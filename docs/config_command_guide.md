@@ -23,7 +23,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | `delete` | Delete configuration data |
 | [`district`](#configure-authority-district) | Districts in the authority. |
 | [`dscp-map`](#configure-authority-dscp-map) | Configure Dscp Map |
-| [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, &#x27;interface-{interface-id}.{router-name}.{authority-name}&#x27;. |
+| [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: \{interface-id\} for Network Interface Global Identifier \{router-name\} for Router Name \{authority-name\} for Authority Name For example, &#x27;interface-\{interface-id\}.\{router-name\}.\{authority-name\}&#x27;. |
 | [`fib-service-match`](#configure-authority-fib-service-match) | When creating FIB entries by matching route updates to service addresses, consider the specified service addresses. |
 | [`forward-error-correction-profile`](#configure-authority-forward-error-correction-profile) | A profile for Forward Error Correection parameters, describing how often to send parity packets. |
 | [`icmp-control`](#configure-authority-icmp-control) | Settings for ICMP packet handling |
@@ -1197,7 +1197,7 @@ This type is used by other entities that need to reference configured resource g
 
 ## `configure authority dynamic-hostname`
 
-Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, &#x27;interface-{interface-id}.{router-name}.{authority-name}&#x27;.
+Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: \{interface-id\} for Network Interface Global Identifier \{router-name\} for Router Name \{authority-name\} for Authority Name For example, &#x27;interface-\{interface-id\}.\{router-name\}.\{authority-name\}&#x27;.
 
 #### Usage
 
@@ -5179,7 +5179,7 @@ configure authority router dns-config <mode>
 | [`address`](#configure-authority-router-dns-config-address) | Address of servers to use for DNS queries. |
 | `delete` | Delete configuration data |
 | [`mode`](#configure-authority-router-dns-config-mode) | Mode of DNS server configuration. |
-| [`move`](#configure-authority-router-dns-config-move) | Move list items |
+| [`move`](#configure-authority-router-dns-config) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;dns-config&#x27; |
 
@@ -6061,7 +6061,7 @@ configure authority router nat-pool <name>
 | [`address-pool`](#configure-authority-router-nat-pool-address-pool) | Defines the NAT prefix and ports in the pool. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-nat-pool-move) | Move list items |
+| [`move`](#configure-authority-router-nat-pool) | Move list items |
 | [`name`](#configure-authority-router-nat-pool-name) | An identifier for the NAT Pool. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;nat-pool&#x27; |
@@ -7070,7 +7070,7 @@ configure authority router node device-interface network-interface <name>
 | [`inter-router-security`](#configure-authority-router-node-device-interface-network-interface-inter-router-security) | The name of the security policy used for inbound inter-router traffic. |
 | [`management`](#configure-authority-router-node-device-interface-network-interface-management) | Allow management traffic to be sent over this interface |
 | [`management-vector`](#configure-authority-router-node-device-interface-network-interface-management-vector) | Vector configuration for non-forwarding interfaces |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface) | Move list items |
 | [`mtu`](#configure-authority-router-node-device-interface-network-interface-mtu) | The maximum transmission unit (MTU) for packets sent on the interface. |
 | [`multicast-listeners`](#configure-authority-router-node-device-interface-network-interface-multicast-listeners) | Enables the sending of IGMP and MLD queries on this interface. |
 | [`multicast-report-proxy`](#configure-authority-router-node-device-interface-network-interface-multicast-report-proxy) | Enables the forwarding of IGMP and MLD joins/leaves/reports to valid multicast services to this network interface. These must come from other network interfaces which allow multicast listeners. |
@@ -7389,7 +7389,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`end-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-end-address) | End of address pool. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-interface-mtu) | Interface MTU provided to clients. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool) | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -7427,7 +7427,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -8120,7 +8120,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment) | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -8248,7 +8248,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -9020,7 +9020,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -9226,7 +9226,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -9544,7 +9544,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -9750,7 +9750,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -10119,7 +10119,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment) | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -10247,7 +10247,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -11019,7 +11019,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -11225,7 +11225,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-move) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -34035,7 +34035,7 @@ configure authority router service-route host <node-name>
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-service-route-host-move) | Move list items |
+| [`move`](#configure-authority-router-service-route-host) | Move list items |
 | [`node-name`](#configure-authority-router-service-route-host-node-name) | The name of the node on which the host interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;host&#x27; |
@@ -34300,7 +34300,7 @@ configure authority router service-route next-hop <node-name> <interface>
 | `delete` | Delete configuration data |
 | [`gateway-ip`](#configure-authority-router-service-route-next-hop-gateway-ip) | Gateway ip address of the service route nexthop. |
 | [`interface`](#configure-authority-router-service-route-next-hop-interface) | A reference to the name of a configured network layer interface used to reach the destination. |
-| [`move`](#configure-authority-router-service-route-next-hop-move) | Move list items |
+| [`move`](#configure-authority-router-service-route-next-hop) | Move list items |
 | [`node-name`](#configure-authority-router-service-route-next-hop-node-name) | The name of the node on which the interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;next-hop&#x27; |
@@ -35345,7 +35345,7 @@ configure authority router static-hostname-mapping static-entry <hostname>
 | `delete` | Delete configuration data |
 | [`hostname`](#configure-authority-router-static-hostname-mapping-static-entry-hostname) | Hostname to set the resolution for. |
 | [`ip-address`](#configure-authority-router-static-hostname-mapping-static-entry-ip-address) | Ip-address for the corresponding hostname. |
-| [`move`](#configure-authority-router-static-hostname-mapping-static-entry-move) | Move list items |
+| [`move`](#configure-authority-router-static-hostname-mapping-static-entry) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;static-entry&#x27; |
 
@@ -38643,7 +38643,7 @@ configure authority routing filter <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-filter-move) | Move list items |
+| [`move`](#configure-authority-routing-filter) | Move list items |
 | [`name`](#configure-authority-routing-filter-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`rule`](#configure-authority-routing-filter-rule) | A fragment of the filter which defines a subset of the logic on how to process the objects going through the filter |
@@ -39006,7 +39006,7 @@ configure authority routing policy <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-policy-move) | Move list items |
+| [`move`](#configure-authority-routing-policy) | Move list items |
 | [`name`](#configure-authority-routing-policy-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;policy&#x27; |
@@ -42476,7 +42476,7 @@ configure authority service-policy <name>
 | [`max-latency`](#configure-authority-service-policy-max-latency) | Maximum acceptable latency for services that use this service class. |
 | [`max-loss`](#configure-authority-service-policy-max-loss) | The acceptable threshold of packet loss for services that use this service class. |
 | [`min-mos`](#configure-authority-service-policy-min-mos) | Minimum acceptable Mean Opinion Score (MOS) for services that use thus service class |
-| [`move`](#configure-authority-service-policy-move) | Move list items |
+| [`move`](#configure-authority-service-policy) | Move list items |
 | [`name`](#configure-authority-service-policy-name) | An arbitrary, unique name for the service policy. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss. |

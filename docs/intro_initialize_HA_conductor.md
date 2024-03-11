@@ -24,7 +24,7 @@ Click on the link of the public cloud provider where you want to perform the Ses
 
 4. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step 5. Otherwise, refer to [Deploying the Primary Node Conductor – Node B](#deploying-the-secondary-node-conductor--node-b) to install the SSR software in Node B. When completed, proceed to step 6.
 
-5. Initialize the secondary node of Conductor as described in the section [Configure Node B](#configure-node-b).
+5. Initialize the secondary node of Conductor as described in the section [Configure Node B](#deploying-the-secondary-node-conductor--node-b).
 
 6. [Disable Password-based Authentication in the Primary Node](#disable-password-based-authentication-in-the-primary-node).
 

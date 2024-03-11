@@ -3,6 +3,8 @@ title: Installing in Azure
 sidebar_label: Installing in Azure
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Introduction
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. The process consists of the following steps:
@@ -53,7 +55,7 @@ To request access to a Private plan follow the next steps:
 * Click on the "View private products" link.
 * If the Private image of the **Session Smart Networking Platform** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
 
-<img src="/img/platforms_azure_marketplace_image_private.png" alt="Session Smart Networking Private offering" width="192" height="243" />
+<img src={useBaseUrl('/img/platforms_azure_marketplace_image_private.png')} alt="Session Smart Networking Private offering" width="192" height="243" />
 
 ## Session Smart Conductor Deployment
 
@@ -108,7 +110,7 @@ Agree to the terms of use and conditions of the deployment and lastly click on t
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
+<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
 * If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
@@ -139,7 +141,7 @@ Launch the deployment with the corresponding Azure CLI or PowerShell commands ma
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
+<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
 * If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
@@ -214,7 +216,7 @@ Agree to the terms of use and conditions of the deployment and lastly click on t
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
+<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command: `sudo dmidecode | grep UUID`. To login to the instance via SSH, use the username and the SSH public key provided in the template. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
@@ -240,7 +242,7 @@ Create the parameters file, accept the terms of use and conditions of the image 
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
+<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command: `sudo dmidecode | grep UUID`. To login to the instance via SSH, use the username and the SSH public key provided in the template. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
@@ -254,8 +256,6 @@ The _Session Smart Router Template_ deploys a VM for the SSR with three network 
 | eth0                   | Management       |
 | eth1                   | Public           |
 | eth2                   | Private          |
-
-In earlier versions of the SSR Networking Platform software (pre-5.0), the SSR used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the Software, please see [PCI Address Association](#pci-address-association). 
 
 With the release of 5.0, device interfaces are mapped using the VMBus UUID; use of the PCI addresses is no longer supported. Use the following process to map the VMBus UUID to the device interfaces. 
 
@@ -353,7 +353,7 @@ commit
 
 To agree to the Terms of Use and the Privacy Policy for the Session Smart Networking image used, click on **Get It Now** as shown in the following image:
 
-<img src="/img/platforms_azure_marketplace_getitnow.png" alt="Session Smart Networking" width="25%" height="25%" />
+<img src={useBaseUrl('/img/platforms_azure_marketplace_getitnow.png')} alt="Session Smart Networking" width="25%" height="25%" />
 
 Click on **Continue** in order to agree to the Terms of Use and the Privacy Policy.
 

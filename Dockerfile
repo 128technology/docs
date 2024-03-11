@@ -1,5 +1,6 @@
-FROM node:18.4.0
-
+FROM node:lts as base
+ENV FORCE_COLOR=0
+RUN corepack enable
 WORKDIR /app/
 
 EXPOSE 3000:3000
