@@ -110,7 +110,7 @@ gre
 exit
 ```
 
-In the above configuration, the `address-type > custom` is used to set a private icmp-address of `192.168.10.13`. In doing so, the icmp-health check algorithm described [above](#tunnel-icmp-health-check-parameters) will be run on the private address of `192.168.10.13` instead of the default `destination > host`. The behavior in terms of declaring the tunnel as down and continuous monitoring remains the same.
+In the above configuration, the `address-type > custom` is used to set a private icmp-address of `192.168.10.13`. In doing so, the [icmp-health check algorithm](#tunnel-icmp-health-check-parameters) will be run on the private address of `192.168.10.13` instead of the default `destination > host`. The behavior in terms of declaring the tunnel as down and continuous monitoring remains the same.
 
 :::important
 When using a private ICMP address, its important to also use an in-subnet address for the generated KNIs. This can be accomplished by configuring the appropriate `plugin-network` as illustrated in the example above.
