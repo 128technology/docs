@@ -19,7 +19,7 @@ For the purposes of describing the platform support policy, the following terms 
 
 Juniper continuously works to maintain a platform abstraction in its software design. At the same time, there are often characteristics and optimizations that require platform-specific support. This support comes by way of a platform certification program which provides assurances of performance and functionality of the SSR Networking Platform software. For example, the SSR Networking Platform software utilizes [DPDK](https://www.dpdk.org) for broad driver support, and in some cases specific firmware revisions need to be loaded prior to being able to fully utilize the SSR's optimized packet forwarding capabilities.
 
-Inclusion in the SSR Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at Juniper's discretion. For details on how to get new platforms in to the SSR certification program, or further information regarding the program, please Juniper support.
+Inclusion in the SSR Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at Juniper's discretion. For details on how to get new platforms in to the SSR certification program, or further information regarding the program, please contact Juniper support.
 
 ### SSR Certified Plus Platform
 
