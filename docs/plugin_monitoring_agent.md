@@ -1347,7 +1347,7 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API. The va
 
 | Element               | Type   | Description                                                                                                                                                                                                              |
 | --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| query-entry-point     | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}').                                              |
+| query-entry-point     | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'$\{ROUTER\}').                                              |
 | extract-field         | list   | List of leaf nodes to be collected from query response as fields                                                                                                                                                         |
 | extract-field > name  | string | The name of the field                                                                                                                                                                                                    |
 | extract-field > value | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is absolute, it cannot diverge from the entry point path and must exclude graphQL arguments |
@@ -1807,7 +1807,7 @@ A new `timeout` argument is added for the `run-once` testing tool provided by `m
 
 #### New Features and Improvements
 
-- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 <= SSR < 6.0.0
+- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 \<= SSR < 6.0.0
 - **MON-233** Upgrade telegraf to 1.14.5
 - **MON-234** Improve metrics collection performance by creating a native Telegraf plugin
 - **MON-198** Provide sample and push interval overrides per input in the agent's config

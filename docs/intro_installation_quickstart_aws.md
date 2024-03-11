@@ -613,7 +613,7 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
    :::
    Select **Yes, I want to continue with this change** and click **Next**.
 10. On the _Step 4: Add Storage_ page, ensure the size is 128 GB (default value).
-11. Click **Next: Add Tags**. See [Interface Tagging](#interface-tagging) for additional tag configuration information.
+11. Click **Next: Add Tags**. See [Interface Tagging](#network-interfaces-layout) for additional tag configuration information.
 12. On the the _Step 5: Add Tags_ page, click **Add Tags**.
 13. Click inside the Key column and select **Name**. Under the Value column enter the name for your instance.
 14. Click **Next: Configure Security Group**.
@@ -621,7 +621,7 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
     :::note
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
-16. For Mist managed routers, expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist org, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
+16. For Mist managed routers, expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist org, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](intro_installation_quickstart_mist_aws.md#cloud-init-onboarding) section.
 17. Select **Review and Launch**.
 18. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
 19. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.

@@ -5,7 +5,7 @@ sidebar_label: Packet Capture
 
 PCAPs are one of the most useful tools to debug traffic issues on the SSR, as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the SSR Networking Platform.
 
-Packet capture information can be viewed and configured from both the PCLI and the [user interface](#packet-capture-in-the-gui). 
+Packet capture information can be viewed and configured from both the PCLI and the [user interface](#session-capture-in-the-gui). 
 
 ## PCLI Packet Capture per Device Interface
 

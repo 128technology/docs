@@ -85,7 +85,7 @@ To release a router, use the following process from the Mist GUI:
 * Select **Release**.
 * Click on **Release** to confirm.
 
-After a few minutes the router will be released and stop sending the data to the Mist cloud. Use the information in [Viewing the SSR Status](#viewing-the-ssr-status) to check the current status. A successfully released router will display the following:
+After a few minutes the router will be released and stop sending the data to the Mist cloud. Use the information in [Viewing the SSR Status](#on-the-conductor-pcli) to check the current status. A successfully released router will display the following:
 
  ![Plugins Context Menu](/img/wana_plugin_released.png)
 
