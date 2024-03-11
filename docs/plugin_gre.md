@@ -117,7 +117,7 @@ When using a private ICMP address, its important to also use an in-subnet addres
 :::
 
 ### SSR services to transport over the tunnel
-Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in an SSR service and setting the next-hop as the `gre-x` interfaces. As noted in the [previous section](#tunnel-icmp-health-check-parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
+Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in an SSR service and setting the next-hop as the `gre-x` interfaces. As noted in the [Tunnel ICMP Health Check Parameters](#tunnel-icmp-health-check-parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
 
 ```
 admin@node1.conductor1# show config running authority service lan-svc
