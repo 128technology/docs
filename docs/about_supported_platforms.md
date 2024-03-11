@@ -9,8 +9,8 @@ Juniper's Session Smart Router (SSR) software is designed to be abstracted from 
 For the purposes of describing the platform support policy, the following terms are defined:
 
 - ***Platform*** - A physical or virtual system, typically consisting of some amount of resources for compute, memory, disk, and networking. _Example_: A physical server, virtual machine, or public cloud virtual machine instance.
-- ***Certification*** - The process of testing to ensure that a specific combination of an SSR Networking Platform software version and platform build meet requirements for functionality, stability, and performance. _Example_: The [SSR Certification Program](#128t-certification-program) provides certification of a set of platforms with SSR Networking Platform software.
-- ***Certified Platform*** - A platform that is currently in the SSR Certification Program as an [SSR Certified Plus Platform](#128t-certified-plus-platform), or [SSR Certified Platform](#128t-certified-platform).
+- ***Certification*** - The process of testing to ensure that a specific combination of an SSR Networking Platform software version and platform build meet requirements for functionality, stability, and performance. _Example_: The [SSR Certification Program](#ssr-certification-program) provides certification of a set of platforms with SSR Networking Platform software.
+- ***Certified Platform*** - A platform that is currently in the SSR Certification Program as an [SSR Certified Plus Platform](#ssr-certified-plus-platform), or [SSR Certified Platform](#ssr-certified-platform).
 - ***Qualified Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications) and is known to be able to run SSR Networking Platform software. _Example_: A CompuLab fitlet2 with an Intel Atom E3950, 8GB of memory, and 120GB of disk space is a qualified platform.
 - ***Compatible Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications). _Example_: A platform with an Intel Xeon D-1518, 8GB of memory, and 120GB of disk space is a compatible platform.
 - ***Incompatible Platform*** - A platform that does not meet [minimum platform specifications](#minimum-platform-specifications) and is unlikely to run SSR Networking Platform software at acceptable levels of functionality, stability, performance, or at all. _Example_: The [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) is an incompatible platform.
@@ -19,7 +19,7 @@ For the purposes of describing the platform support policy, the following terms 
 
 Juniper continuously works to maintain a platform abstraction in its software design. At the same time, there are often characteristics and optimizations that require platform-specific support. This support comes by way of a platform certification program which provides assurances of performance and functionality of the SSR Networking Platform software. For example, the SSR Networking Platform software utilizes [DPDK](https://www.dpdk.org) for broad driver support, and in some cases specific firmware revisions need to be loaded prior to being able to fully utilize the SSR's optimized packet forwarding capabilities.
 
-Inclusion in the SSR Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at Juniper's discretion. For details on how to get new platforms in to the SSR certification program, or further information regarding the program, please [contact](https://www.128technology.com/contact) Juniper.
+Inclusion in the SSR Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at Juniper's discretion. For details on how to get new platforms in to the SSR certification program, or further information regarding the program, please Juniper support.
 
 ### SSR Certified Plus Platform
 
@@ -36,7 +36,7 @@ For a list of platforms which are currently Certified Plus, see [Certified Platf
 
 #### LTE Certified
 
-LTE certification is a superset of [SSR Certified Plus](#128t-certified-plus-platform). Systems that contain an **onboard** LTE adapter are required to pass certification from the carrier.
+LTE certification is a superset of [SSR Certified Plus](#ssr-certified-plus-platform). Systems that contain an **onboard** LTE adapter are required to pass certification from the carrier.
 
 LTE certified platforms have the following characteristics:
 * Has obtained [PTCRB](https://en.wikipedia.org/wiki/PTCRB) (or [GCF](https://en.wikipedia.org/wiki/Global_Certification_Forum) in Europe) and mobile-carrier specific certification in the specified platform
@@ -58,7 +58,7 @@ The SSR Certification program provides a designation of Certified for certain pl
 
 The SSR Certification program provides a designation of Qualified for certain platforms.
 :::note
-Juniper strongly recommends certification for any build in a production deployment. When a qualified platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-128t-on-compatible-platforms).
+Juniper strongly recommends certification for any build in a production deployment. When a qualified platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-ssr-on-compatible-platforms).
 :::
 
 Qualified platforms have the following characteristics:
@@ -73,9 +73,9 @@ Qualified platforms have the following characteristics:
 
 ### SSR Compatible Platform
 
-The SSR Certification program provides a [compatible platform guide](#128t-compatible-platforms-guide) for platforms which are compatible.
+The SSR Certification program provides a [compatible platform guide](#ssr-compatible-platforms-guide) for platforms which are compatible.
 :::note
-Juniper strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-128t-on-compatible-platforms).
+Juniper strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-ssr-on-compatible-platforms).
 :::
 
 Compatible platforms have the following characteristics:

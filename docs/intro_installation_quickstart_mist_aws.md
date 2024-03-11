@@ -70,7 +70,7 @@ A Session Smart Router can be deployed manually via the [AWS Console](https://co
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * EC2 instance using a Session Smart image available in the marketplace.
-* The router is deployed with appropriate network interfaces as described [here](#requirements-1)
+* The router is deployed with appropriate network interfaces as described [here](#requirements)
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
 
