@@ -39,6 +39,11 @@ authority
 
 ![Traffic Engineering Settings](/img/config_dev_interface_te.png)
 
+
+### Limitations
+
+Traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with other traffic engineering settings, performance is further impacted; each level of traffic engineering requires buffering for their scheduled objects. 
+
 ## Troubleshooting and Statistics
 
 Given the packet performance nature of the scheduler, no logs exist at the per-packet level to monitor traffic-engineering performance. The statistics described below are the best source of information about performance. The `success-bandwidth` and `failure-bandwidth` meters are good indicators of how well the scheduler is handling packets. For failure-bandwidth, additional statistics can be used to determine the reason for loss. Some examples are a queue full scenario resulting from an unhandled burst, or packets being dropped due to excessive time spent within the scheduler. 

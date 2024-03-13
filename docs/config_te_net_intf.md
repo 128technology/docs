@@ -36,7 +36,7 @@ In the GUI, configuration specific to network-interface traffic engineering is l
 
 ### Limitations
 
-Network interface traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with either device-interface or adjacency traffic engineering (or both), performance is further impacted since each level of traffic engineering requires buffering for their scheduled objects. 
+Traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with other traffic engineering settings, performance is further impacted; each level of traffic engineering requires buffering for their scheduled objects. 
 
 ## Troubleshooting and Statistics
 

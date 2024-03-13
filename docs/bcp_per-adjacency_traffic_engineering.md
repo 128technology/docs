@@ -7,7 +7,7 @@ sidebar_label: Adjacency Traffic Engineering
 
 ## Overview 
 
-Adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two SSR instances. While device interface traffic engineering is associated with the upload rate of a connected link, the `transmit-cap`, traffic engineering at the adjacency level is associated with the download limit of the adjacent SSR instance; the `receive-cap`.  
+Adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two SSR instances. While device interface traffic engineering is associated with the upload rate (`transmit-cap`) of a connected link, traffic engineering at the adjacency level is associated with the download limit of the adjacent SSR instance; the `receive-cap`.  
 
 For example, in the following hub and spoke diagram the Datacenter router has 5 adjacencies off of the individual device interface with a `transmit-cap` upload speed configured at 50Mb. The adjacent branch routers have 10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb configured as their device interface transmit caps. With such a large `transmit-cap` at the Datacenter, traffic rates exceeding the allowed download speeds (10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb) on each of the paths to the branch routers will result in traffic being dropped by the ISP. 
 
@@ -64,6 +64,11 @@ network-interface foo
     exit
 exit
 ```
+
+### Limitations
+
+Traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with other traffic engineering settings, performance is further impacted; each level of traffic engineering requires buffering for their scheduled objects. 
+
 ### Gathering Statistics
 
 To gather information about Per-Adjacency Traffic Engineering, query the following statistics using the `show stats traffic-eng device-interface peer-path` command within the CLI. These statistics are specific to the peer-path and provide insight into how the adjacency schedulers are operating.
