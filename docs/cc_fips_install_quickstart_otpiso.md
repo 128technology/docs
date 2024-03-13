@@ -5,6 +5,10 @@ sidebar_label: QuickStart from the OTP ISO
 
 Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the SSR Networking Platform. When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
+:::important
+For Common Criteria compliance, a dedicated, out-of-band network must be used to provide the management connection security between Conductor and Router instances. SSR software does not currently provide any evaluated security assurances for this link. This dedicated network interface must be privately routed, and must not be exposed publicly.
+:::
+
 ### SSR Configuration
 
 The SSR router will need to be provisioned on the conductor. This procedure assumes you are familiar with the [concepts](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_glossary) and [configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_basics) of the SSR platform.
