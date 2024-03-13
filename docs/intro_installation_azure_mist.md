@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 This guide describes the process for deploying a Mist Managed Session Smart Router (SSR) in Azure. The process consists of the following steps:
 
 1. [Selecting the Azure plan"](#selecting-the-azure-plan).
-3. Deploying a [Session Smart Router](#session-smart-router-deployment).
+3. Deploying a [Session Smart Router](#session-smart-router).
 
 Proceed to the next section [Selecting the Azure plan"](#selecting-the-azure-plan).
 
@@ -21,7 +21,7 @@ There are different Plans available for the Juniper Session Smart Networking Pla
 * Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
 * Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
-Once you have selected the plan that better suits the needs of your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
+Once you have selected the plan that better suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
 ### Requesting access to a Private plan
 
@@ -233,15 +233,9 @@ After the Terms of Use and the Privacy Policy have been accepted, select the **P
 
 When you select a template, a new tab opens in the browser that redirects you to the template.
 
-:::important
-As an additional note and only applicable when the chosen image is the Session Smart Networking Platform, please be aware of the following conditions before using any of its templates:
-* Applicable when deploying an Session Smart Router:
-  * If there is an existing Session Smart Conductor in the network and the intent is to perform a non interactive installation of an SSR (for example a ZTP installation) please make sure the certificate provided by Juniper has been imported and loaded in Session Smart Conductor before launching the template to deploy the SSR.
-:::
-
 ### Launch the Template
 
-This section describes how to fill out and launch the template via the portal and programmatically to deploy a Session Smart Conductor and SSR.
+This section describes how to fill out and launch the template using either the AWS marketplace or programmatically to deploy a Session Smart Router.
 
 ### Mist-Managed Session Smart Router
 
@@ -295,7 +289,6 @@ The information listed in the Outputs tab is the following:
 
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
 #### Azure CLI or PowerShell
@@ -388,5 +381,4 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
