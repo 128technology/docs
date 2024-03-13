@@ -9,7 +9,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. The process consists of the following steps:
 
-Mist-managed SSR installations are now available through Azure. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in Azure](intro_installation_quickstart_azure_mist.md) for details.
+Mist-managed SSR installations are now available through Azure. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details.
 
 :::important
 If you wish to install SSR Version 6.x on a conductor and conductor-managed router in Azure, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
