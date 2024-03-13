@@ -9,6 +9,12 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. The process consists of the following steps:
 
+Mist-managed SSR installations are now available through Azure. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in Azure](intro_installation_quickstart_azure_mist.md) for details.
+
+:::important
+If you wish to install SSR Version 6.x on a conductor and conductor-managed router in Azure, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
+:::
+
 1. [Selecting the Azure plan"](#selecting-the-azure-plan).
 2. Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
 3. Deploying a [Session Smart Router](#session-smart-router-deployment).
@@ -85,7 +91,7 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -95,13 +101,13 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 Lastly click on the "Launch" link of the "Juniper Session Smart Conductor" template that better suits your needs.
 
 Answer the following 3 questions to launch the deployment of a Conductor (additional information [here](#launch-the-template)):
-* What name do you want to give it?  
+* What name do you want to give it?
 Provide it in the "Instance Name" field (for example: Conductor).
-* Where do you want to deploy it?  
+* Where do you want to deploy it?
  * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
  * Provide the name of the VNet in the "Virtual Network Name" field (for example: SSC-VNet).
  * Provide the name of a subnet in the "Control Subnet Name" field (for example: default).
-* Who is going to be the administrator?  
+* Who is going to be the administrator?
 Provide an username (for example: t128) in the "Admin Username" field and the content of your public SSH key in the "Admin Public Key Data" field respectively.
 
 Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
@@ -198,16 +204,16 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 Lastly click on the "Launch" link of the template that better suits your needs.
 
 Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
-* What name do you want to give it?  
+* What name do you want to give it?
 Provide it in the "Instance Name" field (for example: 128TRouter).
-* Where do you want to deploy it?  
+* Where do you want to deploy it?
   * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
   * Provide the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet).
   * Provide the name of the availability set in the "Availability Set Name" field (for example: 128TRouterSet).
   * Provide the name of the public, private and management subnets in the "Public Subnet Name", "Private Subnet Name" and "Management Subnet Name" fields respectively (for example: wan, lan and default).
-* Which Session Smart Conductor is going to manage it?  
+* Which Session Smart Conductor is going to manage it?
 Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field, and only if the Conductor is highly available then provide the IP address of the secondary node of Conductor in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the Session Smart  Conductor deployed in the previous section.
-* Who is going to be the administrator?  
+* Who is going to be the administrator?
 Provide an username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
 
 Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
@@ -251,19 +257,19 @@ Once the deployment completes, information is provided in the Outputs tab on the
 
 The _Session Smart Router Template_ deploys a VM for the SSR with three network interfaces. The template attaches the network interfaces to the VM in the following order: Management, Public, and Private. The network interfaces are mapped as follows:
 
-| Network interface name | Subnet           | 
+| Network interface name | Subnet           |
 | ---------------------- | ---------------- |
 | eth0                   | Management       |
 | eth1                   | Public           |
 | eth2                   | Private          |
 
-With the release of 5.0, device interfaces are mapped using the VMBus UUID; use of the PCI addresses is no longer supported. Use the following process to map the VMBus UUID to the device interfaces. 
+With the release of 5.0, device interfaces are mapped using the VMBus UUID; use of the PCI addresses is no longer supported. Use the following process to map the VMBus UUID to the device interfaces.
 
 ### Configuring a Device Interface with VMBus UUID
 
 The following are the high level steps to configure a device interface on an SSR running in the Azure cloud.
 
-- Determine the Device Interface Layout 
+- Determine the Device Interface Layout
 - Configure and Assign the VMBus UUID Identifier to a Device Interface
 - Verify Connectivity
 
@@ -273,9 +279,9 @@ If you are *upgrading* the SSR software from a version prior to 5.0, repeat this
 
 #### Determine the Device Interface Layout
 
-1. Identify the VMBus UUID address associated with each device interface on the Linux VM. 
+1. Identify the VMBus UUID address associated with each device interface on the Linux VM.
 
-	a) Login via SSH to the VM corresponding to the SSR. 
+	a) Login via SSH to the VM corresponding to the SSR.
 
 	b) Run the following command in Linux:
 		`sudo dpdk-devbind.py --status`
@@ -286,19 +292,19 @@ If you are *upgrading* the SSR software from a version prior to 5.0, repeat this
 
 2. Identify the Azure mapping of each device interface.
 
-	a) Login to the Azure portal. 
+	a) Login to the Azure portal.
 
 	b) Click on the name of the VM of the router.
 
 	c) Select Networking under the Settings section on the left side of the interface.
 
 	![Settings Menu](/img/VMBusAzureUI1.png)
-	
-	d) The device interfaces attached to the VM are shown. 
+
+	d) The device interfaces attached to the VM are shown.
 
 	![Azure Port UI](/img/VMBusAzureUI2.png)
 
-	From left to right, the interfaces are: **Router-mgmt** (management interface), **Router-public** (WAN interface), and **Router-private** (LAN interface). 
+	From left to right, the interfaces are: **Router-mgmt** (management interface), **Router-public** (WAN interface), and **Router-private** (LAN interface).
 
 	In this example, the _Session Smart Router Template_ assigned the Linux interfaces to eth0, eth1, and eth2 respectively.
 
@@ -314,7 +320,7 @@ If you are *upgrading* the SSR software from a version prior to 5.0, repeat this
 
 Assign the VMBus UUID to a device interface using the CLI.
 
-1. Login to the CLI on the Conductor. 
+1. Login to the CLI on the Conductor.
 2. Run the following commands to configure a device interface with a VMBus UUID on a router:
 
 ```
@@ -335,17 +341,17 @@ commit
 
 #### Verify Connectivity
 
-1. Login via SSH to the VM of each router running on Azure. 
+1. Login via SSH to the VM of each router running on Azure.
 
 2. Login to the SSR CLI.
-	
+
 	`su admin`
 
 3. Ping the gateway of each device interface.
-	
+
 	`ping <gateway IP address>`
 
-4. Azure gateways do not reply to ping, but you can verify connectivity by checking the ARP table on the SSR. Use `show arp` to display the ARP table, and look for **valid** entries. 
+4. Azure gateways do not reply to ping, but you can verify connectivity by checking the ARP table on the SSR. Use `show arp` to display the ARP table, and look for **valid** entries.
 
 ## Annexes
 
@@ -383,7 +389,7 @@ Replace the XYZ placeholder right in the command above with the version of the S
 
 After the Terms of Use and the Privacy Policy have been accepted, select the **Plan** tab. The available templates are listed there.
 
-When you select a template, a new tab opens in the browser that redirects you to the template. 
+When you select a template, a new tab opens in the browser that redirects you to the template.
 
 :::important
 As an additional note and only applicable when the chosen image is the Session Smart Networking Platform, please be aware of the following conditions before using any of its templates:
@@ -418,7 +424,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### Azure Portal
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -546,7 +552,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### Azure Portal
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
