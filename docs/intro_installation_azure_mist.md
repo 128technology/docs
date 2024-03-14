@@ -12,7 +12,6 @@ This guide describes the process for deploying a Mist Managed Session Smart Rout
 1. [Selecting the Azure plan"](#selecting-the-azure-plan).
 3. Deploying a [Session Smart Router](#session-smart-router).
 
-Proceed to the next section [Selecting the Azure plan"](#selecting-the-azure-plan).
 
 ## Selecting the Azure Plan
 
