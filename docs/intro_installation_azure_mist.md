@@ -39,7 +39,7 @@ To request access to a Private plan follow the next steps:
 2. Contact your Juniper Networks Sales representative and provide:
 
 * The Subscription ID of the Azure account that will be used for the deployment.
-* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
+* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you do not know the desired version needed for your deployment.
 
 3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
 
