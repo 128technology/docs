@@ -38,7 +38,7 @@ To request access to a Private plan follow the next steps:
 2. Contact your Juniper Networks Sales representative and provide:
 
 * The Subscription ID of the Azure account that will be used for the deployment.
-* The desired version of the Session Smart Networking software. If necessary, your Juniper Sales representative will assist you to determine the best version for your deployment.
+* The version of the Session Smart Networking software. If necessary, your Juniper Sales representative will assist you to determine the best version for your deployment.
 
 3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
 
@@ -93,35 +93,38 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the Azure plan"](#selecting-the-azure-plan).
-Click on the "Get it now" button.
-Agree to the terms of use and privacy policy of the image.
-Click on the tab "Plans + Pricing" as shown in the following picture:
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the Azure plan"](#selecting-the-azure-plan).
+2. Click on the "Get it now" button.
+3. Agree to the terms of use and privacy policy of the image.
+4. Click on the tab "Plans + Pricing" as shown in the following picture:
 
-![Plans](/img/platforms_azure_plans.png)
+  ![Plans](/img/platforms_azure_plans.png)
 
-Lastly click on the "Launch" link of the Mist-managed template.
+5. Click the "Launch" link of the Mist-managed template.
 
 Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
 * What name do you want to give it?
-Provide it in the "Instance Name" field (for example: 128TRouter).
+  * Provide the name in the "Instance Name" field (for example: `128TRouter`).
 * Where do you want to deploy it?
   * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
-  * Provide the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet).
-  * Provide the name of the availability set in the "Availability Set Name" field (for example: 128TRouterSet).
+  * Provide the name of the VNet in the "Virtual Network Name" field (for example: `128T-VNet`).
+  * Provide the name of the availability set in the "Availability Set Name" field (for example: `128TRouterSet`).
   * Provide the name of the "Public Subnet Name"
   * Provide the name of the "Private Subnet Name"
 * Which Mist org is going to manage it?
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist org.
 * Who is going to be the administrator?
-Provide a username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
 
-Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
+Provide a username (for example: `t128`) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
+
+Agree to the terms of use and conditions of the deployment. 
+
+Click the "Purchase" button to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
-* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
+* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Azure CLI or PowerShell
 
@@ -183,14 +186,16 @@ If the validation process fails with the error shown below, please verify you ar
 
 ### Device Does Not Exist In Mist after ZTP
 
-If the device does not show up in the Mist org after 5 minutes, ssh into the instance.
+If the device does not show up in the Mist org after 5 minutes, ssh into the instance through the Azure portal.
+
 - Log into the pcli, run `su admin` and then `show mist`.
 
-- If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
- - `journalctl -u 128T-hardware-bootstrapper`
+- If the status and action necessary is not obvious, drop back to the linux shell and look at the journal for the bootstrapper:
+ `journalctl -u 128T-hardware-bootstrapper`
 
  And the Mist agent:
- - `journalctl -u 128T-mist-agent`
+  `journalctl -u 128T-mist-agent`
+
 
 ## Annexes
 
@@ -271,7 +276,7 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Click on the "Launch" link of the "Juniper Session Smart Router" template that better suits your needs.
+Click on the "Launch" link of the "Juniper Session Smart Router" template that best suits your needs.
 Agree to the terms of use and conditions of the deployment and lastly click on the **Purchase** button to launch the deployment.
 
 Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
@@ -379,3 +384,4 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
 :::
+
