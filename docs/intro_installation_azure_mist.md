@@ -270,7 +270,7 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Click on the "Launch" link of the "Juniper Session Smart Router" template that better suits your needs.
+Click on the "Launch" link of the "Juniper Session Smart Router" template that best suits your needs.
 Agree to the terms of use and conditions of the deployment and lastly click on the **Purchase** button to launch the deployment.
 
 Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
