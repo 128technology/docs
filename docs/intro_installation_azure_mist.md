@@ -126,7 +126,7 @@ If the validation process fails with the error shown below, please make sure you
 <img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
-* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
+* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Azure CLI or PowerShell
 
