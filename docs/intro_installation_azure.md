@@ -7,30 +7,30 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Introduction
 
-This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. The process consists of the following steps:
+This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. 
 
-Mist-managed SSR installations are now available through Azure. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details.
+Mist-managed SSR installations are now available through Azure. See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** 
 
 :::important
 If you wish to install SSR Version 6.x on a conductor and conductor-managed router in Azure, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
 :::
 
+The process consists of the following steps:
+
 1. [Selecting the Azure plan"](#selecting-the-azure-plan).
 2. Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
 3. Deploying a [Session Smart Router](#session-smart-router-deployment).
-
-Proceed to the next section [Selecting the Azure plan"](#selecting-the-azure-plan).
 
 ## Selecting the Azure Plan
 
 There are different Plans available for the Juniper Session Smart Networking Platform offering:
 
 * Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
-* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
-Once you have selected the plan that better suits the needs of your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
+Once you have selected the plan that best suits the needs of your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
-### Requesting access to a Private plan
+### Requesting Access to a Private Plan
 
 :::important
 There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
@@ -47,7 +47,7 @@ To request access to a Private plan follow the next steps:
 2. Contact your Juniper Networks Sales representative and provide:
 
 * The Subscription ID of the Azure account that will be used for the deployment.
-* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
+* The desired version of the Session Smart Networking software. If necessary, your Juniper Sales representative will assist you to determine the best version for your deployment.
 
 3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
 

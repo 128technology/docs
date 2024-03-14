@@ -7,26 +7,24 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Introduction
 
-This guide describes the process for deploying a Mist Managed Session Smart Router (SSR) in Azure. The process consists of the following steps:
+This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. The process consists of the following steps:
 
 1. [Selecting the Azure plan"](#selecting-the-azure-plan).
-3. Deploying a [Session Smart Router](#session-smart-router).
-
-Proceed to the next section [Selecting the Azure plan"](#selecting-the-azure-plan).
+2. Deploying a [Session Smart Router](#session-smart-router).
 
 ## Selecting the Azure Plan
 
 There are different Plans available for the Juniper Session Smart Networking Platform offering:
 
 * Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
-* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
-Once you have selected the plan that better suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
+Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
 ### Requesting access to a Private plan
 
 :::important
-There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
+There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (i.e., Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) are not possible without a software access token.
 :::
 
 To request access to a Private plan follow the next steps:
@@ -40,7 +38,7 @@ To request access to a Private plan follow the next steps:
 2. Contact your Juniper Networks Sales representative and provide:
 
 * The Subscription ID of the Azure account that will be used for the deployment.
-* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
+* The desired version of the Session Smart Networking software. If necessary, your Juniper Sales representative will assist you to determine the best version for your deployment.
 
 3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
 
@@ -102,7 +100,7 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Lastly click on the "Launch" link of the MIST managed template.
+Lastly click on the "Launch" link of the Mist-managed template.
 
 Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
 * What name do you want to give it?
@@ -116,22 +114,18 @@ Provide it in the "Instance Name" field (for example: 128TRouter).
 * Which Mist org is going to manage it?
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist org.
 * Who is going to be the administrator?
-Provide an username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
+Provide a username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
 
 Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
-
-If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
-
-<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Azure CLI or PowerShell
 
-To deploy the Session Smart Networking software via Azure CLI or Powershell:
+To deploy the Session Smart Networking software using the Azure CLI or Powershell:
 
 Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
@@ -148,12 +142,7 @@ Lastly copy to the clipboard the URL of the template located in the field "URL" 
 
 Create the parameters file, accept the terms of use and conditions of the image and lastly launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
 
-If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
-
-<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
-
-Once the deployment completes, information is provided in the Outputs tab on the left hand side:
-* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side. If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Cloud-init Onboarding
 When launching an instance using CLI or Powershell or while using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
@@ -175,15 +164,6 @@ write_files:
 
 Once the instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist org. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist org once onboarding is complete.
 
-If the device does not show up in the Mist org after 5 minutes, ssh into the instance.
-- Log into the pcli, run `su admin` and then `show mist`.
-
-- If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
- - `journalctl -u 128T-hardware-bootstrapper`
-
- And the Mist agent:
- - `journalctl -u 128T-mist-agent`
-
 ### Network Interfaces Layout
 
 The _Session Smart Router Template_ deploys a VM for the SSR with three network interfaces. The template attaches the network interfaces to the VM in the following order: Public, and Private. The network interfaces to be used in Mist configuration are as follows:
@@ -193,7 +173,24 @@ The _Session Smart Router Template_ deploys a VM for the SSR with three network 
 | eth1                   | Public           | ge-0/0/0    |
 | eth2                   | Private          | ge-0/0/1    |
 
+## Troubleshooting
 
+### Validation Process Failure
+
+If the validation process fails with the error shown below, please verify you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
+
+<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
+
+### Device Does Not Exist In Mist after ZTP
+
+If the device does not show up in the Mist org after 5 minutes, ssh into the instance.
+- Log into the pcli, run `su admin` and then `show mist`.
+
+- If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
+ - `journalctl -u 128T-hardware-bootstrapper`
+
+ And the Mist agent:
+ - `journalctl -u 128T-mist-agent`
 
 ## Annexes
 
