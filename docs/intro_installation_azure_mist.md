@@ -164,7 +164,7 @@ write_files:
 | Option | Meaning |
 | ------ | ------- |
 | name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
-| registration-code | The Mist registration used for adoption of the EC2 instance to a Mist org. |
+| registration-code | The Mist registration used for adoption of the instance to a Mist org. |
 
 ### Mist-Managed Setup
 
@@ -265,7 +265,7 @@ A description of the parameters of the template are listed in the following tabl
 | Private Subnet Allowed CIDR    | It corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.                                                                             |
 | Management Subnet Name  | The name of the management subnet within the VNet. |
 | Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
-| Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist org. |
+| Registration Code   | The Mist registration used for adoption of the instance to a Mist org. |
 | Instance size        | Select the size of the VM in the field Instance Size. |
 | Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH. |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
