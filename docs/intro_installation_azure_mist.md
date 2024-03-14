@@ -25,7 +25,7 @@ Once you have selected the plan that best suits the needs of your deployment, pr
 ### Requesting access to a Private plan
 
 :::important
-There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
+There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (i.e., Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a software access token.
 :::
 
 To request access to a Private plan follow the next steps:
