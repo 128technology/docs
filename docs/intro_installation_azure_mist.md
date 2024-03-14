@@ -21,13 +21,13 @@ There are different Plans available for the Juniper Session Smart Networking Pla
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
-### Requesting access to a Private plan
+### Requesting Access to a Private Plan
 
 :::important
 There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (i.e., Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) are not possible without a software access token.
 :::
 
-To request access to a Private plan follow the next steps:
+To request access to a Private plan:
 
 1. Locate the Subscription ID of the Azure account where the deployment of the software is going to take place. Follow the next steps to find the Subscription ID:
 
@@ -115,11 +115,11 @@ Answer the following 4 questions to launch the deployment of an SSR (additional 
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist org.
 * Who is going to be the administrator?
 
-Provide a username (for example: `t128`) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
+6. Provide a username (for example: `t128`) and the content of your public SSH key in the `Admin Username` and `Admin Public Key Data` fields respectively.
 
-Agree to the terms of use and conditions of the deployment. 
+7. Agree to the terms of use and conditions of the deployment. 
 
-Click the "Purchase" button to launch the deployment.
+8. Click the **Purchase** button to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -130,22 +130,25 @@ Once the deployment completes, information is provided in the Outputs tab on the
 
 To deploy the Session Smart Networking software using the Azure CLI or Powershell:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
-Click on the "Get it now" button.
-Agree to the terms of use and privacy policy of the image.
-Click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
+2. Click on **Get it now**.
+3. Agree to the terms of use and privacy policy of the image.
+4. Click on **Get started** to enable programmatic deployment for the subscription, then click **Save**.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-Click on the tab "Plans + Pricing" as shown in the following picture:
+5. Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Lastly copy to the clipboard the URL of the template located in the field "URL" that better suits your needs.
+6. Copy the URL of the template located in the field "URL" that best suits your needs.
+7. Create the parameters file. 
+8. Accept the terms of use and conditions of the image.
+9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template]](#launch-the-template).
 
-Create the parameters file, accept the terms of use and conditions of the image and lastly launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
+Once the deployment completes, information is provided in the Outputs tab on the left hand side. 
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
+If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Cloud-init Onboarding
 When launching an instance using CLI or Powershell or while using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
@@ -229,7 +232,7 @@ Get-AzureRmMarketplaceTerms `
 Replace the XYZ placeholder right in the command above with the version of the Session Smart Software to be deployed. For example, if the version to deploy is 5.4.4, then replace XYZ with 544
 :::
 
-### Load the template
+### Load the Template
 
 After the Terms of Use and the Privacy Policy have been accepted, select the **Plan** tab. The available templates are listed there.
 
@@ -245,44 +248,44 @@ This section describes the parameters to fill out the template to deploy an SSR 
 
 A description of the parameters of the template are listed in the following table:
 
-| Parameter               | Description                                                                                                                                                               |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Subscription            | Subscription for the deployment.                                                                                                                                          |
-| Resource group          | Select an existing resource group or create a new one.                                                                                                                    |
-| Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group.                                                    |
-| Instance Name           | Provide a name to the VM for the Session Smart Router.                                                                                                               |
-| Router Name             | Provide a name to the Smart Router Router. Optional.                                                                                                                      |
-| Node Name               | Provide a name to the node of the Smart Router Router. Optional.                                                                                                          |
+| Parameter               | Description |
+| ---| --- |
+| Subscription            | Subscription for the deployment. |
+| Resource group          | Select an existing resource group or create a new one. |
+| Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
+| Instance Name           | Provide a name to the VM for the Session Smart Router. |
+| Router Name             | Provide a name to the Smart Router Router. Optional. |
+| Node Name               | Provide a name to the node of the Smart Router Router. Optional. |
 | Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase). Example: eastus, westus, westeurope, eastasia...     |
-| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to.                                                                                 |
+| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to. |
 | Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
-| Public Subnet Name      | The name of the public subnet within the VNet.                                                                                                                            |
-| Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security.             |
-| Private Subnet Name     | The name of the private subnet within the VNet.                                                                                                                           |
+| Public Subnet Name      | The name of the public subnet within the VNet. |
+| Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
+| Private Subnet Name     | The name of the private subnet within the VNet. |
 | Private Subnet Allowed CIDR    | It corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.                                                                             |
-| Management Subnet Name  | The name of the management subnet within the VNet.                                                                                                                        |
-| Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered.                                                                                                                                                                                         |
+| Management Subnet Name  | The name of the management subnet within the VNet. |
+| Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist org. |
-| Instance size        | Select the size of the VM in the field Instance Size.                                                                                                                        |
-| Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH.                                                                              |
-| Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys).                                                                                                         |
+| Instance size        | Select the size of the VM in the field Instance Size. |
+| Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH. |
+| Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 
 ##### Azure Portal
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
-Click on the "Get it now" button.
-Agree to the terms of use and privacy policy of the image.
-Click on the tab "Plans + Pricing" as shown in the following picture:
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
+2. Click on the "Get it now" button.
+3. Agree to the terms of use and privacy policy of the image.
+4. Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Click on the "Launch" link of the "Juniper Session Smart Router" template that best suits your needs.
-Agree to the terms of use and conditions of the deployment and lastly click on the **Purchase** button to launch the deployment.
+5. Click on the "Launch" link of the "Juniper Session Smart Router" template that best suits your needs.
+6. Agree to the terms of use and conditions of the deployment.
+7. Click on the **Purchase** button to launch the deployment.
 
 Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
-
 
 The information listed in the Outputs tab is the following:
 * Name of the VM instance.
@@ -362,18 +365,18 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan"](#selecting-the-azure-plan).
-Click on the "Get it now" button.
-Agree to the terms of use and privacy policy of the image.
-Click on the "Get started" button to enable programmatic deployment for the subscription.
-Click the button "Save" to save the changes.
+1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan"](#selecting-the-azure-plan).
+2. Click on the "Get it now" button.
+3. Agree to the terms of use and privacy policy of the image.
+4. Click on the "Get started" button to enable programmatic deployment for the subscription.
+5. Click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-Close the "Configure Programmatic Deployment" window.
-Click on the tab "Plans + Pricing".
-Copy the URL of the "Session Smart Router" template located in the field "URL" to the clipboard.
-Launch the template running the following command:
+6. Close the "Configure Programmatic Deployment" window.
+7. Click on the tab "Plans + Pricing".
+8. Copy the URL of the "Session Smart Router" template located in the field "URL" to the clipboard.
+9. Launch the template running the following command:
 
 ```
 New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
