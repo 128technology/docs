@@ -174,7 +174,6 @@ write_files:
 
 Once the instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist org. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist org once onboarding is complete.
 
-- Log into the pcli, run `su admin` and then `show mist`.
 
 - If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
 
