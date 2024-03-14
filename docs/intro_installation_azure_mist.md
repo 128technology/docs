@@ -115,7 +115,7 @@ Provide it in the "Instance Name" field (for example: `128TRouter`).
 * Which Mist org is going to manage it?
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist org.
 * Who is going to be the administrator?
-Provide an username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
+Provide an username (for example: `t128`) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
 
 Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
 
