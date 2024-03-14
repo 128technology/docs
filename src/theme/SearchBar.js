@@ -397,4 +397,3 @@ function Modal({onClose}) {
 }
 
 export default SearchBar;
-
