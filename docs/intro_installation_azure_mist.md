@@ -109,7 +109,7 @@ Provide it in the "Instance Name" field (for example: `128TRouter`).
 * Where do you want to deploy it?
   * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
   * Provide the name of the VNet in the "Virtual Network Name" field (for example: `128T-VNet`).
-  * Provide the name of the availability set in the "Availability Set Name" field (for example: 128TRouterSet).
+  * Provide the name of the availability set in the "Availability Set Name" field (for example: `128TRouterSet`).
   * Provide the name of the "Public Subnet Name"
   * Provide the name of the "Private Subnet Name"
 * Which Mist org is going to manage it?
