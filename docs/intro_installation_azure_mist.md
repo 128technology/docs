@@ -378,3 +378,15 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
 :::
+
+## Troubleshooting
+
+### Device Does Not Exist In Mist after ZTP
+If the device does not show up in the Mist org after 5 minutes, ssh into the instance through the Azure portal.
+- Log into the pcli, run `su admin` and then `show mist`.
+
+- If the status and action necessary is not obvious, drop back to the linux shell and look at the journal for the bootstrapper:
+ - `journalctl -u 128T-hardware-bootstrapper`
+
+ And the Mist agent:
+ - `journalctl -u 128T-mist-agent`
