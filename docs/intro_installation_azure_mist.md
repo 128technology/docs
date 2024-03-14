@@ -179,7 +179,6 @@ If the device does not show up in the Mist org after 5 minutes, ssh into the ins
 
 - If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
 
- And the Mist agent:
  - `journalctl -u 128T-mist-agent`
 
 ### Network Interfaces Layout
