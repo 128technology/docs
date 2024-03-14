@@ -177,7 +177,51 @@ config
 
 ## Secure Audit Logs Transport 
 
-The SSR can be configured to send audit logs to a remote-logging server via SSH.  
+To provide secure transport of audit logs to and from a remote server, use the following procedure:
+
+#### On the Audit server:
+1. Make a known host file `etc/128technology/known_hosts` and add the host:
+
+```
+[192.168.1.7]:930 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC95iWSnYev40reditedforsecuritylNfFF6rx28+hvAfWpj5nzR+uXlgL3SSGARdl1fD+9SxYgieeSv82NIgQNz89rx
+```
+2. Start the ssh server with `-R` and use `StrictHostKeyChecking=yes` with `/etc/128technology/known_hosts`.
+```
+/usr/bin/openssh-fips/ssh -R 127.0.0.1:8888:127.0.0.1:9999 192.168.1.7 -p 930 -N -o StrictHostKeyChecking=yes -o UseRoaming=no -o ServerAliveInterval=1 -o ServerAliveCountMax=9 -i /etc/128technology/ssh/pdc_ssh_key -o ExitOnForwardFailure=yes -o UserKnownHostsFile=/etc/128technology/known_hosts
+```
+
+3. Set `tcp_listen_port = 9999` in `/etc/audit/auditd.conf`.
+4. Run `service auditd restart`.
+
+#### On the Device
+On the device, add the configuration to point audit server at `local/8888`
+```
+*admin@conductor-node-1.Conductor# compare config running candidate
+
+config
+
+    authority
+
+        router  Conductor
+            name    Conductor
+
+            system
+
+                audit
+
+                    remote-logging-server  127.0.0.1 8888
+                        address  127.0.0.1
+                        port     8888
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+### Configure Remote Logging
+
+Use the following steps to send audit logs to a remote-logging server via SSH.  
 
 1. Configure port forwarding to connect a port on the SSR (port 7777) to a port on the remote-logging server (port 9999).
 
@@ -221,6 +265,10 @@ config
 ```
 
 3. Use the information in [SSH Key-based Authentication](cc_fips_access_mgmt.md#ssh-key-based-authentication) to copy the SSR public key to the authorized key file onto the remote-logging server.
+
+:::note
+On connection failures to the audit server a syslog message will be generated. No user intervention is required for connections to be re-established.
+:::
 
 ### Example Audit Logs
 
