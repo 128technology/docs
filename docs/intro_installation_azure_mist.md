@@ -178,7 +178,6 @@ If the device does not show up in the Mist org after 5 minutes, ssh into the ins
 - Log into the pcli, run `su admin` and then `show mist`.
 
 - If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
- - `journalctl -u 128T-hardware-bootstrapper`
 
  And the Mist agent:
  - `journalctl -u 128T-mist-agent`
