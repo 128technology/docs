@@ -13,7 +13,7 @@ This section presumes that you have a running SSR system and wants to add config
 
 ## Peering with non-SSR Routers
 
-The BGP configuration exists in the [`routing`](config_reference_guide.md#routing) configuration container within the SSR data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the SSR configuration.
+The BGP configuration exists in the [`routing`](config_reference_guide.md#routing-per-router) configuration container within the SSR data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the SSR configuration.
 
 In this example we will assume that BGP is configured on the peering router with IP address 1.1.1.1, as autonomous system number (ASN) 6000. 
 

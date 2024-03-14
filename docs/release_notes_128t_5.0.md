@@ -45,7 +45,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-15618 [Auto completion](cli_reference.md#clear-arp):** Auto completion is now available on the `clear arp` PCLI command.
 ------
-- **I95-20757 [Displaying alarm history](cli_reference.md#show-events-alarm):** Displaying the Alarm History within the PCLI using `show events alarm` now supports relative timestamps.
+- **I95-20757 [Displaying alarm history](cli_reference.md#show-events):** Displaying the Alarm History within the PCLI using `show events alarm` now supports relative timestamps.
 ------
 - **I95-22350 [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)** allow you to create groupings of services that inherit properties from one another.
 ------

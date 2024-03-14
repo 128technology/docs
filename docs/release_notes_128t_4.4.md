@@ -312,7 +312,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-24957** `t128-salt` command produces an error when running. This error is cosmetic as the operation completes successfully.
   ```
-  Exception ignored in: <generator object _stream_return at 0x7f45d0b66d58>
+  Exception ignored in: \<generator object _stream_return at 0x7f45d0b66d58\>
 Traceback (most recent call last):
   File "/usr/lib/128technology/python/salt/venv/lib/python3.6/site-packages/salt/transport/tcp.py", line 1013, in _stream_return
 AttributeError: 'NoneType' object has no attribute 'StreamClosedError'

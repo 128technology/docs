@@ -20,7 +20,7 @@ Juniper Session Smart Networking provides the following workflows for the instal
   - **Interactive:** For bespoke deployments where customized platform configuration is necessary, an interactive mode exists. Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
 
 :::note
-Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-and-general-availability), the ISO name format has changed from using `OTP` to `ISO`:
+Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-general-availability-and-out-of-support), the ISO name format has changed from using `OTP` to `ISO`:
 
 - 128T-5.4.7-7.el7.ISO.v1.x86_64.iso
 :::

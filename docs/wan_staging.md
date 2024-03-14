@@ -74,5 +74,5 @@ On a system with multiple disks, the **Install Devices** selection allows you to
 
 7. Press the enter key to start the installation. 
 8. Once complete, you are prompted with an option to press Esc to reboot immediately, or Enter to shutdown and continue later. 
-9. Upon restart, the system initializes and is internet ready. Since each manufacturer's device port layout is different, use the [Device Default Port Layout](wan_onboarding_whitebox.md#device-default-port-identification) to identify the port layout of the device to complete the onboarding process.
+9. Upon restart, the system initializes and is internet ready. Since each manufacturer's device port layout is different, use the [Device Default Port Layout](hdwr_ssr_device_port_layout.mdx) to identify the port layout of the device to complete the onboarding process.
 

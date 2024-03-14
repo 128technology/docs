@@ -305,8 +305,8 @@ sidebar_label: Alarms
 
 | Cause                                          | Troubleshooting Step                                         |
 | ---------------------------------------------- | ------------------------------------------------------------ |
-| The node is not reachable by the conconductor. | Enter `show system connectivity router all node all | grep <router>` and `show system connectivity internal node all | grep <router>`commands to check connectivity status. If any entry is listed as not connected, there is a communication issue between node and the conductor. The most probable cause is outage or degradation or improperly configured public keys. |
-| The node is not reachable by its HA peer.      | Enter `show system connectivity router all node all | grep <router>` and `system connectivity internal node all | grep <router>`commands to check connectivity status. If any entry is listed as not connected, there is a communication issue between node and the conductor. The most probable cause is outage or degradation or improperly configured public keys. |
+| The node is not reachable by the conconductor. | Enter `show system connectivity router all node all | grep \<router\>` and `show system connectivity internal node all | grep \<router\>`commands to check connectivity status. If any entry is listed as not connected, there is a communication issue between node and the conductor. The most probable cause is outage or degradation or improperly configured public keys. |
+| The node is not reachable by its HA peer.      | Enter `show system connectivity router all node all | grep \<router\>` and `system connectivity internal node all | grep \<router\>`commands to check connectivity status. If any entry is listed as not connected, there is a communication issue between node and the conductor. The most probable cause is outage or degradation or improperly configured public keys. |
 
 ------
 

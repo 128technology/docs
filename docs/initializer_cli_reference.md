@@ -5,7 +5,7 @@ sidebar_label: Initializer Command Line Reference
 
 This is a reference document for the SSR Initializer command line interface.
 For a guide to basic usage, see the initialization section of the
-[Manual Installation Guide](intro_installation_installer.md#initialize-the-128t-node).
+[Manual Installation Guide](intro_installation_installer.md#initialize-the-node).
 
 ## Running the Initializer
 
@@ -43,7 +43,7 @@ SSR is running; cannot launch Initializer
 ```
 
 To stop SSR, follow the steps shown in the
-[Installation Guide](intro_installation.md#stopping-the-128t-routing-software).
+[Installation Guide](intro_upgrading.md#stopping-the-ssr-software).
 
 :::
 
@@ -58,7 +58,7 @@ initialize128t
 
 Follow the on-screen prompts to complete the initialization process. Step-by-step
 instructions for the Initializer wizard can be found in the
-[Installation Guide](intro_installation_installer.md#initialize-the-128t-node).
+[Installation Guide](intro_installation_installer.md#initialize-the-node).
 
 ### Automated Mode
 
