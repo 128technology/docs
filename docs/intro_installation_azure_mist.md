@@ -105,7 +105,7 @@ Lastly click on the "Launch" link of the MIST managed template.
 
 Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
 * What name do you want to give it?
-Provide it in the "Instance Name" field (for example: 128TRouter).
+Provide it in the "Instance Name" field (for example: `128TRouter`).
 * Where do you want to deploy it?
   * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
   * Provide the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet).
