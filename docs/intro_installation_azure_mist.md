@@ -235,7 +235,7 @@ When you select a template, a new tab opens in the browser that redirects you to
 
 ### Launch the Template
 
-This section describes how to fill out and launch the template using either the AWS marketplace or programmatically to deploy a Session Smart Router.
+This section describes how to fill out and launch the template using either the Azure marketplace or programmatically to deploy a Session Smart Router.
 
 ### Mist-Managed Session Smart Router
 
