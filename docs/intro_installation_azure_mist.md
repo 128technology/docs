@@ -9,7 +9,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. The process consists of the following steps:
 
-1. [Selecting the Azure plan"](#selecting-the-azure-plan).
+1. [Selecting the Azure Plan](#selecting-the-azure-plan).
 2. Deploying a [Session Smart Router](#session-smart-router).
 
 ## Selecting the Azure Plan
