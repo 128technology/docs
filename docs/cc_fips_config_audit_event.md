@@ -270,9 +270,9 @@ config
 On connection failures to the audit server a syslog message will be generated. No user intervention is required for connections to be re-established.
 :::
 
-### Example Audit Logs
+## Example Audit Logs
 
-#### SSH Session Establishment Failure
+### SSH Session Establishment Failure
 
 ```
 type=USER_AUTH msg=audit(1709742862.344:2320): pid=13394 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=? acct="?" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=failed'
@@ -280,7 +280,7 @@ type=USER_AUTH msg=audit(1709742862.344:2320): pid=13394 uid=0 auid=4294967295 s
 type=USER_AUTH msg=audit(1709742864.269:2321): pid=13394 uid=0 auid=4294967295 ses=4294967295 msg='op=password acct="(unknown)" exe="/usr/sbin/sshd" hostname=? addr=172.18.4.99 terminal=ssh res=failed' 
 ```
 
-#### SSH Session Establishment Success
+### SSH Session Establishment Success
 
 ```
 type=USER_AUTH msg=audit(1709742929.672:2335): pid=13700 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_faillock,pam_unix acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
@@ -318,7 +318,7 @@ type=CRYPTO_KEY_USER msg=audit(1709742929.732:2348): pid=13700 uid=0 auid=1000 s
 type=SYSCALL msg=audit(1709742940.326:2349): arch=c000003e syscall=159 success=yes exit=0 a0=55e40cbbf980 a1=1 a2=0 a3=55e40e52326c items=0 ppid=1 pid=6697 auid=4294967295 uid=38 gid=38 euid=38 suid=38 fsuid=38 egid=38 sgid=38 fsgid=38 tty=(none) ses=4294967295 comm="ntpd" exe="/usr/sbin/ntpd" key="128T" 
 ```
 
-#### SSH Session Termination
+### SSH Session Termination
 
 ```
 type=USER_END msg=audit(1709743019.474:2350): pid=13700 uid=0 auid=1000 ses=36 msg='op=login id=1000 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success' 
@@ -339,4 +339,192 @@ type=CRYPTO_KEY_USER msg=audit(1709743019.479:2357): pid=13700 uid=0 auid=1000 s
 
 type=CRYPTO_KEY_USER msg=audit(1709743019.479:2358): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=13700 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
 ```
+
+### NTP Configuration Change
+
+The command `show event type system detail` shows an NTP configuration change.
+
+```
+====================================================================
+ 2024-03-14T20:58:24.469Z Change to the running 128T configuration.
+====================================================================
+ Type:               admin.running_config_change
+ Node:               test1
+ User:               admin
+ Collector:          configDirector
+ Description:        running config changes are committed
+ Permitted:          True
+ Source Ip:          172.18.15.253
+
+config
+    authority
+        router  Fabric128
+            name    Fabric128
+            system
+                ntp
+                    delete server force 172.2.10.13
+                    server  172.2.10.14
+                        ip-address  172.2.10.14
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+### Unsuccessful Login Attempt Limit Met or Exceeded
+
+These will appear in the `sshd` journal for SSH-based logins, or `Dredd` if it is an API-based login.
+
+```
+Mar 14 18:21:25 t117-dut1.openstacklocal sshd[11536]: pam_faillock(sshd:auth): Consecutive login failures for user test account temporarily locked
+
+Mar 14 18:21:27 t117-dut1.openstacklocal sshd[11536]: Failed password for test from 172.18.15.253 port 61203 ssh2
+```
+
+### Identification and Authentication 
+
+(waiting)
+
+###  Password-based Authentication 
+
+This information is found within the journal of `sshd`.
+```
+Mar 14 18:23:23 t117-dut1.openstacklocal sshd[14546]: Accepted password for test from 172.18.15.253 port 61205 ssh2
+```
+
+### Logs for Manual Software Updates
+
+Logs for SSR software updates can be found at `/var/log/install128t/installer.log`. An example would be updating from 6.3.0-develop to 6.4.0-develop. 
+
+```
+2024-03-14 21:34:32,004: INFO - Version requirement: 6.4.0-1.develop.el7
+2024-03-14 21:34:39,218: INFO - Verifying that 128T-0:6.4.0-1.develop.el7.x86_64 will be an upgrade
+2024-03-14 21:34:39,218: INFO - Resolving version of Manifest matching 128T-manifest-6.3.0.0.202403021319.develop.el7
+2024-03-14 21:34:42,009: INFO - Using Manifest package 128T-manifest-0:6.3.0.0.202403021319.develop.el7-1.x86_64
+2024-03-14 21:34:51,737: INFO - Resolving version of Deprecated Packages file 128T-deprecated-packages-6.3.0.0.202403021319.develop.el7
+2024-03-14 21:34:55,061: INFO - Using Manifest package 128T-deprecated-packages-0:6.3.0.0.202403021319.develop.el7-1.x86_64
+2024-03-14 21:34:56,613: INFO - Resolving version of Manifest matching 128T-manifest-6.4.0.1.develop.el7
+2024-03-14 21:35:00,501: INFO - Using Manifest package 128T-manifest-0:6.4.0.1.develop.el7-1.x86_64
+2024-03-14 21:35:07,172: INFO - Resolving version of Deprecated Packages file 128T-deprecated-packages-6.4.0.1.develop.el7
+2024-03-14 21:35:10,274: INFO - Using Manifest package 128T-deprecated-packages-0:6.4.0.1.develop.el7-1.x86_64
+```
+
+### All management activities of TSF data (including creation, modification and deletion of firewall rules)
+...waiting...
+
+### Logs for Automatic Updates 
+
+These logs capture the initiation of updates, and the result of the update attempt (success or failure).
+
+Logs for SSR software updates can be found at `/var/log/install128t/installer.log`. An example would be updating from 6.3.0-develop to 6.4.0-develop.
+
+```
+024-03-14 21:36:34,805: INFO - ================================================================================
+2024-03-14 21:36:34,805: INFO - Package              Arch   Version                  Repository           Size
+2024-03-14 21:36:34,805: INFO - ================================================================================
+2024-03-14 21:36:34,805: INFO - Upgrading:
+2024-03-14 21:36:34,805: INFO - 128T                 x86_64 6.4.0-1.develop.el7      128tech-local-saved 164 M
+2024-03-14 21:36:34,805: INFO - 128T-deprecated-packages
+2024-03-14 21:36:34,805: INFO - x86_64 6.4.0.1.develop.el7-1    128tech-local-saved 3.5 k
+2024-03-14 21:36:34,806: INFO - 128T-manifest        x86_64 6.4.0.1.develop.el7-1    128tech-local-saved  25 k
+2024-03-14 21:36:34,806: INFO - 128T-minion-watchdog x86_64 2.0.0-1                  128tech-local-saved 2.6 M
+2024-03-14 21:36:34,806: INFO - 128T-mist-wan-assurance
+2024-03-14 21:36:34,806: INFO - x86_64 3.10.0-308               128tech-local-saved 5.0 M
+2024-03-14 21:36:34,806: INFO - 128T-snmp-service    x86_64 1.1.7-1                  128tech-local-saved 3.2 M
+2024-03-14 21:36:34,806: INFO - curl                 x86_64 7.29.0-59.0.3.el7_9.2    128tech-local-saved 272 k
+2024-03-14 21:36:34,806: INFO - java-1.8.0-openjdk-headless
+2024-03-14 21:36:34,806: INFO - x86_64 1:1.8.0.402.b06-1.el7_9  128tech-local-saved  33 M
+2024-03-14 21:36:34,806: INFO - libcurl              x86_64 7.29.0-59.0.3.el7_9.2    128tech-local-saved 224 k
+2024-03-14 21:36:34,806: INFO - python               x86_64 2.7.5-94.0.1.el7_9       128tech-local-saved  96 k
+2024-03-14 21:36:34,806: INFO - python-libs          x86_64 2.7.5-94.0.1.el7_9       128tech-local-saved 5.6 M
+2024-03-14 21:36:34,806: INFO - python3              x86_64 3.6.8-21.0.1.el7_9       128tech-local-saved  70 k
+2024-03-14 21:36:34,806: INFO - python3-libs         x86_64 3.6.8-21.0.1.el7_9       128tech-local-saved 7.0 M
+2024-03-14 21:36:34,806: INFO - Installing dependencies:
+2024-03-14 21:36:34,806: INFO - 128T-plugin-starter  x86_64 0.0.2-2                  128tech-local-saved 2.3 M
+2024-03-14 21:36:34,806: INFO - ember                x86_64 1.4.0-3.el7              128tech-local-saved 4.5 M
+2024-03-14 21:36:34,806: INFO - python-dns           noarch 1.12.0-4.20150617git465785f.el7
+2024-03-14 21:36:34,806: INFO - 128tech-local-saved 233 k
+2024-03-14 21:36:34,806: INFO - python2-dns          noarch 1.12.0-0.el7             128tech-local-saved 3.0 k
+2024-03-14 21:36:34,806: INFO - 
+2024-03-14 21:36:34,806: INFO - Transaction Summary
+2024-03-14 21:36:34,806: INFO - ================================================================================
+2024-03-14 21:36:34,806: INFO - Install   4 Packages
+2024-03-14 21:36:34,807: INFO - Upgrade  13 Packages
+2024-03-14 21:36:34,807: INFO - 
+2024-03-14 21:36:35,606: INFO - Total size: 228 M
+2024-03-14 21:36:35,606: INFO - Downloading Packages:
+2024-03-14 21:36:36,368: INFO - Running transaction check
+2024-03-14 21:36:37,441: INFO - Transaction check succeeded.
+2024-03-14 21:36:37,442: INFO - Running transaction test
+2024-03-14 21:36:44,839: INFO - Transaction test succeeded.
+2024-03-14 21:38:31,381: INFO - Installed:
+2024-03-14 21:38:31,381: INFO - 128T-plugin-starter.x86_64 0.0.2-2
+2024-03-14 21:38:31,381: INFO - ember.x86_64 1.4.0-3.el7
+2024-03-14 21:38:31,381: INFO - python-dns.noarch 1.12.0-4.20150617git465785f.el7
+2024-03-14 21:38:31,381: INFO - python2-dns.noarch 1.12.0-0.el7
+2024-03-14 21:38:31,381: INFO - 
+2024-03-14 21:38:31,381: INFO - Upgraded:
+2024-03-14 21:38:31,381: INFO - 128T.x86_64 6.4.0-1.develop.el7
+2024-03-14 21:38:31,381: INFO - 128T-deprecated-packages.x86_64 6.4.0.1.develop.el7-1
+2024-03-14 21:38:31,381: INFO - 128T-manifest.x86_64 6.4.0.1.develop.el7-1
+2024-03-14 21:38:31,381: INFO - 128T-minion-watchdog.x86_64 2.0.0-1
+2024-03-14 21:38:31,382: INFO - 128T-mist-wan-assurance.x86_64 3.10.0-308
+2024-03-14 21:38:31,382: INFO - 128T-snmp-service.x86_64 1.1.7-1
+2024-03-14 21:38:31,382: INFO - curl.x86_64 7.29.0-59.0.3.el7_9.2
+2024-03-14 21:38:31,382: INFO - java-1.8.0-openjdk-headless.x86_64 1:1.8.0.402.b06-1.el7_9
+2024-03-14 21:38:31,382: INFO - libcurl.x86_64 7.29.0-59.0.3.el7_9.2
+2024-03-14 21:38:31,382: INFO - python.x86_64 2.7.5-94.0.1.el7_9
+2024-03-14 21:38:31,383: INFO - python-libs.x86_64 2.7.5-94.0.1.el7_9
+2024-03-14 21:38:31,383: INFO - python3.x86_64 3.6.8-21.0.1.el7_9
+2024-03-14 21:38:31,383: INFO - python3-libs.x86_64 3.6.8-21.0.1.el7_9
+2024-03-14 21:38:31,383: INFO - 
+2024-03-14 21:38:31,383: INFO - Complete!
+2024-03-14 21:38:31,434: INFO - Successfully installed package(s) 128T-manifest-0:6.4.0.1.develop.el7-1.x86_64, 128T-deprecated-packages-0:6.4.0.1.develop.el7-1.x86_64
+```
+
+### Discontinuous Changes to Time
+FPT_STM_EXT.1 
+
+(waiting)
+
+### Local Session Termination - Inactivity Timer
+
+FTA_SSL_EXT.1 
+The termination of a local interactive session by the session locking mechanism due to session timeout. The PCLILogger journal will contain an entry such as:
+
+```
+Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pcli.output:201] (admin:2299) - Session timed out after 900 seconds
+```
+
+### Remote Session Termination - Inactivity Timer
+
+FTA_SSL.3 
+The termination of a remote session by the session locking mechanism due to session timeout. The PCLILogger journal will contain an entry such as:
+
+```
+Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pcli.output:201] (admin:2299) - Session timed out after 900 seconds
+```
+
+### Interactive Session Termination - Administrator-initiated termination
+
+FTA_SSL.4 
+The Administrator-initiated termination of the Administrator’s own interactive session. The PCLILogger journal will contain an entry such as:
+
+```
+Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pcli.output:201] (admin:2299) - Session timed out after 900 seconds
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
