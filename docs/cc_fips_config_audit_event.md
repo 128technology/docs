@@ -180,10 +180,10 @@ config
 To provide secure transport of audit logs to and from a remote server, use the following procedure:
 
 #### On the Audit server:
-1. Make a known host file `etc/128technology/known_hosts` and add the host:
+1. Make a known host file `etc/128technology/known_hosts` and add the host (the host below is an example):
 
 ```
-[192.168.1.7]:930 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC95iWSnYev40reditedforsecuritylNfFF6rx28+hvAfWpj5nzR+uXlgL3SSGARdl1fD+9SxYgieeSv82NIgQNz89rx
+[192.168.1.7]:930 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC95iWSnYev40r/1eJ520M7jY+3jvEiSlFd7Wjw21g5lNfdyG6cAO3tVXHo8MlMFN2E2FMaK335XLgzaBUxMGSDcW/9gIraPRP9LM7aXvVEAFsQYsmlhXxD6NtYJF34ZBn0EZCjxZ6xTqN+CN1JreOerSuuk+WhuQmQTsP4qYhP5GoYSilCLQuh/1tPXCeuJrWjHEsidhSk4Efkxrnn0bHPMjICYVRicSg7OZvrX47F4p28p8rfDbrEpzwC7DR0Bdhhpq2blL3jngKbXFaGaEv4L/lNfFF6rx28+hvAfWpj5nzR+uXlgL3SSGARdl1fD+9SxYgieeSv82NIgQNz89rx
 ```
 2. Start the ssh server with `-R` and use `StrictHostKeyChecking=yes` with `/etc/128technology/known_hosts`.
 ```
@@ -383,9 +383,38 @@ Mar 14 18:21:25 t117-dut1.openstacklocal sshd[11536]: pam_faillock(sshd:auth): C
 Mar 14 18:21:27 t117-dut1.openstacklocal sshd[11536]: Failed password for test from 172.18.15.253 port 61203 ssh2
 ```
 
-### Identification and Authentication 
+### All Use of Identification and Authentication 
 
-(waiting)
+This information is found within the journal of `sshd`.
+
+```
+Mar 14 18:23:23 t117-dut1.openstacklocal sshd[14546]: Accepted password for test from 172.18.15.253 port 61205 ssh2
+```
+
+Banner Information:
+
+```
+$ ssh admin@Conductor
+admin@10.22.0.68's password:
+Last failed login: Mon Mar 18 04:07:15 UTC 2024 from 172.18.15.253 on ssh:notty
+There were 2 failed login attempts since the last successful login.
+Last login: Mon Mar 18 04:06:15 2024 from 172.18.15.253
++---------------------------------------+
+|                                       |
+|    Welcome to:                        |
+|                                       |
+|     | .   . ,---. . ,---. ,---. ,--.  |
+|     | |   | |   | | |---' |---' |     |
+|     | `---' '   ' ' '     `---' '     |
+|  ---'                                 |
+|        __ ___       __   __       __  |
+|  |\ | |_   |  |  | /  \ |__) |_/ (_   |
+|  | \| |__  |  |/\| \__/ | \  | \ __)  |
+|                                       |
+| Session Smart Networking Platform ... |
++---------------------------------------+
+admin@conductor-node-1.Conductor#
+```
 
 ###  Password-based Authentication 
 
@@ -396,7 +425,7 @@ Mar 14 18:23:23 t117-dut1.openstacklocal sshd[14546]: Accepted password for test
 
 ### Logs for Manual Software Updates
 
-Logs for SSR software updates can be found at `/var/log/install128t/installer.log`. An example would be updating from 6.3.0-develop to 6.4.0-develop. 
+Logs for SSR software updates can be found at `/var/log/install128t/installer.log`. An example would be updating from `6.3.0-develop` to `6.4.0-develop`. 
 
 ```
 2024-03-14 21:34:32,004: INFO - Version requirement: 6.4.0-1.develop.el7
@@ -411,14 +440,21 @@ Logs for SSR software updates can be found at `/var/log/install128t/installer.lo
 2024-03-14 21:35:10,274: INFO - Using Manifest package 128T-deprecated-packages-0:6.4.0.1.develop.el7-1.x86_64
 ```
 
-### All management activities of TSF data (including creation, modification and deletion of firewall rules)
-...waiting...
+### All Management Activities of TSF data 
+
+This includes the creation, modification, and deletion of firewall rules. Messages are logged at debug level when a rule is changed in `highway.log`
+
+```
+Mar 15 13:30:27.485 [HWMC|NIF ] DEBUG (GoogleTest) filter-rule change detected in interface 1-111.0
+```
+
+Additionally, when the configuration is applied, the filter-rule being applied is logged in `runtimeStatsHwmOnConfig.log`.
 
 ### Logs for Automatic Updates 
 
 These logs capture the initiation of updates, and the result of the update attempt (success or failure).
 
-Logs for SSR software updates can be found at `/var/log/install128t/installer.log`. An example would be updating from 6.3.0-develop to 6.4.0-develop.
+Logs for SSR software updates can be found at `/var/log/install128t/installer.log`. An example would be updating from `6.3.0-develop` to `6.4.0-develop`.
 
 ```
 024-03-14 21:36:34,805: INFO - ================================================================================
@@ -485,14 +521,31 @@ Logs for SSR software updates can be found at `/var/log/install128t/installer.lo
 ```
 
 ### Discontinuous Changes to Time
-FPT_STM_EXT.1 
 
-(waiting)
+These changes can be Administrator actuated or changed using an automated process. Note that no continuous changes to time need to be logged. 
+
+This logs the old and new values for the time, as well as the origin (e.g., IP address) of the attempt to change the time, and success or failure.
+
+The command `show event type system detail` displays changes to time.
+
+```
+========================================================================================================================
+ 2024-01-01T00:02:35.514Z System clock was adjusted by NTP
+========================================================================================================================
+ Type:               system.ntp_adjustment
+ Node:               test2
+ User:               ntp
+ Collector:          auditd
+ Event Detail:       node=t276-dut2.openstacklocal type=SYSCALL msg=audit(1704067355.514:1953): arch=c000003e
+ syscall=227 success=yes exit=0 a0=0 a1=7ffceb4e2530 a2=aea5b a3=4ab382 items=0 ppid=1 pid=22241 auid=4294967295 uid=38
+ gid=38 euid=38 suid=38 fsuid=38 egid=38 sgid=38 fsgid=38 tty=(none) ses=4294967295 comm="ntpd" exe="/usr/sbin/ntpd"
+ key="128T" old_time=2024-01-01T00:02:35.514000Z new_time=2024-03-15T17:58:18Z
+ New Date Time:      2024-03-15T17:58:18Z
+```
 
 ### Local Session Termination - Inactivity Timer
 
-FTA_SSL_EXT.1 
-The termination of a local interactive session by the session locking mechanism due to session timeout. The PCLILogger journal will contain an entry such as:
+The termination of a local interactive session by the session locking mechanism due to session timeout. The `PCLILogger journal` will contain an entry such as:
 
 ```
 Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pcli.output:201] (admin:2299) - Session timed out after 900 seconds
@@ -500,8 +553,7 @@ Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pc
 
 ### Remote Session Termination - Inactivity Timer
 
-FTA_SSL.3 
-The termination of a remote session by the session locking mechanism due to session timeout. The PCLILogger journal will contain an entry such as:
+The termination of a remote session by the session locking mechanism due to session timeout. The `PCLILogger journal` will contain an entry such as:
 
 ```
 Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pcli.output:201] (admin:2299) - Session timed out after 900 seconds
@@ -509,22 +561,135 @@ Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pc
 
 ### Interactive Session Termination - Administrator-initiated termination
 
-FTA_SSL.4 
-The Administrator-initiated termination of the Administrator’s own interactive session. The PCLILogger journal will contain an entry such as:
+The Administrator-initiated termination of the Administrator’s own interactive session. The `PCLILogger journal` will contain an entry such as:
 
 ```
 Mar 17 23:45:25 t184-dut1.openstacklocal logragator[30093]: ERROR [MainThread:pcli.output:201] (admin:2299) - Session timed out after 900 seconds
 ```
 
+### Trusted Channel Function Logs - User
+
+This allows the identification of the initiator and target of failed attempts to establish a trusted channel.
+
+#### Initiation 
+
+Logged in `/var/log/audit/audit.log`:
+
+```
+type=CRYPTO_KEY_USER msg=audit(1710535870.175:2581): pid=1089 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=1089 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535870.185:2582): pid=1089 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=1089 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535870.186:2583): pid=1089 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=1089 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_SESSION msg=audit(1710535870.192:2584): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=start direction=from-server cipher=aes128-ctr ksize=128 mac=hmac-sha2-256 pfs=diffie-hellman-group14-sha256 spid=1089 suid=74 rport=38122 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=CRYPTO_SESSION msg=audit(1710535870.194:2585): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=start direction=from-client cipher=aes128-ctr ksize=128 mac=hmac-sha2-256 pfs=diffie-hellman-group14-sha256 spid=1089 suid=74 rport=38122 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=USER_AUTH msg=audit(1710535870.352:2586): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=? acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=failed'
+type=USER_AUTH msg=audit(1710535872.130:2587): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=none acct="t128" exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=ssh res=failed'
+type=USER_AUTH msg=audit(1710535872.140:2588): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=pubkey acct="t128" exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=ssh res=failed'
+type=USER_AUTH msg=audit(1710535875.285:2589): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_faillock,pam_unix acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=USER_ACCT msg=audit(1710535875.286:2590): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_faillock,pam_unix,pam_localuser acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535875.287:2591): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=session fp=? direction=both spid=1089 suid=74 rport=38122 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=USER_AUTH msg=audit(1710535875.289:2592): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=success acct="t128" exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=ssh res=success'
+type=CRED_ACQ msg=audit(1710535875.289:2593): pid=1088 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=LOGIN msg=audit(1710535875.290:2594): pid=1088 uid=0 old-auid=4294967295 auid=1001 tty=(none) old-ses=4294967295 ses=28 res=1
+type=SYSCALL msg=audit(1710535875.290:2594): arch=c000003e syscall=1 success=yes exit=4 a0=4 a1=7fff18eb2b50 a2=4 a3=3 items=0 ppid=978 pid=1088 auid=1001 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=28 comm="sshd" exe="/usr/sbin/sshd" key=(null)
+type=PROCTITLE msg=audit(1710535875.290:2594): proctitle=737368643A2074313238205B707269765D
+type=USER_START msg=audit(1710535875.303:2595): pid=1088 uid=0 auid=1001 ses=28 msg='op=PAM:session_open grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535875.305:2596): pid=1106 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=1106 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535875.305:2597): pid=1106 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=1106 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535875.305:2598): pid=1106 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=1106 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRED_ACQ msg=audit(1710535875.306:2599): pid=1106 uid=0 auid=1001 ses=28 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+```
+
+#### Termination
+
+Logged in `/var/log/audit/audit.log`:
+
+```
+type=CRYPTO_KEY_USER msg=audit(1710535893.426:2600): pid=1088 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=1106 suid=1001  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535893.426:2601): pid=1088 uid=0 auid=1001 ses=28 msg='op=destroy kind=session fp=? direction=both spid=1106 suid=1001 rport=38122 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=USER_END msg=audit(1710535893.430:2602): pid=1088 uid=0 auid=1001 ses=28 msg='op=PAM:session_close grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRED_DISP msg=audit(1710535893.431:2603): pid=1088 uid=0 auid=1001 ses=28 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535893.431:2604): pid=1088 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=1088 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535893.431:2605): pid=1088 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=1088 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710535893.431:2606): pid=1088 uid=0 auid=1001 ses=28 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=1088 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+```
+
+#### Failure
+
+Logged in `/var/log/audit/audit.log`:
+
+```
+type=CRYPTO_KEY_USER msg=audit(1710536131.838:2697): pid=1779 uid=0 auid=1001 ses=32 msg='op=destroy kind=session fp=? direction=both spid=1829 suid=1001 rport=56114 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710536131.838:2698): pid=1779 uid=0 auid=1001 ses=32 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=1829 suid=1001  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=USER_END msg=audit(1710536131.844:2699): pid=1779 uid=0 auid=1001 ses=32 msg='op=PAM:session_close grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRED_DISP msg=audit(1710536131.844:2700): pid=1779 uid=0 auid=1001 ses=32 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="t128" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710536131.845:2701): pid=1779 uid=0 auid=1001 ses=32 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=1779 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710536131.845:2702): pid=1779 uid=0 auid=1001 ses=32 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=1779 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710536131.845:2703): pid=1779 uid=0 auid=1001 ses=32 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=1779 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+```
 
 
+### Trusted Channel Function Logs - Administrator
 
+This allows the identification of the administrator as the initiator and target of failed attempts to establish a trusted channel.
 
+#### Initiation 
+Logged in `/var/log/audit/audit.log` (note USER_START):
 
+```
+type=CRYPTO_KEY_USER msg=audit(1710532936.084:2285): pid=23657 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=23657 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532936.085:2286): pid=23657 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=23657 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532936.085:2287): pid=23657 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=23657 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_SESSION msg=audit(1710532936.086:2288): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=start direction=from-server cipher=aes128-ctr ksize=128 mac=hmac-sha2-256 pfs=diffie-hellman-group14-sha256 spid=23657 suid=74 rport=47224 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=CRYPTO_SESSION msg=audit(1710532936.087:2289): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=start direction=from-client cipher=aes128-ctr ksize=128 mac=hmac-sha2-256 pfs=diffie-hellman-group14-sha256 spid=23657 suid=74 rport=47224 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=USER_AUTH msg=audit(1710532936.184:2290): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=? acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=failed'
+type=USER_AUTH msg=audit(1710532937.840:2291): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=none acct="admin" exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=ssh res=failed'
+type=USER_AUTH msg=audit(1710532937.843:2292): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=pubkey acct="admin" exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=ssh res=failed'
+type=USER_AUTH msg=audit(1710532945.221:2293): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_faillock,pam_unix acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=USER_ACCT msg=audit(1710532945.222:2294): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_faillock,pam_localuser acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532945.222:2295): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=session fp=? direction=both spid=23657 suid=74 rport=47224 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=USER_AUTH msg=audit(1710532945.224:2296): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=success acct="admin" exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=ssh res=success'
+type=CRED_ACQ msg=audit(1710532945.225:2297): pid=23656 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=LOGIN msg=audit(1710532945.225:2298): pid=23656 uid=0 old-auid=4294967295 auid=1002 tty=(none) old-ses=4294967295 ses=21 res=1
+type=SYSCALL msg=audit(1710532945.225:2298): arch=c000003e syscall=1 success=yes exit=4 a0=4 a1=7fc5f26b830 a2=4 a3=3 items=0 ppid=2075 pid=23656 auid=1002 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=21 comm="sshd" exe="/usr/sbin/sshd" key=(null)
+type=PROCTITLE msg=audit(1710532945.225:2298): proctitle=737368643A2061646D696E205B707269765D
+type=USER_START msg=audit(1710532945.257:2299): pid=23656 uid=0 auid=1002 ses=21 msg='op=PAM:session_open grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532945.258:2300): pid=23690 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=23690 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532945.258:2301): pid=23690 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=23690 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532945.258:2302): pid=23690 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=23690 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRED_ACQ msg=audit(1710532945.259:2303): pid=23690 uid=0 auid=1002 ses=21 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=USER_LOGIN msg=audit(1710532945.311:2304): pid=23656 uid=0 auid=1002 ses=21 msg='op=login id=1002 exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=/dev/pts/1 res=success'
+type=USER_START msg=audit(1710532945.311:2305): pid=23656 uid=0 auid=1002 ses=21 msg='op=login id=1002 exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=/dev/pts/1 res=success'
+type=CRYPTO_KEY_USER msg=audit(1710532945.313:2306): pid=23656 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=23691 suid=1002  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+```
 
+#### Termination
 
+Logged in `/var/log/audit/audit.log` (note USER_END):
 
+```
+type=USER_END msg=audit(1710533006.604:2307): pid=23656 uid=0 auid=1002 ses=21 msg='op=login id=1002 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success'
+type=USER_LOGOUT msg=audit(1710533006.604:2308): pid=23656 uid=0 auid=1002 ses=21 msg='op=login id=1002 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success'
+type=CRYPTO_KEY_USER msg=audit(1710533006.604:2309): pid=23656 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=23690 suid=1002  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710533006.604:2310): pid=23656 uid=0 auid=1002 ses=21 msg='op=destroy kind=session fp=? direction=both spid=23690 suid=1002 rport=47224 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=USER_END msg=audit(1710533006.609:2311): pid=23656 uid=0 auid=1002 ses=21 msg='op=PAM:session_close grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRED_DISP msg=audit(1710533006.609:2312): pid=23656 uid=0 auid=1002 ses=21 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710533006.610:2313): pid=23656 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=23656 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710533006.610:2314): pid=23656 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=23656 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710533006.610:2315): pid=23656 uid=0 auid=1002 ses=21 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=23656 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+```
 
+#### Failure
 
+Logged in `/var/log/audit/audit.log` (also USER END):
 
-
+```
+type=USER_END msg=audit(1710534850.445:2438): pid=29870 uid=0 auid=1002 ses=23 msg='op=login id=1002 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success'
+type=USER_LOGOUT msg=audit(1710534850.445:2439): pid=29870 uid=0 auid=1002 ses=23 msg='op=login id=1002 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success'
+type=CRYPTO_KEY_USER msg=audit(1710534850.446:2440): pid=29870 uid=0 auid=1002 ses=23 msg='op=destroy kind=session fp=? direction=both spid=29904 suid=1002 rport=57848 laddr=192.168.1.5 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.20.6.12 terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710534850.446:2441): pid=29870 uid=0 auid=1002 ses=23 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=29904 suid=1002  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=USER_END msg=audit(1710534850.465:2442): pid=29870 uid=0 auid=1002 ses=23 msg='op=PAM:session_close grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRED_DISP msg=audit(1710534850.465:2443): pid=29870 uid=0 auid=1002 ses=23 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="admin" exe="/usr/sbin/sshd" hostname=172.20.6.12 addr=172.20.6.12 terminal=ssh res=success'
+type=CRYPTO_KEY_USER msg=audit(1710534850.467:2444): pid=29870 uid=0 auid=1002 ses=23 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=29870 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710534850.467:2445): pid=29870 uid=0 auid=1002 ses=23 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=29870 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+type=CRYPTO_KEY_USER msg=audit(1710534850.467:2446): pid=29870 uid=0 auid=1002 ses=23 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=29870 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+```
