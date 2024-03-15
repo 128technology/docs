@@ -2,6 +2,9 @@
 title: Using the STEP GUI
 sidebar_label: Using the STEP GUI
 ---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 #### Version History
 | Release | Modification                |
 | ------- | --------------------------- |
@@ -11,7 +14,7 @@ sidebar_label: Using the STEP GUI
 
 Use the STEP Configuration Settings button on the Configuration Home panel to set basic STEP configuration parameters.
 
-<img src="/img/howto_stepgui_config.png" alt="STEP Configuration Home" width="300" height="200" />
+<img src={useBaseUrl('/img/howto_stepgui_config.png')} alt="STEP Configuration Home" width="300" height="200" />
 
 To configure STEP settings from the GUI, enter information into the fields as shown.
 
@@ -21,7 +24,7 @@ To configure STEP settings from the GUI, enter information into the fields as sh
 
 Click ADD and enter the IP address of the STEP repository. 
 
-<img src="/img/howto_stepgui_config3.png" alt="New STEP Repo" width="400" height="150" />
+<img src={useBaseUrl('/img/howto_stepgui_config3.png')} alt="New STEP Repo" width="400" height="150" />
 
 Enter the Basic STEP Repository information.
 
