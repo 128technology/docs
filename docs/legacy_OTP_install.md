@@ -3,7 +3,7 @@ title: Installing Using the Pre-5.0 Interactive ISO
 sidebar_label: Installing Using the Pre-5.0 Interactive ISO
 ---
 
-The steps in this section describe installing the legacy Interactive ISO from bootable media. The section, [Initialize the SSR](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
+The steps in this section describe installing the legacy Interactive ISO from bootable media. The section, [Initialize the SSR](#initialize-the-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
 :::note
 The Conductor installation must be completed before installing a router or routers using the OTP ISO.
 :::
