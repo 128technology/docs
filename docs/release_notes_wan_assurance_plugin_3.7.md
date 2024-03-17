@@ -24,6 +24,10 @@ sidebar_label: '3.7'
 
   _**Resolution**_ The internal network will not be included in the data reported for the feature.
 
+- **WAN-2637 One of the nodes in HA pair was not sending any data to the cloud**
+
+  _**Resolution**_ The runtime par file corruption of monitoring-agent package is being addressed by adopting a better packaging approach.
+
 - **WAN-2647 Peer path status is displayed incorrectly under Topology Details view for HA routers**
 
   _**Resolution**_ For VRRP based redundancy, the active/standby status will be reported correctly.
@@ -31,6 +35,10 @@ sidebar_label: '3.7'
 - **WAN-2678 MIST onboarding for HA routers fails with a `mutual authentication failed` error**
 
   _**Resolution**_ The condition that checks for the completeness of the HA configuration has been made more robust, preventing an authentication failure error. This allows the completion of the MIST onboarding process.
+
+- **WAN-2696 Client information displays user as `Anonymous` **
+
+  _**Resolution**_ In addition to the realtime lease updates, the full DHCP server lease data is sent to the cloud once a day.
 
 - **WAN-2748 MIST org sees too many LTE ARP interface flaps**
 
