@@ -96,17 +96,17 @@ device-interface
 
 |Variable|Meaning|Config Example|
 |-------|--------|--------|
-|`{kni_interface}`|Name of the KNI interface|`test`|
-|`{namespace}`|Name of the namespace the KNI belongs to (including the namespace-id)|`testns:1073741829`|
-|`{kni_ip}`|Configured IP address for the KNI interface (corresponds to `address > gateway` |`169.254.140.2`|
-|`{kni_prefix_length}`|Configured prefix-length for the KNI interface (corresponds to `address > prefix-length` |30|
-|`{kni_gateway}`|Configured gateway address for the KNI interface (corresponds to `address > ip-address` |`169.254.140.1`|
+|`\{kni_interface\}`|Name of the KNI interface|`test`|
+|`{\namespace\}`|Name of the namespace the KNI belongs to (including the namespace-id)|`testns:1073741829`|
+|`\{kni_ip\}`|Configured IP address for the KNI interface (corresponds to `address > gateway` |`169.254.140.2`|
+|`\{kni_prefix_length\}`|Configured prefix-length for the KNI interface (corresponds to `address > prefix-length` |30|
+|`\{kni_gateway\}`|Configured gateway address for the KNI interface (corresponds to `address > ip-address` |`169.254.140.1`|
 
 
 The following YAML configurations
 ```yaml
 routing:
-    - "default dev {kni_interface} via {kni_gateway}"
+    - "default dev \{kni_interface\} via \{kni_gateway\}"
 ```
 
 will therefore be converted to the following at runtime:

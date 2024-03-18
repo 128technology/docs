@@ -745,7 +745,7 @@ By using Saltstack data files, the time to apply high states across all assets i
 #### Issues Fixed
 
 - **PLUGIN-1072** Allow wireguard to start when the required version of `kmod-wireguard` is installed along with versions not used by the active kernel.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [\{detail | summmary\}] 128T-wireguard`
 - **PLUGIN-768** Support the Wireguard plugin on conductors running SSR versions `5.1.0` and greater.
 
 ### Caveat

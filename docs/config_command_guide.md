@@ -1213,17 +1213,17 @@ configure authority dynamic-hostname [<string>]
 
 #### Description
 
-Default: interface-{interface-id}.{router-name}.{authority-name}
+Default: interface-\{interface-id\}.\{router-name\}.\{authority-name\}
 
 ##### string
 
 A text value.
 
 Must contain substitution variables:
-`{interface-id}` for Network Interface Global Identifier
-`{router-name}` for Router Name
-`{authority-name}` for Authority Name
-For example, `interface-{interface-id}.{router-name}.{authority-name}`.
+`\{interface-id\}` for Network Interface Global Identifier
+`\{router-name\}` for Router Name
+`\{authority-name\}` for Authority Name
+For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`.
 Any other characters must be alphanumeric or any of the
 following: - _ .
 

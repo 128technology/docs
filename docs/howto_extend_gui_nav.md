@@ -13,11 +13,11 @@ For applications that are running on the same platform as the SSR, the authentic
 
 In order to access the user token, the following code snippet can be leveraged:
 ```js
-export function getUserToken(): string | undefined {
-  const userRaw = window.sessionStorage.getItem('user') || '{}';
+export function getUserToken(): string | undefined \{
+  const userRaw = window.sessionStorage.getItem('user') || '\{\}';
   const user = JSON.parse(userRaw);
   return user.token;
-}
+\}
 ```
 If the function `getUserToken()` returns a non-emtpy string, then the token is valid and the user is considered to be logged in. Any other return value indicates an invalid token or set of credentials.
 
@@ -25,7 +25,7 @@ In order to extend the web UI's sidebar, create a JSON file in the directory `/e
 
 `example_link.json`
 ```json
-{ "name": "Title Of My Link", "url": "http://link.destination" }
+\{ "name": "Title Of My Link", "url": "http://link.destination" \}
 ```
 
 Links added in this fashion are opened in a new browser tab.

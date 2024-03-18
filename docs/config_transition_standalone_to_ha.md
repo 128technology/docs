@@ -211,19 +211,19 @@ When installing a new HA node (conductor or router), ensure that the same versio
 
 ```
 [root@t104-dut1 ~]# cat /etc/128technology/global.init
-{
-  "init" : {
-    "control" : {},
-    "conductor" : {
-      "T104_DUT1" : {
+\{
+  "init" : \{
+    "control" : \{\},
+    "conductor" : \{
+      "T104_DUT1" : \{
         "host" : "172.16.1.1"
-      },
-      "T104_DUT2" : {
+      \},
+      "T104_DUT2" : \{
         "host" : "172.16.1.2"
-      }
-    },
+      \}
+    \},
     "routerName" : "Conductor"
-  }
+  \}
 ```
 ```
 [root@t104-dut1 ~]# cat /etc/salt/minion

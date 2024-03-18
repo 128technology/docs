@@ -12,7 +12,7 @@ Assign the current router to a Mist organization.
 #### Usage
 
 ```
-adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>] [mist-instance <mist-instance>]
+adopt [\{org-id <org-id> | registration-code <registration-code>\}] [force] [router-name <router-name>] [mist-instance <mist-instance>]
 ```
 
 ##### Keyword Arguments
@@ -51,7 +51,7 @@ Clear app-id entries from cache
 #### Usage
 
 ```
-clear app-id cache [force] [stale-entries] [node <node>] {router <router> | resource-group <resource-group>} [<cache>]
+clear app-id cache [force] [stale-entries] [node <node>] \{router <router> | resource-group <resource-group>\} [<cache>]
 ```
 
 ##### Keyword Arguments
@@ -89,7 +89,7 @@ Clear specific app-id entry from cache by address key
 #### Usage
 
 ```
-clear app-id cache-entry address [force] [node <node>] {router <router> | resource-group <resource-group>} <ip> <port> <protocol>
+clear app-id cache-entry address [force] [node <node>] \{router <router> | resource-group <resource-group>\} <ip> <port> <protocol>
 ```
 
 ##### Keyword Arguments
@@ -128,7 +128,7 @@ Clear specific app-id entry from cache by domain name key
 #### Usage
 
 ```
-clear app-id cache-entry domain [force] [node <node>] {router <router> | resource-group <resource-group>} <domain>
+clear app-id cache-entry domain [force] [node <node>] \{router <router> | resource-group <resource-group>\} <domain>
 ```
 
 ##### Keyword Arguments
@@ -165,7 +165,7 @@ Clear specific app-id entry from cache by url key
 #### Usage
 
 ```
-clear app-id cache-entry url [force] [node <node>] {router <router> | resource-group <resource-group>} <url>
+clear app-id cache-entry url [force] [node <node>] \{router <router> | resource-group <resource-group>\} <url>
 ```
 
 ##### Keyword Arguments
@@ -202,7 +202,7 @@ Clear inactive app-id stats
 #### Usage
 
 ```
-clear app-id stats [force] [node <node>] {router <router> | resource-group <resource-group>}
+clear app-id stats [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -227,7 +227,7 @@ Refresh the entire ARP cache or a subset if arguments are provided.
 #### Usage
 
 ```
-clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+clear arp [\{vlan <vlan> | ip <ip>\}] [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -268,7 +268,7 @@ Clear routes associated with one or all BGP neighbors.
 #### Usage
 
 ```
-clear bgp [{in | out | soft}] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} <neighbor>
+clear bgp [\{in | out | soft\}] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} <neighbor>
 ```
 
 ##### Keyword Arguments
@@ -319,7 +319,7 @@ Clears all multicast routes.
 #### Usage
 
 ```
-clear pim mroute [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+clear pim mroute [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -930,7 +930,7 @@ Successfully deleted capture-filter
 #### Usage
 
 ```
-delete { <configuration> } [ force ]
+delete \{ <configuration> \} [ force ]
 ```
 
 #### Description
@@ -1064,7 +1064,7 @@ Clears all active flow data from this node.
 #### Usage
 
 ```
-delete flows [force] [node <node>] {router <router> | resource-group <resource-group>}
+delete flows [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -1179,7 +1179,7 @@ Delete all current sessions or a subset if arguments are provided.
 #### Usage
 
 ```
-delete sessions [{session-id <session-id> | service-name <service-name>}] [force] [node <node>] {router <router> | resource-group <resource-group>}
+delete sessions [\{session-id <session-id> | service-name <service-name>\}] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -1362,20 +1362,20 @@ The _edit prompt_ command lets administrators change the display of the PCLI pro
 State Variables
 ===============
 
-{user}      - Name of the currently logged in user
-{address}   - Address (node.router) of the current system
-{node}      - Name of the connected node
-{router}    - Name of the connected router
-{context}   - Currently set context if one is set; empty otherwise
-{path}      - Full path to the current PCLI menu, separated by &#x27;/&#x27;
-{location}  - Name of current PCLI menu
-{privilege} - &quot;#&quot; if the current user has administrator privileges, else &quot;&gt;&quot;
+\{user\}      - Name of the currently logged in user
+\{address\}   - Address (node.router) of the current system
+\{node\}      - Name of the connected node
+\{router\}    - Name of the connected router
+\{context\}   - Currently set context if one is set; empty otherwise
+\{path\}      - Full path to the current PCLI menu, separated by &#x27;/&#x27;
+\{location\}  - Name of current PCLI menu
+\{privilege\} - &quot;#&quot; if the current user has administrator privileges, else &quot;&gt;&quot;
 
 Conditional Variables
 =====================
 
-{top-level}  - Evaluates true if the PCLI is at the top menu
-{uncomitted} - Evaluates true if the candidate configuration differs from the running configuration
+\{top-level\}  - Evaluates true if the PCLI is at the top menu
+\{uncomitted\} - Evaluates true if the candidate configuration differs from the running configuration
 
 Conditionals
 ============
@@ -1405,7 +1405,7 @@ Custom timestamps are created with the use of standard strftime format codes
 
 For example:
 
-    '(%x %H:%M) {user}@{address}$ '
+    '(%x %H:%M) \{user\}@\{address\}$ '
 
 Yields:
 
@@ -1422,8 +1422,8 @@ Special characters*
 \t - Tab
 \[ - Literal '['
 \] - Literal ']'
-{{ - Literal '{'
-}} - Literal '}'
+\{\{ - Literal '\{'
+\}\} - Literal '\}'
 %% - Literal '%'
 
 * Use \\ if not using a quoted string to specify the prompt
@@ -1756,7 +1756,7 @@ Import SSR ISO to the local repository
 #### Usage
 
 ```
-import iso [check-rpm-signature <check-rpm-signature>] [force] [verbose] {hunt | filepath <filepath>}
+import iso [check-rpm-signature <check-rpm-signature>] [force] [verbose] \{hunt | filepath <filepath>\}
 ```
 
 ##### Keyword Arguments
@@ -2053,7 +2053,7 @@ Refreshes all DNS resolutions configured on the platform.
 #### Usage
 
 ```
-refresh dns resolutions [{router <router> | resource-group <resource-group>}] [hostname <hostname>] [force]
+refresh dns resolutions [\{router <router> | resource-group <resource-group>\}] [hostname <hostname>] [force]
 ```
 
 ##### Keyword Arguments
@@ -2079,7 +2079,7 @@ Releases an active DHCP lease.
 #### Usage
 
 ```
-release dhcp lease [force] [node <node>] {router <router> | resource-group <resource-group>} network-interface <network-interface>
+release dhcp lease [force] [node <node>] \{router <router> | resource-group <resource-group>\} network-interface <network-interface>
 ```
 
 ##### Keyword Arguments
@@ -2254,7 +2254,7 @@ Request IDP signature database connectivity.
 #### Usage
 
 ```
-request idp signature-query [force] [node <node>] {router <router> | resource-group <resource-group>}
+request idp signature-query [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -2686,7 +2686,7 @@ Gathers runtime process stats and stores it in a logfile.
 #### Usage
 
 ```
-save runtime-stats [{router <router> | resource-group <resource-group>}] [force] [node <node>] <filename> [<process-name>]
+save runtime-stats [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] <filename> [<process-name>]
 ```
 
 ##### Keyword Arguments
@@ -3038,7 +3038,7 @@ Download SSR software on a router
 #### Usage
 
 ```
-send command download [dry-run] [force] {router <router> | resource-group <resource-group>} [<version>]
+send command download [dry-run] [force] \{router <router> | resource-group <resource-group>\} [<version>]
 ```
 
 ##### Keyword Arguments
@@ -3208,7 +3208,7 @@ Rollback an SSR to the previously installed version
 #### Usage
 
 ```
-send command rollback [force] {router <router> | resource-group <resource-group>}
+send command rollback [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -3334,7 +3334,7 @@ Transition an asset back to **connected** and perform a sync.
 #### Usage
 
 ```
-send command sync [{router <router> | resource-group <resource-group>}] [force] [force] [node <node>]
+send command sync [\{router <router> | resource-group <resource-group>\}] [force] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3384,7 +3384,7 @@ Upgrade an SSR node
 #### Usage
 
 ```
-send command upgrade [dry-run] [force] {router <router> | resource-group <resource-group>} <version>
+send command upgrade [dry-run] [force] \{router <router> | resource-group <resource-group>\} <version>
 ```
 
 ##### Keyword Arguments
@@ -3433,7 +3433,7 @@ Refresh the yum cache as well as the SSR software versions available for downloa
 #### Usage
 
 ```
-send command yum-cache-refresh [force] {router <router> | resource-group <resource-group>}
+send command yum-cache-refresh [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -3528,7 +3528,7 @@ Sets the encryption key for the SSR configuration
 #### Usage
 
 ```
-set config encryption [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+set config encryption [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3586,7 +3586,7 @@ Disables the encryption for the SSR configuration
 #### Usage
 
 ```
-set config encryption disabled [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+set config encryption disabled [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3949,7 +3949,7 @@ Save credentials for accessing SSR software repositories.
 #### Usage
 
 ```
-set software access-token [{router <router> | resource-group <resource-group>}] [force] [node <node>] <username> <token>
+set software access-token [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] <username> <token>
 ```
 
 ##### Keyword Arguments
@@ -4104,7 +4104,7 @@ Display currently active or shelved alarms
 #### Usage
 
 ```
-show alarms [{router <router> | resource-group <resource-group>}] [shelved] [id <id>] [force]
+show alarms [\{router <router> | resource-group <resource-group>\}] [shelved] [id <id>] [force]
 ```
 
 ##### Keyword Arguments
@@ -4160,7 +4160,7 @@ Show information of app-id entries in cache
 #### Usage
 
 ```
-show app-id cache [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} <cache>
+show app-id cache [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\} <cache>
 ```
 
 ##### Keyword Arguments
@@ -4238,7 +4238,7 @@ Display registered application-modules.
 #### Usage
 
 ```
-show application modules registration [force] [node <node>] {router <router> | resource-group <resource-group>}
+show application modules registration [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -4267,7 +4267,7 @@ Display applications provided by a module.
 #### Usage
 
 ```
-show application modules status [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} name <name> [<verbosity>]
+show application modules status [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\} name <name> [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4304,7 +4304,7 @@ Display application name entries.
 #### Usage
 
 ```
-show application names [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show application names [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -4364,7 +4364,7 @@ Shows the contents of the ARP table on the specified node.
 #### Usage
 
 ```
-show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
+show arp [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4449,7 +4449,7 @@ Display proxy ARP info for network-interfaces.
 #### Usage
 
 ```
-show arp proxy [{router <router> | resource-group <resource-group>}] [name <name>] [force] [node <node>]
+show arp proxy [\{router <router> | resource-group <resource-group>\}] [name <name>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -4487,7 +4487,7 @@ Shows the automated provisioning status of SSR nodes.
 #### Usage
 
 ```
-show assets [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<id>]
+show assets [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] [<id>]
 ```
 
 ##### Keyword Arguments
@@ -4583,7 +4583,7 @@ Shows the SSR nodes that have errors.
 #### Usage
 
 ```
-show assets errors [{router <router> | resource-group <resource-group>}] [force] [<id>]
+show assets errors [\{router <router> | resource-group <resource-group>\}] [force] [<id>]
 ```
 
 ##### Keyword Arguments
@@ -4635,7 +4635,7 @@ Shows assets software information.
 #### Usage
 
 ```
-show assets software [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show assets software [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -4717,7 +4717,7 @@ A summary of assets connected to the Conductor.
 #### Usage
 
 ```
-show assets summary [{router <router> | resource-group <resource-group>}] [force]
+show assets summary [\{router <router> | resource-group <resource-group>\}] [force]
 ```
 
 ##### Keyword Arguments
@@ -4784,7 +4784,7 @@ Show BFD Peer &lt;&gt;
 #### Usage
 
 ```
-show bfd [vrf <vrf>] [peer <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show bfd [vrf <vrf>] [peer <ip>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4810,7 +4810,7 @@ Displays information about the state of the BGP process on the SSR.
 #### Usage
 
 ```
-show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<route>]
+show bgp [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<route>]
 ```
 
 ##### Keyword Arguments
@@ -4897,7 +4897,7 @@ Displays information about the state of the BGP IPv4 vpn table on the SSR router
 #### Usage
 
 ```
-show bgp ipv4-vpn [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<rd>] [<prefix>]
+show bgp ipv4-vpn [rows <rows>] [force] \{router <router> | resource-group <resource-group>\} [<rd>] [<prefix>]
 ```
 
 ##### Keyword Arguments
@@ -4929,7 +4929,7 @@ Displays information about the state of the BGP IPv6 routes on the SSR router.
 #### Usage
 
 ```
-show bgp ipv6 [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<route>]
+show bgp ipv6 [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<route>]
 ```
 
 ##### Keyword Arguments
@@ -4955,7 +4955,7 @@ Displays information about the state of the BGP IPv6 vpn table on the SSR router
 #### Usage
 
 ```
-show bgp ipv6-vpn [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<rd>] [<prefix>]
+show bgp ipv6-vpn [rows <rows>] [force] \{router <router> | resource-group <resource-group>\} [<rd>] [<prefix>]
 ```
 
 ##### Keyword Arguments
@@ -4987,7 +4987,7 @@ Displays information about the state of the BGP neighbors on the SSR.
 #### Usage
 
 ```
-show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<neighbor-ip>] [<option>] [<family>]
+show bgp neighbors [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<neighbor-ip>] [<option>] [<family>]
 ```
 
 ##### Keyword Arguments
@@ -5046,7 +5046,7 @@ Show the current BGP path-based-policy summary from the routing manager.
 #### Usage
 
 ```
-show bgp path-based-policy [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show bgp path-based-policy [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5076,7 +5076,7 @@ Show the current BGP summary from the routing manager.
 #### Usage
 
 ```
-show bgp summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<family>]
+show bgp summary [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<family>]
 ```
 
 ##### Keyword Arguments
@@ -5131,7 +5131,7 @@ Shows current fib/flow/arp/action usage and capacities at the specified node.
 #### Usage
 
 ```
-show capacity [force] [node <node>] {router <router> | resource-group <resource-group>}
+show capacity [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -5171,7 +5171,7 @@ Show active capture-filters.
 #### Usage
 
 ```
-show capture-filters [{router <router> | resource-group <resource-group>}] [device-interface <device-interface>] [force] [node <node>]
+show capture-filters [\{router <router> | resource-group <resource-group>\}] [device-interface <device-interface>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -5364,7 +5364,7 @@ Display table of cached disk configurations and their metadata
 #### Usage
 
 ```
-show config disk-cache [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show config disk-cache [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -5498,7 +5498,7 @@ This command displays the local config override mode status for a Managed SSR Ro
 #### Usage
 
 ```
-show config local-override [{router <router> | resource-group <resource-group>}] [force]
+show config local-override [\{router <router> | resource-group <resource-group>\}] [force]
 ```
 
 ##### Keyword Arguments
@@ -5650,7 +5650,7 @@ Display running configuration version.
 #### Usage
 
 ```
-show config version [{router <router> | resource-group <resource-group>}] [force]
+show config version [\{router <router> | resource-group <resource-group>\}] [force]
 ```
 
 ##### Keyword Arguments
@@ -5825,7 +5825,7 @@ Show each DHCP mapping from an interface to mapping/IP family/config types.
 #### Usage
 
 ```
-show dhcp mappings [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show dhcp mappings [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -5872,7 +5872,7 @@ Show the prefix learned for prefix-delegation.
 #### Usage
 
 ```
-show dhcp prefix-delegation [group <group>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show dhcp prefix-delegation [group <group>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5920,7 +5920,7 @@ Display dhcp lease info for network-interfaces.
 #### Usage
 
 ```
-show dhcp v4 [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
+show dhcp v4 [name <name>] [force] [node <node>] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5998,7 +5998,7 @@ Display dhcp lease info for network-interfaces.
 #### Usage
 
 ```
-show dhcp v6 [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
+show dhcp v6 [name <name>] [force] [node <node>] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6047,7 +6047,7 @@ Shows all DNS resolutions
 #### Usage
 
 ```
-show dns resolutions [{router <router> | resource-group <resource-group>}] [hostname <hostname>] [rows <rows>] [force] [<verbosity>]
+show dns resolutions [\{router <router> | resource-group <resource-group>\}] [hostname <hostname>] [rows <rows>] [force] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6117,7 +6117,7 @@ Display app-id-v2 domain-name categories used by sessions
 #### Usage
 
 ```
-show domain-categories [force] [node <node>] {router <router> | resource-group <resource-group>}
+show domain-categories [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -6142,7 +6142,7 @@ Display app-id-v2 domain-names used by sessions
 #### Usage
 
 ```
-show domain-names [category <category>] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<request-order>]
+show domain-names [category <category>] [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\} [<request-order>]
 ```
 
 ##### Keyword Arguments
@@ -6175,7 +6175,7 @@ Display view of dynamic peer update on the conductor.
 #### Usage
 
 ```
-show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [rows <rows>] [force] [<table>]
+show dynamic-peer-update [\{router <router> | resource-group <resource-group>\}] [rows <rows>] [force] [<table>]
 ```
 
 ##### Keyword Arguments
@@ -6213,7 +6213,7 @@ Displays entitlement utilized.
 #### Usage
 
 ```
-show entitlement [{router <router> | resource-group <resource-group>}] [force]
+show entitlement [\{router <router> | resource-group <resource-group>\}] [force]
 ```
 
 ##### Keyword Arguments
@@ -6257,7 +6257,7 @@ Show events from the historical events database.
 #### Usage
 
 ```
-show events [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [type <type>] [flat] [rows <rows>] [limit <limit>] [force] [<verbosity>]
+show events [\{router <router> | resource-group <resource-group>\}] [from <from>] [to <to>] [type <type>] [flat] [rows <rows>] [limit <limit>] [force] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6347,7 +6347,7 @@ Shows events related to running config change
 #### Usage
 
 ```
-show events config commit [{router <router> | resource-group <resource-group>}] [flat] [from <from>] [to <to>] [force] [<verbosity>]
+show events config commit [\{router <router> | resource-group <resource-group>\}] [flat] [from <from>] [to <to>] [force] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6426,7 +6426,7 @@ Shows events related to config encryption change
 #### Usage
 
 ```
-show events config encryption [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [force]
+show events config encryption [\{router <router> | resource-group <resource-group>\}] [from <from>] [to <to>] [force]
 ```
 
 ##### Keyword Arguments
@@ -6472,7 +6472,7 @@ Shows current fib entries at the specified node.
 #### Usage
 
 ```
-show fib [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name> | match-service-name <name>}] [rows <rows>] [vrf <vrf>] [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] {router <router> | resource-group <resource-group>} [<ip-prefix>]
+show fib [\{service-name <name> | hierarchy-service-name <name> | contains-service-name <name> | match-service-name <name>\}] [rows <rows>] [vrf <vrf>] [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] \{router <router> | resource-group <resource-group>\} [<ip-prefix>]
 ```
 
 ##### Keyword Arguments
@@ -6569,7 +6569,7 @@ Shows current FIB entries at the specified node using incoming packet info.
 #### Usage
 
 ```
-show fib lookup [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] {router <router> | resource-group <resource-group>} destination-ip <destination-ip> destination-port <destination-port> protocol <protocol>
+show fib lookup [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] \{router <router> | resource-group <resource-group>\} destination-ip <destination-ip> destination-port <destination-port> protocol <protocol>
 ```
 
 ##### Keyword Arguments
@@ -6648,7 +6648,7 @@ Show IDP engine details.
 #### Usage
 
 ```
-show idp application details [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp application details [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -6687,7 +6687,7 @@ Show underlying IDP application status.
 #### Usage
 
 ```
-show idp application status [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp application status [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -6733,7 +6733,7 @@ Show underlying IDP details.
 #### Usage
 
 ```
-show idp details [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp details [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -6773,7 +6773,7 @@ Show all IDP events.
 #### Usage
 
 ```
-show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>] router <router> node <node>
+show idp events [\{from <from> | since <since>\}] [to <to>] [verbose] [rows <rows>] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -6826,7 +6826,7 @@ Show IDP events by application.
 #### Usage
 
 ```
-show idp events by-application [{from <from> | since <since>}] [to <to>] [verbose] [name <name>] [rows <rows>] router <router> node <node>
+show idp events by-application [\{from <from> | since <since>\}] [to <to>] [verbose] [name <name>] [rows <rows>] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -6877,7 +6877,7 @@ Show IDP events by attack type.
 #### Usage
 
 ```
-show idp events by-attack [{from <from> | since <since>}] [to <to>] [verbose] [name <name>] [rows <rows>] router <router> node <node>
+show idp events by-attack [\{from <from> | since <since>\}] [to <to>] [verbose] [name <name>] [rows <rows>] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -6927,7 +6927,7 @@ Show IDP events by severity level.
 #### Usage
 
 ```
-show idp events by-severity [{from <from> | since <since>}] [to <to>] [verbose] [name <name>] [rows <rows>] router <router> node <node>
+show idp events by-severity [\{from <from> | since <since>\}] [to <to>] [verbose] [name <name>] [rows <rows>] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -6977,7 +6977,7 @@ Show IDP networks.
 #### Usage
 
 ```
-show idp network [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp network [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7023,7 +7023,7 @@ Show IDP platform data.
 #### Usage
 
 ```
-show idp platform [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp platform [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7069,7 +7069,7 @@ Show IDP signature package details.
 #### Usage
 
 ```
-show idp signatures [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp signatures [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7115,7 +7115,7 @@ Show IGMP groups
 #### Usage
 
 ```
-show igmp groups [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show igmp groups [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7142,7 +7142,7 @@ Show IGMP interface
 #### Usage
 
 ```
-show igmp interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show igmp interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7170,7 +7170,7 @@ Shows current load balancer agent entries from the highway manager at the specif
 #### Usage
 
 ```
-show load-balancer [service <service>] [agent <agent>] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show load-balancer [service <service>] [agent <agent>] [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7236,7 +7236,7 @@ Display LTE summary.
 #### Usage
 
 ```
-show lte [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7268,7 +7268,7 @@ Display LTE connection.
 #### Usage
 
 ```
-show lte connection [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte connection [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7296,7 +7296,7 @@ Display LTE detail.
 #### Usage
 
 ```
-show lte detail [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte detail [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7346,7 +7346,7 @@ Display LTE modem.
 #### Usage
 
 ```
-show lte modem [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte modem [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7366,7 +7366,7 @@ Display LTE network.
 #### Usage
 
 ```
-show lte network [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte network [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7386,7 +7386,7 @@ Display LTE profile.
 #### Usage
 
 ```
-show lte profile [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte profile [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7406,7 +7406,7 @@ Display LTE signal.
 #### Usage
 
 ```
-show lte signal [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte signal [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7435,7 +7435,7 @@ Display LTE sim.
 #### Usage
 
 ```
-show lte sim [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show lte sim [device-interface <device-interface>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7493,7 +7493,7 @@ Display information about the link between the SSR and the Mist Cloud.
 #### Usage
 
 ```
-show mist [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
+show mist [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7527,7 +7527,7 @@ Show MSDP mesh-groups
 #### Usage
 
 ```
-show msdp mesh-group [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show msdp mesh-group [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7559,7 +7559,7 @@ Show MSDP Peer
 #### Usage
 
 ```
-show msdp peer [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show msdp peer [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7592,7 +7592,7 @@ Show MSDP SA (Source-Active)
 #### Usage
 
 ```
-show msdp sa [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show msdp sa [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7625,7 +7625,7 @@ Display network-interface data for network-interface.
 #### Usage
 
 ```
-show network-interface [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show network-interface [name <name>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7683,7 +7683,7 @@ Display application data info for network-interfaces.
 #### Usage
 
 ```
-show network-interface application [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show network-interface application [name <name>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7769,7 +7769,7 @@ Display redundancy info for network-interfaces.
 #### Usage
 
 ```
-show network-interface redundancy [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show network-interface redundancy [name <name>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -7817,7 +7817,7 @@ Display ntp status from the node monitor at the specified node.
 #### Usage
 
 ```
-show ntp [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show ntp [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -7872,7 +7872,7 @@ Show general information about OSPF.
 #### Usage
 
 ```
-show ospf [rows <rows>] [vrf <vrf>] [area <area-id>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf [rows <rows>] [vrf <vrf>] [area <area-id>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8016,7 +8016,7 @@ Show information about the OSPF border routers.
 #### Usage
 
 ```
-show ospf border-routers [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf border-routers [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8079,7 +8079,7 @@ Show OSPF database information.
 #### Usage
 
 ```
-show ospf database [rows <rows>] [vrf <vrf>] [self-originate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf database [rows <rows>] [vrf <vrf>] [self-originate] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8235,7 +8235,7 @@ Show OSPF database LSA information.
 #### Usage
 
 ```
-show ospf database lsa [{origin <ip> | self-originate}] [rows <rows>] [vrf <vrf>] [lsa-id <id>] [force] {router <router> | resource-group <resource-group>} lsa-type <type> [<verbosity>]
+show ospf database lsa [\{origin <ip> | self-originate\}] [rows <rows>] [vrf <vrf>] [lsa-id <id>] [force] \{router <router> | resource-group <resource-group>\} lsa-type <type> [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8413,7 +8413,7 @@ Show OSPF LSAs which have reached maximum age.
 #### Usage
 
 ```
-show ospf database max-age [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf database max-age [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8576,7 +8576,7 @@ Show information about the OSPF interfaces.
 #### Usage
 
 ```
-show ospf interfaces [rows <rows>] [vrf <vrf>] [network-interface <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf interfaces [rows <rows>] [vrf <vrf>] [network-interface <name>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8716,7 +8716,7 @@ Show information about OSPF neighbors.
 #### Usage
 
 ```
-show ospf neighbors [rows <rows>] [vrf <vrf>] [network-interface <name>] [neighbor <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf neighbors [rows <rows>] [vrf <vrf>] [network-interface <name>] [neighbor <ip>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8796,7 +8796,7 @@ Show information about the OSPF routes.
 #### Usage
 
 ```
-show ospf routes [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf routes [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8890,7 +8890,7 @@ Show general information about OSPFv3.
 #### Usage
 
 ```
-show ospfv3 [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospfv3 [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8925,7 +8925,7 @@ Show OSPFv3 database information.
 #### Usage
 
 ```
-show ospfv3 database [rows <rows>] [vrf <vrf>] [self-originate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospfv3 database [rows <rows>] [vrf <vrf>] [self-originate] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8958,7 +8958,7 @@ Show OSPFv3 database LSA information.
 #### Usage
 
 ```
-show ospfv3 database lsa [{self-originate}] [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} lsa-type <type> [<verbosity>]
+show ospfv3 database lsa [\{self-originate\}] [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} lsa-type <type> [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8986,7 +8986,7 @@ Show OSPFv3 interfaces
 #### Usage
 
 ```
-show ospfv3 interfaces [rows <rows>] [vrf <vrf>] [interface <interface>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospfv3 interfaces [rows <rows>] [vrf <vrf>] [interface <interface>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9013,7 +9013,7 @@ Show information about OSPFv3 neighbors.
 #### Usage
 
 ```
-show ospfv3 neighbors [rows <rows>] [vrf <vrf>] [neighbor <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospfv3 neighbors [rows <rows>] [vrf <vrf>] [neighbor <ip>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9040,7 +9040,7 @@ Show information about the OSPFv3 routes.
 #### Usage
 
 ```
-show ospfv3 routes [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospfv3 routes [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9090,7 +9090,7 @@ Display peer information.
 #### Usage
 
 ```
-show peers [name <name>] [dynamic-damping] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show peers [name <name>] [dynamic-damping] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9203,7 +9203,7 @@ Display resolved hostnames of peers
 #### Usage
 
 ```
-show peers hostnames [{router <router> | resource-group <resource-group>}] [force]
+show peers hostnames [\{router <router> | resource-group <resource-group>\}] [force]
 ```
 
 ##### Keyword Arguments
@@ -9239,7 +9239,7 @@ Show PIM interface
 #### Usage
 
 ```
-show pim interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show pim interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9267,7 +9267,7 @@ Show PIM join
 #### Usage
 
 ```
-show pim join [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show pim join [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9294,7 +9294,7 @@ Show PIM mroute
 #### Usage
 
 ```
-show pim mroute [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show pim mroute [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9321,7 +9321,7 @@ Show PIM neighbor
 #### Usage
 
 ```
-show pim neighbor [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show pim neighbor [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9349,7 +9349,7 @@ Show PIM rp-info
 #### Usage
 
 ```
-show pim rp-info [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show pim rp-info [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9376,7 +9376,7 @@ Show PIM state
 #### Usage
 
 ```
-show pim state [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show pim state [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9403,7 +9403,7 @@ Display platform information of nodes.
 #### Usage
 
 ```
-show platform [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<category>]
+show platform [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] [<category>]
 ```
 
 ##### Keyword Arguments
@@ -9471,7 +9471,7 @@ Shows latest verison of plugins available for install.
 #### Usage
 
 ```
-show plugins available [{name <name> | category <category>}] [node <node>]
+show plugins available [\{name <name> | category <category>\}] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -9561,7 +9561,7 @@ Show plugin state data for a given plugin
 #### Usage
 
 ```
-show plugins state [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>] <plugin>
+show plugins state [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] [<verbosity>] <plugin>
 ```
 
 ##### Keyword Arguments
@@ -9587,7 +9587,7 @@ Displays the contents of the Routing Information Base (RIB)
 #### Usage
 
 ```
-show rib [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<route>]
+show rib [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\} [<route>]
 ```
 
 ##### Keyword Arguments
@@ -9654,7 +9654,7 @@ Displays the contents of the Routing Information Base (RIB) filtered to show onl
 #### Usage
 
 ```
-show rib bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+show rib bgp [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -9716,7 +9716,7 @@ Displays the contents of the Routing Information Base (RIB) filtered to show onl
 #### Usage
 
 ```
-show rib connected [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+show rib connected [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -9761,7 +9761,7 @@ Displays the contents of the Routing Information Base (RIB) filtered to show onl
 #### Usage
 
 ```
-show rib ospf [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+show rib ospf [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -9801,7 +9801,7 @@ Displays the contents of the Routing Information Base (RIB) filtered to show onl
 #### Usage
 
 ```
-show rib static [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+show rib static [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -9843,7 +9843,7 @@ Displays a summary of the Routing Information Base (RIB)
 #### Usage
 
 ```
-show rib summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+show rib summary [rows <rows>] [vrf <vrf>] [force] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -9918,7 +9918,7 @@ Display detailed security key status.
 #### Usage
 
 ```
-show security key-status [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show security key-status [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -9968,7 +9968,7 @@ Displays service information at the specified node.
 #### Usage
 
 ```
-show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [node <node>] router <router> [<verbosity>]
+show service [\{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>\}] [node <node>] router <router> [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -9998,7 +9998,7 @@ Displays service path information at the specified node.
 #### Usage
 
 ```
-show service-path [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{rows <rows> | detail}] router <router> node <node>
+show service-path [\{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>\}] [\{rows <rows> | detail\}] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -10119,7 +10119,7 @@ Show active session-captures.
 #### Usage
 
 ```
-show session-captures [{id <id> | detail}] [{router <router> | resource-group <resource-group>}] [service <service>] [force] [node <node>]
+show session-captures [\{id <id> | detail\}] [\{router <router> | resource-group <resource-group>\}] [service <service>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -10149,7 +10149,7 @@ Displays active sessions passing through the SSR.
 #### Usage
 
 ```
-show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show sessions [\{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>\}] [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -10307,7 +10307,7 @@ Display the top sessions ordered by bandwidth.
 #### Usage
 
 ```
-show sessions top bandwidth [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show sessions top bandwidth [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -10364,7 +10364,7 @@ Show STEP clients
 #### Usage
 
 ```
-show step clients [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show step clients [rows <rows>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -10389,7 +10389,7 @@ Show STEP link state database
 #### Usage
 
 ```
-show step lsdb [rows <rows>] [originator <originator-name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show step lsdb [rows <rows>] [originator <originator-name>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -10415,7 +10415,7 @@ Show STEP routes
 #### Usage
 
 ```
-show step routes [rows <rows>] [node <node-name>] [service <service-name>] [ip-prefix <prefix>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show step routes [rows <rows>] [node <node-name>] [service <service-name>] [ip-prefix <prefix>] [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -10465,7 +10465,7 @@ Display detailed system state.
 #### Usage
 
 ```
-show system [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show system [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -10523,7 +10523,7 @@ Display inter-node connection statuses.
 #### Usage
 
 ```
-show system connectivity [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show system connectivity [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -10568,7 +10568,7 @@ Displays inter-node secure communication connections.
 #### Usage
 
 ```
-show system connectivity internal [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show system connectivity internal [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -10608,7 +10608,7 @@ Display a table summarizing the statuses of processes.
 #### Usage
 
 ```
-show system processes [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show system processes [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -10762,7 +10762,7 @@ Display a table summarizing statuses of SSR systemd services.
 #### Usage
 
 ```
-show system services [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show system services [\{router <router> | resource-group <resource-group>\}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -10884,7 +10884,7 @@ Show system version information.
 #### Usage
 
 ```
-show system version [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
+show system version [\{router <router> | resource-group <resource-group>\}] [force] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -10945,7 +10945,7 @@ Shows the prefix-to-tenant associations by network-interface on the specified no
 #### Usage
 
 ```
-show tenant members [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show tenant members [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -11000,7 +11000,7 @@ Show top sources (by source address) over the last 30 minutes at the specified n
 #### Usage
 
 ```
-show top sources [by <by>] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show top sources [by <by>] [rows <rows>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -11058,7 +11058,7 @@ Display the status of UDP transform between peers.
 #### Usage
 
 ```
-show udp-transform [peer <peer>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show udp-transform [peer <peer>] [force] [node <node>] \{router <router> | resource-group <resource-group>\}
 ```
 
 ##### Keyword Arguments
@@ -11236,7 +11236,7 @@ Show VRF name, tenants, and interfaces
 #### Usage
 
 ```
-show vrf [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show vrf [force] \{router <router> | resource-group <resource-group>\} [<verbosity>]
 ```
 #### Description 
 
@@ -11287,7 +11287,7 @@ Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor.
 #### Usage
 
 ```
-sync peer addresses [{router <router> | resource-group <resource-group>}] [force]
+sync peer addresses [\{router <router> | resource-group <resource-group>\}] [force]
 ```
 
 ##### Keyword Arguments
@@ -11600,7 +11600,7 @@ This message will appear in the log files with the category type "USER", as is d
 [admin@labsystem1 ~]$ tail -n 5 /var/log/128technology/stateMonitor.log
   "message" : "No connectivity to labsystem5.burlington",
   "value" : "2"
-}}
+\}\}
 Total alarms for node: 0
 Mar 13 14:14:38.345 [USER| -- ] INFO  (stateMonitPoller) ---- starting test here ----
 [admin@labsystem1 ~]$
