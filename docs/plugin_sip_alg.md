@@ -480,7 +480,7 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 ## Release Notes
 
 ### Release 3.2.3
-**Release Date:** Mar 15, 2024
+**Release Date:** Mar 20, 2024
 
 #### Issues Fixed
 
