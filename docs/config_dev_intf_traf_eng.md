@@ -54,7 +54,26 @@ The general statistics apply to the scheduler as a whole. Per-traffic-class stat
 
 ### Statistics Descriptions
 
-To gather information about network interface traffic engineering, query the following statistics using the `show stats traffic-eng network-interface` command. These statistics are specific to the network interface and provide insight into how the schedulers are operating. 
+To gather information about device interface traffic engineering, query the following statistics using the `show stats traffic-eng device-interface` command. These statistics are specific to the device interface and provide insight into how the schedulers are operating. 
+
+```
+admin@128t-east.128t-east# show stats traffic-eng device-interface
+Mon 2024-03-18 17:43:43 UTC
+✔ Retrieving statistics...
+
+Device Interface Traffic Engineering Stats
+------------------------------------------
+
+========================= =========== =======
+ Metric                    Node        Value
+========================= =========== =======
+ common schedule-failure   128t-east       0
+ common schedule-success   128t-east       0
+ common tracked-buffers    128t-east       0
+
+Completed in 0.10 seconds
+```
+
 
 - `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that a packet was enqueued into the scheduler. 
 - `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that the scheduler attempted to dequeue a packet. 
