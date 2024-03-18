@@ -22,3 +22,4 @@ This Common Criteria document is maintained separately from the SSR documentatio
 | 0.1 | Initial version for 6.2.3-R2 Common Criteria | December 31, 2023 |
 | 0.2 | Revision with Teron feedback EFT-T036-EOR-AGD 1.0 | February 15, 2024 |
 | 0.3 | Updated with Teron feedback EFT-T036-EOR-AGD 1.1 | March 6, 2024 |
+| 0.4 | Updated with Teron feedback EFT-T036-EOR-AGD 1.2 | March 18, 2024 |
