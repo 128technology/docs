@@ -854,7 +854,7 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 - **PLUGIN-630** Report additional LTE metrics
 
-The [LTE collector](#lte-collector) now includes additional information such as `carrier`, `connection-status`, `active-band-class`, `apn`, `service-mode` and `service-status`.
+The [LTE collector](concepts_monitoring.md#lte-collector) now includes additional information such as `carrier`, `connection-status`, `active-band-class`, `apn`, `service-mode` and `service-status`.
 
 - **PLUGIN-2275** Introduced `timeout` argument for `run-once` command
 
