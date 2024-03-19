@@ -840,7 +840,6 @@ Path: `/var/lib/128t-monitoring/outputs/syslog.conf`
 For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages
 :::
 
-
 ## Monitoring Agent Plugin Release Notes
 
 ### Release 3.0.5
@@ -862,31 +861,31 @@ The [LTE collector](#lte-collector) now includes additional information such as 
 A new `timeout` argument is added for the `run-once` testing tool provided by `monitoring-agent-cli` to control how long the input waits to complete its data completion.
 
 #### Issues Fixed ####
-  - **PLUGIN-2069 Disabling monitoring agent does not stop the collection services
+  - **PLUGIN-2069 Disabling monitoring agent does not stop the collection services**
 
     _**Resolution**_ The various monitoring agent services are now correctly stopped when the plugin is disabled or uninstalled.
 
-  - **PLUGIN-2274 Monitoring Agent Plugin incorrectly allows the `data-format` option on some outputs.
+  - **PLUGIN-2274 Monitoring Agent Plugin incorrectly allows the `data-format` option on some outputs.**
 
     _**Resolution**_ For syslog output, the `data-format` option will no longer be allowed to avoid user confusion.
 
-  - **I95-52139 High memory reported when using the cpu collector
+  - **I95-52139 High memory reported when using the cpu collector**
 
     _**Resolution**_ The underlying memory leak for the CPU collector has been fixed to resolve the high memory condition.
 
-  - **PLUGIN-2272 The `include-output` configuration causes duplicated config to be added to the generated config
+  - **PLUGIN-2272 The `include-output` configuration causes duplicated config to be added to the generated config**
 
     _**Resolution**_ The code generation logic handles multiple `include-output` requests correctly and resolves the duplication in the generated config.
 
-  - **I95-53604 Router syslog output is sometimes malformed
+  - **I95-53604 Router syslog output is sometimes malformed**
 
     _**Resolution**_ When an input uses multiple syslog outputs, the data corruption caused by message serialization code has been addressed.
 
-  - **WAN-1714 Dataplane CPU shows incorrect data for core utilization on node0
+  - **WAN-1714 Dataplane CPU shows incorrect data for core utilization on node0**
 
     _**Resolution**_ The cpu collector handles various edge cases with missing data, IDP enabled, etc., when reporting the core utilization statistics.
 
-  - **I95-43137 Session Records not sent correctly in syslog output
+  - **I95-43137 Session Records not sent correctly in syslog output**
 
     _**Resolution**_ The syslog message parsing was improved to correctly handle the JSON output format produced by session records input.
 
@@ -942,6 +941,7 @@ A new `timeout` argument is added for the `run-once` testing tool provided by `m
  * Support the most commonly used outputs such as file, syslog, `Kafka`, etc.
  * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
 
+<<<<<<< HEAD
 ## Monitoring Agent Release Notes
 
 ### Release 3.6.1
@@ -1282,5 +1282,3 @@ The `t128_lte_metric` collector will look for and report SNR signal strength if 
 - **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
 
   _**Resolution:**_ The system telegraf service will be stopped and disabled
-
-
