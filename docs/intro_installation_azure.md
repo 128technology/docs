@@ -17,7 +17,7 @@ If you wish to install SSR Version 6.x on a conductor and conductor-managed rout
 
 The process consists of the following steps:
 
-1. [Selecting the Azure plan"](#selecting-the-azure-plan).
+1. [Selecting the Azure Plan](#selecting-the-azure-plan).
 2. Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
 3. Deploying a [Session Smart Router](#session-smart-router-deployment).
 

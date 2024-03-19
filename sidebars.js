@@ -99,6 +99,7 @@ module.exports = {
       "concepts_session_timer",
       "concepts_STEP",
       "concepts_waypoint_ports",
+      "concepts_monitoring",
       "concepts_glossary",
     ],
     "WAN Assurance": [
