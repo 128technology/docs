@@ -410,7 +410,7 @@ exit
 ```
 
 :::note
-Please refer to [arp state collector](concepts_monitoring.md#arp-path-state-collector) for more details about the input.
+Please refer to [arp state collector](concepts_monitoring.md#arp-state-collector) for more details about the input.
 :::
 
 ### LTE
@@ -434,7 +434,7 @@ exit
 ```
 
 :::note
-Please refer to [lte collector](concepts_monitoring.md#lte-collector) for more details about the input.
+Please refer to [LTE collector](concepts_monitoring.md#lte-collector) for more details about the input.
 :::
 
 ### Top Analytics
@@ -656,7 +656,7 @@ Please refer to [session-record collector](concepts_monitoring.md#session-record
 
 ## SSR Processors
 
-Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](concepts_monitoring.md#input-configuration).
+Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](#input-configuration).
 
 :::note
 Please refer to the [ssr processors](concepts_monitoring.md#ssr-processors) documentation for examples and sample config.
@@ -926,12 +926,12 @@ A new `timeout` argument is added for the `run-once` testing tool provided by `m
 ### Release 2.0.3
 
 #### New Features and Improvements:
- - **PLUGIN-1163** Updated the plugin to use the latest monitoring agent version [`3.6.1`](plugin_monitoring_agent.md#release-361).
+ - **PLUGIN-1163** Updated the plugin to use the latest monitoring agent version.
 
 ### Release 2.0.1
 
 #### New Features and Improvements:
- - **MON-352** Updated the plugin to use the latest monitoring agent version [`3.4.2`](plugin_monitoring_agent.md#release-342).
+ - **MON-352** Updated the plugin to use the latest monitoring agent version.
 
 ### Release 2.0.0
 
