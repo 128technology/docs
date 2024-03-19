@@ -3,7 +3,7 @@ title: Monitoring Agent Plugin
 sidebar_label: Monitoring Agent Plugin
 ---
 
-The monitoring agent plugin builds upon the [monitoring agent](concepts_monitoring.md) application included as part of the SSR software. The monitoring application can be managed via various [config files](concepts_monitoring#file-based-configuration) on disk which can be cumbersome and error prone. The plugin provides a better config management experience while providing a more user friendly way to configure the built-in application.
+The monitoring agent plugin builds upon the [monitoring agent](concepts_monitoring.md) application included as part of the SSR software. The monitoring application can be managed via various [config files](concepts_monitoring.md#file-based-configuration) on disk which can be cumbersome and error prone. The plugin provides a better config management experience while providing a more user friendly way to configure the built-in application.
 
 ## Installation
 
@@ -254,7 +254,7 @@ exit
 ```
 
 :::note
-Please refer to [metric collector](concepts_monitoring#metric-collector) for more details about the input.
+Please refer to [metric collector](concepts_monitoring.md#metric-collector) for more details about the input.
 :::
 
 ### Event
@@ -302,7 +302,7 @@ exit
 ```
 
 :::note
-Please refer to [event collector](concepts_monitoring#event-collector) for more details about the input.
+Please refer to [event collector](concepts_monitoring.md#event-collector) for more details about the input.
 :::
 
 ### Device Interface State
@@ -341,7 +341,7 @@ exit
 ```
 
 :::note
-Please refer to [device interface state collector](concepts_monitoring#device-interface-state-collector) for more details about the input.
+Please refer to [device interface state collector](concepts_monitoring.md#device-interface-state-collector) for more details about the input.
 :::
 
 ### Peer Path State
@@ -376,7 +376,7 @@ exit
 ```
 
 :::note
-Please refer to [peer path state collector](concepts_monitoring#peer-path-state-collector) for more details about the input.
+Please refer to [peer path state collector](concepts_monitoring.md#peer-path-state-collector) for more details about the input.
 :::
 
 ### Arp State
@@ -410,7 +410,7 @@ exit
 ```
 
 :::note
-Please refer to [arp state collector](concepts_monitoring#arp-path-state-collector) for more details about the input.
+Please refer to [arp state collector](concepts_monitoring.md#arp-path-state-collector) for more details about the input.
 :::
 
 ### LTE
@@ -434,7 +434,7 @@ exit
 ```
 
 :::note
-Please refer to [lte collector](concepts_monitoring#lte-collector) for more details about the input.
+Please refer to [lte collector](concepts_monitoring.md#lte-collector) for more details about the input.
 :::
 
 ### Top Analytics
@@ -525,7 +525,7 @@ exit
 ```
 
 :::note
-Please refer to [top analytics collector](concepts_monitoring#top-analytics-collector) for more details about the input.
+Please refer to [top analytics collector](concepts_monitoring.md#top-analytics-collector) for more details about the input.
 :::
 
 ### GraphQL
@@ -594,7 +594,7 @@ exit
 ```
 
 :::note
-Please refer to [GraphQL collector](concepts_monitoring#graphql-collector) for more details about the input.
+Please refer to [GraphQL collector](concepts_monitoring.md#graphql-collector) for more details about the input.
 :::
 
 #### GraphQL variables
@@ -651,7 +651,7 @@ The various configuration options available under authority > monitoring > input
 
 
 :::note
-Please refer to [session-record collector](concepts_monitoring#session-records-collector) for more details about the input.
+Please refer to [session-record collector](concepts_monitoring.md#session-records-collector) for more details about the input.
 :::
 
 ## SSR Processors
@@ -659,7 +659,7 @@ Please refer to [session-record collector](concepts_monitoring#session-records-c
 Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#input-configuration).
 
 :::note
-Please refer to the [ssr processors](concepts_monitoring#ssr-processors) documentation for examples and sample config.
+Please refer to the [ssr processors](concepts_monitoring.md#ssr-processors) documentation for examples and sample config.
 :::
 
 ## Outputs
@@ -1079,11 +1079,11 @@ A new `timeout` argument is added for the `run-once` testing tool provided by `m
 
 - **MON-184** Added stop command in cli to stop all associated Telegraf services.
 
-For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
+For help using this cli option, please refer to the [Monitoring Agent Guide](concepts_monitoring.md#stopping-services).
 
 - **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
 
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
+For help configuring this option, please refer to the [Monitoring Agent Guide](concepts_monitoring.md#configuration).
 
 - **MON-208** Update Telegraf to latest stable version 1.14.2.
 
@@ -1091,11 +1091,11 @@ A new stable version of telegraf was released upstream. The main reason for upgr
 
 - **MON-194** Added arp state collector to collect state of the arp table.
 
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](concepts_monitoring.md#arp-state-collector).
 
 - **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
 
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
+For help configuring this option, please refer to the [Monitoring Agent Guide](concepts_monitoring.md#event-collector).
 
 #### Issues Fixed
 

@@ -114,7 +114,7 @@ config
 ```
 
 :::note
-For a detailed explanation of configuring the Monitoring Agent to handle audit events, refer to the [SSR Monitoring Agent](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/plugin_monitoring_agent) documentation.
+For a detailed explanation of configuring the Monitoring Agent to handle audit events, refer to the [SSR Monitoring Agent](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_monitoring.md) documentation.
 :::
 
 #### Basic Input and Output Configurations
@@ -139,7 +139,7 @@ Use the following information to create basic Input and Output configurations.
   default_sdid = "128T"
 ```
 
-3. The input and output are placed in the input and output directories respectively and tied together by the [Monitoring Agent configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/plugin_monitoring_agent#configuration). A sample monitoring agent configuration:
+3. The input and output are placed in the input and output directories respectively and tied together by the [Monitoring Agent configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_monitoring.md#configuration). A sample monitoring agent configuration:
 
 ```yaml
 enabled: true
@@ -151,7 +151,7 @@ outputs:
 
 ```
 
-Once these configurations are in place, starting the Monitoring Agent will send events to syslog. 
+Once these configurations are in place, starting the Monitoring Agent application will send events to syslog. 
 
 ## Remote Logging 
 
