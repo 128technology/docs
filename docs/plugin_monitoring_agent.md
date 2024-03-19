@@ -376,7 +376,7 @@ exit
 ```
 
 :::note
-Please refer to [peer path state collector](.md#peer-path-state-collector) for more details about the input.
+Please refer to [peer path state collector](concepts_monitoring.md#peer-path-state-collector) for more details about the input.
 :::
 
 ### Arp State
