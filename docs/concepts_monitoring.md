@@ -3,9 +3,9 @@ title: Monitoring Agent
 sidebar_label: Monitoring Agent
 ---
 
-The SSR Monitoring Agent is an application for collecting data from a node running SSR software and to push it to a collector. It is capable of collecting the data from several sources such as metrics, events etc. The current mechanism of monitoring an SSR involves performing REST or GraphQL queries from the conductor. At scale, this can become inefficient and be problematic in terms of the performance of the conductor. Additionally it is important to interact with 3rd party monitoring platforms as means for organizations to collect, analyze and report using various KPIs available from SSR software and other application in the network.
+The SSR Monitoring Agent is an application for collecting data from a node running SSR software and pushing it to a collector. It is capable of collecting the data from several sources such as metrics or events. The current mechanism of monitoring an SSR involves performing REST or GraphQL queries from the conductor. At scale, this can become inefficient and be problematic in terms of the performance of the conductor. Additionally it is important to interact with 3rd party monitoring platforms as means for organizations to collect, analyze and report using various KPIs available from SSR software and other applications in the network.
 
-The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every SSR. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
+The monitoring agent at its core is designed to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every SSR. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
 
 - **monitoring-agent-cli**
   Used for configuring and interacting with the underlying application
@@ -16,7 +16,7 @@ The monitoring agent at its core is designed to be able to push data to external
 - **targets**
   A set of outputs for collecting and pushing the data to various data sinks such as external monitoring platforms, files on disk etc.
 
-## File based configuration
+## File-based Configuration
 
 #### Version History
 
@@ -26,7 +26,7 @@ The monitoring agent at its core is designed to be able to push data to external
 | 3.0.0        | per input `sample-interval` and `push-interval` were introduced |
 | 1.2.0, 2.1.0 | `lib-directory` was introduced                                  |
 
-The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format which looks something like this:
+The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the monitoring agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format. For example:
 
 ```yaml
 name: user-agent
@@ -58,11 +58,11 @@ The `enabled` field is meant as global toggle for applying the monitoring agent 
 
 `lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
-Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
+Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `{HOSTNAME}`, `{ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
 `sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`. These values can be overridden at the input level for finer control of agent's behavior.
 
-The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by Juniper. The function and configuration of each of the SSR provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1/configure_plugins/input_plugins/). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information to. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
+The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by Juniper. The function and configuration of each of the SSR provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1/configure_plugins/input_plugins/). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
 
 The `outputs` represent a data sink where the collected information is to be delivered. By virtue of using `telegraf`, the monitoring agent gets automatic support of the [available outputs supported by telegraf](https://docs.influxdata.com/telegraf/v1/configure_plugins/output_plugins/). Each `input` can be configured to be delivered to one or more `output`.
 
@@ -242,7 +242,7 @@ Path: `/var/lib/128t-monitoring/outputs/kafka.conf`
 ```
 
 #### Syslog
-Here's an example monitoring plugin config for `syslog` output
+Here's an example monitoring configuration for `syslog` output:
 ```config
 config
 
@@ -291,24 +291,24 @@ Within an **input** configuration, several variables have been made available fo
 
 | Value             | Meaning                                           | Version Introduced |
 | ----------------- | ------------------------------------------------- | ------------------ |
-| `${ROUTER}`       | The router name of the running SSR instance      | 3.0.0              |
-| `${NODE}`         | The node name of the running SSR instance        | 3.0.0              |
-| `${128T_VERSION}` | The version of the running SSR instance          | 3.0.0              |
-| `${WEB_PORT}`     | A local port that can be used to access SSR APIs | 3.0.0              |
+| `$\{ROUTER\}`       | The router name of the running SSR instance      | 3.0.0              |
+| `$\{NODE\}`         | The node name of the running SSR instance        | 3.0.0              |
+| `$\{128T_VERSION\}` | The version of the running SSR instance          | 3.0.0              |
+| `$\{WEB_PORT\}`     | A local port that can be used to access SSR APIs | 3.0.0              |
 
 An example of this would be:
 
 ```console
 $ cat /var/lib/128t-monitoring/inputs/example.conf
 [[inputs.example]]
-  version = "${128T_VERSION}"
+  version = "$\{128T_VERSION\}"
 
 $ monitoring-agent-cli generate --force
 Generating example
 
 $ cat /var/lib/128t-monitoring/config/example.conf
 [global_tags]
-host = "${HOSTNAME}"
+host = "$\{HOSTNAME\}"
 
 [agent]
 interval = 1
@@ -332,9 +332,9 @@ Path: `/etc/128t-monitoring/config.yaml`
 enabled: true
 variables:
   - name: ENTITLEMENT
-    query: allRouters(name:"${ROUTER}")/nodes/entitlement/id
+    query: allRouters(name:"$\{ROUTER\}")/nodes/entitlement/id
   - name: DESCRIPTION
-    query: allRouters(name:"${ROUTER}")/nodes/nodes(name:"${NODE}")/nodes/deviceInterfaces(name:"10")/nodes/description
+    query: allRouters(name:"$\{ROUTER\}")/nodes/nodes(name:"$\{NODE\}")/nodes/deviceInterfaces(name:"10")/nodes/description
 ```
 ## Monitoring Agent CLI
 
@@ -360,7 +360,7 @@ inputs:
 - t128_session_records
 ```
 
-The configuration for each of these inputs can be viewed via `monitoring-agent-cli sample view <plugin_name>` command such as:
+The configuration for each of these inputs can be viewed via `monitoring-agent-cli sample view <collector_name>` command such as:
 
 ```console
 # monitoring-agent-cli sample view t128_metrics
@@ -427,7 +427,7 @@ Additionally, its often useful to test the input configuration before full rollo
 # monitoring-agent-cli test-input t128_device_state
 Testing input t128_device_state
 2020-04-15T06:51:17Z I! Starting Telegraf 1.14.0
-2020-04-15T06:51:17Z D! [agent] Initializing plugins
+2020-04-15T06:51:17Z D! [agent] Initializing 
 > device-interface-state,device-interface=dpdk1-lan,host=t127-dut2.openstacklocal,router=router1 adminStatus="ADMIN_UP",enabled=true,operationalStatus="OPER_UP",redundancyStatus="NON_REDUNDANT" 1586933478000000000
 ```
 
@@ -442,7 +442,7 @@ In order to run an input to the configured outputs end-to-end just once for vali
 # monitoring-agent-cli run-once t128_metrics
 Collecting t128_metrics and writing to outputs for input t128_metrics
 2021-04-08T02:49:46Z I! Starting Telegraf 1.17.4
-2021-04-08T02:49:46Z D! [agent] Initializing plugins
+2021-04-08T02:49:46Z D! [agent] Initializing 
 2021-04-08T02:49:46Z D! [sarama]  Initializing new client
 2021-04-08T02:49:46Z D! [sarama] client/metadata fetching metadata for all topics from broker 192.168.1.7:9092
 2021-04-08T02:49:46Z D! [sarama] Connected to broker at 192.168.1.7:9092 (unregistered)
@@ -511,7 +511,7 @@ Each element of the configuration specifies an aspect of the [InfluxDB line prot
   A line protocol field key that should exist in the output
 
 - **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)
-  The SSR KPI providing the value for the associated field key. See the SSR REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
+  The SSR KPI providing the value for the associated field key. See the SSR REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/\{router\}/`.
 
 - **parameters** (e.g. `service`)
   The SSR parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
@@ -772,10 +772,10 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API. The `T
 ```toml
 [[inputs.t128_graphql]]
   ## collector_name = "t128-device-state"
-  ## base_url = "http://localhost:${WEB_PORT}/api/v1/graphql/"
+  ## base_url = "http://localhost:$\{WEB_PORT\}/api/v1/graphql/"
   ## unix_socket = ""
   ## timeout = "10s"
-  ## entry_point = "allRouters(name:'${ROUTER}')/nodes/nodes(name:'${NODE}')/nodes/deviceInterfaces/nodes"
+  ## entry_point = "allRouters(name:'$\{ROUTER\}')/nodes/nodes(name:'${NODE\}')/nodes/deviceInterfaces/nodes"
 
   ## [inputs.t128_graphql.extract_fields]
   ##   enabled = "enabled"
@@ -959,352 +959,3 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 	# tag1 = ["value3"]
 ```
 
-## Monitoring Agent Release Notes
-
-### Release 3.6.1
-
-#### New Features and Improvements:
-
-- **MON-337** Support absolute paths to `extract_fields` and `extract_tags` in `t128_graphql` collector
-- **MON-359** Add `state-change` transform type and `previous_fields` to the `t128_transform`
-- **I95-43137** Add the `t128_session_records` input type.
-- **MON-305** Add the `t128_pass` processor type.
-- **MON-383** Allow double backslash in input configuration files.
-
-#### Issues Fixed:
-- **MON-354** `t128_device_state` collector has incorrect tags and fields for SSR versions < 4.5.3
-
-  _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for SSR versions < 4.5.3
-
-- **I95-43137** Session records and other JSON fields are truncated when used with the `syslog` output.
-
-  _**Resolution**_ Escape the characters not allowed by the syslog specification.
-
-- **MON-369** Variables in output configuration files not substituted.
-
-  _**Resolution**_ Extend variable substitution functionality to output files.
-
-- **MON-320** Non-string variables in configuration files not substituted.
-
-  _**Resolution**_ Extend variable substitution functionality to non-string variables.
-
-- **MON-354** Input files are not generated correctly.
-
-  _**Resolution**_ Modify translation logic so configuration files are not overwritten.
-
-- **MON-365** Top analytics translation file is not staged correctly.
-
-  _**Resolution**_ Stage the file to a subdirectory of the translations directory.
-
-
-
-### Release 3.4.2
-
-#### New Features and Improvements:
-
-- **WAN-116** Allow any topic in the events input.
-
-#### Issues Fixed:
-- **I95-39979** Monitoring agent sending the same metrics multiple times when using the kafka output.
-
-  _**Resolution**_ The kafka output was enhanced to include a batch retry mechanism where it will try up to `max_batch_retry` times (default of `5`) to push the buffered metrics during the push interval. The kafka output will only try to resend metrics which failed to be sent from the previous batch retry.
-
-
-### Release 3.4.0
-
-#### New Features and Improvements:
-
-- **MON-337** Create an ability to run specified input once on demand for testing and debugging
-
-#### Issues Fixed:
-- **MON-328** Monitoring agent failed to setup the environment in some installations
-
-  _**Resolution**_ The script to setup the environment is run every time the monitoring agent service restarts to ensure the correct environment setup
-
-### Release 3.3.1
-
-#### New Features and Improvements:
-
-- **MON-309** Upgrade telegraf to 1.17.2
-- **MON-306** Provide a `name` in the agent config to differentiate multiple Monitoring Agent instances
-- **MON-311** A `t128_graphql` input is now available
-- **MON-311** A dedicated `t128_device_state` input is now available
-- **MON-311** A dedicated `t128_arp_state` input is now available
-- **I95-38959** Improve `t128_metrics` performance with bulk retrieval
-- **I95-38915** Create the `t128_transform` processor
-
-#### Issues Fixed:
-
-- **MON-316** Correct default metrics bug where interface `received-missed` was collected from `stats/interface/received/error`
-
-  _**Resolution**_ The default metrics configuration was updated to point `received-missed` to the correct `stats/interface/received/missed`
-
-### Release 3.1.0
-
-#### New Features and Improvements:
-
-- **MON-297** The LTE collector will use the state file generated by SSR software where possible.
-
-#### Issues Fixed
-
-- **MON-300** Prevent the monitoring agent service from accidentally starting SSR service
-
-  _**Resolution**_ If SSR is not running, the MA will fail to start instead of starting SSR
-
-- **MON-294** LTE interfaces were not found in the SSR configuration
-
-  _**Resolution**_ Account for the differences in the configuration across various SSR software versions.
-
-### Release 3.0.0
-
-#### New Features and Improvements
-
-- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 \<= SSR < 6.0.0
-- **MON-233** Upgrade telegraf to 1.14.5
-- **MON-234** Improve metrics collection performance by creating a native Telegraf plugin
-- **MON-198** Provide sample and push interval overrides per input in the agent's config
-- **MON-246** Enable value substitution in telegraf configuration files
-
-#### Issues Fixed
-
-- **MON-280** Make the arp state collector compatible with SSR 5.X
-
-  _**Resolution**_ The arp state collector now dynamically handles data collection depending on the SSR version.
-
-
-### Release 2.1.1
-
-#### New Features and Improvements
-
-- **MON-225** Update telegraf dependency to 1.14.3
-- **MON-227** Allow this version of the Monitoring Agent to be installed with SSR < 6.0.0 (previously < 5.0.0)
-- **MON-218** Expose MAC address in the device state input
-  - Allow better correlation between device and network interfaces.
-
-- **MON-210** Improve performance of several provided inputs
-  - Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
-
-#### Issues Fixed
-
-- **MON-205** Honor the input enable/disable flag in the agent's config
-
-  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
-
-- **MON-225** `t128_events` input would occasionally drop or delayed events
-
-  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
-
-### Release 2.1.0
-
-#### New Features and Improvements
-
-- **MON-184** Added stop command in cli to stop all associated Telegraf services.
-
-For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
-
-- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
-
-- **MON-208** Update Telegraf to latest stable version 1.14.2.
-
-A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
-
-- **MON-194** Added arp state collector to collect state of the arp table.
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
-
-- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
-
-#### Issues Fixed
-
-- **MON-195** Device state collector collects state from peer node on an HA router.
-
-  _**Resolution**_ The device state collector will now only request state from the local node.
-
-- **MON-181** Event collector excludes multiline events.
-
-  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
-
-
-### Release 2.0.1
-
-#### Issues Fixed
-
-- **MON-185** telegraf error when processing results from peer path input
-
-  _**Resolution:**_ The extra logging causing the problem was removed
-
-- **MON-186** LTE metric collector not reporting any values
-
-  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
-
-- **MON-188** The events inputs collector has invalid sample
-
-  _**Resolution:**_ Updated the sample and staged configuration example for events
-
-### Release 2.0.0
-
-#### New Features and Improvements
-- **MON-126** Automatically stage all SSR input configuration for easy of use
-
-The configuration for all SSR collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
-
-- **MON-148** Top applications, sessions and sources input plugin
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
-
-- **MON-164** Test monitoring-agent input configuration
-
-For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
-
-- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
-
-A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
-
-- **MON-175** LTE metric collect will include SNR signal strength ####
-
-The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the SSR.
-
-
-#### Issues Fixed
-- **MON-125** `t128_metrics` default bfd config doesn't work
-
-  _**Resolution:**_ The new default config for metrics have the correct parameters for BFD metrics
-
-- **MON-146** Metric collector timing out with the default config on customer system
-
-  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
-
-- **MON-160** sample agent-config has invalid tags
-
-  _**Resolution:**_ All the sample configurations now contain valid data
-
-- **MON-169** peer-path collector only captures 1 peer-path per node
-
-  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
-
-- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
-
-  _**Resolution:**_ The system telegraf service will be stopped and disabled
-
-### Release 1.2.1
-
-#### New Features and Improvements
-
-- **MON-225** Update telegraf dependency to 1.14.3
-
-- **MON-218** Expose MAC address in the device state input
-
-Allow better correlation between device and network interfaces.
-
-- **MON-210** Improve performance of several provided inputs
-
-Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
-
-#### Issues Fixed
-
-- **MON-205** Honor the input enable/disable flag in the agent's config
-
-  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
-
-- **MON-225** `t128_events` input would occasionally drop or delayed events
-
-  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
-
-### Release 1.2.0
-
-#### New Features and Improvements
-
-- **MON-184** Added stop command in cli to stop all associated Telegraf services.
-
-For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
-
-- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
-
-- **MON-208** Update Telegraf to latest stable version 1.14.2.
-
-A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
-
-- **MON-194** Added arp state collector to collect state of the arp table.
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
-
-- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
-
-#### Issues Fixed
-
-- **MON-195** Device state collector collects state from peer node on an HA router.
-
-  _**Resolution**_ The device state collector will now only request state from the local node.
-
-- **MON-181** Event collector excludes multiline events.
-
-  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
-
-
-### Release 1.1.1
-
-#### Issues Fixed
-
-- **MON-185** telegraf error when processing results from peer path input
-
-  _**Resolution:**_ The extra logging causing the problem was removed
-
-- **MON-186** LTE metric collector not reporting any values
-
-  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
-
-- **MON-188** The events inputs collector has invalid sample
-
-  _**Resolution:**_ Updated the sample and staged configuration example for events
-
-
-### Release 1.1.0
-
-#### New Features and Improvements
-
-- **MON-126** Automatically stage all SSR input configuration for easy of use
-
-The configuration for all SSR collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
-
-- **MON-148** Top applications, sessions and sources input plugin
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
-
-- **MON-164** Test monitoring-agent input configuration
-
-For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
-
-- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
-
-A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
-
-- **MON-175** LTE metric collect will include SNR signal strength ####
-
-The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the SSR.
-
-
-#### Issues Fixed
-
-- **MON-146** Metric collector timing out with the default config on customer system
-
-  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
-
-- **MON-160** sample agent-config has invalid tags
-
-  _**Resolution:**_ All the sample configurations now contain valid data
-
-- **MON-169** peer-path collector only captures 1 peer-path per node
-
-  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
-
-- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
-
-  _**Resolution:**_ The system telegraf service will be stopped and disabled
