@@ -656,7 +656,7 @@ Please refer to [session-record collector](concepts_monitoring.md#session-record
 
 ## SSR Processors
 
-Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#input-configuration).
+Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](concepts_monitoring.md#input-configuration).
 
 :::note
 Please refer to the [ssr processors](concepts_monitoring.md#ssr-processors) documentation for examples and sample config.
