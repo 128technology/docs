@@ -3,7 +3,7 @@ title: Monitoring Agent Plugin
 sidebar_label: Monitoring Agent Plugin
 ---
 
-The monitoring agent plugin builds upon the [monitoring agent](concepts_monitoring.md) application included as part of the SSR software. The monitoring application can be managed via various [config files](concepts_monitoring#file-based-configuration) on disk which can be cumbersome and error prone. The plugin provides a better config management experience while providing a more user friendly way to configure the built-in application.
+The monitoring agent plugin builds upon the [monitoring agent](concepts_monitoring.md) application included as part of the SSR software. The monitoring application can be managed via various [config files](concepts_monitoring.md#file-based-configuration) on disk which can be cumbersome and error prone. The plugin provides a better config management experience while providing a more user friendly way to configure the built-in application.
 
 ## Installation
 
@@ -254,7 +254,7 @@ exit
 ```
 
 :::note
-Please refer to [metric collector](concepts_monitoring#metric-collector) for more details about the input.
+Please refer to [metric collector](concepts_monitoring.md#metric-collector) for more details about the input.
 :::
 
 ### Event
@@ -302,7 +302,7 @@ exit
 ```
 
 :::note
-Please refer to [event collector](concepts_monitoring#event-collector) for more details about the input.
+Please refer to [event collector](concepts_monitoring.md#event-collector) for more details about the input.
 :::
 
 ### Device Interface State
@@ -341,7 +341,7 @@ exit
 ```
 
 :::note
-Please refer to [device interface state collector](concepts_monitoring#device-interface-state-collector) for more details about the input.
+Please refer to [device interface state collector](concepts_monitoring.md#device-interface-state-collector) for more details about the input.
 :::
 
 ### Peer Path State
@@ -376,7 +376,7 @@ exit
 ```
 
 :::note
-Please refer to [peer path state collector](concepts_monitoring#peer-path-state-collector) for more details about the input.
+Please refer to [peer path state collector](.md#peer-path-state-collector) for more details about the input.
 :::
 
 ### Arp State
@@ -410,7 +410,7 @@ exit
 ```
 
 :::note
-Please refer to [arp state collector](concepts_monitoring#arp-path-state-collector) for more details about the input.
+Please refer to [arp state collector](concepts_monitoring.md#arp-path-state-collector) for more details about the input.
 :::
 
 ### LTE
@@ -434,7 +434,7 @@ exit
 ```
 
 :::note
-Please refer to [lte collector](concepts_monitoring#lte-collector) for more details about the input.
+Please refer to [lte collector](concepts_monitoring.md#lte-collector) for more details about the input.
 :::
 
 ### Top Analytics
@@ -525,7 +525,7 @@ exit
 ```
 
 :::note
-Please refer to [top analytics collector](concepts_monitoring#top-analytics-collector) for more details about the input.
+Please refer to [top analytics collector](concepts_monitoring.md#top-analytics-collector) for more details about the input.
 :::
 
 ### GraphQL
@@ -594,7 +594,7 @@ exit
 ```
 
 :::note
-Please refer to [GraphQL collector](concepts_monitoring#graphql-collector) for more details about the input.
+Please refer to [GraphQL collector](concepts_monitoring.md#graphql-collector) for more details about the input.
 :::
 
 #### GraphQL variables
@@ -651,15 +651,15 @@ The various configuration options available under authority > monitoring > input
 
 
 :::note
-Please refer to [session-record collector](concepts_monitoring#session-records-collector) for more details about the input.
+Please refer to [session-record collector](concepts_monitoring.md#session-records-collector) for more details about the input.
 :::
 
 ## SSR Processors
 
-Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#input-configuration).
+Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](concepts_monitoring.md#input-configuration).
 
 :::note
-Please refer to the [ssr processors](concepts_monitoring#ssr-processors) documentation for examples and sample config.
+Please refer to the [ssr processors](concepts_monitoring.md#ssr-processors) documentation for examples and sample config.
 :::
 
 ## Outputs
@@ -840,7 +840,6 @@ Path: `/var/lib/128t-monitoring/outputs/syslog.conf`
 For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages
 :::
 
-
 ## Monitoring Agent Plugin Release Notes
 
 ### Release 3.0.5
@@ -862,31 +861,31 @@ The [LTE collector](#lte-collector) now includes additional information such as 
 A new `timeout` argument is added for the `run-once` testing tool provided by `monitoring-agent-cli` to control how long the input waits to complete its data completion.
 
 #### Issues Fixed ####
-  - **PLUGIN-2069 Disabling monitoring agent does not stop the collection services
+  - **PLUGIN-2069 Disabling monitoring agent does not stop the collection services**
 
     _**Resolution**_ The various monitoring agent services are now correctly stopped when the plugin is disabled or uninstalled.
 
-  - **PLUGIN-2274 Monitoring Agent Plugin incorrectly allows the `data-format` option on some outputs.
+  - **PLUGIN-2274 Monitoring Agent Plugin incorrectly allows the `data-format` option on some outputs.**
 
     _**Resolution**_ For syslog output, the `data-format` option will no longer be allowed to avoid user confusion.
 
-  - **I95-52139 High memory reported when using the cpu collector
+  - **I95-52139 High memory reported when using the cpu collector**
 
     _**Resolution**_ The underlying memory leak for the CPU collector has been fixed to resolve the high memory condition.
 
-  - **PLUGIN-2272 The `include-output` configuration causes duplicated config to be added to the generated config
+  - **PLUGIN-2272 The `include-output` configuration causes duplicated config to be added to the generated config**
 
     _**Resolution**_ The code generation logic handles multiple `include-output` requests correctly and resolves the duplication in the generated config.
 
-  - **I95-53604 Router syslog output is sometimes malformed
+  - **I95-53604 Router syslog output is sometimes malformed**
 
     _**Resolution**_ When an input uses multiple syslog outputs, the data corruption caused by message serialization code has been addressed.
 
-  - **WAN-1714 Dataplane CPU shows incorrect data for core utilization on node0
+  - **WAN-1714 Dataplane CPU shows incorrect data for core utilization on node0**
 
     _**Resolution**_ The cpu collector handles various edge cases with missing data, IDP enabled, etc., when reporting the core utilization statistics.
 
-  - **I95-43137 Session Records not sent correctly in syslog output
+  - **I95-43137 Session Records not sent correctly in syslog output**
 
     _**Resolution**_ The syslog message parsing was improved to correctly handle the JSON output format produced by session records input.
 
@@ -941,346 +940,4 @@ A new `timeout` argument is added for the `run-once` testing tool provided by `m
  * Support all the SSR developed collectors such as metrics, events, top-sessions, etc.
  * Support the most commonly used outputs such as file, syslog, `Kafka`, etc.
  * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
-
-## Monitoring Agent Release Notes
-
-### Release 3.6.1
-
-#### New Features and Improvements:
-
-- **MON-337** Support absolute paths to `extract_fields` and `extract_tags` in `t128_graphql` collector
-- **MON-359** Add `state-change` transform type and `previous_fields` to the `t128_transform`
-- **I95-43137** Add the `t128_session_records` input type.
-- **MON-305** Add the `t128_pass` processor type.
-- **MON-383** Allow double backslash in input configuration files.
-
-#### Issues Fixed:
-- **MON-354** `t128_device_state` collector has incorrect tags and fields for SSR versions < 4.5.3
-
-  _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for SSR versions < 4.5.3
-
-- **I95-43137** Session records and other JSON fields are truncated when used with the `syslog` output.
-
-  _**Resolution**_ Escape the characters not allowed by the syslog specification.
-
-- **MON-369** Variables in output configuration files not substituted.
-
-  _**Resolution**_ Extend variable substitution functionality to output files.
-
-- **MON-320** Non-string variables in configuration files not substituted.
-
-  _**Resolution**_ Extend variable substitution functionality to non-string variables.
-
-- **MON-354** Input files are not generated correctly.
-
-  _**Resolution**_ Modify translation logic so configuration files are not overwritten.
-
-- **MON-365** Top analytics translation file is not staged correctly.
-
-  _**Resolution**_ Stage the file to a subdirectory of the translations directory.
-
-### Release 3.4.2
-
-#### New Features and Improvements:
-
-- **WAN-116** Allow any topic in the events input.
-
-#### Issues Fixed:
-- **I95-39979** Monitoring agent sending the same metrics multiple times when using the kafka output.
-
-  _**Resolution**_ The kafka output was enhanced to include a batch retry mechanism where it will try up to `max_batch_retry` times (default of `5`) to push the buffered metrics during the push interval. The kafka output will only try to resend metrics which failed to be sent from the previous batch retry.
-
-### Release 3.4.0
-
-#### New Features and Improvements:
-
-- **MON-337** Create an ability to run specified input once on demand for testing and debugging
-
-#### Issues Fixed:
-- **MON-328** Monitoring agent failed to setup the environment in some installations
-
-  _**Resolution**_ The script to setup the environment is run every time the monitoring agent service restarts to ensure the correct environment setup
-
-### Release 3.3.1
-
-#### New Features and Improvements:
-
-- **MON-309** Upgrade telegraf to 1.17.2
-- **MON-306** Provide a `name` in the agent config to differentiate multiple Monitoring Agent instances
-- **MON-311** A `t128_graphql` input is now available
-- **MON-311** A dedicated `t128_device_state` input is now available
-- **MON-311** A dedicated `t128_arp_state` input is now available
-- **I95-38959** Improve `t128_metrics` performance with bulk retrieval
-- **I95-38915** Create the `t128_transform` processor
-
-#### Issues Fixed:
-
-- **MON-316** Correct default metrics bug where interface `received-missed` was collected from `stats/interface/received/error`
-
-  _**Resolution**_ The default metrics configuration was updated to point `received-missed` to the correct `stats/interface/received/missed`
-
-### Release 3.1.0
-
-#### New Features and Improvements:
-
-- **MON-297** The LTE collector will use the state file generated by SSR software where possible.
-
-#### Issues Fixed
-
-- **MON-300** Prevent the monitoring agent service from accidentally starting SSR service
-
-  _**Resolution**_ If SSR is not running, the MA will fail to start instead of starting SSR
-
-- **MON-294** LTE interfaces were not found in the SSR configuration
-
-  _**Resolution**_ Account for the differences in the configuration across various SSR software versions.
-
-### Release 3.0.0
-
-#### New Features and Improvements
-
-- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 \<= SSR < 6.0.0
-- **MON-233** Upgrade telegraf to 1.14.5
-- **MON-234** Improve metrics collection performance by creating a native Telegraf plugin
-- **MON-198** Provide sample and push interval overrides per input in the agent's config
-- **MON-246** Enable value substitution in telegraf configuration files
-
-#### Issues Fixed
-
-- **MON-280** Make the arp state collector compatible with SSR 5.X
-
-  _**Resolution**_ The arp state collector now dynamically handles data collection depending on the SSR version.
-
-### Release 2.1.1
-
-#### New Features and Improvements
-
-- **MON-225** Update telegraf dependency to 1.14.3
-- **MON-227** Allow this version of the Monitoring Agent to be installed with SSR < 6.0.0 (previously < 5.0.0)
-- **MON-218** Expose MAC address in the device state input
-  - Allow better correlation between device and network interfaces.
-
-- **MON-210** Improve performance of several provided inputs
-  - Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
-
-#### Issues Fixed
-
-- **MON-205** Honor the input enable/disable flag in the agent's config
-
-  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
-
-- **MON-225** `t128_events` input would occasionally drop or delayed events
-
-  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
-
-### Release 2.1.0
-
-#### New Features and Improvements
-
-- **MON-184** Added stop command in cli to stop all associated Telegraf services.
-
-For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
-
-- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
-
-- **MON-208** Update Telegraf to latest stable version 1.14.2.
-
-A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
-
-- **MON-194** Added arp state collector to collect state of the arp table.
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
-
-- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
-
-#### Issues Fixed
-
-- **MON-195** Device state collector collects state from peer node on an HA router.
-
-  _**Resolution**_ The device state collector will now only request state from the local node.
-
-- **MON-181** Event collector excludes multiline events.
-
-  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
-
-### Release 2.0.1
-
-#### Issues Fixed
-
-- **MON-185** telegraf error when processing results from peer path input
-
-  _**Resolution:**_ The extra logging causing the problem was removed
-
-- **MON-186** LTE metric collector not reporting any values
-
-  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
-
-- **MON-188** The events inputs collector has invalid sample
-
-  _**Resolution:**_ Updated the sample and staged configuration example for events
-
-### Release 2.0.0
-
-#### New Features and Improvements
-- **MON-126** Automatically stage all SSR input configuration for easy of use
-
-The configuration for all SSR collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
-
-- **MON-148** Top applications, sessions and sources input plugin
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
-
-- **MON-164** Test monitoring-agent input configuration
-
-For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
-
-- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
-
-A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
-
-- **MON-175** LTE metric collect will include SNR signal strength ####
-
-The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the SSR.
-
-#### Issues Fixed
-- **MON-125** `t128_metrics` default bfd config doesn't work
-
-  _**Resolution:**_ The new default config for metrics have the correct parameters for BFD metrics
-
-- **MON-146** Metric collector timing out with the default config on customer system
-
-  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
-
-- **MON-160** sample agent-config has invalid tags
-
-  _**Resolution:**_ All the sample configurations now contain valid data
-
-- **MON-169** peer-path collector only captures 1 peer-path per node
-
-  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
-
-- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
-
-  _**Resolution:**_ The system telegraf service will be stopped and disabled
-
-### Release 1.2.1
-
-#### New Features and Improvements
-
-- **MON-225** Update telegraf dependency to 1.14.3
-
-- **MON-218** Expose MAC address in the device state input
-
-Allow better correlation between device and network interfaces.
-
-- **MON-210** Improve performance of several provided inputs
-
-Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
-
-#### Issues Fixed
-
-- **MON-205** Honor the input enable/disable flag in the agent's config
-
-  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
-
-- **MON-225** `t128_events` input would occasionally drop or delayed events
-
-  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
-
-### Release 1.2.0
-
-#### New Features and Improvements
-
-- **MON-184** Added stop command in cli to stop all associated Telegraf services.
-
-For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
-
-- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
-
-- **MON-208** Update Telegraf to latest stable version 1.14.2.
-
-A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
-
-- **MON-194** Added arp state collector to collect state of the arp table.
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
-
-- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
-
-For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
-
-#### Issues Fixed
-
-- **MON-195** Device state collector collects state from peer node on an HA router.
-
-  _**Resolution**_ The device state collector will now only request state from the local node.
-
-- **MON-181** Event collector excludes multiline events.
-
-  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
-
-### Release 1.1.1
-
-#### Issues Fixed
-
-- **MON-185** telegraf error when processing results from peer path input
-
-  _**Resolution:**_ The extra logging causing the problem was removed
-
-- **MON-186** LTE metric collector not reporting any values
-
-  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
-
-- **MON-188** The events inputs collector has invalid sample
-
-  _**Resolution:**_ Updated the sample and staged configuration example for events
-
-### Release 1.1.0
-
-#### New Features and Improvements
-
-- **MON-126** Automatically stage all SSR input configuration for easy of use
-
-The configuration for all SSR collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
-
-- **MON-148** Top applications, sessions and sources input plugin
-
-To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
-
-- **MON-164** Test monitoring-agent input configuration
-
-For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
-
-- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
-
-A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
-
-- **MON-175** LTE metric collect will include SNR signal strength ####
-
-The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the SSR.
-
-#### Issues Fixed
-
-- **MON-146** Metric collector timing out with the default config on customer system
-
-  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
-
-- **MON-160** sample agent-config has invalid tags
-
-  _**Resolution:**_ All the sample configurations now contain valid data
-
-- **MON-169** peer-path collector only captures 1 peer-path per node
-
-  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
-
-- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
-
-  _**Resolution:**_ The system telegraf service will be stopped and disabled
-
 

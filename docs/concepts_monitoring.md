@@ -58,7 +58,7 @@ The `enabled` field is meant as global toggle for applying the monitoring agent 
 
 `lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
-Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `{HOSTNAME}`, `{ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
+Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
 `sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`. These values can be overridden at the input level for finer control of agent's behavior.
 
@@ -291,24 +291,24 @@ Within an **input** configuration, several variables have been made available fo
 
 | Value             | Meaning                                           | Version Introduced |
 | ----------------- | ------------------------------------------------- | ------------------ |
-| `$\{ROUTER\}`       | The router name of the running SSR instance      | 3.0.0              |
-| `$\{NODE\}`         | The node name of the running SSR instance        | 3.0.0              |
-| `$\{128T_VERSION\}` | The version of the running SSR instance          | 3.0.0              |
-| `$\{WEB_PORT\}`     | A local port that can be used to access SSR APIs | 3.0.0              |
+| `${ROUTER}`       | The router name of the running SSR instance      | 3.0.0              |
+| `${NODE}`         | The node name of the running SSR instance        | 3.0.0              |
+| `${128T_VERSION}` | The version of the running SSR instance          | 3.0.0              |
+| `${WEB_PORT}`     | A local port that can be used to access SSR APIs | 3.0.0              |
 
 An example of this would be:
 
 ```console
 $ cat /var/lib/128t-monitoring/inputs/example.conf
 [[inputs.example]]
-  version = "$\{128T_VERSION\}"
+  version = "${128T_VERSION}"
 
 $ monitoring-agent-cli generate --force
 Generating example
 
 $ cat /var/lib/128t-monitoring/config/example.conf
 [global_tags]
-host = "$\{HOSTNAME\}"
+host = "${HOSTNAME}"
 
 [agent]
 interval = 1
@@ -332,9 +332,9 @@ Path: `/etc/128t-monitoring/config.yaml`
 enabled: true
 variables:
   - name: ENTITLEMENT
-    query: allRouters(name:"$\{ROUTER\}")/nodes/entitlement/id
+    query: allRouters(name:"${ROUTER}")/nodes/entitlement/id
   - name: DESCRIPTION
-    query: allRouters(name:"$\{ROUTER\}")/nodes/nodes(name:"$\{NODE\}")/nodes/deviceInterfaces(name:"10")/nodes/description
+    query: allRouters(name:"${ROUTER}")/nodes/nodes(name:"${NODE}")/nodes/deviceInterfaces(name:"10")/nodes/description
 ```
 ## Monitoring Agent CLI
 
@@ -511,7 +511,7 @@ Each element of the configuration specifies an aspect of the [InfluxDB line prot
   A line protocol field key that should exist in the output
 
 - **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)
-  The SSR KPI providing the value for the associated field key. See the SSR REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/\{router\}/`.
+  The SSR KPI providing the value for the associated field key. See the SSR REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
 
 - **parameters** (e.g. `service`)
   The SSR parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
@@ -660,7 +660,7 @@ The `peerPathStateCollector128t` collector can be used for monitoring the up/dow
 
 ```
 
-### Arp State Collector
+### ARP State Collector
 
 #### Version History
 
@@ -772,10 +772,10 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API. The `T
 ```toml
 [[inputs.t128_graphql]]
   ## collector_name = "t128-device-state"
-  ## base_url = "http://localhost:$\{WEB_PORT\}/api/v1/graphql/"
+  ## base_url = "http://localhost:${WEB_PORT}/api/v1/graphql/"
   ## unix_socket = ""
   ## timeout = "10s"
-  ## entry_point = "allRouters(name:'$\{ROUTER\}')/nodes/nodes(name:'${NODE\}')/nodes/deviceInterfaces/nodes"
+  ## entry_point = "allRouters(name:'${ROUTER}')/nodes/nodes(name:'${NODE}')/nodes/deviceInterfaces/nodes"
 
   ## [inputs.t128_graphql.extract_fields]
   ##   enabled = "enabled"
