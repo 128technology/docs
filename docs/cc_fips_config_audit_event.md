@@ -219,56 +219,6 @@ config
     exit
 exit
 ```
-### Configure Remote Logging
-
-Use the following steps to send audit logs to a remote-logging server via SSH.  
-
-1. Configure port forwarding to connect a port on the SSR (port 7777) to a port on the remote-logging server (port 9999).
-
-```
-config 
-    authority 
-        router combo1 
-            node test1 
-                name test1 
-                port-forwarding 127.0.0.1 7777 lo0 
-                    local-address 127.0.0.1 
-                    local-port 7777 
-                    local-interface lo0 
-                    remote-host 127.0.0.1 
-                    remote-port 9999 
-                    server-address 172.18.4.99 
-                    server-port 22 
-                exit 
-            exit     
-        exit 
-    exit 
-
-```
-2. Configure the remote-logging server using the port-forwarding local address and port. 
-
-```
-config 
-    authority 
-        router combo1 
-            system 
-                audit 
-                    remote-logging-server 127.0.0.1 7777 
-                        address 127.0.0.1 
-                        port 7777 
-                    exit 
-                exit 
-            exit 
-        exit 
-    exit 
-
-```
-
-3. Use the information in [SSH Key-based Authentication](cc_fips_access_mgmt.md#ssh-key-based-authentication) to copy the SSR public key to the authorized key file onto the remote-logging server.
-
-:::note
-On connection failures to the audit server a syslog message will be generated. No user intervention is required for connections to be re-established.
-:::
 
 ## Example Audit Logs
 
