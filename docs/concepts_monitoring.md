@@ -18,14 +18,6 @@ The monitoring agent at its core is designed to push data to external platforms.
 
 ## File-based Configuration
 
-#### Version History
-
-| Release      | Modification                                                    |
-| ------------ | --------------------------------------------------------------- |
-| 3.3.1        | runtime environment `name` was introduced                       |
-| 3.0.0        | per input `sample-interval` and `push-interval` were introduced |
-| 1.2.0, 2.1.0 | `lib-directory` was introduced                                  |
-
 The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the monitoring agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format. For example:
 
 ```yaml
@@ -242,29 +234,6 @@ Path: `/var/lib/128t-monitoring/outputs/kafka.conf`
 ```
 
 #### Syslog
-Here's an example monitoring configuration for `syslog` output:
-```config
-config
-
-    authority
-
-        monitoring
-
-            output  syslog
-                name    syslog
-                type    syslog
-
-                syslog
-                    address                tcp://localhost:514
-                    default-severity-code  3
-                    default-facility-code  20
-                exit
-            exit
-        exit
-    exit
-exit
-```
-
 In this example data is sent via syslog:
 
 Path: `/var/lib/128t-monitoring/outputs/syslog.conf`
@@ -280,11 +249,6 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 :::
 
 ### Variable Replacement
-
-#### Version History
-| Release | Modification                            |
-| ------- | --------------------------------------- |
-| 3.3.3   | GraphQL based variables were introduced |
 
 #### Builtin variables
 Within an **input** configuration, several variables have been made available for substitution.
@@ -427,22 +391,17 @@ Additionally, its often useful to test the input configuration before full rollo
 # monitoring-agent-cli test-input t128_device_state
 Testing input t128_device_state
 2020-04-15T06:51:17Z I! Starting Telegraf 1.14.0
-2020-04-15T06:51:17Z D! [agent] Initializing 
+2020-04-15T06:51:17Z D! [agent] Initializing
 > device-interface-state,device-interface=dpdk1-lan,host=t127-dut2.openstacklocal,router=router1 adminStatus="ADMIN_UP",enabled=true,operationalStatus="OPER_UP",redundancyStatus="NON_REDUNDANT" 1586933478000000000
 ```
 
-#### Version History
-
-| Release | Modification                          |
-| ------- | ------------------------------------- |
-| 3.4.0   | `run-once` CLI command was introduced |
 In order to run an input to the configured outputs end-to-end just once for validation, testing and debugging purposes, the `run-once` command can be used. This will execute the configured inputs and produce data to the outputs as specified in the monitoring agent configuration file.
 
 ```console
 # monitoring-agent-cli run-once t128_metrics
 Collecting t128_metrics and writing to outputs for input t128_metrics
 2021-04-08T02:49:46Z I! Starting Telegraf 1.17.4
-2021-04-08T02:49:46Z D! [agent] Initializing 
+2021-04-08T02:49:46Z D! [agent] Initializing
 2021-04-08T02:49:46Z D! [sarama]  Initializing new client
 2021-04-08T02:49:46Z D! [sarama] client/metadata fetching metadata for all topics from broker 192.168.1.7:9092
 2021-04-08T02:49:46Z D! [sarama] Connected to broker at 192.168.1.7:9092 (unregistered)
@@ -532,13 +491,6 @@ A custom set of metrics can be collected by configuring the `t128_metrics` input
 ```
 
 ### Event Collector
-
-#### Version History
-
-| Release      | Modification                            |
-| ------------ | --------------------------------------- |
-| 1.2.0, 2.1.0 | `t128_events` input type was introduced |
-
 The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event. The configuration file in a `TOML` definition of event collector has the following format:
 
 ```toml
@@ -585,16 +537,6 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 ```
 
 ### Device Interface State Collector
-
-#### Version History
-
-| Release      | Modification                                                    |
-| ------------ | --------------------------------------------------------------- |
-| 3.3.1        | `t128_device_state` input type was introduced                   |
-| 3.3.1        | `provisional-status` tag was added (available in SSR >= 4.5.3) |
-| 1.2.1, 2.1.1 | `mac-address` tag was introduced                                |
-
-
 The `t128_device_state` input can be used for monitoring the admin, oper, provisional, and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. The `TOML` definition of the configuration looks as below. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
 ```toml
@@ -661,13 +603,6 @@ The `peerPathStateCollector128t` collector can be used for monitoring the up/dow
 ```
 
 ### ARP State Collector
-
-#### Version History
-
-| Release | Modification                               |
-| ------- | ------------------------------------------ |
-| 3.3.1   | `t128_arp_state` input type was introduced |
-
 The `t128_arp_state` input can be used for monitoring the arp table status of a network interface configured on the node. The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
 
 ```toml
