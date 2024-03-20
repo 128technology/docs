@@ -12,11 +12,11 @@ sidebar_label: '3.7'
 
   _**Resolution**_ When a cable was disconnected on an interface with an active MIST connection, some events were getting dropped. The mechanism is now more robust and handles the reconnect scenario more gracefully.
 
-- **WAN-2240 WAN bandwidth graph is blank after the user adds new WAN interfaces: oc-stats from the SSR is missing some interfaces**
+- **WAN-2240 WAN bandwidth graph is blank after the user adds new WAN interfaces: `oc-stats` from the SSR is missing some interfaces**
 
   _**Resolution**_ The logic to include configured interfaces in the `oc-stats` and validating data for completeness is more robust, ensuring that accurate data is sent for new configuration changes.
 
-- **WAN-2478 Disabling WAN Assurance plugin does not stop the mist-agent service**
+- **WAN-2478 Disabling the WAN Assurance plugin does not stop the mist-agent service**
 
   _**Resolution**_ When the WAN Assurance plugin is disabled on a router, all relevant services are now stopped.
 
@@ -26,7 +26,7 @@ sidebar_label: '3.7'
 
 - **WAN-2637 One of the nodes in HA pair was not sending any data to the cloud**
 
-  _**Resolution**_ The runtime par file corruption of monitoring-agent package is being addressed by adopting a better packaging approach.
+  _**Resolution**_ The runtime par file corruption of the monitoring-agent package has been addressed by adopting a better packaging approach.
 
 - **WAN-2647 Peer path status is displayed incorrectly under Topology Details view for HA routers**
 
@@ -36,7 +36,7 @@ sidebar_label: '3.7'
 
   _**Resolution**_ The condition that checks for the completeness of the HA configuration has been made more robust, preventing an authentication failure error. This allows the completion of the MIST onboarding process.
 
-- **WAN-2696 Client information displays user as `Anonymous` **
+- **WAN-2696 Client information displays user as `Anonymous`**
 
   _**Resolution**_ In addition to the realtime lease updates, the full DHCP server lease data is sent to the cloud once a day.
 
@@ -56,7 +56,7 @@ sidebar_label: '3.7'
 
   _**Resolution**_ LTE devices with no peer paths were incorrectly being reported as a LAN interface. LTE interfaces will now always be reported as WAN interfaces.
 
-- **WAN-2897 Router not reporting CPU, memory and port metrics**
+- **WAN-2897 Router not reporting CPU, memory, and port metrics**
 
   _**Resolution**_ The condition that checks for the completeness of the HA configuration has been made more robust, preventing an authentication failure error. This allows the full data set to be sent post onboarding.
 
