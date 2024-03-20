@@ -73,6 +73,39 @@ Traffic engineering includes a performance impact to the packet-per-second proce
 
 To gather information about Per-Adjacency Traffic Engineering, query the following statistics using the `show stats traffic-eng device-interface peer-path` command within the CLI. These statistics are specific to the peer-path and provide insight into how the adjacency schedulers are operating.
 
+```
+admin@combo-east-a.combo-east# show stats traffic-eng device-interface peer-path
+Tue 2024-03-19 13:39:58 UTC
+Retrieving statistics...
+
+Peer Path Traffic Engineering Stats
+-----------------------------------
+
+==================================================== ============== ============ ============== ============= ====== ==================
+ Metric                                               Node           Peer-name    Peer-host      Device-name   Vlan              Value
+==================================================== ============== ============ ============== ============= ====== ==================
+ dequeue-cycle-count                                  combo-east-a   combo-west   172.16.102.2   11-red           0   7077545161474020
+ enqueue-cycle-count                                  combo-east-a   combo-west   172.16.102.2   11-red           0   7077545161474020
+ packets-queued                                       combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class buffer-capacity-exceeded-bytes     combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class buffer-capacity-exceeded-packets   combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class dequeue-aqm-drop-bytes             combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class dequeue-aqm-drop-packets           combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class dequeue-max-latency-drop-bytes     combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class dequeue-max-latency-drop-packets   combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class dequeue-success-bytes              combo-east-a   combo-west   172.16.102.2   11-red           0           94918726
+ per-traffic-class dequeue-success-packets            combo-east-a   combo-west   172.16.102.2   11-red           0             244021
+ per-traffic-class schedule-failure-bandwidth         combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class schedule-failure-bytes             combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class schedule-failure-packets           combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+ per-traffic-class schedule-success-bandwidth         combo-east-a   combo-west   172.16.102.2   11-red           0            1201245
+ per-traffic-class schedule-success-bytes             combo-east-a   combo-west   172.16.102.2   11-red           0           94918726
+ per-traffic-class schedule-success-packets           combo-east-a   combo-west   172.16.102.2   11-red           0             244021
+ scheduler-reset                                      combo-east-a   combo-west   172.16.102.2   11-red           0                  0
+```
+
+### Statistics Descriptions
+
 - `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this peer path.
 - `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this peer path.
 - `packets-queued`: The current number of packets queued in traffic engineering for this peer path.

@@ -52,28 +52,45 @@ Statistics for device-interface traffic engineering can be viewed from the `show
 
 The general statistics apply to the scheduler as a whole. Per-traffic-class statistics are maintained for all the available traffic-classes (high, medium, low, best-effort). 
 
-### Statistics Descriptions
+### Gathering Statistics
 
 To gather information about device interface traffic engineering, query the following statistics using the `show stats traffic-eng device-interface` command. These statistics are specific to the device interface and provide insight into how the schedulers are operating. 
 
 ```
-admin@128t-east.128t-east# show stats traffic-eng device-interface
-Mon 2024-03-18 17:43:43 UTC
-✔ Retrieving statistics...
+admin@combo-east-a.combo-east# show stats traffic-eng device-interface
+Tue 2024-03-19 13:39:20 UTC
+Retrieving statistics...
 
 Device Interface Traffic Engineering Stats
 ------------------------------------------
 
-========================= =========== =======
- Metric                    Node        Value
-========================= =========== =======
- common schedule-failure   128t-east       0
- common schedule-success   128t-east       0
- common tracked-buffers    128t-east       0
-
-Completed in 0.10 seconds
+============================================================== ============== ==================
+ Metric                                                         Node                      Value
+============================================================== ============== ==================
+ common schedule-failure                                        combo-east-a             269453
+ common schedule-success                                        combo-east-a           12836478
+ common tracked-buffers                                         combo-east-a                 63
+ peer-path dequeue-cycle-count                                  combo-east-a   7077471138454523
+ peer-path enqueue-cycle-count                                  combo-east-a   7077471138454523
+ peer-path packets-queued                                       combo-east-a                  0
+ peer-path per-traffic-class buffer-capacity-exceeded-bytes     combo-east-a                  0
+ peer-path per-traffic-class buffer-capacity-exceeded-packets   combo-east-a                  0
+ peer-path per-traffic-class dequeue-aqm-drop-bytes             combo-east-a                  0
+ peer-path per-traffic-class dequeue-aqm-drop-packets           combo-east-a                  0
+ peer-path per-traffic-class dequeue-max-latency-drop-bytes     combo-east-a                  0
+ peer-path per-traffic-class dequeue-max-latency-drop-packets   combo-east-a                  0
+ peer-path per-traffic-class dequeue-success-bytes              combo-east-a           48740202
+ peer-path per-traffic-class dequeue-success-packets            combo-east-a             126011
+ peer-path per-traffic-class schedule-failure-bandwidth         combo-east-a                  0
+ peer-path per-traffic-class schedule-failure-bytes             combo-east-a                  0
+ peer-path per-traffic-class schedule-failure-packets           combo-east-a                  0
+ peer-path per-traffic-class schedule-success-bandwidth         combo-east-a            1231157
+ peer-path per-traffic-class schedule-success-bytes             combo-east-a           48740202
+ peer-path per-traffic-class schedule-success-packets           combo-east-a             126011
+ peer-path scheduler-reset                                      combo-east-a                  0
 ```
 
+### Statistics Descriptions
 
 - `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that a packet was enqueued into the scheduler. 
 - `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that the scheduler attempted to dequeue a packet. 

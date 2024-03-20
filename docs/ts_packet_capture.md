@@ -210,7 +210,7 @@ The syntax for displaying selective packet capture filters can be seen below:
 
 ```
 >> show session-captures
-usage: session-captures [\{id <id> | detail\}] [service <service>] [force] [router <router>] [node <node>]
+usage: session-captures [{id <id> | detail}] [service <service>] [force] [router <router>] [node <node>]
 
 Show active session-captures
 

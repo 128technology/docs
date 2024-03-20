@@ -23,7 +23,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | `delete` | Delete configuration data |
 | [`district`](#configure-authority-district) | Districts in the authority. |
 | [`dscp-map`](#configure-authority-dscp-map) | Configure Dscp Map |
-| [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: \{interface-id\} for Network Interface Global Identifier \{router-name\} for Router Name \{authority-name\} for Authority Name For example, &#x27;interface-\{interface-id\}.\{router-name\}.\{authority-name\}&#x27;. |
+| [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`. |
 | [`fib-service-match`](#configure-authority-fib-service-match) | When creating FIB entries by matching route updates to service addresses, consider the specified service addresses. |
 | [`forward-error-correction-profile`](#configure-authority-forward-error-correction-profile) | A profile for Forward Error Correection parameters, describing how often to send parity packets. |
 | [`icmp-control`](#configure-authority-icmp-control) | Settings for ICMP packet handling |
@@ -1197,7 +1197,7 @@ This type is used by other entities that need to reference configured resource g
 
 ## `configure authority dynamic-hostname`
 
-Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: \{interface-id\} for Network Interface Global Identifier \{router-name\} for Router Name \{authority-name\} for Authority Name. For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`.
+Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-{interface-id}.{router-name}.{authority-name}`.
 
 #### Usage
 
@@ -1213,17 +1213,17 @@ configure authority dynamic-hostname [<string>]
 
 #### Description
 
-Default: interface-\{interface-id\}.\{router-name\}.\{authority-name\}
+Default: `interface-{interface-id}.{router-name}.{authority-name}`
 
 ##### string
 
 A text value.
 
 Must contain substitution variables:
-`\{interface-id\}` for Network Interface Global Identifier
-`\{router-name\}` for Router Name
-`\{authority-name\}` for Authority Name
-For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`.
+`{interface-id}` for Network Interface Global Identifier
+`{router-name}` for Router Name
+`{authority-name}` for Authority Name
+For example, `interface-{interface-id}.{router-name}.{authority-name}`.
 Any other characters must be alphanumeric or any of the
 following: - _ .
 
