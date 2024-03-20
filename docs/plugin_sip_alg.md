@@ -479,6 +479,16 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 3.2.3
+**Release Date:** Mar 20, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2393** Reduce pillar generation time for large scale deployments
+
+    _**Resolution**_ Limit xml xpath operations during generation
+
+
 ### Release 3.2.2
 **Release Date:** Dec 02, 2022
 
