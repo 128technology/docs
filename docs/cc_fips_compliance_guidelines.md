@@ -6,14 +6,13 @@ sidebar_label: Common Criteria Compliance Guidelines
 For compliance, the following configuration considerations must be made:
  
 - FIPS mode must be enabled **during installation**. Use of anything other than FIPS mode is not compliant with Common Criteria certification.
-- **Except during installation**, all configuration procedures must be performed from the PCLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI **is acceptable under the Common Criteria guidelines**.
+- **Except during installation**, all configuration procedures must be performed from the CLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI **is acceptable under the Common Criteria guidelines**.
 - When installing a router, the [IPv4 Option Filter](cc_fips_sec_firewall_filtering.md#ipv4-option-filtering) must be set to `drop-all`.
 - When installing a router, the [ICMP Session Match](cc_fips_sec_firewall_filtering.md#icmp-type-as-a-session-attribute) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.
-- The `password-policy` must define the minimum password length and maximum number of permitted login attempts per user. Please refer to [Username and Password Policies](cc_fips_config_password_policies.md) for policies, and to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy) for pcli commands and context for assigning these values.
+- The `password-policy` must define the minimum password length and maximum number of permitted login attempts per user. Please refer to [Username and Password Policies](cc_fips_config_password_policies.md) for policies, and to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy) for CLI commands and context for assigning these values.
 - The `admin` account must be given `sudo` privileges allowing it to use the shell for some management capabilities. Edit the `/etc/sudoers` file as `root` using the `visudo` command. This allows you to add an entry for `admin` which will persist across reboots. For additional information, please see [Root Access](cc_fips_access_mgmt.md#root-access) in the Access Management section.
-- Traffic logging must be enabled by setting the following command to `true`: `configure authority router router system audit traffic enabled true`
- This is a resource intensive setting. Not more than a few sessions are expected to run while collecting traffic events.
+- Traffic logging must be enabled by setting the following command to `true`: `configure authority router router system audit traffic enabled true`. This is a resource intensive setting. Not more than a few sessions are expected to run while collecting traffic events.
 
 - Any services that are used to enforce evaluated firewall functionality must have a service-policy attached that applies strict transport state enforcement:
  `configure authority service-policy <service_policy> transport-state-enforcement strict`
@@ -44,7 +43,7 @@ The following table provides a complete list of compliant hardware.
 
 The following functionality and platforms **are not certified** under Common Criteria.
 
-- SSR Software versions other than V6.2.3-14R2. 
+- SSR Software versions other than V6.2.3-14-R2. 
 - Non-Juniper branded hardware platforms running SSR Software
 - Juniper branded hardware platforms not explicitly included
 - Juniper SSR Software for virtual platforms.

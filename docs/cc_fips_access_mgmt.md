@@ -6,14 +6,13 @@ sidebar_label: Access Management
 Following industry security best practices, SSH features have been limited and in the case of SSH Root Login, have been disabled.
 
 ## Root Access
-To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
-**SSH Root login is not permitted.**
+To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. **Logging in as `root` over SSH is not permitted.**
 
-Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
+Prerequisites for installation and upgrades now include configuring a super user in `/etc/sudoers` that is allowed to execute Linux shell commands as root (sudo privileges).
 During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
 
 1. Login using the admin credentials. 
-2. Enter the Linux shell: Type `shell` to suspend the PCLI and enter the Linux shell. 
+2. Enter the Linux shell: Type `shell` to suspend the CLI and enter the Linux shell. 
 3. Type `su` and enter the default root password. 
 4. Use the following command to grant sudo privilege to the `admin` user account: 
  `/usr/sbin/visudo` 
@@ -141,7 +140,7 @@ admin@conductor.conductor#
 ```
  It should report Version 6.2.3 and Status r2.
  
-3. Type `shell` to suspend the PCLI and enter the Linux shell. 
+3. Type `shell` to suspend the CLI and enter the Linux shell. 
 4. Execute the command `sudo systemctl status 128T` and verify the service is listed as `active (running)`.
 
 ```
@@ -186,27 +185,27 @@ admin@conductor.conductor#
  `cat /proc/sys/crypto/fips_enabled` 
  Expected result:  `1`  
 
-8. Type `exit` to leave the Linux shell and return to the PCLI. 
-9. Type `quit` to log out from PCLI. 
+8. Type `exit` to leave the Linux shell and return to the CLI. 
+9. Type `quit` to log out from CLI. 
 
 You have now completed security validation of the installation. 
 
-## PCLI Access Post Install
+## CLI Access Post Install
 
-Use the following procedure to access the PCLI at any time after installation. 
+Use the following procedure to access the CLI at any time after installation. 
 
 1. Open a terminal window and SSH to the SSR's IP address. 
 2. Use your login credentials to log in to the SSR 
  
- - If using an account other than admin, type `pcli` to start the SSR PCLI. 
+ - If using an account other than admin, type `pcli` to start the SSR CLI. 
 
- - Type `shell` to suspend the PCLI and enter the Linux shell.  
+ - Type `shell` to suspend the CLI and enter the Linux shell.  
 
 To terminate an active session: 
 
-- Type `exit` to return from the Linux shell to the PCLI. 
+- Type `exit` to return from the Linux shell to the CLI. 
 
-- Type `quit` to log out from PCLI.
+- Type `quit` to log out from CLI.
 
 - If using an account other than admin, type `exit` to end the login session. 
 
@@ -232,7 +231,7 @@ The validation status is displayed very briefly on console during boot - it scro
 
 ![validation status](/img/cc_fips_software_self_test1.png)
  
-It is recorded in /var/log/messages for the current boot: 
+It is recorded in `/var/log/messages` for the current boot: 
 
 ![Validation status messages](/img/cc_fips_software_self_test2.png)
 
@@ -246,7 +245,7 @@ If the calculated HMAC does not match the stored value, the bootloader denies lo
 
 ### Kernel Known Answer Tests 
  
-The Kernel Known Answer Tests (KAT) for the FIPS subsystem run automatically at startup. Any failures are displayed on the system console during boot. These scroll quickly off screen, but are recorded in  /var/log/messages for the current boot: 
+The Kernel Known Answer Tests (KAT) for the FIPS subsystem run automatically at startup. Any failures are displayed on the system console during boot. These scroll quickly off screen, but are recorded in `/var/log/messages` for the current boot: 
 
 ![KAT Test Failure Log](/img/cc_fips_software_self_test5.png)
 

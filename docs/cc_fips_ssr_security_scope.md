@@ -6,7 +6,7 @@ This section provides high level descriptions of the security functions and mech
 
 ## Security Audit
 
-The SSR provides an audit function to gather a rich set of detailed audit records of all critical security operations. Audit records are log entries which include necessary data pertinent to the event, allowing detailed analysis of the audit records. These records are protected against unauthorized modification and may be transferred to and audit server for storage and further analysis. The transfer of the audit records to the audit server is protected by SSH.
+The SSR provides an audit function to gather a rich set of detailed audit records of all critical security operations. Audit records are log entries which include necessary data pertinent to the event, allowing detailed analysis of the audit records. These records are protected against unauthorized modification and may be transferred to an audit server for storage and further analysis. The transfer of the audit records to the audit server is protected by SSH.
 
 ## Cryptography
 
@@ -22,13 +22,13 @@ The Command Line Interface (CLI) is used for the management of the SSR. The CLI 
 
 ## Platform Management
 
-Platform management is performed by the administrator from the PCLI on the Conductor. There are no alternative methods for managing the SSR. The CLI is accessed locally from console, or remotely over an SSH connection.
+Common Criteria-compliant platform management is performed by the administrator from the CLI on the Conductor. While there are other methods of SSR management, use of the CLI is the only compliant method for managing the SSR. The CLI is accessed locally from console, or remotely over an SSH connection.
 
 ### Identification, Authentication, and Access Management
 
 Each user is identified with a username and password, and upon successful verification of the password, a user is assigned to a role defined in the user configuration. Users are allowed to change their passwords within the parameters defined on the SSR. The passwords are stored in a secure file preventing unauthorized access. Passwords entered remotely are not echoed to ensure unauthorized parties may not learn passwords of legitimate Administrators. 
 
-Each user may terminate their own session. The SSR also maintains an inactivity timer for each user. When the administrator-defined limit is reached, the SSR terminates that session. The inactivity timer applies to all PCLI and shell sessions, regardless of whether they are local or SSH connections. Use the following command to configure the timeout value (in seconds):
+Each user may terminate their own session. The SSR also maintains an inactivity timer for each user. When the administrator-defined limit is reached, the SSR terminates that session. The inactivity timer applies to all CLI and shell sessions, regardless of whether they are local or SSH connections. Use the following command to configure the timeout value (in seconds):
 
 `configure authority router system inactivity-timer 60` 
 
@@ -39,11 +39,11 @@ Additionally, a counter records unsuccessful consecutive authentication attempts
 The SSR is protected from tampering and unauthorized access by both active and passive means. 
 
 - Active Measures: These are the security measures that ensure that SSR data and functions are not accessible to unauthorized users. These include:
- - Self-tests at boot, or when requested by an administrator, to assert correct functioning of the cryptographic functions.
- - NTP synchronization producing reliable timestamps.
- - Secure storage of passwords, cryptographic keys and CSPs.
- - Managing firewall rule inspection to ensure that the previously processed traffic information does not influence the next filtering decisions.
- - Secure upgrade process for the SSR software and verification of the authenticity of the upgrade prior to installing it.
+  - Self-tests at boot, or when requested by an administrator, to assert correct functioning of the cryptographic functions.
+  - NTP synchronization producing reliable timestamps.
+  - Secure storage of passwords, cryptographic keys and CSPs.
+  - Managing firewall rule inspection to ensure that the previously processed traffic information does not influence the next filtering decisions.
+  - Secure upgrade process for the SSR software and verification of the authenticity of the upgrade prior to installing it.
 - Passive Measures: These are the design characteristics of the SSR that minimize the attack surface accessible to threat agents. The minimization of the attack surface is achieved by the SSR software running on a dedicated hardware platform, with a minimum set of physical ports and connections, implementing only the necessary functions for the SSR. 
 - There are no general computing capabilities available to the users of the SSR. The SSR is not a general purpose device, no other software shall be installed or operated on the device. 
 
@@ -88,7 +88,7 @@ If the system halted due to audit disk full, proceed as follows:
 
 ![Press E](/img/cc_fips_audit_trail3.png)
 
-4. Scroll down and append “audit=0 S” to the end of the vmlinuz kernel line.
+4. Scroll down and append `audit=0 S` to the end of the vmlinuz kernel line.
 
 ![Add audit=0](/img/cc_fips_audit_trail4.png)
 
@@ -99,3 +99,7 @@ If the system halted due to audit disk full, proceed as follows:
 ![Remove logs](/img/cc_fips_audit_trail7.png)
 
 8. When complete, type `reboot` to boot back into normal SSR service.
+
+:::note
+When you modify the GRUB kernel behavior by editing the GRUB menu at boot time, the changes do not persist over a system reboot. Default boot behavior is restored the next time you boot the system.
+:::

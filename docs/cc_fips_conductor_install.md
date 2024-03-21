@@ -13,8 +13,8 @@ The Conductor installation must be completed before installing a Session Smart R
 
 - Installation is performed on a compliant platform; see [Compliant SSR Hardware](cc_fips_compliance_guidelines.md#compliant-ssr-hardware). 
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
-- Local console connectivity to the device. 
-- **The SSH Root login is not permitted.** When a system is installed using the OTP ISO, a `t128` user is configured with `sudo` privileges. 
+- Ensure local console connectivity to the device. 
+- **Logging in as `root` over SSH is not permitted.** When a system is installed using the OTP ISO, a `t128` user is configured with `sudo` privileges. 
 
 ## Installation
 
@@ -25,7 +25,7 @@ Ensure that you have an appropriate rollover cable available to connect to your 
 1. Connect the RJ45 rollover cable to the console port on the SSR device.
 2. Connect the other end of the cable to your computer.
 3. Insert your bootable USB with the new ISO image into the USB port of the SSR device.
-4. Connect the power input to the SSR device
+4. Connect the power input to the SSR device.
 5. Power on the SSR. 
 
 ### Boot from the USB
@@ -35,22 +35,29 @@ Use the steps appropriate for your device to direct the device to boot from the 
 #### SSR100 Series Devices
 
 1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
- ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
+
+    ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
+
 2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
 
- ![Select Boot Device](/img/onboard_otp_boot_device.png)
+    ![Select Boot Device](/img/onboard_otp_boot_device.png)
+
 3. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
 
 #### SSR1000 Series Devices
 
 1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
- ![Setup Menu Prompt](/img/1x00_setup_menu.png)
+
+    ![Setup Menu Prompt](/img/1x00_setup_menu.png)
+
 2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
 
- ![Setup Utility](/img/setup-menu-prompt.png)
+    ![Setup Utility](/img/setup-menu-prompt.png)
+
 3. Use the up and down arrow keys to highlight the USB device in the Boot Override list.
 
- ![Boot Override list](/img/1x00_boot-override.png)
+    ![Boot Override list](/img/1x00_boot-override.png)
+
 4. Press Enter to confirm boot from the USB device.
 5. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
 
@@ -68,7 +75,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 2. Press the TAB key to edit the configuration.
 
-  To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+  To enable FIPS Enforcement for SSR software version 6.2.3-14-R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
   :::important
   FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
@@ -168,9 +175,16 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
     :::note
     Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
     :::
-    - **Conductor Name:** The name of the Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `test-conductor.conductor`. The full system name is reflected in the PCLI prompt.
+    - **Conductor Name:** SSR devices follow a naming scheme akin to domain names (e.g., `specific.general`). As it relates to SSR devices, the leading name identifies the node and the trailing name identifies the name of the HA conductor or router pair. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `test-conductor.conductor`. The full system name is reflected in the CLI prompt.
 
-4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_config_password_policies.md).
+4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be: 
+  - At least 9 characters long 
+  - Contain at least 1 uppercase letter 
+    - At least 1 lowercase letter 
+    - At least 1 number 
+  - Cannot contain the username in any form 
+  - Cannot repeat characters more than 3 times 
+  This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_config_password_policies.md).
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
@@ -191,7 +205,7 @@ Prerequisites for installation and upgrades now include configuring a super user
 During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
 
 1. Login using the admin credentials. 
-2. Enter the Linux shell: Type `shell` to suspend the PCLI and enter the Linux shell. 
+2. Enter the Linux shell: Type `shell` to suspend the CLI and enter the Linux shell. 
 3. Type `su` and enter the default root password. 
 4. Use the following command to grant sudo privilege to the `admin` user account: 
  `/usr/sbin/visudo` 
@@ -255,7 +269,7 @@ admin@conductor.conductor#
 ```
  It should report Version 6.2.3 and Status r2.
  
-3. Type `shell` to suspend the PCLI and enter the Linux shell. 
+3. Type `shell` to suspend the CLI and enter the Linux shell. 
 4. Execute the command `sudo systemctl status 128T` and verify the service is listed as `active (running)`.
 
 ```
@@ -300,8 +314,8 @@ admin@conductor.conductor#
  `cat /proc/sys/crypto/fips_enabled` 
  Expected result:  `1`  
 
-8. Type `exit` to leave the Linux shell and return to the PCLI. 
-9. Type `quit` to log out from PCLI. 
+8. Type `exit` to leave the Linux shell and return to the CLI. 
+9. Type `quit` to log out from CLI. 
 
 You have now completed security validation of the installation.  
 
@@ -309,9 +323,9 @@ You have now completed security validation of the installation.
 
 After the system has been set up for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.
 
-From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
+From the root user in the workflow above, run the `pcli` command to access the CLI and configure the token.
 
-Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
+Use the CLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
 
 ```
 [root@test-conductor ~]# pcli
@@ -327,22 +341,22 @@ Successfully saved credentials.
 admin@node1.test-conductor#
 ```
 
-### PCLI Access Post Install
+### CLI Access Post Install
 
-Use the following procedure to access the PCLI at any time after installation. 
+Use the following procedure to access the CLI at any time after installation. 
 
 1. Open a terminal window and SSH to the SSR's IP address. 
 2. Use your login credentials to log in to the SSR 
  
- - If using an account other than admin, type `pcli` to start the SSR PCLI. 
+ - If using an account other than admin, type `pcli` to start the SSR CLI. 
 
- - Type `shell` to suspend the PCLI and enter the Linux shell.  
+ - Type `shell` to suspend the CLI and enter the Linux shell.  
 
 To terminate an active session: 
 
-- Type `exit` to return from the Linux shell to the PCLI. 
+- Type `exit` to return from the Linux shell to the CLI. 
 
-- Type `quit` to log out from PCLI.
+- Type `quit` to log out from CLI.
 
 - If using an account other than admin, type `exit` to end the login session. 
 

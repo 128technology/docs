@@ -9,7 +9,7 @@ The OTP installation process produces a Router installed with SSR software set t
 
 This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso) and [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb).
 
-Router installation can be performed using **either** the OTP process here, or the [Interactive Installation](cc_fips_router_install.md). You do not need to perform both. **The steps in this section describes the OTP process.**
+Router installation can be performed using **either** the OTP process, or the [Interactive Installation](cc_fips_router_install.md). You do not need to perform both. **The steps in this section describes the OTP process.**
 
 :::note
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for all installations.
@@ -88,7 +88,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 2. Press the TAB key to edit the configuration.
 
-  To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+  To enable FIPS Enforcement for SSR software version 6.2.3-14-R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
   :::important
   FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
@@ -100,19 +100,23 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 4. Press **Enter** to start the install. 
 
+:::note
+When you modify the GRUB kernel behavior by editing the GRUB menu at boot time, the changes do not persist over a system reboot. Default boot behavior is restored the next time you boot the system.
+:::
+
 ### SSR Installation
 
 This installation process is an automated workflow which does not require user interaction after selecting and initiating the OTP menu option. The system will power off after installation.
 
 ### Root Access
 To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
-**SSH Root login is not permitted.**
+**Logging in as `root` over SSH is not permitted.**
 
-Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
+Prerequisites for installation and upgrades now include configuring a super user in `/etc/sudoers` that is allowed to execute Linux shell commands as root (sudo privileges).
 During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
 
 1. Login using the admin credentials. 
-2. Enter the Linux shell: Type `shell` to suspend the PCLI and enter the Linux shell. 
+2. Enter the Linux shell: Type `shell` to suspend the CLI and enter the Linux shell. 
 3. Type `su` and enter the default root password. 
 4. Use the following command to grant sudo privilege to the `admin` user account: 
  `/usr/sbin/visudo` 
@@ -176,7 +180,7 @@ admin@conductor.conductor#
 ```
  It should report Version 6.2.3 and Status r2.
  
-3. Type `shell` to suspend the PCLI and enter the Linux shell. 
+3. Type `shell` to suspend the CLI and enter the Linux shell. 
 4. Execute the command `sudo systemctl status 128T` and verify the service is listed as `active (running)`.
 
 ```
@@ -221,27 +225,27 @@ admin@conductor.conductor#
  `cat /proc/sys/crypto/fips_enabled` 
  Expected result:  `1`  
 
-8. Type `exit` to leave the Linux shell and return to the PCLI. 
-9. Type `quit` to log out from PCLI. 
+8. Type `exit` to leave the Linux shell and return to the CLI. 
+9. Type `quit` to log out from CLI. 
 
 You have now completed security validation of the installation.  
 
-### PCLI Access Post Install
+### CLI Access Post Install
 
-Use the following procedure to access the PCLI at any time after installation. 
+Use the following procedure to access the CLI at any time after installation. 
 
 1. Open a terminal window and SSH to the SSR's IP address. 
 2. Use your login credentials to log in to the SSR 
  
- - If using an account other than admin, type `pcli` to start the SSR PCLI. 
+ - If using an account other than admin, type `pcli` to start the SSR CLI. 
 
- - Type `shell` to suspend the PCLI and enter the Linux shell.  
+ - Type `shell` to suspend the CLI and enter the Linux shell.  
 
 To terminate an active session: 
 
-- Type `exit` to return from the Linux shell to the PCLI. 
+- Type `exit` to return from the Linux shell to the CLI. 
 
-- Type `quit` to log out from PCLI.
+- Type `quit` to log out from CLI.
 
 - If using an account other than admin, type `exit` to end the login session. 
 

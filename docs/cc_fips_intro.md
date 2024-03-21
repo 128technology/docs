@@ -5,7 +5,7 @@ sidebar_label: Introduction - SSR Common Criteria Installation and Configuration
 
 The focus of this document is to provide the required configuration steps to install and operate the SSR in a manner consistent with the requirements of Common Criteria and FIPS. 
 
-Common Criteria for information technology is an international agreement signed by several countries that permits the evaluation of security products against a common set of standards. In the Common Criteria Recognition Arrangement (CCRA) at http://www.commoncriteriaportal.org/, the participants agree to mutually recognize evaluations of products performed in other countries. All evaluations are performed using a common methodology for information technology security evaluation.
+Common Criteria for information technology is an international agreement signed by several countries that permits the evaluation of security products against a common set of standards. In the Common Criteria Recognition Arrangement (CCRA) the participants agree to mutually recognize evaluations of products performed in other countries. All evaluations are performed using a common methodology for information technology security evaluation.
 
 For more information on Common Criteria, see http://www.commoncriteriaportal.org/.
 
@@ -15,10 +15,14 @@ The Session Smart Networking Platform is the first 100% software-defined, sessio
 
 The family of Juniper SSR appliances consists of the Session Smart Networking software executing on Juniper branded platforms. The compliant appliances include the following:
 
-- SSR 120, SSR 130
-- SSR 1200, SSR 1300, SSR 1400, SSR 1500
+- SSR 120
+- SSR 130
+- SSR 1200
+- SSR 1300
+- SSR 1400
+- SSR 1500
 
-The software is Juniper SSR software v6.2.3-14R2. The software is deployed in an ISO package file, which includes Enterprise Linux 7.9 with kernel version 4.18.0.
+The software is Juniper SSR software v6.2.3-14-R2. The software is deployed in an ISO package file, which includes Enterprise Linux 7.9 with kernel version 4.18.0.
 
 The SSR security guidance documentation (this guide, the SSR Common Criteria Installation and User Guide V1.0) is delivered to all users. To achieve Common Criteria compliance, the SSR must at all times be deployed and operated in accordance with this document. The SSR Common Criteria Installation and User Guide V1.0 is a Common Criteria Guidance Supplement which extends the existing manuals and other product documentation. The SSR Common Criteria Installation and User Guide applies to the above listed hardware. 
 

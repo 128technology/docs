@@ -6,11 +6,11 @@ This section provides information about the secure upgrade process and the unins
 
 ## Software Upgrades
 
-To determine the current version of software running on your Conductor or Router, run the following command from the Conductor PCLI:
+To determine the current version of software running on your Conductor or Router, run the following command from the Conductor CLI:
 
 [`show system version`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#show-system-version)
 
-Use this information if you upgrading to a newer software version **after having installed** SSR Version 6.2.3-14R2. This is the initial Common Criteria compliant SSR software release.  
+Use this information if you upgrading to a newer software version **after having installed** SSR Version 6.2.3-14-R2. This is the initial Common Criteria compliant SSR software release.  
 
 The SSR Software packages are available from the Juniper Networks public servers using the **username and token provided to you.** During the upgrade process, your SSR uses this information to securely access the download location. Depending on your upgrade selection, the following location is accessed by the upgrade process:
 
@@ -20,7 +20,7 @@ The SSR Software packages are available from the Juniper Networks public servers
 Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. 
 
 :::important
-**The SSH Root login is not permitted and is not compliant with Common Criteria guidelines.** If the existing version allows SSH Root login, it will be disabled during the upgrade. 
+**The SSH Root login is not permitted and is not compliant with Common Criteria guidelines.**
 ::: 
 
 To perform an upgrade on either a conductor or router, refer to the detailed instructions at [Upgrading the SSR Networking Platform.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrading) 
