@@ -30,14 +30,19 @@ For compliance, the following configuration considerations must be made:
 
 The following table provides a complete list of compliant hardware. 
 
-| PLATFORM | CPU | MICROPROCESSOR | NETWORKING |
-| --- | --- | --- | --- |
-| SSR120 | 4-core Intel Atom 8G | Denverton | 2 x 1GbE combo RJ45/SFP <br/>4 x 1GbE RJ4 |
-| SSR130 | 8-core Intel Atom 16G | Denverton | 2 x 1GbE combo RJ45/SFP <br/>6 x 1GbE RJ45 |
-| SSR1200 | 8-core AMD | Zen (Snowy Owl) | 8 x 1GBe RJ45 <br/>4 x 1/10 GbE SFP+ |
-| SSR1300 | 16-core Intel Xeon | Cascade Lake | 6 x RJ-45 <br/>4 x 10GbE SFP+ <br/>3 x 1/10GBe SFP+ <br/>4 x 1GBe Ethernet |
-| SSR1400 | 24-core Intel Xeon | Cascade Lake | 6 x 1G RJ-45 <br/>4 x 10G SFP+ <br/>4 x 1/10/25G SFP28 |
-| SSR1500 | 64-core AMD | Zen 3 (Milan) | 6 x 1G RJ-45 |
+| PLATFORM | NETWORKING |
+| --- | --- |
+| SSR120 | 2 x 1GbE combo RJ45/SFP <br/>4 x 1GbE RJ4 |
+| SSR130 | 2 x 1GbE combo RJ45/SFP <br/>6 x 1GbE RJ45 |
+| SSR1200 | 8 x 1GBe RJ45 <br/>4 x 1/10 GbE SFP+ |
+| SSR1300 | 6 x RJ-45 <br/>4 x 10GbE SFP+ <br/>3 x 1/10GBe SFP+ <br/>4 x 1GBe Ethernet |
+| SSR1400 | 6 x 1G RJ-45 <br/>4 x 10G SFP+ <br/>4 x 1/10/25G SFP28 |
+| SSR1500 | 6 x 1G RJ-45 |
+
+Juniper SSR Common Criteria certified platforms implement cryptographic algorithms on CPUs covered by the following validations: 
+- [37481](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37481)
+- [37482](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37482)
+- [37469](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37482)
 
 ## Out of Scope Features
 
