@@ -42,7 +42,7 @@ The following table provides a complete list of compliant hardware.
 Juniper SSR Common Criteria certified platforms implement cryptographic algorithms on CPUs covered by the following validations: 
 - [37481](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37481)
 - [37482](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37482)
-- [37469](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37482)
+- [37469](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/details?validation=37469)
 
 ## Out of Scope Features
 
