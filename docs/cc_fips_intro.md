@@ -7,7 +7,7 @@ The focus of this document is to provide the required configuration steps to ins
 
 Common Criteria for information technology is an international agreement signed by several countries that permits the evaluation of security products against a common set of standards. In the Common Criteria Recognition Arrangement (CCRA) the participants agree to mutually recognize evaluations of products performed in other countries. All evaluations are performed using a common methodology for information technology security evaluation.
 
-For more information on Common Criteria, see http://www.commoncriteriaportal.org/.
+For more information on Common Criteria, see https://www.commoncriteriaportal.org/.
 
 ## Introduction to Session Smart Networking Common Critieria Compliance
 
