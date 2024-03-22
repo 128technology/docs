@@ -1213,7 +1213,7 @@ configure authority dynamic-hostname [<string>]
 
 #### Description
 
-Default: interface-{interface-id}.{router-name}.{authority-name}
+Default: `interface-{interface-id}.{router-name}.{authority-name}`
 
 ##### string
 
