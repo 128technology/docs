@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cc_fips_conductor_install" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.1">
+<title data-rh="true">Conductor Installation | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/cc_fips_conductor_install"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Conductor Installation | SSN Docs"><meta data-rh="true" name="description" content="After downloading the ISO, use the procedure in Creating a Bootable USB to create a bootable USB."><meta data-rh="true" property="og:description" content="After downloading the ISO, use the procedure in Creating a Bootable USB to create a bootable USB."><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/cc_fips_conductor_install"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_conductor_install" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_conductor_install" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.e30a7dc4.css">
+<script src="/assets/js/runtime~main.08d33ccf.js" defer="defer"></script>
+<script src="/assets/js/main.1d489193.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="Juniper Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo_dark.png" alt="Juniper Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a></div><div class="navbar__items navbar__items--right"><a class="navbar__item navbar__link" href="/docs/intro_getting_started">Docs</a><a href="https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Community<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://www.juniper.net/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Company<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/about_128t">About</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_getting_started">Introduction</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_system_reqs">Deployment Considerations</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/docs/cc_fips_titlepage">SSR Common Criteria Install and Configuration</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_titlepage">SSR Common Criteria Installation and User Guide</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_intro">Introduction - SSR Common Criteria Installation and Configuration</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_compliance_guidelines">Common Criteria Compliance Guidelines</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_ssr_security_scope">SSR Security Scope</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_secure_deliver">Identifying Secure Product Delivery</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_intro_installation">Secure Installation Overview</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_downloading_iso">Downloading ISOs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cc_fips_conductor_install">Conductor Installation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_otp_router_install">OTP Router Install Process</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_install_quickstart_otpiso">QuickStart from the OTP ISO</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_router_install">Router Interactive Installation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_access_mgmt">Access Management</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_config_ntp_auth">Configure NTP Client Authentication</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_config_password_policies">Username and Password Policies</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_config_audit_event">Audit Events and Logging</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_sec_firewall_filtering">Customizable Firewall Rules and Filters</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_banners">Configuring Banners</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_software_upgrades">Upgrades and Uninstallation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cc_fips_appendix">Appendix</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_installation">Installation Process</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/install_conductor_overview">Conductor Installation</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_installation_bootable_media">Router Installation</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_installation_image">Image-Based Installation</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/supported_cloud_platforms">Cloud Installations</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_upgrade_considerations">Upgrades and Rollback</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/intro_installation_installer">Supporting Install Information - Appendix</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/concepts_application_discovery">Concepts</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/wan_overview">WAN Assurance</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/config_basics">Administration</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/events_overview">Events</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/bcp_att_avpn_configuration">Best Practices</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/cli_reference">CLI and Element Reference</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/installer_cli_reference">Installer/Initializer Reference</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/plugin_intro">Plugins</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/docs/release_notes_128t_6.2">Release Notes</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">SSR Common Criteria Install and Configuration</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Conductor Installation</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Conductor Installation</h1></header><p>After downloading the ISO, use the procedure in <a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb" target="_blank" rel="noopener noreferrer">Creating a Bootable USB</a> to create a bootable USB.</p>
+<p>The steps in this section describe the interactive conductor installation from the packaged-based ISO, using the serial console. The section <a href="#initialize-the-conductor-node">Initialize the Conductor</a> describes using the Initializer to configure the system as a Conductor after installing using the interactive installation.</p>
+<p>The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites">​</a></h2>
+<ul>
+<li>Installation is performed on a compliant platform; see <a href="/docs/cc_fips_compliance_guidelines#compliant-ssr-hardware">Compliant SSR Hardware</a>.</li>
+<li>Verify that the boot priority of the USB drive is properly listed in the system BIOS.</li>
+<li>Ensure local console connectivity to the device.</li>
+<li><strong>Logging in as <code>root</code> over SSH is not permitted.</strong> When a system is installed using the OTP ISO, a <code>t128</code> user is configured with <code>sudo</code> privileges.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="installation">Installation<a href="#installation" class="hash-link" aria-label="Direct link to Installation" title="Direct link to Installation">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="connect-the-ssr-to-a-management-console">Connect the SSR to a Management Console<a href="#connect-the-ssr-to-a-management-console" class="hash-link" aria-label="Direct link to Connect the SSR to a Management Console" title="Direct link to Connect the SSR to a Management Console">​</a></h3>
+<p>Ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The baud rate of the console port is 115200 bps.</p>
+<ol>
+<li>Connect the RJ45 rollover cable to the console port on the SSR device.</li>
+<li>Connect the other end of the cable to your computer.</li>
+<li>Insert your bootable USB with the new ISO image into the USB port of the SSR device.</li>
+<li>Connect the power input to the SSR device.</li>
+<li>Power on the SSR.</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="boot-from-the-usb">Boot from the USB<a href="#boot-from-the-usb" class="hash-link" aria-label="Direct link to Boot from the USB" title="Direct link to Boot from the USB">​</a></h3>
+<p>Use the steps appropriate for your device to direct the device to boot from the USB.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ssr100-series-devices">SSR100 Series Devices<a href="#ssr100-series-devices" class="hash-link" aria-label="Direct link to SSR100 Series Devices" title="Direct link to SSR100 Series Devices">​</a></h4>
+<ol>
+<li>
+<p>At the instruction in the terminal window: <code>Press ESC for boot menu</code>, do so.</p>
+<p><img decoding="async" loading="lazy" alt="Boot Menu prompt" src="/assets/images/onboard_otp_boot_menu-a6cf17e36c4bfa8c2bb906a833ef0e80.png" width="587" height="368" class="img_ev3q"></p>
+</li>
+<li>
+<p>From the boot menu, enter the boot device number corresponding to the USB, and press Enter.</p>
+<p><img decoding="async" loading="lazy" alt="Select Boot Device" src="/assets/images/onboard_otp_boot_device-8a90a08660088f6a2a04c5048f2fbe9e.png" width="588" height="371" class="img_ev3q"></p>
+</li>
+<li>
+<p>When the USB installer boot menu is displayed, continue with the <a href="#conductor-installation">Conductor Installation</a>.</p>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ssr1000-series-devices">SSR1000 Series Devices<a href="#ssr1000-series-devices" class="hash-link" aria-label="Direct link to SSR1000 Series Devices" title="Direct link to SSR1000 Series Devices">​</a></h4>
+<ol>
+<li>
+<p>At the instruction in the terminal window: <code>Press &lt;Tab&gt; or &lt;DEL&gt; to enter Setup</code>, do so.</p>
+<p><img decoding="async" loading="lazy" alt="Setup Menu Prompt" src="/assets/images/1x00_setup_menu-a933d3b21e6143af6e6c4164f053f9c8.png" width="640" height="297" class="img_ev3q"></p>
+</li>
+<li>
+<p>When the Setup Utility window appears, use the left and right arrow keys to navigate to the <code>Save &amp; Exit</code> tab.</p>
+<p><img decoding="async" loading="lazy" alt="Setup Utility" src="/assets/images/setup-menu-prompt-fef7387b5a62cc9966dfecfb8b4f893e.png" width="563" height="354" class="img_ev3q"></p>
+</li>
+<li>
+<p>Use the up and down arrow keys to highlight the USB device in the Boot Override list.</p>
+<p><img decoding="async" loading="lazy" alt="Boot Override list" src="/assets/images/1x00_boot-override-590cf2f9a0988cf09622291389943741.png" width="572" height="359" class="img_ev3q"></p>
+</li>
+<li>
+<p>Press Enter to confirm boot from the USB device.</p>
+</li>
+<li>
+<p>When the USB installer boot menu is displayed, continue with the <a href="#conductor-installation">Conductor Installation</a>.</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conductor-installation">Conductor Installation<a href="#conductor-installation" class="hash-link" aria-label="Direct link to Conductor Installation" title="Direct link to Conductor Installation">​</a></h3>
+<p>Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.</p>
+<p><img decoding="async" loading="lazy" alt="Select Serial Install" src="/assets/images/cc_fips_serial_install1-72c711460c73cdf8125b197e78b91c84.png" width="531" height="272" class="img_ev3q"></p>
+<ol>
+<li>Use the Up/Down keys to select the <code>Install 128T Routing Software Serial Console</code> option. This is the supported installation option for Common Criteria. It uses <code>/dev/ttyS0</code> 115200 baud as the serial console for interacting with the installer.</li>
+</ol>
+<p>Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.</p>
+<p>For serial console issues please refer to <a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing" target="_blank" rel="noopener noreferrer">Serial Console Troubleshooting</a>.</p>
+<ol start="2">
+<li>Press the TAB key to edit the configuration.</li>
+</ol>
+<p>To enable FIPS Enforcement for SSR software version 6.2.3-14-R2, add the <code>fips=1</code> kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.</p>
+<div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.</p></div></div>
+<ol start="3">
+<li>Add <code>fips=1</code> to the end of the <code>vmlinuz</code> parameters.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="FIPS Parameter" src="/assets/images/cc_fips_serial_install2-7c3e7a9551dcd9588b8a5534de7ce6c0.png" width="579" height="276" class="img_ev3q"></p>
+<ol start="4">
+<li>Press <strong>Enter</strong> to start the installation.</li>
+</ol>
+<p>After the Linux installation is complete, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:</p>
+<p><img decoding="async" loading="lazy" alt="Installation Complete" src="/assets/images/intro_installation_bootable_media_install_complete-b5552ee6cc8d84ce585059d7ca910f41.png" width="586" height="484" class="img_ev3q"></p>
+<p>Select <code>&lt;Yes&gt;</code> to shut down the system. Remove the USB device, then power the system up to complete the installation process.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="initial-boot-and-management-network-configuration">Initial Boot and Management Network Configuration<a href="#initial-boot-and-management-network-configuration" class="hash-link" aria-label="Direct link to Initial Boot and Management Network Configuration" title="Direct link to Initial Boot and Management Network Configuration">​</a></h3>
+<p>When the system boots from the <code>Install 128T Routing Software...</code> Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.</p>
+<p><img decoding="async" loading="lazy" alt="128T NetManager TUI Start" src="/assets/images/Initializer_Serial0-e607826204402e45ff6e02202113b4f8.png" width="936" height="606" class="img_ev3q"></p>
+<p>Selecting <code>Yes</code> launches the NMTUI application to perform an initial network interface setup.</p>
+<p><img decoding="async" loading="lazy" alt="128T NetManager TUI Option" src="/assets/images/Initializer_Serial1-228c6976cce5089ab6c64bcd65392ee2.png" width="1460" height="906" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="configure-the-network-interface">Configure the Network Interface<a href="#configure-the-network-interface" class="hash-link" aria-label="Direct link to Configure the Network Interface" title="Direct link to Configure the Network Interface">​</a></h3>
+<p>Configure the IP address that will be used to manage the network routers.</p>
+<ol>
+<li>Select the device ethernet interface that corresponds to the management port for your Conductor and select <code>&lt;Edit&gt;</code></li>
+</ol>
+<img src="/img/nmtui-linux-a.png" alt="Configure the Ethernet port" width="192" height="243">
+<ol start="2">
+<li>In the Edit Connection screen, configure the following:</li>
+</ol>
+<ul>
+<li>The IP address for the port</li>
+<li>the Gateway IP address</li>
+<li>DNS server addresses</li>
+</ul>
+<img src="/img/nmtui-linux-b-static-ipv4-config.png" alt="Edit Connection" width="654" height="394">
+<ol start="3">
+<li>Scroll to the bottom of the screen and select <code>Automatically Connect</code> and <code>Available to All Users</code>, then select OK.</li>
+</ol>
+<img src="/img/nmtui-linux-c-static-ipv4-autoconx.png" alt="Edit Connection" width="654" height="394">
+<ol start="4">
+<li>From the NMTUI screen, select <code>Set system hostname</code>, and <code>&lt;OK&gt;</code>.</li>
+</ol>
+<img src="/img/nmtui-linux-set-hostname.png" alt="Select Hostname" width="354" height="381">
+<ol start="5">
+<li>Enter the hostname and select <code>&lt;OK&gt;</code>. Note that the hostname will be used as the Asset ID.</li>
+</ol>
+<img src="/img/nmtui-linux-set-hostname2.png" alt="Add Hostname" width="354" height="381">
+<p>When the port has been activated, an asterisk will appear next to the port name.</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">Ethernet (enp2s0f0)</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">* enp2s0f0</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="6">
+<li>Select <code>&lt;Back&gt;</code> and then <code>&lt;Quit&gt;</code> NMTUI.</li>
+</ol>
+<p>The Initializer process starts automatically.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="initialize-the-conductor-node">Initialize the Conductor Node<a href="#initialize-the-conductor-node" class="hash-link" aria-label="Direct link to Initialize the Conductor Node" title="Direct link to Initialize the Conductor Node">​</a></h3>
+<p>The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.</p>
+<p>There are two different types of conductor installations supported:</p>
+<ul>
+<li>Standalone Conductor</li>
+<li><a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ha_conductor_install" target="_blank" rel="noopener noreferrer">Conductor High Availability</a></li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>All High Availability configurations must be run and managed over private connections.</p></div></div>
+<p>Conductor High Availability for Cloud Deployments is not supported under Common Criteria.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="standalone-conductor">Standalone Conductor<a href="#standalone-conductor" class="hash-link" aria-label="Direct link to Standalone Conductor" title="Direct link to Standalone Conductor">​</a></h2>
+<ol>
+<li>On the SSR Initializer wizard screen, use the down arrow on the keyboard, or press &quot;C&quot; to select the <strong>Conductor</strong> role for the SSR node, and press the <strong>Enter</strong> key to select <strong>OK</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="SSR Role" src="/assets/images/initializer_Serial2-7ab3273fb33657cbc2bdfaf59ec59581.png" width="936" height="580" class="img_ev3q"></p>
+<ol start="2">
+<li>When asked <em>What kind of Conductor node is this?</em>, select <strong>Standalone</strong> from the following options:</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Identify the Node" src="/assets/images/initializer_standalone-6b33c6659db84f0645ba5fba884acca7.png" width="622" height="353" class="img_ev3q"></p>
+<ul>
+<li><strong>Standalone:</strong> This conductor has no highly available peer, and is not currently planned for high availability.</li>
+</ul>
+<ol start="3">
+<li>
+<p>Enter the following system properties on the <strong>Node Info</strong> screen:</p>
+<p><img decoding="async" loading="lazy" alt="Node Information" src="/assets/images/initializer_Serial5a-ed696ffb94d31d7665c0d9fcf5788940.png" width="772" height="222" class="img_ev3q"></p>
+<ul>
+<li><strong>Node Name:</strong> The name of the system within your Conductor, in this example, <em>test-conductor</em>. By default this field uses the Linux system&#x27;s hostname. The node name identifies the conductor node under the <strong>Conductor</strong> element in the Authority.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).</p></div></div>
+<ul>
+<li><strong>Conductor Name:</strong> SSR devices follow a naming scheme akin to domain names (e.g., <code>specific.general</code>). As it relates to SSR devices, the leading name identifies the node and the trailing name identifies the name of the HA conductor or router pair. When referring to a running SSR software instance, it is identifiable by the full name; e.g., <code>test-conductor.conductor</code>. The full system name is reflected in the CLI prompt.</li>
+</ul>
+</li>
+<li>
+<p>On the <strong>Password Setup</strong> screen, create a password for the SSR Admin user. The administrator password must be:</p>
+</li>
+</ol>
+<ul>
+<li>At least 9 characters long</li>
+<li>Contain at least 1 uppercase letter<!-- -->
+<ul>
+<li>At least 1 lowercase letter</li>
+<li>At least 1 number</li>
+</ul>
+</li>
+<li>Cannot contain the username in any form</li>
+<li>Cannot repeat characters more than 3 times
+This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see <a href="/docs/cc_fips_config_password_policies">Username and Password Policies</a>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure.</p></div></div>
+<p><img decoding="async" loading="lazy" alt="Password Setup" src="/assets/images/initializer_Serial6-03036c862150fcb1da1fa9115568bfc6.png" width="936" height="582" class="img_ev3q"></p>
+<ol start="5">
+<li>
+<p>Press the <strong>Enter</strong> key to select <strong>OK</strong>. The Initializer performs a hardware compatibility check.</p>
+</li>
+<li>
+<p>When prompted, select <code>&lt;Yes&gt;</code> to start the conductor.</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Initializer Complete" src="/assets/images/initializer_complete-31b5e02463d05c72b58293e2cfeb8940.png" width="936" height="588" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="root-access">Root Access<a href="#root-access" class="hash-link" aria-label="Direct link to Root Access" title="Direct link to Root Access">​</a></h3>
+<p>To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router.
+<strong>SSH Root login is not permitted.</strong></p>
+<p>Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
+During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a &quot;t128&quot; user is automatically configured with sudo privileges.</p>
+<ol>
+<li>Login using the admin credentials.</li>
+<li>Enter the Linux shell: Type <code>shell</code> to suspend the CLI and enter the Linux shell.</li>
+<li>Type <code>su</code> and enter the default root password.</li>
+<li>Use the following command to grant sudo privilege to the <code>admin</code> user account:
+<code>/usr/sbin/visudo</code></li>
+<li>Add an entry for admin as follows:</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">admin    ALL=(ALL)      ALL</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="6">
+<li>Save the file and exit from <code>visudo</code>.</li>
+<li>Type <code>exit</code> to leave the <code>su</code> prompt.</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="change-the-default-passwords">Change the Default Passwords<a href="#change-the-default-passwords" class="hash-link" aria-label="Direct link to Change the Default Passwords" title="Direct link to Change the Default Passwords">​</a></h3>
+<p>The following user accounts and passwords are created during the ISO installation process:</p>
+<table><thead><tr><th>Username</th><th>Password</th></tr></thead><tbody><tr><td>root</td><td>128tRoutes</td></tr><tr><td>t128</td><td>128tRoutes</td></tr></tbody></table>
+<p>Change these passwords immediately. Use the <code>passwd</code> command from the Linux shell to individually set the password for each username.</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">[admin@localhost ~]$ sudo passwd t128</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Changing password for user t128</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">New password:</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Retype new password: </span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">passwd: all authentication tokens updated successfully.</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">[admin@localhost ~]$ sudo passwd root </span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Changing password for user root.</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">New password:</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Retype new password: </span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">passwd: all authentication tokens updated successfully.</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">[admin@localhost ~]$</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>The root account will not be used for day-to-day access, but the root account password should be stored securely off-box so that it can be used for admin account recovery if required.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="software-compliance-validation">Software Compliance Validation<a href="#software-compliance-validation" class="hash-link" aria-label="Direct link to Software Compliance Validation" title="Direct link to Software Compliance Validation">​</a></h3>
+<p>After installing the SSR Software, it is important to verify that the installation successfully  completed and that the system is running in the FIPS enforcememt mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. Alternatively you may <code>ssh</code> to the SSR management IP address using the admin account.</p>
+<ol>
+<li>Login using the admin credentials.</li>
+<li>Use <code>show system version</code>  to verify the correct software release is running:</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">Last login: Thu Dec 14 13:28:36 UTC 2023 on pts/0</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">admin@conductor.conductor# show system version</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Fri 2024-03-01 16:23:37 UTC</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">✔ Retrieving system version 1/1 targets complete...</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">=========== =========== ========= ======== ====================== =====================</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"> Router      Node        Version   Status   Build Date             Package</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">=========== =========== ========= ======== ====================== =====================</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"> 128t-east   128t-east   6.2.3     r2       2023-12-11T16:51:25Z   128T-6.2.3-14.r2.el</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">                                                                   7 (package based)</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Completed in 0.05 seconds</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">admin@conductor.conductor#</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>It should report Version 6.2.3 and Status r2.</p>
+<ol start="3">
+<li>Type <code>shell</code> to suspend the CLI and enter the Linux shell.</li>
+<li>Execute the command <code>sudo systemctl status 128T</code> and verify the service is listed as <code>active (running)</code>.</li>
+</ol>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">[root@conductor-test admin]# sudo systemctl status 128T -l</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"> 128T.service - 128T service</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  Loaded: loaded (usr/lib/systemd/system/128T.service; enabled; vendor preset: disabled)</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  Active: active (running) since Mon 2023-7-31 18:04:29 UTC; 50min ago</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"> Main PID: 23317 (processManager)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="5">
+<li>Perform the following steps to verify the software integrity and protect against future tampering:</li>
+</ol>
+<ul>
+<li>Execute the self-test scan <code>sudo systemctl start 128T-rpm-verify</code></li>
+</ul>
+<p>The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run:</p>
+<p><code>systemctl status 128T-rpm-verify</code></p>
+<p>The scan validates all executable files on the system against the <code>sha256</code> digest hash recorded in the signed RPMs from which they were installed. This ensures that no files have been replaced or tampered with.</p>
+<ul>
+<li>Run <code>systemctl status 128T-rpm-verify</code> to confirm that the service shows:</li>
+</ul>
+<p><code>PASS: All RPM file digests verified</code></p>
+<ul>
+<li>If the result displays the following:</li>
+</ul>
+<p><code>FAIL: RPM file digest mismatch detected</code></p>
+<p>The failure must be resolved before continuing to ensure compliance. The full path to each file having a self-check digest mismatch is reported as part of the <code>status</code> output.</p>
+<ul>
+<li>After the self-test scan test has succeed, enable the automatic self-test by executing the <code>enable</code> command in the linux shell:</li>
+</ul>
+<p><code>sudo systemctl enable 128T-rpm-verify</code></p>
+<p>The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.</p>
+<ol start="6">
+<li>
+<p>Perform the following steps to verify that FIPS security enforcment mode is enabled in the OS:
+<code>openssl md5 /dev/null</code>
+Expected result:  <code>digital envelope routines … Disabled for fips</code></p>
+</li>
+<li>
+<p>Run the following command to verify that FIPS security enforcing mode is enabled in the kernel:
+<code>cat /proc/sys/crypto/fips_enabled</code>
+Expected result:  <code>1</code></p>
+</li>
+<li>
+<p>Type <code>exit</code> to leave the Linux shell and return to the CLI.</p>
+</li>
+<li>
+<p>Type <code>quit</code> to log out from CLI.</p>
+</li>
+</ol>
+<p>You have now completed security validation of the installation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="configure-the-token">Configure the Token<a href="#configure-the-token" class="hash-link" aria-label="Direct link to Configure the Token" title="Direct link to Configure the Token">​</a></h3>
+<p>After the system has been set up for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.</p>
+<p>From the root user in the workflow above, run the <code>pcli</code> command to access the CLI and configure the token.</p>
+<p>Use the CLI command <code>set software access-token</code>. For information on this command, see <a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token" target="_blank" rel="noopener noreferrer"><code>set software access-token</code></a>.</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">[root@test-conductor ~]# pcli</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Starting the PCLI...</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">admin@node1.test-conductor# set software access-token &lt;username&gt; &lt;password&gt;</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Saving...</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Waiting for process to complete</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">...(messages removed for brevity)...</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Making the DNF cache</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">No further operation requested. Exiting</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Installer complete</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">Successfully saved credentials.</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">admin@node1.test-conductor#</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cli-access-post-install">CLI Access Post Install<a href="#cli-access-post-install" class="hash-link" aria-label="Direct link to CLI Access Post Install" title="Direct link to CLI Access Post Install">​</a></h3>
+<p>Use the following procedure to access the CLI at any time after installation.</p>
+<ol>
+<li>Open a terminal window and SSH to the SSR&#x27;s IP address.</li>
+<li>Use your login credentials to log in to the SSR</li>
+</ol>
+<ul>
+<li>
+<p>If using an account other than admin, type <code>pcli</code> to start the SSR CLI.</p>
+</li>
+<li>
+<p>Type <code>shell</code> to suspend the CLI and enter the Linux shell.</p>
+</li>
+</ul>
+<p>To terminate an active session:</p>
+<ul>
+<li>
+<p>Type <code>exit</code> to return from the Linux shell to the CLI.</p>
+</li>
+<li>
+<p>Type <code>quit</code> to log out from CLI.</p>
+</li>
+<li>
+<p>If using an account other than admin, type <code>exit</code> to end the login session.</p>
+</li>
+</ul>
+<p>Common Criteria certiﬁcation does not require any restrictions on executing commands. See the <a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide" target="_blank" rel="noopener noreferrer">Conﬁguration Command Reference Guide</a> for command information and usage.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps---router-configuration">Next Steps - Router Configuration<a href="#next-steps---router-configuration" class="hash-link" aria-label="Direct link to Next Steps - Router Configuration" title="Direct link to Next Steps - Router Configuration">​</a></h2>
+<p>Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process.</p>
+<p>Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly.</p>
+<p>A sample branch router configuration is available as a <a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates#default-templates" target="_blank" rel="noopener noreferrer"><strong>template</strong></a> on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top-level resources. For more information, see <a href="https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates" target="_blank" rel="noopener noreferrer">Configuration Templates</a>.</p>
+<p>To see an example router configuration, refer to the <a href="/docs/cc_fips_appendix">Appendix</a>.</p>
+<p>After completing the router configuration on the conductor, please return to this guide to continue the Common Criteria compliant router installation.</p>
+<p>If you will be using the OTP Quickstart router installation process, proceed to the <a href="/docs/cc_fips_otp_router_install">OTP Router Install Process</a> next, and then use the <a href="/docs/cc_fips_install_quickstart_otpiso">QuickStart From the OTP ISO</a> steps to generate a basic configuration and quickstart file for router installation.</p>
+<p>When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.</p>
+<p>If you choose to install routers using the Interactive Installation, continue with <a href="/docs/cc_fips_router_install">Router Interactive Installation</a>.</p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cc_fips_downloading_iso"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Downloading ISOs</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cc_fips_otp_router_install"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">OTP Router Install Process</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#prerequisites" class="table-of-contents__link toc-highlight">Prerequisites</a></li><li><a href="#installation" class="table-of-contents__link toc-highlight">Installation</a><ul><li><a href="#connect-the-ssr-to-a-management-console" class="table-of-contents__link toc-highlight">Connect the SSR to a Management Console</a></li><li><a href="#boot-from-the-usb" class="table-of-contents__link toc-highlight">Boot from the USB</a></li><li><a href="#conductor-installation" class="table-of-contents__link toc-highlight">Conductor Installation</a></li><li><a href="#initial-boot-and-management-network-configuration" class="table-of-contents__link toc-highlight">Initial Boot and Management Network Configuration</a></li><li><a href="#configure-the-network-interface" class="table-of-contents__link toc-highlight">Configure the Network Interface</a></li><li><a href="#initialize-the-conductor-node" class="table-of-contents__link toc-highlight">Initialize the Conductor Node</a></li></ul></li><li><a href="#standalone-conductor" class="table-of-contents__link toc-highlight">Standalone Conductor</a><ul><li><a href="#root-access" class="table-of-contents__link toc-highlight">Root Access</a></li><li><a href="#change-the-default-passwords" class="table-of-contents__link toc-highlight">Change the Default Passwords</a></li><li><a href="#software-compliance-validation" class="table-of-contents__link toc-highlight">Software Compliance Validation</a></li><li><a href="#configure-the-token" class="table-of-contents__link toc-highlight">Configure the Token</a></li><li><a href="#cli-access-post-install" class="table-of-contents__link toc-highlight">CLI Access Post Install</a></li></ul></li><li><a href="#next-steps---router-configuration" class="table-of-contents__link toc-highlight">Next Steps - Router Configuration</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
+</body>
+</html>
