@@ -48,8 +48,9 @@ module.exports = {
       "intro_installation_quickstart_aws",
       "intro_installation_quickstart_mist_aws",
       "intro_installation_azure",
+      "intro_installation_azure_mist",
       "install_vmware_config",
-      "intro_initialize_HA_conductor",      
+      "intro_initialize_HA_conductor",
     ],
     "Upgrades and Rollback": [
       "intro_upgrade_considerations",
@@ -77,6 +78,7 @@ module.exports = {
       "concepts_session_timer",
       "concepts_STEP",
       "concepts_waypoint_ports",
+      "concepts_monitoring",
       "concepts_glossary",
     ],
     "WAN Assurance": [

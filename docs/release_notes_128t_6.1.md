@@ -302,7 +302,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52279 Bond configured with VRRP not receiving UDP traffic when LACP is enabled:** Resolved an issue on the SSR120/SSR130 where VRRP Virtual MACs are being silently dropped by Bond PMD in LACP mode. Packets with VRRP virtual destination MACs are now correctly processed by the Bond PMD when using LACP on the SSR120/SSR130. This issue will be resolved on the SSR1200/1300/1400/1500 in an upcoming release.
 
-- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md#service-matching-order)
 ------
 - **I95-52305 High CPU and memory utilization when Application Identification is enabled:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
 ------

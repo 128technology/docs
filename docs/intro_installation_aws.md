@@ -52,8 +52,6 @@ For more information on Amazon Web Services, refer to the [AWS website](https://
 24. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
 25. When prompted by the installer, press the **Enter** key to select Begin.
 
-Follow the instructions as outlined in [Install the Session Smart Routing Software](#install-using-128t-installer)
-
 ## Install SSR From Amazon Web Services Using ZTP
 
 :::important
@@ -95,7 +93,7 @@ After installing an SSR conductor, you can use ZTP to install your 128 routers f
 22. On the _Launch Status_ page, click **View Instances**.
 23. Connect and assign this router/instance to your conductor either using the GUI or PCLI. **Result**: The router installs automatically.
 
-## Configure the Session Smart Networking softwareUsing AWS
+## Configure the Session Smart Networking Software Using AWS
 
 After installing the Session Smart Networking software using Amazon Web Services, you must then create and apply configuration elements. During the configuration process you'll set up the following:
 

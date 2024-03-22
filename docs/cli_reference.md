@@ -4121,7 +4121,7 @@ show alarms [{router <router> | resource-group <resource-group>}] [shelved] [id 
 
 | command | description |
 | ------- | ----------- |
-| [`show events alarm`](#show-events-alarm) | Show alarm events from the historical events database. |
+| [`show events alarm`](#show-events) | Show alarm events from the historical events database. |
 
 #### Description
 
@@ -5347,8 +5347,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate-authority) | Show configuration data for `authority` |
-| [`generated`](#show-config-candidate-generated) | Show configuration data for `generated` |
+| [`authority`](#show-config-candidate) | Show configuration data for `authority` |
+| [`generated`](#show-config-candidate) | Show configuration data for `generated` |
 
 #### Version History
 
@@ -5356,6 +5356,7 @@ config
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced as "show candidate-config" |
 | 2.0.0   | Renamed and reorganized as "show config candidate". _flat_, _verbose_, and configuration branch arguments added |
+
 ## `show config disk-cache`
 
 Display table of cached disk configurations and their metadata
@@ -5631,8 +5632,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running-authority) | Show configuration data for `authority` |
-| [`generated`](#show-config-running-generated) | Show configuration data for `generated` |
+| [`authority`](#show-config-running) | Show configuration data for `authority` |
+| [`generated`](#show-config-running) | Show configuration data for `generated` |
 
 #### Version History
 
@@ -10169,7 +10170,7 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 | command | description |
 | ------- | ----------- |
 | [`by-id`](#show-sessions-by-id) | Show information of a session for a given Id |
-| [`top`](#show-sessions-top) | &lt;bandwidth&gt; |
+| [`top`](#show-sessions) | &lt;bandwidth&gt; |
 
 #### Description
 
@@ -10484,7 +10485,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
 | [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
-| [`software`](#show-system-software) | &lt;available&gt; \| &lt;download&gt; \| &lt;upgrade&gt; |
+| [`software`](#show-system-software-available) | &lt;available&gt; \| &lt;download&gt; \| &lt;upgrade&gt; |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
