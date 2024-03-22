@@ -1220,10 +1220,10 @@ Default: interface-{interface-id}.{router-name}.{authority-name}
 A text value.
 
 Must contain substitution variables:
-{interface-id} for Network Interface Global Identifier
-{router-name} for Router Name
-{authority-name} for Authority Name
-For example, &#x27;interface-{interface-id}.{router-name}.{authority-name}&#x27;.
+`{interface-id}` for Network Interface Global Identifier
+`{router-name}` for Router Name
+`{authority-name}` for Authority Name
+For example, `interface-{interface-id}.{router-name}.{authority-name}`.
 Any other characters must be alphanumeric or any of the
 following: - _ .
 
