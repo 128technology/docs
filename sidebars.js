@@ -42,6 +42,7 @@ module.exports = {
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
+      "intro_installation_univ-iso", 
     ],
     "Conductor Installation": [
       "install_conductor_overview",
