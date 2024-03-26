@@ -17,6 +17,27 @@ module.exports = {
       "intro_system_reqs",
       "config_firewall_ports",
     ],
+    "SSR Common Criteria Install and Configuration": [
+      "cc_fips_titlepage",
+      "cc_fips_intro",
+      "cc_fips_compliance_guidelines",
+      "cc_fips_ssr_security_scope",
+      "cc_fips_secure_deliver",
+      "cc_fips_intro_installation",
+      "cc_fips_downloading_iso",
+      "cc_fips_conductor_install",
+      "cc_fips_otp_router_install",
+      "cc_fips_install_quickstart_otpiso",
+      "cc_fips_router_install",
+      "cc_fips_access_mgmt",
+      "cc_fips_config_ntp_auth",
+      "cc_fips_config_password_policies",
+      "cc_fips_config_audit_event",
+      "cc_fips_sec_firewall_filtering",
+      "cc_fips_banners",
+      "cc_fips_software_upgrades",
+      "cc_fips_appendix",
+    ],
     "Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
@@ -48,8 +69,9 @@ module.exports = {
       "intro_installation_quickstart_aws",
       "intro_installation_quickstart_mist_aws",
       "intro_installation_azure",
+      "intro_installation_azure_mist",
       "install_vmware_config",
-      "intro_initialize_HA_conductor",      
+      "intro_initialize_HA_conductor",
     ],
     "Upgrades and Rollback": [
       "intro_upgrade_considerations",
@@ -77,6 +99,7 @@ module.exports = {
       "concepts_session_timer",
       "concepts_STEP",
       "concepts_waypoint_ports",
+      "concepts_monitoring",
       "concepts_glossary",
     ],
     "WAN Assurance": [
@@ -199,6 +222,16 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Traffic Engineering",
+        "items": [
+          "concepts_traf_eng",
+          "bcp_per-adjacency_traffic_engineering",
+          "config_te_net_intf",
+          "config_dev_intf_traf_eng",
+        ]
+      },
+      {
+        "type": "category",
         "label": "Access Management and Authentication",
         "items": [
           "config_access_mgmt",
@@ -290,7 +323,6 @@ module.exports = {
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
-      "bcp_per-adjacency_traffic_engineering",
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",

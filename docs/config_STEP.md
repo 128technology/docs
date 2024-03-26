@@ -307,7 +307,7 @@ step peer path advertisement
             delay
 ```
 
-See [`step-peer-path-advertisement (district)`](config_reference_guide.md#step-peer-path-advertisement-district) for configuration details.
+See [`step-peer-path-advertisement (district)`](config_reference_guide.md#step-peer-path-sla-metrics-advertisement-district-setting) for configuration details.
 ```
 district-settings
     default-district

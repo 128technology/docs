@@ -34,16 +34,17 @@ Each of the commands listed below, and the subcommands for each, provide additio
 
 | command | description |
 | ------- | ----------- |
-| [`request idp refresh-security-package`](cli_reference.md#request-idp-refresh-security-packages) | Update the IDP connectivity details. |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
 | [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 ### Additional Commands
@@ -52,16 +53,15 @@ The following commands are visible only in the Advanced view, and should only be
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild IDP Command. |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
 
 ## Stats
 
 The [`show stats idp`](cli_stats_reference.md#show-stats-idp) display metrics for attacks, bytes received and transmitted, and packets dropped, processed, received, and transmitted, as well as by indiviual protocol.
 
-- [`attacks`](#show-stats-idp-attacks)
-- [`bytes`](#show-stats-idp-bytes)
-- [`packets`](#show-stats-idp-packets)
+- [`attacks`](cli_stats_reference.md#show-stats-idp-attacks)
+- [`bytes`](cli_stats_reference.md#show-stats-idp-bytes)
+- [`packets`](cli_stats_reference.md#show-stats-idp-packets)
 
 ## Logs
 

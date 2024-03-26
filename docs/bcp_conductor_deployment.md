@@ -136,7 +136,7 @@ When deploying your conductor behind another SSR at a data center, it opens the 
 1. It exacerbates the Jekyll/Hyde problem (described below), by virtue of being both at the branch and the data center
 2. Certain upgrade workflows or maintenance activities will cause remote sites to toggle between SVR and natural routing, which is suboptimal
 
-A sample configuration is provided in [Appendix B](#appendix-b-conductor-behind-128t).
+A sample configuration is provided in [Appendix B](#appendix-b-conductor-behind-ssr).
 
 ## Conductor Redundancy
 Most production deployments include redundant conductor nodes. When deployed as a highly available pair, conductor nodes are always run as _active/active_, with all managed routers connecting to both. Unlike highly available routers, there is no notion of interface takeover with conductors; each conductor node is given a unique IP address reachable by all devices at all times. The two conductors that comprise a highly available pair will communicate with one another to synchronize state, such that it does not matter which conductor an administrator logs into to view metrics, alarms, etc.

@@ -33,8 +33,8 @@ Schema for the preferences file used by the SSR Installer.
 | [import](#import)                         | `object`  | Optional | cannot be null | [Installer Preferences File](#import-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/import")                         |
 | [repository](#repository)                 | `object`  | Optional | cannot be null | [Installer Preferences File](#repository-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository")                 |
 | [authentication](#authentication)         | `object`  | Optional | cannot be null | [Installer Preferences File](#authentication-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/authentication")         |
-| [enable-128T](#enable-128T)               | `boolean` | Optional | cannot be null | [Installer Preferences File](#enable-128t "http&#x3A;//128technology.com/installerPreferencesFile#/properties/enable-128T")               |
-| [start-128T](#start-128T)                 | `boolean` | Optional | cannot be null | [Installer Preferences File](#start-128t "http&#x3A;//128technology.com/installerPreferencesFile#/properties/start-128T")                 |
+| [enable-128t](#enable-128t)               | `boolean` | Optional | cannot be null | [Installer Preferences File](#enable-128t "http&#x3A;//128technology.com/installerPreferencesFile#/properties/enable-128T")               |
+| [start-128t](#start-128t)                 | `boolean` | Optional | cannot be null | [Installer Preferences File](#start-128t "http&#x3A;//128technology.com/installerPreferencesFile#/properties/start-128T")                 |
 | [reboot-if-required](#reboot-if-required) | `boolean` | Optional | cannot be null | [Installer Preferences File](#reboot-if-required "http&#x3A;//128technology.com/installerPreferencesFile#/properties/reboot-if-required") |
 | [retry-max-attempts](#retry-max-attempts) | `integer` | Optional | cannot be null | [Installer Preferences File](#retry-max-attempts "http&#x3A;//128technology.com/installerPreferencesFile#/properties/retry-max-attempts") |
 | [retry-delay](#retry-delay)               | `integer` | Optional | cannot be null | [Installer Preferences File](#retry-delay "http&#x3A;//128technology.com/installerPreferencesFile#/properties/retry-delay")               |
@@ -337,7 +337,7 @@ Cleanly install SSR with the given options after wiping away any traces of previ
 | :---------------------------------------- | --------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [yum-certificate](#yum-certificate)       | `string`  | Optional | cannot be null | [Installer Preferences File](#yum-certificate "http&#x3A;//128technology.com/installerPreferencesFile#/properties/install/properties/yum-certificate")         |
 | [initialize](#initialize)                 | `object`  | Required | cannot be null | [Installer Preferences File](initializer_preferences.md "http&#x3A;//128technology.com/installerPreferencesFile#/properties/install/properties/initialize") |
-| [128T-version](#128T-version)             | `string`  | Optional | cannot be null | [Installer Preferences File](#128t-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/install/properties/128T-version")               |
+| [ssr-version](#ssr-version)             | `string`  | Optional | cannot be null | [Installer Preferences File](#ssr-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/install/properties/128T-version")               |
 | [no-nuke-on-start](#no-nuke-on-start)     | `boolean` | Optional | cannot be null | [Installer Preferences File](#no-nuke-on-start "http&#x3A;//128technology.com/installerPreferencesFile#/properties/install/properties/no-nuke-on-start")       |
 | [no-nuke-on-failure](#no-nuke-on-failure) | `boolean` | Optional | cannot be null | [Installer Preferences File](#no-nuke-on-failure "http&#x3A;//128technology.com/installerPreferencesFile#/properties/install/properties/no-nuke-on-failure")   |
 
@@ -487,7 +487,7 @@ Upgrade SSR to a newer version.
 | Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                                                                         |
 | :---------------------------------- | -------- | -------- | -------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [yum-certificate](#yum-certificate) | `string` | Optional | cannot be null | [Installer Preferences File](#yum-certificate "http&#x3A;//128technology.com/installerPreferencesFile#/properties/upgrade/properties/yum-certificate") |
-| [128T-version](#128T-version)       | `string` | Optional | cannot be null | [Installer Preferences File](#128t-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/upgrade/properties/128T-version")       |
+| [ssr-version](#ssr-version)       | `string` | Optional | cannot be null | [Installer Preferences File](#ssr-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/upgrade/properties/128T-version")       |
 
 ### yum-certificate
 
@@ -591,7 +591,7 @@ Download the SSR software and dependencies without installing.
 
 | Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                                                                           |
 | :---------------------------------- | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [128T-version](#128T-version)       | `string` | Optional | cannot be null | [Installer Preferences File](#128t-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/download/properties/128T-version")       |
+| [ssr-version](#ssr-version)       | `string` | Optional | cannot be null | [Installer Preferences File](#ssr-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/download/properties/128T-version")       |
 | [yum-certificate](#yum-certificate) | `string` | Optional | cannot be null | [Installer Preferences File](#yum-certificate "http&#x3A;//128technology.com/installerPreferencesFile#/properties/download/properties/yum-certificate") |
 
 ### SSR-version

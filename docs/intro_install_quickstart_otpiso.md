@@ -51,6 +51,35 @@ A password is used to encrypt the contents of the QuickStart file.  This passwor
 
 ![QuickStart Success](/img/intro_ztp_quickstart_client_5.png)
 
+### Change the Default Passwords after Installation
+
+The following user accounts and passwords are created during the ISO installation process:
+
+| Username | Password   |
+| -------- | ---------- |
+| root     | 128tRoutes |
+| t128     | 128tRoutes |
+
+Change these passwords immediately. Use the `passwd` command from the UNIX window.
+
+```
+[t128@test-router ~]$ passwd
+Changing password for user t128
+Changing password for t128
+(current)UNIX password:
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[t128@test-router ~]$ su - 
+Password:
+[root@test-router ~]# passwd
+Changing password for user root.
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@test-router ~]#
+```
+
 ### Verifying Operation
 The SSR router will have connected to the conductor.  The Router page that was previously empty should now be populated with information about the system.  Go to the SSR Conductor UI to verify the process completed for this newly created SSR Router by accessing “Routers” -> “Router Name” -> “Node Name”
 - Verify “SSR Processes” -> “All Processes Running”
