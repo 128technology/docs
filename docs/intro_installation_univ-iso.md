@@ -38,7 +38,7 @@ You will be prompted for your username and token to access the web page listing 
 
 ### Create a Bootable USB
 
-Use the instructions for [Creating a Bootable USB](intro_creating_bootable_usb.md) to create a USB to be used to install the image. 
+Use the instructions for [Creating a Bootable USB](intro_creating_bootable_usb.md) to create a bootable USB drive containing the universal ISO image. 
 
 ## Installation 
 
@@ -63,15 +63,17 @@ Ensure that you have an appropriate rollover cable available to connect to your 
 
   ![Install Type](/img/u-iso3_choose_install_type.png)
 
-11. If you are installing a FIPS enabled system select install option 1, and then select **Enter**. If you are installting a Mist-managed router, select the **cloud-init** option (option 2), and select **Enter**
+11. If you are installing a FIPS enabled system, select Install Option 1, and select **Enter**. 
+
+	If you are installting a Mist-managed router, select option 2 (Cloud-init), and select **Enter**
 
   ![Install Options](/img/u-iso4_install_options.png)
 
-  If you are installing a Conductor or conductor managed router, skip the options and select **Enter**. The download and installation begins.
+	If you are installing a Conductor or conductor-managed router, skip the options and select **Enter**. The download and installation begins.
 
   ![Unpacker](/img/u-iso5_begin_install.png)
 
-12. When the installation completes, you will be prompted to reboot. A reboot is necessary to start the necessary services and launch the GUI to configure the device as a conductor or router, and choose they management type (Conductor-managed or Mist-managed).
+12. When the installation completes, you will be prompted to reboot. A reboot is necessary to start the services and launch the GUI. Device intialization and management is performed from the GUI.
   
   ![Unpacker Successful](/img/u-iso6_unpacker_complete.png)
 
@@ -103,7 +105,7 @@ Use the following process to initialize your device as a Conductor.
 
 3. Click **ASSOCIATE** when you have completed the required information. 
 
-The Conductor is now available in the Configuration. You must commit the configuration changes for the conductor to become active. 
+The Conductor is now available in the Configuration. You must commit the configuration changes from the SSR GUI.
 
 ### Initialize a Conductor-Managed Router
 
@@ -118,7 +120,7 @@ Use the following process to initialize your device as a Conductor-managed route
 
 3. Click **ASSOCIATE** when you have completed the required information. 
 
-The Router will onboard itself to the Conductor. You must commit the configuration changes for the conductor to become active.
+The Router will onboard itself to the Conductor. You must commit the configuration changes from the SSR GUI.
 
 ### Initialize a Mist-Managed Router
 
@@ -136,30 +138,26 @@ Use the following process to initialize your device as a Mist-managed router.
 
    ![Select Org](/img/u-iso14_assign-org-name.png)
 
-4. From the Mist Org page, select Organization from the left side menu, and select Inventory.
+4. Click Adopt. The router information is displayed on the SSR GUI.
 
-5. On the Inventory list for the Org, select the newly installed router.
+  ![Mist-Managed](/img/u-iso14a_adopted_router.png)
+
+5. Log into your Mist Organization.
+
+6. Once you are in your Mist Organization, select Organization from the left side menu, and then select Inventory.
+
+7. On the Inventory list for the Organization, select the newly installed router.
 
   ![Mist Inventory](/img/u-iso15_router-in-mist.png)
 
-6. Use the More... menu to associate the router with the Org. 
+8. Use the More... dropdown and select Assign To Site. 
 
-The router is now available in the Mist Org. 
+  ![More dropdown](/img/u-iso16_inventory_more_dropdown.png)
 
+9. Select the Site, and click Assign to Site.
 
-### Device Default Port Identification
+  ![Assign to site](/img/u-iso17_assign_wan_edges.png)
 
-When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default.
-When the device is unrecognized, a default port layout is generated based upon PCI address order.
-This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
+The router is now available in your inventory, assigned to the selected site. 
 
-The following sections provide information about port connections on Juniper certified devices and non-certified devices that are considered compatible. 
-
-- [Lanner 1515:](hdwr_whitebox_port_layout.md#lanner-1515) Certified Device
-- [Silicom Madrid 90500-0151-G61:](hdwr_whitebox_port_layout.md#silicom-madrid-90500-0151-g61) Certified Device
-- [Fitlet2 Dual Port:](hdwr_whitebox_port_layout.md#fitlet2-dual-port) Non-certified, Compatible Device
-- [Fitlet2 Quad Port:](hdwr_whitebox_port_layout.md#fitlet2-quad-port) Non-certified, Compatible Device
-- [Additional Non-certified, Compatible Devices](hdwr_whitebox_port_layout.md#additional-non-certified-compatible)
-
-Use this data to identify the port layout for your whitebox device. A link to return to this process is provided at the end of the process for each device. 
 
