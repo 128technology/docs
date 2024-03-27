@@ -60,6 +60,10 @@ sidebar_label: '3.7'
 
   _**Resolution**_ The condition that checks for the completeness of the HA configuration has been made more robust, preventing an authentication failure error. This allows the full data set to be sent post onboarding.
 
+- **WAN-3031 The performance-monitoring profile generation is skipped on hub routers**
+
+  _**Resolution**_ Additional logs have been added for config generation to indicate the conditions under which the auto generation for performance-monitoring will be skipped.
+
 ## Release 3.7.6
 
 **Release Date:** November 20, 2023
