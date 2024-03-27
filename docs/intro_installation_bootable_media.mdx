@@ -34,9 +34,9 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
   ![SSR Role](/img/initializer_Serial2a.png)
 
 2. For SSR routers, you will be prompted for the IP address(es) of the conductor. If you have a conductor, enter the administrative IP address and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
-3. When asked _What kind of Router/Conductor node is this?_, select from the following options:
+3. When asked _What kind of Router node is this?_, select from the following options:
 
-  ![Identify the Node](/img/initializer_Serial3.png)
+  ![Identify the Node](/img/initializer_Serial3a.png))
 
 - **Standalone:** This router has no highly available peer, and is not currently planned for high availability.
 
@@ -46,16 +46,16 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 4. Enter the following system properties on the **Node Info** screen:
 
-  ![Node Information](/img/initializer_Serial5.png)
+  ![Node Information](/img/initializer_Serial5cc.png)
 
   - **Node Name:** The name of the system within your SSR Router or Conductor, for example, _boston_router_. By default this field uses the Linux system's hostname.
 
   :::note
   Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
     :::
-  - **Router/Conductor Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston_router-node1.router`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
+  - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston_router-node1.router`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
+5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
@@ -74,6 +74,35 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 ## Verify the Installation
 <VerifyInstall/>
+
+### Change the Default Passwords after Installation
+
+The following user accounts and passwords are created during the ISO installation process:
+
+| Username | Password   |
+| -------- | ---------- |
+| root     | 128tRoutes |
+| t128     | 128tRoutes |
+
+Change these passwords immediately. Use the `passwd` command from the UNIX window.
+
+```
+[t128@test-router ~]$ passwd
+Changing password for user t128
+Changing password for t128
+(current)UNIX password:
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[t128@test-router ~]$ su - 
+Password:
+[root@test-router ~]# passwd
+Changing password for user root.
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@test-router ~]#
+```
 
 ## FIPS Enforcement Mode
 <FIPSmode/>
