@@ -1,6 +1,6 @@
 ---
 title: Image-Based Installation
-sidebar_label: Image-Based Installation
+sidebar_label: Image-Based Installation 
 ---
 
 Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.

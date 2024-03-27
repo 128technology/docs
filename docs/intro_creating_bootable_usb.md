@@ -1,5 +1,5 @@
 ---
-title: Creating a Bootable USB from ISO
+title: Creating a Bootable USB
 sidebar_label: Creating Bootable USB
 ---
 
