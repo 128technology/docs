@@ -3,11 +3,15 @@ title: QuickStart From the OTP ISO
 sidebar_label: QuickStart from the OTP ISO
 ---
 
-Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the SSR Networking Platform.
+Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the SSR Networking Platform. When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
+
+:::important
+For Common Criteria compliance, a dedicated, out-of-band network must be used to provide the management connection security between Conductor and Router instances. SSR software does not currently provide any evaluated security assurances for this link. This dedicated network interface must be privately routed, and must not be exposed publicly.
+:::
 
 ### SSR Configuration
 
-The SSR router will need to be provisioned on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary.md) and [configuration](config_basics.md) of the SSR platform.
+The SSR router will need to be provisioned on the conductor. This procedure assumes you are familiar with the [concepts](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_glossary) and [configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_basics) of the SSR platform.
 
 When a router configuration has been added to the conductor, but the device has not yet connected, in place of device-specific information, QuickStart instructions will be displayed.
 
@@ -15,7 +19,7 @@ After the configuration has been added to the authority on the conductor:
 
 - On the Conductor, go to the UI to start the QuickStart process for the newly created SSR Router by accessing “Routers” -> “Router Name” -> “QUICKSTART LINK”
 
-![QuickStart Generate QuickStart Link](/img/intro_ztp_quickstart_server_2.png)
+![QuickStart Generate QuickStart Link](/img/cc_fips_quickstart_server_2.png)
 
 Clicking on the generate "QuickStart Link" will present you with a dialog box confirming some basic information about the target platform. Notably the *router name*, *node name*, and *asset ID*.
 
@@ -23,11 +27,11 @@ The *device host address* is the IP address that is assigned to the SSR router d
 
 A password is used to encrypt the contents of the QuickStart file.  This password will be required when applying the file to the target platform.
 
-![QuickStart Link Generation](/img/intro_ztp_quickstart_server_3.png)
+![QuickStart Link Generation](/img/cc_fips_quickstart_server_3.png)
 
 - Copy the auto generated “Password” (this can be set to a different value)
 - Follow step 1 to download the QuickStart file locally by selecting the “Click Here” link
-- Plug in the computer that contains the QuickStart file to any ethernet port except for port 1 on the router. Ensure DHCP is enabled on the computer connecting to the router.
+- Plug in the computer that contains the QuickStart file to any ethernet port except for port 1 on the router. Ensure DHCP client is enabled on the computer connecting to the router.
 - Follow step 2 and click the link to start the QuickStart URL process
 - Login locally to the new router with the default username `admin` and password `128Tadmin`
 - Drag and drop the QuickStart file and click “Proceed”
@@ -51,35 +55,6 @@ A password is used to encrypt the contents of the QuickStart file.  This passwor
 
 ![QuickStart Success](/img/intro_ztp_quickstart_client_5.png)
 
-### Change the Default Passwords after Installation
-
-The following user accounts and passwords are created during the ISO installation process:
-
-| Username | Password   |
-| -------- | ---------- |
-| root     | 128tRoutes |
-| t128     | 128tRoutes |
-
-Change these passwords immediately. Use the `passwd` command from the UNIX window.
-
-```
-[t128@test-router ~]$ passwd
-Changing password for user t128
-Changing password for t128
-(current)UNIX password:
-New password:
-Retype new password: 
-passwd: all authentication tokens updated successfully.
-[t128@test-router ~]$ su - 
-Password:
-[root@test-router ~]# passwd
-Changing password for user root.
-New password:
-Retype new password: 
-passwd: all authentication tokens updated successfully.
-[root@test-router ~]#
-```
-
 ### Verifying Operation
 The SSR router will have connected to the conductor.  The Router page that was previously empty should now be populated with information about the system.  Go to the SSR Conductor UI to verify the process completed for this newly created SSR Router by accessing “Routers” -> “Router Name” -> “Node Name”
 - Verify “SSR Processes” -> “All Processes Running”
@@ -88,4 +63,4 @@ The SSR router will have connected to the conductor.  The Router page that was p
 
 ![QuickStart Verification](/img/intro_ztp_quickstart_verification.png)
 
-Congratulations, you have setup your SSR router.
+Congratulations, you have setup your SSR router. 
