@@ -24,6 +24,116 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.4-14r2
+
+**Release Date:** March 29, 2024
+
+### New Features
+
+- **I95-53878 New LACP protocol stats added:** LACP related counters are now available on a per-bond-member resolution. For more information, see **LACP STATS**.(add link here)
+------
+- **I95-53821 Radius Remote Authentication:**
+
+
+
+
+
+### Resolved Issues
+
+- **I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:** When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.
+------
+- **I95-51663 TCP port reuse causing application steering crashes:** Resolved an issue where backwards state transitions was causing an issue with the TCP client reusing ports. 
+------
+- **I95-51787 SNMP alarms generation process updated:** SNMP now uses the SHA1 algorithm to identify a specific instance of an alarm. After upgrading to this release, you will see different values for these instance IDs. These values are defined as "opaque" and are not guaranteed to be consistent from release to release. 
+------
+- **I95-52250 Security Package Update:** Updates have been made to Intrusion Detection and Prevention (IDP)
+------
+- **I95-52500 SVR Multi Hop Failover:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic. 
+------
+- **I95-53216 "Unable to change password" message showing for remote users:** Resolved an issue that caused a "Password Change" dialog to appear for remotely authenticated users.
+------
+- **I95-53523 `bond` interface cleanup following shutdown of the 128T service:** The order in which a `bond` interface is broken down and cleaned up after shutdown has been optimixed and errors resolved. 
+------
+- **I95-53565 Port state of `bond` members not dynamically updated:** Resolved an issue where enabling or disabling a bond member port does not update the status until the 128T service is restarted. The adminisrative enable and disable now works as expected.
+------
+- **I95-53920 Password expiration being applied to remote users:** Resolved an issue that incorrectly enforced password expiration (`configure authority password-policy lifetime`) to RADIUS users.
+------
+- **I95-54029 LLDP packets being dropped on some SSR1300 and SSR1400 devices:** The X722 NIC firmware on SSR1300 and SSR1400 platforms has been updated, and LLDP packets are no longer dropped.
+------
+- **I95-54127 Users not locally created on managed routers cannot get TSI:** Resolved an issue that did not provide a home directory for custom roles, which prevented LDAP users from viewing the systemd journal.
+------
+- **I95-54189 Application mapping does not correctly match services:** Resolved an issue where the application director was misclassifying sessions due to IP overlap; this is a valid configuration, when services use an IP address with different ports assigned to different services. The SSR now recognizes these different port configurations.
+------
+- **I95-54271 Race condition after a configuration change related to the source nat:** Resolved a rare condition wherethe SharedNatPool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash. 
+------
+- **I95-54340 Hub-to-spoke sessions break when failing over from outbound-only path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
+------
+- **I95-54440 / I95-50787 Rebooting the OS from the conductor throws error code 400:** Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display **Error: EOF**.
+------
+- **I95-54471 `ServiceAreaGatewayLookupFailed` exceptions:** This issue has been resolved by applying `bidirectional-NAT` to packets before the gateway lookup. 
+------
+- **I95-54512 SSR130 moved into an HA cluster does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
+------
+- **I95-54726 Duplicate service-routes for IDP being created:** Resolved an issue where duplicate routes were being created in `hub` mode because the service-name field was being used rather than the name field. This issue has been corrected
+------
+- **I95-54750 Load Balancer API Calls not working:** The original API and Swagger documentation used `Load Balancer`, which was misleading. The `Reachability Detection` REST APIs have been updated to use `Reachability Detection` as reference, instead of `Load Balancer`.
+------
+- **I95-54780 Forwarding CPU utilization metrics missing:** Updated the retention policy for forwarding CPU utilization and other metrics.
+------
+- **I95-54803 Control packets are treated with equal priority in overload conditions, causing drops:** Control packets now have preferential treatment under overload conditions, reducing the drop rate. 
+------
+- **I95-54808 Ingress VLAN tag getting stripped:** Updated the DPDK, which adds measures to prevent the vlan reinsert flag from being reset.
+------
+- **I95-54833 HA port is showing as redundant:** Resolved an issue where adding a device-interface back into the configuration after it was removed did not recreate the device-state. 
+------
+- **I95-54835 Conductor not creating autogenerated services:** Check with Mike on this.
+
+------
+- **I95-54841 :**Bob Kebler
+
+------
+- **I95-54867 SSR-1300 baud rate set incorrectly:** Resolved an issue where the incorrect baud rate was allowed. The only allowed baud rate for the SSR is now 115200. This is the default rate.
+------
+- **I95-54901 :** Bob Kebler
+
+------
+- **I95-54909 Generate an Alarm when Websense is down:** Implemented an alarm when the connection to the Websense server is down or responds with a 5xx error. 
+------
+- **I95-54927 Receiver can join stream without any tenant assigned to interface:** This issue has been resolved by creating multicast boundaries in the routing engine to block all multicast addresses on interfaces that do not match the multicast service access-policy.
+------
+- **I95-55002 Password reset loop:** Resolved an issue that caused users created with the **Require password change on first login?** set to `yes` to get stuck in an infinite loop of password changes when logging in using the GUI.
+------
+- **I95-55060 PIM register messages don't need a tenant assigned to be sent over SVR:** This could potentially be disruptive to multicast services. PIM RP and LAN services have been made private. 
+------
+- **I95-55067 Add ability to login to a specific Mist Cloud instance:** This functionality has been added to the CLI using the `mist-instance` argument under the `adopt` command, and in the GUI when onboarding a router. 
+------
+- **I95-55069 One HA node is missing from the Mist GUI:** Resolved an issue where a managed router had an empty product version config metadata field, which resulted in the conductor version metadata field being cleared.
+------
+- **I95-55164 Dropping GRE encapsulated packets:** Classification support for Enhanced GRE Header, version 1, as defined by RFC 2637 Point-to-Point Tunneling Protocol (PPTP) has been added.
+------
+- **I95-55179 FIPS-enabled SSR Conductors not creating HA connection:** The SSH library used by the initializer was using md5 internally for key identification and logging purposes. Since md5 is not supported with FIPS, it raised an error. The SSH library has been upgraded to use a FIPS compliant key generator.
+------
+- **I95-55203 HA Failover takes too long to failover:** Update GR Time for Multicast (WTF??) Bob Kebler
+------
+- **I95-55208 SSR `state.apply` holds process lock:** Added a timeout value for processes in highstate, allowing the process to time out.
+------
+- **I95-55244 Unable to initialize DPDK; SSR does not start:** Resolved an issue with the way the initializer identified the amount of memory in the processor. The initializer is now more NUMA aware when sizing the number of hugepages on a system.
+------
+- **I95-55261 Only run `validate` for plugins on the Conductor:** Resolved an issue where the plugin validator was running on routers. 
+------
+- **I95-55270 DHCP server not coming up:** Resolved an issue where a network namespace was using a namespace ID that was not cleaned up properly after removal.
+------
+- **I95-55298 KNI interface is generating packets but are being dropped by the SSR:** In a case where a network interface can be configured with a /31 net mask, the SSR will exclude network-interface IP addresses that are point-to-point from source-ip broadcast filtering.
+------
+- **I95-55353 Error message `out-of-memory KNI254 management down`:** Resolved an issue on systems with a large number of packet forwarding cores, connectivity to the host interface was impaired due to buffer pool depletion. The buffer pool is now scaled to compensate for forwarding core count.
+------
+
+
+
+
+
+
+
 ## Release 6.2.3-14r2
 
 **Release Date:** December 15, 2023
