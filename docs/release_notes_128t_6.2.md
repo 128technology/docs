@@ -30,9 +30,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-53878 New LACP protocol stats added:** LACP related counters are now available on a per-bond-member resolution. For more information, see **LACP STATS**.(add link here)
+- **I95-53878 New LACP protocol stats added:** LACP related counters are now available at a per-bond-member resolution. For more information, see [show stats interface received lacp](cli_stats_reference#show-stats-interface-received-lacp) or [show stats interface sent lacp](cli_stats_reference#show-stats-interface-sent-lacp). 
 ------
-- **I95-53821 Radius Remote Authentication:** Section to be added.
+- **I95-53821 Radius Remote Authentication:** Radius Authentication supports the remote authentication of users created remotely, automatically adding them to the appropriate local user databases. This is especially helpful for large organizations that are geographically diverse. See [Configure Radius Users](config_radius.md#configure-radius-users) for more information.
 ------
 - **I95-55672 MSDP Alarms for Peer State Change:** MSDP Alarms have been added for peer state change. For more information, see **MSDP Alarms** (add link here) 
 
@@ -130,7 +130,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55454 Dropped packets in correctly listed as a result of Firewall filter rule:** Firewall filter rules on the network interface can be configured to drop non-ip packets. The non-ip packets were incorrectly classified on the Dropped Packets page. This has been resolved and they are now displayed correctly.
 ------
-- **I95-55467 Incorrect VLAN Tagging in Azure HCI Stack with Hyper-V Hypervisor:** When using accelerated mode with the Azure HCI Stack with Hyper-V, bit shifting occurs resulting in incorrect VLAN tags. This has been resolved for **non-accelerated NICs** by updating the DPDK and adding handling for the VLAN tags on Azure HCI. However, this issue is still present when using accelerated mode with the Azure HCI Stack with Hyper-V. The recommended practice is to **not** use accelerated mode. 
+- **I95-55467 Incorrect VLAN Tagging in Azure HCI Stack with Hyper-V Hypervisor:** When using VLANs on Azure HCI Stack with Hyper-V, bit shifting occurs resulting in incorrect VLAN tags. This has been resolved for **non-accelerated NICs** by updating the DPDK and adding handling for the VLAN tags on Azure HCI. However, this issue is still present when using accelerated mode with the Azure HCI Stack with Hyper-V. The current solution is to **not** use accelerated mode if configuring VLAN interfaces.
 ------
 - **I95-55470 Allow the configuration of an `access-policy deny` when a `summary service` is allowed:** When utilizing `router > allow-summary-services true` (MIST deployments), a received SVR packet will now be dropped if the locally (FIB) matched service indicates an `access-policy deny` using the given tenant.
 ------

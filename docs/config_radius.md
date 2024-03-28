@@ -28,7 +28,7 @@ To configure radius authentication, provide the following information in the con
 
 ## Configure Radius Users
 
-Radius authentication is locally administered and remotely authenticated.
+Radius Authentication supports the remote authentication of users created remotely, automatically adding them to the appropriate local user databases. This is especially helpful for large organizations that are geographically diverse. 
 
 ```
 admin@conductor-node-1.Conductor# create user
@@ -65,7 +65,7 @@ Account "jdeveloper" successfully created
 ```
 
 :::note
-Password requirements have been updated in version 5.6. Please refer to [**Password Policies**](config_password_policies.md) for more information. 
+Password requirements are available in [**Password Policies**](config_password_policies.md). 
 :::
 
 
