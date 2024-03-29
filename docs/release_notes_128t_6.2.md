@@ -30,11 +30,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-53878 New LACP protocol stats added:** LACP related counters are now available at a per-bond-member resolution. For more information, see [show stats interface received lacp](cli_stats_reference#show-stats-interface-received-lacp) or [show stats interface sent lacp](cli_stats_reference#show-stats-interface-sent-lacp). 
+- **I95-53878 New LACP protocol stats added:** LACP related counters are now available at a per-bond-member resolution. For more information, see [show stats interface received lacp](cli_stats_reference.md#show-stats-interface-received-lacp) or [show stats interface sent lacp](cli_stats_reference.md#show-stats-interface-sent-lacp). 
 ------
-- **I95-53821 Radius Remote Authentication:** Radius Authentication supports the remote authentication of users created remotely, automatically adding them to the appropriate local user databases. This is especially helpful for large organizations that are geographically diverse. See [Configuring Radius Users](config_radius.md#configuring-radius-users) for more information.
+- **I95-53821 Radius Remote Authentication:** Radius Authentication supports the remote authentication of users created remotely, automatically adding them to the appropriate local user databases. This is especially helpful for large organizations that are geographically diverse. See [Configuring RADIUS](config_radius.md#configuring-radius) for more information.
 ------
-- **I95-55672 MSDP Alarms for Peer State Change:** MSDP Alarms have been added for peer state change. For more information, see **MSDP Alarms** (add link here) 
+- **I95-55672 MSDP Alarms for Peer State Change:** MSDP Alarms have been added for peer state change. For more information, see [`show msdp peer`](cli_reference.md#show-msdp-peer) 
 
 ### Resolved Issues
 
@@ -42,47 +42,47 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:** When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.
 ------
-- **I95-51663 TCP port reuse causing application steering crashes:** Resolved an issue where backwards state transitions was causing an issue with the TCP client reusing ports. 
+- **I95-51663 TCP port reuse causing session issues in session timeout management:** Resolved an issue where TCP client port reused caused backwards state transitions in TCP state tracking.
 ------
-- **I95-51787 SNMP alarms generation process updated:** SNMP now uses the SHA1 algorithm to identify a specific instance of an alarm. After upgrading to this release, you will see different values for these instance IDs. These values are defined as "opaque" and are not guaranteed to be consistent from release to release. 
+- **I95-51787 SNMP alarms generation is not FIPS compliant:** SNMP now uses the SHA1 algorithm to identify a specific instance of an alarm. After upgrading to this release, you will see different values for these instance IDs. These values are defined as "opaque" and are not guaranteed to be consistent from release to release. 
 ------
-- **I95-52250 Security Package Update:** Updates have been made to Intrusion Detection and Prevention (IDP)
+- **I95-52250 Security Package Update:**  Intrusion Detection and Prevention (IDP) signatures have been updated.
 ------
-- **I95-52500 SVR Multi Hop Failover:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic. 
+- **I95-52500 SVR multi-hop failover causes traffic to drop when using outbound-only:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic. 
 ------
 - **I95-53216 Unable to change password for users managed through external user databases (such as LDAP or RADIUS):** Resolved an issue that caused a "Password Change" dialog to appear for remotely authenticated users.
 ------
-- **I95-53523 LAG interface cleanup following shutdown of the 128T service:** The order in which a LAG interface is broken down and cleaned up after shutdown has been optimixed and errors resolved. 
+- **I95-53523 LAG interface unbind errors following shutdown of the 128T service:** The order in which a LAG interface is broken down and cleaned up after shutdown has been optimized and errors resolved. 
 ------
 - **I95-53565 Port state of LAG members not dynamically updated:** Resolved an issue where enabling or disabling a bond member port does not update the status until the 128T service is restarted. The adminisrative enable and disable now works as expected.
 ------
-- **I95-53920 Password expiration being applied to users managed through external user databases (such as LDAP or RADIUS):** Resolved an issue that incorrectly enforced password expiration (`configure authority password-policy lifetime`) to RADIUS users.
+- **I95-53920 Password expiration incorrectly applied to users managed through external user databases (such as LDAP or RADIUS):** Resolved an issue that incorrectly enforced password expiration (`configure authority password-policy lifetime`) to RADIUS users.
 ------
 - **I95-54029 LLDP packets being dropped on some SSR1300 and SSR1400 devices:** The X722 NIC firmware on SSR1300 and SSR1400 platforms has been updated, and LLDP packets are no longer dropped.
 ------
 - **I95-54127 Users managed through external user databases (such as LDAP or RADIUS) cannot generate or view TSI:** Resolved an issue that did not provide a home directory for custom roles, which prevented LDAP users from viewing the systemd journal.
 ------
-- **I95-54189 Application mapping does not correctly match services:** Resolved an issue where the application director was misclassifying sessions due to IP overlap; this is a valid configuration, when services use an IP address with different ports assigned to different services. The SSR now recognizes these different port configurations.
+- **I95-54189 I95-54189 Application classification mapping does not correctly match configured services:** Resolved an issue where DPI was misclassifying sessions due to IP overlap. When services use an IP address with different ports assigned to different services, the SSR now recognizes these different port configurations.
 ------
 - **I95-54271 Race condition after a configuration change related to the source NAT:** Resolved a rare condition where the NAT pool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash. 
 ------
-- **I95-54340 Hub-to-spoke sessions fail during failover from outbound-only path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was  looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
+- **I95-54340 Hub-to-spoke sessions fail during failover from outbound-only path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
 ------
 - **I95-54440 / I95-50787 Rebooting the OS from the conductor throws error code 400:** Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display **Error: EOF**.
 ------
-- **I95-54471 `ServiceAreaGatewayLookupFailed` exceptions:** When the egress interface has no gateway, the original packet dest IP was used for gateway lookup. Oftentimes, the original packet dest IP is off-subnet, but the matching `bidirectional-nat local-ip` is in-subnet. Applying dest NAT first and then looking up the gateway can avoid the `ServiceAreaGatewayLookupFailed` exception. 
+- **I95-54471 LAN-to-LAN traffic with Destination NAT without a gateway configured for either subnet results in dropped traffic and the error log: `ServiceAreaGatewayLookupFailed` exceptions:** When the egress interface has no gateway, the original packet dest IP was used for gateway lookup. Oftentimes, the original packet dest IP is off-subnet, but the matching `bidirectional-nat local-ip` is in-subnet. Applying dest NAT first and then looking up the gateway can avoid the `ServiceAreaGatewayLookupFailed` exception. 
 ------
-- **I95-54512 Forming an HA cluster with an SSR-130 does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
+- **I95-54512 Forming an HA cluster with an SSR 130 does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
 ------
-- **I95-54726 Duplicate service-routes for IDP being created:** Resolved an issue where duplicate routes were being created in `hub` mode because the service-name field was being used rather than the name field. This issue has been corrected
+- **I95-54726 Duplicate service-routes for IDP being created, resulting in a `nodeMonitor` crash:** Resolved an issue where duplicate routes were being created in `hub` mode because the service-name field was being used rather than the name field. This issue has been corrected.
 ------
 - **I95-54750 Load Balancer API Calls not working:** The original API and Swagger documentation used `Load Balancer`, which was misleading. The `Reachability Detection` REST APIs have been updated to use `Reachability Detection` as reference, instead of `Load Balancer`.
 ------
 - **I95-54780 Forwarding CPU utilization metrics missing for duration greater than 1 hour:** Updated the retention policy for forwarding CPU utilization and other metrics.
 ------
-- **I95-54803 Control packets are treated with equal priority in overload conditions, causing drops:** Control packets now have preferential treatment under overload conditions, reducing the drop rate. 
+- **I95-54803 Control packets are treated with equal priority in overload conditions, causing drops:** Control packets now have preferential treatment, reducing the drop rate. 
 ------
-- **I95-54808 Ingress VLAN tag getting stripped:** Added measures to prevent the vlan reinsert flag from being reset.
+- **I95-54808 Ingress VLAN tag getting stripped for vSSR with SR-IOV:** Added measures to prevent the vlan reinsert flag from being reset.
 ------
 - **I95-54833 HA port is showing as redundant:** Resolved an issue where adding a device-interface back into the configuration after it was removed did not recreate the device-state. 
 ------
@@ -92,7 +92,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54901 During source specific multicast, the FHR is displaying the Register Flag (F):** The display was incorrectly showing the register flag (F); PIM registers are not sent for SSM groups, so this flag should not be sent. The display issue causing this has been resolved.
 ------
-- **I95-54909 Generate an Alarm when Websense is down:** Implemented an alarm when the connection to the Websense server is down or responds with a 5xx error. 
+- **I95-54909 Alarm not generated when Websense is down** Implemented an alarm when the connection to the Websense server is down or responds with a 5xx error. 
 ------
 - **I95-54927 Receiver can join stream without any tenant assigned to interface:** This issue has been resolved by creating multicast boundaries in the routing engine to block all multicast addresses on interfaces that do not match the multicast service access-policy.
 ------
@@ -100,7 +100,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55060 PIM register messages don't need a tenant assigned to be sent over SVR:** This could potentially be disruptive to multicast services. PIM RP and LAN services have been made private. 
 ------
-- **I95-55067 Add ability to login to a specific Mist Cloud instance:** This functionality has been added to the CLI using the `mist-instance` argument under the `adopt` command, and in the GUI when onboarding a router. 
+- **I95-55067 Unable to select specific Mist Cloud instance during onboarding:** This functionality has been added to the CLI using the `mist-instance` argument under the `adopt` command, and in the GUI when onboarding a router. 
 ------
 - **I95-55069 One HA node is missing from the Mist GUI:** Resolved an issue where a managed router had an empty product version config metadata field, which resulted in the conductor version metadata field being cleared.
 ------
@@ -114,7 +114,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55244 Unable to initialize DPDK; SSR does not start:** Resolved an issue with the way the initializer identified the amount of memory in the processor. The initializer is now more NUMA aware when sizing the number of hugepages on a system.
 ------
-- **I95-55261 Only run `validate` for plugins on the Conductor:** Resolved an issue where the plugin validator was running on routers. 
+- **I95-55261 Config validation incorrectly being run on router:** Resolved an issue where the plugin validator was running on routers. Validate is now correctly run only on the conductor. 
 ------
 - **I95-55270 DHCP server not coming up:** Resolved an issue where a network namespace was using a namespace ID that was not cleaned up properly after removal.
 ------
@@ -126,7 +126,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55416 Dynamic reconfig of the PCI address of a bond member breaks connectivity:** Added an identifier to the LAG member, enabling the proper handling of the member whenever the PCI address is changed.
 ------
-- **I95-55444 Add ICMP probe stats per service route:** Statistics were not available for ICMP probes that did not meet SLA per service route. These stats have been added.
+- **I95-55444 ICMP probe stats missing per service route:** Statistics were not available for ICMP probes that did not meet SLA per service route. These stats have been added.
 ------
 - **I95-55454 Dropped packets incorrectly listed as a result of Firewall filter rule:** Firewall filter rules on the network interface can be configured to drop non-ip packets. The non-ip packets were incorrectly classified on the Dropped Packets page. This has been resolved and they are now displayed correctly.
 ------
@@ -157,8 +157,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-55903 Memory alarm persists in LAG/HA/VRRP configuration:** The `Memory exceeded 90%` alarm appears and persists in an HA configuration due to multiple database connections being made and not released. These database connections are now properly released and memory use maintained at a reasonable level. 
 ------
 - **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied.
-------
-- **I95-55948 Unable to login to SSR using remote RADIUS authentication:** Resolved an issue where the Radius `add user` hook incorrectly aliased users, based on a search pattern.
 ------
 - **WAN-2753 IDP Engine Failed to Start:** Resolved an issue that prevented IDP from starting if its configuration had changed. 
 
