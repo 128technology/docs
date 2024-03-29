@@ -46343,10 +46343,100 @@ show stats icmp reachability-probe service-routes [probe-profile-name <probe-pro
 
 | command | description |
 | ------- | ----------- |
+| [`exceeded-by-max-latency`](#show-stats-icmp-reachability-probe-service-routes-exceeded-by-max-latency) | The number of ICMP probe intervals whose maximum latency exceeds the profile SLA for the service route. |
+| [`exceeded-by-max-loss`](#show-stats-icmp-reachability-probe-service-routes-exceeded-by-max-loss) | The number of ICMP probe intervals whose maximum percent lost exceeds the profile SLA for the service route. |
+| [`exceeded-by-mean-latency`](#show-stats-icmp-reachability-probe-service-routes-exceeded-by-mean-latency) | The number of ICMP probe intervals whose mean latency exceeds the profile SLA for the service route. |
 | [`jitter`](#show-stats-icmp-reachability-probe-service-routes-jitter) | Jitter in milliseconds for the service route. (in-memory) |
 | [`latency`](#show-stats-icmp-reachability-probe-service-routes-latency) | Latency in milliseconds for the service route. (in-memory) |
 | [`loss`](#show-stats-icmp-reachability-probe-service-routes-loss) | Packet loss percentange for the service route. (in-memory) |
 | [`updated`](#show-stats-icmp-reachability-probe-service-routes-updated) | The unix timestamp (seconds) when the service route&#x27;s values were last updated. (in-memory) |
+
+## `show stats icmp reachability-probe service-routes exceeded-by-max-latency`
+
+The number of ICMP probe intervals whose maximum latency exceeds the profile SLA for the service route.
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes exceeded-by-max-latency [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe service-routes exceeded-by-max-loss`
+
+The number of ICMP probe intervals whose maximum percent lost exceeds the profile SLA for the service route.
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes exceeded-by-max-loss [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe service-routes exceeded-by-mean-latency`
+
+The number of ICMP probe intervals whose mean latency exceeds the profile SLA for the service route.
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes exceeded-by-mean-latency [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp reachability-probe service-routes jitter`
 
@@ -48178,6 +48268,130 @@ show stats interface received fcs-error [port <port>] [since <since>] [force] [r
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats interface received lacp`
+
+Stats pertaining to LACP on specified Interface
+
+#### Usage
+
+```
+show stats interface received lacp [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`illegal`](#show-stats-interface-received-lacp-illegal) | The number of Illegal LACP packets received on this bond member (in-memory) |
+| [`packets`](#show-stats-interface-received-lacp-packets) | The number of LACP packets received on this bond member (in-memory) |
+| [`unknown`](#show-stats-interface-received-lacp-unknown) | The number of Unknown LACP packets received on this bond member (in-memory) |
+
+## `show stats interface received lacp illegal`
+
+The number of Illegal LACP packets received on this bond member (in-memory)
+
+#### Usage
+
+```
+show stats interface received lacp illegal [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
+
+## `show stats interface received lacp packets`
+
+The number of LACP packets received on this bond member (in-memory)
+
+#### Usage
+
+```
+show stats interface received lacp packets [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
+
+## `show stats interface received lacp unknown`
+
+The number of Unknown LACP packets received on this bond member (in-memory)
+
+#### Usage
+
+```
+show stats interface received lacp unknown [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
+
 ## `show stats interface received missed`
 
 The number of packets dropped or discarded by the interface
@@ -48393,7 +48607,7 @@ Statistics for &#x27;sent&#x27;
 #### Usage
 
 ```
-show stats interface sent [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+show stats interface sent [since <since>] [force] [router <router>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -48418,6 +48632,7 @@ show stats interface sent [port <port>] [since <since>] [force] [router <router>
 | ------- | ----------- |
 | [`bytes`](#show-stats-interface-sent-bytes) | The number of bytes sent on interface |
 | [`error`](#show-stats-interface-sent-error) | The number of send errors detected by interface |
+| [`lacp`](#show-stats-interface-sent-lacp) | Stats pertaining to LACP on specified Interface |
 | [`packets`](#show-stats-interface-sent-packets) | The number of packets sent on interface |
 | [`utilization`](#show-stats-interface-sent-utilization) | The current transmit bandwidth of interface |
 
@@ -48472,6 +48687,99 @@ show stats interface sent error [port <port>] [since <since>] [force] [router <r
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats interface sent lacp`
+
+Stats pertaining to LACP on specified Interface
+
+#### Usage
+
+```
+show stats interface sent lacp [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`packets`](#show-stats-interface-sent-lacp-packets) | The number of LACP packets sent on this bond member (in-memory) |
+| [`queue-full`](#show-stats-interface-sent-lacp-queue-full) | The number of times that the transmit queue has been full for this bond member (in-memory) |
+
+## `show stats interface sent lacp packets`
+
+The number of LACP packets sent on this bond member (in-memory)
+
+#### Usage
+
+```
+show stats interface sent lacp packets [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
+
+## `show stats interface sent lacp queue-full`
+
+The number of times that the transmit queue has been full for this bond member (in-memory)
+
+#### Usage
+
+```
+show stats interface sent lacp queue-full [bond-interface <bond-interface>] [member-interface <member-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| bond-interface | The name of the bond device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| member-interface | The name of the bond member device interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats interface sent packets`
 
@@ -50357,6 +50665,7 @@ show stats packet-processing action failure [core <core>] [since <since>] [force
 | [`fec`](#show-stats-packet-processing-action-failure-fec) | Statistics for &#x27;fec&#x27; |
 | [`flow-move`](#show-stats-packet-processing-action-failure-flow-move) | Statistics for &#x27;flow-move&#x27; |
 | [`hmac`](#show-stats-packet-processing-action-failure-hmac) | Statistics for &#x27;hmac&#x27; |
+| [`ingress`](#show-stats-packet-processing-action-failure-ingress) | Statistics for &#x27;ingress&#x27; |
 | [`ip-header-transform`](#show-stats-packet-processing-action-failure-ip-header-transform) | Statistics for &#x27;ip-header-transform&#x27; |
 | [`keep-alive`](#show-stats-packet-processing-action-failure-keep-alive) | Statistics for &#x27;keep-alive&#x27; |
 | [`metadata`](#show-stats-packet-processing-action-failure-metadata) | Statistics for &#x27;metadata&#x27; |
@@ -52019,6 +52328,66 @@ show stats packet-processing action failure hmac opposite-flow-not-found [core <
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing action failure ingress`
+
+Statistics for &#x27;ingress&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure ingress [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`metrics-not-allocated`](#show-stats-packet-processing-action-failure-ingress-metrics-not-allocated) | Number of packets not counted in aggregate session metrics |
+
+## `show stats packet-processing action failure ingress metrics-not-allocated`
+
+Number of packets not counted in aggregate session metrics
+
+#### Usage
+
+```
+show stats packet-processing action failure ingress metrics-not-allocated [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats packet-processing action failure ip-header-transform`
 
 Statistics for &#x27;ip-header-transform&#x27;
@@ -52942,8 +53311,93 @@ show stats packet-processing action failure path-metrics [core <core>] [port <po
 
 | command | description |
 | ------- | ----------- |
+| [`invalid-modify-affinity`](#show-stats-packet-processing-action-failure-path-metrics-invalid-modify-affinity) | The number of times path metrics have been discarded due to invalid affinity |
+| [`invalid-path-index`](#show-stats-packet-processing-action-failure-path-metrics-invalid-path-index) | The number of times path metrics have been discarded due to invalid path index |
+| [`sender-key`](#show-stats-packet-processing-action-failure-path-metrics-sender-key) | The number of times path metrics have been discarded due to invalid sender key |
 | [`sent-correlated-data`](#show-stats-packet-processing-action-failure-path-metrics-sent-correlated-data) | The number of failed attempts to send correlated data to host |
 | [`sent-unidirectional-reply`](#show-stats-packet-processing-action-failure-path-metrics-sent-unidirectional-reply) | The number of failed attempts to send unidirectional reply packets |
+| [`update-allocation`](#show-stats-packet-processing-action-failure-path-metrics-update-allocation) | The number of times path metrics have been discarded due to buffer allocation failure |
+
+## `show stats packet-processing action failure path-metrics invalid-modify-affinity`
+
+The number of times path metrics have been discarded due to invalid affinity
+
+#### Usage
+
+```
+show stats packet-processing action failure path-metrics invalid-modify-affinity [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure path-metrics invalid-path-index`
+
+The number of times path metrics have been discarded due to invalid path index
+
+#### Usage
+
+```
+show stats packet-processing action failure path-metrics invalid-path-index [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure path-metrics sender-key`
+
+The number of times path metrics have been discarded due to invalid sender key
+
+#### Usage
+
+```
+show stats packet-processing action failure path-metrics sender-key [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure path-metrics sent-correlated-data`
 
@@ -52980,6 +53434,33 @@ The number of failed attempts to send unidirectional reply packets
 
 ```
 show stats packet-processing action failure path-metrics sent-unidirectional-reply [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure path-metrics update-allocation`
+
+The number of times path metrics have been discarded due to buffer allocation failure
+
+#### Usage
+
+```
+show stats packet-processing action failure path-metrics update-allocation [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -59482,6 +59963,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | [`icmpv6-link-local-discards`](#show-stats-packet-processing-classifier-received-icmpv6-link-local-discards) | The number of discarded link-local ICMPv6 packets |
 | [`icmpv6-unknown-type-discards`](#show-stats-packet-processing-classifier-received-icmpv6-unknown-type-discards) | The number of ICMPv6 packets with unknown type discarded |
 | [`igmp`](#show-stats-packet-processing-classifier-received-igmp) | Stats pertaining to IGMP processing |
+| [`invalid-gre-header`](#show-stats-packet-processing-classifier-received-invalid-gre-header) | The number of invalid GRE packets discarded |
 | [`invalid-header-length`](#show-stats-packet-processing-classifier-received-invalid-header-length) | The number of packets received with an invalid header length |
 | [`invalid-ipv6`](#show-stats-packet-processing-classifier-received-invalid-ipv6) | The number of invalid IPv6 packets received |
 | [`invalid-length`](#show-stats-packet-processing-classifier-received-invalid-length) | The number of packets received with an invalid length |
@@ -60241,6 +60723,33 @@ The number of packets received and classified as IGMP
 
 ```
 show stats packet-processing classifier received igmp total [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received invalid-gre-header`
+
+The number of invalid GRE packets discarded
+
+#### Usage
+
+```
+show stats packet-processing classifier received invalid-gre-header [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -64705,6 +65214,7 @@ show stats packet-processing received [core <core>] [port <port>] [since <since>
 | [`control-success`](#show-stats-packet-processing-received-control-success) | Number of control packets recieved |
 | [`injected-success`](#show-stats-packet-processing-received-injected-success) | The number of packets injected into the fast lane |
 | [`injected-timeout`](#show-stats-packet-processing-received-injected-timeout) | The number of injected packets dropped in fastlane due to excessive queue time |
+| [`injected-unhandled-exception`](#show-stats-packet-processing-received-injected-unhandled-exception) | The number of injected packets dropped in fastlane due to unhandled exception |
 | [`interface-empty-head`](#show-stats-packet-processing-received-interface-empty-head) | The number of empty head packets received from the interface |
 | [`interface-invalid-chain`](#show-stats-packet-processing-received-interface-invalid-chain) | The number of invalid chain packets received from the interface |
 | [`interface-invalid-metadata-length`](#show-stats-packet-processing-received-interface-invalid-metadata-length) | The number of packets received from the interface having metadata with an invalid length |
@@ -64981,6 +65491,33 @@ The number of injected packets dropped in fastlane due to excessive queue time
 
 ```
 show stats packet-processing received injected-timeout [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received injected-unhandled-exception`
+
+The number of injected packets dropped in fastlane due to unhandled exception
+
+#### Usage
+
+```
+show stats packet-processing received injected-unhandled-exception [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -74786,7 +75323,9 @@ show stats service-area received [since <since>] [force] [router <router>] [node
 | [`session-ignored-reverse-metadata-packets`](#show-stats-service-area-received-session-ignored-reverse-metadata-packets) | Number of reverse metadata packets that are ignored when received from another router |
 | [`session-updated-reverse-metadata-packets`](#show-stats-service-area-received-session-updated-reverse-metadata-packets) | Number of reverse metadata packets that updated the session |
 | [`source-lookup-bad-shared-mem-entry`](#show-stats-service-area-received-source-lookup-bad-shared-mem-entry) | Number of packets that had an invalid shared memory entry for source lookup |
+| [`source-nat-not-allocated`](#show-stats-service-area-received-source-nat-not-allocated) | Number of sessions that should apply source-nat but did not allocate a nat-port |
 | [`stale-inline-session-collision-packets`](#show-stats-service-area-received-stale-inline-session-collision-packets) | Number of packets received for an existing session with a conflicting session id for a session that has already been removed |
+| [`summary-service-denied`](#show-stats-service-area-received-summary-service-denied) | Number of packets dropped for an incoming summary service due to a local access-policy denial |
 | [`unknown-metadata-wayport-range-miss`](#show-stats-service-area-received-unknown-metadata-wayport-range-miss) | Number of packets with unknown metadata that missed the waypoint range |
 | [`update-flow-with-peer-failure`](#show-stats-service-area-received-update-flow-with-peer-failure) | Number of reverse metadata packets that failed to update flow with destination peer |
 | [`update-flow-with-peer-success`](#show-stats-service-area-received-update-flow-with-peer-success) | Number of reverse metadata packets that updated flow with destination peer |
@@ -76317,6 +76856,31 @@ show stats service-area received source-lookup-bad-shared-mem-entry [since <sinc
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats service-area received source-nat-not-allocated`
+
+Number of sessions that should apply source-nat but did not allocate a nat-port
+
+#### Usage
+
+```
+show stats service-area received source-nat-not-allocated [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats service-area received stale-inline-session-collision-packets`
 
 Number of packets received for an existing session with a conflicting session id for a session that has already been removed
@@ -76325,6 +76889,31 @@ Number of packets received for an existing session with a conflicting session id
 
 ```
 show stats service-area received stale-inline-session-collision-packets [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received summary-service-denied`
+
+Number of packets dropped for an incoming summary service due to a local access-policy denial
+
+#### Usage
+
+```
+show stats service-area received summary-service-denied [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
