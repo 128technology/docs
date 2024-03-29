@@ -7,6 +7,16 @@ sidebar_label: '3.2'
 **Upgrade Installer:** Before **upgrading to, or installing** SSR version 5.4, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.2.2
+
+### Resolved Issues
+
+- **IN-552 The location of the local staging repo may cause download to fail:** Resolved an issue when duplicate unsaved packages were present. 
+------
+- **IN-554 DNF process issue:** Resolved a rare RPM data corruption issue that may occur during upgrade.  
+------
+- **IN-555 Update Installer to use new Conductor repos:** Provide installation support for SSR 6.3.0 and later.
+
 ## Release 3.2.1
 
 ### Resolved Issues
