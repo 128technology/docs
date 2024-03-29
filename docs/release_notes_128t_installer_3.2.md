@@ -11,7 +11,7 @@ sidebar_label: '3.2'
 
 ### Resolved Issues
 
-- **IN-552 The location of the local staging repo may cause download to fail:** Resolved an issue when duplicate unsaved packages were present. 
+- **IN-552 Download may fail if partial download exists in local repository:** Resolved an issue when duplicate unsaved packages were present. 
 ------
 - **IN-554 DNF process issue:** Resolved a rare RPM data corruption issue that may occur during upgrade.  
 ------
