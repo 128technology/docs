@@ -2381,6 +2381,22 @@ configure authority radius-server <name>
 | `show` | Show configuration data for &#x27;radius-server&#x27; |
 | [`timeout`](#configure-authority-radius-server-timeout) | Radius Request Timeout. |
 
+## `configure authority radius-server account-creation`
+
+Control account creation behavior.
+
+#### Usage
+
+```
+configure authority radius-server account-creation [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| manual or automatic  | Manual is the default value, requires the user to be created using `create-user`. Automatic allows remote users that exist only in Radius to connect to the device without needing a local account. |
+
 ## `configure authority radius-server address`
 
 The IP address or FQDN of the Radius server.
