@@ -3,18 +3,14 @@ title: SSR Universal ISO Installation
 sidebar_label: SSR Universal ISO Installation
 ---
 
-The release of the SSR Univeral ISO provides a single, image-based downloadable ISO that provides one installation workflow for conductors, conductor-managed routers, and Mist-managed routers. 
-
-With a single process requiring minimal interaction, SSR installation has been greatly simplified.
-
-The image-based installation creates two volumes on the disk, installs the full SSR image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version. 
+The release of the SSR Univeral ISO provides a single, image-based, downloadable ISO that provides a simplified SSR installation process requiring minimal interaction. After the SSR installation completes, the GUI provides clear processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
 
 #### Version History
 
 | Release | Modification |
 | ------- | ------------ |
 | 6.0.0 | Image-based ISO installation process implemented for Mist-managed networks. |
-| 6.3.0 | Universal ISO released, migrating to a single ISO and Image-based installation format for both Conductor-managed and Mist-managed deployments. |
+| 6.3.0 | Universal ISO released, migrating to a single ISO and Image-based installation format for Conductor, Conductor-managed, and Mist-managed deployments. |
 
 The installation workflow consists of the following steps:
 
@@ -42,7 +38,9 @@ Use the instructions for [Creating a Bootable USB](intro_creating_bootable_usb.m
 
 ## Installation 
 
-Ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the SSR to a management console or to a console server. The baud rate of the console port is 115200 bps.
+Under the cover, the image-based installation creates two volumes on the disk, installs the full SSR image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version. 
+
+Before beginning, ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the SSR to a management console or to a console server. The baud rate of the console port is 115200 bps.
 
 1. Connect an RJ45 rollover cable to the console port on the SSR device.
 2. Connect the other end of the cable to your computer.
@@ -65,11 +63,11 @@ Ensure that you have an appropriate rollover cable available to connect to your 
 
 11. If you are installing a FIPS enabled system, select Install Option 1, and select **Enter**. 
 
-	If you are installting a Mist-managed router, select option 2 (Cloud-init), and select **Enter**
+	If you are installting a virtual device, select option 2 (Cloud-init), and select **Enter**.
 
   ![Install Options](/img/u-iso4_install_options.png)
 
-	If you are installing a Conductor or conductor-managed router, skip the options and select **Enter**. The download and installation begins.
+	If you are installing a physical device and do not require FIPS, skip the options and select **Enter**. The download and installation begins.
 
   ![Unpacker](/img/u-iso5_begin_install.png)
 
@@ -95,7 +93,7 @@ Use the following process to initialize your device as a Conductor.
 
   ![SSR Conductor](/img/u-iso8a_initialize_conductor.png)
 
-2. To initialize a single conductor or the first conductor of an HA pair, enter the node name, the Conductor name, and Artifiactory user name and password, and click **ASSOCIATE**.
+2. To initialize a single conductor, or the first conductor of an HA pair, enter the node name, the Conductor name, and user name and password, and click **ASSOCIATE**.
 
  ![Conductor Association](/img/u-iso9_define_conductor.png)
 

@@ -38,12 +38,18 @@ module.exports = {
       "cc_fips_software_upgrades",
       "cc_fips_appendix",
     ],
-    "Installation Process": [
+    "Pre-Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
-      "intro_installation_univ-iso", 
     ],
+
+    
+    "SSR Universal ISO Installation": [
+      "intro_installation_univ-iso",
+    ],
+
+
     "Conductor Installation": [
       "install_conductor_overview",
       "bcp_conductor_deployment",
