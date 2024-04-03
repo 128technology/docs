@@ -4,7 +4,7 @@ sidebar_label: ICMP Reachability Detection
 ---
 
 :::important
-The ICMP Reachability Detection Plugin has been deprecated; its functionality is available as part of [Service Health Learning](config_service_health.md). For information specific to ICMP probe configuration, please refer to the [ICMP Probe](/config_service_health/#icmp-probe) section of the Service Health Learning documentation. 
+The ICMP Reachability Detection Plugin has been deprecated; its functionality is available as part of [Service Health Learning](config_service_health.md). For information specific to ICMP probe configuration, please refer to the [ICMP Probe](config_service_health#icmp-probe) section of the Service Health Learning documentation. 
 
 Service Health Learning operates in both a detection mode to gather metrics, and an enforcement mode to enforce path selection based on the experienced values, preventing failures that cause the router to effectively black-hole traffic.
 :::
