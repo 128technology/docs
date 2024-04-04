@@ -3,6 +3,12 @@ title: ICMP Reachability Detection Plugin
 sidebar_label: ICMP Reachability Detection
 ---
 
+:::important
+The ICMP Reachability Detection Plugin has been deprecated; its functionality is available as part of [**Service Health Learning**](config_service_health.md). For information specific to ICMP probe configuration, please refer to the [**ICMP Probe**](config_service_health.md#icmp-probe) section of the Service Health Learning documentation. 
+
+Service Health Learning operates in both a detection mode to gather metrics, and an enforcement mode to enforce path selection based on the experienced values, preventing failures that cause the router to effectively black-hole traffic.
+:::
+
 The ICMP reachability detection plugin is designed to solve the problem where upstream next-hop failures cause the SSR to blackhole traffic for non-SVR services. When an SSR is provisioned to send traffic towards operationally valid next-hop(s), one of those next-hops might be incapable of delivering the packets to the final destination due to upstream failures beyond simple link or ARP failures causing the traffic being blackholed. The ICMP reachability detection plugin solves this problem by pinging a destination for reachability and allowing new sessions to failover to alternate paths when the primary path is unreachable. The plugin can also be used to perform a similar probe end-to-end to a server over SVR and trigger a failover in the same manner.
 
 :::note
