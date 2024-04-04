@@ -3,8 +3,6 @@ title: Dynamic Source NAT
 sidebar_label: Dynamic Source NAT
 ---
 
-## Dynamic Source NAT
-
 Dynamic Source NAT translates multiple source IP addresses into a smaller pool of translated addresses and dynamic ports, which conserves public IP address space and provides the flexibility to source NAT a specific IP range. This supports scaling up sessions for an internal service. For example, in a corporate office with a SIP phone service where all phones have different IPs on port 5060, these internal IP addresses are source NAT’ed to a single external IP address. 
 
 Dynamic Source NAT may also provide solutions for IP address conflicts, but the IP mapping is not one-to-one and does NOT provide destination NAT in the reverse direction. To facilitate the destination NAT mapping for network connections from the external client to the internal client, use [`bidirectional-nat`](config_static_nat.md). 
@@ -22,7 +20,7 @@ The Dynamic Source NAT challenge is illustrated in scenarios #2 and #4 below, wh
 
 By applying Dynamic Source NAT configuration to the `spk-lan2` interface, the `192.168.1.0/24` subnet can be mapped to the single IP address and subnet `172.16.128.10/32`, with dynamically allocated ports. This allows the SSR to dynamically build a many-to-one source NAT mapping.  
 
-### Configuration
+## Configuration
 
 In scenario #2, sessions from an application using port 1111 are initiated from multiple clients of the spk-lan2 interface, to a client of hub-lan1 on 10.10.10.10. The first client at host 192.168.1.10 and port 1111 is assigned a source NAT of 172.16.128.10:1653 where port 1653 is allocated dynamically. The second client at 192.168.1.11 with port 1111 is allocated a dynamic source NAT of 172.16.128.10:1654. 
 
@@ -30,7 +28,7 @@ Scenario #4 is similar, except the target connections are to the client at the `
 
 The following is the router configuration for both the above use cases. Packets going through `spk-lan2` within the 192.168.1.0/24 domain will be source-natted to 172.16.128.10/32. 
 
-#### PCLI Configuration
+### Sample PCLI Configuration
 
 ```
 config
@@ -51,7 +49,7 @@ config
 exit 
 ```
 
-#### Sample GUI Configuration:
+### Sample GUI Configuration:
 
 Network Interface Configuration
 
@@ -70,7 +68,7 @@ Dynamic Source NAT is configured from the network-interface using the following 
 - [`local-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-local-ip): For packets ingressing this interface, the IP that is source NAT'ed to the `remote-ip`. 
 - [`remote-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-remote-ip): For packets ingressing this interface, the IP where the `local-ip` will be source NAT'ed. `remote-ip` must use the /32 prefix.
 
-### Show Commands
+## Show Commands
  
 The [`show network-interface source-nat-rules`](cli_reference.md#show-network-interface-source-nat-rules) can be run from the router or the conductor to display brief or detailed information for NAT configurations. Please see the [NAT Troubleshooting](ts_nat_troubleshooting.md) pages for information about the `source-nat-rules` subcommand. 
 

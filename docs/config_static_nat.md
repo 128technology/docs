@@ -46,11 +46,11 @@ exit
 
 ```
 
-### Non-SVR Traffic
+## Non-SVR Traffic
 
 In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat. This is done in the following locations within the configuration
 
-#### Service Level
+### Service Level
 
 Disable `egress source-nat` at the service level by setting `service > source-nat` to `disabled` as shown below. 
 
@@ -71,7 +71,7 @@ authority
 exit
 ```
 
-##### Network Interface Level
+### Network Interface Level
 
 Disable `egress source-nat` at the network-interface level by setting `network-interface > source-nat` to `false` and not configuring `network-interface > egress-source-nat-pool`.
 
@@ -94,7 +94,7 @@ authority
 exit
 ```
 
-#### Service Route Level
+### Service Route Level
 
 Disable `egress source-nat` at the service-route level by **not** configuring `service-route > next-hop > source-nat-pool`.
 
@@ -115,7 +115,7 @@ exit
 ```
 
 
-### Using the GUI
+## Using the GUI
 
 Set the local and remote IP addresses under Authority > Router > Node > Device Interface > Network Interface.
 
@@ -123,11 +123,11 @@ Set the local and remote IP addresses under Authority > Router > Node > Device I
 
 ![Bidirectional NAT Config](/img/static_nat_gui_nat-config.png)
 
-### Show Commands
+## Show Commands
 
 For details about command output, refer to the [`show sessions`](cli_reference.md#show-sessions) and [`show sessions by-id`](cli_reference.md#show-sessions-by-id) commands.
 
-#### Source NAT
+### Source NAT
 - On the session ingress node, the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
 
 ![Session Ingress](/img/source-nat1.png)
@@ -140,7 +140,7 @@ For details about command output, refer to the [`show sessions`](cli_reference.m
 
 ![NAT IP and Port](/img/source-nat3.png)
 
-#### Destination NAT
+### Destination NAT
 
 - On the session egress node the `show sessions by-id` output shows the NAT’d destination address in the Forward Flow `NextHop` and Reverse Flow `src ip` fields. 
 
