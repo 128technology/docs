@@ -49,7 +49,7 @@ IP connectivity is required for GUI onboarding. If you do not have an ethernet i
     * [GUI through LAN port](intro_installation_image.md#associate-the-router-with-mist)
     * [PCLI `adopt`command](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
-In some cases, the Silicom Madrid 90500-0151-G61 has been found to have variations in port layout. This is likely due to changing manufacturing requirements. Users should be aware that while these variations are supported, it may require some investigation to determine the correct port layout. The following additional port layout has been identified: 
+In some cases, the Silicom Madrid 90500-0151-G61 has been found to have variations in port layout. This is likely due to changing manufacturing requirements. The following additional port layout has been identified: 
 - WAN/Internet port: ge0/0/1
 - LAN port: ge0/0/6
 
