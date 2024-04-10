@@ -61,7 +61,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 	| IPv4VPN | Routes |
 	| - | BorderRouters |
 ------
-- **I95-53821 Radius Remote Authentication:** Radius Authentication supports the remote authentication of users created remotely, automatically adding them to the appropriate local user databases. This is especially helpful for large organizations that are geographically diverse. See [Configuring RADIUS](config_radius.md#configuring-radius) for more information.
+- **I95-53821 Radius Remote Authentication:** Users can now be added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography. See [Configuring RADIUS](config_radius.md#configuring-radius) for more information.
 ------
 - **I95-53878 LAG:** 
 ------
@@ -73,15 +73,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 
 
-
-
-
-
-
 ### Resolved Issues
 
-- **I95-54029 LLDP packets being dropped on some SSR1300 and SSR1400 devices:** The X722 NIC firmware on SSR1300 and SSR1400 platforms has been updated, and LLDP packets are no longer dropped.
-------
 
 
 
