@@ -19,7 +19,7 @@ There are three standard ways of upgrading routers:
 The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Use the `install128t` application steps through both of these processes.
 :::
 
-Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a **t128** user is configured with `sudo` privileges. 
 
 ### Version Dependencies
 
@@ -29,7 +29,7 @@ Examples:
 - Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
 - Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
 - Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
-- Conductor running version 5.1.9, managing Routers running version 5.0.1; Not supported, but *may* work.
+- Conductor running version 5.6.8, managing Routers running version 6.1.3; Not supported.
 
 ### Stopping the SSR Software
 

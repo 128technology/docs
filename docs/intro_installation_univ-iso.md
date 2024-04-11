@@ -38,7 +38,7 @@ Use the instructions for [Creating a Bootable USB](intro_creating_bootable_usb.m
 
 ## Installation 
 
-Under the cover, the image-based installation creates two volumes on the disk, installs the full SSR image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version. 
+The image-based installation creates two volumes on the disk, installs the full SSR image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version. 
 
 Before beginning, ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the SSR to a management console or to a console server. The baud rate of the console port is 115200 bps.
 

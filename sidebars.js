@@ -47,6 +47,7 @@ module.exports = {
     
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
+      "upgrade_ibu_conductor",
     ],
 
 
@@ -70,6 +71,7 @@ module.exports = {
     ],
     "Image-Based Installation": [
       "intro_installation_image",
+      "upgrade_ibu_conductor",
     ],
     "Cloud Installations": [
       "supported_cloud_platforms",

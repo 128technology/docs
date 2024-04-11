@@ -5,11 +5,9 @@ sidebar_label: Image-Based Installation
 
 Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
 
-For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) is used. 
+Beginning with version 6.3.0, a universal ISO is available that provides a single downloadable ISO providing image-based installs for conductors and routers.
 
-:::important
-The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for conductor-managed WAN Telemetry deployments.
-:::
+The [package-based installation](intro_installation_bootable_media.mdx) is still available for older installations and upgrades. 
 
 The image-based installation creates two volumes on the disk, installs the full 6.0.x image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
