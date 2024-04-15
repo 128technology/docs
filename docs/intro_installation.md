@@ -54,10 +54,10 @@ For full details and instructions refer to [Upgrading the SSR Networking Platfor
 
 ## Version Dependencies
 
-The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
+The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
 
 Examples:
 - Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
 - Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
 - Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
-- Conductor running version 5.1.9, managing Routers running version 5.0.1; Not supported, but *may* work.
+- Conductor running version 5.6.8, managing Routers running version 6.1.3; Not supported.
