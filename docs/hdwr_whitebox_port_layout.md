@@ -39,9 +39,9 @@ IP connectivity is required for GUI onboarding. If you do not have an ethernet i
 
 ![Silicom Madrid](/img/install_onbd_hdwr_silicom.png)
 
-1.  Connect port 6 `ge0/0/6` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
+1.  Connect port 1 `ge0/0/1` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
-2. Connect port 3 `ge0/0/3` (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.
+2. Connect port 4 `ge0/0/4` (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.
 
 3. Go to `https://192.168.3.1 `
 
@@ -49,11 +49,9 @@ IP connectivity is required for GUI onboarding. If you do not have an ethernet i
     * [GUI through LAN port](intro_installation_image.md#associate-the-router-with-mist)
     * [PCLI `adopt`command](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
-In some cases, the Silicom Madrid 90500-0151-G61 has been found to have variations in port layout. This is likely due to changing manufacturing requirements. The following additional port layout has been identified: 
+In rare cases, the Silicom Madrid 90500-0151-G61 has been found to have variations in port layout. The following additional port layout has been identified: 
 - WAN/Internet port: ge0/0/1
 - LAN port: ge0/0/6
-
-    ![Alternate port layout](/img/madrid_ports_alt_layout.png)
 
 ### Fitlet2 Dual Port
 
