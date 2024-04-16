@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.1.1">
 <title data-rh="true">Whitebox Device Default Port Layout | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/hdwr_whitebox_port_layout"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Whitebox Device Default Port Layout | SSN Docs"><meta data-rh="true" name="description" content="When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default."><meta data-rh="true" property="og:description" content="When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default."><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/hdwr_whitebox_port_layout"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/hdwr_whitebox_port_layout" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/hdwr_whitebox_port_layout" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.e30a7dc4.css">
-<script src="/assets/js/runtime~main.da3a08d2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.feff6fea.js" defer="defer"></script>
 <script src="/assets/js/main.1d489193.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -42,25 +42,30 @@ This order often does NOT match the external bezel port order. Some plugging in 
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="silicom-madrid-90500-0151-g61">Silicom Madrid 90500-0151-G61<a href="#silicom-madrid-90500-0151-g61" class="hash-link" aria-label="Direct link to Silicom Madrid 90500-0151-G61" title="Direct link to Silicom Madrid 90500-0151-G61">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="Silicom Madrid" src="/assets/images/install_onbd_hdwr_silicom-1efc8b9d9509bfb91b0ec85dd619d6b0.png" width="909" height="490" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Silicom Madrid" src="/assets/images/install_onbd_hdwr_silicom-43546b76a1db752d2991fb1189497d40.png" width="395" height="264" class="img_ev3q"></p>
 <ol>
 <li>
-<p>Connect port 6 <code>ge0/0/6</code> (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI <code>adopt</code> command, proceed to <a href="/docs/intro_installation_image#adopt-the-router-from-the-ssr-pcli">PCLI Adoption.</a></p>
+<p>Connect port 1 <code>ge0/0/1</code> (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI <code>adopt</code> command, proceed to <a href="/docs/intro_installation_image#adopt-the-router-from-the-ssr-pcli">PCLI Adoption.</a></p>
 </li>
 <li>
-<p>Connect port 3 <code>ge0/0/3</code> (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.</p>
+<p>Connect port 4 <code>ge0/0/4</code> (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.</p>
 </li>
 <li>
 <p>Go to <code>https://192.168.3.1 </code></p>
 </li>
 <li>
-<p>Log in to the router and use one of the following ways to associate the device with a Mist organization.</p>
+<p>Log in to the router and associate the device with a Mist organization using the PCLI or GUI.</p>
 <ul>
-<li><a href="/docs/intro_installation_image#associate-the-router-with-mist">GUI through LAN port.</a></li>
-<li><a href="/docs/intro_installation_image#adopt-the-router-from-the-ssr-pcli">PCLI <code>adopt</code>command.</a></li>
+<li><a href="/docs/intro_installation_image#associate-the-router-with-mist">GUI through LAN port</a></li>
+<li><a href="/docs/intro_installation_image#adopt-the-router-from-the-ssr-pcli">PCLI <code>adopt</code>command</a></li>
 </ul>
 </li>
 </ol>
+<p>In rare cases, the Silicom Madrid 90500-0151-G61 has been found to have variations in port layout. The following additional port layout has been identified:</p>
+<ul>
+<li>WAN/Internet port: ge0/0/1</li>
+<li>LAN port: ge0/0/6</li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="fitlet2-dual-port">Fitlet2 Dual Port<a href="#fitlet2-dual-port" class="hash-link" aria-label="Direct link to Fitlet2 Dual Port" title="Direct link to Fitlet2 Dual Port">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="Fitlet2 Dual Port" src="/assets/images/install_onbd_hdwr_fitletdual-9d247688b00285a63445f92fcb55a02c.png" width="888" height="473" class="img_ev3q"></p>
 <ol>
