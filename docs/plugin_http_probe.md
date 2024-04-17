@@ -33,7 +33,9 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | probe-interval | uint32 | default: 10 | The duration (in seconds) of how often to perform a link test to the destination |
 | number-of-attempts | uint32 | default: 4 | The number of consecutive HTTP(s) requests to be sent within the probe-duration before deciding that destination is unreachable |
 | probe-duration | uint32 | default: 5 | The duration (in seconds) within which to reach the destination. Each attempt will be made in (probe-duration / number-of-attempts) interval |
-| valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
+| valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the 
+server |
+| sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
 
 * Example:
 ```config {9-14}
@@ -50,11 +52,45 @@ config
                 url                http://172.16.2.5:5060/
                 valid-status-code  202
                 valid-status-code  200
+                sla
+                    max-jitter     300
+                    max-loss       2
+                    average-rtt    200
+                exit
             exit
         exit
     exit
 exit
 ```
+
+### SLA
+
+##### Version History
+
+| Release  | Modification                          |
+| -------- | ------------------------------------- |
+| 1.1.0    | `http-probe-profile > sla` introduced |
+
+
+
+```
+router 
+    http-probe-profile  http-probe-1
+        sla
+            max-jitter     300
+            max-loss       2
+            average-rtt    200
+        exit
+    exit
+exit
+``
+
+| Name  | Type    | Constraints | Description                             |
+| --    | --      | --          | --                                      |
+| max-jitter  | uint32 | max: probe-duration / number-of-attempts in [HTTP Profile configuration](#http-profile-configuration) | Maximum difference between the maximum and minimum RTT of the HTTP probe in millisecond |
+| average-rtt | unit32 | max: probe-duration / number-of-attempts in [HTTP Profile configuration](#http-profile-configuration) | Maximum average RTT for an HTTP probe test to be up in millisecond |
+| max-loss    | unit8  | max: number-of-attempts in [HTTP Profile configuration](#http-profile-configuration) | Number of failed HTTP(s) probe requests to mark the test down |
+
 
 ### Service route configuration
 Once the profile is created, the next step is to enable the reachability enforcement and probe detection for a non SVR service-route and reference the profile in that config.
@@ -279,7 +315,42 @@ The same steps can be used to bring `up` a path that is currently `down` by chan
 Additional debugging can be turned on for the `http-monitor` instance by setting `LOG_LEVEL=DEBUG` in `/var/run/128technology/plugins/http_monitor/{probe-name}.conf` config file
 :::
 
+
+### Metrics
+
+In-memory metrics were added for extensive http probe sla values
+
+```
+# show stats http-probe
+Wed 2024-04-17 02:52:35 UTC
+✔ Retrieving statistics...
+
+Http Probe Stats Metrics
+------------------------
+
+============= ======= ==================== ====================
+ Metric        Node    Probe-profile-name                Value
+============= ======= ==================== ====================
+ average-rtt   test2   http-probe-1                          0
+ jitter        test2   http-probe-1                          0
+ loss          test2   http-probe-1                        100
+ max-rtt       test2   http-probe-1                          0
+ min-rtt       test2   http-probe-1                          0
+ updated       test2   http-probe-1         1713322347.9919806
+
+Completed in 0.21 seconds
+```
+
 ## Release Notes
+
+### Release 1.1.0
+
+**Release Date:** Apr 16, 2024
+
+#### New Features and Improvements
+- **PLUGIN-2300** HTTP probe plugin SLA
+
+Add datamodel to allow Users to also configure a round trip time for the probe. If the request/response exceeds the time; consider that a failed attempt in the current probe algorithm. In-memory SLA metrics are added for better monitoring.
 
 ### Release 1.0.2
 
