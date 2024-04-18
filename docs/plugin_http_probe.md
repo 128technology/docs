@@ -21,7 +21,7 @@ For HTTPS probes, the client will allow self-signed certificates for inspecting 
 ## Configuration Snippet
 The plugin leverages the existing SSR reachability detection and enforcement configuration within the service-route on the router.
 
-### HTTP Profile configuration
+### HTTP Probe Profile configuration
 * Config Path: authority > router[name] > http-probe-profile
 * Config Fields:
 
@@ -33,8 +33,7 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | probe-interval | uint32 | default: 10 | The duration (in seconds) of how often to perform a link test to the destination |
 | number-of-attempts | uint32 | default: 4 | The number of consecutive HTTP(s) requests to be sent within the probe-duration before deciding that destination is unreachable |
 | probe-duration | uint32 | default: 5 | The duration (in seconds) within which to reach the destination. Each attempt will be made in (probe-duration / number-of-attempts) interval |
-| valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the 
-server |
+| valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 | sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
 
 * Example:
@@ -52,11 +51,6 @@ config
                 url                http://172.16.2.5:5060/
                 valid-status-code  202
                 valid-status-code  200
-                sla
-                    max-jitter     300
-                    max-loss       2
-                    average-rtt    200
-                exit
             exit
         exit
     exit
@@ -72,8 +66,29 @@ exit
 | 1.1.0    | `http-probe-profile > sla` introduced |
 
 
+SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in http probe profile configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than single probe timeout calculated by `probe-duration` / `number-of-attempts`.
+
+The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 4 seconds will be applied and max-loss of 2 is considered for every test. 
 
 ```
+router 
+    http-probe-profile      http-probe-1
+        name                http-probe-1
+        url                 http://172.16.2.5:5060/
+        valid-status-code   202
+        valid-status-code   200
+        probe-duration      12
+        probe-interval      10
+        number-of-attemps   3
+        sla
+            max-loss       2
+        exit
+    exit
+exit
+```
+
+* Example:
+```config {9-14}
 router 
     http-probe-profile  http-probe-1
         sla
@@ -83,14 +98,38 @@ router
         exit
     exit
 exit
-``
+```
 
-| Name  | Type    | Constraints | Description                             |
-| --    | --      | --          | --                                      |
-| max-jitter  | uint32 | max: probe-duration / number-of-attempts in [HTTP Profile configuration](#http-profile-configuration) | Maximum difference between the maximum and minimum RTT of the HTTP probe in millisecond |
-| average-rtt | unit32 | max: probe-duration / number-of-attempts in [HTTP Profile configuration](#http-profile-configuration) | Maximum average RTT for an HTTP probe test to be up in millisecond |
-| max-loss    | unit8  | max: number-of-attempts in [HTTP Profile configuration](#http-profile-configuration) | Number of failed HTTP(s) probe requests to mark the test down |
+| Name  | Type    | Description |
+| --    | --      | --          |
+| max-jitter  | uint32 | Maximum difference between the maximum and minimum RTT of the HTTP probe in millisecond |
+| average-rtt | unit32 | Maximum average RTT for an HTTP probe test to be up in millisecond |
+| max-loss    | unit8  | Number of failed HTTP(s) probe requests to mark the test down |
 
+
+### HTTP Probe Log Level
+* Config Path: authority > router[name] > http-probe
+* Config Fields:
+
+| Name  | Type    | Constraints | Description |
+| --    | --      | --          | --          |
+| log-level | enum | default: info | Http Probe Log Level |
+
+* Example:
+```config {9-14}
+
+config
+
+    authority
+
+        router  my-router
+            http-probe
+                log-level debug
+            exit
+        exit
+    exit
+exit
+```
 
 ### Service route configuration
 Once the profile is created, the next step is to enable the reachability enforcement and probe detection for a non SVR service-route and reference the profile in that config.
@@ -233,7 +272,7 @@ admin@node1.conductor1#
 
 ```
 
-Each service-route is designed to probe a unique URL for that servers and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers cannot be reached or responds with a unsuccessful status code (e.g. 404, 504 etc) the service path is taken out of service.
+Each service-route is designed to probe a unique URL for that servers and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers cannot be reached, responds with an unsuccessful status code (e.g. 404, 504 etc), or configured [SLA](#sla) is not met the service path is taken out of service.
 
 :::warning
 When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, it's possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
@@ -311,10 +350,6 @@ Nov 07 03:27:34 my-router.openstacklocal systemd[1]: Started HTTP Monitor Status
 The same steps can be used to bring `up` a path that is currently `down` by changing `STATUS=up` in the steps above.
 :::
 
-:::tip
-Additional debugging can be turned on for the `http-monitor` instance by setting `LOG_LEVEL=DEBUG` in `/var/run/128technology/plugins/http_monitor/{probe-name}.conf` config file
-:::
-
 
 ### Metrics
 
@@ -348,9 +383,9 @@ Completed in 0.21 seconds
 **Release Date:** Apr 16, 2024
 
 #### New Features and Improvements
-- **PLUGIN-2300** HTTP probe plugin SLA
+- **PLUGIN-2300** Implement SLA monitoring per probe
 
-Add datamodel to allow Users to also configure a round trip time for the probe. If the request/response exceeds the time; consider that a failed attempt in the current probe algorithm. In-memory SLA metrics are added for better monitoring.
+The plugin allows Users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These are considered in probe success criteria. Additionally, these values are available thorugh metrics. 
 
 ### Release 1.0.2
 
