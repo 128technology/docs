@@ -380,7 +380,7 @@ Completed in 0.21 seconds
 
 ### Release 1.1.0
 
-**Release Date:** Apr 16, 2024
+**Release Date:** Apr 19, 2024
 
 #### New Features and Improvements
 - **PLUGIN-2300** Implement SLA monitoring per probe
