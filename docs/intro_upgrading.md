@@ -29,7 +29,7 @@ Examples:
 - Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
 - Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
 - Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
-- Conductor running version 5.1.9, managing Routers running version 5.0.1; Not supported, but *may* work.
+- Conductor running version 5.6.8, managing Routers running version 6.1.3; Not supported.
 
 ### Stopping the SSR Software
 
