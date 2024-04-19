@@ -66,7 +66,7 @@ exit
 | 1.1.0    | `http-probe-profile > sla` introduced |
 
 
-SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in http probe profile configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than single probe timeout calculated by `probe-duration` / `number-of-attempts`.
+SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in the `http probe profile` configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than the single probe timeout calculated by `probe-duration` / `number-of-attempts`.
 
 The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 4 seconds will be applied and max-loss of 2 is considered for every test. 
 
