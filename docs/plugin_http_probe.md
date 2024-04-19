@@ -275,7 +275,7 @@ admin@node1.conductor1#
 Each service-route is designed to probe a unique URL for that server and monitor the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers either cannot be reached, responds with an unsuccessful status code (e.g. 404, 504 etc), or the configured [SLA](#sla) is not met, the service path is taken out of service.
 
 :::warning
-When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, it's possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
+When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, it is possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
 :::
 
 
