@@ -353,7 +353,7 @@ The same steps can be used to bring `up` a path that is currently `down` by chan
 
 ### Metrics
 
-In-memory metrics were added for extensive http probe sla values
+In-memory metrics were added for http probe SLA values
 
 ```
 # show stats http-probe
