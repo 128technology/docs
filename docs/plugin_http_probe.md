@@ -131,7 +131,7 @@ config
 exit
 ```
 
-### Service route configuration
+### Service Route Configuration
 Once the profile is created, the next step is to enable the reachability enforcement and probe detection for a non SVR service-route and reference the profile in that config.
 
 * Config Path: authority > router[name] > service-route[name] > reachability-detection
