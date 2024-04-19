@@ -102,7 +102,7 @@ exit
 
 | Name  | Type    | Description |
 | --    | --      | --          |
-| max-jitter  | uint32 | Maximum difference between the maximum and minimum RTT of the HTTP probe in millisecond |
+| max-jitter  | uint32 | Maximum difference between the maximum and minimum RTT of the HTTP probe in milliseconds |
 | average-rtt | unit32 | Maximum average RTT for an HTTP probe test to be up in millisecond |
 | max-loss    | unit8  | Number of failed HTTP(s) probe requests to mark the test down |
 
