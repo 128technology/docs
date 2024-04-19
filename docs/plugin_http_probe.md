@@ -385,7 +385,7 @@ Completed in 0.21 seconds
 #### New Features and Improvements
 - **PLUGIN-2300** Implement SLA monitoring per probe
 
-The plugin allows Users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These are considered in probe success criteria. Additionally, these values are available thorugh metrics. 
+The plugin allows Users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These settings are considered as part of the probe success criteria. Additionally, these values are available through metrics. 
 
 ### Release 1.0.2
 
