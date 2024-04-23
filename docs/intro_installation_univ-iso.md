@@ -3,14 +3,14 @@ title: SSR Universal ISO Installation
 sidebar_label: SSR Universal ISO Installation
 ---
 
-The release of the SSR Univeral ISO provides a single, image-based, downloadable ISO that provides a simplified SSR installation process requiring minimal interaction. After the SSR installation completes, the GUI provides clear processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
+The SSR Univeral ISO is a single downloadable ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
 
 #### Version History
 
 | Release | Modification |
 | ------- | ------------ |
 | 6.0.0 | Image-based ISO installation process implemented for Mist-managed networks. |
-| 6.3.0 | Universal ISO released, migrating to a single ISO and Image-based installation format for Conductor, Conductor-managed, and Mist-managed deployments. |
+| 6.3.0 | Universal ISO released, migrating to a single ISO installation format for Conductor, Conductor-managed, and Mist-managed deployments. |
 
 The installation workflow consists of the following steps:
 
@@ -36,9 +36,7 @@ You will be prompted for your username and token to access the web page listing 
 
 Use the instructions for [Creating a Bootable USB](intro_creating_bootable_usb.md) to create a bootable USB drive containing the universal ISO image. 
 
-## Installation 
-
-The image-based installation creates two volumes on the disk, installs the full SSR image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version. 
+## Installation  
 
 Before beginning, ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the SSR to a management console or to a console server. The baud rate of the console port is 115200 bps.
 

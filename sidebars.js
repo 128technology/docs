@@ -38,19 +38,23 @@ module.exports = {
       "cc_fips_software_upgrades",
       "cc_fips_appendix",
     ],
+    "Upgrading the SSR": [
+      "intro_upgrade_considerations",
+      "intro_upgrading",
+      "upgrade_ibu_conductor",
+      "upgrade_router",
+      "upgrade_restricted_access",
+      "upgrade_legacy",  
+      "intro_rollback",
+    ],
     "Pre-Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
     ],
-
-    
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
-      "upgrade_ibu_conductor",
     ],
-
-
     "Conductor Installation": [
       "install_conductor_overview",
       "bcp_conductor_deployment",
@@ -71,7 +75,6 @@ module.exports = {
     ],
     "Image-Based Installation": [
       "intro_installation_image",
-      "upgrade_ibu_conductor",
     ],
     "Cloud Installations": [
       "supported_cloud_platforms",
@@ -81,11 +84,6 @@ module.exports = {
       "intro_installation_azure_mist",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
-    ],
-    "Upgrades and Rollback": [
-      "intro_upgrade_considerations",
-      "intro_upgrading",
-      "intro_rollback",
     ],
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",

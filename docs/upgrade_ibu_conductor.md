@@ -1,22 +1,63 @@
 ---
-title: Image-based Software Upgrade for the Conductor
-sidebar_label: Image-based Software Upgrade for the Conductor
+title: Upgrading the Conductor
+sidebar_label: Upgrading the Conductor
 ---
-Image-based installations provide many benefits over the earlier RPM package-based installation/upgrade process, including upgrade speed, stability, efficiency, and ease of use.  This section describes upgrading a Conductor and Conductor-managed routers to the image-based software installation.
 
-Existing deployments using package-based upgrade (PBU) workflows will continue to be supported however for an improved user experience, we recommend adopting the image-based process.
+## Upgrading the Conductor
 
-**Can an image-based conductor manage a package-based router?**
+The release and upgrade to 6.3.0 allows a Conductor to manage routers running image-based software installations, manage routers running older, package-based software, and initiate image-based upgrades to those routers.
 
-## Overview
+Image-based installations provide many benefits over the earlier RPM package-based installation/upgrade process, including upgrade speed, stability, efficiency, and ease of use. This section describes the process for upgrading a Conductor, allowing it to manage both package-based and image-based routers.
 
-During the initial conductor upgrade, the SSR software is first upgraded from package-based to a standard, image-based version. Once the initial image-based upgrade (IBU) is complete, a second upgrade to the selected version of the image-based software is initiated. This ensures that the data conversions are consistent, and sets a baseline for the upgrade. All subsequent upgrades are performed from the GUI or PCLI. For large deployments, upgrades can be performed by API's.
+Existing deployments using package-based upgrade (PBU) workflows will continue to be supported. However, for an improved user experience we recommend adopting the image-based process.
 
-- Rollback: Once the SSR has been converted/upgraded to image-based software, rollback is only supported to the previous *image-based* version. Rollback from image-based to package-based is not possible. 
-- Once a router has been converted to image-based, the router may not migrate to a conductor running package-based software.
-- The minimum supported conductor and managed router starting version for package based conversion and upgrade is 5.1.0. 
+:::note
+Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md#importexport).
 
-### HA Considerations
+For systems with both primary and secondary conductors, it is a best practice to upgrade only one conductor at a time. 
+:::
+
+### Upgrade using the GUI
+
+Use the following procedures to upgrade a Conductor from the GUI.
+
+1. Select **Conductor** under Authority.
+2. In the **Node: Conductor** panel, select the **Manage SSR Software** icon (the arrow within a circle). This icon displays green when upgrades are available. 
+3. In the **Upgrade SSR** window, use the drop down to select the SSR version for the upgrade. 
+4. Click **Proceed**.
+
+The Upgrade screen displays the Raw Log with the upgrade progress. Once the upgrade is complete, the Conductor is restarted and the GUI is refreshed. 
+
+### Upgrading Using the CLI
+
+Use the `request system software upgrade` command and the associated arguments to perform upgrades. All of the upgrade features are available from the command line as well as the GUI. 
+
+```
+admin@conductor-node-1.Conductor# request system software upgrade
+usage: upgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-check]
+               [skip-health-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
+keyword arguments:
+cohort-id                 Assign a cohort ID to the operation.
+force                     Skip confirmation prompt. Only required when targeting all routers
+node                      The name of the node
+resource-group            The name of the resource group
+router                    The router on which to upgrade SSR software (default: Conductor)
+simultaneous              Upgrade both nodes in an HA router at the same time to maximize speed but interrupt service. Only valid when targeting a router.
+skip-health-check         Skip the post upgrade health check, which reverts to the previous version upon failure.
+skip-package-transfer     Don't transfer any packages installed on top of the current SSR ISO to the new SSR ISO. Only valid for
+                          image based systems.
+skip-pre-check            Skip the pre upgrade health check, which prevents the upgrade from starting upon failure.
+version                   The targeted upgrade version.
+
+see also:
+request system software downgrade       Downgrade to a new version of the SSR.
+request system software download        Download a new version of the SSR.
+request system software health-check    Perform a health check of an SSR.
+request system software revert          Revert to a previous version of the SSR.
+*admin@conductor-node-1.Conductor# request system software upgrade
+```
+
+## HA Considerations
 
 * If an HA pair is discovered to have a mismatched software state (image-based and package-based) an Alarm is reported. The software state must be the same for both nodes.
 * Failure of a router to complete the conversion generates a user visible event and records the reasons for the failure on the conductor.
