@@ -25,7 +25,7 @@ To view the install history for your routers, selecting Lifecycle History displa
 
 ### Upgrade using the Conductor's PCLI
 
-For routers managed by an SSR Conductor, upgrades can be initiated from the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes asociated with software version 6.3.0 and those chages are indicated below. For earlier versions of SSR software, please refer to the Legacy Upgrades section below. 
+For routers managed by an SSR Conductor, a self-upgrade, or manual upgrade, can be initiated from the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes asociated with software version 6.3.0 and those chages are indicated below. For earlier versions of SSR software, please refer to the [Legacy Upgrades](upgrade_legacy.md) section. 
 
 As an administrator-level user, log into the conductor's PCLI.
 
@@ -40,4 +40,4 @@ As an administrator-level user, log into the conductor's PCLI.
 
 4. Once the download is complete, use the command `request system software upgrade router <rtr> node <node> version <image-version>` to initiate the upgrade process. View upgrade progress using `show system software upgrade router <rtr> node <node>`
 
-In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
+In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, intiating an upgrade on one HA node or router will automatically upgrade the second node/router. However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.

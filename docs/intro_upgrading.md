@@ -1,6 +1,6 @@
 ---
-title: Upgrading the SSR Networking Platform
-sidebar_label: Upgrading
+title: Upgrading the SSR
+sidebar_label: Upgrading the SSR 
 ---
 
 :::note
