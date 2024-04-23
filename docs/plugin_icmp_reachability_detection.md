@@ -824,6 +824,18 @@ Some of the key aspects of the auto-generated configuration are as follows:
 The plugin must be updated to version 3.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 3.0.6
+**Release Date:** Apr 24, 2024
+
+**Router Version**
+- 128T-icmp-reachability-detection-router-1.1.3-2
+
+#### Issues Fixed
+
+- **PLUGIN-2371** Adding additional debugging to plugin
+
+  _**Resolution:**_ Log level is set through config and support for save tech-support-info has been added.
+
 ### Release 3.0.5
 **Release Date:** Mar 01, 2023
 
