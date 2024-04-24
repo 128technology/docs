@@ -1,6 +1,6 @@
 ---
-title: Upgrading the SSR
-sidebar_label: Upgrading the SSR 
+title: Upgrade Overview
+sidebar_label: Upgrade Overview 
 ---
 
 :::note
@@ -17,7 +17,7 @@ Conductor and router upgrades may be performed from the GUI of the Conductor, th
 The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed.
 :::
 
-Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. Systems that were installed using the OTP ISO have a **t128** user configured by default with `sudo` privileges. 
+Prerequisites for upgrades include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. Systems that were installed using the OTP ISO have a **t128** user configured by default with `sudo` privileges. 
 
 ### Version Dependencies
 

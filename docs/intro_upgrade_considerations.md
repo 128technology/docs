@@ -2,13 +2,15 @@
 title: Upgrade Considerations
 sidebar_label: Upgrade Considerations
 ---
-Before upgrading to **version 5.3 or 5.4 and higher**, please review the following information.
+Before upgrading please review the following information.
 
 ### Upgrade Installer
-Before **upgrading to, or installing** version 5.4, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
+Before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 
 ### Rollback Considerations
-Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's pcli. On routers, it is recommended that upgrades and rollbacks are performed from the conductor's GUI. 
+
+Upgrading or rolling back earlier versions of the SSR software (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
 ## Configuration Validation Changes
 Several modifications have been made to the verification process for configurations. As a result, configurations that were valid in earlier versions of the SSR software may now present configuration errors. The information below provides an awareness of what to look for and address.
