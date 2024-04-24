@@ -1,6 +1,6 @@
 ---
 title: Upgrading a Router
-sidebar_label: Upgrading a Router
+sidebar_label: Upgrading a Router 
 ---
 Use the following procedures to upgrade a Router.
 

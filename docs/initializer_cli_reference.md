@@ -43,7 +43,7 @@ SSR is running; cannot launch Initializer
 ```
 
 To stop SSR, follow the steps shown in the
-[Installation Guide](intro_upgrading.md#stopping-the-ssr-software).
+[Installation Guide](upgrade_legacy.md#stopping-the-ssr-software).
 
 :::
 

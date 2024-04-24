@@ -7,7 +7,7 @@ sidebar_label: Upgrade Overview
 Please refer to the [Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
 :::
 
-Your SSR conductor or router must have internet access to download the latest software packages; however, we recognize that there are deployments where the SSR does not have internet access. In those cases you can use the SSR conductor as a repository (or proxy) to retrieve or store software images. For information about upgrading offline or air-gap network devices, refer to [Upgrades with Restricted Internet Access](#upgrades-with-restricted-internet-access).
+Your SSR conductor or router must have internet access to download the latest software packages; however, we recognize that there are deployments where the SSR does not have internet access. In those cases you can use the SSR conductor as a repository (or proxy) to retrieve or store software images. For information about upgrading offline or air-gap network devices, refer to [Upgrades with Restricted Internet Access](upgrade_restricted_access.md).
 
 As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
 
