@@ -834,7 +834,7 @@ The plugin must be updated to version 3.0.3 or later prior to [upgrading the con
 
 - **PLUGIN-2371** Adding additional debugging to plugin
 
-  _**Resolution:**_ Log level is set through config and support for save tech-support-info has been added.
+  _**Resolution:**_ Log level is set through config and support for `save tech-support-info` has been added.
 
 ### Release 3.0.5
 **Release Date:** Mar 01, 2023
