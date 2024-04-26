@@ -45,6 +45,69 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.8-12
+
+**Release Date:** May 3, 2024
+
+### New Features
+
+- **I95-51556 Added New LACP Metrics:** The following lacp metrics have been added for bond interfaces: 
+ /interface/received/lacp/packets
+ /interface/received/lacp/unknown
+ /interface/received/lacp/illegal
+ /interface/sent/lacp/packets
+ /interface/sent/lacp/queue-full
+These counters are available per-bond-member. 
+------
+
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, 
+------
+- **I95-53523 Bond interface shut down generates errors:** Resolved an issue where the device interface clean up process was out of order and generated a detach failure. 
+------
+- **I95-53565 Port state of LAG members not dynamically updated:** Resolved an issue where enabling or disabling a bond member port does not update the status until the 128T service is restarted. The adminisrative enable and disable now works as expected.
+------
+- **I95-54541 Device interfaces on Azure VMs with a 2K or greater MTU fail to initialize:** Resolved an issue where device-interfaces configured in an Azure VM fail during initialization, and the port remains operationally down.
+------
+- **I95-54750 Load Balancer API Calls not working:** The original API and Swagger documentation used `Load Balancer`, which was misleading. The `Reachability Detection` REST APIs have been updated to use `Reachability Detection` as reference, instead of `Load Balancer`.
+------
+- **I95-54833 HA port is showing as redundant:** Resolved an issue where adding a device-interface back into the configuration after it was removed did not recreate the device-state. 
+------
+- **I95-54867 SSR-1300 baud rate set incorrectly:** Resolved an issue where the incorrect baud rate was allowed. The only allowed baud rate for the SSR is now 115200. This is the default rate.
+------
+- **I95-54918 Highway process crashed on the active node of a router:** Resolved a crash caused by a race condition when the last instance of a capture filter referencing a particular file-name is removed while a packet is in the process of being captured. 
+------
+- **I95-55164 Dropping GRE encapsulated packets:** Classification support for Enhanced GRE Header, version 1, as defined by RFC 2637 Point-to-Point Tunneling Protocol (PPTP) has been added.
+------
+- **I95-55226 Validation allows a network interface to be used as both DHCP relay and server:** The vaildation process has been updated to include several checks against DHCP relays, clients, servers, and access-policies. 
+------
+- **I95-55270 DHCP server not coming up:** Resolved an issue where a network namespace was using a namespace ID that was not cleaned up properly after removal.
+------
+- **I95-55416 Dynamic reconfig of the PCI address of a bond member breaks connectivity:** Added an identifier to the LAG member, enabling the proper handling of the member whenever the PCI address is changed.
+------
+- **I95-55444 ICMP probe stats missing per service route:** Statistics were not available for ICMP probes that did not meet SLA per service route. These stats have been added.
+------
+- **I95-55467 Incorrect VLAN Tagging in Azure HCI Stack with Hyper-V Hypervisor:** When using VLANs on Azure HCI Stack with Hyper-V, bit shifting occurs resulting in incorrect VLAN tags. This has been resolved for **non-accelerated NICs** by updating the DPDK and adding handling for the VLAN tags on Azure HCI. However, this issue is still present when using accelerated mode with the Azure HCI Stack with Hyper-V. The current solution is to **not** use accelerated mode if configuring VLAN interfaces.
+------
+- **I95-55562 BGP aggregate on router and in Mist intent may cause rare race condition:** Resolved a rare edge case: If an aggregate (summary) is configured in BGP, (e.g., 10.0.0.0/8), and that same prefix also exists as a BGP route present in the network, a race condition may occur and the router with the aggregate configuration may not originate the aggregate.
+------
+- **I95-55578 Traceroute not stopping at the specified `destination-ip`:** Resolved an issue where traceroute would continue probing after a response from the endpoint, if a subsequent probe timed out. 
+------
+- **I95-55586 GraphQL API returns `IsActive` incorrectly if the `device-interface` is `vrrp_standby`:** The `router-peer-path` setting now returns the correct value when in `vrrp-standby`.
+------
+- **I95-55591 Some network interface stats are not updated:** Some network interface stats are not updated with the port name when a device interface is renamed. Device interface name changes are now handled correctly, and `network-interface` metrics are properly updated when `device-interface name` changes.
+------
+- **I95-55603 HA router stuck in connected state:** 
+
+------
+- **I95-55762 Unable to view more than 50 prefixes in BGP:** Updated the routing engine to display all rows for BGP show commands if a count parameter is not specified.
+------
+
+
+
+
 ## Release 6.1.7-3
 
 **Release Date:** February 17, 2024
