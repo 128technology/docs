@@ -6,7 +6,6 @@ sidebar_label: Security Hardening Guidelines
 This section provides a list of security hardening actions and guidelines to provide additional security to your SSR and your network overall. Many of the guidelines below are covered in the [SSR Common Critieria Install and Configuration](cc_fips_titlepage.md) documentation. 
 
 ## Administrative
-
 - Review SSR security polices for CVE tracking and notifications: [Juniper SSR Security Policies](about_security_policy.md#release).
 - Install the latest supported/recommended version of SSR software.
 - Always verify cryptographic (MD5) checksums prior to software installation.
@@ -39,9 +38,9 @@ When the SSR approaches the configured limit of half-open TCP connections, the e
 - Configure SNMP using the most secure method with more than one trusted server.
 - Community strings and USM passwords should be difficult to guess and follow password complexity policy.
 - Be sure to configure read-only access; use read-write only when absolutely required.
-- Allow queries and/or send traps to more than one trusted server.
-- Send Syslog messages to more than one trusted server with enhanced timestamps.
-- Create configuration backups to more than one trusted server.
+- Allow queries and/or send traps to more than one trusted server to provide resiliency.
+- Send Syslog messages to more than one trusted server with enhanced timestamps to provide resiliency.
+- Create configuration backups to more than one trusted server to provide resiliency.
 
 ## Access Security
 - Configure a [login warning banner](cc_fips_banners.md) that is displayed prior to credentials being provided.
@@ -52,7 +51,7 @@ When the SSR approaches the configured limit of half-open TCP connections, the e
 - Restrict authentication by setting the authentication token timeout value.
 
 ## User Authentication Security
-- Configure a [password complexity policy](config_command_guide.md/#configure-authority-password-policy) that incorporates the following, and meets your organization’s password complexity policy.
+- Configure a [password complexity policy](config_command_guide.md#configure-authority-password-policy) that incorporates the following, and meets your organization’s password complexity policy.
   - Minimum password length.
   - Password lifetime.
   - Maximum failed login attempts.
@@ -83,7 +82,7 @@ When the SSR approaches the configured limit of half-open TCP connections, the e
 
 ## Access Control and Encryption
 - Ensure inter-node security is configured with encryption for fabric metadata.
-- Ensure that the network interface adjacency (authority->router->node->device-interface->network-interface->adjacency) has a security policy configured to encrypt peer metadata. See [configure authority security](config_command_guide.md#configure-authority-security) for information about configuring security policies.
+- Ensure that the network interface adjacency (authority>router>node>device-interface>network-interface>adjacency) has a security policy configured to encrypt peer metadata. See [configure authority security](config_command_guide.md#configure-authority-security) for information about configuring security policies.
 - Ensure inter-router security is configured to decrypt metadata.
 - Ensure service security policy is configured to encrypt application payload.
 - Optionally apply HMAC when packet authentication is required.
