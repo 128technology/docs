@@ -56,11 +56,11 @@ The PSIRT will track all vulnerabilities found in all components used in the dev
 
 Juniper will track all upstream dependencies and vulnerabilities to determine the extent of all products and services affected. Juniper will obtain vulnerability information, including remediation advice, from their upstream vendors. Juniper will provide vulnerability information, including remediation advice, to their downstream customers and users.
 
-### Timing of public disclosure
+### Timing of Public Disclosure
 
 The PSIRT should choose an appropriate date for the public vulnerability disclosure and prepare the advisory with the assistance of the product business division and other major stakeholders, such as legal, public relations, and external coordinators if applicable. The vulnerability disclosure should align to when the remediation is available so that users can take the necessary action.
 
-#### Public Disclosure of third-party software vulnerabilities
+#### Public Disclosure of Third-party Software Vulnerabilities
 
 In the event a third-party software organization, on which the SSR Networking Platform depends, has publicly disclosed a vulnerability without prior disclosure to Juniper directly, Juniper will report to its customers any workarounds or remediation contained within the third-party advisory in advance of providing a resolution within the product.  Once a fix is provided within the product, an updated advisory will be reported to communicate the availability of a solution.
 
@@ -134,7 +134,7 @@ Upon release of the remediation, the security advisory will be published on a pu
 
 #### Mailing List
 
-Advisories will be published on Juniper’s 128sirtannounce mailing list and should be easily accessible by its users. If a disclosed vulnerability is a serious or widespread issue, public relations divisions should prepare for contact from mass news media.
+Advisories will be published on Juniper’s `128sirtannounce` mailing list and should be easily accessible by its users. If a disclosed vulnerability is a serious or widespread issue, public relations divisions should prepare for contact from mass news media.
 
 The mailing list will be maintained by the PSIRT and will be accessible by members of the SIRT.  Contact information is subject to GDPR and customers and/or users of Juniper products and services have a right to be forgotten. When users are no longer active customers, their information will be purged.
 
