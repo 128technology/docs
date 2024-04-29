@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[8401],{61114:(e,t,s)=>{s.d(t,{A:()=>n});var a=s(96540),c=s(76257),d=s(74848);c.N.initialize({startOnLoad:!0});const n=e=>{let{chart:t}=e;return(0,a.useEffect)((()=>{c.N.contentLoaded()}),[]),(0,d.jsx)("div",{className:"mermaid",children:t})}}}]);
