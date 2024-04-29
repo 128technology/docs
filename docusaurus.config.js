@@ -36,6 +36,11 @@ module.exports = {
           position: 'right',
         },
         {
+          to: 'kb',
+          label: 'Knowledge Base',
+          position: 'right',
+        },
+        {
           href: 'https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c',
           label: 'Community',
           position: 'right',
@@ -62,6 +67,32 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        blog: {
+          path: 'kb',
+          routeBasePath: 'kb',
+          blogTitle: 'Session Smart Router Knowledge Base Articles',
+          postsPerPage: 'ALL',
+          //blogSidebarTitle: 'Last 10 Posts',
+          blogSidebarCount: 0,
+          showReadingTime: false,
+          feedOptions: {
+            type: 'all',
+            title: '',
+            description: '',
+            limit: 20,
+            description: '',
+            copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
+            language: 'en-US',
+            createFeedItems: async (params) => {
+              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              return defaultCreateFeedItems({
+                // keep only the 10 most recent blog posts in the feed
+                blogPosts: blogPosts.filter((item, index) => index < 10),
+                ...rest,
+              });
+            },
+          },
         },
       },
     ],
