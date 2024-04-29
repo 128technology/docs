@@ -9,6 +9,7 @@ services:
       - 3000:3000
     volumes:
       - ./docs:/app/docs
+      - ./kb:/app/kb
       - ./src:/app/src
       - ./static:/app/static
       - ./docusaurus.config.js:/app/docusaurus.config.js

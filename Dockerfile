@@ -8,6 +8,7 @@ COPY package*.json /app/
 COPY docusaurus.config.js /app/
 COPY sidebars.js /app/
 COPY ./docs /app/docs
+COPY ./kb /app/kb
 COPY ./src /app/src
 COPY ./static /app/static
 RUN npm install
