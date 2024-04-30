@@ -46,8 +46,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-51303 Offline Documentation available upon installation:** The SSR documentation site is now installed as a snapshot at the time of release, and run as a web server on the SSR router and conductor installations. This makes the full documentation site availble from within a network that does not have internet access. To access the documentation, click on the Documentation icon from the GUI after installation. 
 ------
-- **I95-51501 Use of the physical MAC address for VRRP:** SSR now uses the physical MAC when VRRP is configured. **follow up on this
-
+- **I95-51501 Use of the physical MAC address for VRRP:** The command [`use-physical-address`](config_command_guide.md#configure-authority-router-node-device-interface-vrrp-use-physical-address) has been added to the device-interface configuration. This allows VRRP to use the physical MAC rather than the virtual MAC and prevents platforms that reject the virtual MAC from dropping traffic.
 ------
 - **I95-51512 Simplify onboarding of SSR devices in an Air-gapped network:** The image-based ISO is the preferred method of installation for **all** SSR deployments. This new ISO greatly simplifies the software installation process and onboarding of routers to both the Mist-managed and Conductor-managed environments, as well as environments without internet access (air-gap). For information about the install and onboarding process, refer to [SSR Universal ISO Installation].
 ------
@@ -63,14 +62,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-53821 Radius Remote Authentication:** Users can now be added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography. See [Configuring RADIUS](config_radius.md#configuring-radius) for more information.
 ------
-- **I95-53878 LAG:** 
-------
 - **I95-54300 Session performance capacity tracking and troubleshooting:** Added Session Performance Metric in Node Health. Session Processing CPU that displays average CPU, with an expandable selection that shows the individual CPU of each of the session processing threads that come from system resource scaling/config.
 ------
-- **I95- 54699 VRRP Redundancy per VLAN:** 
+- **I95- 54699 VRRP Redundancy per VLAN:** VRRP can now be configured at the network-interface level. Use the `show network interface` command to display active standby at vlan level, and the `show network-interface redundancy` command to show redundancy status of network-interfaces.
 ------
 - **I95_55388 Dynamic FIB support for Dynamic NAT:** 
 ------
+- **I95-55855 Support the `force up` mode for LACP Bond interfaces:** When enabled, a bond interface that does not receive any LACP PDU's on any member interfaces over a configured time-out period enters the `force up` mode, where one member is used as an active interface sending and receiving without the required LACP negotiation. For more information, see [LACP Bond Interfaces - Force-up](config_lacp.md#force-up)
 
 
 ### Resolved Issues
