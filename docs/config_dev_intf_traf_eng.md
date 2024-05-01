@@ -15,7 +15,7 @@ During the initial SSR deployment, the customer was passing approximately 80Mbps
 
 ## Configuration
 
-To prevent dropped traffic, the customer has to enable Traffic Engineering on the Egress device-interface that is connected to ISP, and then has to configure a transmit-cap of 150Mbps to match bandwidth provided by the ISP.
+To match bandwidth provided by the ISP, the customer enables Traffic Engineering on the Egress device-interface that is connected to ISP, and then configures a transmit-cap of 150Mbps.
 
 Device interface traffic engineering is configured under the [`device-interface`](config_command_guide.md#configure-authority-router-node-device-interface-traffic-engineering).  
 

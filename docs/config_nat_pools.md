@@ -7,7 +7,7 @@ sidebar_label: NAT Pools
 
 NAT pools are a construct that allows for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilities.
 
-### Static NAT Bindings
+## Static NAT Bindings
 
 A static NAT binding is configured by creating an `authority > router > nat-pool` object and assigning it to a network-interface. The following rules and constraints apply to this configuration:
 
