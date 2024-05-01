@@ -18394,7 +18394,7 @@ Range: 0-4094
 
 ## `configure authority router node device-interface network-interface vrrp`
 
-Configure Vrrp
+Configure VRRP
 
 ##### Subcommands
 

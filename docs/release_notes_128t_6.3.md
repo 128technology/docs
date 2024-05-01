@@ -64,9 +64,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54300 Session performance capacity tracking and troubleshooting:** Added Session Performance Metric in Node Health. Session Processing CPU that displays average CPU, with an expandable selection that shows the individual CPU of each of the session processing threads that come from system resource scaling/config.
 ------
-- **I95- 54699 VRRP Redundancy per VLAN:** VRRP can now be configured at the network-interface level. Use the `show network interface` command to display active standby at vlan level, and the `show network-interface redundancy` command to show redundancy status of network-interfaces.
-------
-- **I95_55388 Dynamic FIB support for Dynamic NAT:** 
+- **I95-54699 VRRP Redundancy per VLAN:** VRRP can now be [configured at the network-interface level](config_ha.md#configuring-vrrp-on-the-network-interface) allowing you to configure VRRP redundancy per VLAN. For command information, see [configure authority router node device-interface network-interface vrrp.](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-vrrp)
 ------
 - **I95-55855 Support the `force up` mode for LACP Bond interfaces:** When enabled, a bond interface that does not receive any LACP PDU's on any member interfaces over a configured time-out period enters the `force up` mode, where one member is used as an active interface sending and receiving without the required LACP negotiation. For more information, see [LACP Bond Interfaces - Force-up](config_lacp.md#force-up)
 
