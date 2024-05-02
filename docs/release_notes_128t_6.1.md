@@ -116,8 +116,6 @@ These counters are available per-bond-member.
 ------
 - **I95-56127 Changes to KNI device driver increased CPU load per KNI device:** Added KNI module tuning, and excessive CPU usage by idle KNI devices has been alleviated.
 ------
-- **I95-56318 
-------
 - **I95-56326 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
 ------
 - **I95-56363 Highway crash due to traffic metrics manager thread error:** A potential crash due to a race condition in per-service-route metrics has been fixed.
