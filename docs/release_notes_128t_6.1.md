@@ -45,25 +45,24 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-## Release 6.1.8-12
+## Release 6.1.8-15
 
 **Release Date:** May 3, 2024
 
 ### New Features
 
 - **I95-51556 Added New LACP Metrics:** The following lacp metrics have been added for bond interfaces: 
- /interface/received/lacp/packets
- /interface/received/lacp/unknown
- /interface/received/lacp/illegal
- /interface/sent/lacp/packets
- /interface/sent/lacp/queue-full
-These counters are available per-bond-member. 
-------
+  - /interface/received/lacp/packets
+  - /interface/received/lacp/unknown
+  - /interface/received/lacp/illegal
+  - /interface/sent/lacp/packets
+  - /interface/sent/lacp/queue-full
 
+These counters are available per-bond-member. 
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, 
+- **The following CVE's have been identified and addressed in this release:** CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617,
 ------
 - **I95-53523 Bond interface shut down generates errors:** Resolved an issue where the device interface clean up process was out of order and generated a detach failure. 
 ------
@@ -99,14 +98,35 @@ These counters are available per-bond-member.
 ------
 - **I95-55591 Some network interface stats are not updated:** Some network interface stats are not updated with the port name when a device interface is renamed. Device interface name changes are now handled correctly, and `network-interface` metrics are properly updated when `device-interface name` changes.
 ------
-- **I95-55603 HA router stuck in connected state:** 
-
+- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue with an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue. 
 ------
 - **I95-55762 Unable to view more than 50 prefixes in BGP:** Updated the routing engine to display all rows for BGP show commands if a count parameter is not specified.
 ------
-
-
-
+- **I95-55764 Race condition and highway crash with file-based DHCP devices:** Resolved a race condition involving PPPoE and LTE devices, which can lead to a highway crash if the link flaps before the device comes up to steady state.
+------
+- **I95-55775 Race condition exposed by service-area multithreading:** We now prevent a crash due to a race condition in the processing of session collisions when session-processing multithreading is enabled.
+------
+- **I95-55830 Rollback results in missing Admin user:** Resolved an issue where HA nodes running mixed versions of 5.6.0 or greater with versions less than 5.6.0, the admin user could be temporarily removed until both nodes were upgraded or rolled back to the same version.
+------
+- **I95-55850 Changing the name of a `bond-interface` fails:** Resolved an issue where changing the name of a `bond-interface`required a restart to take effect.
+------
+- **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied.
+------
+- **I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:** Resolved an issue where the `cpuinfo` parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the `cpuinfo` contains the word ‘processor’. 
+------
+- **I95-56127 Changes to KNI device driver increased CPU load per KNI device:** Added KNI module tuning, and excessive CPU usage by idle KNI devices has been alleviated.
+------
+- **I95-56318 
+------
+- **I95-56326 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
+------
+- **I95-56363 Highway crash due to traffic metrics manager thread error:** A potential crash due to a race condition in per-service-route metrics has been fixed.
+------
+- **I95-56411 Remove outdated performance package:** 
+------
+- **WAN-2753 IDP Engine Failed to Start:** Resolved an issue that prevented IDP from starting if its configuration had changed. 
+------
+- **WAN-3013 MistAnalytics HA onboarding timeout too short:** The timeout for HA analytics formation has been extended. 
 
 ## Release 6.1.7-3
 
