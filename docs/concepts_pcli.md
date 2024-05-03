@@ -9,6 +9,10 @@ The Programmable Command Line Interface (PCLI) is one of the two primary human i
 
 Note that all of the examples in this document are run as the _admin_ role (as denoted by the prompt in this and other examples); however, each command also indicates which user roles – either _user_ or _admin_ at the time of this writing – are eligible to run the command based upon that command's privileges. Note that unprivileged _user_ accounts are not only unable to execute these commands, they do not "see" them in the PCLI as part of the help text, etc.
 
+:::tip
+Login to the system using the default `admin` user, [locally created users](config_radius#local-users), or [remotely authenticated users](config_radius#overview) will result in PCLI as the user environment. Other users such as `root` or `t128` use a system Linux shell as the user environment. If operating as one of these users in a Linux shell, you can change users to those having PCLI as their environment to access PCLI. Example: `su admin`.
+:::
+
 Optional arguments are written in brackets (`[` `]`), and users may include or omit them as needed. Variable arguments (where users need to supply a value, rather than entering in the literal string shown in the syntax) are written in angle brackets (`<` `>`).
 
 ```
