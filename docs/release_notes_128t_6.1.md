@@ -66,7 +66,7 @@ These counters are available per-bond-member.
 ------
 - **I95-53523 Bond interface shut down generates errors:** Resolved an issue where the device interface clean up process was out of order and generated a detach failure. 
 ------
-- **I95-53565 Port state of LAG members not dynamically updated:** Resolved an issue where enabling or disabling a bond member port does not update the status until the 128T service is restarted. The adminisrative enable and disable now works as expected. 
+- **I95-53565 Port state of LAG members not dynamically updated:** Resolved an issue where enabling or disabling a bond member port does not update the status until the 128T service is restarted. The adminisrative enable and disable now works as expected.
 ------
 - **I95-54541 Device interfaces on Azure VMs with a 2K or greater MTU fail to initialize:** Resolved an issue where device-interfaces configured in an Azure VM fail during initialization, and the port remains operationally down. For additional details, refer to the Knowledge Base article [Unable to bind accelerated networking interfaces in Azure when using vmbus-id](../kb/2024/04/25/I95-54541).
 ------
