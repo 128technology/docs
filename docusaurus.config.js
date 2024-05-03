@@ -80,10 +80,9 @@ module.exports = {
           showReadingTime: false,
           feedOptions: {
             type: 'all',
-            title: '',
-            description: '',
+            title: 'SSR Knowledge Base Articles',
+            description: 'Session Smart Router Knowledge Base Articles',
             limit: 20,
-            description: '',
             copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
             language: 'en-US',
             createFeedItems: async (params) => {
