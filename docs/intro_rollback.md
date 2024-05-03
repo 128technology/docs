@@ -7,7 +7,7 @@ Occasionally you may want or need to revert to a previously running version of S
 
 ## Rollback Considerations
 
-With an upgrade or installation to SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Rollbacks must be performed from the PCLI. 
+With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Rollbacks must be performed from the PCLI. 
 
 Rolling back earlier versions of the SSR software (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures.
 
@@ -15,7 +15,7 @@ Rollbacks are not supported if configuration changes are made after the conducto
 
 ## Legacy Rollback
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities can be performed from the GUI or the PCLI. Use the information below only when rolling back software versions prior to 6.3.0. 
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities on software versions prior to 6.3.0 can be performed from the GUI or the PCLI. Use the information below only when rolling back software versions prior to 6.3.0. 
 
 ### Rolling Back using Automated Provisioner
 
