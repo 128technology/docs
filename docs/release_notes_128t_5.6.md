@@ -32,13 +32,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724,CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
 ------
-- **I95-37802 When a ZK connection is interrupted and reconnected,** Waiting for more info. 
+- **I95-52251 Changes to the conductor address on the router result in loss of ssh connection to the router:** Resolved an issue where changing the router level `conductor-address` did not update the salt-created services with the new addresses.
 ------
-- **I95-52251 Changes to the conductor-address on the router result in loss of ssh connection to the router from the conductor:** Resolved an issue where changing the router level `conductor-address` did not update the salt-created services with the new addresses.
+- **I95-52500 SVR multi-hop failover causes traffic to drop when using outbound-only:** Added a session ID lookup to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.
 ------
-- **I95-52500 SVR multi-hop failover causes traffic to drop when using outbound-only:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.
-------
-- **I95-53216 Unable to change password for users managed through external user databases (such as LDAP or RADIUS):** Resolved an issue that caused a "Password Change" dialog to appear for remotely authenticated users.
+- **I95-53216 Unable to change password for users managed through external user databases (such as LDAP or RADIUS):** Resolved an issue that caused a Password Change dialog to appear for remotely authenticated users.
 ------
 - **I95-54127 Users managed through external user databases (such as LDAP or RADIUS) cannot generate or view TSI:** Resolved an issue that did not provide a home directory for custom roles, which prevented LDAP users from viewing the systemd journal.
 ------
@@ -54,7 +52,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55164 Dropping GRE encapsulated packets:** Classification support for Enhanced GRE Header, version 1, as defined by RFC 2637 Point-to-Point Tunneling Protocol (PPTP) has been added.
 ------
-- **I95-55208 Asset fails to transition state:** In certain cases when the RPM database is corrupted or another process holds its lock indefinitely, the highstate can block forever running rpm -q. Since other highstate attempts see an existing highstate job, they don't try to do anything else and the asset stays stuck like that forever without manual intervention.
+- **I95-55208 Asset fails to transition state and never reaches RUNNING:** In some cases where the RPM database may be corrupt or another process holds an indefinite lock, the highstate will block other processes from starting. A timeout has been added for the `rpm -q` process in highstate to allow other processes to run. 
 ------
 - **I95-55226 Validation incorrectly allows a network interface to be used as both DHCP relay and server:** The validation process has been updated to include several checks against DHCP relays, clients, servers, and access-policies.
 ------
@@ -68,7 +66,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55591 Some network interface stats are not updated:** Some network interface stats are not updated with the port name when a device interface is renamed. Device interface name changes are now handled correctly, and `network-interface` metrics are properly updated when `device-interface name` changes.
 ------
-- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue with an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.
+- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.
 ------
 - **I95-55762 Unable to view more than 50 prefixes in BGP:** Updated the routing engine to display all rows for BGP show commands if a count parameter is not specified.
 ------
@@ -76,14 +74,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55830 Rollback results in missing Admin user:** Resolved an issue where HA nodes running mixed versions of 5.6.0 or greater with versions less than 5.6.0, the admin user could be temporarily removed until both nodes were upgraded or rolled back to the same version.
 ------
-- **I95-55848 / I95-56403 Service "webEx-Calling" dropping calls frequently since implementing best-path-criteria vector:** Resolved an issue where an outbound-only session with a `nat-keep-alive` moves from a dogleg path to a direct inter-router path. This causes repeated session modifications on the hub side and drops reverse traffic.
+- **I95-55848 / I95-56403 Service `webEx-Calling` dropping calls frequently since implementing best-path-criteria vector:** Resolved an issue where an outbound-only session with a `nat-keep-alive` moved from a dogleg path to a direct inter-router path. This causes repeated session modifications on the hub side and drops reverse traffic.
 ------
 <!-- markdown-link-check-disable -->
 - **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article [Upgrade from 5.6 to 6.1 may result in missing FIB entries](../kb/2024/04/24/I95-55904). <!-- markdown-link-check-enable -->
 ------
-- **I95-55912 Validate Patterns for Service Domains and URLs:** The `url` and `domain-name` fields on a service were un-formatted string. This allowed you to configure fields that would be silently discarded. The `domain-name` and `url` fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now trigger a config warning.
+- **I95-55912 Validate Patterns for Service Domains and URLs:** The `url` and `domain-name` fields on a service were an unformatted string. This allowed you to configure fields that would be silently discarded. The `domain-name` and `url` fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now triggers a config warning.
 ------
-- **I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:** Resolved an issue where the `cpuinfo` parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the `cpuinfo` contains the word ‘processor’. 
+- **I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:** Resolved an issue where the `cpuinfo` parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the `cpuinfo` contains the word `processor`. 
 ------
 - **I95-56263 Add `show capacity`, and debugging commands to the TSI output:** Support for additional information in the TSI output has been added.
 ------
