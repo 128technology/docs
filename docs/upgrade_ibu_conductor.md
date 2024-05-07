@@ -38,7 +38,7 @@ usage: upgrade [{router <router> | resource-group <resource-group>}] [simultaneo
                [skip-health-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
 keyword arguments:
 cohort-id                 Assign a cohort ID to the operation.
-force                     Skip confirmation prompt. Only required when targeting all routers
+force                     Skip confirmation prompt.
 node                      The name of the node
 resource-group            The name of the resource group
 router                    The router on which to upgrade SSR software (default: Conductor)
@@ -57,11 +57,15 @@ request system software revert          Revert to a previous version of the SSR.
 *admin@conductor-node-1.Conductor# request system software upgrade
 ```
 
-## HA Considerations
+### High Availability Upgrades
+
+In a high availability configuration, the default behavior is to perform a sequenced self-upgrade from the CLI. Executing the `request system software upgrade router <conductor-router-name>` from an HA conductor launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. When the upgrade is complete on the first node, you may run the command on the second node.  
+
+#### Other HA Considerations
 
 * If an HA pair is discovered to have a mismatched software state (image-based and package-based) an Alarm is reported. The software state must be the same for both nodes.
 * Failure of a router to complete the conversion generates a user visible event and records the reasons for the failure on the conductor.
-* Router conversion success generates an event recording the transition on the conductor.
+* Router conversion success generates an event recording the transition on the router.
 * The image-based and package-based status is visible in the `asset-status` in the GUI, and in the PCLI using `show assets`.
 
 #### Plugin Support

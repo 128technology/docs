@@ -31,13 +31,14 @@ As an administrator-level user, log into the conductor's PCLI.
 
 1. Use the command `show assets` to list the devices managed by this conductor, and the software revision each asset is currently running.
 
-2. For a given asset, use the command `show asset [asset ID]` or `show asset software router [router name]`  to view the available software upgrades for that asset. The list will be in the section labeled "Available for Download" at the end of the output.
-   :::note
-   If there are software releases absent from the list that you are confident should appear, use the command `send command yum-cache-refresh router [router name]` to refresh the software list.
-   :::
+2. For a given asset, use the command `show system software available router <router> node <node>` to show the versions available for upgrade, or the `show system software download router <router> node <node>`  to show the versions available for download. 
 
 3. Type `request system software download router <rtr> node <node> version <image-version>`. You can monitor the progress by using `show system software download router <rtr> node <node>` which will indicate status (e.g., *Downloading*).
 
 4. Once the download is complete, use the command `request system software upgrade router <rtr> node <node> version <image-version>` to initiate the upgrade process. View upgrade progress using `show system software upgrade router <rtr> node <node>`
 
-In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, intiating an upgrade on one HA node or router will automatically upgrade the second node/router. However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
+In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, intiating an upgrade on one HA node or router will automatically upgrade the second node/router. 
+
+If you perform an upgrade from the CLI using the `request system software upgrade router <conductor-router-name>` from an HA conductor, it launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. When the upgrade is complete on the first node, you may run the command on the second node. 
+
+However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.

@@ -3,19 +3,19 @@ title: Rolling Back Software
 sidebar_label: Rollback
 ---
 
-Occasionally you may want or need to revert to a previously running version of SSR software. This is referred to as *rolling back*, and can be accomplished via either the standalone SSR installer application, or by using Automated Provisioner. (Note: as with upgrading, rolling back software using Automated Provisioner is only possible on routers managed by an SSR Conductor.)
+Occasionally you may need to revert to a previously running version of SSR software. This is referred to as *rolling back*, and can be accomplished via either the standalone SSR installer application, or by using Automated Provisioner. (Note: as with upgrading, rolling back software using Automated Provisioner is only possible on routers managed by an SSR Conductor.)
 
 ## Rollback Considerations
 
-With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Rollbacks must be performed from the PCLI. 
+With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
-Rolling back earlier versions of the SSR software (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures.
-
-Rollbacks are not supported if configuration changes are made after the conductor or router are updated to the target version. For example, if the conductor and/or router has been upgraded to version 5.4, and a new feature such as Traffic Engineering is configured on the target conductor or router, rolling back to an earlier version of software may result in loss of configuration or router functionality.
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities are be performed from the GUI or the PCLI.
 
 ## Legacy Rollback
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities on software versions prior to 6.3.0 can be performed from the GUI or the PCLI. Use the information below only when rolling back software versions prior to 6.3.0. 
+Use the information below when rolling back software versions prior to 6.3.0. 
+
+Rollbacks are not supported if configuration changes are made after the conductor or router are updated to the target version. For example, if the conductor and/or router has been upgraded to version 5.4, and a new feature such as Traffic Engineering is configured on the target conductor or router, rolling back to an earlier version of software may result in loss of configuration or router functionality.
 
 ### Rolling Back using Automated Provisioner
 
@@ -28,15 +28,15 @@ Confirming the action will initiate the rollback process.
 
 ### Rolling Back using the Interactive Installer
 
+For software versions prior to SSR v6.3.0, **conductors** can only be rolled back with the interactive installer. Shutting down the salt-minion is required.
+
 :::important
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities can be performed from the GUI or the PCLI.
+Rolling back an earlier version of the SSR software on a router that is managed by a conductor using the interactive installer `install128t` may result in the system becoming unresponsive. It is highly recommended that managed router rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures.
 :::
 
-For software versions prior to SSR v6.3.0 in a situation where a rollback must be performed with the interactive installer, the salt-minion must be shut down. This is done on the target node using the following command:
+For all software versions prior to SSR v6.3.0 in a situation where a rollback must be performed with the interactive installer, the salt-minion must be shut down. This is done on the target node using the following command:
 
 `sudo systemctl stop salt-minion`
-
-For software versions prior to SSR v6.3.0, conductors can only be rolled back with the interactive installer. Shutting down the salt-minion is required.
 
 1. Launch a Linux command prompt window on the node you wish to rollback.
 
