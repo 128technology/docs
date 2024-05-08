@@ -235,6 +235,7 @@ module.exports = {
           "sec_adaptive_encrypt",
           "sec_firewall_filtering",
           "sec_security_policy",
+          "sec_hardening_guidelines",
         ],
       },
       {
