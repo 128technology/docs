@@ -32,6 +32,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724,CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
 ------
+- **I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:** When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.
+------
 - **I95-52251 Changes to the conductor address on the router result in loss of ssh connection to the router:** Resolved an issue where changing the router level `conductor-address` did not update the salt-created services with the new addresses.
 ------
 - **I95-52500 SVR multi-hop failover causes traffic to drop when using outbound-only:** Added a session ID lookup to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.
