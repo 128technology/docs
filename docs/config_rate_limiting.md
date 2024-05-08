@@ -74,18 +74,20 @@ Flow rate limiting and aggregate rate limiting can configured independently of e
 Sample configuration:
 
 ```
-rate-limit-policy    rate-limiting
-    name               rate-limiting
-    mode               shared
-    upload-settings
-        max-rate   300000
-        max-burst  300000
+router
+    rate-limit-policy    rate-limiting
+        name               rate-limiting
+        mode               shared
+        upload-settings
+            max-rate   300000
+            max-burst  300000
+        exit
+        download-settings
+            max-rate   300000
+            max-burst  300000
+        exit
     exit
-    download-settings
-        max-rate   300000
-        max-burst  300000
-    exit
-exit
+router
 
 service-class   rate-policy-class
     name                         rate-policy-class
