@@ -76,7 +76,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55830 Rollback results in missing Admin user:** Resolved an issue where HA nodes running mixed versions of 5.6.0 or greater with versions less than 5.6.0, the admin user could be temporarily removed until both nodes were upgraded or rolled back to the same version.
 ------
-- **I95-55848 / I95-56403 Service `webEx-Calling` dropping calls frequently since implementing best-path-criteria vector:** Resolved an issue where an outbound-only session with a `nat-keep-alive` moved from a dogleg path to a direct inter-router path. This causes repeated session modifications on the hub side and drops reverse traffic.
+- **I95-55848 / I95-56403 Session traffic is black-holed during path failover when `nat-keep-alive` is in use:** Resolved an issue where an outbound-only session with a `nat-keep-alive` moved from a dogleg path to a direct inter-router path. This causes repeated session modifications on the hub side and drops reverse traffic.
 ------
 <!-- markdown-link-check-disable -->
 - **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article [Upgrade from 5.6 to 6.1 may result in missing FIB entries](../kb/2024/04/24/I95-55904). <!-- markdown-link-check-enable -->
