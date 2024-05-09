@@ -5,6 +5,9 @@
     },
     {
       "pattern": "^https://tools.ietf.org"
+    },
+    {
+      "pattern": "^https://www.wireguard.com"
     }
   ],
   "replacementPatterns": [
