@@ -14,30 +14,56 @@ The instructions for installing and managing the plugin can be found [here](plug
 The IPsec plugin setup has the following key parts to the configuration.
 * `ipsec-profile` describing the mechanism with which to connect to the server.
 * `ipsec-client` represent the remote endpoints or server with which the ipsec client communicates.
+* `ipsec-client-settings` configure universal settings for all conductor-managed routers.
 * `service-route`'s to route the traffic through the tunnels
 
 ### Profiles
-The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The table below represents the most common configuration elements for a valid ipsec profile.
+
+The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The examples below shows two examples of ipsec profiles that mutually exclusive one using pre-shared keys, and one using certificate based authentication.
+
+:::note
+This plugin can only connect to IPsec endpoints that support pre-shared key or X.509 certificate.
+:::
 
 ```
 router
-    ipsec-profile  zscaler
-        name                     zscaler
-        ike-encryption           aes256
-        ike-digest               sha2
-        ike-modp                 modp1024
-        authentication-protocol  esp
-        phase2-encryption        aes_gcm128
-        phase2-digest            sha2
-        phase2-modp              modp1024
-        ike-lifetime             1h
-        connection-lifetime      8h
-        perfect-forward-secrecy  true
-        dpddelay                 20
-        dpdtimeout               100
-        dpdaction                restart
-        local-id                 [local-id@domain.com]
-        pre-shared-key           (removed)
+    ipsec-profile  zscaler-preshared-key
+        name                            zscaler-preshared-key
+        ike-encryption                  aes256
+        ike-digest                      sha2
+        ike-modp                        modp1024
+        authentication-protocol         esp
+        phase2-encryption               aes_gcm128
+        phase2-digest                   sha2
+        phase2-modp                     modp1024
+        ike-lifetime                    1h
+        connection-lifetime             8h
+        perfect-forward-secrecy         true
+        dpddelay                        20
+        dpdtimeout                      100
+        dpdaction                       restart
+        local-id                        [local-id@domain.com]
+        pre-shared-key                  (removed)
+    exit
+    ipsec-profile  zscaler-certificate
+        name                            zscaler-certificate
+        ike-encryption                  aes128
+        ike-digest                      sha2
+        ike-modp                        modp1024
+        authentication-protocol         esp
+        phase2-encryption               aes_gcm256
+        phase2-digest                   sha2
+        phase2-modp                     modp1024
+        ike-lifetime                    1h
+        connection-lifetime             8h
+        perfect-forward-secrecy         true
+        dpddelay                        20
+        dpdtimeout                      100
+        dpdaction                       restart
+        local-id                        [local-id@domain.com]
+        private-key-name                rem1-private-key
+        local-certificate-name          rem1-cert
+        trusted-ca-certificate-name     ca-cert
     exit
 exit
 ```
@@ -61,10 +87,21 @@ The above configuration example represents a typical profile used for a IPSec pr
 | dpdtimeout        | seconds  | 100            | After the period has elapsed with no traffic including DPD traffic, the connection will be declared dead |
 | dpdaction         | enum     | restart        | Action taken once the enabled peer is detected as dead |
 | local-id          | string   | user-defined   | How to identify the router for authentication. Can be an IP address of FQDN. Must be preceded with an `@` symbol to prevent resolution as shown in the example |
-| pre-shared-key    | string   | user-defined   | pre-shared key used for authentication |
+| pre-shared-key                | string      | user-defined | pre-shared key used for authentication |
+| private-key-name              | reference   | -            | The name that reference to a private key defined in [Private Key](#private-key) |
+| local-certificate-name        | reference   | -            | The name that reference to a client certificate defined in [`client-certificate`](config_command_guide.md#configure-authority-client-certificate)|
+| trusted-ca-certificate-name   | reference   | -            | The name that reference to a trusted CA certificate defined in [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) |
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.7.0    | `profile > private-key-name` introduced |
+| 3.7.0    | `profile > local-certificate-name ` introduced |
+| 3.7.0    | `profile > trusted-ca-certificate-name` introduced |
 
 :::note
-This plugin can only connect to IPsec endpoints that support pre-shared key authentication.
+All `local-certificate-name`, `trusted-ca-certificate-name` and `private-key-name` must be configured in order to use X.509 certificate type
 :::
 
 #### Custom Options
@@ -117,7 +154,7 @@ The main config properties of a remote endpoint are as follows.
 | name              | string    | The name of the remote client to be used for sending traffic to the tunnel. |
 | host              | ip-or-fqdn | The address or FQDN of the remote endpoint. |
 | profile           | reference | The name of the profile to be used for this remote endpoint. |
-| remote-id         | string    | The optional remote identifier used during authentication. |
+| remote-id         | string    | The optional remote identifier used during authentication, the field must be correctly configured as remote side certificate common name (CN) |
 | subnet            | ip-prefix | The remote subnet behind the tunnel. |
 | tunnel-monitor    | container | Properties for monitoring the phase-2 connection. See [Tunnel Monitoring](#tunnel-monitoring) for more information. |
 
@@ -151,8 +188,8 @@ router myRouter
             remote secondary
                 name primary
                 host <primary-address>
-                profile myProfile
-                remote-id prisma@paloalto.com
+                profile zscaler-certificate
+                remote-id <remote-certificate-common-name>
                 subnet 0.0.0/0
                 tunnel-monitor
                     enabled true
@@ -178,6 +215,75 @@ The `ipsec-client > name` cannot start with `ipsec` or `mast`. See notes [here](
 :::
 
 Each `remote` represents a unique tunnel destination and can be used to route traffic in/out of the tunnels. Typically each node has two tunnels to act as primary and backup.
+
+### Client Settings
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.7.0    | `authority > ipsec-client-settings` introduced |
+
+Client settings are a collection of common settings that would apply to all routers that run IPSec plugin under management of a conductor.
+
+The main config properties of client settings are as follows.
+
+| Config                | Type      | Description                            |
+| --------              | -----     | -------------------                    |
+| common-criteria-mode  | boolean   | Whether common criteria should be applied upon validation. |
+| private-key           | list      | List of [Private Keys](#private-key) to be used for IPSec X.509 certificate type. |
+
+
+``` console
+config
+
+    authority
+        ipsec-client-settings
+            common-criteria-mode true
+            private-key rem1-private-key
+                name rem1-private-key
+                content (removed)
+            exit
+
+            private-key rem2-private-key
+                name rem2-private-key
+                content (removed)
+            exit
+    exit
+exit
+```
+
+#### Private Key
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.7.0    | `ipsec-client-settings > private-key` introduced |
+
+The `private-key` allows the users to configure private keys to be used for IPSec X.508 certificate type.
+
+```
+config
+    authority
+        ipsec-client-settings
+            private-key rem1-private-key
+                name rem1-private-key
+                content (removed)
+            exit
+        exit
+    exit
+exit
+```
+
+| Config            | Type      | Description                                    |
+| --------          | -----     | -------------------                            |
+| name              | string    | The name of the the private key.               |
+| content           | string    | Private key to be used for X.509 certificate.  |
+
+:::warning
+The `private-key` is used for pkc12 certification creation which will be used for tunnel authentication. Wrongly configured private key may prevent IPSec tunnel from establishing successfully. 
+:::
 
 ### Tunnel Monitoring
 
@@ -288,6 +394,10 @@ exit
 ```
 
 Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.
+
+### Configure X.509 Certificates Type For Tunnel Authentication
+The user could enable X.509 certificate type for tunnel authenticate by confiuring valid [`private-key`](#private-key), [`client-certificate`](config_command_guide.md#configure-authority-client-certificate) and [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) then refer their key names to respective fields in [`ipsec-profile`](#profiles) section, with which a PKCS12 file will be generated. IPSec NSS database will be used to store the generated PKCS12 file and wiil be directly used for tunnel authentication. A public Libreswan document is refered [here](https://libreswan.org/wiki/HOWTO:_Using_NSS_with_libreswan). The plugin requires users to generate/acquire their private key, a CA certificate file and user certificate file signed by the CA certificate offline by utilities mentioned in Libreswan document or other reliable sources (openssl). The plugin will take over the configuration from `Importing third-party files into NSS` section listed in the Libreswan document.
+
 
 ### Directing traffic through the tunnel
 The user can leverage standard SSR service and service-route to direct intended traffic over the ipsec tunnel. In the example below, all guest internet traffic is sent over the ipsec tunnel for break and inspect. This can be accomplished as follows:
@@ -803,6 +913,17 @@ exit
 ```
 
 ## Release Notes
+
+### Release 3.7.0
+
+**Release Date:** May 10, 2024
+
+**Router Version** 128T-ipsec-2.5.0-3
+
+#### New Features and Improvements
+
+- **/I95-51716** Common Criteria Certification - VPN Protection Profile
+The new version adds support for X.509 ceritifcate management for IPSec plugin, validating strength of VPN’s encryption algorithms, new Libreswan version update, and DH 21 groups.
 
 ### Release 3.6.0
 
