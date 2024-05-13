@@ -84,9 +84,9 @@ The above configuration example represents a typical profile used for a IPSec pr
 | dpdaction         | enum     | restart        | Action taken once the enabled peer is detected as dead |
 | local-id          | string   | user-defined   | How to identify the router for authentication. Can be an IP address of FQDN. Must be preceded with an `@` symbol to prevent resolution as shown in the example |
 | pre-shared-key                | string      | user-defined | pre-shared key used for authentication |
-| private-key-name              | reference   | -            | The name that reference to a private key defined in [Private Key](#private-key) |
-| local-certificate-name        | reference   | -            | The name that reference to a client certificate defined in [`client-certificate`](config_command_guide.md#configure-authority-client-certificate)|
-| trusted-ca-certificate-name   | reference   | -            | The name that reference to a trusted CA certificate defined in [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) |
+| private-key-name              | reference   | -            | The name that references the private key defined in [Private Key](#private-key) |
+| local-certificate-name        | reference   | -            | The name that references the client certificate defined in [`client-certificate`](config_command_guide.md#configure-authority-client-certificate)|
+| trusted-ca-certificate-name   | reference   | -            | The name that references the trusted CA certificate defined in [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) |
 
 ##### Version History
 
@@ -97,7 +97,7 @@ The above configuration example represents a typical profile used for a IPSec pr
 | 3.7.0    | `profile > trusted-ca-certificate-name` introduced |
 
 :::note
-All `local-certificate-name`, `trusted-ca-certificate-name` and `private-key-name` must be configured in order to use X.509 certificate type
+`local-certificate-name`, `trusted-ca-certificate-name` and `private-key-name` must be configured in order to use X.509 certificate type.
 :::
 
 #### Custom Options
@@ -150,7 +150,7 @@ The main config properties of a remote endpoint are as follows.
 | name              | string    | The name of the remote client to be used for sending traffic to the tunnel. |
 | host              | ip-or-fqdn | The address or FQDN of the remote endpoint. |
 | profile           | reference | The name of the profile to be used for this remote endpoint. |
-| remote-id         | string    | The optional remote identifier used during authentication, the field must be correctly configured as remote side certificate common name (CN) |
+| remote-id         | string    | The optional remote identifier used during authentication. This field must be correctly configured as the remote side certificate common name (CN). |
 | subnet            | ip-prefix | The remote subnet behind the tunnel. |
 | tunnel-monitor    | container | Properties for monitoring the phase-2 connection. See [Tunnel Monitoring](#tunnel-monitoring) for more information. |
 
@@ -220,9 +220,9 @@ Each `remote` represents a unique tunnel destination and can be used to route tr
 | -------- | ------------------------------------ |
 | 3.7.0    | `authority > ipsec-client-settings` introduced |
 
-Client settings are a collection of common settings that would apply to all routers that run IPSec plugin under management of a conductor.
+Client settings are a collection of common settings that apply to all conductor-managed routers running the IPSec plugin.
 
-The main config properties of client settings are as follows.
+The main configuration properties of client settings are as follows:
 
 | Config                | Type      | Description                            |
 | --------              | -----     | -------------------                    |
@@ -278,7 +278,7 @@ exit
 | content           | string    | Private key to be used for X.509 certificate.  |
 
 :::warning
-The `private-key` is used for pkc12 certification creation which will be used for tunnel authentication. Wrongly configured private key may prevent IPSec tunnel from establishing successfully. 
+The `private-key` is used to create the pkc12 certificate for tunnel authentication. A wrongly configured private key may prevent an IPSec tunnel from being established successfully. 
 :::
 
 ### Tunnel Monitoring
@@ -392,7 +392,18 @@ exit
 Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.
 
 ### Configure X.509 Certificates Type For Tunnel Authentication
-The user could enable X.509 certificate type for tunnel authenticate by configuring valid [`private-key`](#private-key), [`client-certificate`](config_command_guide.md#configure-authority-client-certificate) and [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) then refer their key names to respective fields in [`ipsec-profile`](#profiles) section, with which a PKCS12 file will be generated. IPSec NSS database will be used to store the generated PKCS12 file and wiil be directly used for tunnel authentication. A public Libreswan document is refered [here](https://libreswan.org/wiki/HOWTO:_Using_NSS_with_libreswan). The plugin requires users to generate/acquire their private key, a CA certificate file and user certificate file signed by the CA certificate offline by utilities mentioned in Libreswan document or other reliable sources (openssl). The plugin will take over the configuration from `Importing third-party files into NSS` section listed in the Libreswan document.
+### Configure X.509 Certificate-type for Tunnel Authentication
+
+The IPsec plugin requires users to generate/acquire their private key, a CA certificate file, and user certificate file. This must be signed by the CA certificate offline by utilities mentioned in Libreswan document (or other reliable sources such as openssl). Refer to the public [HOWTO:_Using_NSS_with_libreswan document](https://libreswan.org/wiki/HOWTO:_Using_NSS_with_libreswan) for additional information. Note that the IPsec plugin will take over the configuration mentioned in `Importing third-party files into NSS` in the Libreswan document. 
+
+Use the following steps to create the X.509 certificate-type for Tunnel Authentication. 
+
+1. Configure the [`private-key`](#private-key).
+2. Configure the [`client-certificate`](config_command_guide.md#configure-authority-client-certificate).
+3. Configure the [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate).
+4. Enter the key names for each of these items in their respective fields in the [`ipsec-profile`](#profiles).
+
+This information is used to generate the PKCS12 file. The IPsec NSS database stores the generated PKCS12 file for tunnel authentication. 
 
 
 ### Directing traffic through the tunnel
