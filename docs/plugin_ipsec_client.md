@@ -154,7 +154,7 @@ The main config properties of a remote endpoint are as follows.
 | name              | string    | The name of the remote client to be used for sending traffic to the tunnel. |
 | host              | ip-or-fqdn | The address or FQDN of the remote endpoint. |
 | profile           | reference | The name of the profile to be used for this remote endpoint. |
-| remote-id         | string    | The optional remote identifier used during authentication, the field must be correctly configured as remote side certificate common name (CN) |
+| remote-id         | string    | The optional remote identifier used during authentication. This field must be correctly configured as the remote side certificate common name (CN). |
 | subnet            | ip-prefix | The remote subnet behind the tunnel. |
 | tunnel-monitor    | container | Properties for monitoring the phase-2 connection. See [Tunnel Monitoring](#tunnel-monitoring) for more information. |
 
