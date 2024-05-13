@@ -21,10 +21,6 @@ The IPsec plugin setup has the following key parts to the configuration.
 
 The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The examples below shows two examples of ipsec profiles that mutually exclusive one using pre-shared keys, and one using certificate based authentication. The examples below show two IPSec profiles that are mutually exclusive.
 
-:::note
-This plugin can only connect to IPsec endpoints that support pre-shared key or X.509 certificate.
-:::
-
 ```
 router
     ipsec-profile  zscaler-preshared-key
