@@ -396,7 +396,18 @@ exit
 Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.
 
 ### Configure X.509 Certificates Type For Tunnel Authentication
-The user could enable X.509 certificate type for tunnel authenticate by configuring valid [`private-key`](#private-key), [`client-certificate`](config_command_guide.md#configure-authority-client-certificate) and [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) then refer their key names to respective fields in [`ipsec-profile`](#profiles) section, with which a PKCS12 file will be generated. IPSec NSS database will be used to store the generated PKCS12 file and wiil be directly used for tunnel authentication. A public Libreswan document is refered [here](https://libreswan.org/wiki/HOWTO:_Using_NSS_with_libreswan). The plugin requires users to generate/acquire their private key, a CA certificate file and user certificate file signed by the CA certificate offline by utilities mentioned in Libreswan document or other reliable sources (openssl). The plugin will take over the configuration from `Importing third-party files into NSS` section listed in the Libreswan document.
+### Configure X.509 Certificate-type for Tunnel Authentication
+
+The IPsec plugin requires users to generate/acquire their private key, a CA certificate file, and user certificate file. This must be signed by the CA certificate offline by utilities mentioned in Libreswan document (or other reliable sources such as openssl). Refer to the public [HOWTO:_Using_NSS_with_libreswan document](https://libreswan.org/wiki/HOWTO:_Using_NSS_with_libreswan) for additional information. Note that the IPsec plugin will take over the configuration mentioned in `Importing third-party files into NSS` in the Libreswan document. 
+
+Use the following steps to create the X.509 certificate-type for Tunnel Authentication. 
+
+1. Configure the [`private-key`](#private-key).
+2. Configure the [`client-certificate`](config_command_guide.md#configure-authority-client-certificate).
+3. Configure the [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate).
+4. Enter the key names for each of these items in their respective fields in the [`ipsec-profile`](#profiles).
+
+This information is used to generate the PKCS12 file. The IPsec NSS database stores the generated PKCS12 file for tunnel authentication. 
 
 
 ### Directing traffic through the tunnel
