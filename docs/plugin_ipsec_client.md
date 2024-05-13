@@ -226,7 +226,7 @@ Each `remote` represents a unique tunnel destination and can be used to route tr
 
 Client settings are a collection of common settings that would apply to all routers that run IPSec plugin under management of a conductor.
 
-The main config properties of client settings are as follows.
+The main configuration properties of client settings are as follows:
 
 | Config                | Type      | Description                            |
 | --------              | -----     | -------------------                    |
