@@ -88,7 +88,7 @@ The above configuration example represents a typical profile used for a IPSec pr
 | dpdaction         | enum     | restart        | Action taken once the enabled peer is detected as dead |
 | local-id          | string   | user-defined   | How to identify the router for authentication. Can be an IP address of FQDN. Must be preceded with an `@` symbol to prevent resolution as shown in the example |
 | pre-shared-key                | string      | user-defined | pre-shared key used for authentication |
-| private-key-name              | reference   | -            | The name that reference to a private key defined in [Private Key](#private-key) |
+| private-key-name              | reference   | -            | The name that references the private key defined in [Private Key](#private-key) |
 | local-certificate-name        | reference   | -            | The name that reference to a client certificate defined in [`client-certificate`](config_command_guide.md#configure-authority-client-certificate)|
 | trusted-ca-certificate-name   | reference   | -            | The name that reference to a trusted CA certificate defined in [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) |
 
