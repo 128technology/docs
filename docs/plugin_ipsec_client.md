@@ -90,7 +90,7 @@ The above configuration example represents a typical profile used for a IPSec pr
 | pre-shared-key                | string      | user-defined | pre-shared key used for authentication |
 | private-key-name              | reference   | -            | The name that references the private key defined in [Private Key](#private-key) |
 | local-certificate-name        | reference   | -            | The name that reference to a client certificate defined in [`client-certificate`](config_command_guide.md#configure-authority-client-certificate)|
-| trusted-ca-certificate-name   | reference   | -            | The name that reference to a trusted CA certificate defined in [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) |
+| trusted-ca-certificate-name   | reference   | -            | The name that references the trusted CA certificate defined in [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate) |
 
 ##### Version History
 
