@@ -147,8 +147,8 @@ config
         service    adult.internet
             name                  adult.internet
             domain-name-category  Adult
-            access-policy         adult.internet
-                source      adult.internet
+            access-policy         lan
+                source      lan
                 permission  deny
             exit
         exit
@@ -392,8 +392,8 @@ config
         service    adult.internet
             name                  adult.internet
             domain-name-category  Adult
-            access-policy         adult.internet
-                source      adult.internet
+            access-policy         corp
+                source      corp
                 permission  deny
             exit
             access-policy         home

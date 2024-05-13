@@ -82,6 +82,28 @@ When referring to paths in datamodel hierarcies, it is preferable to use a singl
 
 The right-hand table of contents is generated from `## heading 2` and `### heading 3`.  Headings `# heading 1` or `#### header 4` and higher are excluded. Keep this in mind when organizing your content. Use this to your advantage in how you want information to appear.
 
+### Sensitive Data
+
+When creating examples, make certain to scrub any personally identifiable information and sensitive data.
+* Do not refer to actual customers or use their configuration.
+* Do not include customer IP address information.
+
+### Style Guide
+
+A style guide contains a set of standards for writing and designing content. It helps maintain a consistent style, voice, and tone across your documentation, whether you’re a lone writer or part of a huge docs team. A style guide saves documentarians time and trouble by providing a single reference for writing about common topics, features, and more. It can provide guidelines for different documentation deliverables, such as API reference manuals, tutorials, release notes, or overviews of complex technical concepts.
+
+A consistent tone and style makes your content easier to read, reducing your users’ cognitive load and increasing their confidence in the content’s authority.
+
+| Yes         | No           |
+| ----------- | ------------ |
+| metadata    |  meta data   |
+| data center |  datacenter  |
+| plugin      |  plug-in     |
+| internet    |  Internet    |
+| SSR         |  SSR Router  |
+| conductor   |  Conductor   |
+| third-party |  3rd party   |
+
 ### Callouts/admonitions
 
 In addition to the basic Markdown syntax, we use [remark-admonitions](https://github.com/elviswolcott/remark-admonitions) alongside MDX to add support for admonitions. Admonitions are wrapped by a set of 3 colons.
