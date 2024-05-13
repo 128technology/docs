@@ -282,7 +282,7 @@ exit
 | content           | string    | Private key to be used for X.509 certificate.  |
 
 :::warning
-The `private-key` is used for pkc12 certification creation which will be used for tunnel authentication. Wrongly configured private key may prevent IPSec tunnel from establishing successfully. 
+The `private-key` is used to create the pkc12 certificate for tunnel authentication. A wrongly configured private key may prevent an IPSec tunnel from being established successfully. 
 :::
 
 ### Tunnel Monitoring
