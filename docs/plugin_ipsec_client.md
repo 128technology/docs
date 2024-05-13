@@ -101,7 +101,7 @@ The above configuration example represents a typical profile used for a IPSec pr
 | 3.7.0    | `profile > trusted-ca-certificate-name` introduced |
 
 :::note
-All `local-certificate-name`, `trusted-ca-certificate-name` and `private-key-name` must be configured in order to use X.509 certificate type
+`local-certificate-name`, `trusted-ca-certificate-name` and `private-key-name` must be configured in order to use X.509 certificate type.
 :::
 
 #### Custom Options
