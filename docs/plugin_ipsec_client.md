@@ -19,7 +19,7 @@ The IPsec plugin setup has the following key parts to the configuration.
 
 ### Profiles
 
-The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The examples below shows two examples of ipsec profiles that mutually exclusive one using pre-shared keys, and one using certificate based authentication.
+The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The examples below shows two examples of ipsec profiles that mutually exclusive one using pre-shared keys, and one using certificate based authentication. The examples below show two IPSec profiles that are mutually exclusive.
 
 :::note
 This plugin can only connect to IPsec endpoints that support pre-shared key or X.509 certificate.
@@ -922,7 +922,7 @@ exit
 
 #### New Features and Improvements
 
-- **/I95-51716** Common Criteria Certification - VPN Protection Profile
+- **I95-51716** Common Criteria Certification - VPN Protection Profile
 The new version adds support for X.509 ceritifcate management for IPSec plugin, validating strength of VPN’s encryption algorithms, new Libreswan version update, and DH 21 groups.
 
 ### Release 3.6.0
