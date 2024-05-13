@@ -168,7 +168,7 @@ Attributes are optionally included TLVs that are added to the metadata header. T
 
 ### Packet Fragmentation
 
-When a fragmented packet is presented to a SVR Router, the packet is reassembled prior to processing. When transmitting packets between SSRs that are larger than MTU, whether by introduction of metadata, HMAC or encryption (i.e., the insertion of additional bytes to an existing packet), those packets are transmitted as individual smaller packets. Each resulting "fragment" is into an IP packet with 5-tuples that match the corresponding session.  When HMAC is used (time-based or static), a signature is created for the entire packet and appended to the last fragment. Each "fragment" has metadata inserted that clearly identifies the fragment to the SSR peer.
+When a fragmented packet is presented to an SVR Router, the packet is reassembled prior to processing. When transmitting packets between SSRs that are larger than MTU, whether by introduction of metadata, HMAC, or encryption (i.e., the insertion of additional bytes to an existing packet), those packets are transmitted as individual smaller packets; they are "fragmented". Each resulting fragment is converted into an IP packet with 5-tuples that match the corresponding session. When HMAC is used (time-based or static), a signature is created for the entire packet and appended to the last fragment. Each fragment has metadata inserted that clearly identifies the fragment to the SSR peer.
 
 Ladder Diagram Fragmented Packets:
 ```
@@ -194,9 +194,9 @@ Client . . . . . . . . . . . . . . . . . . . . . . Server
   |            |                          |--Frag 2-->|
   |            |                          |--Frag 3-->|
 ```
-In the diagram above, Router A collects all the fragments 1, 2, and 3. Reassembly is performed. Router A records two things from the inbound fragments: The Original ID, and the largest fragment size received.  Router A then proceeds to send the jumbo packet by fragmenting it again, but this time sending each piece inside a packet with a newly created L4 which maps exactly to the peer pathway chosen with ports assigned from the session state table. The fragment size will be the lesser of the smallest MTU on the path OR the largest fragment seen, whichever is smaller.  The metadata header and header TLV's are not encrypted. The packet construction is as follows:
+In the diagram above, Router A receives the fragments 1, 2, and 3. Router A records two things from the inbound fragments; the original ID, and the largest fragment size received. Reassembly is performed, after which Router A fragments the jumbo packet again and transmits it inside of a packet with a newly created L4. The new L4 packet is mapped to the peer pathway chosen using the ports assigned from the session state table. The fragment size is the smaller of either the smallest MTU on the path, OR the largest fragment seen. The metadata header and header TLV's are not encrypted. The packet construction is as follows:
 
-SVR Packet Layout:
+#### SVR Packet Layout
 
 ```
 Fragment 1
@@ -221,9 +221,9 @@ Fragment 3
 +-----+-----+----------+----------+---------+----------+
 ```
 
-The metadata (type 1) inside the SVR fragment will have its own extended ID assigned.  This allows a different number of fragments to be between router A and B than the Client and Server have.  It also allows independent fragmentation by the SSR should it be required. Router B will process the fragments from router A.  Router B will look at its egress MTU size, and the largest fragment seen recorded by Router A and transmitted in metadata to determine the proper size fragments to send, and the packet is fragmented and sent.
+The metadata (type 1) inside the SVR fragment has its own extended ID assigned. This allows a different number of fragments to be between router A and B than the Client and Server. It also allows independent fragmentation by the SSR should it be required. When Router B receives the packets from router A, it begins processing the fragments. Router B takes its own egress MTU size and uses the metadata from Router A for the largest fragment seen and transmitted to determine the proper size fragments to send. The packet is fragmented accordingly and sent.
 
-No other metadata fields required. All information about the session state is conveyed within the initial 5-tuple peer pathway and establishment.
+No other metadata fields are required. All information about the session state is conveyed within the initial 5-tuple peer pathway and establishment.
 
 If a packet traversing an SSR needs to be fragmented by the router for an SVR segment for any reason, including the insertion of metadata, the initiating router inserts metadata on the first packet and duplicates the L4 header (either TCP or UDP) on subsequent fragments and inserts metadata. In this case the largest fragment seen and original ID field in the metadata is left blank.
 
@@ -241,8 +241,8 @@ Client . . . . . . . . . . . . . . . . . . . . . . Server
   |            |                          |           |
 ```
 
-###
-All fragments will have a metadata header and the fragment TLV added to the unencrypted portion of the metadata header. If the original packet already has a metadata header on it, the fragment TLV will be added to it.  See [RFC791](https://datatracker.ietf.org/doc/html/rfc791) for information about IP fragmentation.
+### Fragment TLV
+All fragments have a metadata header and the fragment TLV added to the unencrypted portion of the metadata header. If the original packet already has a metadata header on it, the fragment TLV is added to it. See [RFC791](https://datatracker.ietf.org/doc/html/rfc791) for information about IP fragmentation.
 
 ```
  0                   1                   2                   3
@@ -260,15 +260,15 @@ All fragments will have a metadata header and the fragment TLV added to the unen
 
 TLV:  Type 1, Length 10.
 
-Extended ID (4 bytes):  Uniquely identifies a packet that is broken into fragments. This ID is assigned by the SSR that is processing fragmented packets.  IPv6 uses a 32-bit Extended ID, and IPv4 uses a 16-bit ID.  The same algorithm is used for fragmenting packets for both IPv6 and IPv4, therefore a 32-Bit Extended ID is used.
+Extended ID (4 bytes): Uniquely identifies a packet that is broken into fragments. This ID is assigned by the SSR that is processing fragmented packets. IPv6 uses a 32-bit Extended ID, and IPv4 uses a 16-bit ID. The same algorithm is used for fragmenting packets for both IPv6 and IPv4, therefore a 32-Bit Extended ID is used.
 
-Original ID (2 bytes):  Original identification value of the L3 header of a received packet that is already fragmented.
+Original ID (2 bytes): Original identification value of the L3 header of a received packet that is already fragmented.
 
-Flags (3-bits):  Field used for identifying fragment attributes. They are (in order, from most significant to least significant):
+Flags (3-bits): Field used for identifying fragment attributes. They are (in order, from most significant to least significant):
 * bit 0: Reserved; must be zero.
 * bit 1: Don't fragment (DF).
 * bit 2: More fragments (MF).
 
-Fragment Offset (13-bits):  Field associated with the number of eight-byte segments the fragment payload contains.
+Fragment Offset (13-bits): Field associated with the number of eight-byte segments the fragment payload contains.
 
-Largest Seen Fragment (2 bytes):  Each SSR router keeps track of the largest fragment processed from each interface.  This allows the router to make inferences about the MTU size when fragmenting packets in the opposite direction. This information is used along with a given egress network interface MTU to determine the fragment size of a reassembled packet.
+Largest Seen Fragment (2 bytes): Each SSR router keeps track of the largest fragment processed from each interface. This allows the router to make inferences about the MTU size when fragmenting packets in the opposite direction. This information is used along with a given egress network interface MTU to determine the fragment size of a reassembled packet.
