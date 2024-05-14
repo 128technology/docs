@@ -217,6 +217,19 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 4.0.0
+
+**Release Date:** May 15, 2024
+
+#### New Features and Improvements
+- **PLUGIN-2339** Combined conductor and router rpm
+
+The conductor and router(s) install the same dns-cache rpm to improve release tracking and functionality.
+
+- **PLUGIN-2251** Fixed race between enabling and installing plugin
+
+The plugin is installed on the router before being enabled to handle the race issue.
+
 ### Release 3.5.0
 
 **Release Date:** Dec 21, 2023
