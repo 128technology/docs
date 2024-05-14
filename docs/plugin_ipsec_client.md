@@ -19,7 +19,7 @@ The IPsec plugin setup has the following key parts to the configuration.
 
 ### Profiles
 
-The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The examples below shows two examples of ipsec profiles that mutually exclusive one using pre-shared keys, and one using certificate based authentication. The examples below show two IPSec profiles that are mutually exclusive.
+The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The examples below show two IPSec profiles that are mutually exclusive.
 
 ```
 router
@@ -391,7 +391,6 @@ exit
 
 Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.
 
-### Configure X.509 Certificates Type For Tunnel Authentication
 ### Configure X.509 Certificate-type for Tunnel Authentication
 
 The IPsec plugin requires users to generate/acquire their private key, a CA certificate file, and user certificate file. This must be signed by the CA certificate offline by utilities mentioned in Libreswan document (or other reliable sources such as openssl). Refer to the public [HOWTO:_Using_NSS_with_libreswan document](https://libreswan.org/wiki/HOWTO:_Using_NSS_with_libreswan) for additional information. Note that the IPsec plugin will take over the configuration mentioned in `Importing third-party files into NSS` in the Libreswan document. 
