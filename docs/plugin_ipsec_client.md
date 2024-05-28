@@ -812,13 +812,13 @@ exit
 
 #### Issues Fixed
 
-- **PLUGIN-2232** Enabled and configured tunnels remain down.
+- **PLUGIN-2232** Configured and enabled tunnels remain down.
 
-  _**Resolution:**_ The plugin now handles file corruption better so that it does not get in this state.
+  _**Resolution:**_ File corruption is now handled more gracefully, preventing IPSEC tunnels from going down.
 
 - **PLUGIN-2197** DNS resolution failure causes plugin to become stuck.
 
-  _**Resolution:**_ If any FQDNs are defined in the `ipsec-client` > `remote` > `host` fields, the plugin will not start the tunnels if the FQDNs of the tunnels are unresolvable.
+  _**Resolution:**_ When FQDNs are defined in the `ipsec-client` > `remote` > `host` fields, the plugin will not start the tunnels if the FQDNs of the tunnels are unresolvable.
 
 - **WAN-1848** Tunnel monitoring failures did not cause traffic failover to other tunnels.
 
@@ -828,7 +828,7 @@ exit
 
   _**Resolution:**_ Reduced logging to provide a simplified journal.
 
-- **WAN-2994** Port 500 session were stuck even with session deletion feature.
+- **WAN-2994** Port 500 sessions were stuck even with session deletion feature.
 
   _**Resolution:**_ Delete the port 500 and 4500 sessions whenever the tunnel does not come up.
 
