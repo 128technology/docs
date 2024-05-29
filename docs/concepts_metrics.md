@@ -20,6 +20,10 @@ To view in-memory metrics, create a Metrics Profile containing the specific metr
 
 Care should be taken to avoid overloading the system with the metrics. Many metrics are currently in-memory because of the heavy load they introduce to the system if they were all persisted. 
 
+For in memory metrics, the `since` argument will only show the current value since in memory metrics do not have historic values.
+
+## `since` command 
+
 An Example of `show stats` command using a `since` argument is shown below:
 
 ```
