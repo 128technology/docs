@@ -24,6 +24,24 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.5-3r2
+
+**Release Date:** May 31, 2024
+
+### New Features
+
+
+### Resoved Issues
+
+- **The following CVEs have been resolved in this release:**
+
+------
+- **I95-52251 Router level conductor-address did not update the salt created services with the new addresses:** The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.
+------
+- **I95-53619 Anomaly in Maintenance Mode reporting:** 
+------
+- **I95-54838 Upgrade from 6.1.2 to 6.2 results in broken PCI mapping in AWS:** Resolved an issue in which large-scale systems with many interfaces would not be able to activate all interfaces. Prior multiplication of KNI pool size (32768) by nCores proved to be too much for large system in AWS.
+
 ## Release 6.2.4-14r2
 
 **Release Date:** March 29, 2024
