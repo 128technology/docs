@@ -26,19 +26,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.5-3r2
 
-**Release Date:** May 31, 2024
-
-### New Features
-
+**Release Date:** June 7, 2024
 
 ### Resoved Issues
 
-- **The following CVEs have been resolved in this release:** CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617,
-
+- **The following CVEs have been resolved in this release:** CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
 ------
 - **I95-52251 Router level conductor-address did not update the salt created services with the new addresses:** The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.
 ------
-- **I95-53619 Anomaly in Maintenance Mode reporting:** 
+- **I95-53619 Anomaly in Maintenance Mode reporting:** Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. `BGP peer path is down` alarms are now shelved properly on routers in maintenance mode.
 ------
 - **I95-54838 Upgrade from 6.1.2 to 6.2 results in broken PCI mapping in AWS:** Resolved an issue in which large-scale systems with many interfaces would not be able to activate all interfaces. 
 ------
@@ -81,13 +77,22 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade proces.  
 ------
 - **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
-
-
-
-
-
-
-
+------
+- **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
+------
+- **I95-56507 I350 interface fails to come up when assigned in LAG:** Resolved an issue where configuring an LACP Bond using I350 bond members would fail to come up when more than 7 worker cores were assigned. The I350 is an 8 queue device. It reserves one core as a dedicated queue, and on systems with 8 or more queues it could not assign the dedicated queue, causing an init failure.
+------
+- **I95-56541 Include kernel journal entries in TSI:** A separate `kernel.log` journal file is now created in the TSI output.
+------
+- **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
+------
+- **I95-56600 Add `show tenant members` to the TSI output:** `show tenant members` and additional network scripts have been added to the TSI output.
+------
+- **I95-56715 Address validation in migrate feature in conductor UI is not working correctly:** Resolved an isssue between the client and the server during the use of the GUI `migrate` operation, where the conductor address was not read correctly, and returning an irrelevant error message. 
+------
+- **I95-56726 `No Timeout Queue` message logged in cases where a config commit fails, or a conductor fails to load a config on startup:** Resolved an issue with `ThreadPoolWithExternalPoller` that resulted in a stack trace in the logs which starts with message `No TimeoutQueue:`.
+------
+- **I95-56837 When running `traceroute` after a conductor upgrade, the message `Error: failed to authorize user: you do not have access to resource='128t:*' capability='config-read'` appears:** This issue has been resolved by allowing traceroute access to the wildcard (`*`) resource.
 
 ## Release 6.2.4-14r2
 
