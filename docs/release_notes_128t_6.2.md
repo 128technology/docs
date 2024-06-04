@@ -36,8 +36,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-53619 Anomaly in Maintenance Mode reporting:** Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. `BGP peer path is down` alarms are now shelved properly on routers in maintenance mode.
 ------
-- **I95-54838 Upgrade from 6.1.2 to 6.2 results in broken PCI mapping in AWS:** Resolved an issue in which large-scale systems with many interfaces would not be able to activate all interfaces. 
-------
 - **I95-54918 Highway process crashed on the active node of a router:** Resolved a crash caused by a race condition when the last instance of a capture filter referencing a particular file-name is removed while a packet is in the process of being captured. 
 ------
 - **I95-55226 Validation incorrectly allows a network interface to be used as both DHCP relay and server:** The validation process has been updated to include several checks against DHCP relays, clients, servers, and access-policies. 
@@ -64,9 +62,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-56203 The First Article Inspection (FAI) scan archive is empty:** Resolved an issue with `logrotate` clearing all the FAI scan archives. This was due to each archive having a unique name using a timestamp. A different service is now used to rotate the FAI scan files.
 ------
+- **I95-56259 Upgrade to 6.2.4 failed to bring up KNI and management interfaces:** Resolved an issue in which large-scale systems with many interfaces would not be able to activate all interfaces. 
+------
 - **I95-56263 Add `show capacity`, and debugging commands to the TSI output:** Support for additional information in the TSI output has been added.
 ------
-- **I95-56279 SSM - LHR does not forward traffic upon failover of WAN
+- **I95-56279 When a multicast route changes due to failover, SSR does not forward traffic:** Resolved an issue that when the incoming interface changes from one SVR interface to another, the multicast route is not updated correctly. As a result the new incoming traffic does not match the incoming interface and is dropped. The multicast route is now correctly updated when there is an SVR incoming interface change. 
 ------
 - **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
 ------
