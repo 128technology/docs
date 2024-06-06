@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.5-3r2
 
-**Release Date:** June 5, 2024
+**Release Date:** June 6, 2024
 
 ### Resoved Issues
 
@@ -61,8 +61,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-56127 Changes to KNI device driver increased CPU load per KNI device:** Added KNI module tuning, and excessive CPU usage by idle KNI devices has been alleviated.
 ------
 - **I95-56203 The First Article Inspection (FAI) scan archive is empty:** Resolved an issue with `logrotate` clearing all the FAI scan archives. This was due to each archive having a unique name using a timestamp. A different service is now used to rotate the FAI scan files.
-------
-- **I95-56259 Upgrade to 6.2.4 failed to bring up KNI and management interfaces:** Resolved an issue in which large-scale systems with many interfaces would not be able to activate all interfaces. 
 ------
 - **I95-56263 Add `show capacity`, and debugging commands to the TSI output:** Support for additional information in the TSI output has been added.
 ------
