@@ -24,6 +24,78 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.5-5r2
+
+**Release Date:** June 6, 2024
+
+### Resoved Issues
+
+- **The following CVEs have been resolved in this release:** CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
+------
+- **I95-52251 Router's conductor-address did not update the salt created services with the new addresses:** The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.
+------
+- **I95-53619 Anomaly in Maintenance Mode reporting:** Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. `BGP peer path is down` alarms are now shelved properly on routers in maintenance mode.
+------
+- **I95-54918 Highway process crashed on the active node of a router:** Resolved a crash caused by a race condition when the last instance of a capture filter referencing a particular file-name is removed while a packet is in the process of being captured. 
+------
+- **I95-55226 Validation incorrectly allows a network interface to be used as both DHCP relay and server:** The validation process has been updated to include several checks against DHCP relays, clients, servers, and access-policies. 
+------
+- **I95-55550 node0 went down and did not fail over to node1:** Multiple disk errors caused corruption on the `128T_root` filesystem causing it to enter `read-only` mode and becoming non-responsive. To resolve this issue, issues in the filesystem now result in kernel panic mode, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem. 
+------
+- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.
+------
+- **I95-55764 Race condition and highway crash with DHCP devices:** Resolved a race condition that caused a highway crash when the DHCP client is configured for LTE or PPPoE, and the respective link flaps prior to the lease being assigned.
+------
+- **I95-55768 BGP Routes are not propagated after HUB reboot when Hub to Hub Mesh is enabled:** Resolved a race condition in the BGP graceful restart code that caused a router to sometimes not forward BGP routes learned via route leaking.
+------
+- **I95-55775 Race condition exposed by service-area multithreading:** We now prevent a crash due to a race condition in the processing of session collisions when session-processing multithreading is enabled.
+------
+- **I95-55912 Validate Patterns for Service Domains and URLs:** The `url` and `domain-name` fields on a service were an unformatted string. This allowed you to configure fields that would be silently discarded. The `domain-name` and `url` fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now triggers a config warning.
+------
+- **I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:** Resolved an issue where the `cpuinfo` parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the `cpuinfo` contains the word `processor`. 
+------
+- **I95-55041 IP Database reload failure:** Resolved an issue where concurrent database reloads were causing a race condition and reload failures. The database reload will now only be run sequentially.
+------
+- **I95-56114 Inactivity timers not working correctly:** Resolved an issue with serial console inactivity timers. The inactivity timer enforces timeouts set for serial consoles by logging out users and closing the serial connection. The timeout is configured using `config authority router <name> system inactivity-timer <seconds>`.
+------
+- **I95-56127 Changes to KNI device driver increased CPU load per KNI device:** Added KNI module tuning, and excessive CPU usage by idle KNI devices has been alleviated.
+------
+- **I95-56203 The First Article Inspection (FAI) scan archive is empty:** Resolved an issue with `logrotate` clearing all the FAI scan archives. This was due to each archive having a unique name using a timestamp. A different service is now used to rotate the FAI scan files.
+------
+- **I95-56263 Add `show capacity`, and debugging commands to the TSI output:** Support for additional information in the TSI output has been added.
+------
+- **I95-56279 When a multicast route changes due to failover, SSR does not forward traffic:** Resolved an issue that when the incoming interface changes from one SVR interface to another, the multicast route is not updated correctly. As a result the new incoming traffic does not match the incoming interface and is dropped. The multicast route is now correctly updated when there is an SVR incoming interface change. 
+------
+- **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
+------
+- **I95-56317 Journal logs missing from Conductors running 6.2.3:** An issue related to a typo was creating zero byt files when downloading journal logs using the GUI.
+------
+- **I95-56326 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
+------
+- **I95-56363 Highway crash due to traffic metrics manager thread error:** A potential crash due to a race condition in per-service-route metrics has been fixed.
+------
+- **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade proces.  
+------
+- **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
+------
+- **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
+------
+- **I95-56507 I350 interface fails to come up when assigned in LAG:** Resolved an issue where configuring an LACP Bond using I350 bond members would fail to come up when more than 7 worker cores were assigned. The I350 is an 8 queue device. It reserves one core as a dedicated queue, and on systems with 8 or more queues it could not assign the dedicated queue, causing an init failure.
+------
+- **I95-56541 Include kernel journal entries in TSI:** A separate `kernel.log` journal file is now created in the TSI output.
+------
+- **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
+------
+- **I95-56600 Add `show tenant members` to the TSI output:** `show tenant members` and additional network scripts have been added to the TSI output.
+------
+- **I95-56612 `fib-service-match any-match` missing some FIB entries:** Resolved an issue when a service-address was more specific than the last route update, a search for other less specific services was not performed. Now when the service address update is more specific, additional searches will continue. 
+------
+- **I95-56715 Address validation in migrate feature in conductor UI is not working correctly:** Resolved an isssue between the client and the server during the use of the GUI `migrate` operation, where the conductor address was not read correctly, and returning an irrelevant error message. 
+------
+- **I95-56726 `No Timeout Queue` message logged in cases where a config commit fails, or a conductor fails to load a config on startup:** Resolved an issue with `ThreadPoolWithExternalPoller` that resulted in a stack trace in the logs which starts with message `No TimeoutQueue:`.
+------
+- **I95-56837 When running `traceroute` after a conductor upgrade, the message `Error: failed to authorize user: you do not have access to resource='128t:*' capability='config-read'` appears:** This issue has been resolved by allowing traceroute access to the wildcard (`*`) resource.
+
 ## Release 6.2.4-14r2
 
 **Release Date:** March 29, 2024
