@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.2 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.2 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.2"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.2" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.2" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.b50a304b.css">
-<script src="/assets/js/runtime~main.27087795.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.740220ff.js" defer="defer"></script>
 <script src="/assets/js/main.f6c3f087.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -27,6 +27,140 @@
 <hr>
 <ul>
 <li><strong>Plugin Upgrades:</strong> If you are running with plugins, updates are required for some plugins <strong>before</strong> upgrading the conductor to SSR version 5.4.0 or higher. Please review the <a href="/docs/intro_upgrade_considerations#plugin-configuration-generation-changes">Plugin Configuration Generation Changes</a> for additional information.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-625-3r2">Release 6.2.5-3r2<a href="#release-625-3r2" class="hash-link" aria-label="Direct link to Release 6.2.5-3r2" title="Direct link to Release 6.2.5-3r2">​</a></h2>
+<p><strong>Release Date:</strong> June 6, 2024</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resoved-issues">Resoved Issues<a href="#resoved-issues" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues">​</a></h3>
+<ul>
+<li><strong>The following CVEs have been resolved in this release:</strong> CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-52251 Router&#x27;s conductor-address did not update the salt created services with the new addresses:</strong> The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-53619 Anomaly in Maintenance Mode reporting:</strong> Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. <code>BGP peer path is down</code> alarms are now shelved properly on routers in maintenance mode.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-54918 Highway process crashed on the active node of a router:</strong> Resolved a crash caused by a race condition when the last instance of a capture filter referencing a particular file-name is removed while a packet is in the process of being captured.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55226 Validation incorrectly allows a network interface to be used as both DHCP relay and server:</strong> The validation process has been updated to include several checks against DHCP relays, clients, servers, and access-policies.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55550 node0 went down and did not fail over to node1:</strong> Multiple disk errors caused corruption on the <code>128T_root</code> filesystem causing it to enter <code>read-only</code> mode and becoming non-responsive. To resolve this issue, issues in the filesystem now result in kernel panic mode, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55603 HA router stuck in connected state due to runtime corruption issue:</strong> Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55764 Race condition and highway crash with DHCP devices:</strong> Resolved a race condition that caused a highway crash when the DHCP client is configured for LTE or PPPoE, and the respective link flaps prior to the lease being assigned.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55768 BGP Routes are not propagated after HUB reboot when Hub to Hub Mesh is enabled:</strong> Resolved a race condition in the BGP graceful restart code that caused a router to sometimes not forward BGP routes learned via route leaking.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55775 Race condition exposed by service-area multithreading:</strong> We now prevent a crash due to a race condition in the processing of session collisions when session-processing multithreading is enabled.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55912 Validate Patterns for Service Domains and URLs:</strong> The <code>url</code> and <code>domain-name</code> fields on a service were an unformatted string. This allowed you to configure fields that would be silently discarded. The <code>domain-name</code> and <code>url</code> fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now triggers a config warning.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:</strong> Resolved an issue where the <code>cpuinfo</code> parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the <code>cpuinfo</code> contains the word <code>processor</code>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55041 IP Database reload failure:</strong> Resolved an issue where concurrent database reloads were causing a race condition and reload failures. The database reload will now only be run sequentially.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56114 Inactivity timers not working correctly:</strong> Resolved an issue with serial console inactivity timers. The inactivity timer enforces timeouts set for serial consoles by logging out users and closing the serial connection. The timeout is configured using <code>config authority router &lt;name&gt; system inactivity-timer &lt;seconds&gt;</code>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56127 Changes to KNI device driver increased CPU load per KNI device:</strong> Added KNI module tuning, and excessive CPU usage by idle KNI devices has been alleviated.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56203 The First Article Inspection (FAI) scan archive is empty:</strong> Resolved an issue with <code>logrotate</code> clearing all the FAI scan archives. This was due to each archive having a unique name using a timestamp. A different service is now used to rotate the FAI scan files.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56263 Add <code>show capacity</code>, and debugging commands to the TSI output:</strong> Support for additional information in the TSI output has been added.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56279 When a multicast route changes due to failover, SSR does not forward traffic:</strong> Resolved an issue that when the incoming interface changes from one SVR interface to another, the multicast route is not updated correctly. As a result the new incoming traffic does not match the incoming interface and is dropped. The multicast route is now correctly updated when there is an SVR incoming interface change.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56292 Increase the length of SSH keys to 4096:</strong> The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56317 Journal logs missing from Conductors running 6.2.3:</strong> An issue related to a typo was creating zero byt files when downloading journal logs using the GUI.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56326 Potential crash while collecting TSI:</strong> Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56363 Highway crash due to traffic metrics manager thread error:</strong> A potential crash due to a race condition in per-service-route metrics has been fixed.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56411 Remove outdated performance package:</strong> Older versions of the <code>perf</code> package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older <code>perf</code> packages during the software upgrade proces.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56455 Zero-byte files when updating conductor hardware using an OTP image:</strong> A check has been added to verify that <code>api.key</code> and <code>router-api.key</code> are non-zero length and valid. If not, the keys are regenerated.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56475 HA-sync network interface shows warning after router upgrade:</strong> Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56507 I350 interface fails to come up when assigned in LAG:</strong> Resolved an issue where configuring an LACP Bond using I350 bond members would fail to come up when more than 7 worker cores were assigned. The I350 is an 8 queue device. It reserves one core as a dedicated queue, and on systems with 8 or more queues it could not assign the dedicated queue, causing an init failure.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56541 Include kernel journal entries in TSI:</strong> A separate <code>kernel.log</code> journal file is now created in the TSI output.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56575 Reduce polling rate of disk monitoring and add optimization:</strong> The <code>ComponentDiskUtilizationMonitor</code> checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56600 Add <code>show tenant members</code> to the TSI output:</strong> <code>show tenant members</code> and additional network scripts have been added to the TSI output.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56612 <code>fib-service-match any-match</code> missing some FIB entries:</strong> Resolved an issue when a service-address was more specific than the last route update, a search for other less specific services was not performed. Now when the service address update is more specific, additional searches will continue.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56715 Address validation in migrate feature in conductor UI is not working correctly:</strong> Resolved an isssue between the client and the server during the use of the GUI <code>migrate</code> operation, where the conductor address was not read correctly, and returning an irrelevant error message.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56726 <code>No Timeout Queue</code> message logged in cases where a config commit fails, or a conductor fails to load a config on startup:</strong> Resolved an issue with <code>ThreadPoolWithExternalPoller</code> that resulted in a stack trace in the logs which starts with message <code>No TimeoutQueue:</code>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56837 When running <code>traceroute</code> after a conductor upgrade, the message <code>Error: failed to authorize user: you do not have access to resource=&#x27;128t:*&#x27; capability=&#x27;config-read&#x27;</code> appears:</strong> This issue has been resolved by allowing traceroute access to the wildcard (<code>*</code>) resource.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-624-14r2">Release 6.2.4-14r2<a href="#release-624-14r2" class="hash-link" aria-label="Direct link to Release 6.2.4-14r2" title="Direct link to Release 6.2.4-14r2">​</a></h2>
 <p><strong>Release Date:</strong> March 29, 2024</p>
@@ -800,6 +934,6 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 <hr>
 <ul>
 <li><strong>I95-53878 Dynamic Reconfiguration Issues with LAG:</strong> Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.</li>
-</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/plugin_kni_namespace_scripts"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">KNI Namespace Scripts</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.1"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.1</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-624-14r2" class="table-of-contents__link toc-highlight">Release 6.2.4-14r2</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-623-14r2" class="table-of-contents__link toc-highlight">Release 6.2.3-14r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-620-39" class="table-of-contents__link toc-highlight">Release 6.2.0-39</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
+</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/plugin_kni_namespace_scripts"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">KNI Namespace Scripts</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.1"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.1</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-625-3r2" class="table-of-contents__link toc-highlight">Release 6.2.5-3r2</a><ul><li><a href="#resoved-issues" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-624-14r2" class="table-of-contents__link toc-highlight">Release 6.2.4-14r2</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-623-14r2" class="table-of-contents__link toc-highlight">Release 6.2.3-14r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-620-39" class="table-of-contents__link toc-highlight">Release 6.2.0-39</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>
