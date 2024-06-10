@@ -13,7 +13,7 @@ The Session Smart Router combines a service-centric control plane and a session-
 
 ### Secure Vector Routing (SVR)
 
-The Session Smart Networking Platform uses Secure Vector Routing, an innovative approach to IP routing that eliminates the need for tunnel-based overlay networks. The Session Smart Networking Platform and Secure Vector Routing make existing networks dramatically simpler, smarter, more secure and seamless. SVR comprises two unique control plane and data plane components, the service-centric control plane and the session-aware data plane. 
+The Session Smart Networking Platform uses Secure Vector Routing, an innovative approach to IP routing that eliminates the need for tunnel-based overlay networks. The Session Smart Networking Platform and Secure Vector Routing make existing networks dramatically simpler, smarter, more secure and seamless. SVR comprises two unique control plane and data plane components, the service-centric control plane and the session-aware data plane. For more details of the SVR protocol, see [IETF SVR standards documents](https://www.ietf.org/archive/id/draft-menon-svr-00.html).
 
 ### Data Model
 At the core of the SVR control plane is a service-based data model, which provides the language for describing the network’s services, tenancy, and associated policies. The SVR data model is global and location independent, meaning every router in an SVR fabric shares the same service-based policies and topology, at all times – no matter where it is. The service-centric data model is expressed in YANG and exposed via northbound REST, GraphQL, and NETCONF APIs to deliver a full suite of application and orchestration integration services.
