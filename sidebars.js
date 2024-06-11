@@ -97,7 +97,6 @@ module.exports = {
       "concepts_machine_communication",
       "concepts_pcli",
       "concepts_session_timer",
-      "concepts_STEP",
       "concepts_waypoint_ports",
       "concepts_monitoring",
       "concepts_glossary",
@@ -244,16 +243,6 @@ module.exports = {
           "concepts_ssr_idp",
           "config_idp",
           "ts_idp",
-        ],
-      },
-      {
-        "type": "category",
-        "label": "Service and Topology Exchange Protocol (STEP)",
-        "items": [
-          "config_STEP",
-          "config_step_ha",
-          "howto_STEP_GUI",
-          "ts_step",
         ],
       },
       {
