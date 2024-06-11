@@ -1,9 +1,9 @@
 ---
-title: SSR Universal ISO Installation 
-sidebar_label: SSR Universal ISO Installation
+title: SSR Installation 
+sidebar_label: SSR Installation
 ---
 
-The SSR Univeral ISO is a single downloadable ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
+Beginning with version 6.3.0, the SSR uses a single downloadable ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
 
 #### Version History
 
