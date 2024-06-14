@@ -208,7 +208,7 @@ When matching a session to a service, the list below represents the priority ord
 - category
 
 The SSR obtains the category and subcategory for the URL and domain from Websense, which is then used for the service matching algorithm described below. 
-
+<!-- markdown-link-check-disable -->
 For example, on the URL: http://www.google.com/doodles/doodle-champion-island-games-september-05, matching will be performed in the following order. 
 
 1.  Does any child service URL list contain a match for this URL, including any wild-card patterns for URLs? 
@@ -226,7 +226,7 @@ For example, on the URL: http://www.google.com/doodles/doodle-champion-island-ga
             exit
         exit
 ```
-
+<!-- markdown-link-check-enable -->
 2. If there was no match to the first query, then does any child service match the domain in the URL? 
 - Yes, the following domain based service matches the URL:
 
@@ -278,7 +278,7 @@ In this case, `google.com` does not fall into the category of Technology.
 ### Matching Order Algorithm
 
 The matching order algorithm is the same for scenarios when all the web filtering config options are used across different child services under the parent, or used on the same child service. For example, consider the following service:
-
+<!-- markdown-link-check-disable -->
 ```
         service  block-search.internet
             name                search.internet
@@ -300,7 +300,7 @@ The `block-search.internet` child service will match the various URLs as follows
 | http://www.google.com/doodles/doodle-champion-island-games-september-05 | By URL<br /> http://www.google.com/doodles/* | The wild-card URL is the best match in this case. |
 | http://www.google.com | By domain *google.com | The URL is not a match, but the domain is and the overall child service is a match as a result. |
 | http://www.bing.com | By subcategory Search Engines and Portals. | The URL matches neither the configured URL or domain pattern, however, it is a Search Engine and matches the child service. |
-
+<!-- markdown-link-check-enable -->
 ## Configuring Web Filtering using the GUI
 
 To enable Web Filtering, configure application identification, a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
