@@ -49,6 +49,9 @@ config
             http-probe-profile  http-probe-1
                 name               http-probe-1
                 url                http://172.16.2.5:5060/
+                probe-interval     60
+                number-of-attempts 5
+                probe-duration     20
                 valid-status-code  202
                 valid-status-code  200
             exit
@@ -56,6 +59,11 @@ config
     exit
 exit
 ```
+
+Above configuration runs http probe as follow:
+![Http Probe Timeline](/img/http-probe-timeline.png)
+Based on the configuration, every test would run 5 probe attempts, each attempt runs with a 2 seconds hard timeout. Each probe may fail because of request failure, timeout reached or invalid response code. Service path status is detemined at the end of probe duration and stay on the same status until the end of next test. 
+
 
 ### SLA
 
@@ -363,15 +371,17 @@ Wed 2024-04-17 02:52:35 UTC
 Http Probe Stats Metrics
 ------------------------
 
-============= ======= ==================== ====================
- Metric        Node    Probe-profile-name                Value
-============= ======= ==================== ====================
- average-rtt   test2   http-probe-1                          0
- jitter        test2   http-probe-1                          0
- loss          test2   http-probe-1                        100
- max-rtt       test2   http-probe-1                          0
- min-rtt       test2   http-probe-1                          0
- updated       test2   http-probe-1         1713322347.9919806
+===================== ======= ==================== ====================
+ Metric                Node    Probe-profile-name                Value
+===================== ======= ==================== ====================
+ average-rtt           test2   http-probe-1                       0.12
+ dns-resolution-time   test2   http-probe-1         2.1130787988658994
+ jitter                test2   http-probe-1                       0.02
+ loss                  test2   http-probe-1                          0
+ max-rtt               test2   http-probe-1                       0.13
+ min-rtt               test2   http-probe-1                       0.11
+ updated               test2   http-probe-1         1718376794.8707266
+
 
 Completed in 0.21 seconds
 ```
