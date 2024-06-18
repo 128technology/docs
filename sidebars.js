@@ -101,6 +101,15 @@ module.exports = {
       "concepts_monitoring",
       "concepts_glossary",
     ],
+    "Understanding the Forwarding Information Base": [
+      "concepts_fib",
+      "concepts_fib_construction",
+      "concepts-fib-design",
+      "bcp_fib_design",
+      "ts_fib",
+    ],
+
+
     "WAN Assurance": [
       "wan_overview",
       "hdwr_ssr_device_port_layout",
@@ -287,15 +296,15 @@ module.exports = {
       "events_events",
     ],
     "Best Practices": [
+      "bcp_sdwan_design_guide",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
       "bcp_dhcp_relay_overview",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
-      "bcp_per-adjacency_traffic_engineering",
-      "bcp_salt_pillars",
-      "bcp_sdwan_design_guide",
+      "bcp_salt_pillars",      
       "bcp_service_and_service_policy_design",
       "bcp_service-policy_defaults",
       "bcp_tenants",
