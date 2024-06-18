@@ -108,8 +108,6 @@ module.exports = {
       "bcp_fib_design",
       "ts_fib",
     ],
-
-
     "WAN Assurance": [
       "wan_overview",
       "hdwr_ssr_device_port_layout",

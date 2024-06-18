@@ -3,7 +3,11 @@ title: FIB Troubleshooting
 sidebar_label: FIB Troubleshooting
 ---
 
-To see what FIB entry a particular packet will match, the command show fib lookup can be used. This command will take a destination-ip, destination-port, and protocol as options along with either the name of a tenant or a source-interface and source-address and return the FIB entry that a packet with these characteristics would match as processed by service area.
+### `show fib lookup`
+
+Use [`show fib lookup`](cli_reference.md#show-fib-lookup) to identify the FIB entry a particular packet matches.
+
+Enter the name of a tenant or a source-interface and source-address, as well as the destination-ip, destination-port, and protocol as options to return the FIB entry that a packet with these characteristics would match as processed by service area.
 
 ```
 admin@node0.ssr1# show fib lookup tenant t0 protocol udp destination-port 1001 destination-ip 192.168.0.1
@@ -19,8 +23,18 @@ Completed in 0.01 seconds
 admin@node0.ssr1#
 ```
 
-When looking at a single FIB entry, it is sometimes unclear what action the packet will take. Is the intent to natively IP route the packet or send it over SVR? What are the available paths that might be considered for this service. In these scenarios, the command `show service-paths service-name <service>` can be very useful. After using the show fib lookup command to understand what entry will be selected, the resulting service name can be used as the input to the show service-path command.
+### `show service-path service-name <service>`
 
-There are also various statistics that can illustrate how packets are being processed by service area under the command tree show stats packet-processing lookup. In particular, tenant-table hit or miss will show how many packets (which did not match an existing installed flow) came into a particular interface and either matched a configured tenant or did not match a configured tenant, respectively. Additionally, fib-table hit, deny, or miss will show how many times a packet has resulted in a lookup of the FIB table with one either successful match (hit), no match (miss), or a policy that indicated traffic should be denied (deny).
+When looking at a single FIB entry, it is sometimes unclear what action the packet will take. Is the intent to natively IP route the packet or send it over SVR? What are the available paths that might be considered for this service. In these scenarios, the command [`show service-paths service-name <service>`](cli_reference.md#show-service-path) can be very useful. After using the show fib lookup command to understand what entry will be selected, the resulting service name can be used as the input to the show service-path command.
 
-The maximum capacity of the FIB and other tables, along with the current number of entries and percentage of utilization, can be seen using the show capacity command.
+### `show stats packet-processing lookup`
+
+Commands under `show stats packet-processing lookup` illustrate how packets are being processed by the service area. 
+
+[`show stats packet-processing lookup tenant-table`](cli_stats_reference#show-stats-packet-processing-lookup-tenant-table) `hit` or `miss` displays how many packets (which did not match an existing installed flow) came into a particular interface and either matched a configured tenant or did not match a configured tenant, respectively. 
+
+[`show stats packet-processing lookup fib-table `](cli_stats_reference.md#show-stats-packet-processing-lookup-fib-table) `hit`, `deny`, or `miss` displays how many times a packet has resulted in a lookup of the FIB table with either a successful match (hit), no match (miss), or a policy that indicated traffic should be denied (deny).
+
+### `show capacity`
+
+The maximum capacity of the FIB and other tables, along with the current number of entries and percentage of utilization, can be seen using the [`show capacity`](cli_reference.md#show-capacity) command.
