@@ -104,7 +104,7 @@ module.exports = {
     "Understanding the Forwarding Information Base": [
       "concepts_fib",
       "concepts_fib_construction",
-      "concepts-fib-design",
+      "concepts_fib_design",
       "bcp_fib_design",
       "ts_fib",
     ],
