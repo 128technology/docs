@@ -97,7 +97,6 @@ module.exports = {
       "concepts_machine_communication",
       "concepts_pcli",
       "concepts_session_timer",
-      "concepts_STEP",
       "concepts_waypoint_ports",
       "concepts_monitoring",
       "concepts_glossary",
@@ -248,16 +247,6 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "Service and Topology Exchange Protocol (STEP)",
-        "items": [
-          "config_STEP",
-          "config_step_ha",
-          "howto_STEP_GUI",
-          "ts_step",
-        ],
-      },
-      {
-        "type": "category",
         "label": "How To",
         "items": [
           "how_to_local_config_override",
@@ -386,6 +375,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.8",
           "release_notes_wan_assurance_plugin_3.7",
           "release_notes_wan_assurance_plugin_3.6",
           "release_notes_wan_assurance_plugin_3.5",
