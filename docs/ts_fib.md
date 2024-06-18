@@ -31,7 +31,7 @@ When looking at a single FIB entry, it is sometimes unclear what action the pack
 
 Commands under `show stats packet-processing lookup` illustrate how packets are being processed by the service area. 
 
-[`show stats packet-processing lookup tenant-table`](cli_stats_reference#show-stats-packet-processing-lookup-tenant-table) `hit` or `miss` displays how many packets (which did not match an existing installed flow) came into a particular interface and either matched a configured tenant or did not match a configured tenant, respectively. 
+[`show stats packet-processing lookup tenant-table`](cli_stats_reference.md#show-stats-packet-processing-lookup-tenant-table) `hit` or `miss` displays how many packets (which did not match an existing installed flow) came into a particular interface and either matched a configured tenant or did not match a configured tenant, respectively. 
 
 [`show stats packet-processing lookup fib-table `](cli_stats_reference.md#show-stats-packet-processing-lookup-fib-table) `hit`, `deny`, or `miss` displays how many times a packet has resulted in a lookup of the FIB table with either a successful match (hit), no match (miss), or a policy that indicated traffic should be denied (deny).
 
