@@ -95,7 +95,7 @@ FIB:
 ```
 The above examples do not take the RIB into account. A change in the configuration or a change in the RIB will cause the policy to be reapplied.
  
-Each selected route in the RIB is sent to the highway process as a route update by the routing agent. The route update is compared to all addresses for configured services. If a route update is more specific than a service address, this will result in multiple FIB entries for the service. An example of this is shown below. The service is configured with address 10.0.0.0/8, which automatically receives an entry. There is also a more specific BGP route in the RIB for 10.1.1.0/24. This results in a FIB entry for the configured service address (10.0.0.0/8), and a FIB entry for the more specific RIB route (10.1.1.0/24).
+Each selected route in the RIB produces a route update that *may* influence the FIB. The route update is compared to all addresses for configured services. If a route update is more specific than a service address, this will result in multiple FIB entries for the service. An example of this is shown below. The service is configured with address 10.0.0.0/8, which automatically receives an entry. There is also a more specific BGP route in the RIB for 10.1.1.0/24. This results in a FIB entry for the configured service address (10.0.0.0/8), and a FIB entry for the more specific RIB route (10.1.1.0/24).
 
 ```
         service            s0
@@ -258,7 +258,7 @@ FIB:
 
 In this scenario, the route update for 10.1.1.0/24 finds the best match for a service address for tenant `t0`, which is 10.1.1.0/24. This is configured in service `s0` and therefore only service `s0` is considered for transport overlap. Service `s1` is not considered. If a packet classified as source tenant `t0` comes into the router destined for 10.1.1.10 TCP/443, it will match the FIB entry for 10.1.0.0/16 TCP/0 for service `s1`, which has no next-hop. A session will not be installed in the session table, and no traffic will be forwarded. A network operator may think this traffic should reach its destination based on the intent of this configuration.
 
-Due to the confusion of the above scenario, new configuration parameter, `fib-service-match`, has been added. The default value for this parameter, `best-match-only`, preserves the default functionality. Changing this to `any-match` will enhance the functionality. When `any-match` is configured, a route update visits other, less-specific service addresses. These addresses will be considered for transport overlap in the same manner as the best match is in the default behavior. Configuring `fib-service-match any-match`  changes the way the FIB is built from the above example to what is shown below.
+Due to the confusion of the above scenario, the configuration parameter [`fib-service-match`](config_command_guide.md#configure-authority-fib-service-match)has been added. The default value for this parameter, `best-match-only`, preserves the default functionality. Changing this to `any-match` will enhance the functionality. When `any-match` is configured, a route update visits other, less-specific service addresses. These addresses will be considered for transport overlap in the same manner as the best match is in the default behavior. Configuring `fib-service-match any-match`  changes the way the FIB is built from the above example to what is shown below.
 
 ```
 ==================== =========== ======= ========== ===== ========================= ============= ======== ======
@@ -281,7 +281,7 @@ Due to the confusion of the above scenario, new configuration parameter, `fib-se
 
 In this case, if a packet classified as source tenant `t0` comes into the router destined for 10.1.1.10 TCP/443, it will match the FIB entry for 10.1.1.0/24 TCP/0 for service `s1`. This entry has a next-hop from the route update and therefore a session will be installed and traffic forwarded to next-hop 192.168.1.2.
 
-Be aware, though, that even with this new behavior, when there is any transport conflict between two services for entries of a particular prefix, the service declared as the winner (alphabetically) will create FIB entries for all of its transports and the losing service or services will create **no** FIB entries for this prefix. This is illustrated below:
+Be aware, though, that even with this behavior, when there is any transport conflict between two services for entries of a particular prefix, the service declared as the winner (alphabetically) will create FIB entries for all of its transports and the losing service or services will create **no** FIB entries for this prefix. This is illustrated below:
 
 ```
         service            s0
