@@ -108,6 +108,18 @@ When you modify the GRUB kernel behavior by editing the GRUB menu at boot time, 
 
 This installation process is an automated workflow which does not require user interaction after selecting and initiating the OTP menu option. The system will power off after installation.
 
+### Considerations When Strict Host Key Checking Is Enabled
+
+If the router is configured for strict `inter-router` host key checking (`host-key-checking` is `yes`), there are some additional considerations when onboarding to the conductor. It will be necessary to manually provision the new conductor key **prior** to successful communication to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+
+On the new conductor, identify each nodes `Key` using the command `show system connectivity host-keys node all`.
+
+On the router PCLI, each conductor key can be then be provisioned by using the follow command:
+`create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
+
+where, `<node>` is the router node (should be added on each router node in an HA pair), `<conductor address>` is the conductor address (should be added for each conductor address of an HA conductor pair), `<key>` is the `Key` retrieved from the previous step and, optionally a comment `<comment>` to identify what this key is, for example `Conductor1`.
+
+
 ### Root Access
 To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
 **Logging in as `root` over SSH is not permitted.**
