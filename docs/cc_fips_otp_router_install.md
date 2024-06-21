@@ -22,7 +22,7 @@ Basic configuration parameters are encoded within an encrypted file. For each no
 - Asset ID
 
 ### Before you Begin
-
+ 
 Before beginning the Router installation, you must have a Conductor operationally deployed and reachable by the router.
 
 :::important
@@ -110,10 +110,10 @@ This installation process is an automated workflow which does not require user i
 
 ### Enable Strict Host Key Checking
 
-Enabling strict host key checking allows secure communication between the conductor and a configured router. 
-Similar to SSH, there are two host key checking options; `accept-new` which accepts the key on first connection, and, `yes` which requires the host key to be provisioned manually. 
+Enabling strict `host-key-checking` provides secure communication between the conductor and a configured router. 
+Similar to SSH, there are two `host-key-checking` options; `yes` which requires the host key to be provisioned manually, or `accept-new` which accepts the key on first connection. 
 
-There are two configuration parameters where this can be set: 
+There are two configuration parameters where `host-key-checking` can be set: 
 
 - **`inter-router host-key-checking`** controls host key verification between a router and the conductor. When set to `yes`, strict host key checking is enabled between the router and the conductor. However, the host keys must be manually provisioned on each router. 
  
@@ -128,12 +128,8 @@ There are two configuration parameters where this can be set:
 config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-node host-key-checking yes
 config authority router RTR_EAST_COMBO node combo-east-2 ssh-settings inter-node host-key-checking yes
 ```
-
-The following example manually configures the key to the conductor node `192.168.1.13`:
-
-`create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
  
-To save the work of manually provisioning the host key on the router, set the `accept-new` parameter. This automatically loads the host key.
+To save the work of manually provisioning the host key on the router, set the `accept-new` parameter. This automatically loads the host key on first connection.
 
 ```
 config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-router host-key-checking accept-new
@@ -141,18 +137,23 @@ config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-rout
 
 Use the `show system connectivity known-hosts` to view the accepted host keys for the current node.
 
-<!---
-**QUESTION: IF ACCEPT-NEW IS CONFIGURED, IS THE INFORMATION BELOW NECESSARY?
+#### Manual Provisioning of the Conductor Key
 
-If the router is configured for strict `inter-router` host key checking (`host-key-checking` is `yes`), there are some additional considerations when onboarding to the conductor. It will be necessary to manually provision the new conductor key **prior** to successful communication to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the new conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
 
-On the new conductor, identify each nodes `Key` using the command `show system connectivity host-keys node all`.
+On the new conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
 
-On the router PCLI, each conductor key can be then be provisioned by using the follow command:
+From the router PCLI, provision each conductor key using the following command:
 `create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
 
-where, `<node>` is the router node (should be added on each router node in an HA pair), `<conductor address>` is the conductor address (should be added for each conductor address of an HA conductor pair), `<key>` is the `Key` retrieved from the previous step and, optionally a comment `<comment>` to identify what this key is, for example `Conductor1`.
---->
+- `<node>` is the router node. The key should be added on each router node in an HA pair. 
+- `<conductor address>` is the conductor address. This should be added for each conductor address of an HA conductor pair.
+- `<key>` is the `Key` retrieved from the previous step.
+- `<comment>` is an option that can be used to identify the key; for example `Conductor1`.
+
+The following example manually configures the key to the conductor node `192.168.1.13`:
+
+`create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
 
 ### Root Access
 To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
