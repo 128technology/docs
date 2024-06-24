@@ -210,7 +210,7 @@ When matching a session to a service, the list below represents the priority ord
 The SSR obtains the category and subcategory for the URL and domain from Websense, which is then used for the service matching algorithm described below. 
 <!-- markdown-link-check-disable -->
 For example, on the URL: http://www.google.com/doodles/doodle-champion-island-games-september-05, matching will be performed in the following order. 
-
+<!-- markdown-link-check-enable -->
 1.  Does any child service URL list contain a match for this URL, including any wild-card patterns for URLs? 
 - Yes, the following child service matches the URL:
 
@@ -294,7 +294,7 @@ The matching order algorithm is the same for scenarios when all the web filterin
         exit
 ```
 The `block-search.internet` child service will match the various URLs as follows:
-
+<!-- markdown-link-check-disable -->
 | URL | Match Type | Description |
 | --- | --- | --- |
 | http://www.google.com/doodles/doodle-champion-island-games-september-05 | By URL<br /> http://www.google.com/doodles/* | The wild-card URL is the best match in this case. |
