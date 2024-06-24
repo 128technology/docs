@@ -568,7 +568,7 @@ authority > router > bfd
 
 #### Description:
 
-The *bfd* sub-element is used for configuring timers and behaviors associated with the Bidirectional Forwarding Detection protocol for *nodes* within the *router*. All SSR packet forwarding components will use BFD to report to one another, governed by these parameters.
+The *bfd* sub-element is used for configuring timers and behaviors associated with the Bidirectional Forwarding Detection protocol, specifically for the HA fabric link between *nodes* of a HA *router*.
 
 | Element | Type | Description |
 | --- | --- | --- |
