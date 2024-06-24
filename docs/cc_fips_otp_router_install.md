@@ -110,7 +110,7 @@ This installation process is an automated workflow which does not require user i
 
 ### Enable Strict Host Key Checking
 
-Enabling strict `host-key-checking` provides secure communication between the conductor and a configured router. 
+Enabling strict `host-key-checking` provides secure communication between the conductor and a router. 
 Similar to SSH, there are two `host-key-checking` options; `yes` which requires the host key to be provisioned manually, or `accept-new` which accepts the key on first connection. 
 
 There are two configuration parameters where `host-key-checking` can be set: 
@@ -122,7 +122,7 @@ There are two configuration parameters where `host-key-checking` can be set:
  config authority router RTR_EAST_COMBO node combo-east-2 ssh-settings inter-router host-key-checking yes
  ```
 
-- **`inter-node host-key-checking`** controls host key verification between redundant HA nodes. When set to `yes`, strict host key checking is enabled between the router and the conductor **between each node**. However, the host keys must be manually provisioned on each router. 
+- **`inter-node host-key-checking`** controls host key verification between redundant HA nodes. When set to `yes`, strict host key checking is enabled between the router and the conductor **between each node** of an HA router. However, the host keys must be manually provisioned on each router. 
 
 ```
 config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-node host-key-checking yes
@@ -139,9 +139,9 @@ Use the `show system connectivity known-hosts` to view the accepted host keys fo
 
 #### Manual Provisioning of the Conductor Key
 
-If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the new conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the conductor and configure this in the router.
 
-On the new conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
+On the conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
 
 From the router PCLI, provision each conductor key using the following command:
 `create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
