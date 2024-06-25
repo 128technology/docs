@@ -2,12 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docs.128technology.com/kb</id>
     <title>SSR Knowledge Base Articles</title>
-    <updated>2024-05-29T00:00:00.000Z</updated>
+    <updated>2024-06-25T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docs.128technology.com/kb"/>
     <subtitle>Session Smart Router Knowledge Base Articles</subtitle>
     <icon>https://docs.128technology.com/img/favicon.png</icon>
     <rights>Copyright © 2024 Juniper Networks, Inc.</rights>
+    <entry>
+        <title type="html"><![CDATA[Memory Allocation Exception in Device Disabled Error output]]></title>
+        <id>https://docs.128technology.com/kb/2024/06/25/I95-54838</id>
+        <link href="https://docs.128technology.com/kb/2024/06/25/I95-54838"/>
+        <updated>2024-06-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Large systems with multiple CPU's and many interfaces configured may not initialize the configured interfaces.]]></summary>
+        <content type="html"><![CDATA[<p>Large systems with multiple CPU's and many interfaces configured may not initialize the configured interfaces.</p>
+<p><strong>Issue ID:</strong> I95-54838<br>
+<strong>Last Updated:</strong> 2024-06-25<br>
+<strong>Introduced in SSR Version:</strong> 6.2.3</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem">​</a></h3>
+<p>Large systems with multiple CPU's and many interfaces configured may not initialize the configured interfaces. A large system in this context is one with a core count greater than 30, and more than 10 interfaces. These systems may not initialize the configured interfaces, resulting in a <code>MemoryAllocationException</code> in the <code>Device Disabled Error Reason</code> section of the <code>show device-interface detail</code> command output.</p>
+<p>Currently known systems exhibiting this issue are the <strong>SSR1500</strong>, <strong>Dell 7515</strong>, and <strong>AWS c5.18xlarge</strong>, running SSR software version 6.2.3 or greater. Currently deployed SSR1500's running earlier versions of software will experience this issue when they are upgraded to version 6.2.3 or greater.</p>
+<p>This issue is under investigation and will be resolved in a future release.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity">​</a></h3>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
+<li>Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
+<li>Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
+<li>Minor: Would not significantly impair the functioning or affect service.</li>
+</ul></div></div></details>
+<p>Major</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="status">Status<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status">​</a></h3>
+<p>Open</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="product">Product<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product">​</a></h3>
+<p>AWS SSR Third-party</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area">​</a></h3>
+<p>Interface Binding</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/06/25/I95-54838#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround">​</a></h3>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div></details>
+<ul>
+<li><strong>SSR1500:</strong> Configure 8 or fewer interfaces.</li>
+<li><strong>Dell R7515:</strong> With hugepages of 31G, configure no more than 4 interfaces. With hugepages of 58G, configure no more that 8 interfaces.</li>
+<li><strong>AWS c5.18xlarge:</strong> Systematically reduce the number of interaces until the remaining interfaces become active.</li>
+</ul>]]></content>
+        <category label="6.2" term="6.2"/>
+        <category label="6.2.3-r2" term="6.2.3-r2"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[High Memory usage for application-director]]></title>
         <id>https://docs.128technology.com/kb/2024/05/29/I95-56484</id>

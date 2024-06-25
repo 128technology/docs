@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[250],{83709:e=>{e.exports=JSON.parse('{"permalink":"/kb","page":1,"postsPerPage":7,"totalPages":1,"totalCount":7,"blogDescription":"Blog","blogTitle":"Session Smart Router Knowledge Base Articles"}')}}]);
