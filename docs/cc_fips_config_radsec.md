@@ -9,8 +9,8 @@ This section describes the steps to configure TLS server certification, allowing
 
 In this guide:
 - Configuring RADSEC
+- Signing and Importing Webserver Certificates
 - Syslog over TLS
-- Audit Logging over TLS
 
 ## Configuring RADSEC
 
@@ -80,9 +80,15 @@ Account 'test1' successfully created
 
 When the user logs into the node `t327-dut1` via ssh, the authentication request is sent via RADSEC to the server `172.18.5.224` and the user is authenticated. 
 
-### Certificate signing request and importing for webserver
+### Signing and Importing Webserver Certificates
 
-Imported webserver certificates will be validated against trusted certificates configured via trusted-ca-certificate.To configure the certificates they are pasted in as a multi-line config, for example create a certificate root named “ca_root”:
+Imported webserver certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
+
+#### Create a Truste Certificate
+
+Certificates are pasted in as a multi-line config. 
+
+Create a certificate root named `ca_root` and paste the certificate file content into the command:
 
 ```
 admin@conductor-node-1.Conductor# config authority trusted-ca-certificate ca_root
@@ -91,7 +97,9 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-A certificate signing request can be generated using the `create certificate request webserver` command. 
+#### Generate the Signing Request
+
+Use the `create certificate request webserver` command to generate the certificate signing request.
 
 ```
 admin@t327-dut1.cond# create certificate request webserver
@@ -117,7 +125,11 @@ EwJVUzERMA8GA1UEBwwIV2VzdGZvcmQxEDAOBgNVBAoMB0p1bmlwZXIxFDASBgNV
 -----END CERTIFICATE REQUEST-----
 ```
 
-Once a certificate is signed and returned, this can be imported into the SSR for use by the webserver using the import certificate request webserver  command where it will be validated against any trusted certificates entered via trusted-ca-certificate. The following example shows an invalid self-signed certificate being imported:
+#### Import the Certificate
+
+After the certificate is signed and returned, it is imported into the SSR for use by the webserver using the `import certificate webserver`  command. It is validated against any trusted certificates entered using `trusted-ca-certificate`. 
+
+The following example shows an invalid self-signed certificate being imported:
 
 ```
 admin@t327-dut1.cond# import certificate webserver
@@ -147,12 +159,13 @@ Certificate imported successfully
 
 ## Configuring Syslog over TLS
 
-To configure Syslog server over TLS the following steps are needed:
-1.	Configure trust store CA certificate (necessary to validate the incoming client certificate)
-2.	Configure a client certificate to be used for the radius client
-3.	Configure a syslog server config at the authority level to use the previously configured client certificate
+Use the following information to configure Syslog transport over TLS.
 
-To configure the certificates they are pasted in as a multi-line config, for example create a certificate root named “ca_root”:
+#### 1. Configure the trusted CA certificate. 
+
+The trusted CA certificate is necessary to validate the incoming client certificate. Certificates are pasted in as a multi-line config. 
+
+Create a certificate root named `ca_root` and paste the certificate file content into the command:
 
 ```
 admin@conductor-node-1.Conductor# config authority trusted-ca-certificate ca_root
@@ -161,9 +174,20 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-Repeat this step for a client certificate “syslog”, eg: config authority client-certificate syslog
+#### 2. Configure a client certificate to be used for the syslog client.
 
-To configure the syslog server to 192.168.1.100:6514 :
+Repeat the previous step to create a client certificate named `syslog`.
+
+```
+admin@conductor-node-1.Conductor# config authority client-certificate syslog
+admin@conductor-node-1.Conductor (client-certificate[name=syslog])# content
+Enter plain for content (Press CTRL-D to finish):
+<paste-cert-file-content-here>
+```
+
+#### 3. Configure the syslog server at the Authority level to use the configured client certificate.
+
+The following configuration example will add a syslog server named `syslog` that will use the previously configured client certificate. 
 
 ```
 *admin@t327-dut1.cond# configure authority router cond system syslog server 192.168.1.100 6514
@@ -176,10 +200,6 @@ To configure the syslog server to 192.168.1.100:6514 :
 *admin@t327-dut1.cond (syslog)# top
 ```
 
-Once all config has been added this can be validated and committed with validate then commit
-
-Once all config has been committed the SSR should send TLS syslog to 192.168.1.100:6514.
-
-
+To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to 192.168.1.100:6514 over TLS.
 
 

@@ -108,7 +108,7 @@ When you modify the GRUB kernel behavior by editing the GRUB menu at boot time, 
 
 This installation process is an automated workflow which does not require user interaction after selecting and initiating the OTP menu option. The system will power off after installation.
 
-### Enable Strict Host Key Checking
+### Enable Strict Host Key Checking 
 
 Enabling strict `host-key-checking` provides secure communication between the conductor and a router. 
 Similar to SSH, there are two `host-key-checking` options; `yes` which requires the host key to be provisioned manually, or `accept-new` which accepts the key on first connection. 
