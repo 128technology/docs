@@ -6,10 +6,11 @@ sidebar_label: Common Criteria Compliance Guidelines
 For compliance, the following configuration considerations must be made:
  
 - FIPS mode must be enabled **during installation**. Use of anything other than FIPS mode is not compliant with Common Criteria certification.
-- **Except during installation**, all configuration procedures must be performed from the CLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI **is acceptable under the Common Criteria guidelines**.
+- Configuration procedures may be performed from the CLI or the GUI. Upon configuration of a valid, `trusted-ca-certificate`, use of the SSR Web interface (GUI) is common criteria compliant. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_access_mgmt.md#signing-and-importing-webserver-certificates).
 - When installing a router, the [IPv4 Option Filter](cc_fips_sec_firewall_filtering.md#ipv4-option-filtering) must be set to `drop-all`.
 - When installing a router, the [ICMP Session Match](cc_fips_sec_firewall_filtering.md#icmp-type-as-a-session-attribute) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.
+- Strict Hostkey Checking must be enabled during router installation. Steps are provided as part of the Router installation process. 
 - To use the VPN Protection Profile feature, the IPSec plugin provided with the SSR ISO must be installed and configured as described in [VPN Protection Profile]. The IPSec plugin is currently the only plugin supported for Common Criteria compliance.
 - The `password-policy` must define the minimum password length and maximum number of permitted login attempts per user. Please refer to [Username and Password Policies](cc_fips_config_password_policies.md) for policies, and to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy) for CLI commands and context for assigning these values.
 - The `admin` account must be given `sudo` privileges allowing it to use the shell for some management capabilities. Edit the `/etc/sudoers` file as `root` using the `visudo` command. This allows you to add an entry for `admin` which will persist across reboots. For additional information, please see [Root Access](cc_fips_access_mgmt.md#root-access) in the Access Management section.
@@ -49,11 +50,10 @@ Juniper SSR Common Criteria certified platforms implement cryptographic algorith
 
 The following functionality and platforms **are not certified** under Common Criteria.
 
-- SSR Software versions other than V6.2.3-14-R2. 
+- SSR Software versions other than V6.3.0-R1. 
 - Non-Juniper branded hardware platforms running SSR Software.
 - Juniper branded hardware platforms not explicitly included.
 - Juniper SSR Software for virtual platforms.
-- SSR Graphical User Interface (GUI).
 - Juniper MIST.
 - HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP, syslog/TLS.
 - X.509 certificate management, validation or verification.

@@ -22,7 +22,7 @@ The Command Line Interface (CLI) is used for the management of the SSR. The CLI 
 
 ## Platform Management
 
-Common Criteria-compliant platform management is performed by the administrator from the CLI on the Conductor. While there are other methods of SSR management, use of the CLI is the only compliant method for managing the SSR. The CLI is accessed locally from console, or remotely over an SSH connection.
+Common Criteria-compliant platform management is performed by the administrator. Upon configuration of a valid, `trusted-ca-certificate`, use of the SSR Web interface (GUI) is common criteria compliant. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_access_mgmt.md#signing-and-importing-webserver-certificates). Additionally, platform management may still be performed from the CLI on the Conductor. 
 
 ### Identification, Authentication, and Access Management
 

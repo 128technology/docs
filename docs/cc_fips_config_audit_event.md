@@ -194,6 +194,51 @@ config
 
 ```
 
+## Configuring Syslog over TLS
+
+Use the following information to configure Syslog transport over TLS.
+
+#### 1. Configure the trusted CA certificate. 
+
+The trusted CA certificate is necessary to validate the incoming client certificate. Certificates are pasted in as a multi-line config. 
+
+Create a certificate root named `ca_root` and paste the certificate file content into the command:
+
+```
+admin@conductor-node-1.Conductor# config authority trusted-ca-certificate ca_root
+admin@conductor-node-1.Conductor (trusted-ca-certificate[name=ca_root])# content
+Enter plain for content (Press CTRL-D to finish):
+<paste-cert-file-content-here>
+```
+
+#### 2. Configure a client certificate to be used for the syslog client.
+
+Repeat the previous step to create a client certificate named `syslog`.
+
+```
+admin@conductor-node-1.Conductor# config authority client-certificate syslog
+admin@conductor-node-1.Conductor (client-certificate[name=syslog])# content
+Enter plain for content (Press CTRL-D to finish):
+<paste-cert-file-content-here>
+```
+
+#### 3. Configure the syslog server at the Authority level to use the configured client certificate.
+
+The following configuration example will add a syslog server named `syslog` that will use the previously configured client certificate. 
+
+```
+*admin@t327-dut1.cond# configure authority router cond system syslog server 192.168.1.100 6514
+*admin@t327-dut1.cond (server[ip-address=192.168.1.100][port=6514])# up
+*admin@t327-dut1.cond (syslog)# client-certificate-name syslog
+*admin@t327-dut1.cond (syslog)# protocol tls
+*admin@t327-dut1.cond (syslog)# ocsp strict
+*admin@t327-dut1.cond (syslog)# facility any
+*admin@t327-dut1.cond (syslog)# severity info
+*admin@t327-dut1.cond (syslog)# top
+```
+
+To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to 192.168.1.100:6514 over TLS.
+
 ## Secure Audit Logs Transport 
 
 To provide secure transport of audit logs to and from a remote server, use the following procedures:
