@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.6.15-1
+
+**Release Date:** June 27, 2024
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2024-2973
+
 ## Release 5.6.14-7
 
 **Release Date:** May 14, 2024
