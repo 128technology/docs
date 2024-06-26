@@ -2,7 +2,11 @@
 title: Configure a VPN Protection Profile
 sidebar_label: Configure a VPN Protection Profile
 ---
-The VPN Protection Profile feature adds support for X.509 ceritifcate management for IPSec plugin, along with the validation strength of VPN’s encryption algorithms. The IPSec Plugin is delivered with the SSR ISO, and has been tested and received certification for use as part of Common Criteria compliance. To use the VPN Protection Profile feature, the IPSec plugin provided with the SSR ISO must be installed and configured as described below. The IPSec plugin is currently the only plugin that is Common Criteria compliant.
+The VPN Protection Profile feature adds support for X.509 ceritifcate management for IPSec plugin, along with the validation strength of the VPN’s encryption algorithms. The IPSec Plugin is delivered with the SSR ISO, and has been tested and received certification for use as part of Common Criteria compliance. To use the VPN Protection Profile feature, the IPSec plugin provided with the SSR ISO must be installed and configured as described below. The IPSec plugin is currently the only plugin that is Common Criteria compliant.
+
+## Install the IPSEC Plugin
+
+Install a plugin using `manage plugin {install | remove} [node <node>] name <plugin-name>`
 
 ## Configure X.509 Certificate-type for Tunnel Authentication
 
@@ -12,7 +16,7 @@ Note that the IPsec plugin will take over the configuration mentioned in `Import
 
 Use the following steps to create the X.509 certificate-type for Tunnel Authentication. 
 
-1. Configure the [`private-key`](#private-key).
+1. Configure the [`private-key`](plugin_ipsec_client.md#private-key).
 2. Configure the [`client-certificate`](config_command_guide.md#configure-authority-client-certificate).
 3. Configure the [`trusted-ca-certificate`](config_command_guide.md#configure-authority-trusted-ca-certificate).
 4. Enter the key names for each of these items in their respective fields in the [`ipsec-profile`](#profiles).

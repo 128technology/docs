@@ -6,7 +6,7 @@ sidebar_label: IPsec Client
 The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the SSR. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the SSR will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro.md#service-function-chaining) with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your SSR.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
+The instructions for installing and managing the plugin can be found in [Plugin Workflow - Installation and Management](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration
