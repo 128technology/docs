@@ -568,7 +568,7 @@ authority > router > bfd
 
 #### Description:
 
-The *bfd* sub-element is used for configuring timers and behaviors associated with the Bidirectional Forwarding Detection protocol for *nodes* within the *router*. All SSR packet forwarding components will use BFD to report to one another, governed by these parameters.
+The *bfd* sub-element is used for configuring timers and behaviors associated with the Bidirectional Forwarding Detection protocol, specifically for the HA fabric link between *nodes* of a HA *router*.
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -1398,7 +1398,7 @@ The *nat-keep-alive* function is used when an SSR is sitting behind a NAT device
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: auto, disabled. Default value: disabled. When set to `auto`, the SSR will use its session-type configuration to determine whether to send keepalive packets for a given session. |
+| mode | enumeration | Valid values: auto, disabled. Default value: auto. When set to `auto`, the SSR will use its session-type configuration to determine whether to send keepalive packets for a given session. |
 | tcp-inactivity-timeout | uint32 | Valid values: 1-86400. This controls how frequently the SSR will send keepalive packets for TCP-based sessions. Note that this value must be lower than the binding time-to-live on the NAT device in front of the SSR, but should be kept as close as possible to reduce the overhead of the keepalive packets. |
 | udp-inactivity-timeout | uint32 | Valid values: 1-86400. This controls how frequently the SSR will send keepalive packets for UDP-based sessions. Note that this value must be lower than the binding time-to-live on the NAT device in front of the SSR, but should be kept as close as possible to reduce the overhead of the keepalive packets. |
 
