@@ -4,16 +4,28 @@ sidebar_label: Configure a VPN Protection Profile
 ---
 The VPN Protection Profile feature adds support for X.509 ceritifcate management for IPSec plugin, along with the validation strength of the VPN’s encryption algorithms. The IPSec Plugin is delivered with the SSR ISO, and has been tested and received certification for use as part of Common Criteria compliance. To use the VPN Protection Profile feature, the IPSec plugin provided with the SSR ISO must be installed and configured as described below. The IPSec plugin is currently the only plugin that is Common Criteria compliant.
 
-## Install the IPsec Plugin
+## Install the IPSec Plugin
 
-The IPsec plugin can be installed using either the Web Interface, or the SSR CLI. If use of the web interface has been enabled through the generation and configuration of a `trusted-ca-ertificate`, the GUI may be used to perform the IPsec plugin installation. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_access_mgmt.md#signing-and-importing-webserver-certificates).
-
+The IPSec plugin can be installed using either the Web Interface, or the SSR CLI. If use of the web interface has been enabled through the generation and configuration of a `trusted-ca-ertificate`, the GUI may be used to perform the IPsec plugin installation. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_access_mgmt.md#signing-and-importing-webserver-certificates).
 
 Use the instructions for installing and managing the plugin found in [Plugin Workflow - Installation and Management](plugin_intro.md#installation-and-management).
 
 Otherwise, use the following command from the SSR CLI:
 
 `manage plugin {install | remove} [node <node>] name <plugin-name>`
+
+After installing the IPSec plugin, enable `common-criteria-mode` for use in a Common Criteria compliant environment. Use the following code example to set `common-criteria-mode` to `true`:
+
+```
+config
+
+     authority
+         ipsec-client-settings
+             common-criteria-mode true
+         exit
+     exit
+ exit
+```
 
 ## Configure X.509 Certificate-type for Tunnel Authentication
 

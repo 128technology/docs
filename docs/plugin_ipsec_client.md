@@ -226,7 +226,7 @@ The main configuration properties of client settings are as follows:
 
 | Config                | Type      | Description                            |
 | --------              | -----     | -------------------                    |
-| common-criteria-mode  | boolean   | Whether common criteria should be applied upon validation. |
+| common-criteria-mode  | boolean   | Default is `false`. When enabled, common criteria mode is applied upon validation. |
 | private-key           | list      | List of [Private Keys](#private-key) to be used for IPSec X.509 certificate type. |
 
 

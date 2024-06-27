@@ -120,11 +120,11 @@ The following example manually configures the key to the conductor node `192.168
 
 Imported webserver certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
 
-### Create a Trusted Certificate
+### Configure a Trusted Certificate
 
 Certificates are pasted in as a multi-line config. 
 
-Create a certificate root named `ca_root` and paste the certificate file content into the command:
+Configure a certificate root named `ca_root` and paste the certificate file content into the command:
 
 ```
 admin@conductor-node-1.Conductor# config authority trusted-ca-certificate ca_root
@@ -192,6 +192,7 @@ Could not validate certificate chain against a trusted anchor.
 Would you like to import anyways? [y/N]: y
 Certificate imported successfully
 ```
+The imported certificate will be validated against the configured trusted root certificates and checked for insecure algorithms and invalid configurations. These validations can be bypassed but this should only be done if the user understands the security implications of the failures.
 
 ## SSH Server Cryptographic Algorithms 
  
