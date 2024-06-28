@@ -139,7 +139,7 @@ Use the `show system connectivity known-hosts` to view the accepted host keys fo
 
 #### Manual Provisioning of the Conductor Key
 
-If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the conductor and configure this in the router.
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accept-new` configured, it will be necessary to manually provision the conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the conductor and configure this in the router.
 
 On the conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
 

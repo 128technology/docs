@@ -213,9 +213,9 @@ Enter plain for content (Press CTRL-D to finish):
 
 #### 2. Configure a client certificate to be used for the syslog client.
 
-Repeat the previous step to create a client certificate named `syslog`.
+Use the `import certificate client` workflow to create a client certificate named `syslog`.
 
-```
+```this-will-have-to-be-changed>
 admin@conductor-node-1.Conductor# config authority client-certificate syslog
 admin@conductor-node-1.Conductor (client-certificate[name=syslog])# content
 Enter plain for content (Press CTRL-D to finish):

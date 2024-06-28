@@ -5,9 +5,7 @@ sidebar_label: Configuring RADIUS over TLS
 
 RADIUS over TLS is designed to provide secure communication of RADIUS requests using the Transport Secure Layer (TLS) protocol. RADIUS over TLS, also known as RADSEC, redirects regular RADIUS traffic to remote RADIUS servers connected over TLS. RADSEC allows RADIUS authentication, authorization, and accounting data to be passed safely across untrusted networks.
 
-This section describes the steps to configure TLS server certification, allowing secure use of the SSR Web GUI.
-
-In this guide:
+In this section:
 - Configuring RADSEC
 - Signing and Importing Webserver Certificates
 - Syslog over TLS
@@ -46,9 +44,9 @@ Enter plain for content (Press CTRL-D to finish):
 
 #### 3. Configure a client certificate to be used for the RADIUS client.
 
-Repeat the previous step to create a client certificate named `radsec`.
+Use the `import certificate client` workflow to create a client certificate named `radsec`.
 
-```
+```this-will-have-to-be-changed>
 admin@conductor-node-1.Conductor# config authority client-certificate radsec
 admin@conductor-node-1.Conductor (client-certificate[name=radsec])# content
 Enter plain for content (Press CTRL-D to finish):

@@ -57,7 +57,7 @@ After the migration command is run, you will see a **Connected** state on the co
 
 ### Additional Considerations with Strict Host Key Checking
 
-If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the new conductor key **prior** to migrating the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accept-new` configured, it will be necessary to manually provision the new conductor key **prior** to migrating the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
 
 On the new conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
 

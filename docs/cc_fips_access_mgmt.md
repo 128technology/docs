@@ -192,7 +192,7 @@ Could not validate certificate chain against a trusted anchor.
 Would you like to import anyways? [y/N]: y
 Certificate imported successfully
 ```
-The imported certificate will be validated against the configured trusted root certificates and checked for insecure algorithms and invalid configurations. These validations can be bypassed but this should only be done if the user understands the security implications of the failures.
+The imported certificate will be validated against the configured trusted root certificates and checked for insecure algorithms and invalid configurations. Bypassing or disabling these validations will result in a non-compliant configuration. 
 
 ## SSH Server Cryptographic Algorithms 
  
