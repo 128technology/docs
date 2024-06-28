@@ -44,9 +44,9 @@ Enter plain for content (Press CTRL-D to finish):
 
 #### 3. Configure a client certificate to be used for the RADIUS client.
 
-Use the `import certificate client` workflow to create a client certificate named `radsec`.
+Repeat the previous step to create a client certificate named `radsec`.
 
-```this-will-have-to-be-changed>
+```
 admin@conductor-node-1.Conductor# config authority client-certificate radsec
 admin@conductor-node-1.Conductor (client-certificate[name=radsec])# content
 Enter plain for content (Press CTRL-D to finish):
