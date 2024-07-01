@@ -45,6 +45,14 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.9-2
+
+**Release Date:** June 27, 2024
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2024-2973
+
 ## Release 6.1.8-15
 
 **Release Date:** May 3, 2024

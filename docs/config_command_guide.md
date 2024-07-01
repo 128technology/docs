@@ -1234,14 +1234,15 @@ When creating FIB entries by matching route updates to service addresses, consid
 #### Usage
 
 ```
-configure authority fib-service-match [<enumeration>]
+configure authority fib-service-match [ best-match-only | any-match ]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| enumeration | The value to set for this field |
+| best-match-only | This is the default value, and legacy behavior. When comparing prefixes from a route update to addresses configured in services, only addresses with the longest prefix match for a particular route are considered. In cases of transport overlap, services are visited in alphabetical order. |
+| any-match | All service addresses that match the route update are considered when creating the FIB entries, including those with prefixes shorter than the update or those that do not have the best match service address. The transports from the service with the longest prefix are considered first. This minimizes missed entries, but may result in a higher FIB usage. |
 
 #### Description
 
