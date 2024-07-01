@@ -14,7 +14,7 @@ Either RADIUS or LDAP remote authentication can be configured on a system. If RA
 
 ## Configuring RADIUS 
 
-When authenticating from a RADIUS server, the user is authenticated against the configured credentials. When `account-creation` is set to `automatic`, users are added and identified on the server and each user account is created automatically when they authenticate successfully from a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography.
+When authenticating from a RADIUS server, the user is authenticated against the configured credentials. When `account-creation` is set to `automatic`, users are added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography.
 
 If automatic account creation is enabled, users are configured on the RADIUS server using a RADIUS Vendor Specific Attribute (VSA) and user accounts are created on first login to the SSR based on the role specified in the VSA.
 
