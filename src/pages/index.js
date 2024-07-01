@@ -54,7 +54,7 @@ const features = [
   },
   {
     title: <>Best Practices</>,
-    link: 'docs/bcp_conductor_deployment',
+    link: 'docs/bcp_sdwan_design_guide',
     description: (
       <>
         Recommended guides and design patterns

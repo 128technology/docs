@@ -7,7 +7,7 @@ sidebar_label: Session Smart Networking Platform
 
 Networks exist to connect users to services and applications, and network design should start with those services at the core. Secure Vector Routing (SVR) is a new routing architecture that enables the network to differentiate the way it delivers applications and services with simplicity, security, and scalability in mind. It replaces tunnel-based network overlays and inefficient provisioning systems with distributed control, simple intelligent service-based routing, and in-band (data plane) session-based signaling. SVR is fully compatible and interoperable with existing network protocols and architectures, allowing it to be gradually introduced into an existing IP network without affecting the network endpoints or hosts.
 
-## How does it work?
+## How Does it Work?
 
 At the core of the SVR control plane is a service-based data model, which provides the language for describing the network’s services, tenancy, and associated policies. The SVR data model is global and location independent, meaning every router in an SVR fabric shares the same service-based policies and topology, at all times – no matter where it is. The service-centric data model is expressed in YANG and exposed via northbound REST/GraphQL and NETCONF APIs to deliver a full suite of application and orchestration integration services.
 
