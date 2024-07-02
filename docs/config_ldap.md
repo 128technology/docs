@@ -42,7 +42,128 @@ The following `ldap-server` configuration options have been added with SSR Versi
 - **user-search-base**: Allows users to set user-search-base filters when auto-generate-filter is false for server-type global-catalog. See the configuration examples below for usage.
 - **group-search-base**: Allows users to set group-search-base filters when auto-generate-filter is false for server-type global-catalog.  See the configuration examples below for usage.
 
-## Sample Configurations
+## LDAP Server Configuration
+The following section provides configuration steps for an LDAP server.
+
+## LDAP Server on JumpCloud
+
+[JumpCloud](https://jumpcloud.com/platform/ldap) is a cloud based identity provider that supports centralized user management using LDAP.
+
+#### Set up LDAP bind user in the JumpCloud portal
+
+1. Create a user with access to search the LDAP directory. Make a note of the password and LDAP distinguished name strings for this user. You will need to add this to the SSR Conductor LDAP config.
+
+![JumpCloud User Setup](/img/ldap_jumpcloud_user_setup1.png)
+
+2. Ensure the LDAP user has permissions to search and bind the LDAP server. 
+ - Under the **Details** tab, set Permission Settings to `Enable as LDAP Bind DN`.
+ - Under the **Directories** tab, select the `JumpCloud LDAP` directory.
+
+![LDAP Bind Setting](/img/ldap_jumpcloud_user_setup2.png)
+
+#### Set up groups in the JumpCloud portal
+
+1. Create `128t-admin` and `128t-user` groups in the JumpCloud portal.
+
+![Admin and User Groups](/img/ldap_jumpcloud_user_setup3.png)
+
+2. For the `128t-admin` and `128t-user` group, ensure each are enabled for the LDAP server in the **Directories** menu.
+
+![JumpCloud Directories](/img/ldap_jumpcloud_user_setup4.png)
+
+#### Add users to groups in the JumpCloud portal
+Select users and assign them to either the `128t-user` or `128t-admin` groups.
+
+![JumpCloud User Groups](/img/ldap_jumpcloud_user_setup5.png)
+
+![JumpCloud Admin Groups](/img/ldap_jumpcloud_user_setup6.png)
+
+### JumpCloud Configuration on the SSR
+
+On the SSR conductor, configure the JumpCloud LDAP server.
+Use the **LDAP bind user** distinguished name and password from the first step for these server settings. Change the `search-base` and `distinguished-name` strings based on your JumpCloud settings.
+
+**Example - CLI**
+```
+ldap-server      jumpcloud
+    name                   jumpcloud
+    address                ldap.jumpcloud.com
+    search-base            ou=Users,o=667f12ef4b4383d7f863466f,dc=jumpcloud,dc=com
+    certificate-assurance  strong
+    server-type            ldaps
+    bind-type              password
+    distinguished-name     uid=ldap.bind,ou=Users,o=667f12ef4b4383d7f863466f,dc=jumpcloud,dc=com
+    password               (removed)
+exit
+
+```
+
+**Example - GUI**
+
+![JumpCloud Config on SSR GUI](/img/ldap_jumpcloud_user_setup7.png)
+
+### User Verification
+
+:::important
+Do **NOT** manually create local user accounts for LDAP users. They are automatically added based on the details for each user returned from the LDAP server.
+:::
+
+The first time a user successfully logs in to the Conductor or Router (using either the CLI or the GUI) the SSR reaches out to the JumpCloud LDAP server and configures the user environment. Below is an example CLI login output of an LDAP authenticated user:
+
+```
+~ % ssh test.user@172.25.128.234
+test.user@172.25.128.234's password: 
+First time login, configuring...
+Creating home directory for test.user.Reloading audit rules
+No rules
+No rules
+enabled 1
+failure 1
+pid 18750
+rate_limit 0
+backlog_limit 8192
+lost 0
+backlog 0
+enabled 1
+failure 1
+pid 18750
+rate_limit 0
+backlog_limit 8192
+lost 0
+backlog 4
+
++---------------------------------------+
+|                                       |
+|    Welcome to:                        |
+|                                       |
+|     | .   . ,---. . ,---. ,---. ,--.  |
+|     | |   | |   | | |---' |---' |     |
+|     | `---' '   ' ' '     `---' '     |
+|  ---'                                 |
+|        __ ___       __   __       __  |
+|  |\ | |_   |  |  | /  \ |__) |_/ (_   |
+|  | \| |__  |  |/\| \__/ | \  | \ __)  |
+|                                       |
+| Session Smart Networking Platform ... |
++---------------------------------------+
+test.user@node0.r1>
+test.user@node0.r1>
+test.user@node0.r1> quit
+Connection to 172.25.128.234 closed.
+
+```
+
+Additionally, to verify the status of your configured users and the LDAP server, click on **Users** in the **Adminstration** menu on the left side of the SSR GUI. LDAP authenticated users appear in the users list **after they have successfully logged in**. 
+
+#### Important Clarification
+
+As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS and is not to be configured for LDAP. 
+
+![Not for LDAP](/img/ldap_jumpcloud_user_setup8.png)
+
+In the case of LDAP, both the user and the authentication are administered remotely.
+
+## Microsoft Active Directory Sample Configurations
 The following sample configuration interfaces with Microsoft Active Directory.
 ```
 ldap-server ActiveDirectory
@@ -120,7 +241,7 @@ It is important to ensure that administrative users are configured on the LDAP s
 - When the system is configured to use LDAP for user authentication, the status of the LDAP connection can be seen on the Users page of the GUI. This is a high level status of connectivity to retrieve user and group information based on the LDAP configuration.
 
 ### Logging
-For SSR Version 5.5.2 an LDAP log category has been added to allow you to change the LDAP log level.
+The LDAP log category allows you to change the LDAP log level.
 
 ```
 admin@test1.RTR_EAST_CONDUCTOR# set log level category ldap
