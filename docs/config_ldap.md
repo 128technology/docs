@@ -43,11 +43,15 @@ The following `ldap-server` configuration options have been added with SSR Versi
 - **group-search-base**: Allows users to set group-search-base filters when auto-generate-filter is false for server-type global-catalog.  See the configuration examples below for usage.
 
 ## LDAP Server Configuration
-The following section provides configuration steps for an LDAP server.
+The following section provides example configuration steps for an LDAP server.
 
 ## LDAP Server on JumpCloud
 
-[JumpCloud](https://jumpcloud.com/platform/ldap) is a cloud based identity provider that supports centralized user management using LDAP.
+[JumpCloud](https://jumpcloud.com/platform/ldap) is a cloud based identity provider that supports centralized user management using LDAP and is used as an example of how to configure an LDAP Server. 
+
+:::important
+JumpCloud is not affiliated with Juniper, and Juniper does not endorse the use of JumpCloud. It is used here only as an example of one way to configure an LDAP server.
+:::
 
 #### Set up LDAP bind user in the JumpCloud portal
 
@@ -105,7 +109,7 @@ exit
 ### User Verification
 
 :::important
-Do **NOT** manually create local user accounts for LDAP users. They are automatically added based on the details for each user returned from the LDAP server.
+Do **NOT** manually create local user accounts for LDAP users. They are automatically added based on the details for each user returned from the LDAP server. Manually creating local users prevents the use of the LDAP server for authentication.
 :::
 
 The first time a user successfully logs in to the Conductor or Router (using either the CLI or the GUI) the SSR reaches out to the JumpCloud LDAP server and configures the user environment. Below is an example CLI login output of an LDAP authenticated user:
@@ -153,11 +157,11 @@ Connection to 172.25.128.234 closed.
 
 ```
 
-Additionally, to verify the status of your configured users and the LDAP server, click on **Users** in the **Adminstration** menu on the left side of the SSR GUI. LDAP authenticated users appear in the users list **after they have successfully logged in**. 
+Additionally, to verify the status of your configured users and the LDAP server, click on **Users** in the **Adminstration** menu on the left side of the SSR GUI. LDAP authenticated users appear in the users list **after they have successfully logged in**. From the CLI, use the `show users` command. 
 
 #### Important Clarification
 
-As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS and is not to be configured for LDAP. 
+As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS and is not to be configured for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
 
 ![Not for LDAP](/img/ldap_jumpcloud_user_setup8.png)
 
