@@ -18,6 +18,7 @@ There are different AMIs (images) available for the Juniper Session Smart Networ
 
 * Private: For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issued to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
 * Hourly: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
+* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an AWS VM. You must have a current license for the version of SSR software you wish to install. 
 
 Once you have selected the AMI that better suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
