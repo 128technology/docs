@@ -161,7 +161,7 @@ Additionally, to verify the status of your configured users and the LDAP server,
 
 #### Important Clarification
 
-As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS and is not to be configured for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
+As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS or local users and is **not** to be configured for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
 
 ![Not for LDAP](/img/ldap_jumpcloud_user_setup8.png)
 
