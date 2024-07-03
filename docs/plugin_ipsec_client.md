@@ -804,6 +804,35 @@ exit
 
 ## Release Notes
 
+### Release 3.6.1
+
+**Release Date:** May 29, 2024
+
+**Router Version** 128T-ipsec-2.4.3-2
+
+#### Issues Fixed
+
+- **PLUGIN-2232** Configured and enabled tunnels remain down.
+
+  _**Resolution:**_ File corruption is now handled more gracefully, preventing IPSEC tunnels from going down.
+
+- **PLUGIN-2197** DNS resolution failure causes plugin to become stuck.
+
+  _**Resolution:**_ When FQDNs are defined in the `ipsec-client` > `remote` > `host` fields, the plugin will not start the tunnels if the FQDNs of the tunnels are unresolvable.
+
+- **WAN-1848** Tunnel monitoring failures did not cause traffic failover to other tunnels.
+
+  _**Resolution:**_ If tunnel monitoring is configured, the tunnel monitoring status will be tied into the ingress KNI's operational status which will cause traffic to failover.
+
+- **WAN-2648** Excessive logging in `ipsec-controller` journal.
+
+  _**Resolution:**_ Reduced logging to provide a simplified journal.
+
+- **WAN-2994** Port 500 sessions were stuck even with session deletion feature.
+
+  _**Resolution:**_ Delete the port 500 and 4500 sessions whenever the tunnel does not come up.
+
+
 ### Release 3.6.0
 
 **Release Date:** Oct 13, 2023

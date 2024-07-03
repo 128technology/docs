@@ -20,6 +20,10 @@ To view in-memory metrics, create a Metrics Profile containing the specific metr
 
 Care should be taken to avoid overloading the system with the metrics. Many metrics are currently in-memory because of the heavy load they introduce to the system if they were all persisted. 
 
+For in memory metrics, the `since` argument will only show the current value since in memory metrics do not have historic values.
+
+## `since` command 
+
 An Example of `show stats` command using a `since` argument is shown below:
 
 ```
@@ -44,6 +48,8 @@ IPFIX Stats
 
 Completed in 0.06 seconds
 ```
+
+The `since` argument is a general utility which performs a delta between the two values supplied by the arguments. The primary use is for cumulative metrics - ones that keep incrementing. Some stats are stored as a rate, which is a per 5 second view of the stat. A rate value in the past may be higher than the current rate (or rate at the selected time) and therefore a negative value may be returned.
 
 ## Session Establishment Metrics
 A key indicator of application performance is the time it takes to establish the TCP session between client and server. This is effectively the time it takes to get to the first data packet between endpoints. This metric is more telling than packet transmission rates because it is directional and end to end. Importantly, this information can be used as a measure of SLA to influence path selection.

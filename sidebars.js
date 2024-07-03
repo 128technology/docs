@@ -97,10 +97,16 @@ module.exports = {
       "concepts_machine_communication",
       "concepts_pcli",
       "concepts_session_timer",
-      "concepts_STEP",
       "concepts_waypoint_ports",
       "concepts_monitoring",
       "concepts_glossary",
+    ],
+    "Understanding the Forwarding Information Base": [
+      "concepts_fib",
+      "concepts_fib_construction",
+      "concepts_fib_design",
+      "bcp_fib_design",
+      "ts_fib",
     ],
     "WAN Assurance": [
       "wan_overview",
@@ -268,16 +274,6 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "Service and Topology Exchange Protocol (STEP)",
-        "items": [
-          "config_STEP",
-          "config_step_ha",
-          "howto_STEP_GUI",
-          "ts_step",
-        ],
-      },
-      {
-        "type": "category",
         "label": "How To",
         "items": [
           "how_to_local_config_override",
@@ -318,14 +314,15 @@ module.exports = {
       "events_events",
     ],
     "Best Practices": [
+      "bcp_sdwan_design_guide",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
       "bcp_dhcp_relay_overview",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
-      "bcp_salt_pillars",
-      "bcp_sdwan_design_guide",
+      "bcp_salt_pillars",      
       "bcp_service_and_service_policy_design",
       "bcp_service-policy_defaults",
       "bcp_tenants",
@@ -406,6 +403,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.8",
           "release_notes_wan_assurance_plugin_3.7",
           "release_notes_wan_assurance_plugin_3.6",
           "release_notes_wan_assurance_plugin_3.5",
