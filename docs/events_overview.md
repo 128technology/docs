@@ -96,7 +96,9 @@ show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router burlm
 Note the trailing `Z`.  Most systems are configured to be in UTC time.  If the trailing `Z` was absent, the time filter would be restricted to the local time zone
 :::
 
+```
 show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router AAPDENCOPOD4
+```
 
 ## Contents of Alarms and Events
 
@@ -112,8 +114,16 @@ show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router AAPDE
 
 ## Shelving Alarms
 
-When an SSR is put into “Maintenance Mode” all alarms for that SSR will be “shelved”. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI. The state of shelved alarms can be optionally viewed by issuing:
+When an SSR is put into [Maintenance Mode](howto_maintenance_mode.md) all alarms for that SSR are “shelved”. Shelved alarms continue to be monitored by the system, but are not presented on the standard UI. The state of shelved alarms can be viewed by issuing the following command:
 
 ```
 admin@conductor1.nycsite1# show alarms shelved
 ```
+
+## Alarm Suppression
+
+While shelving alarms for a router is useful for staging and maintenance activities, there are situations where a more granular approach is useful. 
+
+
+
+
