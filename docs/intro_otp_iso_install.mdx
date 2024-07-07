@@ -24,11 +24,11 @@ Basic configuration parameters are encoded within an encrypted file. For each no
 
 ### Disk Cloning
 
-Disk Cloning allows you to create a generic router platform image that can be used to perform multiple installations quickly and efficiently. After the initial ISO installation and power off, the platform is generic and can be cloned to a disk to create a copy of that platform. 
+Disk Cloning allows you to create a generic router platform image that can be used to perform multiple installations quickly and efficiently. After the initial ISO installation and power off, the platform is generic and can be cloned to a disk to create a copy of that platform.
 :::note
 When using cloned images, an identical hardware platform must be used. Create a new disk image for each hardware variation.
 :::
-The cloned platform disk is then used to install the filesystem and SSR software on any number of other identical hardware platforms. 
+The cloned platform disk is then used to install the filesystem and SSR software on any number of other identical hardware platforms.
 
 The general process for disk cloning is as follows:
 
@@ -57,7 +57,7 @@ To install the Router using the OTP workflow, use the arrow keys to select the *
 Not all hardware has video support. Booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
 Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
-::: 
+:::
 
 #### SSR System via Serial Console
 
@@ -147,14 +147,14 @@ Changing password for user t128
 Changing password for t128
 (current)UNIX password:
 New password:
-Retype new password: 
+Retype new password:
 passwd: all authentication tokens updated successfully.
-[t128@test-router ~]$ su - 
+[t128@test-router ~]$ su -
 Password:
 [root@test-router ~]# passwd
 Changing password for user root.
 New password:
-Retype new password: 
+Retype new password:
 passwd: all authentication tokens updated successfully.
 [root@test-router ~]#
 ```
@@ -172,7 +172,7 @@ The scriptlets must have executable permissions to be executed properly.
 Any stdout/stderr output generated from the scriptlets is logged in `/var/log/128T-bootstrap/<scriptlet-name>-scriptlet.log`.
 
 ### Bootstrapping Flow Chart
-The diagram below shows the procedure the Bootstrap utility follows during the first bootup of the platform after the ISO installation completes. 
+The diagram below shows the procedure the Bootstrap utility follows during the first bootup of the platform after the ISO installation completes.
 
 <Flowchart
   chartCode={`
@@ -246,3 +246,24 @@ Or, if you want to test a specific url:
 ```
 $ bootstrap128t rest-test -i <test-identifier> --url <a-fully-qualified-url>
 ```
+
+### Additional Considerations with Strict Host Key Checking
+
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the new conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+
+On the new conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
+
+From the router PCLI, provision each conductor key using the following command:
+`create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
+
+- `<node>` is the router node. The key should be added on each router node in an HA pair. 
+- `<conductor address>` is the conductor address. This should be added for each conductor address of an HA conductor pair.
+- `<key>` is the `Key` retrieved from the previous step.
+- `<comment>` is an option that can be used to identify the key; for example `Conductor1`.
+
+The following example manually configures the key to the conductor node `192.168.1.13`:
+
+`create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
+
+See [Enable Strict Host Key Checking](cc_fips_otp_router_install.md#enable-strict-host-key-checking) for configuration information. 
+

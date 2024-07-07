@@ -30,6 +30,8 @@ module.exports = {
       "cc_fips_install_quickstart_otpiso",
       "cc_fips_router_install",
       "cc_fips_access_mgmt",
+      "cc_fips_config_radsec",
+      "cc_fips_vpn_profile_config",
       "cc_fips_config_ntp_auth",
       "cc_fips_config_password_policies",
       "cc_fips_config_audit_event",
