@@ -282,7 +282,6 @@ module.exports = {
           "config_bfd_tunnel",
           "howto_config_PPPoE",
           "howto_pppoe_vlan",
-          "howto_maintenance_mode",
           "howto_ms365",
           "howto_trusted_ca_certificate",
         ],
@@ -312,6 +311,8 @@ module.exports = {
       "events_overview",
       "events_alarms",
       "events_events",
+      "config_alarm_suppression",
+      "howto_maintenance_mode",      
     ],
     "Best Practices": [
       "bcp_sdwan_design_guide",
