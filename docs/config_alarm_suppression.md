@@ -1,13 +1,11 @@
 ---
 title: Alarm Suppression
 sidebar_label: Alarm Suppression
---- 
-
-## Alarm Suppression
+---
 
 While shelving alarms for a router is useful for staging and maintenance activities, there are situations where a more granular approach is useful. 
 
-By using the Alarm Suppression feature individual alarms as well as alarm types can be filtered or hidden. This allows users to focus on alarms that are relevant to their configuration needs without creating unique rules to hide every type of alarm. You can write custom shelves, allowing you to shelve nuisance alarms, or for example, silence alarming on interfaces that are intentionally configured as administratively down. 
+By using the Alarm Suppression feature, individual alarms as well as alarm types can be filtered or hidden. This allows users to focus on alarms that are relevant to their configuration needs without creating unique rules to hide every type of alarm. You can write custom shelves, allowing you to shelve nuisance alarms, or for example silence alarming on interfaces that are intentionally configured as administratively down. 
 
 ### How It Works
 
@@ -127,34 +125,36 @@ Completed in 0.02 seconds
 
 1. Under Authority Settings, scroll down to Alarm Shelves, and select ADD.
 
-![Authority Settings - Alarm Shelves](/img/alarm_suppression_gui1.png)
+ ![Authority Settings - Alarm Shelves](/img/alarm_suppression_gui1.png)
 
-2. In the New Shelf window, enter a shelf name and click ADD.
+2. In the New Shelf window, enter a shelf name and click SAVE.
 
-![New Shelf window](/img/alarm_suppression_gui2.png)
+ ![New Shelf window](/img/alarm_suppression_gui2.png)
 
 3. Enter the shelf information.
 
-![Shelf Basic Information](/img/alarm_suppression_gui3.png)
+ ![Shelf Basic Information](/img/alarm_suppression_gui3.png)
 
-4. Under Alarm Shelf Applies To, select ADD (or select an existing Service Group from the list).
+4. Under Alarm Shelf Applies To, select ADD.
 
-![Service Group](/img/alarm_suppression_gui3a.png)
+5. Select a Service Group Type from the list and click SAVE.
 
-5. Validate and Commit the changes.
+ ![Service Group](/img/alarm_suppression_gui3a.png)
+
+6. Validate and Commit the changes.
 
 #### To display the shelved alarms:
 
 1. From the Dashboard, select the Alarms notification icon.
 
-![Dashboard](/img/alarm_suppression_gui4.png)
+ ![Dashboard](/img/alarm_suppression_gui4.png)
 
-2. In the alarms view, select the Filter Icon, and select Shelved from the list.
+2. In the Alarms view, select the Filter icon, and select Shelved from the list.
 
-![Alarm Filter List](/img/alarm_suppression_gui5.png)
+ ![Alarm Filter List](/img/alarm_suppression_gui5.png)
 
-3. The shelved alarms list is displayed. Selecting an alarm will display the details below.
+3. The shelved alarms list is displayed. Selecting an alarm displays details in the bottom of the window.
 
-![Shelved Alarms Display](/img/alarm_suppression_gui6.png)
+ ![Shelved Alarms Display](/img/alarm_suppression_gui6.png)
 
 
