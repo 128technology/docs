@@ -17,6 +17,7 @@ This guide describes the process for deploying a Mist-managed Session Smart Rout
 There are different Plans available for the Juniper Session Smart Networking Platform offering:
 
 * Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
+
 * Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
@@ -31,8 +32,8 @@ To request access to a Private plan:
 
 1. Locate the Subscription ID of the Azure account where the deployment of the software is going to take place. Follow the next steps to find the Subscription ID:
 
-* Please click [here](https://portal.azure.com) to go to the Azure portal.
-* On the search box right at the top of the screen, search for "Subscriptions". If you cannot find the subscription associated with your Azure account click [here](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+* Go to the [Azure portal](https://portal.azure.com).
+* On the search box right at the top of the screen, search for "Subscriptions". If you cannot find the subscription associated with your Azure account go to [Azure Subscriptions]](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
 * Take note of your Subscription ID.
 
 2. Contact your Juniper Networks Sales representative and provide:
