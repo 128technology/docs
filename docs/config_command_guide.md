@@ -12,6 +12,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | command | description |
 | ------- | ----------- |
 | [`access-management`](#configure-authority-access-management) | Role Based Access Control (RBAC) configuration. |
+| [`alarm-shelving`](#configure-authority-alarm-shelving) | Configuration to control alarm shelving behavior. |
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
 | [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
 | [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
@@ -52,6 +53,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`session-recovery-detection`](#configure-authority-session-recovery-detection) | Configure Session Recovery Detection |
 | [`session-type`](#configure-authority-session-type) | Type of session classification based on protocol and port, and associates it with a default class of service. |
 | `show` | Show configuration data for &#x27;authority&#x27; |
+| [`software-access`](#configure-authority-software-access) | Configuration for 128T software access for the authority. Supported on managed assets only. |
 | [`software-update`](#configure-authority-software-update) | Configure Software Update |
 | [`step`](#configure-authority-step) | Configure Step |
 | [`step-repo`](#configure-authority-step-repo) | List of Service and Topology Exchange Protocol repositories. |
@@ -390,6 +392,406 @@ A value from a set of predefined names.
 
 Options:
 never    Never expire
+
+## `configure authority alarm-shelving`
+
+Configuration to control alarm shelving behavior.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`shelf`](#configure-authority-alarm-shelving-shelf) | Shelf configuration and criteria for classifying alarms as shelved. |
+| `show` | Show configuration data for &#x27;alarm-shelving&#x27; |
+
+## `configure authority alarm-shelving shelf`
+
+Shelf configuration and criteria for classifying alarms as shelved.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | An arbitrary name for the alarm shelf. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`applies-to`](#configure-authority-alarm-shelving-shelf-applies-to) | Logical group to which a configuration element applies |
+| [`category`](#configure-authority-alarm-shelving-shelf-category) | Shelve alarms for this category. |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`generated`](#configure-authority-alarm-shelving-shelf-generated) | Indicates whether or not the Shelf was automatically generated as a result of Alarm Shelf generation. |
+| [`match-type`](#configure-authority-alarm-shelving-shelf-match-type) | How the individual items in the shelf should be matched in order to trigger the shelving |
+| [`message-regex`](#configure-authority-alarm-shelving-shelf-message-regex) | Shelve alarms with messages that match this regex. |
+| [`name`](#configure-authority-alarm-shelving-shelf-name) | An arbitrary name for the alarm shelf. |
+| [`node-name`](#configure-authority-alarm-shelving-shelf-node-name) | Shelve alarms from this node. |
+| [`node-name-regex`](#configure-authority-alarm-shelving-shelf-node-name-regex) | Shelve alarms from nodes that match this regex. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`router-name`](#configure-authority-alarm-shelving-shelf-router-name) | Shelve alarms from this router. |
+| [`router-name-regex`](#configure-authority-alarm-shelving-shelf-router-name-regex) | Shelve alarms from routers that match this regex. |
+| [`severity`](#configure-authority-alarm-shelving-shelf-severity) | Shelve alarms for this severity. |
+| `show` | Show configuration data for &#x27;shelf&#x27; |
+
+## `configure authority alarm-shelving shelf applies-to`
+
+Logical group to which a configuration element applies
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to <type>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| type | Type of group to which the configuration applies. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`group-name`](#configure-authority-alarm-shelving-shelf-applies-to-group-name) | Name of the router-group to which this configuration applies. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`resource-group`](#configure-authority-alarm-shelving-shelf-applies-to-resource-group) | Name of the resource-group to which this configuration applies. |
+| [`router-name`](#configure-authority-alarm-shelving-shelf-applies-to-router-name) | Name of the router to which this configuration applies. |
+| `show` | Show configuration data for &#x27;applies-to&#x27; |
+| [`type`](#configure-authority-alarm-shelving-shelf-applies-to-type) | Type of group to which the configuration applies. |
+
+## `configure authority alarm-shelving shelf applies-to group-name`
+
+Name of the router-group to which this configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to group-name [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | Value to add to this list |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority alarm-shelving shelf applies-to resource-group`
+
+Name of the resource-group to which this configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to resource-group [<resource-group-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
+## `configure authority alarm-shelving shelf applies-to router-name`
+
+Name of the router to which this configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to router-name [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | Value to add to this list |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority alarm-shelving shelf applies-to type`
+
+Type of group to which the configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+authority         Applies to all routers in the authority.
+router            Router(s) to which the configuration applies.
+router-group      Logical group of router(s) to which the configuration applies.
+resource-group    An RBAC management group to which the configuration applies
+
+## `configure authority alarm-shelving shelf category`
+
+Shelve alarms for this category.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf category [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf generated`
+
+Indicates whether or not the Shelf was automatically generated as a result of Alarm Shelf generation.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf generated [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority alarm-shelving shelf match-type`
+
+How the individual items in the shelf should be matched in order to trigger the shelving
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf match-type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: all
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+all    All items in the shelf must match an alarm in order to trigger the shelving.
+any    At least one item in the shelf must match an alarm in order to trigger the shelving
+
+## `configure authority alarm-shelving shelf message-regex`
+
+Shelve alarms with messages that match this regex.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf message-regex [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority alarm-shelving shelf name`
+
+An arbitrary name for the alarm shelf.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf node-name`
+
+Shelve alarms from this node.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf node-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf node-name-regex`
+
+Shelve alarms from nodes that match this regex.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf node-name-regex [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority alarm-shelving shelf router-name`
+
+Shelve alarms from this router.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf router-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf router-name-regex`
+
+Shelve alarms from routers that match this regex.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf router-name-regex [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority alarm-shelving shelf severity`
+
+Shelve alarms for this severity.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf severity [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority asset-connection-resiliency`
 
@@ -3512,6 +3914,7 @@ configure authority radius-server <name>
 
 | command | description |
 | ------- | ----------- |
+| [`account-creation`](#configure-authority-radius-server-account-creation) | Control account creation behavior. |
 | [`address`](#configure-authority-radius-server-address) | The IP address or FQDN of the Radius server. |
 | `delete` | Delete configuration data |
 | [`name`](#configure-authority-radius-server-name) | The name of the Radius server. |
@@ -3535,7 +3938,19 @@ configure authority radius-server account-creation [<enumeration>]
 
 | name | description |
 | ---- | ----------- |
-| manual or automatic  | Manual is the default value, requires the user to be created using `create-user`. Automatic allows remote users that exist only in Radius to connect to the device without needing a local account. |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: manual
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+manual       Accounts must be created locally on the Router or Conductor before a user can log in.
+automatic    Create accounts automatically on first time login. The Radius server must contain the Vendor Specific Attribute (VSA) &#x27;Juniper-Local-User-Name&#x27; set to the role that the user will be assigned. The role must be prefixed with &#x27;128t-&#x27;, so to assign the user the admin role the VSA key would be set to &#x27;128t-admin&#x27;.
 
 ## `configure authority radius-server address`
 
@@ -5196,7 +5611,7 @@ configure authority router dns-config <mode>
 | [`address`](#configure-authority-router-dns-config-address) | Address of servers to use for DNS queries. |
 | `delete` | Delete configuration data |
 | [`mode`](#configure-authority-router-dns-config-mode) | Mode of DNS server configuration. |
-| [`move`](#configure-authority-router-dns-config) | Move list items |
+| [`move`](#configure-authority-router-dns-config-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;dns-config&#x27; |
 
@@ -6078,7 +6493,7 @@ configure authority router nat-pool <name>
 | [`address-pool`](#configure-authority-router-nat-pool-address-pool) | Defines the NAT prefix and ports in the pool. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-nat-pool) | Move list items |
+| [`move`](#configure-authority-router-nat-pool-move) | Move list items |
 | [`name`](#configure-authority-router-nat-pool-name) | An identifier for the NAT Pool. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;nat-pool&#x27; |
@@ -6310,6 +6725,7 @@ configure authority router node <name>
 | [`session-setup-scaling`](#configure-authority-router-node-session-setup-scaling) | Whether or not to enable session setup scaling. |
 | `show` | Show configuration data for &#x27;node&#x27; |
 | [`ssh-keepalive`](#configure-authority-router-node-ssh-keepalive) | Configure Ssh Keepalive |
+| [`ssh-settings`](#configure-authority-router-node-ssh-settings) | Configure Ssh Settings |
 | [`top-sessions`](#configure-authority-router-node-top-sessions) | Views of top sessions by an ordering criteria. |
 
 ## `configure authority router node asset-id`
@@ -6447,9 +6863,65 @@ Configure Bond Settings
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
+| [`force-up`](#configure-authority-router-node-device-interface-bond-settings-force-up) | Force up when not receiving partner LACP PDUs. |
+| [`force-up-timeout`](#configure-authority-router-node-device-interface-bond-settings-force-up-timeout) | Number of seconds before switching to force-up LACP mode. |
 | [`lacp-enable`](#configure-authority-router-node-device-interface-bond-settings-lacp-enable) | Use 802.3ad LACP protocol for the Bond. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;bond-settings&#x27; |
+
+## `configure authority router node device-interface bond-settings force-up`
+
+Force up when not receiving partner LACP PDUs.
+
+#### Usage
+
+```
+configure authority router node device-interface bond-settings force-up [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router node device-interface bond-settings force-up-timeout`
+
+Number of seconds before switching to force-up LACP mode.
+
+#### Usage
+
+```
+configure authority router node device-interface bond-settings force-up-timeout [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 90
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-100
 
 ## `configure authority router node device-interface bond-settings lacp-enable`
 
@@ -7087,7 +7559,7 @@ configure authority router node device-interface network-interface <name>
 | [`inter-router-security`](#configure-authority-router-node-device-interface-network-interface-inter-router-security) | The name of the security policy used for inbound inter-router traffic. |
 | [`management`](#configure-authority-router-node-device-interface-network-interface-management) | Allow management traffic to be sent over this interface |
 | [`management-vector`](#configure-authority-router-node-device-interface-network-interface-management-vector) | Vector configuration for non-forwarding interfaces |
-| [`move`](#configure-authority-router-node-device-interface-network-interface) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-move) | Move list items |
 | [`mtu`](#configure-authority-router-node-device-interface-network-interface-mtu) | The maximum transmission unit (MTU) for packets sent on the interface. |
 | [`multicast-listeners`](#configure-authority-router-node-device-interface-network-interface-multicast-listeners) | Enables the sending of IGMP and MLD queries on this interface. |
 | [`multicast-report-proxy`](#configure-authority-router-node-device-interface-network-interface-multicast-report-proxy) | Enables the forwarding of IGMP and MLD joins/leaves/reports to valid multicast services to this network interface. These must come from other network interfaces which allow multicast listeners. |
@@ -7406,7 +7878,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`end-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-end-address) | End of address pool. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-interface-mtu) | Interface MTU provided to clients. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-move) | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -7444,7 +7916,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -8137,7 +8609,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-move) | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -8265,7 +8737,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -9037,7 +9509,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -9243,7 +9715,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -9561,7 +10033,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -9767,7 +10239,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -10136,7 +10608,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-move) | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -10264,7 +10736,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -11036,7 +11508,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -11242,7 +11714,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information) | Move list items |
+| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -20312,7 +20784,7 @@ configure authority router node session-setup-scaling [<boolean>]
 
 #### Description
 
-Default: false
+Default: true
 
 :::warning
 a restart is required if session-setup-scaling is created, modified, or deleted
@@ -20491,7 +20963,7 @@ Configure Inter Node
 | ------- | ----------- |
 | `delete` | Delete configuration data |
 | [`interval`](#configure-authority-router-node-ssh-keepalive-inter-node-interval) | Timeout interval in seconds to send keepalive from SSH client when an SSH connection is idle between nodes within a router. |
-| [`max-attempts`](#configure-authority-router-node-ssh-keepalive-inter-node-max-attempts) | Number of keepalive messages sent from SSH client before disconnecting an SSH onnection between nodes within a router. |
+| [`max-attempts`](#configure-authority-router-node-ssh-keepalive-inter-node-max-attempts) | Number of keepalive messages sent from SSH client before disconnecting an SSH connection between nodes within a router. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;inter-node&#x27; |
 
@@ -20527,7 +20999,7 @@ Range: 1-10
 
 ## `configure authority router node ssh-keepalive inter-node max-attempts`
 
-Number of keepalive messages sent from SSH client before disconnecting an SSH onnection between nodes within a router.
+Number of keepalive messages sent from SSH client before disconnecting an SSH connection between nodes within a router.
 
 #### Usage
 
@@ -20702,6 +21174,112 @@ a restart is required if max-attempts is created, modified, or deleted
 Number of keepalive messages sent before disconnecting an SSH connection.
 
 Range: 1-20
+
+## `configure authority router node ssh-settings`
+
+Configure Ssh Settings
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`inter-node`](#configure-authority-router-node-ssh-settings-inter-node) | Configure Inter Node |
+| [`inter-router`](#configure-authority-router-node-ssh-settings-inter-router) | Configure Inter Router |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;ssh-settings&#x27; |
+
+## `configure authority router node ssh-settings inter-node`
+
+Configure Inter Node
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`host-key-checking`](#configure-authority-router-node-ssh-settings-inter-node-host-key-checking) | Whether or not to check the host key of the remote node when establishing an SSH connection between nodes within a router. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;inter-node&#x27; |
+
+## `configure authority router node ssh-settings inter-node host-key-checking`
+
+Whether or not to check the host key of the remote node when establishing an SSH connection between nodes within a router.
+
+#### Usage
+
+```
+configure authority router node ssh-settings inter-node host-key-checking [<ssh-host-key-checking>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ssh-host-key-checking | The value to set for this field |
+
+#### Description
+
+Default: no
+
+:::warning
+a restart is required if host-key-checking is created, modified, or deleted
+:::
+
+##### ssh-host-key-checking (enumeration)
+
+Whether to check host keys when connecting to a remote host.
+
+Options:
+no            Do not check host keys.
+yes           Check host keys.
+accept-new    Accept new host keys.
+
+## `configure authority router node ssh-settings inter-router`
+
+Configure Inter Router
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`host-key-checking`](#configure-authority-router-node-ssh-settings-inter-router-host-key-checking) | Whether or not to check the host key of the remote node when establishing an SSH connection between the conductor and a managed router. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;inter-router&#x27; |
+
+## `configure authority router node ssh-settings inter-router host-key-checking`
+
+Whether or not to check the host key of the remote node when establishing an SSH connection between the conductor and a managed router.
+
+#### Usage
+
+```
+configure authority router node ssh-settings inter-router host-key-checking [<ssh-host-key-checking>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ssh-host-key-checking | The value to set for this field |
+
+#### Description
+
+Default: no
+
+:::warning
+a restart is required if host-key-checking is created, modified, or deleted
+:::
+
+##### ssh-host-key-checking (enumeration)
+
+Whether to check host keys when connecting to a remote host.
+
+Options:
+no            Do not check host keys.
+yes           Check host keys.
+accept-new    Accept new host keys.
 
 ## `configure authority router node top-sessions`
 
@@ -22655,6 +23233,7 @@ Debug BGP commands.
 | `show` | Show configuration data for &#x27;bgp&#x27; |
 | [`update-groups`](#configure-authority-router-routing-debug-bgp-update-groups) | Debug BGP update groups. |
 | [`updates`](#configure-authority-router-routing-debug-bgp-updates) | Debug BGP update. |
+| [`vpn`](#configure-authority-router-routing-debug-bgp-vpn) | Debug BGP VPN. |
 
 ## `configure authority router routing debug bgp bestpath`
 
@@ -22938,6 +23517,42 @@ a tie, the first sequence of all-zero 16-bit chunks is
 replaced by ::.  Single all-zero 16-bit chunks are not
 compressed.  The canonical format uses lowercase
 characters and leading zeros are not allowed.
+
+## `configure authority router routing debug bgp vpn`
+
+Debug BGP VPN.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`leak-from-vrf`](#configure-authority-router-routing-debug-bgp-vpn-leak-from-vrf) | Debug BGP leak from VRF events. |
+| [`leak-to-vrf`](#configure-authority-router-routing-debug-bgp-vpn-leak-to-vrf) | Debug BGP leak to VRF events. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;vpn&#x27; |
+
+## `configure authority router routing debug bgp vpn leak-from-vrf`
+
+Debug BGP leak from VRF events.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;leak-from-vrf&#x27; |
+
+## `configure authority router routing debug bgp vpn leak-to-vrf`
+
+Debug BGP leak to VRF events.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;leak-to-vrf&#x27; |
 
 ## `configure authority router routing debug ospf`
 
@@ -25515,6 +26130,7 @@ configure authority router routing routing-protocol address-family aggregate-add
 | [`as-set`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-as-set) | Generate as-set information for the resultant aggregate |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-policy) |Policy to apply to the aggregate route |
 | [`prefix`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-prefix) | The prefix to aggregate from |
 | `show` | Show configuration data for &#x27;aggregate-address&#x27; |
 | [`summary-only`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-summary-only) | Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised |
@@ -25544,6 +26160,28 @@ Default: false
 A true or false value.
 
 Options: true or false
+
+## `configure authority router routing routing-protocol address-family aggregate-address policy`
+
+Policy to apply to the aggregate route
+
+#### Usage
+
+```
+configure authority router routing routing-protocol address-family aggregate-address policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing routing-protocol address-family aggregate-address prefix`
 
@@ -30920,6 +31558,7 @@ configure authority router routing vrf routing-protocol address-family aggregate
 | [`as-set`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-as-set) | Generate as-set information for the resultant aggregate |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-policy) |Policy to apply to the aggregate route |
 | [`prefix`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-prefix) | The prefix to aggregate from |
 | `show` | Show configuration data for &#x27;aggregate-address&#x27; |
 | [`summary-only`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-summary-only) | Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised |
@@ -30949,6 +31588,28 @@ Default: false
 A true or false value.
 
 Options: true or false
+
+## `configure authority router routing vrf routing-protocol address-family aggregate-address policy`
+
+Policy to apply to the aggregate route
+
+#### Usage
+
+```
+configure authority router routing vrf routing-protocol address-family aggregate-address policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address prefix`
 
@@ -34052,7 +34713,7 @@ configure authority router service-route host <node-name>
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-service-route-host) | Move list items |
+| [`move`](#configure-authority-router-service-route-host-move) | Move list items |
 | [`node-name`](#configure-authority-router-service-route-host-node-name) | The name of the node on which the host interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;host&#x27; |
@@ -34317,7 +34978,7 @@ configure authority router service-route next-hop <node-name> <interface>
 | `delete` | Delete configuration data |
 | [`gateway-ip`](#configure-authority-router-service-route-next-hop-gateway-ip) | Gateway ip address of the service route nexthop. |
 | [`interface`](#configure-authority-router-service-route-next-hop-interface) | A reference to the name of a configured network layer interface used to reach the destination. |
-| [`move`](#configure-authority-router-service-route-next-hop) | Move list items |
+| [`move`](#configure-authority-router-service-route-next-hop-move) | Move list items |
 | [`node-name`](#configure-authority-router-service-route-next-hop-node-name) | The name of the node on which the interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;next-hop&#x27; |
@@ -35362,7 +36023,7 @@ configure authority router static-hostname-mapping static-entry <hostname>
 | `delete` | Delete configuration data |
 | [`hostname`](#configure-authority-router-static-hostname-mapping-static-entry-hostname) | Hostname to set the resolution for. |
 | [`ip-address`](#configure-authority-router-static-hostname-mapping-static-entry-ip-address) | Ip-address for the corresponding hostname. |
-| [`move`](#configure-authority-router-static-hostname-mapping-static-entry) | Move list items |
+| [`move`](#configure-authority-router-static-hostname-mapping-static-entry-move) | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;static-entry&#x27; |
 
@@ -35485,6 +36146,7 @@ System group configuration. Lets administrators configure system-wide properties
 | [`remote-login`](#configure-authority-router-system-remote-login) | Configure Remote Login |
 | [`services`](#configure-authority-router-system-services) | Address information for internal services |
 | `show` | Show configuration data for &#x27;system&#x27; |
+| [`software-access`](#configure-authority-router-system-software-access) | Configuration for SSR software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings. |
 | [`software-update`](#configure-authority-router-system-software-update) | Configuration for SSR software updates. Supported on managed assets only. |
 | [`syslog`](#configure-authority-router-system-syslog) | Syslog configuration lets administrators configure the SSR&#x27;s interaction with external syslog services. |
 
@@ -37833,6 +38495,7 @@ Web server &amp; REST API.
 | [`port`](#configure-authority-router-system-services-webserver-port) | The port on which the Web servers listen. |
 | [`server`](#configure-authority-router-system-services-webserver-server) | List of control node server addresses. When present, they override the defaults from global configuration. |
 | `show` | Show configuration data for &#x27;webserver&#x27; |
+| [`ssl`](#configure-authority-router-system-services-webserver-ssl) | Configure SSL encryption for HTTPS. |
 
 ## `configure authority router system services webserver enabled`
 
@@ -37981,6 +38644,269 @@ configure authority router system services webserver server node-name [<leafref>
 ##### leafref
 
 A reference to an existing value in the instance data.
+
+## `configure authority router system services webserver ssl`
+
+Configure SSL encryption for HTTPS.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`ciphers`](#configure-authority-router-system-services-webserver-ssl-ciphers) | Configure the allowed ciphers. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`protocol`](#configure-authority-router-system-services-webserver-ssl-protocol) | Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used. |
+| `show` | Show configuration data for &#x27;ssl&#x27; |
+
+## `configure authority router system services webserver ssl ciphers`
+
+Configure the allowed ciphers. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings.
+
+#### Usage
+
+```
+configure authority router system services webserver ssl ciphers [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+Default: HIGH:!aNULL:!MD5
+
+##### string
+
+A text value.
+
+## `configure authority router system services webserver ssl protocol`
+
+Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used.
+
+#### Usage
+
+```
+configure authority router system services webserver ssl protocol [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . - _
+Length: 1-63
+
+## `configure authority router system software-access`
+
+Configuration for 128T software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`channel`](#configure-authority-router-system-software-access-channel) | The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`router-credentials`](#configure-authority-router-system-software-access-router-credentials) | Configure Router Credentials |
+| [`rpm-channel`](#configure-authority-router-system-software-access-rpm-channel) | The software access RPM channel to use. The RPM channel will override the router channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `show` | Show configuration data for &#x27;software-access&#x27; |
+| [`ssr-image-channel`](#configure-authority-router-system-software-access-ssr-image-channel) | The software access SSR image channel to use. The SSR image channel will override the router channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token. |
+| [`use-authority-credentials`](#configure-authority-router-system-software-access-use-authority-credentials) | Configure Use Authority Credentials |
+
+## `configure authority router system software-access channel`
+
+The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority router system software-access channel [<router-software-access-channel>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-software-access-channel | The value to set for this field |
+
+#### Description
+
+Default: use-authority-channel
+
+##### router-software-access-channel (enumeration)
+
+The router software access channel.
+
+Options:
+use-authority-channel    Use the configured authority channel.
+prealpha                 Override the authority channel with the prealpha channel.
+alpha                    Override the authority channel with the alpha channel.
+beta                     Override the authority channel with the beta channel.
+release                  Override the authority channel with the release channel.
+
+## `configure authority router system software-access router-credentials`
+
+Configure Router Credentials
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;router-credentials&#x27; |
+| [`token`](#configure-authority-router-system-software-access-router-credentials-token) | The router software access token. |
+| [`username`](#configure-authority-router-system-software-access-router-credentials-username) | The router software access username. |
+
+## `configure authority router system software-access router-credentials token`
+
+The router software access token.
+
+#### Usage
+
+```
+configure authority router system software-access router-credentials token [<software-access-token>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-token | The value to set for this field |
+
+#### Description
+
+##### software-access-token (string)
+
+The software access token.
+
+Must not contain whitespace in the software access token.
+
+## `configure authority router system software-access router-credentials username`
+
+The router software access username.
+
+#### Usage
+
+```
+configure authority router system software-access router-credentials username [<software-access-username>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-username | The value to set for this field |
+
+#### Description
+
+##### software-access-username (string)
+
+The software access username.
+
+Must not contain a colon or whitespace in the software access username.
+
+## `configure authority router system software-access rpm-channel`
+
+The software access RPM channel to use. The RPM channel will override the router channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority router system software-access rpm-channel [<router-software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### router-software-access-channel-override (enumeration)
+
+The router software access channel overrides.
+
+Options:
+use-authority-channel          Use the configured authority channel.
+use-software-access-channel    Use the configured router channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority router system software-access ssr-image-channel`
+
+The software access SSR image channel to use. The SSR image channel will override the router channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority router system software-access ssr-image-channel [<router-software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### router-software-access-channel-override (enumeration)
+
+The router software access channel overrides.
+
+Options:
+use-authority-channel          Use the configured authority channel.
+use-software-access-channel    Use the configured router channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority router system software-access use-authority-credentials`
+
+Configure Use Authority Credentials
+
+#### Usage
+
+```
+configure authority router system software-access use-authority-credentials [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router system software-update`
 
@@ -38660,7 +39586,7 @@ configure authority routing filter <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-filter) | Move list items |
+| [`move`](#configure-authority-routing-filter-move) | Move list items |
 | [`name`](#configure-authority-routing-filter-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`rule`](#configure-authority-routing-filter-rule) | A fragment of the filter which defines a subset of the logic on how to process the objects going through the filter |
@@ -39023,7 +39949,7 @@ configure authority routing policy <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-policy) | Move list items |
+| [`move`](#configure-authority-routing-policy-move) | Move list items |
 | [`name`](#configure-authority-routing-policy-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;policy&#x27; |
@@ -42493,7 +43419,7 @@ configure authority service-policy <name>
 | [`max-latency`](#configure-authority-service-policy-max-latency) | Maximum acceptable latency for services that use this service class. |
 | [`max-loss`](#configure-authority-service-policy-max-loss) | The acceptable threshold of packet loss for services that use this service class. |
 | [`min-mos`](#configure-authority-service-policy-min-mos) | Minimum acceptable Mean Opinion Score (MOS) for services that use thus service class |
-| [`move`](#configure-authority-service-policy) | Move list items |
+| [`move`](#configure-authority-service-policy-move) | Move list items |
 | [`name`](#configure-authority-service-policy-name) | An arbitrary, unique name for the service policy. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss. |
@@ -44013,6 +44939,163 @@ icmp    Internet Control Management Protocol.
 gre     Generic Routing Encapsulation Protocol.
 esp     IPSec Encapsulating Security Payload Protocol.
 pim     Protocol Independent Multicast.
+
+## `configure authority software-access`
+
+Configuration for SSR software access for the authority. Supported on managed assets only.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`channel`](#configure-authority-software-access-channel) | The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`rpm-channel`](#configure-authority-software-access-rpm-channel) | The software access RPM channel to use. The RPM channel will override the authority channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `show` | Show configuration data for &#x27;software-access&#x27; |
+| [`ssr-image-channel`](#configure-authority-software-access-ssr-image-channel) | The software access SSR image channel to use. The SSR image channel will override the authority channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token. |
+| [`token`](#configure-authority-software-access-token) | The authority software access token. |
+| [`username`](#configure-authority-software-access-username) | The authority software access username. |
+
+## `configure authority software-access channel`
+
+The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority software-access channel [<software-access-channel>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-channel | The value to set for this field |
+
+#### Description
+
+Default: release
+
+##### software-access-channel (enumeration)
+
+The software access channels.
+
+Options:
+prealpha    Enable access to software in the prealpha channel.
+alpha       Enable access to software in the alpha channel.
+beta        Enable access to software in the beta channel.
+release     Enable access to software in the release channel.
+
+## `configure authority software-access rpm-channel`
+
+The software access RPM channel to use. The RPM channel will override the authority channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority software-access rpm-channel [<software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### software-access-channel-override (enumeration)
+
+The software access channel overrides.
+
+Options:
+use-software-access-channel    Use the configured channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority software-access ssr-image-channel`
+
+The software access SSR image channel to use. The SSR image channel will override the authority channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority software-access ssr-image-channel [<software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### software-access-channel-override (enumeration)
+
+The software access channel overrides.
+
+Options:
+use-software-access-channel    Use the configured channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority software-access token`
+
+The authority software access token.
+
+#### Usage
+
+```
+configure authority software-access token [<software-access-token>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-token | The value to set for this field |
+
+#### Description
+
+##### software-access-token (string)
+
+The software access token.
+
+Must not contain whitespace in the software access token.
+
+## `configure authority software-access username`
+
+The authority software access username.
+
+#### Usage
+
+```
+configure authority software-access username [<software-access-username>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-username | The value to set for this field |
+
+#### Description
+
+##### software-access-username (string)
+
+The software access username.
+
+Must not contain a colon or whitespace in the software access username.
 
 ## `configure authority software-update`
 
