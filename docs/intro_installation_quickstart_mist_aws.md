@@ -65,6 +65,8 @@ This subnet must provide connectivity to enable communication with external/remo
 #### Private Subnet
 This subnet must provide connectivity to internal workloads within the cloud.
 
+When selecting a platform for deployment, Juniper recommends the use of an AWS EC2 instance size c5.xlarge, or larger.
+
 :::important
 Please note that deploying Session Smart Routers without a valid token or certificate is limited to deployments within the cloud. If your use case also requires the deployment of an on-premises SSR, please contact your Juniper sales representative.
 :::
@@ -94,6 +96,9 @@ To deploy the Session Smart Networking software via the AWS Console:
 5. Click on the "Continue to Launch" button.
 6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
 7. Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template).
+
+![CloudFormation Template](/img/aws-byol-template.png)
+
 - What name do you want to give it?
   - Provide it in the "Stack name" field (for example: SSR_1_Router).
 - Where do you want to deploy it?
