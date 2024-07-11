@@ -7,7 +7,7 @@ This guide provides installation and configuration information for using SSR Con
 
 Supported Software version: 
 - Version 6.2.5-5r2
-- Release Date: December 15, 2023
+- Release Date: June 6, 2024
 
 Supported Hardware (must have Software Version 6.2.5-5r2 installed):
 - SSR 120 
@@ -23,7 +23,7 @@ This Common Criteria document is maintained separately from the SSR documentatio
 
 | Document Revision | Modification | Date |
 | --- | --- | --- |
-| 1.0 | Initial version for 6.2.5-5r2 Common Criteria | July 11, 2024 |
+| 1.0 | Initial version for 6.2.5-5r2 Common Criteria | June 6, 2024 |
 <!---| 0.1 | Initial version for 6.2.3-R2 Common Criteria | December 31, 2023 |
 | 0.2 | Revision with Teron feedback EFT-T036-EOR-AGD 1.0 | February 15, 2024 |
 | 0.3 | Updated with Teron feedback EFT-T036-EOR-AGD 1.1 | March 6, 2024 |
