@@ -6,7 +6,7 @@
 <title data-rh="true">Common Criteria Compliance Guidelines | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/cc_fips_compliance_guidelines"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Common Criteria Compliance Guidelines | SSN Docs"><meta data-rh="true" name="description" content="For compliance, the following configuration considerations must be made:"><meta data-rh="true" property="og:description" content="For compliance, the following configuration considerations must be made:"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/cc_fips_compliance_guidelines"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_compliance_guidelines" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_compliance_guidelines" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.b50a304b.css">
-<script src="/assets/js/runtime~main.ba1c23bf.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.22b40a88.js" defer="defer"></script>
 <script src="/assets/js/main.6a47f0e3.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -61,7 +61,7 @@ This feature must be configured on services where the evaluated firewall capabil
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="out-of-scope-features">Out of Scope Features<a href="#out-of-scope-features" class="hash-link" aria-label="Direct link to Out of Scope Features" title="Direct link to Out of Scope Features">​</a></h2>
 <p>The following functionality and platforms <strong>are not certified</strong> under Common Criteria.</p>
 <ul>
-<li>SSR Software versions other than V6.2.3-14-R2.</li>
+<li>SSR Software versions other than V6.2.5-5r2.</li>
 <li>Non-Juniper branded hardware platforms running SSR Software</li>
 <li>Juniper branded hardware platforms not explicitly included</li>
 <li>Juniper SSR Software for virtual platforms.</li>
@@ -72,7 +72,7 @@ This feature must be configured on services where the evaluated firewall capabil
 <li>Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions</li>
 <li>SSR Plugins, particularly Wireguard, are excluded from Common Criteria certification</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="physical-security">Physical Security<a href="#physical-security" class="hash-link" aria-label="Direct link to Physical Security" title="Direct link to Physical Security"> ​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="physical-security">Physical Security<a href="#physical-security" class="hash-link" aria-label="Direct link to Physical Security" title="Direct link to Physical Security">​</a></h3>
 <p>The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security. The Administrator should ensure that physical security, commensurate with the value of the SSR and the data it contains, is provided by the environment into which SSR is deployed.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="additional-information-related-to-common-criteria">Additional Information Related to Common Criteria<a href="#additional-information-related-to-common-criteria" class="hash-link" aria-label="Direct link to Additional Information Related to Common Criteria" title="Direct link to Additional Information Related to Common Criteria">​</a></h3>
 <p>Common Criteria certification uses FIPS mode to provide cryptographic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure cyphers, and therefore <strong>no additional cryptographic keys are used</strong>.</p>
