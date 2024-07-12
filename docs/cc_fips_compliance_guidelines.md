@@ -48,7 +48,7 @@ Juniper SSR Common Criteria certified platforms implement cryptographic algorith
 
 The following functionality and platforms **are not certified** under Common Criteria.
 
-- SSR Software versions other than V6.2.3-14-R2. 
+- SSR Software versions other than V6.2.5-5r2. 
 - Non-Juniper branded hardware platforms running SSR Software
 - Juniper branded hardware platforms not explicitly included
 - Juniper SSR Software for virtual platforms.
