@@ -5606,17 +5606,17 @@ show certificate webserver
 admin@labsystem1.fiedler# show certificate webserver
 
 Certificate:
-​    Data:
-​        Version: 3 (0x2)
-​        Serial Number: 17087 (0x42bf)
-​    Signature Algorithm: sha256WithRSAEncryption
-​        Issuer: C=US, ST=MA, O=a, CN=a
-​        Validity
-​            Not Before: May  5 04:49:02 2016 GMT
-​            Not After : May  6 04:49:02 2017 GMT
-​        Subject: C=US, ST=MA, O=a, CN=a
-​        Subject Public Key Info:
-​            Public Key Algorithm: rsaEncryption
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 17087 (0x42bf)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, ST=MA, O=a, CN=a
+        Validity
+            Not Before: May  5 04:49:02 2016 GMT
+            Not After : May  6 04:49:02 2017 GMT
+        Subject: C=US, ST=MA, O=a, CN=a
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
 ...
 ```
 
@@ -5647,20 +5647,20 @@ Note that the output from _show config candidate_ is formatted in such a way so 
 ```
 admin@labsystem1.fiedler# show config candidate
 config
-​    authority
-​        router  Fabric128
-​            name  Fabric128
-​            node  labsystem1
-​                name              labsystem1
-​                id                1
-​                description       "Primary lab system"
-​                location          "Newton, MA"
-​                role              combo
-​                device-interface  1
-​                    id                 1
-​                    description        "external network"
-​                    type               ethernet
-​                    pci-address        0000:02:00.0
+    authority
+        router  Fabric128
+            name  Fabric128
+            node  labsystem1
+                name              labsystem1
+                id                1
+                description       "Primary lab system"
+                location          "Newton, MA"
+                role              combo
+                device-interface  1
+                    id                 1
+                    description        "external network"
+                    type               ethernet
+                    pci-address        0000:02:00.0
 ...
 ```
 The same configuration using the _flat_ flag is displayed quite differently:
@@ -5683,21 +5683,21 @@ The _show config candidate_ command also lets users show specific portions of th
 ```
 admin@labsystem1.fiedler# show config candidate authority session-type verbose all
 config
-​    authority
-​        session-type  HTTP
-​            name           HTTP
-​            service-class  Standard
-​            timeout        7200000
-​            transport      tcp
-​                protocol    tcp
-​                port-range  80
-​                    start-port  80
-​                exit
-​                port-range  8080
-​                    start-port  8080
-​                exit
-​            exit
-​        exit
+    authority
+        session-type  HTTP
+            name           HTTP
+            service-class  Standard
+            timeout        7200000
+            transport      tcp
+                protocol    tcp
+                port-range  80
+                    start-port  80
+                exit
+                port-range  8080
+                    start-port  8080
+                exit
+            exit
+        exit
 ...
 ```
 
@@ -5944,12 +5944,12 @@ Note that the output from _show config running_ is formatted in such a way so as
 ```
 admin@labsystem1.fiedler# show config running
 config
-​    authority
-​        name           Authority128
-​        router         Fabric128
-​            name                 Fabric128
-​            description          "Default router"
-​            inter-node-security  internal
+    authority
+        name           Authority128
+        router         Fabric128
+            name                 Fabric128
+            description          "Default router"
+            inter-node-security  internal
 ...
 ```
 
@@ -5958,24 +5958,24 @@ The _show config running_ command also lets users show specific portions of the 
 ```
 admin@labsystem1.fiedler# show config running authority service-class verbose all
 config
-​    authority
-​        service-class  Standard
-​            name            Standard
-​            dscp            0
-​            priority        0
-​            rate-limit      false
-​            max-flow-rate   0
-​            max-flow-burst  0
-​        exit
+    authority
+        service-class  Standard
+            name            Standard
+            dscp            0
+            priority        0
+            rate-limit      false
+            max-flow-rate   0
+            max-flow-burst  0
+        exit
 
-​        service-class  NetworkControl
-​            name            NetworkControl
-​            dscp            48
-​            priority        0
-​            rate-limit      false
-​            max-flow-rate   0
-​            max-flow-burst  0
-​        exit
+        service-class  NetworkControl
+            name            NetworkControl
+            dscp            48
+            priority        0
+            rate-limit      false
+            max-flow-rate   0
+            max-flow-burst  0
+        exit
 ...
 ```
 
@@ -10912,6 +10912,8 @@ Fri 2018-02-09 09:30:48 EST
  cnd1.conductor   dc2.datacenter   disconnected
 
 Completed in 0.20 seconds
+```
+
 ## `show system connectivity authorized-keys`
 
 Display ssh authorized keys for inter-node communication.
@@ -11492,7 +11494,7 @@ Display in-progress and completed upgrades to higher SSR versions.
 #### Usage
 
 ```
-show system software upgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+show system software upgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]`
 ```
 
 ##### Keyword Arguments
