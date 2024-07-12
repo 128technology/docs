@@ -53,7 +53,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`session-recovery-detection`](#configure-authority-session-recovery-detection) | Configure Session Recovery Detection |
 | [`session-type`](#configure-authority-session-type) | Type of session classification based on protocol and port, and associates it with a default class of service. |
 | `show` | Show configuration data for &#x27;authority&#x27; |
-| [`software-access`](#configure-authority-software-access) | Configuration for 128T software access for the authority. Supported on managed assets only. |
+| [`software-access`](#configure-authority-software-access) | Configuration for SSR software access for the authority. Supported on managed assets only. |
 | [`software-update`](#configure-authority-software-update) | Configure Software Update |
 | [`step`](#configure-authority-step) | Configure Step |
 | [`step-repo`](#configure-authority-step-repo) | List of Service and Topology Exchange Protocol repositories. |
@@ -184,7 +184,7 @@ configure authority access-management role exclude-resource <id>
 
 ## `configure authority access-management role exclude-resource id`
 
-Configure Id
+Configure ID
 
 #### Usage
 
@@ -210,7 +210,7 @@ an asterisk, or a path that contains only valid yang
 names and list-keys separated by forward-slashes and
 optionally followed by a forward-slash and an asterisk.
 
-Example: 128t:/authority/router/MyRouter/*
+Example: SSR:/authority/router/MyRouter/*
 
 ## `configure authority access-management role name`
 
@@ -315,7 +315,7 @@ an asterisk, or a path that contains only valid yang
 names and list-keys separated by forward-slashes and
 optionally followed by a forward-slash and an asterisk.
 
-Example: 128t:/authority/router/MyRouter/*
+Example: SSR:/authority/router/MyRouter/*
 
 ## `configure authority access-management role resource-group`
 
@@ -572,20 +572,43 @@ Shelve alarms for this category.
 #### Usage
 
 ```
-configure authority alarm-shelving shelf category [<string>]
+configure authority alarm-shelving shelf category [<enumeration>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| string | The value to set for this field |
+| enumeration | The value to set for this field |
 
 #### Description
 
-##### string
+Default: none
 
-A text value.
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+none                 A Category of &quot;none&quot; indicates that Category will not be considered when evaluating alarms against this shelf
+extensible-alarm     Shelve alarms with a category of &quot;extensible-alarm&quot;
+system               Shelve alarms with a category of &quot;system&quot;
+process              Shelve alarms with a category of &quot;process&quot;
+interface            Shelve alarms with a category of &quot;interface&quot;
+platform             Shelve alarms with a category of &quot;platform&quot;
+peer                 Shelve alarms with a category of &quot;peer&quot;
+base                 Shelve alarms with a category of &quot;base&quot;
+node-base            Shelve alarms with a category of &quot;node-base&quot;
+global-base          Shelve alarms with a category of &quot;global-base&quot;
+network-interface    Shelve alarms with a category of &quot;network-interface&quot;
+platform-stat        Shelve alarms with a category of &quot;platform-stat&quot;
+redundancy           Shelve alarms with a category of &quot;redundancy&quot;
+giid                 Shelve alarms with a category of &quot;giid&quot;
+asset                Shelve alarms with a category of &quot;asset&quot;
+prefix-delegation    Shelve alarms with a category of &quot;prefix-delegation&quot;
+service              Shelve alarms with a category of &quot;service&quot;
+bgp-neighbor         Shelve alarms with a category of &quot;bgp-neighbor&quot;
+msdp-neighbor        Shelve alarms with a category of &quot;msdp-neighbor&quot;
 
 ## `configure authority alarm-shelving shelf generated`
 
@@ -778,20 +801,29 @@ Shelve alarms for this severity.
 #### Usage
 
 ```
-configure authority alarm-shelving shelf severity [<string>]
+configure authority alarm-shelving shelf severity [<enumeration>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| string | The value to set for this field |
+| enumeration | The value to set for this field |
 
 #### Description
 
-##### string
+Default: none
 
-A text value.
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+info        Shelve alarms with a severity level of &quot;info&quot;
+minor       Shelve alarms with a severity level of &quot;minor&quot;
+major       Shelve alarms with a severity level of &quot;major&quot;
+critical    Shelve alarms with a severity level of &quot;critical&quot;
+none        A Severity of &quot;none&quot; indicates that Severity will not be considered when evaluating alarms against this shelf
 
 ## `configure authority asset-connection-resiliency`
 
@@ -805,6 +837,7 @@ Configure Asset Connection Resiliency
 | [`enabled`](#configure-authority-asset-connection-resiliency-enabled) | Enable asset connection resiliency by creating SSH tunnels for asset connections from managed Router to Conductor. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;asset-connection-resiliency&#x27; |
+| [`ssh-only`](#configure-authority-asset-connection-resiliency-ssh-only) | Only allow the asset connections from managed Router to Conductor to connect via the SSH tunnels. |
 
 ## `configure authority asset-connection-resiliency enabled`
 
@@ -825,6 +858,32 @@ configure authority asset-connection-resiliency enabled [<boolean>]
 #### Description
 
 Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority asset-connection-resiliency ssh-only`
+
+Only allow the asset connections from managed Router to Conductor to connect via the SSH tunnels.
+
+#### Usage
+
+```
+configure authority asset-connection-resiliency ssh-only [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
 
 ##### boolean
 
@@ -5611,7 +5670,7 @@ configure authority router dns-config <mode>
 | [`address`](#configure-authority-router-dns-config-address) | Address of servers to use for DNS queries. |
 | `delete` | Delete configuration data |
 | [`mode`](#configure-authority-router-dns-config-mode) | Mode of DNS server configuration. |
-| [`move`](#configure-authority-router-dns-config-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;dns-config&#x27; |
 
@@ -5632,6 +5691,8 @@ configure authority router dns-config address [<ip-address>]
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -5688,30 +5749,6 @@ A value from a set of predefined names.
 Options:
 static       Static list of DNS nameservers
 automatic    Populate DNS nameservers from learned sources
-
-## `configure authority router dns-config move address`
-
-Address of servers to use for DNS queries.
-
-#### Usage
-
-```
-configure authority router dns-config move address [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router entitlement`
 
@@ -6493,7 +6530,7 @@ configure authority router nat-pool <name>
 | [`address-pool`](#configure-authority-router-nat-pool-address-pool) | Defines the NAT prefix and ports in the pool. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-nat-pool-move) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-router-nat-pool-name) | An identifier for the NAT Pool. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;nat-pool&#x27; |
@@ -6524,6 +6561,10 @@ configure authority router nat-pool address-pool <address>
 | [`pool-type`](#configure-authority-router-nat-pool-address-pool-pool-type) | Type of NAT pool |
 | `show` | Show configuration data for &#x27;address-pool&#x27; |
 | [`tenant-name`](#configure-authority-router-nat-pool-address-pool-tenant-name) | Tenant for which this nat pool is applied |
+
+#### Description
+
+The order of elements matters.
 
 ## `configure authority router nat-pool address-pool address`
 
@@ -6637,24 +6678,6 @@ configure authority router nat-pool address-pool tenant-name [<tenant-ref>]
 ##### tenant-ref (leafref)
 
 This type is used by other entities that need to reference configured tenants.
-
-## `configure authority router nat-pool move address-pool`
-
-Defines the NAT prefix and ports in the pool.
-
-#### Usage
-
-```
-configure authority router nat-pool move address-pool <address> <position> [<relative-to-address>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| address | IP Prefix for the pool of NAT ports. |
-| position | first \| last \| before \| after |
-| relative-to-address | Key of item before or after which to move |
 
 ## `configure authority router nat-pool name`
 
@@ -7559,7 +7582,7 @@ configure authority router node device-interface network-interface <name>
 | [`inter-router-security`](#configure-authority-router-node-device-interface-network-interface-inter-router-security) | The name of the security policy used for inbound inter-router traffic. |
 | [`management`](#configure-authority-router-node-device-interface-network-interface-management) | Allow management traffic to be sent over this interface |
 | [`management-vector`](#configure-authority-router-node-device-interface-network-interface-management-vector) | Vector configuration for non-forwarding interfaces |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-move) | Move list items |
+| `move` | Move list items |
 | [`mtu`](#configure-authority-router-node-device-interface-network-interface-mtu) | The maximum transmission unit (MTU) for packets sent on the interface. |
 | [`multicast-listeners`](#configure-authority-router-node-device-interface-network-interface-multicast-listeners) | Enables the sending of IGMP and MLD queries on this interface. |
 | [`multicast-report-proxy`](#configure-authority-router-node-device-interface-network-interface-multicast-report-proxy) | Enables the forwarding of IGMP and MLD joins/leaves/reports to valid multicast services to this network interface. These must come from other network interfaces which allow multicast listeners. |
@@ -7878,7 +7901,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`end-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-end-address) | End of address pool. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-interface-mtu) | Interface MTU provided to clients. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-move) | Move list items |
+| `move` | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -7916,7 +7939,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -8002,30 +8025,6 @@ ipv4-address
 int32
 binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-## `configure authority router node device-interface network-interface address host-service address-pool custom move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool custom move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool custom quantity`
 
 The allowed quantity of the custom option values.
@@ -8072,6 +8071,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### string (required)
 
 A text value.
@@ -8115,6 +8116,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -8218,126 +8221,6 @@ An unsigned 16-bit integer.
 
 Range: 68-9198
 
-## `configure authority router node device-interface network-interface address host-service address-pool move domain-server`
-
-Domain name server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move domain-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move ntp-server`
-
-NTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move ntp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move pop-server`
-
-POP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move pop-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move router`
-
-Gateway router address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move router [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move smtp-server`
-
-SMTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move smtp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool ntp-server`
 
 NTP server address(es) provided to clients in priority order.
@@ -8355,6 +8238,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -8404,6 +8289,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -8452,6 +8339,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -8499,6 +8388,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -8609,7 +8500,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-move) | Move list items |
+| `move` | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -8737,7 +8628,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -8823,30 +8714,6 @@ ipv4-address
 int32
 binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment custom move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom quantity`
 
 The allowed quantity of the custom option values.
@@ -8892,6 +8759,8 @@ configure authority router node device-interface network-interface address host-
 | string | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### string (required)
 
@@ -8958,6 +8827,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -9039,126 +8910,6 @@ The canonical representation uses lowercase characters.
 In the value set and its semantics, this type is equivalent
 to the MacAddress textual convention of the SMIv2.
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move domain-server`
-
-Domain name server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move domain-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move ntp-server`
-
-NTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move ntp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move pop-server`
-
-POP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move pop-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move router`
-
-Gateway router address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move router [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move smtp-server`
-
-SMTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move smtp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment ntp-server`
 
 NTP server address(es) provided to clients in priority order.
@@ -9176,6 +8927,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -9225,6 +8978,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -9273,6 +9028,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -9320,6 +9077,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -9509,7 +9268,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -9617,30 +9376,6 @@ configure authority router node device-interface network-interface address host-
 
 An unsigned 32-bit integer.
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information quantity`
 
 The allowed quantity of the custom option values.
@@ -9687,6 +9422,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### string (required)
 
 A text value.
@@ -9715,7 +9452,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -9801,30 +9538,6 @@ ipv4-address
 int32
 binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information quantity`
 
 The allowed quantity of the custom option values.
@@ -9870,6 +9583,8 @@ configure authority router node device-interface network-interface address host-
 | string | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### string (required)
 
@@ -10033,7 +9748,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -10141,30 +9856,6 @@ configure authority router node device-interface network-interface address host-
 
 An unsigned 32-bit integer.
 
-## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information quantity`
 
 The allowed quantity of the custom option values.
@@ -10211,6 +9902,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### string (required)
 
 A text value.
@@ -10239,7 +9932,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -10325,30 +10018,6 @@ ipv4-address
 int32
 binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information quantity`
 
 The allowed quantity of the custom option values.
@@ -10394,6 +10063,8 @@ configure authority router node device-interface network-interface address host-
 | string | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### string (required)
 
@@ -10608,7 +10279,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-move) | Move list items |
+| `move` | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -10736,7 +10407,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -10822,30 +10493,6 @@ ipv4-address
 int32
 binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-## `configure authority router node device-interface network-interface address host-service static-assignment custom move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment custom move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom quantity`
 
 The allowed quantity of the custom option values.
@@ -10891,6 +10538,8 @@ configure authority router node device-interface network-interface address host-
 | string | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### string (required)
 
@@ -10957,6 +10606,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -11038,126 +10689,6 @@ The canonical representation uses lowercase characters.
 In the value set and its semantics, this type is equivalent
 to the MacAddress textual convention of the SMIv2.
 
-## `configure authority router node device-interface network-interface address host-service static-assignment move domain-server`
-
-Domain name server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move domain-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move ntp-server`
-
-NTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move ntp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move pop-server`
-
-POP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move pop-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move router`
-
-Gateway router address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move router [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move smtp-server`
-
-SMTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move smtp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service static-assignment ntp-server`
 
 NTP server address(es) provided to clients in priority order.
@@ -11175,6 +10706,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -11224,6 +10757,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -11272,6 +10807,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -11319,6 +10856,8 @@ configure authority router node device-interface network-interface address host-
 | ip-address | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### ip-address (union)
 
@@ -11508,7 +11047,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -11616,30 +11155,6 @@ configure authority router node device-interface network-interface address host-
 
 An unsigned 32-bit integer.
 
-## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information quantity`
 
 The allowed quantity of the custom option values.
@@ -11686,6 +11201,8 @@ configure authority router node device-interface network-interface address host-
 
 #### Description
 
+The order of elements matters.
+
 ##### string (required)
 
 A text value.
@@ -11714,7 +11231,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -11800,30 +11317,6 @@ ipv4-address
 int32
 binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information quantity`
 
 The allowed quantity of the custom option values.
@@ -11869,6 +11362,8 @@ configure authority router node device-interface network-interface address host-
 | string | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### string (required)
 
@@ -15172,6 +14667,10 @@ configure authority router node device-interface network-interface filter-rule <
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;filter-rule&#x27; |
 
+#### Description
+
+The order of elements matters.
+
 ## `configure authority router node device-interface network-interface filter-rule action`
 
 Action to be taken when a packet matches the filter rule.
@@ -15947,42 +15446,6 @@ An unsigned 32-bit integer.
 
 Range: 1-999999
 
-## `configure authority router node device-interface network-interface move filter-rule`
-
-A rule for dropping packets.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface move filter-rule <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | A unique name to identify this rule. |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
-
-## `configure authority router node device-interface network-interface move neighborhood`
-
-The neighborhoods to which this interface belongs.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface move neighborhood <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | The neighborhood to which this interface belongs. |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
-
 ## `configure authority router node device-interface network-interface mtu`
 
 The maximum transmission unit (MTU) for packets sent on the interface.
@@ -16240,6 +15703,10 @@ configure authority router node device-interface network-interface neighborhood 
 | [`ttl-padding`](#configure-authority-router-node-device-interface-network-interface-neighborhood-ttl-padding) | Whether to perform TTL Padding on routers within this neighborhood |
 | [`udp-transform`](#configure-authority-router-node-device-interface-network-interface-neighborhood-udp-transform) | UDP transform settings for interoperating with stateful TCP firewalls for peers in the neighborhood. |
 | [`vector`](#configure-authority-router-node-device-interface-network-interface-neighborhood-vector) | Vector name to associate with adjacencies in the neighborhood. |
+
+#### Description
+
+The order of elements matters.
 
 ## `configure authority router node device-interface network-interface neighborhood bfd`
 
@@ -34713,35 +34180,11 @@ configure authority router service-route host <node-name>
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-service-route-host-move) | Move list items |
+| `move` | Move list items |
 | [`node-name`](#configure-authority-router-service-route-host-node-name) | The name of the node on which the host interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;host&#x27; |
 | [`target-address`](#configure-authority-router-service-route-host-target-address) | The ipv4 address or fqdn of the server that packets are forwarded to for the service. The destination is natted to this address. |
-
-## `configure authority router service-route host move target-address`
-
-The ipv4 address or fqdn of the server that packets are forwarded to for the service. The destination is natted to this address.
-
-#### Usage
-
-```
-configure authority router service-route host move target-address [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router service-route host node-name`
 
@@ -34782,6 +34225,8 @@ configure authority router service-route host target-address [<hostv4>]
 | hostv4 | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### hostv4 (union)
 
@@ -34978,7 +34423,7 @@ configure authority router service-route next-hop <node-name> <interface>
 | `delete` | Delete configuration data |
 | [`gateway-ip`](#configure-authority-router-service-route-next-hop-gateway-ip) | Gateway ip address of the service route nexthop. |
 | [`interface`](#configure-authority-router-service-route-next-hop-interface) | A reference to the name of a configured network layer interface used to reach the destination. |
-| [`move`](#configure-authority-router-service-route-next-hop-move) | Move list items |
+| `move` | Move list items |
 | [`node-name`](#configure-authority-router-service-route-next-hop-node-name) | The name of the node on which the interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;next-hop&#x27; |
@@ -35056,30 +34501,6 @@ configure authority router service-route next-hop interface [<leafref>]
 
 A reference to an existing value in the instance data.
 
-## `configure authority router service-route next-hop move target-address`
-
-Target addresses for the service route nexthop.
-
-#### Usage
-
-```
-configure authority router service-route next-hop move target-address [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
 ## `configure authority router service-route next-hop node-name`
 
 The name of the node on which the interface resides.
@@ -35141,6 +34562,8 @@ configure authority router service-route next-hop target-address [<host>]
 | host | Value to add to this list |
 
 #### Description
+
+The order of elements matters.
 
 ##### host (union)
 
@@ -36023,7 +35446,7 @@ configure authority router static-hostname-mapping static-entry <hostname>
 | `delete` | Delete configuration data |
 | [`hostname`](#configure-authority-router-static-hostname-mapping-static-entry-hostname) | Hostname to set the resolution for. |
 | [`ip-address`](#configure-authority-router-static-hostname-mapping-static-entry-ip-address) | Ip-address for the corresponding hostname. |
-| [`move`](#configure-authority-router-static-hostname-mapping-static-entry-move) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;static-entry&#x27; |
 
@@ -36069,6 +35492,8 @@ configure authority router static-hostname-mapping static-entry ip-address [<ip-
 
 #### Description
 
+The order of elements matters.
+
 ##### ip-address (union) (required)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
@@ -36098,30 +35523,6 @@ not allowed.
 
 Must be a valid IPv6 address.
 Must be a valid IPv6 address.
-
-## `configure authority router static-hostname-mapping static-entry move ip-address`
-
-Ip-address for the corresponding hostname.
-
-#### Usage
-
-```
-configure authority router static-hostname-mapping static-entry move ip-address [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router system`
 
@@ -38710,7 +38111,7 @@ Length: 1-63
 
 ## `configure authority router system software-access`
 
-Configuration for 128T software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings.
+Configuration for SSR software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings.
 
 ##### Subcommands
 
@@ -39586,30 +38987,12 @@ configure authority routing filter <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-filter-move) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-routing-filter-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`rule`](#configure-authority-routing-filter-rule) | A fragment of the filter which defines a subset of the logic on how to process the objects going through the filter |
 | `show` | Show configuration data for &#x27;filter&#x27; |
 | [`type`](#configure-authority-routing-filter-type) | A filter type |
-
-## `configure authority routing filter move rule`
-
-A fragment of the filter which defines a subset of the logic on how to process the objects going through the filter
-
-#### Usage
-
-```
-configure authority routing filter move rule <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | An arbitrary identifying name |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
 
 ## `configure authority routing filter name`
 
@@ -39667,6 +39050,10 @@ configure authority routing filter rule <name>
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`prefix`](#configure-authority-routing-filter-rule-prefix) | The prefix to match |
 | `show` | Show configuration data for &#x27;rule&#x27; |
+
+#### Description
+
+The order of elements matters.
 
 ## `configure authority routing filter rule as-path`
 
@@ -39949,29 +39336,11 @@ configure authority routing policy <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-policy-move) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-routing-policy-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;policy&#x27; |
 | [`statement`](#configure-authority-routing-policy-statement) | A fragment of a policy that is executed in sequence. A statement is executed by first running the conditions. If all the conditions match (or if no conditions are specified) the policy (accept or reject) is consulted. An accept means execute the actions in the statement and then terminate the policy returning accept. A reject means do not execute the actions and terminate the policy returning reject. The accept terminating the policy may be modified by flow actions. If a policy reaches the end of the statement list and no statement has been executed there is an implicit reject |
-
-## `configure authority routing policy move statement`
-
-A fragment of a policy that is executed in sequence. A statement is executed by first running the conditions. If all the conditions match (or if no conditions are specified) the policy (accept or reject) is consulted. An accept means execute the actions in the statement and then terminate the policy returning accept. A reject means do not execute the actions and terminate the policy returning reject. The accept terminating the policy may be modified by flow actions. If a policy reaches the end of the statement list and no statement has been executed there is an implicit reject
-
-#### Usage
-
-```
-configure authority routing policy move statement <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | An arbitrary identifying name |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
 
 ## `configure authority routing policy name`
 
@@ -40026,6 +39395,10 @@ configure authority routing policy statement <name>
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`policy`](#configure-authority-routing-policy-statement-policy) | The policy action, accept or reject, to be returned if the conditions evaluate to true. If no conditions are given the condition evaluation is true |
 | `show` | Show configuration data for &#x27;statement&#x27; |
+
+#### Description
+
+The order of elements matters.
 
 ## `configure authority routing policy statement action`
 
@@ -43419,7 +42792,7 @@ configure authority service-policy <name>
 | [`max-latency`](#configure-authority-service-policy-max-latency) | Maximum acceptable latency for services that use this service class. |
 | [`max-loss`](#configure-authority-service-policy-max-loss) | The acceptable threshold of packet loss for services that use this service class. |
 | [`min-mos`](#configure-authority-service-policy-min-mos) | Minimum acceptable Mean Opinion Score (MOS) for services that use thus service class |
-| [`move`](#configure-authority-service-policy-move) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-service-policy-name) | An arbitrary, unique name for the service policy. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss. |
@@ -43855,24 +43228,6 @@ A 64-bit decimal value.
 Range: 1.0-5.0
 Fraction digits: 2
 
-## `configure authority service-policy move vector`
-
-List of vectors to prefer/avoid for the service.
-
-#### Usage
-
-```
-configure authority service-policy move vector <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | Name of the vector. |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
-
 ## `configure authority service-policy name`
 
 An arbitrary, unique name for the service policy.
@@ -44151,6 +43506,10 @@ configure authority service-policy vector <name>
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`priority`](#configure-authority-service-policy-vector-priority) | Priority value for the paths with the vector. |
 | `show` | Show configuration data for &#x27;vector&#x27; |
+
+#### Description
+
+The order of elements matters.
 
 ## `configure authority service-policy vector name`
 
