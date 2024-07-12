@@ -73,8 +73,8 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 | [`packet-capture`](#show-stats-packet-capture) | Stats pertaining to captured packets |
 | [`packet-processing`](#show-stats-packet-processing) | Stats pertaining to packet processing |
 | [`path-tree`](#show-stats-path-tree) | Metrics tracking PathTree server and client behavior |
-| [`performance-monitoring`](#show-stats-performance-monitoring) | Stats pertaining to 128T peer path performance monitoring |
-| [`process`](#show-stats-process) | Metrics about 128T processes |
+| [`performance-monitoring`](#show-stats-performance-monitoring) | Stats pertaining to SSR peer path performance monitoring |
+| [`process`](#show-stats-process) | Metrics about SSR processes |
 | [`queue`](#show-stats-queue) | Metrics tracking the TANK queue production and consumption |
 | [`redis-server-manager`](#show-stats-redis-server-manager) | Stats pertaining to the Redis Server Manager |
 | [`redundancy`](#show-stats-redundancy) | Stats pertaining to the highway manager redundancy |
@@ -31048,13 +31048,13 @@ show stats app-id application-director cache [since <since>] [force] [router <ro
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 ## `show stats app-id application-director cache hit`
 
@@ -31085,13 +31085,13 @@ show stats app-id application-director cache hit [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 #### Description
 
@@ -31126,13 +31126,13 @@ show stats app-id application-director cache miss [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 #### Description
 
@@ -31167,13 +31167,13 @@ show stats app-id application-director cache size [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 #### Description
 
@@ -31364,7 +31364,7 @@ show stats app-id applications [since <since>] [force] [router <router>] [node <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications acknowledgement-round-trip`
 
@@ -31408,7 +31408,7 @@ show stats app-id applications acknowledgement-round-trip [netintf <netintf>] [p
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications acknowledgement-round-trip forward`
 
@@ -31454,7 +31454,7 @@ show stats app-id applications acknowledgement-round-trip forward [netintf <neti
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications acknowledgement-round-trip forward count`
 
@@ -31491,7 +31491,7 @@ show stats app-id applications acknowledgement-round-trip forward count [netintf
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31532,7 +31532,7 @@ show stats app-id applications acknowledgement-round-trip forward max [netintf <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31573,7 +31573,7 @@ show stats app-id applications acknowledgement-round-trip forward min [netintf <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31614,7 +31614,7 @@ show stats app-id applications acknowledgement-round-trip forward total [netintf
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31664,7 +31664,7 @@ show stats app-id applications acknowledgement-round-trip reverse [netintf <neti
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications acknowledgement-round-trip reverse count`
 
@@ -31701,7 +31701,7 @@ show stats app-id applications acknowledgement-round-trip reverse count [netintf
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31742,7 +31742,7 @@ show stats app-id applications acknowledgement-round-trip reverse max [netintf <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31783,7 +31783,7 @@ show stats app-id applications acknowledgement-round-trip reverse min [netintf <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31824,7 +31824,7 @@ show stats app-id applications acknowledgement-round-trip reverse total [netintf
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31864,7 +31864,7 @@ show stats app-id applications bytes-received-reverse [netintf <netintf>] [appli
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31904,7 +31904,7 @@ show stats app-id applications bytes-transmitted-forward [netintf <netintf>] [ap
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -31946,7 +31946,7 @@ show stats app-id applications capacity-limits [since <since>] [force] [router <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications capacity-limits quad-zero-client-used`
 
@@ -31977,7 +31977,7 @@ show stats app-id applications capacity-limits quad-zero-client-used [since <sin
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32012,7 +32012,7 @@ show stats app-id applications capacity-limits untracked [since <since>] [force]
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32057,7 +32057,7 @@ show stats app-id applications classify-source [application-name <application-na
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications classify-source domain-name`
 
@@ -32089,7 +32089,7 @@ show stats app-id applications classify-source domain-name [application-name <ap
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32125,7 +32125,7 @@ show stats app-id applications classify-source ip-address [application-name <app
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32161,7 +32161,7 @@ show stats app-id applications classify-source transport [application-name <appl
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32197,7 +32197,7 @@ show stats app-id applications classify-source url [application-name <applicatio
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32240,7 +32240,7 @@ show stats app-id applications expiration [since <since>] [force] [router <route
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications expiration next-hop`
 
@@ -32286,7 +32286,7 @@ show stats app-id applications expiration next-hop [netintf <netintf>] [applicat
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications expiration next-hop creation-timestamp`
 
@@ -32322,7 +32322,7 @@ show stats app-id applications expiration next-hop creation-timestamp [netintf <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32362,7 +32362,7 @@ show stats app-id applications expiration next-hop timer-cleared [netintf <netin
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32402,7 +32402,7 @@ show stats app-id applications expiration next-hop timer-cleared-timestamp [neti
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32442,7 +32442,7 @@ show stats app-id applications expiration next-hop timer-set [netintf <netintf>]
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32482,7 +32482,7 @@ show stats app-id applications expiration next-hop timer-set-timestamp [netintf 
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32517,7 +32517,7 @@ show stats app-id applications expiration timer-cleared [since <since>] [force] 
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32552,7 +32552,7 @@ show stats app-id applications expiration timer-set [since <since>] [force] [rou
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32587,7 +32587,7 @@ show stats app-id applications next-hops-added [since <since>] [force] [router <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications next-hops-removed`
 
@@ -32618,7 +32618,7 @@ show stats app-id applications next-hops-removed [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications packets-received-reverse`
 
@@ -32654,7 +32654,7 @@ show stats app-id applications packets-received-reverse [netintf <netintf>] [app
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32694,7 +32694,7 @@ show stats app-id applications packets-transmitted-forward [netintf <netintf>] [
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32730,7 +32730,7 @@ show stats app-id applications reclassified-from [application-name <application-
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32766,7 +32766,7 @@ show stats app-id applications reclassified-to [application-name <application-na
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32814,7 +32814,7 @@ show stats app-id applications sessions [netintf <netintf>] [application <applic
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications sessions active`
 
@@ -32850,7 +32850,7 @@ show stats app-id applications sessions active [netintf <netintf>] [application 
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32891,7 +32891,7 @@ show stats app-id applications sessions close-before-establishment [netintf <net
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32929,7 +32929,7 @@ show stats app-id applications sessions failed [netintf <netintf>] [application 
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32979,7 +32979,7 @@ show stats app-id applications sessions length [netintf <netintf>] [protocol <pr
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications sessions length count`
 
@@ -33016,7 +33016,7 @@ show stats app-id applications sessions length count [netintf <netintf>] [protoc
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33057,7 +33057,7 @@ show stats app-id applications sessions length max [netintf <netintf>] [protocol
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33098,7 +33098,7 @@ show stats app-id applications sessions length min [netintf <netintf>] [protocol
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33139,7 +33139,7 @@ show stats app-id applications sessions length total [netintf <netintf>] [protoc
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33179,7 +33179,7 @@ show stats app-id applications sessions success [netintf <netintf>] [application
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33219,7 +33219,7 @@ show stats app-id applications tcp-bad-flag-combinations-forward [netintf <netin
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33259,7 +33259,7 @@ show stats app-id applications tcp-bad-flag-combinations-reverse [netintf <netin
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33299,7 +33299,7 @@ show stats app-id applications tcp-duplicate-acks-forward [netintf <netintf>] [a
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33339,7 +33339,7 @@ show stats app-id applications tcp-duplicate-acks-reverse [netintf <netintf>] [a
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33379,7 +33379,7 @@ show stats app-id applications tcp-invalid-state-transitions-forward [netintf <n
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33419,7 +33419,7 @@ show stats app-id applications tcp-invalid-state-transitions-reverse [netintf <n
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33459,7 +33459,7 @@ show stats app-id applications tcp-out-of-window-forward [netintf <netintf>] [ap
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33499,7 +33499,7 @@ show stats app-id applications tcp-out-of-window-reverse [netintf <netintf>] [ap
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33539,7 +33539,7 @@ show stats app-id applications tcp-resets-received-forward [netintf <netintf>] [
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33579,7 +33579,7 @@ show stats app-id applications tcp-resets-received-reverse [netintf <netintf>] [
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33619,7 +33619,7 @@ show stats app-id applications tcp-resets-transmitted-forward [netintf <netintf>
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33659,7 +33659,7 @@ show stats app-id applications tcp-resets-transmitted-reverse [netintf <netintf>
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33699,7 +33699,7 @@ show stats app-id applications tcp-retransmission-packets-received-forward [neti
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33739,7 +33739,7 @@ show stats app-id applications tcp-retransmission-packets-received-reverse [neti
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33779,7 +33779,7 @@ show stats app-id applications tcp-retransmission-packets-transmitted-forward [n
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33819,7 +33819,7 @@ show stats app-id applications tcp-retransmission-packets-transmitted-reverse [n
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33869,7 +33869,7 @@ show stats app-id applications time-to-first-data-packet [netintf <netintf>] [pr
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications time-to-first-data-packet count`
 
@@ -33906,7 +33906,7 @@ show stats app-id applications time-to-first-data-packet count [netintf <netintf
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33947,7 +33947,7 @@ show stats app-id applications time-to-first-data-packet max [netintf <netintf>]
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -33988,7 +33988,7 @@ show stats app-id applications time-to-first-data-packet min [netintf <netintf>]
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -34029,7 +34029,7 @@ show stats app-id applications time-to-first-data-packet total [netintf <netintf
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -34064,7 +34064,7 @@ show stats app-id applications tracked-next-hops [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id domain-database`
 
@@ -37277,17 +37277,17 @@ show stats bfd by-peer-path [peer-name <peer-name>] [peer-host <peer-host>] [dev
 | command | description |
 | ------- | ----------- |
 | [`async`](#show-stats-bfd-by-peer-path-async) | Stats pertaining to BFD async mode per peer path |
-| [`average-latency`](#show-stats-bfd-by-peer-path-average-latency) | Rolling average latency in milliseconds for the 128T peer path. |
+| [`average-latency`](#show-stats-bfd-by-peer-path-average-latency) | Rolling average latency in milliseconds for the SSR peer path. |
 | [`dynamic-damping`](#show-stats-bfd-by-peer-path-dynamic-damping) | Stats pertaining to Dynamic BFD Damping |
 | [`echo`](#show-stats-bfd-by-peer-path-echo) | Stats pertaining to BFD echo mode per peer path |
-| [`jitter`](#show-stats-bfd-by-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. |
-| [`latency`](#show-stats-bfd-by-peer-path-latency) | Latency in milliseconds for the 128T peer path. |
+| [`jitter`](#show-stats-bfd-by-peer-path-jitter) | Jitter in milliseconds for the SSR peer path. |
+| [`latency`](#show-stats-bfd-by-peer-path-latency) | Latency in milliseconds for the SSR peer path. |
 | [`link-down`](#show-stats-bfd-by-peer-path-link-down) | Stats tracking BFD link down event per peer path |
 | [`link-up`](#show-stats-bfd-by-peer-path-link-up) | The number of link-ups on the peer path. (in-memory) |
 | [`local-source-nat-change`](#show-stats-bfd-by-peer-path-local-source-nat-change) | The number of local source nat changes on the peer path. (in-memory) |
 | [`local-source-nat-reset`](#show-stats-bfd-by-peer-path-local-source-nat-reset) | The number of local source nat resets on the peer path. (in-memory) |
-| [`loss`](#show-stats-bfd-by-peer-path-loss) | Packet loss percentange for the 128T peer path. |
-| [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) |
+| [`loss`](#show-stats-bfd-by-peer-path-loss) | Packet loss percentange for the SSR peer path. |
+| [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the SSR peer path. (hundreths of a decimal) |
 | [`neighbor`](#show-stats-bfd-by-peer-path-neighbor) | Stats pertaining to BFD Neighbor |
 
 ##### See Also
@@ -37629,7 +37629,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats bfd by-peer-path average-latency`
 
-Rolling average latency in milliseconds for the 128T peer path.
+Rolling average latency in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -38035,7 +38035,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats bfd by-peer-path jitter`
 
-Jitter in milliseconds for the 128T peer path.
+Jitter in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -38071,7 +38071,7 @@ show stats bfd by-peer-path jitter [peer-name <peer-name>] [peer-host <peer-host
 
 ## `show stats bfd by-peer-path latency`
 
-Latency in milliseconds for the 128T peer path.
+Latency in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -38432,7 +38432,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats bfd by-peer-path loss`
 
-Packet loss percentange for the 128T peer path.
+Packet loss percentange for the SSR peer path.
 
 #### Usage
 
@@ -38468,7 +38468,7 @@ show stats bfd by-peer-path loss [peer-name <peer-name>] [peer-host <peer-host>]
 
 ## `show stats bfd by-peer-path mos`
 
-MOS value calculated for the 128T peer path. (hundreths of a decimal)
+MOS value calculated for the SSR peer path. (hundreths of a decimal)
 
 #### Usage
 
@@ -39748,18 +39748,18 @@ show stats config [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config cache`
 
@@ -39797,18 +39797,18 @@ show stats config cache [since <since>] [force] [router <router>] [node <node>] 
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config cache hits`
 
@@ -39839,18 +39839,18 @@ show stats config cache hits [since <since>] [force] [router <router>] [node <no
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config cache misses`
 
@@ -39881,18 +39881,18 @@ show stats config cache misses [since <since>] [force] [router <router>] [node <
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-pipeline`
 
@@ -39932,18 +39932,18 @@ show stats config config-pipeline [since <since>] [force] [router <router>] [nod
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-pipeline commit-time`
 
@@ -39974,18 +39974,18 @@ show stats config config-pipeline commit-time [since <since>] [force] [router <r
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-pipeline generation-time`
 
@@ -40016,18 +40016,18 @@ show stats config config-pipeline generation-time [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-pipeline sync-time`
 
@@ -40058,18 +40058,18 @@ show stats config config-pipeline sync-time [since <since>] [force] [router <rou
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-pipeline validation-time`
 
@@ -40100,18 +40100,18 @@ show stats config config-pipeline validation-time [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store`
 
@@ -40161,18 +40161,18 @@ show stats config config-store [datastore <datastore>] [datastore-type <datastor
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store clone-duration`
 
@@ -40205,18 +40205,18 @@ show stats config config-store clone-duration [datastore <datastore>] [datastore
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store edit-duration`
 
@@ -40249,18 +40249,18 @@ show stats config config-store edit-duration [datastore <datastore>] [datastore-
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store force-duration`
 
@@ -40293,18 +40293,18 @@ show stats config config-store force-duration [datastore <datastore>] [datastore
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store get-duration`
 
@@ -40337,18 +40337,18 @@ show stats config config-store get-duration [datastore <datastore>] [datastore-t
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store get-json-duration`
 
@@ -40381,18 +40381,18 @@ show stats config config-store get-json-duration [datastore <datastore>] [datast
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store load-duration`
 
@@ -40425,18 +40425,18 @@ show stats config config-store load-duration [datastore <datastore>] [datastore-
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store load-xml-duration`
 
@@ -40469,18 +40469,18 @@ show stats config config-store load-xml-duration [datastore <datastore>] [datast
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store merge-duration`
 
@@ -40513,18 +40513,18 @@ show stats config config-store merge-duration [datastore <datastore>] [datastore
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store push-duration`
 
@@ -40557,18 +40557,18 @@ show stats config config-store push-duration [datastore <datastore>] [datastore-
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store rebase-duration`
 
@@ -40601,18 +40601,18 @@ show stats config config-store rebase-duration [datastore <datastore>] [datastor
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store shallow-clone-duration`
 
@@ -40645,18 +40645,18 @@ show stats config config-store shallow-clone-duration [datastore <datastore>] [d
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats config config-store to-xml-duration`
 
@@ -40689,18 +40689,18 @@ show stats config config-store to-xml-duration [datastore <datastore>] [datastor
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](README.md#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](README.md#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](README.md#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](README.md#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](README.md#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](README.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](README.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](README.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`set config local-override`](README.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
-| [`show config exports`](README.md#show-config-exports) | Display configuration exports. |
-| [`show config local-override`](README.md#show-config-local-override) | Display local config override status. |
-| [`show config version`](README.md#show-config-version) | Display running configuration version. |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](cli_reference.md#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](cli_reference.md#show-config-local-override) | Display local config override status. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
 
 ## `show stats conflux`
 
@@ -41719,7 +41719,7 @@ show stats cpu [core <core>] [since <since>] [force] [router <router>] [node <no
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -41753,7 +41753,7 @@ show stats cpu utilization [core <core>] [since <since>] [force] [router <router
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -41932,7 +41932,7 @@ show stats disk [since <since>] [force] [router <router>] [node <node>] [<verbos
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -41966,7 +41966,7 @@ show stats disk by-component [component <component>] [since <since>] [force] [ro
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -42000,7 +42000,7 @@ show stats disk capacity [disk <disk>] [since <since>] [force] [router <router>]
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -42034,7 +42034,7 @@ show stats disk used [disk <disk>] [since <since>] [force] [router <router>] [no
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -42500,8 +42500,8 @@ show stats dynamic-peer-update [since <since>] [force] [router <router>] [node <
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection`
 
@@ -42540,8 +42540,8 @@ show stats dynamic-peer-update connection [since <since>] [force] [router <route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection first-conductor-connect`
 
@@ -42572,8 +42572,8 @@ show stats dynamic-peer-update connection first-conductor-connect [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection first-server-connect`
 
@@ -42604,8 +42604,8 @@ show stats dynamic-peer-update connection first-server-connect [since <since>] [
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection last-conductor-disconnect`
 
@@ -42636,8 +42636,8 @@ show stats dynamic-peer-update connection last-conductor-disconnect [since <sinc
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update leadership`
 
@@ -42675,8 +42675,8 @@ show stats dynamic-peer-update leadership [since <since>] [force] [router <route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update leadership lost`
 
@@ -42707,8 +42707,8 @@ show stats dynamic-peer-update leadership lost [since <since>] [force] [router <
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update leadership won`
 
@@ -42739,8 +42739,8 @@ show stats dynamic-peer-update leadership won [since <since>] [force] [router <r
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests`
 
@@ -42778,8 +42778,8 @@ show stats dynamic-peer-update requests [since <since>] [force] [router <router>
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received`
 
@@ -42818,8 +42818,8 @@ show stats dynamic-peer-update requests received [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received push`
 
@@ -42850,8 +42850,8 @@ show stats dynamic-peer-update requests received push [since <since>] [force] [r
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received sync`
 
@@ -42882,8 +42882,8 @@ show stats dynamic-peer-update requests received sync [since <since>] [force] [r
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received sync-peer-addresses`
 
@@ -42914,8 +42914,8 @@ show stats dynamic-peer-update requests received sync-peer-addresses [since <sin
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests sent`
 
@@ -42953,8 +42953,8 @@ show stats dynamic-peer-update requests sent [since <since>] [force] [router <ro
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests sent push`
 
@@ -42985,8 +42985,8 @@ show stats dynamic-peer-update requests sent push [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests sent sync`
 
@@ -43017,8 +43017,8 @@ show stats dynamic-peer-update requests sent sync [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses`
 
@@ -43055,8 +43055,8 @@ show stats dynamic-peer-update responses [since <since>] [force] [router <router
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received`
 
@@ -43096,8 +43096,8 @@ show stats dynamic-peer-update responses received [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received not-found`
 
@@ -43128,8 +43128,8 @@ show stats dynamic-peer-update responses received not-found [since <since>] [for
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received other-failure`
 
@@ -43160,8 +43160,8 @@ show stats dynamic-peer-update responses received other-failure [since <since>] 
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received success`
 
@@ -43192,8 +43192,8 @@ show stats dynamic-peer-update responses received success [since <since>] [force
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received time-out`
 
@@ -43224,8 +43224,8 @@ show stats dynamic-peer-update responses received time-out [since <since>] [forc
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](README.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](README.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats external-protocols`
 
@@ -47216,18 +47216,18 @@ show stats idp [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp attacks`
 
@@ -47267,18 +47267,18 @@ show stats idp attacks [since <since>] [force] [router <router>] [node <node>] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp attacks missed`
 
@@ -47309,18 +47309,18 @@ show stats idp attacks missed [since <since>] [force] [router <router>] [node <n
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47355,18 +47355,18 @@ show stats idp attacks mist-sent [since <since>] [force] [router <router>] [node
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47401,18 +47401,18 @@ show stats idp attacks received [since <since>] [force] [router <router>] [node 
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47447,18 +47447,18 @@ show stats idp attacks total [since <since>] [force] [router <router>] [node <no
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47501,18 +47501,18 @@ show stats idp bytes [netintf <netintf>] [since <since>] [force] [router <router
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp bytes received`
 
@@ -47544,18 +47544,18 @@ show stats idp bytes received [netintf <netintf>] [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp bytes transmitted`
 
@@ -47587,18 +47587,18 @@ show stats idp bytes transmitted [netintf <netintf>] [since <since>] [force] [ro
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets`
 
@@ -47639,18 +47639,18 @@ show stats idp packets [since <since>] [force] [router <router>] [node <node>] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets dropped`
 
@@ -47681,18 +47681,18 @@ show stats idp packets dropped [since <since>] [force] [router <router>] [node <
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47727,18 +47727,18 @@ show stats idp packets processed [since <since>] [force] [router <router>] [node
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47782,18 +47782,18 @@ show stats idp packets protocol [since <since>] [force] [router <router>] [node 
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets protocol icmp`
 
@@ -47824,18 +47824,18 @@ show stats idp packets protocol icmp [since <since>] [force] [router <router>] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47870,18 +47870,18 @@ show stats idp packets protocol other [since <since>] [force] [router <router>] 
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47916,18 +47916,18 @@ show stats idp packets protocol tcp [since <since>] [force] [router <router>] [n
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -47962,18 +47962,18 @@ show stats idp packets protocol udp [since <since>] [force] [router <router>] [n
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
 
@@ -48009,18 +48009,18 @@ show stats idp packets received [netintf <netintf>] [since <since>] [force] [rou
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets transmitted`
 
@@ -48052,18 +48052,18 @@ show stats idp packets transmitted [netintf <netintf>] [since <since>] [force] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](README.md#request-idp-restart) | Restart IDP Command |
-| [`request idp signature-query`](README.md#request-idp-signature-query) | Request IDP signature database connectivity. |
-| [`show idp application details`](README.md#show-idp-application-details) | Show IDP engine details. |
-| [`show idp application status`](README.md#show-idp-application-status) | Show IDP application status. |
-| [`show idp details`](README.md#show-idp-details) | Show IDP details. |
-| [`show idp events`](README.md#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](README.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](README.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](README.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](README.md#show-idp-network) | Show IDP networks |
-| [`show idp platform`](README.md#show-idp-platform) | Show IDP platform data. |
-| [`show idp signatures`](README.md#show-idp-signatures) | Show IDP signature package details. |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats interface`
 
@@ -49354,7 +49354,7 @@ show stats memory [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 
@@ -49387,7 +49387,7 @@ show stats memory capacity [since <since>] [force] [router <router>] [node <node
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 
@@ -49420,7 +49420,7 @@ show stats memory used [since <since>] [force] [router <router>] [node <node>] [
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](README.md#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 
@@ -50428,9 +50428,9 @@ show stats packet-capture [core <core>] [port <port>] [since <since>] [force] [r
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](README.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](README.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](README.md#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 ## `show stats packet-capture cloud-send-failure`
 
@@ -50463,9 +50463,9 @@ show stats packet-capture cloud-send-failure [core <core>] [port <port>] [since 
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](README.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](README.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](README.md#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 #### Description
 
@@ -50502,9 +50502,9 @@ show stats packet-capture cloud-send-success [core <core>] [port <port>] [since 
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](README.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](README.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](README.md#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 #### Description
 
@@ -50541,9 +50541,9 @@ show stats packet-capture success [core <core>] [port <port>] [since <since>] [f
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](README.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](README.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](README.md#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 ## `show stats packet-capture write-failure`
 
@@ -50576,9 +50576,9 @@ show stats packet-capture write-failure [core <core>] [port <port>] [since <sinc
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](README.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](README.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](README.md#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 ## `show stats packet-processing`
 
@@ -68413,7 +68413,7 @@ show stats path-tree server transactions update processed [process <process>] [s
 
 ## `show stats performance-monitoring`
 
-Stats pertaining to 128T peer path performance monitoring
+Stats pertaining to SSR peer path performance monitoring
 
 #### Usage
 
@@ -68483,17 +68483,17 @@ show stats performance-monitoring peer-path [peer-name <peer-name>] [peer-host <
 
 | command | description |
 | ------- | ----------- |
-| [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. (in-memory) |
-| [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the 128T peer path. (in-memory) |
-| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the 128T peer path. (in-memory) |
-| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) (in-memory) |
+| [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the SSR peer path. (in-memory) |
+| [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the SSR peer path. (in-memory) |
+| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the SSR peer path. (in-memory) |
+| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the SSR peer path. (hundreths of a decimal) (in-memory) |
 | [`received`](#show-stats-performance-monitoring-peer-path-received) | Statistics for &#x27;received&#x27; |
 | [`transmit`](#show-stats-performance-monitoring-peer-path-transmit) | Statistics for &#x27;transmit&#x27; |
 | [`updated`](#show-stats-performance-monitoring-peer-path-updated) | The unix timestamp (seconds) when the peer path&#x27;s values were last updated. (in-memory) |
 
 ## `show stats performance-monitoring peer-path jitter`
 
-Jitter in milliseconds for the 128T peer path. (in-memory)
+Jitter in milliseconds for the SSR peer path. (in-memory)
 
 #### Usage
 
@@ -68528,7 +68528,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats performance-monitoring peer-path latency`
 
-Latency in milliseconds for the 128T peer path. (in-memory)
+Latency in milliseconds for the SSR peer path. (in-memory)
 
 #### Usage
 
@@ -68563,7 +68563,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats performance-monitoring peer-path loss`
 
-Aggregate packet loss percentange for the 128T peer path. (in-memory)
+Aggregate packet loss percentange for the SSR peer path. (in-memory)
 
 #### Usage
 
@@ -68598,7 +68598,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats performance-monitoring peer-path mos`
 
-MOS value calculated for the 128T peer path. (hundreths of a decimal) (in-memory)
+MOS value calculated for the SSR peer path. (hundreths of a decimal) (in-memory)
 
 #### Usage
 
@@ -68666,13 +68666,13 @@ show stats performance-monitoring peer-path received [peer-name <peer-name>] [pe
 
 | command | description |
 | ------- | ----------- |
-| [`loss`](#show-stats-performance-monitoring-peer-path-received-loss) | Packet loss percentange for receiving from the 128T peer path. (in-memory) |
+| [`loss`](#show-stats-performance-monitoring-peer-path-received-loss) | Packet loss percentange for receiving from the SSR peer path. (in-memory) |
 | [`marked-packets`](#show-stats-performance-monitoring-peer-path-received-marked-packets) | The number of packets marked by the peer during a given interval. (in-memory) |
 | [`marked-packets-acknowledged`](#show-stats-performance-monitoring-peer-path-received-marked-packets-acknowledged) | The number of marked packets acknowledged by the node during a given interval. (in-memory) |
 
 ## `show stats performance-monitoring peer-path received loss`
 
-Packet loss percentange for receiving from the 128T peer path. (in-memory)
+Packet loss percentange for receiving from the SSR peer path. (in-memory)
 
 #### Usage
 
@@ -68810,13 +68810,13 @@ show stats performance-monitoring peer-path transmit [peer-name <peer-name>] [pe
 
 | command | description |
 | ------- | ----------- |
-| [`loss`](#show-stats-performance-monitoring-peer-path-transmit-loss) | Packet loss percentange for transmitting to the 128T peer path. (in-memory) |
+| [`loss`](#show-stats-performance-monitoring-peer-path-transmit-loss) | Packet loss percentange for transmitting to the SSR peer path. (in-memory) |
 | [`marked-packets`](#show-stats-performance-monitoring-peer-path-transmit-marked-packets) | The number of packets marked by the node during a given interval. (in-memory) |
 | [`marked-packets-acknowledged`](#show-stats-performance-monitoring-peer-path-transmit-marked-packets-acknowledged) | The number of marked packets acknowledged by the peer during a given interval. (in-memory) |
 
 ## `show stats performance-monitoring peer-path transmit loss`
 
-Packet loss percentange for transmitting to the 128T peer path. (in-memory)
+Packet loss percentange for transmitting to the SSR peer path. (in-memory)
 
 #### Usage
 
@@ -68956,7 +68956,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats process`
 
-Metrics about 128T processes
+Metrics about SSR processes
 
 #### Usage
 
@@ -68984,19 +68984,19 @@ show stats process [process-name <process-name>] [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`cpu`](#show-stats-process-cpu) | Metrics about CPU usage of 128T processes |
-| [`memory`](#show-stats-process-memory) | Metrics about memory usage of 128T processes |
-| [`thread`](#show-stats-process-thread) | Metrics about threads in 128T processes |
+| [`cpu`](#show-stats-process-cpu) | Metrics about CPU usage of SSR processes |
+| [`memory`](#show-stats-process-memory) | Metrics about memory usage of SSR processes |
+| [`thread`](#show-stats-process-thread) | Metrics about threads in SSR processes |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process cpu`
 
-Metrics about CPU usage of 128T processes
+Metrics about CPU usage of SSR processes
 
 #### Usage
 
@@ -69030,7 +69030,7 @@ show stats process cpu [process-name <process-name>] [since <since>] [force] [ro
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process cpu usage`
 
@@ -69062,11 +69062,11 @@ show stats process cpu usage [process-name <process-name>] [since <since>] [forc
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory`
 
-Metrics about memory usage of 128T processes
+Metrics about memory usage of SSR processes
 
 #### Usage
 
@@ -69104,7 +69104,7 @@ show stats process memory [process-name <process-name>] [since <since>] [force] 
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory allocated`
 
@@ -69136,7 +69136,7 @@ show stats process memory allocated [process-name <process-name>] [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory heap-size`
 
@@ -69168,7 +69168,7 @@ show stats process memory heap-size [process-name <process-name>] [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory rss`
 
@@ -69200,7 +69200,7 @@ show stats process memory rss [process-name <process-name>] [since <since>] [for
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc`
 
@@ -69241,7 +69241,7 @@ show stats process memory tc-malloc [process-name <process-name>] [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc current-total-thread-cache`
 
@@ -69273,7 +69273,7 @@ show stats process memory tc-malloc current-total-thread-cache [process-name <pr
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc max-total-thread-cache`
 
@@ -69305,7 +69305,7 @@ show stats process memory tc-malloc max-total-thread-cache [process-name <proces
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc page-heap-free`
 
@@ -69337,7 +69337,7 @@ show stats process memory tc-malloc page-heap-free [process-name <process-name>]
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc page-heap-unmapped`
 
@@ -69369,7 +69369,7 @@ show stats process memory tc-malloc page-heap-unmapped [process-name <process-na
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory vsz`
 
@@ -69401,11 +69401,11 @@ show stats process memory vsz [process-name <process-name>] [since <since>] [for
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread`
 
-Metrics about threads in 128T processes
+Metrics about threads in SSR processes
 
 #### Usage
 
@@ -69434,19 +69434,19 @@ show stats process thread [process-name <process-name>] [thread-name <thread-nam
 
 | command | description |
 | ------- | ----------- |
-| [`cpu`](#show-stats-process-thread-cpu) | Metrics about CPU usage of threads in 128T processes |
-| [`queue`](#show-stats-process-thread-queue) | Metrics about queues in threads in 128T processes |
-| [`task`](#show-stats-process-thread-task) | Metrics about tasks in threads in 128T processes |
+| [`cpu`](#show-stats-process-thread-cpu) | Metrics about CPU usage of threads in SSR processes |
+| [`queue`](#show-stats-process-thread-queue) | Metrics about queues in threads in SSR processes |
+| [`task`](#show-stats-process-thread-task) | Metrics about tasks in threads in SSR processes |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu`
 
-Metrics about CPU usage of threads in 128T processes
+Metrics about CPU usage of threads in SSR processes
 
 #### Usage
 
@@ -69484,7 +69484,7 @@ show stats process thread cpu [process-name <process-name>] [thread-name <thread
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu iowait`
 
@@ -69517,7 +69517,7 @@ show stats process thread cpu iowait [process-name <process-name>] [thread-name 
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu system-usage`
 
@@ -69550,7 +69550,7 @@ show stats process thread cpu system-usage [process-name <process-name>] [thread
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu usage`
 
@@ -69583,7 +69583,7 @@ show stats process thread cpu usage [process-name <process-name>] [thread-name <
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu user-usage`
 
@@ -69616,11 +69616,11 @@ show stats process thread cpu user-usage [process-name <process-name>] [thread-n
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread queue`
 
-Metrics about queues in threads in 128T processes
+Metrics about queues in threads in SSR processes
 
 #### Usage
 
@@ -69657,7 +69657,7 @@ show stats process thread queue [process-name <process-name>] [thread-name <thre
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread queue delay`
 
@@ -69691,7 +69691,7 @@ show stats process thread queue delay [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread queue depth`
 
@@ -69724,7 +69724,7 @@ show stats process thread queue depth [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread queue total`
 
@@ -69757,7 +69757,7 @@ show stats process thread queue total [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -69765,7 +69765,7 @@ For more information regarding in-memory metrics, please refer to this retention
 
 ## `show stats process thread task`
 
-Metrics about tasks in threads in 128T processes
+Metrics about tasks in threads in SSR processes
 
 #### Usage
 
@@ -69803,7 +69803,7 @@ show stats process thread task [process-name <process-name>] [thread-name <threa
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread task errors`
 
@@ -69836,7 +69836,7 @@ show stats process thread task errors [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -69875,7 +69875,7 @@ show stats process thread task execution-time [process-name <process-name>] [thr
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -69912,7 +69912,7 @@ show stats process thread task timeouts [process-name <process-name>] [thread-na
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -69950,7 +69950,7 @@ show stats process thread task total [process-name <process-name>] [thread-name 
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -72242,7 +72242,7 @@ show stats registered-services [since <since>] [force] [router <router>] [node <
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats registered-services local`
 
@@ -72274,7 +72274,7 @@ show stats registered-services local [since <since>] [force] [router <router>] [
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats registered-services remote`
 
@@ -72306,7 +72306,7 @@ show stats registered-services remote [since <since>] [force] [router <router>] 
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats registered-services total`
 
@@ -72338,7 +72338,7 @@ show stats registered-services total [since <since>] [force] [router <router>] [
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats routing`
 
@@ -79209,7 +79209,7 @@ show stats ssc [since <since>] [force] [router <router>] [node <node>] [<verbosi
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc clients`
 
@@ -79248,7 +79248,7 @@ show stats ssc clients [since <since>] [force] [router <router>] [node <node>] [
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc clients connects`
 
@@ -79280,7 +79280,7 @@ show stats ssc clients connects [since <since>] [force] [router <router>] [node 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc clients disconnects`
 
@@ -79312,7 +79312,7 @@ show stats ssc clients disconnects [since <since>] [force] [router <router>] [no
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc operations`
 
@@ -79351,7 +79351,7 @@ show stats ssc operations [since <since>] [force] [router <router>] [node <node>
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc operations compressions`
 
@@ -79383,7 +79383,7 @@ show stats ssc operations compressions [since <since>] [force] [router <router>]
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc operations decompressions`
 
@@ -79415,7 +79415,7 @@ show stats ssc operations decompressions [since <since>] [force] [router <router
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received`
 
@@ -79454,7 +79454,7 @@ show stats ssc received [since <since>] [force] [router <router>] [node <node>] 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service`
 
@@ -79498,7 +79498,7 @@ show stats ssc received by-service [service <service>] [since <since>] [force] [
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service deregistrations`
 
@@ -79531,7 +79531,7 @@ show stats ssc received by-service deregistrations [service <service>] [since <s
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service publishes`
 
@@ -79564,7 +79564,7 @@ show stats ssc received by-service publishes [service <service>] [since <since>]
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service registration-updates`
 
@@ -79597,7 +79597,7 @@ show stats ssc received by-service registration-updates [service <service>] [sin
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service registrations`
 
@@ -79630,7 +79630,7 @@ show stats ssc received by-service registrations [service <service>] [since <sin
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service requests`
 
@@ -79663,7 +79663,7 @@ show stats ssc received by-service requests [service <service>] [since <since>] 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service responses`
 
@@ -79696,7 +79696,7 @@ show stats ssc received by-service responses [service <service>] [since <since>]
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors`
 
@@ -79742,7 +79742,7 @@ show stats ssc received errors [since <since>] [force] [router <router>] [node <
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors bad-request-responses`
 
@@ -79774,7 +79774,7 @@ show stats ssc received errors bad-request-responses [since <since>] [force] [ro
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors invalid-message`
 
@@ -79806,7 +79806,7 @@ show stats ssc received errors invalid-message [since <since>] [force] [router <
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors invalid-request`
 
@@ -79838,7 +79838,7 @@ show stats ssc received errors invalid-request [since <since>] [force] [router <
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors no-client-transaction`
 
@@ -79870,7 +79870,7 @@ show stats ssc received errors no-client-transaction [since <since>] [force] [ro
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors no-endpoints-found`
 
@@ -79902,7 +79902,7 @@ show stats ssc received errors no-endpoints-found [since <since>] [force] [route
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors response-not-ready`
 
@@ -79934,7 +79934,7 @@ show stats ssc received errors response-not-ready [since <since>] [force] [route
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors server-error-responses`
 
@@ -79966,7 +79966,7 @@ show stats ssc received errors server-error-responses [since <since>] [force] [r
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors unknown-message-type`
 
@@ -79998,7 +79998,7 @@ show stats ssc received errors unknown-message-type [since <since>] [force] [rou
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors unknown-ssc-request`
 
@@ -80030,7 +80030,7 @@ show stats ssc received errors unknown-ssc-request [since <since>] [force] [rout
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc sessions`
 
@@ -80068,7 +80068,7 @@ show stats ssc sessions [since <since>] [force] [router <router>] [node <node>] 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc sessions active`
 
@@ -80100,7 +80100,7 @@ show stats ssc sessions active [since <since>] [force] [router <router>] [node <
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions`
 
@@ -80140,7 +80140,7 @@ show stats ssc transactions [since <since>] [force] [router <router>] [node <nod
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions client-transactions`
 
@@ -80172,7 +80172,7 @@ show stats ssc transactions client-transactions [since <since>] [force] [router 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions errors`
 
@@ -80210,7 +80210,7 @@ show stats ssc transactions errors [since <since>] [force] [router <router>] [no
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions errors insertion-failures`
 
@@ -80242,7 +80242,7 @@ show stats ssc transactions errors insertion-failures [since <since>] [force] [r
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions server-transactions`
 
@@ -80274,7 +80274,7 @@ show stats ssc transactions server-transactions [since <since>] [force] [router 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted`
 
@@ -80317,7 +80317,7 @@ show stats ssc transmitted [since <since>] [force] [router <router>] [node <node
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted by-service`
 
@@ -80357,7 +80357,7 @@ show stats ssc transmitted by-service [service <service>] [since <since>] [force
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted by-service publishes`
 
@@ -80390,7 +80390,7 @@ show stats ssc transmitted by-service publishes [service <service>] [since <sinc
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted by-service requests`
 
@@ -80423,7 +80423,7 @@ show stats ssc transmitted by-service requests [service <service>] [since <since
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted completed-responses`
 
@@ -80455,7 +80455,7 @@ show stats ssc transmitted completed-responses [since <since>] [force] [router <
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted errors`
 
@@ -80493,7 +80493,7 @@ show stats ssc transmitted errors [since <since>] [force] [router <router>] [nod
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted errors write-failures`
 
@@ -80525,7 +80525,7 @@ show stats ssc transmitted errors write-failures [since <since>] [force] [router
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted local-responses`
 
@@ -80557,7 +80557,7 @@ show stats ssc transmitted local-responses [since <since>] [force] [router <rout
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted publish-on-registrations`
 
@@ -80589,7 +80589,7 @@ show stats ssc transmitted publish-on-registrations [since <since>] [force] [rou
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted retransmitted-responses`
 
@@ -80621,7 +80621,7 @@ show stats ssc transmitted retransmitted-responses [since <since>] [force] [rout
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](README.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats traceroute`
 
