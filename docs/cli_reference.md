@@ -1374,14 +1374,12 @@ delete system software [{router <router> | resource-group <resource-group>}] [fo
 
 | command | description |
 | ------- | ----------- |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2521,13 +2519,11 @@ request system software download [{router <router> | resource-group <resource-gr
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2565,13 +2561,11 @@ request system software health-check [{router <router> | resource-group <resourc
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2605,13 +2599,11 @@ request system software revert [{router <router> | resource-group <resource-grou
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2659,13 +2651,11 @@ request system software upgrade [{router <router> | resource-group <resource-gro
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -4356,13 +4346,11 @@ set system software boot-volume [force] [router <router>] [node <node>] <id>
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -5712,8 +5700,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for a specified section of the configuration |
+| `generated` | Show configuration data for a specified section of the generated configuration |
 
 ## `show config disk-cache`
 
@@ -5990,8 +5978,7 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for a specific section of the authority |
 
 ## `show config version`
 
@@ -10519,8 +10506,8 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 | command | description |
 | ------- | ----------- |
-| [`by-id`](#show-sessions-by-id) | Show information of a session for a given Id |
-| [`top`](#show-sessions-top) | &lt;bandwidth&gt; |
+| [`by-id`](#show-sessions-by-id) | Show information of a session for a given ID |
+| [`top`](#show-sessions-top-bandwidth) | Display the top sessions ordered by bandwidth |
 
 #### Description
 
@@ -11278,6 +11265,35 @@ Wed 2020-04-15 20:41:18 UTC
 Completed in 0.11 seconds
 ```
 
+## `show system software`
+
+Display information about system software status related to download, upgrade, current health, and other information. 
+
+#### Usage
+
+```
+show system software [available | download | health-check | revert | sources | upgrade]
+```
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+
 ## `show system software available`
 
 Display new versions of the SSR that can be installed.
@@ -11307,13 +11323,11 @@ show system software available [skip-version-check] [router <router>] [node <nod
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11347,14 +11361,12 @@ show system software download [{router <router> | resource-group <resource-group
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
@@ -11391,14 +11403,12 @@ show system software health-check [{router <router> | resource-group <resource-g
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
@@ -11429,14 +11439,12 @@ show system software revert [{router <router> | resource-group <resource-group>}
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
@@ -11473,14 +11481,12 @@ show system software sources [include-disabled] [router <router>] [node <node>] 
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11511,14 +11517,12 @@ show system software upgrade [{router <router> | resource-group <resource-group>
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11555,14 +11559,12 @@ show system version [{router <router> | resource-group <resource-group>}] [force
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
-| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
