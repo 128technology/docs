@@ -4,7 +4,7 @@ sidebar_label: '3.9'
 ---
 ## Release 3.9.0
 
-**Release Date:** July 18, 2024
+**Release Date:** July 19, 2024
 
 ### New Features
 - **WAN-2374 LAG Visibility Improvements**
