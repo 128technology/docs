@@ -198,6 +198,14 @@ Active categories and domains are displayed in the GUI on the Applications Seen 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
+### Invalid Application Alarms
+
+In cases where an invalid application is configured, or a domain is mistakenly configured as an application, the following alarm is generated. 
+
+
+
+If you encounter this alarm, review your application configurations. 
+
 ## Service Matching Order
 
 When matching a session to a service, the list below represents the priority order in which the service resolution is performed. 
