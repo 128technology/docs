@@ -11274,6 +11274,23 @@ Display information about system software status related to download, upgrade, c
 ```
 show system software [available | download | health-check | revert | sources | upgrade]
 ```
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The target node to show SSR versions to download. |
+| router | The target router to show SSR versions available for download (default: &lt;current router&gt;). |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [available](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [download](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [health-check](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [revert](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [sources](#show-system-software-sources) | Display information about software sources. |
+| [upgrade](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 
 ##### See Also
 
@@ -11308,8 +11325,8 @@ show system software available [skip-version-check] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| node | The node to show SSR versions to download for |
-| router | The router to show SSR versions to download for (default: &lt;current router&gt;) |
+| node | The target node to show SSR versions to download. |
+| router | The target router to show SSR versions available for download (default: &lt;current router&gt;). |
 | skip-version-check | Skip the version check to show available SSR software at a lower version than what is currently installed. |
 
 ##### Positional Arguments
@@ -11349,12 +11366,12 @@ show system software download [{router <router> | resource-group <resource-group
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node to show downloaded SSR versions for |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The target node to show downloaded SSR versions. |
 | resource-group | The name of the resource group |
-| router | The router to show downloaded SSR versions for (default: &lt;current router&gt;) |
+| router | The target router to show downloaded SSR versions (default: &lt;current router&gt;). |
 | skip-version-check | Skip the version check to allow showing downloaded SSR software at a lower version than what is currently installed. |
-| version | Display state about only a single version |
+| version | Display state about only a single version. |
 
 ##### See Also
 
@@ -11387,10 +11404,10 @@ show system software health-check [{router <router> | resource-group <resource-g
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node on which to show available health-checks |
-| resource-group | The name of the resource group |
-| router | The router on which to show available health-checks (default: &lt;current router&gt;) |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node on which to show available health-checks. |
+| resource-group | The name of the resource group. |
+| router | The router on which to show available health-checks (default: &lt;current router&gt;). |
 
 ##### Positional Arguments
 
@@ -11429,10 +11446,10 @@ show system software revert [{router <router> | resource-group <resource-group>}
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node to show an in-progress reversion for |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The target node to show an in-progress reversion. |
 | resource-group | The name of the resource group |
-| router | The router to show an in-progress reversion for (default: &lt;current router&gt;) |
+| router | The target router to show an in-progress reversion (default: &lt;current router&gt;). |
 
 ##### See Also
 
@@ -11465,9 +11482,9 @@ show system software sources [include-disabled] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| include-disabled | Include disabled sources in the output |
-| node | The node to show software sources for |
-| router | The router to show software sources for (default: &lt;current router&gt;) |
+| include-disabled | Include disabled sources in the output. |
+| node | The target node to show software sources. |
+| router | The target router to show software sources. (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -11507,10 +11524,10 @@ show system software upgrade [{router <router> | resource-group <resource-group>
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node to show an in-progress upgrade for |
-| resource-group | The name of the resource group |
-| router | The router to show an in-progress upgrade for (default: &lt;current router&gt;) |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The target node to show an in-progress upgrade. |
+| resource-group | The name of the resource group. |
+| router | The target router to show an in-progress upgrade (default: &lt;current router&gt;). |
 
 ##### See Also
 
@@ -11543,10 +11560,10 @@ show system version [{router <router> | resource-group <resource-group>}] [force
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node to show version information for |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node to show version information. |
 | resource-group | The name of the resource group |
-| router | The router to show version information for (default: &lt;current router&gt;) |
+| router | The router to show version information (default: &lt;current router&gt;). |
 
 ##### Positional Arguments
 
@@ -11609,7 +11626,7 @@ show tenant members [rows <rows>] [force] [node <node>] {router <router> | resou
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
 | node | The node from which to retrieve tenant members |
 | resource-group | The name of the resource group |
 | router | The router from which to retrieve tenant members |
