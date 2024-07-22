@@ -49,7 +49,16 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-56236 Routers not able to be onboarded after upgrading a Conductor:** Resolved an issue where the automated provisioner and the Quickstart processes overlapped, preventing the results files from being reviewed for errors, which stopped the onboarding process. 
 ------
+- **I95-56326 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
+------
+- **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
+------
 
+
+- **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
+------
+- **I95-56612 `fib-service-match any-match` missing some FIB entries:** Resolved an issue when a service-address was more specific than the last route update, a search for other less specific services was not performed. Now when the service address update is more specific, additional searches will continue. 
+------
 
 ------
 - **I95-56682  :** Reintroduced network `reinit` script to reinitialize namespace, KNI, and target-interface after a config change in the `network-interface`, or under abnormal conditions such as the `target-interface` being moved out from the namespace.
