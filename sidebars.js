@@ -323,7 +323,7 @@ module.exports = {
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
-      "bcp_salt_pillars",      
+      "bcp_salt_pillars",
       "bcp_service_and_service_policy_design",
       "bcp_service-policy_defaults",
       "bcp_tenants",
@@ -404,6 +404,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.9",
           "release_notes_wan_assurance_plugin_3.8",
           "release_notes_wan_assurance_plugin_3.7",
           "release_notes_wan_assurance_plugin_3.6",
