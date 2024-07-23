@@ -41,7 +41,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-49018 Peers are not coming up for PPPoE interface on a standalone setup:** Reintroduced network `reinit` script to reinitialize namespace, KNI, and target-interface after a config change in the `network-interface`, or under abnormal conditions such as the `target-interface` being moved out from the namespace.
 ------
-- **I95-49218 
+- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `rib-policy ipv4|ipv6 <protocol> policy <policy>` command from either the `routing default-instance` or inside `vrf` to provide addtional filtering for OSPF routes. For more information see [`routing default-instance rib-policy`](add_link_here).
 ------
 - **I95-49599 PPPd and PPPoE-connect prematurely killed by `reinit`:** This has been resolved by skipping network `reinit` when namespace, KNI, and target-interface remain unchanged. This avoids pppd being killed prematurely before PADO timeout (used to determine server not responding).
 ------
@@ -53,16 +53,39 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
 ------
-
-
+- **I95-56527 Failure of GUI to validate and commit PCLI executed change:** Resolved an issue where an escape character caused the generation of an invalide JSON document. 
+------
 - **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
 ------
 - **I95-56612 `fib-service-match any-match` missing some FIB entries:** Resolved an issue when a service-address was more specific than the last route update, a search for other less specific services was not performed. Now when the service address update is more specific, additional searches will continue. 
 ------
-
-------
 - **I95-56682  :** Reintroduced network `reinit` script to reinitialize namespace, KNI, and target-interface after a config change in the `network-interface`, or under abnormal conditions such as the `target-interface` being moved out from the namespace.
----
+------
+- **I95-56715 Address validation in migrate feature in conductor UI is not working correctly:** Resolved an isssue between the client and the server during the use of the GUI `migrate` operation, where the conductor address was not read correctly, and returning an irrelevant error message. 
+------
+- **I95-56726 `No Timeout Queue` message logged in cases where a config commit fails, or a conductor fails to load a config on startup:** Resolved an issue with `ThreadPoolWithExternalPoller` that resulted in a stack trace in the logs which starts with message `No TimeoutQueue:`.
+------
+- **I95-56727 Allow domain names that begin with numerically:** Warnings are no longer generated for domain-name elements of service configurations which have labels beginning with a number, for example `123.abc.com`.
+------
+- **I95-56822 Router stuck in a continuous upgrade/failure state:** Resolved an issue when DNS name servers were changed on the conductor, in certain cases the conductor software proxy would not correctly load these changes. In this scenario the proxied router software requests would use an out of date DNS configuration for the proxied requests. 
+------
+- **I95-56843 Error logs filled with irrelevant KNI network script info:** The log output has been reduced to provide related information.
+------
+- **I95-56843 lte / pppoe default-route check incorrectly reporting warnings:** Resolved an issue where warnings were incorrectly shown on the conductor for interfaces without `default-route` or `management-vector` configured.
+------
+- **I95-56850 Overlap warning on router not present on conductor:** Resolved a case where a service on a router is configured with `applies-to`, and the same service is configured on the conductor (overlap) but does not have `applies-to` configured, the validation process will generate a warning on the router but not the conductor. 
+------
+- **I95-57000 Hub crash while generating TSI log:** Resolved an issue where unmapped memory access during packet buffer location walk caused a hub crash. Protections against unmapped memory access have been added.
+------
+- **I95-57017 Application ID failed to block some domains:** Resolved an issue where DPI failed to identify the domain-name from SNI if the `client-hello` is split up into multiple TCP packet segments.
+------
+- **I95-57082 Unable to delete a capture-filter using an escape character (/):** This issue has been resolved. 
+------
+- **I95-57110 Crash seen during add and delete peers while sending traffic:** A race condition has been fixed that could cause a crash in the packet-processing highway process if a peer-path is removed from configuration.
+------
+- **I95-57114 Unable to upgrade AWS Conductor:** Resolved an issue where an incorrect package version was installed, triggering a downgrade and preventing the upgrade.
+------
+- **I95-57205 Repeated core dumps:** Resolved a race condition where a thread tries to call a function before the object is fully made. In this case the object was for DHCP, LTE, and PPPoE interfaces.
 
 
 ## Release 5.6.15-1
