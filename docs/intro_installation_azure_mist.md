@@ -20,6 +20,8 @@ There are different Plans available for the Juniper Session Smart Networking Pla
 
 * Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
+* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an Azure VM. A token or certificate is required to install the software. If a token or certificate is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)]
+
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
 ### Requesting Access to a Private Plan
@@ -103,7 +105,10 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 5. Click the "Launch" link of the Mist-managed template.
 
-Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
+![CloudFormation Template](/img/azure-byol-template.png)
+
+Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template). 
+
 * What name do you want to give it?
   * Provide the name in the "Instance Name" field (for example: `128TRouter`).
 * Where do you want to deploy it?
@@ -145,7 +150,7 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 6. Copy the URL of the template located in the field "URL" that best suits your needs.
 7. Create the parameters file. 
 8. Accept the terms of use and conditions of the image.
-9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template]](#launch-the-template).
+9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template](#launch-the-template).
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side. 
 
@@ -247,6 +252,8 @@ This section describes how to fill out and launch the template using either the 
 
 This section describes the parameters to fill out the template to deploy an SSR as well as how to launch it via the portal and programmatically.
 
+![ARM Template](/img/aws-byol-template.png)
+
 A description of the parameters of the template are listed in the following table:
 
 | Parameter               | Description |
@@ -271,7 +278,7 @@ A description of the parameters of the template are listed in the following tabl
 | Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH. |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 
-##### Azure Portal
+### Azure Portal
 
 1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 2. Click on the "Get it now" button.
@@ -297,7 +304,7 @@ The information listed in the Outputs tab is the following:
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
 :::
 
-#### Azure CLI or PowerShell
+### Azure CLI or PowerShell
 
 Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template:
 

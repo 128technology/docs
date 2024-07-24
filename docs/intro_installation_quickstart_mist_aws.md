@@ -12,7 +12,7 @@ This guide describes the process for deploying a Mist-managed instance through A
 
 Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
-#### Selecting the AMI
+### Selecting the AMI
 
 There are different AMIs (images) available for the Juniper Session Smart Networking Platform offering:
 
@@ -20,9 +20,7 @@ There are different AMIs (images) available for the Juniper Session Smart Networ
 
 * Hourly: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
 
-* Bring Your Own License (BYOL): A token or certificate is required to install the software. If a token or certificate is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
-
-* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an AWS VM. You must have a current license for the version of SSR software you wish to install. 
+* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an AWS VM. A token or certificate is required to install the software. If a token or certificate is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
 Once you have selected the AMI that better suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
@@ -85,7 +83,7 @@ The following image shows the infrastructure elements deployed:
 
 ![Router deployment](/img/platforms_aws_router_deployment.png)
 
-#### AWS Console
+### Using the AWS Console
 
 To deploy the Session Smart Networking software via the AWS Console:
 
@@ -95,9 +93,10 @@ To deploy the Session Smart Networking software via the AWS Console:
 4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
 5. Click on the "Continue to Launch" button.
 6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
-7. Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template).
 
 ![CloudFormation Template](/img/aws-byol-template.png)
+
+7. Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template).
 
 - What name do you want to give it?
   - Provide it in the "Stack name" field (for example: SSR_1_Router).
@@ -118,7 +117,7 @@ Once the deployment completes, information is provided in the Outputs tab:
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.  
 
-#### AWS CLI
+### Using the AWS CLI
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
@@ -204,6 +203,8 @@ This section describes how to fill out and launch the template using either the 
 ### Mist-Managed Session Smart Router
 
 This section describes the parameters to complete the template to deploy a Mist-managed SSR, as well as how to launch it using the portal, or programmatically.
+
+![CloudFormation Template](/img/aws-byol-template.png)
 
 A description of the parameters of the template are listed in the following table:
 
@@ -294,7 +295,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a template from a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-### Deploying a Router without Templates
+## Deploying a Router without Templates
 
 1. Launch a web browser and navigate to https://aws.amazon.com/
 2. Login to AWS with your account.
@@ -339,7 +340,7 @@ If a template from a Private or Hourly image was used, you can login to the appl
 25. Enter the IP address of the instance. 
 26. When prompted by the installer, press the **Enter** key to select Begin.
 
-### Configuring a Default Route to an Internet Gateway
+## Configuring a Default Route to an Internet Gateway
 
 If the EC2 instance deployed for the Session Smart software does not have access to the Internet, verify a default route to an Internet Gateway exists:
 
