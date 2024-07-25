@@ -5,8 +5,6 @@ sidebar_label: Installing Mist-Managed Router in Azure
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-## Introduction
-
 This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. The process consists of the following steps:
 
 1. [Selecting the Azure Plan](#selecting-the-azure-plan).
@@ -20,7 +18,7 @@ There are different Plans available for the Juniper Session Smart Networking Pla
 
 * Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
-* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an Azure VM. A token or certificate is required to install the software. If a token or certificate is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)]
+* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an Azure VM. A token is required to install the software. If a token is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)]
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 

@@ -3,8 +3,6 @@ title: Installing a Mist-Managed Router in AWS
 sidebar_label: Installing Mist-Managed Router in AWS
 ---
 
-## Introduction
-
 This guide describes the process for deploying a Mist-managed instance through AWS. SSR Version 6.x supports Mist-managed routers only when installed as an AWS image. The process consists of the following steps:
 
 1. [Selecting the AMI](#selecting-the-ami).
@@ -20,7 +18,7 @@ There are different AMIs (images) available for the Juniper Session Smart Networ
 
 * Hourly: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
 
-* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an AWS VM. A token or certificate is required to install the software. If a token or certificate is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
+* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an AWS VM. A token is required to install the software. If a token is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
