@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.6.16-8
+## Release 5.6.16-3
 
 **Release Date:** July 26, 2024
 
@@ -41,7 +41,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-49018 Peers are not coming up for PPPoE interface on a standalone setup:** Reintroduced network `reinit` script to reinitialize namespace, KNI, and target-interface after a config change in the `network-interface`, or under abnormal conditions such as the `target-interface` being moved out from the namespace.
 ------
-- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `rib-policy ipv4|ipv6 <protocol> policy <policy>` command from either the `routing default-instance` or inside `vrf` to provide addtional filtering for OSPF routes. For more information see [`routing default-instance rib-policy`](add_link_here).
+- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide addtional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_caommand_guide.md#configure-authority-router-routing-vrf-rib-policy).
 ------
 - **I95-49599 PPPd and PPPoE-connect prematurely killed by `reinit`:** This has been resolved by skipping network `reinit` when namespace, KNI, and target-interface remain unchanged. This avoids pppd being killed prematurely before PADO timeout (used to determine server not responding).
 ------

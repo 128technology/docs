@@ -7,7 +7,7 @@ import React from "react";
 export const releases = [
   {
     version: '5.6.16',
-    url:'release_notes_128t_5.6#release-5616-9',
+    url:'release_notes_128t_5.6#release-5616-3',
     releaseDate: 'July 26, 2024',
   },
   {
