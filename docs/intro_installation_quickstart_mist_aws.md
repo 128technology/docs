@@ -3,10 +3,10 @@ title: Installing a Mist-Managed Router in AWS
 sidebar_label: Installing Mist-Managed Router in AWS
 ---
 
-This guide describes the process for deploying a Mist-managed instance through AWS. SSR Version 6.x supports Mist-managed routers only when installed as an AWS image. The process consists of the following steps:
+This guide describes the process for deploying a Mist-managed instance through AWS. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The installation and deployment process consists of the following steps:
 
-1. [Selecting the AMI](#selecting-the-ami).
-2. Deploying a [Session Smart Router](#session-smart-router-deployment).
+* [Selecting the AMI](#selecting-the-ami).
+* Deploying the [Session Smart Router](#session-smart-router-deployment).
 
 Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
@@ -14,13 +14,11 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 There are different AMIs (images) available for the Juniper Session Smart Networking Platform offering:
 
-* Private: For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issued to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
+- **Private:** For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issued to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
 
-* Hourly: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
+- **Hourly:** This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
 
-* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. 
-
-**Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering to begin the process. 
+- **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering. 
 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
@@ -56,24 +54,20 @@ Use the following steps to deploy a Mist-managed Session Smart Router in AWS.
 The following infrastructure must exist in your AWS account:
 * A VPC where the Session Smart Router will be deployed.
 * The existing VPC is segmented with the following subnets. The role of each subnet is described below.
-
-#### Public Subnet
-This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist-managed deployments, this subnet should also provide access to the Mist cloud infrastructure.
-
-#### Private Subnet
-This subnet must provide connectivity to internal workloads within the cloud.
+  - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist-managed deployments, this subnet should also provide access to the Mist cloud infrastructure.
+  - Private Subnet: This subnet must provide connectivity to internal workloads within the cloud.
 
 :::important
-Please note that deploying Session Smart Routers without a valid token or certificate is limited to deployments within the cloud. If your use case also requires the deployment of an on-premises SSR, please contact your Juniper sales representative.
+Please note that deploying Mist-managed Session Smart Routers is limited to deployments within the cloud. If you also require the deployment of an on-premises SSR, please contact your Juniper sales representative.
 :::
 
 ### Deployment
 
-A Session Smart Router can be deployed manually via the [AWS Console](https://console.aws.amazon.com) or in an automated fashion using AWS CLI commands. This section describes both methods. Choose the method that better suits your needs.
+A Session Smart Router can be deployed manually via the [AWS Console](https://console.aws.amazon.com) or using AWS CLI commands. This section describes both methods. Choose the method that better suits your needs.
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * EC2 instance using a Session Smart image available in the marketplace. When selecting a platform for deployment, Juniper recommends the use of an AWS EC2 instance size c5.xlarge, or larger.
-* The router is deployed with appropriate [network interfaces](#requirements)
+* The router is deployed with appropriate [network interfaces.](#requirements)
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
 
@@ -94,9 +88,14 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![CloudFormation Template](/img/aws-byol-template.png)
 
-7. Answer the following 4 questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
+:::note
+The image above shows the template associated with launching an BYOL instance, which allows you to specify the SSR software version you will be installing.
+:::
 
-- What name do you want to give it?
+7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
+
+- What version of SSR software do you want to install? (BYOL only)
+- What name do you want to give the instance?
   - Provide it in the **Stack name** field (for example: SSR_1_Router).
 - Where do you want to deploy it?
   - Select the VPC in the region.
@@ -110,7 +109,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab:
+Once the deployment completes, information is provided in the Outputs tab.
 
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.  
 
@@ -171,13 +170,14 @@ When launching an AWS EC2 instance using automation the following user-data sect
 write_files:
   - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
     content: |
-      { "name": "<router-name>", "registration-code": "<regcode>", "version": "2.0", "mode": "mist-managed", "cloud-provider": "aws"}
+      { "name": "<router-name>", "registration-code": "<regcode>", "ssr-version": "<6.3.0>", "mode": "mist-managed", "cloud-provider": "aws"}
 ```
 
 | Option | Meaning |
 | ------ | ------- |
 | name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
 | registration-code | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 
 ## Source / Destination Check
 
@@ -211,6 +211,7 @@ A description of the parameters of the template are listed in the following tabl
 | Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
 | Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| Version | SSR software version installed on the instance. (BYOL only) | 
 | Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 
@@ -249,7 +250,7 @@ Create the parameters file router.parameters.json with the following command:
 vi router.parameters.json
 ```
 
-and paste the following JSON content, please adjust the values to your specific environment:
+Paste the following JSON content. Please adjust the values to your specific environment:
 
 ```
 {
@@ -261,6 +262,24 @@ and paste the following JSON content, please adjust the values to your specific 
   "PrivateSubnetAllowedCidr": "0.0.0.0/0",
   "AdminAllowedCidr": "0.0.0.0/0",
   "RegistrationCode": "<Registration code>",
+  "InstanceType": "c5.xlarge",
+  "KeyName": "<username>"
+}
+```
+
+**If you are launching a template for a BYOL instance, the SSR software version you are using must be included in the JSON file.** 
+
+```
+{
+  "StackName": "<instance name>",
+  "VpcId": "<ID of the VPC>",
+  "PublicSubnet": "<ID of the public subnet within the VPC>",
+  "PublicSubnetAllowedCidr": "0.0.0.0/0",
+  "PrivateSubnet": "<ID of the public subnet within the VPC>",
+  "PrivateSubnetAllowedCidr": "0.0.0.0/0",
+  "AdminAllowedCidr": "0.0.0.0/0",
+  "RegistrationCode": "<Registration code>",
+  "SSRVersion": "<ssr-version>",
   "InstanceType": "c5.xlarge",
   "KeyName": "<username>"
 }

@@ -5,20 +5,20 @@ sidebar_label: Installing Mist-Managed Router in Azure
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. The process consists of the following steps:
+This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
-1. [Selecting the Azure Plan](#selecting-the-azure-plan).
-2. Deploying a [Session Smart Router](#session-smart-router).
+* [Selecting the Azure Plan](#selecting-the-azure-plan).
+* Deploying a [Session Smart Router](#session-smart-router).
 
 ## Selecting the Azure Plan
 
 There are different Plans available for the Juniper Session Smart Networking Platform offering:
 
-* Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
+- **Private Plan:** For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
 
-* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+- **Hourly Plan:** This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
-* Bring Your Own License (BYOL): This allows you to install your own licensed copy of the SSR software on an Azure VM. A token is required to install the software. If a token is not in your possession, please contact your Juniper Sales representative. Refer to the [Session Smart Networking Platform (BYOL)]
+- **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an Azure VM. The device registration code is used to authenticate access to the Mist installation repositories.
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
@@ -57,7 +57,7 @@ To request access to a Private plan:
 
 ## Session Smart Router
 
-Use the following guide to deploy a MIST managed Session Smart Router in Azure.
+Use the following process to deploy a Mist-managed Session Smart Router in Azure.
 
 ### Requirements
 
@@ -73,7 +73,7 @@ This subnet must provide connectivity to enable communication with external/remo
 This subnet must provide connectivity to internal workloads within the cloud.
 
 :::important
-Please note that deploying Session Smart Routers without a valid token or certificate is limited to deployments within the cloud. If your use case also requires the deployment of an on-premises SSR, please contact your Juniper sales representative.
+Please note that deploying Session Smart Routers without a valid token is limited to deployments within the cloud. If your use case also requires the deployment of an on-premises SSR, please contact your Juniper sales representative.
 :::
 
 ## Deployment
@@ -105,8 +105,13 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 ![CloudFormation Template](/img/azure-byol-template.png)
 
-Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template). 
+:::note
+The image above shows the template associated with launching an BYOL instance, which allows you to specify the SSR software version you will be installing.
+:::
 
+Answer the following questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template). 
+
+* What version of SSR software do you want to install? (BYOL only)
 * What name do you want to give it?
   * Provide the name in the **Instance Name** field (for example: `128TRouter`).
 * Where do you want to deploy it?
@@ -115,6 +120,7 @@ Answer the following 4 questions to launch the deployment of an SSR. For additio
   * Provide the name of the availability set in the **Availability Set Name** field (for example: `128TRouterSet`).
   * Provide the name of the **Public Subnet Name**
   * Provide the name of the **Private Subnet Name**
+  * Provide the name of the **Management Subnet**
 * Which Mist organization is going to manage it?
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist organization.
 * Who is going to be the administrator?
@@ -169,6 +175,7 @@ write_files:
 | ------ | ------- |
 | name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
 | registration-code | The Mist registration used for adoption of the instance to a Mist organization. |
+| ssr-version | The SSR software version to be installed on the instance (BYOL only). |
 
 ### Mist-Managed Setup
 
@@ -268,6 +275,7 @@ A description of the parameters of the template are listed in the following tabl
 | Management Subnet Name  | The name of the management subnet within the VNet. |
 | Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Registration Code   | The Mist registration used for adoption of the instance to a Mist organization. |
+| Version | SSR software version installed on the instance (BYOL only). | 
 | Instance size        | Select the size of the VM in the field Instance Size. |
 | Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH. |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
@@ -308,7 +316,7 @@ Create the parameters file router_private.parameters.json with the following com
 vi router_private.parameters.json
 ```
 
-and paste the following JSON content, please adjust the values to your specific environment:
+Paste the following JSON content. Please adjust the values to your specific environment:
 
 ```
 {
@@ -353,6 +361,68 @@ and paste the following JSON content, please adjust the values to your specific 
     },
     "registrationCode": {
       "value": "The registration code from the Mist UI."
+    },
+    "instanceSize": {
+      "value": "Standard_DS3_v2"
+    },
+    "adminUsername": {
+      "value": "<username>"
+    },
+    "adminPublicKeyData": {
+      "value": "<content of ssh-rsa key>"
+    }
+  }
+}
+```
+
+**If you are launching a template for a BYOL instance, the SSR software version you are using must be included in the JSON file.**
+
+```
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "instanceName": {
+      "value": "<instance name>"
+    },
+    "routerName": {
+      "value": "<name to assign to the router. Optional>"
+    },
+    "nodeName": {
+      "value": "<name to assign to the node of the router. Optional>"
+    },
+    "location": {
+      "value": "<location of the VNet>"
+    },
+    "virtualNetworkName": {
+      "value": "<name of the VNet>"
+    },
+    "availabilitySetName": {
+      "value": "<name of the Availability Set>"
+    },
+    "publicSubnetName": {
+      "value": "<name of the public subnet>"
+    },
+    "publicSubnetAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "privateSubnetName": {
+      "value": "<name of the private subnet>"
+    },
+    "privateSubnetAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "managementSubnetName": {
+      "value": "<name of the management subnet>"
+    },
+    "adminAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "registrationCode": {
+      "value": "The registration code from the Mist UI."
+    },
+    "ssrVersion": {
+      "value": "The SSR software version number."
     },
     "instanceSize": {
       "value": "Standard_DS3_v2"
