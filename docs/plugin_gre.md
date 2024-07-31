@@ -3,6 +3,10 @@ title: GRE Plugin
 sidebar_label: GRE
 ---
 
+:::important
+The GRE Plugin has been deprecated; its functionality is available as part of [**Native GRE Tunnels**](config_gre_tunnel.md).
+:::
+
 The SSR GRE plugin can be used for creating IPv4 GRE tunnels between a SSR router and a remote GRE tunnel destination. For services such as Zscaler, this provides better throughput compared to other tunneling mechanisms.
 
 :::note
