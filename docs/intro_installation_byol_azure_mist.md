@@ -1,22 +1,17 @@
 ---
-title: Installing a Mist-managed Router in Azure
-sidebar_label: Installing Mist-managed Router in Azure
+title: Installing a BYOL Mist-managed Router in Azure
+sidebar_label: Installing a BYOL Mist-managed Router in Azure
 ---
-
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
+This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure using your own license. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
 * [Selecting the Azure Plan](#selecting-the-azure-plan).
 * Deploying a [Session Smart Router](#session-smart-router).
 
 ## Selecting the Azure Plan
 
-There are different Plans available for the Juniper Session Smart Networking Platform offering:
-
-- **Private Plan:** For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
-
-- **Hourly Plan:** This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+**Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an Azure VM. The device registration code is used to authenticate access to the Mist installation repositories.
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
@@ -25,33 +20,6 @@ Once you have selected the plan that best suits the needs of your deployment, pr
 :::important
 There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (i.e., Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) are not possible without a software access token.
 :::
-
-To request access to a Private plan:
-
-1. Locate the Subscription ID of the Azure account where the deployment of the software is going to take place. Follow the next steps to find the Subscription ID:
-
-* Go to the [Azure portal](https://portal.azure.com).
-* On the search box right at the top of the screen, search for **Subscriptions**. If you cannot find the subscription associated with your Azure account go to [Azure Subscriptions]](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
-* Take note of your Subscription ID.
-
-2. Contact your Juniper Networks Sales representative and provide:
-
-* The Subscription ID of the Azure account that will be used for the deployment.
-* The version of the Session Smart Networking software. If necessary, your Juniper Sales representative will assist you to determine the best version for your deployment.
-
-3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
-
-4. Once your Subscription ID has been allowlisted, validate that the Private plan has been shared with your Subscription:
-
-* Click [here](https://portal.azure.com) to go to the Azure portal. On the search box right at the top of the screen, search for **Marketplace**. If you are unable to access the Marketplace via your Azure Portal, click [here](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryMenuBlade/selectedMenuItemId/home).
-* The following banner is displayed at the top:
-
-![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
-
-* Click on the **View private products** link.
-* If the Private image of the **Session Smart Networking Platform** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
-
-<img src={useBaseUrl('/img/platforms_azure_marketplace_image_private.png')} alt="Session Smart Networking Private offering" width="192" height="243" />
 
 ## Session Smart Router
 
@@ -101,8 +69,11 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 5. Click the **Launch** link of the Mist-managed template.
 
+![CloudFormation Template](/img/azure-byol-template.png)
+
 Answer the following questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template). 
 
+* What version of SSR software do you want to install?
 * What name do you want to give it?
   * Provide the name in the **Instance Name** field (for example: `128TRouter`).
 * Where do you want to deploy it?
@@ -124,14 +95,15 @@ Answer the following questions to launch the deployment of an SSR. For additiona
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side:
-* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side.
+
+The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Azure CLI or PowerShell
 
 To deploy the Session Smart Networking software using the Azure CLI or Powershell:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure Plan](#selecting-the-azure-plan).
+1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
 4. Click on **Get started** to enable programmatic deployment for the subscription, then click **Save**.
@@ -147,9 +119,9 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template](#launch-the-template).
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. 
+Once the deployment completes, information is provided in the Outputs tab on the left hand side.
 
-If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
+The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Cloud-init Onboarding
 When launching an instance using CLI or Powershell or while using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
@@ -273,7 +245,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ### Azure Portal
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure Plan](#selecting-the-azure-plan).
+1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
 4. Click on the tab **Plans + Pricing** as shown in the following picture:
@@ -353,6 +325,9 @@ Paste the following JSON content. Please adjust the values to your specific envi
     "registrationCode": {
       "value": "The registration code from the Mist UI."
     },
+    "ssrVersion": {
+      "value": "The SSR software version number."
+    },
     "instanceSize": {
       "value": "Standard_DS3_v2"
     },
@@ -366,7 +341,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
 }
 ```
 
-1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure Plan](#selecting-the-azure-plan).
+1. Go to the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
 4. Click on the **Get started** button to enable programmatic deployment for the subscription.
@@ -388,4 +363,3 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
 :::
-

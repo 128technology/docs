@@ -1,8 +1,7 @@
 ---
-title: Installing a Mist-managed Router in AWS
-sidebar_label: Installing Mist-managed Router in AWS
+title: Installing a BYOL Mist-managed Router in AWS
+sidebar_label: Installing a BYOL Mist-managed Router in AWS
 ---
-
 This guide describes the process for deploying a Mist-managed instance through AWS. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The installation and deployment process consists of the following steps:
 
 * [Selecting the AMI](#selecting-the-ami).
@@ -12,36 +11,9 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 ### Selecting the AMI
 
-There are different AMIs (images) available for the Juniper Session Smart Networking Platform offering:
-
-- **Private:** For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issued to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
-
-- **Hourly:** This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
+**Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering. 
 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
-
-### Requesting Access to a Private Offer
-
-:::important
-There is no software cost associated with deploying the Private image, the cost of running the EC2 instance is the only cost (AWS compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token.
-:::
-
-To request access to a Private offer:
-
-1. Locate the account ID of the AWS account where the deployment of the software is going to take place:
-
-* Open the [AWS Console](https://console.aws.amazon.com).
-* On the right at the top of the screen, click on the downward arrow next to your username, and the account ID will be displayed.
-* Make a note of your account ID.
-
-2. Contact your Juniper Networks Sales representative and provide:
-
-* The Account ID of the AWS account that will be used for the deployment.
-* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
-
-3. Your Juniper Sales representative will email you the private offer.
-
-4. When you receive the email containing the private offer, open it and review / accept the terms and conditions.
 
 ## Session Smart Router Deployment
 
@@ -52,7 +24,7 @@ Use the following steps to deploy a Mist-managed Session Smart Router in AWS.
 The following infrastructure must exist in your AWS account:
 * A VPC where the Session Smart Router will be deployed.
 * The existing VPC is segmented with the following subnets. The role of each subnet is described below.
-  - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist-managed deployments, this subnet should also provide access to the Mist cloud infrastructure.
+  - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure.
   - Private Subnet: This subnet must provide connectivity to internal workloads within the cloud.
 
 :::important
@@ -77,14 +49,18 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami).
+1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
 5. Click on the **Continue to Launch** button.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
+
+![CloudFormation Template](/img/aws-byol-template.png)
+
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
 
+- What version of SSR software do you want to install?
 - What name do you want to give the instance?
   - Provide it in the **Stack name** field (for example: SSR_1_Router).
 - Where do you want to deploy it?
@@ -99,13 +75,13 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab, and the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.  
+Once the deployment completes, information is provided in the Outputs tab, and the Zero Touch Provisioning (ZTP) installation process begins. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.  
 
 ### Using the AWS CLI
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami).
+1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
@@ -165,6 +141,7 @@ write_files:
 | ------ | ------- |
 | name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
 | registration-code | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 
 ## Source / Destination Check
 
@@ -182,7 +159,7 @@ Disabling Source / Destination checking allows the SSR AWS instance to send and 
 
 ## Launch the Template
 
-This section describes the parameters to complete the template to deploy a Mist-managed SSR, as well as how to launch it using the portal, or programmatically.
+This section describes the parameters to complete the template to deploy a Mist-managed SSR, as well as how to launch it using the portal or programmatically.
 
 ![CloudFormation Template](/img/aws-byol-template.png)
 
@@ -198,12 +175,13 @@ A description of the parameters of the template are listed in the following tabl
 | Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
 | Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| Version | SSR software version installed on the instance. | 
 | Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 
 #### AWS Console
 
-1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
+1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
@@ -223,6 +201,7 @@ The information listed in the Outputs tab is the following:
 
 :::important
 When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
 :::
 
 #### AWS CLI
@@ -247,12 +226,13 @@ Paste the following JSON content. Please adjust the values to your specific envi
   "PrivateSubnetAllowedCidr": "0.0.0.0/0",
   "AdminAllowedCidr": "0.0.0.0/0",
   "RegistrationCode": "<Registration code>",
+  "SSRVersion": "<ssr-version>",
   "InstanceType": "c5.xlarge",
   "KeyName": "<username>"
 }
 ```
 
-1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
+1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
@@ -270,8 +250,7 @@ aws ec2 create-launch-template \
 
 :::important
 When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
-If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
-If a template from a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is **admin** and the password is 128Tadmin.
+To use the template for the **Bring Your Own License (BYOL)** image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
 :::
 
 ## Deploying a Router without Templates
@@ -336,4 +315,3 @@ If the EC2 instance deployed for the Session Smart software does not have access
 9. Click **Add Another Route**.
 10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option. 
 11. Select it and click **Save**.
-
