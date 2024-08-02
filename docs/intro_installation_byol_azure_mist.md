@@ -15,12 +15,6 @@ This guide describes the process for deploying a Mist-managed Session Smart Rout
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
-### Requesting Access to a Private Plan
-
-:::important
-There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (i.e., Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) are not possible without a software access token.
-:::
-
 ## Session Smart Router
 
 Use the following process to deploy a Mist-managed Session Smart Router in Azure.
@@ -192,18 +186,18 @@ Finally, select the subscription you want and click on **Save** to apply the cha
 
 Alternatively, it is possible to accept the term of use and privacy policy programmatically. The PowerShell commands for each Session Smart Networking software image are shown next, please run the commands corresponding to the image you want to use:
 
-* Session Smart Networking - Private Image:
+* Session Smart Networking - BYOL
 
 ```
 Get-AzureRmMarketplaceTerms `
 -Publisher "juniper-networks" `
--Product "session-smart-networking-payg" `
--Name "session-smart-networking-private-XYZ" `
+-Product "session-smart-networking-byol" `
+-Name "session-smart-networking-byol-XYZ" `
 | Set-AzureRmMarketplaceTerms -Accept
 ```
 
 :::important
-Replace the XYZ placeholder right in the command above with the version of the Session Smart Software to be deployed. For example, if the version to deploy is 5.4.4, then replace XYZ with 544
+Replace the XYZ placeholder right in the command above with the version of the Session Smart Software to be deployed. For example, if the version to deploy is 6.2.5, then replace XYZ with 625.
 :::
 
 ### Load the Template
