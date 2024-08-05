@@ -75,7 +75,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab, and the Zero Touch Provisioning (ZTP) installation process begins. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.  
+Once the deployment completes, information is provided in the Outputs tab, and the Zero Touch Provisioning (ZTP) installation process begins. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration. It will then take an additional 5-10 minutes for the desired SSR version to be installed.
 
 ### Using the AWS CLI
 
@@ -91,20 +91,43 @@ To deploy the Session Smart Networking software via the AWS CLI:
 
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
 
+### Cloud-init Onboarding
+When launching an AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
+
+```
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+      { "name": "<router-name>", "ssr-version": "<version>", "registration-code": "<regcode>", "mode": "mist-managed", "cloud-provider": "aws"}
+```
+
+| Option | Meaning |
+| ------ | ------- |
+| name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
+| registration-code | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
+
+### Manual Onboarding
+If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
+
+1. Log into the instance using the admin credentials provided when launching.
+2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
+3. Follow the prompts to generate and apply the onboarding configuration
+
+
 ### Mist-Managed Setup
 
-Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist organization once onboarding is complete.
+Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete.
 
-If the device does not show up in the Mist organization after 5 minutes, ssh into the instance. 
-- Log into the pcli, run `su admin` and then `show mist`.
+If the device does not show up in the Mist organization or the desired SSR version was not installed after 15 minutes, SSH into the instance.
 
-- If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
- - `journalctl -u 128T-hardware-bootstrapper` 
+- Try to log into the pcli, run `su admin` and then `show mist`.
 
- And the Mist agent:
- - `journalctl -u 128T-mist-agent`
+- If the pcli is not accessable or the status and necessary action is not obvious, unzip the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
 
-#### Network Interfaces Layout
+
+### Network Interfaces Layout
 
 The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in Mist configuration are as follows:
 
@@ -125,23 +148,6 @@ In addition to using the cloud formation template, the admin can tag the interfa
 :::note
 The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
 :::
-
-#### Cloud-init Onboarding
-When launching an AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
-
-```
-#cloud-config
-write_files:
-  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
-    content: |
-      { "name": "<router-name>", "registration-code": "<regcode>", "ssr-version": "<6.3.0>", "mode": "mist-managed", "cloud-provider": "aws"}
-```
-
-| Option | Meaning |
-| ------ | ------- |
-| name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
-| registration-code | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
-| ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 
 ## Source / Destination Check
 

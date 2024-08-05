@@ -24,10 +24,10 @@ Use the following process to deploy a Mist-managed Session Smart Router in Azure
 The following infrastructure must exist in your Azure subscription:
 * A VNet where the Session Smart Router (SSR) will be deployed.
 * An Availability Set where the SSR will be deployed.
-* The existing VPC is segmented with the following subnets. The role of each subnet is described below.
+* The existing VNet is segmented with the following subnets. The role of each subnet is described below.
 
 #### Public Subnet
-This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist-managed deployments, this subnet should also provide access to the Mist cloud infrastructure.
+This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure.
 
 #### Private Subnet
 This subnet must provide connectivity to internal workloads within the cloud.
@@ -91,7 +91,7 @@ Answer the following questions to launch the deployment of an SSR. For additiona
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side.
 
-The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
+The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration. It will then take an additional 5-10 minutes for the desired SSR version to be installed.
 
 ### Azure CLI or PowerShell
 
@@ -115,7 +115,7 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side.
 
-The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration.
+The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration. It will then take an additional 5-10 minutes for the desired SSR version to be installed.
 
 ### Cloud-init Onboarding
 When launching an instance using CLI or Powershell or while using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
@@ -125,7 +125,7 @@ When launching an instance using CLI or Powershell or while using automation the
 write_files:
   - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
     content: |
-      { "name": "<router-name>", "registration-code": "<regcode>", "version": "2.0", "mode": "mist-managed", "cloud-provider": "azure"}
+      { "name": "<router-name>", "ssr-version": "<version>", "registration-code": "<regcode>", "mode": "mist-managed", "cloud-provider": "azure"}
 ```
 
 | Option | Meaning |
@@ -133,6 +133,13 @@ write_files:
 | name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
 | registration-code | The Mist registration used for adoption of the instance to a Mist organization. |
 | ssr-version | The SSR software version to be installed on the instance. |
+
+### Manual Onboarding
+If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
+
+1. Log into the instance using the admin credentials provided when launching.
+2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
+3. Follow the prompts to generate and apply the onboarding configuration
 
 ### Mist-Managed Setup
 
@@ -147,6 +154,16 @@ The _Session Smart Router Template_ deploys a VM for the SSR with three network 
 | eth1                   | Public           | ge-0/0/0    |
 | eth2                   | Private          | ge-0/0/1    |
 
+
+#### Interface Tagging
+
+In addition to using the cloud formation template, the admin can tag the interface with the key `SSR-ROLE`. The possible values are as follows:
+
+| Tag Value | Meaning |
+| --------- | ------- |
+| WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to Mist cloud infrastructure. |
+| LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
+
 ## Troubleshooting
 
 ### Validation Process Failure
@@ -157,16 +174,13 @@ If the validation process fails with the error shown below, please verify you ar
 
 ### Device Does Not Exist In Mist after ZTP
 
-If the device does not show up in the Mist organization after 5 minutes, ssh into the instance through the Azure portal.
+Once the instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete.
 
-- Log into the pcli, run `su admin` and then `show mist`.
+If the device does not show up in the Mist organization or the desired SSR version was not installed after 15 minutes, SSH into the instance.
 
-- If the status and action necessary is not obvious, drop back to the linux shell and look at the journal for the bootstrapper:
- `journalctl -u 128T-hardware-bootstrapper`
+- Try to log into the pcli, run `su admin` and then `show mist`.
 
- And the Mist agent:
-  `journalctl -u 128T-mist-agent`
-
+- If the pcli is not accessable or the status and necessary action is not obvious, unzip the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
 
 ## Annexes
 
