@@ -67,7 +67,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-54833 HA port is showing as redundant:** Resolved an issue where adding a device-interface back into the configuration after it was removed did not recreate the device-state.
 ------
-- **I95-55550 node0 went down and did not fail over to node1:** Multiple disk errors caused corruption on the `128T_root` filesystem causing it to enter `read-only` mode and becoming non-responsive. To resolve this issue, issues in the filesystem now result in kernel panic mode, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem. 
+- **I95-55550 Abrupt power failure may result in filesystem corruption:** Multiple disk errors caused corruption on the 128T_root filesystem causing it to enter read-only mode and becoming non-responsive. To resolve this issue, the filesystem triggers a kernel panic, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.
 ------
 - **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.
 ------
@@ -75,13 +75,13 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-55912 Validate Patterns for Service Domains and URLs:** The `url` and `domain-name` fields on a service were an unformatted string. This allowed you to configure fields that would be silently discarded. The `domain-name` and `url` fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now triggers a config warning.
 ------
-- **I95-55965 IDP engine not starting due to invalid environmental conditions:** Additional checks have been added to detect and prevent these conditions. 
+- **I95-55965 IDP engine not starting due to invalid environmental conditions:** AIn cases where a container/csrx does not shut down cleanly, the IDP engine does not start. These conditions are now detected, and a force stop/remove of the container is implemented.
 ------
 - **I95-56263 Add `show capacity`, and debugging commands to the TSI output:** Support for additional information in the TSI output has been added.
 ------
 - **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
 ------
-- **I95-56317 Journal logs missing from Conductors running 6.2.3:** An issue related to a typo was creating zero byt files when downloading journal logs using the GUI.
+- **I95-56317 Journal logs missing from Conductors running 6.2.3:** An issue related to a typo was creating zero byte files when downloading journal logs using the GUI.
 ------
 - **I95-56326 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
 ------
@@ -93,7 +93,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
 ------
-- **I95-56527 GUI fails to validate and commit changes made from the CLI:** Resolved an issue where invalid json errors caused commit failures.
+- **I95-56527 List elements containing backslash renamed during validation:** Resolved an issue with the use of a backslash in a list key or a list element. During the configuration validation process, if a difference between configurations in a child of a list element with a `\` in its key; Or when the parent list or leaf-list exists in both configurations, but the list or list element with the `\` only exists in one configuration, the list element with the `\` was being renamed.
 ------
 - **I95-56541 Include kernel journal entries in TSI:** A separate `kernel.log` journal file is now created in the TSI output.
 ------
@@ -113,7 +113,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-56822 Router stuck in a continuous upgrade/failure state:** DNS name servers changes on the conductor are not honored. In cases where the DNS configuration changed post boot, the conductor software proxy would not reload the config. In this scenario the proxied router software requests would use an out of date DNS configuration for the proxied requests, resulting in failure. 
 ------
-- **I95-56827 NTP Auth key cannot be entered:** Loosened restrictions on NTP server key length to allow plaintext keys. 
+- **I95-56827 NTP Auth key only permits keys of 20 or 40 characters:** Loosened restrictions on NTP server key length to allow plaintext keys. 
 ------
 - **I95-56843 Error logs filled with irrelevant KNI network script info:** The log output has been reduced to provide related information.
 ------
