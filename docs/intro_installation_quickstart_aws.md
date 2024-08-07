@@ -167,6 +167,11 @@ Use the following guide to deploy a Session Smart Router in AWS.
 The following infrastructure must exist in your AWS account:
 * A VPC where the Session Smart Router will be deployed.
 * The existing VPC is segmented with at least three subnets. The role of each subnet is described below
+* [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer
+
+```
+aws ec2 modify-instance-attribute --instance-id instance_id --ena-support
+```
 
 #### Public Subnet
 This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist managed deployments, this subnet should also provide access to the Mist cloud infrastructure.

@@ -54,6 +54,11 @@ The following infrastructure must exist in your AWS account:
 * The existing VPC is segmented with the following subnets. The role of each subnet is described below.
   - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist-managed deployments, this subnet should also provide access to the Mist cloud infrastructure.
   - Private Subnet: This subnet must provide connectivity to internal workloads within the cloud.
+* [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer
+
+```
+aws ec2 modify-instance-attribute --instance-id instance_id --ena-support
+```
 
 :::important
 Please note that deploying Mist-managed Session Smart Routers is limited to deployments within the cloud. If you also require the deployment of an on-premises SSR, please contact your Juniper sales representative.
@@ -99,7 +104,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab, and the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.  
+Once the deployment completes, information is provided in the Outputs tab, and the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
 
 ### Using the AWS CLI
 
@@ -119,11 +124,11 @@ Launch the deployment with the corresponding AWS CLI commands making use of the 
 
 Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist organization once onboarding is complete.
 
-If the device does not show up in the Mist organization after 5 minutes, ssh into the instance. 
+If the device does not show up in the Mist organization after 5 minutes, ssh into the instance.
 - Log into the pcli, run `su admin` and then `show mist`.
 
 - If that does not show the device, drop back to the linux shell and look at the journal for the bootstrapper:
- - `journalctl -u 128T-hardware-bootstrapper` 
+ - `journalctl -u 128T-hardware-bootstrapper`
 
  And the Mist agent:
  - `journalctl -u 128T-mist-agent`
@@ -316,7 +321,7 @@ If a template from a Private or Hourly image was used, you can login to the appl
 22. On the _Launch Status_ page, click **View Instances**.
 23. Record the instances IP address.
 24. Launch a command window prompt.
-25. Enter the IP address of the instance. 
+25. Enter the IP address of the instance.
 26. When prompted by the installer, press the **Enter** key to select Begin.
 
 ## Configuring a Default Route to an Internet Gateway
@@ -334,6 +339,6 @@ If the EC2 instance deployed for the Session Smart software does not have access
 7. On the _Internet Gateways_ page, click **Attach to VPC** and assign the Internet Gateway to your VPC.
 8. From the VPC Dashboard pane, select **Route Tables** and click **Edit**.
 9. Click **Add Another Route**.
-10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option. 
+10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option.
 11. Select it and click **Save**.
 

@@ -11,7 +11,7 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 ### Selecting the AMI
 
-**Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering. 
+**Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
@@ -26,6 +26,11 @@ The following infrastructure must exist in your AWS account:
 * The existing VPC is segmented with the following subnets. The role of each subnet is described below.
   - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure.
   - Private Subnet: This subnet must provide connectivity to internal workloads within the cloud.
+* [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer
+
+```
+aws ec2 modify-instance-attribute --instance-id instance_id --ena-support
+```
 
 :::important
 Please note that deploying Mist-managed Session Smart Routers is limited to deployments within the cloud. If you also require the deployment of an on-premises SSR, please contact your Juniper sales representative.
@@ -181,7 +186,7 @@ A description of the parameters of the template are listed in the following tabl
 | Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
 | Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
-| Version | SSR software version installed on the instance. | 
+| Version | SSR software version installed on the instance. |
 | Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 
@@ -301,7 +306,7 @@ To use the template for the **Bring Your Own License (BYOL)** image was used, SS
 22. On the _Launch Status_ page, click **View Instances**.
 23. Record the instances IP address.
 24. Launch a command window prompt.
-25. Enter the IP address of the instance. 
+25. Enter the IP address of the instance.
 26. When prompted by the installer, press the **Enter** key to select Begin.
 
 ## Configuring a Default Route to an Internet Gateway
@@ -319,5 +324,5 @@ If the EC2 instance deployed for the Session Smart software does not have access
 7. On the _Internet Gateways_ page, click **Attach to VPC** and assign the Internet Gateway to your VPC.
 8. From the VPC Dashboard pane, select **Route Tables** and click **Edit**.
 9. Click **Add Another Route**.
-10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option. 
+10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option.
 11. Select it and click **Save**.
