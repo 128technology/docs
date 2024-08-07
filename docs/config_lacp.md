@@ -50,7 +50,7 @@ LACP is enabled by default on the `bond` device interface, and must be configure
 Please note that after any changes to the LAG configuration, you must restart the 128T service. 
 :::
 
-### Configuration using the PCLI 
+### Configuration Using the PCLI 
 
 1. Create the LAG by configuring the `bond` device-interface.
     - Name the interface
@@ -124,7 +124,68 @@ These same settings are accessed from the GUI at the Authority > Router > Node >
 
 ![Configure LAG devices](/img/config_lacp_dev-inf-parent-bond.png)
 
-### Configuring LLDP
+## Force-up
+
+When enabled, `force-up` allows one member of a bond interface to send and receive without the required LACP negotiation. 
+
+### How It Works 
+
+`force-up` mode can only be enabled when LACP is enabled, and is disabled by default. When enabled, a bond interface that does not receive any LACP PDU's on any member interfaces over a configured time-out period enters the `force-up` mode. In this mode, one member of the bond is used as an active interface, sending and receiving without the required LACP negotiation.
+
+Other interfaces continue to send and receive LACP PDUs, but will not accept or send any other frames. If at any time a member receives an LACP PDU, the bond’s `force-up` mode is cleared and it operates under normal LACP protocol.
+
+Force-up is re-entrant; a bond interface can go into `force-up` mode, back to normal, and then into `force-up` mode again.  
+
+#### Example
+
+An example use-case is a peer system that uses a PXE boot - a preboot environment where a device reaches out over the network to fetch a firmware/OS image - but is unable to support the LACP protocol to form the bond. Configuring `force-up` and time-out allows the SSR to bring the LACP interface up as an active interface without the required LACP negotiation, similar to a static-LAG. The peer system can then get the image, boot, and configure LACP. The SSR LACP bond will return to operating in LACP mode once it starts seeing LACP frames from the device.
+
+### Configuration
+
+In this example, `force-up` is configured on the LACP enabled bond interface, with a timeout of 30 seconds.
+
+```
+ 
+config 
+    authority 
+        router          red-1 
+            node           node_one           
+                device-interface  bond0 
+                    name               bond0 
+                    description        "Bonded Interface" 
+                    type               bond 
+       
+                    bond-settings       
+                        lacp-enabled      true 
+                        force-up          true 
+                        force-up-timeout  30 
+                    ...
+```
+
+The `force up` mode is shown as part of the `show device-interface` output of the bond member information.
+
+```
+bond_members: 
+       aggregator_port_id:     1 
+       selection:              SELECTED 
+       actor_detail_info: 
+         system_priority:      65535 
+         system_mac_address:   90:ec:77:32:e3:f6 
+         port_key:             17 
+         port_priority:        255 
+         port_number:          2 
+         port_state:           ACTIVE, TIMEOUT, AGGREGATION, DEFAULTED 
+       partner_detail_info: 
+         system_priority:      65535 
+         system_mac_address:   00:00:00:00:00:00 
+         port_key:             1 
+         port_priority:        255 
+         port_number:          0 
+         port_state:           ACTIVE 
+       state_machine_flags:    LACP_ENABLED, EXPIRED, FUP
+```
+
+## Configuring LLDP
 
 LLDP allows other devices in the network to discover the SSR. It is not required for LAG, but when enabled it provides information about the LAG interface in the network. It should be noted that when enabled as part of LAG, it is configured for the entirety of the `bond`, not on the individual interfaces within the group. For additional information about using the LLDP command, see [`lldp`](config_reference_guide.md#lldp)
 
@@ -142,7 +203,7 @@ LLDP allows other devices in the network to discover the SSR. It is not required
 
 ![Configuring LLDP mode](/img/config_lldp_lacp.png)
 
-### Show Commands 
+## Show Commands 
 
 Use the `show device-interface name <name>` command to troubleshoot or view the status of the LAG/LACP interface.
 

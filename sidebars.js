@@ -38,10 +38,22 @@ module.exports = {
       "cc_fips_software_upgrades",
       "cc_fips_appendix",
     ],
-    "Installation Process": [
+    "Upgrading the SSR": [
+      "intro_upgrade_considerations",
+      "intro_upgrading",
+      "upgrade_ibu_conductor",
+      "upgrade_router",
+      "upgrade_restricted_access",
+      "upgrade_legacy",  
+      "intro_rollback",
+    ],
+    "Pre-Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
+    ],
+    "SSR Universal ISO Installation": [
+      "intro_installation_univ-iso",
     ],
     "Conductor Installation": [
       "install_conductor_overview",
@@ -72,11 +84,6 @@ module.exports = {
       "intro_installation_azure_mist",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
-    ],
-    "Upgrades and Rollback": [
-      "intro_upgrade_considerations",
-      "intro_upgrading",
-      "intro_rollback",
     ],
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
@@ -168,7 +175,6 @@ module.exports = {
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",
-          "config_nat",
           "config_rate_limiting",
           "config_RBAC",
           "config_service_health",
@@ -206,6 +212,17 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Network Address Translation (NAT)",
+        "items": [
+          "config_source-dest_nat",
+          "config_static_nat",
+          "config_dnat",
+          "config_nat_pools",
+          "ts_nat_troubleshooting",
+        ],
+      },
+      {
+        "type": "category",
         "label": "High Availability",
         "items": [
          "config_ha",
@@ -215,6 +232,16 @@ module.exports = {
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
         ],
+      },
+      {
+        "type": "category",
+        "label": "Traffic Engineering",
+        "items": [
+          "concepts_traf_eng",
+          "bcp_per-adjacency_traffic_engineering",
+          "config_te_net_intf",
+          "config_dev_intf_traf_eng",
+        ]
       },
       {
         "type": "category",
@@ -344,6 +371,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.3",
           "release_notes_128t_6.2",
           "release_notes_128t_6.1",
           "release_notes_128t_6.0",
