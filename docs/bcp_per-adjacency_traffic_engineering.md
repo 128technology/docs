@@ -3,7 +3,7 @@ title: Adjacency Traffic Engineering
 sidebar_label: Adjacency Traffic Engineering
 ---
 
- Adjacency traffic engineering can be enabled to regulate the upload and download rates between peers.  
+Adjacency traffic engineering can be enabled to regulate the upload and download rates between peers.  
 
 ## Overview 
 
