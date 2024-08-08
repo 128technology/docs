@@ -73,6 +73,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 
 
+### Caveats
+
+- **I95-56628 Unable to upgrade second HA Conductor to 6.3.0:** After successfully upgrading the primary HA conductor, attempting to upgrade the second node using the GUI prompt fails. This is a known issue and is currently under investigation. Please see the Knowledgebase Article [Unable to upgrade second HA Conductor to 6.3.0](2024-08-30-I95-56628.md) for workaround information. 
+
+
+
+
 
 
 
