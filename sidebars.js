@@ -224,6 +224,7 @@ module.exports = {
           "config_ldap",
           "config_radius",
           "config_password_policies",
+          "howto_reset_user_password",
         ],
       },
       {
