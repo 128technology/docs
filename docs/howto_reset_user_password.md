@@ -7,7 +7,7 @@ Resetting a user or admin password requires entering the old password. For this 
 
 In this situation, use the following procedure to change the lost password.
 
-1. Log in to the Linux shell using `sudo` as the `t128` user on the SSR. 
+1. Log in to the Linux shell using `sudo`. 
 2. Change the password for the corresponding Linux user. 
 
 ```
