@@ -805,6 +805,31 @@ exit
 
 ## Release Notes
 
+### Release 3.6.2
+
+**Release Date:** Aug 7th, 2024
+
+**Router Version** 128T-ipsec-2.4.4-2
+
+#### Issues Fixed
+
+- **WAN-3229** IPSec tunnels can restart due to unrelated config changes.
+
+  _**Resolution:**_ IPSec config handler manages the config changes more gracefully to avoid spurious restarts.
+
+- **WAN-3334** IPSec tunnels can sometimes fail to start on boot.
+
+  _**Resolution:**_ The pluto runtime directories are created dynamically to avoid certain types of startup failures.
+
+- **PLUGIN-2490** IPSec plugin validation shows incorrect warning about empty local-id
+
+  _**Resolution:**_ The validation logic was made more robust to better handle cases for empty and existing configuration.
+
+- **PLUGIN-2550** IPSec plugin causing monitoring script to get stuck forever
+
+  _**Resolution:**_ The DNS resolution from IPSec namespace enforces better controls and limits to avoid a startup race condition due to which the monitoring script was getting stuck forever. The graceful handling would prevent other scripts from getting stuck indefinetly.
+
+
 ### Release 3.6.1
 
 **Release Date:** May 29, 2024
