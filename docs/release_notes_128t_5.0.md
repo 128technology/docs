@@ -71,7 +71,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-34823 About page includes link to online documentation:** The 128T GUI now includes a link to the online documentation set.
 ------
-- **I95-35150 [PCLI Clone Configuration](cli_reference.md#clone):** The clone command duplicates the configuration data from an existing router into a new router with a new name, and stages it to the candidate configuration.
+- **I95-35150 PCLI Clone Configuration:** The clone command duplicates the configuration data from an existing router into a new router with a new name, and stages it to the candidate configuration.
 ------
 - **I95-35190 [PCLI bulk paste configuration](concepts_pcli.md#paste-config):** The PCLI detects configuration entered in bulk and accepts input in either show config native format or flat format.
 ------

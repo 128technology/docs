@@ -54,3 +54,23 @@ After the migration command is run, you will see a **Connected** state on the co
 
 - Verify that the TCP ports 930, 4505 and 4506 on the conductor are enabled. The routers use these ports to communicate with the conductor.
 - If there is a firewall in front of the conductor, these same TCP ports must be enabled.
+
+### Additional Considerations with Strict Host Key Checking
+
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accept-new` configured, it will be necessary to manually provision the new conductor key **prior** to migrating the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+
+On the new conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
+
+From the router PCLI, provision each conductor key using the following command:
+`create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
+
+- `<node>` is the router node. The key should be added on each router node in an HA pair. 
+- `<conductor address>` is the conductor address. This should be added for each conductor address of an HA conductor pair.
+- `<key>` is the `Key` retrieved from the previous step.
+- `<comment>` is an option that can be used to identify the key; for example `Conductor1`.
+
+The following example manually configures the key to the conductor node `192.168.1.13`:
+
+`create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
+
+See [Enable Strict Host Key Checking](cc_fips_otp_router_install.md#enable-strict-host-key-checking) for configuration information.

@@ -168,7 +168,6 @@ module.exports = {
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",
-          "config_nat",
           "config_rate_limiting",
           "config_RBAC",
           "config_service_health",
@@ -206,6 +205,17 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Network Address Translation (NAT)",
+        "items": [
+          "config_source-dest_nat",
+          "config_static_nat",
+          "config_dnat",
+          "config_nat_pools",
+          "ts_nat_troubleshooting",
+        ],
+      },
+      {
+        "type": "category",
         "label": "High Availability",
         "items": [
          "config_ha",
@@ -215,6 +225,16 @@ module.exports = {
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
         ],
+      },
+      {
+        "type": "category",
+        "label": "Traffic Engineering",
+        "items": [
+          "concepts_traf_eng",
+          "bcp_per-adjacency_traffic_engineering",
+          "config_te_net_intf",
+          "config_dev_intf_traf_eng",
+        ]
       },
       {
         "type": "category",
@@ -262,7 +282,6 @@ module.exports = {
           "config_bfd_tunnel",
           "howto_config_PPPoE",
           "howto_pppoe_vlan",
-          "howto_maintenance_mode",
           "howto_ms365",
           "howto_trusted_ca_certificate",
         ],
@@ -292,6 +311,8 @@ module.exports = {
       "events_overview",
       "events_alarms",
       "events_events",
+      "config_alarm_suppression",
+      "howto_maintenance_mode",      
     ],
     "Best Practices": [
       "bcp_sdwan_design_guide",
@@ -344,6 +365,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.3",
           "release_notes_128t_6.2",
           "release_notes_128t_6.1",
           "release_notes_128t_6.0",

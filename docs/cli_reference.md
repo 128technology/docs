@@ -12,7 +12,7 @@ Assign the current router to a Mist organization.
 #### Usage
 
 ```
-adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>]
+adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>] [mist-instance <mist-instance>]
 ```
 
 ##### Keyword Arguments
@@ -20,6 +20,7 @@ adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [route
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. |
+| mist-instance | Global01 \| Global02 \| Global03 \| Global04 \| Global05 \| EMEA01 \| EMEA02 \| EMEA03 \| APAC01 \| APAC02 \| APAC03 \| APAC04 \| APAC05 \| USGov01 (default: Global01) |
 | org-id | The ID of the Mist organization where the router is assigned. |
 | registration-code | The registration code used to assign this router to an organization. |
 | router-name | Assign a name to the router. |
@@ -34,9 +35,14 @@ adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [route
 
 If you know the ID of the organization in Mist, or the registration code for the router, you can use the optional `org-id` or `registration-code` arguments. Otherwise, use the interactive dialog to walk through entering Mist credentials and assigning the router to an organization.
 
+:::note
+This command can only be run on a Router.
+:::
+
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.0   | This feature was introduced |
+| 6.3.0 | Added `mist-instance` |
 
 ## `clear app-id cache`
 
@@ -325,42 +331,6 @@ clear pim mroute [vrf <vrf>] [force] {router <router> | resource-group <resource
 | router | The name of the router for which to clear multicast routes |
 | vrf | VRF name |
 
-## clone
-
-Clone the configuration of one router to create a new router with a new name and identical contents. 
-
-#### Usage
-
-```
-router [force] <name> <new-name>
-```
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | An identifier for the router |
-| new-name | The new value for the router name |
-
-#### Example
-```
-admin@conductor-east-1.RTR_EAST_CONDUCTOR# configure authority clone router Boston NewYork
-```
-
-#### Description
-The clone command duplicates the configuration data from the existing `Boston` router into a new router with the name `NewYork`, and stages it to the candidate configuration.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 5.0.0   | This feature was introduced |
-
 ## `commit`
 
 Commit the candidate config as the new running config.
@@ -612,6 +582,12 @@ connect [username <username>] router <router> node <node>
 | router | The router to connect to |
 | username | Username to use for login to the Managed Router (default: &lt;current user&gt;) |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `create capture-filter`
 
 Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface.
@@ -808,6 +784,85 @@ When session-count is not specified, default will be unlimited.
 
 When packet-count is not specified, default is 100 packets in each direction for each session matched.
 
+## `create system connectivity authorized-keys`
+
+Adds an entry to the ssh authorized keys file.
+
+#### Usage
+
+```
+create system connectivity authorized-keys [{router <router> | resource-group <resource-group>}] [force] [node <node>] <key-type> <key-value> <comment>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| key-type | The type of key (e.g. ssh-rsa) |
+| key-value | The base64 encoded public key |
+| comment | A comment (usually the asset-id) to be associated with entry |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
+
+## `create system connectivity known-hosts`
+
+Adds an entry to the ssh known hosts file.
+
+#### Usage
+
+```
+create system connectivity known-hosts [{router <router> | resource-group <resource-group>}] [force] [node <node>] <host> <key-type> <key-value> <comment>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| host | The domains/IP addresses associated with the key |
+| key-type | The type of key (e.g. ssh-rsa) |
+| key-value | The base64 encoded public key |
+| comment | A comment (usually the asset-id) to be associated with entry |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
+
 ## `create user`
 
 Create a new user account interactively.
@@ -845,7 +900,7 @@ create user [<username>]
 The `create user` command allows administrators to create user accounts for user and/or administrative access to the SSR's management port. Issuing the `create user <username>` launches an interactive session that prompts for the new user's full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
 
 :::note
-Password policies have been updated with the release of version 5.6. Please see [Password Policies](config_password_policies.md) for additional information. 
+Please see [Password Policies](config_password_policies.md) for additional information. 
 :::
 
 #### Example
@@ -1188,6 +1243,113 @@ The _delete sessions_ command removes all current sessions or a subset if argume
 This may be a service impacting operation.
 :::
 
+## `delete system connectivity authorized-keys autoclean`
+
+Automatically removes unrecognized entries from the ssh authorized keys file.
+
+#### Usage
+
+```
+delete system connectivity authorized-keys autoclean [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+## `delete system connectivity authorized-keys entry`
+
+Deletes entries from the ssh authorized keys file based on specified parameters.
+
+#### Usage
+
+```
+delete system connectivity authorized-keys entry [{router <router> | resource-group <resource-group>}] [key-type <key-type>] [key-value <key-value>] [comment <comment>] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| comment | Optionally specifies a comment to delete entries by (default: ) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| key-type | Optionally specifies which key type to delete (default: ) |
+| key-value | Optionally specifies a key value to delete entries by (default: ) |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
+
+## `delete system connectivity known-hosts autoclean`
+
+Automatically removes unrecognized entries from the ssh known hosts file.
+
+#### Usage
+
+```
+delete system connectivity known-hosts autoclean [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+## `delete system connectivity known-hosts entry`
+
+Deletes entries from the ssh known hosts file based on specified parameters.
+
+#### Usage
+
+```
+delete system connectivity known-hosts entry [{router <router> | resource-group <resource-group>}] [host <host>] [key-type <key-type>] [key-value <key-value>] [comment <comment>] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| comment | Optionally specifies a comment to delete entries by |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| host | Optionally specifies a host to delete entries for |
+| key-type | Optionally specifies which key type to delete |
+| key-value | Optionally specifies a key value to delete entries by |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
+
 ## `delete system software`
 
 Remove or cancel a previously started download.
@@ -1195,13 +1357,17 @@ Remove or cancel a previously started download.
 #### Usage
 
 ```
-delete system software version <version>
+delete system software [{router <router> | resource-group <resource-group>}] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to cancel or remove SSR software |
+| resource-group | The name of the resource group |
+| router | The router on which to cancel or remove SSR software (default: &lt;current router&gt;) |
 | version | The version to cancel or remove. |
 
 ##### See Also
@@ -1209,11 +1375,16 @@ delete system software version <version>
 | command | description |
 | ------- | ----------- |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
 ## `delete user`
@@ -1619,7 +1790,7 @@ export config <datastore> <export-name>
 
 #### Description
 
-The _export_ command takes a configuration from a previously created backup (via _create config backup_), from the candidate configuration, or from the SSR&#x27;s running configuration, and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
+The _export_ command takes the running or candidate configuration from the SSR and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
 
 Exported files are stored in /etc/128technology/config-exports/ and are stored as GZIP compressed files.
 
@@ -1752,33 +1923,70 @@ import iso [check-rpm-signature <check-rpm-signature>] [force] [verbose] {hunt |
 | name | description |
 | ---- | ----------- |
 | check-rpm-signature | required \| allow-unsigned \| disabled (default: required) |
-| filepath | The absolute filepath to the ISO |
+| filepath | The absolute filepath to the ISO, tarball, checksum or signature file |
 | force | Skip confirmation prompt |
-| hunt | Find and import all ISOs from the filesystem |
+| hunt | Find and import all image, checksum and signature files from the filesystem matching 128T*.iso, SSR*.iso or SSR*.tar and any corresponding checksum and signature files |
 | verbose | Increase log level verbosity |
 
-#### Example
+## `initialize conductor`
+
+Initializes the current device as a conductor.
+
+#### Usage
 
 ```
-admin@conductor.Conductor# import iso hunt
-This command is resource intensive and can take a while. Are you sure? [y/N]: y
-Current Installer version: 2.5.0-0.20200326163206.snapshot
-Installer will run in non-interactive mode
-Refreshing DNF cache (this may take a few minutes)
-Cleaning DNF data: expire-cache
-Making the DNF cache
-Cleaning legacy local repos (this may take a few minutes)
-Installer will hunt for ISOs to import
-Importing packages for 128T-4.4.0-0.202004021313.release.el7.x86_64.rpm
-Installer complete
-Import success
+initialize conductor [artifactory-user <artifactory-user>] [artifactory-password <artifactory-password>] [dns-servers <dns-servers>] [node-ip <node-ip>] [node-gateway <node-gateway>] [interface-name <interface-name>] [clustered] [ha-ip <ha-ip>] [ha-interface-name <ha-interface-name>] [ha-peer-ip <ha-peer-ip>] [ha-peer-name <ha-peer-name>] [learn-from-ha-peer] [ha-peer-username <ha-peer-username>] [unsafe-ha-peer-password <unsafe-ha-peer-password>] router-name <router-name> node-name <node-name>
 ```
 
-#### Version History
+##### Keyword Arguments
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 4.4.0   | This feature was introduced |
+| name | description |
+| ---- | ----------- |
+| artifactory-password | Password portion of the artifactory credentials |
+| artifactory-user | User portion of the artifactory credentials |
+| clustered | Whether or not this conductor is to be configured as an HA pair |
+| dns-servers | comma separated list of DNS servers |
+| ha-interface-name | Interface name (matching a port in the device-map) to bind the ha-ip to. |
+| ha-ip | The IPv4 address to assign to the HA interface on this node |
+| ha-peer-ip | The IPv4 address of the node to be used as an HA peer |
+| ha-peer-name | The name of the Node to be used as an HA peer |
+| ha-peer-username | The user on the peer node to authenticate as. This user must have sudo privileges. Required if &#x27;learn-from-ha-peer&#x27; is true. |
+| interface-name | Interface name (matching a port in the device-map) to bind the node-ip and node-gateway to. |
+| learn-from-ha-peer | If true, the Initializer will use the HA peer to obtain setup information. |
+| node-gateway | The IP address of the gateway of the node being provisioned |
+| node-ip | The IPv4 address of the node being provisioned (x.x.x.x/y) |
+| node-name | The name of the node being provisioned |
+| router-name | Assign a name to the router |
+| unsafe-ha-peer-password | The password for the user on the peer node to authenticate as. WARNING: If this field is used, the preferences file should not be world-readable to avoid leaking the peer node password. Required if &#x27;learn-from-ha-peer&#x27; is true. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`initialize conductor-managed`](#initialize-conductor-managed) | Initializes the current device as a conductor-managed router. |
+
+## `initialize conductor-managed`
+
+Initializes the current device as a conductor-managed router.
+
+#### Usage
+
+```
+initialize conductor-managed router-name <router-name> conductor-ip <address> [<address>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| conductor-ip | The address(es) of the conductor node(s) |
+| router-name | Assign a name to the router |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`initialize conductor`](#initialize-conductor) | Initializes the current device as a conductor. |
 
 ## `lookup application by-address`
 
@@ -1884,6 +2092,12 @@ manage plugin install [node <node>] <name> [<version>]
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `manage plugin remove`
 
 Remove an installed plugin.
@@ -1915,6 +2129,12 @@ manage plugin remove [node <node>] <name>
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `migrate`
 
 Migrate an SSR to a new conductor. For more details on the SSR router migration refer to [How to: Conductor Migration](howto_conductor_migration.md).
@@ -1939,15 +2159,18 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 | command | description |
 | ------- | ----------- |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
@@ -2276,13 +2499,19 @@ Download a new version of the SSR.
 #### Usage
 
 ```
-request system software download version <version>
+request system software download [{router <router> | resource-group <resource-group>}] [skip-version-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| node | The node on which to download SSR software |
+| resource-group | The name of the resource group |
+| router | The router on which to download SSR software (default: &lt;current router&gt;) |
+| skip-version-check | Skip the version check to allow downloading SSR software at a lower version than what is currently installed. |
 | version | The version to download. |
 
 ##### See Also
@@ -2290,12 +2519,107 @@ request system software download version <version>
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
+
+## `request system software health-check`
+
+Perform a health check of an SSR.
+
+#### Usage
+
+```
+request system software health-check [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<target>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node on which to perform the health-check |
+| resource-group | The name of the resource group |
+| router | The router on which to perform the health-check (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| target | The target health-check (default: steady-state) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `request system software revert`
+
+Revert to a previous version of the SSR.
+
+#### Usage
+
+```
+request system software revert [{router <router> | resource-group <resource-group>}] [simultaneous] [cohort-id <cohort-id>] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The router on which to revert to previous SSR software (default: &lt;current router&gt;) |
+| simultaneous | Revert both nodes in an HA router at the same time to maximize speed but interrupt service. Only valid when targeting a router. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+#### Description
+
+Revert a router or node to a previous version of the SSR software. When targeting a router with the revert command the default behavior for HA routers is to perform a sequenced revert, which will revert each node one at a time to minimize service impact. The &#x27;simultaneous&#x27; flag will revert both nodes at once to maximize speed but impact service.
+
+When targeting a node in an HA router with the revert command, only the target node will be reverted.
+
+:::warning
+This may be a service impacting operation.
+:::
 
 ## `request system software upgrade`
 
@@ -2304,13 +2628,22 @@ Upgrade to a new version of the SSR.
 #### Usage
 
 ```
-request system software upgrade version <version>
+request system software upgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-health-check] [skip-post-health-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The router on which to upgrade SSR software (default: &lt;current router&gt;) |
+| simultaneous | Upgrade both nodes in an HA router at the same time to maximize speed but interrupt service. Only valid when targeting a router. |
+| skip-package-transfer | Don&#x27;t transfer any packages installed on top of the current SSR ISO to the new SSR ISO. Only valid for image based systems. |
+| skip-post-health-check | Skip the post upgrade health check, which reverts to the previous version upon failure. |
+| skip-pre-health-check | Skip the pre upgrade health check, which prevents the upgrade from starting upon failure. |
 | version | The version to upgrade to. |
 
 ##### See Also
@@ -2319,13 +2652,22 @@ request system software upgrade version <version>
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
 #### Description
+
+Upgrade a router or node to a new version of the SSR software. When targeting a router with the upgrade command the default behavior for HA routers is to perform a sequenced upgrade, which will upgrade each node one at a time to minimize service impact. The &#x27;simultaneous&#x27; flag will upgrade both nodes at once to maximize speed but impact service.
+
+When targeting a node in an HA router with the upgrade command, only the target node will be upgraded.
 
 :::warning
 This may be a service impacting operation.
@@ -2913,10 +3255,7 @@ search config running [limit <limit>] <find>
 
 | name | description |
 | ---- | ----------- |
-| case-sensitive | Interpret the search query as case-sensitive |
 | limit | limit the maximum number of results [type: int] |
-| regex | Process the query as a regular expression |
-| whole-word | Don't allow partial matches of words |
 
 ##### Positional Arguments
 
@@ -3009,12 +3348,12 @@ Configuration Attributes:
 
 ## `send command download`
 
-Download SSR software on a router
+This download command is now obsolete.
 
 #### Usage
 
 ```
-send command download [dry-run] [force] {router <router> | resource-group <resource-group>} [<version>]
+send command download [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3023,36 +3362,58 @@ send command download [dry-run] [force] {router <router> | resource-group <resou
 | ---- | ----------- |
 | dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
 | resource-group | The name of the resource group |
-| router | The router on which to download software |
+| router | The name of the router (default: &lt;current router&gt;) |
 
-##### Positional Arguments
+#### Description
+
+Please use the following commands to perform software maintenance:
+
+show system software ...
+request system software ...
+set system software ...
+delete system software ...
+
+## `send command reboot`
+
+Reboot an SSR node
+
+#### Usage
+
+```
+send command reboot [force] router <router> node <node>
+```
+
+##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| version | The version of SSR as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
+| force | Skip confirmation prompt |
+| node | The node to reboot |
+| router | The router to reboot |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command reconnect`
 
@@ -3081,18 +3442,16 @@ send command reconnect [router <router>] [node <node>]
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `send command reconnect disconnected`
@@ -3115,19 +3474,23 @@ send command reconnect disconnected [force]
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command restart`
 
@@ -3151,32 +3514,32 @@ send command restart [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command rollback`
 
-Rollback an SSR to the previously installed version
+This rollback command is now obsolete.
 
 #### Usage
 
 ```
-send command rollback [force] {router <router> | resource-group <resource-group>}
+send command rollback [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3184,30 +3547,18 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
 | resource-group | The name of the resource group |
-| router | The router to rollback |
-
-##### See Also
-
-| command | description |
-| ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
-| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
-| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command start`](#send-command-start) | Start an SSR node |
-| [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+| router | The name of the router (default: &lt;current router&gt;) |
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+Please use the following commands to perform software maintenance:
+
+show system software ...
+request system software ...
+set system software ...
+delete system software ...
 
 ## `send command start`
 
@@ -3232,22 +3583,22 @@ send command start [force] router <router> node <node>
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command stop`
 
@@ -3271,27 +3622,27 @@ send command stop [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command sync`
 
-Transition an asset back to **connected** and perform a sync.
+Transition an asset back to &#x27;synchronizing&#x27; and perform a sync.
 
 #### Usage
 
@@ -3313,83 +3664,141 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-Transition an asset back to **connected** and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
+Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
 
-#### Version History
-| Release | Modification                |
-| ------- | --------------------------- |
-| 5.6.7   | This feature was introduced |
+:::note
+This command can only be run on a Conductor.
+:::
+
+## `send command system-check post-operation`
+
+Post-operation an SSR node
+
+#### Usage
+
+```
+send command system-check post-operation [cohort-id <cohort-id>] [force] router <router>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| router | The router to post-operation |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
+## `send command system-check pre-operation`
+
+Pre-operation an SSR node
+
+#### Usage
+
+```
+send command system-check pre-operation [cohort-id <cohort-id>] [force] router <router>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| router | The router to pre-operation |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command upgrade`
 
-Upgrade an SSR node
+This upgrade command is now obsolete.
 
 #### Usage
 
 ```
-send command upgrade [dry-run] [force] {router <router> | resource-group <resource-group>} <version>
+send command upgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
 | resource-group | The name of the resource group |
-| router | The router to upgrade |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| version | The version of SSR as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
-
-##### See Also
-
-| command | description |
-| ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
-| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
-| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
-| [`send command start`](#send-command-start) | Start an SSR node |
-| [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+| router | The name of the router (default: &lt;current router&gt;) |
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+Please use the following commands to perform software maintenance:
+
+show system software ...
+request system software ...
+set system software ...
+delete system software ...
 
 ## `send command yum-cache-refresh`
 
-Refresh the yum cache as well as the SSR software versions available for download and upgrade.
+This yum-cache-refresh command is now obsolete.
 
 #### Usage
 
 ```
-send command yum-cache-refresh [force] {router <router> | resource-group <resource-group>}
+send command yum-cache-refresh [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3397,26 +3806,18 @@ send command yum-cache-refresh [force] {router <router> | resource-group <resour
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
 | resource-group | The name of the resource group |
-| router | The router to refresh |
+| router | The name of the router (default: &lt;current router&gt;) |
 
-##### See Also
+#### Description
 
-| command | description |
-| ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
-| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
-| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
-| [`send command start`](#send-command-start) | Start an SSR node |
-| [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+Please use the following commands to perform software maintenance:
+
+show system software ...
+request system software ...
+set system software ...
+delete system software ...
 
 ## `service-ping`
 
@@ -3829,7 +4230,7 @@ set password
 
 The _set password_ command allows a PCLI user to change their password. As is typical with most password changing routines, as a security precaution the user must enter their current password before they&#x27;re permitted to change it.
 :::note
-If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+This command can only be run on a locally authenticated user.
 :::
 
 #### Version History
@@ -3894,49 +4295,51 @@ Successfully set provisional status for device 10
 
 ## `set software access-token`
 
-Save credentials for accessing SSR software repositories.
+Set credentials for accessing SSR software repositories on the local node.
 
 #### Usage
 
 ```
-set software access-token [{router <router> | resource-group <resource-group>}] [force] [node <node>] <username> <token>
+set software access-token [force] <username> <token> [<channel>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The name of the node. |
-| resource-group | The name of the resource group. |
-| router | The name of the router (default: &lt;current router&gt;). |
+| force | Skip confirmation prompt |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| username | The username for the software access account. |
-| token | Authentication token for SSR software. |
+| username | The username for the software access account |
+| token | Authentication token for SSR software |
+| channel | The software access channel (default: release) |
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 5.5.2   | This feature was introduced |
+## `set system software boot-volume`
 
-## `set system software image`
-
-Set the boot image.
+Set the boot volume.
 
 #### Usage
 
 ```
-set system software image <image>
+set system software boot-volume [force] [router <router>] [node <node>] <id>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to set the boot volume |
+| router | The router on which to set the boot volume (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| image | The image to load on next boot |
+| id | The boot volume ID to load on next boot |
 
 ##### See Also
 
@@ -3944,10 +4347,15 @@ set system software image <image>
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
 | Release | Modification                |
@@ -4018,6 +4426,10 @@ shell [<command> ...]
 #### Description
 
 The shell command allows administrators to execute a bash shell, or to execute a command within the context of a bash shell (specified as a series of optional parameters to the _shell_ command).
+
+:::note
+This command can only be run by users that are a part of the &#x27;admin&#x27; group.
+:::
 
 #### Example
 
@@ -4456,30 +4868,31 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 | command | description |
 | ------- | ----------- |
 | [`errors`](#show-assets-errors) | Shows the SSR nodes that have errors. |
-| [`software`](#show-assets-software) | Shows assets software information. |
 | [`summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
 The _show assets_ command displays the automated provisioning status of the SSR nodes within an Authority. With SSR&#x27;s automated provisioning feature set, each &quot;asset&quot; represents a platform into which the SSR software is installed, updated, managed, etc. The _show assets_ command allows administrators to see, at a glance, the state of all assets – including which software versions have been installed on which nodes, what their router and node identifiers are, etc.
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 #### Example
 
@@ -4546,6 +4959,10 @@ show assets errors [{router <router> | resource-group <resource-group>}] [force]
 
 _show assets errors_ will display all assets with at least one automated provisioner related error.
 
+:::note
+This command can only be run on a Conductor.
+:::
+
 #### Example
 
 ```
@@ -4611,6 +5028,10 @@ Displays software related information for each managed asset. The following info
 - Software versions currently being downloaded.
 - Previously downloaded versions that can be used to upgrade the platform.
 
+:::note
+This command can only be run on a Conductor.
+:::
+
 #### Example
 
 ```
@@ -4666,23 +5087,25 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 
 #### Description
 
 _show assets summary_ will display a total of all assets in each state.
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 #### Example
 
@@ -5171,17 +5594,17 @@ show certificate webserver
 admin@labsystem1.fiedler# show certificate webserver
 
 Certificate:
-​    Data:
-​        Version: 3 (0x2)
-​        Serial Number: 17087 (0x42bf)
-​    Signature Algorithm: sha256WithRSAEncryption
-​        Issuer: C=US, ST=MA, O=a, CN=a
-​        Validity
-​            Not Before: May  5 04:49:02 2016 GMT
-​            Not After : May  6 04:49:02 2017 GMT
-​        Subject: C=US, ST=MA, O=a, CN=a
-​        Subject Public Key Info:
-​            Public Key Algorithm: rsaEncryption
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 17087 (0x42bf)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, ST=MA, O=a, CN=a
+        Validity
+            Not Before: May  5 04:49:02 2016 GMT
+            Not After : May  6 04:49:02 2017 GMT
+        Subject: C=US, ST=MA, O=a, CN=a
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
 ...
 ```
 
@@ -5212,20 +5635,20 @@ Note that the output from _show config candidate_ is formatted in such a way so 
 ```
 admin@labsystem1.fiedler# show config candidate
 config
-​    authority
-​        router  Fabric128
-​            name  Fabric128
-​            node  labsystem1
-​                name              labsystem1
-​                id                1
-​                description       "Primary lab system"
-​                location          "Newton, MA"
-​                role              combo
-​                device-interface  1
-​                    id                 1
-​                    description        "external network"
-​                    type               ethernet
-​                    pci-address        0000:02:00.0
+    authority
+        router  Fabric128
+            name  Fabric128
+            node  labsystem1
+                name              labsystem1
+                id                1
+                description       "Primary lab system"
+                location          "Newton, MA"
+                role              combo
+                device-interface  1
+                    id                 1
+                    description        "external network"
+                    type               ethernet
+                    pci-address        0000:02:00.0
 ...
 ```
 The same configuration using the _flat_ flag is displayed quite differently:
@@ -5248,21 +5671,21 @@ The _show config candidate_ command also lets users show specific portions of th
 ```
 admin@labsystem1.fiedler# show config candidate authority session-type verbose all
 config
-​    authority
-​        session-type  HTTP
-​            name           HTTP
-​            service-class  Standard
-​            timeout        7200000
-​            transport      tcp
-​                protocol    tcp
-​                port-range  80
-​                    start-port  80
-​                exit
-​                port-range  8080
-​                    start-port  8080
-​                exit
-​            exit
-​        exit
+    authority
+        session-type  HTTP
+            name           HTTP
+            service-class  Standard
+            timeout        7200000
+            transport      tcp
+                protocol    tcp
+                port-range  80
+                    start-port  80
+                exit
+                port-range  8080
+                    start-port  8080
+                exit
+            exit
+        exit
 ...
 ```
 
@@ -5277,15 +5700,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate) | Show configuration data for `authority` |
-| [`generated`](#show-config-candidate) | Show configuration data for `generated` |
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced as "show candidate-config" |
-| 2.0.0   | Renamed and reorganized as "show config candidate". _flat_, _verbose_, and configuration branch arguments added |
+| `authority` | Show configuration data for a specified section of the configuration |
+| `generated` | Show configuration data for a specified section of the generated configuration |
 
 ## `show config disk-cache`
 
@@ -5473,6 +5889,12 @@ Display all routers with a locally modified config version.
 show config locally-modified
 ```
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show config out-of-sync`
 
 Display all routers with a config version that is out of sync with the conductor.
@@ -5482,6 +5904,12 @@ Display all routers with a config version that is out of sync with the conductor
 ```
 show config out-of-sync
 ```
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show config running`
 
@@ -5504,12 +5932,12 @@ Note that the output from _show config running_ is formatted in such a way so as
 ```
 admin@labsystem1.fiedler# show config running
 config
-​    authority
-​        name           Authority128
-​        router         Fabric128
-​            name                 Fabric128
-​            description          "Default router"
-​            inter-node-security  internal
+    authority
+        name           Authority128
+        router         Fabric128
+            name                 Fabric128
+            description          "Default router"
+            inter-node-security  internal
 ...
 ```
 
@@ -5518,24 +5946,24 @@ The _show config running_ command also lets users show specific portions of the 
 ```
 admin@labsystem1.fiedler# show config running authority service-class verbose all
 config
-​    authority
-​        service-class  Standard
-​            name            Standard
-​            dscp            0
-​            priority        0
-​            rate-limit      false
-​            max-flow-rate   0
-​            max-flow-burst  0
-​        exit
+    authority
+        service-class  Standard
+            name            Standard
+            dscp            0
+            priority        0
+            rate-limit      false
+            max-flow-rate   0
+            max-flow-burst  0
+        exit
 
-​        service-class  NetworkControl
-​            name            NetworkControl
-​            dscp            48
-​            priority        0
-​            rate-limit      false
-​            max-flow-rate   0
-​            max-flow-burst  0
-​        exit
+        service-class  NetworkControl
+            name            NetworkControl
+            dscp            48
+            priority        0
+            rate-limit      false
+            max-flow-rate   0
+            max-flow-burst  0
+        exit
 ...
 ```
 
@@ -5550,16 +5978,7 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running) | Show configuration data for `authority` |
-| [`generated`](#show-config-running) | Show configuration data for `generated` |
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced as "show running-config" |
-| 2.0.0   | Renamed and reorganized as "show config running" |
-
+| `authority` | Show configuration data for a specific section of the authority |
 
 ## `show config version`
 
@@ -6118,6 +6537,12 @@ show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [
 | [`show stats dynamic-peer-update`](cli_stats_reference.md#show-stats-dynamic-peer-update) | Stats pertaining to dynamic peer update processes |
 | [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show entitlement`
 
 Displays entitlement utilized.
@@ -6392,7 +6817,7 @@ show fib [{service-name <name> | hierarchy-service-name <name> | contains-servic
 | name | description |
 | ---- | ----------- |
 | contains-service-name | The partial substring match to show for the fib |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
 | hierarchy-service-name | The hierarchy root to show for the fib |
 | match-service-name | The regex to match service names to show for the fib |
 | node | The node from which to retrieve fib entries |
@@ -7555,6 +7980,8 @@ show network-interface [name <name>] [force] [node <node>] {router <router> | re
 | command | description |
 | ------- | ----------- |
 | [`application`](#show-network-interface-application) | Display application data info for network-interfaces. |
+| [`redundancy`](#show-network-interface-redundancy) | Display redundancy info for network-interfaces. |
+| [`source-nat-rules`](#show-network-interface-source-nat-rules) | Display source NAT rules on a network-interface. Source NAT ports usage is available in the detail view for dynamic rules. |
 
 #### Description
 
@@ -7672,6 +8099,53 @@ Tue 2020-04-21 15:26:19 UTC
 
 Completed in 0.76 seconds
 ```
+## `show network-interface redundancy`
+
+Display redundancy info for network-interfaces.
+
+#### Usage
+
+```
+show network-interface redundancy [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| name | Network interface to display (if omitted, all will be displayed) |
+| node | The node for which to display redundancy data |
+| resource-group | The name of the resource group |
+| router | The router for which to display redundancy data |
+
+#### Description
+
+The command _show network-interface redundancy_ can be used to display information regarding network-interface redundancy status
+
+## `show network-interface source-nat-rules`
+
+Display source NAT rules on a network-interface. Source NAT ports usage is available in the detail view for dynamic rules.
+
+#### Usage
+
+```
+show network-interface source-nat-rules name <name> router <router> node <node> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | The network-interface where the source NAT rules are configured |
+| node | The node on which to run show source-nat-rules |
+| router | The router on which to run show source-nat-rules |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `show ntp`
 
@@ -9077,6 +9551,10 @@ show peers hostnames [{router <router> | resource-group <resource-group>}] [forc
 | resource-group | The name of the resource group |
 | router | The router on which to display peer hostnames (default: all) |
 
+:::note
+This command can only be run on a Conductor.
+:::
+
 #### Example
 
 ```
@@ -9278,7 +9756,7 @@ show platform [{router <router> | resource-group <resource-group>}] [force] [nod
 
 | name | description |
 | ---- | ----------- |
-| category | all \| cpu \| device-interfaces \| disk \| fan-speeds \| memory \| operating-system \| temperatures \| vendor (default: all) |
+| category | all \| cpu \| device-interfaces \| disk \| memory \| operating-system \| vendor (default: all) |
 
 ##### See Also
 
@@ -9350,6 +9828,12 @@ show plugins available [{name <name> | category <category>}] [node <node>]
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show plugins categories`
 
 Shows all possible plugin categories.
@@ -9368,6 +9852,12 @@ show plugins categories
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show plugins installed`
 
@@ -9394,6 +9884,12 @@ show plugins installed [category <category>] [node <node>]
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show plugins state`
 
@@ -9839,7 +10335,7 @@ Displays service path information at the specified node.
 #### Usage
 
 ```
-show service-path [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{rows <rows> | detail}] router <router> node <node>
+show service-path [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{rows <rows> | detail | idp}] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -10010,8 +10506,8 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 | command | description |
 | ------- | ----------- |
-| [`by-id`](#show-sessions-by-id) | Show information of a session for a given Id |
-| [`top`](#show-sessions) | &lt;bandwidth&gt; |
+| [`by-id`](#show-sessions-by-id) | Show information of a session for a given ID |
+| [`top`](#show-sessions-top-bandwidth) | Display the top sessions ordered by bandwidth |
 
 #### Description
 
@@ -10256,7 +10752,7 @@ Show STEP routes
 #### Usage
 
 ```
-show step routes [rows <rows>] [node <node-name>] [service <service-name>] [ip-prefix <prefix>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show step routes [rows <rows>] [service <service-name>] [ip-prefix <prefix>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -10265,7 +10761,6 @@ show step routes [rows <rows>] [node <node-name>] [service <service-name>] [ip-p
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | ip-prefix | STEP routes for this ip prefix [type: IP prefix] |
-| node | STEP routes on this node |
 | resource-group | The name of the resource group |
 | router | The router to request STEP information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
@@ -10293,7 +10788,11 @@ show step-repo clients [<verbosity>]
 | ---- | ----------- |
 | verbosity | detail \| summary (default: summary) |
 
+#### Description
 
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show system`
 
@@ -10322,7 +10821,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
 | [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
-| [`software`](#show-system-software-available) | &lt;available&gt; \| &lt;download&gt; \| &lt;upgrade&gt; |
+| [`software`](#show-system-software) | &lt;available&gt; \| &lt;download&gt; \| &lt;health-check&gt; \| &lt;revert&gt; \| &lt;sources&gt; \| &lt;upgrade&gt; |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
@@ -10376,7 +10875,11 @@ show system connectivity [{router <router> | resource-group <resource-group>}] [
 
 | command | description |
 | ------- | ----------- |
+| [`authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
 | [`internal`](#show-system-connectivity-internal) | Displays inter-node secure communication connections. |
+| [`key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
 
 #### Description
 
@@ -10397,6 +10900,67 @@ Fri 2018-02-09 09:30:48 EST
 
 Completed in 0.20 seconds
 ```
+
+## `show system connectivity authorized-keys`
+
+Display ssh authorized keys for inter-node communication.
+
+#### Usage
+
+```
+show system connectivity authorized-keys [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
+
+## `show system connectivity host-keys`
+
+Displays the public keys used by the router for inter-node communication.
+
+#### Usage
+```
+show system connectivity host-keys [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
 
 ## `show system connectivity internal`
 
@@ -10437,6 +11001,71 @@ Fri 2018-02-09 09:31:38 EST
 
 Completed in 0.27 seconds
 ```
+## `show system connectivity key-checking-mode`
+
+Shows the StrictHostKeyCheckingMode of various router services.
+
+#### Usage
+
+```
+show system connectivity key-checking-mode [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display key checking modes for |
+| resource-group | The name of the resource group |
+| router | The router for which to display key checking modes for (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity known-hosts`](#show-system-connectivity-known-hosts) | Display ssh known hosts for inter-node communication. |
+
+#### Description
+
+Displayes the StrictHostKeyCheckingMode for Inter-Node, and Inter-Router SSH tunnels.
+
+## `show system connectivity known-hosts`
+
+Display ssh known hosts for inter-node communication.
+
+#### Usage
+
+```
+show system connectivity known-hosts [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create system connectivity authorized-keys`](#create-system-connectivity-authorized-keys) | Adds an entry to the ssh authorized keys file. |
+| [`create system connectivity known-hosts`](#create-system-connectivity-known-hosts) | Adds an entry to the ssh known hosts file. |
+| [`delete system connectivity authorized-keys entry`](#delete-system-connectivity-authorized-keys-entry) | Deletes entries from the ssh authorized keys file based on specified parameters. |
+| [`delete system connectivity known-hosts entry`](#delete-system-connectivity-known-hosts-entry) | Deletes entries from the ssh known hosts file based on specified parameters. |
+| [`show system connectivity authorized-keys`](#show-system-connectivity-authorized-keys) | Display ssh authorized keys for inter-node communication. |
+| [`show system connectivity host-keys`](#show-system-connectivity-host-keys) | Displays the public keys used by the router for inter-node communication. |
+| [`show system connectivity key-checking-mode`](#show-system-connectivity-key-checking-mode) | Shows the StrictHostKeyCheckingMode of various router services. |
 
 ## `show system processes`
 
@@ -10636,6 +11265,52 @@ Wed 2020-04-15 20:41:18 UTC
 Completed in 0.11 seconds
 ```
 
+## `show system software`
+
+Display information about system software status related to download, upgrade, current health, and other information. 
+
+#### Usage
+
+```
+show system software [available | download | health-check | revert | sources | upgrade]
+```
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The target node to show SSR versions to download. |
+| router | The target router to show SSR versions available for download (default: &lt;current router&gt;). |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [available](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [download](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [health-check](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [revert](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [sources](#show-system-software-sources) | Display information about software sources. |
+| [upgrade](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+
 ## `show system software available`
 
 Display new versions of the SSR that can be installed.
@@ -10643,8 +11318,16 @@ Display new versions of the SSR that can be installed.
 #### Usage
 
 ```
-show system software available [<verbosity>]
+show system software available [skip-version-check] [router <router>] [node <node>] [<verbosity>]
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The target node to show SSR versions to download. |
+| router | The target router to show SSR versions available for download (default: &lt;current router&gt;). |
+| skip-version-check | Skip the version check to show available SSR software at a lower version than what is currently installed. |
 
 ##### Positional Arguments
 
@@ -10658,10 +11341,15 @@ show system software available [<verbosity>]
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
 ## `show system software download`
@@ -10671,14 +11359,19 @@ Display in-progress and completed downloads of new SSR versions.
 #### Usage
 
 ```
-show system software download [version <version>]
+show system software download [{router <router> | resource-group <resource-group>}] [version <version>] [skip-version-check] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| version | Display state about only a single version |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The target node to show downloaded SSR versions. |
+| resource-group | The name of the resource group |
+| router | The target router to show downloaded SSR versions (default: &lt;current router&gt;). |
+| skip-version-check | Skip the version check to allow showing downloaded SSR software at a lower version than what is currently installed. |
+| version | Display state about only a single version. |
 
 ##### See Also
 
@@ -10686,21 +11379,41 @@ show system software download [version <version>]
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
-## `show system software upgrade`
+## `show system software health-check`
 
-Follow an in-progress upgrade.
+Show available health checks of an SSR.
 
 #### Usage
 
 ```
-show system software upgrade
+show system software health-check [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node on which to show available health-checks. |
+| resource-group | The name of the resource group. |
+| router | The router on which to show available health-checks (default: &lt;current router&gt;). |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ##### See Also
 
@@ -10708,10 +11421,129 @@ show system software upgrade
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `show system software revert`
+
+Display in-progress and reversions to previous SSR versions.
+
+#### Usage
+
+```
+show system software revert [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The target node to show an in-progress reversion. |
+| resource-group | The name of the resource group |
+| router | The target router to show an in-progress reversion (default: &lt;current router&gt;). |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `show system software sources`
+
+Display information about software sources.
+
+#### Usage
+
+```
+show system software sources [include-disabled] [router <router>] [node <node>] [<type>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| include-disabled | Include disabled sources in the output. |
+| node | The target node to show software sources. |
+| router | The target router to show software sources. (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| type | The software source type (default: all) |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `show system software upgrade`
+
+Display in-progress and completed upgrades to higher SSR versions.
+
+#### Usage
+
+```
+show system software upgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]`
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The target node to show an in-progress upgrade. |
+| resource-group | The name of the resource group. |
+| router | The target router to show an in-progress upgrade (default: &lt;current router&gt;). |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
 ## `show system version`
@@ -10728,10 +11560,10 @@ show system version [{router <router> | resource-group <resource-group>}] [force
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node to show version information for |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node to show version information. |
 | resource-group | The name of the resource group |
-| router | The router to show version information for (default: &lt;current router&gt;) |
+| router | The router to show version information (default: &lt;current router&gt;). |
 
 ##### Positional Arguments
 
@@ -10745,11 +11577,16 @@ show system version [{router <router> | resource-group <resource-group>}] [force
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
-| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 
 #### Description
 
@@ -10789,7 +11626,7 @@ show tenant members [rows <rows>] [force] [node <node>] {router <router> | resou
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
 | node | The node from which to retrieve tenant members |
 | resource-group | The name of the resource group |
 | router | The router from which to retrieve tenant members |
@@ -11145,6 +11982,10 @@ sync peer addresses [{router <router> | resource-group <resource-group>}] [force
 #### Description
 
 This command will force a network element (or group of network elements) to synchronize any dynamically-learned IP addresses to its conductor. (The conductor will redistribute these dynamic addresses to other members of the Authority as necessary.)
+
+:::note
+This command can only be run on a Conductor, or a Router that is managed by a Conductor.
+:::
 
 #### Example
 

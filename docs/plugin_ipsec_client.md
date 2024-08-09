@@ -578,7 +578,8 @@ If a tunnel goes down, we set the corresponding ingress KNI to be operationally 
 
 Example output when the tunnel for `rem1` goes down:
 
-```admin@combo-west.RTR_WEST_COMBO# show alarms
+```
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Tue 2020-06-30 16:42:50 UTC
 
 ============== ===================== ========== ============= =========== ==================================
