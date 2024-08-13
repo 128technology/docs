@@ -9,7 +9,7 @@ Occasionally you may need to revert to a previously running version of SSR softw
 
 With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities are be performed from the GUI or the PCLI.
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
 
 ## Legacy Rollback
 

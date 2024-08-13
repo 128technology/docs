@@ -27,7 +27,7 @@ To view the install history for your routers, selecting Lifecycle History displa
 
 For routers managed by an SSR Conductor, a self-upgrade, or manual upgrade, can be initiated from the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes asociated with software version 6.3.0 and those chages are indicated below. For earlier versions of SSR software, please refer to the [Legacy Upgrades](upgrade_legacy.md) section. 
 
-As an administrator-level user, log into the conductor's PCLI.
+As an administrator-level user, log into the conductor's PCLI. 
 
 1. Use the command `show assets` to list the devices managed by this conductor, and the software revision each asset is currently running.
 

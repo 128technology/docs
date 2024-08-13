@@ -10,9 +10,9 @@ Before **upgrading or installing**, update the Installer to the latest version. 
 ### Rollback Considerations
 With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. All software installation, upgrade, or rollback activities are be performed from the GUI or the PCLI.
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
 
-Upgrading or rolling back an earlier version of the SSR software on a peer condutor or router that is managed by a conductor using the interactive installer (`install128t`) may result in the system becoming unresponsive. It is highly recommended that managed router rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+With software versions earlier than 6.3.0, upgrading or rolling back an earlier version of the SSR software on a peer condutor or router that is managed by a conductor using the interactive installer (`install128t`) may result in the system becoming unresponsive. For this reason it is highly recommended that managed router rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
 ## Configuration Validation Changes
 Several modifications have been made to the verification process for configurations. As a result, configurations that were valid in earlier versions of the SSR software may now present configuration errors. The information below provides an awareness of what to look for and address.
