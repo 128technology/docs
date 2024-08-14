@@ -66,7 +66,7 @@ Based on the configuration, every test runs five probe attempts. Each attempt ru
 
 
 :::note
-Each router can configure up to 10 http probe profiles 
+Each router can configure up to 10 http probe profiles.
 :::
 
 ### SLA
