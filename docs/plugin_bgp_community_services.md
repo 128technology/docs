@@ -155,7 +155,7 @@ drwxr-xr-x 2 root root 45 Jun 29 23:28 app_module_utils
 lrwxrwxrwx 1 root root 70 Jun 30 00:44 bgp-community-services -> /etc/128technology/application-modules/defaults/bgp-community-services
 drwxr-xr-x 2 root root 86 Jun 29 23:28 defaults
 lrwxrwxrwx 1 root root 21 Jun 29 20:30 office365.py -> defaults/office365.py
-# 
+#
 ```
 
 ### Application Identification Output
@@ -168,7 +168,7 @@ Once the application identification module is setup correctly and a configuratio
 
 The contents of this file should show a JSON mapping of the user defined application names to a list of prefixes. If the module had any difficulties producing the data, it should generate an error message that can be used to help in determining the reason for the failure. The failure will also indicate which application and community string the module was processing when it encountered a failure. This may be useful in determining if the failure happened initially with the first application/community or later in the processing of the dta. Some examples are shown below.
 
-- This error indicates that the routingManager API was not available to be queried. Please ensure the correct SSR software version is running on the router with this capability. 
+- This error indicates that the routingManager API was not available to be queried. Please ensure the correct SSR software version is running on the router with this capability.
 ```json
 {
   "module-name": "bgp-community-services",
@@ -227,6 +227,14 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 ```
 
 ## Release Notes
+
+### Release 2.1.0
+
+Contains scale improvements for configuration and pillar generation.
+
+#### Issues Fixed
+
+- **PLUGIN-2519** Resolve routing engine API compatability with SSR 6.1.
 
 ### Release 2.0.0
 
