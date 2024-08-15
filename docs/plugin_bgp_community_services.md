@@ -234,7 +234,7 @@ Contains scale improvements for configuration and pillar generation.
 
 #### Issues Fixed
 
-- **PLUGIN-2519** Resolve routing engine API compatability with SSR 6.1.
+- **PLUGIN-2519** Resolve routing engine API compatability with SSR 6.1.4 and above.
 
 ### Release 2.0.0
 
