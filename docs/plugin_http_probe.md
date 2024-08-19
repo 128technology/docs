@@ -75,7 +75,7 @@ Each router can configure up to 10 http probe profiles.
 
 | Release  | Modification                          |
 | -------- | ------------------------------------- |
-| 1.1.0    | `http-probe-profile > sla` introduced |
+| 1.2.0    | `http-probe-profile > sla` introduced |
 
 
 SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in the `http probe profile` configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than the single probe timeout calculated by `probe-duration` / `number-of-attempts`.
@@ -392,9 +392,9 @@ Completed in 0.21 seconds
 
 ## Release Notes
 
-### Release 1.1.0
+### Release 1.2.0
 
-**Release Date:** Apr 19, 2024
+**Release Date:** Aug 19, 2024
 
 #### New Features and Improvements
 - **PLUGIN-2300** Implement SLA monitoring per probe
