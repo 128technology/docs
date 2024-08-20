@@ -62,7 +62,7 @@ exit
 
 Above configuration runs http probe as follow:
 ![Http Probe Timeline](/img/http-probe-timeline.png)
-Based on the configuration, every test runs five probe attempts. Each attempt runs with a two second hard timeout, calculated by the `probe-duration` divided by the `number-of-attempts`. Each probe may fail due to a request failure, timeout reached, or an invalid response code. Service path status is determined at the end of the probe duration and the status will remain until the end of the next test. 
+Based on the configuration, every test runs five probe attempts. Each attempt runs with a two second hard timeout, calculated by the `probe-duration` divided by the `number-of-attempts`. Each probe may fail due to a request failure, timeout reached, or an invalid response code. Service path status is determined at the end of the probe duration and the status will remain until the end of the next test.
 
 
 :::note
@@ -80,10 +80,10 @@ Each router can configure up to 10 http probe profiles.
 
 SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in the `http probe profile` configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than the single probe timeout calculated by `probe-duration` / `number-of-attempts`.
 
-The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 4 seconds will be applied and max-loss of 2 is considered for every test. 
+The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 4 seconds will be applied and max-loss of 2 is considered for every test.
 
 ```
-router 
+router
     http-probe-profile      http-probe-1
         name                http-probe-1
         url                 http://172.16.2.5:5060/
@@ -101,7 +101,7 @@ exit
 
 * Example:
 ```config {9-14}
-router 
+router
     http-probe-profile  http-probe-1
         sla
             max-jitter     300
@@ -155,7 +155,6 @@ The following fields should be enabled for the probe based detection to work. Th
 | --    | --      | --          | --                                      |
 | enforcement | boolean | true | Toggle the configuration to be enabled for the reachability enforcement to take effect. |
 | probe-type | enumeration | always | For probe based reachability detection to take effect the probe-type must be set to `always`. |
-| hold-down | uint32 | probe-duration * 2 | The `hold-down` time is the amount of time in seconds that the path is kept out-of-service when path transitions from down to up. |
 | probe > probe-type | enumeration | http-probe | The probe-type must be set to `http-probe` in order to leverage the HTTP(s) based probing |
 | probe > http-probe-profile | reference | - | Reference to a previously configured http-probe-profile on the router |
 
@@ -241,7 +240,6 @@ config
                 reachability-detection
                     enabled               true
                     enforcement           true
-                    hold-down             60
                     reachability-profile  dummy
                     probe-type            always
 
@@ -266,7 +264,6 @@ config
                 reachability-detection
                     enabled               true
                     enforcement           true
-                    hold-down             60
                     reachability-profile  dummy
                     probe-type            always
 
@@ -399,7 +396,7 @@ Completed in 0.21 seconds
 #### New Features and Improvements
 - **PLUGIN-2300** Implement SLA monitoring per probe
 
-The plugin allows Users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These settings are considered as part of the probe success criteria. Additionally, these values are available through metrics. 
+The plugin allows Users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These settings are considered as part of the probe success criteria. Additionally, these values are available through metrics.
 
 ### Release 1.0.2
 
