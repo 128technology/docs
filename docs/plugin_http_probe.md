@@ -391,7 +391,7 @@ Completed in 0.21 seconds
 
 ### Release 1.2.0
 
-**Release Date:** Aug 19, 2024
+**Release Date:** Aug 20, 2024
 
 #### New Features and Improvements
 - **PLUGIN-2300** Implement SLA monitoring per probe
