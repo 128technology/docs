@@ -62,7 +62,7 @@ exit
 
 Above configuration runs http probe as follow:
 ![Http Probe Timeline](/img/http-probe-timeline.png)
-Based on the configuration, every test runs five probe attempts. Each attempt runs with a two second hard timeout, calculated by the `probe-duration` divided by the `number-of-attempts`. Each probe may fail due to a request failure, timeout reached, or an invalid response code. Service path status is determined at the end of the probe duration and the status will remain until the end of the next test.
+Based on the configuration, every test runs five probe attempts. Each attempt runs with a two second hard timeout, calculated by the `probe-duration` divided by the `number-of-attempts`. Each probe may fail due to a request failure, timeout reached, or an invalid response code. Service path status is determined at the end of the probe duration and the current status will remain until the end of the next test.
 
 
 :::note
