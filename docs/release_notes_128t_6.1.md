@@ -135,8 +135,6 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-57000 Hub crash while generating TSI:** Protection has been added to prevent unmapped memory access during packet buffer location walk.
 ------
-- **I95-57017 Application ID failed to block some domains:** Resolved an issue where DPI failed to identify the domain-name from SNI if the `client-hello` is split up into multiple TCP packet segments.
-------
 - **I95-57028 IDP core files consume disk space:** In cases where large amounts of files are stored on disk, the files will be managed/deleted based upon the folder size. 
 ------
 - **I95-57071 Changing router context in session debug does not update correctly:** Resolved an issue where a missing dependency was not initiating a re-render of the output using the correct router name. 
