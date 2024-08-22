@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.1 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.1 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.1"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.1" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.1" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.b50a304b.css">
-<script src="/assets/js/runtime~main.ad594164.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c906dbe3.js" defer="defer"></script>
 <script src="/assets/js/main.b3b671fd.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -39,9 +39,235 @@
 <p>Note that only the relevant section of <code>local.init</code> is shown for clarity. All other settings should be left the same.
 The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to <code>systemctl restart 128T</code> on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart.</p>
 <p>This issue will be corrected in an upcoming release.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-6110-8">Release 6.1.10-8<a href="#release-6110-8" class="hash-link" aria-label="Direct link to Release 6.1.10-8" title="Direct link to Release 6.1.10-8">​</a></h2>
+<p><strong>Release Date:</strong> August 22, 2024</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<ul>
+<li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617, CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-27052, CVE-2024-27056, CVE-2024-27059, CVE-2024-2961, CVE-2024-33599, CVE-2024-33600, CVE-2024-33601, CVE-2024-33602, CVE-2024-32487, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2024-3596</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-47195, I95-47196, I95-49015, I95-49018, I95-49599, I95-56682 Forwarding plane crash, causing stranded network namespaces when LTE/PPPoE network-interface name is changed:</strong> Implemented reinit script to reiniatilize namespace, KNI and target-interface after a configuration change in the network-interface.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-49218 Filter OSPF routes using RIB Policy routes:</strong> Use the <code>configure authority router routing rib-policy</code> command from either the routing default-instance (<code>configure authority router routing</code>) or inside <code>configure authority router routing vrf</code> to provide addtional filtering for OSPF routes. For more information see <a href="/docs/config_command_guide#configure-authority-router-routing-rib-policy"><code>configure authority router routing rib-policy</code></a> and <a href="/docs/config_command_guide#configure-authority-router-routing-vrf-rib-policy"><code>configure authority router routing vrf rib-policy</code></a>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-49712 Config Validation Error uniformative:</strong> Resolved an issue where paths pointing to missing keys or elements returned error messages that did not provide recognizable information. Now the error message provides key or element names.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:</strong> When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-52251 Changes to the conductor address on the router result in loss of ssh connection to the router:</strong> Resolved an issue where changing the router level <code>conductor-address</code> did not update the salt-created services with the new addresses.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-53619 Anomaly in Maintenance Mode reporting:</strong> Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. <code>BGP peer path is down</code> alarms are now shelved properly on routers in maintenance mode.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-54833 HA port is showing as redundant:</strong> Resolved an issue where adding a device-interface back into the configuration after it was removed did not recreate the device-state.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55550 Abrupt power failure may result in filesystem corruption:</strong> Multiple disk errors caused corruption on the 128T_root filesystem causing it to enter read-only mode and becoming non-responsive. To resolve this issue, the filesystem triggers a kernel panic, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55603 HA router stuck in connected state due to runtime corruption issue:</strong> Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55725 Highway crashes when peer-path routers are removed:</strong> Resolved a race condition that could cause a crash in the highway worker-core packet-processor if peer routers are removed from the configuration.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55912 Validate Patterns for Service Domains and URLs:</strong> The <code>url</code> and <code>domain-name</code> fields on a service were an unformatted string. This allowed you to configure fields that would be silently discarded. The <code>domain-name</code> and <code>url</code> fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now triggers a config warning.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-55965 IDP engine not starting due to invalid environmental conditions:</strong> In cases where a container/csrx does not shut down cleanly, the IDP engine does not start. These conditions are now detected, and a force stop/remove of the container is implemented.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56127 Excessive CPU utilization on systems with a large number of KNI interfaces:</strong> Relaxed KNI scheduling to improve CPU utilization.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56203 FAI scan archives in <code>/var/log/128technology</code> have zero-byte length:</strong> Corrected log rotate function to prevent file truncation.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56236 Quick Start config validation failures not being reported:</strong> Made changes to the initialization process such that quick start errors can be reported.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56263 Add <code>show capacity</code>, and debugging commands to the TSI output:</strong> Support for additional information in the TSI output has been added.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56292 Increase the length of SSH keys to 4096:</strong> The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56317 Journal logs missing from Conductors running 6.2.3:</strong> An issue related to a typo was creating zero byte files when downloading journal logs using the GUI.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56326 Potential crash while collecting TSI:</strong> Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56363 Highway crash due to traffic metrics manager thread error:</strong> A potential crash due to a race condition in per-service-route metrics has been fixed.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56411 Remove outdated performance package:</strong> Older versions of the <code>perf</code> package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older <code>perf</code> packages during the software upgrade proces.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56455 Zero-byte files when updating conductor hardware using an OTP image:</strong> A check has been added to verify that <code>api.key</code> and <code>router-api.key</code> are non-zero length and valid. If not, the keys are regenerated.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56475 HA-sync network interface shows warning after router upgrade:</strong> Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56527 <code>compare config</code> returns an <code>Invalid JSON</code> error:</strong> Resolved an issue where the use of a backslash (<code>\</code>) in a list key or a list element generates an <code>Invalid JSON</code> error when <code>compare config</code> is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a <code>\</code> in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the <code>\</code> only exists in one; Or if the list element with the <code>\</code> is renamed.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56541 Include kernel journal entries in TSI:</strong> A separate <code>kernel.log</code> journal file is now created in the TSI output.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56575 Reduce polling rate of disk monitoring and add optimization:</strong> The <code>ComponentDiskUtilizationMonitor</code> checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56600 Add <code>show tenant members</code> to the TSI output:</strong> <code>show tenant members</code> and additional network scripts have been added to the TSI output.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56612 <code>fib-service-match any-match</code> missing some FIB entries:</strong> Resolved an issue when a service-address was more specific than the last route update, a search for other less specific services was not performed. Now when the service address update is more specific, additional searches will continue.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56702 O365/Sharepoint application missing from the Applications list:</strong> Resolved an issue where certain applications and protocols were excluded from automatic updates.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56715 Address validation in migrate feature in conductor UI is not working correctly:</strong> Resolved an isssue between the client and the server during the use of the GUI <code>migrate</code> operation, where the conductor address was not read correctly, and returning an irrelevant error message.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56726 <code>No Timeout Queue</code> message logged in cases where a config commit fails, or a conductor fails to load a config on startup:</strong> Resolved an issue with <code>ThreadPoolWithExternalPoller</code> that resulted in a stack trace in the logs which starts with message <code>No TimeoutQueue:</code>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56727 Domain names that begin with numbers are not allowed to be configured:</strong> Warnings are no longer generated for domain-name elements of service configurations which have labels beginning with a number, for example <code>123.abc.com</code>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56822 Router stuck in a continuous upgrade/failure state:</strong> DNS name servers changes on the conductor are not honored. In cases where the DNS configuration changed post boot, the conductor software proxy would not reload the config. In this scenario the proxied router software requests would use an out of date DNS configuration for the proxied requests, resulting in failure.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56827 NTP Auth key only permits keys of 20 or 40 characters:</strong> Loosened restrictions on NTP server key length to allow plaintext keys.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56843 Error logs filled with irrelevant KNI network script info:</strong> The log output has been reduced to provide related information.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56847 lte / pppoe default-route check incorrectly reporting warnings:</strong> Resolved an issue where warnings were incorrectly shown on the conductor for interfaces without <code>default-route</code> or <code>management-vector</code> configured.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56850 Overlap warning on router not present on conductor:</strong> Resolved a case where a service on a router is configured with <code>applies-to</code>, and the same service is configured on the conductor (overlap) but does not have <code>applies-to</code> configured, the validation process will generate a warning on the router but not the conductor.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56879 PPPoE stopped working:</strong> Resolved an issue where the system configuration for the PPPoE interface was missing <code>LCP_FAILURE</code> and <code>LCP_INTERVAL</code> fileds. These fields are now set correctly.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56905 Conserve memory footprint on the router:</strong> If the SSR configuration does not have <code>application-identification mode all</code>, then do not load the database. This will save memory on the router.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-56973 Child services do not inherit the service-path configurations from the parent service:</strong> Resolved an issue where child service routes for peers were not inheriting vectors and the <code>enable-failover</code> field.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57000 Hub crash while generating TSI:</strong> Protection has been added to prevent unmapped memory access during packet buffer location walk.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57017 Application ID failed to block some domains:</strong> Resolved an issue where DPI failed to identify the domain-name from SNI if the <code>client-hello</code> is split up into multiple TCP packet segments.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57028 IDP core files consume disk space:</strong> In cases where large amounts of files are stored on disk, the files will be managed/deleted based upon the folder size.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57071 Changing router context in session debug does not update correctly:</strong> Resolved an issue where a missing dependency was not initiating a re-render of the output using the correct router name.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57082 Unable to delete a capture-filter that contains a forward slash (/):</strong> This issue has been resolved.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57099 BFD Session timeout discovered:</strong> Resolved an issue where BFD sessions were deleted prematurely.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57110 Crash seen during add and delete peers while sending traffic:</strong> A race condition has been fixed that could cause a crash in the packet-processing highway process if a peer-path is removed from configuration.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57114 Unable to upgrade AWS Conductor:</strong> Resolved an issue where an incorrect package version was installed, triggering a downgrade and preventing the upgrade.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57205 Race condition on startup with DHCP configured on LTE or PPPoE interface, causing system to crash:</strong> This issue has been resolved.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57283 Unable to perform SNMP discovery:</strong> Resolved an issue where alarms in the <code>SERVICE</code>, <code>BGP_NEIGHBOR</code>, or <code>MSDP_NEIGHBOR</code> category would cause the SNMP server to crash and fail to send messages.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57337 Updates during Application ID reload/refresh:</strong> Updated the processes involved in application reload.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57578 Candidate configuration values not showing in GUI:</strong> Resolved an issue that caused configuration drop-downs in the GUI for tenants and services to only display values from the running configuration, not the candidate configuration.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57580 Provide drop down list in UI for Session Record Profile:</strong> There is now a Session Records Profile drop down list in the GUI.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57593 No option to require password change on first login:</strong> Added a <strong>Require Password Change On First Login</strong> checkbox to the <strong>Create User</strong> dialog. Previously this feature was only available in the <code>create-user</code> command.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-57607 Saving TSI as root from the conductor generates oversized file:</strong> Added and enforcement  that when calling <code>/usr/bin/save-tech-support-info</code> the <code>--output</code> argument always ends in .<code>zip</code>.</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-619-2">Release 6.1.9-2<a href="#release-619-2" class="hash-link" aria-label="Direct link to Release 6.1.9-2" title="Direct link to Release 6.1.9-2">​</a></h2>
 <p><strong>Release Date:</strong> June 27, 2024</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2024-2973</li>
 </ul>
@@ -60,7 +286,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </li>
 </ul>
 <p>These counters are available per-bond-member.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.</li>
 </ul>
@@ -194,7 +420,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-617-3">Release 6.1.7-3<a href="#release-617-3" class="hash-link" aria-label="Direct link to Release 6.1.7-3" title="Direct link to Release 6.1.7-3">​</a></h2>
 <p><strong>Release Date:</strong> February 17, 2024</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732.</li>
 </ul>
@@ -324,7 +550,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <ul>
 <li><strong>I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:</strong> Add a &quot;Lock Status&quot; column to the User table as well as the User Details pane, with more details availble on hover. The <code>show user</code> command now includes two new rows, &quot;Lock Status&quot; and &quot;Last Failed Login&quot;. For command details, please see <a href="/docs/cli_reference#show-user-lock-status"><code>show user lock-status</code></a>.</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2022-41742, CVE-2022-41741, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847.</li>
 </ul>
@@ -591,7 +817,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <ul>
 <li><strong>I95-52517 Allow users the ability to configure the OSPF SPF timers:</strong> Support for user-configured values for SPF delay has been added. Users can now specify values for spf delay, hold-time, and maximum-hold-time. For additional information, see <a href="/docs/config_command_guide#configure-authority-router-routing-ospf-timers-spf">OSPF SPF Timers</a>.</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-2196, CVE-2022-2663, CVE-2022-3028, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-4129, CVE-2022-20141, CVE-2022-25265, CVE-2022-30594, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802.</li>
 </ul>
@@ -801,7 +1027,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 <ul>
 <li><strong>I95-51946 Add LAG related TLVs to LLDP:</strong> Support for LLDP on LAG interfaces has been added.</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-6">Resolved Issues<a href="#resolved-issues-6" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following issues have been resolved as part of our ongoing security certification-related initiative:</strong> I95-48924, I95-48927, I95-48928, I95-48943, I95-49912, I95-49913, I95-49914, I95-50535, I95-51397, IN-533</li>
 </ul>
@@ -977,7 +1203,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-613-4">Release 6.1.3-4<a href="#release-613-4" class="hash-link" aria-label="Direct link to Release 6.1.3-4" title="Direct link to Release 6.1.3-4">​</a></h2>
 <p><strong>Release Date:</strong> May 22, 2023</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-6">Resolved Issues<a href="#resolved-issues-6" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-7">Resolved Issues<a href="#resolved-issues-7" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>I95-48931 Service area Highway crash:</strong> Now prevents crashing in SSR&#x27;s highway process in unusual race conditions when a session&#x27;s flow is removed before the session is fully established.</li>
 </ul>
@@ -1017,7 +1243,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 </ul>
 </li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-7">Resolved Issues<a href="#resolved-issues-7" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-8">Resolved Issues<a href="#resolved-issues-8" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> I95-50535, I95-50790.</li>
 </ul>
@@ -1122,7 +1348,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-611-6">Release 6.1.1-6<a href="#release-611-6" class="hash-link" aria-label="Direct link to Release 6.1.1-6" title="Direct link to Release 6.1.1-6">​</a></h2>
 <p><strong>Release Date:</strong> April 28, 2023</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-8">Resolved Issues<a href="#resolved-issues-8" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-9">Resolved Issues<a href="#resolved-issues-9" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>I95-48965, I95-50070, I95-51086 Race condition with routing updates inducing crash in highway process:</strong> Resolved an issue where a routing change that affects the <code>forwarding-table</code> can incur a race condition with sessions completing and being removed, which could lead to a highway crash and restart.</li>
 </ul>
@@ -1189,7 +1415,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 <ul>
 <li><strong>I95-50159 Automatic mesh created for route-reflector topology:</strong> Enables the generation of additional BGP service-routes for creating mesh connectivity between all clients of a route reflector. See <a href="/docs/config_bgp#service-route-mesh-for-route-reflector-clients">Service-route Mesh For Route Reflector Clients</a> for additional information.</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-9">Resolved Issues<a href="#resolved-issues-9" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-issues-10">Resolved Issues<a href="#resolved-issues-10" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues">​</a></h3>
 <ul>
 <li><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> I95-46020, I95-48448, I95-48455, I95-48458, I95-48859, I95-49456, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523.</li>
 </ul>
@@ -1423,6 +1649,6 @@ B) if the connection is not critical, terminate the application that owns the de
 <hr>
 <ul>
 <li><strong>I95-50787 Rebooting the OS from the conductor throws error code 400:</strong> Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display &quot;Error: EOF&quot;; this has been resolved.</li>
-</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.2"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.2</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-619-2" class="table-of-contents__link toc-highlight">Release 6.1.9-2</a><ul><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-618-15" class="table-of-contents__link toc-highlight">Release 6.1.8-15</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-617-3" class="table-of-contents__link toc-highlight">Release 6.1.7-3</a><ul><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-616-7" class="table-of-contents__link toc-highlight">Release 6.1.6-7</a><ul><li><a href="#resolved-issues-requiring-configuration-changes" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-615-14" class="table-of-contents__link toc-highlight">Release 6.1.5-14</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-1" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li><li><a href="#known-issues" class="table-of-contents__link toc-highlight">Known Issues</a></li></ul></li><li><a href="#release-614-23r2" class="table-of-contents__link toc-highlight">Release 6.1.4-23.r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-613-4" class="table-of-contents__link toc-highlight">Release 6.1.3-4</a><ul><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-612-7" class="table-of-contents__link toc-highlight">Release 6.1.2-7</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-2" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-2" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-611-6" class="table-of-contents__link toc-highlight">Release 6.1.1-6</a><ul><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-610-55" class="table-of-contents__link toc-highlight">Release 6.1.0-55</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-9" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
+</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.2"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.2</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6110-8" class="table-of-contents__link toc-highlight">Release 6.1.10-8</a><ul><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-619-2" class="table-of-contents__link toc-highlight">Release 6.1.9-2</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-618-15" class="table-of-contents__link toc-highlight">Release 6.1.8-15</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-617-3" class="table-of-contents__link toc-highlight">Release 6.1.7-3</a><ul><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-616-7" class="table-of-contents__link toc-highlight">Release 6.1.6-7</a><ul><li><a href="#resolved-issues-requiring-configuration-changes" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-615-14" class="table-of-contents__link toc-highlight">Release 6.1.5-14</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-1" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li><li><a href="#known-issues" class="table-of-contents__link toc-highlight">Known Issues</a></li></ul></li><li><a href="#release-614-23r2" class="table-of-contents__link toc-highlight">Release 6.1.4-23.r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-613-4" class="table-of-contents__link toc-highlight">Release 6.1.3-4</a><ul><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-612-7" class="table-of-contents__link toc-highlight">Release 6.1.2-7</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-2" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-2" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-611-6" class="table-of-contents__link toc-highlight">Release 6.1.1-6</a><ul><li><a href="#resolved-issues-9" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-610-55" class="table-of-contents__link toc-highlight">Release 6.1.0-55</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-10" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>
