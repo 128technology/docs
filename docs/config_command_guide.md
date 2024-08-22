@@ -16638,6 +16638,82 @@ configure authority router routing pim rp group-range [<multicast-ipv4-prefix>]
 | ---- | ----------- |
 | multicast-ipv4-prefix | The value to set for this field |
 
+## `configure authority router routing rib-policy`
+
+List of protocol specific RIB policies
+
+#### Usage
+
+```
+configure authority router routing rib-policy <family> <protocol>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | The routing protocol address family |
+| protocol | The routing protocol RIB policy |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`family`](#configure-authority-router-routing-rib-policy-family) | The routing protocol address family |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-rib-policy-policy) | A policy to apply to the protocol route |
+| [`protocol`](#configure-authority-router-routing-rib-policy-protocol) | The routing protocol RIB policy |
+| `show` | Show configuration data for &#x27;rib-policy&#x27; |
+
+## `configure authority router routing rib-policy family`
+
+The routing protocol address family
+
+#### Usage
+
+```
+configure authority router routing rib-policy family [<rib-family>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-family | The value to set for this field |
+
+## `configure authority router routing rib-policy policy`
+
+A policy to apply to the protocol route
+
+#### Usage
+
+```
+configure authority router routing rib-policy policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+## `configure authority router routing rib-policy protocol`
+
+The routing protocol RIB policy
+
+#### Usage
+
+```
+configure authority router routing rib-policy protocol [<rib-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-protocol | The value to set for this field |
+
 ## `configure authority router routing routing-protocol`
 
 Each entry contains configuration of a routing protocol instance.
@@ -20422,6 +20498,82 @@ configure authority router routing vrf pim rp group-range [<multicast-ipv4-prefi
 | name | description |
 | ---- | ----------- |
 | multicast-ipv4-prefix | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy`
+
+List of protocol specific RIB policies
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy <family> <protocol>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | The routing protocol address family |
+| protocol | The routing protocol RIB policy |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`family`](#configure-authority-router-routing-vrf-rib-policy-family) | The routing protocol address family |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-vrf-rib-policy-policy) | A policy to apply to the protocol route |
+| [`protocol`](#configure-authority-router-routing-vrf-rib-policy-protocol) | The routing protocol RIB policy |
+| `show` | Show configuration data for &#x27;rib-policy&#x27; |
+
+## `configure authority router routing vrf rib-policy family`
+
+The routing protocol address family
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy family [<rib-family>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-family | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy policy`
+
+A policy to apply to the protocol route
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy protocol`
+
+The routing protocol RIB policy
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy protocol [<rib-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-protocol | The value to set for this field |
 
 ## `configure authority router routing vrf routing-protocol`
 
