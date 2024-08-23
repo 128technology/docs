@@ -3,25 +3,75 @@ title: Password Reset and Account Recovery
 sidebar_label: Password Reset and Account Recovery
 ---
 
-Resetting a user or admin password requires entering the old password. For this reason it is highly recommended to keep password records accessible and secure. 
+## User Password Reset
 
-### Password Reset Process
+Resetting a user password requires entering the old password. For this reason it is highly recommended to keep password records accessible and secure. User password reset is typically performed from the GUI. 
 
-This process describes the typical password reset, and requires entering the current user password.
+1. Access your user profile from the GUI.
+2. Under **Profile** select **Change Password**.
 
-Use the `passwd` command from the Linux shell to individually set the password for each username. 
+![User Profile](/img/user-profile.png)
+
+3. Enter your current password, new password, and confirm the new password.
+
+![Change Password Screen](/img/user-change-password.png)
+
+4. Click **Save**.
+
+Additionally, user password reset can be performed from the command line using the `set password` command.
 
 ```
-[admin@localhost ~]$ sudo passwd joeboat
-Changing password for user joeboat
+user222@node1.conductor# set password
+Changing the current password will log this user out of all active sessions. Subsequent logins will require the new password to authenticate.
+Enter your current password:
+Enter a new password:
+Confirm:
+✔ Modifying password...
+Password updated successfully
+```
+
+## Account Recovery - Administrator Activity 
+
+For a situation where a user password is lost and the account is inaccessible, the Administrator can recover access to the account. In this situation, use the following procedure to reset the lost password.
+
+### Lost Password - User
+
+:::important
+This process should only be used to recover access to an account where the password has been lost. 
+:::
+
+1. Make sure the 128T process is running. If it is not running or is restarted before logging into the PCLI and making the update, the password change will be lost. 
+2. Log in to the Linux shell using `sudo`. 
+3. Change the password for the corresponding Linux user. In this example the `user222` user password has been lost.
+
+```
+$ sudo
+$ whoami
+t128
+$ sudo password user222
+[sudo] password for t128:
+Changing password for user user222.
 New password:
-Retype new password: 
+Retype new password:
 passwd: all authentication tokens updated successfully.
 ```
+After changing the password in Linux, the SSR user must log in to the SSR PCLI or the GUI and update their password. If this step is not followed, the next time the SSR is restarted the change will be lost. 
 
-### Account Recovery - Lost Password 
+1. Log into GUI/PCLI.
+2. Change the password again via the GUI/PCLI. This will ensure that their password change remains persistent across SSR restarts.
 
-For a situation where a password is lost and the account is inaccessible, the account can be recovered. In this situation, use the following procedure to change the lost password.
+```
+$ sudo su admin
+admin@node1.conductor# set password user222
+Changing the current password will log this user out of all active sessions. Subsequent logins will require the new password to authenticate.
+Enter your current password:
+Enter a new password:
+Confirm:
+✔ Modifying password...
+Password updated successfully
+```
+
+### Lost Password - Admin
 
 :::important
 This process should only be used to recover access to an account where the password has been lost. 
