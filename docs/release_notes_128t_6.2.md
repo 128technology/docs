@@ -125,8 +125,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-57712 DSCP steering issue with outbound traffic:** Resolved an issue with processing reverse pinhole packets when DSCP steering is enabled. 
 ------
 - **I95-57853 OTP ISO does not have DHCP server enabled:** Identified and resolved a breaking change with how `logging` is configured. This prevented the DHCP server instance from starting successfully. The default configuration for the DHCP server running in the OTP ISO has been corrected, allowing the server to be started correctly.
-------
-- **WAN-3027 ARV events for peers with hostnames are delayed:** 
 
 ## Release 6.2.5-5r2
 
