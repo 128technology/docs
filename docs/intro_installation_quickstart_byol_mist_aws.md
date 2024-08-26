@@ -116,16 +116,16 @@ write_files:
 ### Manual Onboarding
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
 
-1. Log into the instance using the admin credentials provided when launching.
+1. Log into the instance using the default AWS username `ec2-user` and the key pair provided when launching.
 2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
-3. Follow the prompts to generate and apply the onboarding configuration
+3. Follow the prompts to generate and apply the onboarding configuration.
 
 
 ### Mist-Managed Setup
 
 Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete.
 
-If the device does not show up in the Mist organization or the desired SSR version was not installed after 15 minutes, SSH into the instance.
+If the device does not show up in the Mist organization or the desired SSR version was not installed after 15 minutes, SSH into the instance. If the instance was created using the BYOL template, the default username will be `t128`. If not, the username will be `ec2-user`.
 
 - Try to log into the pcli, run `su admin` and then `show mist`.
 
