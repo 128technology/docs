@@ -81,7 +81,7 @@ Answer the following questions to launch the deployment of an SSR. For additiona
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist organization.
 * Who is going to be the administrator?
 
-6. Provide a username (for example: `t128`) and the content of your public SSH key in the `Admin Username` and `Admin Public Key Data` fields respectively.
+6. Provide the content of your public SSH key in the `Admin Public Key Data` field.
 
 7. Agree to the terms of use and conditions of the deployment. 
 
@@ -139,7 +139,7 @@ If a user does not supply the onboarding configuration before launching the inst
 
 1. Log into the instance using the admin credentials provided when launching.
 2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
-3. Follow the prompts to generate and apply the onboarding configuration
+3. Follow the prompts to generate and apply the onboarding configuration.
 
 ### Mist-Managed Setup
 
@@ -248,7 +248,6 @@ A description of the parameters of the template are listed in the following tabl
 | Registration Code   | The Mist registration used for adoption of the instance to a Mist organization. |
 | Version | SSR software version installed on the instance. | 
 | Instance size        | Select the size of the VM in the field Instance Size. |
-| Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH. |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 
 ### Azure Portal
@@ -274,7 +273,7 @@ The information listed in the Outputs tab is the following:
 * SSH command to login to the Linux VM via the management interface.
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
+When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
 
 ### Azure CLI or PowerShell
@@ -299,6 +298,9 @@ Paste the following JSON content. Please adjust the values to your specific envi
     },
     "routerName": {
       "value": "<name to assign to the router. Optional>"
+    },
+    "version": {
+      "value": "<ssr version to be installed>"
     },
     "nodeName": {
       "value": "<name to assign to the node of the router. Optional>"
@@ -339,9 +341,6 @@ Paste the following JSON content. Please adjust the values to your specific envi
     "instanceSize": {
       "value": "Standard_DS3_v2"
     },
-    "adminUsername": {
-      "value": "<username>"
-    },
     "adminPublicKeyData": {
       "value": "<content of ssh-rsa key>"
     }
@@ -369,5 +368,5 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 ```
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
+When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
