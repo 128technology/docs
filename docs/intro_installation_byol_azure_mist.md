@@ -180,7 +180,7 @@ If the device does not show up in the Mist organization or the desired SSR versi
 
 - Try to log into the pcli, run `su admin` and then `show mist`.
 
-- If the pcli is not accessable or the status and necessary action is not obvious, unzip the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
+- If the pcli is not accessable or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
 
 ## Annexes
 
