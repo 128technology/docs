@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.6-11r2
 
-**Release Date:** August 29, 2024
+**Release Date:** September 3, 2024
 
 ### New Features
 
