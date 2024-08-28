@@ -6436,7 +6436,7 @@ configure authority router node device-interface <name>
 | [`traffic-engineering`](#configure-authority-router-node-device-interface-traffic-engineering) | Configure Traffic Engineering |
 | [`type`](#configure-authority-router-node-device-interface-type) | Type of interface. |
 | [`vmbus-uuid`](#configure-authority-router-node-device-interface-vmbus-uuid) | The VMBus UUID of the network device. Hyper-V Environment only. Only relevant if type is ethernet. |
-| [`vrrp`](#configure-authority-router-node-device-interface-vrrp) | Configure Vrrp |
+| [`vrrp`](#configure-authority-router-node-device-interface-vrrp) | Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP). |
 
 ## `configure authority router node device-interface bond-settings`
 
@@ -19115,7 +19115,7 @@ Required format: &#x27;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#x27;
 
 ## `configure authority router node device-interface vrrp`
 
-Configure Vrrp
+Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP).
 
 ##### Subcommands
 
@@ -25391,6 +25391,82 @@ configure authority router routing pim rp group-range [<multicast-ipv4-prefix>]
 
 A multicast IPv4 prefix
 
+## `configure authority router routing rib-policy`
+
+List of protocol specific RIB policies
+
+#### Usage
+
+```
+configure authority router routing rib-policy <family> <protocol>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | The routing protocol address family |
+| protocol | The routing protocol RIB policy |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`family`](#configure-authority-router-routing-rib-policy-family) | The routing protocol address family |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-rib-policy-policy) | A policy to apply to the protocol route |
+| [`protocol`](#configure-authority-router-routing-rib-policy-protocol) | The routing protocol RIB policy |
+| `show` | Show configuration data for &#x27;rib-policy&#x27; |
+
+## `configure authority router routing rib-policy family`
+
+The routing protocol address family
+
+#### Usage
+
+```
+configure authority router routing rib-policy family [<rib-family>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-family | The value to set for this field |
+
+## `configure authority router routing rib-policy policy`
+
+A policy to apply to the protocol route
+
+#### Usage
+
+```
+configure authority router routing rib-policy policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+## `configure authority router routing rib-policy protocol`
+
+The routing protocol RIB policy
+
+#### Usage
+
+```
+configure authority router routing rib-policy protocol [<rib-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-protocol | The value to set for this field |
+
 ## `configure authority router routing routing-protocol`
 
 Each entry contains configuration of a routing protocol instance.
@@ -30795,6 +30871,82 @@ configure authority router routing vrf pim rp group-range [<multicast-ipv4-prefi
 ##### multicast-ipv4-prefix (string)
 
 A multicast IPv4 prefix
+
+## `configure authority router routing vrf rib-policy`
+
+List of protocol specific RIB policies
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy <family> <protocol>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | The routing protocol address family |
+| protocol | The routing protocol RIB policy |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`family`](#configure-authority-router-routing-vrf-rib-policy-family) | The routing protocol address family |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-vrf-rib-policy-policy) | A policy to apply to the protocol route |
+| [`protocol`](#configure-authority-router-routing-vrf-rib-policy-protocol) | The routing protocol RIB policy |
+| `show` | Show configuration data for &#x27;rib-policy&#x27; |
+
+## `configure authority router routing vrf rib-policy family`
+
+The routing protocol address family
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy family [<rib-family>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-family | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy policy`
+
+A policy to apply to the protocol route
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy protocol`
+
+The routing protocol RIB policy
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy protocol [<rib-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-protocol | The value to set for this field |
 
 ## `configure authority router routing vrf routing-protocol`
 
