@@ -72,15 +72,14 @@ module.exports = {
        "type": "category",
           "label": "Installing In AWS",
           "items": [
-            "intro_installation_quickstart_aws", 
+            "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
-            "intro_installation_quickstart_byol_mist_aws",
             ],
       },
       {
        "type": "category",
           "label": "Installing In Azure",
-          "items": [            
+          "items": [
             "intro_installation_azure",
             "intro_installation_azure_mist",
             "intro_installation_byol_azure_mist",
