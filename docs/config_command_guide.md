@@ -130,9 +130,9 @@ configure authority access-management role capability [<identityref>]
 A value from a set of predefined names.
 
 Options:
-config-read     Configuration Read Capability
-config-write    Configuration Write Capability
-provisioning    Asset Provisioning Capability
+- `config-read`:     Configuration Read Capability
+- `config-write`:    Configuration Write Capability
+- `provisioning`:    Asset Provisioning Capability
 
 ## `configure authority access-management role description`
 
@@ -283,7 +283,7 @@ configure authority access-management role resource generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority access-management role resource id`
 
@@ -389,7 +389,7 @@ Range: 1-18446744073709551615
 A value from a set of predefined names.
 
 Options:
-never    Never expire
+- `never`:    Never expire
 
 ## `configure authority asset-connection-resiliency`
 
@@ -429,7 +429,8 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
+
 ## `configure authority asset-connection-resiliency ssh-only`
 
 Only allow the asset connections from managed Router to Conductor to connect via the SSH tunnels.
@@ -470,7 +471,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority bgp-service-generation`
 
@@ -511,7 +512,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority bgp-service-generation security-policy`
 
@@ -1159,10 +1160,10 @@ configure authority dscp-map dscp-traffic-class traffic-class [<traffic-class-id
 Relative priority of traffic.
 
 Options:
-high           High priority traffic class.
-medium         Medium priority traffic class.
-low            Low priority traffic class.
-best-effort    Best-effort priority traffic class.
+- high:           High priority traffic class.
+- medium:         Medium priority traffic class.
+- low:            Low priority traffic class.
+- best-effort:    Best-effort priority traffic class.
 
 ## `configure authority dscp-map name`
 
@@ -1269,8 +1270,8 @@ Default: best-match-only
 A value from a set of predefined names.
 
 Options:
-best-match-only    Longest matching service prefix only.
-any-match          All service prefixes are considered.
+- best-match-only:    Longest matching service prefix only.
+- any-match:          All service prefixes are considered.
 
 ## `configure authority forward-error-correction-profile`
 
@@ -1324,8 +1325,8 @@ Default: dynamic
 A value from a set of predefined names.
 
 Options:
-dynamic    Alter ratio of packets to parity based on loss observed.
-static     Use a consistent ratio of packets to parity regardless of loss.
+- dynamic: Alter ratio of packets to parity based on loss observed.
+- static: Use a consistent ratio of packets to parity regardless of loss.
 
 ## `configure authority forward-error-correction-profile name`
 
@@ -1417,8 +1418,8 @@ Default: allow
 A value from a set of predefined names.
 
 Options:
-drop     ICMP replies without matching requests are dropped.
-allow    ICMP replies without matching requests are forwarded.
+- drop:     ICMP replies without matching requests are dropped.
+- allow:    ICMP replies without matching requests are forwarded.
 
 ## `configure authority icmp-control icmp-session-match`
 
@@ -1445,8 +1446,8 @@ Default: identifier-only
 A value from a set of predefined names.
 
 Options:
-identifier-only        ICMP sessions are based on identifier.
-identifier-and-type    ICMP sessions are based on identifier and type.
+- identifier-only:        ICMP sessions are based on identifier.
+- identifier-and-type:    ICMP sessions are based on identifier and type.
 
 ## `configure authority idp-profile`
 
@@ -1499,9 +1500,9 @@ configure authority idp-profile base-policy [<idp-policy>]
 Predefined policies for intrusion detection actions.
 
 Options:
-alert       A policy that only alerts.
-standard    The standard blocking and alerting policy.
-strict      A strict blocking and alerting policy.
+- alert:       A policy that only alerts.
+- standard:    The standard blocking and alerting policy.
+- strict:      A strict blocking and alerting policy.
 
 ## `configure authority idp-profile name`
 
@@ -1745,9 +1746,9 @@ configure authority idp-profile rule match severities [<idp-severity>]
 Severity levels for IDP rules.
 
 Options:
-minor       Filter minor or higher vulnerabilities.
-major       Filter major or higher vulnerabilities.
-critical    Filter only critical vulnerabilities.
+- minor:       Filter minor or higher vulnerabilities.
+- major:       Filter major or higher vulnerabilities.
+- critical:    Filter only critical vulnerabilities.
 
 ## `configure authority idp-profile rule match severity`
 
@@ -1772,9 +1773,9 @@ configure authority idp-profile rule match severity [<idp-severity>]
 Severity levels for IDP rules.
 
 Options:
-minor       Filter minor or higher vulnerabilities.
-major       Filter major or higher vulnerabilities.
-critical    Filter only critical vulnerabilities.
+- minor:       Filter minor or higher vulnerabilities.
+- major:       Filter major or higher vulnerabilities.
+- critical:    Filter only critical vulnerabilities.
 
 ## `configure authority idp-profile rule match vulnerability`
 
@@ -1860,9 +1861,9 @@ configure authority idp-profile rule outcome action [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-alert                   Alert only.
-drop                    Drop session.
-close-tcp-connection    Close TCP Connection.
+- alert:                   Alert only.
+- drop:                    Drop session.
+- close-tcp-connection:    Close TCP Connection.
 
 ## `configure authority idp-profile rule outcome severity`
 
@@ -1887,9 +1888,9 @@ configure authority idp-profile rule outcome severity [<idp-severity>]
 Severity levels for IDP rules.
 
 Options:
-minor       Filter minor or higher vulnerabilities.
-major       Filter major or higher vulnerabilities.
-critical    Filter only critical vulnerabilities.
+- minor:       Filter minor or higher vulnerabilities.
+- major:       Filter major or higher vulnerabilities.
+- critical:    Filter only critical vulnerabilities.
 
 ## `configure authority ipfix-collector`
 
@@ -1982,13 +1983,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string) (required):
+###### (0) ipv4-address (string) (required):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string) (required):
+###### (1) ipv6-address (string) (required):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -2122,8 +2123,8 @@ Default: tcp
 Transport (Layer 4) protocol.
 
 Options:
-tcp    Transmission Control Protocol.
-udp    User Datagram Protocol.
+- tcp:    Transmission Control Protocol.
+- udp:    User Datagram Protocol.
 
 ## `configure authority ipfix-collector resource-group`
 
@@ -2185,7 +2186,7 @@ Fraction digits: 16
 A value from a set of predefined names.
 
 Options:
-dynamic    Dynamically determine sampling based on data volume.
+- dynamic:    Dynamically determine sampling based on data volume.
 
 ## `configure authority ipfix-collector template-refresh-interval`
 
@@ -2276,8 +2277,8 @@ Default: allow-all
 A value from a set of predefined names.
 
 Options:
-allow-all    Allow all packets that contain options headers.
-drop-all     Drop all packets that contain options headers except for those defined in the exclusion list.
+- allow-all:    Allow all packets that contain options headers.
+- drop-all:     Drop all packets that contain options headers except for those defined in the exclusion list.
 
 ## `configure authority ipv4-option-filter drop-exclusion`
 
@@ -2370,13 +2371,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string) (required):
+###### (0) ipv4-address (string) (required):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string) (required):
+###### (1) ipv6-address (string) (required):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -2458,7 +2459,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority ldap-server bind-type`
 
@@ -2485,9 +2486,9 @@ Default: anonymous
 A value from a set of predefined names.
 
 Options:
-anonymous          Bind to this server anonymously.
-unauthenticated    Bind to this server with a distinguished name only.
-password           Bind to this server with a distinguished name and password.
+- anonymous:          Bind to this server anonymously.
+- unauthenticated:    Bind to this server with a distinguished name only.
+- password:           Bind to this server with a distinguished name and password.
 
 ## `configure authority ldap-server certificate-assurance`
 
@@ -2514,10 +2515,10 @@ Default: strong
 A value from a set of predefined names.
 
 Options:
-weak        Do not request or check any server certificates.
-mild        Ignore invalid or missing certificates but check for hostname
-moderate    Terminate on invalid certificate but ignore missing certificates.
-strong      Terminate on invalid and missing certificates.
+- weak:        Do not request or check any server certificates.
+- mild:        Ignore invalid or missing certificates but check for hostname
+- moderate:    Terminate on invalid certificate but ignore missing certificates.
+- strong:      Terminate on invalid and missing certificates.
 
 ## `configure authority ldap-server distinguished-name`
 
@@ -2653,7 +2654,7 @@ Range: 0-65535
 A value from a set of predefined names.
 
 Options:
-server-type-default    Use the default based on server-type.
+- server-type-default:    Use the default based on server-type.
 
 ## `configure authority ldap-server resource-group`
 
@@ -2726,9 +2727,9 @@ Default: ldaps
 A value from a set of predefined names.
 
 Options:
-starttls          Connect to this server using STARTTLS. Default port is 389.
-ldaps             Connect to this server via LDAPS. Default port is 636.
-global-catalog    Connect to this server as an Active Directory Global Catalog. Default port is 3269.
+- starttls:          Connect to this server using STARTTLS. Default port is 389.
+- ldaps:             Connect to this server via LDAPS. Default port is 636.
+- global-catalog:    Connect to this server as an Active Directory Global Catalog. Default port is 3269.
 
 ## `configure authority ldap-server user-search-base`
 
@@ -2815,8 +2816,8 @@ Default: paths-as-next-hop
 A value from a set of predefined names.
 
 Options:
-paths-as-next-hop         Generate paths on a node as next-hops
-paths-as-service-route    Generate paths on a node as service-route
+- paths-as-next-hop:        Generate paths on a node as next-hops
+- paths-as-service-route:    Generate paths on a node as service-route
 
 ## `configure authority metrics-profile`
 
@@ -3459,7 +3460,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority performance-monitoring-profile name`
 
@@ -3584,13 +3585,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string) (required):
+###### (0) ipv4-address (string) (required):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string) (required):
+###### (1) ipv6-address (string) (required):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -3800,7 +3801,7 @@ Range: 1-720
 A value from a set of predefined names.
 
 Options:
-never    Never regenerate security keys
+- never:    Never regenerate security keys
 
 ## `configure authority remote-login`
 
@@ -3839,7 +3840,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority resource-group`
 
@@ -3994,7 +3995,7 @@ configure authority router administrative-group [<name-id>]
 #### Description
 
 :::warning
-&amp;#x27;administrative-group&amp;#x27; is deprecated and will be removed in a future software version
+`administrative-group` is deprecated and will be removed in a future software version
 :::
 
 ##### name-id (string)
@@ -4090,13 +4091,13 @@ configure authority router application-identification auto-update day-of-week [<
 A value from a set of predefined names.
 
 Options:
-sun    Download each Sunday
-mon    Download each Monday
-tue    Download each Tuesday
-wed    Download each Wednesday
-thu    Download each Thursday
-fri    Download each Friday
-sat    Download each Saturday
+- sun:   Download each Sunday
+- mon:    Download each Monday
+- tue:    Download each Tuesday
+- wed:    Download each Wednesday
+- thu:    Download each Thursday
+- fri:    Download each Friday
+- sat:    Download each Saturday
 
 ## `configure authority router application-identification auto-update enabled`
 
@@ -4122,7 +4123,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router application-identification auto-update update-frequency`
 
@@ -4149,9 +4150,9 @@ Default: weekly
 A value from a set of predefined names.
 
 Options:
-daily      Download each day
-weekly     Download each week
-monthly    Download each month
+- daily:      Download each day
+- weekly:     Download each week
+- monthly:    Download each month
 
 ## `configure authority router application-identification auto-update update-jitter`
 
@@ -4252,10 +4253,10 @@ configure authority router application-identification mode [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-module    Learn application via modules.
-tls       Learn application via TLS server name parsing.
-http      Learn application via HTTP host name parsing.
-all       Learn application via any available techniques.
+- module:    Learn application via modules.
+- tls:       Learn application via TLS server name parsing.
+- http:      Learn application via HTTP host name parsing.
+- all:       Learn application via any available techniques.
 
 ## `configure authority router application-identification per-app-metrics`
 
@@ -4281,7 +4282,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router application-identification summary-retention`
 
@@ -4347,7 +4348,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router application-identification summary-tracking`
 
@@ -4373,7 +4374,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router application-identification use-application-director-in-memory-db`
 
@@ -4399,7 +4400,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router application-identification web-filtering`
 
@@ -4535,7 +4536,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router application-identification web-filtering max-retransmission-attempts-before-allow`
 
@@ -4639,8 +4640,8 @@ Default: sha256
 A value from a set of predefined names.
 
 Options:
-simple    Simple Password.
-sha256    SHA256
+- simple:    Simple Password
+- sha256:    SHA256
 
 ## `configure authority router bfd desired-tx-interval`
 
@@ -4721,8 +4722,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-enabled     Extend hold-down time exponentially if link flaps occur during hold-down time.
-disabled    Use simple hold-down timer for every link up event.
+- enabled:     Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled:    Use simple hold-down timer for every link up event.
 
 ## `configure authority router bfd hold-down-time`
 
@@ -4913,8 +4914,8 @@ Default: enabled
 A value from a set of predefined names.
 
 Options:
-enabled     BFD is enabled on all nodes of this router.
-disabled    BFD is disabled on all nodes of this router.
+- enabled:     BFD is enabled on all nodes of this router.
+- disabled:    BFD is disabled on all nodes of this router.
 
 ## `configure authority router conductor-address`
 
@@ -5287,8 +5288,8 @@ configure authority router dns-config mode [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-static       Static list of DNS nameservers
-automatic    Populate DNS nameservers from learned sources
+- static:       Static list of DNS nameservers
+- automatic:    Populate DNS nameservers from learned sources
 
 
 ## `configure authority router entitlement`
@@ -5415,7 +5416,7 @@ Range: 100-4294967295
 A value from a set of predefined names.
 
 Options:
-unlimited    No limit on this value
+- unlimited:    No limit on this value
 
 ## `configure authority router icmp-probe-profile`
 
@@ -5596,8 +5597,8 @@ Default: any
 A value from a set of predefined names.
 
 Options:
-any    Failure to ping any probe-address brings state down.
-all    Failure to ping all probe-addresses brings state down.
+- any:    Failure to ping any probe-address brings state down.
+- all:    Failure to ping all probe-addresses brings state down.
 
 ## `configure authority router icmp-probe-profile probe-interval`
 
@@ -5773,7 +5774,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router idp mode`
 
@@ -5800,10 +5801,10 @@ Default: auto
 A value from a set of predefined names.
 
 Options:
-auto        Automatically toggle IDP based on idp-policies
-disabled    Disable IDP
-spoke       Enable spoke mode for IDP
-hub         Enable hub mode for IDP
+- auto:        Automatically toggle IDP based on idp-policies
+- disabled:    Disable IDP
+- spoke:       Enable spoke mode for IDP
+- hub:         Enable hub mode for IDP
 
 ## `configure authority router inter-node-security`
 
@@ -5895,7 +5896,7 @@ configure authority router maintenance-mode [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router management-service-generation`
 
@@ -5936,7 +5937,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router management-service-generation service-policy`
 
@@ -5985,8 +5986,8 @@ Default: paths-as-next-hop
 A value from a set of predefined names.
 
 Options:
-paths-as-next-hop         Generate paths on a node as next-hops
-paths-as-service-route    Generate paths on a node as service-route
+- paths-as-next-hop:         Generate paths on a node as next-hops
+- paths-as-service-route:    Generate paths on a node as service-route
 
 ## `configure authority router max-inter-node-way-points`
 
@@ -6190,8 +6191,8 @@ Default: static
 A value from a set of predefined names.
 
 Options:
-static     Static IP assignment per endpoint
-dynamic    Dynamic IP &amp; port assignment per session
+- static:     Static IP assignment per endpoint
+- dynamic:    Dynamic IP &amp; port assignment per session
 
 ## `configure authority router nat-pool address-pool tenant-name`
 
@@ -6334,7 +6335,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node description`
 
@@ -6449,7 +6450,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface bridge-name`
 
@@ -6544,7 +6545,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface forwarding`
 
@@ -6570,7 +6571,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface interface-name`
 
@@ -6619,11 +6620,11 @@ Default: auto
 A value from a set of predefined names.
 
 Options:
-auto            Use auto-negotation for the Ethernet link
-10Mbps-half     Force the Ethernet link to 10 Mbps half duplex
-10Mbps-full     Force the Ethernet link to 10 Mbps full duplex
-100Mbps-half    Force the Ethernet link to 100 Mbps half duplex
-100Mbps-full    Force the Ethernet link to 100 Mbps full duplex
+- auto:            Use auto-negotation for the Ethernet link
+- 10Mbps-half:     Force the Ethernet link to 10 Mbps half duplex
+- 10Mbps-full:     Force the Ethernet link to 10 Mbps full duplex
+- 100Mbps-half:    Force the Ethernet link to 100 Mbps half duplex
+- 100Mbps-full:    Force the Ethernet link to 100 Mbps full duplex
 
 ## `configure authority router node device-interface lldp`
 
@@ -6693,7 +6694,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface lldp hold-multiplier`
 
@@ -6742,7 +6743,7 @@ configure authority router node device-interface lldp mode [<enumeration>]
 Default: disabled
 
 :::warning
-&amp;#x27;mode&amp;#x27; is deprecated and will be removed in a future software version
+`mode` is deprecated and will be removed in a future software version
 :::
 
 ##### enumeration
@@ -6750,9 +6751,9 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled        Disable LLDP
-receive-only    Receive and process incoming LLDP packets
-enabled         Enable sending and receiving LLDP packets
+- disabled:        Disable LLDP
+- receive-only:    Receive and process incoming LLDP packets
+- enabled:         Enable sending and receiving LLDP packets
 
 ## `configure authority router node device-interface load-balancing`
 
@@ -6899,8 +6900,8 @@ configure authority router node device-interface lte authentication authenticati
 A value from a set of predefined names.
 
 Options:
-chap    Challenge-Handshake Authentication Protocol.
-pap     Password Authentication Protocol.
+- chap:    Challenge-Handshake Authentication Protocol.
+- pap:     Password Authentication Protocol.
 
 ## `configure authority router node device-interface lte authentication password`
 
@@ -6977,8 +6978,8 @@ Must be one of the following types:
 A value from a set of predefined names.
 
 Options:
-none    Leave the current image alone.
-auto    Automatically set the image to match the carrier network.
+- none:    Leave the current image alone.
+- auto:    Automatically set the image to match the carrier network.
 
 ###### (1) string
 
@@ -7254,8 +7255,8 @@ Default: allow
 Enumeration defining whether access is allowed or denied.
 
 Options:
-allow    Allow access.
-deny     Deny access.
+- allow:    Allow access.
+- deny:     Deny access.
 
 ## `configure authority router node device-interface network-interface address host-service access-policy source`
 
@@ -7287,7 +7288,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-####### (0) ipv4-prefix (string):
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -7301,7 +7302,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-####### (1) ipv6-prefix (string):
+###### (1) ipv6-prefix (string):
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -7491,14 +7492,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool custom move value`
 
@@ -7549,8 +7550,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service address-pool custom value`
 
@@ -8191,14 +8192,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom quantity`
 
@@ -8225,8 +8226,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom value`
 
@@ -8823,14 +8824,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information enterprise-number`
 
@@ -8873,8 +8874,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information value`
 
@@ -9001,14 +9002,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information quantity`
 
@@ -9035,8 +9036,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information value`
 
@@ -9296,14 +9297,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information enterprise-number`
 
@@ -9352,8 +9353,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information value`
 
@@ -9479,14 +9480,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information quantity`
 
@@ -9513,8 +9514,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information value`
 
@@ -9564,7 +9565,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface address host-service description`
 
@@ -9612,7 +9613,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface address host-service enabled`
 
@@ -9638,7 +9639,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface address host-service max-lease-time`
 
@@ -9711,12 +9712,12 @@ configure authority router node device-interface network-interface address host-
 A value from a set of predefined names.
 
 Options:
-ssh            SSH Hosted service.
-netconf        Netconf service.
-web            Web service.
-dhcp-server    DHCP server service.
-snmp-server    Access SNMP server through this interface
-custom         Custom service.
+- ssh:            SSH Hosted service.
+- netconf:        Netconf service.
+- web:            Web service.
+- dhcp-server:    DHCP server service.
+- snmp-server:    Access SNMP server through this interface
+- custom:        Custom service.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment`
 
@@ -9953,14 +9954,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom quantity`
 
@@ -9987,8 +9988,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom value`
 
@@ -10585,14 +10586,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information enterprise-number`
 
@@ -10635,8 +10636,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information value`
 
@@ -10761,14 +10762,14 @@ Default: string
 A value from a set of predefined names.
 
 Options:
-string
-uint8
-uint16
-uint32
-boolean
-ipv4-address
-int32
-binary          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 
 
@@ -10797,8 +10798,8 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
-singular
-array
+- singular
+- array
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information value`
 
@@ -10946,12 +10947,12 @@ configure authority router node device-interface network-interface address host-
 Transport (Layer 4) protocol.
 
 Options:
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp:     Transmission Control Protocol.
+- udp:     User Datagram Protocol.
+- icmp:    Internet Control Management Protocol.
+- gre:     Generic Routing Encapsulation Protocol.
+- esp:     IPSec Encapsulating Security Payload Protocol.
+- pim:     Protocol Independent Multicast.
 
 ## `configure authority router node device-interface network-interface address in-subnet-arp-prefix`
 
@@ -11240,8 +11241,8 @@ Default: sha256
 A value from a set of predefined names.
 
 Options:
-simple    Simple Password.
-sha256    SHA256
+- simple    Simple Password
+- sha256    SHA256
 
 ## `configure authority router node device-interface network-interface adjacency bfd desired-tx-interval`
 
@@ -11322,8 +11323,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-enabled     Extend hold-down time exponentially if link flaps occur during hold-down time.
-disabled    Use simple hold-down timer for every link up event.
+- enabled:     Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled:    Use simple hold-down timer for every link up event.
 
 ## `configure authority router node device-interface network-interface adjacency bfd hold-down-time`
 
@@ -11514,8 +11515,8 @@ Default: enabled
 A value from a set of predefined names.
 
 Options:
-enabled     BFD is enabled on all nodes of this router.
-disabled    BFD is disabled on all nodes of this router.
+- enabled:     BFD is enabled on all nodes of this router.
+- disabled:    BFD is disabled on all nodes of this router.
 
 ## `configure authority router node device-interface network-interface adjacency cost`
 
@@ -11565,7 +11566,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency external-nat-address`
 
@@ -11605,7 +11606,7 @@ configure authority router node device-interface network-interface adjacency gen
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency inter-router-security`
 
@@ -11715,8 +11716,8 @@ Default: auto
 A value from a set of predefined names.
 
 Options:
-auto        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
-disabled    Do not send keep-alive packets to keep pinhole open on an external NAT device.
+- auto: Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- disabled: Do not send keep-alive packets to keep pinhole open on an external NAT device.
 
 ## `configure authority router node device-interface network-interface adjacency nat-keep-alive tcp-inactivity-timeout`
 
@@ -11811,7 +11812,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency path-metrics-rolling-avg-interval`
 
@@ -11877,7 +11878,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency path-mtu-discovery interval`
 
@@ -11999,7 +12000,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency performance-monitoring profile`
 
@@ -12135,8 +12136,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    Do not add additional padding.
-enabled     Add one byte of padding to the end of the packet.
+- disabled:    Do not add additional padding.
+- enabled:     Add one byte of padding to the end of the packet.
 
 ## `configure authority router node device-interface network-interface adjacency qp-value`
 
@@ -12198,8 +12199,8 @@ configure authority router node device-interface network-interface adjacency ses
 When to apply session optimization. Auto is recommended.
 
 Options:
-never-on    Never optimize TCP traffic.
-auto        Automatically determine if TCP optimization is required.
+- never-on:    Never optimize TCP traffic.
+- auto:L        Automatically determine if TCP optimization is required.
 
 ## `configure authority router node device-interface network-interface adjacency source-nat-address`
 
@@ -12220,7 +12221,7 @@ configure authority router node device-interface network-interface adjacency sou
 #### Description
 
 :::warning
-&amp;#x27;source-nat-address&amp;#x27; is deprecated and will be removed in a future software version
+`source-nat-address` is deprecated and will be removed in a future software version
 :::
 
 ##### ip-prefix (union)
@@ -12611,7 +12612,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency traffic-engineering traffic-profile`
 
@@ -12698,8 +12699,8 @@ Range: 0-255
 A value from a set of predefined names.
 
 Options:
-auto        Automatically determine TTL padding.
-disabled    Do not pad TTL.
+- auto:        Automatically determine TTL padding.
+- disabled:    Do not pad TTL.
 
 ## `configure authority router node device-interface network-interface adjacency udp-transform`
 
@@ -12770,8 +12771,8 @@ Default: auto-detect
 A value from a set of predefined names.
 
 Options:
-auto-detect         Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
-always-transform    Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
+- auto-detect: Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
+- always-transform: Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
 
 ## `configure authority router node device-interface network-interface adjacency udp-transform nat-keep-alive-mode`
 
@@ -12798,8 +12799,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    Do not send keep-alive packets to keep UDP sessions active during UDP transform.
-enabled     Inject keep-alive packets to keep UDP sessions active during UDP transform.
+- disabled: Do not send keep-alive packets to keep UDP sessions active during UDP transform.
+- enabled: Inject keep-alive packets to keep UDP sessions active during UDP transform.
 
 ## `configure authority router node device-interface network-interface adjacency udp-transform nat-keep-alive-timeout`
 
@@ -12961,9 +12962,9 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none       No billing is associated with this interface.
-flat       Flat billing. Is charged flat amount of currency per period of time.
-metered    Metered billing. Is charged based on the data usage.
+- none: No billing is associated with this interface.
+- flat: Flat billing. Is charged flat amount of currency per period of time.
+- metered: Metered billing. Is charged based on the data usage.
 
 ## `configure authority router node device-interface network-interface carrier`
 
@@ -13011,7 +13012,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface default-route`
 
@@ -13037,7 +13038,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface description`
 
@@ -13086,10 +13087,10 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    DHCP is disabled.
-v4          Only DHCPv4 is enabled.
-v6          Only DHCPv6 is enabled.
-v6-pd       Only DHCPv6 Prefix Delegation is enabled and the address is derived from the subnet-id and the prefix associated with the prefix-delegation-group.
+- disabled: DHCP is disabled.
+- v4: Only DHCPv4 is enabled.
+- v6: Only DHCPv6 is enabled.
+- v6-pd: Only DHCPv6 Prefix Delegation is enabled and the address is derived from the subnet-id and the prefix associated with the prefix-delegation-group.
 
 ## `configure authority router node device-interface network-interface dhcp-delayed-auth-key`
 
@@ -13182,9 +13183,9 @@ Default: hmac-md5
 A value from a set of predefined names.
 
 Options:
-hmac-md5       HMAC-MD5 is used to authenticate prefix-delegation messages.
-hmac-sha1      HMAC-SHA1 is used to authenticate prefix-delegation messages.
-hmac-sha256    HMAC-SHA256 is used to authenticate prefix-delegation messages.
+- hmac-md5: HMAC-MD5 is used to authenticate prefix-delegation messages.
+- hmac-sha1: HMAC-SHA1 is used to authenticate prefix-delegation messages.
+- hmac-sha256: HMAC-SHA256 is used to authenticate prefix-delegation messages.
 
 ## `configure authority router node device-interface network-interface dscp-map`
 
@@ -13246,7 +13247,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface dscp-steering transport`
 
@@ -13360,12 +13361,12 @@ configure authority router node device-interface network-interface dscp-steering
 Transport (Layer 4) protocol.
 
 Options:
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
 
 
 ## `configure authority router node device-interface network-interface egress-source-nat-pool`
@@ -13429,8 +13430,8 @@ Range: 64-8960
 A value from a set of predefined names.
 
 Options:
-automatic    Automatically adjust MSS according to egress path
-disabled     Do not force MSS
+- automatic: Automatically adjust MSS according to egress path
+- disabled: Do not force MSS
 
 ## `configure authority router node device-interface network-interface ethernet-over-svr`
 
@@ -13473,7 +13474,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface ethernet-over-svr encapsulate-all-traffic`
 
@@ -13499,7 +13500,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface ethernet-over-svr name`
 
@@ -13579,13 +13580,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -13721,8 +13722,8 @@ Default: deny
 A value from a set of predefined names.
 
 Options:
-deny      Deny packets matching the filter rule.
-permit    Permit packets matching the filter rule. No further rules will run.
+- deny: Deny packets matching the filter rule.
+- permit: Permit packets matching the filter rule. No further rules will run.
 
 ## `configure authority router node device-interface network-interface filter-rule bpf`
 
@@ -13876,8 +13877,8 @@ Default: allow
 Enumeration defining whether access is allowed or denied.
 
 Options:
-allow    Allow access.
-deny     Deny access.
+- allow: Allow access.
+- deny: Deny access.
 
 ## `configure authority router node device-interface network-interface host-service access-policy source`
 
@@ -13909,7 +13910,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-####### (0) ipv4-prefix (string):
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -13923,7 +13924,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-####### (1) ipv6-prefix (string):
+###### (1) ipv6-prefix (string):
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -14017,7 +14018,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface host-service service-type`
 
@@ -14042,12 +14043,12 @@ configure authority router node device-interface network-interface host-service 
 A value from a set of predefined names.
 
 Options:
-ssh            SSH Hosted service.
-netconf        Netconf service.
-web            Web service.
-dhcp-server    DHCP server service.
-snmp-server    Access SNMP server through this interface
-custom         Custom service.
+- ssh: SSH Hosted service.
+- netconf: Netconf service.
+- web: Web service.
+- dhcp-server: DHCP server service.
+- snmp-server: Access SNMP server through this interface
+- custom: Custom service.
 
 ## `configure authority router node device-interface network-interface host-service transport`
 
@@ -14173,12 +14174,12 @@ configure authority router node device-interface network-interface host-service 
 Transport (Layer 4) protocol.
 
 Options:
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
 
 ## `configure authority router node device-interface network-interface hostname`
 
@@ -14263,8 +14264,8 @@ Default: allow
 A value from a set of predefined names.
 
 Options:
-drop     Neither respond to ICMP requests nor generate ICMP errors to/from IPs on this interface
-allow    Respond to ICMP requests and generate ICMP errors to/from IPs on this interface
+- drop: Neither respond to ICMP requests nor generate ICMP errors to/from IPs on this interface
+- allow: Respond to ICMP requests and generate ICMP errors to/from IPs on this interface
 
 ## `configure authority router node device-interface network-interface ifcfg-option`
 
@@ -14406,7 +14407,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface management-vector`
 
@@ -14523,9 +14524,9 @@ Default: automatic
 A value from a set of predefined names.
 
 Options:
-disabled     Multicast listeners are disabled.
-automatic    Multicast listeners are enabled or disabled based on the presence of multicast services with tenant based access policies which match this interface&#x27;s tenant.
-enabled      Multicast listeners are enabled.
+- disabled: Multicast listeners are disabled.
+- automatic: Multicast listeners are enabled or disabled based on the presence of multicast services with tenant based access policies which match this interface&#x27;s tenant.
+- enabled: Multicast listeners are enabled.
 
 ## `configure authority router node device-interface network-interface multicast-report-proxy`
 
@@ -14551,7 +14552,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface name`
 
@@ -14782,8 +14783,8 @@ Default: sha256
 A value from a set of predefined names.
 
 Options:
-simple    Simple Password.
-sha256    SHA256
+- simple: Simple Password
+- sha256: SHA256
 
 ## `configure authority router node device-interface network-interface neighborhood bfd desired-tx-interval`
 
@@ -14864,8 +14865,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-enabled     Extend hold-down time exponentially if link flaps occur during hold-down time.
-disabled    Use simple hold-down timer for every link up event.
+- enabled: Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled: Use simple hold-down timer for every link up event.
 
 ## `configure authority router node device-interface network-interface neighborhood bfd hold-down-time`
 
@@ -15056,8 +15057,8 @@ Default: enabled
 A value from a set of predefined names.
 
 Options:
-enabled     BFD is enabled on all nodes of this router.
-disabled    BFD is disabled on all nodes of this router.
+- enabled: BFD is enabled on all nodes of this router.
+- disabled: BFD is disabled on all nodes of this router.
 
 ## `configure authority router node device-interface network-interface neighborhood encapsulate-icmp-error-messages`
 
@@ -15083,7 +15084,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood external-nat-address`
 
@@ -15196,8 +15197,8 @@ Default: auto
 A value from a set of predefined names.
 
 Options:
-auto        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
-disabled    Do not send keep-alive packets to keep pinhole open on an external NAT device.
+- auto: Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- disabled: Do not send keep-alive packets to keep pinhole open on an external NAT device.
 
 ## `configure authority router node device-interface network-interface neighborhood nat-keep-alive tcp-inactivity-timeout`
 
@@ -15292,7 +15293,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood path-metrics-rolling-avg-interval`
 
@@ -15358,7 +15359,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood path-mtu-discovery interval`
 
@@ -15413,8 +15414,8 @@ Default: disable-override
 Payload encryption override setting.
 
 Options:
-enable-encryption    Enable encryption of payload even when the security-policy associated with the service has encrypt=false. If the payload is already encrypted by another SSR, send it out as is.
-disable-override     Disable override of the security policy and use the security policy settings associated with the service.
+- enable-encryption: Enable encryption of payload even when the security-policy associated with the service has encrypt=false. If the payload is already encrypted by another SSR, send it out as is.
+- disable-override: Disable override of the security policy and use the security policy settings associated with the service.
 
 ## `configure authority router node device-interface network-interface neighborhood peer-connectivity`
 
@@ -15441,8 +15442,8 @@ Default: bidirectional
 The IP-layer connectivity behavior.
 
 Options:
-bidirectional    Publicly reachable (i.e., not behind a firewall/NAT).
-outbound-only    Not publicly reachable (i.e., behind a firewall/NAT).
+- bidirectional: Publicly reachable (i.e., not behind a firewall/NAT).
+- outbound-only: Not publicly reachable (i.e., behind a firewall/NAT).
 
 ## `configure authority router node device-interface network-interface neighborhood peer-path-overlay`
 
@@ -15469,8 +15470,8 @@ Default: svr
 The overlay mechanism used for the peer path.
 
 Options:
-svr           SVR (Secure Vector Routing) overlay.
-bfd-tunnel    Tunnel over BFD overlay.
+- svr: SVR (Secure Vector Routing) overlay.
+- bfd-tunnel: Tunnel over BFD overlay.
 
 ## `configure authority router node device-interface network-interface neighborhood performance-monitoring`
 
@@ -15510,7 +15511,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood performance-monitoring profile`
 
@@ -15646,8 +15647,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    Do not add additional padding.
-enabled     Add one byte of padding to the end of the packet.
+- disabled: Do not add additional padding.
+- enabled: Add one byte of padding to the end of the packet.
 
 ## `configure authority router node device-interface network-interface neighborhood qp-value`
 
@@ -15670,7 +15671,7 @@ configure authority router node device-interface network-interface neighborhood 
 Default: 0
 
 :::warning
-&amp;#x27;qp-value&amp;#x27; is deprecated and will be removed in a future software version
+`qp-value` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -15713,8 +15714,8 @@ configure authority router node device-interface network-interface neighborhood 
 When to apply session optimization. Auto is recommended.
 
 Options:
-never-on    Never optimize TCP traffic.
-auto        Automatically determine if TCP optimization is required.
+- never-on: Never optimize TCP traffic.
+- auto: Automatically determine if TCP optimization is required.
 
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement`
 
@@ -16045,9 +16046,9 @@ Default: spoke
 A value from a set of predefined names.
 
 Options:
-mesh     Full mesh. This router will have adjacencies to all other routers in the neighborhood.
-hub      The router is a hub in a hub-and-spoke topology. The router will have adjacencies with other routers in the neighborhood that are labeled &#x27;spoke&#x27; or &#x27;mesh&#x27;.
-spoke    The router is a spoke in a hub-and-spoke topology. The router will have adjacencies with other routers in the neighborhood that are labeled &#x27;hub&#x27; or &#x27;mesh&#x27;.
+- mesh: Full mesh. This router will have adjacencies to all other routers in the neighborhood.
+- hub: The router is a hub in a hub-and-spoke topology. The router will have adjacencies with other routers in the neighborhood that are labeled &#x27;spoke&#x27; or &#x27;mesh&#x27;.
+- spoke: The router is a spoke in a hub-and-spoke topology. The router will have adjacencies with other routers in the neighborhood that are labeled &#x27;hub&#x27; or &#x27;mesh&#x27;.
 
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering`
 
@@ -16102,7 +16103,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering download receive-cap`
 
@@ -16191,7 +16192,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering upload traffic-profile`
 
@@ -16278,8 +16279,8 @@ Range: 0-255
 A value from a set of predefined names.
 
 Options:
-auto        Automatically determine TTL padding.
-disabled    Do not pad TTL.
+- auto: Automatically determine TTL padding.
+- disabled: Do not pad TTL.
 
 ## `configure authority router node device-interface network-interface neighborhood udp-transform`
 
@@ -16350,8 +16351,8 @@ Default: auto-detect
 A value from a set of predefined names.
 
 Options:
-auto-detect         Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
-always-transform    Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
+- auto-detect: Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
+- always-transform: Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
 
 ## `configure authority router node device-interface network-interface neighborhood udp-transform nat-keep-alive-mode`
 
@@ -16378,8 +16379,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    Do not send keep-alive packets to keep UDP sessions active during UDP transform.
-enabled     Inject keep-alive packets to keep UDP sessions active during UDP transform.
+- disabled: Do not send keep-alive packets to keep UDP sessions active during UDP transform.
+- enabled: Inject keep-alive packets to keep UDP sessions active during UDP transform.
 
 ## `configure authority router node device-interface network-interface neighborhood udp-transform nat-keep-alive-timeout`
 
@@ -16480,7 +16481,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface prefix-delegation`
 
@@ -16506,7 +16507,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface prefix-delegation-authentication`
 
@@ -16533,9 +16534,9 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled        Authentication of prefix-delegation messages is disabled.
-delayed         Delayed authentication protocol is used to authenticate prefix-delegation messages.
-reconfig-key    Reconfigure-key authentication protocol is used to authenticate prefix-delegation messages.
+- disabled: Authentication of prefix-delegation messages is disabled.
+- delayed: Delayed authentication protocol is used to authenticate prefix-delegation messages.
+- reconfig-key: Reconfigure-key authentication protocol is used to authenticate prefix-delegation messages.
 
 ## `configure authority router node device-interface network-interface prefix-delegation-group`
 
@@ -16607,7 +16608,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface prioritization-mode`
 
@@ -16634,8 +16635,8 @@ Default: local
 A value from a set of predefined names.
 
 Options:
-local    Trust the internal classification for prioritization.
-dscp     Trust incoming DSCP values for prioritization.
+- local: Trust the internal classification for prioritization.
+- dscp: Trust incoming DSCP values for prioritization.
 
 ## `configure authority router node device-interface network-interface qp-value`
 
@@ -16658,7 +16659,7 @@ configure authority router node device-interface network-interface qp-value [<ui
 Default: 0
 
 :::warning
-&amp;#x27;qp-value&amp;#x27; is deprecated and will be removed in a future software version
+`qp-value` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -16689,7 +16690,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface rewrite-dscp`
 
@@ -16713,7 +16714,7 @@ configure authority router node device-interface network-interface rewrite-dscp 
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface router-advertisement`
 
@@ -16739,7 +16740,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface source-nat`
 
@@ -16765,7 +16766,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface tenant`
 
@@ -16946,13 +16947,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string) (required):
+###### (0) ipv4-address (string) (required):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string) (required):
+###### (1) ipv6-address (string) (required):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -17159,10 +17160,10 @@ Default: external
 A value from a set of predefined names.
 
 Options:
-fabric        Fabric network for inter-node traffic.
-external      External network for regular traffic.
-shared        Network is both &#x27;fabric&#x27; and &#x27;external&#x27;.
-gre-tunnel    A GRE tunnel.
+- fabric: Fabric network for inter-node traffic.
+- external: External network for regular traffic.
+- shared: Network is both &#x27;fabric&#x27; and &#x27;external&#x27;.
+- gre-tunnel: A GRE tunnel.
 
 ## `configure authority router node device-interface network-interface vlan`
 
@@ -17302,8 +17303,8 @@ configure authority router node device-interface pppoe authentication-protocol [
 A value from a set of predefined names.
 
 Options:
-chap    Challenge-Handshake Authentication Protocol.
-pap     Password Authentication Protocol.
+- chap:    Challenge-Handshake Authentication Protocol.
+- pap:     Password Authentication Protocol.
 
 ## `configure authority router node device-interface pppoe password`
 
@@ -17373,7 +17374,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface q-in-q`
 
@@ -17461,7 +17462,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface session-optimization`
 
@@ -17500,7 +17501,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface shared-phys-address`
 
@@ -17551,7 +17552,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface strip-vlan`
 
@@ -17577,7 +17578,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface target-interface`
 
@@ -17643,7 +17644,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface traffic-engineering traffic-profile`
 
@@ -17704,7 +17705,7 @@ Range: 0-999999999999
 A value from a set of predefined names.
 
 Options:
-unlimited    No limit on this value.
+- unlimited: No limit on this value.
 
 ## `configure authority router node device-interface type`
 
@@ -17731,13 +17732,13 @@ Default: ethernet
 A value from a set of predefined names.
 
 Options:
-ethernet    A physical ethernet interface.
-pppoe       An interface using the Point-to-Point Protocol over Ethernet (PPPoE).
-host        A logical interface to the host system.
-bridged     A logical interface bridged to a target interface.
-lte         An interface using LTE.
-t1          An interface using a T1 card.
-bond        An aggregated group of ethernet interfaces.
+- ethernet: A physical ethernet interface.
+- pppoe: An interface using the Point-to-Point Protocol over Ethernet (PPPoE).
+- host: A logical interface to the host system.
+- bridged: A logical interface bridged to a target interface.
+- lte: An interface using LTE.
+- t1: An interface using a T1 card.
+- bond: An aggregated group of ethernet interfaces.
 
 ## `configure authority router node device-interface vmbus-uuid`
 
@@ -17834,7 +17835,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface vrrp priority`
 
@@ -17886,7 +17887,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node device-interface vrrp vlan`
 
@@ -17962,7 +17963,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node forwarding-core-count`
 
@@ -18021,8 +18022,8 @@ A restart is required if forwarding-core-mode is created, modified, or deleted
 A value from a set of predefined names.
 
 Options:
-automatic    The number of cores dedicated to traffic forwarding will be automatically determined based on system properties.
-manual       The number of cores dedicated to traffic forwarding will be set to the value of forwarding-core-count.
+- automatic: The number of cores dedicated to traffic forwarding will be automatically determined based on system properties.
+- manual: The number of cores dedicated to traffic forwarding will be set to the value of forwarding-core-count.
 
 ## `configure authority router node ipfix`
 
@@ -18061,7 +18062,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node location`
 
@@ -18324,13 +18325,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -18467,13 +18468,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -18554,7 +18555,7 @@ configure authority router node port-forwarding server-destination [<enumeration
 A value from a set of predefined names.
 
 Options:
-ha-node    The server on the HA node
+- ha-node: The server on the HA node
 
 ## `configure authority router node port-forwarding server-port`
 
@@ -18608,7 +18609,7 @@ A restart is required if power-saver is created, modified, or deleted
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node radius`
 
@@ -18879,10 +18880,10 @@ A restart is required if role is created, modified, or deleted
 The node&#x27;s role in the SSR system.
 
 Options:
-control      A Control and Operations Resource node.
-slice        A Software Line-Card Engine node.
-combo        A combined Control and Slice.
-conductor    A remote management system.
+- control: A Control and Operations Resource node.
+- slice: A Software Line-Card Engine node.
+- combo: A combined Control and Slice.
+- conductor: A remote management system.
 
 ## `configure authority router node session-processor-count`
 
@@ -18941,8 +18942,8 @@ A restart is required if session-processor-mode is created, modified, or deleted
 A value from a set of predefined names.
 
 Options:
-automatic    The number of threads dedicated to session processing will be automatically determined based on system properties.
-manual       The number of threads dedicated to session processing will be set to the value of session-processor-count.
+- automatic: The number of threads dedicated to session processing will be automatically determined based on system properties.
+- manual: The number of threads dedicated to session processing will be set to the value of session-processor-count.
 
 ## `configure authority router node session-setup-scaling`
 
@@ -18972,7 +18973,7 @@ A restart is required if session-setup-scaling is created, modified, or deleted
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router node ssh-keepalive`
 
@@ -19602,12 +19603,12 @@ configure authority router node top-sessions bandwidth session protocol [<protoc
 Transport (Layer 4) protocol.
 
 Options:
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
 
 ## `configure authority router node top-sessions bandwidth session service-name`
 
@@ -19846,7 +19847,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router path-mtu-discovery interval`
 
@@ -19957,7 +19958,7 @@ BFD parameters for the peer router (deprecated). This is being replaced by BFD p
 #### Description
 
 :::warning
-&amp;#x27;bfd&amp;#x27; is deprecated and will be removed in a future software version
+`bfd` is deprecated and will be removed in a future software version
 :::
 
 ## `configure authority router peer bfd authentication-type`
@@ -19981,7 +19982,7 @@ configure authority router peer bfd authentication-type [<enumeration>]
 Default: sha256
 
 :::warning
-&amp;#x27;authentication-type&amp;#x27; is deprecated and will be removed in a future software version
+`authentication-type` is deprecated and will be removed in a future software version
 :::
 
 ##### enumeration
@@ -19989,8 +19990,8 @@ Default: sha256
 A value from a set of predefined names.
 
 Options:
-simple    Simple Password.
-sha256    SHA256
+- simple: Simple Password.
+- sha256: SHA256
 
 ## `configure authority router peer bfd desired-tx-interval`
 
@@ -20015,7 +20016,7 @@ Units: milliseconds
 Default: 1000
 
 :::warning
-&amp;#x27;desired-tx-interval&amp;#x27; is deprecated and will be removed in a future software version
+`desired-tx-interval` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -20045,7 +20046,7 @@ configure authority router peer bfd dscp [<dscp>]
 Default: 0
 
 :::warning
-&amp;#x27;dscp&amp;#x27; is deprecated and will be removed in a future software version
+`dscp` is deprecated and will be removed in a future software version
 :::
 
 ##### dscp (uint8)
@@ -20075,7 +20076,7 @@ configure authority router peer bfd dynamic-damping [<enumeration>]
 Default: disabled
 
 :::warning
-&amp;#x27;dynamic-damping&amp;#x27; is deprecated and will be removed in a future software version
+`dynamic-damping` is deprecated and will be removed in a future software version
 :::
 
 ##### enumeration
@@ -20083,8 +20084,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-enabled     Extend hold-down time exponentially if link flaps occur during hold-down time.
-disabled    Use simple hold-down timer for every link up event.
+- enabled: Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled: Use simple hold-down timer for every link up event.
 
 ## `configure authority router peer bfd hold-down-time`
 
@@ -20109,7 +20110,7 @@ Units: seconds
 Default: 5
 
 :::warning
-&amp;#x27;hold-down-time&amp;#x27; is deprecated and will be removed in a future software version
+`hold-down-time` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -20141,7 +20142,7 @@ Units: seconds
 Default: 10
 
 :::warning
-&amp;#x27;link-test-interval&amp;#x27; is deprecated and will be removed in a future software version
+`link-test-interval` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -20173,7 +20174,7 @@ Units: packets
 Default: 10
 
 :::warning
-&amp;#x27;link-test-length&amp;#x27; is deprecated and will be removed in a future software version
+`link-test-length` is deprecated and will be removed in a future software version
 :::
 
 ##### uint8
@@ -20205,7 +20206,7 @@ Units: seconds
 Default: 3600
 
 :::warning
-&amp;#x27;maximum-hold-down-time&amp;#x27; is deprecated and will be removed in a future software version
+`maximum-hold-down-time` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -20235,7 +20236,7 @@ configure authority router peer bfd multiplier [<uint8>]
 Default: 3
 
 :::warning
-&amp;#x27;multiplier&amp;#x27; is deprecated and will be removed in a future software version
+`multiplier` is deprecated and will be removed in a future software version
 :::
 
 ##### uint8
@@ -20267,7 +20268,7 @@ Units: milliseconds
 Default: 1000
 
 :::warning
-&amp;#x27;required-min-rx-interval&amp;#x27; is deprecated and will be removed in a future software version
+`required-min-rx-interval` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -20295,7 +20296,7 @@ configure authority router peer bfd state [<enumeration>]
 Default: enabled
 
 :::warning
-&amp;#x27;state&amp;#x27; is deprecated and will be removed in a future software version
+`state` is deprecated and will be removed in a future software version
 :::
 
 ##### enumeration
@@ -20303,8 +20304,8 @@ Default: enabled
 A value from a set of predefined names.
 
 Options:
-enabled     BFD is enabled on all nodes of this router.
-disabled    BFD is disabled on all nodes of this router.
+- enabled: BFD is enabled on all nodes of this router.
+- disabled: BFD is disabled on all nodes of this router.
 
 ## `configure authority router peer description`
 
@@ -20350,7 +20351,7 @@ configure authority router peer generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router peer name`
 
@@ -20522,8 +20523,8 @@ Default: per-service
 A value from a set of predefined names.
 
 Options:
-per-service    Apply this rate limit policy at a per-service granularity.
-shared         This rate limit policy may be shared across different services.
+- per-service: Apply this rate limit policy at a per-service granularity.
+- shared: This rate limit policy may be shared across different services.
 
 ## `configure authority router rate-limit-policy name`
 
@@ -20715,9 +20716,9 @@ configure authority router reachability-profile protocol protocol-type [<reachab
 A value from a set of predefined names.
 
 Options:
-tcp    Traffic profile settings for TCP
-tls    Traffic profile settings for TLS
-udp    Traffic profile settings for UDP
+- tcp: Traffic profile settings for TCP
+- tls: Traffic profile settings for TLS
+- udp: Traffic profile settings for UDP
 
 ## `configure authority router reachability-profile protocol traffic-class`
 
@@ -20799,7 +20800,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router reachability-profile protocol traffic-class time-to-establishment`
 
@@ -20840,7 +20841,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router reachability-profile protocol traffic-class time-to-establishment max`
 
@@ -20917,10 +20918,10 @@ configure authority router reachability-profile protocol traffic-class traffic-c
 Relative priority of traffic.
 
 Options:
-high           High priority traffic class.
-medium         Medium priority traffic class.
-low            Low priority traffic class.
-best-effort    Best-effort priority traffic class.
+- high: High priority traffic class.
+- medium: Medium priority traffic class.
+- low: Low priority traffic class.
+- best-effort: Best-effort priority traffic class.
 
 ## `configure authority router redundancy-group`
 
@@ -21139,8 +21140,8 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none      Do not perform reverse fib entry lookup to set up reverse flow
-strict    Perform strict uRPF check on reverse fib entry next hop to set up reverse flow
+- none: Do not perform reverse fib entry lookup to set up reverse flow
+- strict: Perform strict uRPF check on reverse fib entry next hop to set up reverse flow
 
 ## `configure authority router reverse-packet-session-resiliency`
 
@@ -21209,7 +21210,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router reverse-packet-session-resiliency minimum-packet-count`
 
@@ -21582,7 +21583,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing debug bgp updates out`
 
@@ -21608,7 +21609,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing debug bgp updates prefix`
 
@@ -22162,7 +22163,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing interface ip-address`
 
@@ -22288,7 +22289,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing msdp`
 
@@ -22599,7 +22600,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing ospf advertise-default metric`
 
@@ -22650,8 +22651,8 @@ Default: type-2
 OSPF external metric type
 
 Options:
-type-1    External metric type 1, comparable to link state metric
-type-2    External metric type 2, larger than link state metric
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
 
 ## `configure authority router routing ospf advertise-default policy`
 
@@ -22733,9 +22734,9 @@ Default: none
 OSPF area authentication. Can be overriden by interface authentication.
 
 Options:
-none      No authentication
-simple    Simple (plain text) password authentication
-md5       MD5 HMAC authentication
+- none: No authentication
+- simple: Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
 
 ## `configure authority router routing ospf area default-cost`
 
@@ -22848,10 +22849,10 @@ Default: area
 OSPF interface authentication type
 
 Options:
-area      Use area authentication type
-none      No interface authentication
-simple    Simple (plain text) password authentication
-md5       MD5 HMAC authentication
+- area: Use area authentication type
+- none: No interface authentication
+- simple: Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
 
 ## `configure authority router routing ospf area interface bfd`
 
@@ -22921,7 +22922,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing ospf area interface bfd multiplier`
 
@@ -23180,9 +23181,9 @@ Default: unspecified
 OSPF interface network type
 
 Options:
-unspecified       Unspecified network type
-broadcast         Broadcast network
-point-to-point    Point-to-point network
+- unspecified: Unspecified network type
+- broadcast: Broadcast network
+- point-to-point: Point-to-point network
 
 ## `configure authority router routing ospf area interface node`
 
@@ -23230,7 +23231,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing ospf area interface password`
 
@@ -23380,7 +23381,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing ospf area summary-range`
 
@@ -23433,7 +23434,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing ospf area summary-range cost`
 
@@ -23547,9 +23548,9 @@ Default: normal
 A value from a set of predefined names.
 
 Options:
-normal    OSPF normal area
-stub      OSPF stub area
-nssa      OSPF Not-So-Stubby Area (NSSA)
+- normal: OSPF normal area
+- stub: OSPF stub area
+- nssa: OSPF Not-So-Stubby Area (NSSA)
 
 ## `configure authority router routing ospf distance`
 
@@ -23829,8 +23830,8 @@ Default: type-2
 OSPF external metric type
 
 Options:
-type-1    External metric type 1, comparable to link state metric
-type-2    External metric type 2, larger than link state metric
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
 
 ## `configure authority router routing ospf redistribute policy`
 
@@ -23877,10 +23878,10 @@ configure authority router routing ospf redistribute protocol [<redistribute-int
 A value from a set of predefined names.
 
 Options:
-bgp          BGP routes
-connected    Interface routes
-service      Service routes
-static       Static routes
+- bgp: BGP routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
 
 ## `configure authority router routing ospf router-id`
 
@@ -24041,8 +24042,8 @@ Default: ospfv2
 A value from a set of predefined names.
 
 Options:
-ospfv2
-ospfv3
+- ospfv2
+- ospfv3
 
 ## `configure authority router routing pim`
 
@@ -24430,10 +24431,10 @@ configure authority router routing routing-protocol address-family afi-safi [<id
 A value from a set of predefined names.
 
 Options:
-ipv4-unicast    IPv4 unicast (AFI,SAFI = 1,1)
-ipv6-unicast    IPv6 unicast (AFI,SAFI = 2,1)
-ipv4-vpn        IPv4 vpn (AFI,SAFI = 1,128)
-ipv6-vpn        IPv6 vpn (AFI,SAFI = 2,128)
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
 
 ## `configure authority router routing routing-protocol address-family aggregate-address`
 
@@ -24487,7 +24488,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol address-family aggregate-address policy`
 
@@ -24561,7 +24562,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol address-family default-route-distance`
 
@@ -24673,7 +24674,7 @@ Configuration parameters relating to BGP graceful restart.
 #### Description
 
 :::warning
-&amp;#x27;graceful-restart&amp;#x27; is deprecated and will be removed in a future software version
+`graceful-restart` is deprecated and will be removed in a future software version
 :::
 
 ## `configure authority router routing routing-protocol address-family graceful-restart restart-time`
@@ -24697,7 +24698,7 @@ configure authority router routing routing-protocol address-family graceful-rest
 Units: seconds
 
 :::warning
-&amp;#x27;restart-time&amp;#x27; is deprecated and will be removed in a future software version
+`restart-time` is deprecated and will be removed in a future software version
 :::
 
 ##### uint16
@@ -24727,7 +24728,7 @@ configure authority router routing routing-protocol address-family graceful-rest
 Units: seconds
 
 :::warning
-&amp;#x27;stale-routes-time&amp;#x27; is deprecated and will be removed in a future software version
+`stale-routes-time` is deprecated and will be removed in a future software version
 :::
 
 ##### uint16
@@ -24918,10 +24919,10 @@ configure authority router routing routing-protocol address-family redistribute 
 A value from a set of predefined names.
 
 Options:
-connected    Interface routes
-service      Service routes
-static       Static routes
-ospf         OSPF routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
 
 ## `configure authority router routing routing-protocol address-family use-multiple-paths`
 
@@ -25471,9 +25472,9 @@ Default: helper
 configure BGP graceful restart mode [rfc4724]
 
 Options:
-enable     enable graceful restart and helper mode
-helper     enable graceful restart helper mode only
-disable    disable graceful restart
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
 
 ## `configure authority router routing routing-protocol graceful-restart restart-time`
 
@@ -25687,7 +25688,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor address-family afi-safi`
 
@@ -25712,10 +25713,10 @@ configure authority router routing routing-protocol neighbor address-family afi-
 A value from a set of predefined names.
 
 Options:
-ipv4-unicast    IPv4 unicast (AFI,SAFI = 1,1)
-ipv6-unicast    IPv6 unicast (AFI,SAFI = 2,1)
-ipv4-vpn        IPv4 vpn (AFI,SAFI = 1,128)
-ipv6-vpn        IPv6 vpn (AFI,SAFI = 2,128)
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
 
 ## `configure authority router routing routing-protocol neighbor address-family as-path-options`
 
@@ -25917,7 +25918,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor address-family prefix-limit`
 
@@ -26033,11 +26034,11 @@ configure authority router routing routing-protocol neighbor address-family remo
 Set of options for configuring how private AS numbers are modified in advertised AS paths.
 
 Options:
-all             Remove all private ASes in the AS path.
-replace-all     Replace all private ASes with the local AS.
-only            Remove private ASes only if the AS path contains just private ASes.
-replace-only    Replace private ASes with the local AS only if the AS path contains just private ASes.
-disable         Do not remove private ASes.
+- all: Remove all private ASes in the AS path.
+- replace-all: Replace all private ASes with the local AS.
+- only: Remove private ASes only if the AS path contains just private ASes.
+- replace-only: Replace private ASes with the local AS only if the AS path contains just private ASes.
+- disable: Do not remove private ASes.
 
 ## `configure authority router routing routing-protocol neighbor address-family route-reflector`
 
@@ -26076,7 +26077,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor address-family send-default-route`
 
@@ -26102,7 +26103,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor auth-password`
 
@@ -26194,7 +26195,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor bfd multiplier`
 
@@ -26308,9 +26309,9 @@ configure authority router routing routing-protocol neighbor graceful-restart mo
 configure BGP graceful restart mode [rfc4724]
 
 Options:
-enable     enable graceful restart and helper mode
-helper     enable graceful restart helper mode only
-disable    disable graceful restart
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
 
 ## `configure authority router routing routing-protocol neighbor local-as`
 
@@ -26412,7 +26413,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor neighbor-address`
 
@@ -26582,7 +26583,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor timers`
 
@@ -26900,7 +26901,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol redistribute`
 
@@ -26973,10 +26974,10 @@ configure authority router routing routing-protocol redistribute protocol [<redi
 A value from a set of predefined names.
 
 Options:
-connected    Interface routes
-service      Service routes
-static       Static routes
-ospf         OSPF routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
 
 ## `configure authority router routing routing-protocol route-reflector-allow-outbound-policy`
 
@@ -27002,7 +27003,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol route-selection-options`
 
@@ -27043,7 +27044,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol route-selection-options external-compare-router-id`
 
@@ -27069,7 +27070,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol route-selection-options ignore-as-path-length`
 
@@ -27095,7 +27096,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol router-id`
 
@@ -27214,7 +27215,7 @@ configure authority router routing routing-protocol type [<identityref>]
 A value from a set of predefined names.
 
 Options:
-bgp    BGP routing protocol
+- bgp: BGP routing protocol
 
 ## `configure authority router routing service-admin-distance`
 
@@ -27492,7 +27493,7 @@ configure authority router routing type [<identityref>]
 A value from a set of predefined names.
 
 Options:
-default-instance    This identity represents a default routing instance.
+- default-instance: This identity represents a default routing instance.
 
 ## `configure authority router routing vrf`
 
@@ -27792,7 +27793,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf interface ip-address`
 
@@ -28202,7 +28203,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf ospf advertise-default metric`
 
@@ -28253,8 +28254,8 @@ Default: type-2
 OSPF external metric type
 
 Options:
-type-1    External metric type 1, comparable to link state metric
-type-2    External metric type 2, larger than link state metric
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
 
 ## `configure authority router routing vrf ospf advertise-default policy`
 
@@ -28336,9 +28337,9 @@ Default: none
 OSPF area authentication. Can be overriden by interface authentication.
 
 Options:
-none      No authentication
-simple    Simple (plain text) password authentication
-md5       MD5 HMAC authentication
+- none: No authentication
+- simple: Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
 
 ## `configure authority router routing vrf ospf area default-cost`
 
@@ -28451,10 +28452,10 @@ Default: area
 OSPF interface authentication type
 
 Options:
-area      Use area authentication type
-none      No interface authentication
-simple    Simple (plain text) password authentication
-md5       MD5 HMAC authentication
+- area: Use area authentication type
+- none:No interface authentication
+- simple:Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
 
 ## `configure authority router routing vrf ospf area interface bfd`
 
@@ -28524,7 +28525,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf ospf area interface bfd multiplier`
 
@@ -28783,9 +28784,9 @@ Default: unspecified
 OSPF interface network type
 
 Options:
-unspecified       Unspecified network type
-broadcast         Broadcast network
-point-to-point    Point-to-point network
+- unspecified: Unspecified network type
+- broadcast: Broadcast network
+- point-to-point: Point-to-point network
 
 ## `configure authority router routing vrf ospf area interface node`
 
@@ -28833,7 +28834,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf ospf area interface password`
 
@@ -28983,7 +28984,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf ospf area summary-range`
 
@@ -29036,7 +29037,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf ospf area summary-range cost`
 
@@ -29150,9 +29151,9 @@ Default: normal
 A value from a set of predefined names.
 
 Options:
-normal    OSPF normal area
-stub      OSPF stub area
-nssa      OSPF Not-So-Stubby Area (NSSA)
+- normal: OSPF normal area
+- stub: OSPF stub area
+- nssa: OSPF Not-So-Stubby Area (NSSA)
 
 ## `configure authority router routing vrf ospf distance`
 
@@ -29432,8 +29433,8 @@ Default: type-2
 OSPF external metric type
 
 Options:
-type-1    External metric type 1, comparable to link state metric
-type-2    External metric type 2, larger than link state metric
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
 
 ## `configure authority router routing vrf ospf redistribute policy`
 
@@ -29480,10 +29481,10 @@ configure authority router routing vrf ospf redistribute protocol [<redistribute
 A value from a set of predefined names.
 
 Options:
-bgp          BGP routes
-connected    Interface routes
-service      Service routes
-static       Static routes
+- bgp: BGP routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
 
 ## `configure authority router routing vrf ospf router-id`
 
@@ -29644,8 +29645,8 @@ Default: ospfv2
 A value from a set of predefined names.
 
 Options:
-ospfv2
-ospfv3
+- ospfv2
+- ospfv3
 
 ## `configure authority router routing vrf pim`
 
@@ -30033,10 +30034,10 @@ configure authority router routing vrf routing-protocol address-family afi-safi 
 A value from a set of predefined names.
 
 Options:
-ipv4-unicast    IPv4 unicast (AFI,SAFI = 1,1)
-ipv6-unicast    IPv6 unicast (AFI,SAFI = 2,1)
-ipv4-vpn        IPv4 vpn (AFI,SAFI = 1,128)
-ipv6-vpn        IPv6 vpn (AFI,SAFI = 2,128)
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
 
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address`
 
@@ -30090,7 +30091,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address policy`
 
@@ -30164,7 +30165,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol address-family default-route-distance`
 
@@ -30276,7 +30277,7 @@ Configuration parameters relating to BGP graceful restart.
 #### Description
 
 :::warning
-&amp;#x27;graceful-restart&amp;#x27; is deprecated and will be removed in a future software version
+`graceful-restart` is deprecated and will be removed in a future software version
 :::
 
 ## `configure authority router routing vrf routing-protocol address-family graceful-restart restart-time`
@@ -30300,7 +30301,7 @@ configure authority router routing vrf routing-protocol address-family graceful-
 Units: seconds
 
 :::warning
-&amp;#x27;restart-time&amp;#x27; is deprecated and will be removed in a future software version
+`restart-time` is deprecated and will be removed in a future software version
 :::
 
 ##### uint16
@@ -30330,7 +30331,7 @@ configure authority router routing vrf routing-protocol address-family graceful-
 Units: seconds
 
 :::warning
-&amp;#x27;stale-routes-time&amp;#x27; is deprecated and will be removed in a future software version
+`stale-routes-time` is deprecated and will be removed in a future software version
 :::
 
 ##### uint16
@@ -30521,10 +30522,10 @@ configure authority router routing vrf routing-protocol address-family redistrib
 A value from a set of predefined names.
 
 Options:
-connected    Interface routes
-service      Service routes
-static       Static routes
-ospf         OSPF routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
 
 ## `configure authority router routing vrf routing-protocol address-family use-multiple-paths`
 
@@ -31074,9 +31075,9 @@ Default: helper
 configure BGP graceful restart mode [rfc4724]
 
 Options:
-enable     enable graceful restart and helper mode
-helper     enable graceful restart helper mode only
-disable    disable graceful restart
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
 
 ## `configure authority router routing vrf routing-protocol graceful-restart restart-time`
 
@@ -31290,7 +31291,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family afi-safi`
 
@@ -31314,11 +31315,11 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 
 A value from a set of predefined names.
 
-Options:
-ipv4-unicast    IPv4 unicast (AFI,SAFI = 1,1)
-ipv6-unicast    IPv6 unicast (AFI,SAFI = 2,1)
-ipv4-vpn        IPv4 vpn (AFI,SAFI = 1,128)
-ipv6-vpn        IPv6 vpn (AFI,SAFI = 2,128)
+Options: 
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family as-path-options`
 
@@ -31520,7 +31521,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family prefix-limit`
 
@@ -31636,11 +31637,11 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 Set of options for configuring how private AS numbers are modified in advertised AS paths.
 
 Options:
-all             Remove all private ASes in the AS path.
-replace-all     Replace all private ASes with the local AS.
-only            Remove private ASes only if the AS path contains just private ASes.
-replace-only    Replace private ASes with the local AS only if the AS path contains just private ASes.
-disable         Do not remove private ASes.
+- all: Remove all private ASes in the AS path.
+- replace-all: Replace all private ASes with the local AS.
+- only: Remove private ASes only if the AS path contains just private ASes.
+- replace-only: Replace private ASes with the local AS only if the AS path contains just private ASes.
+- disable: Do not remove private ASes.
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family route-reflector`
 
@@ -31679,7 +31680,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family send-default-route`
 
@@ -31705,7 +31706,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor auth-password`
 
@@ -31797,7 +31798,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor bfd multiplier`
 
@@ -31911,9 +31912,9 @@ configure authority router routing vrf routing-protocol neighbor graceful-restar
 configure BGP graceful restart mode [rfc4724]
 
 Options:
-enable     enable graceful restart and helper mode
-helper     enable graceful restart helper mode only
-disable    disable graceful restart
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
 
 ## `configure authority router routing vrf routing-protocol neighbor local-as`
 
@@ -32015,7 +32016,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor neighbor-address`
 
@@ -32186,7 +32187,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor timers`
 
@@ -32504,7 +32505,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol redistribute`
 
@@ -32577,10 +32578,10 @@ configure authority router routing vrf routing-protocol redistribute protocol [<
 A value from a set of predefined names.
 
 Options:
-connected    Interface routes
-service      Service routes
-static       Static routes
-ospf         OSPF routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
 
 ## `configure authority router routing vrf routing-protocol route-reflector-allow-outbound-policy`
 
@@ -32606,7 +32607,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol route-selection-options`
 
@@ -32647,7 +32648,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol route-selection-options external-compare-router-id`
 
@@ -32673,7 +32674,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol route-selection-options ignore-as-path-length`
 
@@ -32699,7 +32700,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol router-id`
 
@@ -32818,7 +32819,7 @@ configure authority router routing vrf routing-protocol type [<identityref>]
 A value from a set of predefined names.
 
 Options:
-bgp    BGP routing protocol
+- bgp: BGP routing protocol
 
 ## `configure authority router routing vrf service-admin-distance`
 
@@ -33184,7 +33185,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route generated`
 
@@ -33208,7 +33209,7 @@ configure authority router service-route generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route host`
 
@@ -33386,13 +33387,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -33628,13 +33629,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -33857,7 +33858,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route reachability-detection enforcement`
 
@@ -33883,7 +33884,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route reachability-detection hold-down`
 
@@ -33964,7 +33965,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route reachability-detection probe icmp-probe-profile`
 
@@ -34035,8 +34036,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    Ignore probe state and use organic traffic to determine path health
-always      Factor probe state into path health
+- disabled: Ignore probe state and use organic traffic to determine path health
+- always: Factor probe state into path health
 
 ## `configure authority router service-route reachability-detection reachability-profile`
 
@@ -34277,7 +34278,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route-policy max-sessions`
 
@@ -34314,7 +34315,7 @@ Range: 0-999999999999
 A value from a set of predefined names.
 
 Options:
-unlimited    No limit on this value.
+- unlimited: No limit on this value.
 
 ## `configure authority router service-route-policy name`
 
@@ -34365,7 +34366,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router service-route-policy session-high-water-mark`
 
@@ -34458,7 +34459,7 @@ Range: 0-999999999999
 A value from a set of predefined names.
 
 Options:
-unlimited    No limit on this value.
+- unlimited: No limit on this value.
 
 ## `configure authority router static-hostname-mapping`
 
@@ -34643,14 +34644,14 @@ Must be one of the following types:
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ###### (1) enumeration
 
 A value from a set of predefined names.
 
 Options:
-use-authority-setting    Use the authority wide asset connection resiliency state.
+- use-authority-setting: Use the authority wide asset connection resiliency state.
 
 ## `configure authority router system audit`
 
@@ -34710,7 +34711,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system audit administration persist`
 
@@ -34736,7 +34737,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system audit disk-full-action`
 
@@ -34763,8 +34764,8 @@ Default: ignore
 A value from a set of predefined names.
 
 Options:
-halt      On failure halt the system.
-ignore    Ignore the failure.
+- halt: On failure halt the system.
+- ignore: Ignore the failure.
 
 ## `configure authority router system audit remote-logging-server`
 
@@ -34822,13 +34823,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -34973,7 +34974,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system audit security persist`
 
@@ -34999,7 +35000,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or false
 
 ## `configure authority router system audit system`
 
@@ -35039,7 +35040,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system audit system persist`
 
@@ -35065,7 +35066,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system audit traffic`
 
@@ -35105,7 +35106,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system audit traffic persist`
 
@@ -35131,7 +35132,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system contact`
 
@@ -35261,8 +35262,8 @@ Default: issue-warning
 A value from a set of predefined names.
 
 Options:
-no-action        Take no action.
-issue-warning    Log and issue warning to all current shell sessions that the session limit has been exceeded.
+- no-action: Take no action.
+- issue-warning: Log and issue warning to all current shell sessions that the session limit has been exceeded.
 
 ## `configure authority router system log-category`
 
@@ -35313,12 +35314,12 @@ configure authority router system log-category log-level [<log-level>]
 Log levels
 
 Options:
-fatal      Only record log messages with level &quot;fatal&quot; or higher.
-error      Only record log messages with level &quot;error&quot; or higher.
-warning    Only record log messages with level &quot;warning&quot; or higher.
-info       Only record log messages with level &quot;info&quot; or higher.
-debug      Only record log messages with level &quot;debug&quot; or higher.
-trace      Only record log messages with level &quot;trace&quot; or higher.
+- fatal: Only record log messages with level &quot;fatal&quot; or higher.
+- error: Only record log messages with level &quot;error&quot; or higher.
+- warning: Only record log messages with level &quot;warning&quot; or higher.
+- info: Only record log messages with level &quot;info&quot; or higher.
+- debug: Only record log messages with level &quot;debug&quot; or higher.
+- trace: Only record log messages with level &quot;trace&quot; or higher.
 
 ## `configure authority router system log-category name`
 
@@ -35343,34 +35344,34 @@ configure authority router system log-category name [<log-category>]
 Log categories
 
 Options:
-ATCS    Components related to the SSR Analytics Engine.
-CFGD    Components related to the SSR Configuration Engine.
-DATA    Components related to the configuration and state databases.
-DISC    Discovery-based components (except BFD). Today this is DHCP and ARP.
-USER    User-created log messages, generated via the &#x27;write&#x27; command.
-FLC     Control system for packet forwarding.
-FLPP    System for processing the initial packet of each new session.
-HWMC    Control system for packet processing.
-IPC     The subsystem responsible for messaging between components within the SSR product.
-LINK    The subsystem for inter-node communication (today, BFD).
-PLAT    Components related to the underlying platform management.
-PLUG    Components related to plugin management.
-RDB     The subsystem responsible for synchronizing data between nodes.
-RTG     Components related to the routing engine.
-SNMP    Components related to the SNMP engine.
-SATF    Failures related to multi-threaded session setup.
-SESS    Components related to session setup.
-STEP    Components related to STEP.
-TEST    Components related to testing.
-UTIL    Components related to utility libraries.
-DPDK    Components related to DPDK.
-DNS     Components related to DNS.
-HTTP    Components related to HTTP request/response processing.
-PCLI    All the PCLI&#x27;s log messages.
-BONS    Components related to the configuration database.
-LDAP    All the System Security Services Daemon logs.
-RIB     Components related to routing changes.
-IDP     Components related to IDP.
+- ATCS: Components related to the SSR Analytics Engine.
+- CFGD: Components related to the SSR Configuration Engine.
+- DATA: Components related to the configuration and state databases.
+- DISC: Discovery-based components (except BFD). Today this is DHCP and ARP.
+- USER: User-created log messages, generated via the &#x27;write&#x27; command.
+- FLC: Control system for packet forwarding.
+- FLPP: System for processing the initial packet of each new session.
+- HWMC: Control system for packet processing.
+- IPC: The subsystem responsible for messaging between components within the SSR product.
+- LINK: The subsystem for inter-node communication (today, BFD).
+- PLAT: Components related to the underlying platform management.
+- PLUG: Components related to plugin management.
+- RDB: The subsystem responsible for synchronizing data between nodes.
+- RTG: Components related to the routing engine.
+- SNMP: Components related to the SNMP engine.
+- SATF: Failures related to multi-threaded session setup.
+- SESS: Components related to session setup.
+- STEP: Components related to STEP.
+- TEST: Components related to testing.
+- UTIL: Components related to utility libraries.
+- DPDK: Components related to DPDK.
+- DNS: Components related to DNS.
+- HTTP: Components related to HTTP request/response processing.
+- PCLI: All the PCLI&#x27;s log messages.
+- BONS: Components related to the configuration database.
+- LDAP: All the System Security Services Daemon logs.
+- RIB: Components related to routing changes.
+- IDP: Components related to IDP.
 
 ## `configure authority router system log-level`
 
@@ -35397,12 +35398,12 @@ Default: info
 Log levels
 
 Options:
-fatal      Only record log messages with level &quot;fatal&quot; or higher.
-error      Only record log messages with level &quot;error&quot; or higher.
-warning    Only record log messages with level &quot;warning&quot; or higher.
-info       Only record log messages with level &quot;info&quot; or higher.
-debug      Only record log messages with level &quot;debug&quot; or higher.
-trace      Only record log messages with level &quot;trace&quot; or higher.
+- fatal: Only record log messages with level &quot;fatal&quot; or higher.
+- error: Only record log messages with level &quot;error&quot; or higher.
+- warning: Only record log messages with level &quot;warning&quot; or higher.
+- info: Only record log messages with level &quot;info&quot; or higher.
+- debug: Only record log messages with level &quot;debug&quot; or higher.
+- trace: Only record log messages with level &quot;trace&quot; or higher.
 
 ## `configure authority router system metrics`
 
@@ -35520,10 +35521,10 @@ Default: in-memory
 A value from a set of predefined names.
 
 Options:
-in-memory       Don&#x27;t store any historical data
-short           Metrics will be stored for the short duration as defined in the router&#x27;s config
-intermediate    Metrics will be stored for the short and intermediate durations as defined in the router&#x27;s config
-long            Metrics will be stored for the short, intermediate, and long durations as defined in the router&#x27;s config
+- in-memory: Don not store any historical data
+- short: Metrics will be stored for the short duration as defined in the router&#x27;s config
+- intermediate: Metrics will be stored for the short and intermediate durations as defined in the router&#x27;s config
+- long: Metrics will be stored for the short, intermediate, and long durations as defined in the router&#x27;s config
 
 ## `configure authority router system metrics retention`
 
@@ -35605,7 +35606,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system metrics retention intermediate interval`
 
@@ -35698,7 +35699,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system metrics retention long interval`
 
@@ -35791,7 +35792,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system metrics retention short interval`
 
@@ -35842,7 +35843,7 @@ Units: seconds
 Default: 5
 
 :::warning
-&amp;#x27;sample-period&amp;#x27; is deprecated and will be removed in a future software version
+`sample-period` is deprecated and will be removed in a future software version
 :::
 
 ##### int8
@@ -35980,8 +35981,8 @@ configure authority router system ntp server authentication-key type [<enumerati
 A value from a set of predefined names.
 
 Options:
-md5     Key uses MD5 authentication algorithm
-sha1    Key uses SHA1 authentication algorithm
+- md5: Key uses MD5 authentication algorithm
+- sha1: Key uses SHA1 authentication algorithm
 
 ## `configure authority router system ntp server authentication-key value`
 
@@ -36037,13 +36038,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -36143,14 +36144,14 @@ Must be one of the following types:
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ###### (1) enumeration
 
 A value from a set of predefined names.
 
 Options:
-use-authority-setting    Use the authority wide remote-login state.
+- use-authority-setting: Use the authority wide remote-login state.
 
 ## `configure authority router system services`
 
@@ -36295,13 +36296,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -36400,9 +36401,9 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none
-md5
-sha
+- none
+- md5
+- sha
 
 ## `configure authority router system services snmp-server access-control usm authentication-key`
 
@@ -36453,9 +36454,9 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none
-des
-aes
+- none
+- des
+- aes
 
 ## `configure authority router system services snmp-server access-control usm privacy-key`
 
@@ -36552,7 +36553,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system services snmp-server engine-id`
 
@@ -36648,7 +36649,7 @@ configure authority router system services snmp-server notification-receiver com
 #### Description
 
 :::warning
-&amp;#x27;community&amp;#x27; is deprecated and will be removed in a future software version
+`community` is deprecated and will be removed in a future software version
 :::
 
 ##### snmp-community (string)
@@ -36728,9 +36729,9 @@ configure authority router system services snmp-server notification-receiver typ
 
 A value from a set of predefined names.
 
-Options:
-trap
-inform
+Options: 
+- trap
+- inform
 
 ## `configure authority router system services snmp-server port`
 
@@ -36897,7 +36898,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system services snmp-server version`
 
@@ -36924,8 +36925,8 @@ Default: v2c
 A value from a set of predefined names.
 
 Options:
-v2c
-v3
+- v2c
+- v3
 
 ## `configure authority router system services webserver`
 
@@ -36967,7 +36968,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system services webserver port`
 
@@ -37143,7 +37144,7 @@ Range: 1-999999999999
 A value from a set of predefined names.
 
 Options:
-unlimited    No limit on this value
+- unlimited: No limit on this value
 
 ## `configure authority router system software-update repository`
 
@@ -37190,13 +37191,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -37277,7 +37278,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority router system software-update repository source-type`
 
@@ -37304,9 +37305,9 @@ Default: internet-only
 A value from a set of predefined names.
 
 Options:
-conductor-only      Download software from the Conductor, using it as a proxy to the Internet if it has not already downloaded the requested software.
-prefer-conductor    Download software from the Conductor, using the Internet if the Conductor has not already downloaded the requested software.
-internet-only       Download software from publicly available sources via the Internet.
+- conductor-only: Download software from the Conductor, using it as a proxy to the Internet if it has not already downloaded the requested software.
+- prefer-conductor: Download software from the Conductor, using the Internet if the Conductor has not already downloaded the requested software.
+- internet-only: Download software from publicly available sources via the Internet.
 
 ## `configure authority router system syslog`
 
@@ -37373,26 +37374,26 @@ Default: local0
 A value from a set of predefined names.
 
 Options:
-auth        security and authorization messages
-authpriv    security and authorization messages (private)
-cron        cron daemon messages
-daemon      system daemons without separate facility
-kern        kernel messages
-lpr         line printer subsystem messages
-mail        mail subsystem messages
-news        USENET news subsystem messages
-syslog      messages generated internally by syslog
-user        generic user-level messages
-uucp        UUCP messages
-local0      syslog local use 0 facility reserved for local use
-local1      syslog local use 1 facility reserved for local use
-local2      syslog local use 2 facility reserved for local use
-local3      syslog local use 3 facility reserved for local use
-local4      syslog local use 4 facility reserved for local use
-local5      syslog local use 5 facility reserved for local use
-local6      syslog local use 6 facility reserved for local use
-local7      syslog local use 7 facility reserved for local use
-any         match any syslog facility
+- auth: security and authorization messages
+- authpriv: security and authorization messages (private)
+- cron: cron daemon messages
+- daemon: system daemons without separate facility
+- kern: kernel messages
+- lpr: line printer subsystem messages
+- mail: mail subsystem messages
+- news: USENET news subsystem messages
+- syslog: messages generated internally by syslog
+- user: generic user-level messages
+- uucp: UUCP messages
+- local0: syslog local use 0 facility reserved for local use
+- local1: syslog local use 1 facility reserved for local use
+- local2: syslog local use 2 facility reserved for local use
+- local3: syslog local use 3 facility reserved for local use
+- local4: syslog local use 4 facility reserved for local use
+- local5: syslog local use 5 facility reserved for local use
+- local6: syslog local use 6 facility reserved for local use
+- local7: syslog local use 7 facility reserved for local use
+- any: match any syslog facility
 
 ## `configure authority router system syslog protocol`
 
@@ -37419,9 +37420,9 @@ Default: udp
 A value from a set of predefined names.
 
 Options:
-udp    Use UDP protocol to communicate with syslog server.
-tcp    Use TCP protocol to communicate with syslog server.
-tls    Use TLS over TCP protocol to communicate with syslog server.
+- udp: Use UDP protocol to communicate with syslog server.
+- tcp: Use TCP protocol to communicate with syslog server.
+- tls: Use TLS over TCP protocol to communicate with syslog server.
 
 ## `configure authority router system syslog server`
 
@@ -37479,13 +37480,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -37591,14 +37592,14 @@ Default: error
 A value from a set of predefined names.
 
 Options:
-emergency    Only record log messages with level &quot;emergency&quot; or higher
-alert        Only record log messages with level &quot;alert&quot; or higher
-critical     Only record log messages with level &quot;critical&quot; or higher
-error        Only record log messages with level &quot;error&quot; or higher
-warning      Only record log messages with level &quot;warning&quot; or higher
-notice       Only record log messages with level &quot;notice&quot; or higher
-info         Only record log messages with level &quot;info&quot; or higher
-debug        Only record log messages with level &quot;debug&quot; or higher
+- emergency: Only record log messages with level &quot;emergency&quot; or higher
+- alert: Only record log messages with level &quot;alert&quot; or higher
+- critical: Only record log messages with level &quot;critical&quot; or higher
+- error: Only record log messages with level &quot;error&quot; or higher
+- warning: Only record log messages with level &quot;warning&quot; or higher
+- notice: Only record log messages with level &quot;notice&quot; or higher
+- info: Only record log messages with level &quot;info&quot; or higher
+- debug: Only record log messages with level &quot;debug&quot; or higher
 
 ## `configure authority router udp-transform`
 
@@ -37669,8 +37670,8 @@ Default: auto-detect
 A value from a set of predefined names.
 
 Options:
-auto-detect         Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
-always-transform    Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
+- auto-detect: Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
+- always-transform: Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
 
 ## `configure authority router udp-transform nat-keep-alive-mode`
 
@@ -37697,8 +37698,8 @@ Default: disabled
 A value from a set of predefined names.
 
 Options:
-disabled    Do not send keep-alive packets to keep UDP sessions active during UDP transform.
-enabled     Inject keep-alive packets to keep UDP sessions active during UDP transform.
+- disabled: Do not send keep-alive packets to keep UDP sessions active during UDP transform.
+- enabled: Inject keep-alive packets to keep UDP sessions active during UDP transform.
 
 ## `configure authority router udp-transform nat-keep-alive-timeout`
 
@@ -37925,8 +37926,8 @@ Default: accept
 A value from a set of predefined names.
 
 Options:
-accept    Indicates elements matching the rule should not be filtered by the calling construct
-reject    Indicates elements matching the rule should be filtered by the calling construct
+- accept: Indicates elements matching the rule should not be filtered by the calling construct
+- reject: Indicates elements matching the rule should be filtered by the calling construct
 
 ## `configure authority routing filter rule ge`
 
@@ -38087,11 +38088,11 @@ configure authority routing filter type [<identityref>]
 A value from a set of predefined names.
 
 Options:
-prefix-filter                Filter based on IPv4 prefixes within a given range
-prefix-filter-ipv6           Filter based on IPv6 prefixes within a given range
-as-path-filter               Filter based on the BGP AS path
-community-filter             Filter based on the BGP community value
-extended-community-filter    Filter based on the BGP extended community value
+- prefix-filter: Filter based on IPv4 prefixes within a given range
+- prefix-filter-ipv6: Filter based on IPv6 prefixes within a given range
+- as-path-filter: Filter based on the BGP AS path
+- community-filter: Filter based on the BGP community value
+- extended-community-filter: Filter based on the BGP extended community value
 
 ## `configure authority routing policy`
 
@@ -38381,10 +38382,10 @@ Must be one of the following types:
 A value from a set of predefined names.
 
 Options:
-internet
-local-AS
-no-advertise
-no-export
+- internet
+- local-AS
+- no-advertise
+- no-export
 
 ###### (1) string
 
@@ -38563,9 +38564,9 @@ configure authority routing policy statement action origin [<origin>]
 BGP ORIGIN attribute.
 
 Options:
-igp           Network Layer Reachability Information is interior to the originating AS.
-egp           Network Layer Reachability Information learned via the EGP protocol [RFC904].
-incomplete    Network Layer Reachability Information learned by some other means.
+- igp: Network Layer Reachability Information is interior to the originating AS.
+- egp: Network Layer Reachability Information learned via the EGP protocol [RFC904].
+- incomplete: Network Layer Reachability Information learned by some other means.
 
 ## `configure authority routing policy statement action originator-id`
 
@@ -38892,23 +38893,23 @@ configure authority routing policy statement action type [<identityref>]
 A value from a set of predefined names.
 
 Options:
-set-aggregator            An action which sets the BGP aggregator
-modify-as-path            An action which changes the BGP as-path
-set-path-based-as-path    An action which changes the BGP as-path depending on the best path to a peer
-set-atomic-aggregate      An action which sets the BGP atomic aggregate attribute
-set-community             An action which sets the BGP community attribute
-remove-community          An action which removes the BGP community attribute
-set-extended-community    An action which sets the BGP extended community attribute
-set-next-hop              An action which sets the next hop
-set-local-preference      An action which sets the BGP local preference
-modify-metric             An action which sets the metric
-set-originator-id         An action which sets the originator id
-set-origin                An action which sets the origin
-set-tag                   An action which sets the tag
-set-bgp-weight            An action which sets the BGP weight
-set-distance              An action which sets the administrative distance
-continue                  A flow action that advances to the next (or specified) entry in the policy
-call                      A flow action calls the given policy
+- set-aggregator            An action which sets the BGP aggregator
+- modify-as-path            An action which changes the BGP as-path
+- set-path-based-as-path    An action which changes the BGP as-path depending on the best path to a peer
+- set-atomic-aggregate      An action which sets the BGP atomic aggregate attribute
+- set-community             An action which sets the BGP community attribute
+- remove-community          An action which removes the BGP community attribute
+- set-extended-community    An action which sets the BGP extended community attribute
+- set-next-hop              An action which sets the next hop
+- set-local-preference      An action which sets the BGP local preference
+- modify-metric             An action which sets the metric
+- set-originator-id         An action which sets the originator id
+- set-origin                An action which sets the origin
+- set-tag                   An action which sets the tag
+- set-bgp-weight            An action which sets the BGP weight
+- set-distance              An action which sets the administrative distance
+- continue                  A flow action that advances to the next (or specified) entry in the policy
+- call                      A flow action calls the given policy
 
 ## `configure authority routing policy statement condition`
 
@@ -39102,9 +39103,9 @@ configure authority routing policy statement condition origin [<origin>]
 BGP ORIGIN attribute.
 
 Options:
-igp           Network Layer Reachability Information is interior to the originating AS.
-egp           Network Layer Reachability Information learned via the EGP protocol [RFC904].
-incomplete    Network Layer Reachability Information learned by some other means.
+- igp: Network Layer Reachability Information is interior to the originating AS.
+- egp: Network Layer Reachability Information learned via the EGP protocol [RFC904].
+- incomplete: Network Layer Reachability Information learned by some other means.
 
 ## `configure authority routing policy statement condition peer-address`
 
@@ -39263,20 +39264,20 @@ configure authority routing policy statement condition type [<identityref>]
 A value from a set of predefined names.
 
 Options:
-address-prefix-filter-condition          An IPv4 prefix filter condition on address
-next-hop-prefix-filter-condition         An IPv4 prefix filter condition on next hop
-source-prefix-filter-condition           An IPv4 prefix filter condition on route source
-address-prefix-filter-ipv6-condition     An IPv6 prefix filter condition on address
-next-hop-prefix-filter-ipv6-condition    An IPv6 prefix filter condition on next hop
-as-path-filter-condition                 An autonomous path filter condition
-community-filter-condition               A community filter condition
-extended-community-filter-condition      An extended community filter condition
-next-hop-interface-condition             A next hop interface condition
-metric-condition                         A metric condition
-origin-condition                         An origin condition
-peer-condition                           A peer condition
-probability-condition                    A probablity condition
-tag-condition                            A tag condition
+- address-prefix-filter-condition: An IPv4 prefix filter condition on address
+- next-hop-prefix-filter-condition: An IPv4 prefix filter condition on next hop
+- source-prefix-filter-condition: An IPv4 prefix filter condition on route source
+- address-prefix-filter-ipv6-condition: An IPv6 prefix filter condition on address
+- next-hop-prefix-filter-ipv6-condition: An IPv6 prefix filter condition on next hop
+- as-path-filter-condition: An autonomous path filter condition
+- community-filter-condition: A community filter condition
+- extended-community-filter-condition: An extended community filter condition
+- next-hop-interface-condition: A next hop interface condition
+- metric-condition: A metric condition
+- origin-condition: An origin condition
+- peer-condition: A peer condition
+- probability-condition: A probablity condition
+- tag-condition: A tag condition
 
 ## `configure authority routing policy statement name`
 
@@ -39328,8 +39329,8 @@ Default: accept
 A value from a set of predefined names.
 
 Options:
-accept    On the conditions evaluating true execute the actions specified in the statement and terminate the policy returning accept
-reject    On the conditions evaluating true do not execute the actions specified in the statement and terminate the policy returning reject
+- accept: On the conditions evaluating true execute the actions specified in the statement and terminate the policy returning accept
+- reject: On the conditions evaluating true do not execute the actions specified in the statement and terminate the policy returning reject
 
 ## `configure authority routing resource-group`
 
@@ -39413,7 +39414,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority security description`
 
@@ -39461,7 +39462,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority security encryption-cipher`
 
@@ -39488,8 +39489,8 @@ Default: aes-cbc-128
 Encryption cipher and mode.
 
 Options:
-aes-cbc-128    AES Cipher Block Chaining 128-bit Encryption Mode.
-aes-cbc-256    AES Cipher Block Chaining 256-bit Encryption Mode.
+- aes-cbc-128: AES Cipher Block Chaining 128-bit Encryption Mode.
+- aes-cbc-256: AES Cipher Block Chaining 256-bit Encryption Mode.
 
 ## `configure authority security encryption-iv`
 
@@ -39586,14 +39587,14 @@ configure authority security hmac [<boolean>]
 Default: true
 
 :::warning
-&amp;#x27;hmac&amp;#x27; is deprecated and will be removed in a future software version
+`hmac` is deprecated and will be removed in a future software version
 :::
 
 ##### boolean
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority security hmac-cipher`
 
@@ -39620,9 +39621,9 @@ Default: sha256-128
 HMAC cipher and mode.
 
 Options:
-sha1          SHA1 160-bit Key Hashed Message Authentication Code Mode.
-sha256        SHA256 256-bit Key Hashed Message Authentication Code Mode.
-sha256-128    SHA256 128-bit Key Hashed Message Authentication Code Mode.
+- sha1: SHA1 160-bit Key Hashed Message Authentication Code Mode.
+- sha256: SHA256 256-bit Key Hashed Message Authentication Code Mode.
+- sha256-128: SHA256 128-bit Key Hashed Message Authentication Code Mode.
 
 ## `configure authority security hmac-key`
 
@@ -39686,9 +39687,9 @@ Default: time-based
 A value from a set of predefined names.
 
 Options:
-disabled      Do not add HMAC to packets.
-regular       Add HMAC to packets.
-time-based    Add time-based HMAC to packets.
+- disabled: Do not add HMAC to packets.
+- regular: Add HMAC to packets.
+- time-based: Add time-based HMAC to packets.
 
 ## `configure authority security name`
 
@@ -39843,10 +39844,10 @@ configure authority service access-policy idp-policy [<optional-idp-policy>]
 Predefined policies for intrusion detection actions
 
 Options:
-none        No IDP policy.
-alert       A policy that only alerts.
-standard    The standard blocking and alerting policy.
-strict      A strict blocking and alerting policy.
+- none: No IDP policy.
+- alert: A policy that only alerts.
+- standard: The standard blocking and alerting policy.
+- strict: A strict blocking and alerting policy.
 
 ## `configure authority service access-policy idp-profile`
 
@@ -39895,8 +39896,8 @@ Default: allow
 Enumeration defining whether access is allowed or denied.
 
 Options:
-allow    Allow access.
-deny     Deny access.
+- allow: Allow access.
+- deny: Deny access.
 
 ## `configure authority service access-policy source`
 
@@ -39928,7 +39929,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-####### (0) ipv4-prefix (string):
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -39942,7 +39943,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-####### (1) ipv6-prefix (string):
+###### (1) ipv6-prefix (string):
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -40012,7 +40013,7 @@ configure authority service access-policy-generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service address`
 
@@ -40044,7 +40045,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-####### (0) ipv4-prefix (string):
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -40058,7 +40059,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-####### (1) ipv6-prefix (string):
+###### (1) ipv6-prefix (string):
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -40148,8 +40149,8 @@ Default: inherited
 A value from a set of predefined names.
 
 Options:
-inherited    Inherit from router level config for application identification.
-disabled     Disable application identification.
+- inherited: Inherit from router level config for application identification.
+- disabled: Disable application identification.
 
 ## `configure authority service application-name`
 
@@ -40217,12 +40218,12 @@ Default: generic
 A value from a set of predefined names.
 
 Options:
-generic        Default service handling.
-dhcp-relay     Act as a DHCP relay.
-dns-proxy      Act as a DNS Proxy.
-ftp-control    Handle FTP control traffic on this service. Pinholes for data flows will be established based on passive mode exchanges detected on the control flows.
-ftp-data       Pinhole service for FTP data flows. Must be paired with an FTP control service to be effective.
-template       Template service for hierarchical services.
+- generic: Default service handling.
+- dhcp-relay: Act as a DHCP relay.
+- dns-proxy: Act as a DNS Proxy.
+- ftp-control: Handle FTP control traffic on this service. Pinholes for data flows will be established based on passive mode exchanges detected on the control flows.
+- ftp-data: Pinhole service for FTP data flows. Must be paired with an FTP control service to be effective.
+- template: Template service for hierarchical services.
 
 ## `configure authority service applies-to`
 
@@ -40341,10 +40342,10 @@ configure authority service applies-to type [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-authority         Applies to all routers in the authority.
-router            Router(s) to which the configuration applies.
-router-group      Logical group of router(s) to which the configuration applies.
-resource-group    An RBAC management group to which the configuration applies
+- authority: Applies to all routers in the authority.
+- router: Router(s) to which the configuration applies.
+- router-group: Logical group of router(s) to which the configuration applies.
+- resource-group: An RBAC management group to which the configuration applies
 
 ## `configure authority service description`
 
@@ -40532,7 +40533,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service fqdn-resolution-type`
 
@@ -40559,8 +40560,8 @@ Default: v4
 A value from a set of predefined names.
 
 Options:
-v4    Resolve FQDNs as IPv4 addresses only.
-v6    Resolve FQDNs as IPv6 addresses only.
+- v4: Resolve FQDNs as IPv4 addresses only.
+- v6: Resolve FQDNs as IPv6 addresses only.
 
 ## `configure authority service generate-categories`
 
@@ -40586,7 +40587,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service generated`
 
@@ -40610,7 +40611,7 @@ configure authority service generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service multicast-sender-policy`
 
@@ -40663,8 +40664,8 @@ Default: allow
 Enumeration defining whether access is allowed or denied.
 
 Options:
-allow    Allow access.
-deny     Deny access.
+- allow: Allow access.
+- deny: Deny access.
 
 ## `configure authority service multicast-sender-policy source`
 
@@ -40696,7 +40697,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-####### (0) ipv4-prefix (string):
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -40710,7 +40711,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-####### (1) ipv6-prefix (string):
+###### (1) ipv6-prefix (string):
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -40808,8 +40809,8 @@ Default: private
 Enumeration defining whether a service scope is public or private
 
 Options:
-public     Everyone allowed in the absence of access policy that restricts it. Shared on public interfaces.
-private    Restricted to the access policy of the service. Shared with other routers in the authority.
+- public: Everyone allowed in the absence of access policy that restricts it. Shared on public interfaces.
+- private: Restricted to the access policy of the service. Shared with other routers in the authority.
 
 ## `configure authority service security`
 
@@ -40919,7 +40920,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service session-record profile`
 
@@ -40970,7 +40971,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service source-nat`
 
@@ -40997,8 +40998,8 @@ Default: network-interface
 A value from a set of predefined names.
 
 Options:
-network-interface    Use source-nat settings of egress network-interface
-disabled             Disable source nat for this service
+- network-interface: Use source-nat settings of egress network-interface
+- disabled: Disable source nat for this service
 
 ## `configure authority service subcategory`
 
@@ -41046,7 +41047,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service tenant`
 
@@ -41067,7 +41068,7 @@ configure authority service tenant [<tenant-ref>]
 #### Description
 
 :::warning
-&amp;#x27;tenant&amp;#x27; is deprecated and will be removed in a future software version
+`tenant` is deprecated and will be removed in a future software version
 :::
 
 ##### tenant-ref (leafref)
@@ -41198,12 +41199,12 @@ configure authority service transport protocol [<protocol>]
 Transport (Layer 4) protocol.
 
 Options:
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
 
 ## `configure authority service ttl-padding`
 
@@ -41230,8 +41231,8 @@ Default: neighborhood
 A value from a set of predefined names.
 
 Options:
-neighborhood    Use ttl-padding settings of the neighborhood
-disabled        Disable ttl-padding for this service
+- neighborhood: Use ttl-padding settings of the neighborhood
+- disabled: Disable ttl-padding for this service
 
 ## `configure authority service url`
 
@@ -41485,7 +41486,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service-class resource-group`
 
@@ -41532,10 +41533,10 @@ configure authority service-class traffic-class [<traffic-class-id>]
 Relative priority of traffic.
 
 Options:
-high           High priority traffic class.
-medium         Medium priority traffic class.
-low            Low priority traffic class.
-best-effort    Best-effort priority traffic class.
+- high: High priority traffic class.
+- medium: Medium priority traffic class.
+- low: Low priority traffic class.
+- best-effort: Best-effort priority traffic class.
 
 ## `configure authority service-policy`
 
@@ -41702,10 +41703,10 @@ configure authority service-policy applies-to type [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-authority         Applies to all routers in the authority.
-router            Router(s) to which the configuration applies.
-router-group      Logical group of router(s) to which the configuration applies.
-resource-group    An RBAC management group to which the configuration applies
+- authority: Applies to all routers in the authority.
+- router: Router(s) to which the configuration applies.
+- router-group: Logical group of router(s) to which the configuration applies.
+- resource-group: An RBAC management group to which the configuration applies
 
 ## `configure authority service-policy best-effort`
 
@@ -41731,7 +41732,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service-policy best-path-criteria`
 
@@ -41758,9 +41759,9 @@ Default: vector
 A value from a set of predefined names.
 
 Options:
-vector             Path with best vector cost is selected.
-average-latency    Path with the lowest rolling average latency is selected.
-mos                Path with the best Mean Opinion Score (MOS) score is selected.
+- vector: Path with best vector cost is selected.
+- average-latency: Path with the lowest rolling average latency is selected.
+- mos: Path with the best Mean Opinion Score (MOS) score is selected.
 
 ## `configure authority service-policy description`
 
@@ -41828,7 +41829,7 @@ configure authority service-policy generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service-policy ingress-source-nat`
 
@@ -41855,8 +41856,8 @@ Default: network-interface
 A value from a set of predefined names.
 
 Options:
-network-interface    Use source-nat settings of ingress network-interface
-disabled             Disable ingress source nat for this service
+- network-interface: Use source-nat settings of ingress network-interface
+- disabled: Disable ingress source nat for this service
 
 ## `configure authority service-policy lb-strategy`
 
@@ -41883,8 +41884,8 @@ Default: hunt
 A value from a set of predefined names.
 
 Options:
-hunt            Servers are chosen in order with highest capacity first.
-proportional    Traffic is distributed evenly to all servers weighted by capacity.
+- hunt: Servers are chosen in order with highest capacity first.
+- proportional: Traffic is distributed evenly to all servers weighted by capacity.
 
 ## `configure authority service-policy max-jitter`
 
@@ -41998,7 +41999,7 @@ Must be one of the following types:
 A value from a set of predefined names.
 
 Options:
-disabled
+- disabled
 
 ###### (1) decimal64
 
@@ -42059,10 +42060,10 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none                              No resiliency for packet loss.
-packet-retransmission             Enable packet loss detection. Lost packets within buffer are retransmitted.
-packet-retransmission-with-dpi    Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
-forward-error-correction          Enable Forward Error Correction, which will send parity packets to reconstruct lost packets.
+- none: No resiliency for packet loss.
+- packet-retransmission: Enable packet loss detection. Lost packets within buffer are retransmitted.
+- packet-retransmission-with-dpi: Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
+- forward-error-correction: Enable Forward Error Correction, which will send parity packets to reconstruct lost packets.
 
 ## `configure authority service-policy path-quality-filter`
 
@@ -42088,7 +42089,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service-policy peer-path-resiliency`
 
@@ -42114,7 +42115,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority service-policy qp-preference`
 
@@ -42137,7 +42138,7 @@ configure authority service-policy qp-preference [<enumeration>]
 Default: highest
 
 :::warning
-&amp;#x27;qp-preference&amp;#x27; is deprecated and will be removed in a future software version
+`qp-preference` is deprecated and will be removed in a future software version
 :::
 
 ##### enumeration
@@ -42145,8 +42146,8 @@ Default: highest
 A value from a set of predefined names.
 
 Options:
-lowest     Order interfaces from lowest to highest qualifying QP value.
-highest    Order interfaces from highest to lowest qualifying QP value.
+- lowest: Order interfaces from lowest to highest qualifying QP value.
+- highest: Order interfaces from highest to lowest qualifying QP value.
 
 ## `configure authority service-policy required-qp`
 
@@ -42171,7 +42172,7 @@ Units: points
 Default: 0
 
 :::warning
-&amp;#x27;required-qp&amp;#x27; is deprecated and will be removed in a future software version
+`required-qp` is deprecated and will be removed in a future software version
 :::
 
 ##### uint32
@@ -42225,12 +42226,12 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none                              No failover support when path goes down.
-failover                          Fail over the session to use a secondary path when the best path goes down due to link failure or unacceptable path quality values. This session will stay on the secondary path and will not switch back unless the secondary path itself goes down.
-revertible-failover               Fail over the session to use a secondary path when the best path goes down due to link failure or unacceptable path quality values. This session will revert back to the best path if it comes back up or is within permissible path quality values.
-packet-duplication                Duplicate packets across all multihomed-paths to another router. Only one set of packets will be sent to the final destination.
-packet-retransmission             Enable packet loss detection. Lost packets within buffer are retransmitted.
-packet-retransmission-with-dpi    Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
+- none: No failover support when path goes down.
+- failover: Fail over the session to use a secondary path when the best path goes down due to link failure or unacceptable path quality values. This session will stay on the secondary path and will not switch back unless the secondary path itself goes down.
+- revertible-failover: Fail over the session to use a secondary path when the best path goes down due to link failure or unacceptable path quality values. This session will revert back to the best path if it comes back up or is within permissible path quality values.
+- packet-duplication: Duplicate packets across all multihomed-paths to another router. Only one set of packets will be sent to the final destination.
+- packet-retransmission: Enable packet loss detection. Lost packets within buffer are retransmitted.
+- packet-retransmission-with-dpi: Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
 
 ## `configure authority service-policy transport-state-enforcement`
 
@@ -42257,10 +42258,10 @@ Default: reset
 A value from a set of predefined names.
 
 Options:
-allow     TCP non-syn first packets are allowed, as well as packets that do not conform to the TCP state machine.
-block     TCP non-syn first packets are blocked, and packets that do not conform to the TCP state machine are dropped.
-reset     TCP non-syn first packets cause a reset on the session and packets that do not conform to the TCP state machine are dropped.
-strict    TCP non-syn first packets cause a reset on the session, packets that do not conform to the TCP state machine are dropped, and packets that do not conform to sequence checking are dropped.
+- allow: TCP non-syn first packets are allowed, as well as packets that do not conform to the TCP state machine.
+- block: TCP non-syn first packets are blocked, and packets that do not conform to the TCP state machine are dropped.
+- reset: TCP non-syn first packets cause a reset on the session and packets that do not conform to the TCP state machine are dropped.
+- strict: TCP non-syn first packets cause a reset on the session, packets that do not conform to the TCP state machine are dropped, and packets that do not conform to sequence checking are dropped.
 
 ## `configure authority service-policy vector`
 
@@ -42352,8 +42353,8 @@ Range: 1-999999
 A value from a set of predefined names.
 
 Options:
-ordered    priority value determined by ordinal position
-never      paths with the vector are not used
+- ordered: priority value determined by ordinal position
+- never:paths with the vector are not used
 
 ## `configure authority session-record-profile`
 
@@ -42503,10 +42504,10 @@ configure authority session-record-profile applies-to type [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-authority         Applies to all routers in the authority.
-router            Router(s) to which the configuration applies.
-router-group      Logical group of router(s) to which the configuration applies.
-resource-group    An RBAC management group to which the configuration applies
+- authority: Applies to all routers in the authority.
+- router: Router(s) to which the configuration applies.
+- router-group: Logical group of router(s) to which the configuration applies.
+- resource-group: An RBAC management group to which the configuration applies
 
 ## `configure authority session-record-profile enabled`
 
@@ -42532,7 +42533,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority session-record-profile include-modify-record`
 
@@ -42558,7 +42559,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority session-record-profile include-start-record`
 
@@ -42584,7 +42585,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority session-record-profile intermediate-records`
 
@@ -42624,7 +42625,7 @@ Default: true
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority session-record-profile intermediate-records interval`
 
@@ -42744,8 +42745,8 @@ Default: packet-based
 A value from a set of predefined names.
 
 Options:
-packet-based        Detect sessions needing recovery due to unsolicited packets.
-inactivity-based    Detect sessions needing recovery due to session inactivity.
+- packet-based: Detect sessions needing recovery due to unsolicited packets.
+- inactivity-based: Detect sessions needing recovery due to session inactivity.
 
 ## `configure authority session-type`
 
@@ -42877,7 +42878,7 @@ Default: false
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority session-type resource-group`
 
@@ -43073,12 +43074,12 @@ configure authority session-type transport protocol [<protocol>]
 Transport (Layer 4) protocol.
 
 Options:
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
 
 ## `configure authority software-update`
 
@@ -43148,13 +43149,13 @@ The ip-address type represents an IP address and is IP version neutral. The form
 
 Must be one of the following types:
 
-####### (0) ipv4-address (string):
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-####### (1) ipv6-address (string):
+###### (1) ipv6-address (string):
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -43177,7 +43178,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-####### (0) ipv4-prefix (string):
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -43191,7 +43192,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-####### (1) ipv6-prefix (string):
+###### (1) ipv6-prefix (string):
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -43500,7 +43501,7 @@ configure authority tenant generated [<boolean>]
 
 A true or false value.
 
-Options: true or false
+Options: `true` or `false`
 
 ## `configure authority tenant member`
 
@@ -43682,7 +43683,7 @@ configure authority tenant security [<security-ref>]
 #### Description
 
 :::warning
-&amp;#x27;security&amp;#x27; is deprecated and will be removed in a future software version
+`security` is deprecated and will be removed in a future software version
 :::
 
 ##### security-ref (leafref)
