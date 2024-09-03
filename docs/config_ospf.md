@@ -171,14 +171,13 @@ By enabling OSPF GR on all peered routers, timers can be set to prevent the peer
 
 For situations where OSPF is redistributed into BGP, an additional timer has been added which will allow OSPF graceful restart to complete before a BGP graceful restart completes. 
 
-For situations where OSPF is redistributed into BGP, the `select-delay-time` timer has been added to BGP Graceful Restart. It is important that the OSPF graceful restart complete before the BGP graceful restart completes, due to the impact on the routing table. This should be set to a value greater than the time for OSPF graceful restart to complete. (how does the user determine this value??)
+For situations where OSPF is redistributed into BGP, the `select-delay-time` timer has been added to BGP Graceful Restart. It is important that the OSPF graceful restart complete before the BGP graceful restart completes, due to the impact on the routing table. This should be set to a value greater than the time for OSPF graceful restart to complete. To determine the OSPF graceful restart length, examine the logging messages seen via `debug ospf graceful-restart`. 
 
 ### Simple Configuration
 
 ```
     ospf              1
         instance          1
-        router-id         172.16.111.2
 
         graceful-restart
             restart-time  120
@@ -188,6 +187,8 @@ For situations where OSPF is redistributed into BGP, the `select-delay-time` tim
             exit
         exit
 ```
+
+For additional information about the OSPF graceful restart commands, please see [`ospf graceful-restart`](config_command_guide.md#configure-authority-router-routing-ospf-graceful-restart). 
 
 ## OSPF Troubleshooting Steps
 1. Verify OSPF router information (`show ospf detail` or `show ospf summary`)

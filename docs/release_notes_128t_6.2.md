@@ -30,7 +30,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-56894 OSPF Graceful Restart:** Support for OSPF graceful restart has been added. For command details, see [`ospf graceful-restart`](config_command_guide.md#configure-authority-router-routing-ospf-graceful-restart).
+- **I95-56894 OSPF Graceful Restart:** Support for OSPF graceful restart has been added. For a feature description and configuration information, see [OSPF Graceful Restart](config_ospf.md#ospf_graceful_restart). For command details, see [`ospf graceful-restart`](config_command_guide.md#configure-authority-router-routing-ospf-graceful-restart).
 ------
 - **I95-56337 / I95-56339 / I95-56341 REST API changes to better support BGP endpoints:** Updated BGP REST endpoints for better functionality, by adding pagination support to summary commands and altering json schema to use arrays where necessary to preserve ordering. Added `show bgp family-summary` to condense address-family information per peer into one entry.
 
