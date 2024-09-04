@@ -6249,13 +6249,9 @@ Default: static
 A value from a set of predefined names.
 
 Options:
-<<<<<<< HEAD
-static     Static IP assignment per endpoint
-dynamic    Dynamic IP &amp; port assignment per session
-=======
+
 - static:     Static IP assignment per endpoint
-- dynamic:    Dynamic IP &amp; port assignment per session
->>>>>>> origin/master
+- dynamic:    Dynamic IP port assignment per session
 
 ## `configure authority router nat-pool address-pool tenant-name`
 
@@ -6274,15 +6270,10 @@ configure authority router nat-pool address-pool tenant-name [<tenant-ref>]
 | tenant-ref | Value to add to this list |
 
 #### Description
-<<<<<<< HEAD
 
 ##### tenant-ref (leafref)
 
 This type is used by other entities that need to reference configured tenants.
-
-## `configure authority router nat-pool move address-pool`
-=======
->>>>>>> origin/master
 
 ##### tenant-ref (leafref)
 
@@ -9555,7 +9546,6 @@ configure authority router node device-interface network-interface address host-
 | enumeration | The value to set for this field |
 
 #### Description
-<<<<<<< HEAD
 
 Default: string
 
