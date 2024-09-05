@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.2.6-11r2
+## Release 6.2.6-13r2
 
-**Release Date:** September 5, 2024
+**Release Date:** September 6, 2024
 
 ### New Features
 
@@ -105,6 +105,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-57337 Updates during Application ID reload/refresh:** Updated the processes involved in application reload.
 ------
 - **I95-57421 Viewing BGP Neighbors in GUI returns errors:** Resolved an issue with the display of BGP neighbor information in the GUI, where the options were too broad. BGP neighbors now have a selection field for ipv4 or ipv6, as well as a `neighbor` field.
+------
+- **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where an inter-router interface global-id change caused waypoint ports to not update in a push to the production environment. 
 ------
 - **I95-57578 Candidate configuration values not showing in GUI:** Resolved an issue that caused configuration drop-downs in the GUI for tenants and services to only display values from the running configuration, not the candidate configuration.
 ------
