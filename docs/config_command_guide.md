@@ -12,6 +12,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | command | description |
 | ------- | ----------- |
 | [`access-management`](#configure-authority-access-management) | Role Based Access Control (RBAC) configuration. |
+| [`alarm-shelving`](#configure-authority-alarm-shelving) | Configuration to control alarm shelving behavior. |
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
 | [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
 | [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
@@ -52,6 +53,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`session-recovery-detection`](#configure-authority-session-recovery-detection) | Configure Session Recovery Detection |
 | [`session-type`](#configure-authority-session-type) | Type of session classification based on protocol and port, and associates it with a default class of service. |
 | `show` | Show configuration data for &#x27;authority&#x27; |
+| [`software-access`](#configure-authority-software-access) | Configuration for SSR software access for the authority. Supported on managed assets only. |
 | [`software-update`](#configure-authority-software-update) | Configure Software Update |
 | [`step`](#configure-authority-step) | Configure Step |
 | [`step-repo`](#configure-authority-step-repo) | List of Service and Topology Exchange Protocol repositories. |
@@ -390,8 +392,439 @@ Range: 1-18446744073709551615
 A value from a set of predefined names.
 
 Options:
+never    Never expire
 
-- never:    Never expire
+## `configure authority alarm-shelving`
+
+Configuration to control alarm shelving behavior.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`shelf`](#configure-authority-alarm-shelving-shelf) | Shelf configuration and criteria for classifying alarms as shelved. |
+| `show` | Show configuration data for &#x27;alarm-shelving&#x27; |
+
+## `configure authority alarm-shelving shelf`
+
+Shelf configuration and criteria for classifying alarms as shelved.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | An arbitrary name for the alarm shelf. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`applies-to`](#configure-authority-alarm-shelving-shelf-applies-to) | Logical group to which a configuration element applies |
+| [`category`](#configure-authority-alarm-shelving-shelf-category) | Shelve alarms for this category. |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`generated`](#configure-authority-alarm-shelving-shelf-generated) | Indicates whether or not the Shelf was automatically generated as a result of Alarm Shelf generation. |
+| [`match-type`](#configure-authority-alarm-shelving-shelf-match-type) | How the individual items in the shelf should be matched in order to trigger the shelving |
+| [`message-regex`](#configure-authority-alarm-shelving-shelf-message-regex) | Shelve alarms with messages that match this regex. |
+| [`name`](#configure-authority-alarm-shelving-shelf-name) | An arbitrary name for the alarm shelf. |
+| [`node-name`](#configure-authority-alarm-shelving-shelf-node-name) | Shelve alarms from this node. |
+| [`node-name-regex`](#configure-authority-alarm-shelving-shelf-node-name-regex) | Shelve alarms from nodes that match this regex. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`router-name`](#configure-authority-alarm-shelving-shelf-router-name) | Shelve alarms from this router. |
+| [`router-name-regex`](#configure-authority-alarm-shelving-shelf-router-name-regex) | Shelve alarms from routers that match this regex. |
+| [`severity`](#configure-authority-alarm-shelving-shelf-severity) | Shelve alarms for this severity. |
+| `show` | Show configuration data for &#x27;shelf&#x27; |
+
+## `configure authority alarm-shelving shelf applies-to`
+
+Logical group to which a configuration element applies
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to <type>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| type | Type of group to which the configuration applies. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`group-name`](#configure-authority-alarm-shelving-shelf-applies-to-group-name) | Name of the router-group to which this configuration applies. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`resource-group`](#configure-authority-alarm-shelving-shelf-applies-to-resource-group) | Name of the resource-group to which this configuration applies. |
+| [`router-name`](#configure-authority-alarm-shelving-shelf-applies-to-router-name) | Name of the router to which this configuration applies. |
+| `show` | Show configuration data for &#x27;applies-to&#x27; |
+| [`type`](#configure-authority-alarm-shelving-shelf-applies-to-type) | Type of group to which the configuration applies. |
+
+## `configure authority alarm-shelving shelf applies-to group-name`
+
+Name of the router-group to which this configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to group-name [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | Value to add to this list |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority alarm-shelving shelf applies-to resource-group`
+
+Name of the resource-group to which this configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to resource-group [<resource-group-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
+## `configure authority alarm-shelving shelf applies-to router-name`
+
+Name of the router to which this configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to router-name [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | Value to add to this list |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority alarm-shelving shelf applies-to type`
+
+Type of group to which the configuration applies.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf applies-to type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+authority         Applies to all routers in the authority.
+router            Router(s) to which the configuration applies.
+router-group      Logical group of router(s) to which the configuration applies.
+resource-group    An RBAC management group to which the configuration applies
+
+## `configure authority alarm-shelving shelf category`
+
+Shelve alarms for this category.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf category [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+none                 A Category of &quot;none&quot; indicates that Category will not be considered when evaluating alarms against this shelf
+extensible-alarm     Shelve alarms with a category of &quot;extensible-alarm&quot;
+system               Shelve alarms with a category of &quot;system&quot;
+process              Shelve alarms with a category of &quot;process&quot;
+interface            Shelve alarms with a category of &quot;interface&quot;
+platform             Shelve alarms with a category of &quot;platform&quot;
+peer                 Shelve alarms with a category of &quot;peer&quot;
+base                 Shelve alarms with a category of &quot;base&quot;
+node-base            Shelve alarms with a category of &quot;node-base&quot;
+global-base          Shelve alarms with a category of &quot;global-base&quot;
+network-interface    Shelve alarms with a category of &quot;network-interface&quot;
+platform-stat        Shelve alarms with a category of &quot;platform-stat&quot;
+redundancy           Shelve alarms with a category of &quot;redundancy&quot;
+giid                 Shelve alarms with a category of &quot;giid&quot;
+asset                Shelve alarms with a category of &quot;asset&quot;
+prefix-delegation    Shelve alarms with a category of &quot;prefix-delegation&quot;
+service              Shelve alarms with a category of &quot;service&quot;
+bgp-neighbor         Shelve alarms with a category of &quot;bgp-neighbor&quot;
+msdp-neighbor        Shelve alarms with a category of &quot;msdp-neighbor&quot;
+
+## `configure authority alarm-shelving shelf generated`
+
+Indicates whether or not the Shelf was automatically generated as a result of Alarm Shelf generation.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf generated [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority alarm-shelving shelf match-type`
+
+How the individual items in the shelf should be matched in order to trigger the shelving
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf match-type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: all
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+all    All items in the shelf must match an alarm in order to trigger the shelving.
+any    At least one item in the shelf must match an alarm in order to trigger the shelving
+
+## `configure authority alarm-shelving shelf message-regex`
+
+Shelve alarms with messages that match this regex.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf message-regex [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority alarm-shelving shelf name`
+
+An arbitrary name for the alarm shelf.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf node-name`
+
+Shelve alarms from this node.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf node-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf node-name-regex`
+
+Shelve alarms from nodes that match this regex.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf node-name-regex [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority alarm-shelving shelf router-name`
+
+Shelve alarms from this router.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf router-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority alarm-shelving shelf router-name-regex`
+
+Shelve alarms from routers that match this regex.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf router-name-regex [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority alarm-shelving shelf severity`
+
+Shelve alarms for this severity.
+
+#### Usage
+
+```
+configure authority alarm-shelving shelf severity [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+info        Shelve alarms with a severity level of &quot;info&quot;
+minor       Shelve alarms with a severity level of &quot;minor&quot;
+major       Shelve alarms with a severity level of &quot;major&quot;
+critical    Shelve alarms with a severity level of &quot;critical&quot;
+none        A Severity of &quot;none&quot; indicates that Severity will not be considered when evaluating alarms against this shelf
 
 ## `configure authority asset-connection-resiliency`
 
@@ -653,6 +1086,7 @@ configure authority client-certificate <name>
 | [`name`](#configure-authority-client-certificate-name) | An identifier for the client certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;client-certificate&#x27; |
+| [`validation-mode`](#configure-authority-client-certificate-validation-mode) | Client certificate validation mode. |
 
 ## `configure authority client-certificate content`
 
@@ -700,6 +1134,32 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
+
+## `configure authority client-certificate validation-mode`
+
+Client certificate validation mode.
+
+#### Usage
+
+```
+configure authority client-certificate validation-mode [<certificate-validation-mode>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| certificate-validation-mode | The value to set for this field |
+
+#### Description
+
+##### certificate-validation-mode (enumeration)
+
+Sets the mode of certificate validation
+
+Options:
+strict    Reject insecure certificates during import.
+warn      Warn when importing insecure certificates
 
 ## `configure authority conductor-address`
 
@@ -1999,7 +2459,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-###### (0) ip-address (union) (required)
+##### (0) ip-address (union) (required)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
@@ -2027,9 +2487,8 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
-##### (2) domain-name (string) (required)
+##### (1) domain-name (string) (required)
 
 The domain-name type represents a DNS domain name.  The
 name SHOULD be fully qualified whenever possible.
@@ -2417,7 +2876,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string) (required)
@@ -3563,9 +4021,12 @@ configure authority radius-server <name>
 | [`address`](#configure-authority-radius-server-address) | The IP address or FQDN of the Radius server. |
 | `delete` | Delete configuration data |
 | [`name`](#configure-authority-radius-server-name) | The name of the Radius server. |
+| [`ocsp`](#configure-authority-radius-server-ocsp) | Whether to check the revocation status of the Radius server&#x27;s certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`port`](#configure-authority-radius-server-port) | The port number Radius server listens on. |
+| [`protocol`](#configure-authority-radius-server-protocol) | Use TLS or UDP protocol to communicate with Radius server. |
 | [`secret`](#configure-authority-radius-server-secret) | The secret key to bind to the Radius server. |
+| [`server-name`](#configure-authority-radius-server-server-name) | Hostname of the Radius server. |
 | `show` | Show configuration data for &#x27;radius-server&#x27; |
 | [`timeout`](#configure-authority-radius-server-timeout) | Radius Request Timeout. |
 
@@ -3622,7 +4083,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-###### (0) ip-address (union) (required)
+##### (0) ip-address (union) (required)
 
 The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
@@ -3649,7 +4110,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string) (required)
@@ -3717,6 +4177,32 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
 
+## `configure authority radius-server ocsp`
+
+Whether to check the revocation status of the Radius server&#x27;s certificate.
+
+#### Usage
+
+```
+configure authority radius-server ocsp [<ocsp>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ocsp | The value to set for this field |
+
+#### Description
+
+##### ocsp (enumeration)
+
+Whether to check the revocation status of a server&#x27;s certificate.
+
+Options:
+strict    Require a successful OCSP check in order to establish a connection.
+off       Do not check revocation status of the server certificate.
+
 ## `configure authority radius-server port`
 
 The port number Radius server listens on.
@@ -3753,6 +4239,34 @@ to the InetPortNumber textual convention of the SMIv2.
 
 Range: 0-65535
 
+## `configure authority radius-server protocol`
+
+Use TLS or UDP protocol to communicate with Radius server.
+
+#### Usage
+
+```
+configure authority radius-server protocol [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: udp
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+udp    Use UDP protocol to communicate with Radius server.
+tls    Use TLS over TCP protocol to communicate with Radius server.
+
 ## `configure authority radius-server secret`
 
 The secret key to bind to the Radius server.
@@ -3776,6 +4290,28 @@ configure authority radius-server secret [<string>]
 A text value.
 
 Length: 1-16
+
+## `configure authority radius-server server-name`
+
+Hostname of the Radius server.
+
+#### Usage
+
+```
+configure authority radius-server server-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority radius-server timeout`
 
@@ -5316,7 +5852,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router dns-config mode`
 
@@ -5596,7 +6131,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ## `configure authority router icmp-probe-profile probe-duration`
@@ -6275,10 +6809,6 @@ configure authority router nat-pool address-pool tenant-name [<tenant-ref>]
 
 This type is used by other entities that need to reference configured tenants.
 
-##### tenant-ref (leafref)
-
-This type is used by other entities that need to reference configured tenants.
-
 ## `configure authority router nat-pool name`
 
 An identifier for the NAT Pool.
@@ -6486,9 +7016,65 @@ Configure Bond Settings
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
+| [`force-up`](#configure-authority-router-node-device-interface-bond-settings-force-up) | Force up when not receiving partner LACP PDUs. |
+| [`force-up-timeout`](#configure-authority-router-node-device-interface-bond-settings-force-up-timeout) | Number of seconds before switching to force-up LACP mode. |
 | [`lacp-enable`](#configure-authority-router-node-device-interface-bond-settings-lacp-enable) | Use 802.3ad LACP protocol for the Bond. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;bond-settings&#x27; |
+
+## `configure authority router node device-interface bond-settings force-up`
+
+Force up when not receiving partner LACP PDUs.
+
+#### Usage
+
+```
+configure authority router node device-interface bond-settings force-up [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router node device-interface bond-settings force-up-timeout`
+
+Number of seconds before switching to force-up LACP mode.
+
+#### Usage
+
+```
+configure authority router node device-interface bond-settings force-up-timeout [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 90
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-100
 
 ## `configure authority router node device-interface bond-settings lacp-enable`
 
@@ -7238,7 +7824,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service`
 
@@ -7355,7 +7940,13 @@ A source address prefix, QSN, service-group or combination of tenant-name and pr
 
 Must be one of the following types:
 
-##### (0) ipv4-prefix (string)
+##### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -7692,7 +8283,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool end-address`
 
@@ -7739,7 +8329,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool interface-mtu`
@@ -7814,7 +8403,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool pop-server`
 
@@ -7863,7 +8451,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool router`
@@ -7914,7 +8501,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool smtp-server`
 
@@ -7963,7 +8549,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool start-address`
@@ -8102,7 +8687,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment circuit-identifier`
 
@@ -9885,7 +10469,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment circuit-identifier`
 
@@ -10384,7 +10967,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment smtp-server`
 
@@ -11691,7 +12273,13 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ipv4-address (string)
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -11712,7 +12300,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -11825,6 +12412,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -11846,7 +12439,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -14121,7 +14713,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
 
@@ -14422,6 +15013,12 @@ configure authority router node device-interface network-interface host-service 
 ##### source-spec (union)
 
 A source address prefix, QSN, service-group or combination of tenant-name and prefix.
+
+Must be one of the following types:
+
+##### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
 
 Must be one of the following types:
 
@@ -15169,7 +15766,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface neighbor phys-address`
 
@@ -15631,6 +16227,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -15652,7 +16254,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -17635,6 +18236,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string) (required)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -17656,7 +18263,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string) (required)
@@ -18971,7 +19577,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node name`
 
@@ -19083,7 +19688,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router node port-forwarding local-interface`
 
@@ -19158,6 +19762,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -19179,7 +19789,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -19295,6 +19904,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -19316,7 +19931,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -19447,11 +20061,35 @@ Radius authentication parameters for this node.
 
 | command | description |
 | ------- | ----------- |
+| [`client-certificate-name`](#configure-authority-router-node-radius-client-certificate-name) | A client certificate to be used to communicate with Radius server. |
 | `delete` | Delete configuration data |
 | [`nas-identifier`](#configure-authority-router-node-radius-nas-identifier) | The NAS Identifier to be used in outgoing Radius authentication requests. |
 | [`nas-ip-address`](#configure-authority-router-node-radius-nas-ip-address) | The NAS IP Address to be used in outgoing Radius authentication requests. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`router-client-certificate-name`](#configure-authority-router-node-radius-router-client-certificate-name) | A client certificate to be used to communicate with Radius server. |
 | `show` | Show configuration data for &#x27;radius&#x27; |
+
+## `configure authority router node radius client-certificate-name`
+
+A client certificate to be used to communicate with Radius server.
+
+#### Usage
+
+```
+configure authority router node radius client-certificate-name [<client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate.
 
 ## `configure authority router node radius nas-identifier`
 
@@ -19523,7 +20161,28 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
+
+## `configure authority router node radius router-client-certificate-name`
+
+A client certificate to be used to communicate with Radius server.
+
+#### Usage
+
+```
+configure authority router node radius router-client-certificate-name [<router-client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### router-client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate for a specific router.
 
 ## `configure authority router node reachability-detection`
 
@@ -19794,7 +20453,7 @@ configure authority router node session-setup-scaling [<boolean>]
 
 #### Description
 
-Default: false
+Default: true
 
 :::warning
 A restart is required if session-setup-scaling is created, modified, or deleted
@@ -23073,7 +23732,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ## `configure authority router routing interface name`
@@ -27410,7 +28068,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router routing routing-protocol neighbor neighbor-as`
 
@@ -28350,7 +29007,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router routing static-route next-hop-interface`
 
@@ -28793,7 +29449,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ## `configure authority router routing vrf interface name`
@@ -33104,7 +33759,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router routing vrf routing-protocol neighbor neighbor-as`
 
@@ -34044,7 +34698,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router routing vrf static-route next-hop-interface`
 
@@ -34423,6 +35076,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -34657,6 +35316,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -34678,7 +35343,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -35616,6 +36280,7 @@ System group configuration. Lets administrators configure system-wide properties
 | ------- | ----------- |
 | [`asset-connection-resiliency`](#configure-authority-router-system-asset-connection-resiliency) | Configure Asset Connection Resiliency |
 | [`audit`](#configure-authority-router-system-audit) | Configuration for audit events |
+| [`client-certificate`](#configure-authority-router-system-client-certificate) | Contains the content of client certificates for this router. |
 | `clone` | Clone a list item |
 | [`contact`](#configure-authority-router-system-contact) | The administrator contact information for the system. |
 | `delete` | Delete configuration data |
@@ -35629,6 +36294,7 @@ System group configuration. Lets administrators configure system-wide properties
 | [`remote-login`](#configure-authority-router-system-remote-login) | Configure Remote Login |
 | [`services`](#configure-authority-router-system-services) | Address information for internal services |
 | `show` | Show configuration data for &#x27;system&#x27; |
+| [`software-access`](#configure-authority-router-system-software-access) | Configuration for SSR software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings. |
 | [`software-update`](#configure-authority-router-system-software-update) | Configuration for SSR software updates. Supported on managed assets only. |
 | [`syslog`](#configure-authority-router-system-syslog) | Syslog configuration lets administrators configure the SSR&#x27;s interaction with external syslog services. |
 
@@ -35850,6 +36516,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -35871,7 +36543,6 @@ all-zero 16-bit chunks are not compressed.  The canonical
 format uses lowercase characters and leading zeros are
 not allowed.
 
-Must be a valid IPv6 address.
 Must be a valid IPv6 address.
 
 ##### (2) domain-name (string)
@@ -36161,6 +36832,106 @@ Default: true
 A true or false value.
 
 Options: true or false
+
+## `configure authority router system client-certificate`
+
+Contains the content of client certificates for this router.
+
+#### Usage
+
+```
+configure authority router system client-certificate <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | An identifier for the client certificate. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`content`](#configure-authority-router-system-client-certificate-content) | Client certificate content. |
+| `delete` | Delete configuration data |
+| [`name`](#configure-authority-router-system-client-certificate-name) | An identifier for the client certificate. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;client-certificate&#x27; |
+| [`validation-mode`](#configure-authority-router-system-client-certificate-validation-mode) | Router level Client certificate validation mode. |
+
+## `configure authority router system client-certificate content`
+
+Client certificate content.
+
+#### Usage
+
+```
+configure authority router system client-certificate content [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string (required)
+
+A text value.
+
+## `configure authority router system client-certificate name`
+
+An identifier for the client certificate.
+
+#### Usage
+
+```
+configure authority router system client-certificate name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
+## `configure authority router system client-certificate validation-mode`
+
+Router level Client certificate validation mode.
+
+#### Usage
+
+```
+configure authority router system client-certificate validation-mode [<certificate-validation-mode>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| certificate-validation-mode | The value to set for this field |
+
+#### Description
+
+##### certificate-validation-mode (enumeration)
+
+Sets the mode of certificate validation
+
+Options:
+strict    Reject insecure certificates during import.
+warn      Warn when importing insecure certificates
 
 ## `configure authority router system contact`
 
@@ -37066,6 +37837,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -37319,7 +38096,13 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ipv4-address (string)
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -37970,6 +38753,7 @@ Web server &amp; REST API.
 | [`port`](#configure-authority-router-system-services-webserver-port) | The port on which the Web servers listen. |
 | [`server`](#configure-authority-router-system-services-webserver-server) | List of control node server addresses. When present, they override the defaults from global configuration. |
 | `show` | Show configuration data for &#x27;webserver&#x27; |
+| [`ssl`](#configure-authority-router-system-services-webserver-ssl) | Configure SSL encryption for HTTPS. |
 
 ## `configure authority router system services webserver enabled`
 
@@ -38095,7 +38879,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority router system services webserver server node-name`
 
@@ -38118,6 +38901,269 @@ configure authority router system services webserver server node-name [<leafref>
 ##### leafref
 
 A reference to an existing value in the instance data.
+
+## `configure authority router system services webserver ssl`
+
+Configure SSL encryption for HTTPS.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`ciphers`](#configure-authority-router-system-services-webserver-ssl-ciphers) | Configure the allowed ciphers. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`protocol`](#configure-authority-router-system-services-webserver-ssl-protocol) | Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used. |
+| `show` | Show configuration data for &#x27;ssl&#x27; |
+
+## `configure authority router system services webserver ssl ciphers`
+
+Configure the allowed ciphers. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings.
+
+#### Usage
+
+```
+configure authority router system services webserver ssl ciphers [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+Default: HIGH:!aNULL:!MD5
+
+##### string
+
+A text value.
+
+## `configure authority router system services webserver ssl protocol`
+
+Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used.
+
+#### Usage
+
+```
+configure authority router system services webserver ssl protocol [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . - _
+Length: 1-63
+
+## `configure authority router system software-access`
+
+Configuration for SSR software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`channel`](#configure-authority-router-system-software-access-channel) | The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`router-credentials`](#configure-authority-router-system-software-access-router-credentials) | Configure Router Credentials |
+| [`rpm-channel`](#configure-authority-router-system-software-access-rpm-channel) | The software access RPM channel to use. The RPM channel will override the router channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `show` | Show configuration data for &#x27;software-access&#x27; |
+| [`ssr-image-channel`](#configure-authority-router-system-software-access-ssr-image-channel) | The software access SSR image channel to use. The SSR image channel will override the router channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token. |
+| [`use-authority-credentials`](#configure-authority-router-system-software-access-use-authority-credentials) | Configure Use Authority Credentials |
+
+## `configure authority router system software-access channel`
+
+The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority router system software-access channel [<router-software-access-channel>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-software-access-channel | The value to set for this field |
+
+#### Description
+
+Default: use-authority-channel
+
+##### router-software-access-channel (enumeration)
+
+The router software access channel.
+
+Options:
+use-authority-channel    Use the configured authority channel.
+prealpha                 Override the authority channel with the prealpha channel.
+alpha                    Override the authority channel with the alpha channel.
+beta                     Override the authority channel with the beta channel.
+release                  Override the authority channel with the release channel.
+
+## `configure authority router system software-access router-credentials`
+
+Configure Router Credentials
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;router-credentials&#x27; |
+| [`token`](#configure-authority-router-system-software-access-router-credentials-token) | The router software access token. |
+| [`username`](#configure-authority-router-system-software-access-router-credentials-username) | The router software access username. |
+
+## `configure authority router system software-access router-credentials token`
+
+The router software access token.
+
+#### Usage
+
+```
+configure authority router system software-access router-credentials token [<software-access-token>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-token | The value to set for this field |
+
+#### Description
+
+##### software-access-token (string)
+
+The software access token.
+
+Must not contain whitespace in the software access token.
+
+## `configure authority router system software-access router-credentials username`
+
+The router software access username.
+
+#### Usage
+
+```
+configure authority router system software-access router-credentials username [<software-access-username>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-username | The value to set for this field |
+
+#### Description
+
+##### software-access-username (string)
+
+The software access username.
+
+Must not contain a colon or whitespace in the software access username.
+
+## `configure authority router system software-access rpm-channel`
+
+The software access RPM channel to use. The RPM channel will override the router channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority router system software-access rpm-channel [<router-software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### router-software-access-channel-override (enumeration)
+
+The router software access channel overrides.
+
+Options:
+use-authority-channel          Use the configured authority channel.
+use-software-access-channel    Use the configured router channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority router system software-access ssr-image-channel`
+
+The software access SSR image channel to use. The SSR image channel will override the router channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority router system software-access ssr-image-channel [<router-software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### router-software-access-channel-override (enumeration)
+
+The router software access channel overrides.
+
+Options:
+use-authority-channel          Use the configured authority channel.
+use-software-access-channel    Use the configured router channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority router system software-access use-authority-credentials`
+
+Configure Use Authority Credentials
+
+#### Usage
+
+```
+configure authority router system software-access use-authority-credentials [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router system software-update`
 
@@ -38214,6 +39260,12 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types
+:
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -38345,8 +39397,10 @@ Syslog configuration lets administrators configure the SSR&#x27;s interaction wi
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`facility`](#configure-authority-router-system-syslog-facility) | The facility under which syslog messages will be recorded. |
+| [`ocsp`](#configure-authority-router-system-syslog-ocsp) | Whether to check the revocation status of the Syslog server&#x27;s certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`protocol`](#configure-authority-router-system-syslog-protocol) | Use TCP or UDP protocol to communicate with syslog server. |
+| [`router-client-certificate-name`](#configure-authority-router-system-syslog-router-client-certificate-name) | A client certificate to be used to communicate with syslog server. |
 | [`server`](#configure-authority-router-system-syslog-server) | The list of syslog servers configured for this device. |
 | [`severity`](#configure-authority-router-system-syslog-severity) | Sets the level at which messages will be sent to the syslog server. |
 | `show` | Show configuration data for &#x27;syslog&#x27; |
@@ -38420,6 +39474,32 @@ Options:
 - local7:      syslog local use 7 facility reserved for local use
 - any:         match any syslog facility
 
+## `configure authority router system syslog ocsp`
+
+Whether to check the revocation status of the Syslog server&#x27;s certificate.
+
+#### Usage
+
+```
+configure authority router system syslog ocsp [<ocsp>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ocsp | The value to set for this field |
+
+#### Description
+
+##### ocsp (enumeration)
+
+Whether to check the revocation status of a server&#x27;s certificate.
+
+Options:
+strict    Require a successful OCSP check in order to establish a connection.
+off       Do not check revocation status of the server certificate.
+
 ## `configure authority router system syslog protocol`
 
 Use TCP or UDP protocol to communicate with syslog server.
@@ -38449,6 +39529,28 @@ Options:
 - udp:    Use UDP protocol to communicate with syslog server.
 - tcp:    Use TCP protocol to communicate with syslog server.
 - tls:    Use TLS over TCP protocol to communicate with syslog server.
+
+## `configure authority router system syslog router-client-certificate-name`
+
+A client certificate to be used to communicate with syslog server.
+
+#### Usage
+
+```
+configure authority router system syslog router-client-certificate-name [<router-client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### router-client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate for a specific router.
 
 ## `configure authority router system syslog server`
 
@@ -38500,7 +39602,13 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ipv4-address (string)
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -40182,7 +41290,6 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
 ## `configure authority routing policy statement condition peer-local`
 
@@ -40959,7 +42066,13 @@ A source address prefix, QSN, service-group or combination of tenant-name and pr
 
 Must be one of the following types:
 
-##### (0) ipv4-prefix (string)
+##### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -41069,7 +42182,13 @@ The host type represents either an IP prefix or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ipv4-prefix (string)
+##### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -41715,7 +42834,13 @@ A source address prefix, QSN, service-group or combination of tenant-name and pr
 
 Must be one of the following types:
 
-##### (0) ipv4-prefix (string)
+##### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -44114,6 +45239,163 @@ Options:
 - esp:     IPSec Encapsulating Security Payload Protocol.
 - pim:     Protocol Independent Multicast.
 
+## `configure authority software-access`
+
+Configuration for SSR software access for the authority. Supported on managed assets only.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`channel`](#configure-authority-software-access-channel) | The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`rpm-channel`](#configure-authority-software-access-rpm-channel) | The software access RPM channel to use. The RPM channel will override the authority channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token. |
+| `show` | Show configuration data for &#x27;software-access&#x27; |
+| [`ssr-image-channel`](#configure-authority-software-access-ssr-image-channel) | The software access SSR image channel to use. The SSR image channel will override the authority channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token. |
+| [`token`](#configure-authority-software-access-token) | The authority software access token. |
+| [`username`](#configure-authority-software-access-username) | The authority software access username. |
+
+## `configure authority software-access channel`
+
+The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority software-access channel [<software-access-channel>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-channel | The value to set for this field |
+
+#### Description
+
+Default: release
+
+##### software-access-channel (enumeration)
+
+The software access channels.
+
+Options:
+prealpha    Enable access to software in the prealpha channel.
+alpha       Enable access to software in the alpha channel.
+beta        Enable access to software in the beta channel.
+release     Enable access to software in the release channel.
+
+## `configure authority software-access rpm-channel`
+
+The software access RPM channel to use. The RPM channel will override the authority channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority software-access rpm-channel [<software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### software-access-channel-override (enumeration)
+
+The software access channel overrides.
+
+Options:
+use-software-access-channel    Use the configured channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority software-access ssr-image-channel`
+
+The software access SSR image channel to use. The SSR image channel will override the authority channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token.
+
+#### Usage
+
+```
+configure authority software-access ssr-image-channel [<software-access-channel-override>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-channel-override | The value to set for this field |
+
+#### Description
+
+Default: use-software-access-channel
+
+##### software-access-channel-override (enumeration)
+
+The software access channel overrides.
+
+Options:
+use-software-access-channel    Use the configured channel.
+prealpha                       Override the configured channel with the prealpha channel.
+alpha                          Override the configured channel with the alpha channel.
+beta                           Override the configured channel with the beta channel.
+release                        Override the configured channel with the release channel.
+
+## `configure authority software-access token`
+
+The authority software access token.
+
+#### Usage
+
+```
+configure authority software-access token [<software-access-token>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-token | The value to set for this field |
+
+#### Description
+
+##### software-access-token (string)
+
+The software access token.
+
+Must not contain whitespace in the software access token.
+
+## `configure authority software-access username`
+
+The authority software access username.
+
+#### Usage
+
+```
+configure authority software-access username [<software-access-username>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| software-access-username | The value to set for this field |
+
+#### Description
+
+##### software-access-username (string)
+
+The software access username.
+
+Must not contain a colon or whitespace in the software access username.
+
 ## `configure authority software-update`
 
 Configure Software Update
@@ -44176,7 +45458,13 @@ An IP address or prefix.
 
 Must be one of the following types:
 
-##### (0) ipv4-address (string)
+##### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string):
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -44198,9 +45486,14 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
-Must be a valid IPv6 address.
 
-##### (2) ipv4-prefix (string)
+##### (1) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-prefix (string):
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -44970,6 +46263,7 @@ configure authority trusted-ca-certificate <name>
 | [`name`](#configure-authority-trusted-ca-certificate-name) | An identifier for the trusted CA certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;trusted-ca-certificate&#x27; |
+| [`validation-mode`](#configure-authority-trusted-ca-certificate-validation-mode) | Trusted CA certificate validation mode. |
 
 ## `configure authority trusted-ca-certificate content`
 
@@ -45017,6 +46311,32 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
+
+## `configure authority trusted-ca-certificate validation-mode`
+
+Trusted CA certificate validation mode.
+
+#### Usage
+
+```
+configure authority trusted-ca-certificate validation-mode [<certificate-validation-mode>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| certificate-validation-mode | The value to set for this field |
+
+#### Description
+
+##### certificate-validation-mode (enumeration)
+
+Sets the mode of certificate validation
+
+Options:
+strict    Reject insecure certificates during import.
+warn      Warn when importing insecure certificates
 
 ## `configure authority web-messages`
 
