@@ -86,6 +86,7 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_mist_aws",
             ],
       },
       {
@@ -264,6 +265,7 @@ module.exports = {
           "config_ldap",
           "config_radius",
           "config_password_policies",
+          "howto_reset_user_password",
         ],
       },
       {

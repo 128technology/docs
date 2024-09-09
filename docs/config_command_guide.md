@@ -25253,6 +25253,11 @@ A true or false value.
 
 Options: true or false
 
+Units: seconds
+Range: 10-1800
+Default: 120
+
+
 ## `configure authority router routing ospf graceful-restart restart-time`
 
 OSPF graceful restart duration
