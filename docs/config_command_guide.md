@@ -23709,6 +23709,12 @@ configure authority router routing ospf graceful-restart helper strict-lsa-check
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Units: seconds
+Range: 10-1800
+Default: 120
+
 ## `configure authority router routing ospf graceful-restart restart-time`
 
 OSPF graceful restart duration
