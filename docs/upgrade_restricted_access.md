@@ -40,26 +40,28 @@ exit
 
 The following process is used to upgrade a Conductor and Conductor-managed Routers to version 6.3.0 of the SSR software.
 
-1. On a system that has internet access, Use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) download the `128T-6.3.0-xx.r1.el7` and the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` software packages.
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-xx.r1.el7` and the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` software packages.
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
-2. Import the `128T-6.3.0-xx.r1.el7` package onto the conductor using the [`import iso`](cli_reference.md#import-iso)command. 
+2. Import the `128T-6.3.0-xx.r1.el7` package onto the conductor using the [`import iso`](cli_reference.md#import-iso) command. 
 3. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 4. Import the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` package onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. You do **not** install this package onto the conductor, only import it. 
 5. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
 
 ### Import ISO
 
-The [`import iso`](cli_reference.md#import-iso)command is used to import packages contained within an SSR ISO onto a local repository, allowing the SSR to be upgraded without connecting to Juniper servers. When upgrading a conductor or when `offline-mode` is defined for a router, the ISO must be imported to the target conductor to perform the upgrade. 
+The [`import iso`](cli_reference.md#import-iso) command is used to import the SSR ISO onto a local repository, allowing the SSR to be upgraded without connecting to Juniper servers. When upgrading a conductor or when `offline-mode` is defined for a router, the ISO must be imported to the target conductor to perform the upgrade. 
 
-Use the `filepath` argument to specify the exact location of the ISO. `hunt` will search for files that match the patterns `128T*.iso`, `SSR*.iso`, or `SSR*.tar`, and the corresponding checksum and signature files. These checksum and signature files are essential for security verification and are required as part of the `import iso` operation. 
+Use the `filepath` argument to specify the exact location of the ISO. `hunt` will search for files that match the patterns `128T*.iso`, `SSR*.iso`, or `SSR*.tar`, and the corresponding checksum and signature files. These checksum and signature files are essential for security verification and are included as part of the `import iso` operation. To install the 6.3.0 software, the following file must be downloaded to the USB and imported onto the conductor:
 
-For example, in order to import and install the 6.3.0 software the following three files must be downloaded and saved to the same directory:
+- `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso`
 
-    - `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso`
-    - `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.tar.sha256sum`
-    - `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.tar.sha256sum.asc` 
+After the local software repository has been updated with the ISO, the upgrade can proceed.
 
-After the local software repository has been updated with the software from the ISO, the upgrade can proceed.
+If you are installing older images on the routers (versions 6.2.5 or older) you may need to include the checksum and signature files with the ISO when you download and import the software to the conductor. 
+
+- `SSR-6.2.5-xx.r1.el7.x86_64.ibu-v1.iso`
+- `SSR-6.2.5-xx.r1.el7.x86_64.ibu-v1.tar.sha256sum`
+- `SSR-6.2.5-xx.r1.el7.x86_64.ibu-v1.tar.sha256sum.asc`
 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.

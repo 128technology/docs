@@ -57,6 +57,42 @@ request system software revert          Revert to a previous version of the SSR.
 *admin@conductor-node-1.Conductor# request system software upgrade
 ```
 
+#### Image-based and Package-based Installation Status
+
+The image-based and package-based status is visible under **Install Type** in the PCLI using `show assets`.
+
+**Image Based**
+
+```
+admin@t106-dut1.Conductor# show assets
+Mon 2024-09-09 18:14:18 UTC
+Retrieving assets...
+
+=========== =========== ===================== ============= ============== ================ ================ ========
+ Router      Node        Asset Id              SSR Version   Install Type   Status           Time in Status   Errors
+=========== =========== ===================== ============= ============== ================ ================ ========
+ Conductor   t106-dut1   t106-dut1.novalocal   7.0.0-1.el9   Image          Synchronized     34m 44s               0
+             t106-dut2   t106-dut2.novalocal   7.0.0-1.el9   Image          Synchronized     21m 19s               0
+```
+
+**Package Based**
+
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# show assets
+Mon 2024-09-09 18:15:20 UTC
+✔ Retrieving assets...
+
+==================== ================== ===================== ====================== ============== ============== ================ ========
+ Router               Node               Asset Id              SSR Version            Install Type   Status         Time in Status   Errors
+==================== ================== ===================== ====================== ============== ============== ================ ========
+ RTR_EAST_COMBO       combo-east-1       t212-dut3.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   3d 23h 18m 58s        0
+                      combo-east-2       t212-dut4.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   4d 2h 40m 27s         0
+ RTR_EAST_CONDUCTOR   conductor-east-1   t212-dut1.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   4d 2h 42m 57s         0
+                      conductor-east-2   t212-dut2.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   4d 2h 43m 14s         0
+
+Completed in 0.04 seconds
+```
+
 ### High Availability Upgrades
 
 In a high availability configuration, the default behavior is to perform a sequenced self-upgrade from the CLI. Executing the `request system software upgrade router <conductor-router-name>` from an HA conductor launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. When the upgrade is complete on the first node, you may run the command on the second node.  
@@ -66,7 +102,7 @@ In a high availability configuration, the default behavior is to perform a seque
 * If an HA pair is discovered to have a mismatched software state (image-based and package-based) an Alarm is reported. The software state must be the same for both nodes.
 * Failure of a router to complete the conversion generates a user visible event and records the reasons for the failure on the conductor.
 * Router conversion success generates an event recording the transition on the router.
-* The image-based and package-based status is visible in the `asset-status` in the GUI, and in the PCLI using `show assets`.
+* The image-based and package-based status is visible in the PCLI using `show assets`.
 
 #### Plugin Support
 

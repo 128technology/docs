@@ -3,11 +3,15 @@ title: Rolling Back Software
 sidebar_label: Rollback
 ---
 
-Occasionally you may need to revert to a previously running version of SSR software. This is referred to as *rolling back*, and can be accomplished via either the standalone SSR installer application, or by using Automated Provisioner. (Note: as with upgrading, rolling back software using Automated Provisioner is only possible on routers managed by an SSR Conductor.)
+Occasionally you may need to revert to a previously running version of SSR software. This is referred to as *rolling back*, and can be accomplished via either the standalone SSR installer application, or by using Automated Provisioner. 
+
+:::note
+As with upgrading, rolling back software using Automated Provisioner is only possible on routers managed by an SSR Conductor.
+:::
 
 ## Rollback Considerations
 
-With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
+With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. The `show system software revert` command to view the progress of a revert operation. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
 Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
 

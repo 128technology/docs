@@ -23,7 +23,7 @@ The upgrade will run to completion with no interaction necessary.
 
 To view the install history for your routers, selecting Lifecycle History displays all versions downloaded and installed, and the operation status. 
 
-### Upgrade using the Conductor's PCLI
+### Upgrade using the Conductor PCLI
 
 For routers managed by an SSR Conductor, a self-upgrade, or manual upgrade, can be initiated from the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes asociated with software version 6.3.0 and those chages are indicated below. For earlier versions of SSR software, please refer to the [Legacy Upgrades](upgrade_legacy.md) section. 
 
@@ -31,14 +31,34 @@ As an administrator-level user, log into the conductor's PCLI.
 
 1. Use the command `show assets` to list the devices managed by this conductor, and the software revision each asset is currently running.
 
-2. For a given asset, use the command `show system software available router <router> node <node>` to show the versions available for upgrade, or the `show system software download router <router> node <node>`  to show the versions available for download. 
+2. For a given asset, use the command `show system software available router <router> node <node>` to show the versions available for download. 
 
-3. Type `request system software download router <rtr> node <node> version <image-version>`. You can monitor the progress by using `show system software download router <rtr> node <node>` which will indicate status (e.g., *Downloading*).
+3. Type `request system software download router <rtr> node <node> version <image-version>`. You can monitor the progress by using `show system software download router <rtr> node <node>` which indicates status (e.g., in progress download, completed download, and failed download).
 
 4. Once the download is complete, use the command `request system software upgrade router <rtr> node <node> version <image-version>` to initiate the upgrade process. View upgrade progress using `show system software upgrade router <rtr> node <node>`
 
 In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, intiating an upgrade on one HA node or router will automatically upgrade the second node/router. 
 
-If you perform an upgrade from the CLI using the `request system software upgrade router <conductor-router-name>` from an HA conductor, it launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. When the upgrade is complete on the first node, you may run the command on the second node. 
+If you perform an upgrade from the CLI using the `request system software upgrade router <conductor-router-name>` from an HA conductor, it launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. Use `show system software upgrade` to view the status of an in progress upgrade. When the upgrade is complete on the first node, you may run the command on the second node. 
+
+However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
+
+### Upgrade from the Router PCLI
+
+The same commands and process can be executed from the router PCLI. The upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes asociated with software version 6.3.0 and those chages are indicated below. For earlier versions of SSR software, please refer to the [Legacy Upgrades](upgrade_legacy.md) section. 
+
+As an administrator-level user, log into the router's PCLI. 
+
+1. Use the command `show assets` to list the software revision each router or node is currently running.
+
+2. For a given asset, use the command `show system software available router <router>` to show the versions available for download. 
+
+3. Type `request system software download router <rtr> version <image-version>` to download software to a router or both nodes in an HA router. You can monitor the progress by using `show system software download router <rtr>` which indicates status (e.g., in progress download, completed download, and failed download).
+
+4. Once the download is complete, use the command `request system software upgrade router <rtr> version <image-version>` to initiate the upgrade process. View upgrade progress using `show system software upgrade router <rtr>`
+
+In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, intiating an upgrade on one HA node or router will automatically upgrade the second node/router. 
+
+If you perform an upgrade from the CLI using the `request system software upgrade router <conductor-router-name>` from an HA conductor, it launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. Use `show system software upgrade` to view the status of an in progress upgrade. When the upgrade is complete on the first node, you may run the command on the second node. 
 
 However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.

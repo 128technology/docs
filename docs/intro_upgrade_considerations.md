@@ -5,7 +5,7 @@ sidebar_label: Upgrade Considerations
 Before upgrading please review the following information.
 
 ### Upgrade Installer
-Before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
+For software versions prior to 6.3.0, before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 
 ### Rollback Considerations
 With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 

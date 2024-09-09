@@ -54,6 +54,8 @@ module.exports = {
     ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
+      "install_univ_iso",
+      "initialize_u-iso_device",
     ],
     "Conductor Installation": [
       "install_conductor_overview",
