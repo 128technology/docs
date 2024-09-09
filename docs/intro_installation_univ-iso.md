@@ -16,8 +16,8 @@ The installation workflow consists of the following steps:
 
 - [Download](#download)
 - [Create a bootable USB](intro_creating_bootable_usb.md)
-- [Installation](install_univ_iso.md)
-- [Initializing](initialize_u-iso_device.md)
+- [Software Installation](install_univ_iso.md)
+- [Device Initialization](initialize_u-iso_device.md)
 
 ## Download
 
@@ -37,4 +37,4 @@ You will be prompted for your username and token to access the web page listing 
 
 Use the instructions for [Creating a Bootable USB](intro_creating_bootable_usb.md) to create a bootable USB drive containing the universal ISO image. 
 
-Next, [Install the SSR software.](install_univ_iso.md) 
+Once you have the USB, let's go [Install the SSR software!](install_univ_iso.md) 

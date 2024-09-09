@@ -3,7 +3,7 @@ title: Initialize Your Device
 sidebar_label: Initialize Your Device
 ---
 
-Use the GUI to initialize the device as a Conductor, a Conductor-managed Router, or a Mist-managed Router. 
+This is the part where configuring your device gets really easy! Use a browser to navigate to your conductor and begin the initialization. Use the GUI to initialize the device as a [Conductor](#initialize-a-conductor), a [Conductor-managed Router](#initialize-a-conductor-managed-router), or a [Mist-managed Router](#initialize-a-mist-managed-router). 
 
 ![U-ISO Device Selection GUI](/img/u-iso8_launch_gui.png)
 
@@ -15,17 +15,25 @@ Use the following process to initialize your device as a Conductor.
 
   ![SSR Conductor](/img/u-iso8a_initialize_conductor.png)
 
-2. To initialize a single conductor, or the first conductor of an HA pair, enter the node name, the Conductor name, and user name and password, and click **ASSOCIATE**.
+2. To initialize a single conductor or the first conductor of an HA pair, enter the following information:
+	- Node name: if this is the first node of an HA pair, it must be named `node0`. 
+	- Conductor name.
+	- Artifactory username and password.
+	- Click **ASSOCIATE**.
 
  ![Conductor Association](/img/u-iso9_define_conductor.png)
 
-  To initialize the second conductor of an HA Pair, enter the information as above, but also select the checkboxes for **Existing HA Peer** and **Learn from HA Peer**. 
+3. The device reboots and comes online as a Conductor.
 
-  ![HA Conductor Association](/img/u-iso9a_ha_conductor.png)
+4. To initialize the second conductor of an HA Pair: 
+	- Enter the name of the second node, typically `node1`.
+	- Conductor name.
+	- Artifactory username and password.
+	- Select the checkboxes for **Existing HA Peer** and **Learn from HA Peer**. This will autofill the HA Peer information.  
 
-3. Click **ASSOCIATE** when you have completed the required information. 
+ ![HA Conductor Association](/img/u-iso9a_ha_conductor.png)
 
-The Conductor is now available in the Configuration. You must commit the configuration changes from the SSR GUI.
+5. Click **ASSOCIATE** when you have completed the required information. The device reboots and comes online as the second Conductor.
 
 ### Initialize a Conductor-Managed Router
 
@@ -40,7 +48,7 @@ Use the following process to initialize your device as a Conductor-managed route
 
 3. Click **ASSOCIATE** when you have completed the required information. 
 
-The Router will onboard itself to the Conductor. You must commit the configuration changes from the SSR GUI.
+The Router will onboard itself to the Conductor. Router configuration is performed from the Conductor. 
 
 ### Initialize a Mist-Managed Router
 

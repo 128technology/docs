@@ -38,6 +38,7 @@ Before beginning, ensure that you have an appropriate rollover cable available t
   
   ![Unpacker Successful](/img/u-iso6_unpacker_complete.png)
 
-13. When the login screen appears, log in to launch the GUI.
 
   ![Final Install Screen](/img/u-iso7_serial_install.png)
+
+**Great job! Your software has installed, now let's go [initialize your device!](initialize_u-iso_device.md)**
