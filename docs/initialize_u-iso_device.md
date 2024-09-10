@@ -15,21 +15,25 @@ Use the following process to initialize your device as a Conductor.
 
   ![SSR Conductor](/img/u-iso8a_initialize_conductor.png)
 
-2. To initialize a single conductor or the first conductor of an HA pair, enter the following information:
-	- Node name: if this is the first node of an HA pair, it must be named `node0`. 
-	- Conductor name.
-	- Artifactory username and password.
-	- Click **ASSOCIATE**.
+2. To initialize a standalone conductor, select **STANDALONE**. To initialize the first conductor of an HA pair, select **HA NODE 0**. Select the address type (DHCP or STATIC). If Static is selected, add the static IP address. Enter the following information: 
+ 
+	- Conductor name
+	- Node IP Address (Static)
+	- Node Gateway (Static)
+	- Interface Name (Static)
+	- DNS Server address(es)
+	- Artifactory username and password (if available)
+
+	Click **ASSOCIATE**
 
  ![Conductor Association](/img/u-iso9_define_conductor.png)
 
 3. The device reboots and comes online as a Conductor.
 
 4. To initialize the second conductor of an HA Pair: 
-	- Enter the name of the second node, typically `node1`.
-	- Conductor name.
-	- Artifactory username and password.
-	- Select the checkboxes for **Existing HA Peer** and **Learn from HA Peer**. This will autofill the HA Peer information.  
+	- select **HA NODE 0**
+	- Conductor name
+	- Artifactory username and password (if available) 
 
  ![HA Conductor Association](/img/u-iso9a_ha_conductor.png)
 
@@ -68,22 +72,24 @@ Use the following process to initialize your device as a Mist-managed router.
 
 4. Click Adopt. The router information is displayed on the SSR GUI.
 
-  ![Mist-Managed](/img/u-iso14a_adopted_router.png)
+  ![Mist-Managed](/img/u-iso14a_assign-org-name.png)
 
 5. Log into your Mist Organization.
 
 6. Once you are in your Mist Organization, select Organization from the left side menu, and then select Inventory.
 
+  ![Mist Inventory](/img/u-iso15a_router-in-mist.png)
+
 7. On the Inventory list for the Organization, select the newly installed router.
+
+8. Use the **Site** dropdown and select **Assign To Site**. 
 
   ![Mist Inventory](/img/u-iso15_router-in-mist.png)
 
-8. Use the More... dropdown and select Assign To Site. 
-
-  ![More dropdown](/img/u-iso16_inventory_more_dropdown.png)
-
-9. Select the Site, and click Assign to Site.
+9. Place a check in the **Manage configuration with Mist** checkbox. 
 
   ![Assign to site](/img/u-iso17_assign_wan_edges.png)
+
+10. Click **Assign to Site**.
 
 The router is now available in your inventory, assigned to the selected site. 
