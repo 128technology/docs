@@ -5,6 +5,10 @@ sidebar_label: QuickStart from the OTP ISO
 
 Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the SSR Networking Platform.
 
+:::important
+If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
+:::
+
 ### SSR Configuration
 
 The SSR router will need to be provisioned on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary.md) and [configuration](config_basics.md) of the SSR platform.

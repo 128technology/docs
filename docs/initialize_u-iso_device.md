@@ -21,7 +21,7 @@ Use the following process to initialize your device as a Conductor.
 	- Node IP Address (Static)
 	- Node Gateway (Static)
 	- Interface Name (Static)
-	- DNS Server address(es)
+	- DNS Server address (Optional)
 	- Artifactory username and password (if available)
 
  ![Conductor Association](/img/u-iso9_define_conductor.png)
@@ -36,7 +36,7 @@ Use the following process to initialize your device as a Conductor.
 	- Node IP Address (Static)
 	- Node Gateway (Static)
 	- Interface Name (Static)
-	- DNS Server address(es)
+	- DNS Server address (Optional)
 	- Artifactory username and password (if available)
 
  ![HA Conductor Association](/img/u-iso9a_ha_conductor.png)
@@ -78,29 +78,9 @@ You can use either of the following processes to initialize your device as a Mis
 
    ![Select Org](/img/u-iso14_assign-org-name.png)
 
-4. Click Adopt. The router information is displayed on the SSR GUI.
+4. Click **ADOPT**. The router information is displayed on the SSR GUI. Your router is adopted into your Mist Organization, and is now available in your inventory ready to be [assigned to a site](#mist-site-assignment).
 
   ![Mist-Managed](/img/u-iso14a_assign-org-name.png)
-
-5. Log into your Mist Organization.
-
-6. Once you are in your Mist Organization, select Organization from the left side menu, and then select Inventory.
-
-  ![Mist Inventory](/img/u-iso15a_router-in-mist.png)
-
-7. On the Inventory list for the Organization, select the newly installed router.
-
-8. Use the **Site** dropdown and select **Assign To Site**. 
-
-  ![Mist Inventory](/img/u-iso15_router-in-mist.png)
-
-9. Place a check in the **Manage configuration with Mist** checkbox. 
-
-  ![Assign to site](/img/u-iso17_assign_wan_edges.png)
-
-10. Click **Assign to Site**.
-
-The router is now available in your inventory, assigned to the selected site. 
 
 ### Mist Registration Code
 
@@ -112,10 +92,9 @@ The router is now available in your inventory, assigned to the selected site.
 
 ![Enter Mist Registration Code](/img/u-iso19_mist_reg_code1.png)
 
-3. Click **ADOPT**. Your router is adopted into your Mist Organization, and is now available in your inventory, assigned to the selected site.
+3. Click **ADOPT**. Your router is adopted into your Mist Organization, and is now available in your inventory ready to be [assigned to a site](#mist-site-assignment).
 
-
-### Retrieve the Mist Registration Code
+#### Retrieve the Mist Registration Code
 
 Use the following procedure to retrieve the Mist registration code from your Mist Organization.
 
@@ -136,4 +115,26 @@ Use the following procedure to retrieve the Mist registration code from your Mis
 5. Click on **Copy to Clipboard**.
 
 6. Return to the **Initialization page** and paste the registration code into the Registration Code field.
+
+### Mist Site Assignment
+
+1. Log into your Mist Organization.
+
+2. Once you are in your Mist Organization, select Organization from the left side menu, and then select Inventory.
+
+  ![Mist Inventory](/img/u-iso15a_router-in-mist.png)
+
+3. On the Inventory list for the Organization, select the newly installed router.
+
+4. Use the **Site** dropdown and select **Assign To Site**. 
+
+  ![Mist Inventory](/img/u-iso15_router-in-mist.png)
+
+5. Place a check in the **Manage configuration with Mist** checkbox. 
+
+  ![Assign to site](/img/u-iso17_assign_wan_edges.png)
+
+6. Click **Assign to Site**.
+
+The router is now assigned to the selected site, and managed by Mist. 
 
