@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.3.0-
+## Release 6.3.0-1
 
-**Release Date:** May 10, 2024
+**Release Date:** September 26, 2024
 
 ### New Features
 
@@ -38,11 +38,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47041 Selection of Mist Cloud during Adoption:** The onboarding process queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).
 ------
-- **I95-47154 Conductor-management of image-based SSR devices:** The Image-based ISO now supports conductor managed deployments. For information about the universal ISO and imaged-based installation, see [SSR Universal ISO Installation]. 
+- **I95-47154 Conductor-management of image-based SSR devices:** Upgrading to or installing SSR 6.3.0 now supports conductor managed deployments. See [SSR Universal ISO Installation](intro_installation_univ-iso.md) for installation information, and refer to [Upgrades] . 
 ------
-- **I95-48255 BYOL SSR images for AWS and Azure marketplaces:** Concerns with CVEs have been addressed and the SSR images are again available on AWS and Azure.
+- **I95-48255 BYOL SSR images for AWS and Azure marketplaces:** Concerns with CVEs have been addressed and the SSR images are available on AWS and Azure. For installation and deployment information, refer to 
 ------
-- **I95-50572 Unified ISO for Mist and Conductor Onboarding:** A single, image-based ISO is the preferred method of installation for all SSR deployments. This new ISO greatly simplifies the software installation process and onboarding of routers to both the Mist-managed and Conductor-managed environments. For information about the install and onboarding process, refer to [SSR Universal ISO Installation].
+- **I95-50572 Unified ISO for Mist and Conductor Onboarding:** A single, image-based ISO is the preferred method of installation for all SSR deployments. This new ISO greatly simplifies the software installation process and onboarding of routers to both the Mist-managed and Conductor-managed environments. For information about the install and onboarding process, refer to [SSR Universal ISO Installation](intro_installation_univ-iso.md).
 ------
 - **I95-51303 Offline Documentation available upon installation:** The SSR documentation site is now installed as a snapshot at the time of release, and run as a web server on the SSR router and conductor installations. This makes the full documentation site availble from within a network that does not have internet access. To access the documentation, click on the Documentation icon from the GUI after installation. 
 ------
