@@ -28,10 +28,11 @@ Installation is done from the SSR ISOs, typically from a bootable image on a fla
 - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
 - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
 
-To install the SSR software on AWS or Azure, refer to: 
+To install the SSR software on a cloud platform, refer to: 
  - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
     - [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
- - [Installation in Microsoft Azure](intro_installation_azure.md)   
+ - [Installation in Microsoft Azure](intro_installation_azure.md)
+ - [Installing in VMWare](install_vmware_config.mdx)
 
 A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
 

@@ -38,10 +38,24 @@ module.exports = {
       "cc_fips_software_upgrades",
       "cc_fips_appendix",
     ],
-    "Installation Process": [
+    "Upgrading the SSR": [
+      "intro_upgrade_considerations",
+      "intro_upgrading",
+      "upgrade_ibu_conductor",
+      "upgrade_router",
+      "upgrade_restricted_access",
+      "upgrade_legacy",  
+      "intro_rollback",
+    ],
+    "Pre-Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
+    ],
+    "SSR Universal ISO Installation": [
+      "intro_installation_univ-iso",
+      "install_univ_iso",
+      "initialize_u-iso_device",
     ],
     "Conductor Installation": [
       "install_conductor_overview",
@@ -66,17 +80,26 @@ module.exports = {
     ],
     "Cloud Installations": [
       "supported_cloud_platforms",
-      "intro_installation_quickstart_aws",
-      "intro_installation_quickstart_mist_aws",
-      "intro_installation_azure",
-      "intro_installation_azure_mist",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
-    ],
-    "Upgrades and Rollback": [
-      "intro_upgrade_considerations",
-      "intro_upgrading",
-      "intro_rollback",
+      {
+       "type": "category",
+          "label": "Installing In AWS",
+          "items": [
+            "intro_installation_quickstart_aws",
+            "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_mist_aws",
+            ],
+      },
+      {
+       "type": "category",
+          "label": "Installing In Azure",
+          "items": [
+            "intro_installation_azure",
+            "intro_installation_azure_mist",
+            "intro_installation_byol_azure_mist",
+          ],
+      },
     ],
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
@@ -244,6 +267,7 @@ module.exports = {
           "config_ldap",
           "config_radius",
           "config_password_policies",
+          "howto_reset_user_password",
         ],
       },
       {

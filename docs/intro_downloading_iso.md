@@ -17,7 +17,7 @@ Juniper Session Smart Networking provides the following workflows for the instal
   - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
     - [Router Installation Using OTP](intro_otp_iso_install.mdx)
     - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
-  - **Interactive:** For bespoke deployments where customized platform configuration is necessary, an interactive mode exists. Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
+  - **Interactive:** Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI. With software versions earlier than 6.3.0, upgrading the SSR software on a peer condutor or router that is managed by a conductor using the interactive installer may result in the system becoming unresponsive. For this reason it is highly recommended that installations and upgrades be performed through the conductor UI.
 
 :::note
 Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-general-availability-and-out-of-support), the ISO name format has changed from using `OTP` to `ISO`:
