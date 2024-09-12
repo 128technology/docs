@@ -6,10 +6,12 @@ sidebar_label: SSR Common Criteria Installation and User Guide
 This guide provides installation and configuration information for using SSR Conductors and Routers in a certified Common Criteria environment. The following platforms are supported for Common Criteria certification:
 
 Supported Software version: 
+
 - Version 6.3.0-R1
 - Release Date: July 2024
-
+- 
 Supported Hardware (must have Software Version 6.3.0-R1 installed):
+
 - SSR 120 
 - SSR 130
 - SSR 1200

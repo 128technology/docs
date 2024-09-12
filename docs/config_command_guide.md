@@ -123,6 +123,17 @@ configure authority access-management role capability [<identityref>]
 | ---- | ----------- |
 | identityref | Value to add to this list |
 
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- `config-read`:     Configuration Read Capability
+- `config-write`:    Configuration Write Capability
+- `provisioning`:    Asset Provisioning Capability
+
 ## `configure authority access-management role description`
 
 A description about the role.
@@ -138,6 +149,12 @@ configure authority access-management role description [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority access-management role exclude-resource`
 
@@ -179,6 +196,20 @@ configure authority access-management role exclude-resource id [<resource-id>]
 | ---- | ----------- |
 | resource-id | The value to set for this field |
 
+#### Description
+
+##### resource-id (string)
+
+The identifier of the resource.
+
+Must be either just a `*` asterisk or an identifier
+followed by a colon which is then followed by either
+an asterisk, or a path that contains only valid yang
+names and list-keys separated by forward-slashes and
+optionally followed by a forward-slash and an asterisk.
+
+Example: 128t:/authority/router/MyRouter/*
+
 ## `configure authority access-management role name`
 
 A unique name that identifies this role.
@@ -194,6 +225,15 @@ configure authority access-management role name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority access-management role resource`
 
@@ -237,9 +277,17 @@ configure authority access-management role resource generated [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority access-management role resource id`
 
-Configure Id
+Configure ID
 
 #### Usage
 
@@ -252,6 +300,20 @@ configure authority access-management role resource id [<resource-id>]
 | name | description |
 | ---- | ----------- |
 | resource-id | The value to set for this field |
+
+#### Description
+
+##### resource-id (string)
+
+The identifier of the resource.
+
+Must be either just a `*` asterisk or an identifier
+followed by a colon which is then followed by either
+an asterisk, or a path that contains only valid yang
+names and list-keys separated by forward-slashes and
+optionally followed by a forward-slash and an asterisk.
+
+Example: 128t:/authority/router/MyRouter/*
 
 ## `configure authority access-management role resource-group`
 
@@ -268,6 +330,12 @@ configure authority access-management role resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority access-management token`
 
@@ -302,6 +370,27 @@ configure authority access-management token expiration [<union>]
 
 Units: minutes
 
+Default: never
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint64
+
+An unsigned 64-bit integer.
+
+Range: 1-18446744073709551615
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- `never`:    Never expire
+
 ## `configure authority asset-connection-resiliency`
 
 Configure Asset Connection Resiliency
@@ -314,6 +403,7 @@ Configure Asset Connection Resiliency
 | [`enabled`](#configure-authority-asset-connection-resiliency-enabled) | Enable asset connection resiliency by creating SSH tunnels for asset connections from managed Router to Conductor. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;asset-connection-resiliency&#x27; |
+| [`ssh-only`](#configure-authority-asset-connection-resiliency-ssh-only) | Only allow the asset connections from managed Router to Conductor to connect via the SSH tunnels. |
 
 ## `configure authority asset-connection-resiliency enabled`
 
@@ -323,6 +413,32 @@ Enable asset connection resiliency by creating SSH tunnels for asset connections
 
 ```
 configure authority asset-connection-resiliency enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
+## `configure authority asset-connection-resiliency ssh-only`
+
+Only allow the asset connections from managed Router to Conductor to connect via the SSH tunnels.
+
+#### Usage
+
+```
+configure authority asset-connection-resiliency ssh-only [<boolean>]
 ```
 
 ##### Positional Arguments
@@ -346,6 +462,16 @@ configure authority backwards-compatible-vrf-bgp-tenants [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority bgp-service-generation`
 
@@ -378,6 +504,16 @@ configure authority bgp-service-generation route-reflector-client-mesh [<boolean
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority bgp-service-generation security-policy`
 
 Security policy to be used instead of &#x27;internal&#x27;.
@@ -394,6 +530,12 @@ configure authority bgp-service-generation security-policy [<security-ref>]
 | ---- | ----------- |
 | security-ref | The value to set for this field |
 
+#### Description
+
+##### security-ref (leafref)
+
+This type is used by other entities that need to reference configured security policies.
+
 ## `configure authority bgp-service-generation service-policy`
 
 Service policy to be used for generated BGP services.
@@ -409,6 +551,12 @@ configure authority bgp-service-generation service-policy [<service-policy-ref>]
 | name | description |
 | ---- | ----------- |
 | service-policy-ref | The value to set for this field |
+
+#### Description
+
+##### service-policy-ref (leafref)
+
+This type is used by other entities that need to reference configured service policies.
 
 ## `configure authority cli-messages`
 
@@ -440,6 +588,12 @@ configure authority cli-messages login-message [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority cli-messages welcome-message`
 
 The message displayed after a successful login through console.
@@ -455,6 +609,12 @@ configure authority cli-messages welcome-message [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority client-certificate`
 
@@ -498,6 +658,12 @@ configure authority client-certificate content [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string (required)
+
+A text value.
+
 ## `configure authority client-certificate name`
 
 An identifier for the client certificate.
@@ -513,6 +679,15 @@ configure authority client-certificate name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority conductor-address`
 
@@ -530,6 +705,60 @@ configure authority conductor-address [<hostv4>]
 | ---- | ----------- |
 | hostv4 | Value to add to this list |
 
+#### Description
+
+##### hostv4 (union)
+
+The host type represents either an IPv4 address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority currency`
 
 Local monetary unit.
@@ -545,6 +774,14 @@ configure authority currency [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+Default: USD
+
+##### string
+
+A text value.
 
 ## `configure authority district`
 
@@ -589,6 +826,15 @@ configure authority district name [<non-default-district-name>]
 | ---- | ----------- |
 | non-default-district-name | The value to set for this field |
 
+#### Description
+
+##### non-default-district-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority district neighborhood`
 
 Neighborhoods which belong to this district.
@@ -605,6 +851,15 @@ configure authority district neighborhood [<neighborhood-id>]
 | ---- | ----------- |
 | neighborhood-id | Value to add to this list |
 
+#### Description
+
+##### neighborhood-id (string)
+
+A string identifier for network neighborhood.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
+
 ## `configure authority district resource-group`
 
 Associate this district with a top-level resource-group.
@@ -620,6 +875,12 @@ configure authority district resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority dscp-map`
 
@@ -719,6 +980,14 @@ configure authority dscp-map dscp-prioritization dscp-range end-value [<dscp-end
 | ---- | ----------- |
 | dscp-end-value | The value to set for this field |
 
+#### Description
+
+##### dscp-end-value (uint8)
+
+Upper dscp range value. Default value is the start dscp value
+
+Range: 0-63
+
 ## `configure authority dscp-map dscp-prioritization dscp-range start-value`
 
 Lower DSCP number.
@@ -735,6 +1004,14 @@ configure authority dscp-map dscp-prioritization dscp-range start-value [<dscp>]
 | ---- | ----------- |
 | dscp | The value to set for this field |
 
+#### Description
+
+##### dscp (uint8) (required)
+
+A DSCP value (0-63)
+
+Range: 0-63
+
 ## `configure authority dscp-map dscp-prioritization priority`
 
 The priority assigned to the incoming DSCP value.
@@ -750,6 +1027,14 @@ configure authority dscp-map dscp-prioritization priority [<priority-id>]
 | name | description |
 | ---- | ----------- |
 | priority-id | The value to set for this field |
+
+#### Description
+
+##### priority-id (uint8)
+
+An unsigned 8-bit integer.
+
+Range: 0-3
 
 ## `configure authority dscp-map dscp-traffic-class`
 
@@ -820,6 +1105,14 @@ configure authority dscp-map dscp-traffic-class dscp-range end-value [<dscp-end-
 | ---- | ----------- |
 | dscp-end-value | The value to set for this field |
 
+#### Description
+
+##### dscp-end-value (uint8)
+
+Upper dscp range value. Default value is the start dscp value
+
+Range: 0-63
+
 ## `configure authority dscp-map dscp-traffic-class dscp-range start-value`
 
 Lower DSCP number.
@@ -835,6 +1128,14 @@ configure authority dscp-map dscp-traffic-class dscp-range start-value [<dscp>]
 | name | description |
 | ---- | ----------- |
 | dscp | The value to set for this field |
+
+#### Description
+
+##### dscp (uint8) (required)
+
+A DSCP value (0-63)
+
+Range: 0-63
 
 ## `configure authority dscp-map dscp-traffic-class traffic-class`
 
@@ -852,6 +1153,18 @@ configure authority dscp-map dscp-traffic-class traffic-class [<traffic-class-id
 | ---- | ----------- |
 | traffic-class-id | The value to set for this field |
 
+#### Description
+
+##### traffic-class-id (enumeration)
+
+Relative priority of traffic.
+
+Options:
+- high:           High priority traffic class.
+- medium:         Medium priority traffic class.
+- low:            Low priority traffic class.
+- best-effort:    Best-effort priority traffic class.
+
 ## `configure authority dscp-map name`
 
 The name of the DSCP map
@@ -867,6 +1180,15 @@ configure authority dscp-map name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority dscp-map resource-group`
 
@@ -884,9 +1206,15 @@ configure authority dscp-map resource-group [<resource-group-ref>]
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
 
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
 ## `configure authority dynamic-hostname`
 
-Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: \{interface-id\} for Network Interface Global Identifier \{router-name\} for Router Name \{authority-name\} for Authority Name For example, &#x27;interface-\{interface-id\}.\{router-name\}.\{authority-name\}&#x27;.
+Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-{interface-id}.{router-name}.{authority-name}`.
 
 #### Usage
 
@@ -899,6 +1227,22 @@ configure authority dynamic-hostname [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+Default: `interface-{interface-id}.{router-name}.{authority-name}`
+
+##### string
+
+A text value.
+
+Must contain substitution variables:
+`{interface-id}` for Network Interface Global Identifier
+`{router-name}` for Router Name
+`{authority-name}` for Authority Name
+For example, `interface-{interface-id}.{router-name}.{authority-name}`.
+Any other characters must be alphanumeric or any of the
+following: - _ .
 
 ## `configure authority fib-service-match`
 
@@ -916,6 +1260,18 @@ configure authority fib-service-match [ best-match-only | any-match ]
 | ---- | ----------- |
 | best-match-only | This is the default value, and legacy behavior. When comparing prefixes from a route update to addresses configured in services, only addresses with the longest prefix match for a particular route are considered. In cases of transport overlap, services are visited in alphabetical order. |
 | any-match | All service addresses that match the route update are considered when creating the FIB entries, including those with prefixes shorter than the update or those that do not have the best match service address. The transports from the service with the longest prefix are considered first. This minimizes missed entries, but may result in a higher FIB usage. |
+
+#### Description
+
+Default: best-match-only
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- best-match-only:    Longest matching service prefix only.
+- any-match:          All service prefixes are considered.
 
 ## `configure authority forward-error-correction-profile`
 
@@ -960,6 +1316,18 @@ configure authority forward-error-correction-profile mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: dynamic
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- dynamic: Alter ratio of packets to parity based on loss observed.
+- static: Use a consistent ratio of packets to parity regardless of loss.
+
 ## `configure authority forward-error-correction-profile name`
 
 The name of the Forward Error Correction profile
@@ -976,6 +1344,15 @@ configure authority forward-error-correction-profile name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority forward-error-correction-profile ratio`
 
 The ratio (expressed as x:1) which will dictate the number of data packets to transmit before a parity packet will be transmitted.
@@ -991,6 +1368,16 @@ configure authority forward-error-correction-profile ratio [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 10
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-50
 
 ## `configure authority icmp-control`
 
@@ -1022,6 +1409,18 @@ configure authority icmp-control icmp-async-reply [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: allow
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- drop:     ICMP replies without matching requests are dropped.
+- allow:    ICMP replies without matching requests are forwarded.
+
 ## `configure authority icmp-control icmp-session-match`
 
 How to differentiate ICMP sessions.
@@ -1037,6 +1436,18 @@ configure authority icmp-control icmp-session-match [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: identifier-only
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- identifier-only:        ICMP sessions are based on identifier.
+- identifier-and-type:    ICMP sessions are based on identifier and type.
 
 ## `configure authority idp-profile`
 
@@ -1082,6 +1493,17 @@ configure authority idp-profile base-policy [<idp-policy>]
 | ---- | ----------- |
 | idp-policy | The value to set for this field |
 
+#### Description
+
+##### idp-policy (enumeration) (required)
+
+Predefined policies for intrusion detection actions.
+
+Options:
+- alert:       A policy that only alerts.
+- standard:    The standard blocking and alerting policy.
+- strict:      A strict blocking and alerting policy.
+
 ## `configure authority idp-profile name`
 
 Name of the profile.
@@ -1097,6 +1519,16 @@ configure authority idp-profile name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+IDP profile name (alert|strict|standard|none) is reserved.
+Length: 0-63
 
 ## `configure authority idp-profile rule`
 
@@ -1142,6 +1574,12 @@ configure authority idp-profile rule description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority idp-profile rule match`
 
 The options to use for matching.
@@ -1175,6 +1613,53 @@ configure authority idp-profile rule match client-address [<ip-prefix>]
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority idp-profile rule match destination-address`
 
 Destination address prefix to match in the rule.
@@ -1190,6 +1675,53 @@ configure authority idp-profile rule match destination-address [<ip-prefix>]
 | name | description |
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
+
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
 
 ## `configure authority idp-profile rule match severities`
 
@@ -1207,6 +1739,17 @@ configure authority idp-profile rule match severities [<idp-severity>]
 | ---- | ----------- |
 | idp-severity | Value to add to this list |
 
+#### Description
+
+##### idp-severity (enumeration)
+
+Severity levels for IDP rules.
+
+Options:
+- minor:       Filter minor or higher vulnerabilities.
+- major:       Filter major or higher vulnerabilities.
+- critical:    Filter only critical vulnerabilities.
+
 ## `configure authority idp-profile rule match severity`
 
 Match vulnerabilities only with severity mentioned or above.
@@ -1222,6 +1765,17 @@ configure authority idp-profile rule match severity [<idp-severity>]
 | name | description |
 | ---- | ----------- |
 | idp-severity | The value to set for this field |
+
+#### Description
+
+##### idp-severity (enumeration)
+
+Severity levels for IDP rules.
+
+Options:
+- minor:       Filter minor or higher vulnerabilities.
+- major:       Filter major or higher vulnerabilities.
+- critical:    Filter only critical vulnerabilities.
 
 ## `configure authority idp-profile rule match vulnerability`
 
@@ -1239,6 +1793,12 @@ configure authority idp-profile rule match vulnerability [<string>]
 | ---- | ----------- |
 | string | Value to add to this list |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority idp-profile rule name`
 
 Name of the rule.
@@ -1254,6 +1814,15 @@ configure authority idp-profile rule name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority idp-profile rule outcome`
 
@@ -1285,6 +1854,17 @@ configure authority idp-profile rule outcome action [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+##### enumeration (required)
+
+A value from a set of predefined names.
+
+Options:
+- alert:                   Alert only.
+- drop:                    Drop session.
+- close-tcp-connection:    Close TCP Connection.
+
 ## `configure authority idp-profile rule outcome severity`
 
 Modify a vulnerability severity level of the match.
@@ -1300,6 +1880,17 @@ configure authority idp-profile rule outcome severity [<idp-severity>]
 | name | description |
 | ---- | ----------- |
 | idp-severity | The value to set for this field |
+
+#### Description
+
+##### idp-severity (enumeration)
+
+Severity levels for IDP rules.
+
+Options:
+- minor:       Filter minor or higher vulnerabilities.
+- major:       Filter major or higher vulnerabilities.
+- critical:    Filter only critical vulnerabilities.
 
 ## `configure authority ipfix-collector`
 
@@ -1354,6 +1945,14 @@ configure authority ipfix-collector interim-record-interval [<uint32>]
 
 Units: seconds
 
+Default: 120
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 60-1800
+
 ## `configure authority ipfix-collector ip-address`
 
 The IP address or hostname of the collector.
@@ -1369,6 +1968,84 @@ configure authority ipfix-collector ip-address [<host>]
 | name | description |
 | ---- | ----------- |
 | host | The value to set for this field |
+
+#### Description
+
+##### host (union) (required)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string) (required)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority ipfix-collector name`
 
@@ -1386,6 +2063,15 @@ configure authority ipfix-collector name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority ipfix-collector port`
 
 The port of the collector.
@@ -1401,6 +2087,16 @@ configure authority ipfix-collector port [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+Default: 4739
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority ipfix-collector protocol`
 
@@ -1418,6 +2114,18 @@ configure authority ipfix-collector protocol [<ipfix-protocol>]
 | ---- | ----------- |
 | ipfix-protocol | The value to set for this field |
 
+#### Description
+
+Default: tcp
+
+##### ipfix-protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp:    Transmission Control Protocol.
+- udp:    User Datagram Protocol.
+
 ## `configure authority ipfix-collector resource-group`
 
 Associate this IPFIX collector with a top-level resource-group.
@@ -1434,6 +2142,12 @@ configure authority ipfix-collector resource-group [<resource-group-ref>]
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
 
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
 ## `configure authority ipfix-collector sampling-percentage`
 
 The percentage of flows to be selected for export OR &#x27;dynamic&#x27;. When set to &#x27;dynamic&#x27;, the system will select a percentage based on the current data volume as follows: || &lt; 100 Mb/s : 1 in 256 || &lt; 1 Gb/s : 1 in 512 || &lt; 10 Gb/s : 1 in 1024 || &lt; 25 Gb/s : 1 in 2048 || &gt; 25 Gb/s : 1 in 8192 ||
@@ -1449,6 +2163,30 @@ configure authority ipfix-collector sampling-percentage [<union>]
 | name | description |
 | ---- | ----------- |
 | union | The value to set for this field |
+
+#### Description
+
+Default: dynamic
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) decimal64
+
+A 64-bit decimal value.
+
+Range: 0-100
+Fraction digits: 16
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- dynamic:    Dynamically determine sampling based on data volume.
 
 ## `configure authority ipfix-collector template-refresh-interval`
 
@@ -1470,6 +2208,14 @@ configure authority ipfix-collector template-refresh-interval [<uint32>]
 
 Units: seconds
 
+Default: 60
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 60-1800
+
 ## `configure authority ipfix-collector tenant`
 
 The tenants whose records this collector should receive. An empty list indicates all tenants.
@@ -1485,6 +2231,12 @@ configure authority ipfix-collector tenant [<tenant-ref>]
 | name | description |
 | ---- | ----------- |
 | tenant-ref | Value to add to this list |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority ipv4-option-filter`
 
@@ -1516,6 +2268,18 @@ configure authority ipv4-option-filter action [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: allow-all
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- allow-all:    Allow all packets that contain options headers.
+- drop-all:     Drop all packets that contain options headers except for those defined in the exclusion list.
+
 ## `configure authority ipv4-option-filter drop-exclusion`
 
 Option headers that will not cause the packet to be dropped when present.
@@ -1531,6 +2295,14 @@ configure authority ipv4-option-filter drop-exclusion [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | Value to add to this list |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority ldap-server`
 
@@ -1585,6 +2357,84 @@ configure authority ldap-server address [<host>]
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union) (required)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string) (required)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority ldap-server auto-generate-filter`
 
 When enabled, the SSR will generate user-search-base and group-search-base LDAP filters.
@@ -1600,6 +2450,16 @@ configure authority ldap-server auto-generate-filter [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority ldap-server bind-type`
 
@@ -1617,6 +2477,19 @@ configure authority ldap-server bind-type [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: anonymous
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- anonymous:          Bind to this server anonymously.
+- unauthenticated:    Bind to this server with a distinguished name only.
+- password:           Bind to this server with a distinguished name and password.
+
 ## `configure authority ldap-server certificate-assurance`
 
 LDAP assurance level to apply on server certificates in a TLS session.
@@ -1632,6 +2505,20 @@ configure authority ldap-server certificate-assurance [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: strong
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- weak:        Do not request or check any server certificates.
+- mild:        Ignore invalid or missing certificates but check for hostname
+- moderate:    Terminate on invalid certificate but ignore missing certificates.
+- strong:      Terminate on invalid and missing certificates.
 
 ## `configure authority ldap-server distinguished-name`
 
@@ -1649,6 +2536,14 @@ configure authority ldap-server distinguished-name [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
+
 ## `configure authority ldap-server group-search-base`
 
 An optional group search LDAP filter to restrict searches for this attribute type.
@@ -1664,6 +2559,14 @@ configure authority ldap-server group-search-base [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
 
 ## `configure authority ldap-server name`
 
@@ -1681,6 +2584,15 @@ configure authority ldap-server name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority ldap-server password`
 
 The password to use for binding to the server.
@@ -1696,6 +2608,14 @@ configure authority ldap-server password [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
 
 ## `configure authority ldap-server port`
 
@@ -1713,6 +2633,29 @@ configure authority ldap-server port [<union>]
 | ---- | ----------- |
 | union | The value to set for this field |
 
+#### Description
+
+Default: server-type-default
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- server-type-default:    Use the default based on server-type.
+
 ## `configure authority ldap-server resource-group`
 
 Associate this LDAP server with a top-level resource-group.
@@ -1728,6 +2671,12 @@ configure authority ldap-server resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority ldap-server search-base`
 
@@ -1745,6 +2694,14 @@ configure authority ldap-server search-base [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string (required)
+
+A text value.
+
+Length: 1-18446744073709551615
+
 ## `configure authority ldap-server server-type`
 
 The type of LDAP server.
@@ -1761,6 +2718,19 @@ configure authority ldap-server server-type [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: ldaps
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- starttls:          Connect to this server using STARTTLS. Default port is 389.
+- ldaps:             Connect to this server via LDAPS. Default port is 636.
+- global-catalog:    Connect to this server as an Active Directory Global Catalog. Default port is 3269.
+
 ## `configure authority ldap-server user-search-base`
 
 An optional user search LDAP filter to restrict searches for this attribute type.
@@ -1776,6 +2746,14 @@ configure authority ldap-server user-search-base [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
 
 ## `configure authority management-service-generation`
 
@@ -1807,6 +2785,12 @@ configure authority management-service-generation service-policy [<service-polic
 | ---- | ----------- |
 | service-policy-ref | The value to set for this field |
 
+#### Description
+
+##### service-policy-ref (leafref)
+
+This type is used by other entities that need to reference configured service policies.
+
 ## `configure authority management-service-generation service-route-type`
 
 Strategy to generate service-routes for management services.
@@ -1822,6 +2806,18 @@ configure authority management-service-generation service-route-type [<enumerati
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: paths-as-next-hop
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- paths-as-next-hop:        Generate paths on a node as next-hops
+- paths-as-service-route:    Generate paths on a node as service-route
 
 ## `configure authority metrics-profile`
 
@@ -1893,6 +2889,15 @@ configure authority metrics-profile filter parameter [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority metrics-profile filter value`
 
 The values that should be included if matched
@@ -1908,6 +2913,12 @@ configure authority metrics-profile filter value [<string>]
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority metrics-profile metric`
 
@@ -1951,6 +2962,12 @@ configure authority metrics-profile metric description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority metrics-profile metric id`
 
 The ID of the metric as it exists in the REST API
@@ -1966,6 +2983,14 @@ configure authority metrics-profile metric id [<metric-id>]
 | name | description |
 | ---- | ----------- |
 | metric-id | The value to set for this field |
+
+#### Description
+
+##### metric-id (string)
+
+A string metric identifier based on the stats YANG path which only uses alphanumerics, dashes, and forward slashes.
+
+Must contain only alphanumeric characters or any of the following: - /
 
 ## `configure authority metrics-profile name`
 
@@ -1983,6 +3008,15 @@ configure authority metrics-profile name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority name`
 
 The identifier for the Authority.
@@ -1998,6 +3032,15 @@ configure authority name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string) (required)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority password-policy`
 
@@ -2031,6 +3074,16 @@ configure authority password-policy deny [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 6
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-65535
+
 ## `configure authority password-policy lifetime`
 
 The lifetime of a user&#x27;s password in days
@@ -2051,6 +3104,14 @@ configure authority password-policy lifetime [<uint32>]
 
 Units: days
 
+Default: 99999
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-99999
+
 ## `configure authority password-policy minimum-length`
 
 The minimum length of user&#x27;s password.
@@ -2066,6 +3127,16 @@ configure authority password-policy minimum-length [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+Default: 9
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 8-65535
 
 ## `configure authority password-policy unlock-time`
 
@@ -2086,6 +3157,12 @@ configure authority password-policy unlock-time [<uint32>]
 #### Description
 
 Units: seconds
+
+Default: 1800
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority pcli`
 
@@ -2172,6 +3249,14 @@ configure authority pcli alias command path [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
+
 ## `configure authority pcli alias command table-filter`
 
 Filter the output table to only include the specified columns. This is a case-insensitive match (and also excludes special characters such as dashes.)
@@ -2187,6 +3272,14 @@ configure authority pcli alias command table-filter [<string>]
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
 
 ## `configure authority pcli alias description`
 
@@ -2204,6 +3297,14 @@ configure authority pcli alias description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
+
 ## `configure authority pcli alias path`
 
 The space-delimited path to the alias. This will be the text that a user must enter to run the alias.
@@ -2220,6 +3321,14 @@ configure authority pcli alias path [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-18446744073709551615
+
 ## `configure authority pcli alias resource-group`
 
 Associate this PCLI alias with a top-level resource-group.
@@ -2235,6 +3344,12 @@ configure authority pcli alias resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority performance-monitoring-profile`
 
@@ -2285,6 +3400,14 @@ configure authority performance-monitoring-profile interval-duration [<uint32>]
 
 Units: milliseconds
 
+Default: 10000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 100-3600000
+
 ## `configure authority performance-monitoring-profile marking-count`
 
 The number of packets to mark within a given interval.
@@ -2305,6 +3428,14 @@ configure authority performance-monitoring-profile marking-count [<uint16>]
 
 Units: packets
 
+Default: 100
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-32767
+
 ## `configure authority performance-monitoring-profile monitor-only`
 
 Collect statistics without influencing packet processing features.
@@ -2320,6 +3451,16 @@ configure authority performance-monitoring-profile monitor-only [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority performance-monitoring-profile name`
 
@@ -2337,6 +3478,15 @@ configure authority performance-monitoring-profile name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority performance-monitoring-profile resource-group`
 
 Associate this performance monitoring profile with a top-level resource-group.
@@ -2352,6 +3502,12 @@ configure authority performance-monitoring-profile resource-group [<resource-gro
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority radius-server`
 
@@ -2373,6 +3529,7 @@ configure authority radius-server <name>
 
 | command | description |
 | ------- | ----------- |
+| [`account-creation`](#configure-authority-radius-server-account-creation) | Control account creation behavior. |
 | [`address`](#configure-authority-radius-server-address) | The IP address or FQDN of the Radius server. |
 | `delete` | Delete configuration data |
 | [`name`](#configure-authority-radius-server-name) | The name of the Radius server. |
@@ -2414,6 +3571,84 @@ configure authority radius-server address [<host>]
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union) (required)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string) (required)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority radius-server name`
 
 The name of the Radius server.
@@ -2429,6 +3664,15 @@ configure authority radius-server name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority radius-server port`
 
@@ -2446,6 +3690,26 @@ configure authority radius-server port [<port-number>]
 | ---- | ----------- |
 | port-number | The value to set for this field |
 
+#### Description
+
+Default: 1812
+
+##### port-number (uint16)
+
+The port-number type represents a 16-bit port number of an
+Internet transport layer protocol such as UDP, TCP, DCCP, or
+SCTP.  Port numbers are assigned by IANA.  A current list of
+all assignments is available from &lt;http://www.iana.org/&gt;.
+
+Note that the port number value zero is reserved by IANA.  In
+situations where the value zero does not make sense, it can
+be excluded by subtyping the port-number type.
+
+In the value set and its semantics, this type is equivalent
+to the InetPortNumber textual convention of the SMIv2.
+
+Range: 0-65535
+
 ## `configure authority radius-server secret`
 
 The secret key to bind to the Radius server.
@@ -2461,6 +3725,14 @@ configure authority radius-server secret [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string (required)
+
+A text value.
+
+Length: 1-16
 
 ## `configure authority radius-server timeout`
 
@@ -2482,6 +3754,14 @@ configure authority radius-server timeout [<uint32>]
 
 Units: seconds
 
+Default: 3
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority rekey-interval`
 
 Hours between security key regeneration. Recommended value 24 hours.
@@ -2501,6 +3781,27 @@ configure authority rekey-interval [<union>]
 #### Description
 
 Units: hours
+
+Default: never
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-720
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- never:    Never regenerate security keys
 
 ## `configure authority remote-login`
 
@@ -2530,6 +3831,16 @@ configure authority remote-login enabled [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority resource-group`
 
@@ -2573,6 +3884,12 @@ configure authority resource-group description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority resource-group name`
 
 The name of the resource group.
@@ -2588,6 +3905,15 @@ configure authority resource-group name [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must be the single character &#x27;*&#x27; OR Must contain only alphanumeric characters or any of the following: _ -
+Length: 1-63
 
 ## `configure authority router`
 
@@ -2668,7 +3994,16 @@ configure authority router administrative-group [<name-id>]
 
 #### Description
 
-Warning: &#x27;administrative-group&#x27; is deprecated and will be removed in a future software version
+:::warning
+`administrative-group` is deprecated and will be removed in a future software version
+:::
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router application-identification`
 
@@ -2708,6 +4043,14 @@ configure authority router application-identification application-director-cache
 | ---- | ----------- |
 | uint64 | The value to set for this field |
 
+#### Description
+
+Default: 10000
+
+##### uint64
+
+An unsigned 64-bit integer.
+
 ## `configure authority router application-identification auto-update`
 
 Automatic updating of application data
@@ -2741,6 +4084,21 @@ configure authority router application-identification auto-update day-of-week [<
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- sun:   Download each Sunday
+- mon:    Download each Monday
+- tue:    Download each Tuesday
+- wed:    Download each Wednesday
+- thu:    Download each Thursday
+- fri:    Download each Friday
+- sat:    Download each Saturday
+
 ## `configure authority router application-identification auto-update enabled`
 
 Enable updates
@@ -2756,6 +4114,16 @@ configure authority router application-identification auto-update enabled [<bool
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router application-identification auto-update update-frequency`
 
@@ -2773,6 +4141,19 @@ configure authority router application-identification auto-update update-frequen
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: weekly
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- daily:      Download each day
+- weekly:     Download each week
+- monthly:    Download each month
+
 ## `configure authority router application-identification auto-update update-jitter`
 
 The max random jitter applied to the update time
@@ -2788,6 +4169,16 @@ configure authority router application-identification auto-update update-jitter 
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 15
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-30
 
 ## `configure authority router application-identification auto-update update-time`
 
@@ -2805,6 +4196,16 @@ configure authority router application-identification auto-update update-time [<
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 2
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-23
+
 ## `configure authority router application-identification max-capacity`
 
 The maximum capacity for resolved next-hops under a client
@@ -2820,6 +4221,14 @@ configure authority router application-identification max-capacity [<uint64>]
 | name | description |
 | ---- | ----------- |
 | uint64 | The value to set for this field |
+
+#### Description
+
+Default: 10000
+
+##### uint64
+
+An unsigned 64-bit integer.
 
 ## `configure authority router application-identification mode`
 
@@ -2837,6 +4246,18 @@ configure authority router application-identification mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | Value to add to this list |
 
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- module:    Learn application via modules.
+- tls:       Learn application via TLS server name parsing.
+- http:      Learn application via HTTP host name parsing.
+- all:       Learn application via any available techniques.
+
 ## `configure authority router application-identification per-app-metrics`
 
 Enable per app classification metrics
@@ -2852,6 +4273,16 @@ configure authority router application-identification per-app-metrics [<boolean>
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router application-identification summary-retention`
 
@@ -2883,6 +4314,16 @@ configure authority router application-identification summary-retention duration
 | ---- | ----------- |
 | duration | The value to set for this field |
 
+#### Description
+
+Default: 24h
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
+
 ## `configure authority router application-identification summary-retention enabled`
 
 Enable persistence of app summary to the DB for UI and other uses
@@ -2898,6 +4339,16 @@ configure authority router application-identification summary-retention enabled 
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router application-identification summary-tracking`
 
@@ -2915,6 +4366,16 @@ configure authority router application-identification summary-tracking [<boolean
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router application-identification use-application-director-in-memory-db`
 
 Use in-memory db
@@ -2930,6 +4391,16 @@ configure authority router application-identification use-application-director-i
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router application-identification web-filtering`
 
@@ -2977,6 +4448,16 @@ configure authority router application-identification web-filtering classify-ses
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-500000
+
 ## `configure authority router application-identification web-filtering classify-session retries`
 
 The maximum retries for client to request for classifying the session
@@ -2992,6 +4473,16 @@ configure authority router application-identification web-filtering classify-ses
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-50
 
 ## `configure authority router application-identification web-filtering classify-session timeout`
 
@@ -3013,6 +4504,14 @@ configure authority router application-identification web-filtering classify-ses
 
 Units: seconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-1000
+
 ## `configure authority router application-identification web-filtering enabled`
 
 Whether web filtering should be enabled
@@ -3028,6 +4527,16 @@ configure authority router application-identification web-filtering enabled [<bo
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router application-identification web-filtering max-retransmission-attempts-before-allow`
 
@@ -3049,6 +4558,14 @@ configure authority router application-identification web-filtering max-retransm
 
 Units: packets
 
+Default: 4
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-100
+
 ## `configure authority router application-identification write-interval`
 
 Interval to define how often analytics are calculated
@@ -3064,6 +4581,16 @@ configure authority router application-identification write-interval [<duration>
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 1m
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router bfd`
 
@@ -3104,6 +4631,18 @@ configure authority router bfd authentication-type [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: sha256
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- simple:    Simple Password
+- sha256:    SHA256
+
 ## `configure authority router bfd desired-tx-interval`
 
 Represents the frequency with which BFD asynchronous control packets are sent to peer nodes/routers.
@@ -3124,6 +4663,14 @@ configure authority router bfd desired-tx-interval [<uint32>]
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50-600000
+
 ## `configure authority router bfd dscp`
 
 The DSCP value to use with BFD packets.
@@ -3140,6 +4687,16 @@ configure authority router bfd dscp [<dscp>]
 | ---- | ----------- |
 | dscp | The value to set for this field |
 
+#### Description
+
+Default: 0
+
+##### dscp (uint8)
+
+A DSCP value (0-63)
+
+Range: 0-63
+
 ## `configure authority router bfd dynamic-damping`
 
 When enabled, extend the hold-down time if additional link flaps occur during the hold-down period.
@@ -3155,6 +4712,18 @@ configure authority router bfd dynamic-damping [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled:     Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled:    Use simple hold-down timer for every link up event.
 
 ## `configure authority router bfd hold-down-time`
 
@@ -3176,6 +4745,14 @@ configure authority router bfd hold-down-time [<uint32>]
 
 Units: seconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-300
+
 ## `configure authority router bfd link-test-interval`
 
 This represents the interval between BFD echo tests sent to the peer node/router.
@@ -3195,6 +4772,14 @@ configure authority router bfd link-test-interval [<uint32>]
 #### Description
 
 Units: seconds
+
+Default: 10
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router bfd link-test-length`
 
@@ -3216,6 +4801,14 @@ configure authority router bfd link-test-length [<uint8>]
 
 Units: packets
 
+Default: 10
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
 ## `configure authority router bfd maximum-hold-down-time`
 
 Represents the maximum hold-down time of dynamic-damping exponential backoff. If the hold-down-time hits the maximum three times in a row, it will reset back to the original value.
@@ -3236,6 +4829,14 @@ configure authority router bfd maximum-hold-down-time [<uint32>]
 
 Units: seconds
 
+Default: 3600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router bfd multiplier`
 
 Number of consecutive missed messages from a peer before deciding that the link between them is unusable. Valid range is (3,20).
@@ -3251,6 +4852,16 @@ configure authority router bfd multiplier [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 3-20
 
 ## `configure authority router bfd required-min-rx-interval`
 
@@ -3272,6 +4883,12 @@ configure authority router bfd required-min-rx-interval [<uint32>]
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router bfd state`
 
 When enabled, run BFD between all nodes within the router.
@@ -3287,6 +4904,18 @@ configure authority router bfd state [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: enabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled:     BFD is enabled on all nodes of this router.
+- disabled:    BFD is disabled on all nodes of this router.
 
 ## `configure authority router conductor-address`
 
@@ -3304,6 +4933,60 @@ configure authority router conductor-address [<hostv4>]
 | ---- | ----------- |
 | hostv4 | Value to add to this list |
 
+#### Description
+
+##### hostv4 (union)
+
+The host type represents either an IPv4 address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router description`
 
 A human-readable string that allows administrators to describe this configuration.
@@ -3320,6 +5003,12 @@ configure authority router description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router dhcp-server-generated-address-pool`
 
 The address pool for KNI network-interfaces generated for dhcp-servers.
@@ -3335,6 +5024,24 @@ configure authority router dhcp-server-generated-address-pool [<ipv4-prefix>]
 | name | description |
 | ---- | ----------- |
 | ipv4-prefix | The value to set for this field |
+
+#### Description
+
+Default: 169.254.130.0/24
+
+##### ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
 
 ## `configure authority router district-settings`
 
@@ -3378,6 +5085,15 @@ configure authority router district-settings district-name [<district-name>]
 | ---- | ----------- |
 | district-name | The value to set for this field |
 
+#### Description
+
+##### district-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router district-settings step-peer-path-sla-metrics-advertisement`
 
 STEP advertisement settings for peer path SLA metrics.
@@ -3413,6 +5129,14 @@ configure authority router district-settings step-peer-path-sla-metrics-advertis
 
 Units: seconds
 
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-86400
+
 ## `configure authority router district-settings step-peer-path-sla-metrics-advertisement update-burst-size`
 
 Limit on the number of peer path SLA metric value updates advertised in STEP at the minimum (burst) update interval.
@@ -3428,6 +5152,16 @@ configure authority router district-settings step-peer-path-sla-metrics-advertis
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 2
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-100
 
 ## `configure authority router district-settings step-peer-path-sla-metrics-advertisement update-rate-limit`
 
@@ -3448,6 +5182,14 @@ configure authority router district-settings step-peer-path-sla-metrics-advertis
 #### Description
 
 Units: seconds
+
+Default: 180
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router dns-config`
 
@@ -3472,7 +5214,7 @@ configure authority router dns-config <mode>
 | [`address`](#configure-authority-router-dns-config-address) | Address of servers to use for DNS queries. |
 | `delete` | Delete configuration data |
 | [`mode`](#configure-authority-router-dns-config-mode) | Mode of DNS server configuration. |
-| [`move`](#configure-authority-router-dns-config) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;dns-config&#x27; |
 
@@ -3492,6 +5234,37 @@ configure authority router dns-config address [<ip-address>]
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router dns-config mode`
 
 Mode of DNS server configuration.
@@ -3508,29 +5281,16 @@ configure authority router dns-config mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
-## `configure authority router dns-config move address`
+#### Description
 
-Address of servers to use for DNS queries.
+##### enumeration
 
-#### Usage
+A value from a set of predefined names.
 
-```
-configure authority router dns-config move address [force] <value> <position> [<relative-to>]
-```
+Options:
+- static:       Static list of DNS nameservers
+- automatic:    Populate DNS nameservers from learned sources
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router entitlement`
 
@@ -3563,6 +5323,12 @@ configure authority router entitlement description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router entitlement id`
 
 Project identifier.
@@ -3578,6 +5344,14 @@ configure authority router entitlement id [<entitlement-project-id>]
 | name | description |
 | ---- | ----------- |
 | entitlement-project-id | The value to set for this field |
+
+#### Description
+
+Default: trial
+
+##### entitlement-project-id (string)
+
+Indicates that an enclosing leaf represents the project ID for entitlement.
 
 ## `configure authority router entitlement max-bandwidth`
 
@@ -3599,6 +5373,12 @@ configure authority router entitlement max-bandwidth [<uint64>]
 
 Units: bits/second
 
+Default: 0
+
+##### uint64
+
+An unsigned 64-bit integer.
+
 ## `configure authority router half-open-connection-limit`
 
 A limit on half-open TCP sessions.
@@ -3614,6 +5394,29 @@ configure authority router half-open-connection-limit [<union>]
 | name | description |
 | ---- | ----------- |
 | union | The value to set for this field |
+
+#### Description
+
+Default: unlimited
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint32
+
+An unsigned 32-bit integer.
+
+Range: 100-4294967295
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- unlimited:    No limit on this value
 
 ## `configure authority router icmp-probe-profile`
 
@@ -3662,6 +5465,12 @@ configure authority router icmp-probe-profile name [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router icmp-probe-profile number-of-attempts`
 
 Number of consecutive ICMP ping requests to be sent within the probe-duration before deciding that destination is unreachable
@@ -3678,6 +5487,16 @@ configure authority router icmp-probe-profile number-of-attempts [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 4
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-20
+
 ## `configure authority router icmp-probe-profile probe-address`
 
 Address to send ICMP ping requests to
@@ -3693,6 +5512,37 @@ configure authority router icmp-probe-profile probe-address [<ip-address>]
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router icmp-probe-profile probe-duration`
 
@@ -3714,6 +5564,14 @@ configure authority router icmp-probe-profile probe-duration [<uint8>]
 
 Units: seconds
 
+Default: 1
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-10
+
 ## `configure authority router icmp-probe-profile probe-failure-trigger`
 
 Control how failure to ping probe-addresses impacts state.
@@ -3729,6 +5587,18 @@ configure authority router icmp-probe-profile probe-failure-trigger [<enumeratio
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: any
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- any:    Failure to ping any probe-address brings state down.
+- all:    Failure to ping all probe-addresses brings state down.
 
 ## `configure authority router icmp-probe-profile probe-interval`
 
@@ -3749,6 +5619,14 @@ configure authority router icmp-probe-profile probe-interval [<uint32>]
 #### Description
 
 Units: seconds
+
+Default: 10
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-3600
 
 ## `configure authority router icmp-probe-profile sla-metrics`
 
@@ -3798,6 +5676,12 @@ configure authority router icmp-probe-profile sla-metrics latency max [<uint32>]
 
 Units: milliseconds
 
+Default: 250
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router icmp-probe-profile sla-metrics latency mean`
 
 The maximum acceptable mean latency based on the ping test
@@ -3818,6 +5702,12 @@ configure authority router icmp-probe-profile sla-metrics latency mean [<uint32>
 
 Units: milliseconds
 
+Default: 100
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router icmp-probe-profile sla-metrics max-loss`
 
 The amount of acceptable loss on the link. Determined by sending number-of-attempts ICMP requests and waiting probe-duration for response
@@ -3837,6 +5727,14 @@ configure authority router icmp-probe-profile sla-metrics max-loss [<percentage>
 #### Description
 
 Units: percent
+
+Default: 10
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
 
 ## `configure authority router idp`
 
@@ -3868,6 +5766,16 @@ configure authority router idp bypass-enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router idp mode`
 
 IDP config management mode
@@ -3883,6 +5791,20 @@ configure authority router idp mode [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: auto
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto:        Automatically toggle IDP based on idp-policies
+- disabled:    Disable IDP
+- spoke:       Enable spoke mode for IDP
+- hub:         Enable hub mode for IDP
 
 ## `configure authority router inter-node-security`
 
@@ -3900,6 +5822,12 @@ configure authority router inter-node-security [<security-ref>]
 | ---- | ----------- |
 | security-ref | The value to set for this field |
 
+#### Description
+
+##### security-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured security policies.
+
 ## `configure authority router location`
 
 A descriptive location for this SSR.
@@ -3915,6 +5843,12 @@ configure authority router location [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router location-coordinates`
 
@@ -3932,6 +5866,14 @@ configure authority router location-coordinates [<geolocation>]
 | ---- | ----------- |
 | geolocation | The value to set for this field |
 
+#### Description
+
+##### geolocation (string)
+
+Geolocation in ISO 6709 format.
+
+Must be a geographic coordinate in ISO-6709 format. Example: +50.1-074.1/
+
 ## `configure authority router maintenance-mode`
 
 When enabled, the router will be in maintenance mode and alarms related to this router will be shelved.
@@ -3947,6 +5889,14 @@ configure authority router maintenance-mode [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router management-service-generation`
 
@@ -3979,6 +5929,16 @@ configure authority router management-service-generation proxy [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router management-service-generation service-policy`
 
 Service policy to be used instead of auto-generated service policy.
@@ -3995,6 +5955,12 @@ configure authority router management-service-generation service-policy [<servic
 | ---- | ----------- |
 | service-policy-ref | The value to set for this field |
 
+#### Description
+
+##### service-policy-ref (leafref)
+
+This type is used by other entities that need to reference configured service policies.
+
 ## `configure authority router management-service-generation service-route-type`
 
 Strategy to generate service-routes for management services.
@@ -4010,6 +5976,18 @@ configure authority router management-service-generation service-route-type [<en
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: paths-as-next-hop
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- paths-as-next-hop:         Generate paths on a node as next-hops
+- paths-as-service-route:    Generate paths on a node as service-route
 
 ## `configure authority router max-inter-node-way-points`
 
@@ -4029,7 +6007,17 @@ configure authority router max-inter-node-way-points [<uint32>]
 
 #### Description
 
-Warning: a restart is required if max-inter-node-way-points is created, modified, or deleted
+Default: 50000
+
+:::warning
+A restart is required if max-inter-node-way-points is created, modified, or deleted
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50000-1000000
 
 ## `configure authority router name`
 
@@ -4049,7 +6037,16 @@ configure authority router name [<reserved-name-id>]
 
 #### Description
 
-Warning: a restart is required if name is created or deleted
+:::warning
+A restart is required if the name is created or deleted
+:::
+
+##### reserved-name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters, and cannot be the words &#x27;all&#x27;, &#x27;any&#x27;, or &#x27;unknown&#x27;.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router nat-pool`
 
@@ -4074,7 +6071,7 @@ configure authority router nat-pool <name>
 | [`address-pool`](#configure-authority-router-nat-pool-address-pool) | Defines the NAT prefix and ports in the pool. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-nat-pool) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-router-nat-pool-name) | An identifier for the NAT Pool. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;nat-pool&#x27; |
@@ -4122,6 +6119,53 @@ configure authority router nat-pool address-pool address [<ip-prefix>]
 | ---- | ----------- |
 | ip-prefix | The value to set for this field |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority router nat-pool address-pool pool-type`
 
 Type of NAT pool
@@ -4137,6 +6181,18 @@ configure authority router nat-pool address-pool pool-type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: static
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- static:     Static IP assignment per endpoint
+- dynamic:    Dynamic IP &amp; port assignment per session
 
 ## `configure authority router nat-pool address-pool tenant-name`
 
@@ -4154,23 +6210,11 @@ configure authority router nat-pool address-pool tenant-name [<tenant-ref>]
 | ---- | ----------- |
 | tenant-ref | Value to add to this list |
 
-## `configure authority router nat-pool move address-pool`
+#### Description
 
-Defines the NAT prefix and ports in the pool.
+##### tenant-ref (leafref)
 
-#### Usage
-
-```
-configure authority router nat-pool move address-pool <address> <position> [<relative-to-address>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| address | IP Prefix for the pool of NAT ports. |
-| position | first \| last \| before \| after |
-| relative-to-address | Key of item before or after which to move |
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority router nat-pool name`
 
@@ -4187,6 +6231,15 @@ configure authority router nat-pool name [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router node`
 
@@ -4250,6 +6303,14 @@ configure authority router node asset-id [<asset-id>]
 | ---- | ----------- |
 | asset-id | The value to set for this field |
 
+#### Description
+
+##### asset-id (string)
+
+A unique identifier of an SSR node.
+
+Must not contain repeating, leading, or ending &#x27;_&#x27; character
+
 ## `configure authority router node asset-validation-enabled`
 
 Validate that the asset is suitable to run SSR.
@@ -4266,6 +6327,16 @@ configure authority router node asset-validation-enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node description`
 
 A description about the node.
@@ -4281,6 +6352,12 @@ configure authority router node description [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface`
 
@@ -4334,7 +6411,7 @@ configure authority router node device-interface <name>
 | [`traffic-engineering`](#configure-authority-router-node-device-interface-traffic-engineering) | Configure Traffic Engineering |
 | [`type`](#configure-authority-router-node-device-interface-type) | Type of interface. |
 | [`vmbus-uuid`](#configure-authority-router-node-device-interface-vmbus-uuid) | The VMBus UUID of the network device. Hyper-V Environment only. Only relevant if type is ethernet. |
-| [`vrrp`](#configure-authority-router-node-device-interface-vrrp) | Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP) like protocol. |
+| [`vrrp`](#configure-authority-router-node-device-interface-vrrp) | Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP). |
 
 ## `configure authority router node device-interface bond-settings`
 
@@ -4365,6 +6442,16 @@ configure authority router node device-interface bond-settings lacp-enable [<boo
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface bridge-name`
 
 An optional bridge name to be used for the bridging the kni and target interfaces. If no name is specified, one will be auto-generated
@@ -4380,6 +6467,15 @@ configure authority router node device-interface bridge-name [<bridge-name>]
 | name | description |
 | ---- | ----------- |
 | bridge-name | The value to set for this field |
+
+#### Description
+
+##### bridge-name (string)
+
+A string identifier for bridge-name which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters.
+
+Must contain only alphanumeric characters, start with a alphabet and can contain any of the following: _ -
+Length: 0-15
 
 ## `configure authority router node device-interface capture-filter`
 
@@ -4397,6 +6493,12 @@ configure authority router node device-interface capture-filter [<string>]
 | ---- | ----------- |
 | string | Value to add to this list |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface description`
 
 A description of the device-interface.
@@ -4412,6 +6514,12 @@ configure authority router node device-interface description [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface enabled`
 
@@ -4429,6 +6537,16 @@ configure authority router node device-interface enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface forwarding`
 
 Whether this interface is used for forwarding traffic.
@@ -4444,6 +6562,16 @@ configure authority router node device-interface forwarding [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface interface-name`
 
@@ -4461,6 +6589,12 @@ configure authority router node device-interface interface-name [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface link-settings`
 
 Ethernet link settings on the interface
@@ -4476,6 +6610,21 @@ configure authority router node device-interface link-settings [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: auto
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto:            Use auto-negotation for the Ethernet link
+- 10Mbps-half:     Force the Ethernet link to 10 Mbps half duplex
+- 10Mbps-full:     Force the Ethernet link to 10 Mbps full duplex
+- 100Mbps-half:    Force the Ethernet link to 100 Mbps half duplex
+- 100Mbps-full:    Force the Ethernet link to 100 Mbps full duplex
 
 ## `configure authority router node device-interface lldp`
 
@@ -4513,6 +6662,14 @@ configure authority router node device-interface lldp advertisement-interval [<u
 
 Units: seconds
 
+Default: 120
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface lldp enabled`
 
 Whether or not LLDP sending and receiving is enabled on this device.
@@ -4529,6 +6686,16 @@ configure authority router node device-interface lldp enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface lldp hold-multiplier`
 
 The multiplier to apply to the advertisement-interval when setting the LLDP TTL.
@@ -4544,6 +6711,16 @@ configure authority router node device-interface lldp hold-multiplier [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 4
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-10
 
 ## `configure authority router node device-interface lldp mode`
 
@@ -4563,7 +6740,20 @@ configure authority router node device-interface lldp mode [<enumeration>]
 
 #### Description
 
-Warning: &#x27;mode&#x27; is deprecated and will be removed in a future software version
+Default: disabled
+
+:::warning
+`mode` is deprecated and will be removed in a future software version
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled:        Disable LLDP
+- receive-only:    Receive and process incoming LLDP packets
+- enabled:         Enable sending and receiving LLDP packets
 
 ## `configure authority router node device-interface load-balancing`
 
@@ -4599,6 +6789,14 @@ configure authority router node device-interface load-balancing utilization-high
 
 Units: percent
 
+Default: 100
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority router node device-interface load-balancing utilization-low-water-mark`
 
 Percentage of allowed bandwidth utilization below which this interface will be reconsidered for load balancing.
@@ -4618,6 +6816,14 @@ configure authority router node device-interface load-balancing utilization-low-
 #### Description
 
 Units: percent
+
+Default: 80
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
 
 ## `configure authority router node device-interface lte`
 
@@ -4650,6 +6856,12 @@ configure authority router node device-interface lte apn-name [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string (required)
+
+A text value.
+
 ## `configure authority router node device-interface lte authentication`
 
 Configure Authentication
@@ -4681,6 +6893,16 @@ configure authority router node device-interface lte authentication authenticati
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+##### enumeration (required)
+
+A value from a set of predefined names.
+
+Options:
+- chap:    Challenge-Handshake Authentication Protocol.
+- pap:     Password Authentication Protocol.
+
 ## `configure authority router node device-interface lte authentication password`
 
 Password required to connect to the LTE network.
@@ -4696,6 +6918,12 @@ configure authority router node device-interface lte authentication password [<p
 | name | description |
 | ---- | ----------- |
 | password | The value to set for this field |
+
+#### Description
+
+##### password (string) (required)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
 
 ## `configure authority router node device-interface lte authentication user-name`
 
@@ -4713,6 +6941,12 @@ configure authority router node device-interface lte authentication user-name [<
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string (required)
+
+A text value.
+
 ## `configure authority router node device-interface lte carrier-image`
 
 Name of the carrier-image to load the SIM card with.
@@ -4729,6 +6963,28 @@ configure authority router node device-interface lte carrier-image [<union>]
 | ---- | ----------- |
 | union | The value to set for this field |
 
+#### Description
+
+Default: none
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none:    Leave the current image alone.
+- auto:    Automatically set the image to match the carrier network.
+
+###### (1) string
+
+A text value.
+
 ## `configure authority router node device-interface name`
 
 A unique name identifier for the physical or virtual interface, used to reference it in other configuration sections and show commands.
@@ -4744,6 +7000,15 @@ configure authority router node device-interface name [<device-name>]
 | name | description |
 | ---- | ----------- |
 | device-name | The value to set for this field |
+
+#### Description
+
+##### device-name (string)
+
+A string identifier for device-interface which only uses alphanumerics, underscores, dashes, or slashes, and cannot exceed 12 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-12
 
 ## `configure authority router node device-interface network-interface`
 
@@ -4796,7 +7061,7 @@ configure authority router node device-interface network-interface <name>
 | [`inter-router-security`](#configure-authority-router-node-device-interface-network-interface-inter-router-security) | The name of the security policy used for inbound inter-router traffic. |
 | [`management`](#configure-authority-router-node-device-interface-network-interface-management) | Allow management traffic to be sent over this interface |
 | [`management-vector`](#configure-authority-router-node-device-interface-network-interface-management-vector) | Vector configuration for non-forwarding interfaces |
-| [`move`](#configure-authority-router-node-device-interface-network-interface) | Move list items |
+| `move` | Move list items |
 | [`mtu`](#configure-authority-router-node-device-interface-network-interface-mtu) | The maximum transmission unit (MTU) for packets sent on the interface. |
 | [`multicast-listeners`](#configure-authority-router-node-device-interface-network-interface-multicast-listeners) | Enables the sending of IGMP and MLD queries on this interface. |
 | [`multicast-report-proxy`](#configure-authority-router-node-device-interface-network-interface-multicast-report-proxy) | Enables the forwarding of IGMP and MLD joins/leaves/reports to valid multicast services to this network interface. These must come from other network interfaces which allow multicast listeners. |
@@ -4871,6 +7136,37 @@ configure authority router node device-interface network-interface address gatew
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service`
 
@@ -4950,6 +7246,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | access-mode | The value to set for this field |
 
+#### Description
+
+Default: allow
+
+##### access-mode (enumeration)
+
+Enumeration defining whether access is allowed or denied.
+
+Options:
+- allow:    Allow access.
+- deny:     Deny access.
+
 ## `configure authority router node device-interface network-interface address host-service access-policy source`
 
 The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service
@@ -4965,6 +7273,82 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | source-spec | The value to set for this field |
+
+#### Description
+
+##### source-spec (union)
+
+A source address prefix, QSN, service-group or combination of tenant-name and prefix.
+
+Must be one of the following types:
+
+###### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string):
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
+###### (1) qsn (string)
+
+Qualified Service Name in the form: tenant[.authority][/[service-group/]service]
+
+Must contain only alphanumeric characters or any of the following: / . _ -
+Required format: &#x27;Tenant[.Authority[/ServiceGroup[/Service]]]&#x27;. No forward slash-delimited segment can exceed 62 characters.(e.g., Engineering.Authority128/Video/private_conferencing).
+Length: 1-1024
+
+###### (2) service-spec (string)
+
+Service group and service name portion of a Qualified Service Name.
+
+Must contain only alphanumeric characters or any of the following: - _ / .
+Required format: &#x27;/groupLabel1[/groupLabel2[/groupLabel3...]]&#x27;. No forward slash-delimited segment can exceed 62 characters.
+Length: 0-127
+
+###### (3) tenant-prefix (string)
+
+A string identifier for a tenant prefix. Consists of a valid tenant name, followed by @ and a valid IP Address.
+
+Must contain a valid tenant name, followed by @  and a valid IP Address.
+Length: 0-280
 
 ## `configure authority router node device-interface network-interface address host-service address-pool`
 
@@ -4993,7 +7377,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`end-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-end-address) | End of address pool. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-interface-mtu) | Interface MTU provided to clients. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool) | Move list items |
+| `move` | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -5031,7 +7415,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -5053,6 +7437,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service address-pool custom description`
 
 A description of the custom DHCP option.
@@ -5069,6 +7461,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool custom encoded-type`
 
 The encoded type of the custom option.
@@ -5084,6 +7482,24 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool custom move value`
 
@@ -5125,6 +7541,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service address-pool custom value`
 
 The value(s) of custom option to be provided to clients.
@@ -5140,6 +7568,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool domain-name`
 
@@ -5157,6 +7591,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool domain-server`
 
 Domain name server address(es) provided to clients in priority order.
@@ -5172,6 +7612,37 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool end-address`
 
@@ -5189,6 +7660,37 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool interface-mtu`
 
 Interface MTU provided to clients.
@@ -5204,126 +7706,13 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+#### Description
 
-## `configure authority router node device-interface network-interface address host-service address-pool move domain-server`
+##### uint16
 
-Domain name server address(es) provided to clients in priority order.
+An unsigned 16-bit integer.
 
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move domain-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move ntp-server`
-
-NTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move ntp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move pop-server`
-
-POP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move pop-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move router`
-
-Gateway router address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move router [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool move smtp-server`
-
-SMTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool move smtp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+Range: 68-9198
 
 ## `configure authority router node device-interface network-interface address host-service address-pool ntp-server`
 
@@ -5341,6 +7730,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool pop-server`
 
 POP server address(es) provided to clients in priority order.
@@ -5356,6 +7778,39 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool router`
 
@@ -5373,6 +7828,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool smtp-server`
 
 SMTP server address(es) provided to clients in priority order.
@@ -5389,6 +7877,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool start-address`
 
 Start of address pool.
@@ -5404,6 +7925,37 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment`
 
@@ -5436,7 +7988,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment) | Move list items |
+| `move` | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -5464,6 +8016,37 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment circuit-identifier`
 
 DHCP circuit identifier option (RFC3046) identifying this client.
@@ -5480,6 +8063,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment client-identifier`
 
 DHCP client identifier option identifying this client.
@@ -5495,6 +8084,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom`
 
@@ -5520,7 +8115,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -5542,6 +8137,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom description`
 
 A description of the custom DHCP option.
@@ -5557,6 +8160,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom encoded-type`
 
@@ -5574,29 +8183,23 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom move value`
+#### Description
 
-The value(s) of custom option to be provided to clients.
+Default: string
 
-#### Usage
+##### enumeration
 
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment custom move value [force] <value> <position> [<relative-to>]
-```
+A value from a set of predefined names.
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom quantity`
 
@@ -5614,6 +8217,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom value`
 
 The value(s) of custom option to be provided to clients.
@@ -5629,6 +8244,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment description`
 
@@ -5646,6 +8267,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment domain-name`
 
 Domain name provided to clients.
@@ -5661,6 +8288,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment domain-server`
 
@@ -5678,6 +8311,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment interface-mtu`
 
 Interface MTU provided to clients.
@@ -5693,6 +8359,14 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 68-9198
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment link-layer-address`
 
@@ -5710,125 +8384,15 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | mac-address | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move domain-server`
+#### Description
 
-Domain name server address(es) provided to clients in priority order.
+##### mac-address (string)
 
-#### Usage
+The mac-address type represents an IEEE 802 MAC address.
+The canonical representation uses lowercase characters.
 
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move domain-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move ntp-server`
-
-NTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move ntp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move pop-server`
-
-POP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move pop-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move router`
-
-Gateway router address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move router [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move smtp-server`
-
-SMTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment move smtp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+In the value set and its semantics, this type is equivalent
+to the MacAddress textual convention of the SMIv2.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment ntp-server`
 
@@ -5846,6 +8410,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment pop-server`
 
 POP server address(es) provided to clients in priority order.
@@ -5861,6 +8458,39 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment router`
 
@@ -5878,6 +8508,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment smtp-server`
 
 SMTP server address(es) provided to clients in priority order.
@@ -5893,6 +8556,39 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment static-route`
 
@@ -5936,6 +8632,26 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | non-default-ip-address | The value to set for this field |
 
+#### Description
+
+##### non-default-ip-address (union)
+
+A non-default IPv4 or IPv6 address
+
+Must be one of the following types:
+
+###### (0) non-default-ipv4-address (string)
+
+A non-default IPv4 address
+
+Must be a valid IPv4 address.
+
+###### (1) non-default-ipv6-address (string)
+
+A non-default IPv6 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment static-route gateway`
 
 Gateway address of static route.
@@ -5952,6 +8668,37 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment tenant`
 
 Tenant to which clients will be assigned.
@@ -5967,6 +8714,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | tenant-ref | The value to set for this field |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information`
 
@@ -5994,7 +8747,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -6016,6 +8769,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information description`
 
 A description of the custom DHCP option.
@@ -6031,6 +8792,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information encoded-type`
 
@@ -6048,6 +8815,24 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information enterprise-number`
 
 The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA.
@@ -6063,30 +8848,6 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
-
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information quantity`
 
@@ -6104,6 +8865,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information value`
 
 The value(s) of custom option to be provided to clients.
@@ -6119,6 +8892,14 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information`
 
@@ -6144,7 +8925,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -6166,6 +8947,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information description`
 
 A description of the custom DHCP option.
@@ -6181,6 +8970,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information encoded-type`
 
@@ -6198,29 +8993,23 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information move value`
+#### Description
 
-The value(s) of custom option to be provided to clients.
+Default: string
 
-#### Usage
+##### enumeration
 
-```
-configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
+A value from a set of predefined names.
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information quantity`
 
@@ -6238,6 +9027,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information value`
 
 The value(s) of custom option to be provided to clients.
@@ -6253,6 +9054,14 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-route`
 
@@ -6296,6 +9105,26 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | non-default-ip-address | The value to set for this field |
 
+#### Description
+
+##### non-default-ip-address (union)
+
+A non-default IPv4 or IPv6 address
+
+Must be one of the following types:
+
+###### (0) non-default-ipv4-address (string)
+
+A non-default IPv4 address
+
+Must be a valid IPv4 address.
+
+###### (1) non-default-ipv6-address (string)
+
+A non-default IPv6 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool static-route gateway`
 
 Gateway address of static route.
@@ -6312,6 +9141,37 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool tenant`
 
 Tenant to which clients will be assigned.
@@ -6327,6 +9187,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | tenant-ref | The value to set for this field |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information`
 
@@ -6354,7 +9220,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -6376,6 +9242,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information description`
 
 A description of the custom DHCP option.
@@ -6391,6 +9265,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information encoded-type`
 
@@ -6408,6 +9288,24 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information enterprise-number`
 
 The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA.
@@ -6424,29 +9322,11 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information move value`
+#### Description
 
-The value(s) of custom option to be provided to clients.
+##### uint32 (required)
 
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+An unsigned 32-bit integer.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information quantity`
 
@@ -6464,6 +9344,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information value`
 
 The value(s) of custom option to be provided to clients.
@@ -6479,6 +9371,13 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+The order of elements matters.
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information`
 
@@ -6504,7 +9403,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-address-pool-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -6526,6 +9425,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information description`
 
 A description of the custom DHCP option.
@@ -6541,6 +9448,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information encoded-type`
 
@@ -6558,29 +9471,23 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information move value`
+#### Description
 
-The value(s) of custom option to be provided to clients.
+Default: string
 
-#### Usage
+##### enumeration
 
-```
-configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
+A value from a set of predefined names.
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information quantity`
 
@@ -6598,6 +9505,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information value`
 
 The value(s) of custom option to be provided to clients.
@@ -6613,6 +9532,14 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service authoritative`
 
@@ -6630,6 +9557,16 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface address host-service description`
 
 A description about the hosted service.
@@ -6645,6 +9582,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service echo-client-id`
 
@@ -6662,6 +9605,16 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface address host-service enabled`
 
 Enable/disable for host services
@@ -6677,6 +9630,16 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface address host-service max-lease-time`
 
@@ -6698,6 +9661,12 @@ configure authority router node device-interface network-interface address host-
 
 Units: seconds
 
+Default: 86400
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface address host-service server-name`
 
 Server name that identifies the DHCP server to clients.
@@ -6714,6 +9683,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service service-type`
 
 The type of hosted service
@@ -6729,6 +9704,20 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ssh:            SSH Hosted service.
+- netconf:        Netconf service.
+- web:            Web service.
+- dhcp-server:    DHCP server service.
+- snmp-server:    Access SNMP server through this interface
+- custom:        Custom service.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment`
 
@@ -6761,7 +9750,7 @@ configure authority router node device-interface network-interface address host-
 | [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-domain-server) | Domain name server address(es) provided to clients in priority order. |
 | [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-interface-mtu) | Interface MTU provided to clients. |
 | [`link-layer-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-link-layer-address) | MAC address identifying this client. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment) | Move list items |
+| `move` | Move list items |
 | [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-ntp-server) | NTP server address(es) provided to clients in priority order. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-pop-server) | POP server address(es) provided to clients in priority order. |
@@ -6789,6 +9778,37 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment circuit-identifier`
 
 DHCP circuit identifier option (RFC3046) identifying this client.
@@ -6805,6 +9825,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment client-identifier`
 
 DHCP client identifier option identifying this client.
@@ -6820,6 +9846,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom`
 
@@ -6845,7 +9877,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-custom-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;custom&#x27; |
@@ -6867,6 +9899,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom description`
 
 A description of the custom DHCP option.
@@ -6882,6 +9922,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom encoded-type`
 
@@ -6899,29 +9945,23 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service static-assignment custom move value`
+#### Description
 
-The value(s) of custom option to be provided to clients.
+Default: string
 
-#### Usage
+##### enumeration
 
-```
-configure authority router node device-interface network-interface address host-service static-assignment custom move value [force] <value> <position> [<relative-to>]
-```
+A value from a set of predefined names.
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom quantity`
 
@@ -6939,6 +9979,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom value`
 
 The value(s) of custom option to be provided to clients.
@@ -6954,6 +10006,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment description`
 
@@ -6971,6 +10029,12 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment domain-name`
 
 Domain name provided to clients.
@@ -6986,6 +10050,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment domain-server`
 
@@ -7003,6 +10073,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment interface-mtu`
 
 Interface MTU provided to clients.
@@ -7018,6 +10121,14 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 68-9198
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment link-layer-address`
 
@@ -7035,125 +10146,15 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | mac-address | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service static-assignment move domain-server`
+#### Description
 
-Domain name server address(es) provided to clients in priority order.
+##### mac-address (string)
 
-#### Usage
+The mac-address type represents an IEEE 802 MAC address.
+The canonical representation uses lowercase characters.
 
-```
-configure authority router node device-interface network-interface address host-service static-assignment move domain-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move ntp-server`
-
-NTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move ntp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move pop-server`
-
-POP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move pop-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move router`
-
-Gateway router address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move router [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment move smtp-server`
-
-SMTP server address(es) provided to clients in priority order.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment move smtp-server [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+In the value set and its semantics, this type is equivalent
+to the MacAddress textual convention of the SMIv2.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment ntp-server`
 
@@ -7171,6 +10172,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment pop-server`
 
 POP server address(es) provided to clients in priority order.
@@ -7186,6 +10220,39 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment router`
 
@@ -7203,6 +10270,39 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment smtp-server`
 
 SMTP server address(es) provided to clients in priority order.
@@ -7218,6 +10318,39 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment static-route`
 
@@ -7261,6 +10394,26 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | non-default-ip-address | The value to set for this field |
 
+#### Description
+
+##### non-default-ip-address (union)
+
+A non-default IPv4 or IPv6 address
+
+Must be one of the following types:
+
+###### (0) non-default-ipv4-address (string)
+
+A non-default IPv4 address
+
+Must be a valid IPv4 address.
+
+###### (1) non-default-ipv6-address (string)
+
+A non-default IPv6 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment static-route gateway`
 
 Gateway address of static route.
@@ -7277,6 +10430,37 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment tenant`
 
 Tenant to which clients will be assigned.
@@ -7292,6 +10476,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | tenant-ref | The value to set for this field |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information`
 
@@ -7319,7 +10509,7 @@ configure authority router node device-interface network-interface address host-
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
 | [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
@@ -7341,6 +10531,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information description`
 
 A description of the custom DHCP option.
@@ -7356,6 +10554,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information encoded-type`
 
@@ -7373,6 +10577,24 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information enterprise-number`
 
 The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA.
@@ -7388,30 +10610,6 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
-
-## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information move value`
-
-The value(s) of custom option to be provided to clients.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information quantity`
 
@@ -7429,6 +10627,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information value`
 
 The value(s) of custom option to be provided to clients.
@@ -7444,6 +10654,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information`
 
@@ -7469,7 +10685,7 @@ configure authority router node device-interface network-interface address host-
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-description) | A description of the custom DHCP option. |
 | [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
-| [`move`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
 | `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
@@ -7491,6 +10707,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information description`
 
 A description of the custom DHCP option.
@@ -7506,6 +10730,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information encoded-type`
 
@@ -7523,29 +10753,25 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
-## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information move value`
+#### Description
 
-The value(s) of custom option to be provided to clients.
+Default: string
 
-#### Usage
+##### enumeration
 
-```
-configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information move value [force] <value> <position> [<relative-to>]
-```
+A value from a set of predefined names.
 
-##### Keyword Arguments
+Options:
+- string
+- uint8
+- uint16
+- uint32
+- boolean
+- ipv4-address
+- int32
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
 
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information quantity`
 
@@ -7563,6 +10789,18 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- singular
+- array
+
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information value`
 
 The value(s) of custom option to be provided to clients.
@@ -7578,6 +10816,12 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
+
+#### Description
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface address host-service transport`
 
@@ -7648,6 +10892,14 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface address host-service transport port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -7663,6 +10915,14 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16) (required)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router node device-interface network-interface address host-service transport protocol`
 
@@ -7680,6 +10940,20 @@ configure authority router node device-interface network-interface address host-
 | ---- | ----------- |
 | protocol | The value to set for this field |
 
+#### Description
+
+##### protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp:     Transmission Control Protocol.
+- udp:     User Datagram Protocol.
+- icmp:    Internet Control Management Protocol.
+- gre:     Generic Routing Encapsulation Protocol.
+- esp:     IPSec Encapsulating Security Payload Protocol.
+- pim:     Protocol Independent Multicast.
+
 ## `configure authority router node device-interface network-interface address in-subnet-arp-prefix`
 
 Address(es) for which the router will respond to ARP requests.
@@ -7695,6 +10969,12 @@ configure authority router node device-interface network-interface address in-su
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-prefix | Value to add to this list |
+
+#### Description
+
+##### unicast-ipv4-prefix (string)
+
+A unicast IPv4 prefix
 
 ## `configure authority router node device-interface network-interface address ip-address`
 
@@ -7712,6 +10992,37 @@ configure authority router node device-interface network-interface address ip-ad
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface address ppp-peer-ip`
 
 PPP Peer IP address for interfaces like T1.
@@ -7727,6 +11038,37 @@ configure authority router node device-interface network-interface address ppp-p
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface address prefix-length`
 
@@ -7744,6 +11086,14 @@ configure authority router node device-interface network-interface address prefi
 | ---- | ----------- |
 | prefix-length | The value to set for this field |
 
+#### Description
+
+##### prefix-length (uint8) (required)
+
+Prefix-length for IP address
+
+Range: 0-128
+
 ## `configure authority router node device-interface network-interface address utility-ip-address`
 
 Utility IP address used for purposes other than forwarding traffic.
@@ -7759,6 +11109,37 @@ configure authority router node device-interface network-interface address utili
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface adjacency`
 
@@ -7851,6 +11232,18 @@ configure authority router node device-interface network-interface adjacency bfd
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: sha256
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- simple    Simple Password
+- sha256    SHA256
+
 ## `configure authority router node device-interface network-interface adjacency bfd desired-tx-interval`
 
 Represents the frequency with which BFD asynchronous control packets are sent to peer nodes/routers.
@@ -7871,6 +11264,14 @@ configure authority router node device-interface network-interface adjacency bfd
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50-600000
+
 ## `configure authority router node device-interface network-interface adjacency bfd dscp`
 
 The DSCP value to use with BFD packets.
@@ -7887,6 +11288,16 @@ configure authority router node device-interface network-interface adjacency bfd
 | ---- | ----------- |
 | dscp | The value to set for this field |
 
+#### Description
+
+Default: 0
+
+##### dscp (uint8)
+
+A DSCP value (0-63)
+
+Range: 0-63
+
 ## `configure authority router node device-interface network-interface adjacency bfd dynamic-damping`
 
 When enabled, extend the hold-down time if additional link flaps occur during the hold-down period.
@@ -7902,6 +11313,18 @@ configure authority router node device-interface network-interface adjacency bfd
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled:     Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled:    Use simple hold-down timer for every link up event.
 
 ## `configure authority router node device-interface network-interface adjacency bfd hold-down-time`
 
@@ -7923,6 +11346,14 @@ configure authority router node device-interface network-interface adjacency bfd
 
 Units: seconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-300
+
 ## `configure authority router node device-interface network-interface adjacency bfd link-test-interval`
 
 This represents the interval between BFD echo tests sent to the peer node/router.
@@ -7942,6 +11373,14 @@ configure authority router node device-interface network-interface adjacency bfd
 #### Description
 
 Units: seconds
+
+Default: 10
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router node device-interface network-interface adjacency bfd link-test-length`
 
@@ -7963,6 +11402,14 @@ configure authority router node device-interface network-interface adjacency bfd
 
 Units: packets
 
+Default: 10
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
 ## `configure authority router node device-interface network-interface adjacency bfd maximum-hold-down-time`
 
 Represents the maximum hold-down time of dynamic-damping exponential backoff. If the hold-down-time hits the maximum three times in a row, it will reset back to the original value.
@@ -7983,6 +11430,14 @@ configure authority router node device-interface network-interface adjacency bfd
 
 Units: seconds
 
+Default: 3600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface adjacency bfd multiplier`
 
 Number of consecutive missed messages from a peer before deciding that the link between them is unusable. Valid range is (3,20).
@@ -7998,6 +11453,16 @@ configure authority router node device-interface network-interface adjacency bfd
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 3-20
 
 ## `configure authority router node device-interface network-interface adjacency bfd required-min-rx-interval`
 
@@ -8019,6 +11484,12 @@ configure authority router node device-interface network-interface adjacency bfd
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface adjacency bfd state`
 
 When enabled, run BFD between all nodes within the router.
@@ -8034,6 +11505,18 @@ configure authority router node device-interface network-interface adjacency bfd
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: enabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled:     BFD is enabled on all nodes of this router.
+- disabled:    BFD is disabled on all nodes of this router.
 
 ## `configure authority router node device-interface network-interface adjacency cost`
 
@@ -8051,6 +11534,14 @@ configure authority router node device-interface network-interface adjacency cos
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 0
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface adjacency encapsulate-icmp-error-messages`
 
 Encapsulate ICMP errors in UDP across SVR for this adjacency
@@ -8066,6 +11557,16 @@ configure authority router node device-interface network-interface adjacency enc
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface adjacency external-nat-address`
 
@@ -8099,6 +11600,14 @@ configure authority router node device-interface network-interface adjacency gen
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface adjacency inter-router-security`
 
 The name of the security policy used for inter-router traffic to the peer via this adjacency.
@@ -8114,6 +11623,12 @@ configure authority router node device-interface network-interface adjacency int
 | name | description |
 | ---- | ----------- |
 | security-ref | The value to set for this field |
+
+#### Description
+
+##### security-ref (leafref)
+
+This type is used by other entities that need to reference configured security policies.
 
 ## `configure authority router node device-interface network-interface adjacency ip-address`
 
@@ -8149,7 +11664,17 @@ configure authority router node device-interface network-interface adjacency max
 
 #### Description
 
-Warning: a restart is required if max-way-points is created, modified, or deleted
+Default: 50000
+
+:::warning
+A restart is required if max-way-points is created, modified, or deleted
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50000-1000000
 
 ## `configure authority router node device-interface network-interface adjacency nat-keep-alive`
 
@@ -8182,6 +11707,18 @@ configure authority router node device-interface network-interface adjacency nat
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: auto
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto: Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- disabled: Do not send keep-alive packets to keep pinhole open on an external NAT device.
+
 ## `configure authority router node device-interface network-interface adjacency nat-keep-alive tcp-inactivity-timeout`
 
 Represents the frequency with which TCP keep-alive packets are generated and should be shorter than the external NAT&#x27;s TCP timeout settings.
@@ -8202,6 +11739,14 @@ configure authority router node device-interface network-interface adjacency nat
 
 Units: seconds
 
+Default: 1800
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface adjacency nat-keep-alive udp-inactivity-timeout`
 
 Represents the frequency with which UDP keep-alive packets are generated and should be shorter than the external NAT&#x27;s UDP timeout settings.
@@ -8221,6 +11766,14 @@ configure authority router node device-interface network-interface adjacency nat
 #### Description
 
 Units: seconds
+
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router node device-interface network-interface adjacency packet-resiliency`
 
@@ -8251,6 +11804,16 @@ configure authority router node device-interface network-interface adjacency pac
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface adjacency path-metrics-rolling-avg-interval`
 
 This defines the rolling average interval used for computing various path metrics such as latency and loss.
@@ -8266,6 +11829,16 @@ configure authority router node device-interface network-interface adjacency pat
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 60s
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router node device-interface network-interface adjacency path-mtu-discovery`
 
@@ -8297,6 +11870,16 @@ configure authority router node device-interface network-interface adjacency pat
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface adjacency path-mtu-discovery interval`
 
 Represents the frequency with which the peer-path MTU discovery is performed.
@@ -8316,6 +11899,14 @@ configure authority router node device-interface network-interface adjacency pat
 #### Description
 
 Units: seconds
+
+Default: 600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router node device-interface network-interface adjacency payload-encryption-override`
 
@@ -8348,6 +11939,12 @@ configure authority router node device-interface network-interface adjacency pee
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router node device-interface network-interface adjacency peer-connectivity`
 
@@ -8395,6 +11992,16 @@ configure authority router node device-interface network-interface adjacency per
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface adjacency performance-monitoring profile`
 
 The name of the performance monitoring profile used for marking traffic.
@@ -8410,6 +12017,12 @@ configure authority router node device-interface network-interface adjacency per
 | name | description |
 | ---- | ----------- |
 | performance-monitoring-profile-ref | The value to set for this field |
+
+#### Description
+
+##### performance-monitoring-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured performance monitoring profiles.
 
 ## `configure authority router node device-interface network-interface adjacency port-range`
 
@@ -8453,6 +12066,14 @@ configure authority router node device-interface network-interface adjacency por
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 1025-65535
+
 ## `configure authority router node device-interface network-interface adjacency port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -8468,6 +12089,14 @@ configure authority router node device-interface network-interface adjacency por
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 1025-65535
 
 ## `configure authority router node device-interface network-interface adjacency post-encryption-padding`
 
@@ -8498,6 +12127,18 @@ configure authority router node device-interface network-interface adjacency pos
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled:    Do not add additional padding.
+- enabled:     Add one byte of padding to the end of the packet.
+
 ## `configure authority router node device-interface network-interface adjacency qp-value`
 
 Quality points value that represents the &#x27;quality&#x27; of the the link to the adjacent router. Used for selecting egress interface based on the service class required minimum quality points.
@@ -8513,6 +12154,14 @@ configure authority router node device-interface network-interface adjacency qp-
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+Default: 0
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router node device-interface network-interface adjacency session-optimization`
 
@@ -8543,6 +12192,16 @@ configure authority router node device-interface network-interface adjacency ses
 | ---- | ----------- |
 | session-optimization-mode | The value to set for this field |
 
+#### Description
+
+##### session-optimization-mode (enumeration)
+
+When to apply session optimization. Auto is recommended.
+
+Options:
+- never-on:    Never optimize TCP traffic.
+- auto:L        Automatically determine if TCP optimization is required.
+
 ## `configure authority router node device-interface network-interface adjacency source-nat-address`
 
 The source nat IP address or prefixes for packets received on the interface.
@@ -8561,7 +12220,54 @@ configure authority router node device-interface network-interface adjacency sou
 
 #### Description
 
-Warning: &#x27;source-nat-address&#x27; is deprecated and will be removed in a future software version
+:::warning
+`source-nat-address` is deprecated and will be removed in a future software version
+:::
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
 
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement`
 
@@ -8639,6 +12345,10 @@ configure authority router node device-interface network-interface adjacency ste
 
 Units: seconds
 
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics decrease-report-delay percentage`
 
 Largest percentage decrease seen among all of the metric values.
@@ -8658,6 +12368,12 @@ configure authority router node device-interface network-interface adjacency ste
 #### Description
 
 Units: percent
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
 
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics increase-report-delay`
 
@@ -8705,6 +12421,10 @@ configure authority router node device-interface network-interface adjacency ste
 
 Units: seconds
 
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics increase-report-delay percentage`
 
 Largest percentage increase seen among all of the metric values.
@@ -8725,6 +12445,12 @@ configure authority router node device-interface network-interface adjacency ste
 
 Units: percent
 
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics moving-average-sample-size`
 
 Sample size for calculating the weighted moving average of peer path SLA metrics to be advertised into STEP.
@@ -8740,6 +12466,16 @@ configure authority router node device-interface network-interface adjacency ste
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-10000
 
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics significance-threshold`
 
@@ -8776,6 +12512,12 @@ configure authority router node device-interface network-interface adjacency ste
 
 Units: milliseconds
 
+Default: 2
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics significance-threshold min-latency`
 
 The threshold latency value considered significant enough for advertising into STEP.
@@ -8796,6 +12538,12 @@ configure authority router node device-interface network-interface adjacency ste
 
 Units: milliseconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface adjacency step-peer-path-advertisement sla-metrics significance-threshold min-loss`
 
 The threshold of packet loss considered significant enough for advertising into STEP.
@@ -8815,6 +12563,15 @@ configure authority router node device-interface network-interface adjacency ste
 #### Description
 
 Units: percent
+
+Default: 0.1
+
+##### decimal64
+
+A 64-bit decimal value.
+
+Range: 0-100
+Fraction digits: 16
 
 ## `configure authority router node device-interface network-interface adjacency traffic-engineering`
 
@@ -8847,6 +12604,16 @@ configure authority router node device-interface network-interface adjacency tra
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface adjacency traffic-engineering traffic-profile`
 
 The name of the traffic profile used for traffic engineering on this adjacency
@@ -8862,6 +12629,12 @@ configure authority router node device-interface network-interface adjacency tra
 | name | description |
 | ---- | ----------- |
 | traffic-profile-ref | The value to set for this field |
+
+#### Description
+
+##### traffic-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured traffic profiles.
 
 ## `configure authority router node device-interface network-interface adjacency traffic-engineering transmit-cap`
 
@@ -8883,6 +12656,12 @@ configure authority router node device-interface network-interface adjacency tra
 
 Units: bits/second
 
+##### uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-999999999999
+
 ## `configure authority router node device-interface network-interface adjacency ttl-padding`
 
 Whether to perform TTL Padding on routers for this adjacency
@@ -8898,6 +12677,30 @@ configure authority router node device-interface network-interface adjacency ttl
 | name | description |
 | ---- | ----------- |
 | ttl-padding-type | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### ttl-padding-type (union)
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto:        Automatically determine TTL padding.
+- disabled:    Do not pad TTL.
 
 ## `configure authority router node device-interface network-interface adjacency udp-transform`
 
@@ -8935,6 +12738,14 @@ configure authority router node device-interface network-interface adjacency udp
 
 Units: seconds
 
+Default: 300
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface adjacency udp-transform mode`
 
 Configure Mode
@@ -8951,6 +12762,18 @@ configure authority router node device-interface network-interface adjacency udp
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: auto-detect
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto-detect: Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
+- always-transform: Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
+
 ## `configure authority router node device-interface network-interface adjacency udp-transform nat-keep-alive-mode`
 
 Configure Nat Keep Alive Mode
@@ -8966,6 +12789,18 @@ configure authority router node device-interface network-interface adjacency udp
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Do not send keep-alive packets to keep UDP sessions active during UDP transform.
+- enabled: Inject keep-alive packets to keep UDP sessions active during UDP transform.
 
 ## `configure authority router node device-interface network-interface adjacency udp-transform nat-keep-alive-timeout`
 
@@ -8987,6 +12822,14 @@ configure authority router node device-interface network-interface adjacency udp
 
 Units: seconds
 
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface adjacency vector`
 
 Vector names for path selection.
@@ -9002,6 +12845,15 @@ configure authority router node device-interface network-interface adjacency vec
 | name | description |
 | ---- | ----------- |
 | vector-name | Value to add to this list |
+
+#### Description
+
+##### vector-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
 
 ## `configure authority router node device-interface network-interface bidirectional-nat`
 
@@ -9077,6 +12929,14 @@ configure authority router node device-interface network-interface billing-rate 
 | ---- | ----------- |
 | decimal64 | The value to set for this field |
 
+#### Description
+
+##### decimal64
+
+A 64-bit decimal value.
+
+Fraction digits: 2
+
 ## `configure authority router node device-interface network-interface billing-type`
 
 Billing type associated with the interface.
@@ -9092,6 +12952,19 @@ configure authority router node device-interface network-interface billing-type 
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none: No billing is associated with this interface.
+- flat: Flat billing. Is charged flat amount of currency per period of time.
+- metered: Metered billing. Is charged based on the data usage.
 
 ## `configure authority router node device-interface network-interface carrier`
 
@@ -9109,6 +12982,12 @@ configure authority router node device-interface network-interface carrier [<str
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface conductor`
 
 Whether the interface is used for communicating with the conductor.
@@ -9124,6 +13003,16 @@ configure authority router node device-interface network-interface conductor [<b
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface default-route`
 
@@ -9141,6 +13030,16 @@ configure authority router node device-interface network-interface default-route
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface description`
 
 A description about the interface.
@@ -9156,6 +13055,12 @@ configure authority router node device-interface network-interface description [
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface dhcp`
 
@@ -9173,6 +13078,20 @@ configure authority router node device-interface network-interface dhcp [<enumer
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: DHCP is disabled.
+- v4: Only DHCPv4 is enabled.
+- v6: Only DHCPv6 is enabled.
+- v6-pd: Only DHCPv6 Prefix Delegation is enabled and the address is derived from the subnet-id and the prefix associated with the prefix-delegation-group.
+
 ## `configure authority router node device-interface network-interface dhcp-delayed-auth-key`
 
 The key used to generate the HMAC-MD5 value.
@@ -9188,6 +13107,12 @@ configure authority router node device-interface network-interface dhcp-delayed-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface dhcp-delayed-auth-key-id`
 
@@ -9205,6 +13130,12 @@ configure authority router node device-interface network-interface dhcp-delayed-
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface dhcp-delayed-auth-realm`
 
 The DHCP realm that identifies the key used to generate the HMAC-MD5 value.
@@ -9220,6 +13151,12 @@ configure authority router node device-interface network-interface dhcp-delayed-
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface dhcp-reconfig-auth-algorithm`
 
@@ -9237,6 +13174,19 @@ configure authority router node device-interface network-interface dhcp-reconfig
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: hmac-md5
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- hmac-md5: HMAC-MD5 is used to authenticate prefix-delegation messages.
+- hmac-sha1: HMAC-SHA1 is used to authenticate prefix-delegation messages.
+- hmac-sha256: HMAC-SHA256 is used to authenticate prefix-delegation messages.
+
 ## `configure authority router node device-interface network-interface dscp-map`
 
 Mapping of DSCP values to priorities.
@@ -9252,6 +13202,12 @@ configure authority router node device-interface network-interface dscp-map [<ds
 | name | description |
 | ---- | ----------- |
 | dscp-map-ref | The value to set for this field |
+
+#### Description
+
+##### dscp-map-ref (leafref)
+
+This type is used by other entities that need to reference configured DSCP maps.
 
 ## `configure authority router node device-interface network-interface dscp-steering`
 
@@ -9282,6 +13238,16 @@ configure authority router node device-interface network-interface dscp-steering
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface dscp-steering transport`
 
@@ -9340,6 +13306,14 @@ configure authority router node device-interface network-interface dscp-steering
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface dscp-steering transport port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -9355,6 +13329,14 @@ configure authority router node device-interface network-interface dscp-steering
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16) (required)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router node device-interface network-interface dscp-steering transport protocol`
 
@@ -9372,6 +13354,21 @@ configure authority router node device-interface network-interface dscp-steering
 | ---- | ----------- |
 | protocol | The value to set for this field |
 
+#### Description
+
+##### protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
+
+
 ## `configure authority router node device-interface network-interface egress-source-nat-pool`
 
 Indicates whether source address and port translation (NAPT) is performed for flows egressing the interface to the final destination.
@@ -9387,6 +13384,12 @@ configure authority router node device-interface network-interface egress-source
 | name | description |
 | ---- | ----------- |
 | nat-pool-ref | The value to set for this field |
+
+#### Description
+
+##### nat-pool-ref (leafref)
+
+This type is used by other entities that need to reference configured NAT pools.
 
 ## `configure authority router node device-interface network-interface enforced-mss`
 
@@ -9407,6 +13410,28 @@ configure authority router node device-interface network-interface enforced-mss 
 #### Description
 
 Units: bytes
+
+Default: disabled
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint16
+
+An unsigned 16-bit integer.
+
+Range: 64-8960
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- automatic: Automatically adjust MSS according to egress path
+- disabled: Do not force MSS
 
 ## `configure authority router node device-interface network-interface ethernet-over-svr`
 
@@ -9441,6 +13466,16 @@ configure authority router node device-interface network-interface ethernet-over
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface ethernet-over-svr encapsulate-all-traffic`
 
 Whether all traffic arriving on the bridge should be encapsulated.
@@ -9457,6 +13492,16 @@ configure authority router node device-interface network-interface ethernet-over
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface ethernet-over-svr name`
 
 Name of the L2 over SVR bridge.
@@ -9472,6 +13517,12 @@ configure authority router node device-interface network-interface ethernet-over
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router node device-interface network-interface ethernet-over-svr peer`
 
@@ -9515,6 +13566,84 @@ configure authority router node device-interface network-interface ethernet-over
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router node device-interface network-interface ethernet-over-svr peer peer`
 
 Peer router on which this L2 adjacency exists.
@@ -9530,6 +13659,12 @@ configure authority router node device-interface network-interface ethernet-over
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router node device-interface network-interface filter-rule`
 
@@ -9558,6 +13693,10 @@ configure authority router node device-interface network-interface filter-rule <
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;filter-rule&#x27; |
 
+#### Description
+
+The order of elements matters.
+
 ## `configure authority router node device-interface network-interface filter-rule action`
 
 Action to be taken when a packet matches the filter rule.
@@ -9573,6 +13712,18 @@ configure authority router node device-interface network-interface filter-rule a
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: deny
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- deny: Deny packets matching the filter rule.
+- permit: Permit packets matching the filter rule. No further rules will run.
 
 ## `configure authority router node device-interface network-interface filter-rule bpf`
 
@@ -9590,6 +13741,12 @@ configure authority router node device-interface network-interface filter-rule b
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface filter-rule name`
 
 A unique name to identify this rule.
@@ -9606,6 +13763,15 @@ configure authority router node device-interface network-interface filter-rule n
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router node device-interface network-interface global-id`
 
 Global Interface Id (GIID) used in next-hop egress interface for routing data. All instances of a redundant interface will have the same GIID.
@@ -9621,6 +13787,14 @@ configure authority router node device-interface network-interface global-id [<g
 | name | description |
 | ---- | ----------- |
 | global-interface-id | The value to set for this field |
+
+#### Description
+
+##### global-interface-id (uint32)
+
+A global interface identifier which is a virtual interface across an entire SSR. This can be a single network interface or a set of network interfaces in interface redundancy.
+
+Range: 1-4294967295
 
 ## `configure authority router node device-interface network-interface host-service`
 
@@ -9694,6 +13868,18 @@ configure authority router node device-interface network-interface host-service 
 | ---- | ----------- |
 | access-mode | The value to set for this field |
 
+#### Description
+
+Default: allow
+
+##### access-mode (enumeration)
+
+Enumeration defining whether access is allowed or denied.
+
+Options:
+- allow: Allow access.
+- deny: Deny access.
+
 ## `configure authority router node device-interface network-interface host-service access-policy source`
 
 The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service
@@ -9709,6 +13895,82 @@ configure authority router node device-interface network-interface host-service 
 | name | description |
 | ---- | ----------- |
 | source-spec | The value to set for this field |
+
+#### Description
+
+##### source-spec (union)
+
+A source address prefix, QSN, service-group or combination of tenant-name and prefix.
+
+Must be one of the following types:
+
+###### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string):
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
+###### (1) qsn (string)
+
+Qualified Service Name in the form: tenant[.authority][/[service-group/]service]
+
+Must contain only alphanumeric characters or any of the following: / . _ -
+Required format: &#x27;Tenant[.Authority[/ServiceGroup[/Service]]]&#x27;. No forward slash-delimited segment can exceed 62 characters.(e.g., Engineering.Authority128/Video/private_conferencing).
+Length: 1-1024
+
+###### (2) service-spec (string)
+
+Service group and service name portion of a Qualified Service Name.
+
+Must contain only alphanumeric characters or any of the following: - _ / .
+Required format: &#x27;/groupLabel1[/groupLabel2[/groupLabel3...]]&#x27;. No forward slash-delimited segment can exceed 62 characters.
+Length: 0-127
+
+###### (3) tenant-prefix (string)
+
+A string identifier for a tenant prefix. Consists of a valid tenant name, followed by @ and a valid IP Address.
+
+Must contain a valid tenant name, followed by @  and a valid IP Address.
+Length: 0-280
 
 ## `configure authority router node device-interface network-interface host-service description`
 
@@ -9726,6 +13988,12 @@ configure authority router node device-interface network-interface host-service 
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface host-service enabled`
 
 Enable/disable for host services
@@ -9742,6 +14010,16 @@ configure authority router node device-interface network-interface host-service 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface host-service service-type`
 
 The type of hosted service
@@ -9757,6 +14035,20 @@ configure authority router node device-interface network-interface host-service 
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ssh: SSH Hosted service.
+- netconf: Netconf service.
+- web: Web service.
+- dhcp-server: DHCP server service.
+- snmp-server: Access SNMP server through this interface
+- custom: Custom service.
 
 ## `configure authority router node device-interface network-interface host-service transport`
 
@@ -9827,6 +14119,14 @@ configure authority router node device-interface network-interface host-service 
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface host-service transport port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -9842,6 +14142,14 @@ configure authority router node device-interface network-interface host-service 
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16) (required)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router node device-interface network-interface host-service transport protocol`
 
@@ -9859,6 +14167,20 @@ configure authority router node device-interface network-interface host-service 
 | ---- | ----------- |
 | protocol | The value to set for this field |
 
+#### Description
+
+##### protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
+
 ## `configure authority router node device-interface network-interface hostname`
 
 Hostname for the interface. This is an optional fully-qualified domain name (FQDN).
@@ -9875,6 +14197,48 @@ configure authority router node device-interface network-interface hostname [<do
 | ---- | ----------- |
 | domain-name | The value to set for this field |
 
+#### Description
+
+##### domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router node device-interface network-interface icmp`
 
 Enable/disable ICMP Blackhole
@@ -9890,6 +14254,18 @@ configure authority router node device-interface network-interface icmp [<enumer
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: allow
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- drop: Neither respond to ICMP requests nor generate ICMP errors to/from IPs on this interface
+- allow: Respond to ICMP requests and generate ICMP errors to/from IPs on this interface
 
 ## `configure authority router node device-interface network-interface ifcfg-option`
 
@@ -9933,6 +14309,14 @@ configure authority router node device-interface network-interface ifcfg-option 
 | ---- | ----------- |
 | ifcfg-key | The value to set for this field |
 
+#### Description
+
+##### ifcfg-key (string)
+
+A string representing an allowable ifcfg script option key
+
+Must contain only capital alphanumeric characters or any of the following: _
+
 ## `configure authority router node device-interface network-interface ifcfg-option value`
 
 Value of the ifcfg options
@@ -9948,6 +14332,12 @@ configure authority router node device-interface network-interface ifcfg-option 
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string (required)
+
+A text value.
 
 ## `configure authority router node device-interface network-interface ingress-source-nat-pool`
 
@@ -9965,6 +14355,12 @@ configure authority router node device-interface network-interface ingress-sourc
 | ---- | ----------- |
 | nat-pool-ref | The value to set for this field |
 
+#### Description
+
+##### nat-pool-ref (leafref)
+
+This type is used by other entities that need to reference configured NAT pools.
+
 ## `configure authority router node device-interface network-interface inter-router-security`
 
 The name of the security policy used for inbound inter-router traffic.
@@ -9981,6 +14377,12 @@ configure authority router node device-interface network-interface inter-router-
 | ---- | ----------- |
 | security-ref | The value to set for this field |
 
+#### Description
+
+##### security-ref (leafref)
+
+This type is used by other entities that need to reference configured security policies.
+
 ## `configure authority router node device-interface network-interface management`
 
 Allow management traffic to be sent over this interface
@@ -9996,6 +14398,16 @@ configure authority router node device-interface network-interface management [<
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface management-vector`
 
@@ -10027,6 +14439,15 @@ configure authority router node device-interface network-interface management-ve
 | ---- | ----------- |
 | vector-name | The value to set for this field |
 
+#### Description
+
+##### vector-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
+
 ## `configure authority router node device-interface network-interface management-vector priority`
 
 Priority value for the paths with the vector.
@@ -10043,41 +14464,14 @@ configure authority router node device-interface network-interface management-ve
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
-## `configure authority router node device-interface network-interface move filter-rule`
+#### Description
 
-A rule for dropping packets.
+##### uint32
 
-#### Usage
+An unsigned 32-bit integer.
 
-```
-configure authority router node device-interface network-interface move filter-rule <name> <position> [<relative-to-name>]
-```
+Range: 1-999999
 
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | A unique name to identify this rule. |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
-
-## `configure authority router node device-interface network-interface move neighborhood`
-
-The neighborhoods to which this interface belongs.
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface move neighborhood <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | The neighborhood to which this interface belongs. |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
 
 ## `configure authority router node device-interface network-interface mtu`
 
@@ -10095,6 +14489,16 @@ configure authority router node device-interface network-interface mtu [<uint32>
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 1500
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 68-9198
+
 ## `configure authority router node device-interface network-interface multicast-listeners`
 
 Enables the sending of IGMP and MLD queries on this interface.
@@ -10110,6 +14514,19 @@ configure authority router node device-interface network-interface multicast-lis
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: automatic
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Multicast listeners are disabled.
+- automatic: Multicast listeners are enabled or disabled based on the presence of multicast services with tenant based access policies which match this interface&#x27;s tenant.
+- enabled: Multicast listeners are enabled.
 
 ## `configure authority router node device-interface network-interface multicast-report-proxy`
 
@@ -10127,6 +14544,16 @@ configure authority router node device-interface network-interface multicast-rep
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface name`
 
 An arbitrary, unique name for the interface, used to reference it in other configuration sections.
@@ -10142,6 +14569,15 @@ configure authority router node device-interface network-interface name [<interf
 | name | description |
 | ---- | ----------- |
 | interface-name | The value to set for this field |
+
+#### Description
+
+##### interface-name (string)
+
+A string identifier for network-interface which only uses alphanumerics, underscores, dashes, dots, or slashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ - .
+Length: 0-63
 
 ## `configure authority router node device-interface network-interface neighbor`
 
@@ -10185,6 +14621,38 @@ configure authority router node device-interface network-interface neighbor ip-a
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface neighbor phys-address`
 
 The physical level address (MAC address) of the neighbor node.
@@ -10200,6 +14668,20 @@ configure authority router node device-interface network-interface neighbor phys
 | name | description |
 | ---- | ----------- |
 | phys-address | The value to set for this field |
+
+#### Description
+
+##### phys-address (string) (required)
+
+Represents media- or physical-level addresses represented
+as a sequence octets, each octet represented by two hexadecimal
+numbers.  Octets are separated by colons.  The canonical
+representation uses lowercase characters.
+
+In the value set and its semantics, this type is equivalent
+to the PhysAddress textual convention of the SMIv2.
+
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
 
 ## `configure authority router node device-interface network-interface neighborhood`
 
@@ -10249,6 +14731,10 @@ configure authority router node device-interface network-interface neighborhood 
 | [`udp-transform`](#configure-authority-router-node-device-interface-network-interface-neighborhood-udp-transform) | UDP transform settings for interoperating with stateful TCP firewalls for peers in the neighborhood. |
 | [`vector`](#configure-authority-router-node-device-interface-network-interface-neighborhood-vector) | Vector name to associate with adjacencies in the neighborhood. |
 
+#### Description
+
+The order of elements matters.
+
 ## `configure authority router node device-interface network-interface neighborhood bfd`
 
 BFD parameters for peers in the neighborhood.
@@ -10288,6 +14774,18 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: sha256
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- simple: Simple Password
+- sha256: SHA256
+
 ## `configure authority router node device-interface network-interface neighborhood bfd desired-tx-interval`
 
 Represents the frequency with which BFD asynchronous control packets are sent to peer nodes/routers.
@@ -10308,6 +14806,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50-600000
+
 ## `configure authority router node device-interface network-interface neighborhood bfd dscp`
 
 The DSCP value to use with BFD packets.
@@ -10324,6 +14830,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | dscp | The value to set for this field |
 
+#### Description
+
+Default: 0
+
+##### dscp (uint8)
+
+A DSCP value (0-63)
+
+Range: 0-63
+
 ## `configure authority router node device-interface network-interface neighborhood bfd dynamic-damping`
 
 When enabled, extend the hold-down time if additional link flaps occur during the hold-down period.
@@ -10339,6 +14855,18 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled: Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled: Use simple hold-down timer for every link up event.
 
 ## `configure authority router node device-interface network-interface neighborhood bfd hold-down-time`
 
@@ -10360,6 +14888,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-300
+
 ## `configure authority router node device-interface network-interface neighborhood bfd link-test-interval`
 
 This represents the interval between BFD echo tests sent to the peer node/router.
@@ -10379,6 +14915,14 @@ configure authority router node device-interface network-interface neighborhood 
 #### Description
 
 Units: seconds
+
+Default: 10
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router node device-interface network-interface neighborhood bfd link-test-length`
 
@@ -10400,6 +14944,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: packets
 
+Default: 10
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
 ## `configure authority router node device-interface network-interface neighborhood bfd maximum-hold-down-time`
 
 Represents the maximum hold-down time of dynamic-damping exponential backoff. If the hold-down-time hits the maximum three times in a row, it will reset back to the original value.
@@ -10420,6 +14972,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+Default: 3600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface neighborhood bfd multiplier`
 
 Number of consecutive missed messages from a peer before deciding that the link between them is unusable. Valid range is (3,20).
@@ -10435,6 +14995,16 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 3-20
 
 ## `configure authority router node device-interface network-interface neighborhood bfd required-min-rx-interval`
 
@@ -10456,6 +15026,12 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface neighborhood bfd state`
 
 When enabled, run BFD between all nodes within the router.
@@ -10472,6 +15048,18 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: enabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled: BFD is enabled on all nodes of this router.
+- disabled: BFD is disabled on all nodes of this router.
+
 ## `configure authority router node device-interface network-interface neighborhood encapsulate-icmp-error-messages`
 
 Encapsulate ICMP errors in UDP across SVR on routers within this neighborhood
@@ -10487,6 +15075,16 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface neighborhood external-nat-address`
 
@@ -10522,7 +15120,17 @@ configure authority router node device-interface network-interface neighborhood 
 
 #### Description
 
-Warning: a restart is required if max-way-points is created, modified, or deleted
+Default: 50000
+
+:::warning
+A restart is required if max-way-points is created, modified, or deleted
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50000-1000000
 
 ## `configure authority router node device-interface network-interface neighborhood name`
 
@@ -10539,6 +15147,15 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | neighborhood-id | The value to set for this field |
+
+#### Description
+
+##### neighborhood-id (string)
+
+A string identifier for network neighborhood.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
 
 ## `configure authority router node device-interface network-interface neighborhood nat-keep-alive`
 
@@ -10571,6 +15188,18 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: auto
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto: Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- disabled: Do not send keep-alive packets to keep pinhole open on an external NAT device.
+
 ## `configure authority router node device-interface network-interface neighborhood nat-keep-alive tcp-inactivity-timeout`
 
 Represents the frequency with which TCP keep-alive packets are generated and should be shorter than the external NAT&#x27;s TCP timeout settings.
@@ -10591,6 +15220,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+Default: 1800
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface neighborhood nat-keep-alive udp-inactivity-timeout`
 
 Represents the frequency with which UDP keep-alive packets are generated and should be shorter than the external NAT&#x27;s UDP timeout settings.
@@ -10610,6 +15247,14 @@ configure authority router node device-interface network-interface neighborhood 
 #### Description
 
 Units: seconds
+
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router node device-interface network-interface neighborhood packet-resiliency`
 
@@ -10640,6 +15285,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface neighborhood path-metrics-rolling-avg-interval`
 
 This defines the rolling average interval used for computing various path metrics such as latency and loss.
@@ -10655,6 +15310,16 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 60s
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router node device-interface network-interface neighborhood path-mtu-discovery`
 
@@ -10686,6 +15351,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface neighborhood path-mtu-discovery interval`
 
 Represents the frequency with which the peer-path MTU discovery is performed.
@@ -10706,6 +15381,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+Default: 600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface neighborhood payload-encryption-override`
 
 Transport based encryption override for payload setting within the neighborhood.
@@ -10721,6 +15404,18 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | payload-encryption-override | The value to set for this field |
+
+#### Description
+
+Default: disable-override
+
+##### payload-encryption-override (enumeration)
+
+Payload encryption override setting.
+
+Options:
+- enable-encryption: Enable encryption of payload even when the security-policy associated with the service has encrypt=false. If the payload is already encrypted by another SSR, send it out as is.
+- disable-override: Disable override of the security policy and use the security policy settings associated with the service.
 
 ## `configure authority router node device-interface network-interface neighborhood peer-connectivity`
 
@@ -10738,6 +15433,18 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | peer-connectivity | The value to set for this field |
 
+#### Description
+
+Default: bidirectional
+
+##### peer-connectivity (enumeration)
+
+The IP-layer connectivity behavior.
+
+Options:
+- bidirectional: Publicly reachable (i.e., not behind a firewall/NAT).
+- outbound-only: Not publicly reachable (i.e., behind a firewall/NAT).
+
 ## `configure authority router node device-interface network-interface neighborhood peer-path-overlay`
 
 Overlay type for the neighborhood.
@@ -10753,6 +15460,18 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | peer-path-overlay | The value to set for this field |
+
+#### Description
+
+Default: svr
+
+##### peer-path-overlay (enumeration)
+
+The overlay mechanism used for the peer path.
+
+Options:
+- svr: SVR (Secure Vector Routing) overlay.
+- bfd-tunnel: Tunnel over BFD overlay.
 
 ## `configure authority router node device-interface network-interface neighborhood performance-monitoring`
 
@@ -10784,6 +15503,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface neighborhood performance-monitoring profile`
 
 The name of the performance monitoring profile used for marking traffic.
@@ -10799,6 +15528,12 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | performance-monitoring-profile-ref | The value to set for this field |
+
+#### Description
+
+##### performance-monitoring-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured performance monitoring profiles.
 
 ## `configure authority router node device-interface network-interface neighborhood port-range`
 
@@ -10842,6 +15577,14 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 1025-65535
+
 ## `configure authority router node device-interface network-interface neighborhood port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -10857,6 +15600,14 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 1025-65535
 
 ## `configure authority router node device-interface network-interface neighborhood post-encryption-padding`
 
@@ -10887,6 +15638,18 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Do not add additional padding.
+- enabled: Add one byte of padding to the end of the packet.
+
 ## `configure authority router node device-interface network-interface neighborhood qp-value`
 
 Quality points value that represents the &#x27;quality&#x27; of the the links to adjacent routers in the neighborhood. Used for selecting egress interface based on the service class required minimum quality points.
@@ -10905,7 +15668,15 @@ configure authority router node device-interface network-interface neighborhood 
 
 #### Description
 
-Warning: &#x27;qp-value&#x27; is deprecated and will be removed in a future software version
+Default: 0
+
+:::warning
+`qp-value` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router node device-interface network-interface neighborhood session-optimization`
 
@@ -10936,6 +15707,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | session-optimization-mode | The value to set for this field |
 
+#### Description
+
+##### session-optimization-mode (enumeration)
+
+When to apply session optimization. Auto is recommended.
+
+Options:
+- never-on: Never optimize TCP traffic.
+- auto: Automatically determine if TCP optimization is required.
+
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement`
 
 Update frequency and timeliness of the STEP peer path advertisements for this neighborhood.
@@ -10951,7 +15732,7 @@ Update frequency and timeliness of the STEP peer path advertisements for this ne
 
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics`
 
-Configure Sla Metrics
+Configure SLA Metrics
 
 ##### Subcommands
 
@@ -11012,6 +15793,10 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics decrease-report-delay percentage`
 
 Largest percentage decrease seen among all of the metric values.
@@ -11031,6 +15816,12 @@ configure authority router node device-interface network-interface neighborhood 
 #### Description
 
 Units: percent
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
 
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics increase-report-delay`
 
@@ -11078,6 +15869,10 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics increase-report-delay percentage`
 
 Largest percentage increase seen among all of the metric values.
@@ -11098,6 +15893,12 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: percent
 
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics moving-average-sample-size`
 
 Sample size for calculating the weighted moving average of peer path SLA metrics to be advertised into STEP.
@@ -11113,6 +15914,16 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-10000
 
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics significance-threshold`
 
@@ -11149,6 +15960,12 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: milliseconds
 
+Default: 2
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics significance-threshold min-latency`
 
 The threshold latency value considered significant enough for advertising into STEP.
@@ -11168,6 +15985,12 @@ configure authority router node device-interface network-interface neighborhood 
 #### Description
 
 Units: milliseconds
+
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics significance-threshold min-loss`
 
@@ -11189,6 +16012,15 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: percent
 
+Default: 0.1
+
+##### decimal64
+
+A 64-bit decimal value.
+
+Range: 0-100
+Fraction digits: 16
+
 ## `configure authority router node device-interface network-interface neighborhood topology`
 
 Type of topology for this router in the network for the neighborhood. This determines the other routers in the neighborhood with which this router has an adjacency.
@@ -11204,6 +16036,19 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: spoke
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- mesh: Full mesh. This router will have adjacencies to all other routers in the neighborhood.
+- hub: The router is a hub in a hub-and-spoke topology. The router will have adjacencies with other routers in the neighborhood that are labeled &#x27;spoke&#x27; or &#x27;mesh&#x27;.
+- spoke: The router is a spoke in a hub-and-spoke topology. The router will have adjacencies with other routers in the neighborhood that are labeled &#x27;hub&#x27; or &#x27;mesh&#x27;.
 
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering`
 
@@ -11250,6 +16095,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering download receive-cap`
 
 Value that is used as the limit of our peer&#x27;s transmit capacity on this peer path as to not overwhelm our interface.
@@ -11270,6 +16125,12 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: bits/second
 
+##### uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-999999999999
+
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering download traffic-profile`
 
 The name of the traffic profile our peer should use when limiting its transmit-capacity on this peer path
@@ -11285,6 +16146,12 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | traffic-profile-ref | The value to set for this field |
+
+#### Description
+
+##### traffic-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured traffic profiles.
 
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering upload`
 
@@ -11317,6 +16184,16 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering upload traffic-profile`
 
 The name of the traffic profile used for traffic engineering on this peer path
@@ -11332,6 +16209,12 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | traffic-profile-ref | The value to set for this field |
+
+#### Description
+
+##### traffic-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured traffic profiles.
 
 ## `configure authority router node device-interface network-interface neighborhood traffic-engineering upload transmit-cap`
 
@@ -11353,6 +16236,12 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: bits/second
 
+##### uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-999999999999
+
 ## `configure authority router node device-interface network-interface neighborhood ttl-padding`
 
 Whether to perform TTL Padding on routers within this neighborhood
@@ -11368,6 +16257,30 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | ttl-padding-type | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### ttl-padding-type (union)
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto: Automatically determine TTL padding.
+- disabled: Do not pad TTL.
 
 ## `configure authority router node device-interface network-interface neighborhood udp-transform`
 
@@ -11405,6 +16318,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+Default: 300
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface neighborhood udp-transform mode`
 
 Configure Mode
@@ -11421,6 +16342,18 @@ configure authority router node device-interface network-interface neighborhood 
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: auto-detect
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto-detect: Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
+- always-transform: Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
+
 ## `configure authority router node device-interface network-interface neighborhood udp-transform nat-keep-alive-mode`
 
 Configure Nat Keep Alive Mode
@@ -11436,6 +16369,18 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Do not send keep-alive packets to keep UDP sessions active during UDP transform.
+- enabled: Inject keep-alive packets to keep UDP sessions active during UDP transform.
 
 ## `configure authority router node device-interface network-interface neighborhood udp-transform nat-keep-alive-timeout`
 
@@ -11457,6 +16402,14 @@ configure authority router node device-interface network-interface neighborhood 
 
 Units: seconds
 
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface neighborhood vector`
 
 Vector name to associate with adjacencies in the neighborhood.
@@ -11472,6 +16425,15 @@ configure authority router node device-interface network-interface neighborhood 
 | name | description |
 | ---- | ----------- |
 | vector-name | The value to set for this field |
+
+#### Description
+
+##### vector-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
 
 ## `configure authority router node device-interface network-interface off-subnet-arp-prefix`
 
@@ -11489,6 +16451,12 @@ configure authority router node device-interface network-interface off-subnet-ar
 | ---- | ----------- |
 | unicast-ipv4-prefix | Value to add to this list |
 
+#### Description
+
+##### unicast-ipv4-prefix (string)
+
+A unicast IPv4 prefix
+
 ## `configure authority router node device-interface network-interface off-subnet-reverse-arp-mac-learning`
 
 When enabled, the source MAC address of the packet will be used for reverse traffic for off-subnet source ip address.
@@ -11504,6 +16472,16 @@ configure authority router node device-interface network-interface off-subnet-re
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface prefix-delegation`
 
@@ -11521,6 +16499,16 @@ configure authority router node device-interface network-interface prefix-delega
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface prefix-delegation-authentication`
 
 Whether prefix-delegation messages are authenticated.
@@ -11536,6 +16524,19 @@ configure authority router node device-interface network-interface prefix-delega
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Authentication of prefix-delegation messages is disabled.
+- delayed: Delayed authentication protocol is used to authenticate prefix-delegation messages.
+- reconfig-key: Reconfigure-key authentication protocol is used to authenticate prefix-delegation messages.
 
 ## `configure authority router node device-interface network-interface prefix-delegation-group`
 
@@ -11553,6 +16554,12 @@ configure authority router node device-interface network-interface prefix-delega
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface network-interface prefix-delegation-subnet-id`
 
 The identifier of a subnet within a prefix-delegation group which is used to construct a global IPv6 address for an internal interface.
@@ -11568,6 +16575,14 @@ configure authority router node device-interface network-interface prefix-delega
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router node device-interface network-interface preserve-dscp`
 
@@ -11585,6 +16600,16 @@ configure authority router node device-interface network-interface preserve-dscp
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface prioritization-mode`
 
 Controls how packets received on this interface are prioritized.
@@ -11600,6 +16625,18 @@ configure authority router node device-interface network-interface prioritizatio
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: local
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- local: Trust the internal classification for prioritization.
+- dscp: Trust incoming DSCP values for prioritization.
 
 ## `configure authority router node device-interface network-interface qp-value`
 
@@ -11619,7 +16656,15 @@ configure authority router node device-interface network-interface qp-value [<ui
 
 #### Description
 
-Warning: &#x27;qp-value&#x27; is deprecated and will be removed in a future software version
+Default: 0
+
+:::warning
+`qp-value` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router node device-interface network-interface reverse-arp-mac-learning`
 
@@ -11637,6 +16682,16 @@ configure authority router node device-interface network-interface reverse-arp-m
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface rewrite-dscp`
 
 Controls if DSCP bits are rewritten on this interface.
@@ -11652,6 +16707,14 @@ configure authority router node device-interface network-interface rewrite-dscp 
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface network-interface router-advertisement`
 
@@ -11669,6 +16732,16 @@ configure authority router node device-interface network-interface router-advert
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface source-nat`
 
 Indicates whether source address and port translation (NAPT) is performed for flows egressing the interface to the final destination.
@@ -11685,6 +16758,16 @@ configure authority router node device-interface network-interface source-nat [<
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface network-interface tenant`
 
 Tenant to which this interface belongs.
@@ -11700,6 +16783,12 @@ configure authority router node device-interface network-interface tenant [<tena
 | name | description |
 | ---- | ----------- |
 | tenant-ref | The value to set for this field |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority router node device-interface network-interface tenant-prefixes`
 
@@ -11743,6 +16832,53 @@ configure authority router node device-interface network-interface tenant-prefix
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
 
+#### Description
+
+##### ip-prefix (union) (required)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string) (required)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string) (required)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority router node device-interface network-interface tenant-prefixes tenant`
 
 Tenant name.
@@ -11758,6 +16894,13 @@ configure authority router node device-interface network-interface tenant-prefix
 | name | description |
 | ---- | ----------- |
 | tenant-ref | The value to set for this field |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
+
 
 ## `configure authority router node device-interface network-interface tunnel`
 
@@ -11790,6 +16933,84 @@ configure authority router node device-interface network-interface tunnel destin
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union) (required)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string) (required)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router node device-interface network-interface tunnel internal-address`
 
 The source address to use when sending packets over the tunnel.
@@ -11805,6 +17026,37 @@ configure authority router node device-interface network-interface tunnel intern
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node device-interface network-interface tunnel source`
 
@@ -11836,6 +17088,37 @@ configure authority router node device-interface network-interface tunnel source
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node device-interface network-interface tunnel source network-interface`
 
 Use the address of the interface with the same vlan.
@@ -11845,6 +17128,12 @@ Use the address of the interface with the same vlan.
 ```
 configure authority router node device-interface network-interface tunnel source network-interface
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority router node device-interface network-interface type`
 
@@ -11862,6 +17151,20 @@ configure authority router node device-interface network-interface type [<enumer
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: external
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- fabric: Fabric network for inter-node traffic.
+- external: External network for regular traffic.
+- shared: Network is both &#x27;fabric&#x27; and &#x27;external&#x27;.
+- gre-tunnel: A GRE tunnel.
+
 ## `configure authority router node device-interface network-interface vlan`
 
 The VLAN id for the interface (0 for no VLAN, otherwise 1-4094).
@@ -11877,6 +17180,17 @@ configure authority router node device-interface network-interface vlan [<vlan>]
 | name | description |
 | ---- | ----------- |
 | vlan | The value to set for this field |
+
+#### Description
+
+Default: 0
+
+##### vlan (uint16)
+
+A VLAN identifier (0 for no VLAN, otherwise 1-4094).
+
+Range: 0-4094
+
 
 ## `configure authority router node device-interface network-namespace`
 
@@ -11894,6 +17208,15 @@ configure authority router node device-interface network-namespace [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
+Must contain only alphanumeric characters, start with a alphabet and can contain any of the following: _ -
+Length: 0-50
+
 ## `configure authority router node device-interface parent-bond`
 
 The bond type interface that this interface is grouped with.
@@ -11910,6 +17233,12 @@ configure authority router node device-interface parent-bond [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router node device-interface pci-address`
 
 The PCI address of the device. Only relevant if type is ethernet.
@@ -11925,6 +17254,16 @@ configure authority router node device-interface pci-address [<pci-address>]
 | name | description |
 | ---- | ----------- |
 | pci-address | The value to set for this field |
+
+#### Description
+
+##### pci-address (string)
+
+A PCI address specifying domain, bus, device, and function
+
+Must contain only hex digits or any of the following: . :
+Required format: &#x27;aaaa:bb:cc.d&#x27; (e.g. 0000:00:1d.0).
+Length: 0-13
 
 ## `configure authority router node device-interface pppoe`
 
@@ -11957,6 +17296,16 @@ configure authority router node device-interface pppoe authentication-protocol [
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- chap:    Challenge-Handshake Authentication Protocol.
+- pap:     Password Authentication Protocol.
+
 ## `configure authority router node device-interface pppoe password`
 
 Password required to setup PPPoE connection.
@@ -11972,6 +17321,12 @@ configure authority router node device-interface pppoe password [<password>]
 | name | description |
 | ---- | ----------- |
 | password | The value to set for this field |
+
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
 
 ## `configure authority router node device-interface pppoe user-name`
 
@@ -11989,6 +17344,12 @@ configure authority router node device-interface pppoe user-name [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node device-interface promiscuous-mode`
 
 Enables promiscuous mode on the interface.
@@ -12004,6 +17365,16 @@ configure authority router node device-interface promiscuous-mode [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface q-in-q`
 
@@ -12035,6 +17406,14 @@ configure authority router node device-interface q-in-q outer-ethertype [<hex-st
 | ---- | ----------- |
 | hex-string | The value to set for this field |
 
+#### Description
+
+##### hex-string (string) (required)
+
+A hexadecimal string with octets represented as hex digits.
+
+Length: 4
+
 ## `configure authority router node device-interface q-in-q outer-vlan`
 
 Add an outer VLAN tag to all non-zero VLAN interfaces
@@ -12051,6 +17430,14 @@ configure authority router node device-interface q-in-q outer-vlan [<uint16>]
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+##### uint16 (required)
+
+An unsigned 16-bit integer.
+
+Range: 1-4094
+
 ## `configure authority router node device-interface reinsert-vlan`
 
 Enables reinsertion of NIC-stripped VLAN on ingress packets, on supported devices.
@@ -12066,6 +17453,16 @@ configure authority router node device-interface reinsert-vlan [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface session-optimization`
 
@@ -12096,6 +17493,16 @@ configure authority router node device-interface session-optimization enable-det
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface shared-phys-address`
 
 Virtual MAC address for interface redundancy.
@@ -12111,6 +17518,15 @@ configure authority router node device-interface shared-phys-address [<unicast-p
 | name | description |
 | ---- | ----------- |
 | unicast-phys-address | The value to set for this field |
+
+#### Description
+
+##### unicast-phys-address (string)
+
+A text value.
+
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Shared physical address must not be a multicast address nor 00:00:00:00:00:00
 
 ## `configure authority router node device-interface sriov-vlan-filter`
 
@@ -12128,6 +17544,16 @@ configure authority router node device-interface sriov-vlan-filter [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface strip-vlan`
 
 Enables VLAN stripping on ingress packets on supported devices.
@@ -12144,6 +17570,16 @@ configure authority router node device-interface strip-vlan [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface target-interface`
 
 Specifies the name of an external interface to be automatically bridged to a logical interface.
@@ -12159,6 +17595,15 @@ configure authority router node device-interface target-interface [<target-name>
 | name | description |
 | ---- | ----------- |
 | target-name | The value to set for this field |
+
+#### Description
+
+##### target-name (string)
+
+A string identifier for target-interface which cannot be slash or colon and cannot exceed 15 characters.
+
+Must not contain slash, colon, or whitespace in target-interface name.
+Length: 1-15
 
 ## `configure authority router node device-interface traffic-engineering`
 
@@ -12191,6 +17636,16 @@ configure authority router node device-interface traffic-engineering enabled [<b
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node device-interface traffic-engineering traffic-profile`
 
 The name of the traffic profile used for traffic engineering on this device interface
@@ -12206,6 +17661,12 @@ configure authority router node device-interface traffic-engineering traffic-pro
 | name | description |
 | ---- | ----------- |
 | traffic-profile-ref | The value to set for this field |
+
+#### Description
+
+##### traffic-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured traffic profiles.
 
 ## `configure authority router node device-interface traffic-engineering transmit-cap`
 
@@ -12227,6 +17688,25 @@ configure authority router node device-interface traffic-engineering transmit-ca
 
 Units: bits/second
 
+##### limit (union)
+
+A type for defining values such as rates and capacities for which the default value is unlimited.
+
+Must be one of the following types:
+
+###### (0) uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-999999999999
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- unlimited: No limit on this value.
+
 ## `configure authority router node device-interface type`
 
 Type of interface.
@@ -12242,6 +17722,23 @@ configure authority router node device-interface type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: ethernet
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ethernet: A physical ethernet interface.
+- pppoe: An interface using the Point-to-Point Protocol over Ethernet (PPPoE).
+- host: A logical interface to the host system.
+- bridged: A logical interface bridged to a target interface.
+- lte: An interface using LTE.
+- t1: An interface using a T1 card.
+- bond: An aggregated group of ethernet interfaces.
 
 ## `configure authority router node device-interface vmbus-uuid`
 
@@ -12259,9 +17756,18 @@ configure authority router node device-interface vmbus-uuid [<vmbus-uuid>]
 | ---- | ----------- |
 | vmbus-uuid | The value to set for this field |
 
+#### Description
+
+##### vmbus-uuid (string)
+
+A VMBUS UUID which specifies a network device
+
+Must contain only hex digits.
+Required format: &#x27;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#x27;
+
 ## `configure authority router node device-interface vrrp`
 
-Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP) like protocol.
+Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP).
 
 ##### Subcommands
 
@@ -12297,6 +17803,14 @@ configure authority router node device-interface vrrp advertisement-interval [<u
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 100-40950
+
 ## `configure authority router node device-interface vrrp enabled`
 
 Whether or not this interface should participate in VRRP.
@@ -12312,6 +17826,16 @@ configure authority router node device-interface vrrp enabled [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface vrrp priority`
 
@@ -12329,6 +17853,16 @@ configure authority router node device-interface vrrp priority [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 100
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router node device-interface vrrp use-physical-address`
 
 Use the physical mac address of the device instead of the VRRP virtual mac.
@@ -12344,6 +17878,16 @@ configure authority router node device-interface vrrp use-physical-address [<boo
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node device-interface vrrp vlan`
 
@@ -12361,6 +17905,16 @@ configure authority router node device-interface vrrp vlan [<vlan>]
 | ---- | ----------- |
 | vlan | The value to set for this field |
 
+#### Description
+
+Default: 0
+
+##### vlan (uint16)
+
+A VLAN identifier (0 for no VLAN, otherwise 1-4094).
+
+Range: 0-4094
+
 ## `configure authority router node device-interface vrrp vrid`
 
 The Virtual Router ID. This value must be mirrored by the redundant interface.
@@ -12377,6 +17931,14 @@ configure authority router node device-interface vrrp vrid [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router node enabled`
 
 Enable/disable the whole node.
@@ -12392,6 +17954,16 @@ configure authority router node enabled [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node forwarding-core-count`
 
@@ -12411,7 +17983,15 @@ configure authority router node forwarding-core-count [<uint8>]
 
 #### Description
 
-Warning: a restart is required if forwarding-core-count is created, modified, or deleted
+:::warning
+A restart is required if forwarding-core-count is created, modified, or deleted
+:::
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router node forwarding-core-mode`
 
@@ -12431,7 +18011,19 @@ configure authority router node forwarding-core-mode [<enumeration>]
 
 #### Description
 
-Warning: a restart is required if forwarding-core-mode is created, modified, or deleted
+Default: automatic
+
+:::warning
+A restart is required if forwarding-core-mode is created, modified, or deleted
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- automatic: The number of cores dedicated to traffic forwarding will be automatically determined based on system properties.
+- manual: The number of cores dedicated to traffic forwarding will be set to the value of forwarding-core-count.
 
 ## `configure authority router node ipfix`
 
@@ -12462,6 +18054,16 @@ configure authority router node ipfix enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router node location`
 
 A text description of the node&#x27;s physical location.
@@ -12478,6 +18080,12 @@ configure authority router node location [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router node loopback-address`
 
 The loopback IP address to use for management traffic originating on this node when routed via SVR.
@@ -12493,6 +18101,38 @@ configure authority router node loopback-address [<ip-address>]
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
 
 ## `configure authority router node name`
 
@@ -12512,7 +18152,16 @@ configure authority router node name [<reserved-name-id>]
 
 #### Description
 
-Warning: a restart is required if name is created or deleted
+:::warning
+A restart is required if name is created or deleted
+:::
+
+##### reserved-name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters, and cannot be the words &#x27;all&#x27;, &#x27;any&#x27;, or &#x27;unknown&#x27;.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router node port-forwarding`
 
@@ -12565,6 +18214,38 @@ configure authority router node port-forwarding local-address [<ip-address>]
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
 ## `configure authority router node port-forwarding local-interface`
 
 The local interface to forward from
@@ -12580,6 +18261,15 @@ configure authority router node port-forwarding local-interface [<device-name>]
 | name | description |
 | ---- | ----------- |
 | device-name | The value to set for this field |
+
+#### Description
+
+##### device-name (string)
+
+A string identifier for device-interface which only uses alphanumerics, underscores, dashes, or slashes, and cannot exceed 12 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-12
 
 ## `configure authority router node port-forwarding local-port`
 
@@ -12597,6 +18287,14 @@ configure authority router node port-forwarding local-port [<l4-port>]
 | ---- | ----------- |
 | l4-port | The value to set for this field |
 
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
+
 ## `configure authority router node port-forwarding remote-host`
 
 The remote host to connect to from server
@@ -12612,6 +18310,84 @@ configure authority router node port-forwarding remote-host [<host>]
 | name | description |
 | ---- | ----------- |
 | host | The value to set for this field |
+
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority router node port-forwarding remote-interface`
 
@@ -12629,6 +18405,15 @@ configure authority router node port-forwarding remote-interface [<device-name>]
 | ---- | ----------- |
 | device-name | The value to set for this field |
 
+#### Description
+
+##### device-name (string)
+
+A string identifier for device-interface which only uses alphanumerics, underscores, dashes, or slashes, and cannot exceed 12 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-12
+
 ## `configure authority router node port-forwarding remote-port`
 
 The remote port to connect to from server
@@ -12644,6 +18429,14 @@ configure authority router node port-forwarding remote-port [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router node port-forwarding server-address`
 
@@ -12661,6 +18454,84 @@ configure authority router node port-forwarding server-address [<host>]
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router node port-forwarding server-destination`
 
 The server at known destination
@@ -12677,6 +18548,15 @@ configure authority router node port-forwarding server-destination [<enumeration
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ha-node: The server on the HA node
+
 ## `configure authority router node port-forwarding server-port`
 
 The port to connect to on the server
@@ -12692,6 +18572,14 @@ configure authority router node port-forwarding server-port [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router node power-saver`
 
@@ -12711,7 +18599,17 @@ configure authority router node power-saver [<boolean>]
 
 #### Description
 
-Warning: a restart is required if power-saver is created, modified, or deleted
+Default: false
+
+:::warning
+A restart is required if power-saver is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node radius`
 
@@ -12743,6 +18641,14 @@ configure authority router node radius nas-identifier [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-253
+
 ## `configure authority router node radius nas-ip-address`
 
 The NAS IP Address to be used in outgoing Radius authentication requests.
@@ -12758,6 +18664,37 @@ configure authority router node radius nas-ip-address [<ip-address>]
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node reachability-detection`
 
@@ -12796,6 +18733,14 @@ configure authority router node reachability-detection arp-cache-timeout [<uint3
 
 Units: seconds
 
+Default: 0
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-86400
+
 ## `configure authority router node reachability-detection arp-refresh-interval`
 
 Represents the frequency in seconds that an arp entry is refreshed.
@@ -12815,6 +18760,14 @@ configure authority router node reachability-detection arp-refresh-interval [<ui
 #### Description
 
 Units: seconds
+
+Default: 1200
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router node reachability-detection expired-refresh-count`
 
@@ -12836,6 +18789,14 @@ configure authority router node reachability-detection expired-refresh-count [<u
 
 Units: packets
 
+Default: 10
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 3-20
+
 ## `configure authority router node reachability-detection expired-refresh-interval`
 
 Represents the retry frequency in milliseconds of arp in expired state.
@@ -12855,6 +18816,14 @@ configure authority router node reachability-detection expired-refresh-interval 
 #### Description
 
 Units: milliseconds
+
+Default: 500
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 500-60000
 
 ## `configure authority router node reachability-detection gateway-refresh-interval`
 
@@ -12876,6 +18845,14 @@ configure authority router node reachability-detection gateway-refresh-interval 
 
 Units: seconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node role`
 
 The node&#x27;s role in the SSR system.
@@ -12894,7 +18871,19 @@ configure authority router node role [<node-role>]
 
 #### Description
 
-Warning: a restart is required if role is created, modified, or deleted
+:::warning
+A restart is required if role is created, modified, or deleted
+:::
+
+##### node-role (enumeration) (required)
+
+The node&#x27;s role in the SSR system.
+
+Options:
+- control: A Control and Operations Resource node.
+- slice: A Software Line-Card Engine node.
+- combo: A combined Control and Slice.
+- conductor: A remote management system.
 
 ## `configure authority router node session-processor-count`
 
@@ -12914,7 +18903,15 @@ configure authority router node session-processor-count [<uint8>]
 
 #### Description
 
-Warning: a restart is required if session-processor-count is created, modified, or deleted
+:::warning
+A restart is required if session-processor-count is created, modified, or deleted
+:::
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router node session-processor-mode`
 
@@ -12934,7 +18931,19 @@ configure authority router node session-processor-mode [<enumeration>]
 
 #### Description
 
-Warning: a restart is required if session-processor-mode is created, modified, or deleted
+Default: automatic
+
+:::warning
+A restart is required if session-processor-mode is created, modified, or deleted
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- automatic: The number of threads dedicated to session processing will be automatically determined based on system properties.
+- manual: The number of threads dedicated to session processing will be set to the value of session-processor-count.
 
 ## `configure authority router node session-setup-scaling`
 
@@ -12954,7 +18963,17 @@ configure authority router node session-setup-scaling [<boolean>]
 
 #### Description
 
-Warning: a restart is required if session-setup-scaling is created, modified, or deleted
+Default: false
+
+:::warning
+A restart is required if session-setup-scaling is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router node ssh-keepalive`
 
@@ -13003,6 +19022,16 @@ configure authority router node ssh-keepalive asset-inter-conductor-router-serve
 | ---- | ----------- |
 | ssh-keepalive-interval | The value to set for this field |
 
+#### Description
+
+Default: 5
+
+##### ssh-keepalive-interval (uint8)
+
+Timeout interval in seconds to send keepalive when an SSH connection is idle.
+
+Range: 1-10
+
 ## `configure authority router node ssh-keepalive asset-inter-conductor-router-server max-attempts`
 
 Number of keepalive messages sent from SSHD server before disconnecting an SSH connection between the conductor and a managed router&#x27;s asset connections.
@@ -13018,6 +19047,16 @@ configure authority router node ssh-keepalive asset-inter-conductor-router-serve
 | name | description |
 | ---- | ----------- |
 | ssh-keepalive-max-attempts | The value to set for this field |
+
+#### Description
+
+Default: 4
+
+##### ssh-keepalive-max-attempts (uint8)
+
+Number of keepalive messages sent before disconnecting an SSH connection.
+
+Range: 1-20
 
 ## `configure authority router node ssh-keepalive inter-conductor-router-server`
 
@@ -13051,7 +19090,17 @@ configure authority router node ssh-keepalive inter-conductor-router-server inte
 
 #### Description
 
-Warning: a restart is required if interval is created, modified, or deleted
+Default: 5
+
+:::warning
+A restart is required if interval is created, modified, or deleted
+:::
+
+##### ssh-keepalive-interval (uint8)
+
+Timeout interval in seconds to send keepalive when an SSH connection is idle.
+
+Range: 1-10
 
 ## `configure authority router node ssh-keepalive inter-conductor-router-server max-attempts`
 
@@ -13071,7 +19120,17 @@ configure authority router node ssh-keepalive inter-conductor-router-server max-
 
 #### Description
 
-Warning: a restart is required if max-attempts is created, modified, or deleted
+Default: 4
+
+:::warning
+A restart is required if max-attempts is created, modified, or deleted
+:::
+
+##### ssh-keepalive-max-attempts (uint8)
+
+Number of keepalive messages sent before disconnecting an SSH connection.
+
+Range: 1-20
 
 ## `configure authority router node ssh-keepalive inter-node`
 
@@ -13083,7 +19142,7 @@ Configure Inter Node
 | ------- | ----------- |
 | `delete` | Delete configuration data |
 | [`interval`](#configure-authority-router-node-ssh-keepalive-inter-node-interval) | Timeout interval in seconds to send keepalive from SSH client when an SSH connection is idle between nodes within a router. |
-| [`max-attempts`](#configure-authority-router-node-ssh-keepalive-inter-node-max-attempts) | Number of keepalive messages sent from SSH client before disconnecting an SSH onnection between nodes within a router. |
+| [`max-attempts`](#configure-authority-router-node-ssh-keepalive-inter-node-max-attempts) | Number of keepalive messages sent from SSH client before disconnecting an SSH connection between nodes within a router. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;inter-node&#x27; |
 
@@ -13105,11 +19164,21 @@ configure authority router node ssh-keepalive inter-node interval [<ssh-keepaliv
 
 #### Description
 
-Warning: a restart is required if interval is created, modified, or deleted
+Default: 1
+
+:::warning
+A restart is required if interval is created, modified, or deleted
+:::
+
+##### ssh-keepalive-interval (uint8)
+
+Timeout interval in seconds to send keepalive when an SSH connection is idle.
+
+Range: 1-10
 
 ## `configure authority router node ssh-keepalive inter-node max-attempts`
 
-Number of keepalive messages sent from SSH client before disconnecting an SSH onnection between nodes within a router.
+Number of keepalive messages sent from SSH client before disconnecting an SSH connection between nodes within a router.
 
 #### Usage
 
@@ -13125,7 +19194,17 @@ configure authority router node ssh-keepalive inter-node max-attempts [<ssh-keep
 
 #### Description
 
-Warning: a restart is required if max-attempts is created, modified, or deleted
+Default: 9
+
+:::warning
+A restart is required if max-attempts is created, modified, or deleted
+:::
+
+##### ssh-keepalive-max-attempts (uint8)
+
+Number of keepalive messages sent before disconnecting an SSH connection.
+
+Range: 1-20
 
 ## `configure authority router node ssh-keepalive inter-node-server`
 
@@ -13159,7 +19238,17 @@ configure authority router node ssh-keepalive inter-node-server interval [<ssh-k
 
 #### Description
 
-Warning: a restart is required if interval is created, modified, or deleted
+Default: 1
+
+:::warning
+A restart is required if interval is created, modified, or deleted
+:::
+
+##### ssh-keepalive-interval (uint8)
+
+Timeout interval in seconds to send keepalive when an SSH connection is idle.
+
+Range: 1-10
 
 ## `configure authority router node ssh-keepalive inter-node-server max-attempts`
 
@@ -13179,7 +19268,17 @@ configure authority router node ssh-keepalive inter-node-server max-attempts [<s
 
 #### Description
 
-Warning: a restart is required if max-attempts is created, modified, or deleted
+Default: 9
+
+:::warning
+A restart is required if max-attempts is created, modified, or deleted
+:::
+
+##### ssh-keepalive-max-attempts (uint8)
+
+Number of keepalive messages sent before disconnecting an SSH connection.
+
+Range: 1-20
 
 ## `configure authority router node ssh-keepalive inter-router`
 
@@ -13213,7 +19312,17 @@ configure authority router node ssh-keepalive inter-router interval [<ssh-keepal
 
 #### Description
 
-Warning: a restart is required if interval is created, modified, or deleted
+Default: 5
+
+:::warning
+A restart is required if interval is created, modified, or deleted
+:::
+
+##### ssh-keepalive-interval (uint8)
+
+Timeout interval in seconds to send keepalive when an SSH connection is idle.
+
+Range: 1-10
 
 ## `configure authority router node ssh-keepalive inter-router max-attempts`
 
@@ -13233,7 +19342,101 @@ configure authority router node ssh-keepalive inter-router max-attempts [<ssh-ke
 
 #### Description
 
-Warning: a restart is required if max-attempts is created, modified, or deleted
+Default: 4
+
+:::warning
+A restart is required if max-attempts is created, modified, or deleted
+:::
+
+##### ssh-keepalive-max-attempts (uint8)
+
+Number of keepalive messages sent before disconnecting an SSH connection.
+
+Range: 1-20
+
+## `configure authority router node ssh-settings`
+
+Configure SSH Settings
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`inter-node`](#configure-authority-router-node-ssh-settings-inter-node) | Configure Inter Node |
+| [`inter-router`](#configure-authority-router-node-ssh-settings-inter-router) | Configure Inter Router |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;ssh-settings&#x27; |
+
+## `configure authority router node ssh-settings inter-node`
+
+Configure Inter Node
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`host-key-checking`](#configure-authority-router-node-ssh-settings-inter-node-host-key-checking) | Whether or not to check the host key of the remote node when establishing an SSH connection between nodes within a router. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;inter-node&#x27; |
+
+## `configure authority router node ssh-settings inter-node host-key-checking`
+
+Whether or not to check the host key of the remote node when establishing an SSH connection between nodes within a router.
+
+#### Usage
+
+```
+configure authority router node ssh-settings inter-node host-key-checking [<ssh-host-key-checking>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ssh-host-key-checking | The value to set for this field |
+
+#### Description
+
+:::warning
+A restart is required if host-key-checking is created, modified, or deleted
+:::
+
+## `configure authority router node ssh-settings inter-router`
+
+Configure Inter Router
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`host-key-checking`](#configure-authority-router-node-ssh-settings-inter-router-host-key-checking) | Whether or not to check the host key of the remote node when establishing an SSH connection between the conductor and a managed router. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;inter-router&#x27; |
+
+## `configure authority router node ssh-settings inter-router host-key-checking`
+
+Whether or not to check the host key of the remote node when establishing an SSH connection between the conductor and a managed router.
+
+#### Usage
+
+```
+configure authority router node ssh-settings inter-router host-key-checking [<ssh-host-key-checking>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ssh-host-key-checking | The value to set for this field |
+
+#### Description
+
+:::warning
+A restart is required if host-key-checking is created, modified, or deleted
+:::
 
 ## `configure authority router node top-sessions`
 
@@ -13312,6 +19515,37 @@ configure authority router node top-sessions bandwidth session destination-ip [<
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router node top-sessions bandwidth session destination-port`
 
 The destination port of the session
@@ -13327,6 +19561,24 @@ configure authority router node top-sessions bandwidth session destination-port 
 | name | description |
 | ---- | ----------- |
 | port-number | The value to set for this field |
+
+#### Description
+
+##### port-number (uint16)
+
+The port-number type represents a 16-bit port number of an
+Internet transport layer protocol such as UDP, TCP, DCCP, or
+SCTP.  Port numbers are assigned by IANA.  A current list of
+all assignments is available from &lt;http://www.iana.org/&gt;.
+
+Note that the port number value zero is reserved by IANA.  In
+situations where the value zero does not make sense, it can
+be excluded by subtyping the port-number type.
+
+In the value set and its semantics, this type is equivalent
+to the InetPortNumber textual convention of the SMIv2.
+
+Range: 0-65535
 
 ## `configure authority router node top-sessions bandwidth session protocol`
 
@@ -13344,6 +19596,20 @@ configure authority router node top-sessions bandwidth session protocol [<protoc
 | ---- | ----------- |
 | protocol | The value to set for this field |
 
+#### Description
+
+##### protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
+
 ## `configure authority router node top-sessions bandwidth session service-name`
 
 The name of the service that created session
@@ -13359,6 +19625,15 @@ configure authority router node top-sessions bandwidth session service-name [<na
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router node top-sessions bandwidth session session-id`
 
@@ -13376,6 +19651,12 @@ configure authority router node top-sessions bandwidth session session-id [<sess
 | ---- | ----------- |
 | session-id | The value to set for this field |
 
+#### Description
+
+##### session-id (string)
+
+A globally-unique session identifier.
+
 ## `configure authority router node top-sessions bandwidth session source-ip`
 
 The source IP of the session
@@ -13391,6 +19672,37 @@ configure authority router node top-sessions bandwidth session source-ip [<ip-ad
 | name | description |
 | ---- | ----------- |
 | ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router node top-sessions bandwidth session source-port`
 
@@ -13408,6 +19720,24 @@ configure authority router node top-sessions bandwidth session source-port [<por
 | ---- | ----------- |
 | port-number | The value to set for this field |
 
+#### Description
+
+##### port-number (uint16)
+
+The port-number type represents a 16-bit port number of an
+Internet transport layer protocol such as UDP, TCP, DCCP, or
+SCTP.  Port numbers are assigned by IANA.  A current list of
+all assignments is available from &lt;http://www.iana.org/&gt;.
+
+Note that the port number value zero is reserved by IANA.  In
+situations where the value zero does not make sense, it can
+be excluded by subtyping the port-number type.
+
+In the value set and its semantics, this type is equivalent
+to the InetPortNumber textual convention of the SMIv2.
+
+Range: 0-65535
+
 ## `configure authority router node top-sessions bandwidth session tenant`
 
 The tenant in which the session originated
@@ -13423,6 +19753,15 @@ configure authority router node top-sessions bandwidth session tenant [<name-id>
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router node top-sessions bandwidth session value`
 
@@ -13440,6 +19779,14 @@ configure authority router node top-sessions bandwidth session value [<decimal64
 | ---- | ----------- |
 | decimal64 | The value to set for this field |
 
+#### Description
+
+##### decimal64
+
+A 64-bit decimal value.
+
+Fraction digits: 4
+
 ## `configure authority router node top-sessions bandwidth tstamp`
 
 Configure Tstamp
@@ -13455,6 +19802,12 @@ configure authority router node top-sessions bandwidth tstamp [<timestamp>]
 | name | description |
 | ---- | ----------- |
 | timestamp | The value to set for this field |
+
+#### Description
+
+##### timestamp (uint32)
+
+Number of seconds since UNIX epoch.
 
 ## `configure authority router path-mtu-discovery`
 
@@ -13486,6 +19839,16 @@ configure authority router path-mtu-discovery enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router path-mtu-discovery interval`
 
 Represents the frequency with which the peer-path MTU discovery is performed.
@@ -13505,6 +19868,14 @@ configure authority router path-mtu-discovery interval [<uint32>]
 #### Description
 
 Units: seconds
+
+Default: 600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router peer`
 
@@ -13552,6 +19923,15 @@ configure authority router peer authority-name [<authority-name>]
 | ---- | ----------- |
 | authority-name | The value to set for this field |
 
+#### Description
+
+##### authority-name (string) (required)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router peer bfd`
 
 BFD parameters for the peer router (deprecated). This is being replaced by BFD parameters in the neighborhood and adjacency in network-interfaces.
@@ -13577,7 +19957,9 @@ BFD parameters for the peer router (deprecated). This is being replaced by BFD p
 
 #### Description
 
-Warning: &#x27;bfd&#x27; is deprecated and will be removed in a future software version
+:::warning
+`bfd` is deprecated and will be removed in a future software version
+:::
 
 ## `configure authority router peer bfd authentication-type`
 
@@ -13597,7 +19979,19 @@ configure authority router peer bfd authentication-type [<enumeration>]
 
 #### Description
 
-Warning: &#x27;authentication-type&#x27; is deprecated and will be removed in a future software version
+Default: sha256
+
+:::warning
+`authentication-type` is deprecated and will be removed in a future software version
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- simple: Simple Password.
+- sha256: SHA256
 
 ## `configure authority router peer bfd desired-tx-interval`
 
@@ -13618,7 +20012,18 @@ configure authority router peer bfd desired-tx-interval [<uint32>]
 #### Description
 
 Units: milliseconds
-Warning: &#x27;desired-tx-interval&#x27; is deprecated and will be removed in a future software version
+
+Default: 1000
+
+:::warning
+`desired-tx-interval` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 50-600000
 
 ## `configure authority router peer bfd dscp`
 
@@ -13638,7 +20043,17 @@ configure authority router peer bfd dscp [<dscp>]
 
 #### Description
 
-Warning: &#x27;dscp&#x27; is deprecated and will be removed in a future software version
+Default: 0
+
+:::warning
+`dscp` is deprecated and will be removed in a future software version
+:::
+
+##### dscp (uint8)
+
+A DSCP value (0-63)
+
+Range: 0-63
 
 ## `configure authority router peer bfd dynamic-damping`
 
@@ -13658,7 +20073,19 @@ configure authority router peer bfd dynamic-damping [<enumeration>]
 
 #### Description
 
-Warning: &#x27;dynamic-damping&#x27; is deprecated and will be removed in a future software version
+Default: disabled
+
+:::warning
+`dynamic-damping` is deprecated and will be removed in a future software version
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled: Extend hold-down time exponentially if link flaps occur during hold-down time.
+- disabled: Use simple hold-down timer for every link up event.
 
 ## `configure authority router peer bfd hold-down-time`
 
@@ -13679,7 +20106,18 @@ configure authority router peer bfd hold-down-time [<uint32>]
 #### Description
 
 Units: seconds
-Warning: &#x27;hold-down-time&#x27; is deprecated and will be removed in a future software version
+
+Default: 5
+
+:::warning
+`hold-down-time` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-300
 
 ## `configure authority router peer bfd link-test-interval`
 
@@ -13700,7 +20138,18 @@ configure authority router peer bfd link-test-interval [<uint32>]
 #### Description
 
 Units: seconds
-Warning: &#x27;link-test-interval&#x27; is deprecated and will be removed in a future software version
+
+Default: 10
+
+:::warning
+`link-test-interval` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router peer bfd link-test-length`
 
@@ -13721,7 +20170,18 @@ configure authority router peer bfd link-test-length [<uint8>]
 #### Description
 
 Units: packets
-Warning: &#x27;link-test-length&#x27; is deprecated and will be removed in a future software version
+
+Default: 10
+
+:::warning
+`link-test-length` is deprecated and will be removed in a future software version
+:::
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router peer bfd maximum-hold-down-time`
 
@@ -13742,7 +20202,18 @@ configure authority router peer bfd maximum-hold-down-time [<uint32>]
 #### Description
 
 Units: seconds
-Warning: &#x27;maximum-hold-down-time&#x27; is deprecated and will be removed in a future software version
+
+Default: 3600
+
+:::warning
+`maximum-hold-down-time` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router peer bfd multiplier`
 
@@ -13762,7 +20233,17 @@ configure authority router peer bfd multiplier [<uint8>]
 
 #### Description
 
-Warning: &#x27;multiplier&#x27; is deprecated and will be removed in a future software version
+Default: 3
+
+:::warning
+`multiplier` is deprecated and will be removed in a future software version
+:::
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 3-20
 
 ## `configure authority router peer bfd required-min-rx-interval`
 
@@ -13783,7 +20264,16 @@ configure authority router peer bfd required-min-rx-interval [<uint32>]
 #### Description
 
 Units: milliseconds
-Warning: &#x27;required-min-rx-interval&#x27; is deprecated and will be removed in a future software version
+
+Default: 1000
+
+:::warning
+`required-min-rx-interval` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router peer bfd state`
 
@@ -13803,7 +20293,19 @@ configure authority router peer bfd state [<enumeration>]
 
 #### Description
 
-Warning: &#x27;state&#x27; is deprecated and will be removed in a future software version
+Default: enabled
+
+:::warning
+`state` is deprecated and will be removed in a future software version
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- enabled: BFD is enabled on all nodes of this router.
+- disabled: BFD is disabled on all nodes of this router.
 
 ## `configure authority router peer description`
 
@@ -13821,6 +20323,12 @@ configure authority router peer description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router peer generated`
 
 Indicates whether or not the Peer was automatically generated as a result of routers existing in the same neighborhood.
@@ -13836,6 +20344,14 @@ configure authority router peer generated [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router peer name`
 
@@ -13853,6 +20369,16 @@ configure authority router peer name [<peer-name>]
 | ---- | ----------- |
 | peer-name | The value to set for this field |
 
+#### Description
+
+##### peer-name (string)
+
+A string identifier for a peer, which uses alphanumerics, underscores, dots, or dashes, and cannot exceed 253 characters.
+
+Must contain only alphanumeric characters or any of the following: - _ .
+(e.g., MyFirst-SSR-Router).
+Length: 0-253
+
 ## `configure authority router peer router-name`
 
 Name of the peer router.
@@ -13868,6 +20394,15 @@ configure authority router peer router-name [<router-name>]
 | name | description |
 | ---- | ----------- |
 | router-name | The value to set for this field |
+
+#### Description
+
+##### router-name (string) (required)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router rate-limit-policy`
 
@@ -13931,6 +20466,12 @@ configure authority router rate-limit-policy download-settings max-burst [<uint6
 
 Units: bits
 
+##### uint64 (required)
+
+An unsigned 64-bit integer.
+
+Range: 0-107374182400
+
 ## `configure authority router rate-limit-policy download-settings max-rate`
 
 Limit the maximum rate to this value.
@@ -13951,6 +20492,12 @@ configure authority router rate-limit-policy download-settings max-rate [<uint64
 
 Units: bits/second
 
+##### uint64 (required)
+
+An unsigned 64-bit integer.
+
+Range: 0-107374182400
+
 ## `configure authority router rate-limit-policy mode`
 
 Configure Mode
@@ -13967,6 +20514,18 @@ configure authority router rate-limit-policy mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: per-service
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- per-service: Apply this rate limit policy at a per-service granularity.
+- shared: This rate limit policy may be shared across different services.
+
 ## `configure authority router rate-limit-policy name`
 
 The name for the rate limit policy.
@@ -13982,6 +20541,15 @@ configure authority router rate-limit-policy name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router rate-limit-policy upload-settings`
 
@@ -14017,6 +20585,12 @@ configure authority router rate-limit-policy upload-settings max-burst [<uint64>
 
 Units: bits
 
+##### uint64 (required)
+
+An unsigned 64-bit integer.
+
+Range: 0-107374182400
+
 ## `configure authority router rate-limit-policy upload-settings max-rate`
 
 Limit the maximum rate to this value.
@@ -14036,6 +20610,12 @@ configure authority router rate-limit-policy upload-settings max-rate [<uint64>]
 #### Description
 
 Units: bits/second
+
+##### uint64 (required)
+
+An unsigned 64-bit integer.
+
+Range: 0-107374182400
 
 ## `configure authority router reachability-profile`
 
@@ -14080,6 +20660,12 @@ configure authority router reachability-profile name [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router reachability-profile protocol`
 
 Reachability-detection enforcement for a protocol
@@ -14122,6 +20708,17 @@ configure authority router reachability-profile protocol protocol-type [<reachab
 | name | description |
 | ---- | ----------- |
 | reachability-profile-protocol | The value to set for this field |
+
+#### Description
+
+##### reachability-profile-protocol (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- tcp: Traffic profile settings for TCP
+- tls: Traffic profile settings for TLS
+- udp: Traffic profile settings for UDP
 
 ## `configure authority router reachability-profile protocol traffic-class`
 
@@ -14171,6 +20768,14 @@ configure authority router reachability-profile protocol traffic-class acceptabl
 
 Units: percent
 
+Default: 25
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority router reachability-profile protocol traffic-class enabled`
 
 Enable reachability-detection enforcment for this protocol and traffic class
@@ -14186,6 +20791,16 @@ configure authority router reachability-profile protocol traffic-class enabled [
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router reachability-profile protocol traffic-class time-to-establishment`
 
@@ -14218,6 +20833,16 @@ configure authority router reachability-profile protocol traffic-class time-to-e
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router reachability-profile protocol traffic-class time-to-establishment max`
 
 Maximum acceptable session time-to-establishment in the detection window
@@ -14237,6 +20862,12 @@ configure authority router reachability-profile protocol traffic-class time-to-e
 #### Description
 
 Units: milliseconds
+
+Default: 500
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router reachability-profile protocol traffic-class time-to-establishment mean`
 
@@ -14258,6 +20889,12 @@ configure authority router reachability-profile protocol traffic-class time-to-e
 
 Units: milliseconds
 
+Default: 250
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router reachability-profile protocol traffic-class traffic-class-id`
 
 Type of traffic-class to enforce
@@ -14273,6 +20910,18 @@ configure authority router reachability-profile protocol traffic-class traffic-c
 | name | description |
 | ---- | ----------- |
 | net-traffic-class | The value to set for this field |
+
+#### Description
+
+##### net-traffic-class (enumeration)
+
+Relative priority of traffic.
+
+Options:
+- high: High priority traffic class.
+- medium: Medium priority traffic class.
+- low: Low priority traffic class.
+- best-effort: Best-effort priority traffic class.
 
 ## `configure authority router redundancy-group`
 
@@ -14319,6 +20968,12 @@ configure authority router redundancy-group description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router redundancy-group member`
 
 Configure Member
@@ -14361,6 +21016,12 @@ configure authority router redundancy-group member device-id [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router redundancy-group member node`
 
 Name of the node the interface is on.
@@ -14376,6 +21037,12 @@ configure authority router redundancy-group member node [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router redundancy-group name`
 
@@ -14393,6 +21060,15 @@ configure authority router redundancy-group name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router redundancy-group priority`
 
 Priority of member interfaces relative to their redundant interfaces. Higher priority interfaces take precedence.
@@ -14408,6 +21084,14 @@ configure authority router redundancy-group priority [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8 (required)
+
+An unsigned 8-bit integer.
+
+Range: 0-100
 
 ## `configure authority router resource-group`
 
@@ -14425,6 +21109,12 @@ configure authority router resource-group [<resource-group-ref>]
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
 
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
 ## `configure authority router reverse-flow-enforcement`
 
 When to enforce biflow reverse fib entry check
@@ -14440,6 +21130,18 @@ configure authority router reverse-flow-enforcement [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none: Do not perform reverse fib entry lookup to set up reverse flow
+- strict: Perform strict uRPF check on reverse fib entry next hop to set up reverse flow
 
 ## `configure authority router reverse-packet-session-resiliency`
 
@@ -14476,6 +21178,14 @@ configure authority router reverse-packet-session-resiliency detection-interval 
 
 Units: seconds
 
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-30
+
 ## `configure authority router reverse-packet-session-resiliency enabled`
 
 Whether reverse packet triggered failover is enabled on this router when session resiliency is set.
@@ -14491,6 +21201,16 @@ configure authority router reverse-packet-session-resiliency enabled [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router reverse-packet-session-resiliency minimum-packet-count`
 
@@ -14512,6 +21232,14 @@ configure authority router reverse-packet-session-resiliency minimum-packet-coun
 
 Units: packets
 
+Default: 3
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-999999
+
 ## `configure authority router router-group`
 
 Logical group of routers for filtering services.
@@ -14527,6 +21255,15 @@ configure authority router router-group [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | Value to add to this list |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority router routing`
 
@@ -14559,6 +21296,7 @@ configure authority router routing <type>
 | [`ospf`](#configure-authority-router-routing-ospf) | OSPF instance configuration |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pim`](#configure-authority-router-routing-pim) | PIM configuration |
+| [`rib-policy`](#configure-authority-router-routing-rib-policy) | List of protocol specific RIB policies |
 | [`routing-protocol`](#configure-authority-router-routing-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-service-admin-distance) | Administrative distance for routes generated from services. |
 | `show` | Show configuration data for &#x27;routing&#x27; |
@@ -14651,6 +21389,7 @@ Debug BGP commands.
 | `show` | Show configuration data for &#x27;bgp&#x27; |
 | [`update-groups`](#configure-authority-router-routing-debug-bgp-update-groups) | Debug BGP update groups. |
 | [`updates`](#configure-authority-router-routing-debug-bgp-updates) | Debug BGP update. |
+| [`vpn`](#configure-authority-router-routing-debug-bgp-vpn) | Debug BGP VPN. |
 
 ## `configure authority router routing debug bgp bestpath`
 
@@ -14680,6 +21419,53 @@ configure authority router routing debug bgp bestpath prefix [<ip-prefix>]
 | name | description |
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
+
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
 
 ## `configure authority router routing debug bgp bfd`
 
@@ -14789,6 +21575,16 @@ configure authority router routing debug bgp updates in [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing debug bgp updates out`
 
 Debug BGP updates out.
@@ -14804,6 +21600,16 @@ configure authority router routing debug bgp updates out [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing debug bgp updates prefix`
 
@@ -14821,6 +21627,89 @@ configure authority router routing debug bgp updates prefix [<ip-prefix>]
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
+## `configure authority router routing debug bgp vpn`
+
+Debug BGP VPN.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`leak-from-vrf`](#configure-authority-router-routing-debug-bgp-vpn-leak-from-vrf) | Debug BGP leak from VRF events. |
+| [`leak-to-vrf`](#configure-authority-router-routing-debug-bgp-vpn-leak-to-vrf) | Debug BGP leak to VRF events. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;vpn&#x27; |
+
+## `configure authority router routing debug bgp vpn leak-from-vrf`
+
+Debug BGP leak from VRF events.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;leak-from-vrf&#x27; |
+
+## `configure authority router routing debug bgp vpn leak-to-vrf`
+
+Debug BGP leak to VRF events.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;leak-to-vrf&#x27; |
+
 ## `configure authority router routing debug ospf`
 
 Debug OSPF commands.
@@ -14833,6 +21722,7 @@ Debug OSPF commands.
 | [`default-information`](#configure-authority-router-routing-debug-ospf-default-information) | Debug OSPF default information. |
 | `delete` | Delete configuration data |
 | [`events`](#configure-authority-router-routing-debug-ospf-events) | Debug OSPF events. |
+| [`graceful-restart`](#configure-authority-router-routing-debug-ospf-graceful-restart) | Debug OSPF graceful restart. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;ospf&#x27; |
 
@@ -14868,6 +21758,17 @@ Debug OSPF events.
 | ------- | ----------- |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;events&#x27; |
+
+## `configure authority router routing debug ospf graceful-restart`
+
+Debug OSPF graceful restart.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;graceful-restart&#x27; |
 
 ## `configure authority router routing debug rib`
 
@@ -15017,6 +21918,12 @@ configure authority router routing description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router routing igmp`
 
 IGMP configuration
@@ -15077,6 +21984,12 @@ configure authority router routing igmp interface interface [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing igmp interface join`
 
 List of Groups to join
@@ -15119,6 +22032,14 @@ configure authority router routing igmp interface join group [<multicast-ipv4-ad
 | ---- | ----------- |
 | multicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### multicast-ipv4-address (string)
+
+A multicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing igmp interface join source`
 
 IPv4 address of the Source to Join
@@ -15134,6 +22055,14 @@ configure authority router routing igmp interface join source [<unicast-ipv4-add
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv4-address (string)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing igmp interface node`
 
@@ -15151,6 +22080,12 @@ configure authority router routing igmp interface node [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing igmp interface version`
 
 IGMP Version
@@ -15166,6 +22101,16 @@ configure authority router routing igmp interface version [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-3
 
 ## `configure authority router routing interface`
 
@@ -15210,6 +22155,16 @@ configure authority router routing interface enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing interface ip-address`
 
 The IP address of the interface.
@@ -15226,6 +22181,38 @@ configure authority router routing interface ip-address [<ip-address>]
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
 ## `configure authority router routing interface name`
 
 An arbitrary, unique name for the routing interface, used to reference it in other routing configuration sections.
@@ -15241,6 +22228,16 @@ configure authority router routing interface name [<bridge-name>]
 | name | description |
 | ---- | ----------- |
 | bridge-name | The value to set for this field |
+
+#### Description
+
+##### bridge-name (string)
+
+A string identifier for bridge-name which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters.
+
+Must contain only alphanumeric characters, start with a alphabet and can contain any of the following: _ -
+The name &#x27;lo&#x27; is reserved.
+Length: 0-15
 
 ## `configure authority router routing mist-events`
 
@@ -15283,6 +22280,16 @@ configure authority router routing mist-events bgp enable [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing msdp`
 
@@ -15343,6 +22350,12 @@ configure authority router routing msdp mesh-group auth-password [<password>]
 | ---- | ----------- |
 | password | The value to set for this field |
 
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
+
 ## `configure authority router routing msdp mesh-group member`
 
 IPv4 address of the Mesh-group member
@@ -15358,6 +22371,14 @@ configure authority router routing msdp mesh-group member [<unicast-ipv4-address
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | Value to add to this list |
+
+#### Description
+
+##### unicast-ipv4-address (string)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing msdp mesh-group name`
 
@@ -15375,6 +22396,15 @@ configure authority router routing msdp mesh-group name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router routing msdp mesh-group source`
 
 Source Address for the mesh-group
@@ -15390,6 +22420,14 @@ configure authority router routing msdp mesh-group source [<unicast-ipv4-address
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv4-address (string) (required)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing msdp peer`
 
@@ -15434,6 +22472,14 @@ configure authority router routing msdp peer address [<unicast-ipv4-address>]
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### unicast-ipv4-address (string)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing msdp peer auth-password`
 
 Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups.
@@ -15450,6 +22496,12 @@ configure authority router routing msdp peer auth-password [<password>]
 | ---- | ----------- |
 | password | The value to set for this field |
 
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
+
 ## `configure authority router routing msdp peer source`
 
 Source Address for the peer adjacency
@@ -15465,6 +22517,14 @@ configure authority router routing msdp peer source [<unicast-ipv4-address>]
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv4-address (string) (required)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing ospf`
 
@@ -15491,6 +22551,7 @@ configure authority router routing ospf <instance>
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`distance`](#configure-authority-router-routing-ospf-distance) | OSPF route administrative distance |
+| [`graceful-restart`](#configure-authority-router-routing-ospf-graceful-restart) | Enable OSPF graceful restart |
 | [`instance`](#configure-authority-router-routing-ospf-instance) | Number of OSPF instance |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`redistribute`](#configure-authority-router-routing-ospf-redistribute) | List of routing protocols to redistribute into OSPF |
@@ -15531,6 +22592,16 @@ configure authority router routing ospf advertise-default always [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing ospf advertise-default metric`
 
 Advertised metric of the default route
@@ -15546,6 +22617,14 @@ configure authority router routing ospf advertise-default metric [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-16777214
 
 ## `configure authority router routing ospf advertise-default metric-type`
 
@@ -15563,6 +22642,18 @@ configure authority router routing ospf advertise-default metric-type [<ospf-ext
 | ---- | ----------- |
 | ospf-external-metric-type | The value to set for this field |
 
+#### Description
+
+Default: type-2
+
+##### ospf-external-metric-type (enumeration)
+
+OSPF external metric type
+
+Options:
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
+
 ## `configure authority router routing ospf advertise-default policy`
 
 A policy to apply to the default route
@@ -15578,6 +22669,12 @@ configure authority router routing ospf advertise-default policy [<policy-ref>]
 | name | description |
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing ospf area`
 
@@ -15628,6 +22725,19 @@ configure authority router routing ospf area authentication-type [<area-authenti
 | ---- | ----------- |
 | area-authentication-type | The value to set for this field |
 
+#### Description
+
+Default: none
+
+##### area-authentication-type (enumeration)
+
+OSPF area authentication. Can be overriden by interface authentication.
+
+Options:
+- none: No authentication
+- simple: Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
+
 ## `configure authority router routing ospf area default-cost`
 
 Set the summary default route cost for a stub or NSSA area.
@@ -15644,6 +22754,16 @@ configure authority router routing ospf area default-cost [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-16777215
+
 ## `configure authority router routing ospf area id`
 
 Area ID
@@ -15659,6 +22779,12 @@ configure authority router routing ospf area id [<area-id-type>]
 | name | description |
 | ---- | ----------- |
 | area-id-type | The value to set for this field |
+
+#### Description
+
+##### area-id-type (string)
+
+Area ID type.
 
 ## `configure authority router routing ospf area interface`
 
@@ -15714,6 +22840,20 @@ configure authority router routing ospf area interface authentication-type [<int
 | ---- | ----------- |
 | interface-authentication-type | The value to set for this field |
 
+#### Description
+
+Default: area
+
+##### interface-authentication-type (enumeration)
+
+OSPF interface authentication type
+
+Options:
+- area: Use area authentication type
+- none: No interface authentication
+- simple: Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
+
 ## `configure authority router routing ospf area interface bfd`
 
 BFD Client Configuration.
@@ -15750,6 +22890,14 @@ configure authority router routing ospf area interface bfd desired-tx-interval [
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing ospf area interface bfd enable`
 
 Enable/Disable BFD protocol
@@ -15766,6 +22914,16 @@ configure authority router routing ospf area interface bfd enable [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing ospf area interface bfd multiplier`
 
 The number of BFD packets that can be lost without the BFD session declared as down.
@@ -15781,6 +22939,16 @@ configure authority router routing ospf area interface bfd multiplier [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-255
 
 ## `configure authority router routing ospf area interface bfd required-min-rx-interval`
 
@@ -15802,6 +22970,14 @@ configure authority router routing ospf area interface bfd required-min-rx-inter
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing ospf area interface cost`
 
 Interface cost
@@ -15817,6 +22993,16 @@ configure authority router routing ospf area interface cost [<uint16>]
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+
+#### Description
+
+Default: 10
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
 
 ## `configure authority router routing ospf area interface dead-interval`
 
@@ -15838,6 +23024,14 @@ configure authority router routing ospf area interface dead-interval [<uint32>]
 
 Units: seconds
 
+Default: 40
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-2147483647
+
 ## `configure authority router routing ospf area interface hello-interval`
 
 Interval between hello packets (seconds).
@@ -15858,6 +23052,14 @@ configure authority router routing ospf area interface hello-interval [<uint16>]
 
 Units: seconds
 
+Default: 10
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
+
 ## `configure authority router routing ospf area interface interface`
 
 Network interface name
@@ -15873,6 +23075,12 @@ configure authority router routing ospf area interface interface [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing ospf area interface message-digest-key`
 
@@ -15916,6 +23124,14 @@ configure authority router routing ospf area interface message-digest-key id [<u
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing ospf area interface message-digest-key key`
 
 Message digest secret key
@@ -15931,6 +23147,14 @@ configure authority router routing ospf area interface message-digest-key key [<
 | name | description |
 | ---- | ----------- |
 | routing-password-type | The value to set for this field |
+
+#### Description
+
+##### routing-password-type (string)
+
+A routing engine password that is hidden from the UI.
+
+Invalid whitespace or other unrecognized character.
 
 ## `configure authority router routing ospf area interface network-type`
 
@@ -15948,6 +23172,19 @@ configure authority router routing ospf area interface network-type [<interface-
 | ---- | ----------- |
 | interface-network-type | The value to set for this field |
 
+#### Description
+
+Default: unspecified
+
+##### interface-network-type (enumeration)
+
+OSPF interface network type
+
+Options:
+- unspecified: Unspecified network type
+- broadcast: Broadcast network
+- point-to-point: Point-to-point network
+
 ## `configure authority router routing ospf area interface node`
 
 Interface node name
@@ -15963,6 +23200,12 @@ configure authority router routing ospf area interface node [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing ospf area interface passive`
 
@@ -15980,6 +23223,16 @@ configure authority router routing ospf area interface passive [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing ospf area interface password`
 
 OSPF simple authentication password
@@ -15996,6 +23249,14 @@ configure authority router routing ospf area interface password [<routing-passwo
 | ---- | ----------- |
 | routing-password-type | The value to set for this field |
 
+#### Description
+
+##### routing-password-type (string)
+
+A routing engine password that is hidden from the UI.
+
+Invalid whitespace or other unrecognized character.
+
 ## `configure authority router routing ospf area interface priority`
 
 Router priority
@@ -16011,6 +23272,16 @@ configure authority router routing ospf area interface priority [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 1
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router routing ospf area routing-interface`
 
@@ -16054,6 +23325,16 @@ configure authority router routing ospf area routing-interface cost [<uint16>]
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+Default: 10
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
+
 ## `configure authority router routing ospf area routing-interface routing-interface`
 
 Routing interface name
@@ -16070,6 +23351,12 @@ configure authority router routing ospf area routing-interface routing-interface
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing ospf area summary-advertisement`
 
 Enable/Disable summary advertisement into the stub or NSSA area.
@@ -16085,6 +23372,16 @@ configure authority router routing ospf area summary-advertisement [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing ospf area summary-range`
 
@@ -16129,6 +23426,16 @@ configure authority router routing ospf area summary-range advertise [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing ospf area summary-range cost`
 
 Advertised cost of summary route
@@ -16144,6 +23451,14 @@ configure authority router routing ospf area summary-range cost [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-16777214
 
 ## `configure authority router routing ospf area summary-range prefix`
 
@@ -16161,6 +23476,53 @@ configure authority router routing ospf area summary-range prefix [<ip-prefix>]
 | ---- | ----------- |
 | ip-prefix | The value to set for this field |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority router routing ospf area type`
 
 Area type
@@ -16176,6 +23538,19 @@ configure authority router routing ospf area type [<area-type>]
 | name | description |
 | ---- | ----------- |
 | area-type | The value to set for this field |
+
+#### Description
+
+Default: normal
+
+##### area-type (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- normal: OSPF normal area
+- stub: OSPF stub area
+- nssa: OSPF Not-So-Stubby Area (NSSA)
 
 ## `configure authority router routing ospf distance`
 
@@ -16208,6 +23583,16 @@ configure authority router routing ospf distance external [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 110
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing ospf distance inter-area`
 
 Administrative distance for inter-area OSPF routes
@@ -16223,6 +23608,16 @@ configure authority router routing ospf distance inter-area [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 110
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
 
 ## `configure authority router routing ospf distance intra-area`
 
@@ -16240,6 +23635,106 @@ configure authority router routing ospf distance intra-area [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 110
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
+## `configure authority router routing ospf graceful-restart`
+
+Enable OSPF graceful restart
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`helper`](#configure-authority-router-routing-ospf-graceful-restart-helper) | OSPF graceful restart helper support |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`restart-time`](#configure-authority-router-routing-ospf-graceful-restart-restart-time) | OSPF graceful restart duration |
+| `show` | Show configuration data for &#x27;graceful-restart&#x27; |
+
+## `configure authority router routing ospf graceful-restart helper`
+
+OSPF graceful restart helper support
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`helper-restart-time`](#configure-authority-router-routing-ospf-graceful-restart-helper-helper-restart-time) | Helper support graceful restart duration |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;helper&#x27; |
+| [`strict-lsa-checking`](#configure-authority-router-routing-ospf-graceful-restart-helper-strict-lsa-checking) | When enabled, helper will abort graceful restart if a LSA change occurs that affects the restarting router |
+
+## `configure authority router routing ospf graceful-restart helper helper-restart-time`
+
+Helper support graceful restart duration
+
+#### Usage
+
+```
+configure authority router routing ospf graceful-restart helper helper-restart-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+## `configure authority router routing ospf graceful-restart helper strict-lsa-checking`
+
+When enabled, helper will abort graceful restart if a LSA change occurs that affects the restarting router
+
+#### Usage
+
+```
+configure authority router routing ospf graceful-restart helper strict-lsa-checking [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Units: seconds
+Range: 10-1800
+Default: 120
+
+## `configure authority router routing ospf graceful-restart restart-time`
+
+OSPF graceful restart duration
+
+#### Usage
+
+```
+configure authority router routing ospf graceful-restart restart-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
 ## `configure authority router routing ospf instance`
 
 Number of OSPF instance
@@ -16255,6 +23750,14 @@ configure authority router routing ospf instance [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-8
 
 ## `configure authority router routing ospf redistribute`
 
@@ -16300,6 +23803,14 @@ configure authority router routing ospf redistribute metric [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-16777214
+
 ## `configure authority router routing ospf redistribute metric-type`
 
 Advertised metric type of redistributed route
@@ -16315,6 +23826,18 @@ configure authority router routing ospf redistribute metric-type [<ospf-external
 | name | description |
 | ---- | ----------- |
 | ospf-external-metric-type | The value to set for this field |
+
+#### Description
+
+Default: type-2
+
+##### ospf-external-metric-type (enumeration)
+
+OSPF external metric type
+
+Options:
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
 
 ## `configure authority router routing ospf redistribute policy`
 
@@ -16332,6 +23855,12 @@ configure authority router routing ospf redistribute policy [<policy-ref>]
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing ospf redistribute protocol`
 
 The routing protocol to redistribute into OSPF
@@ -16348,6 +23877,18 @@ configure authority router routing ospf redistribute protocol [<redistribute-int
 | ---- | ----------- |
 | redistribute-into-ospf | The value to set for this field |
 
+#### Description
+
+##### redistribute-into-ospf (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- bgp: BGP routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+
 ## `configure authority router routing ospf router-id`
 
 Defined in RFC 2328. A 32-bit number that uniquely identifies the router
@@ -16363,6 +23904,12 @@ configure authority router routing ospf router-id [<dotted-quad>]
 | name | description |
 | ---- | ----------- |
 | dotted-quad | The value to set for this field |
+
+#### Description
+
+##### dotted-quad (string)
+
+An unsigned 32-bit number expressed in the dotted-quad notation, i.e., four octets written as decimal numbers and separated with the &#x27;.&#x27; (full stop) character.
 
 ## `configure authority router routing ospf timers`
 
@@ -16412,6 +23959,14 @@ configure authority router routing ospf timers spf delay [<uint32>]
 
 Units: milliseconds
 
+Default: 0
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-600000
+
 ## `configure authority router routing ospf timers spf hold-time`
 
 Adaptive hold-time.
@@ -16431,6 +23986,14 @@ configure authority router routing ospf timers spf hold-time [<uint32>]
 #### Description
 
 Units: milliseconds
+
+Default: 5000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-600000
 
 ## `configure authority router routing ospf timers spf maximum-hold-time`
 
@@ -16452,6 +24015,14 @@ configure authority router routing ospf timers spf maximum-hold-time [<uint32>]
 
 Units: milliseconds
 
+Default: 30000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-600000
+
 ## `configure authority router routing ospf version`
 
 OSPF version
@@ -16467,6 +24038,18 @@ configure authority router routing ospf version [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: ospfv2
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ospfv2
+- ospfv3
 
 ## `configure authority router routing pim`
 
@@ -16528,6 +24111,16 @@ configure authority router routing pim interface dr-priority [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-4294967295
+
 ## `configure authority router routing pim interface hello-interval`
 
 Configure Hello Interval
@@ -16548,6 +24141,14 @@ configure authority router routing pim interface hello-interval [<uint8>]
 
 Units: seconds
 
+Default: 30
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing pim interface interface`
 
 Network interface name
@@ -16564,6 +24165,12 @@ configure authority router routing pim interface interface [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing pim interface node`
 
 Interface node name
@@ -16579,6 +24186,12 @@ configure authority router routing pim interface node [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing pim rp`
 
@@ -16622,6 +24235,14 @@ configure authority router routing pim rp address [<unicast-ipv4-address>]
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### unicast-ipv4-address (string) (required)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing pim rp group-range`
 
 Multicast Group address range for this RP
@@ -16637,6 +24258,88 @@ configure authority router routing pim rp group-range [<multicast-ipv4-prefix>]
 | name | description |
 | ---- | ----------- |
 | multicast-ipv4-prefix | The value to set for this field |
+
+#### Description
+
+##### multicast-ipv4-prefix (string)
+
+A multicast IPv4 prefix
+
+## `configure authority router routing rib-policy`
+
+List of protocol specific RIB policies
+
+#### Usage
+
+```
+configure authority router routing rib-policy <family> <protocol>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | The routing protocol address family |
+| protocol | The routing protocol RIB policy |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`family`](#configure-authority-router-routing-rib-policy-family) | The routing protocol address family |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-rib-policy-policy) | A policy to apply to the protocol route |
+| [`protocol`](#configure-authority-router-routing-rib-policy-protocol) | The routing protocol RIB policy |
+| `show` | Show configuration data for &#x27;rib-policy&#x27; |
+
+## `configure authority router routing rib-policy family`
+
+The routing protocol address family
+
+#### Usage
+
+```
+configure authority router routing rib-policy family [<rib-family>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-family | The value to set for this field |
+
+## `configure authority router routing rib-policy policy`
+
+A policy to apply to the protocol route
+
+#### Usage
+
+```
+configure authority router routing rib-policy policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+## `configure authority router routing rib-policy protocol`
+
+The routing protocol RIB policy
+
+#### Usage
+
+```
+configure authority router routing rib-policy protocol [<rib-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-protocol | The value to set for this field |
 
 ## `configure authority router routing routing-protocol`
 
@@ -16727,6 +24430,18 @@ configure authority router routing routing-protocol address-family afi-safi [<id
 | ---- | ----------- |
 | identityref | The value to set for this field |
 
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
+
 ## `configure authority router routing routing-protocol address-family aggregate-address`
 
 Address prefixes to aggregate
@@ -16750,6 +24465,7 @@ configure authority router routing routing-protocol address-family aggregate-add
 | [`as-set`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-as-set) | Generate as-set information for the resultant aggregate |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-policy) | a policy to apply to the aggregate route |
 | [`prefix`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-prefix) | The prefix to aggregate from |
 | `show` | Show configuration data for &#x27;aggregate-address&#x27; |
 | [`summary-only`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-summary-only) | Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised |
@@ -16770,6 +24486,32 @@ configure authority router routing routing-protocol address-family aggregate-add
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
+## `configure authority router routing routing-protocol address-family aggregate-address policy`
+
+a policy to apply to the aggregate route
+
+#### Usage
+
+```
+configure authority router routing routing-protocol address-family aggregate-address policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
 ## `configure authority router routing routing-protocol address-family aggregate-address prefix`
 
 The prefix to aggregate from
@@ -16786,6 +24528,22 @@ configure authority router routing routing-protocol address-family aggregate-add
 | ---- | ----------- |
 | not-host-ip-prefix | The value to set for this field |
 
+#### Description
+
+##### not-host-ip-prefix (union)
+
+A not host IPv4 or IPv6 prefix
+
+Must be one of the following types:
+
+###### (0) not-host-ipv4-prefix (string)
+
+A not host IPv4 prefix
+
+###### (1) not-host-ipv6-prefix (string)
+
+A not host IPv6 prefix
+
 ## `configure authority router routing routing-protocol address-family aggregate-address summary-only`
 
 Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised
@@ -16801,6 +24559,16 @@ configure authority router routing routing-protocol address-family aggregate-add
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol address-family default-route-distance`
 
@@ -16833,6 +24601,16 @@ configure authority router routing routing-protocol address-family default-route
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 20
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing routing-protocol address-family default-route-distance internal`
 
 Administrative distance for routes learned from internal BGP (iBGP).
@@ -16848,6 +24626,16 @@ configure authority router routing routing-protocol address-family default-route
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 200
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
 
 ## `configure authority router routing routing-protocol address-family default-route-distance local`
 
@@ -16865,6 +24653,16 @@ configure authority router routing routing-protocol address-family default-route
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 200
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing routing-protocol address-family graceful-restart`
 
 Configuration parameters relating to BGP graceful restart.
@@ -16881,7 +24679,9 @@ Configuration parameters relating to BGP graceful restart.
 
 #### Description
 
-Warning: &#x27;graceful-restart&#x27; is deprecated and will be removed in a future software version
+:::warning
+`graceful-restart` is deprecated and will be removed in a future software version
+:::
 
 ## `configure authority router routing routing-protocol address-family graceful-restart restart-time`
 
@@ -16902,7 +24702,16 @@ configure authority router routing routing-protocol address-family graceful-rest
 #### Description
 
 Units: seconds
-Warning: &#x27;restart-time&#x27; is deprecated and will be removed in a future software version
+
+:::warning
+`restart-time` is deprecated and will be removed in a future software version
+:::
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-4096
 
 ## `configure authority router routing routing-protocol address-family graceful-restart stale-routes-time`
 
@@ -16923,7 +24732,16 @@ configure authority router routing routing-protocol address-family graceful-rest
 #### Description
 
 Units: seconds
-Warning: &#x27;stale-routes-time&#x27; is deprecated and will be removed in a future software version
+
+:::warning
+`stale-routes-time` is deprecated and will be removed in a future software version
+:::
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-3600
 
 ## `configure authority router routing routing-protocol address-family network`
 
@@ -16967,6 +24785,53 @@ configure authority router routing routing-protocol address-family network netwo
 | ---- | ----------- |
 | ip-prefix | The value to set for this field |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority router routing routing-protocol address-family network policy`
 
 a policy to apply to the imported route
@@ -16982,6 +24847,12 @@ configure authority router routing routing-protocol address-family network polic
 | name | description |
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing routing-protocol address-family redistribute`
 
@@ -17025,6 +24896,12 @@ configure authority router routing routing-protocol address-family redistribute 
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol address-family redistribute protocol`
 
 The routing protocol to redistribute into BGP
@@ -17040,6 +24917,18 @@ configure authority router routing routing-protocol address-family redistribute 
 | name | description |
 | ---- | ----------- |
 | redistribute-into-bgp | The value to set for this field |
+
+#### Description
+
+##### redistribute-into-bgp (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
 
 ## `configure authority router routing routing-protocol address-family use-multiple-paths`
 
@@ -17088,6 +24977,14 @@ configure authority router routing routing-protocol address-family use-multiple-
 
 Units: paths
 
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-64
+
 ## `configure authority router routing routing-protocol address-family use-multiple-paths ibgp`
 
 Multipath parameters for iBGP
@@ -17121,6 +25018,14 @@ configure authority router routing routing-protocol address-family use-multiple-
 
 Units: paths
 
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-64
+
 ## `configure authority router routing routing-protocol address-family vpn-export`
 
 Configure Vpn Export
@@ -17152,6 +25057,12 @@ configure authority router routing routing-protocol address-family vpn-export ex
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol address-family vpn-export route-distinguisher`
 
 Route Distinguisher for vpn export
@@ -17168,6 +25079,43 @@ configure authority router routing routing-protocol address-family vpn-export ro
 | ---- | ----------- |
 | set-extended-community | The value to set for this field |
 
+#### Description
+
+##### set-extended-community (union) (required)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string (required)
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string (required)
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string (required)
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
+
 ## `configure authority router routing routing-protocol address-family vpn-export vpn-export-route-target`
 
 Route Target list for vpn export
@@ -17183,6 +25131,43 @@ configure authority router routing routing-protocol address-family vpn-export vp
 | name | description |
 | ---- | ----------- |
 | set-extended-community | Value to add to this list |
+
+#### Description
+
+##### set-extended-community (union) (required)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string (required)
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string (required)
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string (required)
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
 
 ## `configure authority router routing routing-protocol address-family vpn-import`
 
@@ -17214,6 +25199,12 @@ configure authority router routing routing-protocol address-family vpn-import im
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol address-family vpn-import vpn-import-route-target`
 
 Route Target list for vpn import
@@ -17230,6 +25221,43 @@ configure authority router routing routing-protocol address-family vpn-import vp
 | ---- | ----------- |
 | set-extended-community | Value to add to this list |
 
+#### Description
+
+##### set-extended-community (union) (required)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string (required)
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string (required)
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string (required)
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
+
 ## `configure authority router routing routing-protocol cluster-id`
 
 Route reflector cluster id.
@@ -17245,6 +25273,14 @@ configure authority router routing routing-protocol cluster-id [<ipv4-address>]
 | name | description |
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
+
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing routing-protocol conditional-advertisement`
 
@@ -17279,6 +25315,14 @@ configure authority router routing routing-protocol conditional-advertisement in
 
 Units: seconds
 
+Default: 60
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 5-240
+
 ## `configure authority router routing routing-protocol confederation`
 
 Configuration options specifying parameters when the local router is within an autonomous system which is part of a BGP confederation.
@@ -17309,6 +25353,29 @@ configure authority router routing routing-protocol confederation identifier [<a
 | ---- | ----------- |
 | as-number | The value to set for this field |
 
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
+
 ## `configure authority router routing routing-protocol confederation member-as`
 
 Remote autonomous systems that are to be treated as part of the local confederation.
@@ -17324,6 +25391,29 @@ configure authority router routing routing-protocol confederation member-as [<as
 | name | description |
 | ---- | ----------- |
 | as-number | Value to add to this list |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing routing-protocol description`
 
@@ -17341,6 +25431,12 @@ configure authority router routing routing-protocol description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router routing routing-protocol graceful-restart`
 
 Configuration parameters relating to BGP graceful restart.
@@ -17353,8 +25449,9 @@ Configuration parameters relating to BGP graceful restart.
 | [`mode`](#configure-authority-router-routing-routing-protocol-graceful-restart-mode) | Graceful restart mode. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`restart-time`](#configure-authority-router-routing-routing-protocol-graceful-restart-restart-time) | Estimated time for the local BGP speaker to restart a session. This value is advertised in the graceful restart BGP capability. This is a 12-bit value, referred to as Restart Time in RFC4724. Per RFC4724, the suggested default value is less than or equal to the hold-time value. |
+| [`select-delay-time`](#configure-authority-router-routing-routing-protocol-graceful-restart-select-delay-time) | After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard- coded to 360 seconds. |
 | `show` | Show configuration data for &#x27;graceful-restart&#x27; |
-| [`stale-routes-time`](#configure-authority-router-routing-routing-protocol-graceful-restart-stale-routes-time) | An upper-bound on the time that the stale routes will be retained by a router after a session is restarted or 0 to disable. If an End-of-RIB (EOR) marker is received prior to this timer expiring stale-routes will be flushed upon its receipt - if no EOR is received, then when this timer expires stale paths will be purged. This timer is referred to as the Selection_Deferral_Timer in RFC4724 |
+| [`stale-routes-time`](#configure-authority-router-routing-routing-protocol-graceful-restart-stale-routes-time) | An upper-bound on the time that the stale routes will be retained by a router after a session is restarted or 0 to disable. If an End-of-RIB (EOR) marker is received prior to this timer expiring stale-routes will be flushed upon its receipt - if no EOR is received, then when this timer expires stale paths will be purged. |
 
 ## `configure authority router routing routing-protocol graceful-restart mode`
 
@@ -17371,6 +25468,19 @@ configure authority router routing routing-protocol graceful-restart mode [<grac
 | name | description |
 | ---- | ----------- |
 | graceful-restart-mode | The value to set for this field |
+
+#### Description
+
+Default: helper
+
+##### graceful-restart-mode (enumeration)
+
+configure BGP graceful restart mode [rfc4724]
+
+Options:
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
 
 ## `configure authority router routing routing-protocol graceful-restart restart-time`
 
@@ -17392,9 +25502,37 @@ configure authority router routing routing-protocol graceful-restart restart-tim
 
 Units: seconds
 
+Default: 120
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-4095
+
+## `configure authority router routing routing-protocol graceful-restart select-delay-time`
+
+After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard- coded to 360 seconds.
+
+#### Usage
+
+```
+configure authority router routing routing-protocol graceful-restart select-delay-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
 ## `configure authority router routing routing-protocol graceful-restart stale-routes-time`
 
-An upper-bound on the time that the stale routes will be retained by a router after a session is restarted or 0 to disable. If an End-of-RIB (EOR) marker is received prior to this timer expiring stale-routes will be flushed upon its receipt - if no EOR is received, then when this timer expires stale paths will be purged. This timer is referred to as the Selection_Deferral_Timer in RFC4724
+An upper-bound on the time that the stale routes will be retained by a router after a session is restarted or 0 to disable. If an End-of-RIB (EOR) marker is received prior to this timer expiring stale-routes will be flushed upon its receipt - if no EOR is received, then when this timer expires stale paths will be purged.
 
 #### Usage
 
@@ -17412,6 +25550,14 @@ configure authority router routing routing-protocol graceful-restart stale-route
 
 Units: seconds
 
+Default: 360
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-3600
+
 ## `configure authority router routing routing-protocol local-as`
 
 Local autonomous system number of the router. Uses the 32-bit as-number type from the model in RFC 6991.
@@ -17427,6 +25573,29 @@ configure authority router routing routing-protocol local-as [<as-number>]
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing routing-protocol neighbor`
 
@@ -17517,6 +25686,16 @@ configure authority router routing routing-protocol neighbor address-family acti
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing routing-protocol neighbor address-family afi-safi`
 
 Address family type
@@ -17532,6 +25711,18 @@ configure authority router routing routing-protocol neighbor address-family afi-
 | name | description |
 | ---- | ----------- |
 | identityref | The value to set for this field |
+
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
 
 ## `configure authority router routing routing-protocol neighbor address-family as-path-options`
 
@@ -17561,6 +25752,14 @@ configure authority router routing routing-protocol neighbor address-family as-p
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router routing routing-protocol neighbor address-family conditional-advertisement`
 
@@ -17593,6 +25792,12 @@ configure authority router routing routing-protocol neighbor address-family cond
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref) (required)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor address-family conditional-advertisement exist-policy`
 
 If this policy matches any BGP route, advertise the routes matched by advertisement-policy, otherwise do not advertise the routes matched by advertisement-policy.
@@ -17609,6 +25814,12 @@ configure authority router routing routing-protocol neighbor address-family cond
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor address-family conditional-advertisement non-exist-policy`
 
 If this policy does not match any BGP route, advertise the routes matched by advertisement-policy, otherwise do not advertise the routes matched by advertisement-policy.
@@ -17624,6 +25835,12 @@ configure authority router routing routing-protocol neighbor address-family cond
 | name | description |
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing routing-protocol neighbor address-family neighbor-policy`
 
@@ -17655,6 +25872,12 @@ configure authority router routing routing-protocol neighbor address-family neig
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor address-family neighbor-policy outbound-policy`
 
 A policy to apply to the NLRIs outbound to this neighbor.
@@ -17671,6 +25894,12 @@ configure authority router routing routing-protocol neighbor address-family neig
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor address-family next-hop-self`
 
 Sets the router as the next hop for this neighbor and this address family
@@ -17686,6 +25915,16 @@ configure authority router routing routing-protocol neighbor address-family next
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor address-family prefix-limit`
 
@@ -17722,6 +25961,10 @@ configure authority router routing routing-protocol neighbor address-family pref
 
 Units: prefixes
 
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
 ## `configure authority router routing routing-protocol neighbor address-family prefix-limit restart-timer`
 
 Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this adddress family.
@@ -17741,6 +25984,12 @@ configure authority router routing routing-protocol neighbor address-family pref
 #### Description
 
 Units: seconds
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
 
 ## `configure authority router routing routing-protocol neighbor address-family prefix-limit shutdown-threshold-pct`
 
@@ -17762,6 +26011,12 @@ configure authority router routing routing-protocol neighbor address-family pref
 
 Units: percent
 
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority router routing routing-protocol neighbor address-family remove-private-as`
 
 Modify private AS numbers in updates sent to neighbors for this address family.
@@ -17777,6 +26032,19 @@ configure authority router routing routing-protocol neighbor address-family remo
 | name | description |
 | ---- | ----------- |
 | remove-private-as-option | The value to set for this field |
+
+#### Description
+
+##### remove-private-as-option (enumeration)
+
+Set of options for configuring how private AS numbers are modified in advertised AS paths.
+
+Options:
+- all: Remove all private ASes in the AS path.
+- replace-all: Replace all private ASes with the local AS.
+- only: Remove private ASes only if the AS path contains just private ASes.
+- replace-only: Replace private ASes with the local AS only if the AS path contains just private ASes.
+- disable: Do not remove private ASes.
 
 ## `configure authority router routing routing-protocol neighbor address-family route-reflector`
 
@@ -17807,6 +26075,16 @@ configure authority router routing routing-protocol neighbor address-family rout
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing routing-protocol neighbor address-family send-default-route`
 
 If set to true, generate and send the default-route for this address-family to the neighbor
@@ -17823,6 +26101,16 @@ configure authority router routing routing-protocol neighbor address-family send
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing routing-protocol neighbor auth-password`
 
 Configures an MD5 authentication password for use with neighboring devices.
@@ -17838,6 +26126,12 @@ configure authority router routing routing-protocol neighbor auth-password [<pas
 | name | description |
 | ---- | ----------- |
 | password | The value to set for this field |
+
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
 
 ## `configure authority router routing routing-protocol neighbor bfd`
 
@@ -17875,6 +26169,14 @@ configure authority router routing routing-protocol neighbor bfd desired-tx-inte
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing routing-protocol neighbor bfd enable`
 
 Enable/Disable BFD protocol
@@ -17891,6 +26193,16 @@ configure authority router routing routing-protocol neighbor bfd enable [<boolea
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing routing-protocol neighbor bfd multiplier`
 
 The number of BFD packets that can be lost without the BFD session declared as down.
@@ -17906,6 +26218,16 @@ configure authority router routing routing-protocol neighbor bfd multiplier [<ui
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-255
 
 ## `configure authority router routing routing-protocol neighbor bfd required-min-rx-interval`
 
@@ -17927,6 +26249,14 @@ configure authority router routing routing-protocol neighbor bfd required-min-rx
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing routing-protocol neighbor description`
 
 An optional textual description (intended primarily for use with a neighbor or group
@@ -17942,6 +26272,12 @@ configure authority router routing routing-protocol neighbor description [<strin
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router routing routing-protocol neighbor graceful-restart`
 
@@ -17972,6 +26308,17 @@ configure authority router routing routing-protocol neighbor graceful-restart mo
 | ---- | ----------- |
 | graceful-restart-mode | The value to set for this field |
 
+#### Description
+
+##### graceful-restart-mode (enumeration)
+
+configure BGP graceful restart mode [rfc4724]
+
+Options:
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
+
 ## `configure authority router routing routing-protocol neighbor local-as`
 
 The local autonomous system number that is to be used when establishing sessions with the remote neighbor or neighbor group, if this differs from the global BGP router autonomous system number.
@@ -17987,6 +26334,29 @@ configure authority router routing routing-protocol neighbor local-as [<as-numbe
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing routing-protocol neighbor multihop`
 
@@ -18017,6 +26387,14 @@ configure authority router routing routing-protocol neighbor multihop ttl [<uint
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing routing-protocol neighbor negotiate-capabilities`
 
 If set to false, suppress sending the Capabilities Optional Parameter in the BGP OPEN message.
@@ -18032,6 +26410,16 @@ configure authority router routing routing-protocol neighbor negotiate-capabilit
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor neighbor-address`
 
@@ -18049,6 +26437,37 @@ configure authority router routing routing-protocol neighbor neighbor-address [<
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router routing routing-protocol neighbor neighbor-as`
 
 AS number of the neighbor.
@@ -18064,6 +26483,29 @@ configure authority router routing routing-protocol neighbor neighbor-as [<as-nu
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32) (required)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing routing-protocol neighbor neighbor-policy`
 
@@ -18095,6 +26537,12 @@ configure authority router routing routing-protocol neighbor neighbor-policy inb
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor neighbor-policy outbound-policy`
 
 A policy to apply to the NLRIs outbound to this neighbor.
@@ -18111,6 +26559,12 @@ configure authority router routing routing-protocol neighbor neighbor-policy out
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor shutdown`
 
 If set to true, the neighbors connection will not come up.
@@ -18126,6 +26580,16 @@ configure authority router routing routing-protocol neighbor shutdown [<boolean>
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol neighbor timers`
 
@@ -18163,6 +26627,14 @@ configure authority router routing routing-protocol neighbor timers connect-retr
 
 Units: seconds
 
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router routing routing-protocol neighbor timers hold-time`
 
 Time interval that a BGP session will be considered active in the absence of keepalive or other messages from the neighbor. The hold-time is typically set to 3x the keepalive-interval.
@@ -18182,6 +26654,12 @@ configure authority router routing routing-protocol neighbor timers hold-time [<
 #### Description
 
 Units: seconds
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0,3-65535
 
 ## `configure authority router routing routing-protocol neighbor timers keepalive-interval`
 
@@ -18203,6 +26681,12 @@ configure authority router routing routing-protocol neighbor timers keepalive-in
 
 Units: seconds
 
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router routing routing-protocol neighbor timers minimum-advertisement-interval`
 
 Minimum time which must elapse between subsequent UPDATE messages relating to a common set of NLRI being transmitted to a neighbor. This timer is referred to as MinRouteAdvertisementIntervalTimer by RFC 4721 and serves to reduce the number of UPDATE messages transmitted when a particular set of NLRI exhibit instability.
@@ -18222,6 +26706,14 @@ configure authority router routing routing-protocol neighbor timers minimum-adve
 #### Description
 
 Units: seconds
+
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-600
 
 ## `configure authority router routing routing-protocol neighbor transport`
 
@@ -18263,6 +26755,12 @@ Do not generate a BGP service or service routes.
 configure authority router routing routing-protocol neighbor transport bgp-service-generation disabled
 ```
 
+#### Description
+
+##### empty
+
+Has no value.
+
 ## `configure authority router routing routing-protocol neighbor transport bgp-service-generation neighbor-vrf`
 
 Name of the neighbor&#x27;s VRF in which the peer BGP instance resides. Can be &#x27;default&#x27;.
@@ -18279,6 +26777,15 @@ configure authority router routing routing-protocol neighbor transport bgp-servi
 | ---- | ----------- |
 | vrf-name-or-default-vrf | The value to set for this field |
 
+#### Description
+
+##### vrf-name-or-default-vrf (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters, and cannot be the words &#x27;all&#x27;, &#x27;any&#x27;, or &#x27;unknown&#x27;.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 1-15
+
 ## `configure authority router routing routing-protocol neighbor transport bgp-service-generation same-neighbor-vrf`
 
 Generate BGP service if there is a matching peer with a BGP instance within the same VRF.
@@ -18288,6 +26795,12 @@ Generate BGP service if there is a matching peer with a BGP instance within the 
 ```
 configure authority router routing routing-protocol neighbor transport bgp-service-generation same-neighbor-vrf
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority router routing routing-protocol neighbor transport local-address`
 
@@ -18320,6 +26833,12 @@ configure authority router routing routing-protocol neighbor transport local-add
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref (required)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor transport local-address node`
 
 Interface node name
@@ -18335,6 +26854,12 @@ configure authority router routing routing-protocol neighbor transport local-add
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref (required)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing routing-protocol neighbor transport local-address routing-interface`
 
@@ -18352,6 +26877,12 @@ configure authority router routing routing-protocol neighbor transport local-add
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol neighbor transport passive-mode`
 
 Wait for neighbors to issue requests to open a BGP session, rather than initiating sessions from the local router.
@@ -18367,6 +26898,16 @@ configure authority router routing routing-protocol neighbor transport passive-m
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol redistribute`
 
@@ -18410,6 +26951,12 @@ configure authority router routing routing-protocol redistribute policy [<policy
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing routing-protocol redistribute protocol`
 
 The routing protocol to redistribute into BGP
@@ -18426,6 +26973,18 @@ configure authority router routing routing-protocol redistribute protocol [<redi
 | ---- | ----------- |
 | redistribute-into-bgp | The value to set for this field |
 
+#### Description
+
+##### redistribute-into-bgp (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
+
 ## `configure authority router routing routing-protocol route-reflector-allow-outbound-policy`
 
 Apply outbound policy on route reflector clients.
@@ -18441,6 +27000,16 @@ configure authority router routing routing-protocol route-reflector-allow-outbou
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol route-selection-options`
 
@@ -18473,6 +27042,16 @@ configure authority router routing routing-protocol route-selection-options alwa
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing routing-protocol route-selection-options external-compare-router-id`
 
 When comparing similar routes received from external BGP neighbors, use the router-id as a criterion to select the active path.
@@ -18488,6 +27067,16 @@ configure authority router routing routing-protocol route-selection-options exte
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing routing-protocol route-selection-options ignore-as-path-length`
 
@@ -18505,6 +27094,16 @@ configure authority router routing routing-protocol route-selection-options igno
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing routing-protocol router-id`
 
 Router id of the router, expressed as an 32-bit value, IPv4 address.
@@ -18520,6 +27119,14 @@ configure authority router routing routing-protocol router-id [<ipv4-address>]
 | name | description |
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
+
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing routing-protocol timers`
 
@@ -18555,6 +27162,14 @@ configure authority router routing routing-protocol timers hold-time [<uint16>]
 
 Units: seconds
 
+Default: 90
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0,3-65535
+
 ## `configure authority router routing routing-protocol timers keepalive-interval`
 
 Time interval between transmission of keepalive messages to the neighbor. Must be set to 1/3 the hold-time or smaller.
@@ -18575,6 +27190,14 @@ configure authority router routing routing-protocol timers keepalive-interval [<
 
 Units: seconds
 
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router routing routing-protocol type`
 
 Type of the routing protocol - an identity derived from the &#x27;routing-protocol&#x27; base identity.
@@ -18591,6 +27214,15 @@ configure authority router routing routing-protocol type [<identityref>]
 | ---- | ----------- |
 | identityref | The value to set for this field |
 
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- bgp: BGP routing protocol
+
 ## `configure authority router routing service-admin-distance`
 
 Administrative distance for routes generated from services.
@@ -18606,6 +27238,16 @@ configure authority router routing service-admin-distance [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 254
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
 
 ## `configure authority router routing static-route`
 
@@ -18654,6 +27296,12 @@ configure authority router routing static-route description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router routing static-route destination-prefix`
 
 IPv4 or IPv6 destination prefix that must be unicast.
@@ -18669,6 +27317,22 @@ configure authority router routing static-route destination-prefix [<unicast-ip-
 | name | description |
 | ---- | ----------- |
 | unicast-ip-prefix | The value to set for this field |
+
+#### Description
+
+##### unicast-ip-prefix (union)
+
+A unicast IPv4 or IPv6 prefix
+
+Must be one of the following types:
+
+###### (0) unicast-ipv4-prefix (string)
+
+A unicast IPv4 prefix
+
+###### (1) unicast-ipv6-prefix (string)
+
+A unicast IPv6 prefix
 
 ## `configure authority router routing static-route distance`
 
@@ -18686,6 +27350,14 @@ configure authority router routing static-route distance [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing static-route next-hop`
 
 List of next-hops. An empty list creates a blackhole route.
@@ -18701,6 +27373,38 @@ configure authority router routing static-route next-hop [<ip-address>]
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
 
 ## `configure authority router routing static-route next-hop-interface`
 
@@ -18744,6 +27448,12 @@ configure authority router routing static-route next-hop-interface interface [<l
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing static-route next-hop-interface node`
 
 Interface node name
@@ -18760,6 +27470,12 @@ configure authority router routing static-route next-hop-interface node [<leafre
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing type`
 
 The type of the routing instance.
@@ -18775,6 +27491,15 @@ configure authority router routing type [<identityref>]
 | name | description |
 | ---- | ----------- |
 | identityref | The value to set for this field |
+
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- default-instance: This identity represents a default routing instance.
 
 ## `configure authority router routing vrf`
 
@@ -18806,6 +27531,7 @@ configure authority router routing vrf <name>
 | [`ospf`](#configure-authority-router-routing-vrf-ospf) | OSPF instance configuration |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pim`](#configure-authority-router-routing-vrf-pim) | PIM VRF configuration |
+| [`rib-policy`](#configure-authority-router-routing-vrf-rib-policy) | List of protocol specific RIB policies |
 | [`routing-protocol`](#configure-authority-router-routing-vrf-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-vrf-service-admin-distance) | Administrative distance for routes generated from services. |
 | `show` | Show configuration data for &#x27;vrf&#x27; |
@@ -18827,6 +27553,12 @@ configure authority router routing vrf description [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router routing vrf igmp`
 
@@ -18888,6 +27620,12 @@ configure authority router routing vrf igmp interface interface [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf igmp interface join`
 
 List of Groups to join
@@ -18930,6 +27668,14 @@ configure authority router routing vrf igmp interface join group [<multicast-ipv
 | ---- | ----------- |
 | multicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### multicast-ipv4-address (string)
+
+A multicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing vrf igmp interface join source`
 
 IPv4 address of the Source to Join
@@ -18945,6 +27691,14 @@ configure authority router routing vrf igmp interface join source [<unicast-ipv4
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv4-address (string)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing vrf igmp interface node`
 
@@ -18962,6 +27716,12 @@ configure authority router routing vrf igmp interface node [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf igmp interface version`
 
 IGMP Version
@@ -18977,6 +27737,16 @@ configure authority router routing vrf igmp interface version [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-3
 
 ## `configure authority router routing vrf interface`
 
@@ -19021,6 +27791,16 @@ configure authority router routing vrf interface enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf interface ip-address`
 
 The IP address of the interface.
@@ -19037,6 +27817,37 @@ configure authority router routing vrf interface ip-address [<ip-address>]
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router routing vrf interface name`
 
 An arbitrary, unique name for the routing interface, used to reference it in other routing configuration sections.
@@ -19052,6 +27863,16 @@ configure authority router routing vrf interface name [<bridge-name>]
 | name | description |
 | ---- | ----------- |
 | bridge-name | The value to set for this field |
+
+#### Description
+
+##### bridge-name (string)
+
+A string identifier for bridge-name which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters.
+
+Must contain only alphanumeric characters, start with a alphabet and can contain any of the following: _ -
+The name &#x27;lo&#x27; is reserved.
+Length: 0-15
 
 ## `configure authority router routing vrf msdp`
 
@@ -19112,6 +27933,12 @@ configure authority router routing vrf msdp mesh-group auth-password [<password>
 | ---- | ----------- |
 | password | The value to set for this field |
 
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
+
 ## `configure authority router routing vrf msdp mesh-group member`
 
 IPv4 address of the Mesh-group member
@@ -19127,6 +27954,14 @@ configure authority router routing vrf msdp mesh-group member [<unicast-ipv4-add
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | Value to add to this list |
+
+#### Description
+
+##### unicast-ipv4-address (string)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing vrf msdp mesh-group name`
 
@@ -19144,6 +27979,15 @@ configure authority router routing vrf msdp mesh-group name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router routing vrf msdp mesh-group source`
 
 Source Address for the mesh-group
@@ -19159,6 +28003,14 @@ configure authority router routing vrf msdp mesh-group source [<unicast-ipv4-add
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv4-address (string) (required)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing vrf msdp peer`
 
@@ -19203,6 +28055,14 @@ configure authority router routing vrf msdp peer address [<unicast-ipv4-address>
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### unicast-ipv4-address (string)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing vrf msdp peer auth-password`
 
 Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups.
@@ -19218,6 +28078,12 @@ configure authority router routing vrf msdp peer auth-password [<password>]
 | name | description |
 | ---- | ----------- |
 | password | The value to set for this field |
+
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
 
 ## `configure authority router routing vrf msdp peer source`
 
@@ -19235,6 +28101,14 @@ configure authority router routing vrf msdp peer source [<unicast-ipv4-address>]
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### unicast-ipv4-address (string) (required)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing vrf name`
 
 The name of the VRF.
@@ -19250,6 +28124,16 @@ configure authority router routing vrf name [<vrf-name>]
 | name | description |
 | ---- | ----------- |
 | vrf-name | The value to set for this field |
+
+#### Description
+
+##### vrf-name (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters, and cannot be the words &#x27;all&#x27;, &#x27;any&#x27;, &#x27;default&#x27;, or &#x27;unknown&#x27;.
+
+Must contain only alphanumeric characters or any of the following: _ -
+The name &#x27;lo&#x27; is reserved.
+Length: 1-15
 
 ## `configure authority router routing vrf ospf`
 
@@ -19276,6 +28160,7 @@ configure authority router routing vrf ospf <instance>
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`distance`](#configure-authority-router-routing-vrf-ospf-distance) | OSPF route administrative distance |
+| [`graceful-restart`](#configure-authority-router-routing-vrf-ospf-graceful-restart) | Enable OSPF graceful restart |
 | [`instance`](#configure-authority-router-routing-vrf-ospf-instance) | Number of OSPF instance |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`redistribute`](#configure-authority-router-routing-vrf-ospf-redistribute) | List of routing protocols to redistribute into OSPF |
@@ -19316,6 +28201,16 @@ configure authority router routing vrf ospf advertise-default always [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf ospf advertise-default metric`
 
 Advertised metric of the default route
@@ -19331,6 +28226,14 @@ configure authority router routing vrf ospf advertise-default metric [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-16777214
 
 ## `configure authority router routing vrf ospf advertise-default metric-type`
 
@@ -19348,6 +28251,18 @@ configure authority router routing vrf ospf advertise-default metric-type [<ospf
 | ---- | ----------- |
 | ospf-external-metric-type | The value to set for this field |
 
+#### Description
+
+Default: type-2
+
+##### ospf-external-metric-type (enumeration)
+
+OSPF external metric type
+
+Options:
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
+
 ## `configure authority router routing vrf ospf advertise-default policy`
 
 A policy to apply to the default route
@@ -19363,6 +28278,12 @@ configure authority router routing vrf ospf advertise-default policy [<policy-re
 | name | description |
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf ospf area`
 
@@ -19413,6 +28334,19 @@ configure authority router routing vrf ospf area authentication-type [<area-auth
 | ---- | ----------- |
 | area-authentication-type | The value to set for this field |
 
+#### Description
+
+Default: none
+
+##### area-authentication-type (enumeration)
+
+OSPF area authentication. Can be overriden by interface authentication.
+
+Options:
+- none: No authentication
+- simple: Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
+
 ## `configure authority router routing vrf ospf area default-cost`
 
 Set the summary default route cost for a stub or NSSA area.
@@ -19429,6 +28363,16 @@ configure authority router routing vrf ospf area default-cost [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-16777215
+
 ## `configure authority router routing vrf ospf area id`
 
 Area ID
@@ -19444,6 +28388,12 @@ configure authority router routing vrf ospf area id [<area-id-type>]
 | name | description |
 | ---- | ----------- |
 | area-id-type | The value to set for this field |
+
+#### Description
+
+##### area-id-type (string)
+
+Area ID type.
 
 ## `configure authority router routing vrf ospf area interface`
 
@@ -19499,6 +28449,20 @@ configure authority router routing vrf ospf area interface authentication-type [
 | ---- | ----------- |
 | interface-authentication-type | The value to set for this field |
 
+#### Description
+
+Default: area
+
+##### interface-authentication-type (enumeration)
+
+OSPF interface authentication type
+
+Options:
+- area: Use area authentication type
+- none:No interface authentication
+- simple:Simple (plain text) password authentication
+- md5: MD5 HMAC authentication
+
 ## `configure authority router routing vrf ospf area interface bfd`
 
 BFD Client Configuration.
@@ -19535,6 +28499,14 @@ configure authority router routing vrf ospf area interface bfd desired-tx-interv
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing vrf ospf area interface bfd enable`
 
 Enable/Disable BFD protocol
@@ -19551,6 +28523,16 @@ configure authority router routing vrf ospf area interface bfd enable [<boolean>
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf ospf area interface bfd multiplier`
 
 The number of BFD packets that can be lost without the BFD session declared as down.
@@ -19566,6 +28548,16 @@ configure authority router routing vrf ospf area interface bfd multiplier [<uint
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-255
 
 ## `configure authority router routing vrf ospf area interface bfd required-min-rx-interval`
 
@@ -19587,6 +28579,14 @@ configure authority router routing vrf ospf area interface bfd required-min-rx-i
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing vrf ospf area interface cost`
 
 Interface cost
@@ -19602,6 +28602,16 @@ configure authority router routing vrf ospf area interface cost [<uint16>]
 | name | description |
 | ---- | ----------- |
 | uint16 | The value to set for this field |
+
+#### Description
+
+Default: 10
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
 
 ## `configure authority router routing vrf ospf area interface dead-interval`
 
@@ -19623,6 +28633,14 @@ configure authority router routing vrf ospf area interface dead-interval [<uint3
 
 Units: seconds
 
+Default: 40
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-2147483647
+
 ## `configure authority router routing vrf ospf area interface hello-interval`
 
 Interval between hello packets (seconds).
@@ -19643,6 +28661,14 @@ configure authority router routing vrf ospf area interface hello-interval [<uint
 
 Units: seconds
 
+Default: 10
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
+
 ## `configure authority router routing vrf ospf area interface interface`
 
 Network interface name
@@ -19658,6 +28684,12 @@ configure authority router routing vrf ospf area interface interface [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf ospf area interface message-digest-key`
 
@@ -19701,6 +28733,14 @@ configure authority router routing vrf ospf area interface message-digest-key id
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf ospf area interface message-digest-key key`
 
 Message digest secret key
@@ -19716,6 +28756,14 @@ configure authority router routing vrf ospf area interface message-digest-key ke
 | name | description |
 | ---- | ----------- |
 | routing-password-type | The value to set for this field |
+
+#### Description
+
+##### routing-password-type (string)
+
+A routing engine password that is hidden from the UI.
+
+Invalid whitespace or other unrecognized character.
 
 ## `configure authority router routing vrf ospf area interface network-type`
 
@@ -19733,6 +28781,19 @@ configure authority router routing vrf ospf area interface network-type [<interf
 | ---- | ----------- |
 | interface-network-type | The value to set for this field |
 
+#### Description
+
+Default: unspecified
+
+##### interface-network-type (enumeration)
+
+OSPF interface network type
+
+Options:
+- unspecified: Unspecified network type
+- broadcast: Broadcast network
+- point-to-point: Point-to-point network
+
 ## `configure authority router routing vrf ospf area interface node`
 
 Interface node name
@@ -19748,6 +28809,12 @@ configure authority router routing vrf ospf area interface node [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf ospf area interface passive`
 
@@ -19765,6 +28832,16 @@ configure authority router routing vrf ospf area interface passive [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf ospf area interface password`
 
 OSPF simple authentication password
@@ -19781,6 +28858,14 @@ configure authority router routing vrf ospf area interface password [<routing-pa
 | ---- | ----------- |
 | routing-password-type | The value to set for this field |
 
+#### Description
+
+##### routing-password-type (string)
+
+A routing engine password that is hidden from the UI.
+
+Invalid whitespace or other unrecognized character.
+
 ## `configure authority router routing vrf ospf area interface priority`
 
 Router priority
@@ -19796,6 +28881,16 @@ configure authority router routing vrf ospf area interface priority [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 1
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router routing vrf ospf area routing-interface`
 
@@ -19839,6 +28934,16 @@ configure authority router routing vrf ospf area routing-interface cost [<uint16
 | ---- | ----------- |
 | uint16 | The value to set for this field |
 
+#### Description
+
+Default: 10
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
+
 ## `configure authority router routing vrf ospf area routing-interface routing-interface`
 
 Routing interface name
@@ -19855,6 +28960,12 @@ configure authority router routing vrf ospf area routing-interface routing-inter
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf ospf area summary-advertisement`
 
 Enable/Disable summary advertisement into the stub or NSSA area.
@@ -19870,6 +28981,16 @@ configure authority router routing vrf ospf area summary-advertisement [<boolean
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf ospf area summary-range`
 
@@ -19914,6 +29035,16 @@ configure authority router routing vrf ospf area summary-range advertise [<boole
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf ospf area summary-range cost`
 
 Advertised cost of summary route
@@ -19929,6 +29060,14 @@ configure authority router routing vrf ospf area summary-range cost [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-16777214
 
 ## `configure authority router routing vrf ospf area summary-range prefix`
 
@@ -19946,6 +29085,53 @@ configure authority router routing vrf ospf area summary-range prefix [<ip-prefi
 | ---- | ----------- |
 | ip-prefix | The value to set for this field |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority router routing vrf ospf area type`
 
 Area type
@@ -19961,6 +29147,19 @@ configure authority router routing vrf ospf area type [<area-type>]
 | name | description |
 | ---- | ----------- |
 | area-type | The value to set for this field |
+
+#### Description
+
+Default: normal
+
+##### area-type (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- normal: OSPF normal area
+- stub: OSPF stub area
+- nssa: OSPF Not-So-Stubby Area (NSSA)
 
 ## `configure authority router routing vrf ospf distance`
 
@@ -19993,6 +29192,16 @@ configure authority router routing vrf ospf distance external [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 110
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf ospf distance inter-area`
 
 Administrative distance for inter-area OSPF routes
@@ -20008,6 +29217,16 @@ configure authority router routing vrf ospf distance inter-area [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 110
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
 
 ## `configure authority router routing vrf ospf distance intra-area`
 
@@ -20025,6 +29244,100 @@ configure authority router routing vrf ospf distance intra-area [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 110
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
+## `configure authority router routing vrf ospf graceful-restart`
+
+Enable OSPF graceful restart
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`helper`](#configure-authority-router-routing-vrf-ospf-graceful-restart-helper) | OSPF graceful restart helper support |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`restart-time`](#configure-authority-router-routing-vrf-ospf-graceful-restart-restart-time) | OSPF graceful restart duration |
+| `show` | Show configuration data for &#x27;graceful-restart&#x27; |
+
+## `configure authority router routing vrf ospf graceful-restart helper`
+
+OSPF graceful restart helper support
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`helper-restart-time`](#configure-authority-router-routing-vrf-ospf-graceful-restart-helper-helper-restart-time) | Helper support graceful restart duration |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;helper&#x27; |
+| [`strict-lsa-checking`](#configure-authority-router-routing-vrf-ospf-graceful-restart-helper-strict-lsa-checking) | When enabled, helper will abort graceful restart if a LSA change occurs that affects the restarting router |
+
+## `configure authority router routing vrf ospf graceful-restart helper helper-restart-time`
+
+Helper support graceful restart duration
+
+#### Usage
+
+```
+configure authority router routing vrf ospf graceful-restart helper helper-restart-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+## `configure authority router routing vrf ospf graceful-restart helper strict-lsa-checking`
+
+When enabled, helper will abort graceful restart if a LSA change occurs that affects the restarting router
+
+#### Usage
+
+```
+configure authority router routing vrf ospf graceful-restart helper strict-lsa-checking [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+## `configure authority router routing vrf ospf graceful-restart restart-time`
+
+OSPF graceful restart duration
+
+#### Usage
+
+```
+configure authority router routing vrf ospf graceful-restart restart-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
 ## `configure authority router routing vrf ospf instance`
 
 Number of OSPF instance
@@ -20040,6 +29353,14 @@ configure authority router routing vrf ospf instance [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-8
 
 ## `configure authority router routing vrf ospf redistribute`
 
@@ -20085,6 +29406,14 @@ configure authority router routing vrf ospf redistribute metric [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-16777214
+
 ## `configure authority router routing vrf ospf redistribute metric-type`
 
 Advertised metric type of redistributed route
@@ -20100,6 +29429,18 @@ configure authority router routing vrf ospf redistribute metric-type [<ospf-exte
 | name | description |
 | ---- | ----------- |
 | ospf-external-metric-type | The value to set for this field |
+
+#### Description
+
+Default: type-2
+
+##### ospf-external-metric-type (enumeration)
+
+OSPF external metric type
+
+Options:
+- type-1: External metric type 1, comparable to link state metric
+- type-2: External metric type 2, larger than link state metric
 
 ## `configure authority router routing vrf ospf redistribute policy`
 
@@ -20117,6 +29458,12 @@ configure authority router routing vrf ospf redistribute policy [<policy-ref>]
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf ospf redistribute protocol`
 
 The routing protocol to redistribute into OSPF
@@ -20133,6 +29480,18 @@ configure authority router routing vrf ospf redistribute protocol [<redistribute
 | ---- | ----------- |
 | redistribute-into-ospf | The value to set for this field |
 
+#### Description
+
+##### redistribute-into-ospf (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- bgp: BGP routes
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+
 ## `configure authority router routing vrf ospf router-id`
 
 Defined in RFC 2328. A 32-bit number that uniquely identifies the router
@@ -20148,6 +29507,12 @@ configure authority router routing vrf ospf router-id [<dotted-quad>]
 | name | description |
 | ---- | ----------- |
 | dotted-quad | The value to set for this field |
+
+#### Description
+
+##### dotted-quad (string)
+
+An unsigned 32-bit number expressed in the dotted-quad notation, i.e., four octets written as decimal numbers and separated with the &#x27;.&#x27; (full stop) character.
 
 ## `configure authority router routing vrf ospf timers`
 
@@ -20197,6 +29562,14 @@ configure authority router routing vrf ospf timers spf delay [<uint32>]
 
 Units: milliseconds
 
+Default: 0
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-600000
+
 ## `configure authority router routing vrf ospf timers spf hold-time`
 
 Adaptive hold-time.
@@ -20216,6 +29589,14 @@ configure authority router routing vrf ospf timers spf hold-time [<uint32>]
 #### Description
 
 Units: milliseconds
+
+Default: 5000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-600000
 
 ## `configure authority router routing vrf ospf timers spf maximum-hold-time`
 
@@ -20237,6 +29618,14 @@ configure authority router routing vrf ospf timers spf maximum-hold-time [<uint3
 
 Units: milliseconds
 
+Default: 30000
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-600000
+
 ## `configure authority router routing vrf ospf version`
 
 OSPF version
@@ -20252,6 +29641,18 @@ configure authority router routing vrf ospf version [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: ospfv2
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ospfv2
+- ospfv3
 
 ## `configure authority router routing vrf pim`
 
@@ -20313,6 +29714,16 @@ configure authority router routing vrf pim interface dr-priority [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-4294967295
+
 ## `configure authority router routing vrf pim interface hello-interval`
 
 Configure Hello Interval
@@ -20333,6 +29744,14 @@ configure authority router routing vrf pim interface hello-interval [<uint8>]
 
 Units: seconds
 
+Default: 30
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf pim interface interface`
 
 Network interface name
@@ -20349,6 +29768,12 @@ configure authority router routing vrf pim interface interface [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf pim interface node`
 
 Interface node name
@@ -20364,6 +29789,12 @@ configure authority router routing vrf pim interface node [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf pim rp`
 
@@ -20407,6 +29838,14 @@ configure authority router routing vrf pim rp address [<unicast-ipv4-address>]
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
 
+#### Description
+
+##### unicast-ipv4-address (string) (required)
+
+A unicast IPv4 address
+
+Must be a valid IPv4 address.
+
 ## `configure authority router routing vrf pim rp group-range`
 
 Multicast Group address range for this RP
@@ -20422,6 +29861,88 @@ configure authority router routing vrf pim rp group-range [<multicast-ipv4-prefi
 | name | description |
 | ---- | ----------- |
 | multicast-ipv4-prefix | The value to set for this field |
+
+#### Description
+
+##### multicast-ipv4-prefix (string)
+
+A multicast IPv4 prefix
+
+## `configure authority router routing vrf rib-policy`
+
+List of protocol specific RIB policies
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy <family> <protocol>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | The routing protocol address family |
+| protocol | The routing protocol RIB policy |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`family`](#configure-authority-router-routing-vrf-rib-policy-family) | The routing protocol address family |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-vrf-rib-policy-policy) | A policy to apply to the protocol route |
+| [`protocol`](#configure-authority-router-routing-vrf-rib-policy-protocol) | The routing protocol RIB policy |
+| `show` | Show configuration data for &#x27;rib-policy&#x27; |
+
+## `configure authority router routing vrf rib-policy family`
+
+The routing protocol address family
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy family [<rib-family>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-family | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy policy`
+
+A policy to apply to the protocol route
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
+## `configure authority router routing vrf rib-policy protocol`
+
+The routing protocol RIB policy
+
+#### Usage
+
+```
+configure authority router routing vrf rib-policy protocol [<rib-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rib-protocol | The value to set for this field |
 
 ## `configure authority router routing vrf routing-protocol`
 
@@ -20512,6 +30033,18 @@ configure authority router routing vrf routing-protocol address-family afi-safi 
 | ---- | ----------- |
 | identityref | The value to set for this field |
 
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
+
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address`
 
 Address prefixes to aggregate
@@ -20535,6 +30068,7 @@ configure authority router routing vrf routing-protocol address-family aggregate
 | [`as-set`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-as-set) | Generate as-set information for the resultant aggregate |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-policy) | a policy to apply to the aggregate route |
 | [`prefix`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-prefix) | The prefix to aggregate from |
 | `show` | Show configuration data for &#x27;aggregate-address&#x27; |
 | [`summary-only`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-summary-only) | Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised |
@@ -20555,6 +30089,32 @@ configure authority router routing vrf routing-protocol address-family aggregate
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
+## `configure authority router routing vrf routing-protocol address-family aggregate-address policy`
+
+a policy to apply to the aggregate route
+
+#### Usage
+
+```
+configure authority router routing vrf routing-protocol address-family aggregate-address policy [<policy-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| policy-ref | The value to set for this field |
+
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address prefix`
 
 The prefix to aggregate from
@@ -20571,6 +30131,22 @@ configure authority router routing vrf routing-protocol address-family aggregate
 | ---- | ----------- |
 | not-host-ip-prefix | The value to set for this field |
 
+#### Description
+
+##### not-host-ip-prefix (union)
+
+A not host IPv4 or IPv6 prefix
+
+Must be one of the following types:
+
+###### (0) not-host-ipv4-prefix (string)
+
+A not host IPv4 prefix
+
+###### (1) not-host-ipv6-prefix (string)
+
+A not host IPv6 prefix
+
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address summary-only`
 
 Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised
@@ -20586,6 +30162,16 @@ configure authority router routing vrf routing-protocol address-family aggregate
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol address-family default-route-distance`
 
@@ -20618,6 +30204,16 @@ configure authority router routing vrf routing-protocol address-family default-r
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 20
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf routing-protocol address-family default-route-distance internal`
 
 Administrative distance for routes learned from internal BGP (iBGP).
@@ -20633,6 +30229,16 @@ configure authority router routing vrf routing-protocol address-family default-r
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 200
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
 
 ## `configure authority router routing vrf routing-protocol address-family default-route-distance local`
 
@@ -20650,6 +30256,16 @@ configure authority router routing vrf routing-protocol address-family default-r
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 200
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf routing-protocol address-family graceful-restart`
 
 Configuration parameters relating to BGP graceful restart.
@@ -20666,7 +30282,9 @@ Configuration parameters relating to BGP graceful restart.
 
 #### Description
 
-Warning: &#x27;graceful-restart&#x27; is deprecated and will be removed in a future software version
+:::warning
+`graceful-restart` is deprecated and will be removed in a future software version
+:::
 
 ## `configure authority router routing vrf routing-protocol address-family graceful-restart restart-time`
 
@@ -20687,7 +30305,16 @@ configure authority router routing vrf routing-protocol address-family graceful-
 #### Description
 
 Units: seconds
-Warning: &#x27;restart-time&#x27; is deprecated and will be removed in a future software version
+
+:::warning
+`restart-time` is deprecated and will be removed in a future software version
+:::
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-4096
 
 ## `configure authority router routing vrf routing-protocol address-family graceful-restart stale-routes-time`
 
@@ -20708,7 +30335,16 @@ configure authority router routing vrf routing-protocol address-family graceful-
 #### Description
 
 Units: seconds
-Warning: &#x27;stale-routes-time&#x27; is deprecated and will be removed in a future software version
+
+:::warning
+`stale-routes-time` is deprecated and will be removed in a future software version
+:::
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-3600
 
 ## `configure authority router routing vrf routing-protocol address-family network`
 
@@ -20752,6 +30388,53 @@ configure authority router routing vrf routing-protocol address-family network n
 | ---- | ----------- |
 | ip-prefix | The value to set for this field |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority router routing vrf routing-protocol address-family network policy`
 
 a policy to apply to the imported route
@@ -20767,6 +30450,12 @@ configure authority router routing vrf routing-protocol address-family network p
 | name | description |
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf routing-protocol address-family redistribute`
 
@@ -20810,6 +30499,12 @@ configure authority router routing vrf routing-protocol address-family redistrib
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol address-family redistribute protocol`
 
 The routing protocol to redistribute into BGP
@@ -20825,6 +30520,18 @@ configure authority router routing vrf routing-protocol address-family redistrib
 | name | description |
 | ---- | ----------- |
 | redistribute-into-bgp | The value to set for this field |
+
+#### Description
+
+##### redistribute-into-bgp (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
 
 ## `configure authority router routing vrf routing-protocol address-family use-multiple-paths`
 
@@ -20873,6 +30580,14 @@ configure authority router routing vrf routing-protocol address-family use-multi
 
 Units: paths
 
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-64
+
 ## `configure authority router routing vrf routing-protocol address-family use-multiple-paths ibgp`
 
 Multipath parameters for iBGP
@@ -20906,6 +30621,14 @@ configure authority router routing vrf routing-protocol address-family use-multi
 
 Units: paths
 
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-64
+
 ## `configure authority router routing vrf routing-protocol address-family vpn-export`
 
 Configure Vpn Export
@@ -20937,6 +30660,12 @@ configure authority router routing vrf routing-protocol address-family vpn-expor
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol address-family vpn-export route-distinguisher`
 
 Route Distinguisher for vpn export
@@ -20953,6 +30682,43 @@ configure authority router routing vrf routing-protocol address-family vpn-expor
 | ---- | ----------- |
 | set-extended-community | The value to set for this field |
 
+#### Description
+
+##### set-extended-community (union) (required)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string (required)
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string (required)
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string (required)
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
+
 ## `configure authority router routing vrf routing-protocol address-family vpn-export vpn-export-route-target`
 
 Route Target list for vpn export
@@ -20968,6 +30734,43 @@ configure authority router routing vrf routing-protocol address-family vpn-expor
 | name | description |
 | ---- | ----------- |
 | set-extended-community | Value to add to this list |
+
+#### Description
+
+##### set-extended-community (union) (required)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string (required)
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string (required)
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string (required)
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
 
 ## `configure authority router routing vrf routing-protocol address-family vpn-import`
 
@@ -20999,6 +30802,12 @@ configure authority router routing vrf routing-protocol address-family vpn-impor
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol address-family vpn-import vpn-import-route-target`
 
 Route Target list for vpn import
@@ -21015,6 +30824,43 @@ configure authority router routing vrf routing-protocol address-family vpn-impor
 | ---- | ----------- |
 | set-extended-community | Value to add to this list |
 
+#### Description
+
+##### set-extended-community (union) (required)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string (required)
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string (required)
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string (required)
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
+
 ## `configure authority router routing vrf routing-protocol cluster-id`
 
 Route reflector cluster id.
@@ -21030,6 +30876,14 @@ configure authority router routing vrf routing-protocol cluster-id [<ipv4-addres
 | name | description |
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
+
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing vrf routing-protocol conditional-advertisement`
 
@@ -21064,6 +30918,14 @@ configure authority router routing vrf routing-protocol conditional-advertisemen
 
 Units: seconds
 
+Default: 60
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 5-240
+
 ## `configure authority router routing vrf routing-protocol confederation`
 
 Configuration options specifying parameters when the local router is within an autonomous system which is part of a BGP confederation.
@@ -21094,6 +30956,29 @@ configure authority router routing vrf routing-protocol confederation identifier
 | ---- | ----------- |
 | as-number | The value to set for this field |
 
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
+
 ## `configure authority router routing vrf routing-protocol confederation member-as`
 
 Remote autonomous systems that are to be treated as part of the local confederation.
@@ -21109,6 +30994,29 @@ configure authority router routing vrf routing-protocol confederation member-as 
 | name | description |
 | ---- | ----------- |
 | as-number | Value to add to this list |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing vrf routing-protocol description`
 
@@ -21126,6 +31034,12 @@ configure authority router routing vrf routing-protocol description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router routing vrf routing-protocol graceful-restart`
 
 Configuration parameters relating to BGP graceful restart.
@@ -21138,6 +31052,7 @@ Configuration parameters relating to BGP graceful restart.
 | [`mode`](#configure-authority-router-routing-vrf-routing-protocol-graceful-restart-mode) | Graceful restart mode. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`restart-time`](#configure-authority-router-routing-vrf-routing-protocol-graceful-restart-restart-time) | Estimated time for the local BGP speaker to restart a session. This value is advertised in the graceful restart BGP capability. This is a 12-bit value, referred to as Restart Time in RFC4724. Per RFC4724, the suggested default value is less than or equal to the hold-time value. |
+| [`select-delay-time`](#configure-authority-router-routing-vrf-routing-protocol-graceful-restart-select-delay-time) | After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard- coded to 360 seconds. |
 | `show` | Show configuration data for &#x27;graceful-restart&#x27; |
 | [`stale-routes-time`](#configure-authority-router-routing-vrf-routing-protocol-graceful-restart-stale-routes-time) | An upper-bound on the time that the stale routes will be retained by a router after a session is restarted or 0 to disable. If an End-of-RIB (EOR) marker is received prior to this timer expiring stale-routes will be flushed upon its receipt - if no EOR is received, then when this timer expires stale paths will be purged. This timer is referred to as the Selection_Deferral_Timer in RFC4724 |
 
@@ -21157,6 +31072,19 @@ configure authority router routing vrf routing-protocol graceful-restart mode [<
 | ---- | ----------- |
 | graceful-restart-mode | The value to set for this field |
 
+#### Description
+
+Default: helper
+
+##### graceful-restart-mode (enumeration)
+
+configure BGP graceful restart mode [rfc4724]
+
+Options:
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
+
 ## `configure authority router routing vrf routing-protocol graceful-restart restart-time`
 
 Estimated time for the local BGP speaker to restart a session. This value is advertised in the graceful restart BGP capability. This is a 12-bit value, referred to as Restart Time in RFC4724. Per RFC4724, the suggested default value is less than or equal to the hold-time value.
@@ -21165,6 +31093,34 @@ Estimated time for the local BGP speaker to restart a session. This value is adv
 
 ```
 configure authority router routing vrf routing-protocol graceful-restart restart-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 120
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-4095
+
+## `configure authority router routing vrf routing-protocol graceful-restart select-delay-time`
+
+After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard- coded to 360 seconds.
+
+#### Usage
+
+```
+configure authority router routing vrf routing-protocol graceful-restart select-delay-time [<uint16>]
 ```
 
 ##### Positional Arguments
@@ -21197,6 +31153,14 @@ configure authority router routing vrf routing-protocol graceful-restart stale-r
 
 Units: seconds
 
+Default: 360
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-3600
+
 ## `configure authority router routing vrf routing-protocol local-as`
 
 Local autonomous system number of the router. Uses the 32-bit as-number type from the model in RFC 6991.
@@ -21212,6 +31176,29 @@ configure authority router routing vrf routing-protocol local-as [<as-number>]
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing vrf routing-protocol neighbor`
 
@@ -21302,6 +31289,16 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family afi-safi`
 
 Address family type
@@ -21317,6 +31314,18 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | name | description |
 | ---- | ----------- |
 | identityref | The value to set for this field |
+
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options: 
+- ipv4-unicast: IPv4 unicast (AFI,SAFI = 1,1)
+- ipv6-unicast: IPv6 unicast (AFI,SAFI = 2,1)
+- ipv4-vpn: IPv4 vpn (AFI,SAFI = 1,128)
+- ipv6-vpn: IPv6 vpn (AFI,SAFI = 2,128)
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family as-path-options`
 
@@ -21346,6 +31355,14 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family conditional-advertisement`
 
@@ -21378,6 +31395,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref) (required)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family conditional-advertisement exist-policy`
 
 If this policy matches any BGP route, advertise the routes matched by advertisement-policy, otherwise do not advertise the routes matched by advertisement-policy.
@@ -21394,6 +31417,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family conditional-advertisement non-exist-policy`
 
 If this policy does not match any BGP route, advertise the routes matched by advertisement-policy, otherwise do not advertise the routes matched by advertisement-policy.
@@ -21409,6 +31438,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | name | description |
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
+
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family neighbor-policy`
 
@@ -21440,6 +31475,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family neighbor-policy outbound-policy`
 
 A policy to apply to the NLRIs outbound to this neighbor.
@@ -21456,6 +31497,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family next-hop-self`
 
 Sets the router as the next hop for this neighbor and this address family
@@ -21471,6 +31518,16 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family prefix-limit`
 
@@ -21507,6 +31564,10 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 
 Units: prefixes
 
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family prefix-limit restart-timer`
 
 Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this adddress family.
@@ -21526,6 +31587,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 #### Description
 
 Units: seconds
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family prefix-limit shutdown-threshold-pct`
 
@@ -21547,6 +31614,12 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 
 Units: percent
 
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family remove-private-as`
 
 Modify private AS numbers in updates sent to neighbors for this address family.
@@ -21562,6 +31635,19 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | name | description |
 | ---- | ----------- |
 | remove-private-as-option | The value to set for this field |
+
+#### Description
+
+##### remove-private-as-option (enumeration)
+
+Set of options for configuring how private AS numbers are modified in advertised AS paths.
+
+Options:
+- all: Remove all private ASes in the AS path.
+- replace-all: Replace all private ASes with the local AS.
+- only: Remove private ASes only if the AS path contains just private ASes.
+- replace-only: Replace private ASes with the local AS only if the AS path contains just private ASes.
+- disable: Do not remove private ASes.
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family route-reflector`
 
@@ -21592,6 +31678,16 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf routing-protocol neighbor address-family send-default-route`
 
 If set to true, generate and send the default-route for this address-family to the neighbor
@@ -21608,6 +31704,16 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf routing-protocol neighbor auth-password`
 
 Configures an MD5 authentication password for use with neighboring devices.
@@ -21623,6 +31729,12 @@ configure authority router routing vrf routing-protocol neighbor auth-password [
 | name | description |
 | ---- | ----------- |
 | password | The value to set for this field |
+
+#### Description
+
+##### password (string)
+
+A password type that is hidden from the UI. The internal storage format is dependent on the individual field.
 
 ## `configure authority router routing vrf routing-protocol neighbor bfd`
 
@@ -21660,6 +31772,14 @@ configure authority router routing vrf routing-protocol neighbor bfd desired-tx-
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing vrf routing-protocol neighbor bfd enable`
 
 Enable/Disable BFD protocol
@@ -21676,6 +31796,16 @@ configure authority router routing vrf routing-protocol neighbor bfd enable [<bo
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf routing-protocol neighbor bfd multiplier`
 
 The number of BFD packets that can be lost without the BFD session declared as down.
@@ -21691,6 +31821,16 @@ configure authority router routing vrf routing-protocol neighbor bfd multiplier 
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 2-255
 
 ## `configure authority router routing vrf routing-protocol neighbor bfd required-min-rx-interval`
 
@@ -21712,6 +31852,14 @@ configure authority router routing vrf routing-protocol neighbor bfd required-mi
 
 Units: milliseconds
 
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 50-60000
+
 ## `configure authority router routing vrf routing-protocol neighbor description`
 
 An optional textual description (intended primarily for use with a neighbor or group
@@ -21727,6 +31875,12 @@ configure authority router routing vrf routing-protocol neighbor description [<s
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router routing vrf routing-protocol neighbor graceful-restart`
 
@@ -21757,6 +31911,17 @@ configure authority router routing vrf routing-protocol neighbor graceful-restar
 | ---- | ----------- |
 | graceful-restart-mode | The value to set for this field |
 
+#### Description
+
+##### graceful-restart-mode (enumeration)
+
+configure BGP graceful restart mode [rfc4724]
+
+Options:
+- enable: enable graceful restart and helper mode
+- helper: enable graceful restart helper mode only
+- disable: disable graceful restart
+
 ## `configure authority router routing vrf routing-protocol neighbor local-as`
 
 The local autonomous system number that is to be used when establishing sessions with the remote neighbor or neighbor group, if this differs from the global BGP router autonomous system number.
@@ -21772,6 +31937,29 @@ configure authority router routing vrf routing-protocol neighbor local-as [<as-n
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing vrf routing-protocol neighbor multihop`
 
@@ -21802,6 +31990,14 @@ configure authority router routing vrf routing-protocol neighbor multihop ttl [<
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf routing-protocol neighbor negotiate-capabilities`
 
 If set to false, suppress sending the Capabilities Optional Parameter in the BGP OPEN message.
@@ -21817,6 +32013,16 @@ configure authority router routing vrf routing-protocol neighbor negotiate-capab
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor neighbor-address`
 
@@ -21834,6 +32040,38 @@ configure authority router routing vrf routing-protocol neighbor neighbor-addres
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
 ## `configure authority router routing vrf routing-protocol neighbor neighbor-as`
 
 AS number of the neighbor.
@@ -21849,6 +32087,29 @@ configure authority router routing vrf routing-protocol neighbor neighbor-as [<a
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32) (required)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority router routing vrf routing-protocol neighbor neighbor-policy`
 
@@ -21880,6 +32141,12 @@ configure authority router routing vrf routing-protocol neighbor neighbor-policy
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor neighbor-policy outbound-policy`
 
 A policy to apply to the NLRIs outbound to this neighbor.
@@ -21896,6 +32163,12 @@ configure authority router routing vrf routing-protocol neighbor neighbor-policy
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor shutdown`
 
 If set to true, the neighbors connection will not come up.
@@ -21911,6 +32184,16 @@ configure authority router routing vrf routing-protocol neighbor shutdown [<bool
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol neighbor timers`
 
@@ -21948,6 +32231,14 @@ configure authority router routing vrf routing-protocol neighbor timers connect-
 
 Units: seconds
 
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router routing vrf routing-protocol neighbor timers hold-time`
 
 Time interval that a BGP session will be considered active in the absence of keepalive or other messages from the neighbor. The hold-time is typically set to 3x the keepalive-interval.
@@ -21967,6 +32258,12 @@ configure authority router routing vrf routing-protocol neighbor timers hold-tim
 #### Description
 
 Units: seconds
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0,3-65535
 
 ## `configure authority router routing vrf routing-protocol neighbor timers keepalive-interval`
 
@@ -21988,6 +32285,12 @@ configure authority router routing vrf routing-protocol neighbor timers keepaliv
 
 Units: seconds
 
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router routing vrf routing-protocol neighbor timers minimum-advertisement-interval`
 
 Minimum time which must elapse between subsequent UPDATE messages relating to a common set of NLRI being transmitted to a neighbor. This timer is referred to as MinRouteAdvertisementIntervalTimer by RFC 4721 and serves to reduce the number of UPDATE messages transmitted when a particular set of NLRI exhibit instability.
@@ -22007,6 +32310,14 @@ configure authority router routing vrf routing-protocol neighbor timers minimum-
 #### Description
 
 Units: seconds
+
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-600
 
 ## `configure authority router routing vrf routing-protocol neighbor transport`
 
@@ -22048,6 +32359,12 @@ Do not generate a BGP service or service routes.
 configure authority router routing vrf routing-protocol neighbor transport bgp-service-generation disabled
 ```
 
+#### Description
+
+##### empty
+
+Has no value.
+
 ## `configure authority router routing vrf routing-protocol neighbor transport bgp-service-generation neighbor-vrf`
 
 Name of the neighbor&#x27;s VRF in which the peer BGP instance resides. Can be &#x27;default&#x27;.
@@ -22064,6 +32381,15 @@ configure authority router routing vrf routing-protocol neighbor transport bgp-s
 | ---- | ----------- |
 | vrf-name-or-default-vrf | The value to set for this field |
 
+#### Description
+
+##### vrf-name-or-default-vrf (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters, and cannot be the words &#x27;all&#x27;, &#x27;any&#x27;, or &#x27;unknown&#x27;.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 1-15
+
 ## `configure authority router routing vrf routing-protocol neighbor transport bgp-service-generation same-neighbor-vrf`
 
 Generate BGP service if there is a matching peer with a BGP instance within the same VRF.
@@ -22073,6 +32399,12 @@ Generate BGP service if there is a matching peer with a BGP instance within the 
 ```
 configure authority router routing vrf routing-protocol neighbor transport bgp-service-generation same-neighbor-vrf
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority router routing vrf routing-protocol neighbor transport local-address`
 
@@ -22105,6 +32437,12 @@ configure authority router routing vrf routing-protocol neighbor transport local
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref (required)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor transport local-address node`
 
 Interface node name
@@ -22120,6 +32458,12 @@ configure authority router routing vrf routing-protocol neighbor transport local
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref (required)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router routing vrf routing-protocol neighbor transport local-address routing-interface`
 
@@ -22137,6 +32481,12 @@ configure authority router routing vrf routing-protocol neighbor transport local
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol neighbor transport passive-mode`
 
 Wait for neighbors to issue requests to open a BGP session, rather than initiating sessions from the local router.
@@ -22152,6 +32502,16 @@ configure authority router routing vrf routing-protocol neighbor transport passi
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol redistribute`
 
@@ -22195,6 +32555,12 @@ configure authority router routing vrf routing-protocol redistribute policy [<po
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf routing-protocol redistribute protocol`
 
 The routing protocol to redistribute into BGP
@@ -22211,6 +32577,18 @@ configure authority router routing vrf routing-protocol redistribute protocol [<
 | ---- | ----------- |
 | redistribute-into-bgp | The value to set for this field |
 
+#### Description
+
+##### redistribute-into-bgp (enumeration)
+
+A value from a set of predefined names.
+
+Options:
+- connected: Interface routes
+- service: Service routes
+- static: Static routes
+- ospf: OSPF routes
+
 ## `configure authority router routing vrf routing-protocol route-reflector-allow-outbound-policy`
 
 Apply outbound policy on route reflector clients.
@@ -22226,6 +32604,16 @@ configure authority router routing vrf routing-protocol route-reflector-allow-ou
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol route-selection-options`
 
@@ -22258,6 +32646,16 @@ configure authority router routing vrf routing-protocol route-selection-options 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf routing-protocol route-selection-options external-compare-router-id`
 
 When comparing similar routes received from external BGP neighbors, use the router-id as a criterion to select the active path.
@@ -22273,6 +32671,16 @@ configure authority router routing vrf routing-protocol route-selection-options 
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router routing vrf routing-protocol route-selection-options ignore-as-path-length`
 
@@ -22290,6 +32698,16 @@ configure authority router routing vrf routing-protocol route-selection-options 
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router routing vrf routing-protocol router-id`
 
 Router id of the router, expressed as an 32-bit value, IPv4 address.
@@ -22305,6 +32723,14 @@ configure authority router routing vrf routing-protocol router-id [<ipv4-address
 | name | description |
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
+
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
 
 ## `configure authority router routing vrf routing-protocol timers`
 
@@ -22340,6 +32766,14 @@ configure authority router routing vrf routing-protocol timers hold-time [<uint1
 
 Units: seconds
 
+Default: 90
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0,3-65535
+
 ## `configure authority router routing vrf routing-protocol timers keepalive-interval`
 
 Time interval between transmission of keepalive messages to the neighbor. Must be set to 1/3 the hold-time or smaller.
@@ -22360,6 +32794,14 @@ configure authority router routing vrf routing-protocol timers keepalive-interva
 
 Units: seconds
 
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
 ## `configure authority router routing vrf routing-protocol type`
 
 Type of the routing protocol - an identity derived from the &#x27;routing-protocol&#x27; base identity.
@@ -22376,6 +32818,15 @@ configure authority router routing vrf routing-protocol type [<identityref>]
 | ---- | ----------- |
 | identityref | The value to set for this field |
 
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- bgp: BGP routing protocol
+
 ## `configure authority router routing vrf service-admin-distance`
 
 Administrative distance for routes generated from services.
@@ -22391,6 +32842,16 @@ configure authority router routing vrf service-admin-distance [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+Default: 254
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
 
 ## `configure authority router routing vrf static-route`
 
@@ -22439,6 +32900,12 @@ configure authority router routing vrf static-route description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router routing vrf static-route destination-prefix`
 
 IPv4 or IPv6 destination prefix that must be unicast.
@@ -22454,6 +32921,22 @@ configure authority router routing vrf static-route destination-prefix [<unicast
 | name | description |
 | ---- | ----------- |
 | unicast-ip-prefix | The value to set for this field |
+
+#### Description
+
+##### unicast-ip-prefix (union)
+
+A unicast IPv4 or IPv6 prefix
+
+Must be one of the following types:
+
+###### (0) unicast-ipv4-prefix (string)
+
+A unicast IPv4 prefix
+
+###### (1) unicast-ipv6-prefix (string)
+
+A unicast IPv6 prefix
 
 ## `configure authority router routing vrf static-route distance`
 
@@ -22471,6 +32954,14 @@ configure authority router routing vrf static-route distance [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
 ## `configure authority router routing vrf static-route next-hop`
 
 List of next-hops. An empty list creates a blackhole route.
@@ -22486,6 +32977,38 @@ configure authority router routing vrf static-route next-hop [<ip-address>]
 | name | description |
 | ---- | ----------- |
 | ip-address | Value to add to this list |
+
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
 
 ## `configure authority router routing vrf static-route next-hop-interface`
 
@@ -22529,6 +33052,12 @@ configure authority router routing vrf static-route next-hop-interface interface
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf static-route next-hop-interface node`
 
 Interface node name
@@ -22545,6 +33074,12 @@ configure authority router routing vrf static-route next-hop-interface node [<le
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router routing vrf tenant-name`
 
 List of tenants in this VRF.
@@ -22560,6 +33095,12 @@ configure authority router routing vrf tenant-name [<tenant-ref>]
 | name | description |
 | ---- | ----------- |
 | tenant-ref | Value to add to this list |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority router service-route`
 
@@ -22620,6 +33161,12 @@ configure authority router service-route bridge-name [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route enable-failover`
 
 Enable failover across next-hops and service-routes that have this flag set.
@@ -22636,6 +33183,16 @@ configure authority router service-route enable-failover [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router service-route generated`
 
 Indicates whether or not the Service Route was automatically generated as a result of STEP topology builder, Conductor, BGP/SVR, or DHCP Relay services.
@@ -22651,6 +33208,14 @@ configure authority router service-route generated [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router service-route host`
 
@@ -22673,35 +33238,11 @@ configure authority router service-route host <node-name>
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-router-service-route-host) | Move list items |
+| `move` | Move list items |
 | [`node-name`](#configure-authority-router-service-route-host-node-name) | The name of the node on which the host interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;host&#x27; |
 | [`target-address`](#configure-authority-router-service-route-host-target-address) | The ipv4 address or fqdn of the server that packets are forwarded to for the service. The destination is natted to this address. |
-
-## `configure authority router service-route host move target-address`
-
-The ipv4 address or fqdn of the server that packets are forwarded to for the service. The destination is natted to this address.
-
-#### Usage
-
-```
-configure authority router service-route host move target-address [force] <value> <position> [<relative-to>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router service-route host node-name`
 
@@ -22719,6 +33260,12 @@ configure authority router service-route host node-name [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route host target-address`
 
 The ipv4 address or fqdn of the server that packets are forwarded to for the service. The destination is natted to this address.
@@ -22734,6 +33281,62 @@ configure authority router service-route host target-address [<hostv4>]
 | name | description |
 | ---- | ----------- |
 | hostv4 | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### hostv4 (union)
+
+The host type represents either an IPv4 address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority router service-route name`
 
@@ -22751,6 +33354,15 @@ configure authority router service-route name [<service-route-name>]
 | ---- | ----------- |
 | service-route-name | The value to set for this field |
 
+#### Description
+
+##### service-route-name (string)
+
+A service route name identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 320 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-320
+
 ## `configure authority router service-route nat-target`
 
 The address or fqdn of the server that packets are forwarded to for the service. The destination is natted to this address.
@@ -22766,6 +33378,83 @@ configure authority router service-route nat-target [<host>]
 | name | description |
 | ---- | ----------- |
 | host | The value to set for this field |
+
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority router service-route next-hop`
 
@@ -22791,7 +33480,7 @@ configure authority router service-route next-hop <node-name> <interface>
 | `delete` | Delete configuration data |
 | [`gateway-ip`](#configure-authority-router-service-route-next-hop-gateway-ip) | Gateway ip address of the service route nexthop. |
 | [`interface`](#configure-authority-router-service-route-next-hop-interface) | A reference to the name of a configured network layer interface used to reach the destination. |
-| [`move`](#configure-authority-router-service-route-next-hop) | Move list items |
+| `move` | Move list items |
 | [`node-name`](#configure-authority-router-service-route-next-hop-node-name) | The name of the node on which the interface resides. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;next-hop&#x27; |
@@ -22815,6 +33504,37 @@ configure authority router service-route next-hop gateway-ip [<ip-address>]
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router service-route next-hop interface`
 
 A reference to the name of a configured network layer interface used to reach the destination.
@@ -22831,29 +33551,13 @@ configure authority router service-route next-hop interface [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
-## `configure authority router service-route next-hop move target-address`
+#### Description
 
-Target addresses for the service route nexthop.
+##### leafref
 
-#### Usage
+A reference to an existing value in the instance data.
 
-```
-configure authority router service-route next-hop move target-address [force] <value> <position> [<relative-to>]
-```
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
 
 ## `configure authority router service-route next-hop node-name`
 
@@ -22871,6 +33575,12 @@ configure authority router service-route next-hop node-name [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route next-hop source-nat-pool`
 
 Apply source address (and optional port) translation for flows created towards the configured next-hop. This config will override any source-nat settings on the egress network-interface.
@@ -22886,6 +33596,12 @@ configure authority router service-route next-hop source-nat-pool [<nat-pool-ref
 | name | description |
 | ---- | ----------- |
 | nat-pool-ref | The value to set for this field |
+
+#### Description
+
+##### nat-pool-ref (leafref)
+
+This type is used by other entities that need to reference configured NAT pools.
 
 ## `configure authority router service-route next-hop target-address`
 
@@ -22903,6 +33619,86 @@ configure authority router service-route next-hop target-address [<host>]
 | ---- | ----------- |
 | host | Value to add to this list |
 
+#### Description
+
+The order of elements matters.
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router service-route next-hop vector`
 
 Vector name to assign a cost to this next-hop in service-route
@@ -22918,6 +33714,15 @@ configure authority router service-route next-hop vector [<vector-name>]
 | name | description |
 | ---- | ----------- |
 | vector-name | The value to set for this field |
+
+#### Description
+
+##### vector-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
 
 ## `configure authority router service-route next-peer`
 
@@ -22935,6 +33740,12 @@ configure authority router service-route next-peer [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route peer`
 
 Peer router to forward packets to for the service.
@@ -22951,6 +33762,12 @@ configure authority router service-route peer [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route port-target`
 
 The port of the server that packets are forwarded to for the service. The destination is port natted to this port. If no value is specified, no translation occurs.
@@ -22966,6 +33783,14 @@ configure authority router service-route port-target [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router service-route reachability-detection`
 
@@ -23007,6 +33832,14 @@ configure authority router service-route reachability-detection detection-window
 
 Units: seconds
 
+Default: 5
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 5-60
+
 ## `configure authority router service-route reachability-detection enabled`
 
 Whether reachability detection is enabled on this service-route.
@@ -23023,6 +33856,16 @@ configure authority router service-route reachability-detection enabled [<boolea
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router service-route reachability-detection enforcement`
 
 Whether reachability detection is enforced on this service-route.
@@ -23038,6 +33881,16 @@ configure authority router service-route reachability-detection enforcement [<bo
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router service-route reachability-detection hold-down`
 
@@ -23058,6 +33911,14 @@ configure authority router service-route reachability-detection hold-down [<uint
 #### Description
 
 Units: seconds
+
+Default: 5
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 5-60
 
 ## `configure authority router service-route reachability-detection probe`
 
@@ -23102,6 +33963,16 @@ configure authority router service-route reachability-detection probe enabled [<
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router service-route reachability-detection probe icmp-probe-profile`
 
 The ICMP probe profile settings to use for this path
@@ -23117,6 +33988,12 @@ configure authority router service-route reachability-detection probe icmp-probe
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router service-route reachability-detection probe name`
 
@@ -23134,6 +34011,12 @@ configure authority router service-route reachability-detection probe name [<str
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router service-route reachability-detection probe-type`
 
 The mode for performing probes in addition to reachability-detection enforcement
@@ -23149,6 +34032,18 @@ configure authority router service-route reachability-detection probe-type [<enu
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Ignore probe state and use organic traffic to determine path health
+- always: Factor probe state into path health
 
 ## `configure authority router service-route reachability-detection reachability-profile`
 
@@ -23166,6 +34061,12 @@ configure authority router service-route reachability-detection reachability-pro
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route routing-stack`
 
 Packets are passed to the internal routing agent for processing
@@ -23175,6 +34076,12 @@ Packets are passed to the internal routing agent for processing
 ```
 configure authority router service-route routing-stack
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority router service-route routing-stack-vrf`
 
@@ -23192,6 +34099,12 @@ configure authority router service-route routing-stack-vrf [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route service-name`
 
 The name of the service that this service route applies to.
@@ -23207,6 +34120,12 @@ configure authority router service-route service-name [<service-name-ref>]
 | name | description |
 | ---- | ----------- |
 | service-name-ref | The value to set for this field |
+
+#### Description
+
+##### service-name-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured services.
 
 ## `configure authority router service-route service-route-policy`
 
@@ -23224,6 +34143,12 @@ configure authority router service-route service-route-policy [<leafref>]
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority router service-route use-bgp-over-svr`
 
 Combine BGP over SVR routes with local service routes.
@@ -23234,6 +34159,12 @@ Combine BGP over SVR routes with local service routes.
 configure authority router service-route use-bgp-over-svr
 ```
 
+#### Description
+
+##### empty
+
+Has no value.
+
 ## `configure authority router service-route use-learned-routes`
 
 Use learned (from routing protocols), connected, and static routes.
@@ -23243,6 +34174,12 @@ Use learned (from routing protocols), connected, and static routes.
 ```
 configure authority router service-route use-learned-routes
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority router service-route vector`
 
@@ -23259,6 +34196,15 @@ configure authority router service-route vector [<vector-name>]
 | name | description |
 | ---- | ----------- |
 | vector-name | The value to set for this field |
+
+#### Description
+
+##### vector-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
 
 ## `configure authority router service-route-policy`
 
@@ -23308,6 +34254,12 @@ configure authority router service-route-policy description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority router service-route-policy include-parent-routes`
 
 When true, the routes from the immediate parent service will be used in addition to those provisioned for the child service. By default, only provisioned routes for a child service is in use.
@@ -23323,6 +34275,16 @@ configure authority router service-route-policy include-parent-routes [<boolean>
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router service-route-policy max-sessions`
 
@@ -23340,6 +34302,27 @@ configure authority router service-route-policy max-sessions [<limit>]
 | ---- | ----------- |
 | limit | The value to set for this field |
 
+#### Description
+
+##### limit (union)
+
+A type for defining values such as rates and capacities for which the default value is unlimited.
+
+Must be one of the following types:
+
+###### (0) uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-999999999999
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- unlimited: No limit on this value.
+
 ## `configure authority router service-route-policy name`
 
 A unique name for the service route policy.
@@ -23356,6 +34339,15 @@ configure authority router service-route-policy name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router service-route-policy packet-replication`
 
 When true, packets will be replicated for all next-hops in the associated service-route.
@@ -23371,6 +34363,16 @@ configure authority router service-route-policy packet-replication [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router service-route-policy session-high-water-mark`
 
@@ -23392,6 +34394,14 @@ configure authority router service-route-policy session-high-water-mark [<percen
 
 Units: percent
 
+Default: 95
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority router service-route-policy session-low-water-mark`
 
 Percentage of maximum sessions below which the route will be reconsidered for load balancing.
@@ -23412,6 +34422,14 @@ configure authority router service-route-policy session-low-water-mark [<percent
 
 Units: percent
 
+Default: 90
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority router service-route-policy session-rate`
 
 Maximum rate in sessions per second. When configured, once the service-route using this service-route-policy reaches the configured rate limit threshold, no new sessions will be established until the rate drops below the configured value.
@@ -23427,6 +34445,27 @@ configure authority router service-route-policy session-rate [<limit>]
 | name | description |
 | ---- | ----------- |
 | limit | The value to set for this field |
+
+#### Description
+
+##### limit (union)
+
+A type for defining values such as rates and capacities for which the default value is unlimited.
+
+Must be one of the following types:
+
+###### (0) uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-999999999999
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- unlimited: No limit on this value.
 
 ## `configure authority router static-hostname-mapping`
 
@@ -23465,7 +34504,7 @@ configure authority router static-hostname-mapping static-entry <hostname>
 | `delete` | Delete configuration data |
 | [`hostname`](#configure-authority-router-static-hostname-mapping-static-entry-hostname) | Hostname to set the resolution for. |
 | [`ip-address`](#configure-authority-router-static-hostname-mapping-static-entry-ip-address) | Ip-address for the corresponding hostname. |
-| [`move`](#configure-authority-router-static-hostname-mapping-static-entry) | Move list items |
+| `move` | Move list items |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;static-entry&#x27; |
 
@@ -23485,6 +34524,14 @@ configure authority router static-hostname-mapping static-entry hostname [<domai
 | ---- | ----------- |
 | domain-name-not-ipv4 | The value to set for this field |
 
+#### Description
+
+##### domain-name-not-ipv4 (string)
+
+A subset of domain-name that are not IPv4 addresses
+
+Length: 1-253
+
 ## `configure authority router static-hostname-mapping static-entry ip-address`
 
 Ip-address for the corresponding hostname.
@@ -23501,29 +34548,38 @@ configure authority router static-hostname-mapping static-entry ip-address [<ip-
 | ---- | ----------- |
 | ip-address | Value to add to this list |
 
-## `configure authority router static-hostname-mapping static-entry move ip-address`
+#### Description
 
-Ip-address for the corresponding hostname.
+The order of elements matters.
 
-#### Usage
+##### ip-address (union) (required)
 
-```
-configure authority router static-hostname-mapping static-entry move ip-address [force] <value> <position> [<relative-to>]
-```
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
-##### Keyword Arguments
+Must be one of the following types:
 
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
+###### (0) ipv4-address (string) (required)
 
-##### Positional Arguments
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
-| name | description |
-| ---- | ----------- |
-| value | Value to move |
-| position | first \| last \| before \| after |
-| relative-to | Value before or after which to move |
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router system`
 
@@ -23580,6 +34636,29 @@ configure authority router system asset-connection-resiliency enabled [<union>]
 | ---- | ----------- |
 | union | The value to set for this field |
 
+#### Description
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- use-authority-setting: Use the authority wide asset connection resiliency state.
+
 ## `configure authority router system audit`
 
 Configuration for audit events
@@ -23630,6 +34709,16 @@ configure authority router system audit administration enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system audit administration persist`
 
 Enable/disable persistence of administration events by SSR
@@ -23646,6 +34735,16 @@ configure authority router system audit administration persist [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system audit disk-full-action`
 
 Action to take when disk is full.
@@ -23661,6 +34760,18 @@ configure authority router system audit disk-full-action [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: ignore
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- halt: On failure halt the system.
+- ignore: Ignore the failure.
 
 ## `configure authority router system audit remote-logging-server`
 
@@ -23704,6 +34815,83 @@ configure authority router system audit remote-logging-server address [<host>]
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router system audit remote-logging-server port`
 
 The remote port of the audit logging server.
@@ -23720,6 +34908,14 @@ configure authority router system audit remote-logging-server port [<l4-port>]
 | ---- | ----------- |
 | l4-port | The value to set for this field |
 
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
+
 ## `configure authority router system audit retention`
 
 How long events should be persisted. This includes the explicit events here as well as the the implicit alarm and provisioning events
@@ -23735,6 +34931,16 @@ configure authority router system audit retention [<duration>]
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 180d
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router system audit security`
 
@@ -23766,6 +34972,16 @@ configure authority router system audit security enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system audit security persist`
 
 Enable/disable persistence of security events by SSR
@@ -23781,6 +34997,16 @@ configure authority router system audit security persist [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or false
 
 ## `configure authority router system audit system`
 
@@ -23812,6 +35038,16 @@ configure authority router system audit system enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system audit system persist`
 
 Enable/disable persistence of system events by SSR
@@ -23827,6 +35063,16 @@ configure authority router system audit system persist [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority router system audit traffic`
 
@@ -23858,6 +35104,16 @@ configure authority router system audit traffic enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system audit traffic persist`
 
 Enable/disable persistence of traffic events by SSR
@@ -23874,6 +35130,16 @@ configure authority router system audit traffic persist [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system contact`
 
 The administrator contact information for the system.
@@ -23889,6 +35155,12 @@ configure authority router system contact [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router system inactivity-timer`
 
@@ -23909,6 +35181,14 @@ configure authority router system inactivity-timer [<uint32>]
 #### Description
 
 Units: seconds
+
+Default: 900
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 300-86400
 
 ## `configure authority router system local-login`
 
@@ -23953,6 +35233,16 @@ configure authority router system local-login netconf session-limit [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+Default: 10
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-100
+
 ## `configure authority router system local-login netconf session-limit-action`
 
 Action performed when local session limit exceeded.
@@ -23968,6 +35258,18 @@ configure authority router system local-login netconf session-limit-action [<enu
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: issue-warning
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- no-action: Take no action.
+- issue-warning: Log and issue warning to all current shell sessions that the session limit has been exceeded.
 
 ## `configure authority router system log-category`
 
@@ -24011,6 +35313,20 @@ configure authority router system log-category log-level [<log-level>]
 | ---- | ----------- |
 | log-level | The value to set for this field |
 
+#### Description
+
+##### log-level (enumeration) (required)
+
+Log levels
+
+Options:
+- fatal: Only record log messages with level &quot;fatal&quot; or higher.
+- error: Only record log messages with level &quot;error&quot; or higher.
+- warning: Only record log messages with level &quot;warning&quot; or higher.
+- info: Only record log messages with level &quot;info&quot; or higher.
+- debug: Only record log messages with level &quot;debug&quot; or higher.
+- trace: Only record log messages with level &quot;trace&quot; or higher.
+
 ## `configure authority router system log-category name`
 
 The log category.
@@ -24027,6 +35343,42 @@ configure authority router system log-category name [<log-category>]
 | ---- | ----------- |
 | log-category | The value to set for this field |
 
+#### Description
+
+##### log-category (enumeration)
+
+Log categories
+
+Options:
+- ATCS: Components related to the SSR Analytics Engine.
+- CFGD: Components related to the SSR Configuration Engine.
+- DATA: Components related to the configuration and state databases.
+- DISC: Discovery-based components (except BFD). Today this is DHCP and ARP.
+- USER: User-created log messages, generated via the &#x27;write&#x27; command.
+- FLC: Control system for packet forwarding.
+- FLPP: System for processing the initial packet of each new session.
+- HWMC: Control system for packet processing.
+- IPC: The subsystem responsible for messaging between components within the SSR product.
+- LINK: The subsystem for inter-node communication (today, BFD).
+- PLAT: Components related to the underlying platform management.
+- PLUG: Components related to plugin management.
+- RDB: The subsystem responsible for synchronizing data between nodes.
+- RTG: Components related to the routing engine.
+- SNMP: Components related to the SNMP engine.
+- SATF: Failures related to multi-threaded session setup.
+- SESS: Components related to session setup.
+- STEP: Components related to STEP.
+- TEST: Components related to testing.
+- UTIL: Components related to utility libraries.
+- DPDK: Components related to DPDK.
+- DNS: Components related to DNS.
+- HTTP: Components related to HTTP request/response processing.
+- PCLI: All the PCLI&#x27;s log messages.
+- BONS: Components related to the configuration database.
+- LDAP: All the System Security Services Daemon logs.
+- RIB: Components related to routing changes.
+- IDP: Components related to IDP.
+
 ## `configure authority router system log-level`
 
 The log level is the degree to which the SSR writes information into its log files, by default. WARNING: using the &#x27;trace&#x27; level will significantly impact system performance and is not recommended for production environments. The &#x27;log-category&#x27; configuration should be used instead for &#x27;trace&#x27; level of specific categories.
@@ -24042,6 +35394,22 @@ configure authority router system log-level [<log-level>]
 | name | description |
 | ---- | ----------- |
 | log-level | The value to set for this field |
+
+#### Description
+
+Default: info
+
+##### log-level (enumeration)
+
+Log levels
+
+Options:
+- fatal: Only record log messages with level &quot;fatal&quot; or higher.
+- error: Only record log messages with level &quot;error&quot; or higher.
+- warning: Only record log messages with level &quot;warning&quot; or higher.
+- info: Only record log messages with level &quot;info&quot; or higher.
+- debug: Only record log messages with level &quot;debug&quot; or higher.
+- trace: Only record log messages with level &quot;trace&quot; or higher.
 
 ## `configure authority router system metrics`
 
@@ -24075,6 +35443,16 @@ configure authority router system metrics application-stats-interval [<duration>
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 1m
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router system metrics profile`
 
@@ -24118,6 +35496,12 @@ configure authority router system metrics profile name [<metrics-profile-ref>]
 | ---- | ----------- |
 | metrics-profile-ref | The value to set for this field |
 
+#### Description
+
+##### metrics-profile-ref (leafref)
+
+A reference to one of the defined metrics profiles
+
 ## `configure authority router system metrics profile retention`
 
 How long the metrics should be retained on box
@@ -24133,6 +35517,20 @@ configure authority router system metrics profile retention [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: in-memory
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- in-memory: Don not store any historical data
+- short: Metrics will be stored for the short duration as defined in the router&#x27;s config
+- intermediate: Metrics will be stored for the short and intermediate durations as defined in the router&#x27;s config
+- long: Metrics will be stored for the short, intermediate, and long durations as defined in the router&#x27;s config
 
 ## `configure authority router system metrics retention`
 
@@ -24180,6 +35578,16 @@ configure authority router system metrics retention intermediate duration [<dura
 | ---- | ----------- |
 | duration | The value to set for this field |
 
+#### Description
+
+Default: 1d
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
+
 ## `configure authority router system metrics retention intermediate enabled`
 
 Whether intermediate and subsequent retentions should be disabled
@@ -24196,6 +35604,16 @@ configure authority router system metrics retention intermediate enabled [<boole
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system metrics retention intermediate interval`
 
 How frequently metrics should be aggregated into the intermediate retention
@@ -24211,6 +35629,16 @@ configure authority router system metrics retention intermediate interval [<dura
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 5m
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router system metrics retention long`
 
@@ -24243,6 +35671,16 @@ configure authority router system metrics retention long duration [<duration>]
 | ---- | ----------- |
 | duration | The value to set for this field |
 
+#### Description
+
+Default: 180d
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
+
 ## `configure authority router system metrics retention long enabled`
 
 Whether the long retention should be disabled
@@ -24259,6 +35697,16 @@ configure authority router system metrics retention long enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system metrics retention long interval`
 
 How frequently metrics should be aggregated into the long retention
@@ -24274,6 +35722,16 @@ configure authority router system metrics retention long interval [<duration>]
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 1h
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router system metrics retention short`
 
@@ -24306,6 +35764,16 @@ configure authority router system metrics retention short duration [<duration>]
 | ---- | ----------- |
 | duration | The value to set for this field |
 
+#### Description
+
+Default: 1h
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
+
 ## `configure authority router system metrics retention short enabled`
 
 Whether short and subsequent retentions should be disabled
@@ -24322,6 +35790,16 @@ configure authority router system metrics retention short enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system metrics retention short interval`
 
 How frequently metrics should be inserted into the short retention. This is equivallent to the deprecated &#x27;sample-period&#x27; element.
@@ -24337,6 +35815,16 @@ configure authority router system metrics retention short interval [<duration>]
 | name | description |
 | ---- | ----------- |
 | duration | The value to set for this field |
+
+#### Description
+
+Default: 5s
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router system metrics sample-period`
 
@@ -24357,7 +35845,18 @@ configure authority router system metrics sample-period [<int8>]
 #### Description
 
 Units: seconds
-Warning: &#x27;sample-period&#x27; is deprecated and will be removed in a future software version
+
+Default: 5
+
+:::warning
+`sample-period` is deprecated and will be removed in a future software version
+:::
+
+##### int8
+
+A signed 8-bit integer.
+
+Range: 1-60
 
 ## `configure authority router system ntp`
 
@@ -24389,6 +35888,16 @@ configure authority router system ntp orphan-stratum [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-15
 
 ## `configure authority router system ntp server`
 
@@ -24447,6 +35956,14 @@ configure authority router system ntp server authentication-key key-number [<uin
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
+Range: 1-65534
+
 ## `configure authority router system ntp server authentication-key type`
 
 The algorithm used by symmetric key
@@ -24462,6 +35979,16 @@ configure authority router system ntp server authentication-key type [<enumerati
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration (required)
+
+A value from a set of predefined names.
+
+Options:
+- md5: Key uses MD5 authentication algorithm
+- sha1: Key uses SHA1 authentication algorithm
 
 ## `configure authority router system ntp server authentication-key value`
 
@@ -24479,6 +36006,14 @@ configure authority router system ntp server authentication-key value [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string (required)
+
+A text value.
+
+Length: 20,40
+
 ## `configure authority router system ntp server ip-address`
 
 The address or hostname of NTP server.
@@ -24494,6 +36029,83 @@ configure authority router system ntp server ip-address [<host>]
 | name | description |
 | ---- | ----------- |
 | host | The value to set for this field |
+
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority router system remote-login`
 
@@ -24523,6 +36135,29 @@ configure authority router system remote-login enabled [<union>]
 | name | description |
 | ---- | ----------- |
 | union | The value to set for this field |
+
+#### Description
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- use-authority-setting: Use the authority wide remote-login state.
 
 ## `configure authority router system services`
 
@@ -24603,6 +36238,15 @@ configure authority router system services snmp-server access-control community 
 | ---- | ----------- |
 | snmp-community | The value to set for this field |
 
+#### Description
+
+##### snmp-community (string)
+
+A string representing an SNMP community.
+
+Cannot contain quotes or spaces in community string.
+Length: 1-255
+
 ## `configure authority router system services snmp-server access-control name`
 
 An arbitrary, unique name for this access control policy.
@@ -24619,6 +36263,15 @@ configure authority router system services snmp-server access-control name [<nam
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router system services snmp-server access-control source`
 
 The SNMP client host to restrict access to.
@@ -24634,6 +36287,83 @@ configure authority router system services snmp-server access-control source [<h
 | name | description |
 | ---- | ----------- |
 | host | The value to set for this field |
+
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority router system services snmp-server access-control usm`
 
@@ -24668,6 +36398,19 @@ configure authority router system services snmp-server access-control usm authen
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none
+- md5
+- sha
+
 ## `configure authority router system services snmp-server access-control usm authentication-key`
 
 Authentication key.
@@ -24683,6 +36426,14 @@ configure authority router system services snmp-server access-control usm authen
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 8-128
 
 ## `configure authority router system services snmp-server access-control usm privacy`
 
@@ -24700,6 +36451,19 @@ configure authority router system services snmp-server access-control usm privac
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none
+- des
+- aes
+
 ## `configure authority router system services snmp-server access-control usm privacy-key`
 
 Privacy key.
@@ -24715,6 +36479,14 @@ configure authority router system services snmp-server access-control usm privac
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 8-128
 
 ## `configure authority router system services snmp-server access-control usm user-name`
 
@@ -24732,6 +36504,15 @@ configure authority router system services snmp-server access-control usm user-n
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string) (required)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router system services snmp-server access-control view`
 
 The view to use for this access control policy.
@@ -24747,6 +36528,12 @@ configure authority router system services snmp-server access-control view [<snm
 | name | description |
 | ---- | ----------- |
 | snmp-vacm-view-ref | The value to set for this field |
+
+#### Description
+
+##### snmp-vacm-view-ref (leafref)
+
+This type is used by other entities that need to reference configured snmp vacm views.
 
 ## `configure authority router system services snmp-server enabled`
 
@@ -24764,6 +36551,16 @@ configure authority router system services snmp-server enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system services snmp-server engine-id`
 
 The SNMPv3 Engine ID.
@@ -24779,6 +36576,12 @@ configure authority router system services snmp-server engine-id [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority router system services snmp-server notification-receiver`
 
@@ -24827,6 +36630,12 @@ configure authority router system services snmp-server notification-receiver acc
 | ---- | ----------- |
 | snmp-access-control-ref | The value to set for this field |
 
+#### Description
+
+##### snmp-access-control-ref (leafref)
+
+This type is used by other entities that need to reference configured snmp access-controls.
+
 ## `configure authority router system services snmp-server notification-receiver community`
 
 The SNMP community string to use when notifying this receiver.
@@ -24845,7 +36654,16 @@ configure authority router system services snmp-server notification-receiver com
 
 #### Description
 
-Warning: &#x27;community&#x27; is deprecated and will be removed in a future software version
+:::warning
+`community` is deprecated and will be removed in a future software version
+:::
+
+##### snmp-community (string)
+
+A string representing an SNMP community.
+
+Cannot contain quotes or spaces in community string.
+Length: 1-255
 
 ## `configure authority router system services snmp-server notification-receiver ip-address`
 
@@ -24863,6 +36681,14 @@ configure authority router system services snmp-server notification-receiver ip-
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
 
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
 ## `configure authority router system services snmp-server notification-receiver port`
 
 The port to which the SNMP servers send notifications.
@@ -24878,6 +36704,14 @@ configure authority router system services snmp-server notification-receiver por
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router system services snmp-server notification-receiver type`
 
@@ -24895,6 +36729,16 @@ configure authority router system services snmp-server notification-receiver typ
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options: 
+- trap
+- inform
+
 ## `configure authority router system services snmp-server port`
 
 The port on which the SNMP server listens.
@@ -24910,6 +36754,16 @@ configure authority router system services snmp-server port [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+Default: 161
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router system services snmp-server vacm`
 
@@ -24969,6 +36823,14 @@ configure authority router system services snmp-server vacm view excluded [<snmp
 | ---- | ----------- |
 | snmp-oid | Value to add to this list |
 
+#### Description
+
+##### snmp-oid (string)
+
+A string representing an SNMP OID.
+
+Can only define numerical OIDs with &#x27;.&#x27; separating objects.
+
 ## `configure authority router system services snmp-server vacm view included`
 
 OID view to allow.
@@ -24984,6 +36846,14 @@ configure authority router system services snmp-server vacm view included [<snmp
 | name | description |
 | ---- | ----------- |
 | snmp-oid | Value to add to this list |
+
+#### Description
+
+##### snmp-oid (string)
+
+A string representing an SNMP OID.
+
+Can only define numerical OIDs with &#x27;.&#x27; separating objects.
 
 ## `configure authority router system services snmp-server vacm view name`
 
@@ -25001,6 +36871,15 @@ configure authority router system services snmp-server vacm view name [<name-id>
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority router system services snmp-server vacm view strict`
 
 When parsing the included OIDs, strict mode will prevent any OIDs that are not a part of the SSR supported OIDs from being added to the specified view.
@@ -25017,6 +36896,16 @@ configure authority router system services snmp-server vacm view strict [<boolea
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system services snmp-server version`
 
 The SNMP server protocol version.
@@ -25032,6 +36921,18 @@ configure authority router system services snmp-server version [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: v2c
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- v2c
+- v3
 
 ## `configure authority router system services webserver`
 
@@ -25065,6 +36966,16 @@ configure authority router system services webserver enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system services webserver port`
 
 The port on which the Web servers listen.
@@ -25080,6 +36991,16 @@ configure authority router system services webserver port [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+Default: 443
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority router system services webserver server`
 
@@ -25123,6 +37044,37 @@ configure authority router system services webserver server ip-address [<ip-addr
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
 ## `configure authority router system services webserver server node-name`
 
 The name of the control node.
@@ -25138,6 +37090,12 @@ configure authority router system services webserver server node-name [<leafref>
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority router system software-update`
 
@@ -25173,6 +37131,27 @@ configure authority router system software-update max-bandwidth [<union>]
 
 Units: bits/second
 
+Default: unlimited
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) uint64
+
+An unsigned 64-bit integer.
+
+Range: 1-999999999999
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- unlimited: No limit on this value
+
 ## `configure authority router system software-update repository`
 
 Configuration for how to retrieve software updates.
@@ -25204,6 +37183,83 @@ configure authority router system software-update repository address [<host>]
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router system software-update repository offline-mode`
 
 Software updates are received through the Conductor without internet connectivity
@@ -25220,6 +37276,16 @@ configure authority router system software-update repository offline-mode [<bool
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority router system software-update repository source-type`
 
 The location from which to retrieve software updates.
@@ -25235,6 +37301,19 @@ configure authority router system software-update repository source-type [<enume
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: internet-only
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- conductor-only: Download software from the Conductor, using it as a proxy to the Internet if it has not already downloaded the requested software.
+- prefer-conductor: Download software from the Conductor, using the Internet if the Conductor has not already downloaded the requested software.
+- internet-only: Download software from publicly available sources via the Internet.
 
 ## `configure authority router system syslog`
 
@@ -25270,6 +37349,12 @@ configure authority router system syslog client-certificate-name [<client-certif
 | ---- | ----------- |
 | client-certificate-ref | The value to set for this field |
 
+#### Description
+
+##### client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate.
+
 ## `configure authority router system syslog facility`
 
 The facility under which syslog messages will be recorded.
@@ -25286,6 +37371,36 @@ configure authority router system syslog facility [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: local0
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auth: security and authorization messages
+- authpriv: security and authorization messages (private)
+- cron: cron daemon messages
+- daemon: system daemons without separate facility
+- kern: kernel messages
+- lpr: line printer subsystem messages
+- mail: mail subsystem messages
+- news: USENET news subsystem messages
+- syslog: messages generated internally by syslog
+- user: generic user-level messages
+- uucp: UUCP messages
+- local0: syslog local use 0 facility reserved for local use
+- local1: syslog local use 1 facility reserved for local use
+- local2: syslog local use 2 facility reserved for local use
+- local3: syslog local use 3 facility reserved for local use
+- local4: syslog local use 4 facility reserved for local use
+- local5: syslog local use 5 facility reserved for local use
+- local6: syslog local use 6 facility reserved for local use
+- local7: syslog local use 7 facility reserved for local use
+- any: match any syslog facility
+
 ## `configure authority router system syslog protocol`
 
 Use TCP or UDP protocol to communicate with syslog server.
@@ -25301,6 +37416,19 @@ configure authority router system syslog protocol [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: udp
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- udp: Use UDP protocol to communicate with syslog server.
+- tcp: Use TCP protocol to communicate with syslog server.
+- tls: Use TLS over TCP protocol to communicate with syslog server.
 
 ## `configure authority router system syslog server`
 
@@ -25344,6 +37472,83 @@ configure authority router system syslog server ip-address [<host>]
 | ---- | ----------- |
 | host | The value to set for this field |
 
+#### Description
+
+##### host (union)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority router system syslog server port`
 
 The port on which remote syslog server listens
@@ -25360,6 +37565,14 @@ configure authority router system syslog server port [<l4-port>]
 | ---- | ----------- |
 | l4-port | The value to set for this field |
 
+#### Description
+
+##### l4-port (uint16)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
+
 ## `configure authority router system syslog severity`
 
 Sets the level at which messages will be sent to the syslog server.
@@ -25375,6 +37588,24 @@ configure authority router system syslog severity [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: error
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- emergency: Only record log messages with level &quot;emergency&quot; or higher
+- alert: Only record log messages with level &quot;alert&quot; or higher
+- critical: Only record log messages with level &quot;critical&quot; or higher
+- error: Only record log messages with level &quot;error&quot; or higher
+- warning: Only record log messages with level &quot;warning&quot; or higher
+- notice: Only record log messages with level &quot;notice&quot; or higher
+- info: Only record log messages with level &quot;info&quot; or higher
+- debug: Only record log messages with level &quot;debug&quot; or higher
 
 ## `configure authority router udp-transform`
 
@@ -25412,6 +37643,14 @@ configure authority router udp-transform detect-interval [<uint32>]
 
 Units: seconds
 
+Default: 300
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router udp-transform mode`
 
 Configure Mode
@@ -25428,6 +37667,18 @@ configure authority router udp-transform mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: auto-detect
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- auto-detect: Detect if TCP to UDP transform is required. Special TCP packets are sent to the peer at the specified interval. If these packets are not returned, transformation is required.
+- always-transform: Force UDP transform for all TCP traffic to the peer. TCP detection packets are never sent in this mode.
+
 ## `configure authority router udp-transform nat-keep-alive-mode`
 
 Configure Nat Keep Alive Mode
@@ -25443,6 +37694,18 @@ configure authority router udp-transform nat-keep-alive-mode [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Do not send keep-alive packets to keep UDP sessions active during UDP transform.
+- enabled: Inject keep-alive packets to keep UDP sessions active during UDP transform.
 
 ## `configure authority router udp-transform nat-keep-alive-timeout`
 
@@ -25463,6 +37726,14 @@ configure authority router udp-transform nat-keep-alive-timeout [<uint32>]
 #### Description
 
 Units: seconds
+
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority routing`
 
@@ -25502,30 +37773,12 @@ configure authority routing filter <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-filter) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-routing-filter-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`rule`](#configure-authority-routing-filter-rule) | A fragment of the filter which defines a subset of the logic on how to process the objects going through the filter |
 | `show` | Show configuration data for &#x27;filter&#x27; |
 | [`type`](#configure-authority-routing-filter-type) | A filter type |
-
-## `configure authority routing filter move rule`
-
-A fragment of the filter which defines a subset of the logic on how to process the objects going through the filter
-
-#### Usage
-
-```
-configure authority routing filter move rule <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | An arbitrary identifying name |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
 
 ## `configure authority routing filter name`
 
@@ -25542,6 +37795,15 @@ configure authority routing filter name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority routing filter rule`
 
@@ -25575,6 +37837,10 @@ configure authority routing filter rule <name>
 | [`prefix`](#configure-authority-routing-filter-rule-prefix) | The prefix to match |
 | `show` | Show configuration data for &#x27;rule&#x27; |
 
+#### Description
+
+The order of elements matters.
+
 ## `configure authority routing filter rule as-path`
 
 An AS-path regex to match on
@@ -25590,6 +37856,12 @@ configure authority routing filter rule as-path [<regex>]
 | name | description |
 | ---- | ----------- |
 | regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
 
 ## `configure authority routing filter rule community`
 
@@ -25607,6 +37879,12 @@ configure authority routing filter rule community [<regex>]
 | ---- | ----------- |
 | regex | The value to set for this field |
 
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
 ## `configure authority routing filter rule extended-community`
 
 A BGP extended community regex to match on
@@ -25622,6 +37900,12 @@ configure authority routing filter rule extended-community [<regex>]
 | name | description |
 | ---- | ----------- |
 | regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
 
 ## `configure authority routing filter rule filter`
 
@@ -25639,6 +37923,18 @@ configure authority routing filter rule filter [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: accept
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- accept: Indicates elements matching the rule should not be filtered by the calling construct
+- reject: Indicates elements matching the rule should be filtered by the calling construct
+
 ## `configure authority routing filter rule ge`
 
 Match the prefix greater than or equal to said prefix length
@@ -25654,6 +37950,14 @@ configure authority routing filter rule ge [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-128
 
 ## `configure authority routing filter rule le`
 
@@ -25671,6 +37975,14 @@ configure authority routing filter rule le [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-128
+
 ## `configure authority routing filter rule name`
 
 An arbitrary identifying name
@@ -25686,6 +37998,15 @@ configure authority routing filter rule name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority routing filter rule prefix`
 
@@ -25703,6 +38024,53 @@ configure authority routing filter rule prefix [<ip-prefix>]
 | ---- | ----------- |
 | ip-prefix | The value to set for this field |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority routing filter type`
 
 A filter type
@@ -25718,6 +38086,19 @@ configure authority routing filter type [<identityref>]
 | name | description |
 | ---- | ----------- |
 | identityref | The value to set for this field |
+
+#### Description
+
+##### identityref (required)
+
+A value from a set of predefined names.
+
+Options:
+- prefix-filter: Filter based on IPv4 prefixes within a given range
+- prefix-filter-ipv6: Filter based on IPv6 prefixes within a given range
+- as-path-filter: Filter based on the BGP AS path
+- community-filter: Filter based on the BGP community value
+- extended-community-filter: Filter based on the BGP extended community value
 
 ## `configure authority routing policy`
 
@@ -25741,29 +38122,11 @@ configure authority routing policy <name>
 | ------- | ----------- |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
-| [`move`](#configure-authority-routing-policy) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-routing-policy-name) | An arbitrary identifying name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;policy&#x27; |
 | [`statement`](#configure-authority-routing-policy-statement) | A fragment of a policy that is executed in sequence. A statement is executed by first running the conditions. If all the conditions match (or if no conditions are specified) the policy (accept or reject) is consulted. An accept means execute the actions in the statement and then terminate the policy returning accept. A reject means do not execute the actions and terminate the policy returning reject. The accept terminating the policy may be modified by flow actions. If a policy reaches the end of the statement list and no statement has been executed there is an implicit reject |
-
-## `configure authority routing policy move statement`
-
-A fragment of a policy that is executed in sequence. A statement is executed by first running the conditions. If all the conditions match (or if no conditions are specified) the policy (accept or reject) is consulted. An accept means execute the actions in the statement and then terminate the policy returning accept. A reject means do not execute the actions and terminate the policy returning reject. The accept terminating the policy may be modified by flow actions. If a policy reaches the end of the statement list and no statement has been executed there is an implicit reject
-
-#### Usage
-
-```
-configure authority routing policy move statement <name> <position> [<relative-to-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| name | An arbitrary identifying name |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
 
 ## `configure authority routing policy name`
 
@@ -25780,6 +38143,15 @@ configure authority routing policy name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority routing policy statement`
 
@@ -25809,6 +38181,10 @@ configure authority routing policy statement <name>
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`policy`](#configure-authority-routing-policy-statement-policy) | The policy action, accept or reject, to be returned if the conditions evaluate to true. If no conditions are given the condition evaluation is true |
 | `show` | Show configuration data for &#x27;statement&#x27; |
+
+#### Description
+
+The order of elements matters.
 
 ## `configure authority routing policy statement action`
 
@@ -25876,6 +38252,12 @@ configure authority routing policy statement action add [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority routing policy statement action additive`
 
 Merge the community attribute values
@@ -25885,6 +38267,12 @@ Merge the community attribute values
 ```
 configure authority routing policy statement action additive
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority routing policy statement action aggregator-address`
 
@@ -25902,6 +38290,14 @@ configure authority routing policy statement action aggregator-address [<ipv4-ad
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
 
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
 ## `configure authority routing policy statement action as`
 
 The aggregator as
@@ -25917,6 +38313,29 @@ configure authority routing policy statement action as [<as-number>]
 | name | description |
 | ---- | ----------- |
 | as-number | The value to set for this field |
+
+#### Description
+
+##### as-number (uint32)
+
+The as-number type represents autonomous system numbers
+which identify an Autonomous System (AS).  An AS is a set
+of routers under a single technical administration, using
+an interior gateway protocol and common metrics to route
+packets within the AS, and using an exterior gateway
+protocol to route packets to other ASs&#x27;.  IANA maintains
+the AS number space and has delegated large parts to the
+regional registries.
+
+Autonomous system numbers were originally limited to 16
+bits.  BGP extensions have enlarged the autonomous system
+number space to 32 bits.  This type therefore uses an uint32
+base type without a range restriction in order to support
+a larger autonomous system number space.
+
+In the value set and its semantics, this type is equivalent
+to the InetAutonomousSystemNumber textual convention of
+the SMIv2.
 
 ## `configure authority routing policy statement action bgp-weight`
 
@@ -25934,6 +38353,12 @@ configure authority routing policy statement action bgp-weight [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority routing policy statement action community-attribute`
 
 The new community attribute values
@@ -25949,6 +38374,30 @@ configure authority routing policy statement action community-attribute [<set-co
 | name | description |
 | ---- | ----------- |
 | set-community | Value to add to this list |
+
+#### Description
+
+##### set-community (union)
+
+A BGP community. Accepts the well-known communities internet, local-AS, no-advertise and no-export or any 32 bit communtity value specified as &lt;uint16&gt;:&lt;uint16&gt; (in decimal).
+
+Must be one of the following types:
+
+###### (0) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- internet
+- local-AS
+- no-advertise
+- no-export
+
+###### (1) string
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint16&gt;
 
 ## `configure authority routing policy statement action community-filter`
 
@@ -25966,6 +38415,12 @@ configure authority routing policy statement action community-filter [<filter-re
 | ---- | ----------- |
 | filter-ref | The value to set for this field |
 
+#### Description
+
+##### filter-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority routing policy statement action distance`
 
 The administrative distance value
@@ -25981,6 +38436,14 @@ configure authority routing policy statement action distance [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
 
 ## `configure authority routing policy statement action exclude`
 
@@ -25998,6 +38461,14 @@ configure authority routing policy statement action exclude [<as-path>]
 | ---- | ----------- |
 | as-path | The value to set for this field |
 
+#### Description
+
+##### as-path (string)
+
+A list of BGP autonomous system numbers (uint32) space separated.
+
+Must be space separated list of &lt;uint32&gt;
+
 ## `configure authority routing policy statement action ip-address`
 
 The new next hop IP address to set
@@ -26013,6 +38484,14 @@ configure authority routing policy statement action ip-address [<unicast-non-def
 | name | description |
 | ---- | ----------- |
 | unicast-non-default-ipv4-address | The value to set for this field |
+
+#### Description
+
+##### unicast-non-default-ipv4-address (string)
+
+A unicast non-default IPv4 address
+
+Must be a valid IPv4 address.
 
 ## `configure authority routing policy statement action local-preference`
 
@@ -26030,6 +38509,12 @@ configure authority routing policy statement action local-preference [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority routing policy statement action no-extended-communities`
 
 Remove all extended communities
@@ -26040,6 +38525,12 @@ Remove all extended communities
 configure authority routing policy statement action no-extended-communities
 ```
 
+#### Description
+
+##### empty
+
+Has no value.
+
 ## `configure authority routing policy statement action none`
 
 Remove all communities
@@ -26049,6 +38540,12 @@ Remove all communities
 ```
 configure authority routing policy statement action none
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority routing policy statement action origin`
 
@@ -26066,6 +38563,17 @@ configure authority routing policy statement action origin [<origin>]
 | ---- | ----------- |
 | origin | The value to set for this field |
 
+#### Description
+
+##### origin (enumeration)
+
+BGP ORIGIN attribute.
+
+Options:
+- igp: Network Layer Reachability Information is interior to the originating AS.
+- egp: Network Layer Reachability Information learned via the EGP protocol [RFC904].
+- incomplete: Network Layer Reachability Information learned by some other means.
+
 ## `configure authority routing policy statement action originator-id`
 
 The new originator id to set
@@ -26082,6 +38590,14 @@ configure authority routing policy statement action originator-id [<ipv4-address
 | ---- | ----------- |
 | ipv4-address | The value to set for this field |
 
+#### Description
+
+##### ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
 ## `configure authority routing policy statement action peer-address`
 
 Set the next hop to the IP address of the peer
@@ -26091,6 +38607,12 @@ Set the next hop to the IP address of the peer
 ```
 configure authority routing policy statement action peer-address
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority routing policy statement action policy`
 
@@ -26108,6 +38630,12 @@ configure authority routing policy statement action policy [<policy-ref>]
 | ---- | ----------- |
 | policy-ref | The value to set for this field |
 
+#### Description
+
+##### policy-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority routing policy statement action prepend`
 
 The AS(s) to prepend to the as-path
@@ -26123,6 +38651,14 @@ configure authority routing policy statement action prepend [<as-path>]
 | name | description |
 | ---- | ----------- |
 | as-path | The value to set for this field |
+
+#### Description
+
+##### as-path (string)
+
+A list of BGP autonomous system numbers (uint32) space separated.
+
+Must be space separated list of &lt;uint32&gt;
 
 ## `configure authority routing policy statement action route-target`
 
@@ -26140,6 +38676,43 @@ configure authority routing policy statement action route-target [<set-extended-
 | ---- | ----------- |
 | set-extended-community | Value to add to this list |
 
+#### Description
+
+##### set-extended-community (union)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
+
 ## `configure authority routing policy statement action service-policy`
 
 The service policy to select the best path.
@@ -26155,6 +38728,12 @@ configure authority routing policy statement action service-policy [<service-pol
 | name | description |
 | ---- | ----------- |
 | service-policy-ref | The value to set for this field |
+
+#### Description
+
+##### service-policy-ref (leafref)
+
+This type is used by other entities that need to reference configured service policies.
 
 ## `configure authority routing policy statement action set`
 
@@ -26172,6 +38751,12 @@ configure authority routing policy statement action set [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority routing policy statement action site-of-origin`
 
 The new extended-community site of origin value
@@ -26187,6 +38772,43 @@ configure authority routing policy statement action site-of-origin [<set-extende
 | name | description |
 | ---- | ----------- |
 | set-extended-community | Value to add to this list |
+
+#### Description
+
+##### set-extended-community (union)
+
+A BGP extended community (RFC-4360), an 8 octet value,
+6 value octets are specified here.  The 2 octet type
+is part of the set extended community action.  The
+following formats are accepted:
+
+a) A.B.C.D:EF
+b) EF:GHJK
+c) GHJK:EF
+
+A.B.C.D: Four Byte IP
+EF:      Two byte ASN (in decimal)
+GHJK:    Four-byte ASN (in decimal)
+
+Must be one of the following types:
+
+###### (0) string
+
+A text value.
+
+Must be &lt;ipv4-address&gt;:&lt;uint16&gt;
+
+###### (1) string
+
+A text value.
+
+Must be &lt;uint16&gt;:&lt;uint32&gt;
+
+###### (2) string
+
+A text value.
+
+Must be &lt;uint32&gt;:&lt;uint16&gt;
 
 ## `configure authority routing policy statement action statement`
 
@@ -26204,6 +38826,12 @@ configure authority routing policy statement action statement [<policy-statement
 | ---- | ----------- |
 | policy-statement-ref | The value to set for this field |
 
+#### Description
+
+##### policy-statement-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority routing policy statement action subtract`
 
 The metric value to subtract
@@ -26219,6 +38847,12 @@ configure authority routing policy statement action subtract [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority routing policy statement action tag`
 
@@ -26236,6 +38870,12 @@ configure authority routing policy statement action tag [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority routing policy statement action type`
 
 The action type
@@ -26251,6 +38891,31 @@ configure authority routing policy statement action type [<identityref>]
 | name | description |
 | ---- | ----------- |
 | identityref | The value to set for this field |
+
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- set-aggregator            An action which sets the BGP aggregator
+- modify-as-path            An action which changes the BGP as-path
+- set-path-based-as-path    An action which changes the BGP as-path depending on the best path to a peer
+- set-atomic-aggregate      An action which sets the BGP atomic aggregate attribute
+- set-community             An action which sets the BGP community attribute
+- remove-community          An action which removes the BGP community attribute
+- set-extended-community    An action which sets the BGP extended community attribute
+- set-next-hop              An action which sets the next hop
+- set-local-preference      An action which sets the BGP local preference
+- modify-metric             An action which sets the metric
+- set-originator-id         An action which sets the originator id
+- set-origin                An action which sets the origin
+- set-tag                   An action which sets the tag
+- set-bgp-weight            An action which sets the BGP weight
+- set-distance              An action which sets the administrative distance
+- continue                  A flow action that advances to the next (or specified) entry in the policy
+- call                      A flow action calls the given policy
 
 ## `configure authority routing policy statement condition`
 
@@ -26305,6 +38970,12 @@ configure authority routing policy statement condition as-path-filter [<filter-r
 | ---- | ----------- |
 | filter-ref | The value to set for this field |
 
+#### Description
+
+##### filter-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority routing policy statement condition community-filter`
 
 The community filter name
@@ -26320,6 +38991,12 @@ configure authority routing policy statement condition community-filter [<filter
 | name | description |
 | ---- | ----------- |
 | filter-ref | The value to set for this field |
+
+#### Description
+
+##### filter-ref (leafref)
+
+A reference to an existing value in the instance data.
 
 ## `configure authority routing policy statement condition extended-community-filter`
 
@@ -26337,6 +39014,12 @@ configure authority routing policy statement condition extended-community-filter
 | ---- | ----------- |
 | filter-ref | The value to set for this field |
 
+#### Description
+
+##### filter-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority routing policy statement condition metric`
 
 The metric value to match on.
@@ -26352,6 +39035,12 @@ configure authority routing policy statement condition metric [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority routing policy statement condition next-hop-interface`
 
@@ -26369,6 +39058,12 @@ configure authority routing policy statement condition next-hop-interface [<netw
 | ---- | ----------- |
 | network-interface-ref | The value to set for this field |
 
+#### Description
+
+##### network-interface-ref (leafref)
+
+This type is used by other entities that need to reference all configured network interfaces across all routers, nodes, and device interfaces.
+
 ## `configure authority routing policy statement condition next-hop-node`
 
 Name of the node the next hop interface resides on.
@@ -26384,6 +39079,12 @@ configure authority routing policy statement condition next-hop-node [<node-name
 | name | description |
 | ---- | ----------- |
 | node-name-ref | The value to set for this field |
+
+#### Description
+
+##### node-name-ref (leafref)
+
+This type is used by other entities that need to reference all configured nodes across all routers.
 
 ## `configure authority routing policy statement condition origin`
 
@@ -26401,6 +39102,17 @@ configure authority routing policy statement condition origin [<origin>]
 | ---- | ----------- |
 | origin | The value to set for this field |
 
+#### Description
+
+##### origin (enumeration)
+
+BGP ORIGIN attribute.
+
+Options:
+- igp: Network Layer Reachability Information is interior to the originating AS.
+- egp: Network Layer Reachability Information learned via the EGP protocol [RFC904].
+- incomplete: Network Layer Reachability Information learned by some other means.
+
 ## `configure authority routing policy statement condition peer-address`
 
 The peer address to match
@@ -26417,6 +39129,38 @@ configure authority routing policy statement condition peer-address [<ip-address
 | ---- | ----------- |
 | ip-address | The value to set for this field |
 
+#### Description
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
 ## `configure authority routing policy statement condition peer-local`
 
 Match local addresses (static or redistributed routes)
@@ -26426,6 +39170,12 @@ Match local addresses (static or redistributed routes)
 ```
 configure authority routing policy statement condition peer-local
 ```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority routing policy statement condition prefix-filter`
 
@@ -26443,6 +39193,12 @@ configure authority routing policy statement condition prefix-filter [<filter-re
 | ---- | ----------- |
 | filter-ref | The value to set for this field |
 
+#### Description
+
+##### filter-ref (leafref)
+
+A reference to an existing value in the instance data.
+
 ## `configure authority routing policy statement condition probability`
 
 The probability of a match
@@ -26458,6 +39214,14 @@ configure authority routing policy statement condition probability [<percentage>
 | name | description |
 | ---- | ----------- |
 | percentage | The value to set for this field |
+
+#### Description
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
 
 ## `configure authority routing policy statement condition tag`
 
@@ -26475,6 +39239,14 @@ configure authority routing policy statement condition tag [<uint32>]
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-4294967295
+
 ## `configure authority routing policy statement condition type`
 
 The condition type
@@ -26490,6 +39262,28 @@ configure authority routing policy statement condition type [<identityref>]
 | name | description |
 | ---- | ----------- |
 | identityref | The value to set for this field |
+
+#### Description
+
+##### identityref
+
+A value from a set of predefined names.
+
+Options:
+- address-prefix-filter-condition: An IPv4 prefix filter condition on address
+- next-hop-prefix-filter-condition: An IPv4 prefix filter condition on next hop
+- source-prefix-filter-condition: An IPv4 prefix filter condition on route source
+- address-prefix-filter-ipv6-condition: An IPv6 prefix filter condition on address
+- next-hop-prefix-filter-ipv6-condition: An IPv6 prefix filter condition on next hop
+- as-path-filter-condition: An autonomous path filter condition
+- community-filter-condition: A community filter condition
+- extended-community-filter-condition: An extended community filter condition
+- next-hop-interface-condition: A next hop interface condition
+- metric-condition: A metric condition
+- origin-condition: An origin condition
+- peer-condition: A peer condition
+- probability-condition: A probablity condition
+- tag-condition: A tag condition
 
 ## `configure authority routing policy statement name`
 
@@ -26507,6 +39301,15 @@ configure authority routing policy statement name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority routing policy statement policy`
 
 The policy action, accept or reject, to be returned if the conditions evaluate to true. If no conditions are given the condition evaluation is true
@@ -26523,6 +39326,18 @@ configure authority routing policy statement policy [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: accept
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- accept: On the conditions evaluating true execute the actions specified in the statement and terminate the policy returning accept
+- reject: On the conditions evaluating true do not execute the actions specified in the statement and terminate the policy returning reject
+
 ## `configure authority routing resource-group`
 
 Associate this routing configuration with a top-level resource-group.
@@ -26538,6 +39353,12 @@ configure authority routing resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority security`
 
@@ -26591,6 +39412,16 @@ configure authority security adaptive-encryption [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority security description`
 
 A description of the security policy.
@@ -26606,6 +39437,12 @@ configure authority security description [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority security encrypt`
 
@@ -26623,6 +39460,16 @@ configure authority security encrypt [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority security encryption-cipher`
 
 Encryption cipher and mode.
@@ -26638,6 +39485,18 @@ configure authority security encryption-cipher [<encryption-cipher>]
 | name | description |
 | ---- | ----------- |
 | encryption-cipher | The value to set for this field |
+
+#### Description
+
+Default: aes-cbc-128
+
+##### encryption-cipher (enumeration)
+
+Encryption cipher and mode.
+
+Options:
+- aes-cbc-128: AES Cipher Block Chaining 128-bit Encryption Mode.
+- aes-cbc-256: AES Cipher Block Chaining 256-bit Encryption Mode.
 
 ## `configure authority security encryption-iv`
 
@@ -26655,6 +39514,27 @@ configure authority security encryption-iv [<union>]
 | ---- | ----------- |
 | union | The value to set for this field |
 
+#### Description
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) hex-string (string)
+
+A hexadecimal string with octets represented as hex digits.
+
+Length: 32
+
+###### (1) hex-string (string)
+
+A hexadecimal string with octets represented as hex digits separated by colons. The canonical representation uses lowercase characters.
+
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Length: 47
+
 ## `configure authority security encryption-key`
 
 The encryption key for the security policy.
@@ -26670,6 +39550,27 @@ configure authority security encryption-key [<union>]
 | name | description |
 | ---- | ----------- |
 | union | The value to set for this field |
+
+#### Description
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) hex-string (string)
+
+A hexadecimal string with octets represented as hex digits.
+
+Length: 32,64
+
+###### (1) hex-string (string)
+
+A hexadecimal string with octets represented as hex digits separated by colons. The canonical representation uses lowercase characters.
+
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Length: 47,95
 
 ## `configure authority security hmac`
 
@@ -26689,7 +39590,17 @@ configure authority security hmac [<boolean>]
 
 #### Description
 
-Warning: &#x27;hmac&#x27; is deprecated and will be removed in a future software version
+Default: true
+
+:::warning
+`hmac` is deprecated and will be removed in a future software version
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority security hmac-cipher`
 
@@ -26707,6 +39618,19 @@ configure authority security hmac-cipher [<hmac-cipher>]
 | ---- | ----------- |
 | hmac-cipher | The value to set for this field |
 
+#### Description
+
+Default: sha256-128
+
+##### hmac-cipher (enumeration)
+
+HMAC cipher and mode.
+
+Options:
+- sha1: SHA1 160-bit Key Hashed Message Authentication Code Mode.
+- sha256: SHA256 256-bit Key Hashed Message Authentication Code Mode.
+- sha256-128: SHA256 128-bit Key Hashed Message Authentication Code Mode.
+
 ## `configure authority security hmac-key`
 
 The HMAC key for the security policy.
@@ -26722,6 +39646,27 @@ configure authority security hmac-key [<union>]
 | name | description |
 | ---- | ----------- |
 | union | The value to set for this field |
+
+#### Description
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+###### (0) hex-string (string)
+
+A hexadecimal string with octets represented as hex digits.
+
+Length: 8,16,32,40,64
+
+###### (1) hex-string (string)
+
+A hexadecimal string with octets represented as hex digits separated by colons. The canonical representation uses lowercase characters.
+
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Length: 11,23,47,59,95
 
 ## `configure authority security hmac-mode`
 
@@ -26739,6 +39684,19 @@ configure authority security hmac-mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: time-based
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled: Do not add HMAC to packets.
+- regular: Add HMAC to packets.
+- time-based: Add time-based HMAC to packets.
+
 ## `configure authority security name`
 
 An arbitrary, unique name for the security policy, used to reference it in other configuration sections.
@@ -26755,6 +39713,15 @@ configure authority security name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority security resource-group`
 
 Associate this security with a top-level resource-group.
@@ -26770,6 +39737,12 @@ configure authority security resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority service`
 
@@ -26870,6 +39843,18 @@ configure authority service access-policy idp-policy [<optional-idp-policy>]
 | ---- | ----------- |
 | optional-idp-policy | The value to set for this field |
 
+#### Description
+
+##### optional-idp-policy (enumeration)
+
+Predefined policies for intrusion detection actions
+
+Options:
+- none: No IDP policy.
+- alert: A policy that only alerts.
+- standard: The standard blocking and alerting policy.
+- strict: A strict blocking and alerting policy.
+
 ## `configure authority service access-policy idp-profile`
 
 User-defined profile for intrusion detection prevention and monitoring.
@@ -26885,6 +39870,12 @@ configure authority service access-policy idp-profile [<leafref>]
 | name | description |
 | ---- | ----------- |
 | leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority service access-policy permission`
 
@@ -26902,6 +39893,18 @@ configure authority service access-policy permission [<access-mode>]
 | ---- | ----------- |
 | access-mode | The value to set for this field |
 
+#### Description
+
+Default: allow
+
+##### access-mode (enumeration)
+
+Enumeration defining whether access is allowed or denied.
+
+Options:
+- allow: Allow access.
+- deny: Deny access.
+
 ## `configure authority service access-policy source`
 
 The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service
@@ -26917,6 +39920,82 @@ configure authority service access-policy source [<source-spec>]
 | name | description |
 | ---- | ----------- |
 | source-spec | The value to set for this field |
+
+#### Description
+
+##### source-spec (union)
+
+A source address prefix, QSN, service-group or combination of tenant-name and prefix.
+
+Must be one of the following types:
+
+###### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string):
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
+###### (1) qsn (string)
+
+Qualified Service Name in the form: tenant[.authority][/[service-group/]service]
+
+Must contain only alphanumeric characters or any of the following: / . _ -
+Required format: &#x27;Tenant[.Authority[/ServiceGroup[/Service]]]&#x27;. No forward slash-delimited segment can exceed 62 characters.(e.g., Engineering.Authority128/Video/private_conferencing).
+Length: 1-1024
+
+###### (2) service-spec (string)
+
+Service group and service name portion of a Qualified Service Name.
+
+Must contain only alphanumeric characters or any of the following: - _ / .
+Required format: &#x27;/groupLabel1[/groupLabel2[/groupLabel3...]]&#x27;. No forward slash-delimited segment can exceed 62 characters.
+Length: 0-127
+
+###### (3) tenant-prefix (string)
+
+A string identifier for a tenant prefix. Consists of a valid tenant name, followed by @ and a valid IP Address.
+
+Must contain a valid tenant name, followed by @  and a valid IP Address.
+Length: 0-280
 
 ## `configure authority service access-policy-generated`
 
@@ -26934,6 +40013,14 @@ configure authority service access-policy-generated [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service address`
 
 The destination address prefix or hostname to match the route.
@@ -26949,6 +40036,99 @@ configure authority service address [<host-prefix>]
 | name | description |
 | ---- | ----------- |
 | host-prefix | Value to add to this list |
+
+#### Description
+
+##### host-prefix (union)
+
+The host type represents either an IP prefix or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string):
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority service application-identification`
 
@@ -26966,6 +40146,18 @@ configure authority service application-identification [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: inherited
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- inherited: Inherit from router level config for application identification.
+- disabled: Disable application identification.
+
 ## `configure authority service application-name`
 
 Application name to identify application. This will be matched against the Domain Names imported via the application modules
@@ -26982,6 +40174,31 @@ configure authority service application-name [<glob-pattern>]
 | ---- | ----------- |
 | glob-pattern | Value to add to this list |
 
+#### Description
+
+##### glob-pattern (string)
+
+A glob style pattern (following POSIX.2 fnmatch() without
+special treatment of file paths):
+
+* matches a sequence of characters
+
+?         matches a single character
+[seq]     matches any character in seq
+[!seq]    matches any character not in seq
+
+A backslash followed by a character matches the following
+character. In particular:
+
+\*matches*
+\?        matches ?
+\\        matches \
+
+A sequence seq may be a sequence of characters (e.g., [abc]
+or a range of characters (e.g., [a-c]).
+
+Length: 1-18446744073709551615
+
 ## `configure authority service application-type`
 
 Use generic service behavior, or custom application specific logic.
@@ -26997,6 +40214,22 @@ configure authority service application-type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: generic
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- generic: Default service handling.
+- dhcp-relay: Act as a DHCP relay.
+- dns-proxy: Act as a DNS Proxy.
+- ftp-control: Handle FTP control traffic on this service. Pinholes for data flows will be established based on passive mode exchanges detected on the control flows.
+- ftp-data: Pinhole service for FTP data flows. Must be paired with an FTP control service to be effective.
+- template: Template service for hierarchical services.
 
 ## `configure authority service applies-to`
 
@@ -27042,6 +40275,12 @@ configure authority service applies-to group-name [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority service applies-to resource-group`
 
 Name of the resource-group to which this configuration applies.
@@ -27057,6 +40296,12 @@ configure authority service applies-to resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority service applies-to router-name`
 
@@ -27074,6 +40319,12 @@ configure authority service applies-to router-name [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority service applies-to type`
 
 Type of group to which the configuration applies.
@@ -27089,6 +40340,18 @@ configure authority service applies-to type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- authority: Applies to all routers in the authority.
+- router: Router(s) to which the configuration applies.
+- router-group: Logical group of router(s) to which the configuration applies.
+- resource-group: An RBAC management group to which the configuration applies
 
 ## `configure authority service description`
 
@@ -27106,6 +40369,12 @@ configure authority service description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority service domain-name`
 
 Domain name that identifies a service. Traffic matching this domain name will be considered to belong to this service.
@@ -27122,6 +40391,31 @@ configure authority service domain-name [<glob-pattern>]
 | ---- | ----------- |
 | glob-pattern | Value to add to this list |
 
+#### Description
+
+##### glob-pattern (string)
+
+A glob style pattern (following POSIX.2 fnmatch() without
+special treatment of file paths):
+
+* matches a sequence of characters
+
+?         matches a single character
+[seq]     matches any character in seq
+[!seq]    matches any character not in seq
+
+A backslash followed by a character matches the following
+character. In particular:
+
+\*matches*
+\?        matches ?
+\\        matches \
+
+A sequence seq may be a sequence of characters (e.g., [abc]
+or a range of characters (e.g., [a-c]).
+
+Length: 1-18446744073709551615
+
 ## `configure authority service domain-name-category`
 
 Domain name categorization of this service. This will be matched against the imported categories using the domain pulled from the data stream
@@ -27137,6 +40431,15 @@ configure authority service domain-name-category [<domain-category-type>]
 | name | description |
 | ---- | ----------- |
 | domain-category-type | Value to add to this list |
+
+#### Description
+
+##### domain-category-type (string)
+
+A domain name category type identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 20 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-20
 
 ## `configure authority service dscp-range`
 
@@ -27180,6 +40483,14 @@ configure authority service dscp-range end-value [<dscp-end-value>]
 | ---- | ----------- |
 | dscp-end-value | The value to set for this field |
 
+#### Description
+
+##### dscp-end-value (uint8)
+
+Upper dscp range value. Default value is the start dscp value
+
+Range: 0-63
+
 ## `configure authority service dscp-range start-value`
 
 Lower DSCP number.
@@ -27195,6 +40506,14 @@ configure authority service dscp-range start-value [<dscp>]
 | name | description |
 | ---- | ----------- |
 | dscp | The value to set for this field |
+
+#### Description
+
+##### dscp (uint8) (required)
+
+A DSCP value (0-63)
+
+Range: 0-63
 
 ## `configure authority service enabled`
 
@@ -27212,6 +40531,16 @@ configure authority service enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service fqdn-resolution-type`
 
 IP address family to use for FQDN resolutions for this service.
@@ -27227,6 +40556,18 @@ configure authority service fqdn-resolution-type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: v4
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- v4: Resolve FQDNs as IPv4 addresses only.
+- v6: Resolve FQDNs as IPv6 addresses only.
 
 ## `configure authority service generate-categories`
 
@@ -27244,6 +40585,16 @@ configure authority service generate-categories [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service generated`
 
 Indicates whether or not the Service was automatically generated as a result of Conductor, BGP/SVR, or DHCP Relay services.
@@ -27259,6 +40610,14 @@ configure authority service generated [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority service multicast-sender-policy`
 
@@ -27302,6 +40661,18 @@ configure authority service multicast-sender-policy permission [<access-mode>]
 | ---- | ----------- |
 | access-mode | The value to set for this field |
 
+#### Description
+
+Default: allow
+
+##### access-mode (enumeration)
+
+Enumeration defining whether access is allowed or denied.
+
+Options:
+- allow: Allow access.
+- deny: Deny access.
+
 ## `configure authority service multicast-sender-policy source`
 
 The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service
@@ -27317,6 +40688,82 @@ configure authority service multicast-sender-policy source [<source-spec>]
 | name | description |
 | ---- | ----------- |
 | source-spec | The value to set for this field |
+
+#### Description
+
+##### source-spec (union)
+
+A source address prefix, QSN, service-group or combination of tenant-name and prefix.
+
+Must be one of the following types:
+
+###### (0) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string):
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
+###### (1) qsn (string)
+
+Qualified Service Name in the form: tenant[.authority][/[service-group/]service]
+
+Must contain only alphanumeric characters or any of the following: / . _ -
+Required format: &#x27;Tenant[.Authority[/ServiceGroup[/Service]]]&#x27;. No forward slash-delimited segment can exceed 62 characters.(e.g., Engineering.Authority128/Video/private_conferencing).
+Length: 1-1024
+
+###### (2) service-spec (string)
+
+Service group and service name portion of a Qualified Service Name.
+
+Must contain only alphanumeric characters or any of the following: - _ / .
+Required format: &#x27;/groupLabel1[/groupLabel2[/groupLabel3...]]&#x27;. No forward slash-delimited segment can exceed 62 characters.
+Length: 0-127
+
+###### (3) tenant-prefix (string)
+
+A string identifier for a tenant prefix. Consists of a valid tenant name, followed by @ and a valid IP Address.
+
+Must contain a valid tenant name, followed by @  and a valid IP Address.
+Length: 0-280
 
 ## `configure authority service name`
 
@@ -27334,6 +40781,15 @@ configure authority service name [<service-name>]
 | ---- | ----------- |
 | service-name | The value to set for this field |
 
+#### Description
+
+##### service-name (string)
+
+A service name identifier which only uses alphanumerics, underscores, dots, or dashes, and cannot exceed 255 characters.
+
+Must contain only alphanumeric characters or any of the following: _.-
+Length: 0-255
+
 ## `configure authority service scope`
 
 Defines whether or not tenantless sources have access to this service.
@@ -27349,6 +40805,18 @@ configure authority service scope [<service-scope>]
 | name | description |
 | ---- | ----------- |
 | service-scope | The value to set for this field |
+
+#### Description
+
+Default: private
+
+##### service-scope (enumeration)
+
+Enumeration defining whether a service scope is public or private
+
+Options:
+- public: Everyone allowed in the absence of access policy that restricts it. Shared on public interfaces.
+- private: Restricted to the access policy of the service. Shared with other routers in the authority.
 
 ## `configure authority service security`
 
@@ -27366,6 +40834,12 @@ configure authority service security [<security-ref>]
 | ---- | ----------- |
 | security-ref | The value to set for this field |
 
+#### Description
+
+##### security-ref (leafref)
+
+This type is used by other entities that need to reference configured security policies.
+
 ## `configure authority service service-group`
 
 A string used to group services together, where each service with the same string gets added to the service group. Service Groups can be referenced within the QSN to target a group of services.
@@ -27382,6 +40856,16 @@ configure authority service service-group [<service-group>]
 | ---- | ----------- |
 | service-group | The value to set for this field |
 
+#### Description
+
+##### service-group (string)
+
+A string identifier for a service group.
+
+Must contain only alphanumeric characters or any of the following: - _ / .
+Required format: &#x27;groupLabel1[/groupLabel2[/groupLabel3...]]&#x27;. No forward slash-delimited segment can exceed 62 characters.
+Length: 0-127
+
 ## `configure authority service service-policy`
 
 Service policy that applies to the service.
@@ -27397,6 +40881,12 @@ configure authority service service-policy [<service-policy-ref>]
 | name | description |
 | ---- | ----------- |
 | service-policy-ref | The value to set for this field |
+
+#### Description
+
+##### service-policy-ref (leafref)
+
+This type is used by other entities that need to reference configured service policies.
 
 ## `configure authority service session-record`
 
@@ -27428,6 +40918,16 @@ configure authority service session-record include-hierarchical-services [<boole
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service session-record profile`
 
 The session record profile to use.
@@ -27435,14 +40935,23 @@ The session record profile to use.
 #### Usage
 
 ```
-configure authority service session-record profile [<short-name-id>]
+configure authority service session-record profile [<session-record-profile-name>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| short-name-id | The value to set for this field |
+| session-record-profile-name | The value to set for this field |
+
+#### Description
+
+##### session-record-profile-name (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-15
 
 ## `configure authority service share-service-routes`
 
@@ -27460,6 +40969,16 @@ configure authority service share-service-routes [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service source-nat`
 
 Configure Source Nat
@@ -27475,6 +40994,18 @@ configure authority service source-nat [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: network-interface
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- network-interface: Use source-nat settings of egress network-interface
+- disabled: Disable source nat for this service
 
 ## `configure authority service subcategory`
 
@@ -27492,6 +41023,12 @@ configure authority service subcategory [<string>]
 | ---- | ----------- |
 | string | Value to add to this list |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority service tap-multiplexing`
 
 Enable/disable tap-multiplexing on this service.
@@ -27507,6 +41044,16 @@ configure authority service tap-multiplexing [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority service tenant`
 
@@ -27526,7 +41073,13 @@ configure authority service tenant [<tenant-ref>]
 
 #### Description
 
-Warning: &#x27;tenant&#x27; is deprecated and will be removed in a future software version
+:::warning
+`tenant` is deprecated and will be removed in a future software version
+:::
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
 
 ## `configure authority service transport`
 
@@ -27597,6 +41150,14 @@ configure authority service transport port-range end-port [<end-port>]
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 0-65535
+
 ## `configure authority service transport port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -27612,6 +41173,14 @@ configure authority service transport port-range start-port [<l4-port>]
 | name | description |
 | ---- | ----------- |
 | l4-port | The value to set for this field |
+
+#### Description
+
+##### l4-port (uint16) (required)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
 
 ## `configure authority service transport protocol`
 
@@ -27629,6 +41198,20 @@ configure authority service transport protocol [<protocol>]
 | ---- | ----------- |
 | protocol | The value to set for this field |
 
+#### Description
+
+##### protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
+
 ## `configure authority service ttl-padding`
 
 Configure Ttl Padding
@@ -27645,6 +41228,18 @@ configure authority service ttl-padding [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: neighborhood
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- neighborhood: Use ttl-padding settings of the neighborhood
+- disabled: Disable ttl-padding for this service
+
 ## `configure authority service url`
 
 URL that identifies a service. Traffic matching this URL will be considered to belong to this service.
@@ -27660,6 +41255,31 @@ configure authority service url [<glob-pattern>]
 | name | description |
 | ---- | ----------- |
 | glob-pattern | Value to add to this list |
+
+#### Description
+
+##### glob-pattern (string)
+
+A glob style pattern (following POSIX.2 fnmatch() without
+special treatment of file paths):
+
+* matches a sequence of characters
+
+?         matches a single character
+[seq]     matches any character in seq
+[!seq]    matches any character not in seq
+
+A backslash followed by a character matches the following
+character. In particular:
+
+\*matches*
+\?        matches ?
+\\        matches \
+
+A sequence seq may be a sequence of characters (e.g., [abc]
+or a range of characters (e.g., [a-c]).
+
+Length: 1-18446744073709551615
 
 ## `configure authority service-class`
 
@@ -27710,6 +41330,15 @@ configure authority service-class aggregate-rate-limit-policy [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority service-class description`
 
 A description of the service class.
@@ -27726,6 +41355,12 @@ configure authority service-class description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority service-class dscp`
 
 The DSCP value assigned to this service class to mark egress packets with.
@@ -27741,6 +41376,18 @@ configure authority service-class dscp [<dscp>]
 | name | description |
 | ---- | ----------- |
 | dscp | The value to set for this field |
+
+#### Description
+
+##### dscp (uint8) (required)
+
+The dscp type represents a Differentiated Services Code-Point
+that may be used for marking packets in a traffic stream.
+
+In the value set and its semantics, this type is equivalent
+to the Dscp textual convention of the SMIv2.
+
+Range: 0-63
 
 ## `configure authority service-class max-flow-burst`
 
@@ -27762,6 +41409,12 @@ configure authority service-class max-flow-burst [<uint64>]
 
 Units: bits
 
+Default: 0
+
+##### uint64
+
+An unsigned 64-bit integer.
+
 ## `configure authority service-class max-flow-rate`
 
 Limit the maximum rate of each flow of this service class to this value.
@@ -27782,6 +41435,14 @@ configure authority service-class max-flow-rate [<uint64>]
 
 Units: bits/second
 
+Default: 0
+
+##### uint64
+
+An unsigned 64-bit integer.
+
+Range: 0-107374182400
+
 ## `configure authority service-class name`
 
 Configure Name
@@ -27797,6 +41458,15 @@ configure authority service-class name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority service-class rate-limit`
 
@@ -27814,6 +41484,16 @@ configure authority service-class rate-limit [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service-class resource-group`
 
 Associate this service class with a top-level resource-group.
@@ -27830,6 +41510,12 @@ configure authority service-class resource-group [<resource-group-ref>]
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
 
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
 ## `configure authority service-class traffic-class`
 
 The traffic-class assigned to this service class. Governs the treatment for the traffic.
@@ -27845,6 +41531,18 @@ configure authority service-class traffic-class [<traffic-class-id>]
 | name | description |
 | ---- | ----------- |
 | traffic-class-id | The value to set for this field |
+
+#### Description
+
+##### traffic-class-id (enumeration)
+
+Relative priority of traffic.
+
+Options:
+- high: High priority traffic class.
+- medium: Medium priority traffic class.
+- low: Low priority traffic class.
+- best-effort: Best-effort priority traffic class.
 
 ## `configure authority service-policy`
 
@@ -27880,7 +41578,7 @@ configure authority service-policy <name>
 | [`max-latency`](#configure-authority-service-policy-max-latency) | Maximum acceptable latency for services that use this service class. |
 | [`max-loss`](#configure-authority-service-policy-max-loss) | The acceptable threshold of packet loss for services that use this service class. |
 | [`min-mos`](#configure-authority-service-policy-min-mos) | Minimum acceptable Mean Opinion Score (MOS) for services that use thus service class |
-| [`move`](#configure-authority-service-policy) | Move list items |
+| `move` | Move list items |
 | [`name`](#configure-authority-service-policy-name) | An arbitrary, unique name for the service policy. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss. |
@@ -27938,6 +41636,12 @@ configure authority service-policy applies-to group-name [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority service-policy applies-to resource-group`
 
 Name of the resource-group to which this configuration applies.
@@ -27953,6 +41657,12 @@ configure authority service-policy applies-to resource-group [<resource-group-re
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority service-policy applies-to router-name`
 
@@ -27970,6 +41680,12 @@ configure authority service-policy applies-to router-name [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority service-policy applies-to type`
 
 Type of group to which the configuration applies.
@@ -27985,6 +41701,18 @@ configure authority service-policy applies-to type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- authority: Applies to all routers in the authority.
+- router: Router(s) to which the configuration applies.
+- router-group: Logical group of router(s) to which the configuration applies.
+- resource-group: An RBAC management group to which the configuration applies
 
 ## `configure authority service-policy best-effort`
 
@@ -28002,6 +41730,16 @@ configure authority service-policy best-effort [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service-policy best-path-criteria`
 
 This defines the criteria for selecting best paths for the service.
@@ -28017,6 +41755,19 @@ configure authority service-policy best-path-criteria [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: vector
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- vector: Path with best vector cost is selected.
+- average-latency: Path with the lowest rolling average latency is selected.
+- mos: Path with the best Mean Opinion Score (MOS) score is selected.
 
 ## `configure authority service-policy description`
 
@@ -28034,6 +41785,12 @@ configure authority service-policy description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority service-policy forward-error-correction-profile`
 
 Parameters for Forward Error Correction.
@@ -28049,6 +41806,12 @@ configure authority service-policy forward-error-correction-profile [<fec-profil
 | name | description |
 | ---- | ----------- |
 | fec-profile-ref | The value to set for this field |
+
+#### Description
+
+##### fec-profile-ref (leafref)
+
+This type is used by other entities that need to reference configured Forward Error Correction profiles.
 
 ## `configure authority service-policy generated`
 
@@ -28066,6 +41829,14 @@ configure authority service-policy generated [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service-policy ingress-source-nat`
 
 Controls the ingress source nat treatment for the service
@@ -28082,6 +41853,18 @@ configure authority service-policy ingress-source-nat [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: network-interface
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- network-interface: Use source-nat settings of ingress network-interface
+- disabled: Disable ingress source nat for this service
+
 ## `configure authority service-policy lb-strategy`
 
 Defines load balancing strategy to distribute traffic to service routes of services assigned this policy.
@@ -28097,6 +41880,18 @@ configure authority service-policy lb-strategy [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: hunt
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- hunt: Servers are chosen in order with highest capacity first.
+- proportional: Traffic is distributed evenly to all servers weighted by capacity.
 
 ## `configure authority service-policy max-jitter`
 
@@ -28118,6 +41913,12 @@ configure authority service-policy max-jitter [<uint32>]
 
 Units: milliseconds
 
+Default: 100
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority service-policy max-latency`
 
 Maximum acceptable latency for services that use this service class.
@@ -28137,6 +41938,12 @@ configure authority service-policy max-latency [<uint32>]
 #### Description
 
 Units: milliseconds
+
+Default: 250
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority service-policy max-loss`
 
@@ -28158,6 +41965,15 @@ configure authority service-policy max-loss [<decimal64>]
 
 Units: percent
 
+Default: 0.5
+
+##### decimal64
+
+A 64-bit decimal value.
+
+Range: 0-100
+Fraction digits: 16
+
 ## `configure authority service-policy min-mos`
 
 Minimum acceptable Mean Opinion Score (MOS) for services that use thus service class
@@ -28174,23 +41990,31 @@ configure authority service-policy min-mos [<union>]
 | ---- | ----------- |
 | union | The value to set for this field |
 
-## `configure authority service-policy move vector`
+#### Description
 
-List of vectors to prefer/avoid for the service.
+Default: disabled
 
-#### Usage
+##### union
 
-```
-configure authority service-policy move vector <name> <position> [<relative-to-name>]
-```
+A value that corresponds to one of its member types.
 
-##### Positional Arguments
+Must be one of the following types:
 
-| name | description |
-| ---- | ----------- |
-| name | Name of the vector. |
-| position | first \| last \| before \| after |
-| relative-to-name | Key of item before or after which to move |
+###### (0) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- disabled
+
+###### (1) decimal64
+
+A 64-bit decimal value.
+
+Range: 1.0-5.0
+Fraction digits: 2
+
+
 
 ## `configure authority service-policy name`
 
@@ -28208,6 +42032,15 @@ configure authority service-policy name [<service-policy-name>]
 | ---- | ----------- |
 | service-policy-name | The value to set for this field |
 
+#### Description
+
+##### service-policy-name (string)
+
+A service policy name identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority service-policy packet-resiliency`
 
 Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss.
@@ -28223,6 +42056,20 @@ configure authority service-policy packet-resiliency [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none: No resiliency for packet loss.
+- packet-retransmission: Enable packet loss detection. Lost packets within buffer are retransmitted.
+- packet-retransmission-with-dpi: Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
+- forward-error-correction: Enable Forward Error Correction, which will send parity packets to reconstruct lost packets.
 
 ## `configure authority service-policy path-quality-filter`
 
@@ -28240,6 +42087,16 @@ configure authority service-policy path-quality-filter [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority service-policy peer-path-resiliency`
 
 Whether or not session resiliency failover occurs among multiple peers.
@@ -28255,6 +42112,16 @@ configure authority service-policy peer-path-resiliency [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority service-policy qp-preference`
 
@@ -28274,7 +42141,19 @@ configure authority service-policy qp-preference [<enumeration>]
 
 #### Description
 
-Warning: &#x27;qp-preference&#x27; is deprecated and will be removed in a future software version
+Default: highest
+
+:::warning
+`qp-preference` is deprecated and will be removed in a future software version
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- lowest: Order interfaces from lowest to highest qualifying QP value.
+- highest: Order interfaces from highest to lowest qualifying QP value.
 
 ## `configure authority service-policy required-qp`
 
@@ -28295,7 +42174,16 @@ configure authority service-policy required-qp [<uint32>]
 #### Description
 
 Units: points
-Warning: &#x27;required-qp&#x27; is deprecated and will be removed in a future software version
+
+Default: 0
+
+:::warning
+`required-qp` is deprecated and will be removed in a future software version
+:::
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority service-policy service-class`
 
@@ -28313,6 +42201,12 @@ configure authority service-policy service-class [<service-class-ref>]
 | ---- | ----------- |
 | service-class-ref | The value to set for this field |
 
+#### Description
+
+##### service-class-ref (leafref)
+
+This type is used by other entities that need to reference configured service classes.
+
 ## `configure authority service-policy session-resiliency`
 
 Types of session resiliency govern how the SSR provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing.
@@ -28329,6 +42223,22 @@ configure authority service-policy session-resiliency [<enumeration>]
 | ---- | ----------- |
 | enumeration | The value to set for this field |
 
+#### Description
+
+Default: none
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- none: No failover support when path goes down.
+- failover: Fail over the session to use a secondary path when the best path goes down due to link failure or unacceptable path quality values. This session will stay on the secondary path and will not switch back unless the secondary path itself goes down.
+- revertible-failover: Fail over the session to use a secondary path when the best path goes down due to link failure or unacceptable path quality values. This session will revert back to the best path if it comes back up or is within permissible path quality values.
+- packet-duplication: Duplicate packets across all multihomed-paths to another router. Only one set of packets will be sent to the final destination.
+- packet-retransmission: Enable packet loss detection. Lost packets within buffer are retransmitted.
+- packet-retransmission-with-dpi: Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
+
 ## `configure authority service-policy transport-state-enforcement`
 
 The level of enforcement applied to the transport layer. Governs the behavior of the TCP state machine when processing packets.
@@ -28344,6 +42254,20 @@ configure authority service-policy transport-state-enforcement [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: reset
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- allow: TCP non-syn first packets are allowed, as well as packets that do not conform to the TCP state machine.
+- block: TCP non-syn first packets are blocked, and packets that do not conform to the TCP state machine are dropped.
+- reset: TCP non-syn first packets cause a reset on the session and packets that do not conform to the TCP state machine are dropped.
+- strict: TCP non-syn first packets cause a reset on the session, packets that do not conform to the TCP state machine are dropped, and packets that do not conform to sequence checking are dropped.
 
 ## `configure authority service-policy vector`
 
@@ -28371,6 +42295,10 @@ configure authority service-policy vector <name>
 | [`priority`](#configure-authority-service-policy-vector-priority) | Priority value for the paths with the vector. |
 | `show` | Show configuration data for &#x27;vector&#x27; |
 
+#### Description
+
+The order of elements matters.
+
 ## `configure authority service-policy vector name`
 
 Name of the vector.
@@ -28387,6 +42315,15 @@ configure authority service-policy vector name [<vector-name>]
 | ---- | ----------- |
 | vector-name | The value to set for this field |
 
+#### Description
+
+##### vector-name (string)
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
+
 ## `configure authority service-policy vector priority`
 
 Priority value for the paths with the vector.
@@ -28402,6 +42339,28 @@ configure authority service-policy vector priority [<vector-priority>]
 | name | description |
 | ---- | ----------- |
 | vector-priority | The value to set for this field |
+
+#### Description
+
+##### vector-priority (union)
+
+A type for defining priorities for vector use.
+
+Must be one of the following types:
+
+###### (0) uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-999999
+
+###### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+- ordered: priority value determined by ordinal position
+- never:paths with the vector are not used
 
 ## `configure authority session-record-profile`
 
@@ -28478,6 +42437,12 @@ configure authority session-record-profile applies-to group-name [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority session-record-profile applies-to resource-group`
 
 Name of the resource-group to which this configuration applies.
@@ -28493,6 +42458,12 @@ configure authority session-record-profile applies-to resource-group [<resource-
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority session-record-profile applies-to router-name`
 
@@ -28510,6 +42481,12 @@ configure authority session-record-profile applies-to router-name [<leafref>]
 | ---- | ----------- |
 | leafref | Value to add to this list |
 
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
 ## `configure authority session-record-profile applies-to type`
 
 Type of group to which the configuration applies.
@@ -28525,6 +42502,18 @@ configure authority session-record-profile applies-to type [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- authority: Applies to all routers in the authority.
+- router: Router(s) to which the configuration applies.
+- router-group: Logical group of router(s) to which the configuration applies.
+- resource-group: An RBAC management group to which the configuration applies
 
 ## `configure authority session-record-profile enabled`
 
@@ -28542,6 +42531,16 @@ configure authority session-record-profile enabled [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority session-record-profile include-modify-record`
 
 Whether to include the modify record.
@@ -28558,6 +42557,16 @@ configure authority session-record-profile include-modify-record [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority session-record-profile include-start-record`
 
 Whether to include the start record.
@@ -28573,6 +42582,16 @@ configure authority session-record-profile include-start-record [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority session-record-profile intermediate-records`
 
@@ -28604,6 +42623,16 @@ configure authority session-record-profile intermediate-records enabled [<boolea
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority session-record-profile intermediate-records interval`
 
 Interval in which to send intermediate records.
@@ -28620,6 +42649,16 @@ configure authority session-record-profile intermediate-records interval [<durat
 | ---- | ----------- |
 | duration | The value to set for this field |
 
+#### Description
+
+Default: 3m
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
+
 ## `configure authority session-record-profile name`
 
 The name of session record profile.
@@ -28635,6 +42674,15 @@ configure authority session-record-profile name [<short-name-id>]
 | name | description |
 | ---- | ----------- |
 | short-name-id | The value to set for this field |
+
+#### Description
+
+##### short-name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 15 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-15
 
 ## `configure authority session-recovery-detection`
 
@@ -28670,6 +42718,14 @@ configure authority session-recovery-detection inactivity-timeout [<uint16>]
 
 Units: seconds
 
+Default: 5
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-30
+
 ## `configure authority session-recovery-detection mode`
 
 What mode to enable session recovery detection.
@@ -28685,6 +42741,18 @@ configure authority session-recovery-detection mode [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Default: packet-based
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+- packet-based: Detect sessions needing recovery due to unsolicited packets.
+- inactivity-based: Detect sessions needing recovery due to session inactivity.
 
 ## `configure authority session-type`
 
@@ -28735,6 +42803,12 @@ configure authority session-type description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority session-type initial-timeout`
 
 The inactivity timeout for sessions that are not yet established.
@@ -28755,6 +42829,12 @@ configure authority session-type initial-timeout [<uint64>]
 
 Units: milliseconds
 
+Default: 10000
+
+##### uint64
+
+An unsigned 64-bit integer.
+
 ## `configure authority session-type name`
 
 The name of the session type.
@@ -28770,6 +42850,15 @@ configure authority session-type name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority session-type nat-keep-alive`
 
@@ -28787,6 +42876,16 @@ configure authority session-type nat-keep-alive [<boolean>]
 | ---- | ----------- |
 | boolean | The value to set for this field |
 
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
+
 ## `configure authority session-type resource-group`
 
 Associate this session type with a top-level resource-group.
@@ -28803,6 +42902,12 @@ configure authority session-type resource-group [<resource-group-ref>]
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
 
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
+
 ## `configure authority session-type service-class`
 
 The service class this type belongs to.
@@ -28818,6 +42923,12 @@ configure authority session-type service-class [<service-class-ref>]
 | name | description |
 | ---- | ----------- |
 | service-class-ref | The value to set for this field |
+
+#### Description
+
+##### service-class-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured service classes.
 
 ## `configure authority session-type timeout`
 
@@ -28838,6 +42949,12 @@ configure authority session-type timeout [<uint64>]
 #### Description
 
 Units: milliseconds
+
+Default: 180000
+
+##### uint64
+
+An unsigned 64-bit integer.
 
 ## `configure authority session-type transport`
 
@@ -28908,6 +43025,14 @@ configure authority session-type transport port-range end-port [<end-port>]
 | ---- | ----------- |
 | end-port | The value to set for this field |
 
+#### Description
+
+##### end-port (uint16)
+
+Upper transport (layer 4) port number. Default value is the start-port
+
+Range: 0-65535
+
 ## `configure authority session-type transport port-range start-port`
 
 Lower transport (layer 4) port number.
@@ -28924,6 +43049,14 @@ configure authority session-type transport port-range start-port [<l4-port>]
 | ---- | ----------- |
 | l4-port | The value to set for this field |
 
+#### Description
+
+##### l4-port (uint16) (required)
+
+Transport (layer 4) port number.
+
+Range: 0-65535
+
 ## `configure authority session-type transport protocol`
 
 Layer 4 transport protocol.
@@ -28939,6 +43072,20 @@ configure authority session-type transport protocol [<protocol>]
 | name | description |
 | ---- | ----------- |
 | protocol | The value to set for this field |
+
+#### Description
+
+##### protocol (enumeration)
+
+Transport (Layer 4) protocol.
+
+Options:
+- tcp: Transmission Control Protocol.
+- udp: User Datagram Protocol.
+- icmp: Internet Control Management Protocol.
+- gre: Generic Routing Encapsulation Protocol.
+- esp: IPSec Encapsulating Security Payload Protocol.
+- pim: Protocol Independent Multicast.
 
 ## `configure authority software-update`
 
@@ -28970,6 +43117,14 @@ configure authority software-update proxy-allowed-domain [<squid-proxy-domain>]
 | ---- | ----------- |
 | squid-proxy-domain | Value to add to this list |
 
+#### Description
+
+##### squid-proxy-domain (string)
+
+A domain name, optionally preceded with a &#x27;.&#x27;. If preceded by the &#x27;.&#x27;, the pattern will match the given domain, as well as any subdomains
+
+Length: 1-253
+
 ## `configure authority software-update proxy-allowed-ip`
 
 IP addresses or prefixes that should be accessible through the conductor repo proxy
@@ -28985,6 +43140,88 @@ configure authority software-update proxy-allowed-ip [<ip-address-or-prefix>]
 | name | description |
 | ---- | ----------- |
 | ip-address-or-prefix | Value to add to this list |
+
+#### Description
+
+##### ip-address-or-prefix (union)
+
+An IP address or prefix.
+
+Must be one of the following types:
+
+###### (0) ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string):
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string):
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (1) ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string):
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string):
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
 
 ## `configure authority step`
 
@@ -29018,6 +43255,14 @@ configure authority step session-expiry-time [<uint16>]
 #### Description
 
 Units: seconds
+
+Default: 60
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 5-65535
 
 ## `configure authority step-repo`
 
@@ -29063,6 +43308,60 @@ configure authority step-repo address [<hostv4>]
 | ---- | ----------- |
 | hostv4 | The value to set for this field |
 
+#### Description
+
+##### hostv4 (union)
+
+The host type represents either an IPv4 address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
 ## `configure authority step-repo description`
 
 A description about the STEP repository.
@@ -29078,6 +43377,12 @@ configure authority step-repo description [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority step-repo priority`
 
@@ -29095,6 +43400,16 @@ configure authority step-repo priority [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+#### Description
+
+Default: 0
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
 ## `configure authority step-repo resource-group`
 
 Associate this STEP repo with a top-level resource-group.
@@ -29110,6 +43425,12 @@ configure authority step-repo resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority tenant`
 
@@ -29158,6 +43479,12 @@ configure authority tenant description [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority tenant generated`
 
 Indicates whether or not the Tenant was automatically generated as a result of Conductor or BGP/SVR services.
@@ -29173,6 +43500,14 @@ configure authority tenant generated [<boolean>]
 | name | description |
 | ---- | ----------- |
 | boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: `true` or `false`
 
 ## `configure authority tenant member`
 
@@ -29216,6 +43551,53 @@ configure authority tenant member address [<ip-prefix>]
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
 
+#### Description
+
+##### ip-prefix (union)
+
+The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+###### (0) ipv4-prefix (string)
+
+The ipv4-prefix type represents an IPv4 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal to 32.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The canonical format of an IPv4 prefix has all bits of
+the IPv4 address set to zero that are not part of the
+IPv4 prefix.
+
+###### (1) ipv6-prefix (string)
+
+The ipv6-prefix type represents an IPv6 address prefix.
+The prefix length is given by the number following the
+slash character and must be less than or equal 128.
+
+A prefix length value of n corresponds to an IP address
+mask that has n contiguous 1-bits from the most
+significant bit (MSB) and all other bits set to 0.
+
+The IPv6 address should have all bits that do not belong
+to the prefix set to zero.
+
+The canonical format of an IPv6 prefix has all bits of
+the IPv6 address set to zero that are not part of the
+IPv6 prefix.  Furthermore, IPv6 address is represented
+in the compressed format described in RFC 4291, Section
+2.2, item 2 with the following additional rules: the ::
+substitution must be applied to the longest sequence of
+all-zero 16-bit chunks in an IPv6 address.  If there is
+a tie, the first sequence of all-zero 16-bit chunks is
+replaced by ::.  Single all-zero 16-bit chunks are not
+compressed.  The canonical format uses lowercase
+characters and leading zeros are not allowed.
+
 ## `configure authority tenant member neighborhood`
 
 Neigborhood where tenant members are located.
@@ -29231,6 +43613,15 @@ configure authority tenant member neighborhood [<neighborhood-id>]
 | name | description |
 | ---- | ----------- |
 | neighborhood-id | The value to set for this field |
+
+#### Description
+
+##### neighborhood-id (string)
+
+A string identifier for network neighborhood.
+
+Must contain only alphanumeric characters or any of the following: . _ -
+Length: 0-63
 
 ## `configure authority tenant name`
 
@@ -29248,6 +43639,15 @@ configure authority tenant name [<tenant-name>]
 | ---- | ----------- |
 | tenant-name | The value to set for this field |
 
+#### Description
+
+##### tenant-name (string)
+
+A string identifier for a tenant, which uses alphanumerics, underscores, dots, or dashes, and cannot exceed 253 characters (similar to domain-name).
+
+Must contain only alphanumeric characters or any of the following: - _ .
+Length: 0-253
+
 ## `configure authority tenant resource-group`
 
 Associate this tenant with a top-level resource-group.
@@ -29263,6 +43663,12 @@ configure authority tenant resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority tenant security`
 
@@ -29282,7 +43688,13 @@ configure authority tenant security [<security-ref>]
 
 #### Description
 
-Warning: &#x27;security&#x27; is deprecated and will be removed in a future software version
+:::warning
+`security` is deprecated and will be removed in a future software version
+:::
+
+##### security-ref (leafref)
+
+This type is used by other entities that need to reference configured security policies.
 
 ## `configure authority traffic-profile`
 
@@ -29347,6 +43759,12 @@ configure authority traffic-profile best-effort distribution [<percentage>]
 
 Units: percent
 
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority traffic-profile high`
 
 Configure High
@@ -29379,6 +43797,12 @@ configure authority traffic-profile high distribution [<percentage>]
 #### Description
 
 Units: percent
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
 
 ## `configure authority traffic-profile low`
 
@@ -29413,6 +43837,12 @@ configure authority traffic-profile low distribution [<percentage>]
 
 Units: percent
 
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority traffic-profile medium`
 
 Configure Medium
@@ -29446,6 +43876,12 @@ configure authority traffic-profile medium distribution [<percentage>]
 
 Units: percent
 
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
 ## `configure authority traffic-profile name`
 
 The name of the Traffic Profile
@@ -29462,6 +43898,15 @@ configure authority traffic-profile name [<name-id>]
 | ---- | ----------- |
 | name-id | The value to set for this field |
 
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
 ## `configure authority traffic-profile resource-group`
 
 Associate this traffic profile with a top-level resource-group.
@@ -29477,6 +43922,12 @@ configure authority traffic-profile resource-group [<resource-group-ref>]
 | name | description |
 | ---- | ----------- |
 | resource-group-ref | Value to add to this list |
+
+#### Description
+
+##### resource-group-ref (leafref)
+
+This type is used by other entities that need to reference configured resource groups.
 
 ## `configure authority trusted-ca-certificate`
 
@@ -29520,6 +43971,12 @@ configure authority trusted-ca-certificate content [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string (required)
+
+A text value.
+
 ## `configure authority trusted-ca-certificate name`
 
 An identifier for the trusted CA certificate.
@@ -29535,6 +43992,15 @@ configure authority trusted-ca-certificate name [<name-id>]
 | name | description |
 | ---- | ----------- |
 | name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
 
 ## `configure authority web-messages`
 
@@ -29566,6 +44032,12 @@ configure authority web-messages login-message [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority web-messages welcome-message`
 
 The message displayed after a successful login.
@@ -29581,6 +44053,12 @@ configure authority web-messages welcome-message [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority web-theme`
 
@@ -29614,6 +44092,12 @@ configure authority web-theme logo [<string>]
 | ---- | ----------- |
 | string | The value to set for this field |
 
+#### Description
+
+##### string
+
+A text value.
+
 ## `configure authority web-theme primary-color`
 
 The hexidecimal code of the primary color in the authority&#x27;s theme.
@@ -29629,6 +44113,14 @@ configure authority web-theme primary-color [<hex-string>]
 | name | description |
 | ---- | ----------- |
 | hex-string | The value to set for this field |
+
+#### Description
+
+##### hex-string (string)
+
+A hexadecimal string with octets represented as hex digits.
+
+Length: 6
 
 ## `configure authority web-theme secondary-color`
 
@@ -29646,6 +44138,14 @@ configure authority web-theme secondary-color [<hex-string>]
 | ---- | ----------- |
 | hex-string | The value to set for this field |
 
+#### Description
+
+##### hex-string (string)
+
+A hexadecimal string with octets represented as hex digits.
+
+Length: 6
+
 ## `configure authority web-theme tab-icon`
 
 The icon displayed in the browser tab.
@@ -29661,3 +44161,9 @@ configure authority web-theme tab-icon [<string>]
 | name | description |
 | ---- | ----------- |
 | string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.

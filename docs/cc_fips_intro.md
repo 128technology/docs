@@ -22,6 +22,7 @@ The family of Juniper SSR appliances consists of the Session Smart Networking so
 - SSR 1400
 - SSR 1500
 
+
 The software is Juniper SSR software v6.3.0-R1. The software is deployed in an ISO package file, which includes Enterprise Linux 7.9 with kernel version 4.18.0.
 
 The SSR security guidance documentation (this guide, the SSR Common Criteria Installation and User Guide V1.0) is delivered to all users. To achieve Common Criteria compliance, the SSR must at all times be deployed and operated in accordance with this document. The SSR Common Criteria Installation and User Guide V1.0 is a Common Criteria Guidance Supplement which extends the existing manuals and other product documentation. The SSR Common Criteria Installation and User Guide applies to the above listed hardware. 

@@ -68,12 +68,26 @@ module.exports = {
     ],
     "Cloud Installations": [
       "supported_cloud_platforms",
-      "intro_installation_quickstart_aws",
-      "intro_installation_quickstart_mist_aws",
-      "intro_installation_azure",
-      "intro_installation_azure_mist",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
+      {
+       "type": "category",
+          "label": "Installing In AWS",
+          "items": [
+            "intro_installation_quickstart_aws",
+            "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_mist_aws",
+            ],
+      },
+      {
+       "type": "category",
+          "label": "Installing In Azure",
+          "items": [
+            "intro_installation_azure",
+            "intro_installation_azure_mist",
+            "intro_installation_byol_azure_mist",
+          ],
+      },
     ],
     "Upgrades and Rollback": [
       "intro_upgrade_considerations",
@@ -226,6 +240,7 @@ module.exports = {
           "config_ldap",
           "config_radius",
           "config_password_policies",
+          "howto_reset_user_password",
         ],
       },
       {
@@ -304,7 +319,7 @@ module.exports = {
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
-      "bcp_salt_pillars",      
+      "bcp_salt_pillars",
       "bcp_service_and_service_policy_design",
       "bcp_service-policy_defaults",
       "bcp_tenants",
@@ -384,6 +399,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.9",
           "release_notes_wan_assurance_plugin_3.8",
           "release_notes_wan_assurance_plugin_3.7",
           "release_notes_wan_assurance_plugin_3.6",

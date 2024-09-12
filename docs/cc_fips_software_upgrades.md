@@ -10,7 +10,7 @@ To determine the current version of software running on your Conductor or Router
 
 [`show system version`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#show-system-version)
 
-Use this information if you upgrading to a newer software version **after having installed** SSR Version 6.2.3-14-R2. This is the initial Common Criteria compliant SSR software release.  
+Use this information if you upgrading to a newer software version **after having installed** SSR Version 6.2.5-5r2. This is the initial Common Criteria compliant SSR software release. 
 
 The SSR Software packages are available from the Juniper Networks public servers using the **username and token provided to you.** During the upgrade process, your SSR uses this information to securely access the download location. Depending on your upgrade selection, the following location is accessed by the upgrade process:
 
