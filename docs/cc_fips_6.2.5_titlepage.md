@@ -1,6 +1,6 @@
 ---
-title: SSR 6.2.x Common Criteria Installation and User Guide
-sidebar_label: SSR 6.2.x Common Criteria Installation and User Guide
+title: SSR 6.2.5 Common Criteria Installation and User Guide
+sidebar_label: SSR 6.2.5 Common Criteria Installation and User Guide
 ---
 
 This guide provides installation and configuration information for using SSR Conductors and Routers in a certified Common Criteria environment. The following platforms are supported for Common Criteria certification:
