@@ -2,9 +2,6 @@
 title: Link Aggregation and LACP
 sidebar_label: Link Aggregation and LACP
 ---
-:::important
-This feature is currently in Beta. Support for LAG has been added for a limited number of use cases. Please refer to the [Caveats](#caveats) section for details.
-:::
 
 A Link Aggregation Group (LAG) enables the grouping Ethernet interfaces to form a single link layer interface. LAGs are formed by connecting multiple ports in parallel between two devices. As more links are added between the two devices, bandwidth expands. Traffic is automatically load-balanced, and in a network failure scenario, there is link-level redundancy. 
 
@@ -29,18 +26,13 @@ LAG/LACP has the following requirements:
 
 ### Supported Platforms
 
-LAG is currently supported on the following platforms:
-- SSR120
-- SSR130
+All SSR hardware platforms (SSR100 Series and SSR1000 Series) are supported.
 
 ### Caveats
 
-The following caveats have been identified:
-
-- Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.
-- High Availability has not been fully tested, and may not be fully functional. 
-    - VRRP with LAG is not supported
-    - Shared physical addresses are not allowed.
+* High Availability has not been fully tested, and may not be fully functional.
+    * VRRP with LAG has not been fully tested.
+    * Shared physical addresses are not allowed.
 
 ## Configuring LAG and LACP
 
