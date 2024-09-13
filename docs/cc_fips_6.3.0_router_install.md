@@ -11,10 +11,6 @@ Router installation can be performed using either the Interactive Installation, 
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
 :::
 
-:::important
-For Common Criteria compliance, a dedicated, out-of-band network must be used to provide the management connection security between Conductor and Router instances. SSR software does not currently provide any evaluated security assurances for this link. This dedicated network interface must be privately routed, and must not be exposed publicly.
-:::
-
 ## Prerequisites
 
 - Ensure that the platform you are installing on is an approved Common Criteria platform:

@@ -25,10 +25,6 @@ Basic configuration parameters are encoded within an encrypted file. For each no
  
 Before beginning the Router installation, you must have a Conductor operationally deployed and reachable by the router.
 
-:::important
-For Common Criteria compliance, a dedicated, out-of-band network must be used to provide the management connection security between Conductor and Router instances. SSR software does not currently provide any evaluated security assurances for this link. This dedicated network interface must be privately routed, and must not be exposed publicly.
-:::
-
 ## Installation
 
 ### Connect the SSR to a Management Console
