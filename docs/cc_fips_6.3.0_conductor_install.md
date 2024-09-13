@@ -11,7 +11,7 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Prerequisites
 
-- Installation is performed on a compliant platform; see [Compliant SSR Hardware](cc_fips_compliance_guidelines.md#compliant-ssr-hardware). 
+- Installation is performed on a compliant platform; see [Compliant SSR Hardware](cc_fips_6.3.0_compliance_guidelines.md#compliant-ssr-hardware). 
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Ensure local console connectivity to the device. 
 - **Logging in as `root` over SSH is not permitted.** When a system is installed using the OTP ISO, a `t128` user is configured with `sudo` privileges. 
@@ -184,7 +184,7 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
     - At least 1 number 
   - Cannot contain the username in any form 
   - Cannot repeat characters more than 3 times 
-  This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_config_password_policies.md).
+  This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_6.3.0_config_password_policies.md).
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
@@ -370,13 +370,13 @@ Creating router configurations on the conductor allows individual routers to dow
 
 A sample branch router configuration is available as a [**template**](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top-level resources. For more information, see [Configuration Templates](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates). 
 
-To see an example router configuration, refer to the [Appendix](cc_fips_appendix.md).
+To see an example router configuration, refer to the [Appendix](cc_fips_6.3.0_appendix.md).
 
 After completing the router configuration on the conductor, please return to this guide to continue the Common Criteria compliant router installation.
 
-If you will be using the OTP Quickstart router installation process, proceed to the [OTP Router Install Process](cc_fips_otp_router_install.md) next, and then use the [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md) steps to generate a basic configuration and quickstart file for router installation. 
+If you will be using the OTP Quickstart router installation process, proceed to the [OTP Router Install Process](cc_fips_6.3.0_otp_router_install.md) next, and then use the [QuickStart From the OTP ISO](cc_fips_6.3.0_install_quickstart_otpiso.md) steps to generate a basic configuration and quickstart file for router installation. 
 
 When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
-If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_router_install.md).
+If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_6.3.0_router_install.md).
 

@@ -28,10 +28,10 @@ Access to the SSR Software packages available for download from our software rep
 
 Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. 
 The install process is as follows:
-- [Download the OTP ISO](cc_fips_downloading_iso.md)
+- [Download the OTP ISO](cc_fips_6.3.0_downloading_iso.md)
 - [Create Bootable Media](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb)
-- [Install a Conductor](cc_fips_conductor_install.md)
+- [Install a Conductor](cc_fips_6.3.0_conductor_install.md)
 - [Create the Router configuration with the Conductor](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_basic_router_config) or [Import a Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/single_conductor_config)
-- [Install the Router](cc_fips_router_install.md) 
+- [Install the Router](cc_fips_6.3.0_router_install.md) 
 
 

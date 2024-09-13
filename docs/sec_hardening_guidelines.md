@@ -3,7 +3,7 @@ title: Security Hardening Guidelines
 sidebar_label: Security Hardening Guidelines
 ---
 
-This section provides a list of security hardening actions and guidelines to provide additional security to your SSR and your network overall. Many of the guidelines below are covered in the [SSR Common Critieria Install and Configuration](cc_fips_titlepage.md) documentation. 
+This section provides a list of security hardening actions and guidelines to provide additional security to your SSR and your network overall. Many of the guidelines below are covered in the [SSR Common Critieria Install and Configuration](cc_fips_6.3.0_titlepage.md) documentation. 
 
 ## Administrative
 - Review SSR security polices for CVE tracking and notifications: [Juniper SSR Security Policies](about_security_policy.md#release).
@@ -33,7 +33,7 @@ When the SSR approaches the configured limit of half-open TCP connections, the e
 - Ensure Proxy ARP is either not configured, or is restricted to specific interfaces.
 
 ## Management Services Security
-- Consider enabling [FIPS mode](cc_fips_conductor_install.md#conductor-installation) to restrict the encryption algorithms used for management connections.
+- Consider enabling [FIPS mode](cc_fips_6.3.0_conductor_install.md#conductor-installation) to restrict the encryption algorithms used for management connections.
 - Configure known/trusted NTP servers and authentication.
 - Configure SNMP using the most secure method with more than one trusted server.
 - Community strings and USM passwords should be difficult to guess and follow password complexity policy.
@@ -43,7 +43,7 @@ When the SSR approaches the configured limit of half-open TCP connections, the e
 - Create configuration backups to more than one trusted server to provide resiliency.
 
 ## Access Security
-- Configure a [login warning banner](cc_fips_banners.md) that is displayed prior to credentials being provided.
+- Configure a [login warning banner](cc_fips_6.3.0_banners.md) that is displayed prior to credentials being provided.
 - Ensure unnecessary host services (SSH, HTTPS, etc.) are not configured.
 - Use HTTPS with a valid certificate signed by a trusted CA.
 - Ensure access lists are configured for required services (SSH, HTTPS).

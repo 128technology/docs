@@ -6,7 +6,7 @@ The VPN Protection Profile feature adds support for X.509 ceritifcate management
 
 ## Install the IPSec Plugin
 
-The IPSec plugin can be installed using either the Web Interface, or the SSR CLI. If use of the web interface has been enabled through the generation and configuration of a `trusted-ca-ertificate`, the GUI may be used to perform the IPsec plugin installation. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_access_mgmt.md#signing-and-importing-webserver-certificates).
+The IPSec plugin can be installed using either the Web Interface, or the SSR CLI. If use of the web interface has been enabled through the generation and configuration of a `trusted-ca-ertificate`, the GUI may be used to perform the IPsec plugin installation. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_6.3.0_access_mgmt.md#signing-and-importing-webserver-certificates).
 
 Use the instructions for installing and managing the plugin found in [Plugin Workflow - Installation and Management](plugin_intro.md#installation-and-management).
 
@@ -34,7 +34,7 @@ The IPsec plugin requires users to generate/acquire their private key, a CA cert
 The IPsec plugin will take over the configuration mentioned in `Importing third-party files into NSS` in the Libreswan document. 
 
 :::note
-All x509 certificates must meet common criteria compliant requirements regarding algorithms. Please see [Cryptographic Algorithms](cc_fips_access_mgmt.md#ssh-server-cryptographic-algorithms) for more information. 
+All x509 certificates must meet common criteria compliant requirements regarding algorithms. Please see [Cryptographic Algorithms](cc_fips_6.3.0_access_mgmt.md#ssh-server-cryptographic-algorithms) for more information. 
 :::
 
 Use the following steps to create the X.509 certificate-type for Tunnel Authentication. 

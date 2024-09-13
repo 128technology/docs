@@ -9,7 +9,7 @@ The OTP installation process produces a Router installed with SSR software set t
 
 This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso) and [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb).
 
-Router installation can be performed using **either** the OTP process, or the [Interactive Installation](cc_fips_router_install.md). You do not need to perform both. **The steps in this section describes the OTP process.**
+Router installation can be performed using **either** the OTP process, or the [Interactive Installation](cc_fips_6.3.0_router_install.md). You do not need to perform both. **The steps in this section describes the OTP process.**
 
 :::note
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for all installations.
