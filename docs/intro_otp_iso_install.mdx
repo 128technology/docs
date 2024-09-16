@@ -11,6 +11,10 @@ An important aspect of the OTP solution is its flexibility. When the product is 
 
 In this deployment model, the SSR node is deployed into the production environment with no site-specific configuration during shipment of units and initial on-line state. A site configuration file is directed via the SSR for initial provisioning.
 
+:::important
+If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
+:::
+
 ## Software Delivery Options
 The simplest deployment of the OTP solution is highly automated and leverages just two components, the Conductor and at least one SSR. For many customers, the SSR platform is ordered and delivered as a pre-integrated, off-the-shelf solution through the Juniper SSR partner network. An image leveraging QuickStart provisioning can also be deployed into a VM or cloud environment, though consideration must be made to the mechanism of injecting the file. Virtual environments may be better suited for cloud automation tools to assist in automated, dynamic deployment.
 
@@ -249,7 +253,7 @@ $ bootstrap128t rest-test -i <test-identifier> --url <a-fully-qualified-url>
 
 ### Additional Considerations with Strict Host Key Checking
 
-If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accepts-new` configured, it will be necessary to manually provision the new conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accept-new` configured, it will be necessary to manually provision the new conductor key **prior** to migrating the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
 
 On the new conductor, identify the `key` for each node using the command `show system connectivity host-keys node all`.
 

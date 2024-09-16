@@ -6,44 +6,58 @@ sidebar_label: Installation Overview
 Welcome to Session Smart Routing - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the SSR Router and Conductor products into a Linux operating system environment. This product suite is collectively known as SSR Software.
 
 :::info
-The installation guides are version agnostic and are applicable for all current and future versions of software.
+The installation guide covers all supported versions. However, release-specific information is identified in context.
 :::
 
 ## Before You Begin
 Before you begin the installation and configuration of an SSR Networking Plaform, you must:
 - Be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - Be a system administrator to perform the installation and configuration.
-- Have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
+- Have an entry in `/etc/sudoers` allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
 
 :::note
 The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
 ## Installation Process
-Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
-- [Download the ISOs](intro_downloading_iso.md)
-- [Create Bootable Media](intro_creating_bootable_usb.md)
-- [Perform the Interactive ISO installation](intro_installation_bootable_media.mdx) 
-- [Install a Conductor](install_conductor_overview.md)
-- [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
-- [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
 
-To install the SSR software on AWS or Azure, refer to: 
- - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
-    - [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
- - [Installation in Microsoft Azure](intro_installation_azure.md)   
+Beginning with SSR 6.3.0, the Universal ISO Installation simplifies and streamlines the SSR installation and initialization process, and supports Conductor-managed image-based installations as well as Mist-managed deployments. 
+
+Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
+- Pre-Installation Process:
+   - [Download the ISOs](intro_downloading_iso.md)
+   - [Create Bootable Media](intro_creating_bootable_usb.md)
+- [SSR Universal ISO Installation (SSR 6.3.0+)](intro_installation_univ-iso.md)
+   - [SSR Installation](install_univ_iso.md)
+   - [Device Initialization](initialize_u-iso_device.md)
+
+- Cloud Platform Installation: 
+   - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
+   - [Installation in Microsoft Azure](intro_installation_azure.md)
+   - [Installing in VMWare](install_vmware_config.mdx)
 
 A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
 
-## Image Based Installation
+### Legacy Installations - SSR 6.2.x and Earlier
 
-Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process.
+- Pre-Installation Process:
+   - [Download the ISOs](intro_downloading_iso.md)
+   - [Create Bootable Media](intro_creating_bootable_usb.md)
+- Legacy Installation 
+   - [Perform the Interactive ISO installation](intro_installation_bootable_media.mdx) 
+   - [Install a Conductor](install_conductor_overview.md)
+   - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
+   - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
+
+### Image-based Installation
+
+An image-based ISO installation process is available for users who manage their network using the Mist Cloud. This installation and upgrade process is available for SSR version 6.0.x - 6.2.x, and is only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process. SSR Version 6.3.0 provides support for image-based installs for both Conductor- and Mist-managed deployments. 
 
 :::important
-The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for conductor-managed WAN Telemetry deployments.
+The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for versions 6.0.x - 6.2.x in a conductor-managed WAN Telemetry deployment.
 :::
 
-For customers with conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) continues to be used for upgrades and new installations.
+For customers with legacy conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) continues to be used for upgrades and new installations.
 
 ## Upgrades
 

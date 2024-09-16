@@ -8,6 +8,10 @@ The Authority is where system-wide data is stored. Conceptually, the Authority r
 
 The [Conductor Deployment](bcp_conductor_deployment.md) section is a great starting point before installing and configuring your conductor. This document includes best practices for conductor deployment, creating a topology, example configurations, and conductor redundancy. It is recommended to review this section before installing and configuring the conductor.
 
+:::important
+If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
+:::
+
 The following Conductor installation processes are covered in this guide:
 
 - [Standalone Conductor](single_conductor_install.mdx)
