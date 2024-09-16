@@ -331,6 +331,7 @@ module.exports = {
           "howto_pppoe_vlan",
           "howto_ms365",
           "howto_trusted_ca_certificate",
+          "howto_update_bios",
         ],
       },
       {
