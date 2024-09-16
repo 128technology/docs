@@ -27,7 +27,7 @@ Although the update procedure can be initiated remotely over ssh, personnel must
 
 The BIOS update package can be installed using either of two methods:
 - On-line install from Juniper SSR repositories
-- RPM download & off-line installation
+- RPM download and off-line installation
 
 ### Online Installation from the SSR Repository
 
@@ -70,7 +70,7 @@ Complete!
 
 ```
 
-Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-firmware).
+Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-x722-firmware).
 
 ### RPM Download and Off-line Installation
 
@@ -84,9 +84,9 @@ For systems that do not have internet access (air-gap systems), you can download
 5. Enter the following command:
   `sudo dnf install -y /tmp/afulnx-5.16.02.0111-3.el7.x86_64.rpm`
 
-Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-firmware).
+Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-x722-firmware).
 
-## Upgrading the BIOS and X722 firmware
+## Upgrading the BIOS and X722 Firmware
 
 After the upgrade package has been installed onto your SSR hardware, the BIOS and X722 firmware must be upgraded. 
 
@@ -102,7 +102,7 @@ DO NOT INTERRUPT THIS PROCESS AFTER CONFIRMING! Doing so may result in an unboot
 3. The upgrade process takes place:
   - Current BIOS version is saved as a backup
   - Current DMI information (serial number etc) is saved
-  - BIOS, ME and NIC firmware is updated
+  - BIOS, ME, and NIC firmware is updated
   - Saved DMI information is programmed into the new BIOS
   - The system initiates a controlled shutdown and power-off
 
