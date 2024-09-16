@@ -326,3 +326,29 @@ If the EC2 instance deployed for the Session Smart software does not have access
 9. Click **Add Another Route**.
 10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option.
 11. Select it and click **Save**.
+
+
+## Release Notes
+
+### Release 1.1.0
+
+**Release Date:** Sep 12th, 2024
+
+#### Issues Fixed
+
+- **I95-58025** AWS instances can sometimes fail to successfully onboard on first boot.
+
+  _**Resolution:**_ On first boot after onboarding, a race condition between startup and initializing the system can sometimes result in the onboarding to fail. The condition is now better handled in the new image.
+
+- **I95-58274** Serial console does not show any output in AWS BYOL image
+
+  _**Resolution:**_ The boot line for the BYOL image now contain the appopriate options ot enable the console to operate correctly.
+
+### Release 1.0.0
+
+**Release Date:** Sep 1st, 2024
+
+#### New Features and Improvements
+- **I95-48255** BYOL Support for Mist Managed router
+
+Created a new BYOL offering in AWS, to provide seamless onboarding for MIST managed Session Smart Routers. The offer enables various modes of operation using CloudFormation templates, AMI based, cloud-init based and manual onboarding modes to best fit the end user workfow.
