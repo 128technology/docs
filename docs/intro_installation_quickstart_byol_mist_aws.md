@@ -13,6 +13,8 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
+For the latest information about SSR BYOL offereings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
+
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
 ## Session Smart Router Deployment
