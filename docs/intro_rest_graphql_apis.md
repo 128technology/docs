@@ -1,6 +1,6 @@
 ---
 title: Introduction to REST and GraphQL APIs
-sidebar_label: REST/GraphQL
+sidebar_label: REST and GraphQL APIs
 ---
 
 The SSR provides Application Programming Interfaces (APIs) that can be used to interact with the SSR from an external application. The two primary interfaces are REST and GraphQL.
