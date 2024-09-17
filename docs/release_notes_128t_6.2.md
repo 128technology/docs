@@ -48,8 +48,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55965 IDP engine not starting due to invalid environmental conditions:**  In cases where the IDP engine does not shut down cleanly, the IDP engine will fail to restart. These conditions are now detected and handled correctly.
 ------
-- **I95-55982 X722 interface MAC being set to 00:00:00:00:00:00 on SSR1300/SSR1400:** Identified an issue where the MAC address would change during a power cycle. Another power cycle can restore the MAC to its previous value. An upgrade to the X722 firmware addresses this issue. NOTE: A power cycle is required as part of the firmware flashing sequence. All power feeds must be manually disconnected and reconnected to cycle it correctly.
-------
 - **I95-56013 Automatically created Conductor user accounts show as "LDAP":** Resolved an issue with user authentication where accounts were listed as `LDAP` rather than `Remote`.
 ------ 
 - **I95-56233 / I95-56546 Relay routers in AWS unresponsive, showing device errors:** Resolved an issue where ENA devices in some environments have shown command queue failures and are no longer able to retrieve device stats, or pass traffic. The device is now reinitialized when the driver watchdog issues a reset event.

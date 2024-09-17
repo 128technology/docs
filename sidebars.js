@@ -405,6 +405,13 @@ module.exports = {
           "release_notes_wan_assurance_plugin_3.4",
           "release_notes_wan_assurance_plugin_3.3"
         ]
+      },
+      {
+        "type": "category",
+        "label": "BYOL Cloud Images",
+        "items": [
+          "release_notes_byol"
+        ]
       }
     ],
   },
