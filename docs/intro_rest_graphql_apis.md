@@ -17,12 +17,12 @@ The examples shown in this document use the `curl` command-line application; any
 
 The REST and GraphQL APIs are authorized and authenticated securely using authorization tokens. Tokens are granted using the username and password of a suitably priviliged user, and passed to each API call. The SSR uses the token to determine authorization for each API call. The RBAC privileges of the user determine access to the resources being accessed by the API.
 
-The `/api/v1/login` REST API is used to generate these tokens. For example:
+The `/api/v1/login` REST API is used to generate these tokens, as shown below:
 `curl --request POST -k --url 'https://192.168.0.1/api/v1/login' -H "Content-Type: application/json" -d '{ "username": "admin", "password":"128Tadmin"}'`
 
 In this example, the address of the SSR is `192.168.0.1` and the username is `admin` with password `128Tadmin`. Additionally the `-H "Content-Type: application/json"` specifies a `Content-Type` header that the client is passing and accepting JSON data.
 
-If the login attempt is successful a token is returned. For example:
+If the login attempt is successful a token is returned, as shown below:
 ```
 {"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiJdLCJzY29wZXMiOlsiY29uZmlndXJlIiwic2hvdy1jb21tYW5kcyJdLCJjYXBhYmlsaXRpZXMiOlsiY29uZmlnLXJlYWQiLCJjb25maWctd3JpdGUiLCJwcm92aXNpb25pbmciXSwiYXBwbGljYXRpb24iOiJ1bmtub3duIiwidXNlckFnZW50IjoiThiSaintAR31lt0k3njI5LjAlc3MiOiIxMjcuMC4wLjEiLCJpc3MiOiJSVFJfRUFTVF9DT05EVUNUT1IiLCJpYXQiOjE3MjY1NDQ5Mzd9.NoEgcSzm752k1PWsvi5WtyFVCA825WI_fFMfOVeoNXvK1jsyW6UKiwGD8gSJFuQrtNYISgZWlBrqD3bhpiii33-DnAzOOEIuDXpbNGKAw2KwiuVKHoDIj8iWRi1grBERFpDFKCgjO15sR0q2JAb88k_EIkIHLeuS1bLSpi1mGfjRGeNcDh8DkCjQM1jH-DbPXf5oJ7pAq79pflLR-yS5WcWpeeQRaO_xrwWnd9cS4R31T-T0p1q0SYJanB9IQ3YUtue3zqArJmb4qHT46HJ_rctpp6NLXUih2Q7LEe7-DQB3yV9nDoB5vIAZn1PThiSaintAR31lt0k3ndH_KZxkuQQ"}
 ```
