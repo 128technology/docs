@@ -370,33 +370,3 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 :::important
 When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
-
-## Release Notes
-
-### Release 1.1.0
-
-**Release Date:** Sep 18th, 2024
-
-#### New Features and Improvements
-
-- **I95-58026** Add support for Standard public IP address API.
-
-Azure plans to [deprecate](https://learn.microsoft.com/en-us/azure/load-balancer/skus) support for `Basic` loadbalancer and defaults to `Standard` loadbalancer for certain workflows. The new AMI version adds the support for both modes for completeness.
-
-#### Issues Fixed
-
-- **I95-58025** Azure instances can sometimes fail to successfully onboard on first boot.
-
-  _**Resolution:**_ On first boot after onboarding, a race condition between startup and initializing the system can sometimes result in the onboarding to fail. The condition is now better handled in the new image.
-
-- **I95-58274** Azure instances can sometimes fail to successfully onboard on first boot.
-
-
-### Release 1.0.0
-
-**Release Date:** Sep 2nd, 2024
-
-#### New Features and Improvements
-- **I95-48255** BYOL Support for Mist Managed router
-
-Created a new BYOL offering in Azure, to provide seamless onboarding for MIST managed Session Smart Routers. The offer enables various modes of operation using ARM templates, image based, cloud-init based and manual onboarding modes to best fit the end user workfow.
