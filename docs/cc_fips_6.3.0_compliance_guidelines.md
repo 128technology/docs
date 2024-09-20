@@ -11,7 +11,6 @@ For compliance, the following configuration considerations must be made:
 - When installing a router, the [ICMP Session Match](cc_fips_6.3.0_sec_firewall_filtering.md#icmp-type-as-a-session-attribute) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_6.3.0_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.
 - Strict Hostkey Checking must be enabled during router installation. Steps are provided as part of the Router installation process. 
-- To use the VPN Protection Profile feature, the IPSec plugin provided with the SSR ISO must be installed and configured as described in [VPN Protection Profile]. The IPSec plugin is currently the only plugin supported for Common Criteria compliance.
 - The `password-policy` must define the minimum password length and maximum number of permitted login attempts per user. Please refer to [Username and Password Policies](cc_fips_6.3.0_config_password_policies.md) for policies, and to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy) for CLI commands and context for assigning these values.
 - The `admin` account must be given `sudo` privileges allowing it to use the shell for some management capabilities. Edit the `/etc/sudoers` file as `root` using the `visudo` command. This allows you to add an entry for `admin` which will persist across reboots. For additional information, please see [Root Access](cc_fips_6.3.0_access_mgmt.md#root-access) in the Access Management section.
 - Traffic logging must be enabled by setting the following command to `true`: `configure authority router router system audit traffic enabled true`. This is a resource intensive setting. Not more than a few sessions are expected to run while collecting traffic events.
@@ -55,10 +54,9 @@ The following functionality and platforms **are not certified** under Common Cri
 - Juniper branded hardware platforms not explicitly included.
 - Juniper SSR Software for virtual platforms.
 - Juniper MIST.
-- HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP, syslog/TLS.
-- X.509 certificate management, validation or verification.
-- Intrusion Prevention System (IPS) functions.
-- SSR Plugins, particularly Wireguard, are excluded from Common Criteria certification. The one exception to this is the IPSec Plugin, which is delivered with the SSR ISO and is required for the VPN Protection Profile feature. 
+- IPSec, SNMP, LDAP.
+- Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions.
+- SSR Plugins, particularly Wireguard, are excluded from Common Criteria certification.  
 
 ### Physical Security
 

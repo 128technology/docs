@@ -52,7 +52,6 @@ module.exports = {
       "cc_fips_6.3.0_router_install",
       "cc_fips_6.3.0_access_mgmt",
       "cc_fips_6.3.0_config_radsec",
-      "cc_fips_6.3.0_vpn_profile_config",
       "cc_fips_6.3.0_config_ntp_auth",
       "cc_fips_6.3.0_config_password_policies",
       "cc_fips_6.3.0_config_audit_event",
