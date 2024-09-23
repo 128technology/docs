@@ -15,7 +15,13 @@ Use the following process to initialize your device as a Conductor.
 
   ![SSR Conductor](/img/u-iso8a_initialize_conductor.png)
 
-2. To initialize a standalone conductor, select **STANDALONE**. To initialize the first conductor of an HA pair, select **HA NODE 0**. Select the address type (DHCP or STATIC). Enter the following information: 
+2. To initialize a standalone conductor, select **STANDALONE**. To initialize the first conductor of an HA pair, select **HA NODE 0**. Select the address type (DHCP or STATIC). 
+
+:::note
+In an HA configuration, **HA NODE 0** must always be configured before HA NODE 1. Configuring Node 1 first prevents Node 0 from starting.
+:::
+
+Enter the following information: 
  
 	- Conductor name
 	- Node IP Address (Static)
