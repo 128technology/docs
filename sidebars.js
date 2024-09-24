@@ -76,8 +76,9 @@ module.exports = {
     ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
-      "install_univ_iso",
+      "install_univ_iso", 
       "initialize_u-iso_device",
+      "initialize_u-iso_other",
     ],
     "Conductor Installation": [
       "install_conductor_overview",
@@ -458,6 +459,13 @@ module.exports = {
           "release_notes_wan_assurance_plugin_3.5",
           "release_notes_wan_assurance_plugin_3.4",
           "release_notes_wan_assurance_plugin_3.3"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "BYOL Cloud Images",
+        "items": [
+          "release_notes_byol"
         ]
       }
     ],

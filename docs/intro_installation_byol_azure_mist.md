@@ -13,6 +13,8 @@ This guide describes the process for deploying a Mist-managed Session Smart Rout
 
 **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an Azure VM. The device registration code is used to authenticate access to the Mist installation repositories.
 
+For the latest information about SSR BYOL offereings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
+
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
 
 ## Session Smart Router
