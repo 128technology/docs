@@ -16,22 +16,17 @@ The examples listed in this guide generally run commands as a non-root user, exc
 
 ### SSR Software Version
 
-The SSR devices ship with an older version of SSR software that is not Common Criteria and FIPS compliant. It is required that you install SSR 6.2.5-5r2 software on the device to configure and run Common Criteria and FIPS compliant instances.
+The SSR devices ship with an older version of SSR software that is not Common Criteria and FIPS compliant. It is required that you install SSR 6.3.0-r1 software on the device to configure and run Common Criteria and FIPS compliant instances.
 
 :::note
-The installation process is the only way to achieve compliant software. The upgrade process may only be used for subsequent updates after the initial installation of the SSR 6.2.5-5r2 software.
+The installation process is the only way to achieve compliant software. The upgrade process may only be used for subsequent updates after the initial installation of the SSR 6.3.0-r1 software.
 :::
 
 Access to the SSR Software packages available for download from our software repositories is authenticated using the username and token provided to you.
 
 ## Installation Process Overview
 
-Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. 
-The install process is as follows:
-- [Download the OTP ISO](cc_fips_6.3.0_downloading_iso.md)
-- [Create Bootable Media](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb)
-- [Install a Conductor](cc_fips_6.3.0_conductor_install.md)
-- [Create the Router configuration with the Conductor](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_basic_router_config) or [Import a Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/single_conductor_config)
-- [Install the Router](cc_fips_6.3.0_router_install.md) 
+Installation is done using the SSR Universal ISO, typically from a bootable image on a USB or copied to disk. 
+Please follow the instructions starting with the [SSR Universal ISO Installation Overview](cc_fips_6.3.0_intro_install_univ-iso.md).
 
 

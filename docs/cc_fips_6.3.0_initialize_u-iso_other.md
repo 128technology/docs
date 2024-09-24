@@ -50,12 +50,6 @@ The following PCLI command can be used to onboard a router to a conductor as con
 
 For additional information, refer to the [initialize conductor-managed](cli_reference.md#initialize-conductor-managed) command.
 
-### Mist-Managed Router
-
-The following PCLI command will onboard a router to the Mist inventory.
-
-`adopt router-name <router-name> registration-code <reg-code>`
-
 ## Automated Onboarding
 
 Automated onboarding can be used whenever the user wants to automatically set up a device during first boot, and does not require manual input. All the onboarding configurations must be known prior to starting the process. These methods must also be used if the user wants to provide a customized devicemap.
