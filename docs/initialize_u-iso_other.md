@@ -1,6 +1,6 @@
 ---
-title: Initialize Your Device - Other Methods
-sidebar_label: Initialize Your Device - Other Methods
+title: Initialize Your Device - Advanced Workflows
+sidebar_label: Initialize Your Device - Advanced Workflows
 ---
 
 While the Web Interface is the recommended method of initializing and onboarding your SSR device, there are additional methods to complete the process.

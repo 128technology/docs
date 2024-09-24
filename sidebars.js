@@ -58,27 +58,6 @@ module.exports = {
       "initialize_u-iso_device",
       "initialize_u-iso_other",
     ],
-    "Conductor Installation": [
-      "install_conductor_overview",
-      "bcp_conductor_deployment",
-      "single_conductor_install",
-      "ha_conductor_install",
-      "single_conductor_config",
-      "conductor_upgrade",
-      "howto_conductor_migration",
-    ],
-    "Router Installation": [
-      "intro_installation_bootable_media",
-      "intro_basic_router_config",
-      "intro_otp_iso_install",
-      "intro_install_quickstart_otpiso",
-      "onboard_ssr_to_conductor",
-      "onboard_ssr_device_otp",
-      "howto_router_migration",
-    ],
-    "Image-Based Installation": [
-      "intro_installation_image",
-    ],
     "Cloud Installations": [
       "supported_cloud_platforms",
       "install_vmware_config",
@@ -102,11 +81,50 @@ module.exports = {
           ],
       },
     ],
-    "Supporting Install Information - Appendix": [
-      "intro_installation_installer",
-      "install_qcow2_deployment",
-      "legacy_OTP_install",
-    ],
+    "Legacy Install Information": [
+      {
+       "type": "category",
+          "label": "Conductor Installation",
+          "items": [
+            "install_conductor_overview",
+            "bcp_conductor_deployment",
+            "single_conductor_install",
+           "ha_conductor_install",
+            "single_conductor_config",
+            "conductor_upgrade",
+            "howto_conductor_migration",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Router Installation",
+          "items": [
+            "intro_installation_bootable_media",
+           "intro_basic_router_config",
+            "intro_otp_iso_install",
+            "intro_install_quickstart_otpiso",
+            "onboard_ssr_to_conductor",
+            "onboard_ssr_device_otp",
+            "howto_router_migration",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Image-Based Installation",
+          "items": [
+            "intro_installation_image",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Appendix",
+          "items": [
+            "intro_installation_installer",
+            "install_qcow2_deployment",
+            "legacy_OTP_install",
+          ],
+      },
+    ],            
     "Concepts": [
       "concepts_application_discovery",
       "concepts_EthOverSVR",
