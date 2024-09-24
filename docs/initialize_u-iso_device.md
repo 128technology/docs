@@ -1,9 +1,9 @@
 ---
-title: Initialize Your Device
-sidebar_label: Initialize Your Device
+title: Initialize Your Device - Web Workflow
+sidebar_label: Initialize Your Device - Web Workflow
 ---
 
-This is the part where configuring your device gets really easy! Use a browser to navigate to your conductor and begin the initialization. Use the GUI to initialize the device as a [Conductor](#initialize-a-conductor), a [Conductor-managed Router](#initialize-a-conductor-managed-router), or a [Mist-managed Router](#initialize-a-mist-managed-router). 
+This is the part where configuring your device gets really easy! Use the GUI to initialize the device as a [Conductor](#initialize-a-conductor), a [Conductor-managed Router](#initialize-a-conductor-managed-router), or a [Mist-managed Router](#initialize-a-mist-managed-router). Use a browser to navigate to your conductor and begin the initialization.  
 
 ![U-ISO Device Selection GUI](/img/u-iso8_launch_gui.png)
 

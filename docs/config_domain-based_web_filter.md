@@ -198,7 +198,7 @@ Active categories and domains are displayed in the GUI on the Applications Seen 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
-#### Invalid Applications
+### Invalid Applications
 
 In cases where an application is configured incorrectly, or a domain is mistakenly configured as an application, an alarm is generated. 
 

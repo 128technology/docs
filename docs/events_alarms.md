@@ -412,5 +412,4 @@ sidebar_label: Alarms
 
 | Cause                                               | Troubleshooting Step                                         |
 | --------------------------------------------------- | ------------------------------------------------------------ |
-| Capacity of the cache exceeds 95% of the `max-capacity` configured value | The alarm is cleared once the capacity of the 
-cache goes below 85% of the configured value, and as sessions using those stats expire. The alarm can be addressed by adjusting the `max-capacity` value under `application-identification`. App-id stats are tracked per application, per client, and per next-hop. The granularity of per-application, per-client traffic stats will be reduced while the alarm is active on the system. |
+| Capacity of the cache exceeds 95% of the `max-capacity` configured value | The alarm is cleared once the capacity of the cache goes below 85% of the configured value, and as sessions using those stats expire. The alarm can be addressed by adjusting the `max-capacity` value under `application-identification`. App-id stats are tracked per application, per client, and per next-hop. The granularity of per-application, per-client traffic stats will be reduced while the alarm is active on the system. |
