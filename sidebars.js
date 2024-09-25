@@ -306,6 +306,7 @@ module.exports = {
           "config_access_mgmt",
           "config_ldap",
           "config_radius",
+          "config_radsec",
           "config_password_policies",
           "howto_reset_user_password",
         ],
