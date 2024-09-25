@@ -62,7 +62,7 @@ Automated onboarding can be used whenever the user wants to automatically set up
 
 ### Onboarding Config
 
-The brains behind the automated onboarding process is a json file named `onboarding-config.json`. This file contains all the configuration parameters and drives the entire onboarding process. The `onboarding-config.json` can be provided from a USB, as a file placed on the SSR disk, or applied via API initialization. 
+The brains behind the automated onboarding process is a json file named `onboarding-config.json`. This file contains all the configuration parameters and drives the entire onboarding process. The `onboarding-config.json` can be provided from a USB, as a file placed on the SSR disk, or applied via API initialization. For virtual and cloud based deployments, the same mechanism is supported via cloud-init as well.
 
 ### Conductor Onboarding Configuration
 
