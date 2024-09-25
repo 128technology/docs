@@ -56,7 +56,7 @@ module.exports = {
       "intro_installation_univ-iso",
       "install_univ_iso", 
       "initialize_u-iso_device",
-      "initialize_u-iso_other",
+      "initialize_u-iso_adv_workflow",
     ],
     "Cloud Installations": [
       "supported_cloud_platforms",

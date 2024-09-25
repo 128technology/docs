@@ -9,8 +9,6 @@ While the Web Interface is the recommended method of initializing and onboarding
 - [USB Initialization](#usb-initialization)
 - [File on Disk](#file-on-disk)
 - [API Initialization](#api-initialization)
-- [Cloud Init](#cloud-init)
-
 
 ## PCLI Workflow
 
@@ -61,7 +59,7 @@ The following PCLI command can be used to onboard a router to a conductor as con
 
 `initialize conductor-managed router-name <rtr-name> conductor-ip <ip-address>`
 
-For additional information, refer to the [initialize conductor-managed](cli_reference.md#initialize-conductor-managed) command.
+For additional information, refer to the [`initialize conductor-managed`](cli_reference.md#initialize-conductor-managed) command.
 
 ### Mist-Managed Router
 
@@ -90,10 +88,10 @@ The following JSON is an example of a valid conductor `onboarding-config.json`.
 "node-name": "node0",
 "node-ip": "10.73.1.10/24",
 "node-gateway": "10.73.1.11",
-"interface-name": "ge-0-0",
-"dns-servers": [
-	"8.8.8.8",
-	"1.1.1.1"
+	"interface-name": "ge-0-0",
+	"dns-servers": [
+		"8.8.8.8",
+		"1.1.1.1"
 	]
 }
 ```
@@ -110,9 +108,9 @@ The following is an example onboarding config that can be used to onboard a cond
 
 If no router name is supplied in the onboarding config, the default name is chosen in this order:
 
-1. Serial Number (via dmidecode)
+1. Serial Number (via DMI table)
 2. Hostname
-3. UUID (via dmidecode)
+3. UUID (via DMI table)
 
 ### Mist-Managed Router Onboarding Configuration
 
@@ -124,6 +122,12 @@ The following is an example onboarding config that can be used to onboard a Mist
 “registration-code”: "<mist-reg-code>”
 }
 ```
+
+If no router name is supplied in the onboarding config, the default name is chosen in this order:
+
+1. Serial Number (via DMI table)
+2. Hostname
+3. UUID (via DMI table)
 
 :::note
 If no onboarding configuration file is provided, it is assumed that the device is an unmanaged router, and an onboarding configuration will be provided later.
@@ -138,7 +142,7 @@ When the device boots for the first time it looks for a connected USB device nam
 - pre-bootstrap
 - post-bootstrap
 
-Scriptlets are passed in the device identifier, which is usually the device serial number. The order of operations is:
+Scriptlets are passed in the device identifier, which is typically the device serial number. The order of operations is:
 
 1. Pre-bootstrap
 2. Normal bootstrapping operation
@@ -149,9 +153,9 @@ Scriptlets are passed in the device identifier, which is usually the device seri
 
 If no onboarding config was found on a USB device, the initialization process looks for a config file placed on the device; this is a common workflow for virtual devices. You can also provide a customized devicemap in the onboarding config at this time. These files are located at:
 
-`/etc/128T-hardware-bootstrapper/onboarding-config.json`
-`/etc/128T-hardware-bootstrapper/pre-bootstrap`
-`/etc/128T-hardware-bootstrapper/post-bootstrap`
+- `/etc/128T-hardware-bootstrapper/onboarding-config.json`
+- `/etc/128T-hardware-bootstrapper/pre-bootstrap`
+- `/etc/128T-hardware-bootstrapper/post-bootstrap`
 
 If you wish to not onboard the device and only supply a devicemap, the device is onboarded as an unmanaged router. 
 
@@ -161,21 +165,4 @@ If an `onboarding-config.json` was not provided during the initial bootstrapping
 
 ```
 curl -X POST -H "Content-Type: application/json" -d @onboard-cfg.json http://localhost:31517/api/bootstrap/onboarding
-```
-
-### Cloud Init
-
-Cloud init can easily be used to automatically place the onboarding config before the device is bootstrapped. An example cloud init script to automatically onboard to mist is as follows:
-
-```
-#cloud-config
-write_files:
-	- path: /etc/128T-hardware-bootstrapper/onboarding-config.json
-		content: |
-			{
-				"registration_code": "RegistrationCode",
-				“name": "rtr-name",
-				"mode": "mist-managed",
-				"cloud-provider": "aws"
-			}
 ```
