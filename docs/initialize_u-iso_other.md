@@ -70,7 +70,7 @@ The following JSON is an example of a valid conductor `onboarding-config.json`.
 
 ```
 {
-"name": "Conductor",
+"name": "MyConductor",
 "mode": "conductor",
 "artifactory-user": "username",
 "artifactory-password": "password",
