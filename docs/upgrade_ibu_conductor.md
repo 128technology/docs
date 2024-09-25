@@ -3,8 +3,6 @@ title: Upgrading the Conductor
 sidebar_label: Upgrading the Conductor
 ---
 
-## Upgrading the Conductor
-
 The release and upgrade to 6.3.0 allows a Conductor to manage routers running image-based software installations, manage routers running older, package-based software, and initiate image-based upgrades to those routers.
 
 Image-based installations provide many benefits over the earlier RPM package-based installation/upgrade process, including upgrade speed, stability, efficiency, and ease of use. This section describes the process for upgrading a Conductor, allowing it to manage both package-based and image-based routers.
@@ -17,7 +15,7 @@ Before upgrading a conductor, it is recommended to [export the running configura
 For systems with both primary and secondary conductors, it is a best practice to upgrade only one conductor at a time. 
 :::
 
-### Upgrade using the GUI
+## Upgrade using the GUI
 
 Use the following procedures to upgrade a Conductor from the GUI.
 
@@ -28,7 +26,7 @@ Use the following procedures to upgrade a Conductor from the GUI.
 
 The Upgrade screen displays the Raw Log with the upgrade progress. Once the upgrade is complete, the Conductor is restarted and the GUI is refreshed. 
 
-### Upgrading Using the CLI
+## Upgrading Using the CLI
 
 Use the `request system software upgrade` command and the associated arguments to perform upgrades. All of the upgrade features are available from the command line as well as the GUI. 
 
@@ -93,7 +91,7 @@ Mon 2024-09-09 18:15:20 UTC
 Completed in 0.04 seconds
 ```
 
-### High Availability Upgrades
+## High Availability Upgrades
 
 In a high availability configuration, the default behavior is to perform a sequenced self-upgrade from the CLI. Executing the `request system software upgrade router <conductor-router-name>` from an HA conductor launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. When the upgrade is complete on the first node, you may run the command on the second node.  
 
