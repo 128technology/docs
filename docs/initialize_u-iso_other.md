@@ -58,7 +58,7 @@ The following PCLI command will onboard a router to the Mist inventory.
 
 ## Automated Onboarding
 
-Automated onboarding can be used whenever the user wants to automatically set up a device during first boot, and does not require manual input. All the onboarding configurations must be known prior to starting the process. These methods must also be used if the user wants to provide a customized devicemap.
+Automated onboarding can be used whenever the user wants to automatically set up a device during first boot, and does not require manual input. All the onboarding configurations must be known prior to starting the process. These methods should also be used If the user wants to provide a customized interface mapping scheme for whitebox platforms.
 
 ### Onboarding Config
 
