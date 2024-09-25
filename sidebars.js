@@ -48,7 +48,7 @@ module.exports = {
       "cc_fips_6.3.0_intro_install_univ-iso",
       "cc_fips_6.3.0_install_univ_iso",
       "cc_fips_6.3.0_initialize_u-iso_device",
-      "cc_fips_6.3.0_initialize_u-iso_other",
+      "cc_fips_6.3.0_initialize_u-iso_adv_workflow",
       "cc_fips_6.3.0_access_mgmt",
       "cc_fips_6.3.0_config_radsec",
       "cc_fips_6.3.0_config_ntp_auth",
