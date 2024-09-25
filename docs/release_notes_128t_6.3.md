@@ -72,7 +72,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-56337 / I95-56339 / I95-56341 REST API changes to better support BGP endpoints:** Updated BGP REST endpoints for better functionality, by adding pagination support to summary commands and altering json schema to use arrays where necessary to preserve ordering. Added `show bgp family-summary` to condense address-family information per peer into one entry.
 ------
-- **I95-56723 TLS Client Support:** See CC docs, see Radius Server docs ---- **link here
+- **I95-56723 TLS Client Support:** RADIUS over TLS is designed to provide secure communication of RADIUS requests using the Transport Secure Layer (TLS) protocol. RADIUS authentication, authorization, and accounting data can now be passed safely across untrusted networks. For more information, see [Configuring RADUIS over TLS](config_radsec.md).
 
 ### Resolved Issues
 
@@ -180,11 +180,3 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-56628 Unable to upgrade second HA Conductor to 6.3.0:** After successfully upgrading the primary HA conductor, attempting to upgrade the second node using the GUI prompt fails. This is a known issue and is currently under investigation. Please see the Knowledgebase Article [Unable to upgrade second HA Conductor to 6.3.0](../kb/2024/08/30/I95-56628) for workaround information. <!-- markdown-link-check-enable -->
 ------
 - **I95-57844 Software versions not listed for download from the GUI:** In rare failure scenarios when initiating a software download via the GUI, known software versions are missing from the upgrade list but no errors are reported to the user. If such a scenario is observed, it is recommended that you initiate a second download from the PCLI. In this case any errors are better reported and can be resolved.
-
-
-
-
-
-
-
-
