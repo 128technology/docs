@@ -394,7 +394,7 @@ Completed in 0.21 seconds
 **Release Date:** Sep 10, 2024
 
 #### Issues Fixed
-- **PLUGIN-2629** The command "show stats http-probe" is not working in the SSR.
+- **PLUGIN-2629** The command `show stats http-probe` is not working in the SSR.
 
   _**Resolution:**_ Replace incompatible parameter referred in stats data model with local leaf definition
 
