@@ -3,11 +3,9 @@ title: Upgrading the Conductor
 sidebar_label: Upgrading the Conductor
 ---
 
-The release and upgrade to 6.3.0 allows a Conductor to manage routers running image-based software installations, manage routers running older, package-based software, and initiate image-based upgrades to those routers.
+SSR software version 6.3.0 and newer allows a Conductor to manage routers running image-based software, manage routers running older, package-based software, and initiate image-based upgrades to those routers.
 
 Image-based installations provide many benefits over the earlier RPM package-based installation/upgrade process, including upgrade speed, stability, efficiency, and ease of use. This section describes the process for upgrading a Conductor, allowing it to manage both package-based and image-based routers.
-
-Existing deployments using package-based upgrade (PBU) workflows will continue to be supported. However, for an improved user experience we recommend adopting the image-based process.
 
 :::note
 Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md#importexport).

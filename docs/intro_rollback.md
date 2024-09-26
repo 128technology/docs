@@ -19,7 +19,7 @@ Beginning with SSR v6.3.0, the use of the interactive installer is not supported
 
 Use the information below when rolling back software versions prior to 6.3.0. 
 
-Rollbacks are not supported if configuration changes are made after the conductor or router are updated to the target version. For example, if the conductor and/or router has been upgraded to version 5.4, and a new feature such as Traffic Engineering is configured on the target conductor or router, rolling back to an earlier version of software may result in loss of configuration or router functionality.
+Rollbacks are not supported if configuration changes are made after the conductor or router are updated to the target version. For example, if the conductor and/or router has been upgraded to version 6.2, and a new feature is configured on the target conductor or router, rolling back to an earlier version of software may result in loss of configuration or router functionality.
 
 ### Rolling Back using Automated Provisioner
 

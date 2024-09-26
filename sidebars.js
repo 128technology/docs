@@ -82,6 +82,7 @@ module.exports = {
       },
     ],
     "Legacy Install Information": [
+      "intro_installation_legacy",
       {
        "type": "category",
           "label": "Conductor Installation",

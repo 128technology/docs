@@ -42,7 +42,7 @@ authority
 
 ### Limitations
 
-Traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with other traffic engineering settings, performance is further impacted; each level of traffic engineering requires buffering for their scheduled objects. 
+Enabling traffic engineering will introduce a performance impact to the packet-per-second processing rate as the QoS engine works to ensure fairness of packet distribution under congestion scenarios. When used in conjunction with other traffic engineering settings (e.g., adjacency traffic engineering configured alongside device interface traffic engineering), performance may be further impacted.
 
 ## Troubleshooting and Statistics
 
@@ -70,8 +70,8 @@ Device Interface Traffic Engineering Stats
  common schedule-failure                                        combo-east-a             269453
  common schedule-success                                        combo-east-a           12836478
  common tracked-buffers                                         combo-east-a                 63
- peer-path dequeue-cycle-count                                  combo-east-a   7077471138454523
- peer-path enqueue-cycle-count                                  combo-east-a   7077471138454523
+ peer-path dequeue-cycle-count                                  combo-east-a           38454523
+ peer-path enqueue-cycle-count                                  combo-east-a           38454523
  peer-path packets-queued                                       combo-east-a                  0
  peer-path per-traffic-class buffer-capacity-exceeded-bytes     combo-east-a                  0
  peer-path per-traffic-class buffer-capacity-exceeded-packets   combo-east-a                  0
@@ -92,21 +92,23 @@ Device Interface Traffic Engineering Stats
 
 ### Statistics Descriptions
 
-- `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that a packet was enqueued into the scheduler. 
-- `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that the scheduler attempted to dequeue a packet. 
-- `packets-queued`: The current number of packets queued in traffic engineering for this network-interface. 
+To gather information about device interface traffic engineering, query the following statistics using the `show stats traffic-eng device-interface` command. These statistics are specific to the device interface and provide insight into how the schedulers are operating.
+
+- `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this interface. This statistic refers to the last time (in cycles) that a packet was enqueued into the scheduler. This value is helpful when debugging. 
+- `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this interface. This statistic refers to the last time (in cycles) that the scheduler attempted to dequeue a packet.  This value is helpful when debugging.
+- `packets-queued`: The current number of packets queued in traffic engineering for this interface. 
 - `scheduler-reset`: The number of times the scheduler was reset due to encountering an processing error. 
-- `per-traffic-class schedule-success-bytes`: The number of bytes successfully scheduled for transmission for this network-interface.  
-- `per-traffic-class schedule-success-packets`: The number of packets successfully scheduled for transmission for this network-interface.  
-- `per-traffic-class schedule-failure-bytes`: The number of bytes failed to be scheduled for transmission due to bandwidth oversubscription for this network-interface.
-- `per-traffic-class schedule-failure-packets`: The number of packets failed to be scheduled for transmission due to bandwidth oversubscription for this network-interface.  
-- `per-traffic-class dequeue-success-bytes`: The number of bytes successfully dequeued from the scheduler for transmission for this network-interface.  
-- `per-traffic-class dequeue-success-packets`: The number of packets successfully dequeued from the scheduler for transmission for this network-interface.  
-- `per-traffic-class dequeue-max-latency-drop-bytes`: The number of bytes scheduled for transmission that were dropped due to excessive latency for this network-interface. 
-- `per-traffic-class dequeue-max-latency-drop-packets`: The number of packets scheduled for transmission that were dropped due to excessive latency for this network-interface. 
-- `per-traffic-class dequeue-aqm-drop-bytes`: The number of bytes scheduled for transmission that were dropped due to Active Queue Management for this network-interface. 
-- `per-traffic-class dequeue-aqm-drop-packets`: The number of packets scheduled for transmission that were dropped due to Active Queue Management for this network-interface. 
-- `per-traffic-class buffer-capacity-exceeded-bytes`: The number of bytes failed to be scheduled for transmission due to exceeded buffer capacity for this network-interface. 
-- `per-traffic-class buffer-capacity-exceeded-packets`: The number of packets failed to be scheduled for transmission due to exceeded buffer capacity for this network-interface. 
-- `per-traffic-class schedule-success-bandwidth`: Traffic bandwidth in bytes per second successfully scheduled for transmission for this network-interface.  
-- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue managment for this network-interface. 
+- `per-traffic-class schedule-success-bytes`: The number of bytes successfully scheduled for transmission for this interface.  
+- `per-traffic-class schedule-success-packets`: The number of packets successfully scheduled for transmission for this interface.  
+- `per-traffic-class schedule-failure-bytes`: The number of bytes failed to be scheduled for transmission due to bandwidth oversubscription for this interface.
+- `per-traffic-class schedule-failure-packets`: The number of packets failed to be scheduled for transmission due to bandwidth oversubscription for this interface.  
+- `per-traffic-class dequeue-success-bytes`: The number of bytes successfully dequeued from the scheduler for transmission for this interface.  
+- `per-traffic-class dequeue-success-packets`: The number of packets successfully dequeued from the scheduler for transmission for this interface.  
+- `per-traffic-class dequeue-max-latency-drop-bytes`: The number of bytes scheduled for transmission that were dropped due to excessive latency for this interface. 
+- `per-traffic-class dequeue-max-latency-drop-packets`: The number of packets scheduled for transmission that were dropped due to excessive latency for this interface. 
+- `per-traffic-class dequeue-aqm-drop-bytes`: The number of bytes scheduled for transmission that were dropped due to Active Queue Management for this interface. 
+- `per-traffic-class dequeue-aqm-drop-packets`: The number of packets scheduled for transmission that were dropped due to Active Queue Management for this interface. 
+- `per-traffic-class buffer-capacity-exceeded-bytes`: The number of bytes failed to be scheduled for transmission due to exceeded buffer capacity for this interface. 
+- `per-traffic-class buffer-capacity-exceeded-packets`: The number of packets failed to be scheduled for transmission due to exceeded buffer capacity for this interface. 
+- `per-traffic-class schedule-success-bandwidth`: Traffic bandwidth in bytes per second successfully scheduled for transmission for this interface.  
+- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue managment for this interface. 

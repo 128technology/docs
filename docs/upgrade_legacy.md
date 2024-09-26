@@ -3,19 +3,21 @@ title: Legacy Upgrades
 sidebar_label: Legacy Upgrades
 ---
 
+This guide focuses on legacy software upgrades - those prior to version 6.3.0.
+
 :::note
 Please refer to the [Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
 :::
 
-Your SSR conductor or router must have internet access to download the latest software packages; however, we recognize that there are deployments where the SSR does not have internet access. In those cases you can use the SSR conductor as a repository (or proxy) to retrieve or store software images. For information about upgrading offline or air-gap network devices, refer to [Upgrades with Restricted Internet Access](upgrade_restricted_access.md).
+The SSR conductor or router must have internet access to download the latest software packages; however, we recognize that there are deployments where the SSR does not have internet access. In those cases you can use the SSR conductor as a repository (or proxy) to retrieve or store software images. For information about upgrading offline or air-gap network devices, refer to [Upgrades with Restricted Internet Access](upgrade_restricted_access.md).
 
 As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
 
 With software versions prior to 6.3.0, there are three standard ways of upgrading routers:
 
-- Using the conductor's PCLI to initiate the upgrade
-- Using the conductor's GUI to initiate the upgrade
-- Manually upgrading a router by invoking the `install128t` application from the Linux shell
+- Using the conductor's [Web Interface](#using-the-web-interface) to initiate the upgrade
+- Using the conductor's [PCLI](#using-the-pcli) to initiate the upgrade
+- Using the [Interactive Installer](#upgrading-using-the-interactive-installer) from the Linux shell
 
 :::note
 The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Use the `install128t` application steps through both of these processes.
@@ -33,7 +35,21 @@ Examples:
 - Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
 - Conductor running version 5.6.8, managing Routers running version 6.1.3; Not supported.
 
-### Stopping the SSR Software
+## Upgrading Software Versions Prior to 6.3.0
+
+Use the following procedure to upgrade your software versions earlier than 6.3.0.
+
+### Using the Web Interface
+
+1. Navigate to the Router page in the Conductor's GUI. Routers that have available upgrades are indicated with the green **Upgrade SSR** icon (the arrow within a circle) in the router list.
+2. Click on the **Upgrade SSR** icon next to your router. A list of upgrade and download options appears. This list is filterable if the list grows large.
+3. Click on the target release in the Available Downloads section of the list. 
+4. Confirm the operation to begin downloading the software. Clicking on the router in the router list shows download progress.
+5. Once complete, click the **Upgrade SSR** icon again, and select the target software release from the Available Upgrades list. Confirm this operation to begin the upgrade process.
+
+The Automated Provisioner upgrades both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
+
+### Using the PCLI
 
 Before upgrading the SSR Software from the PCLI, use the following procedure to stop the the software.
 
@@ -56,7 +72,7 @@ Before upgrading the SSR Software from the PCLI, use the following procedure to 
 
 Use the steps below to download and upgrade SSR software if you are running earlier software versions.
 
-### Versions Prior to 6.3.0
+#### Log into the PCLI
 
 As an administrator-level user, log into the conductor's PCLI.
 
@@ -72,18 +88,6 @@ As an administrator-level user, log into the conductor's PCLI.
 4. Once the download is complete, use the command `send command upgrade router [your router name]` to initiate the upgrade process.
 
 The conductor's _automated provisioner_ will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
-
-### Versions Prior to 5.6.0
-
-Similar to the process for upgrading using the PCLI, the upgrade process using the GUI is done in two stages: *download* and *upgrade*.
-
-1. Navigate to the Router page in the Conductor's GUI. Routers that have available upgrades are indicated with the green **Upgrade SSR** icon (the arrow within a circle) in the router list.
-2. Click on the **Upgrade SSR** icon next to your router. A list of upgrade and download options appears. This list is filterable if the list grows large.
-3. Click on the target release in the Available Downloads section of the list. 
-4. Confirm the operation to begin downloading the software. Clicking on the router in the router list shows download progress.
-5. Once complete, click the **Upgrade SSR** icon again, and select the target software release from the Available Upgrades list. Confirm this operation to begin the upgrade process.
-
-The Automated Provisioner upgrades both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
 ### Upgrading Using the Interactive Installer
 

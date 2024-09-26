@@ -5,7 +5,7 @@ sidebar_label: Alarm Suppression
 
 While shelving alarms for a router is useful for staging and maintenance activities, there are situations where a more granular approach is useful. 
 
-By using the Alarm Suppression feature, individual alarms as well as alarm types can be filtered or hidden. This allows users to focus on alarms that are relevant to their configuration needs without creating unique rules to hide every type of alarm. You can write custom shelves, allowing you to shelve nuisance alarms, or for example silence alarming on interfaces that are intentionally configured as administratively down. 
+By using the Alarm Suppression feature, individual alarms as well as alarm types can be filtered or hidden. This allows you to focus on alarms that are relevant to your configuration needs without creating unique rules to hide every type of alarm. You can write custom shelves, allowing you to silence alarming on interfaces that are intentionally configured as administratively down, for example.
 
 ### How It Works
 
@@ -20,7 +20,7 @@ An Alarm Shelf is configured using [`configure authority alarm-shelving shelf <n
 | [`generated`](config_command_guide.md#configure-authority-alarm-shelving-shelf-generated) | Indicates whether or not the Shelf was automatically generated as a result of Alarm Shelf generation. |
 | [`match-type`](config_command_guide.md#configure-authority-alarm-shelving-shelf-match-type) | How the individual items in the shelf should be matched in order to trigger the shelving |
 | [`message-regex`](config_command_guide.md#configure-authority-alarm-shelving-shelf-message-regex) | Shelve alarms with messages that match this regex. |
-| [`name`](config_command_guide.md#configure-authority-alarm-shelving-shelf-name) | An arbitrary name for the alarm shelf. |
+| [`name`](config_command_guide.md#configure-authority-alarm-shelving-shelf-name) | A name for the alarm shelf. |
 | [`node-name`](config_command_guide.md#configure-authority-alarm-shelving-shelf-node-name) | Shelve alarms from this node. |
 | [`node-name-regex`](config_command_guide.md#configure-authority-alarm-shelving-shelf-node-name-regex) | Shelve alarms from nodes that match this regex. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |

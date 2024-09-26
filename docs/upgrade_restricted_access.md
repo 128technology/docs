@@ -111,11 +111,3 @@ admin@conductor-node-1.Conductor#
 Change the `Selected Boot Volume` using the command `set system software router <name> node <name> boot-volume {a|b}`.
 
 Use the reboot command to boot into the specifed volume: `send command reboot router <name> node <name>`.
-
-
-
-
-
-
-
-

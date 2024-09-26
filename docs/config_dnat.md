@@ -1,6 +1,6 @@
 ---
-title: Dynamic Source NAT
-sidebar_label: Dynamic Source NAT
+title: Dynamic Ingress Source NAT
+sidebar_label: Dynamic Ingress Source NAT
 ---
 
 Dynamic Source NAT translates multiple source IP addresses into a smaller pool of translated addresses and dynamic ports, which conserves public IP address space and provides the flexibility to source NAT a specific IP range. This supports scaling up sessions for an internal service. For example, in a corporate office with a SIP phone service where all phones have different IPs on port 5060, these internal IP addresses are source NAT’ed to a single external IP address. 
