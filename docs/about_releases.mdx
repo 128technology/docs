@@ -10,7 +10,7 @@ The SSR software follows a semantic versioning scheme. Semantic versioning is a 
 
 Starting with version `5.4.0` the `-build` will reflect the number of iterations the release candidate went through prior to release. The build number will never increment once the software has been released. The build number will be included in the release notes for the respective version.
 
-Version `6.1.0` introduces the milestone suffix to the SSR software release model. Every six months, a new SSR software stream (i.e., bump in Major or Minor) will be released. Each software stream (major.minor) will have three phases of release - R1, followed by R2, followed by a final release. Initial feature content for a stream will be known as R1 (Release candidate 1). R1 will be followed by additional feature content three months later in an R2 (Release candidate 2). Between R1 and R2, there will be patch releases that only contain bug fixes. Once R2 is released, a customer must upgrade to R2 to remain on the same stream and address any defects identified in R1. Three months following R2, the release will be designated as either Standard Term Support (STS) or Long Term Support (LTS). Every other release stream will be designated as LTS (Long Term Support). The EoSE dates for STS or LTS start once the software is labeled with the `sts` or `lts` suffix, respectively; not based on the FRS date.
+Version `6.1.0` introduces the milestone suffix to the SSR software release model. Every six months, a new SSR software stream (i.e., bump in Major or Minor) will be released. Each software stream (major.minor) will have three phases of release - R1, followed by R2, followed by a final release. Initial feature content for a stream will be known as R1 (Release candidate 1). R1 will be followed by additional feature content three months later in an R2 (Release candidate 2). Between R1 and R2, there may be patch releases. Once R2 is released, a customer must upgrade to R2 to remain on the same stream and address any defects identified in R1. Three months following R2, the release will be designated as either Standard Term Support (STS) or Long Term Support (LTS). Every other release stream will be designated as LTS (Long Term Support). The EoSE dates for STS or LTS start once the software is labeled with the `sts` or `lts` suffix, respectively; not based on the FRS date.
 
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
@@ -22,16 +22,16 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 | Term   | Definition |
 | ------ | ---------- |
-| EoSE   | End of Software Engineering support. Patches will no longer be produced after this date |
-| EoS    | End of Support. Release is EoL and TAC is unable to support unless software is upgraded |
-| Major  | Introduction of signficant features or backwards incompatibility |
-| Minor  | New feature content |
-| Patch  | Bug fixes only |
-| -build | Final build version released |
-| R1     | Release Candidate 1. Introduction of new features. First version of every release stream (major.minor) |
-| R2     | Release Candidate 2. Introduction of new features. Second version of every release stream (major.minor) |
-| sts    | Standard Term Support. 9 months until EoSE from sts date |
-| lts    | Long Term Support. 24 months until EoSE from lts date |
+| EoSE   | End of Software Engineering support. Patches will no longer be produced after this date. |
+| EoS    | End of Support. Release is EoL and TAC is unable to support unless software is upgraded. |
+| Major  | Introduction of signficant features or backwards incompatibility. |
+| Minor  | New feature content. |
+| Patch  | Bug fixes only. |
+| -build | Final build version released. |
+| R1     | Release Candidate 1. Introduction of new features. First version of every release stream (major.minor). |
+| R2     | Release Candidate 2. Introduction of new features. Second version of every release stream (major.minor). |
+| sts    | Standard Term Support. 9 months until EoSE from sts date. |
+| lts    | Long Term Support. 24 months until EoSE from lts date. |
 
 
 ## General Availability 
