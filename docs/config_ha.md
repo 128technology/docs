@@ -5,16 +5,18 @@ sidebar_label: Dual Node High Availability
 
 The SSR provides significant flexibility for high availability configurations. The SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes. And like traditional routers, the SSR software can also be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration.  
 
-This document contains the steps for configuring support for configuration of dual-node high availability. In addtion to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
+This document contains the steps for configuring support for configuration of dual-node high availability. In addition to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
 
 A new service route parameter introduced in version 5.4, [`enable-failover`](#service-route-redundancy), provides stateful failover on the dual node HA configuration.
 
 ## Requirements
+
 Configuring high availability in a shared-interface configuration requires that two SSR routing nodes have at least one device-interface that is shared between them. Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the SSR uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
 
 The two SSR router nodes that make up a high availability pair must be collocated due to latency sensitivities for the information that they synchronize between themselves.
 
 ## Before You Begin
+
 There are several things to be mindful of before configuring HA; the two nodes must be informed that they are part of a high availability set, and they must have a dedicated interface between themselves for synchronizing state information about active sessions. These steps will be covered in this section.
 
 ### Configuration Change Operations
@@ -89,7 +91,7 @@ Converting an existing router from standalone to HA will require downtime, and i
 
 Adding a second node requires configuring another *node* container within the router. This node will contain one or more *shared interfaces*, which will protect the router from failure modes when interfaces, links, or a node fails. Configuring shared interfaces is covered later in this document.
 
-Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer SSR nodes.
+Follow the steps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer SSR nodes.
 
 ## Configuring the Shared Interface(s)
 For systems configured prior to release 5.4, Dual Node High Availability can be configured using a shared MAC interface, and is described below. For systems configured on release 5.4 and later, High Availability can be configured using VRRP. See [High Availability Using VRRP](#high-availability-using-vrrp) for information about using VRRP for dual-node failover.
@@ -358,7 +360,7 @@ service-policy  netcat-policy
 
 ```
 
-The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
+The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availability. 
     ```
     service-route
         name    wan1-route
@@ -506,7 +508,7 @@ network-interface lan2
     exit
 ```
 
-With this configuration option, network interfaces can have VRRP enabled independent of one another, allowing redundant interfaces to fail over when necessary, and unaffected interfaces to continue operation. For example, an interface that doesn’t need to failover but two that do. VRRP can be configured on two of the network-interfaces, and disabled on the third interface. Or, if I want one VLAN to go over `node0` as primary and another VLAN go over `node1` as primary, I can set the priorities to set this configuration.
+With this configuration option, network interfaces can have VRRP enabled independent of one another, allowing redundant interfaces to fail over when necessary, and unaffected interfaces to continue operation. For example, perhaps there is one interface that does not need to failover, but two that do. VRRP can be configured on two of the network-interfaces, and disabled on the third interface. Or, if it is desirable to have a VLAN to go over node0 as primary and another VLAN go over node1 as primary, this can be defined in the configuration by specifying the priority.
 
 In the configuration example below: 
 - lan1 takes node0 as primary and fails over to node1

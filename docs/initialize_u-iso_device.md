@@ -3,7 +3,11 @@ title: Initialize Your Device - Web Workflow
 sidebar_label: Initialize Your Device - Web Workflow
 ---
 
-This is the part where configuring your device gets really easy! Use the GUI to initialize the device as a [Conductor](#initialize-a-conductor), a [Conductor-managed Router](#initialize-a-conductor-managed-router), or a [Mist-managed Router](#initialize-a-mist-managed-router). Use a browser to navigate to your conductor and begin the initialization.  
+This is the part where configuring your device gets really easy! Using your browser, choose the workflow below that best suits your needs: 
+
+Installing a Conductor-managed network? Start with [Initialize a Conductor](#initialize-a-conductor), then [Initialize a Conductor-managed Router](#initialize-a-conductor-managed-router).
+
+Onboarding your device to Mist? Start with [Initialize a Mist-managed Router](#initialize-a-mist-managed-router).
 
 ![U-ISO Device Selection GUI](/img/u-iso8_launch_gui.png)
 
@@ -49,6 +53,8 @@ Enter the following information:
 
 5. Click **ASSOCIATE** when you have completed the required information. The device reboots and comes online as the second Conductor.
 
+For information about deploying and configuring a conductor, see [Conductor Deployment](bcp_conductor_deployment.md) and [Import Configurations to the Conductor](single_conductor_config.md). Otherwise, continue with [Initialize a Conductor-Managed Router](#initialize-a-conductor-managed-router). 
+
 ## Initialize a Conductor-Managed Router
 
 Use the following process to initialize your device as a Conductor-managed router.
@@ -62,7 +68,7 @@ Use the following process to initialize your device as a Conductor-managed route
 
 3. Click **ASSOCIATE** when you have completed the required information. 
 
-The Router will onboard itself to the Conductor. Router configuration is performed from the Conductor. 
+The Router will onboard itself to the Conductor. Router configuration is performed from the Conductor. See [Basic Router Configuration](intro_basic_router_config.md) for more information. 
 
 ## Initialize a Mist-Managed Router
 

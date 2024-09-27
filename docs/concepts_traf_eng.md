@@ -2,9 +2,11 @@
 title: Traffic Engineering Overview
 sidebar_label: Traffic Engineering Overview
 ---
-Packet loss due to congestion in networks, particularly over WAN links, is inevitable. Depending on where drops occur, it can have a major impact on perceived quality of experience. Packet loss due to exceeding transmit caps between instances of SSR should be avoided. Traffic engineering allows for scheduling traffic on egress at both the device interface and the network interface level, and per adjacency. 
+Packet loss due to congestion in networks, particularly over WAN links, is inevitable. Depending on where drops occur, it can have a major impact on perceived quality of experience. Packet loss due to exceeding transmit caps between instances of SSR should be avoided. Traffic engineering allows for scheduling traffic on egress at both the device interface and the network interface level, as well as per adjacency. 
 
-It is important to note that traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with other traffic engineering settings, performance is further impacted; each level of traffic engineering requires buffering for their scheduled objects. 
+:::note
+Enabling traffic engineering will introduce a performance impact to the packet-per-second processing rate as the QoS engine works to ensure fairness of packet distribution under congestion scenarios. When used in conjunction with other traffic engineering settings (e.g., adjacency traffic engineering configured alongside device interface traffic engineering), performance may be further impacted.
+:::
 
 [**Adjacency traffic engineering**](bcp_per-adjacency_traffic_engineering.md) provides targeted traffic engineering on bandwidth restricted links between two SSR instances. When configured, the adjacent path and the `receive-cap` are automatically identified, and the rate of traffic destined for that path is limited at that cap. Traffic does not exceed the `receive-cap` associated with the adjacency, and is not dropped by the ISP.
 

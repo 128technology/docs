@@ -1,8 +1,10 @@
 ---
-title: SSR Software Installation Guide
-sidebar_label: Installation Overview
+title: SSR Legacy Software Installation Overview
+sidebar_label: SSR Legacy Software Installation Overview
 ---
 ## Introduction
+
+This guide focuses on legacy software installations - those prior to version 6.3.0. The installation process changes significantly with version 6.3.0. 
 
 Welcome to Session Smart Routing - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the SSR Router and Conductor products into a Linux operating system environment. This product suite is collectively known as SSR Software.
 
@@ -18,22 +20,28 @@ The examples listed in this guide generally prefer running commands as a non-roo
 
 ## Installation Process
 
-Beginning with SSR 6.3.0, the Universal ISO Installation simplifies and streamlines the SSR installation and initialization process, and supports Conductor-managed image-based installations as well as Mist-managed deployments. 
-
-Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
 - Pre-Installation Process:
    - [Download the ISOs](intro_downloading_iso.md)
    - [Create Bootable Media](intro_creating_bootable_usb.md)
-- [SSR Universal ISO Installation (SSR 6.3.0+)](intro_installation_univ-iso.md)
-   - [SSR Installation](install_univ_iso.md)
-   - [Device Initialization](initialize_u-iso_device.md)
-
-- Cloud Platform Installation: 
-   - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
-   - [Installation in Microsoft Azure](intro_installation_azure.md)
-   - [Installing in VMWare](install_vmware_config.mdx)
+- Legacy Installation 
+   - [Perform the Interactive ISO installation](intro_installation_bootable_media.mdx) 
+   - [Install a Conductor](install_conductor_overview.md)
+   - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
+   - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
 
 A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
+
+### Image-based Installation
+
+SSR Version 6.3.0 provides support for image-based installs for both Conductor- and Mist-managed deployments. Earlier installations (6.0.x - 6.2.x) using the image-based install only support Mist-managed deployments. 
+
+An image-based ISO installation process is available for users who manage their network using the Mist Cloud. This installation and upgrade process is available for SSR version 6.0.x - 6.2.x, and is only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process. 
+
+:::important
+The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for versions 6.0.x - 6.2.x in a conductor-managed WAN Telemetry deployment.
+:::
+
+For customers with legacy conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) continues to be used for upgrades and new installations.
 
 ## Upgrades
 
@@ -44,3 +52,9 @@ For full details and instructions refer to [Upgrading the SSR Networking Platfor
 ## Version Dependencies
 
 The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
+
+Examples:
+- Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
+- Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
+- Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
+- Conductor running version 5.6.8, managing Routers running version 6.1.3; Not supported.

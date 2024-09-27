@@ -67,7 +67,7 @@ exit
 
 ### Limitations
 
-Traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with other traffic engineering settings, performance is further impacted; each level of traffic engineering requires buffering for their scheduled objects. 
+Enabling traffic engineering will introduce a performance impact to the packet-per-second processing rate as the QoS engine works to ensure fairness of packet distribution under congestion scenarios. When used in conjunction with other traffic engineering settings (e.g., adjacency traffic engineering configured alongside device interface traffic engineering), performance may be further impacted.
 
 ### Gathering Statistics
 
@@ -84,8 +84,8 @@ Peer Path Traffic Engineering Stats
 ==================================================== ============== ============ ============== ============= ====== ==================
  Metric                                               Node           Peer-name    Peer-host      Device-name   Vlan              Value
 ==================================================== ============== ============ ============== ============= ====== ==================
- dequeue-cycle-count                                  combo-east-a   combo-west   172.16.102.2   11-red           0   7077545161474020
- enqueue-cycle-count                                  combo-east-a   combo-west   172.16.102.2   11-red           0   7077545161474020
+ dequeue-cycle-count                                  combo-east-a   combo-west   172.16.102.2   11-red           0           61474020
+ enqueue-cycle-count                                  combo-east-a   combo-west   172.16.102.2   11-red           0           61474020
  packets-queued                                       combo-east-a   combo-west   172.16.102.2   11-red           0                  0
  per-traffic-class buffer-capacity-exceeded-bytes     combo-east-a   combo-west   172.16.102.2   11-red           0                  0
  per-traffic-class buffer-capacity-exceeded-packets   combo-east-a   combo-west   172.16.102.2   11-red           0                  0
@@ -106,8 +106,8 @@ Peer Path Traffic Engineering Stats
 
 ### Statistics Descriptions
 
-- `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this peer path.
-- `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this peer path.
+- `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this peer path. This value is helpful when debugging.
+- `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this peer path. This value is helpful when debugging.
 - `packets-queued`: The current number of packets queued in traffic engineering for this peer path.
 - `per-traffic-class schedule-success-bytes`: The number of bytes successfully scheduled for transmission for this peer path. 
 - `per-traffic-class schedule-success-packets`: The number of packets successfully scheduled for transmission for this peer path. 

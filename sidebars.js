@@ -104,6 +104,7 @@ module.exports = {
       },
     ],
     "Legacy Install Information": [
+      "intro_installation_legacy",
       {
        "type": "category",
           "label": "Conductor Installation",
@@ -111,7 +112,7 @@ module.exports = {
             "install_conductor_overview",
             "bcp_conductor_deployment",
             "single_conductor_install",
-           "ha_conductor_install",
+            "ha_conductor_install",
             "single_conductor_config",
             "conductor_upgrade",
             "howto_conductor_migration",
