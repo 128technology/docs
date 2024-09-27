@@ -3,7 +3,9 @@ title: Initialize Your Device - Advanced Workflows
 sidebar_label: Initialize Your Device - Advanced Workflows
 ---
 
-While the Web Interface is the recommended method of initializing and onboarding your SSR device, there are additional methods to complete the process.
+While the Web Interface is the recommended method of initializing and onboarding your SSR device, there are alternative methods that can be used to complete the process. These methods are typically used when further customization of the conductor and router is required, and performed by advanced users.
+
+Select the method that suits the needs of your deployment.
 
 - [PCLI Workflow](#pcli-workflow)
 - [USB Initialization](#usb-initialization)
@@ -12,13 +14,21 @@ While the Web Interface is the recommended method of initializing and onboarding
 
 ## PCLI Workflow
 
-Use the following workflows to initialize and onboard your device.
+Use the following workflows to initialize and onboard your device. For a conductor-managed deployment use 
 
-### Conductor
+- [Initialize a Conductor](#initialize-a-conductor)
+- [Initialize a Router](#initialize-a-conductor-managed-router)
+
+To onboard a Mist-managed router to your Mist Org, use
+- [Initialize a Mist-managed Router](#initialize-a-mist-managed-router)
+
+### Initialize a Conductor
 
 The `initialize conductor` command allows the user to overwrite the defaults provided in the Web workflow and allows for further customization of conductors.
 
-`initialize conductor <options>`
+```
+initialize conductor [artifactory-user <artifactory-user>] [artifactory-password <artifactory-password>] [dns-servers <dns-servers>] [node-ip <node-ip>] [node-gateway <node-gateway>] [interface-name <interface-name>] [clustered] [ha-ip <ha-ip>] [ha-interface-name <ha-interface-name>] [ha-peer-ip <ha-peer-ip>] [ha-peer-name <ha-peer-name>] [learn-from-ha-peer] [ha-peer-username <ha-peer-username>] [unsafe-ha-peer-password <unsafe-ha-peer-password>] router-name <router-name> node-name <node-name>
+```
 
 Allowed Options:
 
@@ -53,7 +63,7 @@ When configuring High Availability, if any one of the following options is confi
 
 For more information on the available options and parameters, refer to the [`initialize conductor`](cli_reference.md#initialize-conductor) command.
 
-### Conductor-Managed Router
+### Initialize a Conductor-Managed Router
 
 The following PCLI command can be used to onboard a router to a conductor as conductor managed.
 
@@ -61,7 +71,7 @@ The following PCLI command can be used to onboard a router to a conductor as con
 
 For additional information, refer to the [`initialize conductor-managed`](cli_reference.md#initialize-conductor-managed) command.
 
-### Mist-Managed Router
+### Initialize a Mist-Managed Router
 
 The following PCLI command will onboard a router to the Mist inventory.
 
@@ -71,13 +81,19 @@ The following PCLI command will onboard a router to the Mist inventory.
 
 Automated onboarding can be used whenever the user wants to automatically set up a device during first boot, and does not require manual input. All the onboarding configurations must be known prior to starting the process. These methods should also be used If the user wants to provide a customized interface mapping scheme for whitebox platforms.
 
-### Onboarding Config
+### Onboarding Configuration File
 
-The brains behind the automated onboarding process is a json file named `onboarding-config.json`. This file contains all the configuration parameters and drives the entire onboarding process. The `onboarding-config.json` can be provided from a USB, as a file placed in `/etc/128T-hardware-bootstrapper/onboarding-config.json` on the SSR disk, or applied via API initialization. For virtual and cloud based deployments, the same mechanism is supported via cloud-init as well.
+The brains behind the automated onboarding process is a json file named `onboarding-config.json`. This file contains all the configuration parameters and drives the entire onboarding process. The `onboarding-config.json` can be [provided from a USB](#usb-initialization), as a [file placed in `/etc/128T-hardware-bootstrapper/onboarding-config.json` on the SSR disk](#file-on-disk), or applied via [API initialization](#api-initialization). For virtual and cloud based deployments, the same mechanism is supported via cloud-init as well.
 
-### Conductor Onboarding Configuration
+The following are examples of the `onboarding-config.json` files. 
 
-The following JSON is an example of a valid conductor `onboarding-config.json`. 
+#### Conductor Onboarding Configuration Example File
+
+The following JSON is an example of a valid conductor `onboarding-config.json` that can be used to onboard a conductor using any of the following methods:
+
+- [USB Initialization](#usb-initialization)
+- [File on Disk](#file-on-disk)
+- [API Initialization](#api-initialization)
 
 ```
 {
@@ -96,9 +112,9 @@ The following JSON is an example of a valid conductor `onboarding-config.json`.
 }
 ```
 
-### Conductor-Managed Router Onboarding Configuration
+#### Conductor-Managed Router Onboarding Configuration Example File
 
-The following is an example onboarding config that can be used to onboard a conductor-managed router using API initialization or a file placed on disk. 
+The following is an example onboarding config that can be used to onboard a conductor-managed router using [API Initialization](#api-initialization) or a [file placed on disk](#file-on-disk). 
 ```
 { 
 “mode”: “conductor-managed”, 
@@ -112,9 +128,9 @@ If no router name is supplied in the onboarding config, the default name is chos
 2. Hostname
 3. UUID (via DMI table)
 
-### Mist-Managed Router Onboarding Configuration
+#### Mist-Managed Router Onboarding Configuration Example File
 
-The following is an example onboarding config that can be used to onboard a Mist-managed router using API initialization or a file placed on disk.
+The following is an example onboarding config that can be used to onboard a Mist-managed router using [API Initialization](#api-initialization) or a [file placed on disk](#file-on-disk). 
 ```
 {
 “mode”: “mist-managed”,
@@ -135,12 +151,18 @@ If no onboarding configuration file is provided, it is assumed that the device i
 
 ### USB Initialization
 
-When the device boots for the first time it looks for a connected USB device named **BOOTSTRAP**. On this device, you can provide an onboarding config, devicemap, and/or pre-post boot scriptlets in the root directory. These files must be called:
+When the device boots for the first time it looks for a connected USB device named **BOOTSTRAP**.
 
-- onboarding-config.json
-- devicemap.json
-- pre-bootstrap
-- post-bootstrap
+1. Create a USB device named **BOOTSTRAP**.
+2. On the USB, create the following files:
+	- `onboarding-config.json`
+	- `devicemap.json`
+	- `pre-bootstrap`
+	- `post-bootstrap`
+
+3. Save these files in the root directory.
+4. Insert the USB into the SSR device and power it on.
+5. The device will boot and automatically configure based on the provided files.
 
 Scriptlets are passed in the device identifier, which is typically the device serial number. The order of operations is:
 
@@ -151,11 +173,21 @@ Scriptlets are passed in the device identifier, which is typically the device se
 
 ### File on Disk
 
-If no onboarding config was found on a USB device, the initialization process looks for a config file placed on the device; this is a common workflow for virtual devices. You can also provide a customized devicemap in the onboarding config at this time. These files are located at:
+If no onboarding config was found on a USB device, the initialization process looks for a configuration file placed on the device; this is a common workflow for virtual devices. You can also provide a customized devicemap in the onboarding config at this time. 
 
-- `/etc/128T-hardware-bootstrapper/onboarding-config.json`
-- `/etc/128T-hardware-bootstrapper/pre-bootstrap`
-- `/etc/128T-hardware-bootstrapper/post-bootstrap`
+1. Create the following files:
+	- `onboarding-config.json`
+	- `devicemap.json`
+	- `pre-bootstrap`
+	- `post-bootstrap`
+
+2. Copy the files onto the SSR device into the following locations:
+	- `/etc/128T-hardware-bootstrapper/onboarding-config.json`
+	- `/etc/128T-hardware-bootstrapper/devicemap.json`
+	- `/etc/128T-hardware-bootstrapper/pre-bootstrap`
+	- `/etc/128T-hardware-bootstrapper/post-bootstrap`
+
+3. Reboot the device.
 
 If you wish to not onboard the device and only supply a devicemap, the device is onboarded as an unmanaged router. 
 

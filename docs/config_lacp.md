@@ -28,12 +28,6 @@ LAG/LACP has the following requirements:
 
 All SSR hardware platforms (SSR100 Series and SSR1000 Series) are supported.
 
-### Caveats
-
-* High Availability has not been fully tested, and may not be fully functional.
-    * VRRP with LAG has not been fully tested.
-    * Shared physical addresses are not allowed.
-
 ## Configuring LAG and LACP
 
 LACP is enabled by default on the `bond` device interface, and must be configured on each end of the link. The following device interface configuration shows a `bond` interface and `lacp-enabled` as true (default). The interfaces that are part of the LAG are configured as ethernet interfaces and the `parent-bond` is identified as the name of the `bond` interface. 
