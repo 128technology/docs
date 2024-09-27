@@ -163,15 +163,14 @@ If no onboarding configuration file is provided, it is assumed that the device i
 When the device boots for the first time it looks for a connected USB device named **BOOTSTRAP**.
 
 1. Create a USB device named **BOOTSTRAP**.
-2. On the USB, create the following files:
+2. On the USB, create the following files in the root directory:
 	- `onboarding-config.json`
 	- `devicemap.json`
 	- `pre-bootstrap`
 	- `post-bootstrap`
 
-3. Save these files in the root directory.
-4. Insert the USB into the SSR device and power it on.
-5. The device will boot and automatically configure based on the provided files.
+3. Insert the USB into the SSR device and power it on.
+4. The device will boot and automatically configure based on the provided files.
 
 Scriptlets are passed in the device identifier, which is typically the device serial number. The order of operations is:
 

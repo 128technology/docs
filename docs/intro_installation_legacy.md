@@ -18,7 +18,7 @@ Before you begin the installation and configuration of an SSR Networking Plaform
 The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
-## Installing SSR Software Versions 6.2.x and Earlier
+## Installation Process
 
 - Pre-Installation Process:
    - [Download the ISOs](intro_downloading_iso.md)
@@ -33,7 +33,7 @@ A Mist-redirect ZTP process for Conductor-managed deployments is supported on Ju
 
 ### Image-based Installation
 
-SSR Version 6.3.0 provides support for image-based installs for both Conductor- and Mist-managed deployments. 
+SSR Version 6.3.0 provides support for image-based installs for both Conductor- and Mist-managed deployments. Earlier installations (6.0.x - 6.2.x) using the image-based install only support Mist-managed deployments. 
 
 An image-based ISO installation process is available for users who manage their network using the Mist Cloud. This installation and upgrade process is available for SSR version 6.0.x - 6.2.x, and is only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process. 
 
