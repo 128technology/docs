@@ -24,13 +24,13 @@ Before beginning, ensure that you have an appropriate rollover cable available t
 
   ![Install Type](/img/u-iso3_choose_install_type.png)
 
-11. If you are installing a FIPS enabled system, select Install Option 1, and select **Enter**. 
+11. To enable FIPS Enforcement for SSR software, select Install Option 1, and select **Enter**. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
-	If you are installting a virtual device, select option 2 (Cloud-init), and select **Enter**.
+  :::important
+  FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
+  :::
 
-  ![Install Options](/img/u-iso4_install_options.png)
-
-	If you are installing a physical device and do not require FIPS, skip the options and select **Enter**. The download and installation begins.
+ The download and installation begins.
 
   ![Unpacker](/img/u-iso5_begin_install.png)
 

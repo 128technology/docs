@@ -73,7 +73,7 @@ The following example manually configures the key to the conductor node `192.168
 
 `create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
 
-See [Enable Strict Host Key Checking](cc_fips_6.3.0_otp_router_install.md#enable-strict-host-key-checking) for configuration information.
+See [Enable Strict Host Key Checking](cc_fips_6.3.0_quickstart_otp.md#enable-strict-host-key-checking) for configuration information.
 
 For additional information, see [`create system connectivity known-hosts`](cli_reference.md#create-system-connectivity-known-hosts).
 
