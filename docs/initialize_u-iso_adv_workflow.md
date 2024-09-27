@@ -1,11 +1,20 @@
 ---
 title: Initialize Your Device - Advanced Workflows
-sidebar_label: Initialize Your Device - Advanced Workflows
+sidebar_label: Initialize Your Device - Advanced Workflows 
 ---
 
 While the Web Interface is the recommended method of initializing and onboarding your SSR device, there are alternative methods that can be used to complete the process. These methods are typically used when further customization of the conductor and router is required, and performed by advanced users.
 
-Select the method that suits the needs of your deployment.
+In this document, you will find:
+- Information about the PCLI commands used to initialize a conductor and conductor-managed router.
+- Information about the PCLI commands used to initialize a Mist-managed router.
+- [File structure needed for performing automated onboarding](#automated-onboarding) of conductors and routers.
+- Workflows for automating onboarding by supplying the necessary files using three different processes:
+	- USB Initialization
+	- File on Disk
+	- API Initialization
+
+Select the initialization workflow that suits the needs of your deployment.
 
 - [PCLI Workflow](#pcli-workflow)
 - [USB Initialization](#usb-initialization)
