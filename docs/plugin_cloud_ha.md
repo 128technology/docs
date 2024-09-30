@@ -970,7 +970,7 @@ exit
 Below is a sample running configuration for a node and a service.
 
 :::info
-Use the following configuration as an example only - it should not be used on a system as is.
+The following configuration is an example only - It is not for use on a system.
 :::
 
 
