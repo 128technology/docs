@@ -805,6 +805,12 @@ exit
 
 ## Release Notes
 
+### Release 4.0.0
+
+Image based install and upgrade (IBU) support for SSR 6.3.0.
+
+**Release Date:** Sep 30, 2024
+
 ### Release 3.6.2
 
 **Release Date:** Aug 7th, 2024
