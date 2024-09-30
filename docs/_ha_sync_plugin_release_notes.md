@@ -7,6 +7,8 @@ The plugin must be updated to version 1.1.0 or later prior to [upgrading the con
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
 
+**Release Date:** Sep 30, 2024
+
 ### Release 1.1.3
 
 #### Issues Fixed
