@@ -3,7 +3,7 @@ title: Set Hostname
 ---
 
 :::important
-This plugin has been deprecated starting in SSR 6.3.0.
+This plugin has been deprecated with the release of SSR 6.3.0.
 :::
 
 Set the system hostname of a 128T node to the default value of `node.router` or define a custom hostname. Where `node` and `router` are set to the respective values defined in 128T configuration.
