@@ -5,16 +5,18 @@ sidebar_label: Dual Node High Availability
 
 The SSR provides significant flexibility for high availability configurations. The SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes. And like traditional routers, the SSR software can also be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration.  
 
-This document contains the steps for configuring support for configuration of dual-node high availability. In addtion to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
+This document contains the steps for configuring support for configuration of dual-node high availability. In addition to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
 
 A new service route parameter introduced in version 5.4, [`enable-failover`](#service-route-redundancy), provides stateful failover on the dual node HA configuration.
 
 ## Requirements
+
 Configuring high availability in a shared-interface configuration requires that two SSR routing nodes have at least one device-interface that is shared between them. Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the SSR uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
 
 The two SSR router nodes that make up a high availability pair must be collocated due to latency sensitivities for the information that they synchronize between themselves.
 
 ## Before You Begin
+
 There are several things to be mindful of before configuring HA; the two nodes must be informed that they are part of a high availability set, and they must have a dedicated interface between themselves for synchronizing state information about active sessions. These steps will be covered in this section.
 
 ### Configuration Change Operations
@@ -89,7 +91,7 @@ Converting an existing router from standalone to HA will require downtime, and i
 
 Adding a second node requires configuring another *node* container within the router. This node will contain one or more *shared interfaces*, which will protect the router from failure modes when interfaces, links, or a node fails. Configuring shared interfaces is covered later in this document.
 
-Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer SSR nodes.
+Follow the steps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer SSR nodes.
 
 ## Configuring the Shared Interface(s)
 For systems configured prior to release 5.4, Dual Node High Availability can be configured using a shared MAC interface, and is described below. For systems configured on release 5.4 and later, High Availability can be configured using VRRP. See [High Availability Using VRRP](#high-availability-using-vrrp) for information about using VRRP for dual-node failover.
@@ -358,7 +360,7 @@ service-policy  netcat-policy
 
 ```
 
-The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
+The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availability. 
     ```
     service-route
         name    wan1-route
@@ -376,7 +378,11 @@ The vector and the associated priority can then be assigned to one or more next 
 
 ## High Availability Using VRRP
 
-To facilitate a seamless failover, you can now configure VRRP on a dual node HA configuration. This reduces failover time and when configured with service-route failover, the sessions are preserved. 
+In dual-node HA configurations, VRRP is configurable on either the [device-interface](#configuring-vrrp-on-the-device-interface) or the [network-interface](#configuring-vrrp-on-the-network-interface).
+
+### Configuring VRRP on the Device Interface 
+
+When a failover event is encountered, device interface level VRRP will fail over an entire device interface, including all network interfaces under that device interface. VRRP reduces failover time, and when configured with service-route failover, will preserve sessions.
 
 Configure VRRP on the `wan` and `lan` interfaces of node 1. In this example node 1 is set as the active node (set with the higher priority), and node 2 is configured as the standby node. 
 
@@ -487,6 +493,64 @@ Node 2 lan and wan interfaces are configured similarly, however the priority is 
                             inter-router-security  internal
 
 ```
+
+### Configuring VRRP on the Network Interface 
+
+The `vrrp` field under `network-interface` has the following configuration parameters:
+
+```
+network-interface lan2
+    vrrp
+        enabled <true/false>
+        priority <1-255>
+        vrid <1-255>
+        advertisement-interval <100-40950> 
+    exit
+```
+
+With this configuration option, network interfaces can have VRRP enabled independent of one another, allowing redundant interfaces to fail over when necessary, and unaffected interfaces to continue operation. For example, perhaps there is one interface that does not need to failover, but two that do. VRRP can be configured on two of the network-interfaces, and disabled on the third interface. Or, if it is desirable to have a VLAN to go over node0 as primary and another VLAN go over node1 as primary, this can be defined in the configuration by specifying the priority.
+
+In the configuration example below: 
+- lan1 takes node0 as primary and fails over to node1
+- lan2 takes node1 as primary and fails over to node0
+- lan3 only exists on node0 and does not failover
+
+```
+                node0                           Node1
+                    device-interface lan            device-interface lan
+                        name lan                        name lan
+                        pci-address xxx                 pci-address xxx
+                        network-interface lan1              network-interface lan1
+                            vrrp                            vrrp
+                            enabled true                        enabled true
+                            priority 20                     priority 10
+                            vrid 1                          vrid 1
+                            exit                            exit
+                        name lan1                       name lan1
+                            vlan 1                          vlan 1
+                            address xxxx                        address xxxx
+                            exit                            exit
+
+                        Network-interface lan2              network-interface lan2
+                            Vrrp                            vrrp
+                            enabled true                        enabled true
+                            priority 10                     priority 20
+                            vrid 15                         vrid 15
+                            exit                            exit
+                        name lan2                       name lan2
+                            Vlan 2                          vlan 2
+                            address xxxxx                       address xxxx
+                        network-interface lan3                              
+                        name lan3               
+                            vlan 3          
+                            address xxx                 
+                            exit
+
+```
+
+### Show Commands
+
+Use the `show network interface` command to display active standby at vlan level, and the `show network-interface redundancy` command to show redundancy status of network-interfaces.
 
 ### Configuration Considerations
 

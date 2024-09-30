@@ -3,6 +3,10 @@ title: QuickStart From the OTP ISO
 sidebar_label: QuickStart from the OTP ISO
 ---
 
+:::important
+If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
+:::
+
 Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the SSR Networking Platform.
 
 ### SSR Configuration
