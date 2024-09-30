@@ -49,7 +49,7 @@ The internal state machines wait for the value set in seconds in `up-holddown-ti
 
 The internal state machines wait for the `peer-reachability-timeout` after every health status before considering the node unreachable. The timer is reset if a health report is processed before the timeout expires.
 
-When the HA Agent determines that a node must become active, the first active redundant interface's mac address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**.
+When the HA Agent determines that a node must become active, the first active redundant interface's MAC address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**.
 
 ### API Agents
 
