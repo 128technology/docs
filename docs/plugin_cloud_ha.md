@@ -312,7 +312,7 @@ To facilitate the transport of the health status between members of the same gro
 
 ### Azure Load Balancer Config Generation
 
-If the `solution-type` of a group is `azure-lb`, then the plugin will generate services and service routes to route the http probes down into the `cloud-ha` interface for the Azure Load Balancer API Agent to respond to.
+If the `solution-type` of a group is `azure-lb`, then the plugin will generate services and service routes to route the http probes down into the `cloud-ha` interface for the Azure Load Balancer API Agent to respond.
 
 
 ## Troubleshooting
