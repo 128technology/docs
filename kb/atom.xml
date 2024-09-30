@@ -2,12 +2,45 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docs.128technology.com/kb</id>
     <title>SSR Knowledge Base Articles</title>
-    <updated>2024-08-05T00:00:00.000Z</updated>
+    <updated>2024-08-30T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docs.128technology.com/kb"/>
     <subtitle>Session Smart Router Knowledge Base Articles</subtitle>
     <icon>https://docs.128technology.com/img/favicon.png</icon>
     <rights>Copyright © 2024 Juniper Networks, Inc.</rights>
+    <entry>
+        <title type="html"><![CDATA[Unable to upgrade second HA Conductor to 6.3.0]]></title>
+        <id>https://docs.128technology.com/kb/2024/08/30/I95-56628</id>
+        <link href="https://docs.128technology.com/kb/2024/08/30/I95-56628"/>
+        <updated>2024-08-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Upgrading an HA Conductor to 6.3.0 fails on the second node.]]></summary>
+        <content type="html"><![CDATA[<p>Upgrading an HA Conductor to 6.3.0 fails on the second node.</p>
+<p><strong>Issue ID:</strong> I95-56628<br>
+<strong>Last Updated:</strong> 2024-05-02<br>
+<strong>Introduced in SSR Version:</strong> 6.3.0</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem">​</a></h3>
+<p>During an HA Conductor upgrade, the primary node upgrade completes successfully. The GUI then presents an option to continue with the secondary node upgrade. Initiating the secondary node from the GUI displays an error explaining that the resource could not be found.</p>
+<p>This issue has not been resolved and is currently under investigation. Please use the suggested workaround below.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity">​</a></h3>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
+<li>Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
+<li>Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
+<li>Minor: Would not significantly impair the functioning or affect service.</li>
+</ul></div></div></details>
+<p>Major</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="status">Status<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status">​</a></h3>
+<p>Open</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="product">Product<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product">​</a></h3>
+<p>SSR</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area">​</a></h3>
+<p>Installation</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/08/30/I95-56628#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround">​</a></h3>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div></details>
+<p>Log in to the secondary node independently and initiate the upgrade to 6.3.0. The upgrade will complete successfully. Once both nodes have been upgraded, subsequent upgrades can use the normal workflow, where either node can be upgraded from the other.</p>]]></content>
+        <category label="6.3" term="6.3"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Highway stuck on startup when IPsec is enabled]]></title>
         <id>https://docs.128technology.com/kb/2024/08/05/PLUGIN-2550</id>
@@ -231,7 +264,7 @@ During device configuration, user specified MTU exceeding 2K will cause init fai
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="status">Status<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status">​</a></h3>
 <p>Closed</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In">​</a></h3>
-<p><a href="https://docs.128technology.com/docs/release_notes_128t_6.1#release-618-15">6.1.8</a>,
+<p><a href="https://docs.128technology.com/docs/release_notes_128t_6.1#release-618-15-lts">6.1.8</a>,
 <a href="https://docs.128technology.com/docs/release_notes_128t_6.2#release-624-14r2">6.2.4</a></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="product">Product<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product">​</a></h3>
 <p>Azure SSR AMI</p>
@@ -341,7 +374,7 @@ During device configuration, user specified MTU exceeding 2K will cause init fai
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="status">Status<a href="https://docs.128technology.com/kb/2024/04/24/I95-55904#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status">​</a></h3>
 <p>Closed</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/04/24/I95-55904#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In">​</a></h3>
-<p><a href="https://docs.128technology.com/docs/release_notes_128t_6.1#release-618-15">6.1.8</a></p>
+<p><a href="https://docs.128technology.com/docs/release_notes_128t_6.1#release-618-15-lts">6.1.8</a></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="product">Product<a href="https://docs.128technology.com/kb/2024/04/24/I95-55904#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product">​</a></h3>
 <p>SSR</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/04/24/I95-55904#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area">​</a></h3>
