@@ -27,7 +27,7 @@ export const releases = [
   },
   {
     version: '6.1.9',
-    url: 'release_notes_128t_6.1#release-619-2',
+    url: 'release_notes_128t_6.1#release-619-2-lts',
     releaseDate: 'June 27, 2024',
   },
   {
@@ -42,7 +42,7 @@ export const releases = [
   },
   {
     version: '6.1.8',
-    url: 'release_notes_128t_6.1#release-618-15',
+    url: 'release_notes_128t_6.1#release-618-15-lts',
     releaseDate: 'May 3, 2024',
   },
   {
@@ -57,7 +57,7 @@ export const releases = [
   },
   {
     version: '6.1.7',
-    url: 'release_notes_128t_6.1#release-617-3',
+    url: 'release_notes_128t_6.1#release-617-3-lts',
     releaseDate: 'February 17, 2024',
   },
   {
@@ -67,7 +67,7 @@ export const releases = [
   },
   {
     version: '6.1.6',
-    url: 'release_notes_128t_6.1#release-616-7',
+    url: 'release_notes_128t_6.1#release-616-7-lts',
     releaseDate: 'January 2, 2024',
   },  
   {
@@ -77,7 +77,7 @@ export const releases = [
   },
   {
     version: '6.2.0',
-    url: 'release_notes_128t_6.2#release-620-39',
+    url: 'release_notes_128t_6.2#release-620-39r1',
     releaseDate: 'November 16, 2023',
   },
   {
@@ -92,7 +92,7 @@ export const releases = [
   },
   {
     version: '6.1.5',
-    url: 'release_notes_128t_6.1#release-615-14',
+    url: 'release_notes_128t_6.1#release-615-14-lts',
     releaseDate: 'September 22, 2023',
   },
   {
@@ -132,12 +132,12 @@ export const releases = [
   },
   {
     version: '6.1.3',
-    url: 'release_notes_128t_6.1#release-613-4',
+    url: 'release_notes_128t_6.1#release-613-4r1',
     releaseDate: 'May 22, 2023',
   },
   {
     version: '6.1.2',
-    url: 'release_notes_128t_6.1#release-612-7',
+    url: 'release_notes_128t_6.1#release-612-7r1',
     releaseDate: 'May 12, 2023',
   },
   {
@@ -147,12 +147,12 @@ export const releases = [
   },
   {
     version: '6.1.1',
-    url: 'release_notes_128t_6.1#release-611-6',
+    url: 'release_notes_128t_6.1#release-611-6r1',
     releaseDate: 'April 28, 2023',
   },
   {
     version: '6.1.0',
-    url: 'release_notes_128t_6.1#release-610-55',
+    url: 'release_notes_128t_6.1#release-610-55r1',
     releaseDate: 'April 14, 2023',
   },
   {
