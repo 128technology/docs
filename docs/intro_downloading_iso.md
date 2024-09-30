@@ -9,6 +9,10 @@ With your purchase of a SSR license, you are provided a set of credentials used 
 
 Juniper Session Smart Networking provides the following workflows for the installation process:
 
+- **Universal ISO:** Beginning with version 6.3.0, the SSR uses a single downloadable ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
+
+  Please see [SSR Universal ISO Installation Overview](intro_installation_univ-iso.md) for the download location and related installation instructions.
+
 - **Image-based ISO:** Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
 
   For details about the Image-based install process, see [Image-based Installation.](intro_installation_image.md) 
@@ -17,7 +21,7 @@ Juniper Session Smart Networking provides the following workflows for the instal
   - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
     - [Router Installation Using OTP](intro_otp_iso_install.mdx)
     - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
-  - **Interactive:** For bespoke deployments where customized platform configuration is necessary, an interactive mode exists. Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
+  - **Interactive:** Beginning with SSR version 6.3.0, the use of the interactive installer is not supported, nor necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI. With software versions earlier than 6.3.0, upgrading the SSR software on a peer conductor or router that is managed by a conductor using the interactive installer may result in the system becoming unresponsive. For this reason it is highly recommended that installations and upgrades be performed through the conductor UI.
 
 :::note
 Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-general-availability-and-out-of-support), the ISO name format has changed from using `OTP` to `ISO`:
@@ -40,7 +44,6 @@ The package-based ISOs for Conductor-managed deployments are available to downlo
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page.
-
 
 Files available for download are:
 

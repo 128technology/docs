@@ -58,7 +58,7 @@ In the SSR platform architecture, `salt` is used as communication mechanism betw
 * Trigger additional services or functions on the router such as systemd services etc.
 
 :::note
-Plugins rely on connectivity between the conductor and router to drive their logic. They also rely on the router to have access to the SSR RPM repository as either direct access over internet or by leveraging [conductor hosted repo](intro_upgrading.md#routers-with-restricted-internet-access).
+Plugins rely on connectivity between the conductor and router to drive their logic. They also rely on the router to have access to the SSR RPM repository as either direct access over internet or by leveraging [conductor hosted repo](upgrade_restricted_access.md).
 :::
 
 ## Plugin Concepts

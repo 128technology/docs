@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.2.6-15r2
+## Release 6.2.6-15-sts
 
 **Release Date:** September 6, 2024
 
@@ -460,7 +460,7 @@ Valid values for `remove-as-path`:
 - `only`: Remove private AS only if the AS path contains just private AS.
 - `replace-only`: Replace private AS with the local AS only if the AS path contains just private AS.
 
-## Release 6.2.0-39
+## Release 6.2.0-39r1
 
 **Release Date:** November 16, 2023
 
@@ -470,7 +470,7 @@ Valid values for `remove-as-path`:
 ------
 - **I95-17284 SNMPv3:** Support for SNMPv3 has been added. For configuration details, see [SNMPv3 Basic Configuration](config_snmp.md#snmp-v3-basic-configuration).
 ------
-- **I95-43657 Static NAT:** Static NAT address mapping is supported by the SSR. For supporting information about this feature, see [Static NAT](config_nat.md#static-nat).
+- **I95-43657 Static NAT:** Static NAT address mapping is supported by the SSR. For supporting information about this feature, see [Static NAT](config_static_nat.md).
 ------
 - **I95-46537 Azure Mini-R Platform Support:** The Azure Mini-R is now a supported platform for the SSR software. 
 ------

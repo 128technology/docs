@@ -86,25 +86,27 @@ Within the web client, the Event History link will bring you to a page where all
 
 ![alarms_and_events_events_screenshot](/img/events_events_screenshot.png)
 
-In large deployments, there may be a large number of events on a conductor.  It may be difficult to wade through the pages of events if you know you are looking for a particular event within a window of time.  The `show events` command supports filtering events by time when specifying starting and ending time ranges.  The syntax for time follows the same format of the event timestamps.
+In large deployments, there may be a large number of events on a conductor. It may be difficult to wade through the pages of events if you know you are looking for a particular event within a window of time. The `show events` command supports filtering events by time when specifying starting and ending time ranges. The syntax for time follows the same format of the event timestamps.
 
 ```
 show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router burlma-corp
 ```
 
 :::note
-Note the trailing `Z`.  Most systems are configured to be in UTC time.  If the trailing `Z` was absent, the time filter would be restricted to the local time zone
+Note the trailing `Z`. Most systems are configured to be in UTC time. If the trailing `Z` was absent, the time filter would be restricted to the local time zone
 :::
 
+```
 show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router AAPDENCOPOD4
+```
 
 ## Contents of Alarms and Events
 
-| Field    | Description                                                  |
-| :------- | :----------------------------------------------------------- |
-| dateTime | This is the date and time that the event occurred. The format of the value followsthe ISO 8601 standard |
-| node     | The system within the SSR which produced the event          |
-| process  | The process within the node which produced the event         |
+| Field | Description |
+| --- | --- |
+| dateTime | This is the date and time that the event occurred. The format of the value follows the ISO 8601 standard. |
+| node | The system within the SSR which produced the event. |
+| process  | The process within the node which produced the event. |
 | source   | The name of the entity which was the originator of the alarm. When the topic is a network-interface, this would be the name of the network-interface. |
 | category | This is the alarm type. Each category has a specific message format:<br />• **system** Related to the system, e.g. CPU, memory, etc.<br />• **process** Related to an internal software process<br />• **interface/network-interface** Related to an interface on the SSR (up, down,etc.)<br />• **platform** Related to low-level events that aren't necessarily derived from the machine; e.g. security keys<br />• **peer** Related to connectivity between SSR routers<br />• **platform-state** Sourced from the stats infrastructure<br />• **redundancy** Related to high availability behavior; e.g. a failover or leadership change<br />• **giid** Related to an interface that is part of a redundant pair (giid is an interface's "global ID")<br />• **asset**  An alarm sourced by an asset (a managed node) that is dervied from Automated Provisioner |
 | severity | Alarms can be categorized in one of four severities: critical, major, minor and info. These severity levels can be used to filter alerts based on one of these levels. The default severity level is info, which shows all alarms.<br />• **critical** The condition affects service<br />• **major** Immediate action is required<br />• **minor** Minor warning conditions<br />• **info** No action is required |
@@ -112,8 +114,12 @@ show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router AAPDE
 
 ## Shelving Alarms
 
-When an SSR is put into “Maintenance Mode” all alarms for that SSR will be “shelved”. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI. The state of shelved alarms can be optionally viewed by issuing:
+When an SSR is put into [Maintenance Mode](howto_maintenance_mode.md) all alarms for that SSR are “shelved”. Shelved alarms continue to be monitored by the system, but are not presented on the standard UI. The state of shelved alarms can be viewed by issuing the following command:
 
 ```
 admin@conductor1.nycsite1# show alarms shelved
 ```
+
+For information on how to shelve individual alarms, see [Alarm Suppression](config_alarm_suppression.md).
+
+
