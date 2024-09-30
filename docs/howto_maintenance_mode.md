@@ -1,12 +1,13 @@
 ---
 title: Maintenance Mode
+sidebar_label: Maintenance Mode
 ---
 
 Maintenance mode is used when staging equipment in a production network prior to its go-live date, or to isolate a router/device from the network in order to perform debugging or an upgrade. The primary function of maintenance mode is to suppress alarms from systems that are incomplete, or undergoing maintenance activities that would cause alarms. When the device maintenance is complete, you can set the router out of maintenance mode.
 
 ## Alarms during Maintenance mode
 
-When an SSR is put into **Maintenance Mode** all alarms for that SSR device will be **shelved**. Shelving refers to placing an alarm in state such that it is not considered critical and so as to not bother the user. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI.
+When an SSR is put into **Maintenance Mode** all alarms for that SSR device will be **shelved**. All alarms generated on that router are shelved, and ALL of its peers will shelve the alarms that they generate saying that the peer router is down (i.e., path down). **Shelving** refers to placing a resource in a state that is not considered critical, so that the alarms do not bother the user. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI.
 
 The state of shelved alarms can be optionally viewed by issuing:
 ```

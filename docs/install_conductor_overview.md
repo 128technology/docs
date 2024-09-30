@@ -2,6 +2,11 @@
 title: Conductor Overview
 sidebar_label: Conductor Overview
 ---
+
+:::important
+If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
+:::
+
 The Conductor is an SSR instance that is used to manage the SSR Routers you configure within the same Authority. It offers centralized administration, provisioning, monitoring, analytics, and lifecycle management of the SSR routers. 
 
 The Authority is where system-wide data is stored. Conceptually, the Authority represents the complete set of all SSR Routers managed under a single organizational entity. Service configuration, which represents the cornerstone of the SSR Router’s worldview, is part of the set of global data within an authority. Services represent specific applications that a network delivers; e.g., web services, database services, or voice/video services. Each Authority is uniquely named, in the same way a domain name is unique.

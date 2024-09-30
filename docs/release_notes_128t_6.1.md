@@ -45,7 +45,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-## Release 6.1.10-8
+## Release 6.1.10-8-lts
 
 **Release Date:** August 22, 2024
 
@@ -163,7 +163,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-57607 Saving TSI as root from the conductor generates oversized file:** Added and enforcement  that when calling `/usr/bin/save-tech-support-info` the `--output` argument always ends in .`zip`.
 
-## Release 6.1.9-2
+## Release 6.1.9-2-lts
 
 **Release Date:** June 27, 2024
 
@@ -171,7 +171,7 @@ This issue will be corrected in an upcoming release.
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2024-2973
 
-## Release 6.1.8-15
+## Release 6.1.8-15-lts
 
 **Release Date:** May 3, 2024
 
@@ -256,7 +256,7 @@ These counters are available per-bond-member.
 ------
 - **WAN-3013 MistAnalytics HA onboarding timeout too short:** The timeout for HA analytics formation has been extended. 
 
-## Release 6.1.7-3
+## Release 6.1.7-3-lts
 
 **Release Date:** February 17, 2024
 
@@ -316,7 +316,7 @@ These counters are available per-bond-member.
 ------
 - **I95-55389 Queries for private domains with Websense classified as Miscellaneous:** Domains categorized by Websense as Uncategorized are now classified as Uncategorized/Uncategorized, rather than Miscellaneous/Uncategorized.
 
-## Release 6.1.6-7
+## Release 6.1.6-7-lts
 
 **Release Date:** January 2, 2024
 
@@ -456,7 +456,7 @@ These counters are available per-bond-member.
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH so that this is accessible for admin users.
 
-## Release 6.1.5-14
+## Release 6.1.5-14-lts
 
 **Release Date:** September 22, 2023
 
@@ -681,7 +681,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **I95-53777 Multicast traffic not passing after HA Failover:** High Availability with Multicast is not fully supported. Drop or complete loss of traffic may be seen when the primary node resumes traffic after a node failure and failover.
 
-## Release 6.1.3-4
+## Release 6.1.3-4r1
 
 **Release Date:** May 22, 2023
 
@@ -697,7 +697,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **WAN-1958 Mist agent crashes:** Increased internal file system limits which were preventing some services from starting correctly at boot. Limits were raised based on expected system usage. 
 
-## Release 6.1.2-7
+## Release 6.1.2-7r1
 
 **Release Date:** May 12, 2023
 
@@ -769,7 +769,7 @@ and there are established flows for any of these services, a link flap triggerin
 
   **_Workaround:_** Make a simple configuration change and commit the change. Any configuration change is sufficient to start the internal proxy service. Once this commit has been made this will no longer be an issue.
 
-## Release 6.1.1-6
+## Release 6.1.1-6r1
 
 **Release Date:** April 28, 2023
 
@@ -782,7 +782,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 ------
 - **I95-51093 Race condition in `session-scaling` can cause crash/restart:** Resolved an issue when `session-scaling` is set to `enabled` together with `outbound-only`, a race condition can cause a crash and restart of the `highway` process in the SSR.
 
-## Release 6.1.0-55
+## Release 6.1.0-55r1
 
 **Release Date:** April 14, 2023
 

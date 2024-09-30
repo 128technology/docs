@@ -5,7 +5,11 @@ sidebar_label: Router Installation Using OTP
 
 import Flowchart from '../src/components/Flowchart';
 
-The Session Smart Router has a software-driven framework for rapid and dynamic deployment of network nodes across the enterprise using One Touch Provisioning (OTP). The software has been architected to enable automated deployment across a large set of scenarios, including simple, repeatable branch deployments and dynamic, scalable data center/cloud deployments. The solution may be deployed with minimal configuration using the default SSR installation process, or customized and integrated with 3rd party tools.
+:::important
+If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
+:::
+
+The Session Smart Router has a software-driven framework for rapid and dynamic deployment of network nodes across the enterprise using One Touch Provisioning (OTP). The software has been developed to enable automated deployment across a large set of scenarios, including simple, repeatable branch deployments and dynamic, scalable data center/cloud deployments. The solution may be deployed with minimal configuration using the default SSR installation process, or customized and integrated with 3rd party tools.
 
 An important aspect of the OTP solution is its flexibility. When the product is deployed using the standard SSR images, many customers appreciate the simplicity of enabling an enterprise-wide SessionSmart&trade; routing fabric without investing additional time to customize the deployment. Rapid deployment of session-enabled routing, security and network visibility is the key objective.
 
@@ -238,7 +242,7 @@ The password data within the JSON is required if the QuickStart file was encrypt
 
 ### Testing
 
-The Bootstrap utility provides an entrypoint to test your QuickStart Server. By executing the command below, the client makes requests to URLs and attempts to download and decode the QuickStart file. It will NOT apply the QuickStart to the platform - only test the process.
+The Bootstrap utility provides an entry point to test your QuickStart Server. By executing the command below, the client makes requests to URLs and attempts to download and decode the QuickStart file. It will NOT apply the QuickStart to the platform - only test the process.
 ```
 $ bootstrap128t rest-test -i <test-identifier>
 ```
@@ -246,3 +250,25 @@ Or, if you want to test a specific url:
 ```
 $ bootstrap128t rest-test -i <test-identifier> --url <a-fully-qualified-url>
 ```
+
+### Additional Considerations with Strict Host Key Checking
+
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accept-new` configured, it will be necessary to manually provision the new conductor key **prior** to migrating the router to the conductor. This will require the administrator to retrieve the host key of each node of the new conductor and configure this in the router.
+
+On the conductor, identify the `key` for each node using the command [`show system connectivity host-keys node all`](cli_reference.md#show-system-connectivity-host-keys).
+
+From the router PCLI, provision each conductor key using the following command:
+`create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
+
+- `<node>` is the router node. The key should be added on each router node in an HA pair. 
+- `<conductor address>` is the conductor address. This should be added for each conductor address of an HA conductor pair.
+- `<key>` is the `Key` retrieved from the previous step.
+- `<comment>` is an option that can be used to identify the key; for example `Conductor1`.
+
+The following example manually configures the key to the conductor node `192.168.1.13`:
+
+`create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
+
+For additional information, see [`create system connectivity known-hosts`](cli_reference.md#create-system-connectivity-known-hosts).
+
+See [Enable Strict Host Key Checking](cc_fips_otp_router_install.md#enable-strict-host-key-checking) for configuration information.
