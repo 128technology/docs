@@ -3,7 +3,7 @@ title: Loopback Static Routes Plugin
 sidebar_label: Loopback Static Routes
 ---
 :::important
-This plugin has been deprecated starting in SSR 6.3.0.
+This plugin has been deprecated with the release of SSR 6.3.0.
 :::
 
 
