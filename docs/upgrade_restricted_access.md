@@ -3,22 +3,25 @@ title: Upgrades with Restricted Internet Access
 sidebar_label: Upgrades with Restricted Internet Access
 ---
 
-The standard upgrade workflow is for individual instances of SSR software to download upgrades directly from mirror servers hosted and managed by Juniper on the public internet. However, we recognize that there are deployments where the SSR does not have internet access. In this case, you can configure the routers to retrieve software from a conductor.
+In some secure deployments where networks are strictly internal to an organization, SSR devices do not have access to the internet to download updated software. In these networks, referred to as "air-gap" networks, it is necessary to manually download the SSR software on to a device such as a USB and perform an upgrade from inside the network. 
 
-There are four configurable software access modes on a router:
+To identify a device in an air-gap network, SSR conductors and routers are configured in `offline-mode`, indicating they do not have internet access. This is defined in the `router > system > software-update > repository` configuration, using the `source-type` setting. Upgrading devices in this configuration is addressed in this document. 
 
-- `conductor-only`: The router retrieves software versions only from the conductor.
-- `prefer-conductor`: The router will retrieve software versions from the conductor, and fall back to using the internet.
+Other configurable software access modes on a router:
+
+- `conductor-only`: The router retrieves software versions only from the conductor. This is often used on internal networks where the routers do not have direct internet access. 
+- `prefer-conductor`: The router will retrieve software versions from the conductor, but if the conductor is not available it will fall back to using the internet. 
 - `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving software images.
-- `offline-mode`: This mode is used for conductors and routers that do not have internet access - "air-gap" networks.
 
-In the `router > system > software-update > repository` configuration, use the `source-type` setting to define the software update repository to one of the first three values; `conductor-only`, `prefer-conductor`, or `internet-only`.
+For information about configuring software access modes on a router, please see, [Software Access Modes](insert link here when it is done)
 
-With each of these settings, the conductor(s) require internet access, and the routers must be able to resolve internet hosted repositories. Because the access mode is configured on the router, your collection of routers can each use different preferences. For example, a router on the internet can use a Juniper repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
+## How Does it Work?
 
-## Offline Mode
+In networks that do not have internet access, routers are configured to override the `source-type` setting and retrieve software directly from the conductor. 
 
-In networks that do not have internet access, routers can be configured to override the `source-type` setting and retrieve software directly from the conductor. In the GUI, set `router > system > software-update > repository > offline-mode` to `true`. 
+### Setting Offline Mode
+
+In the GUI, set `router > system > software-update > repository > offline-mode` to `true`. 
 
 **From the PCLI:**
 ```
@@ -38,14 +41,45 @@ exit
 ```
 ## Air-Gap Network Upgrade Process
 
-The following process is used to upgrade a Conductor and Conductor-managed Routers to version 6.3.0 of the SSR software.
+There are two use cases for upgrades within an air-gap network and each is slightly different.
 
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-xx.r1.el7` and the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` software packages.
+- A single-version 6.3.0 upgrade
+- A mixed-version upgrade, where the conductor is V6.2.x and the routers are similar or earlier versions
+
+### Single-Version 6.3.0 Upgrade
+
+The following process is used to upgrade a Conductor and Conductor-managed Routers to **version 6.3.0** of the SSR software.
+
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` and the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` software packages.
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
-2. Import the `128T-6.3.0-xx.r1.el7` package onto the conductor using the [`import iso`](cli_reference.md#import-iso) command. 
+2. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](cli_reference.md#import-iso) command. 
 3. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 4. Import the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` package onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. You do **not** install this package onto the conductor, only import it. 
 5. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
+6. Continue with [Import ISO](#import-iso).
+
+### Mixed Version Upgrade
+
+In this workflow, the conductor will be upgraded to 6.2.6, and the routers to 6.1.10. 
+
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` and the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` software packages.
+2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
+2. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](cli_reference.md#import-iso) command. 
+3. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
+4. Import the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` package onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. You do **not** install this package onto the conductor, only import it. 
+5. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
+6. Continue with [Import ISO](#import-iso).
+
+
+
+
+
+
+** I'm starting to see holes in this scenario. 
+ - Conductor managed deployments are all package based installs, so there will be no mixed deployments of 6.3 managing image based routers unless they are choosing to do that upgrade as part of this process, which does not make any sense; if they want to go to ib-routers, then install 6.3 across the boards.
+ - If they are upgrading a conductor to 6.2.6 (pb) they will have to upgrade the routers to some PB install.  
+
+
 
 ### Import ISO
 
@@ -57,7 +91,9 @@ Use the `filepath` argument to specify the exact location of the ISO. `hunt` wil
 
 After the local software repository has been updated with the ISO, the upgrade can proceed.
 
-If you are installing older images on the routers (versions 6.2.5 or older) you may need to include the checksum and signature files with the ISO when you download and import the software to the conductor. 
+#### Version Checks (outlier - 98% of router ibu's will be done in mist)
+
+If you are upgrading or installing older image-based software on a router (versions 6.2.5 or older) you may need to include the checksum and signature files with the ISO when you download and import the software to the conductor. 
 
 - `SSR-6.2.5-xx.r1.el7.x86_64.ibu-v1.iso`
 - `SSR-6.2.5-xx.r1.el7.x86_64.ibu-v1.tar.sha256sum`
