@@ -10,7 +10,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 :::
 
 ## Supported Solutions
- 
+
 | Solution Name      | `solution-type` | Available In Version |
 | ------------------ | --------------- | -------------------- |
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
@@ -40,7 +40,7 @@ The following flow diagram summarizes the process followed by the HA Agent using
 
 ![HA Agent Flow Diagram](/img/cloud-ha-ha-agent-flow-diagram.png)
 
-An HA Agent configured with a priority of 1 will be defined as the Primary node; a priority of 2 becomes the Secondary node. 
+An HA Agent configured with a priority of 1 will be defined as the Primary node; a priority of 2 becomes the Secondary node.
 
 * Primary: This node is preferred to be active except when the local node is unhealthy.
 * Secondary: This node is preferred to become active only when the local node is healthy and the remote node is unhealthy or unreachable.
@@ -49,7 +49,7 @@ The internal state machines wait for the value set in seconds in `up-holddown-ti
 
 The internal state machines wait for the `peer-reachability-timeout` after every health status before considering the node unreachable. The timer is reset if a health report is processed before the timeout expires.
 
-When the HA Agent determines that a node must become active, the first active redundant interface's mac address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**. 
+When the HA Agent determines that a node must become active, the first active redundant interface's mac address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**.
 
 ### API Agents
 
@@ -58,7 +58,7 @@ The job of the API Agent is to perform failover actions specific to the cloud pr
 
 #### Azure Loadbalancer
 
-A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces. 
+A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces.
 
 Probe example:
 
@@ -69,7 +69,7 @@ Backend Pool example:
 ![Azure Loadblancer Backend Pool Configuration](/img/cloud-ha-azure-lb-backend-pool-config.png)
 
 
-The Azure Loadbalancer sends a health probe to the redundant SSR's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent. 
+The Azure Loadbalancer sends a health probe to the redundant SSR's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent.
 
 The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the SSR when the redundant interfaces are set provisionally down.
 
@@ -94,12 +94,12 @@ To prevent routing loops, the solution will not update the Azure Route Tables as
 
 #### Alicloud VPC
 
-A `solution-type` of `alicloud-vpc` can be used to enable the Alicloud VPC API agent. It requires an Alicloud Route Table setup on the same VNET as the redundant interfaces. 
+A `solution-type` of `alicloud-vpc` can be used to enable the Alicloud VPC API agent. It requires an Alicloud Route Table setup on the same VNET as the redundant interfaces.
 
 Since the deployment of Juniper SDWAN HA requires granting RAM role permissions, you need to add a RAM username for this under your current Alicloud account and grant the following permissions. The Virtual Machines where these members are running must be granted with the RAM role with following permissions in order for the route updates to work correctly:
 
 * AliyunECSFullAccess
-* AliyunVPCFullAccess 
+* AliyunVPCFullAccess
 
 The agent finds all of the route tables within the Alicloud VPC using the Alicloud REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
 
@@ -312,7 +312,7 @@ To facilitate the transport of the health status between members of the same gro
 
 ### Azure Load Balancer Config Generation
 
-If the `solution-type` of a group is `azure-lb`, then the plugin will generate services and service routes to route the http probes down into the `cloud-ha` interface for the Azure Load Balancer API Agent to respond to. 
+If the `solution-type` of a group is `azure-lb`, then the plugin will generate services and service routes to route the http probes down into the `cloud-ha` interface for the Azure Load Balancer API Agent to respond to.
 
 
 ## Troubleshooting
@@ -711,7 +711,7 @@ config
 
                     network-interface  intracloudintf
                         name          intracloudintf
-                        
+
                         inter-router-security internal
                         neighborhood intracloud
                             name intracloud
@@ -757,7 +757,7 @@ config
 
                     network-interface  intracloudintf
                         name          intracloudintf
-                        
+
                         inter-router-security internal
                         neighborhood intracloud
                             name intracloud
@@ -970,7 +970,7 @@ exit
 Below is a sample running configuration for a node and a service.
 
 :::info
-Use the following configuration as an example only - it should not be used on a system as is. 
+Use the following configuration as an example only - it should not be used on a system as is.
 :::
 
 
@@ -1095,6 +1095,12 @@ Use the following configuration as an example only - it should not be used on a 
 
 
 ## Release Notes
+
+### Release 4.0.0
+
+Image based install and upgrade (IBU) support for SSR 6.3.0.
+
+**Release Date:** Sep 30, 2024
 
 ### Release 3.0.0
 
