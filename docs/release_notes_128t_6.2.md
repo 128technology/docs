@@ -460,7 +460,7 @@ Valid values for `remove-as-path`:
 - `only`: Remove private AS only if the AS path contains just private AS.
 - `replace-only`: Replace private AS with the local AS only if the AS path contains just private AS.
 
-## Release 6.2.0-39
+## Release 6.2.0-39r1
 
 **Release Date:** November 16, 2023
 

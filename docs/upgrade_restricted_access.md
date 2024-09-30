@@ -88,8 +88,8 @@ Retrieving system version...
  Build User:            jenkins
  Build Directory:       /i95code
  Hash:                  1d892d709c45409369048d129840b02e435b4e21
- Package:               128T-6.3.0-60.r1.el7
- SSR-IMG-release:       SSR-6.3.0-60.r1.el7.x86_64.ibu-v1
+ Package:               128T-6.3.0-107.r1.el7
+ SSR-IMG-release:       SSR-6.3.0-107.r1.el7.x86_64.ibu-v1
  ---> Volume ID:             b  <---
  ---> Selected Boot Volume:  b  <---
  Idle Volume:
