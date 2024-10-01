@@ -9,7 +9,7 @@ With your purchase of a SSR license, you are provided a set of credentials used 
 
 Juniper Session Smart Networking provides the following workflows for the installation process:
 
-- **Universal ISO:** **Beginning with version 6.3.0**, the SSR uses a single downloadable ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
+- **Universal ISO:** **Beginning with version 6.3.0**, the SSR uses a single downloadable image-based ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
 
   Please see [SSR Universal ISO Installation Overview](intro_installation_univ-iso.md) for the installation instructions and software image download location.
 

@@ -18,9 +18,9 @@ The examples listed in this guide generally prefer running commands as a non-roo
 
 ## Installation Process
 
-Beginning with SSR 6.3.0, the Universal ISO Installation simplifies and streamlines the SSR installation and initialization process, and supports Conductor-managed image-based installations as well as Mist-managed deployments. 
+Beginning with SSR 6.3.0, a universal image-based ISO is provided to simplify and streamline the SSR installation and initialization process. This version supports Conductor-managed image-based installations as well as Mist-managed deployments. 
 
-Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
+Installation to your device utilizes the SSR ISO, downloaded as a bootable image to a USB drive or from disk. The install process is as follows:
 
 - [SSR Universal ISO Installation (SSR 6.3.0+)](intro_installation_univ-iso.md)
    - [SSR Installation](install_univ_iso.md)
@@ -31,7 +31,7 @@ Installation is done from the SSR ISOs, typically from a bootable image on a fla
    - [Installation in Microsoft Azure](intro_installation_azure.md)
    - [Installing in VMWare](install_vmware_config.mdx)
 
-For installation of versions prior to 6.3.0, see [Legacy Installations](intro_installation_legacy.md):
+- [Legacy Installations](intro_installation_legacy.md) for installation of versions prior to 6.3.0 
 
 A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
 
