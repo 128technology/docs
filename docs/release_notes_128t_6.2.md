@@ -32,7 +32,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
 ------
-- **I95-53274 PIM scaling above 1500 (Source,Group) sessions:** Resolved an issue where the SSR could not maintain more than 1400 active (Source,Group) sessions. In deployments with a high number of active (Source,Group) sessions, Juniper recommends monitoring sessions to prevent a loss of traffic. 
+- **I95-53274 PIM scaling above 1500 multicast routes:** Resolved an issue where the SSR could not maintain more than 1400 active sessions.  
 ------
 - **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where a configuration change may cause existing waypoint ports to become invalidated, creating an exhaustion scenario.
 ------
