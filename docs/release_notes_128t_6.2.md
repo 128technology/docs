@@ -24,6 +24,22 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.7-4-sts
+
+**Release Date:** October 3, 2024
+
+### Resoved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
+------
+- **I95-53274 PIM scaling above 1500 (Source,Group) sessions:** Resolved an issue where the SSR could not maintain more than 1400 active (Source,Group) sessions. In deployments with a high number of active (Source,Group) sessions, Juniper recommends monitoring sessions to prevent a loss of traffic. 
+------
+- **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where a configuration change may cause existing waypoint ports to become invalidated, creating an exhaustion scenario.
+------
+- **I95-57667 Traffic Engineering traffic throughput improvements:** Internal improvements have been made to optimize the throughput of traffic when traffic engineering is configured. 
+------
+- **I95-58201 Increase AMD performance:** Throughput performance on AMD processors has been improved through the tuning of some kernel parameters. 
+
 ## Release 6.2.6-15-sts
 
 **Release Date:** September 6, 2024
