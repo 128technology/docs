@@ -36,7 +36,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where a configuration change may cause existing waypoint ports to become invalidated, creating an exhaustion scenario.
 ------
-- **I95-57667 Traffic Engineering traffic throughput improvements:** Internal improvements have been made to optimize the throughput of traffic when traffic engineering is configured. 
+- **I95-57667 / I95-57912 Traffic Engineering traffic throughput improvements:** Internal improvements have been made to optimize the throughput of traffic when traffic engineering is configured. 
 ------
 - **I95-58201 Increase AMD performance:** Throughput performance on AMD processors has been improved through the tuning of some kernel parameters. 
 
@@ -46,7 +46,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-56894 OSPF Graceful Restart:** Support for OSPF graceful restart has been added. For a feature description and configuration information, see [OSPF Graceful Restart](config_ospf.md#ospf-graceful-restart). For command details, see [`ospf graceful-restart`](config_command_guide.md#configure-authority-router-routing-ospf-graceful-restart).
+- **I95-56894 / I95-57907 OSPF Graceful Restart:** Support for OSPF graceful restart has been added. For a feature description and configuration information, see [OSPF Graceful Restart](config_ospf.md#ospf-graceful-restart). For command details, see [`ospf graceful-restart`](config_command_guide.md#configure-authority-router-routing-ospf-graceful-restart).
 ------
 - **I95-56337 / I95-56339 / I95-56341 REST API changes to better support BGP endpoints:** Updated BGP REST endpoints for better functionality, by adding pagination support to summary commands and altering json schema to use arrays where necessary to preserve ordering. Added `show bgp family-summary` to condense address-family information per peer into one entry.
 
