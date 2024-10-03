@@ -9,15 +9,11 @@ With your purchase of a SSR license, you are provided a set of credentials used 
 
 Juniper Session Smart Networking provides the following workflows for the installation process:
 
-- **Universal ISO:** **Beginning with version 6.3.0**, the SSR uses a single downloadable image-based ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
+- **SSR Image-based ISO:** **Beginning with version 6.3.0**, the SSR uses a single downloadable image-based ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
 
-  Please see [SSR Universal ISO Installation Overview](intro_installation_univ-iso.md) for the installation instructions and software image download location.
+  Please see [SSR Image-based ISO Installation Overview](intro_installation_univ-iso.md) for the installation instructions and software image download location.
 
-For users installing *earlier versions of the SSR software*, the following installation methods are available:
-
-- **Image-based ISO:** An image-based ISO installation process is available for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
-
-  For details about the Image-based install process, see [Image-based Installation.](intro_installation_image.md) 
+For users installing *earlier, package-based versions of the SSR software*, the following installation methods are available:
 
 - **Package-based ISO:** For users who do not use Mist Cloud, this ISO offers multiple local installation methods.
   - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
@@ -29,12 +25,12 @@ For users installing *earlier versions of the SSR software*, the following insta
 
 The SSR Software packages are available from our public servers using the username and token provided to you and can be accessed at the following location:
 
-The image-based ISOs for Mist-managed deployments are available to download at the following location:
+The image-based ISOs are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local
 
-The package-based ISOs for Conductor-managed deployments are available to download at the following location:
+The package-based ISOs are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
