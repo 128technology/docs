@@ -35,7 +35,7 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | probe-duration | uint32 | default: 5 | The duration (in seconds) within which to reach the destination. Each attempt will be made in (probe-duration / number-of-attempts) interval |
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 | sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
-| up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before it comes up when the previous state was down |
+| up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before transitioning from down to up state |
 
 * Example:
 ```config {9-14}
