@@ -1,6 +1,6 @@
 ---
-title: SSR Universal ISO Installation Overview 
-sidebar_label: SSR Universal ISO Installation Overview
+title: SSR Image-Based ISO Installation Overview 
+sidebar_label: SSR Image-Based ISO Installation Overview
 ---
 
 Beginning with version 6.3.0, the SSR uses a single downloadable ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
