@@ -41,4 +41,4 @@ Before beginning, ensure that you have an appropriate rollover cable available t
 
   ![Final Install Screen](/img/u-iso7_serial_install.png)
 
-**Great job! Your software has installed, now let's go [initialize your device!](initialize_u-iso_device.md)**
+**Great job! Your software has installed, now let's go [initialize your device!](cc_fips_6.3.0_initialize_u-iso_device.md)**

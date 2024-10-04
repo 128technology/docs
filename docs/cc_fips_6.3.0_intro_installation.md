@@ -27,6 +27,6 @@ Access to the SSR Software packages available for download from our software rep
 ## Installation Process Overview
 
 Installation is done using the SSR Universal ISO, typically from a bootable image on a USB or copied to disk. 
-Please follow the instructions starting with the [SSR Universal ISO Installation Overview](cc_fips_6.3.0_intro_install_univ-iso.md).
+Please follow the instructions starting with the [SSR Image-Based Installation Overview](cc_fips_6.3.0_intro_install_univ-iso.md).
 
 
