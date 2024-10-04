@@ -2,6 +2,10 @@
 title: Loopback Static Routes Plugin
 sidebar_label: Loopback Static Routes
 ---
+:::important
+This plugin has been deprecated with the release of SSR 6.3.0.
+:::
+
 
 The `128T-loopback-static-routes` plugin provides a way to manage the route table in Linux for the loopback interface called [`kni254`](concepts_kni.md) which is created by default on an SSR. This is useful to set up the appropriate [Linux host networking](concepts_linux_host_networking.md) when management traffic is traversing a forwarding interface managed by the SSR.
 

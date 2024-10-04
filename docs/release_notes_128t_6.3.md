@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.3.0-1
+## Release 6.3.0-107r1
 
 **Release Date:** September 30, 2024
 
@@ -44,7 +44,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-50572 Unified ISO for Mist and Conductor Onboarding:** A single, image-based ISO is the preferred method of installation for all SSR deployments. This new ISO greatly simplifies the software installation process and onboarding of routers to both the Mist-managed and Conductor-managed environments. For information about the install and onboarding process, refer to [SSR Universal ISO Installation](intro_installation_univ-iso.md).
 ------
-- **I95-51303 Offline Documentation available upon installation:** The SSR documentation site is now installed as a snapshot at the time of release, and run as a web server on the SSR router and conductor installations. This makes the full documentation site availble from within a network that does not have internet access. To access the documentation, click on the Documentation icon from the GUI after installation. 
+- **I95-51303 Offline Documentation available upon installation:** The SSR documentation site is now installed as a snapshot at the time of release, and run as a web server on the SSR router and conductor installations. This makes the full documentation site available from within a network that does not have internet access. To access the documentation, click on the Offline Product Documentation selection on the About this System page in the GUI after installation. 
 ------
 - **I95-51501 Use of the physical MAC address for VRRP:** The command [`use-physical-address`](config_command_guide.md#configure-authority-router-node-device-interface-vrrp-use-physical-address) has been added to the device-interface configuration. This allows VRRP to use the physical MAC rather than the virtual MAC and prevents platforms that reject the virtual MAC from dropping traffic.
 ------
@@ -64,7 +64,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54300 Session performance capacity tracking and troubleshooting:** Added Session Performance Metric in Node Health. Session Processing CPU that displays average CPU, with an expandable selection that shows the individual CPU of each of the session processing threads that come from system resource scaling/config.
 ------
-- **I95-54699 VRRP Redundancy per VLAN:** VRRP can now be [configured at the network-interface level](config_ha.md#configuring-vrrp-on-the-network-interface) allowing you to configure VRRP redundancy per VLAN. For command information, see [configure authority router node device-interface network-interface vrrp.](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-vrrp)
+- **I95-54699 VRRP Redundancy per VLAN:** VRRP can now be [configured at the network-interface level](config_ha.md#configuring-vrrp-on-the-network-interface) allowing you to configure VRRP redundancy per VLAN. For command information, see [`configure authority router node device-interface network-interface vrrp`.](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-vrrp)
 ------
 - **I95-55855 Support the `force up` mode for LACP Bond interfaces:** When enabled, a bond interface that does not receive any LACP PDU's on any member interfaces over a configured time-out period enters the `force up` mode, where one member is used as an active interface sending and receiving without the required LACP negotiation. For more information, see [LACP Bond Interfaces - Force-up](config_lacp.md#force-up)
 ------
@@ -78,9 +78,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48453 Reverse SSH tunnels do not check Known Hosts file:** Functionality has been added to allow for the retrieval of the ssh known hosts and authorized keys file contents on the SSR. For details on the known host functionality, see [Strict Host Key Checking](cc_fips_6.3.0_quickstart_otp.md#enable-strict-host-key-checking). 
 ------
-- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide addtional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
+- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide additional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
 ------
-- **I95-49712 Configuration validation error uniformative:** Resolved an issue where invalid configuration parameters were returning errors that were not specific enough to allow the user to locate the invalid configuration. Invalid configuration elements now generate messages that include relevant information for the invalid element, such as an IP address, node name, router name, interface names, etc.
+- **I95-49712 Configuration validation error uninformative:** Resolved an issue where invalid configuration parameters were returning errors that were not specific enough to allow the user to locate the invalid configuration. Invalid configuration elements now generate messages that include relevant information for the invalid element, such as an IP address, node name, router name, interface names, etc.
 ------ 
 - **I95-52337 Uninformative error when STEP is selected for the Conductor:** The error message now clearly states that STEP is not supported on the Conductor.
 ------
@@ -116,7 +116,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-56850 Overlap warning on router not present on conductor:** Resolved a case where a service on a router is configured with `applies-to`, and the same service is configured on the conductor (overlap) but does not have `applies-to` configured, the validation process will generate a warning on the router but not the conductor. 
 ------
-- **I95-56879 PPPoE stopped working:** Resolved an issue where the system configuration for the PPPoE interface was missing `LCP_FAILURE` and `LCP_INTERVAL` fileds. These fields are now set correctly.
+- **I95-56879 PPPoE stopped working:** Resolved an issue where the system configuration for the PPPoE interface was missing `LCP_FAILURE` and `LCP_INTERVAL` fields. These fields are now set correctly.
 ------
 - **I95-56905 Conserve memory footprint on the router:** If the SSR configuration does not have `application-identification mode all`, then do not load the database. This will save memory on the router. 
 ------
@@ -160,7 +160,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-57599 Duplicate password entries causing login issues:** After an upgrade, `/etc/passwd.radius` showed multiple duplicate entries. This has been resolved by forcing a restart of an internal program during the reboot as part of an upgrade. 
 ------
-- **I95-57607 Saving TSI as root from the conductor generates oversized file:** Added and enforcement  that when calling `/usr/bin/save-tech-support-info` the `--output` argument always ends in .`zip`.
+- **I95-57607 Saving TSI as root from the conductor generates oversized file:** Added and enforcement  that when calling `/usr/bin/save-tech-support-info` the `--output` argument always ends in `.zip`.
 ------
 - **I95-57692 SSR120/SSR130 Upgrade issues when upgrading from version 6.2.5:** Resolved an issue where if the `128T` process is running and memory usage increases during upgrade, the upgrade will fail due to running out of memory.
 ------
@@ -171,7 +171,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-58152 Correctly reflect 128T service start time:** The previous logic for node start time used the internal database cluster connection time, which caused unexpected behaviors, such as restarting the system up time if an HA link bounces. The new logic reports the start time of the 128T service of each node.
 ------
 - **I95-58273 Web UI login banner not visible in "Dark Mode":** This issue has been resolved and the login banner is now visible in dark mode.
-------
 
 ### Caveats
 <!-- markdown-link-check-disable -->

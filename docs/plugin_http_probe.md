@@ -389,6 +389,12 @@ Completed in 0.21 seconds
 
 ## Release Notes
 
+### Release 2.0.0
+
+Image based install and upgrade (IBU) support for SSR 6.3.0.
+
+**Release Date:** Sep 30, 2024
+
 ### Release 1.2.0
 
 **Release Date:** Aug 20, 2024

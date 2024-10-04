@@ -921,16 +921,11 @@ exit
 
 ## Release Notes
 
-### Release 3.7.0
+### Release 4.0.0
 
-**Release Date:** June 30, 2024
+Image based install and upgrade (IBU) support for SSR 6.3.0.
 
-**Router Version** 128T-ipsec-2.5.0-3
-
-#### New Features and Improvements
-
-- **I95-51716** Common Criteria Certification - VPN Protection Profile
-The new version adds support for X.509 ceritifcate management for IPSec plugin, validating strength of VPN’s encryption algorithms, new Libreswan version update, and DH 21 groups.
+**Release Date:** Sep 30, 2024
 
 ### Release 3.6.2
 

@@ -64,11 +64,11 @@ admin@t106-dut1.Conductor# show assets
 Mon 2024-09-09 18:14:18 UTC
 Retrieving assets...
 
-=========== =========== ===================== ============= ============== ================ ================ ========
- Router      Node        Asset Id              SSR Version   Install Type   Status           Time in Status   Errors
-=========== =========== ===================== ============= ============== ================ ================ ========
- Conductor   t106-dut1   t106-dut1.novalocal   7.0.0-1.el9   Image          Synchronized     34m 44s               0
-             t106-dut2   t106-dut2.novalocal   7.0.0-1.el9   Image          Synchronized     21m 19s               0
+=========== =========== ===================== ================== ============== ================ ================ ========
+ Router      Node        Asset Id              SSR Version        Install Type   Status           Time in Status   Errors
+=========== =========== ===================== ================== ============== ================ ================ ========
+ Conductor   t106-dut1   t106-dut1.novalocal   6.3.0-107.r1.el7   Image          Synchronized     34m 44s               0
+             t106-dut2   t106-dut2.novalocal   6.3.0-107.r1.el7   Image          Synchronized     21m 19s               0
 ```
 
 **Package Based**
@@ -81,10 +81,10 @@ Mon 2024-09-09 18:15:20 UTC
 ==================== ================== ===================== ====================== ============== ============== ================ ========
  Router               Node               Asset Id              SSR Version            Install Type   Status         Time in Status   Errors
 ==================== ================== ===================== ====================== ============== ============== ================ ========
- RTR_EAST_COMBO       combo-east-1       t212-dut3.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   3d 23h 18m 58s        0
-                      combo-east-2       t212-dut4.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   4d 2h 40m 27s         0
- RTR_EAST_CONDUCTOR   conductor-east-1   t212-dut1.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   4d 2h 42m 57s         0
-                      conductor-east-2   t212-dut2.novalocal   6.3.0-1.r1.debug.el7   Package        Synchronized   4d 2h 43m 14s         0
+ RTR_EAST_COMBO       combo-east-1       t212-dut3.novalocal   6.3.0-107.r1.el7       Package        Synchronized   3d 23h 18m 58s        0
+                      combo-east-2       t212-dut4.novalocal   6.3.0-107.r1.el7       Package        Synchronized   4d 2h 40m 27s         0
+ RTR_EAST_CONDUCTOR   conductor-east-1   t212-dut1.novalocal   6.3.0-107.r1.el7       Package        Synchronized   4d 2h 42m 57s         0
+                      conductor-east-2   t212-dut2.novalocal   6.3.0-107.r1.el7       Package        Synchronized   4d 2h 43m 14s         0
 
 Completed in 0.04 seconds
 ```
