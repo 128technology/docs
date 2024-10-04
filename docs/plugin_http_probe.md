@@ -219,7 +219,7 @@ exit
 
 An `up-delay-timer` can be configured on a probe to prevent a probe watching an unstable service path from coming up right away. When a probe state transitions from down to up, instead of bringing that probe up, if an `up-delay-timer` is configured the probe will be kept down until the timer finishes. If the probe goes back down while the timer is running, the timer will cancel and the probe will remain down.
 
-It is recommended that a probe's `up-delay-timer` has a value greater than the `probe-interval` field. This configuration allows the probe to run atleast one more time while the timer is active. A warning will be produced if a probe is configured with an `up-delay-timer` value less than the `probe-interval`. If a configuration reload occurs while a probe timer is active, the timer is honored with the previous config.
+It is recommended that a probe's `up-delay-timer` has a value greater than the `probe-interval` field. This configuration allows the probe to run at least one more time while the timer is active. A warning will be produced if a probe is configured with an `up-delay-timer` value less than the `probe-interval`. If a configuration reload occurs while a probe timer is active, the timer is honored with the previous config.
 
 The below example shows a probe with a configured `up-delay-timer`; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 2 seconds will be applied and when the probe transitions from down > up it will be held down for 15 seconds.
 
