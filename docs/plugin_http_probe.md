@@ -217,7 +217,7 @@ exit
 | 2.1.0    | `http-probe-profile > up-delay-timer` introduced |
 
 
-An `up-delay-timer` can be configured on a probe to prevent a probe watching an unstable service path from coming up right away. When a probe state transitions from down to up, instead of bringing that probe up, if an `up-delay-timer` is configured the probe will be kept down until the timer finishes. If the probe goes back down while the timer is running, the timer will cancel and the probe will remain down.
+An `up-delay-timer` can be configured on a probe to prevent a probe watching an unstable service path from coming up right away. When a probe state transitions from down to up, instead of bringing that probe up, if an `up-delay-timer` is configured the probe will be kept down until the timer finishes. If the probe goes back down while the timer is running, the timer will cancel and the probe will remain down. If it is set to the default value (0) then the timer is disabled.
 
 It is recommended that a probe's `up-delay-timer` has a value greater than the `probe-interval` field. This configuration allows the probe to run at least one more time while the timer is active. A warning will be produced if a probe is configured with an `up-delay-timer` value less than the `probe-interval`. If a configuration reload occurs while a probe timer is active, the timer is honored with the previous config.
 
