@@ -35,6 +35,7 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | probe-duration | uint32 | default: 5 | The duration (in seconds) within which to reach the destination. Each attempt will be made in (probe-duration / number-of-attempts) interval |
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 | sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
+| up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before it comes up when the previous state was down |
 
 * Example:
 ```config {9-14}
@@ -80,7 +81,7 @@ Each router can configure up to 10 http probe profiles.
 
 SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in the `http probe profile` configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than the single probe timeout calculated by `probe-duration` / `number-of-attempts`.
 
-The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 4 seconds will be applied and max-loss of 2 is considered for every test.
+The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 2 seconds will be applied and max-loss of 2 is considered for every test.
 
 ```
 router
@@ -89,7 +90,7 @@ router
         url                 http://172.16.2.5:5060/
         valid-status-code   202
         valid-status-code   200
-        probe-duration      12
+        probe-duration      6
         probe-interval      10
         number-of-attemps   3
         sla
@@ -208,6 +209,35 @@ config
 exit
 ```
 
+### Up Delay Timer
+##### Version History
+
+| Release  | Modification                                     |
+| -------- | ------------------------------------------------ |
+| 2.1.0    | `http-probe-profile > up-delay-timer` introduced |
+
+
+An `up-delay-timer` can be configured on a probe to prevent a probe watching an unstable service path from coming up right away. When a probe state transitions from down to up, instead of bringing that probe up, if an `up-delay-timer` is configured the probe will be kept down until the timer finishes. If the probe goes back down while the timer is running, the timer will cancel and the probe will remain down.
+
+It is recommended that a probe's `up-delay-timer` has a value greater than the `probe-interval` field. This configuration allows the probe to run atleast one more time while the timer is active. A warning will be produced if a probe is configured with an `up-delay-timer` value less than the `probe-interval`. If a configuration reload occurs while a probe timer is active, the timer is honored with the previous config.
+
+The below example shows a probe with a configured `up-delay-timer`; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 2 seconds will be applied and when the probe transitions from down > up it will be held down for 15 seconds.
+
+```
+router
+    http-probe-profile      http-probe-1
+        name                http-probe-1
+        url                 http://172.16.2.5:5060/
+        valid-status-code   202
+        valid-status-code   200
+        probe-duration      6
+        probe-interval      10
+        number-of-attemps   3
+        up-delay-timer      15
+    exit
+exit
+```
+
 ## Use Cases
 
 ### Path selection
@@ -308,6 +338,23 @@ Completed in 0.05 seconds
 admin@node1.conductor1#admin@node1.conductor1#
 ```
 
+The `show plugins state router <router-name> summary 128T-http-probe` command can be used to view the current status of the probe and whether the probe is being held down. For example:
+
+```
+admin@node1.conductor1# show plugins state router my-router summary 128T-http-probe
+Wed 2024-10-02 03:19:33 UTC
+Target: node1.my-router
+
+============= ======== =========== ================= 
+ Probe         Status   Held Down   Time Left (sec)
+============= ======== =========== ================= 
+ test-probe1   up       True                      8
+ test-probe2   down     False                     0
+
+Retrieved state data.
+Completed in 0.05 seconds
+```
+
 In addition, the probe's running status in linux can be found by inspecting the `128T-http-probe-status-change-notifier@<probe-name>.service`. For example,
 
 ```
@@ -389,6 +436,15 @@ Completed in 0.21 seconds
 
 ## Release Notes
 
+### Release 2.1.0
+
+**Release Date:** Oct 10, 2024
+
+#### New Features and Improvements
+- **PLUGIN-2510** Implement an up-delay-timer
+
+The plugin allows users to configure an up-delay-timer which holds a probe down for a set duration before bringing the probe up.
+
 ### Release 2.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
@@ -402,7 +458,7 @@ Image based install and upgrade (IBU) support for SSR 6.3.0.
 #### New Features and Improvements
 - **PLUGIN-2300** Implement SLA monitoring per probe
 
-The plugin allows Users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These settings are considered as part of the probe success criteria. Additionally, these values are available through metrics.
+The plugin allows users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These settings are considered as part of the probe success criteria. Additionally, these values are available through metrics.
 
 ### Release 1.0.2
 
