@@ -71,26 +71,26 @@ Then use the directions for uploading an `authorized_keys` file via `scp`, or ma
 
 ## Enable Strict Host Key Checking 
 
-Enabling strict `host-key-checking` provides secure communication between the conductor and a router. 
+Enabling strict `host-key-checking` **provides secure communication between the conductor and a router**. 
 Similar to SSH, there are two `host-key-checking` options; `yes` which requires the host key to be provisioned manually, or `accept-new` which accepts the key on first connection. 
 
 There are two configuration parameters where `host-key-checking` can be set: 
 
-- **`inter-router host-key-checking`** controls host key verification between a router and the conductor. When set to `yes`, strict host key checking is enabled between the router and the conductor. However, the host keys must be manually provisioned on each router. 
+- **`inter-router host-key-checking`** controls host key verification between a router and the conductor. When set to `yes`, strict host key checking is enabled between the router and the conductor. However, the host keys must be [manually provisioned on each router](#manual-provisioning-of-the-conductor-key). 
  
  ```
  config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-router host-key-checking yes
  config authority router RTR_EAST_COMBO node combo-east-2 ssh-settings inter-router host-key-checking yes
  ```
 
-- **`inter-node host-key-checking`** controls host key verification between redundant HA nodes. When set to `yes`, strict host key checking is enabled between the router and the conductor **between each node** of an HA router. However, the host keys must be manually provisioned on each router. 
+- **`inter-node host-key-checking`** controls host key verification between redundant HA nodes. When set to `yes`, strict host key checking is enabled between the router and the conductor **between each node** of an HA router. However, the host keys must be [manually provisioned on each router](#manual-provisioning-of-the-conductor-key).
 
 ```
 config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-node host-key-checking yes
 config authority router RTR_EAST_COMBO node combo-east-2 ssh-settings inter-node host-key-checking yes
 ```
  
-To save the work of manually provisioning the host key on the router, set the `accept-new` parameter. This automatically loads the host key on first connection.
+To save the work of manually provisioning the host key on the router, set the `accept-new` parameter. **This automatically loads the host key on first connection**.
 
 ```
 config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-router host-key-checking accept-new

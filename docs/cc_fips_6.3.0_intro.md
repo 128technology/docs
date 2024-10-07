@@ -45,6 +45,8 @@ A non-forwarding interface is always serviced by the Linux network stack. It is 
 
 Although the SSR software permits forwarding interfaces to also be configured for management access, these *management over forwarding* operations are non-compliant for Common Criteria deployments. SSH management connections to the SSR must only be configured for non-forwarding interfaces. Refer to the Appendix for an example where management interfaces are correctly configures as `forwarding = false`.
 
+Wnen running the SSR software version 6.3.0 installed as directed in this guide and `strict hostkey checking` enabled (set to `yes`), a dedicated out of band network mamagement interface is no longer required. 
+
 ### Additional Software Details
 
 SSR provides SSH for Remote Administration on Port 22, using OpenSSH v7.4 and OpenSSL v1.0.2k. These versions are certified for FIPS 140-2 compliance. 
@@ -53,7 +55,13 @@ All implementations of cryptographic algorithms are certified under the Cryptogr
 
 All software used as part of the SSR is implemented to minimize the attack surface and only allow the minimum number of connections with outside users and products. 
 
-Administration of the SSR can be performed using either the CLI or the WebGUI and is considered Common Criteria-certified when a valid CA certificate and webserver certificate is configured in the `trusted ca-certificate` store.  
+Administration of the SSR can be performed using the following methods: 
+- CLI or the 
+- WebGUI 
+- REST API
+- GraphQL PSI
+
+These are considered Common Criteria-certified when a valid CA certificate and webserver certificate is configured in the `trusted ca-certificate` store, and a valid signed webserver server certificate is imported. For more information, see [Signing and Importing Webserver Certificates](cc_fips_6.3.0_access_mgmt.md#signing-and-importing-webserver-certificates).  
 
 The SSR implements a number of security mechanisms to protect itself and any critical data, and to ensure that attempts to tamper with the SSR or data are detected.
 

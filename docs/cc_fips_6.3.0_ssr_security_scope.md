@@ -16,9 +16,11 @@ All cryptographic algorithms are validated through the Cryptographic Algorithm V
 
 ## SSH 
 
-The SSR implements an SSH Client and an SSH Server for secure communication between the SSR and external devices such as an audit server or remote management device. Communication between the SSR and external devices uses Port 22. The SSR implements public-key based authentication between itself and other devices. The public keys are stored in key containers. The SSR does not implement X.509 certificate-based authentication mechanisms. Once the SSH connection between the SSR and a remote management device is established, the user is authenticated with a username and password. 
+The SSR implements [Syslog over TLS](cc_fips_6.3.0_config_audit_event.md#configuring-syslog-over-tls) for secure communication between the SSR and external devices such as an audit server or remote management device. Communication between the SSR and external devices uses Port 6514. The SSR implements public-key based authentication between itself and other devices. The public keys are stored in key containers. 
 
-The Command Line Interface (CLI) is used for the management of the SSR. The CLI may be accessed by successfully authenticated Administrators locally from console, or remotely over SSH. Once authenticated, the Administrator uses the Conductor to manage one or more SSRs (routers). Management communication is also protected by SSH.
+The SSR does not implement X.509 certificate-based authentication mechanisms. Once the SSH connection between the SSR and a remote management device is established, the user is authenticated with a username and password.
+
+Both the Command Line Interface (CLI) and the Web Interface can be used to manage the SSR. They may be accessed by successfully authenticated Administrators locally from console, or remotely over SSH. Once authenticated, the Administrator uses the Conductor to manage one or more SSRs (routers). Management communication is also protected by SSH.
 
 ## Platform Management
 
@@ -28,7 +30,7 @@ Common Criteria-compliant platform management is performed by the administrator.
 
 Each user is identified with a username and password, and upon successful verification of the password, a user is assigned to a role defined in the user configuration. Users are allowed to change their passwords within the parameters defined on the SSR. The passwords are stored in a secure file preventing unauthorized access. Passwords entered remotely are not echoed to ensure unauthorized parties may not learn passwords of legitimate Administrators. 
 
-Each user may terminate their own session. The SSR also maintains an inactivity timer for each user. When the administrator-defined limit is reached, the SSR terminates that session. The inactivity timer applies to all CLI and shell sessions, regardless of whether they are local or SSH connections. Use the following command to configure the timeout value (in seconds):
+Each user may terminate their own session. The SSR also maintains an inactivity timer for each user. When the administrator-defined limit is reached, the SSR terminates that session. The inactivity timer applies to all sessions, regardless of whether they are local or SSH connections. Use the following command to configure the timeout value (in seconds):
 
 `configure authority router system inactivity-timer 60` 
 

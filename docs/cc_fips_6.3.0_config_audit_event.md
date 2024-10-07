@@ -194,9 +194,15 @@ config
 
 ```
 
-## Configuring Syslog over TLS
+## Configuring Syslog Over TLS
+
+Syslog over TLS allows the secure transportation of system log messages from the syslog client to the syslog server. TLS uses certificates to authenticate and encrypt the communication.
 
 Use the following information to configure Syslog transport over TLS.
+
+:::note
+Logging export must be configured individually on each conductor and router. 
+:::
 
 #### 1. Configure the trusted CA certificate. 
 
