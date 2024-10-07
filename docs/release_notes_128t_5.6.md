@@ -97,6 +97,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
 ------
+- **I95-56492 Only process the keep-alive for the same path as the session is currently using:**In a case where an outbound-only session with `nat-keep-alive` configured moves a flow from a dogleg path to a direct inter-router path, the `nat-keep-alive` caused repeated session modifies on the hub side. This resulted in reverse traffic packet drops. This issue has been resolved.
+------
 - **I95-56541 Include kernel journal entries in TSI:** A separate `kernel.log` journal file is now created in the TSI output.
 ------
 - **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
