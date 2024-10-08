@@ -59,7 +59,7 @@ To initialize your device as a Conductor-managed router, and incorporate `ssh-on
 
 2. Enter the your login credentials. 
 
-3. Use the [**Quickstart Procedure**](cc_fips_6.3.0_quickstart_otp.md) and file to configure `ssh-only` and Strict Hostkey checking on the router.  
+3. Use the [**Quickstart Procedure**](cc_fips_6.3.0_otp_router_install.md) and file to configure `ssh-only` and Strict Hostkey checking on the router.  
 
  
 

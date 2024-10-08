@@ -48,6 +48,7 @@ module.exports = {
       "cc_fips_6.3.0_intro_install_univ-iso",
       "cc_fips_6.3.0_install_univ_iso",
       "cc_fips_6.3.0_initialize_u-iso_device",
+      "cc_fips_6.3.0_otp_router_install",
       "cc_fips_6.3.0_quickstart_otp",
       "cc_fips_6.3.0_initialize_u-iso_adv_workflow",
       "cc_fips_6.3.0_access_mgmt",
