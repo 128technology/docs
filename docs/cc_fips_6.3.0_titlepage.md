@@ -26,3 +26,4 @@ This Common Criteria document is maintained separately from the SSR documentatio
 | Document Revision | Modification | Date |
 | --- | --- | --- |
 | 0.1 | Draft version for 6.3.0-R1 Common Criteria | June 28, 2024 |
+| 0.2 | Draft version with updated installation process, initial edits and feature documentation. | October 9, 2024 |

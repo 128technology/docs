@@ -3,6 +3,10 @@ title: QuickStart the SSR Router
 sidebar_label: QuickStart the SSR
 ---
 
+:::important
+Before beginning the Quickstart process, verify that you have enabled [Strict Host Key Checking](cc_fips_6.3.0_otp_router_install.md#enable-strict-host-key-checking) and provisioned the host keys on the router. Failure to enable strict host key checking will invalidate the security of the communications between the conductor and routers. 
+:::
+
 Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the SSR Networking Platform.
 
 When a router configuration has been added to the conductor but the device has not yet connected, QuickStart instructions will be displayed in place of device-specific information.

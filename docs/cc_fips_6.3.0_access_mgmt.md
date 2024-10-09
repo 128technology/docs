@@ -69,7 +69,24 @@ chmod u=rwx,g=,o= /home/t128/.ssh
 ``` 
 Then use the directions for uploading an `authorized_keys` file via `scp`, or manually edit `/home/t128/.ssh/authorized_keys` directly. 
 
-## Enable Strict Host Key Checking 
+## Enable Secure Communication
+
+In order to secure communication between the Conductor and the managed routers in a distributed environment, it is essential that you enable both strict hostkey checking and asset connection resiliency. These features may be enabled from either the command line or the web interface.
+
+- [Asset Connection Resiliency](#enable-asset-connection-resiliency)
+- [Strict Host Key Checking](#enable-strict-host-key-checking)
+
+### Enable Asset Connection Resiliency
+
+Asset Connection Resiliency is set at the Authority level to ensure that all communication between the conductor and the managed routers is secure. By configuring [`asset-connection-resiliency`](config_command_guide.md#configure-authority-asset-connection-resiliency) as `true`, SSH tunnels are created for asset connections between a managed Router and the Conductor. Enabling `ssh-only` mode forces the asset connections to use the SSH tunnels.
+
+```
+config authority asset-connection-resiliency enabled  true
+config authority asset-connection-resiliency ssh-only true
+```
+
+
+### Enable Strict Host Key Checking 
 
 Enabling strict `host-key-checking` **provides secure communication between the conductor and a router**. 
 Similar to SSH, there are two `host-key-checking` options; `yes` which requires the host key to be provisioned manually, or `accept-new` which accepts the key on first connection. 
