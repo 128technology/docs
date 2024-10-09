@@ -1,15 +1,15 @@
 ---
-title: Installing a Conductor-managed Router in Azure
-sidebar_label: Installing a Conductor-managed Router in Azure
+title: Installing a PAYG Conductor-managed Router in Azure
+sidebar_label: Installing a PAYG Conductor-managed Router in Azure
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Introduction
 
-This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. 
+This guide describes the process for deploying a PAYG (Pay As You Go) Session Smart Conductor and a Session Smart Router (SSR) in Azure.
 
-Mist-managed SSR installations are now available through Azure. See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** 
+Mist-managed SSR installations are now available through Azure. See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.**
 
 :::important
 If you wish to install SSR Version 6.x on a conductor and conductor-managed router in Azure, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
@@ -53,7 +53,7 @@ To request access to a Private plan:
 
 4. Once your Subscription ID has been allowlisted, validate that the Private plan has been shared with your Subscription:
 
-  * [Go to the Azure portal](https://portal.azure.com). 
+  * [Go to the Azure portal](https://portal.azure.com).
   * On the search box right at the top of the screen, search for **Marketplace**. If you are unable to access the Marketplace via your Azure Portal, use this [Azure Marketplace link.](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryMenuBlade/selectedMenuItemId/home).
   * The following banner is displayed at the top:
 
@@ -219,7 +219,7 @@ Provide the IP address of the primary node of Conductor in the **Conductor Prima
 
 6. Provide a username (for example: `t128`) and the content of your public SSH key in the `Admin Username` and `Admin Public Key Data` fields respectively.
 
-7. Agree to the terms of use and conditions of the deployment. 
+7. Agree to the terms of use and conditions of the deployment.
 
 8. Click the **Purchase** button to launch the deployment.
 
@@ -244,7 +244,7 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 ![Plans](/img/platforms_azure_plans.png)
 
 6. Copy the URL of the template located in the field **URL** that best suits your needs.
-7. Create the parameters file. 
+7. Create the parameters file.
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template]](#launch-the-template).
 
@@ -562,7 +562,7 @@ A description of the parameters of the template are listed in the following tabl
 | Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security.             |
 | Private Subnet Name     | The name of the private subnet within the VNet. |
 | Private Subnet Allowed CIDR    | It corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router. |
-| Management Subnet Name  | The name of the management subnet within the VNet. 
+| Management Subnet Name  | The name of the management subnet within the VNet.
 | Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Conductor Primary Control IP   | If a Session Smart  Conductor has already been deployed, fill out the field Conductor Primary Control IP with the IP address of the control interface of the primary node of Session Smart  Conductor. The IP address of the control interface of Conductor should be reachable from the Management subnet selected above. It must be a valid IP address of the form x.x.x.x. If no Session Smart Conductor has been deployed yet or the intention is simply deploying an unmanaged router please refrain from entering any value in this field.  |
 | Conductor Secondary Control IP | If there is an existing Session Smart  Conductor already deployed and the deployment of the Conductor is Highly Available, please enter the IP address of the control interface of the secondary node of Session Smart  Conductor in the field Conductor Secondary Control IP. If the existing deployment of the Session Smart  Conductor is not Highly Available, in other words if the Conductor is standalone, please refrain from entering any value in this field. |

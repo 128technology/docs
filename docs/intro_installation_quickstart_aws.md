@@ -1,11 +1,11 @@
 ---
-title: Installing a Conductor-managed Router in AWS
-sidebar_label: Installing a Conductor-managed Router in AWS
+title: Installing a PAYG Conductor-managed Router in AWS
+sidebar_label: Installing a PAYG Conductor-managed Router in AWS
 ---
 
 ## Introduction
 
-This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in AWS.
+This guide describes the process for deploying a PAYG (Pay As You Go) Session Smart Conductor and a Session Smart Router (SSR) in AWS.
 
 Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.x installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_quickstart_mist_aws.md) for details.
 
