@@ -42,7 +42,69 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-#### 3. Configure a client certificate to be used for the RADIUS client.
+#### 3. Create a Signing Request
+
+Use the `create certificate request client` command to generate the certificate signing request.
+
+```
+admin@t327-dut1.cond# create certificate request client
+Country name (2 letter code): US
+State or province name (full name): Massachusetts
+Locality name (eg: city): Westford
+Organization name (eg: company): Juniper
+Organization unit (eg: engineering): engineering
+Common name: www.router.com
+Email address: bob@juniper.net
+Subject Alternative Name - DNS (fully qualified domain name): www.router.com
+Subject Alternative Name - IP Address: 1.1.1.1
+
+Request successfully generated:
+
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDLDCCAhQCAQAwgZkxFzAVBgNVBAMMDnd3dy5yb3V0ZXIuY29tMQswCQYDVQQG
+EwJVUzERMA8GA1UEBwwIV2VzdGZvcmQxEDAOBgNVBAoMB0p1bmlwZXIxFDASBgNV
+... <text removed for brevity>
+.
+.
+.
+-----END CERTIFICATE REQUEST-----
+```
+
+#### 4. Import the Certificate
+
+After the certificate is signed and returned, it is imported into the SSR for use by the client using the `import certificate client`  command. This process validates the imported certificate against the trusted certificates entered using `trusted-ca-certificate`, and checks for insecure algorithms and invalid configurations. 
+
+**DO NOT ignore any errors, warnings, or failures in this process.** Bypassing or disabling these validations will result in a non-compliant configuration. 
+
+The following example shows an **invalid** self-signed certificate:
+
+```
+admin@t327-dut1.cond# import certificate client
+Enter the end point certificate in PEM format (Press CTRL-D to finish):
+-----BEGIN CERTIFICATE-----
+MIIDHTCCAgWgAwIBAgICL/AwDQYJKoZIhvcNAQELBQAwDzENMAsGA1UEAwwEMTI4
+VDAiGA8yMDI0MDYwNjEyMzIzMVoYDzIwMjUwNjA3MTIzMjMxWjAPMQ0wCwYDVQQD
+...
+RaIliPRAdN85EXDiAP68ytg5D2ZzxCpmRvj4AiFI3JOc
+-----END CERTIFICATE-----
+
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCo4PCT4Wp89t5P
+53ZJtfgKwdV/CfAi3uXAfWmdluKlXjarlgTc6rgX8wGNSRj5/AajEUU6Z68DaejR
+...
+KBs2Hz/E/goCvyEqNaJOix+l
+-----END PRIVATE KEY-----
+                                                                                                                                                                                                                                                                                 
+⚠ Importing...
+certificate contains the following issues: certificate is self-signed
+/usr/lib/128technology/unzip/pcli/runfiles/pypi__36__cryptography_40_0_2/cryptography/x509/base.py:576: CryptographyDeprecationWarning: Parsed a negative serial number, which is disallowed by RFC 5280.
+  return rust_x509.load_pem_x509_certificates(data)
+Could not validate certificate chain against a trusted anchor.
+Could not validate certificate chain against a trusted anchor.
+Would you like to import anyway? [y/N]: N
+```
+
+#### 5. Configure a client certificate to be used for the RADIUS client.
 
 Repeat the previous step to create a client certificate named `radsec`.
 
@@ -53,7 +115,7 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-#### 4. Configure the RADIUS server at the Authority level to use the configured client certificate.
+#### 6. Configure the RADIUS server at the Authority level to use the configured client certificate.
 
 Associate the previously configured `radsec` client certificate to the radius server running on a specified node.
 
@@ -63,7 +125,7 @@ Note that the client certificate selected should match the appropriate IP/hostna
 
 `validate` and `commit` the changes. 
 
-#### 5. Create a RADIUS User
+#### 7. Create a RADIUS User
 
 Create a remotely authenticated RADIUS user. In this example we create user `test1`.
 
@@ -80,9 +142,9 @@ When the user logs into the node `t327-dut1` via ssh, the authentication request
 
 ## Signing and Importing Webserver Certificates
 
-Imported webserver certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
+Imported webserver X.509 certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
 
-### Configure a Trusted Certificate
+### 1. Configure a Trusted Certificate
 
 Certificates are pasted in as a multi-line config. 
 
@@ -95,7 +157,7 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-### Generate the Signing Request
+### 2. Create the Signing Request
 
 Use the `create certificate request webserver` command to generate the certificate signing request.
 
@@ -123,11 +185,13 @@ EwJVUzERMA8GA1UEBwwIV2VzdGZvcmQxEDAOBgNVBAoMB0p1bmlwZXIxFDASBgNV
 -----END CERTIFICATE REQUEST-----
 ```
 
-### Import the Certificate
+### 3. Import the Certificate
 
-After the certificate is signed and returned, it is imported into the SSR for use by the webserver using the `import certificate webserver`  command. It is validated against any trusted certificates entered using `trusted-ca-certificate`. 
+After the certificate is signed and returned, it is imported into the SSR for use by the webserver using the `import certificate webserver`  command. This process validates the imported certificate against the trusted certificates entered using `trusted-ca-certificate`, and checks for insecure algorithms and invalid configurations. 
 
-The following example shows an invalid self-signed certificate being imported:
+**DO NOT ignore any errors, warnings, or failures in this process.** Bypassing or disabling these validations will result in a non-compliant configuration. 
+
+The following example shows an **invalid** self-signed certificate:
 
 ```
 admin@t327-dut1.cond# import certificate webserver
@@ -151,10 +215,8 @@ certificate contains the following issues: certificate is self-signed
 /usr/lib/128technology/unzip/pcli/runfiles/pypi__36__cryptography_40_0_2/cryptography/x509/base.py:576: CryptographyDeprecationWarning: Parsed a negative serial number, which is disallowed by RFC 5280.
   return rust_x509.load_pem_x509_certificates(data)
 Could not validate certificate chain against a trusted anchor.
-Would you like to import anyways? [y/N]: y
-Certificate imported successfully
+Would you like to import anyways? [y/N]: N
 ```
-The imported certificate will be validated against the configured trusted root certificates and checked for insecure algorithms and invalid configurations. Bypassing or disabling these validations will result in a non-compliant configuration. 
 
 ## Configuring Syslog Over TLS
 
@@ -190,7 +252,69 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-#### 3. Configure the syslog server at the Authority level to use the configured client certificate.
+#### 3. Create a Signing Request
+
+Use the `create certificate request client` command to generate the certificate signing request.
+
+```
+admin@t327-dut1.cond# create certificate request client
+Country name (2 letter code): US
+State or province name (full name): Massachusetts
+Locality name (eg: city): Westford
+Organization name (eg: company): Juniper
+Organization unit (eg: engineering): engineering
+Common name: www.router.com
+Email address: bob@juniper.net
+Subject Alternative Name - DNS (fully qualified domain name): www.router.com
+Subject Alternative Name - IP Address: 1.1.1.1
+
+Request successfully generated:
+
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDLDCCAhQCAQAwgZkxFzAVBgNVBAMMDnd3dy5yb3V0ZXIuY29tMQswCQYDVQQG
+EwJVUzERMA8GA1UEBwwIV2VzdGZvcmQxEDAOBgNVBAoMB0p1bmlwZXIxFDASBgNV
+... <text removed for brevity>
+.
+.
+.
+-----END CERTIFICATE REQUEST-----
+```
+
+#### 4. Import the Certificate
+
+After the certificate is signed and returned, it is imported into the SSR for use by the client using the `import certificate client`  command. This process validates the imported certificate against the trusted certificates entered using `trusted-ca-certificate`, and checks for insecure algorithms and invalid configurations. 
+
+**DO NOT ignore any errors, warnings, or failures in this process.** Bypassing or disabling these validations will result in a non-compliant configuration. 
+
+The following example shows an **invalid** self-signed certificate:
+
+```
+admin@t327-dut1.cond# import certificate client
+Enter the end point certificate in PEM format (Press CTRL-D to finish):
+-----BEGIN CERTIFICATE-----
+MIIDHTCCAgWgAwIBAgICL/AwDQYJKoZIhvcNAQELBQAwDzENMAsGA1UEAwwEMTI4
+VDAiGA8yMDI0MDYwNjEyMzIzMVoYDzIwMjUwNjA3MTIzMjMxWjAPMQ0wCwYDVQQD
+...
+RaIliPRAdN85EXDiAP68ytg5D2ZzxCpmRvj4AiFI3JOc
+-----END CERTIFICATE-----
+
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCo4PCT4Wp89t5P
+53ZJtfgKwdV/CfAi3uXAfWmdluKlXjarlgTc6rgX8wGNSRj5/AajEUU6Z68DaejR
+...
+KBs2Hz/E/goCvyEqNaJOix+l
+-----END PRIVATE KEY-----
+                                                                                                                                                                                                                                                                                 
+⚠ Importing...
+certificate contains the following issues: certificate is self-signed
+/usr/lib/128technology/unzip/pcli/runfiles/pypi__36__cryptography_40_0_2/cryptography/x509/base.py:576: CryptographyDeprecationWarning: Parsed a negative serial number, which is disallowed by RFC 5280.
+  return rust_x509.load_pem_x509_certificates(data)
+Could not validate certificate chain against a trusted anchor.
+Could not validate certificate chain against a trusted anchor.
+Would you like to import anyway? [y/N]: N
+```
+
+#### 5. Configure the syslog server at the Authority level to use the configured client certificate.
 
 The following configuration example will add a syslog server named `syslog` that will use the previously configured client certificate. 
 

@@ -6,7 +6,7 @@ sidebar_label: Common Criteria Compliance Guidelines
 For compliance, the following configuration considerations must be made:
  
 - FIPS mode must be enabled **during installation**. Use of anything other than FIPS mode is not compliant with Common Criteria certification.
-- Configuration procedures may be performed from the CLI or the GUI. Upon configuration of a valid, `trusted-ca-certificate`, use of the SSR Web interface (GUI) is common criteria compliant. For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_6.3.0_access_mgmt.md#signing-and-importing-webserver-certificates).
+-  Upon configuration of a valid, `trusted-ca-certificate`, and the [Secure Communications](cc_fips_6.3.0_otp_router_install.md#enable-secure-communication) procedures, all methods of configuration are Common Criteria compliant; procedures may be performed from the CLI, the web interface (GUI), or through the use of [APIs](intro_rest_graphql_apis.md). For information about configuring a `trusted-ca-ertificate`, see [Signing and Importing Webserver Certificates](cc_fips_6.3.0_access_mgmt.md#signing-and-importing-webserver-certificates).
 - When installing a router, the [IPv4 Option Filter](cc_fips_6.3.0_sec_firewall_filtering.md#ipv4-option-filtering) must be set to `drop-all`.
 - When installing a router, the [ICMP Session Match](cc_fips_6.3.0_sec_firewall_filtering.md#icmp-type-as-a-session-attribute) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_6.3.0_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.

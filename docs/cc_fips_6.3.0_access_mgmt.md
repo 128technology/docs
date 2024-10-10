@@ -85,7 +85,6 @@ config authority asset-connection-resiliency enabled  true
 config authority asset-connection-resiliency ssh-only true
 ```
 
-
 ### Enable Strict Host Key Checking 
 
 Enabling strict `host-key-checking` **provides secure communication between the conductor and a router**. 
@@ -135,9 +134,9 @@ The following example manually configures the key to the conductor node `192.168
 
 ## Signing and Importing Webserver Certificates
 
-Imported webserver certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
+Imported webserver and X.509 certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
 
-### Configure a Trusted Certificate
+### 1. Configure a Trusted Certificate
 
 Certificates are pasted in as a multi-line config. 
 
@@ -150,7 +149,7 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-### Generate the Signing Request
+### 2. Create the Signing Request
 
 Use the `create certificate request webserver` command to generate the certificate signing request.
 
@@ -178,11 +177,13 @@ EwJVUzERMA8GA1UEBwwIV2VzdGZvcmQxEDAOBgNVBAoMB0p1bmlwZXIxFDASBgNV
 -----END CERTIFICATE REQUEST-----
 ```
 
-### Import the Certificate
+### 3. Import the Certificate
 
-After the certificate is signed and returned, it is imported into the SSR for use by the webserver using the `import certificate webserver`  command. It is validated against any trusted certificates entered using `trusted-ca-certificate`. 
+After the certificate is signed and returned, it is imported into the SSR for use by the webserver using the `import certificate webserver`  command. This process validates the imported certificate against the trusted certificates entered using `trusted-ca-certificate`, and checks for insecure algorithms and invalid configurations. 
 
-The following example shows an invalid self-signed certificate being imported:
+**DO NOT ignore any errors, warnings, or failures in this process.** Bypassing or disabling these validations will result in a non-compliant configuration. 
+
+The following example shows an **invalid** self-signed certificate:
 
 ```
 admin@t327-dut1.cond# import certificate webserver
@@ -206,10 +207,8 @@ certificate contains the following issues: certificate is self-signed
 /usr/lib/128technology/unzip/pcli/runfiles/pypi__36__cryptography_40_0_2/cryptography/x509/base.py:576: CryptographyDeprecationWarning: Parsed a negative serial number, which is disallowed by RFC 5280.
   return rust_x509.load_pem_x509_certificates(data)
 Could not validate certificate chain against a trusted anchor.
-Would you like to import anyways? [y/N]: y
-Certificate imported successfully
+Would you like to import anyways? [y/N]: N
 ```
-The imported certificate will be validated against the configured trusted root certificates and checked for insecure algorithms and invalid configurations. Bypassing or disabling these validations will result in a non-compliant configuration. 
 
 ## SSH Server Cryptographic Algorithms 
  
