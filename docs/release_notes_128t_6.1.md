@@ -99,7 +99,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
 ------
-- **I95-56492 Sessions configured for outbound-only with nat-keep-alive enabled experience reverse flow packet drops after flow migration:** A flow move from a WAN path to an inter-router path causes repeated session modifies on the hub side causing reverse traffic packet drops due to NAT keepalives incorrectly testing the failed WAN path for the migrated session. This issue has been resolved.
+- **I95-56492 Sessions configured for outbound-only with nat-keep-alive enabled experience reverse flow packet drops after flow migration:** A flow move from an inter-router (WAN) peer path to an inter-node (fabric) peer path causes repeated session modifies on the hub side causing reverse traffic packet drops due to NAT keepalives incorrectly testing the failed WAN path for the migrated session. This issue has been resolved.
 ------
 - **I95-56527 `compare config` returns an `Invalid JSON` error:** Resolved an issue where the use of a backslash (`\`) in a list key or a list element generates an `Invalid JSON` error when `compare config` is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a `\` in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the `\` only exists in one; Or if the list element with the `\` is renamed.
 ------
