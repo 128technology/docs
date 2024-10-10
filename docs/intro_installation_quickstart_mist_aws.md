@@ -1,9 +1,9 @@
 ---
-title: Installing a Mist-managed Router in AWS
-sidebar_label: Installing Mist-managed Router in AWS
+title: Installing a PAYG Mist-managed Router in AWS
+sidebar_label: Installing PAYG Mist-managed Router in AWS
 ---
 
-This guide describes the process for deploying a Mist-managed instance through AWS. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The installation and deployment process consists of the following steps:
+This guide describes the process for deploying a PAYG (Pay As You Go) Mist-managed instance through AWS. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The installation and deployment process consists of the following steps:
 
 * [Selecting the AMI](#selecting-the-ami).
 * Deploying the [Session Smart Router](#session-smart-router-deployment).

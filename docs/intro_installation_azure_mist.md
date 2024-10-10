@@ -1,11 +1,11 @@
 ---
-title: Installing a Mist-managed Router in Azure
-sidebar_label: Installing Mist-managed Router in Azure
+title: Installing a PAYG Mist-managed Router in Azure
+sidebar_label: Installing PAYG Mist-managed Router in Azure
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
+This guide describes the process for deploying a PAYG (Pay As You Go) Mist-managed Session Smart Router (SSR) in Azure. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
 * [Selecting the Azure Plan](#selecting-the-azure-plan).
 * Deploying a [Session Smart Router](#session-smart-router).
@@ -101,7 +101,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 5. Click the **Launch** link of the Mist-managed template.
 
-Answer the following questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template). 
+Answer the following questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template).
 
 * What name do you want to give it?
   * Provide the name in the **Instance Name** field (for example: `128TRouter`).
@@ -118,7 +118,7 @@ Answer the following questions to launch the deployment of an SSR. For additiona
 
 6. Provide a username (for example: `t128`) and the content of your public SSH key in the `Admin Username` and `Admin Public Key Data` fields respectively.
 
-7. Agree to the terms of use and conditions of the deployment. 
+7. Agree to the terms of use and conditions of the deployment.
 
 8. Click the **Purchase** button to launch the deployment.
 
@@ -143,11 +143,11 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 ![Plans](/img/platforms_azure_plans.png)
 
 6. Copy the URL of the template located in the field **URL** that best suits your needs.
-7. Create the parameters file. 
+7. Create the parameters file.
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template](#launch-the-template).
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. 
+Once the deployment completes, information is provided in the Outputs tab on the left hand side.
 
 If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Mist inventory to be associated with the router configuration.
 
@@ -266,7 +266,7 @@ A description of the parameters of the template are listed in the following tabl
 | Management Subnet Name  | The name of the management subnet within the VNet. |
 | Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Registration Code   | The Mist registration used for adoption of the instance to a Mist organization. |
-| Version | SSR software version installed on the instance. | 
+| Version | SSR software version installed on the instance. |
 | Instance size        | Select the size of the VM in the field Instance Size. |
 | Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH. |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
