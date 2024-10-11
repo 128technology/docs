@@ -21,6 +21,12 @@ For users installing *earlier, package-based versions of the SSR software*, the 
     - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
   - **Interactive:** Beginning with SSR version 6.3.0, the use of the interactive installer is not supported, nor necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI. With software versions earlier than 6.3.0, upgrading the SSR software on a conductor or router that is managed by a conductor using the interactive installer may result in the system becoming unresponsive. For this reason it is highly recommended that installations and upgrades be performed through the conductor UI.
 
+  :::note
+  Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-general-availability-and-out-of-support), the ISO name format has changed from using `OTP` to `ISO`:
+
+  `128T-5.4.7-7.el7.ISO.v1.x86_64.iso`
+  :::
+
 ## Downloading an ISO
 
 The SSR Software packages are available from our public servers using the username and token provided to you and can be accessed at the following location:
