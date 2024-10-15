@@ -5,7 +5,7 @@ sidebar_label: Downloading ISOs
 
 ## Introduction
 
-With your purchase of a SSR license, you are provided a set of credentials used to access the Session Smart Routing software. These credentials, in the form of a username and password are used to access the software assets.
+With the purchase of an SSR license, you are provided a set of credentials used to access the Session Smart Routing software. These credentials, in the form of a username and password are used to access the software assets.
 
 Juniper Session Smart Networking provides the following workflows for the installation process:
 
@@ -15,11 +15,17 @@ Juniper Session Smart Networking provides the following workflows for the instal
 
 For users installing *earlier, package-based versions of the SSR software*, the following installation methods are available:
 
-- **Package-based ISO:** For users who do not use Mist Cloud, this ISO offers multiple local installation methods.
+- **Package-based ISO:** For users who do not use Mist Cloud, the package-based ISO is used in the following deployments. 
+
+  - When the initial installation is going to be a version prior to 6.3.0.
+  - When upgrading to a version prior to 6.3.0 on air-gap network using the `import ISO` operation . For example, upgrading an air-gap conductor or routers from V5.6.6 to V6.2.7. See [Package-based Software Upgrade in an Air-Gap Network](upgrade_restricted_access.md#package-based-software-upgrade) for the more information. 
+
+  This ISO also provides different local installation methods.
+
   - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
     - [Router Installation Using OTP](intro_otp_iso_install.mdx)
     - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
-  - **Interactive:** Beginning with SSR version 6.3.0, the use of the interactive installer is not supported, nor necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI. With software versions earlier than 6.3.0, upgrading the SSR software on a conductor or router that is managed by a conductor using the interactive installer may result in the system becoming unresponsive. For this reason it is highly recommended that installations and upgrades be performed through the conductor UI.
+  - **Interactive:** Beginning with SSR version 6.3.0, the use of the interactive installer is not supported, nor necessary. Software installation and upgrade activities are supported from the GUI or PCLI. With software versions earlier than 6.3.0, upgrading the SSR software on a conductor or router that is managed by a conductor using the interactive installer may result in the system becoming unresponsive. For this reason it is highly recommended that installations and upgrades be performed through the conductor UI.
 
   :::note
   Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-general-availability-and-out-of-support), the ISO name format has changed from using `OTP` to `ISO`:
