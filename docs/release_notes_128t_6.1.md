@@ -72,9 +72,6 @@ I95-58142
 - **I95-58332 Show service-path incorrectly shows the state as `up` in an unreachable next-hop:** In a config where a `service-route next-hop` is pointing to an unreachable address, the show service-path shows the state is being up. This has been resolved by adding a next-hop reachability check to `show service-path`.
 ------
 - **I95-58503 Add the ability to disable session error records:** The ability to explicilty disable session records on a conductor or a router has been added to the SSR software. For more information, see [`session-record-profile`](config_command_guide.md/#configure-authority-session-record-profile).
-------
-- **I95-58527 Waiting for feedback**
-
 
 ## Release 6.1.10-8-lts
 
