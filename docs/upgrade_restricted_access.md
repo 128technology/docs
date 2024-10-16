@@ -126,7 +126,7 @@ For upgrades of Conductor and Conductor-managed routers to software versions pri
 
 In this example workflow, the conductor will be upgraded to 6.2.6, and the routers to 6.1.10. 
 <!-- markdown-link-check-disable -->
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.2.6-15.sts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page. <!-- markdown-link-check-enable -->
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.2.6-15.sts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page. 
 
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
 
