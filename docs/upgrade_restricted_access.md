@@ -59,9 +59,9 @@ The following process is used to upgrade a Conductor and Conductor-managed Route
 <!-- markdown-link-check-disable -->
 1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page. 
 
-2. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page. <!-- markdown-link-check-enable -->. 
+2. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page. <!-- markdown-link-check-enable --> 
 
-3. . [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
+3. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
 
 4. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](#import-iso) command. 
 
