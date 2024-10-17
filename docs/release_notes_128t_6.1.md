@@ -45,6 +45,32 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.11-5-lts
+
+**Release Date:** October 17, 2024
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2024-3596, CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
+------
+- **I95-55982 X722 interface MAC being set to 00:00:00:00:00:00 on SSR1300/SSR1400:** Identified an issue where the MAC address would change during a power cycle. Another power cycle can restore the MAC to its previous value. An upgrade to the X722 firmware addresses this issue. NOTE: A power cycle is required as part of the firmware flashing sequence. All power feeds must be manually disconnected and reconnected to cycle it correctly.
+------
+- **I95-57128 Slow inter-vlan traffic due to i40e performance issue:** Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value.  This has been resolved and latency reduced to 32us.
+------
+- **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where a configuration change may cause existing waypoint ports to become invalidated, creating an exhaustion scenario.
+------
+- **I95-57712 DSCP steering issue with outbound traffic:** Resolved an issue with processing reverse pinhole packets when DSCP steering is enabled.
+-------
+- **I95-57730 Peer Service Next Hops Not Reloaded After Provisional Status Change:** Resolved an issue where a `bgp-over-svr service-route` does not failback to primary node on a `provisional-status` change.
+------
+- **I95-58201 Increase AMD performance:** Throughput performance on AMD processors has been improved through the tuning of some kernel parameters. 
+------
+- **I95-58264 EoSVR session breaks after upgrading:** Resolved an issue where a high number of STEP route updates carried in an FPM message disconnected the Routing manager to agent connection. This has been resolved by limiting the max number of STEP paths in a single STEP route. 
+------
+- **I95-58332 Show service-path incorrectly shows the state as `up` in an unreachable next-hop:** In a config where a `service-route next-hop` is pointing to an unreachable address, the show service-path shows the state is being up. This has been resolved by adding a next-hop reachability check to `show service-path`.
+------
+- **I95-58503 Add the ability to disable session error records:** The ability to explicilty disable session records on a conductor or a router has been added to the SSR software. For more information, see [`session-record-profile`](config_command_guide.md#configure-authority-session-record-profile).
+
 ## Release 6.1.10-8-lts
 
 **Release Date:** August 22, 2024
@@ -98,6 +124,8 @@ This issue will be corrected in an upcoming release.
 - **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
 ------
 - **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
+------
+- **I95-56492 Sessions configured for outbound-only with nat-keep-alive enabled experience reverse flow packet drops after flow migration:** A flow move from an inter-router (WAN) peer path to an inter-node (fabric) peer path causes repeated session modifies on the hub side causing reverse traffic packet drops due to NAT keepalives incorrectly testing the failed WAN path for the migrated session. This issue has been resolved.
 ------
 - **I95-56527 `compare config` returns an `Invalid JSON` error:** Resolved an issue where the use of a backslash (`\`) in a list key or a list element generates an `Invalid JSON` error when `compare config` is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a `\` in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the `\` only exists in one; Or if the list element with the `\` is renamed.
 ------
