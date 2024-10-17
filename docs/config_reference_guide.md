@@ -2086,8 +2086,8 @@ This controls which repository or repositories a router will use to retrieve sof
 
 | Element | Type | Description |
 | --- | --- | --- |
-| offline-mode | boolean | Default: false. Controls whether the router will only be able to retrieve software upgrade images via its conductor.|
-| source-type | enumeration | Valid values: conductor-only, prefer-conductor, internet-only. Default: internet-only. To use the conductor as a proxy server to reach the SSR public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
+| offline-mode | boolean | Default: `false`. Set this to `true` to limit the router to only retrieve software upgrade images from its conductor.|
+| source-type | enumeration | Valid values: `conductor-only`, `prefer-conductor`, `internet-only`. Default: `internet-only`. To use the conductor as a proxy server to reach the SSR public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
 
 ## reverse-packet-session-resiliency
 
@@ -2708,7 +2708,7 @@ By default, an SSR retrieves software from a public software repository hosted b
 | Element | Type | Description |
 | --- | --- | --- |
 | max-bandwidth | enumeration | Valid values: unlimited, 1-999999999999. This value is in bits/second. This represents the bandwidth limiter applied to software downloads. |
-| repository | sub-element | Which repository/repositories the SSR will use.|
+| [repository](#repository) | sub-element | Which repository/repositories the SSR will use.|
 
 ## ssh-keepalive
 
