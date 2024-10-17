@@ -187,6 +187,7 @@ module.exports = {
           "wan_telemetry_troubleshooting",
           ],
       },
+      "wan_migration_to_mist",
     ],
     "Administration": [
       {
