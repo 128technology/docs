@@ -57,6 +57,10 @@ request system software revert          Revert to a previous version of the SSR.
 
 The image-based and package-based status is visible under **Install Type** in the PCLI using `show assets`.
 
+:::note
+The `status` column under `show assests` now displays `Synchronized` or `Synchronizing` where previously `Running` or `Connected` was displayed in earlier versions of software. `Synchronized` = `Running`, `Synchronizing` = `Connected`.
+:::
+
 **Image Based**
 
 ```
