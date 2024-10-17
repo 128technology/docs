@@ -35,4 +35,8 @@ A quick reminder on how neighborhoods work: when setting values in a neighborhoo
 
 Limiting this range will make your firewall team happy without putting too much of a crimp in your ability to SVR sessions. In fact, we have some customers that have limited their waypoint port allocation to only 10 ports on their head end routers! At face value this seems like it would severely restrict the number of unique, concurrent sessions that could be established by a peer, but in practice it doesn't. If a branch keeps its range to the default value of ports (49,151 ports), which can be sent to each of ten ports, you still wind up with a theoretical maximum of over 491,510 concurrent sessions *in each direction* to that branch over that adjacency.
 
+:::note
+When specifying [port-range](config_reference_guide.md#port-range), the even/odd rule for port selection no longer applies. Both local and remote ports selection will be continuous (round-robin).
+:::
+
 It is important to note that despite the configured [port-range](config_reference_guide.md#port-range), the SSR will at most use 50,000 of those ports by default. The configuration [max-way-points](config_reference_guide.md#max-way-points) allows the SSR software to scale respective to the platform and the administrator's needs. A `max-way-points` setting that is smaller than the number of sessions traversing a peer path will result in port exhaustion. A `max-way-points` setting that is too large will result in wasted system resources. Best practice is to tune both the `port-range` and `max-way-points` to a factor of 1.5x of the max number of sessions traversing a peer path.
