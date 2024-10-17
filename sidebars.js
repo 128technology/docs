@@ -47,10 +47,9 @@ module.exports = {
       "upgrade_legacy",  
       "intro_rollback",
     ],
-    "Pre-Installation Process": [
+    "Installation Overview": [
       "intro_installation",
-      "intro_downloading_iso",
-      "intro_creating_bootable_usb",
+
     ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
@@ -83,6 +82,8 @@ module.exports = {
     ],
     "Legacy Install Information": [
       "intro_installation_legacy",
+      "intro_downloading_iso",
+      "intro_creating_bootable_usb",
       {
        "type": "category",
           "label": "Conductor Installation",
