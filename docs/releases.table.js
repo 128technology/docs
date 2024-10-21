@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // ----------------------------------------------------------------------------
 // Please respect chronological release date order when adding new entries.
@@ -711,7 +712,7 @@ export const columns = [
     accessor: "version",
     className: "pester-data-table left",
     Cell: ({ cell: { value }, row: { original } }) => (
-      <a href={`${original.url}`}>
+      <a href={useBaseUrl(`${original.url}`)}>
         {value}
       </a>
     ),
