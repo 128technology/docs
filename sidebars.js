@@ -288,6 +288,8 @@ module.exports = {
           "config_ldap",
           "config_radius",
           "config_radsec",
+          "config_syslog_tls",
+          "config_weberver_certs",
           "config_password_policies",
           "howto_reset_user_password",
         ],

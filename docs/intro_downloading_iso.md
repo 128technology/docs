@@ -18,7 +18,7 @@ For users installing *earlier, package-based versions of the SSR software*, the 
 - **Package-based ISO:** For users who do not use Mist Cloud, the package-based ISO is used in the following deployments. 
 
   - When the initial installation is going to be a version prior to 6.3.0.
-  - When upgrading to a version prior to 6.3.0 on air-gap network using the `import ISO` operation . For example, upgrading an air-gap conductor or routers from V5.6.6 to V6.2.7. See [Package-based Software Upgrade in an Air-Gap Network](upgrade_restricted_access.md#package-based-software-upgrade) for the more information. 
+  - When upgrading to a version prior to 6.3.0 on air-gap network using the `import ISO` operation. For example, upgrading an air-gap conductor or routers from 5.6.6 to 6.2.7. See [Package-based Software Upgrade in an Air-Gap Network](upgrade_restricted_access.md#package-based-software-upgrade) for the more information. 
 
   This ISO also provides different local installation methods.
 

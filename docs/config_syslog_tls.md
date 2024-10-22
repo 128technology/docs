@@ -1,34 +1,19 @@
 ---
-title: Configuring RADUIS over TLS
-sidebar_label: Configuring RADIUS over TLS
+title: Configuring Syslog Over TLS
+sidebar_label: Configuring Syslog Over TLS
 ---
 
-RADIUS over TLS is designed to provide secure communication of RADIUS requests using the Transport Secure Layer (TLS) protocol. RADIUS over TLS, also known as RADSEC, redirects regular RADIUS traffic to remote RADIUS servers connected over TLS. RADSEC allows RADIUS authentication, authorization, and accounting data to be passed safely across untrusted networks.
+Syslog over TLS allows the secure transportation of system log messages from the syslog client to the syslog server. TLS uses certificates to authenticate and encrypt the communication.
 
-## RADSEC Configuration - Existing Certificate
+## Syslog over TLS Configuration - Existing Certificate
 
-Use the following information to configure RADIUS over TLS (RADSEC) using an existing certificate.
+Use the following information to configure Syslog over TLS using an existing certificate.
 
-#### 1. Configure the RADSEC server. 
-
-The following configuration example will add a radius server named `radsec`
-
-```
-admin@t327-dut1.cond# configure authority radius-server radsec
-admin@t327-dut1.cond (radius-server[name=radsec])# address 172.18.5.224
-admin@t327-dut1.cond (radius-server[name=radsec])# port 2083
-admin@t327-dut1.cond (radius-server[name=radsec])# protocol tls
-admin@t327-dut1.cond (radius-server[name=radsec])# account-creation manual
-admin@t327-dut1.cond (radius-server[name=radsec])# ocsp strict
-admin@t327-dut1.cond (radius-server[name=radsec])# server-name t327-dut1.openstacklocal
-admin@t327-dut1.cond (radius-server[name=radsec])# top
-``` 
-
-#### 2. Configure the Trusted CA Certificate. 
+#### 1. Configure the Trusted CA Certificate. 
 
 The trusted CA certificate is necessary to validate the incoming client certificate. Certificates are pasted in as a multi-line config. 
 
-Create a certificate root named `ca_root` and paste the certificate file content into the command:
+Create a root certificate named `ca_root` and paste the certificate file content into the command:
 
 ```
 admin@conductor-node-1.Conductor# config authority trusted-ca-certificate ca_root
@@ -41,43 +26,37 @@ Enter plain for content (Press CTRL-D to finish):
 The `trusted-ca-certificate` is a list and may contain different CA roots used for different certificates. In that case, naming them all `ca_root` would not be suitable. In that case, choose a name that is meaningful to the user and CA, eg: `globalsign_root`.
 :::
 
-#### 3. Configure a Client Certificate to be used for the RADIUS client.
+#### 2. Configure a Client Certificate to be used for the Syslog Client.
 
-Repeat the previous step to create a client certificate named `radsec`.
+Repeat the previous step to create a client certificate named `syslog`.
 
 ```
-admin@conductor-node-1.Conductor# config authority client-certificate radsec
-admin@conductor-node-1.Conductor (client-certificate[name=radsec])# content
+admin@conductor-node-1.Conductor# config authority client-certificate syslog
+admin@conductor-node-1.Conductor (client-certificate[name=syslog])# content
 Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-#### 4. Configure the RADIUS server at the Authority level to use the configured client certificate.
+#### 3. Configure the Syslog Server at the Authority level to use the configured client certificate.
 
-Associate the previously configured `radsec` client certificate to the radius server running on a specified node.
-
-`configure authority router cond node t327-dut1 radius client-certificate-name radsec`
-
-Note that the client certificate selected should match the appropriate IP/hostname of the node as seen from the RADIUS server.
-
-`validate` and `commit` the changes. 
-
-#### 5. Create a RADIUS User
-
-Create a remotely authenticated RADIUS user. In this example we create user `test1`.
+The following configuration example will add a syslog server named `syslog` that will use the previously configured client certificate. 
 
 ```
-*admin@conductor-node-1.Conductor# create user test1
-Full Name: test1
-Authentication Type (remote or local): remote
-Roles (space separated): admin
-Enabled (true or false): true
-Account 'test1' successfully created
+*admin@t327-dut1.cond# configure authority router cond system syslog server 192.168.1.100 6514
+*admin@t327-dut1.cond (server[ip-address=192.168.1.100][port=6514])# up
+*admin@t327-dut1.cond (syslog)# client-certificate-name syslog
+*admin@t327-dut1.cond (syslog)# protocol tls
+*admin@t327-dut1.cond (syslog)# ocsp strict
+*admin@t327-dut1.cond (syslog)# facility any
+*admin@t327-dut1.cond (syslog)# severity info
+*admin@t327-dut1.cond (syslog)# top
 ```
 
+To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to 192.168.1.100:6514 over TLS.
 When the user logs into the node `t327-dut1` via ssh, the authentication request is sent via RADSEC to the server `172.18.5.224` and the user is authenticated. 
 
-## RADSEC Configuration - Generate Certificate
+
+## Syslog over TLS Configuration - Generate Certificate
 
 Use the following examples to generate a client certificate for use on the device. 
 
@@ -86,7 +65,7 @@ Use the following examples to generate a client certificate for use on the devic
 Use the `create certificate request client` command to generate the signing request.
 
 ```
-admin@conductor-node-1.Conductor# create certificate request client radsec
+admin@conductor-node-1.Conductor# create certificate request client syslog
 Country name (2 letter code): US
 State or province name (full name): MA
 Locality name (eg: city): Westford
@@ -97,7 +76,7 @@ Email address:
 Subject Alternative Name - DNS (fully qualified domain name):
 Subject Alternative Name - IP Address:
 % Error: Could not create request: Subject Alternative Name (DNS or IP address) is required
-admin@conductor-node-1.Conductor# create certificate request client radsec
+admin@conductor-node-1.Conductor# create certificate request client syslog
 Country name (2 letter code): US
 State or province name (full name): MA
 Locality name (eg: city): Westford
@@ -200,7 +179,7 @@ After the certificate is signed and returned, it is imported into the SSR for us
 The following example shows an valid self-signed certificate being imported:
 
 ```
-admin@conductor-node-1.Conductor# import certificate client radsec
+admin@conductor-node-1.Conductor# import certificate client syslog
 Enter the end point certificate in PEM format (Press CTRL-D to finish):
 -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDFrn/2q4mijt14
@@ -285,5 +264,4 @@ Would you like to clean up the temporary certificate and key files? [Y/n]: Y
 
 Use the following example command to configure your device to accept the certificate.
 
-` configure authority router ComboWest node combo-west radius client-certificate-name radsec`
-
+` configure authority router ComboWest node combo-west radius client-certificate-name syslog`
