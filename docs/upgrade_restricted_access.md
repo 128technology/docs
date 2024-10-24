@@ -98,23 +98,15 @@ The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.
 
 5. Navigate to the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page, identify the software image version you will use to upgrade the target router or routers, and download it. <!-- markdown-link-check-enable -->
 
-:::note
-If you are upgrading or installing earlier image-based software on a router (versions 6.2.5 or earlier) you will need to include the checksum and signature files with the ISO when you download and import the software to the conductor.
-:::
-
  For example, if you are upgrading a router to SSR Version 6.1.10, you will need to download the following files:
 
  - `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.iso`
- - `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.tar.sha256sum`
- - `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.tar.sha256sum.asc`
 
-6. Copy the files to a USB that has an EXT4 file system.
+6. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
 
-7. Plug the USB in to the Conductor and mount the USB. 
+7. Import the `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
 
-8. Import the ISO, checksum, and signature file package you downloaded in step 5 onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install these files onto the conductor, only import them.  
-
-9. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
+8. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure. 
 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.

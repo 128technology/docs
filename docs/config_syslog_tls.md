@@ -53,8 +53,6 @@ The following configuration example will add a syslog server named `syslog` that
 ```
 
 To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to 192.168.1.100:6514 over TLS.
-When the user logs into the node `t327-dut1` via ssh, the authentication request is sent via RADSEC to the server `172.18.5.224` and the user is authenticated. 
-
 
 ## Syslog over TLS Configuration - Generate Certificate
 
