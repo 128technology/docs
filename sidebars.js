@@ -67,6 +67,7 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_conductor_aws",
             "intro_installation_quickstart_byol_mist_aws",
             ],
       },
