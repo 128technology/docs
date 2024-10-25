@@ -58,7 +58,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![CloudFormation Template](/img/aws-byol-conductor-template.png)
 
-7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
+7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
 
 
 - What version of SSR software do you want to install?
@@ -92,7 +92,7 @@ To deploy the Session Smart Networking software via the AWS CLI:
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
 7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
 
-Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
+Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
 
 ### Cloud-init Onboarding
 When launching an AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
@@ -120,7 +120,7 @@ write_files:
 | artifactory-password | Password portion of the artifactory credentials. |
 | node-name | The name of the node being provisioned. For a standalone conductor, this is `node0`. |
 
-Additional Conductor configuration options can be found in [initialize your device - Advanced Workflows.] (initialize_u-iso_other.md)
+Additional Conductor configuration options can be found in [initialize your device - Advanced Workflows.](initialize_u-iso_adv_workflow.md#initialize-a-conductor)
 
 ### Manual Onboarding
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
@@ -176,10 +176,10 @@ The information listed in the Outputs tab is the following:
 
 Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template.
 
-Create the parameters file router.parameters.json with the following command:
+Create the parameters file conductor.parameters.json with the following command:
 
 ```
-vi router.parameters.json
+vi conductor.parameters.json
 ```
 
 Paste the following JSON content. Please adjust the values to your specific environment:
@@ -211,11 +211,11 @@ Launch the template running the following command:
 ```
 aws ec2 create-launch-template \
   --launch-template-name <template-file> \
-  --launch-template-data file://router.parameters.json
+  --launch-template-data file://conductor.parameters.json
 ```
 
 
-## Deploying a Router without Templates
+### Deploying a Conductor without Templates
 
 1. Launch a web browser and navigate to https://aws.amazon.com/
 2. Login to AWS with your account.
@@ -311,7 +311,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
 
-7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
+7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
 
 - What version of SSR software do you want to install?
 - What name do you want to give the instance?
@@ -346,7 +346,10 @@ To deploy the Session Smart Networking software via the AWS CLI:
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
 7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
 
-Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
+Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
+
+### Cloud-init Onboarding
+When launching an AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
 
 ```
 #cloud-config
@@ -481,7 +484,7 @@ aws ec2 create-launch-template \
 ```
 
 
-## Deploying a Router without Templates
+### Deploying a Router without Templates
 
 1. Launch a web browser and navigate to https://aws.amazon.com/
 2. Login to AWS with your account.
@@ -511,7 +514,7 @@ aws ec2 create-launch-template \
     :::note
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
-16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist organization, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
+16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist organization, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding-1) section.
 17. Select **Review and Launch**.
 18. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
 19. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.
@@ -520,7 +523,7 @@ aws ec2 create-launch-template \
     If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
     :::
 21. Check the acknowledgment check box and then click **Launch Instances**.
-22. If an onboarding configuration was not provided in step 16, follow the manual steps to in the [Manual Onboarding](#manual-onboarding) section.
+22. If an onboarding configuration was not provided in step 16, follow the manual steps to in the [Manual Onboarding](#manual-onboarding-1) section.
 
 ## Interface Tagging
 
