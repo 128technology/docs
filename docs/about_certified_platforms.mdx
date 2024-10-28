@@ -1,48 +1,45 @@
 ---
-title: Certified Plus Platforms
-sidebar_label: Certified Plus Platforms
+title: Certified Portfolio
+sidebar_label: Certified Portfolio
 ---
 
 export const certifiedPlatforms = {
-  lanner7573a : {
-    application : "Medium/Large Branch",
-    cpu : "8C (Atom)",
-    mem : "16GB",
-    interfaces : [
-      "Ethernet, 6 ports",
-      "LTE AT&T",
-      "LTE Verizon",
-      "T1"
-    ]
-  },
-  lanner7573b : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom)",
-    mem : "8GB",
-    interfaces : [
-      "Ethernet, 6 ports",
-      "LTE AT&T",
-      "LTE Verizon",
-      "T1"
-    ]
-  },
-  lenovosr530 : {
-    application : "Small/Medium Datacenter",
-    cpu : "8-16C (Xeon Bronze-Silver)",
-    mem : "32-192GB",
-    interfaces : [
-      "Ethernet, 2-16 ports"
-    ]
-  },
-  lenovosr570 : {
-    application : "Large Datacenter",
+  lenovosr650r2 : {
+    application : "Large Datacenter, 100G hub",
     cpu : "22C (Xeon Gold)",
     mem : "128-192GB",
     interfaces : [
-      "Ethernet, 2-16 ports"
+      "12 ports total", 
+      "4 x 100Gb", 
+      "4 x 10/25Gb", 
+      "4 x 1/10Gb-T"
     ]
   },
-  silicommadridg61 : {
+  silicommadridg15901 : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "8GB",
+    interfaces : [
+      "Ethernet, 6 ports",
+    ]
+  },
+  silicommadridg02 : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "8GB",
+    interfaces : [
+      "Ethernet, 6 ports",
+    ]
+  },
+  silicommadridg03 : {
+    application : "Medium/Large Branch",
+    cpu : "8C (Atom C3558)",
+    mem : "16GB",
+    interfaces : [
+      "Ethernet, 8 ports",
+    ]
+  },
+    silicommadridg15911 : {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
@@ -51,14 +48,67 @@ export const certifiedPlatforms = {
       "LTE"
     ]
   },
-  silicommadridg01 : {
+  silicommadridg12 : {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
     interfaces : [
-      "Ethernet, 6 ports"
+      "Ethernet, 6 ports",
+      "LTE"
     ]
-  }
+  },
+    silicommadridg13 : {
+    application : "Medium/Large Branch",
+    cpu : "8C (Atom C3558)",
+    mem : "16GB",
+    interfaces : [
+      "Ethernet, 8 ports",
+      "LTE"
+    ]
+  },
+  silicommadridg71 : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "8GB",
+    interfaces : [
+      "Ethernet, 6 ports",
+      "Dual LTE"
+    ]
+  },
+  lannernca1515b : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "8GB ECC",
+    interfaces : [
+      "Ethernet, 6 RJ45 ports, 2 SFP",
+    ]
+  },
+    lannernca1515a : {
+    application : "Medium/Large Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "16GB ECC",
+    interfaces : [
+      "Ethernet, 6 RJ45 ports, 2 SFP",
+    ]
+  },
+  lannernca1515blte : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "8GB ECC",
+    interfaces : [
+      "Ethernet, 6 RJ45 ports, 2 SFP",
+      "LTE (AT&T, Verizon) Dual SIM"
+    ]
+  },
+    lannernca1515alte : {
+    application : "Medium/Large Branch",
+    cpu : "4C (Atom C3558)",
+    mem : "16GB ECC",
+    interfaces : [
+      "Ethernet, 6 RJ45 ports, 2 SFP",
+      "LTE (AT&T, Verizon) Dual SIM"
+    ]
+  },
 }
 
 export const Platform = ({id}) => (
@@ -84,48 +134,95 @@ export const Platform = ({id}) => (
   </table>
 )
 
-Juniper maintains platforms which have been certified to run the Session Smart Router (SSR) software. For more details on certification, see the [platform support policy](about_supported_platforms.md#ssr-certification-program).
+Juniper maintains platforms which have been certified to run the Session Smart Router (SSR) software. For more details on certification, see the [Platform Support Policy](about_supported_platforms.md#ssr-certification-program).
 
-## Certified Plus
+## Certified Platforms - Small and Medium Branch
 
-The following platforms have the status of [Certified Plus](about_supported_platforms.md#ssr-certified-plus-platform).
+The following devices are Certified Platforms for small to medium deployments. Models vary out of the box. Only the SKUs listed are Certified.
 
-### Silicom Madrid 90500-0151-G61
+### Silicom Madrid
 
-![Silicom Madrid 90500-0151-G61](/img/about_certified_platforms_silicommadrid-g61.png)
+![Silicom Madrid 90500-0151-G71](/img/about_certified_platforms_silicommadrid-gseries.png)
 
-Models vary, others are not Certified Plus.
+Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for information and quotes.
 
-<Platform id="silicommadridg61"></Platform>
+#### Silicom Madrid 90500-0151-G71
+<Platform id="silicommadridg71"></Platform>
 
-### Silicom Madrid 90500-0151-G01
+#### Silicom Madrid 90500-0151-G12
+<Platform id="silicommadridg12"></Platform>
 
-![Silicom Madrid 90500-0151-G01](/img/about_certified_platforms_silicommadrid-g01.png)
+#### Silicom Madrid 90500-0151-G02
+<Platform id="silicommadridg02"></Platform>
 
-Models vary, others are not Certified Plus.
+### Silicom Madrid Ruggedized
 
-<Platform id="silicommadridg01"></Platform>
+![Silicom Madrid Ruggedized 90500-0159-G01](/img/about_certified_platforms_silicommadrid-ruggedize-g01.png)
 
-### Lenovo SR530
+Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for information and quotes.
 
-![Lenovo SR530](/img/about_certified_platforms_lenovosr530.png)
+#### Silicom Madrid Ruggedized 90500-0159-G01
+<Platform id="silicommadridg15901"></Platform>
 
-<Platform id="lenovosr530"></Platform>
+#### Silicom Madrid Ruggedized 90500-0159-G11
+<Platform id="silicommadridg15911"></Platform>
 
-### Lenovo SR570
+### Lanner NCA-1515B
 
-![Lenovo SR570](/img/about_certified_platforms_lenovosr570.png)
+![Lanner NCA-1515B](/img/about_certified_platforms_lanner-nca-1515.jpg)
 
-<Platform id="lenovosr570"></Platform>
+Please reach out to the Lanner sales domain at partner_sales@Lannerinc.com with any purchase requests, HW questions, and order fulfillment.
 
-### Lanner 7573A
+#### L-1515B-4C-8E-128M-SSR1
+<Platform id="lannernca1515b"></Platform>
 
-![Lanner 7573A](/img/about_certified_platforms_lanner7573a.png)
+#### L-1515B-4C-8E-128M-C1-SSR
+<Platform id="lannernca1515blte"></Platform>
 
-<Platform id="lanner7573a"></Platform>
+## Certified Platforms – Medium and Large Branch
 
-### Lanner 7573B
+The following devices are Certified Platforms for medium to large deployments. Models vary out of the box. Only the SKUs listed are Certified.
 
-![Lanner 7573B](/img/about_certified_platforms_lanner7573b.png)
+### Lanner NCA-1515A
 
-<Platform id="lanner7573b"></Platform>
+![Lanner NCA-1515B](/img/about_certified_platforms_lanner-nca-1515.jpg)
+
+Please reach out to the Lanner sales domain at partner_sales@Lannerinc.com with any purchase requests, HW questions, and order fulfillment.
+
+#### L-1515A-8C-16E-128M-SSR
+<Platform id="lannernca1515a"></Platform>
+
+#### L-1515A-8C-16E-128M-C1-SSR1
+<Platform id="lannernca1515alte"></Platform>
+
+### Silicom Madrid
+
+Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for information and quotes.
+
+#### 90500-0151-G03 (NO LTE)
+<Platform id="silicommadridg03"></Platform>
+
+
+#### 90500-0151-G13 (LTE)
+<Platform id="silicommadridg13"></Platform>
+
+
+## Certified Platform – Hub
+
+The following devices are Certified Platforms for Hub deployments. Models vary out of the box. Only the SKUs listed are Certified.
+
+### Lenovo SR650v2
+
+![Lenovo SR650v2](/img/about_certified_platforms_lenovo-SR650-V2.png)
+
+Please reach out to one of the following organizations for sales and quote information:
+
+- Ingram Micro
+- TD Synnex
+- Arrow ECS (EMEA)
+- Arrow Integrated Solutions (USA)
+
+#### Lenovo SR650v2 7Z73VWQ100
+<Platform id="lenovosr650r2"></Platform>
+
+
