@@ -296,7 +296,7 @@ aws ec2 create-launch-template \
     If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
     :::
 21. Check the acknowledgment check box and then click **Launch Instances**.
-22. If an onboarding configuration was not provided in step 16, follow the manual steps to in the [Manual Onboarding](#manual-onboarding) section.
+22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
 
 ## Configuring a Default Route to an Internet Gateway
 
