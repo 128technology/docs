@@ -244,8 +244,7 @@ aws ec2 create-launch-template \
     :::note
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
-16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist organization, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
-<!---This step references onboarding a router to Mist. I was going to remove it, but Step 22 refers to this step. However it references an onboarding config being added here. I think this needs clarifictation. --->
+16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Conductor, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
 
 17. Select **Review and Launch**.
 18. In the _Boot from General Purpose_ window, select **Continue** and click **Next**.
@@ -256,7 +255,6 @@ aws ec2 create-launch-template \
     :::
 21. Place a check the acknowledgment check box and  click **Launch Instances**.
 22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
-<!--- Please provide the onboarding config info in step 16.---> 
 
 ## Session Smart Router Deployment
 
@@ -508,8 +506,7 @@ aws ec2 create-launch-template \
     :::note
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
-16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist organization, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding-1) section.
-<!---This step references onboarding a router to Mist. I was going to remove it, but Step 22 refers to this step. However it references an onboarding config being added here. I think this needs clarifictation. --->
+16. Expand the _Advanced Details_ and scroll down to the **User data** section. To initialize the Conductor, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding-1) section.
 
 17. Select **Review and Launch**.
 18. In the _Boot from General Purpose_ window, select **Continue** and click **Next**.
@@ -520,7 +517,6 @@ aws ec2 create-launch-template \
     :::
 21. Check the acknowledgment check box and click **Launch Instances**.
 22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding-1) section.
-<!--- Please provide the onboarding config info in step 16.---> 
 
 ## Interface Tagging
 
