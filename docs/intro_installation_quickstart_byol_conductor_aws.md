@@ -14,9 +14,9 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 ### Selecting the AMI
 
-**Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. Artifactory credentials are required to authenticate access to the installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
+The **Bring Your Own License (BYOL)** AMI allows you to install your own licensed copy of the SSR software on an AWS VM. Artifactory credentials are required to authenticate access to the installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
-Once you have selected the AMI that better suits the needs of your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
+Once you have selected the AMI for your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
 ## Session Smart Conductor Deployment
 
@@ -44,16 +44,16 @@ The following image shows the infrastructure elements deployed:
 
 ![Conductor deployment](/img/platforms_aws_conductor_deployment.png)
 
-#### AWS Console
+### Using the AWS Console
 
 To deploy the Session Smart Networking software via the AWS Console:
 
 1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Counductor** and select the desired region.
+3. Click the **Continue to Configuration** button.
+4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
 5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
 
 
 ![CloudFormation Template](/img/aws-byol-conductor-template.png)
@@ -61,9 +61,9 @@ To deploy the Session Smart Networking software via the AWS Console:
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
 
 
-- What version of SSR software do you want to install?
 - What name do you want to give the instance?
   - Provide it in the **Stack name** field (for example: Conductor).
+- What version of SSR software do you want to install?
 - Where do you want to deploy it?
   - Select the VPC in the region.
   - Select the subnet within the VPC.
@@ -87,7 +87,7 @@ To deploy the Session Smart Networking software via the AWS CLI:
 1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor** and select the desired region.
+4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, then select the **Juniper Session Smart Conductor** template and select the desired region.
 5. Click on the **Continue to Launch** button.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
 7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
@@ -114,13 +114,13 @@ write_files:
 
 | Option | Meaning |
 | ------ | ------- |
-| name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
+| name | The name of the router to use for Mist onboarding. By default, the instance name is used. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
 | node-name | The name of the node being provisioned. For a standalone conductor, this is `node0`. |
 
-Additional Conductor configuration options can be found in [initialize your device - Advanced Workflows.](initialize_u-iso_adv_workflow.md#initialize-a-conductor)
+Additional Conductor configuration options can be found in [Initialize Your Device - Advanced Workflows.](initialize_u-iso_adv_workflow.md#initialize-a-conductor)
 
 ### Manual Onboarding
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
@@ -131,9 +131,9 @@ If a user does not supply the onboarding configuration before launching the inst
 4. Upon completion, the instance will reboot once.
 
 
-### Launch the Conductor Template
+#### Launch the Conductor Template
 
-This section describes the parameters to complete the template to deploy a SSR conductor.
+This section describes the parameters to complete the template to deploy an SSR conductor.
 
 ![CloudFormation Template](/img/aws-byol-conductor-template.png)
 
@@ -141,12 +141,12 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Stack name           | Fill out the Instance Name field to provide a name to the VM for the Mist-managed router.|
-| VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
+| Stack name           | The Instance Name field provides a name to the VM for the device.|
+| VPC ID               | ID of the existing VPC where the device is going to be deployed. |
 | Public Subnet ID     | ID of the management subnet within the VPC. |
 | Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token | portion of the artifactory credentials used to install the SSR software. |
+| Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
 | Version | SSR software version installed on the instance. |
 | Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
@@ -214,7 +214,6 @@ aws ec2 create-launch-template \
   --launch-template-data file://conductor.parameters.json
 ```
 
-
 ### Deploying a Conductor without Templates
 
 1. Launch a web browser and navigate to https://aws.amazon.com/
@@ -226,7 +225,7 @@ aws ec2 create-launch-template \
 4. Click **Launch Instance**.
 5. On the _Step 1: Choose an Amazon Machine Image (AMI)_ page, select the **Amazon Marketplace** tab and enter Session Smart Networking in the search bar.
 6. Locate the SSR image and click **Select**.
-7. On the _Step 2: Choose and Instance Type_ page, choose an instance type.
+7. On the _Step 2: Choose an Instance Type_ page, choose an instance type.
 8. On the _Step 3: Configure Instance Details_ page, click **Subnet** and select the desired subnet and retain the default values for the other fields.
    :::note
    If the desired subnet is not listed, click **Create New Subnet** to create one.
@@ -246,17 +245,18 @@ aws ec2 create-launch-template \
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
 16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist organization, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
+<!---This step references onboarding a router to Mist. I was going to remove it, but Step 22 refers to this step. However it references an onboarding config being added here. I think this needs clarifictation. --->
+
 17. Select **Review and Launch**.
-18. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
+18. In the _Boot from General Purpose_ window, select **Continue** and click **Next**.
 19. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.
 20. In the _Select an existing key pair or create a new key pair_ dialog box, select **Choose an existing key pair** and select the desired key pair from the list.
     :::note
     If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
     :::
-21. Check the acknowledgment check box and then click **Launch Instances**.
-22. If an onboarding configuration was not provided in step 16, follow the manual steps to in the [Manual Onboarding](#manual-onboarding) section.
-
-
+21. Place a check the acknowledgment check box and  click **Launch Instances**.
+22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
+<!--- Please provide the onboarding config info in step 16.---> 
 
 ## Session Smart Router Deployment
 
@@ -266,23 +266,17 @@ Use the following guide to deploy a BYOL Session Smart Router in AWS.
 
 The following infrastructure must exist in your AWS account:
 * A VPC where the Session Smart Router will be deployed.
-* The existing VPC is segmented with at least three subnets. The role of each subnet is described below
-* [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer
+* The existing VPC is segmented with at least the following three subnets:
+  - **Public Subnet**: This subnet must provide connectivity to enable communication with external/remote SSR peers.
+  - **Private Subnet**: This subnet must provide connectivity to internal workloads within the cloud.
+  - **Management Subnet**: This subnet is used for conductor-managed deployments, and has the following requirements:
+    * The subnet is reachable for SSH for administration purposes.
+    * The interface of the Conductor that manages this router must be reachable from this subnet.
+* [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer:
 
 ```
 aws ec2 modify-instance-attribute --instance-id instance_id --ena-support
 ```
-
-#### Public Subnet
-This subnet must provide connectivity to enable communication with external/remote SSR peers.
-
-#### Private Subnet
-This subnet must provide connectivity to internal workloads within the cloud.
-
-#### Management Subnet
-This subnet is used for conductor-managed deployments, and has the following requirements:
-* The subnet is reachable for SSH for administration purposes.
-* The interface of the Conductor that manages this router must be reachable from this subnet.
 
 ### Deployment
 
@@ -303,19 +297,19 @@ The following image shows the infrastructure elements deployed:
 To deploy the Session Smart Networking software via the AWS Console:
 
 1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor Managed Router** and select the desired region.
+2. Click the **Continue to Subscribe** button and accept the terms and conditions.
+3. Click the **Continue to Configuration** button.
+4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
 5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
 
 ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
 
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
 
-- What version of SSR software do you want to install?
 - What name do you want to give the instance?
   - Provide it in the **Stack name** field (for example: SSR_1_Router).
+- What version of SSR software do you want to install?
 - Where do you want to deploy it?
   - Select the VPC in the region.
   - Select the public, private, and management subnets within the VPC.
@@ -324,8 +318,8 @@ To deploy the Session Smart Networking software via the AWS Console:
 - **Optional** What is the secondary control IP address of the Conductor used to manage it?
 - Who is going to be the administrator?
   - Select the IAM user key.
-8. Click the **Next** button.
-9. Click on the **Create stack** button to launch the deployment.
+8. Click **Next**.
+9. Click **Create stack** to launch the deployment.
 
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
@@ -339,17 +333,17 @@ To login to the instance via SSH, use `t128` as the username and the SSH public 
 To deploy the Session Smart Networking software via the AWS CLI:
 
 1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor Managed Router** and select the desired region.
-5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
-7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
+2. Click the **Continue to Subscribe** button and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
+5. Click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+7. Copy the URL of the template located in the field **Amazon S3 URL** to the clipboard.
 
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
 
 ### Cloud-init Onboarding
-When launching an AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
+When launching an AWS EC2 instance using automation, the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
 
 ```
 #cloud-config
@@ -365,7 +359,7 @@ write_files:
 ```
 | Option | Meaning |
 | ------ | ------- |
-| name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
+| name | The name of the router to use for Mist onboarding. By default, the instance name is used. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
@@ -381,7 +375,7 @@ If a user does not supply the onboarding configuration before launching the inst
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used are as follows:
 
 | Network Interface name | Subnet           | PCI Address     |
 | ---------------------- | ---------------- | ----------------|
@@ -391,7 +385,7 @@ The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two
 
 ### Launch the Conductor Managed Template
 
-This section describes the parameters to complete the template to deploy a Mist-managed SSR, as well as how to launch it using the portal or programmatically.
+This section describes the parameters to complete the template to deploy a conductor-managed SSR, as well as how to launch it using the portal or programmatically.
 
 ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
 
@@ -399,8 +393,8 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Stack name           | Fill out the Instance Name field to provide a name to the VM for the Mist-managed router.|
-| VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
+| Stack name           | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
+| VPC ID               | ID of the existing VPC where the conductor-managed router is going to be deployed. |
 | Public Subnet ID     | ID of the public subnet within the VPC. |
 | Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
 | Private Subnet ID    | ID of the private subnet within the VPC. |
@@ -408,7 +402,7 @@ A description of the parameters of the template are listed in the following tabl
 | Management Subnet ID | ID of the management subnet within the VPC. |
 | Management Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token | portion of the artifactory credentials used to install the SSR software. |
+| Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
 | Primary Control IP | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
 | Version | SSR software version installed on the instance. |
@@ -419,14 +413,14 @@ A description of the parameters of the template are listed in the following tabl
 #### AWS Console
 
 1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor Managed Router** and select the desired region.
-5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
-7. Click the **Next** button.
+2. Click the **Continue to Subscribe** button and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop down, select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
+5. Click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+7. Click **Next**.
 8. Fill out the template. Review the section above to understand the parameters of the template.
-9. Continue clicking the **Next** button.
+9. Click **Next**.
 10. Click **Create Stack** to start the deployment.
 
 Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
@@ -468,14 +462,14 @@ Paste the following JSON content. Please adjust the values to your specific envi
 ```
 
 1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor Managed Router** and select the desired region.
-5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
-7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop down, select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
+5. Click **Continue to Launch**.
+6. In the **Choose Action** dialog, select **Launch CloudFormation** and click **Launch**.
+7. Copy the URL of the template located in the field **Amazon S3 URL** to the clipboard.
 
-Launch the template running the following command:
+Run the following command to launch the template:
 
 ```
 aws ec2 create-launch-template \
@@ -515,15 +509,18 @@ aws ec2 create-launch-template \
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
 16. Expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist organization, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding-1) section.
+<!---This step references onboarding a router to Mist. I was going to remove it, but Step 22 refers to this step. However it references an onboarding config being added here. I think this needs clarifictation. --->
+
 17. Select **Review and Launch**.
-18. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
+18. In the _Boot from General Purpose_ window, select **Continue** and click **Next**.
 19. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.
 20. In the _Select an existing key pair or create a new key pair_ dialog box, select **Choose an existing key pair** and select the desired key pair from the list.
     :::note
     If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
     :::
-21. Check the acknowledgment check box and then click **Launch Instances**.
-22. If an onboarding configuration was not provided in step 16, follow the manual steps to in the [Manual Onboarding](#manual-onboarding-1) section.
+21. Check the acknowledgment check box and click **Launch Instances**.
+22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding-1) section.
+<!--- Please provide the onboarding config info in step 16.---> 
 
 ## Interface Tagging
 
