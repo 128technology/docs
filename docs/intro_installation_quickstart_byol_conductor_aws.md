@@ -8,7 +8,7 @@ The installation and deployment process consists of the following steps:
 
 * [Selecting the AMI](#selecting-the-ami).
 * Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
-* Deploying the [Session Smart Router](#session-smart-router-deployment).
+* Deploying the [Session Smart Conductor Managed Router](#session-smart-conductor-managed-router-deployment).
 
 Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
@@ -16,7 +16,7 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 The **Bring Your Own License (BYOL)** AMI allows you to install your own licensed copy of the SSR software on an AWS VM. Artifactory credentials are required to authenticate access to the installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
-Once you have selected the AMI for your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
+Once you have selected the AMI for your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Conductor Managed Router.
 
 ## Session Smart Conductor Deployment
 
@@ -114,7 +114,7 @@ write_files:
 
 | Option | Meaning |
 | ------ | ------- |
-| name | The name of the router to use for Mist onboarding. By default, the instance name is used. |
+| name | The name of the router. By default, the instance name is used. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
@@ -256,9 +256,9 @@ aws ec2 create-launch-template \
 21. Place a check the acknowledgment check box and  click **Launch Instances**.
 22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
 
-## Session Smart Router Deployment
+## Session Smart Conductor Managed Router Deployment
 
-Use the following guide to deploy a BYOL Session Smart Router in AWS.
+Use the following guide to deploy a BYOL Session Smart Conductor Managed Router in AWS.
 
 ### Requirements
 
@@ -357,7 +357,7 @@ write_files:
 ```
 | Option | Meaning |
 | ------ | ------- |
-| name | The name of the router to use for Mist onboarding. By default, the instance name is used. |
+| name | The name of the Conductor. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
@@ -524,7 +524,7 @@ In addition to using the cloud formation template, the admin can tag the interfa
 
 | Tag Value | Meaning |
 | --------- | ------- |
-| WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to Mist cloud infrastructure. |
+| WAN       | Interface is marked as WAN for onboarding purposes. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
 
 :::note
