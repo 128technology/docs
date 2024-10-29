@@ -15,7 +15,7 @@ This guide describes the process for deploying a Mist-managed Session Smart Rout
 The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of the SSR software on an Azure VM. Artifactory credentials are required to authenticate access to the installation repositories. Select the BYOL plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
 
-Once you have selecte the BYOL plan for your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
+Once you have selecte the BYOL plan for your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Router.
 
 ## Session Smart Conductor Deployment
 
