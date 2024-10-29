@@ -324,7 +324,7 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
-          "howto_bios_upgrade",
+          "howto_update_bios",
           "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",
