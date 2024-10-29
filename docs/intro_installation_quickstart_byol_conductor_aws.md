@@ -48,18 +48,16 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click the **Continue to Configuration** button.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
 4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
-5. Click on the **Continue to Launch** button.
+5. Click **Continue to Launch**.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
-
 
 ![CloudFormation Template](/img/aws-byol-conductor-template.png)
 
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
-
 
 - What name do you want to give the instance?
   - Provide it in the **Stack name** field (for example: Conductor).
@@ -70,8 +68,8 @@ To deploy the Session Smart Networking software via the AWS Console:
 - What are the artifactory credentials used to install the software?
 - Who is going to be the administrator?
   - Select the IAM user key.
-8. Click the **Next** button.
-9. Click on the **Create stack** button to launch the deployment.
+8. Click **Next**.
+9. Click **Create stack** to launch the deployment.
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
@@ -84,13 +82,13 @@ To login to the instance via SSH, use `t128` as the username and the SSH public 
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, then select the **Juniper Session Smart Conductor** template and select the desired region.
-5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
-7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
+5. Click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and select **Launch**.
+7. Copy the URL of the template in the **Amazon S3 URL** field.
 
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
 
@@ -155,14 +153,14 @@ A description of the parameters of the template are listed in the following tabl
 #### AWS Console
 
 1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor** and select the desired region.
-5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
+5. Click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and select **Launch**.
 7. Click the **Next** button.
 8. Fill out the template. Review the section above to understand the parameters of the template.
-9. Continue clicking the **Next** button.
+9. Continue by clicking **Next**.
 10. Click **Create Stack** to start the deployment.
 
 Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
@@ -199,12 +197,12 @@ Paste the following JSON content. Please adjust the values to your specific envi
 ```
 
 1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
-2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click on the **Continue to Configuration** button.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Conductor** and select the desired region.
-5. Click on the **Continue to Launch** button.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
-7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
+5. Click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and select **Launch**.
+7. Copy the URL of the template in the **Amazon S3 URL** field.
 
 Launch the template running the following command:
 
@@ -294,11 +292,11 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click the **Continue to Subscribe** button and accept the terms and conditions.
-3. Click the **Continue to Configuration** button.
+1. Click **Session Smart Networking Platform BYOL**.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
 4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
-5. Click on the **Continue to Launch** button.
+5. Click **Continue to Launch**.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
 
 ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
@@ -330,13 +328,13 @@ To login to the instance via SSH, use `t128` as the username and the SSH public 
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click the **Continue to Subscribe** button and accept the terms and conditions.
+1. Click **Session Smart Networking Platform BYOL**.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
 3. Click **Continue to Configuration**.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
+4. In the **Fulfillment Option** drop down, select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
 5. Click **Continue to Launch**.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
-7. Copy the URL of the template located in the field **Amazon S3 URL** to the clipboard.
+7. Copy the URL of the template in the **Amazon S3 URL** field.
 
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
 
@@ -407,17 +405,16 @@ A description of the parameters of the template are listed in the following tabl
 | Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 
+#### Using the AWS Console
 
-#### AWS Console
-
-1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
-2. Click the **Continue to Subscribe** button and accept the terms and conditions.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
 3. Click **Continue to Configuration**.
-4. In the **Fulfillment Option** drop down, select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
+4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
 5. Click **Continue to Launch**.
-6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
 7. Click **Next**.
-8. Fill out the template. Review the section above to understand the parameters of the template.
+8. Fill out the template using the table above to understand the parameters of the template.
 9. Click **Next**.
 10. Click **Create Stack** to start the deployment.
 
@@ -459,13 +456,13 @@ Paste the following JSON content. Please adjust the values to your specific envi
 }
 ```
 
-1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
+1. Click the **Session Smart Networking Platform BYOL** offering.
 2. Click **Continue to Subscribe** and accept the terms and conditions.
 3. Click **Continue to Configuration**.
-4. In the **Fulfillment Option** drop down, select **CloudFormation Template**, select the **Juniper Session Smart Conductor Managed Router** template and select the desired region.
+4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
 5. Click **Continue to Launch**.
-6. In the **Choose Action** dialog, select **Launch CloudFormation** and click **Launch**.
-7. Copy the URL of the template located in the field **Amazon S3 URL** to the clipboard.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
+7. Copy the URL of the template in the **Amazon S3 URL** field.
 
 Run the following command to launch the template:
 
