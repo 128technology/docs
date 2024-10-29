@@ -10,7 +10,7 @@ sidebar_label: '2.0'
 
 - **I95-57252 BYOL Support for Conductor and Conductor Managed router:** Added support for IBU Conductors. BYOL Conductors are supported with 6.3.0-R1 and above. Added support for IBU Conductor Managed routers. Conductor managed routers require 6.1.0 or above and must be managed by a 6.3.0-R1 or greater conductor.
 
-- **I95-58706 Whitelist AWS cXa instance types:** Added support for AWS cXa instance types such as c7a. These instnace types utilize varius AMD processors. More information can be found in the [AWS documentation](https://aws.amazon.com/ec2/instance-types/#Compute_Optimized).
+- **I95-58706 Whitelist AWS cXa instance types:** Added support for AWS cXa instance types such as c7a. These instance types utilize various AMD processors. For more information, please see the [AWS documentation](https://aws.amazon.com/ec2/instance-types/#Compute_Optimized).
 
 ### Resolved Issues
 
