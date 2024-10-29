@@ -4,18 +4,18 @@ sidebar_label: Installing a BYOL Conductor-managed Router in Azure
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure using your own license. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
+This guide describes the process for deploying a Conductor-managed Session Smart Router (SSR) in Azure using your own license. The process consists of the following steps:
 
 * [Selecting the Azure Plan](#selecting-the-azure-plan).
 * Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
-* Deploying the [Session Smart Conductor Managed Router](#session-smart-conductor-managed-router-deployment).
+* Deploying the [Session Smart Conductor-managed Router](#session-smart-conductor-managed-router-deployment).
 
 ## Selecting the Azure Plan
 
 The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of the SSR software on an Azure VM. Artifactory credentials are required to authenticate access to the installation repositories. Select the BYOL plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
 
-Once you have selecte the BYOL plan for your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Router.
+Once you have selected the BYOL plan for your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor-managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Router.
 
 ## Session Smart Conductor Deployment
 
@@ -47,14 +47,14 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-1. Click on the BYOL **Session Smart Networking Platform** offering.
-2. Click on the **Get it now** button.
+1. Click **Session Smart Networking Platform BYOL**.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab **Plans + Pricing** as shown in the following picture:
+4. Click the **Plans + Pricing** tab as shown below:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click on the **Launch** link of the **Juniper Session Smart Conductor** template.
+5. Click the **Launch** link on the **Juniper Session Smart Conductor** template to open the template. 
 
 ![ARM Template](/img/azure-byol-conductor-template.png)
 
@@ -74,7 +74,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 7. Agree to the terms of use and conditions of the deployment. 
 
-8. Click the **Purchase** button to launch the deployment.
+8. Click **Purchase** to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -82,19 +82,18 @@ Once the deployment completes, information is provided in the Outputs tab and th
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
-
 ### Azure CLI or PowerShell
 
 To deploy the Session Smart Networking software using the Azure CLI or Powershell:
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on **Get it now**.
+1. Click **Session Smart Networking Platform BYOL**.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
 4. Click on **Get started** to enable programmatic deployment for the subscription, then click **Save**.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-5. Click on the tab **Plans + Pricing** as shown in the following picture:
+5. Click the **Plans + Pricing** tab as shown below:
 
 ![Plans](/img/platforms_azure_plans.png)
 
@@ -108,7 +107,7 @@ Once the deployment completes, information is provided in the Outputs tab and th
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
 ### Cloud-init Onboarding
-When launching an instance using CLI or Powershell or while using automation the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
+When launching an instance using the CLI, Powershell, or while using automation, the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
 
 ```
 #cloud-config
@@ -135,7 +134,6 @@ write_files:
 
 Additional Conductor configuration options can be found in [Initialize Your Device - Advanced Workflows.](initialize_u-iso_adv_workflow.md#initialize-a-conductor)
 
-
 ### Manual Onboarding
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
 
@@ -159,9 +157,9 @@ A description of the parameters of the template are listed in the following tabl
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
 | Instance Name           | Provide a name to the VM for the Session Smart Conductor. |
 | Version                 | SSR software version installed on the instance. |
-| Location                | As indicated in the requirements, the Session Smart Conductor is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase). Example: eastus, westus, westeurope, eastasia...     |
-| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to. |
-| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
+| Location                | As indicated in the requirements, the Session Smart Conductor is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia).     |
+| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
+| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above where the device will be deployed. |
 | Management Subnet Name  | The name of the management subnet within the VNet. |
 | Management Allowed CIDR      | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet.  |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
@@ -172,14 +170,14 @@ A description of the parameters of the template are listed in the following tabl
 
 ### Azure Portal
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Get it now** button.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab **Plans + Pricing** as shown in the following picture:
+4. Click the **Plans + Pricing** tab as shown below:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click on the **Launch** link of the **Juniper Session Smart Conductor** template.
+5. Click the **Launch** link of the **Juniper Session Smart Conductor** template.
 6. Agree to the terms of use and conditions of the deployment.
 7. Click on the **Purchase** button to launch the deployment.
 
@@ -195,7 +193,6 @@ The information listed in the Outputs tab is the following:
 :::important
 When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
-
 
 ### Azure CLI or PowerShell
 
@@ -252,17 +249,17 @@ Paste the following JSON content. Please adjust the values to your specific envi
 ```
 
 1. Go to the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Get it now** button.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the **Get started** button to enable programmatic deployment for the subscription.
-5. Click the button **Save** to save the changes.
+4. Click **Get started** to enable programmatic deployment for the subscription.
+5. Click **Save** to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
 6. Close the **Configure Programmatic Deployment** window.
-7. Click on the tab **Plans + Pricing**.
-8. Copy the URL of the **Session Smart Router** template located in the field **URL** to the clipboard.
-9. Launch the template running the following command:
+7. Click the **Plans + Pricing** tab.
+8. Copy the URL for the **Session Smart Router** template from the **URL** field.
+9. Launch the template by running the following command:
 
 ```
 New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
@@ -271,21 +268,21 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 ```
 
 :::important
-When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
+When logging to the Linux instance via SSH, use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
 
 ### Deploying a Conductor without Templates
 
 1. Go to the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Create** button.
+2. Click **Create**.
 3. Complete the Basics tab then review the additional tabs for further customization.
 4. Under the Advanced tab, you can add cloud-init custom data to automatically install and initalize the conductor. Use the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
 5. Click **Review and Create**
 6. If an onboarding configuration was not provided in step 4, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
 
-## Session Smart Conductor Managed Router Deployment
+## Session Smart Conductor-managed Router Deployment
 
-Use the following guide to deploy a BYOL Session Smart Conductor Managed Router in AWS.
+Use the following guide to deploy a BYOL Session Smart Conductor-managed Router in Azure.
 
 ### Requirements
 
@@ -300,7 +297,7 @@ The following infrastructure must exist in your Azure subscription:
     * The interface of the Conductor that manages this router must be reachable from this subnet.
 
 ### Deployment
-A Session Smart Conductor Managed Router can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
+A Session Smart Conductor-managed Router can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * Virtual machine with the Session Smart image specified in the template.
@@ -312,24 +309,21 @@ The following image shows the infrastructure elements deployed:
 
 ![Router deployment](/img/platforms_azure_router_deployment.png)
 
-
 ### Azure Portal
 
 To deploy the Session Smart Networking software via the Azure Portal:
-
-
-1. Click on the BYOL **Session Smart Networking Platform** offering.
-2. Click on the **Get it now** button.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab **Plans + Pricing** as shown in the following picture:
+4. Click the **Plans + Pricing** tab as shown below:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click on the **Launch** link of the **Juniper Session Smart Conductor Managed Router** template.
+5. Click the **Launch** link of the **Juniper Session Smart Conductor** template.
 
 ![ARM Template](/img/azure-byol-conductor-managed-template.png)
 
-6. Answer the following questions to launch the deployment of a Conductor Managed Router. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
+6. Answer the following questions to launch the deployment of a Conductor-managed Router. For a description of the parameters of the template, please refer to [Launch the Conductor-managed Template](#launch-the-conductor-managed-template).
 
 - What name do you want to give it?
   - Provide it in the **Instance Name** field (for example: Router).
@@ -350,7 +344,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 7. Agree to the terms of use and conditions of the deployment. 
 
-8. Click the **Purchase** button to launch the deployment.
+8. Click **Purchase** to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -363,29 +357,29 @@ To login to the instance via SSH, use `t128` as the username and the SSH public 
 
 To deploy the Session Smart Networking software using the Azure CLI or Powershell:
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on **Get it now**.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on **Get started** to enable programmatic deployment for the subscription, then click **Save**.
+4. Click **Get started** to enable programmatic deployment for the subscription, then click **Save**.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-5. Click on the tab **Plans + Pricing** as shown in the following picture:
+5. Click the **Plans + Pricing** tab as shown below:
 
 ![Plans](/img/platforms_azure_plans.png)
 
 6. Copy the URL of the template located in the field **URL** that best suits your needs.
 7. Create the parameters file.
 8. Accept the terms of use and conditions of the image.
-9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
+9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Conductor-managed Template](#launch-the-conductor-managed-template).
 
 Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed. The Router will automatically be associated with the desired Conductor.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
-
 ### Cloud-init Onboarding
-When launching an instance using CLI or Powershell or while using automation the following custom data section can be leveraged to setup the onboarding data for the instance.
+
+When launching an instance using the CLI, Powershell, or using automation, the following custom data section can be leveraged to setup the onboarding data for the instance.
 
 ```
 #cloud-config
@@ -414,7 +408,7 @@ If a user does not supply the onboarding configuration before launching the inst
 2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
 3. Follow the prompts to generate and apply the onboarding configuration.
 
-#### Launch the Conductor Managed Template
+#### Launch the Conductor-managed Template
 
 This section describes the parameters to complete the template to deploy an SSR using either the Azure marketplace, or programmatically.
 
@@ -423,25 +417,21 @@ This section describes the parameters to complete the template to deploy an SSR 
 
 A description of the parameters of the template are listed in the following table:
 
-
-A description of the parameters of the template are listed in the following table:
-A description of the parameters of the template are listed in the following table:
-
 | Parameter               | Description |
 | ---| --- |
 | Subscription            | Subscription for the deployment. |
 | Resource group          | Select an existing resource group or create a new one. |
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
-| Instance Name           | Provide a name to the VM for the Session Smart Conductor. |
+| Instance Name           | Provide a name to the VM for the Session Smart Router. |
 | Version                 | SSR software version installed on the instance. |
-| Location                | As indicated in the requirements, the Session Smart Conductor is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase). Example: eastus, westus, westeurope, eastasia...     |
-| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to. |
-| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
+| Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia).     |
+| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
+| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above. |
    |
 | Public Subnet Name      | The name of the public subnet within the VNet. |
-| Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
+| Public Subnet Allowed CIDR     | Corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
 | Private Subnet Name     | The name of the private subnet within the VNet. |
-| Private Subnet Allowed CIDR    | It corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.                                                                             |
+| Private Subnet Allowed CIDR    | Corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.                                                                             |
 | Primary Control IP | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
 | Management Subnet Name  | The name of the management subnet within the VNet. |
@@ -453,18 +443,18 @@ A description of the parameters of the template are listed in the following tabl
 
 ### Azure Portal
 
-1. Click on the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Get it now** button.
+1. Click the **Session Smart Networking Platform BYOL** offering.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab **Plans + Pricing** as shown in the following picture:
+4. Click the **Plans + Pricing** tab as shown below:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click on the **Launch** link of the **Juniper Session Smart Conductor** template.
+5. Click the **Launch** link on the **Juniper Session Smart Conductor** template.
 6. Agree to the terms of use and conditions of the deployment.
-7. Click on the **Purchase** button to launch the deployment.
+7. Click **Purchase** to launch the deployment.
 
-Once the deployment of the template is complete, information about the new conductor deployment is provided in the Output tab.
+Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -476,7 +466,6 @@ The information listed in the Outputs tab is the following:
 :::important
 When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
-
 
 ### Azure CLI or PowerShell
 
@@ -551,17 +540,17 @@ Paste the following JSON content. Please adjust the values to your specific envi
 ```
 
 1. Go to the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Get it now** button.
+2. Click **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the **Get started** button to enable programmatic deployment for the subscription.
+4. Click **Get started** to enable programmatic deployment for the subscription.
 5. Click the button **Save** to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
 6. Close the **Configure Programmatic Deployment** window.
-7. Click on the tab **Plans + Pricing**.
-8. Copy the URL of the **Session Smart Router** template located in the field **URL** to the clipboard.
-9. Launch the template running the following command:
+7. Click the **Plans + Pricing** tab.
+8. Copy the URL of the **Session Smart Router** template located in the **URL** field.
+9. Launch the template by running the following command:
 
 ```
 New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
@@ -573,10 +562,10 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 When logging to the Linux instance via SSH use the default username of `t128` and the private key specified in the **Admin Public Key Data** field.
 :::
 
-### Deploying a Conductor Managed Router without Templates
+### Deploying a Conductor-managed Router without Templates
 
 1. Go to the **Session Smart Networking Platform BYOL** offering.
-2. Click on the **Create** button.
+2. Click **Create**.
 3. Complete the Basics tab then review the additional tabs for further customization.
 4. Under the Advanced tab, you can add cloud-init custom data to automatically install and onboard the router. Use the steps in the [Cloud-init Onboarding](#cloud-init-onboarding-1) section.
 5. Click **Review and Create**
@@ -588,7 +577,7 @@ In addition to using the cloud formation template, the admin can tag the interfa
 
 | Tag Value | Meaning |
 | --------- | ------- |
-| WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to Mist cloud infrastructure. |
+| WAN       | Interface is marked as WAN for onboarding purposes. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
 
 ## Troubleshooting
