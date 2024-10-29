@@ -3,7 +3,7 @@ title: BIOS Upgrade for x722
 sidebar_labe: BIOS Upgrade for x722
 ---
 
-Juniper SSR1300 and SSR1400 routers are manufactured to support x722 NICs. To support the LLDP feature available in SSR releases 6.1 and greater, a BIOS upgrade to version 4.09 is required. This BIOS version contains X722 firmware version 6.5, which is required for the LLDP feature.
+Juniper SSR1300 and SSR1400 devices are manufactured to support x722 NICs. To support the LLDP feature available in SSR releases 6.1 and greater, a BIOS upgrade to version 4.09 is required. This BIOS version contains X722 firmware version 6.5, which is required for the LLDP feature.
 
 In order to fully integrate the new Intel ME firmware delivered by the BIOS, there are two mandatory steps to be performed:
 
