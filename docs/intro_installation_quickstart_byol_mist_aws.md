@@ -59,11 +59,11 @@ To deploy the Session Smart Networking software via the AWS Console:
 1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
+4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Mist Managed Router** and select the desired region.
 5. Click on the **Continue to Launch** button.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
 
-![CloudFormation Template](/img/aws-byol-template.png)
+![CloudFormation Template](/img/aws-byol-mist-template.png)
 
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
 
@@ -91,7 +91,7 @@ To deploy the Session Smart Networking software via the AWS CLI:
 1. Click on the **Session Smart Networking Platform BYOL** offering.
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
+4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Mist Managed Router** and select the desired region.
 5. Click on the **Continue to Launch** button.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
 7. Copy to the clipboard the URL of the template located in the field **Amazon S3 URL**.
@@ -140,8 +140,8 @@ The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two
 
 | Network Interface Name | Subnet           | Mist Config Name     |
 | ---------------------- | ---------------- | ----------------|
-| eth1                   | Public           | ge-0/0/0    |
-| eth2                   | Private          | ge-0/0/1    |
+| ge-0-0                 | Public           | ge-0/0/0    |
+| ge-0-1                 | Private          | ge-0/0/1    |
 
 #### Interface Tagging
 
@@ -174,7 +174,7 @@ Disabling Source / Destination checking allows the SSR AWS instance to send and 
 
 This section describes the parameters to complete the template to deploy a Mist-managed SSR, as well as how to launch it using the portal or programmatically.
 
-![CloudFormation Template](/img/aws-byol-template.png)
+![CloudFormation Template](/img/aws-byol-mist-template.png)
 
 A description of the parameters of the template are listed in the following table:
 
@@ -197,7 +197,7 @@ A description of the parameters of the template are listed in the following tabl
 1. Go to the **Session Smart Networking Platform BYOL** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 2. Click on the **Continue to Subscribe** button and accept the terms and conditions.
 3. Click on the **Continue to Configuration** button.
-4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Router** and select the desired region.
+4. In the **Fulfillment Option** drop down box select **CloudFormation Template**, select the template **Juniper Session Smart Mist Managed Router** and select the desired region.
 5. Click on the **Continue to Launch** button.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click on the button **Launch**.
 7. Click the **Next** button.
@@ -210,12 +210,7 @@ Once the deployment of the template is complete, information about the new route
 The information listed in the Outputs tab is the following:
 * Instance ID of the Router EC2 instance.
 * Public IP address of the public interface for administration purposes.
-* SSH command to login to the Linux VM. Please continue to the end of this section below for more information regarding the credentials to login.
-
-:::important
-When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
-If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
-:::
+* SSH command to login to the Linux VM.
 
 #### AWS CLI
 
@@ -261,10 +256,6 @@ aws ec2 create-launch-template \
   --launch-template-data file://router.parameters.json
 ```
 
-:::important
-When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
-To use the template for the **Bring Your Own License (BYOL)** image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
-:::
 
 ## Deploying a Router without Templates
 
@@ -305,11 +296,7 @@ To use the template for the **Bring Your Own License (BYOL)** image was used, SS
     If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
     :::
 21. Check the acknowledgment check box and then click **Launch Instances**.
-22. On the _Launch Status_ page, click **View Instances**.
-23. Record the instances IP address.
-24. Launch a command window prompt.
-25. Enter the IP address of the instance.
-26. When prompted by the installer, press the **Enter** key to select Begin.
+22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
 
 ## Configuring a Default Route to an Internet Gateway
 
