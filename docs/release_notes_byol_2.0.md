@@ -14,4 +14,4 @@ sidebar_label: '2.0'
 
 ### Resolved Issues
 
-- **I95-58549 Azure and AWS instances can sometimes fail to successfully connect to Mist:** On first boot the system can sometimes fail to connect to Mist before timing out. This causes the SSR software to not be installed. The timeout is now increased.
+- **I95-58549 Azure and AWS instances can sometimes fail to successfully connect to Mist:** On first boot the system can sometimes fail to connect to Mist before timing out. This causes the SSR software to not be installed. The timeout has been increased.
