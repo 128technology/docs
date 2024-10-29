@@ -77,6 +77,7 @@ module.exports = {
           "items": [
             "intro_installation_azure",
             "intro_installation_azure_mist",
+            "intro_installation_byol_azure_conductor",
             "intro_installation_byol_azure_mist",
           ],
       },
