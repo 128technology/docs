@@ -9,9 +9,9 @@ This guide is intended to provide methods for users to implement custom Saltstac
 
 This guide is not intended to teach the users how to use Saltstack. This document will reference the Salt top file and Salt pillars. Some good resources for these topics are:
 
-[Salt Top File](https://docs.saltstack.com/en/latest/ref/states/top.html)
+[Salt Top File](https://docs.saltproject.io/en/latest/ref/states/top.html)
 
-[Salt Pillars](https://docs.saltstack.com/en/latest/topics/tutorials/pillar.html)
+[Salt Pillars](https://docs.saltproject.io/en/latest/topics/tutorials/pillar.html)
 
 ## Using Salt with SSR
 

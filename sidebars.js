@@ -67,6 +67,7 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_conductor_aws",
             "intro_installation_quickstart_byol_mist_aws",
             ],
       },
@@ -467,6 +468,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_2.0",
           "release_notes_byol"
         ]
       }
