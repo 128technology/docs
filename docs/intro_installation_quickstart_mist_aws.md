@@ -189,7 +189,7 @@ Disabling Source / Destination checking allows the SSR AWS instance to send and 
 
 This section describes the parameters to complete the template to deploy a Mist-managed SSR, as well as how to launch it using the portal, or programmatically.
 
-![CloudFormation Template](/img/aws-byol-template.png)
+![CloudFormation Template](/img/aws-byol-mist-template.png)
 
 A description of the parameters of the template are listed in the following table:
 
