@@ -5,7 +5,34 @@ sidebar_label: System Requirements
 ## Hardware Requirements
 The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
 
-Please review the router and conductor [minimum requirements](about_supported_platforms.md#minimum-platform-specifications). See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
+
+
+## Minimum Platform Specifications
+
+These are the minimum platform specifications for running the SSR Networking Platform software.
+
+### Router
+
+* Intel 4 Core x86 processor, single socket
+* 8GB ECC Memory
+* 120GB SSD
+* 1 DPDK enabled NIC port for standalone systems (two recommended)
+* 2 DPDK enabled NIC ports for HA systems (three recommended)
+* 1 dedicated NIC port for HA synchronization
+* (optional) 1 dedicated NIC port for out-of-band management
+* Hyperthreading disabled
+
+:::note
+Multi-socket platforms are not compatible with the SSR software when run as a router.
+:::
+
+### Conductor
+
+* Intel 4 Core x86 processor
+* 8GB ECC Memory
+* 120GB SSD
+* 1 (1G) Management port
+* Hyperthreading enabled
 
 :::info
 Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for hardware profile examples.
