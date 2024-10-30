@@ -46,7 +46,7 @@ Using the PCI address found above (6a:00), use `dmesg` to identify the firmware 
 [    5.666600] i40e 0000:6a:00.2: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
 [    5.812634] i40e 0000:6a:00.3: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
 ```
-In the example above, the X722 firmware version is `firmware-version: 6.20 0x80004200 1.3353.0`.
+In the example above, the X722 firmware version is 6.20.
 
 Alternatively, if the X722 NIC is bound to linux only, you can use `ethtool`:
 
