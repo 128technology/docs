@@ -11,7 +11,7 @@ sidebar_label: '3.2'
 
 ### Resolved Issues
 
-- **IN-55 Upgrade Installer for CentOS and RedHat 7.5 Changes:** Installer maintenance to provide support for future SSR releases.
+- **IN-557 Handle SSR OS Upgrades and Downgrades:** Installer maintenance to provide support for future SSR releases.
 
 ## Release 3.2.2
 
