@@ -70,7 +70,7 @@ Complete!
 
 ```
 
-Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-firmware).
+Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-x722-firmware).
 
 ### RPM Download and Off-line Installation
 
@@ -84,7 +84,7 @@ For systems that do not have internet access (air-gap systems), you can download
 5. Enter the following command:
   `sudo dnf install -y /tmp/afulnx-5.16.02.0111-3.el7.x86_64.rpm`
 
-Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-firmware).
+Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-x722-firmware).
 
 ## Upgrading the BIOS and X722 firmware
 
