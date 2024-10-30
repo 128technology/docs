@@ -1,16 +1,13 @@
 ---
-title: BIOS Upgrade for x722
-sidebar_labe: BIOS Upgrade for x722
+title: SSR1300 and SSR1400 BIOS Upgrade for X722
+sidebar_labe: SSR1300 and SSR1400 BIOS Upgrade for X722
 ---
 
-Juniper SSR1300 and SSR1400 devices are manufactured to support x722 NICs. To support the LLDP feature available in SSR releases 6.1 and greater, a BIOS upgrade to version 4.09 is required. This BIOS version contains X722 firmware version 6.5, which is required for the LLDP feature.
+Juniper SSR1300 and SSR1400 incorporate X722 NICs. To support the LLDP feature available in SSR releases 6.1 and greater, a BIOS upgrade to version 4.09 is required. This BIOS version contains updated Intel Management Engine (ME) and X722 NIC firmware, which is required for the LLDP feature.
 
-In order to fully integrate the new Intel ME firmware delivered by the BIOS, there are two mandatory steps to be performed:
+In order to fully integrate the new Intel ME firmware delivered by the BIOS, the software powers down the system after the firmware upgrade, and the user must manually power the system back up. 
 
-- An automated power off/power on that is automatically performed after the firmware update has completed.
-- A mandatory physical post-upgrade hardware power cycle.
-
-Although the update procedure can be initiated remotely over ssh, personnel must be available **ON SITE** to perform the mandatory post-upgrade power cycle.
+Although the update procedure can be initiated remotely over ssh, personnel must be available **ON SITE** to perform the mandatory post-update power cycle.
 
 ### Affected Hardware
 
@@ -22,6 +19,50 @@ Although the update procedure can be initiated remotely over ssh, personnel must
 - BIOS update package: `afulnx-5.16.02.0111-3.el7.x86_64.rpm`
 - SSH or console for root access to the target system
 - Personnel available on site to perform power cycle
+
+#### Version Checks
+
+To verify the BIOS version use the `dmidecode` command:
+```
+$ dmidecode -s bios-version
+SSR1300V408
+```
+
+To verify the NIC firmware version, first find the X722 PCI address:
+```
+[t128@PERF-SSR1300-AR49230058 ~]$ lspci | grep X722
+6a:00.0 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
+6a:00.1 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
+6a:00.2 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
+6a:00.3 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
+```
+
+Using the PCI address found above (6a:00), use `dmesg` to identify the firmware version:
+
+```
+[t128@PERF-SSR1300-AR49230058 ~]$ dmesg |grep 6a:00 | grep nvm
+[    5.373011] i40e 0000:6a:00.0: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
+[    5.497829] i40e 0000:6a:00.1: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
+[    5.666600] i40e 0000:6a:00.2: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
+[    5.812634] i40e 0000:6a:00.3: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
+```
+In the example above, the X722 firmware version is `firmware-version: 6.20 0x80004200 1.3353.0`.
+
+Alternatively, if the X722 NIC is bound to linux only, you can use `ethtool`:
+
+```
+[root@PERF-SSR1300-AR49230058 t128]# ethtool -i xe-0-0
+driver: i40e
+version: 2.16.11
+firmware-version: 6.20 0x80004200 1.3353.0
+expansion-rom-version: 
+bus-info: 0000:6a:00.0
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: yes
+supports-register-dump: yes
+supports-priv-flags: yes
+```
 
 ## Installation
 
@@ -35,7 +76,7 @@ On systems with internet access, use the following steps to download and install
 
 1. Login to your SSR device using SSH or through the console.
 2. Enter the following command:
-  `sudo dnf install -y afulnx-5.16.02.0111-3`
+  `sudo dnf install -y afulnx`
 
 ```
 sudo dnf install -y afulnx-5.16.02.0111-3
@@ -114,7 +155,6 @@ DO NOT INTERRUPT THIS PROCESS AFTER CONFIRMING! Doing so may result in an unboot
   - Reconnect all power cords to the system 
 
 The system will boot using the new v4.09 BIOS and v6.5 X722 firmware
-
 
 ### Sample Upgrade Output
 
