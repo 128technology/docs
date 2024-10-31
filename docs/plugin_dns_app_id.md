@@ -341,6 +341,15 @@ exit
 The plugin must be updated to version 3.1.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 4.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2699** Ensure plugin starts on system reboot or 128T restart
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
 ### Release 4.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
