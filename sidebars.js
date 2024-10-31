@@ -44,7 +44,7 @@ module.exports = {
       "upgrade_ibu_conductor",
       "upgrade_router",
       "upgrade_restricted_access",
-      "upgrade_legacy",  
+      "upgrade_legacy",
       "intro_rollback",
     ],
     "Installation Overview": [
@@ -53,7 +53,7 @@ module.exports = {
     ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
-      "install_univ_iso", 
+      "install_univ_iso",
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
     ],
@@ -127,7 +127,7 @@ module.exports = {
             "legacy_OTP_install",
           ],
       },
-    ],            
+    ],
     "Concepts": [
       "concepts_application_discovery",
       "concepts_EthOverSVR",
@@ -361,7 +361,7 @@ module.exports = {
       "events_alarms",
       "events_events",
       "config_alarm_suppression",
-      "howto_maintenance_mode",      
+      "howto_maintenance_mode",
     ],
     "Best Practices": [
       "bcp_sdwan_design_guide",

@@ -479,6 +479,14 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 4.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
 ### Release 4.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.

@@ -308,6 +308,23 @@ Completed in 0.05 seconds
 admin@node1.conductor1#admin@node1.conductor1#
 ```
 
+The `show plugins state router <router-name> summary 128T-http-probe` command can be used to view the current status of the probe and whether the probe is being held down. For example:
+
+```
+admin@node1.conductor1# show plugins state router my-router summary 128T-http-probe
+Wed 2024-10-02 03:19:33 UTC
+Target: node1.my-router
+
+============= ======== =========== =================
+ Probe         Status   Held Down   Time Left (sec)
+============= ======== =========== =================
+ test-probe1   up       True                      8
+ test-probe2   down     False                     0
+
+Retrieved state data.
+Completed in 0.05 seconds
+```
+
 In addition, the probe's running status in linux can be found by inspecting the `128T-http-probe-status-change-notifier@<probe-name>.service`. For example,
 
 ```
@@ -388,6 +405,20 @@ Completed in 0.21 seconds
 ```
 
 ## Release Notes
+
+### Release 2.1.0
+
+**Release Date:** Oct 31, 2024
+
+#### New Features and Improvements
+- **PLUGIN-2510** Implement an up-delay-timer
+
+The plugin allows users to configure an up-delay-timer which holds a path down for a set duration before bringing the path up.
+
+#### Issues Fixed
+
+- **PLUGIN-2629** Display stats in older (5.X) SSR releases
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
 
 ### Release 2.0.0
 
