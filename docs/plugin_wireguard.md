@@ -670,6 +670,16 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 3.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+- **PLUGIN-2727** Fix RPM removal on Conductor
+- **PLUGIN-2734** Ensure plugin starts after IBU conversion (upgrade)
+
 ### Release 3.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
