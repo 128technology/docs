@@ -23,12 +23,16 @@ Although the update procedure can be initiated remotely over ssh, personnel must
 #### Version Checks
 
 To verify the BIOS version use the `dmidecode` command:
+
 ```
 $ dmidecode -s bios-version
 SSR1300V408
 ```
 
+In this example, the BIOS version of the SSR1300 is `4.08`.
+
 To verify the NIC firmware version, first find the X722 PCI address:
+
 ```
 [t128@PERF-SSR1300-AR49230058 ~]$ lspci | grep X722
 6a:00.0 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
