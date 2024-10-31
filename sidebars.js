@@ -80,7 +80,7 @@ module.exports = {
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
     ],
-    "Cloud Installations": [
+    "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
@@ -90,6 +90,7 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_conductor_aws",
             "intro_installation_quickstart_byol_mist_aws",
             ],
       },
@@ -311,6 +312,8 @@ module.exports = {
           "config_ldap",
           "config_radius",
           "config_radsec",
+          "config_syslog_tls",
+          "config_webserver_certs",
           "config_password_policies",
           "howto_reset_user_password",
         ],
@@ -489,6 +492,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_2.0",
           "release_notes_byol"
         ]
       }

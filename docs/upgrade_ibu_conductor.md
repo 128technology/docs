@@ -57,6 +57,16 @@ request system software revert          Revert to a previous version of the SSR.
 
 The image-based and package-based status is visible under **Install Type** in the PCLI using `show assets`.
 
+:::note
+The states displayed in the `status` column under `show assests` have changed. The old and new states are mapped below. 
+
+| Old | New |
+| --- | ---|
+| Disconnected | Disconnected |
+| Connected | Synchronizing or Resynchronizing |
+| Running | Synchronized |
+:::
+
 **Image Based**
 
 ```

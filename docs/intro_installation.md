@@ -18,7 +18,7 @@ The examples listed in this guide generally prefer running commands as a non-roo
 
 ## Installation Process
 
-Beginning with SSR 6.3.0, a universal image-based ISO is provided to simplify and streamline the SSR installation and initialization process. This version supports Conductor-managed image-based installations as well as Mist-managed deployments. 
+Beginning with SSR 6.3.0, a universal image-based SSR ISO is provided to simplify and streamline the SSR installation and initialization process. This version supports Conductor-managed image-based installations as well as Mist-managed deployments. 
 
 Installation to your device utilizes the SSR ISO, downloaded as a bootable image to a USB drive or from disk. The install process is as follows:
 

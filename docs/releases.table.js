@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // ----------------------------------------------------------------------------
 // Please respect chronological release date order when adding new entries.
@@ -6,228 +7,233 @@ import React from "react";
 // ----------------------------------------------------------------------------
 export const releases = [
   {
+    version: '6.1.11',
+    url: '/docs/release_notes_128t_6.1#release-6111-5-lts',
+    releaseDate: 'October 17, 2024',
+  },
+  {
     version: '6.2.7',
-    url: 'release_notes_128t_6.2#release-627-4-sts',
+    url: '/docs/release_notes_128t_6.2#release-627-4-sts',
     releaseDate: 'October 3, 2024',
   },
   {
     version: '6.3.0',
-    url: 'release_notes_128t_6.3#release-630-107r1',
+    url: '/docs/release_notes_128t_6.3#release-630-107r1',
     releaseDate: 'September 30, 2024',
   },
   {
     version: '6.2.6',
-    url: 'release_notes_128t_6.2#release-626-15-sts',
+    url: '/docs/release_notes_128t_6.2#release-626-15-sts',
     releaseDate: 'September 6, 2024',
   },
   {
     version: '6.1.10',
-    url: 'release_notes_128t_6.1#release-6110-8-lts',
+    url: '/docs/release_notes_128t_6.1#release-6110-8-lts',
     releaseDate: 'August 22, 2024',
   },
   {
     version: '5.6.15',
-    url:'release_notes_128t_5.6#release-5615-1',
+    url: '/docs/release_notes_128t_5.6#release-5615-1',
     releaseDate: 'June 27, 2024',
   },
   {
     version: '6.1.9',
-    url: 'release_notes_128t_6.1#release-619-2-lts',
+    url: '/docs/release_notes_128t_6.1#release-619-2-lts',
     releaseDate: 'June 27, 2024',
   },
   {
     version: '6.2.5',
-    url: 'release_notes_128t_6.2#release-625-5r2',
+    url: '/docs/release_notes_128t_6.2#release-625-5r2',
     releaseDate: 'June 6, 2024',
   },
   {
     version: '5.6.14',
-    url:'release_notes_128t_5.6#release-5614-7',
+    url: '/docs/release_notes_128t_5.6#release-5614-7',
     releaseDate: 'May 14, 2024',
   },
   {
     version: '6.1.8',
-    url: 'release_notes_128t_6.1#release-618-15-lts',
+    url: '/docs/release_notes_128t_6.1#release-618-15-lts',
     releaseDate: 'May 3, 2024',
   },
   {
     version: '6.2.4',
-    url: 'release_notes_128t_6.2#release-624-14r2',
+    url: '/docs/release_notes_128t_6.2#release-624-14r2',
     releaseDate: 'March 29, 2024',
   },
   {
     version: '5.5.12',
-    url:'release_notes_128t_5.5#release-5512-9',
+    url: '/docs/release_notes_128t_5.5#release-5512-9',
     releaseDate: 'February 22, 2024',
   },
   {
     version: '6.1.7',
-    url: 'release_notes_128t_6.1#release-617-3-lts',
+    url: '/docs/release_notes_128t_6.1#release-617-3-lts',
     releaseDate: 'February 17, 2024',
   },
   {
     version: '5.6.13',
-    url:'release_notes_128t_5.6#release-5613-7',
+    url: '/docs/release_notes_128t_5.6#release-5613-7',
     releaseDate: 'January 30, 2024',
   },
   {
     version: '6.1.6',
-    url: 'release_notes_128t_6.1#release-616-7-lts',
+    url: '/docs/release_notes_128t_6.1#release-616-7-lts',
     releaseDate: 'January 2, 2024',
   },  
   {
     version: '6.2.3',
-    url: 'release_notes_128t_6.2#release-623-14r2',
+    url: '/docs/release_notes_128t_6.2#release-623-14r2',
     releaseDate: 'December 15, 2023',
   },
   {
     version: '6.2.0',
-    url: 'release_notes_128t_6.2#release-620-39r1',
+    url: '/docs/release_notes_128t_6.2#release-620-39r1',
     releaseDate: 'November 16, 2023',
   },
   {
     version: '5.6.12',
-    url:'release_notes_128t_5.6#release-5612-1',
+    url: '/docs/release_notes_128t_5.6#release-5612-1',
     releaseDate: 'October 20, 2023',
   },
   {
     version: '5.6.11',
-    url:'release_notes_128t_5.6#release-5611-4',
+    url: '/docs/release_notes_128t_5.6#release-5611-4',
     releaseDate: 'October 2, 2023',
   },
   {
     version: '6.1.5',
-    url: 'release_notes_128t_6.1#release-615-14-lts',
+    url: '/docs/release_notes_128t_6.1#release-615-14-lts',
     releaseDate: 'September 22, 2023',
   },
   {
     version: '5.6.10',
-    url:'release_notes_128t_5.6#release-5610-6',
+    url: '/docs/release_notes_128t_5.6#release-5610-6',
     releaseDate: 'August 29, 2023',
   },
   {
     version: '5.5.11',
-    url:'release_notes_128t_5.5#release-5511-4',
+    url: '/docs/release_notes_128t_5.5#release-5511-4',
     releaseDate: 'August 21, 2023',
   },
   {
     version: '5.5.10',
-    url:'release_notes_128t_5.5#release-5510-6',
+    url: '/docs/release_notes_128t_5.5#release-5510-6',
     releaseDate: 'July 31, 2023',
   },
   {
     version: '5.6.9',
-    url:'release_notes_128t_5.6#release-569-3',
+    url: '/docs/release_notes_128t_5.6#release-569-3',
     releaseDate: 'July 19, 2023',
   },
   {
     version: '6.1.4',
-    url: 'release_notes_128t_6.1#release-614-23r2',
+    url: '/docs/release_notes_128t_6.1#release-614-23r2',
     releaseDate: 'July 14, 2023',
   },
   {
     version: '5.5.9',
-    url:'release_notes_128t_5.5#release-559-4',
+    url: '/docs/release_notes_128t_5.5#release-559-4',
     releaseDate: 'June 2, 2023',
   },
   {
     version: '5.6.8',
-    url:'release_notes_128t_5.6#release-568-9',
+    url: '/docs/release_notes_128t_5.6#release-568-9',
     releaseDate: 'May 25, 2023',
   },
   {
     version: '6.1.3',
-    url: 'release_notes_128t_6.1#release-613-4r1',
+    url: '/docs/release_notes_128t_6.1#release-613-4r1',
     releaseDate: 'May 22, 2023',
   },
   {
     version: '6.1.2',
-    url: 'release_notes_128t_6.1#release-612-7r1',
+    url: '/docs/release_notes_128t_6.1#release-612-7r1',
     releaseDate: 'May 12, 2023',
   },
   {
     version: '6.0.10',
-    url: 'release_notes_128t_6.0#release-6010-5',
+    url: '/docs/release_notes_128t_6.0#release-6010-5',
     releaseDate: 'May 12, 2023',
   },
   {
     version: '6.1.1',
-    url: 'release_notes_128t_6.1#release-611-6r1',
+    url: '/docs/release_notes_128t_6.1#release-611-6r1',
     releaseDate: 'April 28, 2023',
   },
   {
     version: '6.1.0',
-    url: 'release_notes_128t_6.1#release-610-55r1',
+    url: '/docs/release_notes_128t_6.1#release-610-55r1',
     releaseDate: 'April 14, 2023',
   },
   {
     version: '6.0.9',
-    url: 'release_notes_128t_6.0#release-609-3',
+    url: '/docs/release_notes_128t_6.0#release-609-3',
     releaseDate: 'April 3, 2023',
   },
   {
     version: '5.6.7',
-    url:'release_notes_128t_5.6#release-567-4',
+    url: '/docs/release_notes_128t_5.6#release-567-4',
     releaseDate: 'March 16, 2023',
   },
   {
     version: '6.0.8',
-    url: 'release_notes_128t_6.0#release-608-20',
+    url: '/docs/release_notes_128t_6.0#release-608-20',
     releaseDate: 'March 7, 2023',
   },
   {
     version: '5.5.8',
-    url:'release_notes_128t_5.5#release-558-7',
+    url: '/docs/release_notes_128t_5.5#release-558-7',
     releaseDate: 'February 1, 2023',
   },
   {
     version: '5.6.6',
-    url:'release_notes_128t_5.6#release-566-7',
+    url: '/docs/release_notes_128t_5.6#release-566-7',
     releaseDate: 'January 18, 2023',
   },
   {
     version: '5.4.11',
-    url:'/docs/release_notes_128t_5.4#release-5411-4',
+    url: '/docs/release_notes_128t_5.4#release-5411-4',
     releaseDate: 'December 30, 2022',
   },
   {
     version: '5.6.5',
-    url:'/docs/release_notes_128t_5.6#release-565-5',
+    url: '/docs/release_notes_128t_5.6#release-565-5',
     releaseDate: 'December 28, 2022',
   },
   {
     version: '6.0.7',
-    url: 'release_notes_128t_6.0#release-607-8',
+    url: '/docs/release_notes_128t_6.0#release-607-8',
     releaseDate: 'December 5, 2022',
   },
   {
     version: '5.4.10',
-    url:'/docs/release_notes_128t_5.4#release-5410-3',
+    url: '/docs/release_notes_128t_5.4#release-5410-3',
     releaseDate: 'November 23, 2022',
   },
   {
     version: '5.6.4',
-    url:'/docs/release_notes_128t_5.6#release-564-3',
+    url: '/docs/release_notes_128t_5.6#release-564-3',
     releaseDate: 'November 18, 2022',
   },
   {
     version: '5.5.7',
-    url:'/docs/release_notes_128t_5.5#release-557-3',
+    url: '/docs/release_notes_128t_5.5#release-557-3',
     releaseDate: 'November 15, 2022',
   },
   {
     version: '5.6.3',
-    url:'/docs/release_notes_128t_5.6#release-563-6',
+    url: '/docs/release_notes_128t_5.6#release-563-6',
     releaseDate: 'November 7, 2022',
   },
   {
     version: '5.4.9',
-    url:'/docs/release_notes_128t_5.4#release-549-7',
+    url: '/docs/release_notes_128t_5.4#release-549-7',
     releaseDate: 'November 9, 2022',
   },
   {
     version: '5.5.6',
-    url:'/docs/release_notes_128t_5.5#release-556-2',
+    url: '/docs/release_notes_128t_5.5#release-556-2',
     releaseDate: 'October 21, 2022',
   },
   {
@@ -237,22 +243,22 @@ export const releases = [
   },
   {
     version: '5.4.8',
-    url:'/docs/release_notes_128t_5.4#release-548-8',
+    url: '/docs/release_notes_128t_5.4#release-548-8',
     releaseDate: 'October 11, 2022',
   },
   {
     version: '5.6.2',
-    url:'/docs/release_notes_128t_5.6#release-562-7',
+    url: '/docs/release_notes_128t_5.6#release-562-7',
     releaseDate: 'October 4, 2022',
   },
   {
     version: '5.5.5',
-    url:'/docs/release_notes_128t_5.5#release-555-3',
+    url: '/docs/release_notes_128t_5.5#release-555-3',
     releaseDate: 'September 23, 2022',
   },
   {
     version: '5.5.4',
-    url:'/docs/release_notes_128t_5.5#release-554-8',
+    url: '/docs/release_notes_128t_5.5#release-554-8',
     releaseDate: 'September 19, 2022',
   },
   {
@@ -272,17 +278,17 @@ export const releases = [
   },
   {
     version: '5.5.3',
-    url:'/docs/release_notes_128t_5.5#release-553-4',
+    url: '/docs/release_notes_128t_5.5#release-553-4',
     releaseDate: 'August 19, 2022',
   },
   {
     version: '5.4.7',
-    url:'/docs/release_notes_128t_5.4#release-547-7',
+    url: '/docs/release_notes_128t_5.4#release-547-7',
     releaseDate: 'August 4, 2022',
   },
   {
     version: '5.6.1',
-    url:'/docs/release_notes_128t_5.6#release-561-18',
+    url: '/docs/release_notes_128t_5.6#release-561-18',
     releaseDate: 'August 1, 2022',
    },
    {
@@ -297,22 +303,22 @@ export const releases = [
    },
    {
     version: '5.5.2',
-    url:'/docs/release_notes_128t_5.5#release-552-5',
+    url: '/docs/release_notes_128t_5.5#release-552-5',
     releaseDate: 'June 30, 2022',
    },
    {
     version: '5.4.6',
-    url:'/docs/release_notes_128t_5.4#release-546-9',
+    url: '/docs/release_notes_128t_5.4#release-546-9',
     releaseDate: 'June 28, 2022',
   },
   {
     version: '5.5.1',
-    url:'/docs/release_notes_128t_5.5#release-551-6',
+    url: '/docs/release_notes_128t_5.5#release-551-6',
     releaseDate: 'June 1, 2022',
    },
    {
     version: '5.6.0',
-    url:'/docs/release_notes_128t_5.6',
+    url: '/docs/release_notes_128t_5.6',
     releaseDate: 'May 20, 2022',
    },
    {
@@ -322,57 +328,57 @@ export const releases = [
   },
   {
     version: '5.4.5',
-    url:'/docs/release_notes_128t_5.4#release-545-8',
+    url: '/docs/release_notes_128t_5.4#release-545-8',
     releaseDate: 'May 11, 2022',
   },
   {
     version: '5.1.9',
-    url:'/docs/release_notes_128t_5.1#release-519-1',
+    url: '/docs/release_notes_128t_5.1#release-519-1',
     releaseDate: 'March 16, 2022',
   },
   {
     version: '5.5.0',
-    url:'/docs/release_notes_128t_5.5',
+    url: '/docs/release_notes_128t_5.5',
     releaseDate: 'March 7, 2022',
   },
   {
     version: '5.4.4',
-    url:'/docs/release_notes_128t_5.4#release-544-9',
+    url: '/docs/release_notes_128t_5.4#release-544-9',
     releaseDate: 'February 18, 2022',
   },
   {
     version: '5.4.3',
-    url:'/docs/release_notes_128t_5.4#release-543-8',
+    url: '/docs/release_notes_128t_5.4#release-543-8',
     releaseDate: 'January 27, 2022',
   },
   {
     version: '5.1.8',
-    url:'/docs/release_notes_128t_5.1#release-518',
+    url: '/docs/release_notes_128t_5.1#release-518',
     releaseDate: 'January 18, 2022',
   },
   {
     version: '5.4.2',
-    url:'/docs/release_notes_128t_5.4#release-542-5',
+    url: '/docs/release_notes_128t_5.4#release-542-5',
     releaseDate: 'December 22, 2021',
   },
   {
     version: '5.1.7',
-    url:'/docs/release_notes_128t_5.1#release-517',
+    url: '/docs/release_notes_128t_5.1#release-517',
     releaseDate: 'December 9, 2021',
   },
   {
     version: '5.4.1',
-    url:'/docs/release_notes_128t_5.4#release-541-4',
+    url: '/docs/release_notes_128t_5.4#release-541-4',
     releaseDate: 'November 23, 2021',
   },
   {
     version: '5.4.0',
-    url:'/docs/release_notes_128t_5.4#release-540-104',
+    url: '/docs/release_notes_128t_5.4#release-540-104',
     releaseDate: 'November 18, 2021',
   },
   {
     version: '5.1.6',
-    url:'/docs/release_notes_128t_5.1#release-516',
+    url: '/docs/release_notes_128t_5.1#release-516',
     releaseDate: 'October 27, 2021',
   },
   {
@@ -706,7 +712,7 @@ export const columns = [
     accessor: "version",
     className: "pester-data-table left",
     Cell: ({ cell: { value }, row: { original } }) => (
-      <a href={`${original.url}`}>
+      <a href={useBaseUrl(`${original.url}`)}>
         {value}
       </a>
     ),
