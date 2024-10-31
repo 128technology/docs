@@ -143,28 +143,12 @@ Connect an additional PCI card (if possible):
 
 If a PCI address for an interfaces change, the system will be disqualified. Examples of a PCI address changing are; after an OS reboot, or a BIOS setting change after the system is imaged. 
 
-
 :::tip
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
 :::
 :::note
 PCI-to-port maps are available for commonly deployed hardware systems on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208)
 :::
-
-## VMware ESXi and KVM Requirements
-When deploying SSR Software on VMware ESXi release 6.7 (or newer), [Secure Boot must be disabled](#disable-secure-boot) when the Virtual Machine is created (New Virtual Machine wizard). 
-To disable Secure Boot on VMWare ESXi, deselect **Secure Boot (EFI boot only)** found on the **VM Options** tab within the **Customize Hardware** section.
-
-![New Virtual Machine Wizard](/img/intro_vmware_secureboot.png)
-
-VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run SSR Software in these environments: 
-- Leverage core affinity to dedicate CPU cores to SSR software, instead of leveraging virtual CPUs.
-- Set the SCSI controller to LSI Logic SAS.
-- For VMWare ESXi deployments, set network adapters to type e1000. 
-- For KVM deployments, set the network adapters to type Virtio. 
-- Separate the management interface, which is used for inter-component communication and out-of-band management, from the forwarding plane interfaces. 
-- Reserve a minimum of two network interfaces for production traffic.
-- Depending on your environment, set the SSR router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroup mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
 
 ## Next Steps
 Once you have identified the platform best suited for your needs, please refer to the [SSR Software Installation Guide](intro_installation.md) for information about the install process. 
