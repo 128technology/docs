@@ -1,9 +1,11 @@
 ---
-title: SSR1300 and SSR1400 BIOS Upgrade for X722
-sidebar_labe: SSR1300 and SSR1400 BIOS Upgrade for X722
+title: SSR1300 and SSR1400 BIOS Upgrade for the Intel X722
+sidebar_labe: SSR1300 and SSR1400 BIOS Upgrade for the Intel X722
 ---
 
-Juniper SSR1300 and SSR1400 incorporate X722 NICs. To support the LLDP feature available in SSR releases 6.1 and greater, a BIOS upgrade to version 4.09 is required. This BIOS version contains updated Intel Management Engine (ME) and X722 NIC firmware, which is required for the LLDP feature.
+Juniper SSR1300 and SSR1400 incorporate Intel X722 NICs. To support the LLDP feature available in SSR releases 6.1 and greater, a BIOS upgrade to version 4.09 is required. This BIOS version contains updated Intel Management Engine (ME) and X722 NIC firmware, which is required for the LLDP feature. 
+
+The Intel X722 NIC will be referred to as the X722 or X722 NIC for the remainder of this document. 
 
 In order to fully integrate the new Intel ME firmware delivered by the BIOS, the software powers down the system after the firmware upgrade, and the user must manually power the system back up. 
 
