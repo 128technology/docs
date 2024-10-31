@@ -7,6 +7,12 @@ sidebar_label: '3.2'
 **Upgrade Installer:** Before **upgrading to, or installing** SSR version 5.4, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.2.3
+
+### Resolved Issues
+
+- **IN-557 Handle SSR OS Upgrades and Downgrades:** Installer maintenance to provide support for future SSR releases.
+
 ## Release 3.2.2
 
 ### Resolved Issues
