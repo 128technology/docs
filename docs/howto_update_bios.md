@@ -7,9 +7,9 @@ Juniper SSR1300 and SSR1400 incorporate Intel X722 NICs. To support the LLDP fea
 
 The Intel X722 NIC will be referred to as the X722 or X722 NIC for the remainder of this document. 
 
-In order to fully integrate the new Intel ME firmware delivered by the BIOS, the software powers down the system after the firmware upgrade, and the user must manually power the system back up. 
+In order to fully integrate the new Intel ME firmware delivered by the BIOS, the software powers down the system after the firmware upgrade, and the user MUST manually power the system back up. 
 
-Although the update procedure can be initiated remotely over ssh, personnel must be available **ON SITE** to perform the mandatory post-update power cycle.
+Although the update procedure can be initiated remotely over ssh, personnel must be available **ON SITE** to perform the [mandatory post-update power cycle](#post-upgrade-power-cycle).
 
 ### Affected Hardware
 
@@ -18,9 +18,9 @@ Although the update procedure can be initiated remotely over ssh, personnel must
 
 ### Prerequsites
 
-- BIOS update package: `afulnx-5.16.02.0111-3.el7.x86_64.rpm`
-- SSH or console for root access to the target system
-- Personnel available on site to perform power cycle
+- BIOS update package: `afulnx-5.16.02.0111-3.el7.x86_64.rpm`.
+- SSH or console for root access to the target system.
+- Personnel available on site to perform the post-update power cycle.
 
 #### Version Checks
 
@@ -28,15 +28,30 @@ To verify the BIOS version use the `dmidecode` command:
 
 ```
 $ dmidecode -s bios-version
-SSR1300V408
+SSR1300V405
 ```
 
-In this example, the BIOS version of the SSR1300 is `4.08`.
+```
+$ dmidecode -s bios-version
+SSR1400V405
+```
+
+In this example, the BIOS version of the SSR1300 is `4.05`. After the upgrade, the BIOS version should be `4.09`:
+
+```
+$ dmidecode -s bios-version
+SSR1300V409
+```
+
+```
+$ dmidecode -s bios-version
+SSR1400V409
+```
 
 To verify the NIC firmware version, first find the X722 PCI address:
 
 ```
-[t128@PERF-SSR1300-AR49230058 ~]$ lspci | grep X722
+[t128@YOUR-DEVICE-HERE ~]$ lspci | grep X722
 6a:00.0 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
 6a:00.1 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
 6a:00.2 Ethernet controller: Intel Corporation Ethernet Connection X722 for 10GbE SFP+ (rev 04)
@@ -46,22 +61,22 @@ To verify the NIC firmware version, first find the X722 PCI address:
 Using the PCI address found above (6a:00), use `dmesg` to identify the firmware version:
 
 ```
-[t128@PERF-SSR1300-AR49230058 ~]$ dmesg |grep 6a:00 | grep nvm
-[    5.373011] i40e 0000:6a:00.0: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
-[    5.497829] i40e 0000:6a:00.1: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
-[    5.666600] i40e 0000:6a:00.2: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
-[    5.812634] i40e 0000:6a:00.3: fw 5.6.74624 api 1.12 nvm 6.20 0x80004200 1.3353.0
+[t128@YOUR-DEVICE-HERE ~]$ dmesg |grep 6a:00 | grep nvm
+[ 5.460406] i40e 0000:6a:00.0: fw 3.1.55727 api 1.5 nvm 3.31 0x80000d00 1.1766.0
+[ 5.649662] i40e 0000:6a:00.1: fw 3.1.55727 api 1.5 nvm 3.31 0x80000d00 1.1766.0
+[ 5.790353] i40e 0000:6a:00.2: fw 3.1.55727 api 1.5 nvm 3.31 0x80000d00 1.1766.0
+[ 5.861986] i40e 0000:6a:00.3: fw 3.1.55727 api 1.5 nvm 3.31 0x80000d00 1.1766.0
 ```
-In the example above, the X722 firmware version is 6.20.
+In the example above, the X722 firmware version is 3.31.
 
 Alternatively, if the X722 NIC is bound to linux only, you can use `ethtool`:
 
 ```
-[root@PERF-SSR1300-AR49230058 t128]# ethtool -i xe-0-0
+[root@YOUR-DEVICE-HERE t128]# ethtool -i xe-0-0
 driver: i40e
 version: 2.16.11
-firmware-version: 6.20 0x80004200 1.3353.0
-expansion-rom-version: 
+firmware-version: 3.31 0x80000d00 1.1766.0
+expansion-rom-version:
 bus-info: 0000:6a:00.0
 supports-statistics: yes
 supports-test: yes
@@ -73,8 +88,8 @@ supports-priv-flags: yes
 ## Installation
 
 The BIOS update package can be installed using either of two methods:
-- On-line install from Juniper SSR repositories
-- RPM download & off-line installation
+- On-line install from Juniper SSR repositories.
+- RPM download & off-line installation.
 
 ### Online Installation from the SSR Repository
 
@@ -133,9 +148,9 @@ For systems that do not have internet access (air-gap systems), you can download
 
 Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bios-and-x722-firmware).
 
-## Upgrading the BIOS and X722 firmware
+## Upgrading the BIOS and X722 Firmware
 
-After the upgrade package has been installed onto your SSR hardware, the BIOS and X722 firmware must be upgraded. 
+After the upgrade package has been installed onto your SSR hardware, the BIOS and X722 firmware must be upgraded, and the Post-Upgrade Power Cycle must be performed. Complete steps 1-3 and then perform the Post-Upgrade Power Cycle. 
 
 1. Enter the following command:
   `sudo /usr/libexec/update_bios.sh`
@@ -147,25 +162,28 @@ DO NOT INTERRUPT THIS PROCESS AFTER CONFIRMING! Doing so may result in an unboot
 :::
 
 3. The upgrade process takes place:
-  - Current BIOS version is saved as a backup
-  - Current DMI information (serial number etc) is saved
-  - BIOS, ME and NIC firmware is updated
-  - Saved DMI information is programmed into the new BIOS
-  - The system initiates a controlled shutdown and power-off
+  - Current BIOS version is saved as a backup.
+  - Current DMI information is saved.
+  - BIOS, ME, and NIC firmware is updated.
+  - Saved DMI information is programmed into the new BIOS.
+  - The system initiates a controlled shutdown and power-off.
 
   The update process can take up to 10 minutes, from confirmation to initiating system shutdown.
 
-4. On site personnel **must** perform the following post-update power cycle. Power cycle the unit as follows:
-  - Remove all power cords from the system 
-  - Wait 30 seconds 
-  - Reconnect all power cords to the system 
+### Post-Upgrade Power Cycle
 
-The system will boot using the new v4.09 BIOS and v6.5 X722 firmware
+On-site personnel **MUST** perform the following post-update power cycle process. Power cycle the unit as follows:
+  - Remove all power cords from the system. 
+  - Wait 30 seconds. 
+  - Reconnect all power cords to the system. 
+  - Power up the device.
+
+The system will boot using the new v4.09 BIOS and v6.5 X722 firmware.
 
 ### Sample Upgrade Output
 
 ```
-[root@as43220096]# /usr/libexec/update_bios.sh 
+[root@YOUR-DEVICE-HERE]# /usr/libexec/update_bios.sh 
 
 Current BIOS version SSR1400V405 will be updated using FNCA5520C0SSR6B409.BIN
 
@@ -184,12 +202,12 @@ Continue? [y/n] : y
 
  Process completed.
 
-Saving DMI: AS43220096 0002 0002 AS43220096 AS43220096 71C15841-ECD5-5C49-9D13-447D356767E7 (4158C171D5EC495C9D13447D356767E7)
+Saving DMI: AS<device> 0002 0002 AS<device> AS<device> 71C15841-ECD5-5C49-9D13-447D356767E7 (4158C171D5EC495C9D13447D356767E7)
 
 CAUTION: DO NOT interrupt this operation, the system may become unbootable
 
 
-Broadcast message from root@as43220096 (pts/0) (Tue Aug 13 14:29:36 2024):
+Broadcast message from root@as<device> (pts/0) (Tue Aug 13 14:29:36 2024):
 
 BIOS update in progress. DO NOT reboot or interrupt
 
@@ -230,7 +248,7 @@ BIOS update in progress. DO NOT reboot or interrupt
  Process completed.
 
 
-Restoring DMI: AS43220096 0002 0002 AS43220096 AS43220096 71C15841-ECD5-5C49-9D13-447D356767E7 (4158C171D5EC495C9D13447D356767E7)
+Restoring DMI: AS<device> 0002 0002 AS<device> AS<device> 71C15841-ECD5-5C49-9D13-447D356767E7 (4158C171D5EC495C9D13447D356767E7)
 
 +---------------------------------------------------------------------------+
 |        AMI Desktop Management Interface Edit Utility v5.27.03.0010        |
@@ -241,20 +259,20 @@ Restoring DMI: AS43220096 0002 0002 AS43220096 AS43220096 71C15841-ECD5-5C49-9D1
 Initializing the SMBIOS interface.  Please wait a moment......
           Name              R/W  Status  Information
 --------------------------  ---  ------  ----------------------------------
-(/SS)System Serial number    W    Done   "AS43220096" 
+(/SS)System Serial number    W    Done   "AS<device>" 
 (/SV)System version          W    Done   "0002" 
 (/SU)System UUID             W    Done   "4158C171D5EC495C9D13447D356767E7" 
 (/BV)Baseboard version       W    Done   "0002" 
-(/BS)Baseboard Serial number W    Done   "AS43220096" 
-(/BT)Baseboard Asset Tag     W    Done   "AS43220096" 
+(/BS)Baseboard Serial number W    Done   "AS<device>" 
+(/BT)Baseboard Asset Tag     W    Done   "AS<device>" 
 BIOS update successful
 
 IMPORTANT: Please power cycle the system now
 
 Shutdown scheduled for Tue 2024-08-13 14:34:39 UTC, use 'shutdown -c' to cancel.
 
-[root@as43220096]# 
-Broadcast message from root@as43220096 (Tue 2024-08-13 14:33:39 UTC):
+[root@YOUR-DEVICE-HERE]# 
+Broadcast message from root@YOUR-DEVICE-HERE (Tue 2024-08-13 14:33:39 UTC):
 
 Powering off due to BIOS update
 The system is going down for power-off at Tue 2024-08-13 14:34:39 UTC!
