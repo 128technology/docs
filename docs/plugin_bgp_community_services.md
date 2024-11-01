@@ -228,6 +228,14 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 ## Release Notes
 
+### Release 3.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
 ### Release 3.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
