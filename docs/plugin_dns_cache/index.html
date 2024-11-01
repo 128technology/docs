@@ -6,7 +6,7 @@
 <title data-rh="true">DNS Cache Plugin | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/plugin_dns_cache"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="DNS Cache Plugin | SSN Docs"><meta data-rh="true" name="description" content="The SSR-dns-cache plugin provides a DNS caching service on your SSR router by forwarding all traffic on a configured ingress-service and tenant to dnsmasq. By default it uses existing system configuration for nameserver resolution, but supports optionally configuring custom server addresses. The plugin is implemented as a service function chain (SFC) where the DNS traffic received on an ingress interface is detoured through a Kernel Network Interface (KNI) to be cached by dnsmasq. A typical flow of the packets for the plugin is illustrated below:"><meta data-rh="true" property="og:description" content="The SSR-dns-cache plugin provides a DNS caching service on your SSR router by forwarding all traffic on a configured ingress-service and tenant to dnsmasq. By default it uses existing system configuration for nameserver resolution, but supports optionally configuring custom server addresses. The plugin is implemented as a service function chain (SFC) where the DNS traffic received on an ingress interface is detoured through a Kernel Network Interface (KNI) to be cached by dnsmasq. A typical flow of the packets for the plugin is illustrated below:"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/plugin_dns_cache"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/plugin_dns_cache" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/plugin_dns_cache" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.b50a304b.css">
-<script src="/assets/js/runtime~main.33414578.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.15ee9c9d.js" defer="defer"></script>
 <script src="/assets/js/main.b040fd97.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -53,6 +53,12 @@
 <p>Verify that the dns-cache network interface (default <code>dns-cache-intf</code>) is UP.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes">Release Notes<a href="#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes">​</a></h2>
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>The plugin must be updated to version 3.2.1 or later prior to <a href="/docs/intro_upgrade_considerations#plugin-configuration-generation-changes">upgrading the conductor to SSR version 5.4.0.</a></p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-401">Release 4.0.1<a href="#release-401" class="hash-link" aria-label="Direct link to Release 4.0.1" title="Direct link to Release 4.0.1">​</a></h3>
+<p><strong>Release Date:</strong> Oct 31, 2024</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed">Issues Fixed<a href="#issues-fixed" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<ul>
+<li><strong>PLUGIN-2721</strong> Resolve on plugin downgrade config removal</li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-400">Release 4.0.0<a href="#release-400" class="hash-link" aria-label="Direct link to Release 4.0.0" title="Direct link to Release 4.0.0">​</a></h3>
 <p>Image based install and upgrade (IBU) support for SSR 6.3.0.</p>
 <p><strong>Release Date:</strong> Sep 30, 2024</p>
@@ -77,7 +83,7 @@
 <li><strong>PLUGIN-1208</strong> Enhance DNS Cache Plugin with An Advanced field</li>
 </ul>
 <p>Added support for new custom dnsmasq options that are otherwise not provided via direct configuration.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed">Issues Fixed<a href="#issues-fixed" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-1">Issues Fixed<a href="#issues-fixed-1" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-1707</strong> dns-cache service stops working</p>
@@ -85,7 +91,7 @@
 </li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-322">Release 3.2.2<a href="#release-322" class="hash-link" aria-label="Direct link to Release 3.2.2" title="Direct link to Release 3.2.2">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-1">Issues Fixed<a href="#issues-fixed-1" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-2">Issues Fixed<a href="#issues-fixed-2" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-1452</strong> The dns-app-id plugin has lot of failures on system startup</p>
@@ -97,7 +103,7 @@
 </li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-321">Release 3.2.1<a href="#release-321" class="hash-link" aria-label="Direct link to Release 3.2.1" title="Direct link to Release 3.2.1">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-2">Issues Fixed<a href="#issues-fixed-2" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-3">Issues Fixed<a href="#issues-fixed-3" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-1461</strong>  Config generation for the plugin failing in the Bonsai mode</p>
@@ -109,12 +115,12 @@
 </li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-310">Release 3.1.0<a href="#release-310" class="hash-link" aria-label="Direct link to Release 3.1.0" title="Direct link to Release 3.1.0">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-3">Issues Fixed<a href="#issues-fixed-3" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-4">Issues Fixed<a href="#issues-fixed-4" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li><strong>PLUGIN-768</strong> Support the DNS Cache plugin in SSR versions <code>5.1.0</code> and greater.</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-120-220">Release 1.2.0, 2.2.0<a href="#release-120-220" class="hash-link" aria-label="Direct link to Release 1.2.0, 2.2.0" title="Direct link to Release 1.2.0, 2.2.0">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-4">Issues Fixed<a href="#issues-fixed-4" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-5">Issues Fixed<a href="#issues-fixed-5" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-952</strong> FIB entry for dns-app-id based applications was deleted before the advertised TTL causing traffic to be blackholed</p>
@@ -127,7 +133,7 @@
 <li><strong>PLUGIN-641</strong> Provide support for redirecting and blocking domains</li>
 </ul>
 <p>Added support for redirecting domains to a different upstream domain server. In addition, added support for blocking domains that the user should not be able to access.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-5">Issues Fixed<a href="#issues-fixed-5" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-6">Issues Fixed<a href="#issues-fixed-6" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-684</strong> DNS cache plugin fails to apply configuration on initial installation</p>
@@ -135,9 +141,9 @@
 </li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-101-201">Release 1.0.1, 2.0.1<a href="#release-101-201" class="hash-link" aria-label="Direct link to Release 1.0.1, 2.0.1" title="Direct link to Release 1.0.1, 2.0.1">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-6">Issues Fixed<a href="#issues-fixed-6" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-7">Issues Fixed<a href="#issues-fixed-7" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li><strong>PLUGIN-402</strong> Ensure the application restarts with SSR</li>
-</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/plugin_dns_app_id"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">DNS App Id</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/plugin_gre"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">GRE</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#configuration" class="table-of-contents__link toc-highlight">Configuration</a><ul><li><a href="#notes-about-the-sample-configuration" class="table-of-contents__link toc-highlight">Notes about the Sample Configuration</a></li><li><a href="#custom-dns-servers" class="table-of-contents__link toc-highlight">Custom DNS Servers</a></li><li><a href="#redirecting-and-blocking-domains" class="table-of-contents__link toc-highlight">Redirecting and blocking domains</a></li><li><a href="#custom-options" class="table-of-contents__link toc-highlight">Custom Options</a></li></ul></li><li><a href="#third-party-software-and-licenses" class="table-of-contents__link toc-highlight">Third Party Software and Licenses</a></li><li><a href="#troubleshooting" class="table-of-contents__link toc-highlight">Troubleshooting</a></li><li><a href="#release-notes" class="table-of-contents__link toc-highlight">Release Notes</a><ul><li><a href="#release-400" class="table-of-contents__link toc-highlight">Release 4.0.0</a></li><li><a href="#release-350" class="table-of-contents__link toc-highlight">Release 3.5.0</a></li><li><a href="#release-340" class="table-of-contents__link toc-highlight">Release 3.4.0</a></li><li><a href="#release-331" class="table-of-contents__link toc-highlight">Release 3.3.1</a></li><li><a href="#release-322" class="table-of-contents__link toc-highlight">Release 3.2.2</a></li><li><a href="#release-321" class="table-of-contents__link toc-highlight">Release 3.2.1</a></li><li><a href="#release-310" class="table-of-contents__link toc-highlight">Release 3.1.0</a></li><li><a href="#release-120-220" class="table-of-contents__link toc-highlight">Release 1.2.0, 2.2.0</a></li><li><a href="#release-110-210" class="table-of-contents__link toc-highlight">Release 1.1.0, 2.1.0</a></li><li><a href="#release-101-201" class="table-of-contents__link toc-highlight">Release 1.0.1, 2.0.1</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
+</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/plugin_dns_app_id"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">DNS App Id</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/plugin_gre"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">GRE</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#configuration" class="table-of-contents__link toc-highlight">Configuration</a><ul><li><a href="#notes-about-the-sample-configuration" class="table-of-contents__link toc-highlight">Notes about the Sample Configuration</a></li><li><a href="#custom-dns-servers" class="table-of-contents__link toc-highlight">Custom DNS Servers</a></li><li><a href="#redirecting-and-blocking-domains" class="table-of-contents__link toc-highlight">Redirecting and blocking domains</a></li><li><a href="#custom-options" class="table-of-contents__link toc-highlight">Custom Options</a></li></ul></li><li><a href="#third-party-software-and-licenses" class="table-of-contents__link toc-highlight">Third Party Software and Licenses</a></li><li><a href="#troubleshooting" class="table-of-contents__link toc-highlight">Troubleshooting</a></li><li><a href="#release-notes" class="table-of-contents__link toc-highlight">Release Notes</a><ul><li><a href="#release-401" class="table-of-contents__link toc-highlight">Release 4.0.1</a></li><li><a href="#release-400" class="table-of-contents__link toc-highlight">Release 4.0.0</a></li><li><a href="#release-350" class="table-of-contents__link toc-highlight">Release 3.5.0</a></li><li><a href="#release-340" class="table-of-contents__link toc-highlight">Release 3.4.0</a></li><li><a href="#release-331" class="table-of-contents__link toc-highlight">Release 3.3.1</a></li><li><a href="#release-322" class="table-of-contents__link toc-highlight">Release 3.2.2</a></li><li><a href="#release-321" class="table-of-contents__link toc-highlight">Release 3.2.1</a></li><li><a href="#release-310" class="table-of-contents__link toc-highlight">Release 3.1.0</a></li><li><a href="#release-120-220" class="table-of-contents__link toc-highlight">Release 1.2.0, 2.2.0</a></li><li><a href="#release-110-210" class="table-of-contents__link toc-highlight">Release 1.1.0, 2.1.0</a></li><li><a href="#release-101-201" class="table-of-contents__link toc-highlight">Release 1.0.1, 2.0.1</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>
