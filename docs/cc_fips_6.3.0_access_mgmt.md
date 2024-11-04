@@ -85,6 +85,8 @@ config authority asset-connection-resiliency enabled  true
 config authority asset-connection-resiliency ssh-only true
 ```
 
+![GUI Enable Asset Resiliency](/img/asset-connection-resiliency.png)
+
 ### Enable Strict Host Key Checking 
 
 Enabling strict `host-key-checking` **provides secure communication between the conductor and a router**. 
@@ -111,6 +113,10 @@ To save the work of manually provisioning the host key on the router, set the `a
 ```
 config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-router host-key-checking accept-new
 ```
+
+#### Web Interface Example
+
+![Enable Strict Hostkey Checking](/img/enable-strict-hostkey-checking.png)
 
 Use the `show system connectivity known-hosts` to view the accepted host keys for the current node.
 
@@ -210,6 +216,22 @@ Could not validate certificate chain against a trusted anchor.
 Would you like to import anyways? [y/N]: N
 ```
 
+### Web Interface Example
+
+1. From the Authority level, select Authority Settings.
+
+![Authority Settings Button](/img/config-authority-settings-button.png)
+
+2. Scroll down to Trusted CA Certificate and click **ADD**.
+
+![Add Trusted Certificate](/img/import-webserver-cert1.png)
+
+3. Enter the name of the certificate, set the validation mode to strict, and paste in the certificate text. 
+
+![Paste Certificate](/img/import-webserver-cert2.png)
+
+4. Click **Validate** and **Commit**.
+
 ## SSH Server Cryptographic Algorithms 
  
 The following SSH parameter lists are hard-coded as the system defaults: 
@@ -265,21 +287,23 @@ After installing the SSR Software, it is important to verify that the installati
 2. Use `show system version`  to verify the correct software release is running: 
 
 ```
-Last login: Thu Dec 14 13:28:36 UTC 2023 on pts/0
-admin@conductor.conductor# show system version
-Fri 2024-03-01 16:23:37 UTC
+Last login: Thu Oct 31 20:56:35 UTC 2024 from 10.27.14.48 on pts/0
+*admin@test1.RTR_EAST_CONDUCTOR# show system version
+Fri 2024-11-01 18:22:07 UTC
 ✔ Retrieving system version 1/1 targets complete...
 
-=========== =========== ========= ======== ====================== =====================
- Router      Node        Version   Status   Build Date             Package
-=========== =========== ========= ======== ====================== =====================
- 128t-east   128t-east   6.2.5     r2       2024-06-06T23:56:25Z   128T-6.2.5-5r2.el
-                                                                   7 (package based)
+==================== ======= ========= ======== ====================== ================
+ Router               Node    Version   Status   Build Date             Package
+==================== ======= ========= ======== ====================== ================
+ RTR_EAST_CONDUCTOR   test1   6.3.0     r1       2024-09-28T01:23:30Z   128T-6.3.0-107
+                                                                        .r1.el7
+                                                                        (package
+                                                                        based)
 
-Completed in 0.05 seconds
+Completed in 0.13 seconds
 admin@conductor.conductor#
 ```
- It should report Version 6.2.5 and Status r2.
+ It should report Version 6.3.0 and Status r1.
  
 3. Type `shell` to suspend the CLI and enter the Linux shell. 
 4. Execute the command `sudo systemctl status 128T` and verify the service is listed as `active (running)`.
@@ -288,7 +312,7 @@ admin@conductor.conductor#
 [root@conductor-test admin]# sudo systemctl status 128T -l
  128T.service - 128T service
   Loaded: loaded (usr/lib/systemd/system/128T.service; enabled; vendor preset: disabled)
-  Active: active (running) since Mon 2023-7-31 18:04:29 UTC; 50min ago
+  Active: active (running) since Thu 2024-10-31 18:04:29 UTC; 1day 50min ago
  Main PID: 23317 (processManager)
 ```
  

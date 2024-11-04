@@ -1,5 +1,5 @@
 ---
-title: Configuring Audit Events and Logging
+title: Audit Events and Logging
 sidebar_label: Audit Events and Logging
 ---
 The Session Smart Router can be configured to maintain a history of several different class of events in the *event log*, which can subsequently be used to support compliance audits, forensics on network issues related to configuration (misapplied or otherwise), and traceability. This document covers:
@@ -25,17 +25,17 @@ All the SSR alarms generate an add event when the alarm is raised and a clear ev
 The provisioning events are generated for software download and upgrades as well as for configuration changes that are processed on the router. For configuration changes the event contains a diff of the configuration change that triggered the event. These are implicit events and cannot be disabled via configuration.
 
 ## Basic Configuration
-The configuration for audit logging is performed under the `system > audit` branch in the `router` hierarchy. In most cases, the only configuration required for enabling audit logging is adding it to the `router` element for your Authority's conductor. For cases where an SSR router is not managed by a conductor, audit logging configuration is added to the `system > audit` branch of the `router` hierarchy.
+The configuration for audit logging is performed under the `system > audit` branch in the `router` hierarchy. 
+
+To enable audit logging, set `audit administration enabled` to `true`. For cases where an SSR router is not managed by a conductor, audit logging configuration is added to the `system > audit` branch under the `router`. The pcli example below describes the command hierarchy. 
 
 If `auditd` fails to start or is prevented from running, an immediate, real-time message is displayed to all users indicating that the audit logging capability is impacted. This message persists until the failure is resolved.
 
-## Sample Configuration
+### Enable Basic Audit Logging - CLI
 
 :::note
 Configuration not related to audit logging has been filtered out for illustrative purposes.
 :::
-
-### Enable Basic Audit Logging
 
 ```
 config
@@ -53,6 +53,20 @@ config
     exit
 exit
 ```
+
+### Enable Basic Audit Logging - GUI
+
+1. From the Authority, select your router
+
+![Choose Router](/img/configure-audit-logging1.png)
+
+2. Scroll down and select System Settings.
+
+![System Settings](/img/configure-audit-logging2.png)
+
+3. Scroll down to Admin Audit Settings, and set it to `true`. 
+
+![Admin Audit Settings](/img/config-audit-logging3.png)
 
 ### Set the Disk Full Action
 

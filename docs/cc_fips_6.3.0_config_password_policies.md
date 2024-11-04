@@ -3,7 +3,7 @@ title: Username and Password Policies
 sidebar_label: Username and Password Policies
 ---
 
-Username and password requirements are listed below. For a list of the commands and how they are used to configure and enforce requirements, please refer to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy).
+Username and password requirements are listed below. For a list of the CLI commands and how they are used to configure and enforce requirements, please refer to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy).
 
 ### Password Requirements
 
@@ -20,6 +20,13 @@ The SSR password policies have been updated to provide a more secure experience.
 9. The default admin password **must** be changed to strong password on first use.
 10. The maximum failed login attempts are configurable, with a default of 6.
 11. User lock time (time the user must wait before attempting login after reaching the max failed attempts) is configurable. The default is 1800 seconds.
+
+
+### Using the Web Interface
+
+The Password Policy dialog under Authority Settings can be used to adjust password settings.
+
+![Configure Password Policies](/img/config-password-policies.png)
 
 ### Username Requirements
 

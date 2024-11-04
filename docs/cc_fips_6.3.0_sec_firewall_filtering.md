@@ -32,7 +32,9 @@ Filters are configured and applied on the receiving network-interface.
 The number and complexity of rules will have an impact on forwarding performance.
 :::
 
-#### Configuration Example:
+#### Configuration Examples:
+
+**Using the CLI**
 
 ```
 *admin@conductor.conductor# configure authority router 128t-west
@@ -47,7 +49,14 @@ The number and complexity of rules will have an impact on forwarding performance
 *admin@conductor.conductor (filter-rule[name=PermitIPaddress])# action permit
 *admin@conductor.conductor (filter-rule[name=PermitIPaddress])# bpf "host 192.168.0.0"
 ```
-Rules can be moved using the `move` command:
+
+**Using the Web Interface:** 
+
+![Create the Packet filtering rule](/img/pckt_filter_rule_create.png)
+
+#### Moving Rules
+
+Rules can be moved using the CLI with the `move` command:
 
 ```
 *admin@conductor.conductor (device-interface[name=bfp-test])# network-interface intf30
@@ -67,6 +76,10 @@ filter-rule  DropUDP_Port400
     action  deny
 exit
 ```
+
+Rules can be moved using the web interface by selecting the three dots next to the rule number:
+
+![Move a Rule](/img/pckt_filter_rule-move.png)
 
 :::note
 Detailed information about Berkeley Packet Filters is outside of the scope of this documentation, but is readily available on the internet.
@@ -89,12 +102,14 @@ To enable ICMP type as a session attribute:
 
 3. Set `icmp-session-match` to `identifier and type`. 
 
-#### Configuration Example
+#### Configuration Examples
 
 ```
 *admin@conductor.conductor# configure authority icmp-control icmp-async-reply drop
 *admin@conductor.conductor# configure authority icmp-control icmp-session-match identifier-and-type
 ```
+
+![ICMP Control](/img/icmp_async_drop.png)
 
 ### Discard ICMP Echo Replies With No Request
 
@@ -112,7 +127,7 @@ By default, all IPv4 packets with options are allowed. To configure the dropping
 
 3. Enter the Option type/number from the [IPv4 Parameters](https://www.iana.org/assignments/ip-parameters/ip-parameters.xhtml#ip-parameters-1).
 
-#### Configuration Example
+#### Configuration Examples
 
 ```
 *admin@conductor.conductor# configure authority ipv4-option-filter action drop-all
@@ -133,6 +148,8 @@ exit
 *admin@conductor.conductor#
 ```
 
+![IPV4 Option Filter](/img/ipv4_option_filter_drop.png)
+
 ### Broadcast and Multicast Source Addresses
 
 To prevent DoS attacks, packets with broadcast or multicast source IP and MAC addresses are now dropped by default. Otherwise the traffic is propogated across the entire network, flooding the network.
@@ -143,13 +160,18 @@ This functionality sets the action on how the TCP state machine should process u
 
 Any packets in the TCP stream that fall outside of the sequence number stream will be dropped. This will apply to any service that has this service policy configured.
 
-#### Configuration Example
+#### Configuration Examples
 
 ```
 *admin@conductor.conductor# configure authority service-policy prefer-path-2 transport-
 state-enforcement strict
 *admin@conductor.conductor#
 ```
+
+![Service Policy](/img/add_transport_state_enf_policy.png)
+
+![Strict Policy](/img/strict_transport_policy.png)
+
 
 For a detailed description of Transport State Enforcement, refer to [Transport State Enforcement](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/bcp_service_and_service_policy_design#transport-state-enforcement). For additional configuration information, see the [transport-state-enforcement](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_reference_guide#service-policy) parameter. 
 
@@ -169,13 +191,15 @@ Additionally, if you require a limit for half-open TCP sessions, it may be helpf
 
 An awareness of these two values (half-open limit and TCP session timer) may mitigate the impact of limiting the establishment of **healthy** TCP sessions.
 
-#### Configuration Example
+#### Configuration Examples
 
 ```
 *admin@conductor.conductor#
 *admin@conductor.conductor# configure authority router 128t-west half-open-connection-l
 imit 100000
 ```
+
+![Half-open limit](/img/half_open_cnx_limit.png)
 
 ## Firewall Audit Events
 
