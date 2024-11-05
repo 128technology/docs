@@ -842,6 +842,14 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ## Monitoring Agent Plugin Release Notes
 
+### Release 4.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
 ### Release 4.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.

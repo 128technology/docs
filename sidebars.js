@@ -44,7 +44,7 @@ module.exports = {
       "upgrade_ibu_conductor",
       "upgrade_router",
       "upgrade_restricted_access",
-      "upgrade_legacy",  
+      "upgrade_legacy",
       "intro_rollback",
     ],
     "Installation Overview": [
@@ -53,11 +53,11 @@ module.exports = {
     ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
-      "install_univ_iso", 
+      "install_univ_iso",
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
     ],
-    "Cloud Installations": [
+    "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
@@ -128,7 +128,7 @@ module.exports = {
             "legacy_OTP_install",
           ],
       },
-    ],            
+    ],
     "Concepts": [
       "concepts_application_discovery",
       "concepts_EthOverSVR",
@@ -326,6 +326,7 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
+          "howto_update_bios",
           "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",
@@ -362,7 +363,7 @@ module.exports = {
       "events_alarms",
       "events_events",
       "config_alarm_suppression",
-      "howto_maintenance_mode",      
+      "howto_maintenance_mode",
     ],
     "Best Practices": [
       "bcp_sdwan_design_guide",
