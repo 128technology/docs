@@ -1096,6 +1096,14 @@ The following configuration is an example only - It is not for use on a system.
 
 ## Release Notes
 
+### Release 4.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
 ### Release 4.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
