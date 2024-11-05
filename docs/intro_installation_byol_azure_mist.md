@@ -43,7 +43,7 @@ Please note that deploying Session Smart Routers without a valid token is limite
 A Session Smart Router can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
-* Virtual machine using a Session Smart image available in the marketplace.
+* Virtual machine with the Session Smart image specified in the template.
 * The router is deployed with three network interfaces: public, private and management interfaces.
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
@@ -111,7 +111,7 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 ![Plans](/img/platforms_azure_plans.png)
 
 6. Copy the URL of the template located in the field **URL** that best suits your needs.
-7. Create the parameters file. 
+7. Create the parameters file.
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template](#launch-the-template).
 
@@ -167,12 +167,6 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
 
 ## Troubleshooting
-
-### Validation Process Failure
-
-If the validation process fails with the error shown below, please verify you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
-
-<img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 ### Device Does Not Exist In Mist after ZTP
 

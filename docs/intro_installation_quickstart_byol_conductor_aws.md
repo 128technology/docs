@@ -35,7 +35,7 @@ The following infrastructure must exist in your AWS account:
 A Conductor can be deployed manually via the [AWS Console](https://console.aws.amazon.com) or in an automated fashion using AWS CLI commands. This section describes both methods. Choose the method that better suits your needs.
 
 When deploying the Session Smart Conductor using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
-* EC2 instance using a Session Smart image available in the marketplace.
+* EC2 instance with the Session Smart image specified in the template.
 * The Conductor is deployed with a single network interface identified as the control interface.
  * There is a network security group associated with the control interface.
  * The control interface has a unique and static public IP address.
@@ -131,7 +131,7 @@ If a user does not supply the onboarding configuration before launching the inst
 
 #### Launch the Conductor Template
 
-This section describes the parameters to complete the template to deploy an SSR conductor.
+This section describes the parameters to complete the template to deploy an SSR Conductor.
 
 ![CloudFormation Template](/img/aws-byol-conductor-template.png)
 
@@ -279,7 +279,7 @@ aws ec2 modify-instance-attribute --instance-id instance_id --ena-support
 A Session Smart Router can be deployed manually via the [AWS Console](https://console.aws.amazon.com) or in an automated fashion using AWS CLI commands. This section describes both methods. Choose the method that better suits your needs.
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
-* EC2 instance using a Session Smart image available in the marketplace.
+* EC2 instance with the Session Smart image specified in the template.
 * The router is deployed with appropriate network interfaces as described [here](#requirements-1)
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
@@ -339,7 +339,7 @@ To deploy the Session Smart Networking software via the AWS CLI:
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For a description of the parameters of the template, please refer to [Launch the Conductor Managed Template](#launch-the-conductor-managed-template).
 
 ### Cloud-init Onboarding
-When launching an AWS EC2 instance using automation, the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the conductor onboarding configuration.
+When launching an AWS EC2 instance using automation, the following user-data section can be leveraged to setup the onboarding data for the instance. Additionally, this method can be used to further customize the router onboarding configuration.
 
 ```
 #cloud-config
@@ -347,7 +347,7 @@ write_files:
   - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
     content: |
         { 
-            "name": "<conductor-name>",
+            "name": "<router-name>",
             "ssr-version": "<version>",
             “mode”: "conductor-managed", 
             “conductor-hosts”: ["<conductor-host>"] 
@@ -355,7 +355,7 @@ write_files:
 ```
 | Option | Meaning |
 | ------ | ------- |
-| name | The name of the Conductor. |
+| name | The name of the Router. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
@@ -527,3 +527,15 @@ In addition to using the cloud formation template, the admin can tag the interfa
 :::note
 The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
 :::
+
+## Troubleshooting
+
+### Device Does Not Initalize Properly
+
+Once the instance is launched with the correct parameters, the device will begin to install the SSR software. After installing the software, the device will either initialize as a Conductor or automatically onboard to the associated conductor. This process can take up to 15 minutes to complete.
+
+If the instance does not install SSR as expected, SSH into the instance using the credentials provided during VM creation.
+
+- Try to log into the pcli, run `su admin` and then `show system`.
+
+- If the pcli is not accessable or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
