@@ -13,7 +13,7 @@ These are the minimum platform specifications for running the SSR Networking Pla
 
 ### Router
 
-* Intel 4 Core x86 processor, single socket
+* Intel 4 Core x86_64-v2 processor, single socket
 * 8GB ECC Memory
 * 120GB SSD
 * 1 DPDK enabled NIC port for standalone systems (two recommended)
@@ -28,11 +28,32 @@ Multi-socket platforms are not compatible with the SSR software when run as a ro
 
 ### Conductor
 
-* Intel 4 Core x86 processor
+* Intel 4 Core x86_64-v2 processor
 * 8GB ECC Memory
 * 120GB SSD
 * 1 (1G) Management port
 * Hyperthreading enabled
+
+### Compatible Platform BIOS and UEFI Recommendations  
+
+Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running SSR on compatible platforms, the following are the recommended boot firmware settings: 
+
+- Hyperthreading disabled for platform operating as a router 
+- Hyperthreading enabled for platform operating as a conductor 
+- LAN bypass disabled 
+- Wake on LAN disabled 
+- Date time format: UTC format / GMT time zone 
+- Power on setting: always on 
+- Setup prompt timeout value: 3 seconds 
+- Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted) 
+- Boot order: HDD, USB, PXE 
+- Watchdog timer: disabled 
+- SR-IOV: enabled 
+- Secure Boot: disabled 
+- Serial Port Baud Rate: 115200/8-n-1 (To be used for console installation) 
+- Power profile: maximum performance 
+- System version, release date, manufacturer's part number, and serial number set in DMI table 
+
 
 :::info
 Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for hardware profile examples.

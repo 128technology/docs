@@ -6,19 +6,21 @@ sidebar_label: Certified Portfolio
 export const certifiedPlatforms = {
   lenovosr650r2 : {
     application : "Large Datacenter, 100G hub",
-    cpu : "TBD",
-    mem : "TBD",
+    cpu : "40C (Xeon Platinum 8380)",
+    mem : "64GB",
+    hdrive : "960GB SSD",
     interfaces : [
-      "12 ports total", 
-      "4 x 100Gb", 
-      "4 x 10/25Gb", 
-      "4 x 1/10Gb-T"
+      "8 ports total", 
+      "2 x 100GbE", 
+      "4 x 10/25GbE", 
+      "4 x 10GBase-T"
     ]
   },
   silicommadridg15901 : {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 6 ports",
     ]
@@ -27,6 +29,7 @@ export const certifiedPlatforms = {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 6 ports",
     ]
@@ -35,6 +38,7 @@ export const certifiedPlatforms = {
     application : "Medium/Large Branch",
     cpu : "8C (Atom C3758)",
     mem : "16GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 8 ports",
     ]
@@ -43,6 +47,7 @@ export const certifiedPlatforms = {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 6 ports",
       "LTE (AT&T, Verizon)"
@@ -52,6 +57,7 @@ export const certifiedPlatforms = {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 6 ports",
       "LTE (AT&T, Verizon)"
@@ -61,6 +67,7 @@ export const certifiedPlatforms = {
     application : "Medium/Large Branch",
     cpu : "8C (Atom C3758)",
     mem : "16GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 8 ports",
       "LTE (AT&T, Verizon)"
@@ -70,6 +77,7 @@ export const certifiedPlatforms = {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB",
+    hdrive : "120GB SSD",
     interfaces : [
       "Ethernet, 6 ports",
       "Dual LTE (AT&T, Verizon)"
@@ -79,6 +87,7 @@ export const certifiedPlatforms = {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB ECC",
+    hdrive : "128GB SSD",
     interfaces : [
       "Ethernet, 6 RJ45 ports, 2 SFP",
     ]
@@ -87,6 +96,7 @@ export const certifiedPlatforms = {
     application : "Medium/Large Branch",
     cpu : "8C (Atom C3558)",
     mem : "16GB ECC",
+    hdrive : "128GB SSD",
     interfaces : [
       "Ethernet, 6 RJ45 ports, 2 SFP",
     ]
@@ -95,6 +105,7 @@ export const certifiedPlatforms = {
     application : "Small/Medium Branch",
     cpu : "4C (Atom C3558)",
     mem : "8GB ECC",
+    hdrive : "128GB SSD",
     interfaces : [
       "Ethernet, 6 RJ45 ports, 2 SFP",
       "LTE (AT&T, Verizon) Dual SIM"
@@ -104,6 +115,7 @@ export const certifiedPlatforms = {
     application : "Medium/Large Branch",
     cpu : "8C (Atom C3558)",
     mem : "16GB ECC",
+    hdrive : "128GB SSD",
     interfaces : [
       "Ethernet, 6 RJ45 ports, 2 SFP",
       "LTE (AT&T, Verizon) Dual SIM"
@@ -126,6 +138,10 @@ export const Platform = ({id}) => (
         <td><b>Memory</b></td>
         <td>{certifiedPlatforms[id].mem}</td>
       </tr>  
+      <tr>
+        <td><b>Hard Drive</b></td>
+        <td>{certifiedPlatforms[id].hdrive}</td>
+      </tr> 
       <tr>
         <td><b>Interface Options</b></td>
         <td>{ certifiedPlatforms[id].interfaces.map((iface, index) => <li key={index}>{ iface }</li>) }</td>
