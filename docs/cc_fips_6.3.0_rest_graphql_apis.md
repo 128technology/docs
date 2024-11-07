@@ -53,3 +53,162 @@ The GraphQL APIs are documented using an interactive explorer and are found here
 ## Tips
 
 The PCLI `trace` command can be used to see the API calls made for a given PCLI command. This can be useful to determine which data is available for common use cases.
+
+
+## Configuration Changes
+
+This section documents the method of configuring some example Common Criteria features using the edit configuration API. The changes mirror what is documented in the PCLI in the relevant sections of the documentation which contain more detail about how these configuration settings function. The examples presented here with the online API documentation can be used to create configuration for any of the documented Common Criteria settings.
+
+Once the configuration edit API has been issued and no errors reported in the response, the configuration can be commited using the commit API. For example:
+
+```
+curl --request POST https://127.0.0.1/api/config/commit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...'
+```
+
+Also note that the examples use the command line utility Curl however any compliant REST API client can be used. The authorization tokens are removed for brevity.
+
+### Configure asset-connection-resiliency
+The following examples show how to configure `asset-connection-resiliency` settings:
+
+```
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config",
+             "type": "merge",
+             "value": {
+               "authority": {
+                 "asset-connection-resiliency": {
+                   "enabled": true
+                 }
+               }
+             }
+           }
+         ]'
+
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config",
+             "type": "merge",
+             "value": {
+               "authority": {
+                 "asset-connection-resiliency": {
+                   "ssh-only": true
+                 }
+               }
+             }
+           }
+         ]'
+```
+
+### Configure ssh-settings
+
+The following example shows how to set `ssh-settings` `inter-router` `host-key-checking` to `yes`:
+
+```
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config/authority/router/RTR_EAST_COMBO/node/combo-east-1/ssh-settings",
+             "type": "merge",
+             "value": {
+               "inter-router": {
+                 "host-key-checking": "yes"
+               }
+             }
+           }
+         ]'
+```
+
+The following example shows how to set `ssh-settings` `inter-router` `host-key-checking` to `accept-new`:
+
+```
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config/authority/router/RTR_EAST_COMBO/node/combo-east-1/ssh-settings",
+             "type": "merge",
+             "value": {
+               "inter-router": {
+                 "host-key-checking": "accept-new"
+               }
+             }
+           }
+         ]'
+```
+
+The following example shows how to set `ssh-settings` `inter-node` `host-key-checking` to `yes`:
+```
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config/authority/router/RTR_EAST_COMBO/node/combo-east-1/ssh-settings",
+             "type": "merge",
+             "value": {
+               "inter-node": {
+                "host-key-checking": "yes"
+               }
+             }
+           }
+         ]'
+```
+
+The following example shows how to set `ssh-settings` `inter-node` `host-key-checking` to `accept-new`:
+```
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config/authority/router/RTR_EAST_COMBO/node/combo-east-1/ssh-settings",
+             "type": "merge",
+             "value": {
+               "inter-node": {
+                "host-key-checking": "accept-new"
+               }
+             }
+           }
+         ]'
+```
+
+
+### Configure trusted-ca-certificate
+
+The following example shows how to configure a `trusted-ca-certificate` called "ca_root":
+
+```
+curl --request PATCH https://127.0.0.1/api/config/edit \
+     -H "Content-Type: application/json" \
+     -H 'authorization: Bearer ...' \
+     -d '[
+           {
+             "path": "/config",
+             "type": "merge",
+             "value": {
+               "authority": {
+                 "trusted-ca-certificate": [
+                  {
+                   "name": "ca_root",
+                   "content": "-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----"
+                  }
+                ]
+               }
+             }
+           }
+         ]'
+```
