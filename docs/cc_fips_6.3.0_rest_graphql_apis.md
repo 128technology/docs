@@ -49,17 +49,15 @@ The REST APIs are documented using Swagger and are found here:
 The GraphQL APIs are documented using an interactive explorer and are found here:
 `https://<SSR address>/documentation/graphql`
 
-
 ## Tips
 
 The PCLI `trace` command can be used to see the API calls made for a given PCLI command. This can be useful to determine which data is available for common use cases.
 
-
 ## Configuration Changes
 
-This section documents the method of configuring some example Common Criteria features using the edit configuration API. The changes mirror what is documented in the PCLI in the relevant sections of the documentation which contain more detail about how these configuration settings function. The examples presented here with the online API documentation can be used to create configuration for any of the documented Common Criteria settings.
+This section documents the method of configuring features using the `edit configuration` API. The changes mirror what is documented in the PCLI, which contain more detail about these configuration settings. The examples presented here, along with the online API documentation, can be used to create configuration for any of the documented Common Criteria settings.
 
-Once the configuration edit API has been issued and no errors reported in the response, the configuration can be commited using the commit API. For example:
+Once the `configuration edit` API has been issued and no errors reported in the response, the configuration can be commited using the `commit` API. For example:
 
 ```
 curl --request POST https://127.0.0.1/api/config/commit \
@@ -67,9 +65,12 @@ curl --request POST https://127.0.0.1/api/config/commit \
      -H 'authorization: Bearer ...'
 ```
 
-Also note that the examples use the command line utility Curl however any compliant REST API client can be used. The authorization tokens are removed for brevity.
+:::note
+The examples use the command line utility `curl`, however any compliant REST API client can be used. The authorization tokens are removed for brevity.
+:::
 
 ### Configure asset-connection-resiliency
+
 The following examples show how to configure `asset-connection-resiliency` settings:
 
 ```
@@ -183,7 +184,6 @@ curl --request PATCH https://127.0.0.1/api/config/edit \
            }
          ]'
 ```
-
 
 ### Configure trusted-ca-certificate
 
