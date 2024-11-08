@@ -1,6 +1,6 @@
 ---
-title: Configuring RADUIS over TLS
-sidebar_label: Configuring RADIUS over TLS
+title: RADUIS over TLS
+sidebar_label: RADIUS over TLS
 ---
 
 RADIUS over TLS is designed to provide secure communication of RADIUS requests using the Transport Secure Layer (TLS) protocol. RADIUS over TLS, also known as RADSEC, redirects regular RADIUS traffic to remote RADIUS servers connected over TLS. RADSEC allows RADIUS authentication, authorization, and accounting data to be passed safely across untrusted networks.
