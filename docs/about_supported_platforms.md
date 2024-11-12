@@ -141,11 +141,17 @@ Multi-socket platforms are not compatible with the SSR software when run as a ro
 
 ### Conductor
 
-* Intel 4 Core x86 processor
-* 8GB ECC Memory
-* 120GB SSD
-* 1 (1G) Management port
-* Hyperthreading enabled
+| Number of managed routers | Physical Cores | Memory |
+| ------------------------- | -------------- | ------ |
+| 1 to 10                   | 2 Xeon         | 8 GB   |
+| 1 to 25                   | 4 Xeon         | 8 GB   |
+| 25 to 100                 | 8 Xeon         | 16 GB  |
+| 100 to 500                | 12 Xeon        | 48 GB  |
+| 500 to 1000               | 24 Xeon        | 96 GB  |
+| 1000 to 1500              | 32 Xeon        | 128 GB |
+| 1500 to 2000              | 48 Xeon        | 160 GB |
+
+Hyperthreading should be enabled on Conductor platforms.
 
 ## Support for SSR on Compatible Platforms
 
