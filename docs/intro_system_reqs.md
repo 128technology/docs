@@ -18,6 +18,20 @@ These are the minimum platform specifications for running the SSR Networking Pla
 - 1 dedicated NIC port for HA synchronization
 - (Optional) 1 dedicated NIC port for out-of-band management
 
+### Conductor Scaling Recommendations
+
+| Number of managed routers | Physical Cores | Memory |
+| ------------------------- | -------------- | ------ |
+| 1 to 10                   | 2 Xeon         | 8 GB   |
+| 1 to 25                   | 4 Xeon         | 8 GB   |
+| 25 to 100                 | 8 Xeon         | 16 GB  |
+| 100 to 500                | 12 Xeon        | 48 GB  |
+| 500 to 1000               | 24 Xeon        | 96 GB  |
+| 1000 to 1500              | 32 Xeon        | 128 GB |
+| 1500 to 2000              | 48 Xeon        | 160 GB |
+
+Hyperthreading should be enabled on Conductor platforms.
+
 ### Compatible Platform BIOS and UEFI Recommendations  
 
 Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running SSR on compatible platforms, the following are the recommended boot firmware settings: 
