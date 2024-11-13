@@ -62,6 +62,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-53821 Radius Remote Authentication:** Users can now be added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography. See [Configuring RADIUS](config_radius.md#configuring-radius) for more information.
 ------
+- **I95-53862 Alarm Suppression Support:** The Alarm Suppression feature allows you to filter or hide individual alarms as well as alarm types. You can write custom shelves, allowing you to silence alarming on interfaces that are intentionally configured as administratively down, for example. For more information, see [Alarm Suppression](config_alarm_suppression.md).
+------
 - **I95-54300 Session performance capacity tracking and troubleshooting:** Added Session Performance Metric in Node Health. Session Processing CPU that displays average CPU, with an expandable selection that shows the individual CPU of each of the session processing threads that come from system resource scaling/config.
 ------
 - **I95-54699 VRRP Redundancy per VLAN:** VRRP can now be [configured at the network-interface level](config_ha.md#configuring-vrrp-on-the-network-interface) allowing you to configure VRRP redundancy per VLAN. For command information, see [`configure authority router node device-interface network-interface vrrp`.](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-vrrp)
