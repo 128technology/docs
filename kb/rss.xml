@@ -4,11 +4,83 @@
         <title>SSR Knowledge Base Articles</title>
         <link>https://docs.128technology.com/kb</link>
         <description>Session Smart Router Knowledge Base Articles</description>
-        <lastBuildDate>Fri, 30 Aug 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 06 Nov 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
         <copyright>Copyright © 2024 Juniper Networks, Inc.</copyright>
+        <item>
+            <title><![CDATA[Change in behavior for Salt states for 5.6.16+, 6.1.12+, 6.2.8+, 6.3.x-r2+]]></title>
+            <link>https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776</link>
+            <guid>https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776</guid>
+            <pubDate>Wed, 06 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[In some cases, Salt states fail to be applied on routers after an upgrade to 5.6.16+, 6.1.12+, 6.2.8+, and 6.3.x-r2+. This will impact any salt states that rely on the CentOS name to detect or conditionally perform operations on the SSR.]]></description>
+            <content:encoded><![CDATA[<p>In some cases, Salt states fail to be applied on routers after an upgrade to 5.6.16+, 6.1.12+, 6.2.8+, and 6.3.x-r2+. This will impact any salt states that rely on the <code>CentOS</code> name to detect or conditionally perform operations on the SSR.</p>
+<p>For example, the following <code>top.sls</code> would be impacted:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">base:</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  '*':</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    - dummy</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  'os:CentOS':</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    - match: grain</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    - centos_example</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Issue ID:</strong> PLUGIN-2776</p>
+<p><strong>Last Updated:</strong> 2024-11-06</p>
+<p><strong>Introduced in SSR Version:</strong> 5.6.16, 6.1.12, 6.2.8, 6.3.x-r2</p>
+<p><strong>Impacted Plugin version:</strong> 128T-sip-alg-4.0.1 and below</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem">​</a></h3>
+<p>The SSR is migrating the underlying Linux distribution in an effort to remain agile and to reduce the surface area of CVEs.</p>
+<p>Because the OS version is now reported as <code>Oracle Linux</code> instead of <code>CentOS</code>, there is an impact to the SIP ALG plugin, as well as any packages that may have an OS dependency, such as SaltStack.</p>
+<p>Once a router is upgraded to SSR version 5.6.16+ or 6.1.12+, the 128T-SIP-ALG plugin version 4.0.1 (or earlier) is impacted by this issue. To avoid this issue, <strong>the plugin must be upgraded to 4.0.2 before upgrading the SSR</strong>.</p>
+<p>For customer deployments implementing custom salt states that leverage OS-specific salt grains for <code>CentOS Linux 7</code>, those salt states may fail to apply after upgrading to 5.6.16+ and 6.1.12+.</p>
+<p>Please see the <a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#workaround">workaround</a> for steps to determine whether your environment is impacted and to remediate the issue.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes">​</a></h3>
+<ul>
+<li>Resolved the salt state issues for the SIP ALG plugin.</li>
+<li>Use the Workaround procedure below to scan salt states prior to Conductor and Router upgrades.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity">​</a></h3>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
+<li>Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
+<li>Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
+<li>Minor: Would not significantly impair the functioning or affect service.</li>
+</ul></div></div></details>
+<p>Major</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="status">Status<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status">​</a></h3>
+<p>In Progress</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In">​</a></h3>
+<p>128T-sip-alg-4.0.2</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="product">Product<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product">​</a></h3>
+<p>SSR Routers</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area">​</a></h3>
+<p>SaltStack</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround">​</a></h3>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div></details>
+<p>Salt states are configuration files used to deploy and manage extensible behaviors on the SSR routers via the salt-minion. They are used by the product to implement certain features, by plugins, and in some cases, to implement customer specific use-cases not otherwise supported by the SSR.</p>
+<p>For customers that implement custom salt states, use the following procedure to scan your salt states and identify issues that could arise during or after an upgrade.</p>
+<ol>
+<li>
+<p>Log in to the Conductor CLI as the admin user.</p>
+</li>
+<li>
+<p>Enter the linux shell; type <code>shell</code> to suspend the CLI.</p>
+</li>
+<li>
+<p>Run the following command to scan the custom salt states for <code>Centos 7</code>:</p>
+<p><code>grep -riE 'cent[-]?os' /srv/salt</code></p>
+</li>
+<li>
+<p>If the above command returns no hits, none of the custom salt states leverage the OS specific salt grain features.</p>
+</li>
+</ol>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>There exists a possibility that a custom salt state is impacted despite the scan returning an empty result. In this case, please contact your Juniper support representative for support on the matter.</p></div></div>
+<ol start="5">
+<li>
+<p>If the above command results in non-empty output, remediate the salt states to be OS agnostic.</p>
+<p>The exact changes will depend on the business logic of the salt state. Customers should work with their subject matter experts to properly remediate and test any changes.</p>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="example-remediation">Example Remediation<a href="https://docs.128technology.com/kb/2024/11/06/PLUGIN-2776#example-remediation" class="hash-link" aria-label="Direct link to Example Remediation" title="Direct link to Example Remediation">​</a></h4>
+<p>Salt state found during scan:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">{% set defaults = salt['grains.filter_by']({</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    'CentOS Linux-7': {</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">        'network_routes_target_filedir': '/etc/sysconfig/network-scripts/route-',</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">}, grain='osfinger', merge=salt['pillar.get']('repo_map:merge'), base=None) %}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>The remediated salt state:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">{% set defaults = {</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    'network_routes_target_filedir': '/etc/sysconfig/network-scripts/route-',</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">%}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>]]></content:encoded>
+            <category>saltstack, sip-alg</category>
+        </item>
         <item>
             <title><![CDATA[Unable to upgrade second HA Conductor to 6.3.0]]></title>
             <link>https://docs.128technology.com/kb/2024/08/30/I95-56628</link>
