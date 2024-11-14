@@ -479,6 +479,14 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 4.0.2
+
+**Release Date:** Nov 14, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2776** Resolve OS specific salt state issue for CentOS
+
 ### Release 4.0.1
 
 **Release Date:** Oct 31, 2024
