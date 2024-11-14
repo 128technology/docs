@@ -4,7 +4,7 @@ sidebar_label: System Requirements
 ---
 ## Hardware Requirements
 
-The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
+The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required.
 
 ### Minimum Platform Specifications
 
