@@ -479,6 +479,28 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 4.0.2
+
+**Release Date:** Nov 14, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2776** Resolve OS specific salt state issue for CentOS
+
+### Release 4.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
+### Release 4.0.0
+
+Image based install and upgrade (IBU) support for SSR 6.3.0.
+
+**Release Date:** Sep 30, 2024
+
 ### Release 3.2.3
 **Release Date:** Mar 20, 2024
 

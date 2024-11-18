@@ -198,6 +198,34 @@ Active categories and domains are displayed in the GUI on the Applications Seen 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
+### Invalid Applications
+
+In cases where an application is configured incorrectly, or a domain is mistakenly configured as an application, an alarm is generated. 
+
+For example, in the configuration snippet below a service is configured using an invalid application name: `You-Tube`. (The correct name for the application would be YouTube.)
+
+```
+        service You-Tube
+            name You-Tube
+            application-name You-Tube
+```
+
+The result is the following alarm in the `show alarms` output:
+
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# show alarms 
+Tue 2024-07-09 14:25:28 UTC
+WARNING: Targeting router 'all' may take a long time. Continue anyway? [y/N]: y
+✔ Retrieving alarms...
+
+================================ ===================== ========== ======== =========== =================================== 
+ ID                               Time                  Severity   Source   Category    Message                            
+================================ ===================== ========== ======== =========== =================================== 
+ combo-east-1.RTR_EAST_COMBO:30   2024-07-09 14:24:47   Major               INTERFACE  Invalid applications: *.bea-brak.de   
+```
+
+If you encounter this alarm, review your application configurations. 
+
 ## Service Matching Order
 
 When matching a session to a service, the list below represents the priority order in which the service resolution is performed. 

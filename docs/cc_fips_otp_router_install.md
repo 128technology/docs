@@ -88,7 +88,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 2. Press the TAB key to edit the configuration.
 
-  To enable FIPS Enforcement for SSR software version 6.2.5-5r2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+  To enable FIPS Enforcement for SSR software version 6.2.5-5-sts, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
   :::important
   FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
@@ -107,6 +107,63 @@ When you modify the GRUB kernel behavior by editing the GRUB menu at boot time, 
 ### SSR Installation
 
 This installation process is an automated workflow which does not require user interaction after selecting and initiating the OTP menu option. The system will power off after installation.
+
+### Enable Strict Host Key Checking 
+
+Enabling strict `host-key-checking` provides secure communication between the conductor and a router. 
+Similar to SSH, there are two `host-key-checking` options; `yes` which requires the host key to be provisioned manually, or `accept-new` which accepts the key on first connection. 
+
+There are two configuration parameters where `host-key-checking` can be set: 
+
+- **[`inter-router host-key-checking`](config_command_guide.md#configure-authority-router-node-ssh-settings-inter-router-host-key-checking)** controls host key verification between a router and the conductor. When set to `yes`, strict host key checking is enabled between the router and the conductor. However, the host keys must be manually provisioned on each router. 
+ 
+ ```
+ config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-router host-key-checking yes
+ config authority router RTR_EAST_COMBO node combo-east-2 ssh-settings inter-router host-key-checking yes
+ ```
+
+- **[`inter-node host-key-checking`](config_command_guide.md#configure-authority-router-node-ssh-settings-inter-node-host-key-checking)** controls host key verification between redundant HA nodes. When set to `yes`, strict host key checking is enabled between the router and the conductor **between each node** of an HA router. However, the host keys must be manually provisioned on each router. 
+
+```
+config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-node host-key-checking yes
+config authority router RTR_EAST_COMBO node combo-east-2 ssh-settings inter-node host-key-checking yes
+```
+
+To configure a new authorized key for ssh inter-node communication, use the [`create system connectivity authorized-keys`](cli_reference.md#create-system-connectivity-authorized-keys) command. This command adds an entry to the ssh authorized keys file.
+
+Use the following show commands to display additional key information: 
+
+- [`show system connectivity authorized-keys`](cli_reference.md#show-system-connectivity-authorized-keys) displays the authorized keys for ssh inter-node communication and tunneling.
+
+- [`show system connectivity key-checking-mode`](cli_reference.md#show-system-connectivity-key-checking-mode) displays the key checking mode (Inter-Asset, Inter-Node, Inter-Router) across specified nodes.
+ 
+To save the work of manually provisioning the host key on the router, set the `accept-new` parameter. This automatically loads the host key on first connection.
+
+```
+config authority router RTR_EAST_COMBO node combo-east-1 ssh-settings inter-router host-key-checking accept-new
+```
+
+Use the [`show system connectivity known-hosts`](cli_reference.md#show-system-connectivity-known-hosts) to view the accepted host keys for the current node.
+
+#### Manual Provisioning of the Conductor Key
+
+If a router is configured for strict `inter-router host-key-checking` (set to `yes`), but **does not** have `accept-new` configured, it will be necessary to manually provision the conductor key **prior** to onboarding the router to the conductor. This will require the administrator to retrieve the host key of each node of the conductor and configure this in the router.
+
+On the conductor, identify the `key` for each node using the command [`show system connectivity host-keys node all`](cli_reference.md#show-system-connectivity-host-keys).
+
+From the router PCLI, provision each conductor key using the following command:
+`create system connectivity known-hosts node <node> <conductor address> ssh-rsa <key> <comment>`
+
+- `<node>` is the router node. The key should be added on each router node in an HA pair. 
+- `<conductor address>` is the conductor address. This should be added for each conductor address of an HA conductor pair.
+- `<key>` is the `Key` retrieved from the previous step.
+- `<comment>` is an option that can be used to identify the key; for example `Conductor1`.
+
+The following example manually configures the key to the conductor node `192.168.1.13`:
+
+`create system connectivity known-hosts router RTR_EAST_COMBO node combo-east-1 [192.168.1.13]:930 ssh-rsa <public key contents>`
+
+For additional information, see [`create system connectivity known-hosts`](cli_reference.md#create-system-connectivity-known-hosts).
 
 ### Root Access
 To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
@@ -158,7 +215,7 @@ The root account will not be used for day-to-day access, but the root account pa
 
 ### Software Compliance Validation
 
-After installing the SSR Software, it is important to verify that the installation successfully  completed and that the system is running in the FIPS enforcememt mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. Alternatively you may `ssh` to the SSR management IP address using the admin account. 
+After installing the SSR Software, it is important to verify that the installation successfully  completed and that the system is running in the FIPS enforcement mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. Alternatively you may `ssh` to the SSR management IP address using the admin account. 
 
 1. Login using the admin credentials. 
 2. Use `show system version`  to verify the correct software release is running: 
@@ -195,7 +252,7 @@ admin@conductor.conductor#
  
 - Execute the self-test scan `sudo systemctl start 128T-rpm-verify` 
  
- The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
+ The self-test scan is initiated and takes approximately two minutes to complete. Upon completion, run: 
 
  `systemctl status 128T-rpm-verify` 
 
@@ -217,7 +274,7 @@ admin@conductor.conductor#
 
  The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.  
  
-6. Perform the following steps to verify that FIPS security enforcment mode is enabled in the OS:
+6. Perform the following steps to verify that FIPS security enforcement mode is enabled in the OS:
  `openssl md5 /dev/null` 
  Expected result:  `digital envelope routines … Disabled for fips` 
 
@@ -249,4 +306,4 @@ To terminate an active session:
 
 - If using an account other than admin, type `exit` to end the login session. 
 
-Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
+Common Criteria certification does not require any restrictions on executing commands. See the [Configuration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 

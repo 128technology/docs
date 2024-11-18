@@ -3,7 +3,7 @@ title: Ethernet Over Secure Vector Routing
 sidebar_label: Ethernet Over Secure Vector Routing
 ---
 
-Ethernet Over SVR (EoSVR) is a proprietary protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between SSR routers with increased security and efficiency, without the overhead of IP packet encapsulation.
+Ethernet Over SVR (EoSVR) extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between SSR routers with increased security and efficiency, without the overhead of IP packet encapsulation.
 
 Layer 2 and IP traffic destined for your LAN arrives on the SSR and is transported over an Ethernet Over SVR bridge to the destination SSR within the customer network. The bridge is configured between not more than two routers, and the configuration is validated before committing it to the running config.
 

@@ -3,24 +3,61 @@ title: System Requirements
 sidebar_label: System Requirements
 ---
 ## Hardware Requirements
-The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
 
-Please review the router and conductor [minimum requirements](about_supported_platforms.md#minimum-platform-specifications). See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
+The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required.
+
+### Minimum Platform Specifications
+
+These are the minimum platform specifications for running the SSR Networking Platform software.
+
+- 4 Core x86_64-v2 processor, single socket
+- 8GB Memory, ECC strongly recommended
+- 120GB Storage
+- 1 DPDK-enabled NIC port for standalone systems (two recommended)
+- 2 DPDK-enabled NIC ports for HA systems (three recommended)
+- 1 dedicated NIC port for HA synchronization
+- (Optional) 1 dedicated NIC port for out-of-band management
+
+### Conductor Scaling Recommendations
+
+| Number of managed routers | Physical Cores | Memory |
+| ------------------------- | -------------- | ------ |
+| 1 to 10                   | 2 Xeon         | 8 GB   |
+| 1 to 25                   | 4 Xeon         | 8 GB   |
+| 25 to 100                 | 8 Xeon         | 16 GB  |
+| 100 to 500                | 12 Xeon        | 48 GB  |
+| 500 to 1000               | 24 Xeon        | 96 GB  |
+| 1000 to 1500              | 32 Xeon        | 128 GB |
+| 1500 to 2000              | 48 Xeon        | 160 GB |
+
+Hyperthreading should be enabled on Conductor platforms.
+
+### Compatible Platform BIOS and UEFI Recommendations  
+
+Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running SSR on compatible platforms, the following are the recommended boot firmware settings: 
+
+- Hyperthreading disabled for platform operating as a router 
+- Hyperthreading enabled for platform operating as a conductor 
+- LAN bypass disabled 
+- Wake on LAN disabled 
+- Date time format: UTC format / GMT time zone 
+- Power on setting: always on 
+- Setup prompt timeout value: 3 seconds 
+- Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted) 
+- Boot order: HDD, USB, PXE 
+- Watchdog timer: disabled 
+- SR-IOV: enabled 
+- Secure Boot: disabled 
+- Serial Port Baud Rate: 115200/8-n-1 (To be used for console installation) 
+- Power profile: maximum performance 
+- System version, release date, manufacturer's part number, and serial number set in DMI table 
 
 :::info
-Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for hardware profile examples.
+Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs.
 :::
 
 :::important
 While the SSR uses a journaled filesystem to limit the risk of data corruption during a power failure, the use of an uninterrupted power supply (UPS) is recommended whenever practical.
-:::
-
-:::important
-When run as a virtual machine, CPU cores must be dedicated to the SSR router using core affinity.
-:::
-
-:::important
-It is strongly recommended to use ECC memory for all hardware platforms.
 :::
 
 ## Environmental Requirements
@@ -116,28 +153,12 @@ Connect an additional PCI card (if possible):
 
 If a PCI address for an interfaces change, the system will be disqualified. Examples of a PCI address changing are; after an OS reboot, or a BIOS setting change after the system is imaged. 
 
-
 :::tip
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
 :::
 :::note
 PCI-to-port maps are available for commonly deployed hardware systems on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208)
 :::
-
-## VMware ESXi and KVM Requirements
-When deploying SSR Software on VMware ESXi release 6.7 (or newer), [Secure Boot must be disabled](#disable-secure-boot) when the Virtual Machine is created (New Virtual Machine wizard). 
-To disable Secure Boot on VMWare ESXi, deselect **Secure Boot (EFI boot only)** found on the **VM Options** tab within the **Customize Hardware** section.
-
-![New Virtual Machine Wizard](/img/intro_vmware_secureboot.png)
-
-VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run SSR Software in these environments: 
-- Leverage core affinity to dedicate CPU cores to SSR software, instead of leveraging virtual CPUs.
-- Set the SCSI controller to LSI Logic SAS.
-- For VMWare ESXi deployments, set network adapters to type e1000. 
-- For KVM deployments, set the network adapters to type Virtio. 
-- Separate the management interface, which is used for inter-component communication and out-of-band management, from the forwarding plane interfaces. 
-- Reserve a minimum of two network interfaces for production traffic.
-- Depending on your environment, set the SSR router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroup mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
 
 ## Next Steps
 Once you have identified the platform best suited for your needs, please refer to the [SSR Software Installation Guide](intro_installation.md) for information about the install process. 

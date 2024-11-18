@@ -1,15 +1,15 @@
 ---
-title: Installing in Azure
-sidebar_label: Installing in Azure
+title: Installing a PAYG Conductor-managed Router in Azure
+sidebar_label: Installing a PAYG Conductor-managed Router in Azure
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Introduction
 
-This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. 
+This guide describes the process for deploying a PAYG (Pay As You Go) Session Smart Conductor and a Session Smart Router (SSR) in Azure.
 
-Mist-managed SSR installations are now available through Azure. See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.** 
+Mist-managed SSR installations are now available through Azure. See [Installing a Mist-Managed Router in Azure](intro_installation_azure_mist.md) for details. **However, SSR Version 6.x installed as an Azure image will only support Mist-managed routers. It will not support a conductor-managed deployment.**
 
 :::important
 If you wish to install SSR Version 6.x on a conductor and conductor-managed router in Azure, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
@@ -25,8 +25,8 @@ The process consists of the following steps:
 
 There are different Plans available for the Juniper Session Smart Networking Platform offering:
 
-* Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
-* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+* **Private Plan:** For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
+* **Hourly Plan:** This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a software access token. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
@@ -40,8 +40,8 @@ To request access to a Private plan:
 
 1. Locate the Subscription ID of the Azure account where the deployment of the software is going to take place. Follow the next steps to find the Subscription ID:
 
-* Please click [here](https://portal.azure.com) to go to the Azure portal.
-* On the search box right at the top of the screen, search for "Subscriptions". If you cannot find the subscription associated with your Azure account click [here](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+* [Go to the Azure portal](https://portal.azure.com).
+* On the search box right at the top of the screen, search for **Subscriptions**. If you cannot find the subscription associated with your Azure account go to [Azure Subscriptions](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
 * Take note of your Subscription ID.
 
 2. Contact your Juniper Networks Sales representative and provide:
@@ -53,13 +53,14 @@ To request access to a Private plan:
 
 4. Once your Subscription ID has been allowlisted, validate that the Private plan has been shared with your Subscription:
 
-* Click [here](https://portal.azure.com) to go to the Azure portal. On the search box right at the top of the screen, search for "Marketplace". If you are unable to access the Marketplace via your Azure Portal, click [here](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryMenuBlade/selectedMenuItemId/home).
-* The following banner is displayed at the top:
+  * [Go to the Azure portal](https://portal.azure.com).
+  * On the search box right at the top of the screen, search for **Marketplace**. If you are unable to access the Marketplace via your Azure Portal, use this [Azure Marketplace link.](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryMenuBlade/selectedMenuItemId/home).
+  * The following banner is displayed at the top:
 
-![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
+  ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 
-* Click on the "View private products" link.
-* If the Private image of the **Session Smart Networking Platform** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
+  * Click on the **View private products** link.
+  * If the Private image of the **Session Smart Networking Platform** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
 
 <img src={useBaseUrl('/img/platforms_azure_marketplace_image_private.png')} alt="Session Smart Networking Private offering" width="192" height="243" />
 
@@ -87,30 +88,30 @@ The following image shows the infrastructure elements deployed:
 
 ![Conductor deployment](/img/platforms_azure_conductor_deployment.png)
 
-#### Azure Portal
+### Azure Portal
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
-Click on the "Get it now" button.
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan](#selecting-the-azure-plan).
+Click on the **Get it now** button.
 Agree to the terms of use and privacy policy of the image.
-Click on the tab "Plans + Pricing" as shown in the following picture:
+Click on the tab **Plans + Pricing** as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Lastly click on the "Launch" link of the "Juniper Session Smart Conductor" template that better suits your needs.
+Lastly click on the **Launch** link of the **Juniper Session Smart Conductor** template that better suits your needs.
 
-Answer the following 3 questions to launch the deployment of a Conductor (additional information [here](#launch-the-template)):
+Answer the following 3 questions to launch the deployment of a Conductor. For additional details, see [Launch the Template](#launch-the-template).
 * What name do you want to give it?
-Provide it in the "Instance Name" field (for example: Conductor).
+Provide it in the **Instance Name** field (for example: Conductor).
 * Where do you want to deploy it?
- * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
- * Provide the name of the VNet in the "Virtual Network Name" field (for example: SSC-VNet).
- * Provide the name of a subnet in the "Control Subnet Name" field (for example: default).
+ * Provide the location where the VNet exists in the **Location** field (for example: eastus). [All available Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase; for example, `eastus`, `westus`, `westeurope`, `eastasia`.
+ * Provide the name of the VNet in the **Virtual Network Name** field (for example: SSC-VNet).
+ * Provide the name of a subnet in the **Control Subnet Name** field (for example: default).
 * Who is going to be the administrator?
-Provide an username (for example: t128) in the "Admin Username" field and the content of your public SSH key in the "Admin Public Key Data" field respectively.
+Provide an username (for example: t128) in the **Admin Username** field and the content of your public SSH key in the **Admin Public Key Data** field respectively.
 
-Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
+Agree to the terms of use and conditions of the deployment, and click on the **Purchase** button to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -118,39 +119,40 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side:
-* If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
+Once the deployment completes, information is provided in the Outputs tab on the left hand side.
+
+If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an **unsafe** connection. Click through the message.). The credentials are `admin` for username and the password is `128Tadmin`. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
 :::
 
-#### Azure CLI or PowerShell
+### Azure CLI or PowerShell
 
 To deploy the Session Smart Networking software via Azure CLI or PowerShell:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
-Click on the "Get it now" button.
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan](#selecting-the-azure-plan).
+Click on the **Get it now** button.
 Agree to the terms of use and privacy policy of the image.
-Click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Click on the **Get started** button to enable programmatic deployment for the subscription and click the button **Save** to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-Click on the tab "Plans + Pricing" as shown in the following picture:
+Click on the tab **Plans + Pricing** as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Lastly copy to the clipboard the URL of the "Juniper Session Smart Conductor" template located in the field "URL" that better suits your needs.
+Lastly copy to the clipboard the URL of the **Juniper Session Smart Conductor** template located in the field **URL** that better suits your needs.
 
 Create the parameters file, accept the terms of use and conditions of the image.
-Launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
+Launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information see [Launch the Template](#launch-the-template).
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
 <img src={useBaseUrl('/img/platforms_azure_private_image_version_mismatch.png')} alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side:
-* If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
+* If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an **unsafe** connection. Click through the message.). The credentials are `admin` for username and the password is `128Tadmin`. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
@@ -194,30 +196,30 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the Azure plan"](#selecting-the-azure-plan).
-2. Click on the "Get it now" button.
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan](#selecting-the-azure-plan).
+2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab "Plans + Pricing" as shown in the following picture:
+4. Click on the tab **Plans + Pricing** as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click the "Launch" link of the Mist-managed template.
+5. Click the **Launch** link of the Mist-managed template.
 
-Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
+Answer the following 4 questions to launch the deployment of an SSR .For additional information see [Launch the Template](#launch-the-template).
 * What name do you want to give it?
-  * Provide the name in the "Instance Name" field (for example: `128TRouter`).
+  * Provide the name in the **Instance Name** field (for example: `128TRouter`).
 * Where do you want to deploy it?
-  * Provide the location where the VNet exists in the "Location" field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
-  * Provide the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet).
-  * Provide the name of the availability set in the "Availability Set Name" field (for example: 128TRouterSet).
-  * Provide the name of the public, private and management subnets in the "Public Subnet Name", "Private Subnet Name" and "Management Subnet Name" fields respectively (for example: wan, lan and default).
+  * Provide the location where the VNet exists in the **Location** field (for example: eastus).  [All available Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase; for example, `eastus`, `westus`, `westeurope`, `eastasia`.
+  * Provide the name of the VNet in the **Virtual Network Name** field (for example: 128T-VNet).
+  * Provide the name of the availability set in the **Availability Set Name** field (for example: 128TRouterSet).
+  * Provide the name of the public, private and management subnets in the **Public Subnet Name**, **Private Subnet Name** and **Management Subnet Name** fields respectively (for example: wan, lan and default).
 * Which Session Smart Conductor is going to manage it?
-Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field, and only if the Conductor is highly available then provide the IP address of the secondary node of Conductor in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the Session Smart  Conductor deployed in the previous section.
+Provide the IP address of the primary node of Conductor in the **Conductor Primary Control IP** field, and only if the Conductor is highly available then provide the IP address of the secondary node of Conductor in the **Conductor Secondary Control IP** field. Please check the public IP address assigned to the Session Smart  Conductor deployed in the previous section.
 * Who is going to be the administrator?
 
 6. Provide a username (for example: `t128`) and the content of your public SSH key in the `Admin Username` and `Admin Public Key Data` fields respectively.
 
-7. Agree to the terms of use and conditions of the deployment. 
+7. Agree to the terms of use and conditions of the deployment.
 
 8. Click the **Purchase** button to launch the deployment.
 
@@ -230,19 +232,19 @@ Once the deployment completes, information is provided in the Outputs tab on the
 
 To deploy the Session Smart Networking software using the Azure CLI or Powershell:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan](#selecting-the-azure-plan).
 2. Click on **Get it now**.
 3. Agree to the terms of use and privacy policy of the image.
 4. Click on **Get started** to enable programmatic deployment for the subscription, then click **Save**.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-5. Click on the tab "Plans + Pricing" as shown in the following picture:
+5. Click on the tab **Plans + Pricing** as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-6. Copy the URL of the template located in the field "URL" that best suits your needs.
-7. Create the parameters file. 
+6. Copy the URL of the template located in the field **URL** that best suits your needs.
+7. Create the parameters file.
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Template]](#launch-the-template).
 
@@ -441,14 +443,14 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### Azure Portal
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
-2. Click on the "Get it now" button.
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan](#selecting-the-azure-plan).
+2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab "Plans + Pricing" as shown in the following picture:
+4. Click on the tab **Plans + Pricing** as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click on the "Launch" link of the "Juniper Session Smart Conductor" template that better suits your needs.
+5. Click on the **Launch** link of the **Juniper Session Smart Conductor** template that better suits your needs.
 6. Agree to the terms of use and conditions of the deployment.
 7. Click on the **Purchase** button to launch the deployment.
 
@@ -463,8 +465,8 @@ The information listed in the Outputs tab is the following:
 * SSH command to login to the Linux VM. Please continue to the end of this section below for more information regarding the credentials to login.
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is `admin` and the password is `128Tadmin`.
 :::
 
 #### Azure CLI or PowerShell
@@ -515,17 +517,17 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan"](#selecting-the-azure-plan).
-2. Click on the "Get it now" button.
+1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan](#selecting-the-azure-plan).
+2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the "Get started" button to enable programmatic deployment for the subscription.
-5. Click the button "Save" to save the changes.
+4. Click on the **Get started** button to enable programmatic deployment for the subscription.
+5. Click the button **Save** to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-6. Close the "Configure Programmatic Deployment" window.
-7. Click on the tab "Plans + Pricing".
-8. Copy the URL of the "Session Smart Router" template located in the field "URL" to the clipboard.
+6. Close the **Configure Programmatic Deployment** window.
+7. Click on the tab **Plans + Pricing**.
+8. Copy the URL of the **Session Smart Router** template located in the field **URL** to the clipboard.
 9. Launch the template running the following command:
 
 ```
@@ -535,8 +537,8 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 ```
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is `admin` and the password is `128Tadmin`.
 :::
 
 ### Session Smart Router
@@ -560,7 +562,7 @@ A description of the parameters of the template are listed in the following tabl
 | Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security.             |
 | Private Subnet Name     | The name of the private subnet within the VNet. |
 | Private Subnet Allowed CIDR    | It corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router. |
-| Management Subnet Name  | The name of the management subnet within the VNet. 
+| Management Subnet Name  | The name of the management subnet within the VNet.
 | Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Conductor Primary Control IP   | If a Session Smart  Conductor has already been deployed, fill out the field Conductor Primary Control IP with the IP address of the control interface of the primary node of Session Smart  Conductor. The IP address of the control interface of Conductor should be reachable from the Management subnet selected above. It must be a valid IP address of the form x.x.x.x. If no Session Smart Conductor has been deployed yet or the intention is simply deploying an unmanaged router please refrain from entering any value in this field.  |
 | Conductor Secondary Control IP | If there is an existing Session Smart  Conductor already deployed and the deployment of the Conductor is Highly Available, please enter the IP address of the control interface of the secondary node of Session Smart  Conductor in the field Conductor Secondary Control IP. If the existing deployment of the Session Smart  Conductor is not Highly Available, in other words if the Conductor is standalone, please refrain from entering any value in this field. |
@@ -571,13 +573,13 @@ A description of the parameters of the template are listed in the following tabl
 ##### Azure Portal
 
 1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan](#selecting-the-azure-plan).
-2. Click on the "Get it now" button.
+2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the tab "Plans + Pricing" as shown in the following picture:
+4. Click on the tab **Plans + Pricing** as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click on the "Launch" link of the "Juniper Session Smart Router" template that best suits your needs.
+5. Click on the **Launch** link of the **Juniper Session Smart Router** template that best suits your needs.
 6. Agree to the terms of use and conditions of the deployment.
 7. Click on the **Purchase** button to launch the deployment.
 
@@ -591,8 +593,8 @@ The information listed in the Outputs tab is the following:
 * SSH command to login to the Linux VM via the management interface.
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is `admin` and the password is `128Tadmin`.
 :::
 
 #### Azure CLI or PowerShell
@@ -667,17 +669,17 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan"](#selecting-the-azure-plan).
-2. Click on the "Get it now" button.
+1. Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan](#selecting-the-azure-plan).
+2. Click on the **Get it now** button.
 3. Agree to the terms of use and privacy policy of the image.
-4. Click on the "Get started" button to enable programmatic deployment for the subscription.
-5. Click the button "Save" to save the changes.
+4. Click on the **Get started** button to enable programmatic deployment for the subscription.
+5. Click the button **Save** to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-6. Close the "Configure Programmatic Deployment" window.
-7. Click on the tab "Plans + Pricing".
-8. Copy the URL of the "Session Smart Router" template located in the field "URL" to the clipboard.
+6. Close the **Configure Programmatic Deployment** window.
+7. Click on the tab **Plans + Pricing**.
+8. Copy the URL of the **Session Smart Router** template located in the field **URL** to the clipboard.
 9. Launch the template running the following command:
 
 ```
@@ -687,6 +689,6 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 ```
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+When logging to the Linux instance via SSH make use of the username specified in the **Admin Username** field and the corresponding private key specified in the **Admin Public Key Data** field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is `admin` and the password is `128Tadmin`.
 :::

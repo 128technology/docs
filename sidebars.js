@@ -38,50 +38,96 @@ module.exports = {
       "cc_fips_software_upgrades",
       "cc_fips_appendix",
     ],
-    "Installation Process": [
-      "intro_installation",
-      "intro_downloading_iso",
-      "intro_creating_bootable_usb",
-    ],
-    "Conductor Installation": [
-      "install_conductor_overview",
-      "bcp_conductor_deployment",
-      "single_conductor_install",
-      "ha_conductor_install",
-      "single_conductor_config",
-      "conductor_upgrade",
-      "howto_conductor_migration",
-    ],
-    "Router Installation": [
-      "intro_installation_bootable_media",
-      "intro_basic_router_config",
-      "intro_otp_iso_install",
-      "intro_install_quickstart_otpiso",
-      "onboard_ssr_to_conductor",
-      "onboard_ssr_device_otp",
-      "howto_router_migration",
-    ],
-    "Image-Based Installation": [
-      "intro_installation_image",
-    ],
-    "Cloud Installations": [
-      "supported_cloud_platforms",
-      "intro_installation_quickstart_aws",
-      "intro_installation_quickstart_mist_aws",
-      "intro_installation_azure",
-      "intro_installation_azure_mist",
-      "install_vmware_config",
-      "intro_initialize_HA_conductor",
-    ],
-    "Upgrades and Rollback": [
+    "Upgrading the SSR": [
       "intro_upgrade_considerations",
       "intro_upgrading",
+      "upgrade_ibu_conductor",
+      "upgrade_router",
+      "upgrade_restricted_access",
+      "upgrade_legacy",
       "intro_rollback",
     ],
-    "Supporting Install Information - Appendix": [
-      "intro_installation_installer",
-      "install_qcow2_deployment",
-      "legacy_OTP_install",
+    "Installation Overview": [
+      "intro_installation",
+
+    ],
+    "SSR Universal ISO Installation": [
+      "intro_installation_univ-iso",
+      "install_univ_iso",
+      "initialize_u-iso_device",
+      "initialize_u-iso_adv_workflow",
+    ],
+    "Cloud / Hypervisor Installations": [
+      "supported_cloud_platforms",
+      "install_vmware_config",
+      "intro_initialize_HA_conductor",
+      {
+       "type": "category",
+          "label": "Installing In AWS",
+          "items": [
+            "intro_installation_quickstart_aws",
+            "intro_installation_quickstart_mist_aws",
+            "intro_installation_quickstart_byol_conductor_aws",
+            "intro_installation_quickstart_byol_mist_aws",
+            ],
+      },
+      {
+       "type": "category",
+          "label": "Installing In Azure",
+          "items": [
+            "intro_installation_azure",
+            "intro_installation_azure_mist",
+            "intro_installation_byol_azure_conductor",
+            "intro_installation_byol_azure_mist",
+          ],
+      },
+    ],
+    "Legacy Install Information": [
+      "intro_installation_legacy",
+      "intro_downloading_iso",
+      "intro_creating_bootable_usb",
+      {
+       "type": "category",
+          "label": "Conductor Installation",
+          "items": [
+            "install_conductor_overview",
+            "bcp_conductor_deployment",
+            "single_conductor_install",
+            "ha_conductor_install",
+            "single_conductor_config",
+            "conductor_upgrade",
+            "howto_conductor_migration",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Router Installation",
+          "items": [
+            "intro_installation_bootable_media",
+           "intro_basic_router_config",
+            "intro_otp_iso_install",
+            "intro_install_quickstart_otpiso",
+            "onboard_ssr_to_conductor",
+            "onboard_ssr_device_otp",
+            "howto_router_migration",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Image-Based Installation",
+          "items": [
+            "intro_installation_image",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Appendix",
+          "items": [
+            "intro_installation_installer",
+            "install_qcow2_deployment",
+            "legacy_OTP_install",
+          ],
+      },
     ],
     "Concepts": [
       "concepts_application_discovery",
@@ -168,7 +214,6 @@ module.exports = {
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",
-          "config_nat",
           "config_rate_limiting",
           "config_RBAC",
           "config_service_health",
@@ -206,6 +251,17 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Network Address Translation (NAT)",
+        "items": [
+          "config_source-dest_nat",
+          "config_static_nat",
+          "config_dnat",
+          "config_nat_pools",
+          "ts_nat_troubleshooting",
+        ],
+      },
+      {
+        "type": "category",
         "label": "High Availability",
         "items": [
          "config_ha",
@@ -218,12 +274,26 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Traffic Engineering",
+        "items": [
+          "concepts_traf_eng",
+          "bcp_per-adjacency_traffic_engineering",
+          "config_te_net_intf",
+          "config_dev_intf_traf_eng",
+        ]
+      },
+      {
+        "type": "category",
         "label": "Access Management and Authentication",
         "items": [
           "config_access_mgmt",
           "config_ldap",
           "config_radius",
+          "config_radsec",
+          "config_syslog_tls",
+          "config_webserver_certs",
           "config_password_policies",
+          "howto_reset_user_password",
         ],
       },
       {
@@ -256,13 +326,13 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
+          "howto_update_bios",
           "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",
           "config_bfd_tunnel",
           "howto_config_PPPoE",
           "howto_pppoe_vlan",
-          "howto_maintenance_mode",
           "howto_ms365",
           "howto_trusted_ca_certificate",
         ],
@@ -292,6 +362,8 @@ module.exports = {
       "events_overview",
       "events_alarms",
       "events_events",
+      "config_alarm_suppression",
+      "howto_maintenance_mode",
     ],
     "Best Practices": [
       "bcp_sdwan_design_guide",
@@ -312,6 +384,7 @@ module.exports = {
       "config_command_guide",
       "config_reference_guide",
       "cli_stats_reference",
+      "intro_rest_graphql_apis",
     ],
     "Installer/Initializer Reference": [
       "installer_cli_reference",
@@ -344,6 +417,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.3",
           "release_notes_128t_6.2",
           "release_notes_128t_6.1",
           "release_notes_128t_6.0",
@@ -382,6 +456,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.10",
           "release_notes_wan_assurance_plugin_3.9",
           "release_notes_wan_assurance_plugin_3.8",
           "release_notes_wan_assurance_plugin_3.7",
@@ -389,6 +464,14 @@ module.exports = {
           "release_notes_wan_assurance_plugin_3.5",
           "release_notes_wan_assurance_plugin_3.4",
           "release_notes_wan_assurance_plugin_3.3"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "BYOL Cloud Images",
+        "items": [
+          "release_notes_byol_2.0",
+          "release_notes_byol"
         ]
       }
     ],

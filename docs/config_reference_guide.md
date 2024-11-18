@@ -427,7 +427,7 @@ The *authority* configuration element is the top-most level in the SSR configura
 | conductor-address | address | The IP address or hostname of your conductors. There can be at most two conductor addresses configured in an authority; note that the addresses here should be reachable by most/all of your authority's routers. (Routers that use different addresses to reach the same conductor can override this in their configuration.) |
 | currency | string | Indicates local monetary currency used in the system. Default is `USD`. |
 | dscp-map | sub-element | Lets administrators map the inbound DSCP values received in packet headers into priority values, for traffic engineering purposes. |
-| dynamic-hostname | string | This allows administrators to establish a templated pattern for how interfaces on routers will create "names" for their interfaces. These names, constructed using substitution variables in the dynamic-hostname syntax, can be used as (effectively) persistent labels for referring to the corresponding interface, rather than an IP address. This is particularly useful when an interface acquires its address using a dynamic protocol such as PPPoE or DHCP. Uses the following substitution variables: \{interface-id\} for Network Interface Global Identifier \{router-name\} for Router Name \{authority-name\} for Authority Name For example, \'interface-\{interface-id\}.\{router-name\}.\{authority-name\}\'. |
+| dynamic-hostname | string | This allows administrators to establish a templated pattern for how interfaces on routers will create "names" for their interfaces. These names, constructed using substitution variables in the dynamic-hostname syntax, can be used as (effectively) persistent labels for referring to the corresponding interface, rather than an IP address. This is particularly useful when an interface acquires its address using a dynamic protocol such as PPPoE or DHCP. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier `{router-name}` for Router Name `{authority-name}` for Authority Name For example, `interface-{interface-id}.{router-name}.{authority-name}`. |
 | ipfix-collector | sub-element | Allows administrators to configure authority-wide IPFIX (IP Flow Information Export) collectors, for flow-by-flow/session-by-session information. |
 | ldap-server | sub-element | Configuration in support of an external authentication service for administrative logins. |
 | name | string | A text string that names the authority. This should be unique to an administrative domain, as devices that are configured with the same authority:name are presumed to be associated with each other. It is recommended that an authority name be something associated with an enterprise deploying the SSR; e.g., "128technology". |
@@ -2086,8 +2086,8 @@ This controls which repository or repositories a router will use to retrieve sof
 
 | Element | Type | Description |
 | --- | --- | --- |
-| offline-mode | boolean | Default: false. Controls whether the router will only be able to retrieve software upgrade images via its conductor.|
-| source-type | enumeration | Valid values: conductor-only, prefer-conductor, internet-only. Default: internet-only. To use the conductor as a proxy server to reach the SSR public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
+| offline-mode | boolean | Default: `false`. Set this to `true` to limit the router to only retrieve software upgrade images from its conductor.|
+| source-type | enumeration | Valid values: `conductor-only`, `prefer-conductor`, `internet-only`. Default: `internet-only`. To use the conductor as a proxy server to reach the SSR public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
 
 ## reverse-packet-session-resiliency
 
@@ -2708,7 +2708,7 @@ By default, an SSR retrieves software from a public software repository hosted b
 | Element | Type | Description |
 | --- | --- | --- |
 | max-bandwidth | enumeration | Valid values: unlimited, 1-999999999999. This value is in bits/second. This represents the bandwidth limiter applied to software downloads. |
-| repository | sub-element | Which repository/repositories the SSR will use.|
+| [repository](#repository) | sub-element | Which repository/repositories the SSR will use.|
 
 ## ssh-keepalive
 

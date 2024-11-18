@@ -5,6 +5,10 @@ sidebar_label: Mosh
 <!-- markdown-link-check-disable-next-line -->
 The Mosh plugin provides the ability to install the MObile SHell [MOSH](https://mosh.org/) on SSR nodes. Mosh is provided under GNU GPLv3.
 
+:::important
+This plugin has been deprecated with the release of SSR 6.3.0.
+:::
+
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
