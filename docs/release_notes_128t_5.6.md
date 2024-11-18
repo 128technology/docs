@@ -93,7 +93,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-58201 Increase AMD performance:** Throughput performance on AMD processors has been improved through the tuning of some kernel parameters.
 ------
-- **I95-58528 SSR OS renaming:** The SSR OS has been renamed/rebranded from CentOS7 to SSR OS to acknowledge CentOS 7 is no longer supported. All internal naming has been updated. 
+- **I95-58528 SSR OS renaming:** The SSR OS has been renamed/rebranded from "CentOS7" to "SSR OS" to more accurately reflect its customized Linux distribution. All internal naming has been updated. 
 ------
 - **I95-58682 Adjust the inactivity timer range to allow for Azure policy limits:** Updated the `inactivity-timer` range to allow for values as low as 30 seconds. Resoved an issue that would have used an incorrect default setting of 3600 instead of 900 seconds in certain scenarios. 
 
