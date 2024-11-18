@@ -21,7 +21,7 @@ For HTTPS probes, the client will allow self-signed certificates for inspecting 
 ## Configuration Snippet
 The plugin leverages the existing SSR reachability detection and enforcement configuration within the service-route on the router.
 
-### HTTP Profile configuration
+### HTTP Probe Profile configuration
 * Config Path: authority > router[name] > http-probe-profile
 * Config Fields:
 
@@ -34,6 +34,8 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | number-of-attempts | uint32 | default: 4 | The number of consecutive HTTP(s) requests to be sent within the probe-duration before deciding that destination is unreachable |
 | probe-duration | uint32 | default: 5 | The duration (in seconds) within which to reach the destination. Each attempt will be made in (probe-duration / number-of-attempts) interval |
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
+| sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
+| up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before transitioning from down to up state |
 
 * Example:
 ```config {9-14}
@@ -48,6 +50,9 @@ config
             http-probe-profile  http-probe-1
                 name               http-probe-1
                 url                http://172.16.2.5:5060/
+                probe-interval     60
+                number-of-attempts 5
+                probe-duration     20
                 valid-status-code  202
                 valid-status-code  200
             exit
@@ -56,7 +61,90 @@ config
 exit
 ```
 
-### Service route configuration
+Above configuration runs http probe as follow:
+![Http Probe Timeline](/img/http-probe-timeline.png)
+Based on the configuration, every test runs five probe attempts. Each attempt runs with a two second hard timeout, calculated by the `probe-duration` divided by the `number-of-attempts`. Each probe may fail due to a request failure, timeout reached, or an invalid response code. Service path status is determined at the end of the probe duration and the current status will remain until the end of the next test.
+
+
+:::note
+Each router can configure up to 10 http probe profiles.
+:::
+
+### SLA
+
+##### Version History
+
+| Release  | Modification                          |
+| -------- | ------------------------------------- |
+| 1.2.0    | `http-probe-profile > sla` introduced |
+
+
+SLA can be configured to add additional criteria to determine probe test success. The result of a probe test is based on number of probe attempts defined in the `http probe profile` configuration. Certain validations are applied to SLA configuration. `max-loss` should be less than `number-of-attempts`, `max-jitter` and `average-rtt` should be less than the single probe timeout calculated by `probe-duration` / `number-of-attempts`.
+
+The below example sets SLA on the probe test; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 2 seconds will be applied and max-loss of 2 is considered for every test.
+
+```
+router
+    http-probe-profile      http-probe-1
+        name                http-probe-1
+        url                 http://172.16.2.5:5060/
+        valid-status-code   202
+        valid-status-code   200
+        probe-duration      6
+        probe-interval      10
+        number-of-attemps   3
+        sla
+            max-loss       2
+        exit
+    exit
+exit
+```
+
+* Example:
+```config {9-14}
+router
+    http-probe-profile  http-probe-1
+        sla
+            max-jitter     300
+            max-loss       2
+            average-rtt    200
+        exit
+    exit
+exit
+```
+
+| Name  | Type    | Description |
+| --    | --      | --          |
+| max-jitter  | uint32 | Maximum difference between the maximum and minimum RTT of the HTTP probe in milliseconds |
+| average-rtt | unit32 | Maximum average RTT for an HTTP probe test to be up in milliseconds |
+| max-loss    | unit8  | Number of failed HTTP(s) probe requests to mark the test down |
+
+
+### HTTP Probe Log Level
+* Config Path: authority > router[name] > http-probe
+* Config Fields:
+
+| Name  | Type    | Constraints | Description |
+| --    | --      | --          | --          |
+| log-level | enum | default: info | Http Probe Log Level |
+
+* Example:
+```config {9-14}
+
+config
+
+    authority
+
+        router  my-router
+            http-probe
+                log-level debug
+            exit
+        exit
+    exit
+exit
+```
+
+### Service Route Configuration
 Once the profile is created, the next step is to enable the reachability enforcement and probe detection for a non SVR service-route and reference the profile in that config.
 
 * Config Path: authority > router[name] > service-route[name] > reachability-detection
@@ -68,7 +156,6 @@ The following fields should be enabled for the probe based detection to work. Th
 | --    | --      | --          | --                                      |
 | enforcement | boolean | true | Toggle the configuration to be enabled for the reachability enforcement to take effect. |
 | probe-type | enumeration | always | For probe based reachability detection to take effect the probe-type must be set to `always`. |
-| hold-down | uint32 | probe-duration * 2 | The `hold-down` time is the amount of time in seconds that the path is kept out-of-service when path transitions from down to up. |
 | probe > probe-type | enumeration | http-probe | The probe-type must be set to `http-probe` in order to leverage the HTTP(s) based probing |
 | probe > http-probe-profile | reference | - | Reference to a previously configured http-probe-profile on the router |
 
@@ -122,6 +209,35 @@ config
 exit
 ```
 
+### Up Delay Timer
+##### Version History
+
+| Release  | Modification                                     |
+| -------- | ------------------------------------------------ |
+| 2.1.0    | `http-probe-profile > up-delay-timer` introduced |
+
+
+An `up-delay-timer` can be configured on a probe to prevent a probe watching an unstable service path from coming up right away. When a probe state transitions from down to up, instead of bringing that probe up, if an `up-delay-timer` is configured the probe will be kept down until the timer finishes. If the probe goes back down while the timer is running, the timer will cancel and the probe will remain down. If it is set to the default value (0) then the timer is disabled.
+
+It is recommended that a probe's `up-delay-timer` has a value greater than the `probe-interval` field. This configuration allows the probe to run at least one more time while the timer is active. A warning will be produced if a probe is configured with an `up-delay-timer` value less than the `probe-interval`. If a configuration reload occurs while a probe timer is active, the timer is honored with the previous config.
+
+The below example shows a probe with a configured `up-delay-timer`; with these settings, the test will be triggered every 10 seconds, 3 probes with a single probe timeout of 2 seconds will be applied and when the probe transitions from down > up it will be held down for 15 seconds.
+
+```
+router
+    http-probe-profile      http-probe-1
+        name                http-probe-1
+        url                 http://172.16.2.5:5060/
+        valid-status-code   202
+        valid-status-code   200
+        probe-duration      6
+        probe-interval      10
+        number-of-attemps   3
+        up-delay-timer      15
+    exit
+exit
+```
+
 ## Use Cases
 
 ### Path selection
@@ -154,7 +270,6 @@ config
                 reachability-detection
                     enabled               true
                     enforcement           true
-                    hold-down             60
                     reachability-profile  dummy
                     probe-type            always
 
@@ -179,7 +294,6 @@ config
                 reachability-detection
                     enabled               true
                     enforcement           true
-                    hold-down             60
                     reachability-profile  dummy
                     probe-type            always
 
@@ -197,10 +311,10 @@ admin@node1.conductor1#
 
 ```
 
-Each service-route is designed to probe a unique URL for that servers and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers cannot be reached or responds with a unsuccessful status code (e.g. 404, 504 etc) the service path is taken out of service.
+Each service-route is designed to probe a unique URL for that server and monitor the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers either cannot be reached, responds with an unsuccessful status code (e.g. 404, 504 etc), or the configured [SLA](#sla) is not met, the service path is taken out of service.
 
 :::warning
-When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, it's possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
+When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, it is possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
 :::
 
 
@@ -222,6 +336,23 @@ Node: node1.my-router Page 1
 
 Completed in 0.05 seconds
 admin@node1.conductor1#admin@node1.conductor1#
+```
+
+The `show plugins state router <router-name> summary 128T-http-probe` command can be used to view the current status of the probe and whether the probe is being held down. For example:
+
+```
+admin@node1.conductor1# show plugins state router my-router summary 128T-http-probe
+Wed 2024-10-02 03:19:33 UTC
+Target: node1.my-router
+
+============= ======== =========== =================
+ Probe         Status   Held Down   Time Left (sec)
+============= ======== =========== =================
+ test-probe1   up       True                      8
+ test-probe2   down     False                     0
+
+Retrieved state data.
+Completed in 0.05 seconds
 ```
 
 In addition, the probe's running status in linux can be found by inspecting the `128T-http-probe-status-change-notifier@<probe-name>.service`. For example,
@@ -275,11 +406,64 @@ Nov 07 03:27:34 my-router.openstacklocal systemd[1]: Started HTTP Monitor Status
 The same steps can be used to bring `up` a path that is currently `down` by changing `STATUS=up` in the steps above.
 :::
 
-:::tip
-Additional debugging can be turned on for the `http-monitor` instance by setting `LOG_LEVEL=DEBUG` in `/var/run/128technology/plugins/http_monitor/{probe-name}.conf` config file
-:::
+
+### Metrics
+
+In-memory metrics were added for http probe SLA values
+
+```
+# show stats http-probe
+Wed 2024-04-17 02:52:35 UTC
+✔ Retrieving statistics...
+
+Http Probe Stats Metrics
+------------------------
+
+===================== ======= ==================== ====================
+ Metric                Node    Probe-profile-name                Value
+===================== ======= ==================== ====================
+ average-rtt           test2   http-probe-1                       0.12
+ dns-resolution-time   test2   http-probe-1         2.1130787988658994
+ jitter                test2   http-probe-1                       0.02
+ loss                  test2   http-probe-1                          0
+ max-rtt               test2   http-probe-1                       0.13
+ min-rtt               test2   http-probe-1                       0.11
+ updated               test2   http-probe-1         1718376794.8707266
+
+
+Completed in 0.21 seconds
+```
 
 ## Release Notes
+
+### Release 2.1.0
+
+**Release Date:** Oct 31, 2024
+
+#### New Features and Improvements
+- **PLUGIN-2510** Implement an up-delay-timer
+
+The plugin allows users to configure an up-delay-timer which holds a path down for a set duration before bringing the path up.
+
+#### Issues Fixed
+
+- **PLUGIN-2629** Display stats in older (5.X) SSR releases
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+
+### Release 2.0.0
+
+Image based install and upgrade (IBU) support for SSR 6.3.0.
+
+**Release Date:** Sep 30, 2024
+
+### Release 1.2.0
+
+**Release Date:** Aug 20, 2024
+
+#### New Features and Improvements
+- **PLUGIN-2300** Implement SLA monitoring per probe
+
+The plugin allows users to configure the following SLA settings: max-loss, max-jitter, average-rtt. These settings are considered as part of the probe success criteria. Additionally, these values are available through metrics.
 
 ### Release 1.0.2
 

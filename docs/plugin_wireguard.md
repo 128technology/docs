@@ -2,7 +2,7 @@
 title: Wireguard Plugin
 sidebar_label: Wireguard
 ---
-
+<!-- markdown-link-check-disable -->
 The wireguard plugin allows your SSR to peer with other endpoints using [wireguard](https://www.wireguard.com/).  With this plugin you can securely connect endpoints to your SSR fabric, extending services and network tenancy.
 
 ![Wireguard overview](/img/plugin_wireguard_1.png)
@@ -16,7 +16,7 @@ See instructions for [installing and managing](plugin_intro.md#installation-and-
 Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with an SSR service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated. Each endpoint wishing to form a peering relationship must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
 
 When an SSR is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally service prefixes that should be sent to the SSR by a wireguard peer, can be configured as allowed IPs. More information on wireguard configuration can be found [here](https://www.wireguard.com/quickstart/).
-
+<!-- markdown-link-check-enable-->
 ## Basic Configuration
 
 To configure your SSR for wireguard peering, you first create a wireguard profile on the router. For example, the following defines a profile called `wg-profile-1`. Each wireguard endpoint will use a unique address from the prefix `10.10.10.0/24` as defined in the profile and the router wireguard instance will use the first address of `10.10.10.1`.:
@@ -251,9 +251,11 @@ Completed in 0.27 seconds
 ### Remote Endpoint Configuration
 
 Now the remote peer endpoints can be configured to peer with the `dc1` and `dc2` routers at their respective interface addresses, and route the corresponding service prefixes of `172.16.1.0/24` and `172.16.2.0/24` to each. For example, a wireguard config for peer `p1` might look like the following:
+<!-- markdown-link-check-disable-->
 :::tip
 See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
+<!-- markdown-link-check-enable-->
 ```
 [Interface]
 # p1
@@ -366,11 +368,11 @@ PersistentKeepalive = 30
 :::note
 If wireguard is hosted on a DHCP enabled interface, the peer's `Endpoint` address needs to be configured with the latest IP address assigned.
 :::
-
+<!-- markdown-link-check-disable-->
 :::note
 The `PersistentKeepalive` in this wireguard configuration causes the peer to keep the connection to the peer alive by sending periodic traffic. This has the effect of allowing the SSR to originate sessions to the peer at any time. See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
-
+<!-- markdown-link-check-enable-->
 With the profile and peer configured on the SSR `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
 
 ```
@@ -667,6 +669,22 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 :::warning
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
+
+### Release 3.0.1
+
+**Release Date:** Oct 31, 2024
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+- **PLUGIN-2727** Fix RPM removal on Conductor
+- **PLUGIN-2734** Ensure plugin starts after IBU conversion (upgrade)
+
+### Release 3.0.0
+
+Image based install and upgrade (IBU) support for SSR 6.3.0.
+
+**Release Date:** Sep 30, 2024
 
 ### Release 2.1.2
 

@@ -45,7 +45,153 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-## Release 6.1.9-2
+## Release 6.1.11-5-lts
+
+**Release Date:** October 17, 2024
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2024-3596, CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
+------
+- **I95-55982 X722 interface MAC being set to 00:00:00:00:00:00 on SSR1300/SSR1400:** Identified an issue where the MAC address would change during a power cycle. Another power cycle can restore the MAC to its previous value. An upgrade to the X722 firmware addresses this issue. NOTE: A power cycle is required as part of the firmware flashing sequence. All power feeds must be manually disconnected and reconnected to cycle it correctly.
+------
+- **I95-57128 Slow inter-vlan traffic due to i40e performance issue:** Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value.  This has been resolved and latency reduced to 32us.
+------
+- **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where a configuration change may cause existing waypoint ports to become invalidated, creating an exhaustion scenario.
+------
+- **I95-57712 DSCP steering issue with outbound traffic:** Resolved an issue with processing reverse pinhole packets when DSCP steering is enabled.
+-------
+- **I95-57730 Peer Service Next Hops Not Reloaded After Provisional Status Change:** Resolved an issue where a `bgp-over-svr service-route` does not failback to primary node on a `provisional-status` change.
+------
+- **I95-58201 Increase AMD performance:** Throughput performance on AMD processors has been improved through the tuning of some kernel parameters. 
+------
+- **I95-58264 EoSVR session breaks after upgrading:** Resolved an issue where a high number of STEP route updates carried in an FPM message disconnected the Routing manager to agent connection. This has been resolved by limiting the max number of STEP paths in a single STEP route. 
+------
+- **I95-58332 Show service-path incorrectly shows the state as `up` in an unreachable next-hop:** In a config where a `service-route next-hop` is pointing to an unreachable address, the show service-path shows the state is being up. This has been resolved by adding a next-hop reachability check to `show service-path`.
+------
+- **I95-58503 Add the ability to disable session error records:** The ability to explicilty disable session records on a conductor or a router has been added to the SSR software. For more information, see [`session-record-profile`](config_command_guide.md#configure-authority-session-record-profile).
+
+## Release 6.1.10-8-lts
+
+**Release Date:** August 22, 2024
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617, CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-27052, CVE-2024-27056, CVE-2024-27059, CVE-2024-2961, CVE-2024-33599, CVE-2024-33600, CVE-2024-33601, CVE-2024-33602, CVE-2024-32487, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2024-3596
+------
+- **I95-47195, I95-47196, I95-49015, I95-49018, I95-49599, I95-56682 Forwarding plane crash, causing stranded network namespaces when LTE/PPPoE network-interface name is changed:** Implemented reinit script to reiniatilize namespace, KNI and target-interface after a configuration change in the network-interface.
+------
+- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide addtional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
+------
+- **I95-49712 Config Validation Error uniformative:** Resolved an issue where paths pointing to missing keys or elements returned error messages that did not provide recognizable information. Now the error message provides key or element names.
+------ 
+- **I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:** When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.
+------
+- **I95-52251 Changes to the conductor address on the router result in loss of ssh connection to the router:** Resolved an issue where changing the router level `conductor-address` did not update the salt-created services with the new addresses.
+------
+- **I95-53619 Anomaly in Maintenance Mode reporting:** Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. `BGP peer path is down` alarms are now shelved properly on routers in maintenance mode.
+------
+- **I95-54833 HA port is showing as redundant:** Resolved an issue where adding a device-interface back into the configuration after it was removed did not recreate the device-state.
+------
+- **I95-55550 Abrupt power failure may result in filesystem corruption:** Multiple disk errors caused corruption on the 128T_root filesystem causing it to enter read-only mode and becoming non-responsive. To resolve this issue, the filesystem triggers a kernel panic, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.
+------
+- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.
+------
+- **I95-55725 Highway crashes when peer-path routers are removed:** Resolved a race condition that could cause a crash in the highway worker-core packet-processor if peer routers are removed from the configuration.
+------
+- **I95-55912 Validate Patterns for Service Domains and URLs:** The `url` and `domain-name` fields on a service were an unformatted string. This allowed you to configure fields that would be silently discarded. The `domain-name` and `url` fields within services are now validated for correctness and viability from an App-ID perspective. Anything to be ignored during validation now triggers a config warning.
+------
+- **I95-55965 IDP engine not starting due to invalid environmental conditions:** In cases where a container/csrx does not shut down cleanly, the IDP engine does not start. These conditions are now detected, and a force stop/remove of the container is implemented.
+------
+- **I95-56127 Excessive CPU utilization on systems with a large number of KNI interfaces:** Relaxed KNI scheduling to improve CPU utilization.
+------
+- **I95-56203 FAI scan archives in `/var/log/128technology` have zero-byte length:** Corrected log rotate function to prevent file truncation.
+------
+- **I95-56236 Quick Start config validation failures not being reported:** Made changes to the initialization process such that quick start errors can be reported.
+------
+- **I95-56263 Add `show capacity`, and debugging commands to the TSI output:** Support for additional information in the TSI output has been added.
+------
+- **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
+------
+- **I95-56317 Journal logs missing from Conductors running 6.2.3:** An issue related to a typo was creating zero byte files when downloading journal logs using the GUI.
+------
+- **I95-56326 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
+------
+- **I95-56363 Highway crash due to traffic metrics manager thread error:** A potential crash due to a race condition in per-service-route metrics has been fixed.
+------
+- **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade proces.  
+------
+- **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
+------
+- **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
+------
+- **I95-56492 Sessions configured for outbound-only with nat-keep-alive enabled experience reverse flow packet drops after flow migration:** A flow move from an inter-router (WAN) peer path to an inter-node (fabric) peer path causes repeated session modifies on the hub side causing reverse traffic packet drops due to NAT keepalives incorrectly testing the failed WAN path for the migrated session. This issue has been resolved.
+------
+- **I95-56527 `compare config` returns an `Invalid JSON` error:** Resolved an issue where the use of a backslash (`\`) in a list key or a list element generates an `Invalid JSON` error when `compare config` is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a `\` in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the `\` only exists in one; Or if the list element with the `\` is renamed.
+------
+- **I95-56541 Include kernel journal entries in TSI:** A separate `kernel.log` journal file is now created in the TSI output.
+------
+- **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
+------
+- **I95-56600 Add `show tenant members` to the TSI output:** `show tenant members` and additional network scripts have been added to the TSI output.
+------
+- **I95-56612 `fib-service-match any-match` missing some FIB entries:** Resolved an issue when a service-address was more specific than the last route update, a search for other less specific services was not performed. Now when the service address update is more specific, additional searches will continue. 
+------
+- **I95-56702 O365/Sharepoint application missing from the Applications list:** Resolved an issue where certain applications and protocols were excluded from automatic updates.
+------
+- **I95-56715 Address validation in migrate feature in conductor UI is not working correctly:** Resolved an isssue between the client and the server during the use of the GUI `migrate` operation, where the conductor address was not read correctly, and returning an irrelevant error message. 
+------
+- **I95-56726 `No Timeout Queue` message logged in cases where a config commit fails, or a conductor fails to load a config on startup:** Resolved an issue with `ThreadPoolWithExternalPoller` that resulted in a stack trace in the logs which starts with message `No TimeoutQueue:`.
+------
+- **I95-56727 Domain names that begin with numbers are not allowed to be configured:** Warnings are no longer generated for domain-name elements of service configurations which have labels beginning with a number, for example `123.abc.com`.
+------
+- **I95-56822 Router stuck in a continuous upgrade/failure state:** DNS name servers changes on the conductor are not honored. In cases where the DNS configuration changed post boot, the conductor software proxy would not reload the config. In this scenario the proxied router software requests would use an out of date DNS configuration for the proxied requests, resulting in failure. 
+------
+- **I95-56827 NTP Auth key only permits keys of 20 or 40 characters:** Loosened restrictions on NTP server key length to allow plaintext keys. 
+------
+- **I95-56843 Error logs filled with irrelevant KNI network script info:** The log output has been reduced to provide related information.
+------
+- **I95-56847 lte / pppoe default-route check incorrectly reporting warnings:** Resolved an issue where warnings were incorrectly shown on the conductor for interfaces without `default-route` or `management-vector` configured.
+------
+- **I95-56850 Overlap warning on router not present on conductor:** Resolved a case where a service on a router is configured with `applies-to`, and the same service is configured on the conductor (overlap) but does not have `applies-to` configured, the validation process will generate a warning on the router but not the conductor. 
+------
+- **I95-56879 PPPoE stopped working:** Resolved an issue where the system configuration for the PPPoE interface was missing `LCP_FAILURE` and `LCP_INTERVAL` fileds. These fields are now set correctly.
+------
+- **I95-56905 Conserve memory footprint on the router:** If the SSR configuration does not have `application-identification mode all`, then do not load the database. This will save memory on the router. 
+------
+- **I95-56973 Child services do not inherit the service-path configurations from the parent service:** Resolved an issue where child service routes for peers were not inheriting vectors and the `enable-failover` field. 
+------
+- **I95-57000 Hub crash while generating TSI:** Protection has been added to prevent unmapped memory access during packet buffer location walk.
+------
+- **I95-57017 Application ID failed to block some domains:** Resolved an issue where DPI failed to identify the domain-name from SNI if the `client-hello` is split up into multiple TCP packet segments.
+------
+- **I95-57028 IDP core files consume disk space:** In cases where large amounts of files are stored on disk, the files will be managed/deleted based upon the folder size. 
+------
+- **I95-57071 Changing router context in session debug does not update correctly:** Resolved an issue where a missing dependency was not initiating a re-render of the output using the correct router name. 
+------
+- **I95-57082 Unable to delete a capture-filter that contains a forward slash (/):** This issue has been resolved. 
+------
+- **I95-57099 BFD Session timeout discovered:** Resolved an issue where BFD sessions were deleted prematurely.
+------
+- **I95-57110 Crash seen during add and delete peers while sending traffic:** A race condition has been fixed that could cause a crash in the packet-processing highway process if a peer-path is removed from configuration.
+------
+- **I95-57114 Unable to upgrade AWS Conductor:** Resolved an issue where an incorrect package version was installed, triggering a downgrade and preventing the upgrade.
+------
+- **I95-57205 Race condition on startup with DHCP configured on LTE or PPPoE interface, causing system to crash:** This issue has been resolved.
+------
+- **I95-57283 Unable to perform SNMP discovery:** Resolved an issue where alarms in the `SERVICE`, `BGP_NEIGHBOR`, or `MSDP_NEIGHBOR` category would cause the SNMP server to crash and fail to send messages.
+------
+- **I95-57337 Updates during Application ID reload/refresh:** Updated the processes involved in application reload.
+------
+- **I95-57578 Candidate configuration values not showing in GUI:** Resolved an issue that caused configuration drop-downs in the GUI for tenants and services to only display values from the running configuration, not the candidate configuration.
+------
+- **I95-57580 Provide drop down list in UI for Session Record Profile:** There is now a Session Records Profile drop down list in the GUI.
+------
+- **I95-57593 No option to require password change on first login:** Added a **Require Password Change On First Login** checkbox to the **Create User** dialog. Previously this feature was only available in the `create-user` command.
+------
+- **I95-57607 Saving TSI as root from the conductor generates oversized file:** Added and enforcement  that when calling `/usr/bin/save-tech-support-info` the `--output` argument always ends in .`zip`.
+
+## Release 6.1.9-2-lts
 
 **Release Date:** June 27, 2024
 
@@ -53,7 +199,7 @@ This issue will be corrected in an upcoming release.
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2024-2973
 
-## Release 6.1.8-15
+## Release 6.1.8-15-lts
 
 **Release Date:** May 3, 2024
 
@@ -138,7 +284,7 @@ These counters are available per-bond-member.
 ------
 - **WAN-3013 MistAnalytics HA onboarding timeout too short:** The timeout for HA analytics formation has been extended. 
 
-## Release 6.1.7-3
+## Release 6.1.7-3-lts
 
 **Release Date:** February 17, 2024
 
@@ -198,7 +344,7 @@ These counters are available per-bond-member.
 ------
 - **I95-55389 Queries for private domains with Websense classified as Miscellaneous:** Domains categorized by Websense as Uncategorized are now classified as Uncategorized/Uncategorized, rather than Miscellaneous/Uncategorized.
 
-## Release 6.1.6-7
+## Release 6.1.6-7-lts
 
 **Release Date:** January 2, 2024
 
@@ -338,7 +484,7 @@ These counters are available per-bond-member.
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH so that this is accessible for admin users.
 
-## Release 6.1.5-14
+## Release 6.1.5-14-lts
 
 **Release Date:** September 22, 2023
 
@@ -563,7 +709,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **I95-53777 Multicast traffic not passing after HA Failover:** High Availability with Multicast is not fully supported. Drop or complete loss of traffic may be seen when the primary node resumes traffic after a node failure and failover.
 
-## Release 6.1.3-4
+## Release 6.1.3-4r1
 
 **Release Date:** May 22, 2023
 
@@ -579,7 +725,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **WAN-1958 Mist agent crashes:** Increased internal file system limits which were preventing some services from starting correctly at boot. Limits were raised based on expected system usage. 
 
-## Release 6.1.2-7
+## Release 6.1.2-7r1
 
 **Release Date:** May 12, 2023
 
@@ -651,7 +797,7 @@ and there are established flows for any of these services, a link flap triggerin
 
   **_Workaround:_** Make a simple configuration change and commit the change. Any configuration change is sufficient to start the internal proxy service. Once this commit has been made this will no longer be an issue.
 
-## Release 6.1.1-6
+## Release 6.1.1-6r1
 
 **Release Date:** April 28, 2023
 
@@ -664,7 +810,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 ------
 - **I95-51093 Race condition in `session-scaling` can cause crash/restart:** Resolved an issue when `session-scaling` is set to `enabled` together with `outbound-only`, a race condition can cause a crash and restart of the `highway` process in the SSR.
 
-## Release 6.1.0-55
+## Release 6.1.0-55r1
 
 **Release Date:** April 14, 2023
 

@@ -157,6 +157,39 @@ neighbors         Show information about OSPF neighbors
 routes            Show information about the OSPF routes
 ```
 
+## OSPF Graceful Restart
+
+OSPF Graceful Restart helps avoid route flaps and dropped traffic due to a software or hardware failure. For example, if the routing protocol on a peer router crashes and restarts, or the routing protocol one HA node fails and fails over to another node, OSPF graceful restart will avoid dropped traffic and route flapping. 
+
+### How Does It Work?
+
+When a router peered with another router via OSPF restarts, the peered router withdraws any routes learned from the restarting router until the restart is complete and the routing protocol connection is re-established. This withdrawal of routes often causes route flaps and dropped traffic. However, the SSR may continue to forward packets even though the routing protocol has restarted because the forwarding function is independent of the routing protocol. This is especially true for dual node High Availability. 
+
+By enabling OSPF GR on all peered routers, timers can be set to prevent the peered router from withdrawing routes. Additionally, enabling the `helper-restart timer` and `strict-lsa-checking` will configure whether or not to terminate OSPF graceful restart in a situation where there is a change to an LSA that would be flooded to the restarting router, or when there is a changed LSA on the restarting router's retransmission list. 
+
+#### Interaction with BGP Graceful Restart
+
+For situations where OSPF is redistributed into BGP, an additional timer has been added which will allow OSPF graceful restart to complete before a BGP graceful restart completes. 
+
+For situations where OSPF is redistributed into BGP, the `select-delay-time` timer has been added to BGP Graceful Restart. It is important that the OSPF graceful restart complete before the BGP graceful restart completes, due to the impact on the routing table. This should be set to a value greater than the time for OSPF graceful restart to complete. To determine the OSPF graceful restart length, examine the logging messages seen via `debug ospf graceful-restart`. 
+
+### Simple Configuration
+
+```
+    ospf              1
+        instance          1
+
+        graceful-restart
+            restart-time  120
+
+            helper
+                helper-restart-time  120
+            exit
+        exit
+```
+
+For additional information about the OSPF graceful restart commands, please see [`ospf graceful-restart`](config_command_guide.md#configure-authority-router-routing-ospf-graceful-restart). 
+
 ## OSPF Troubleshooting Steps
 1. Verify OSPF router information (`show ospf detail` or `show ospf summary`)
     1. Check the area
