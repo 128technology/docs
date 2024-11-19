@@ -147,7 +147,7 @@ export const releases = [
     releaseDate: 'May 25, 2023',
   },
   {
-    version: '6.1.3'
+    version: '6.1.3',
     url: '/docs/release_notes_128t_6.1#release-613-4r1',
     releaseDate: 'May 22, 2023',
   },
