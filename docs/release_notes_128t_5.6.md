@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.6.16-16
 
-**Release Date:** November 20, 2024
+**Release Date:** November 25, 2024
 
 ### Resolved Issues
 

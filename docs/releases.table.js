@@ -9,7 +9,7 @@ export const releases = [
   {
     version: '5.6.16',
     url:'/docs/release_notes_128t_5.6#release-5616-16',
-    releaseDate: 'November 20, 2024',
+    releaseDate: 'November 25, 2024',
   },
   {
     version: '6.1.11',
