@@ -1,109 +1,118 @@
 ---
-title: "RMA WAN Assurance Workflow"
-sidebar_label: "RMA WAN Assurance"
+title: RMA WAN Assurance Workflow
+sidebar_label: RMA WAN Assurance
 ---
 
 Return Merchandise Authorizations (RMAs) are a necessary component in the lifecycle of networking equipment, ensuring operational continuity, customer satisfaction, and the efficient resolution of hardware issues.
 
 RMAs streamline the process of returning defective hardware and obtaining a replacement, minimizing downtime for businesses and ensuring network functionality is restored promptly.
 
-The following workflow walks through the procedure of replacing a defective WAN Edge node of a HA router. This procedure is the same for a standalone router. This document presumes you have already contacted Juniper support, identified that a replacement unit is necessary, and have already received your replacement unit.
+The following workflow walks through the procedure of replacing a defective WAN Edge node of an HA router. This procedure is the same for a standalone router. This document presumes you have already contacted Juniper support, identified that a replacement unit is necessary, and received your replacement unit.
 
 ### Whitebox Staging
-If you are replacing a whitebox platform, you must first ensure that the system is running the same version of firmware of the node that is being replaced. If you have not already done this, follow the [installation guide](intro_installation.md).
+If you are replacing a whitebox platform, you must first verify that the system is running the same version of firmware of the node that is being replaced. If you have not already done so, use the information in the [SSR Installation Guide](intro_installation.md).
 
-### RMA Process
-If you are replacing a [Juniper-branded hardware platform](hdwr_ssr_device_port_layout.mdx), the device will already have SSR software installed on it. The version of software installed on the replacement unit may not be the same version as the node being replaced. The device must be upgraded upon completion of the RMA procedure.
+## RMA Process
+If you are replacing a [Juniper-branded hardware platform](hdwr_ssr_device_port_layout.mdx), the device already has SSR software installed on it. The version of software installed on the replacement unit may not be the same version as the node being replaced. The device must be upgraded upon completion of the RMA procedure.
+
+### Configuration Example
 
 :::important
 Do NOT unassign any nodes from the cluster until you complete the reassignment process.
 :::
 
-The following example will go through the process of replacing node0 of a HA pair. The SSR software running in this example is SSR-6.1.6.
+The following example shows the process of replacing `node0` of an HA pair. The SSR software used in this example is SSR-6.1.6. The MAC addresses are provided here for reference.
 
-MACs for the original cluster:
+- MACs for the original cluster:
 
-Node0 = `90:ec:77:38:e6:73`
+  Node0 = `90:ec:77:38:e6:73`
 
-Node1 = `90:ec:77:39:1a:76`
+  Node1 = `90:ec:77:39:1a:76`
 
-MAC of the new node:
+- MAC of the new node:
 
-Node0 = `90:ec:77:39:1e:f6`
+  Node0 = `90:ec:77:39:1e:f6`
 
   ![Device Overview 1](/img/rma_wan_assurance_router.png)
 
-1. Replace bad SSR node with new SSR node
+#### 1. Replace the bad SSR node (node0) with the new SSR node
 
-Power down the node to be replaced. Take note of the location of each of the connections. Swap the old device for the new one, replacing each of the connections in the exact location. Do not power on the new unit at this time.
+  1. Power down the node to be replaced. 
+  2. Take note of the location of each of the connections. 
+  3. Swap the old device for the new one, replacing each of the connections in the exact location. Do not power on the new unit at this time.
 
-2. Verify bad node (node0) is offline
+#### 2. Verify that the bad node - `node0` - is offline
 
-In this example node0 is being replaced so it shows disconnected in Mist
-
-Verify that node0 is not connected to Mist and that node1 is still connected to Mist
+Verify that `node0` is not connected to Mist and that `node1` is still connected to Mist.
  
   ![Node Offline](/img/rma_wan_assurance_node_0_offline.png)
 
-3. Claim the new node in Mist and verify it is in the Mist Inventory and Unassigned
+#### 3. Claim the new node in Mist 
+
+You must also verify the node is in the Mist inventory and Unassigned.
 
 :::important
-Do NOT assign new node to a site at this time
+Do NOT assign the new node to a site at this time.
 :::
-Click WAN Edges
 
-  ![WAN Edge](/img/rma_wan_assurance_select_wan_edges.png)
+  1. Select **WAN Edges**. 
 
-Click Inventory
+ ![WAN Edge](/img/rma_wan_assurance_select_wan_edges.png)
 
-  ![Inventory](/img/rma_wan_assurance_select_inventory.png)
+  2. Select **Inventory**.
 
-Click Claim WAN Edges
+ ![Inventory](/img/rma_wan_assurance_select_inventory.png)
 
-  ![Claim Button](/img/rma_wan_claim_button.png)
+  3. Select **Claim WAN Edges** in the upper right of the Inventory view.
 
-Uncheck “Assign claimed WAN Edges to site”
+ ![Claim Button](/img/rma_wan_claim_button.png)
 
-Enter SSR Claim Code and Click Add
+  4. In the **Claim WAN Edges and Activate Subcriptions** dialog, add the device claim code to the list of devices to claim and select **Add**.
 
-Click Done
+  5. **Un-check** the **Assign claimed WAN edges to site** box. This will place the device into inventory, to be assigned to a site later.
 
-  ![Claim WAN Edge](/img/rma_wan_assurance_claim_wan_edge.png)
+  6. Click the **Claim** button to claim the device into your inventory.
 
-Verify that the new node is in the WAN Edge Inventory.
+ ![Claim WAN Edge](/img/rma_wan_assurance_claim_wan_edge.png)
 
-Connect power to the new node.
+  7. Verify that the new node shows in the WAN Edge Inventory.
 
-Verify the Model is the same between the new node and the cluster.
+ ![Verify Model](/img/rma_wan_assurance_verify_model.png)
 
-  ![Verify Model](/img/rma_wan_assurance_verify_model.png)
+  8. Connect power to the new node.
 
-4. Replace the bad node in Mist
+  9. Verify the Model is the same between the new node and the cluster.
 
-Click Utilities
+#### 4. Replace the bad node in Mist
 
-Select Replace WAN Edge
+  1. Select the device to be replaced in the Inventory window.
+  2. In the WAN Edges window, click on the Utilities dropdown and select **Replace WAN Edge**.
 
-  ![Node Utilities](/img/rma_wan_assurance_node_utilities.png)
+ ![Node Utilities](/img/rma_wan_assurance_node_utilities.png)
 
-Select the node to be replaced
+  3. When the **Replace WAN Edge** dialog appears, use the radio buttons to select the node to be replaced.
 
-  ![Select Node](/img/rma_wan_assurance_select_node.png)
+ ![Select Node](/img/rma_wan_assurance_select_node.png)
 
-Select the MAC of the replacement node
+  4. Enter or select the MAC Address of the replacement node.
 
-  ![Click Replace](/img/rma_wan_assurance_select_mac.png)
+ ![Click Replace](/img/rma_wan_assurance_select_mac.png)
 
-Click Replace
+  5. Click **Replace**.
+  6. From the Analytics menu, select Events to verify the WAN Edge Replacement is in progress. 
 
-  ![Confirm Replacement](/img/rma_wan_assurance_node_replaced.png)
+ ![Events Menu](/img/rma_wan_assurance_select_events.png)
 
-5. Verify WAN Edge Replacement is in process under WAN Edge Events
+ When the replacement is complete the following message is displayed.
+
+ ![Confirm Replacement](/img/rma_wan_assurance_node_replaced.png)
+
+### Verify Replacement and Return the Old Device
   
-6. Verify new node is online and running
+Verify new node is online and running in the WAN Edges view for All Nodes.
 
-  ![Verify Online](/img/rma_wan_assurance_verify_online.png)
+ ![Verify Online](/img/rma_wan_assurance_verify_online.png)
 
-7. If the new device is not the same version as the existing one, [upgrade the device at this time](https://www.juniper.net/documentation/us/en/software/mist/mist-wan/topics/task/ssr-configuration-wan-edge-upgrade.html)
+If the new device is not the same version as the existing one, [upgrade the device at this time](https://www.juniper.net/documentation/us/en/software/mist/mist-wan/topics/task/ssr-configuration-wan-edge-upgrade.html)
 
-8. Place the replaced unit in the box and return to Juniper
+Once you have verified the state of the device, and upgraded the firmware as necessary, place the replaced unit in the box and return to Juniper.
