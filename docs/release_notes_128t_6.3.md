@@ -24,6 +24,36 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.3.3-25r2
+
+**Release Date:** December 18, 2024
+
+### New Features
+
+- **I95-50045 IDP Throughput Improvements:** IDP performance improvements have been made on the single core SSR Devices (SSR120/130/1200). More substantial IDP performance improvements have been made to multi-core devices (SSR12300/1400/1500). 
+------
+- **I95-51685 WAN Edge Firmware Downgrade:** For customers wishing to install older versions of the SSR firmware on their devices, the version selection will now display all SSR versions available for installation. If a higher version is selected, the installation proceeds normally. If a lower version is selected, a warning is displayed to the user, and they can choose to continue with the downgrade process. For additional information, see [Software Downgrades]. 
+------
+- **I95-53993 Display LLDP Neighbors:** The `show lldp neighbors` command has been added to the SSR PCLI, allowing users to view lldp neighbors and their messages. For more information, see [`show lldp neighbors`]. 
+------
+- **I95-54553 DCSP Steering with BGP over SVR:** DSCP Steering service will now utilize a routing lookup when no explicit service-route configuration is present.
+------
+- **I95-55228 IDP Critical Profile:**
+------
+- **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, and is configurable ona per-application basis. The SSR AV protection can run with or without IDP configuration, reports metrics to the User Interface, and will generate alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus]. 
+------
+- **I95-55574 Events Sync Improvements:**
+------
+- **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
+------
+- **I95-56936 OS Hardening:** To provide greater security on the SSR devices, the ability to disable USB booting and storage, as well as disable the serial console/port has been implemented. For additional details, please see [USB Security] and [Serial Port Security].
+------
+- **I95-57305 Add flow timeout value to Associated Paths:**
+------
+- **I95-57471 Allow Radius configuration per router:** 
+
+
+
 ## Release 6.3.0-107r1
 
 **Release Date:** September 30, 2024
