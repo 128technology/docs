@@ -311,6 +311,7 @@ module.exports = {
           "sec_firewall_filtering",
           "sec_security_policy",
           "sec_hardening_guidelines",
+          "sec-usb-security",
         ],
       },
       {

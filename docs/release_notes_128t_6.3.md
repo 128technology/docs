@@ -38,19 +38,22 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54553 DCSP Steering with BGP over SVR:** DSCP Steering service will now utilize a routing lookup when no explicit service-route configuration is present.
 ------
-- **I95-55228 IDP Critical Profile:**
+- **I95-55228 IDP Critical Profile:** A new **Critical** profile has been added to the IDP feature. This profile focuses on `critical` level attacks, and has a more focused policy, improving the processing time. For more information about IDP, see [Intrusion Detection and Prevention](concepts_ssr_idp.md). 
 ------
 - **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, and is configurable ona per-application basis. The SSR AV protection can run with or without IDP configuration, reports metrics to the User Interface, and will generate alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus]. 
 ------
-- **I95-55574 Events Sync Improvements:**
+- **I95-55574 Events Sync Improvements:** Improve performance of events storage on HA systems
+ Event pagination now requires use of endCursor and startIndex in GQL and use of the Pagination-Crumbs header for the HTTP API. Without pagination (e.g. time bound queries) require no special attention.
+ 
+ In the event of broken communication between HA nodes, each node will provide access to one hour of its peer's events leading up to the disconnection. This is reduced from the full history of events in the previous implementation.
 ------
 - **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
 ------
-- **I95-56936 OS Hardening:** To provide greater security on the SSR devices, the ability to disable USB booting and storage, as well as disable the serial console/port has been implemented. For additional details, please see [USB Security] and [Serial Port Security].
+- **I95-56936 OS Hardening:** To provide greater security on the SSR devices, the ability to disable USB booting and storage, as well as disable the serial console/port has been implemented. For additional details, please see [USB Boot and Storage Security](sec-usb-security.md) and [Serial Port Security].
 ------
-- **I95-57305 Add flow timeout value to Associated Paths:**
+- **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused. 
 ------
-- **I95-57471 Allow Radius configuration per router:** 
+- **I95-57471 Allow Radius configuration per router:** Radius servers can now be configured at the router level. The servers can continue to be configured at the Authority level. If configured in both places, the combination of both configured servers will be used.
 
 
 
