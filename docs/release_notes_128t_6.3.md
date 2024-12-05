@@ -30,9 +30,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-50045 IDP Throughput Improvements:** IDP performance improvements have been made on the single core SSR Devices (SSR120/130/1200). More substantial IDP performance improvements have been made to multi-core devices (SSR12300/1400/1500). 
+- **I95-50045 IDP Throughput Improvements:** Improvements have been made to increase IDP performance on SSR Devices. While improvements have been made on all SSR's, the larger multi-core SSR devices now auto-size to scale IDP processing and throughput. 
 ------
-- **I95-51685 WAN Edge Firmware Downgrade:** For customers wishing to install older versions of the SSR firmware on their devices, the version selection will now display all SSR versions available for installation. If a higher version is selected, the installation proceeds normally. If a lower version is selected, a warning is displayed to the user, and they can choose to continue with the downgrade process. For additional information, see [Software Downgrades]. 
+- **I95-51685 WAN Edge Firmware Downgrade:** For customers wishing to install older versions of the SSR firmware on their devices, the version selection now displays all available SSR versions for installation. If a higher version is selected, the installation proceeds normally. If a lower version is selected, a warning is displayed to the user and they can choose to continue with the downgrade process. For additional information, see [Software Downgrades]. 
 ------
 - **I95-53993 Display LLDP Neighbors:** The `show lldp neighbors` command has been added to the SSR PCLI, allowing users to view lldp neighbors and their messages. For more information, see [`show lldp neighbors`]. 
 ------
@@ -40,21 +40,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55228 IDP Critical Profile:** A new **Critical** profile has been added to the IDP feature. This profile focuses on `critical` level attacks, and has a more focused policy, improving the processing time. For more information about IDP, see [Intrusion Detection and Prevention](concepts_ssr_idp.md). 
 ------
-- **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, and is configurable ona per-application basis. The SSR AV protection can run with or without IDP configuration, reports metrics to the User Interface, and will generate alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus]. 
+- **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, configurable on a per-application basis. The SSR Anti-Virus protection can run with or without IDP configuration, reports metrics to the User Interface, and generates alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus]. 
 ------
-- **I95-55574 Events Sync Improvements:** Improve performance of events storage on HA systems
- Event pagination now requires use of endCursor and startIndex in GQL and use of the Pagination-Crumbs header for the HTTP API. Without pagination (e.g. time bound queries) require no special attention.
- 
- In the event of broken communication between HA nodes, each node will provide access to one hour of its peer's events leading up to the disconnection. This is reduced from the full history of events in the previous implementation.
+- **I95-55574 Events Sync Improvements:** In the event of broken communication between HA nodes, each node provides access to one hour of peer events leading up to the disconnection. This is reduced from the full history of events to lower storage needs and expedite restoration and troubleshooting. 
 ------
 - **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.
 ------
-- **I95-56936 OS Hardening:** To provide greater security on the SSR devices, the ability to disable USB booting and storage, as well as disable the serial console/port has been implemented. For additional details, please see [USB Boot and Storage Security](sec-usb-security.md) and [Serial Port Security].
+- **I95-56936 OS Hardening:** To provide greater security on the SSR devices, the ability to disable USB booting and storage, as well as disable the console output has been implemented. For additional details, please see [USB Boot and Storage Security](sec-usb-security.md) and [Disable Console Output](sec-disable-console-output.md).
 ------
 - **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused. 
 ------
 - **I95-57471 Allow Radius configuration per router:** Radius servers can now be configured at the router level. The servers can continue to be configured at the Authority level. If configured in both places, the combination of both configured servers will be used.
 
+### Resolved Issues
 
 
 ## Release 6.3.0-107r1
