@@ -1,6 +1,6 @@
 ---
-title: RMA WAN Assurance Workflow
-sidebar_label: RMA WAN Assurance
+title: RMA WAN Assurance Workflow for Juniper Hardware
+sidebar_label: RMA - WAN Assurance (Juniper Hardware)
 ---
 
 Return Merchandise Authorizations (RMAs) are a necessary component in the lifecycle of networking equipment, ensuring operational continuity, customer satisfaction, and the efficient resolution of hardware issues.
@@ -9,8 +9,9 @@ RMAs streamline the process of returning defective hardware and obtaining a repl
 
 The following workflow walks through the procedure of replacing a defective WAN Edge node of an HA router. This procedure is the same for a standalone router. This document presumes you have already contacted Juniper support, identified that a replacement unit is necessary, and received your replacement unit.
 
-### Whitebox Staging
-If you are replacing a whitebox platform, you must first verify that the system is running the same version of firmware of the node that is being replaced. If you have not already done so, use the information in the [SSR Installation Guide](intro_installation.md).
+:::note
+This guide is intended to be used for Juniper-branded hardware in WAN Assurance deployments only.
+:::
 
 ## RMA Process
 If you are replacing a [Juniper-branded hardware platform](hdwr_ssr_device_port_layout.mdx), the device already has SSR software installed on it. The version of software installed on the replacement unit may not be the same version as the node being replaced. The device must be upgraded upon completion of the RMA procedure.
