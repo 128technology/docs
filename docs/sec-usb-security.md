@@ -53,9 +53,9 @@ Select boot device:
 
 Upon subsequent boots, if interrupted with `esc` when prompted, USB devices will not be shown as bootable devices. To reset the USB as a bootable device, the password set in the steps above will be required to re-enter administrator mode.
 
-### BIOS on SSR 1300, 1400 and 1500
+### BIOS on SSR1200 SSR1300 SSR1400 SSR1500
 
-On the SSR1300/1400/1500 the BIOS contains configuration specifically for USB mass storage devices.
+On the SSR1200, SSR1300, SSR1400, SSR1500 the BIOS contains configuration specifically for USB mass storage devices.
 
 1. If the unit is powered off, power it on. If it is already running, reboot it
 from the linux shell.
