@@ -51,6 +51,9 @@ module.exports = {
       "intro_installation",
 
     ],
+    "RMA Workflows": [
+      "rma_wan_assurance",
+    ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
       "install_univ_iso",
