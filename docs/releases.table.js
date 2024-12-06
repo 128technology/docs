@@ -6,6 +6,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 // New entries should be placed at the top.
 // ----------------------------------------------------------------------------
 export const releases = [
+    {
+    version: '6.3.3',
+    url: '/docs/release_notes_128t_6.3#release-633-25r2',
+    releaseDate: 'December 18, 2024',
+  },
   {
     version: '5.6.16',
     url:'/docs/release_notes_128t_5.6#release-5616-16',

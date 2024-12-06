@@ -314,6 +314,7 @@ module.exports = {
           "sec_firewall_filtering",
           "sec_security_policy",
           "sec_hardening_guidelines",
+          "sec-usb-security",
         ],
       },
       {
@@ -323,6 +324,7 @@ module.exports = {
           "concepts_ssr_idp",
           "config_idp",
           "ts_idp",
+          "sec-config-antivirus",
         ],
       },
       {
