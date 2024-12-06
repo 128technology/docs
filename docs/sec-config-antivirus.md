@@ -11,27 +11,25 @@ SSR Anti-Virus uses the Sophos anti-virus engine and includes a self signing cer
 
 ## SSR Anti-Virus Profiles
 
-The SSR provides the following standard profiles:
+The SSR provides the following **standard profiles**:
 
-- http-only: Process only http traffic.
-- default-profile: Process all traffic: ftp, http, imap, pop3, smtp.
-- No-ftp: Process all traffic except ftp.
+- `http-only`: Process only http traffic.
+- `default-profile`: Process all traffic: ftp, http, imap, pop3, smtp.
+- `no-ftp`: Process all traffic except ftp.
 
-Custom Profile Parameters
+If you choose to configure a **custom profile**, the following lists and values are configurable:
 
-If you choose to configure a custom profile, the following lists and values are configurable:
-
-- URL-whitelist: A list of URLs or addresses to be bypassed by antivirus scanning.
-- MIME-whitelist: A MIME exception list to be bypassed by antivirus scanning.
-- Fallback action: A list of fallback options: block, log and permit, or permit. The default setting is log-and-permit, and can be changed to block or permit if desired. 
-- Protocols: The type of traffic to process. This list includes http, smtp, pop3, imap, ftp. Only the protocols selected from the list are processed by the AV engine.
-- Max-filesize: The maximum filesize permitted. The default is 10,000.
+- `url-allowlist`: A list of URLs or addresses to be bypassed by antivirus scanning.
+- `mime-allowlist`: A MIME exception list to be bypassed by antivirus scanning.
+- `fallback-action`: A list of fallback options: block, log and permit, or permit. The default setting is log-and-permit, and can be changed to block or permit if desired. 
+- `protocol`: The type of traffic to process. This list includes http, smtp, pop3, imap, ftp. Only the protocols selected from the list are processed by the AV engine.
+- `max-filesize`: The maximum filesize permitted. The default is 10,000.
 
 ## Configuration
 
 Configuration can be performed from either the CLI or the Web Interface (GUI). 
 
-Configure Anti-Virus Standard Profiles (CLI)
+#### Configure Anti-Virus Standard Profiles (CLI)
 
 ```
 configure
@@ -44,9 +42,7 @@ configure
 exit
 ```
 
-
-
-Custom Profile Example (CLI)
+#### Custom Profile Example (CLI)
 
 ```
 configure
@@ -70,19 +66,20 @@ configure
 exit
 ```
 
-In most cases, entering invalid values or parameters during configuration will generate a message in either the CLI or web interface informing the user that the entry is not correct. Invalid configurations will not be permitted, and will generate a validation error. 
+In most cases, entering invalid values or parameters during configuration will generate a message in either the CLI or web interface informing the user that the entry is not correct. Invalid configurations will not be committed, and will generate a validation error. 
 
 ## Troubleshooting
 
 Use the following information and show commands to help identify issues with configuring or running Anti-virus. 
 
 ### Alarms
-Sophos server is down: An alarm is triggered and an error logged. 
-Anti-virus engine not running: An alarm is triggered and an error logged after X number of restart attempts.
+- Anti-virus server is down: An alarm is triggered and an error logged. 
+- Anti-virus engine not running: An alarm is triggered and an error logged after X number of restart attempts.
 
 ### Show Commands
 
-`show utm status`
-`show antivirus status` - Sophos AV Engine status, license information.
-`show antivirus statistics` - Information regarding traffic processed by the AV engine. 
+The following show commands can be used to view information relevant to the Anti-Virus feature.
+
+- `show idp application status` - AV Engine status, license information.
+- `show stats ipd antivirus` - Information regarding traffic processed by the AV engine. 
 

@@ -321,6 +321,7 @@ module.exports = {
           "concepts_ssr_idp",
           "config_idp",
           "ts_idp",
+          "sec-config-antivirus",
         ],
       },
       {

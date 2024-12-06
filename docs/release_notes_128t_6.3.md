@@ -32,7 +32,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-50045 IDP Throughput Improvements:** Improvements have been made to increase IDP performance on SSR Devices. While improvements have been made on all SSR's, the larger multi-core SSR devices now auto-size to scale IDP processing and throughput. 
 ------
-- **I95-51685 WAN Edge Firmware Downgrade:** For customers wishing to install older versions of the SSR firmware on their devices, the version selection now displays all available SSR versions for installation. If a higher version is selected, the installation proceeds normally. If a lower version is selected, a warning is displayed to the user and they can choose to continue with the downgrade process. For additional information, see [Software Downgrades]. 
+- **I95-51685 WAN Edge Firmware Downgrade:** Due to network expansion or an RMA, you may need to add or replace a device that is preinstalled with firmware newer than what is currently running on your network. The SSR provides a process for an image-based reinstall to an SSR firmware version which is less than the firmware version on the target device. For additional information, see [Reinstallation](intro_rollback.md#reinstallation). 
 ------
 - **I95-53993 Display LLDP Neighbors:** The `show lldp neighbors` command has been added to the SSR PCLI, allowing users to view lldp neighbors and their messages. For more information, see [`show lldp neighbors`]. 
 ------
@@ -40,7 +40,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-55228 IDP Critical Profile:** A new **Critical** profile has been added to the IDP feature. This profile focuses on `critical` level attacks, and has a more focused policy, improving the processing time. For more information about IDP, see [Intrusion Detection and Prevention](concepts_ssr_idp.md). 
 ------
-- **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, configurable on a per-application basis. The SSR Anti-Virus protection can run with or without IDP configuration, reports metrics to the User Interface, and generates alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus]. 
+- **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, configurable on a per-application basis. The SSR Anti-Virus protection can run with or without IDP configuration, reports metrics to the User Interface, and generates alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus](sec-config-antivirus.md. 
 ------
 - **I95-55574 Events Sync Improvements:** In the event of broken communication between HA nodes, each node provides access to one hour of peer events leading up to the disconnection. This is reduced from the full history of events to lower storage needs and expedite restoration and troubleshooting. 
 ------
@@ -54,6 +54,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
+TBA
 
 ## Release 6.3.0-107r1
 
