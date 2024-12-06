@@ -22,7 +22,7 @@ Select the initialization workflow that suits the needs of your deployment.
 - [API Initialization](#api-initialization)
 
 ## Connection Setup
-For non console access you can connect your laptop or other device to any of the designated LAN port and connect to 192.168.128.1 to connect to SSR PCLI and/or shell.
+For non console access you can connect your laptop or other device to any of the designated LAN port and SSH to 192.168.128.1 to login via SSR PCLI and/or shell.
 
 :::note
 The laptop or other client device must be assigned a static IP address within the range of `192.168.128.2` to `192.168.128.254` along with a subnet mask of `/24` or `255.255.255.0`
