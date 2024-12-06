@@ -6,7 +6,7 @@ sidebar_label: Initialize Your Device - Web Workflow
 This is the part where configuring your device gets really easy!
 
 <!-- markdown-link-check-disable -->
-As a first step, connect your laptop or other device to any of the designated LAN port and connect to https://192.168.128.1 to connect to SSR onboarding UI
+As a first step, connect your laptop or other device to any of the designated LAN port and connect to https://192.168.128.1 to access the SSR onboarding UI
 <!-- markdown-link-check-enable -->
 
 :::note
