@@ -7,7 +7,7 @@ When traffic is traversing an IPSec encrypted tunnel, every flow within that tun
 
 To provide identification and aid in load balancing and traffic engineering, DSCP values can be set at the tunnel endpoint. When the traffic reaches the SSR, the DSCP value is used for both traffic engineering priority and path priority for DSCP traffic steering.
 
-Beginning with SSR version 6.1.4, DSCP Steering is now enabled for BGP over SVR tunnels. Using the configuration below, and [configuring BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr), the child service configured for DSCP steering is now recognized and steered appropriately. 
+Beginning with SSR version 6.1.4, DSCP Steering is enabled for BGP over SVR tunnels. Using the configuration below, and [configuring BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr), the child service configured for DSCP steering is now recognized and steered appropriately. 
 
 ## Basic Configuration
 
@@ -154,11 +154,22 @@ exit
 
 ```
 
+### Service Route Configuration
+
+DSCP steering follows the SSR's [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services) model. As such, service-route configurations from the parent tunnel service are available to the child DSCP services. Flows may be steered via DSCP value by defining a service-route configuration for the child DSCP services. 
+
+When no service-route configuration is applied, the RIB will be followed for routing purposes.
+
+If a `service-route` is configured on the parent service, that route is inherited by the child service. This will prevent routing lookup for the child DSCP services. 
+
+:::info
+In versions 6.2.7 and below and 6.3.0 and below, if you did not configure a service-route for the parent or child services, the system would only consider BGP over SVR routes from the RIB. In versions beginning with 6.2.8 and 6.3.3-r2, if a service route is not configured on the parent or child services, all routes available to the RIB are considered; connected routes, static routes, routes from BGP neighbors (not just BGP over SVR neighbors), and OSPF routes. 
+:::
+
 ### Restrictions 
 
-- The DSCP steering transport list for a network-interface is limited to one range.
+- The DSCP steering transport list for a `network-interface` is limited to one range.
 - Any service with a `dscp-range` configuration must be a child service.
-- Only provisioned service-routes are supported. 
 - DSCP steering ranges must not overlap. 
 
 ## GUI Configuration Screens

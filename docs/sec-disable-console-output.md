@@ -1,0 +1,44 @@
+---
+title: Disable Console Output
+sidebar_label: Disable Console Output
+---
+
+In some cases, you may want to disable console output to protect the information displayed. You may disable the output using either of the procedures below.
+
+### From the GUI
+
+1. Log in to the SSR as the `admin` user.
+2. Under Configuration, select Authority.
+3. Select the Router to disable the console output.
+4. Select the node.
+5. Under Basic Information, set the Serial Console Enabled to `false`.
+
+![Console Output](/img/sec-disable-console-output.png)
+
+6. Validate and Commit the change.
+7. Reboot the router.
+
+The router must be rebooted for the change to take effect. 
+
+### From the CLI
+
+1. Log in to the SSR as the `admin` user.
+2. Use the following config example to configure `serial-console-enabled false`.
+
+```
+authority
+    router Fabric128
+        node node1
+            serial console enabled false
+            exit
+        exit
+    exit
+exit
+```
+
+3. Validate and Commit the change.
+4. Reboot the router. The router must be rebooted for the change to take effect.
+
+#### Upgrades
+
+After disabling the serial console output (setting to `false`), the setting **will** perpetuate after an upgrade, but the router must be restarted after the upgrade to maintain the `false` setting. 
