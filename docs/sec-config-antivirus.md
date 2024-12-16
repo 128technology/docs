@@ -21,9 +21,9 @@ If you choose to configure a **custom profile**, the following lists and values 
 
 - `url-allowlist`: A list of URLs or addresses to be bypassed by antivirus scanning.
 - `mime-allowlist`: A MIME exception list to be bypassed by antivirus scanning.
-- `fallback-action`: A list of fallback options: block, log and permit, or permit. The default setting is log-and-permit, and can be changed to block or permit if desired. 
+- `fallback-action`: A list of fallback options: block, log-and-permit, or permit. The default setting is log-and-permit, and can be changed to block or permit if desired. 
 - `protocol`: The type of traffic to process. This list includes http, smtp, pop3, imap, ftp. Only the protocols selected from the list are processed by the AV engine.
-- `max-filesize`: The maximum filesize permitted. The default is 10,000.
+- `max-filesize`: The maximum filesize permitted. The default is 10,000 bytes.
 
 ## Configuration
 
@@ -35,8 +35,8 @@ Configuration can be performed from either the CLI or the Web Interface (GUI).
 configure
     authority
         service internet
-            access-policy branch
-            anti-virus-policy[KA1]    [KA2]     http-only
+            access-policy         branch
+            anti-virus-policy     http-only
         exit
     exit
 exit
@@ -54,9 +54,9 @@ configure
             anti-virus-profile          custom-profile
             name                        custom-profile
             url-allowlist               *.juniper.net
-            url-allowlist               *.mist.com[KA1] [MB2]    
-            mime-allowlist              audio/
-            mime-allowlist              video/
+            url-allowlist               *.mist.com    
+            mime-allowlist              audio
+            mime-allowlist              video
             protocol                    http
             protocol                    icmp
             max-filesize                20000
@@ -73,6 +73,7 @@ In most cases, entering invalid values or parameters during configuration will g
 Use the following information and show commands to help identify issues with configuring or running Anti-virus. 
 
 ### Alarms
+
 - Anti-virus server is down: An alarm is triggered and an error logged. 
 - Anti-virus engine not running: An alarm is triggered and an error logged after X number of restart attempts.
 
@@ -81,5 +82,5 @@ Use the following information and show commands to help identify issues with con
 The following show commands can be used to view information relevant to the Anti-Virus feature.
 
 - `show idp application status` - AV Engine status, license information.
-- `show stats ipd antivirus` - Information regarding traffic processed by the AV engine. 
+- `show stats idp antivirus` - Information regarding traffic processed by the AV engine. 
 

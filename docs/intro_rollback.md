@@ -13,7 +13,7 @@ As with upgrading, rolling back software using Automated Provisioner is only pos
 
 With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. The `show system software revert` command to view the progress of a revert operation. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
 
 ## Reinstallation
 
@@ -21,15 +21,18 @@ In some cases, you may have already qualified a version of firmware to run on yo
 
 ### Reinstallation from Mist
 
-In the Mist interface you have the option of selecting any available software version from the repository. Selecting the same or lower version of firmware than is currently installed initiates an SSR firmware reinstall to the requested version. An informational message is displayed, explaining the limitations of reinstall.
+In the Mist interface you have the option of selecting any available software version from the repository. Selecting the same or lower version of firmware than is currently installed initiates an SSR firmware reinstall to the requested version. An informational message is displayed, explaining the [limitations of reinstall](#limitations).
 
 ### Conductor-initiated Reinstallation
+
 The following section describes the Reinstallation process from both the Conductor web interface and the PCLI.
 
 #### Web Interface
+
 The Conductor web interface displays a checkbox to allow reinstallation. When selected, the UI displays **all** versions in the selection dropdown. If you select a version less than or equal to the router’s current version, the reinstallation is initiated and proceeds in the same manner as an upgrade.
 
 #### PCLI
+
 Use the `request system software reinstall` command to identify the image-based target version of firmware to be installed. To display all software versions available for reinstallation, use the `skip-version-check` flag with `show system software available`.
 
 The reinstallation status is visible under **Install Type** in the PCLI using `show assets`.
@@ -55,6 +58,18 @@ Retrieving assets...
  Conductor   t106-dut1   t106-dut1.novalocal   6.3.0-107.r1.el7   Image          Synchronized     34m 44s               0
              t106-dut2   t106-dut2.novalocal   6.3.0-107.r1.el7   Image          Synchronized     21m 19s               0
 ```
+
+### Limitations
+
+The Reinstallation process has the following limitations:
+
+- Configuration that enables features not present in the target SSR version will no longer apply after a reinstall.
+
+- System state and configuration outside of the datamodel (for example; analytics, logs, custom salt states, user-installed packages) will not be preserved after a reinstall, except for those required for basic system functionality and cloud connectivity.
+
+- Some reinstallations may be impossible due to incompatibilities between firmware versions. For example, if the user has configured a feature that did not exist in older software, reinstalling to the older version will not retain the feature configuration.
+
+- SSR plugins may be downgraded (but not removed) as part of a reinstall, if the currently installed plugins are not compatible with the target SSR version.
 
 ## Legacy Rollback
 

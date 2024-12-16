@@ -80,16 +80,12 @@ Please use the BIOS menus to enable/set the BIOS password.
 
 Use the following procedure to disable the USB storage module in the Operating System. This process applies to all SSR devices. 
 
-1. As the `root` user in the linux shell, create a file at the path
+1. As the `root` user in the linux shell, create the following file, with the contents and permissions shown here:
 
- `/etc/modprobe.d/disable-usb-storage.conf`
-
- with the contents
  ```
- install usb-storage /bin/true
- blacklist usb-storage
+chown root:root /etc/modprobe.d/disable-usb-storage.conf
+chmod 644 /etc/modprobe.d/disable-usb-storage.conf
  ```
- owned by `root:root`, and permissions `644`.
 
 2. Verify that the following module is disabled using each of the commands below. 
 	- The `rmmod` command may return a **Module not loaded** error if there are no USB storage devices connected.
