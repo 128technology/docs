@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[511],{53432:e=>{e.exports=JSON.parse('{"permalink":"/kb/tags/ipsec-client","page":1,"postsPerPage":1,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Session Smart Router Knowledge Base Articles"}')}}]);
