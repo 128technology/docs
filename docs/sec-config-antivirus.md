@@ -7,7 +7,7 @@ The SSR provides Anti-Virus protection on spoke and hub devices, and is configur
 
 ## How Does It Work?
 
-SSR Anti-Virus uses the Sophos anti-virus engine and includes a self signing certificate for simplified, secure connection. Similar to IDP, Anti-Virus is configurable directly on the hub and spokes of the network. You can select one of the built-in security profiles, or define parameters on your own for a custom profile.
+SSR Anti-Virus uses the Sophos anti-virus engine and includes a self signing certificate for simplified, secure connection. Similar to IDP, Anti-Virus is configurable directly on the spokes of the network. You can select one of the built-in security profiles, or define parameters on your own for a custom profile.
 
 ## SSR Anti-Virus Profiles
 
@@ -51,7 +51,7 @@ configure
             access-policy branch
             anti-virus-profile custom-profile
         exit
-            anti-virus-profile          custom-profile
+        anti-virus-profile          custom-profile
             name                        custom-profile
             url-allowlist               *.juniper.net
             url-allowlist               *.mist.com    
@@ -70,12 +70,12 @@ In most cases, entering invalid values or parameters during configuration will g
 
 ## Troubleshooting
 
-Use the following information and show commands to help identify issues with configuring or running Anti-virus. 
+Use the following information and show commands to help identify issues with configuring or running Anti-Virus. 
 
 ### Alarms
 
-- Anti-virus server is down: An alarm is triggered and an error logged. 
-- Anti-virus engine not running: An alarm is triggered and an error logged after X number of restart attempts.
+- Anti-Virus server is down: An alarm is triggered and an error logged. 
+- Anti-Virus engine not running: An alarm is triggered and an error logged after X number of restart attempts.
 
 ### Show Commands
 

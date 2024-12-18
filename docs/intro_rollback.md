@@ -67,8 +67,6 @@ The Reinstallation process has the following limitations:
 
 - System state and configuration outside of the datamodel (for example; analytics, logs, custom salt states, user-installed packages) will not be preserved after a reinstall, except for those required for basic system functionality and cloud connectivity.
 
-- Some reinstallations may be impossible due to incompatibilities between firmware versions. For example, if the user has configured a feature that did not exist in older software, reinstalling to the older version will not retain the feature configuration.
-
 - SSR plugins may be downgraded (but not removed) as part of a reinstall, if the currently installed plugins are not compatible with the target SSR version.
 
 ## Legacy Rollback

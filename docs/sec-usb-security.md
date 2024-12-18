@@ -64,13 +64,19 @@ from the linux shell.
 
 3. Use the `right arrow` key to move to the tab labeled `Advanced`. 
 
-4. Use the `down arrow` key to select the `USB Mass Storage Driver Support` menu entry. 
+![BIOS Advanced Tab](/img/sec-bios-adv-tab.png)
 
-5. Press `enter`.
+4. Use the `down arrow` key to select `USB Configuration`. 
 
-6. Select `Disabled`.
+5. Use the `down arrow` key to select the `USB Mass Storage Driver Support` menu entry. 
 
-7. Exit the BIOS.
+6. Press `enter`.
+
+![USB Mass Storage](/img/sec-usb-storage-disable.png)
+
+7. Select `Disabled`.
+
+8. Exit the BIOS.
 
 #### BIOS Passwords
 

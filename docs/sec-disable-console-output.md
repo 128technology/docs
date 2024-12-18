@@ -25,6 +25,10 @@ The router must be rebooted for the change to take effect.
 1. Log in to the SSR as the `admin` user.
 2. Use the following config example to configure `serial-console-enabled false`.
 
+:::note
+The `serial-console-enabled` command is only visible in Advanced User mode.
+:::
+
 ```
 authority
     router Fabric128
@@ -41,4 +45,4 @@ exit
 
 #### Upgrades
 
-After disabling the serial console output (setting to `false`), the setting **will** perpetuate after an upgrade, but the router must be restarted after the upgrade to maintain the `false` setting. 
+After disabling the serial console output (setting to `false`), the setting **will** perpetuate after an upgrade, but the router must be restarted after the upgrade to maintain the `false` setting. Additionally, a restart is required after an upgrade when the serial console output is re-enabled (set to `true`).

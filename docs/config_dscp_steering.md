@@ -62,7 +62,7 @@ service          high-priority.tunnel
 exit
 ```
 
-## How it Works
+## How It Works
 
 DSCP traffic steering is configured on the `network-interface` to identify the protocol and port, and the `service`, to identify the DSCP values used to steer the traffic. 
 
@@ -163,7 +163,7 @@ When no service-route configuration is applied, the RIB will be followed for rou
 If a `service-route` is configured on the parent service, that route is inherited by the child service. This will prevent routing lookup for the child DSCP services. 
 
 :::info
-In versions 6.2.7 and below and 6.3.0 and below, if you did not configure a service-route for the parent or child services, the system would only consider BGP over SVR routes from the RIB. In versions beginning with 6.2.8 and 6.3.3-r2, if a service route is not configured on the parent or child services, all routes available to the RIB are considered; connected routes, static routes, routes from BGP neighbors (not just BGP over SVR neighbors), and OSPF routes. 
+In versions 6.2.7 and below, or version 6.3.0, if you did not configure a service-route for the parent or child services, the system would only consider BGP over SVR routes from the RIB. In versions beginning with 6.2.8 and 6.3.3-r2, if a service route is not configured on the parent or child services, all routes available to the RIB are considered; connected routes, static routes, routes from BGP neighbors (not just BGP over SVR neighbors), and OSPF routes. 
 :::
 
 ### Restrictions 
