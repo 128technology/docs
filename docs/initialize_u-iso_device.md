@@ -10,7 +10,7 @@ As a first step, connect your laptop or other device to any of the designated LA
 <!-- markdown-link-check-enable -->
 
 :::note
-The laptop or other client device must be assigned a static IP address within the range of `192.168.128.2` to `192.168.128.254` along with a subnet mask of `/24` or `255.255.255.0`
+The laptop or other client device must be assigned a static IP address within the range of `192.168.128.2` to `192.168.128.254` along with a subnet mask of `/24` or `255.255.255.0`.
 :::
 
 Using your browser, choose the workflow below that best suits your needs:
