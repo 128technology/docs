@@ -254,7 +254,7 @@ For example, on the URL: http://www.google.com/doodles/doodle-champion-island-ga
             exit
         exit
 ```
-
+<!-- markdown-link-check-enable -->
 2. If there was no match to the first query, then does any child service match the domain in the URL? 
 - Yes, the following domain based service matches the URL:
 
@@ -306,7 +306,7 @@ In this case, `google.com` does not fall into the category of Technology.
 ### Matching Order Algorithm
 
 The matching order algorithm is the same for scenarios when all the web filtering config options are used across different child services under the parent, or used on the same child service. For example, consider the following service:
-
+<!-- markdown-link-check-disable -->
 ```
         service  block-search.internet
             name                search.internet

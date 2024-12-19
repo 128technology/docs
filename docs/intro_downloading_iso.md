@@ -25,6 +25,7 @@ For users installing *earlier, package-based versions of the SSR software*, the 
   - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
     - [Router Installation Using OTP](intro_otp_iso_install.mdx)
     - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
+
   - **Interactive:** Beginning with SSR version 6.3.0, the use of the interactive installer is not supported, nor necessary. Software installation and upgrade activities are supported from the GUI or PCLI. With software versions earlier than 6.3.0, upgrading the SSR software on a conductor or router that is managed by a conductor using the interactive installer may result in the system becoming unresponsive. For this reason it is highly recommended that upgrades be performed through the conductor UI. For a new installation of a conductor using software prior to 6.3.0, the interactive method can be used.
 
   :::note
