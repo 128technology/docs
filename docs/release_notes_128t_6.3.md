@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.3.3-25r2
+## Release 6.3.3-36r2
 
 **Release Date:** December 30, 2024
 
@@ -103,6 +103,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-59131 Next Hops not updated properly when OSPF is used:** Resolved a race condition found in OSPF and the end of FIB update message.
 ------
 - **I95-59146 BGP confederation member-as modify path incorrect:** Resolved an issue where modifications to `bgp confederation member-as` was not comparing and validating the changes correctly. 
+
+### Caveats
+
+- **I95-58782 `node.js` process may crash on SSR120, SSR130, and other branch router devices while generating Swagger documentation:** The `node.js` process may crash on SSR120, SSR130, and other branch router devices during SSR application startup while generating Swagger documentation. This is due to an internal error, and will generate a `node.js` coredump, but has **no impact** on the SSR. Swagger documentation is generated on a subsequent restart of the SSR. This is not service impacting.
 
 ## Release 6.3.0-107r1
 

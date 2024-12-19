@@ -20,6 +20,10 @@ In some cases, you may want to disable console output to protect the information
 
 The router must be rebooted for the change to take effect. 
 
+:::note
+The console is disabled once the operating system starts. This means that during the initial bootup sequence, the console is fully functional regardless of the console setting.
+:::
+
 ### From the CLI
 
 1. Log in to the SSR as the `admin` user.
@@ -43,6 +47,10 @@ exit
 3. Validate and Commit the change.
 4. Reboot the router. The router must be rebooted for the change to take effect.
 
+:::note
+The console is disabled once the operating system starts. This means that during the initial bootup sequence, the console is fully functional regardless of the console setting.
+:::
+
 #### Upgrades
 
-After disabling the serial console output (setting to `false`), the setting **will** perpetuate after an upgrade, but the router must be restarted after the upgrade to maintain the `false` setting. Additionally, a restart is required after an upgrade when the serial console output is re-enabled (set to `true`).
+After disabling the serial console output (setting to `false`), a restart is required. The setting **will** perpetuate after an upgrade. Additionally, a restart is required after the serial console output is re-enabled (set to `true`).
