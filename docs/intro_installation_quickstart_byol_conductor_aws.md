@@ -12,6 +12,10 @@ The installation and deployment process consists of the following steps:
 
 Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
+:::note
+BYOL instances only supports Image Based installation and requires conductor to run 6.3.0-R1 or newer in order to manage these instances.
+:::
+
 ### Selecting the AMI
 
 The **Bring Your Own License (BYOL)** AMI allows you to install your own licensed copy of the SSR software on an AWS VM. Artifactory credentials are required to authenticate access to the installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
@@ -346,11 +350,11 @@ When launching an AWS EC2 instance using automation, the following user-data sec
 write_files:
   - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
     content: |
-        { 
+        {
             "name": "<router-name>",
             "ssr-version": "<version>",
-            “mode”: "conductor-managed", 
-            “conductor-hosts”: ["<conductor-host>"] 
+            “mode”: "conductor-managed",
+            “conductor-hosts”: ["<conductor-host>"]
         }
 ```
 | Option | Meaning |
