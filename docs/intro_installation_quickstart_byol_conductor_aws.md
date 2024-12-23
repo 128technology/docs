@@ -13,7 +13,7 @@ The installation and deployment process consists of the following steps:
 Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 :::note
-BYOL instances only supports Image Based installation and requires conductor to run 6.3.0-R1 or newer in order to manage these instances.
+BYOL instances only support image-based installations, and require the conductor to run 6.3.0-R1 or newer in order to manage these instances.
 :::
 
 ### Selecting the AMI

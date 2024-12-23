@@ -11,7 +11,7 @@ This guide describes the process for deploying a Conductor-managed Session Smart
 * Deploying the [Session Smart Conductor-managed Router](#session-smart-conductor-managed-router-deployment).
 
 :::note
-BYOL instances only supports Image Based installation and requires conductor to run 6.3.0-R1 or newer in order to manage these instances.
+BYOL instances only support image-based installations, and require the conductor to run 6.3.0-R1 or newer in order to manage these instances.
 :::
 
 ## Selecting the Azure Plan
