@@ -13,6 +13,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | ------- | ----------- |
 | [`access-management`](#configure-authority-access-management) | Role Based Access Control (RBAC) configuration. |
 | [`alarm-shelving`](#configure-authority-alarm-shelving) | Configuration to control alarm shelving behavior. |
+| [`anti-virus-profile`](#configure-authority-anti-virus-profile) | User defined Anti-Virus profiles. |
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
 | [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
 | [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
@@ -50,6 +51,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`service-class`](#configure-authority-service-class) | Defines the association between DSCP value and a priority queue. |
 | [`service-policy`](#configure-authority-service-policy) | A service policy, which defines parameters applied to services that reference the policy |
 | [`session-record-profile`](#configure-authority-session-record-profile) | A profile to describe how to collect session records. |
+| [`session-records`](#configure-authority-session-records) | Configure Session Records |
 | [`session-recovery-detection`](#configure-authority-session-recovery-detection) | Configure Session Recovery Detection |
 | [`session-type`](#configure-authority-session-type) | Type of session classification based on protocol and port, and associates it with a default class of service. |
 | `show` | Show configuration data for &#x27;authority&#x27; |
@@ -561,10 +563,10 @@ configure authority alarm-shelving shelf applies-to type [<enumeration>]
 A value from a set of predefined names.
 
 Options:
-authority         Applies to all routers in the authority.
-router            Router(s) to which the configuration applies.
-router-group      Logical group of router(s) to which the configuration applies.
-resource-group    An RBAC management group to which the configuration applies
+- authority:         Applies to all routers in the authority.
+- router:            Router(s) to which the configuration applies.
+- router-group:      Logical group of router(s) to which the configuration applies.
+- resource-group:    An RBAC management group to which the configuration applies
 
 ## `configure authority alarm-shelving shelf category`
 
@@ -591,25 +593,25 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-none                 A Category of &quot;none&quot; indicates that Category will not be considered when evaluating alarms against this shelf
-extensible-alarm     Shelve alarms with a category of &quot;extensible-alarm&quot;
-system               Shelve alarms with a category of &quot;system&quot;
-process              Shelve alarms with a category of &quot;process&quot;
-interface            Shelve alarms with a category of &quot;interface&quot;
-platform             Shelve alarms with a category of &quot;platform&quot;
-peer                 Shelve alarms with a category of &quot;peer&quot;
-base                 Shelve alarms with a category of &quot;base&quot;
-node-base            Shelve alarms with a category of &quot;node-base&quot;
-global-base          Shelve alarms with a category of &quot;global-base&quot;
-network-interface    Shelve alarms with a category of &quot;network-interface&quot;
-platform-stat        Shelve alarms with a category of &quot;platform-stat&quot;
-redundancy           Shelve alarms with a category of &quot;redundancy&quot;
-giid                 Shelve alarms with a category of &quot;giid&quot;
-asset                Shelve alarms with a category of &quot;asset&quot;
-prefix-delegation    Shelve alarms with a category of &quot;prefix-delegation&quot;
-service              Shelve alarms with a category of &quot;service&quot;
-bgp-neighbor         Shelve alarms with a category of &quot;bgp-neighbor&quot;
-msdp-neighbor        Shelve alarms with a category of &quot;msdp-neighbor&quot;
+- none:                 A Category of &quot;none&quot; indicates that Category will not be considered when evaluating alarms against this shelf
+- extensible-alarm:     Shelve alarms with a category of &quot;extensible-alarm&quot;
+- system:               Shelve alarms with a category of &quot;system&quot;
+- process:              Shelve alarms with a category of &quot;process&quot;
+- interface:            Shelve alarms with a category of &quot;interface&quot;
+- platform:             Shelve alarms with a category of &quot;platform&quot;
+- peer:                 Shelve alarms with a category of &quot;peer&quot;
+- base:                 Shelve alarms with a category of &quot;base&quot;
+- node-base:            Shelve alarms with a category of &quot;node-base&quot;
+- global-base:          Shelve alarms with a category of &quot;global-base&quot;
+- network-interface:    Shelve alarms with a category of &quot;network-interface&quot;
+- platform-stat:        Shelve alarms with a category of &quot;platform-stat&quot;
+- redundancy:           Shelve alarms with a category of &quot;redundancy&quot;
+- giid:                 Shelve alarms with a category of &quot;giid&quot;
+- asset:                Shelve alarms with a category of &quot;asset&quot;
+- prefix-delegation:    Shelve alarms with a category of &quot;prefix-delegation&quot;
+- service:              Shelve alarms with a category of &quot;service&quot;
+- bgp-neighbor:         Shelve alarms with a category of &quot;bgp-neighbor&quot;
+- msdp-neighbor:        Shelve alarms with a category of &quot;msdp-neighbor&quot;
 
 ## `configure authority alarm-shelving shelf generated`
 
@@ -660,8 +662,8 @@ Default: all
 A value from a set of predefined names.
 
 Options:
-all    All items in the shelf must match an alarm in order to trigger the shelving.
-any    At least one item in the shelf must match an alarm in order to trigger the shelving
+- all:    All items in the shelf must match an alarm in order to trigger the shelving.
+- any:    At least one item in the shelf must match an alarm in order to trigger the shelving
 
 ## `configure authority alarm-shelving shelf message-regex`
 
@@ -820,11 +822,196 @@ Default: none
 A value from a set of predefined names.
 
 Options:
-info        Shelve alarms with a severity level of &quot;info&quot;
-minor       Shelve alarms with a severity level of &quot;minor&quot;
-major       Shelve alarms with a severity level of &quot;major&quot;
-critical    Shelve alarms with a severity level of &quot;critical&quot;
-none        A Severity of &quot;none&quot; indicates that Severity will not be considered when evaluating alarms against this shelf
+
+- info:        Shelve alarms with a severity level of &quot;info&quot;
+- minor:       Shelve alarms with a severity level of &quot;minor&quot;
+- major:       Shelve alarms with a severity level of &quot;major&quot;
+- critical:    Shelve alarms with a severity level of &quot;critical&quot;
+- none:        A Severity of &quot;none&quot; indicates that Severity will not be considered when evaluating alarms against this shelf
+
+## `configure authority anti-virus-profile`
+
+User defined Anti-Virus profiles.
+
+#### Usage
+
+```
+configure authority anti-virus-profile <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | Name of the profile. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`fallback-option`](#configure-authority-anti-virus-profile-fallback-option) | Defines what action the system should take for the match. |
+| [`max-filesize`](#configure-authority-anti-virus-profile-max-filesize) | Configure Max Filesize |
+| [`mime-allowlist`](#configure-authority-anti-virus-profile-mime-allowlist) | MIME patterns for allowing |
+| [`name`](#configure-authority-anti-virus-profile-name) | Name of the profile. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`protocol`](#configure-authority-anti-virus-profile-protocol) | Defines protocols to allow. |
+| `show` | Show configuration data for &#x27;anti-virus-profile&#x27; |
+| [`url-allowlist`](#configure-authority-anti-virus-profile-url-allowlist) | URL patterns for allowing |
+
+## `configure authority anti-virus-profile fallback-option`
+
+Defines what action the system should take for the match.
+
+#### Usage
+
+```
+configure authority anti-virus-profile fallback-option [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: log-and-permit
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- permit:            Permit content size.
+- log-and-permit:    Log and Permit content size.
+- block:             Block content size.
+
+## `configure authority anti-virus-profile max-filesize`
+
+Configure Max Filesize
+
+#### Usage
+
+```
+configure authority anti-virus-profile max-filesize [<uint64>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint64 | The value to set for this field |
+
+#### Description
+
+Default: 10000
+
+##### uint64
+
+An unsigned 64-bit integer.
+
+## `configure authority anti-virus-profile mime-allowlist`
+
+MIME patterns for allowing
+
+#### Usage
+
+```
+configure authority anti-virus-profile mime-allowlist [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority anti-virus-profile name`
+
+Name of the profile.
+
+#### Usage
+
+```
+configure authority anti-virus-profile name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Anti-Virus profile name (default-policy|no-ftp|http-only|none) is reserved.
+Length: 0-20
+
+## `configure authority anti-virus-profile protocol`
+
+Defines protocols to allow.
+
+#### Usage
+
+```
+configure authority anti-virus-profile protocol [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | Value to add to this list |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- http:    Allow HTTP protocol.
+- smtp:    Allow SMTP protocol.
+- pop3:    Allow POP3 protocol.
+- imap:    Allow IMAP protocol.
+- ftp:     Allow FTP protocol.
+
+## `configure authority anti-virus-profile url-allowlist`
+
+URL patterns for allowing
+
+#### Usage
+
+```
+configure authority anti-virus-profile url-allowlist [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+##### string
+
+A text value.
 
 ## `configure authority asset-connection-resiliency`
 
@@ -1158,8 +1345,9 @@ configure authority client-certificate validation-mode [<certificate-validation-
 Sets the mode of certificate validation
 
 Options:
-strict    Reject insecure certificates during import.
-warn      Warn when importing insecure certificates
+
+- strict:    Reject insecure certificates during import.
+- warn:      Warn when importing insecure certificates
 
 ## `configure authority conductor-address`
 
@@ -1981,6 +2169,7 @@ Options:
 - alert:       A policy that only alerts.
 - standard:    The standard blocking and alerting policy.
 - strict:      A strict blocking and alerting policy.
+- critical:    A strict blocking and alerting policy with dynamic group critical.
 
 ## `configure authority idp-profile name`
 
@@ -4200,8 +4389,8 @@ configure authority radius-server ocsp [<ocsp>]
 Whether to check the revocation status of a server&#x27;s certificate.
 
 Options:
-strict    Require a successful OCSP check in order to establish a connection.
-off       Do not check revocation status of the server certificate.
+- strict:    Require a successful OCSP check in order to establish a connection.
+- off:       Do not check revocation status of the server certificate.
 
 ## `configure authority radius-server port`
 
@@ -4264,8 +4453,9 @@ Default: udp
 A value from a set of predefined names.
 
 Options:
-udp    Use UDP protocol to communicate with Radius server.
-tls    Use TLS over TCP protocol to communicate with Radius server.
+
+- udp:    Use UDP protocol to communicate with Radius server.
+- tls:    Use TLS over TCP protocol to communicate with Radius server.
 
 ## `configure authority radius-server secret`
 
@@ -4551,6 +4741,7 @@ configure authority router <name>
 | [`routing`](#configure-authority-router-routing) | A router-level container for all of the routing policies associated with a given SSR deployment. Each routing element may have one and only one routing-instance. |
 | [`service-route`](#configure-authority-router-service-route) | Defines a route for a service or an instance of a service (server or service agent). |
 | [`service-route-policy`](#configure-authority-router-service-route-policy) | Used to define the properties of service routes. These capabilities influence route selection when determining the optimal path for establishing new sessions. |
+| [`session-records`](#configure-authority-router-session-records) | Configure Session Records |
 | `show` | Show configuration data for &#x27;router&#x27; |
 | [`static-hostname-mapping`](#configure-authority-router-static-hostname-mapping) | Map hostnames to ip-address resolutions. These entries will be put in /etc/hosts. This will prevent DNS requests from being sent for these hostnames. |
 | [`system`](#configure-authority-router-system) | System group configuration. Lets administrators configure system-wide properties for their SSR deployment. |
@@ -6858,6 +7049,7 @@ configure authority router node <name>
 
 | command | description |
 | ------- | ----------- |
+| [`anti-virus`](#configure-authority-router-node-anti-virus) | Configure Anti Virus |
 | [`asset-id`](#configure-authority-router-node-asset-id) | A unique identifier of an SSR node used for automated provisioning |
 | [`asset-validation-enabled`](#configure-authority-router-node-asset-validation-enabled) | Validate that the asset is suitable to run SSR. |
 | `clone` | Clone a list item |
@@ -6867,6 +7059,7 @@ configure authority router node <name>
 | [`enabled`](#configure-authority-router-node-enabled) | Enable/disable the whole node. |
 | [`forwarding-core-count`](#configure-authority-router-node-forwarding-core-count) | The number of CPU cores to dedicate to traffic forwarding when using &#x27;manual&#x27; forwarding core mode. |
 | [`forwarding-core-mode`](#configure-authority-router-node-forwarding-core-mode) | The method by which the number of CPU cores dedicated to traffic forwarding should be determined. |
+| [`idp`](#configure-authority-router-node-idp) | Configure IDP |
 | [`ipfix`](#configure-authority-router-node-ipfix) | Node specific IPFIX configuration |
 | [`location`](#configure-authority-router-node-location) | A text description of the node&#x27;s physical location. |
 | [`loopback-address`](#configure-authority-router-node-loopback-address) | The loopback IP address to use for management traffic originating on this node when routed via SVR. |
@@ -6877,6 +7070,7 @@ configure authority router node <name>
 | [`radius`](#configure-authority-router-node-radius) | Radius authentication parameters for this node. |
 | [`reachability-detection`](#configure-authority-router-node-reachability-detection) | Layer 2 reachability detection |
 | [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the SSR system. |
+| [`serial-console-enabled`](#configure-authority-router-node-serial-console-enabled) | Enable serial console. |
 | [`session-processor-count`](#configure-authority-router-node-session-processor-count) | The number of threads to use for session processing when using &#x27;manual&#x27; session-processor mode. |
 | [`session-processor-mode`](#configure-authority-router-node-session-processor-mode) | The method by which the number of threads used for session processing should be determined. |
 | [`session-setup-scaling`](#configure-authority-router-node-session-setup-scaling) | Whether or not to enable session setup scaling. |
@@ -6884,6 +7078,78 @@ configure authority router node <name>
 | [`ssh-keepalive`](#configure-authority-router-node-ssh-keepalive) | Configure SSH Keepalive |
 | [`ssh-settings`](#configure-authority-router-node-ssh-settings) | Configure SSH Settings |
 | [`top-sessions`](#configure-authority-router-node-top-sessions) | Views of top sessions by an ordering criteria. |
+| [`usb-mass-storage-enabled`](#configure-authority-router-node-usb-mass-storage-enabled) | Allow mounting of USB mass-storage devices. |
+
+## `configure authority router node anti-virus`
+
+Configure Anti Virus
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`server-domain`](#configure-authority-router-node-anti-virus-server-domain) | Server domain for anti-virus |
+| `show` | Show configuration data for &#x27;anti-virus&#x27; |
+
+## `configure authority router node anti-virus server-domain`
+
+Server domain for anti-virus
+
+#### Usage
+
+```
+configure authority router node anti-virus server-domain [<domain-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| domain-name | The value to set for this field |
+
+#### Description
+
+##### domain-name (string)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
 
 ## `configure authority router node asset-id`
 
@@ -9667,7 +9933,7 @@ Options:
 - boolean:
 - ipv4-address:
 - int32:
-- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;
+- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information quantity`
 
@@ -14330,12 +14596,12 @@ Transport (Layer 4) protocol.
 
 Options:
 
-tcp     Transmission Control Protocol.
-udp     User Datagram Protocol.
-icmp    Internet Control Management Protocol.
-gre     Generic Routing Encapsulation Protocol.
-esp     IPSec Encapsulating Security Payload Protocol.
-pim     Protocol Independent Multicast.
+- tcp:     Transmission Control Protocol.
+- udp:     User Datagram Protocol.
+- icmp:    Internet Control Management Protocol.
+- gre:     Generic Routing Encapsulation Protocol.
+- esp:     IPSec Encapsulating Security Payload Protocol.
+- pim:     Protocol Independent Multicast.
 
 ## `configure authority router node device-interface network-interface dynamic-source-nat`
 
@@ -19474,6 +19740,67 @@ Options:
 - automatic:    The number of cores dedicated to traffic forwarding will be automatically determined based on system properties.
 - manual:       The number of cores dedicated to traffic forwarding will be set to the value of forwarding-core-count.
 
+## `configure authority router node idp`
+
+Configure Idp
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`platform-size`](#configure-authority-router-node-idp-platform-size) | Size of the IDP platform |
+| `show` | Show configuration data for &#x27;idp&#x27; |
+
+## `configure authority router node idp platform-size`
+
+Size of the IDP platform
+
+#### Usage
+
+```
+configure authority router node idp platform-size [<idp-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| idp-size | The value to set for this field |
+
+#### Description
+
+Default: auto
+
+:::warning
+a restart is required if platform-size is created, modified, or deleted
+:::
+
+##### idp-size (enumeration)
+
+Size of the idp platform
+
+Options:
+
+- auto:         Automatically size the platform
+- legacy:       Set legacy mode override
+- 4CPU-4G:      Set 4CPU-4G as platform size
+- 4CPU-8G:      Set 4CPU-8G as platform size
+- 6CPU-8G:      Set 6CPU-8G as platform size
+- 6CPU-12G:     Set 6CPU-12G as platform size
+- 6CPU-16G:     Set 6CPU-16G as platform size
+- 8CPU-16G:     Set 8CPU-16G as platform size
+- 8CPU-20G:     Set 8CPU-20G as platform size
+- 12CPU-16G:    Set 12CPU-16G as platform size
+- 12CPU-24G:    Set 12CPU-24G as platform size
+- 12CPU-32G:    Set 12CPU-32G as platform size
+- 16CPU-32G:    Set 16CPU-32G as platform size
+- 16CPU-40G:    Set 16CPU-40G as platform size
+- 20CPU-32G:    Set 20CPU-32G as platform size
+- 20CPU-48G:    Set 20CPU-40G as platform size
+- 20CPU-64G:    Set 20CPU-64G as platform size
+- 32CPU-64G:    Set 32CPU-64G as platform size
 ## `configure authority router node ipfix`
 
 Node specific IPFIX configuration
@@ -20067,6 +20394,7 @@ Radius authentication parameters for this node.
 | ------- | ----------- |
 | [`client-certificate-name`](#configure-authority-router-node-radius-client-certificate-name) | A client certificate to be used to communicate with Radius server. |
 | `delete` | Delete configuration data |
+| [`enable-message-authenticator`](#configure-authority-router-node-radius-enable-message-authenticator) | Enable enforcement of Message-Authenticator for all requests and responses. WARNING: It is considered unsafe to disable this enforcement and can expose the system to authentication attacks. |
 | [`nas-identifier`](#configure-authority-router-node-radius-nas-identifier) | The NAS Identifier to be used in outgoing Radius authentication requests. |
 | [`nas-ip-address`](#configure-authority-router-node-radius-nas-ip-address) | The NAS IP Address to be used in outgoing Radius authentication requests. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
@@ -20094,6 +20422,31 @@ configure authority router node radius client-certificate-name [<client-certific
 ##### client-certificate-ref (leafref)
 
 This type is used by other entities that need to reference configured client certificate.
+## `configure authority router node radius enable-message-authenticator`
+
+Enable enforcement of Message-Authenticator for all requests and responses. WARNING: It is considered unsafe to disable this enforcement and can expose the system to authentication attacks.
+
+#### Usage
+
+```
+configure authority router node radius enable-message-authenticator [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node radius nas-identifier`
 
@@ -20377,6 +20730,36 @@ Options:
 - slice:        A Software Line-Card Engine node.
 - combo:        A combined Control and Slice.
 - conductor:    A remote management system.
+
+## `configure authority router node serial-console-enabled`
+
+Enable serial console.
+
+#### Usage
+
+```
+configure authority router node serial-console-enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+:::warning
+a restart is required if serial-console-enabled is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node session-processor-count`
 
@@ -21328,6 +21711,36 @@ configure authority router node top-sessions bandwidth tstamp [<timestamp>]
 ##### timestamp (uint32)
 
 Number of seconds since UNIX epoch.
+
+## `configure authority router node usb-mass-storage-enabled`
+
+Allow mounting of USB mass-storage devices.
+
+#### Usage
+
+```
+configure authority router node usb-mass-storage-enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+:::warning
+a restart is required if usb-mass-storage-enabled is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router path-mtu-discovery`
 
@@ -25258,9 +25671,9 @@ A true or false value.
 
 Options: true or false
 
-Units: seconds
-Range: 10-1800
-Default: 120
+- Units: seconds
+- Range: 10-1800
+- Default: 120
 
 
 ## `configure authority router routing ospf graceful-restart restart-time`
@@ -36166,6 +36579,43 @@ Options:
 
 - unlimited:    No limit on this value.
 
+## `configure authority router session-records`
+
+Configure Session Records
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`include-error-records`](#configure-authority-router-session-records-include-error-records) | Whether to enable session records for session errors; override the authority config. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;session-records&#x27; |
+
+## `configure authority router session-records include-error-records`
+
+Whether to enable session records for session errors; override the authority config.
+
+#### Usage
+
+```
+configure authority router session-records include-error-records [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 ## `configure authority router static-hostname-mapping`
 
 Map hostnames to ip-address resolutions. These entries will be put in /etc/hosts. This will prevent DNS requests from being sent for these hostnames.
@@ -36301,6 +36751,7 @@ System group configuration. Lets administrators configure system-wide properties
 | [`metrics`](#configure-authority-router-system-metrics) | Parameters controlling metric configuration and collection. Governs various aspects of the SSR&#x27;s data sampling for analytics purposes. |
 | [`ntp`](#configure-authority-router-system-ntp) | NTP configuration lets administrators configure information about the NTP servers within their management network. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`radius`](#configure-authority-router-system-radius) | Configure RADIUS |
 | [`remote-login`](#configure-authority-router-system-remote-login) | Configure Remote Login |
 | [`services`](#configure-authority-router-system-services) | Address information for internal services |
 | `show` | Show configuration data for &#x27;system&#x27; |
@@ -36940,8 +37391,8 @@ configure authority router system client-certificate validation-mode [<certifica
 Sets the mode of certificate validation
 
 Options:
-strict    Reject insecure certificates during import.
-warn      Warn when importing insecure certificates
+- strict:    Reject insecure certificates during import.
+- warn:      Warn when importing insecure certificates
 
 ## `configure authority router system contact`
 
@@ -37915,6 +38366,361 @@ domain names MUST be encoded in punycode as described in RFC
 3492
 
 Length: 1-253
+
+## `configure authority router system radius`
+
+Configure Radius
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`account-creation`](#configure-authority-router-system-radius-account-creation) | Control account creation behavior. |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`radius-server`](#configure-authority-router-system-radius-radius-server) | Radius Servers against which to authenticate user credentials. |
+| `show` | Show configuration data for &#x27;radius&#x27; |
+
+## `configure authority router system radius account-creation`
+
+Control account creation behavior.
+
+#### Usage
+
+```
+configure authority router system radius account-creation [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: use-authority-setting
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority wide account creation behavior.
+- manual:                   Accounts must be created locally on the Router or Conductor before a user can log in.
+- automatic:                Create accounts automatically on first time login. The Radius server must contain the Vendor Specific Attribute (VSA) &#x27;Juniper-Local-User-Name&#x27; set to the role that the user will be assigned. The role must be prefixed with &#x27;SSR-&#x27;, so to assign the user the admin role the VSA key would be set to &#x27;SSR-admin&#x27;.
+
+## `configure authority router system radius radius-server`
+
+Radius Servers against which to authenticate user credentials.
+
+#### Usage
+
+```
+configure authority router system radius radius-server <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | The name of the Radius server. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`address`](#configure-authority-router-system-radius-radius-server-address) | The IP address or FQDN of the Radius server. |
+| `delete` | Delete configuration data |
+| [`name`](#configure-authority-router-system-radius-radius-server-name) | The name of the Radius server. |
+| [`ocsp`](#configure-authority-router-system-radius-radius-server-ocsp) | Whether to check the revocation status of the Radius server&#x27;s certificate. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`port`](#configure-authority-router-system-radius-radius-server-port) | The port number Radius server listens on. |
+| [`protocol`](#configure-authority-router-system-radius-radius-server-protocol) | Use TLS or UDP protocol to communicate with Radius server. |
+| [`secret`](#configure-authority-router-system-radius-radius-server-secret) | The secret key to bind to the Radius server. |
+| [`server-name`](#configure-authority-router-system-radius-radius-server-server-name) | Hostname of the Radius server. |
+| `show` | Show configuration data for &#x27;radius-server&#x27; |
+| [`timeout`](#configure-authority-router-system-radius-radius-server-timeout) | Radius Request Timeout. |
+
+## `configure authority router system radius radius-server address`
+
+The IP address or FQDN of the Radius server.
+
+#### Usage
+
+```
+configure authority router system radius radius-server address [<host>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| host | The value to set for this field |
+
+#### Description
+
+##### host (union) (required)
+
+The host type represents either an IP address or a DNS domain name.
+
+Must be one of the following types:
+
+###### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+###### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+###### (2) domain-name (string) (required)
+
+The domain-name type represents a DNS domain name.  The
+name SHOULD be fully qualified whenever possible.
+
+Internet domain names are only loosely specified.  Section
+3.5 of RFC 1034 recommends a syntax (modified in Section
+2.1 of RFC 1123).  The pattern above is intended to allow
+for current practice in domain name use, and some possible
+future expansion.  It is designed to hold various types of
+domain names, including names used for A or AAAA records
+(host names) and other records, such as SRV records.  Note
+that Internet host names have a stricter syntax (described
+in RFC 952) than the DNS recommendations in RFCs 1034 and
+1123, and that systems that want to store host names in
+schema nodes using the domain-name type are recommended to
+adhere to this stricter standard to ensure interoperability.
+
+The encoding of DNS names in the DNS protocol is limited
+to 255 characters.  Since the encoding consists of labels
+prefixed by a length bytes and there is a trailing NULL
+byte, only 253 characters can appear in the textual dotted
+notation.
+
+The description clause of schema nodes using the domain-name
+type MUST describe when and how these names are resolved to
+IP addresses.  Note that the resolution of a domain-name value
+may require to query multiple DNS records (e.g., A for IPv4
+and AAAA for IPv6).  The order of the resolution process and
+which DNS record takes precedence can either be defined
+explicitely or it may depend on the configuration of the
+resolver.
+
+Domain-name values use the US-ASCII encoding.  Their canonical
+format uses lowercase US-ASCII characters.  Internationalized
+domain names MUST be encoded in punycode as described in RFC
+3492
+
+Length: 1-253
+
+## `configure authority router system radius radius-server name`
+
+The name of the Radius server.
+
+#### Usage
+
+```
+configure authority router system radius radius-server name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
+## `configure authority router system radius radius-server ocsp`
+
+Whether to check the revocation status of the Radius server&#x27;s certificate.
+
+#### Usage
+
+```
+configure authority router system radius radius-server ocsp [<ocsp>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ocsp | The value to set for this field |
+
+#### Description
+
+##### ocsp (enumeration)
+
+Whether to check the revocation status of a server&#x27;s certificate.
+
+Options:
+
+- strict:    Require a successful OCSP check in order to establish a connection.
+- off:       Do not check revocation status of the server certificate.
+
+## `configure authority router system radius radius-server port`
+
+The port number Radius server listens on.
+
+#### Usage
+
+```
+configure authority router system radius radius-server port [<port-number>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| port-number | The value to set for this field |
+
+#### Description
+
+Default: 1812
+
+##### port-number (uint16)
+
+The port-number type represents a 16-bit port number of an
+Internet transport layer protocol such as UDP, TCP, DCCP, or
+SCTP.  Port numbers are assigned by IANA.  A current list of
+all assignments is available from &lt;http://www.iana.org/&gt;.
+
+Note that the port number value zero is reserved by IANA.  In
+situations where the value zero does not make sense, it can
+be excluded by subtyping the port-number type.
+
+In the value set and its semantics, this type is equivalent
+to the InetPortNumber textual convention of the SMIv2.
+
+Range: 0-65535
+
+## `configure authority router system radius radius-server protocol`
+
+Use TLS or UDP protocol to communicate with Radius server.
+
+#### Usage
+
+```
+configure authority router system radius radius-server protocol [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: udp
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- udp:    Use UDP protocol to communicate with Radius server.
+- tls:    Use TLS over TCP protocol to communicate with Radius server.
+
+## `configure authority router system radius radius-server secret`
+
+The secret key to bind to the Radius server.
+
+#### Usage
+
+```
+configure authority router system radius radius-server secret [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Length: 1-16
+
+## `configure authority router system radius radius-server server-name`
+
+Hostname of the Radius server.
+
+#### Usage
+
+```
+configure authority router system radius radius-server server-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority router system radius radius-server timeout`
+
+Radius Request Timeout.
+
+#### Usage
+
+```
+configure authority router system radius radius-server timeout [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 3
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
 
 ## `configure authority router system remote-login`
 
@@ -39017,11 +39823,11 @@ Default: use-authority-channel
 The router software access channel.
 
 Options:
-use-authority-channel    Use the configured authority channel.
-prealpha                 Override the authority channel with the prealpha channel.
-alpha                    Override the authority channel with the alpha channel.
-beta                     Override the authority channel with the beta channel.
-release                  Override the authority channel with the release channel.
+- use-authority-channel:    Use the configured authority channel.
+- prealpha:                 Override the authority channel with the prealpha channel.
+- alpha:                    Override the authority channel with the alpha channel.
+- beta:                     Override the authority channel with the beta channel.
+- release:                  Override the authority channel with the release channel.
 
 ## `configure authority router system software-access router-credentials`
 
@@ -39110,12 +39916,12 @@ Default: use-software-access-channel
 The router software access channel overrides.
 
 Options:
-use-authority-channel          Use the configured authority channel.
-use-software-access-channel    Use the configured router channel.
-prealpha                       Override the configured channel with the prealpha channel.
-alpha                          Override the configured channel with the alpha channel.
-beta                           Override the configured channel with the beta channel.
-release                        Override the configured channel with the release channel.
+- use-authority-channel:          Use the configured authority channel.
+- use-software-access-channel:    Use the configured router channel.
+- prealpha:                       Override the configured channel with the prealpha channel.
+- alpha:                          Override the configured channel with the alpha channel.
+- beta:                           Override the configured channel with the beta channel.
+- release:                        Override the configured channel with the release channel.
 
 ## `configure authority router system software-access ssr-image-channel`
 
@@ -39142,12 +39948,12 @@ Default: use-software-access-channel
 The router software access channel overrides.
 
 Options:
-use-authority-channel          Use the configured authority channel.
-use-software-access-channel    Use the configured router channel.
-prealpha                       Override the configured channel with the prealpha channel.
-alpha                          Override the configured channel with the alpha channel.
-beta                           Override the configured channel with the beta channel.
-release                        Override the configured channel with the release channel.
+- use-authority-channel:          Use the configured authority channel.
+- use-software-access-channel:    Use the configured router channel.
+- prealpha:                       Override the configured channel with the prealpha channel.
+- alpha:                          Override the configured channel with the alpha channel.
+- beta:                           Override the configured channel with the beta channel.
+- release:                        Override the configured channel with the release channel.
 
 ## `configure authority router system software-access use-authority-credentials`
 
@@ -39507,8 +40313,8 @@ configure authority router system syslog ocsp [<ocsp>]
 Whether to check the revocation status of a server&#x27;s certificate.
 
 Options:
-strict    Require a successful OCSP check in order to establish a connection.
-off       Do not check revocation status of the server certificate.
+- strict:    Require a successful OCSP check in order to establish a connection.
+- off:       Do not check revocation status of the server certificate.
 
 ## `configure authority router system syslog protocol`
 
@@ -41964,6 +42770,8 @@ configure authority service access-policy <source>
 
 | command | description |
 | ------- | ----------- |
+| [`anti-virus-policy`](#configure-authority-service-access-policy-anti-virus-policy) | Built-in policy for unified threat management. |
+| [`anti-virus-profile`](#configure-authority-service-access-policy-anti-virus-profile) | User-defined profile for unified threat management. |
 | `delete` | Delete configuration data |
 | [`idp-policy`](#configure-authority-service-access-policy-idp-policy) | Built-in policy for intrusion detection prevention and monitoring. |
 | [`idp-profile`](#configure-authority-service-access-policy-idp-profile) | User-defined profile for intrusion detection prevention and monitoring. |
@@ -41971,6 +42779,57 @@ configure authority service access-policy <source>
 | [`permission`](#configure-authority-service-access-policy-permission) | Whether or not to allow access to the service. |
 | `show` | Show configuration data for &#x27;access-policy&#x27; |
 | [`source`](#configure-authority-service-access-policy-source) | The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service |
+
+## `configure authority service access-policy anti-virus-policy`
+
+Built-in policy for unified threat management.
+
+#### Usage
+
+```
+configure authority service access-policy anti-virus-policy [<optional-anti-virus-policy>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| optional-anti-virus-policy | The value to set for this field |
+
+#### Description
+
+##### optional-anti-virus-policy (enumeration)
+
+Predefined policies for Unified Threat Management.
+
+Options:
+
+- none:              No AV policy.
+- default-policy:    Include all protocols.
+- no-ftp:            Include all protocols except ftp.
+- http-only:         Include only http protocol.
+
+## `configure authority service access-policy anti-virus-profile`
+
+User-defined profile for unified threat management.
+
+#### Usage
+
+```
+configure authority service access-policy anti-virus-profile [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority service access-policy idp-policy`
 
@@ -42000,6 +42859,7 @@ Options:
 - alert:       A policy that only alerts.
 - standard:    The standard blocking and alerting policy.
 - strict:      A strict blocking and alerting policy.
+- critical:    A strict blocking and alerting policy with dynamic group critical.
 
 ## `configure authority service access-policy idp-profile`
 
@@ -44844,6 +45704,43 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-15
 
+## `configure authority session-records`
+
+Configure Session Records
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`include-error-records`](#configure-authority-session-records-include-error-records) | Whether to enable session records for session errors |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;session-records&#x27; |
+
+## `configure authority session-records include-error-records`
+
+Whether to enable session records for session errors
+
+#### Usage
+
+```
+configure authority session-records include-error-records [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 ## `configure authority session-recovery-detection`
 
 Configure Session Recovery Detection
@@ -45291,10 +46188,10 @@ Default: release
 The software access channels.
 
 Options:
-prealpha    Enable access to software in the prealpha channel.
-alpha       Enable access to software in the alpha channel.
-beta        Enable access to software in the beta channel.
-release     Enable access to software in the release channel.
+- prealpha:    Enable access to software in the prealpha channel.
+- alpha:       Enable access to software in the alpha channel.
+- beta:        Enable access to software in the beta channel.
+- release:     Enable access to software in the release channel.
 
 ## `configure authority software-access rpm-channel`
 
@@ -45321,11 +46218,11 @@ Default: use-software-access-channel
 The software access channel overrides.
 
 Options:
-use-software-access-channel    Use the configured channel.
-prealpha                       Override the configured channel with the prealpha channel.
-alpha                          Override the configured channel with the alpha channel.
-beta                           Override the configured channel with the beta channel.
-release                        Override the configured channel with the release channel.
+- use-software-access-channel:    Use the configured channel.
+- prealpha:                       Override the configured channel with the prealpha channel.
+- alpha:                          Override the configured channel with the alpha channel.
+- beta:                           Override the configured channel with the beta channel.
+- release:                        Override the configured channel with the release channel.
 
 ## `configure authority software-access ssr-image-channel`
 
@@ -45352,11 +46249,11 @@ Default: use-software-access-channel
 The software access channel overrides.
 
 Options:
-use-software-access-channel    Use the configured channel.
-prealpha                       Override the configured channel with the prealpha channel.
-alpha                          Override the configured channel with the alpha channel.
-beta                           Override the configured channel with the beta channel.
-release                        Override the configured channel with the release channel.
+- use-software-access-channel    Use the configured channel.
+- prealpha                       Override the configured channel with the prealpha channel.
+- alpha                          Override the configured channel with the alpha channel.
+- beta                           Override the configured channel with the beta channel.
+- release                        Override the configured channel with the release channel.
 
 ## `configure authority software-access token`
 
@@ -45448,10 +46345,10 @@ Default: release
 The software access channels.
 
 Options:
-prealpha    Enable access to software in the prealpha channel.
-alpha       Enable access to software in the alpha channel.
-beta        Enable access to software in the beta channel.
-release     Enable access to software in the release channel.
+- prealpha    Enable access to software in the prealpha channel.
+- alpha       Enable access to software in the alpha channel.
+- beta        Enable access to software in the beta channel.
+- release     Enable access to software in the release channel.
 
 ## `configure authority software-access rpm-channel`
 
@@ -45478,11 +46375,11 @@ Default: use-software-access-channel
 The software access channel overrides.
 
 Options:
-use-software-access-channel    Use the configured channel.
-prealpha                       Override the configured channel with the prealpha channel.
-alpha                          Override the configured channel with the alpha channel.
-beta                           Override the configured channel with the beta channel.
-release                        Override the configured channel with the release channel.
+- use-software-access-channel:    Use the configured channel.
+- prealpha:                       Override the configured channel with the prealpha channel.
+- alpha:                          Override the configured channel with the alpha channel.
+- beta:                           Override the configured channel with the beta channel.
+- release:                        Override the configured channel with the release channel.
 
 ## `configure authority software-access ssr-image-channel`
 
@@ -45509,11 +46406,11 @@ Default: use-software-access-channel
 The software access channel overrides.
 
 Options:
-use-software-access-channel    Use the configured channel.
-prealpha                       Override the configured channel with the prealpha channel.
-alpha                          Override the configured channel with the alpha channel.
-beta                           Override the configured channel with the beta channel.
-release                        Override the configured channel with the release channel.
+- use-software-access-channel:    Use the configured channel.
+- prealpha:                       Override the configured channel with the prealpha channel.
+- alpha:                          Override the configured channel with the alpha channel.
+- beta:                           Override the configured channel with the beta channel.
+- release:                        Override the configured channel with the release channel.
 
 ## `configure authority software-access token`
 
@@ -46502,8 +47399,8 @@ configure authority trusted-ca-certificate validation-mode [<certificate-validat
 Sets the mode of certificate validation
 
 Options:
-strict    Reject insecure certificates during import.
-warn      Warn when importing insecure certificates
+- strict:    Reject insecure certificates during import.
+- warn:      Warn when importing insecure certificates
 
 ## `configure authority web-messages`
 
