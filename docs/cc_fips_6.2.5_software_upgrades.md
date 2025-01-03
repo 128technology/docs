@@ -29,7 +29,7 @@ Two upgrade methods are available depending on your network internet access: The
 
 When using the `import iso` method, the `check-rpm-signature required` (default) option must be run. This ensures that the RPM signature and `sha256` digest of each package is validated during the import process. The use of `check-rpm-signature disabled` or `check-rpm-signature allow-unsigned` is not compliant for Common Criteria systems. For an online installation, signature checking is performed automatically. 
 
-After upgrading the software, repeat the [Software Compliance Validation](cc_fips_access_mgmt.md#software-compliance-validation) steps to ensure continued compliance. 
+After upgrading the software, repeat the [Software Compliance Validation](cc_fips_6.2.5_access_mgmt.md#software-compliance-validation) steps to ensure continued compliance. 
  
 :::important
 Firmware and Software updates are expected to be performed by an Administrator on a regular basis, in response to the release of product updates due to known vulnerabilities. Only Common Criteria compliant software releases shall be installed on the target device.
