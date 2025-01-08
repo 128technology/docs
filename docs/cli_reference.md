@@ -2375,10 +2375,7 @@ replace config <find> <replace>
 
 #### Description
 
-The _replace_ command is a powerful tool for making sweeping configuration changes, similar to a &quot;find and replace&quot; operation in a word processor.
-The _replace_ command has several optional arguments that affect how the replacement occurs; _case-sensitive_ will only match elements within the configuration that match the case supplied with the _query_ string. The _regex_ argument treats the query string as a regular expression. The _whole-word_ argument requires that the match be an entire word, rather than just a substring or partial match.
-
-The user-supplied _query string_ and _replacement string_ are the matching text, and the replacement text, respectively.
+The replace command is a powerful tool for making sweeping configuration changes, similar to a "find and replace" operation in a word processor.
 
 #### Example
 
