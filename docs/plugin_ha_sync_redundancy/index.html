@@ -6,7 +6,7 @@
 <title data-rh="true">HA Sync Redundancy Plugin | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/plugin_ha_sync_redundancy"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="HA Sync Redundancy Plugin | SSN Docs"><meta data-rh="true" name="description" content="The HA Sync Redundancy plugin adds the ability to include an additional link in the team interface configured as described in Non-Forwarding HA Interfaces. Additionally, the plugin provides the ability to use the HA sync connection (single or dual-member) to send HA fabric traffic by creating a vlan sub-interface, and setting up a KNI interface in a bridge with this sub-interface."><meta data-rh="true" property="og:description" content="The HA Sync Redundancy plugin adds the ability to include an additional link in the team interface configured as described in Non-Forwarding HA Interfaces. Additionally, the plugin provides the ability to use the HA sync connection (single or dual-member) to send HA fabric traffic by creating a vlan sub-interface, and setting up a KNI interface in a bridge with this sub-interface."><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/plugin_ha_sync_redundancy"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/plugin_ha_sync_redundancy" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/plugin_ha_sync_redundancy" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.b50a304b.css">
-<script src="/assets/js/runtime~main.02d434c9.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.8515e3f4.js" defer="defer"></script>
 <script src="/assets/js/main.30a83e9e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -50,11 +50,21 @@
 <p>If these scripts have errors, they will be shown in <code>/var/log/128technology/highway.log</code>. On occasion, setting the log-level to <code>debug</code> will provide additional details of how these scripts are run and errors they generate.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes">Release Notes<a href="#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes">​</a></h2>
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>The plugin must be updated to version 1.1.0 or later prior to <a href="/docs/intro_upgrade_considerations#plugin-configuration-generation-changes">upgrading the conductor to SSR version 5.4.0.</a></p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-210">Release 2.1.0<a href="#release-210" class="hash-link" aria-label="Direct link to Release 2.1.0" title="Direct link to Release 2.1.0">​</a></h3>
+<p><strong>Release Date:</strong> Jan 8, 2025</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-and-improvements">New Features and Improvements<a href="#new-features-and-improvements" class="hash-link" aria-label="Direct link to New Features and Improvements" title="Direct link to New Features and Improvements">​</a></h4>
+<ul>
+<li><strong>PLUGIN-2626</strong> Support configuring MTU, DSCP Map, and Transmit Cap options which will be applied to the auto-generted HA fabric interface.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed">Issues Fixed<a href="#issues-fixed" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<ul>
+<li><strong>PLUGIN-2721</strong> Resolve plugin downgrade config removal</li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-200">Release 2.0.0<a href="#release-200" class="hash-link" aria-label="Direct link to Release 2.0.0" title="Direct link to Release 2.0.0">​</a></h3>
 <p>Image based install and upgrade (IBU) support for SSR 6.3.0.</p>
 <p><strong>Release Date:</strong> Sep 30, 2024</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-113">Release 1.1.3<a href="#release-113" class="hash-link" aria-label="Direct link to Release 1.1.3" title="Direct link to Release 1.1.3">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed">Issues Fixed<a href="#issues-fixed" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-1">Issues Fixed<a href="#issues-fixed-1" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-2233</strong>  VLAN ID cannot be modified</p>
@@ -62,7 +72,7 @@
 </li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-112">Release 1.1.2<a href="#release-112" class="hash-link" aria-label="Direct link to Release 1.1.2" title="Direct link to Release 1.1.2">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-1">Issues Fixed<a href="#issues-fixed-1" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-2">Issues Fixed<a href="#issues-fixed-2" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-1580</strong>  Communication through HA sync interface was broken after one HA node was rebooted</p>
@@ -70,7 +80,7 @@
 </li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-110">Release 1.1.0<a href="#release-110" class="hash-link" aria-label="Direct link to Release 1.1.0" title="Direct link to Release 1.1.0">​</a></h3>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-2">Issues Fixed<a href="#issues-fixed-2" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="issues-fixed-3">Issues Fixed<a href="#issues-fixed-3" class="hash-link" aria-label="Direct link to Issues Fixed" title="Direct link to Issues Fixed">​</a></h4>
 <ul>
 <li>
 <p><strong>PLUGIN-1451</strong>  Config generation for the plugin failing</p>
