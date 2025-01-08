@@ -436,6 +436,14 @@ Completed in 0.21 seconds
 
 ## Release Notes
 
+### Release 2.2.0
+
+**Release Date:** Jan 8, 2025
+
+#### New Features and Improvements
+- **PLUGIN-2505** Ensure server is restarted on upgrade
+- **PLUGIN-2505** Improved debuggability of probe and up-delay-timer
+
 ### Release 2.1.0
 
 **Release Date:** Oct 31, 2024
