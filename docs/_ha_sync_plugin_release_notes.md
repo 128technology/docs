@@ -8,7 +8,7 @@ The plugin must be updated to version 1.1.0 or later prior to [upgrading the con
 **Release Date:** Jan 8, 2025
 
 #### New Features and Improvements
-- **PLUGIN-2626** Support MTU, DSCP Map, and Transmit Cap options
+- **PLUGIN-2626** Support configuring MTU, DSCP Map, and Transmit Cap options which will be applied to the auto-generted HA fabric interface.
 
 #### Issues Fixed
 - **PLUGIN-2721** Resolve plugin downgrade config removal
