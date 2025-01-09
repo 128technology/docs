@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.3.3-36r2
+## Release 6.3.3-40r2
 
-**Release Date:** January 3, 2025
+**Release Date:** January 9, 2025
 
 ### New Features
 
@@ -54,13 +54,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVEs have been identified and resolved in this release:** CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-27052, CVE-2024-27056, CVE-2024-27059, CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564, CVE-2021-27290, CVE-2022-24999.
 ------
-- **I95-48453 
-------
 - **I95-53274 PIM multicast routes unable to maintain more than 1,400 concurrent (Source, Group) sessions:** The SSR cannot maintain more than 1400 active (Source,Group) sessions. This scaling limitation has been addressed. 
 ------
 - **I95-54366 Unable to assign an SNMP view name via the GUI:** Resolved an issue that prevented configuring SNMP (v3) Access Policy View in the GUI.
 ------
-- **I95-57128 Inter-vlan traffic on the same x710 or x722 port has 8ms delay:** Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value. This has been resolved and latency reduced to 32us.
+- **I95-57128 Inter-VLAN traffic on the same x710 or x722 port has 8ms delay:** Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value. This has been resolved and latency reduced to 32us.
 ------
 - **I95-57205 Race condition on startup with LTE or PPPoE interfaces configured for DHCP, causing system to crash:** This issue has been resolved.
 ------
@@ -104,18 +102,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-59131 Next Hops not updated properly when OSPF is used:** Resolved a race condition found in OSPF and the end of FIB update message.
 ------
-- **I95-59146 BGP confederation member-as modify path incorrect:** Resolved an issue where modifications to `bgp confederation member-as` was not comparing and validating the changes correctly. 
+- **I95-59146 BGP confederation member-as modify path incorrect:** Resolved an issue where modifications to `bgp confederation member-as` were not comparing and validating the changes correctly. 
 ------
 - **I95-59264 BGP community data model regex incorrect:** Resolved an issue with the validation pattern in the routing policy for extended communities. 
 ------
-- **I95-59477 Multiple Highway crashes seen on the HA node:** 
+-  **I95-59537, I95-59551 Apply `ingress-source-nat-pool` to local breakout sessions:** Resolved an issue where `ingress-source-nat-pool`  was only applied to SVR sessions. The `ingress-source-nat-pool` has been updated with the `applies-to-local-breakout` flag.
 
 ### Caveats
 
 - **I95-58622 IDP Engine Intermittent Start-up:** 6.3.3-R2 introduces the support of multi-core capabilities for IDP for image-based routers. For legacy package-based routers, multi-core IDP capability is not supported, and those systems will continue to operate in the single-core mode. For customers running IDP on older image-based firmware versions (6.3.0-R1 and under) on the SSR1300, SSR1400, and SSR1500, IDP multicore will be automatically enabled when upgrading to 6.3.3-R2. In some cases, after an upgrade the IDP engine can fail to start as it transitions from single-core to multi-core mode. When the IDP engine fails to start, the following alarm will be generated on the system:  `IDP engine unable to start; reboot-required`. In this situation, it is recommended to reboot the system post-upgrade to ensure future reliable reboots with IDP multi-core enabled.
 ------
 - **I95-58782 `node.js` process may crash on SSR120, SSR130, and other branch router devices while generating Swagger documentation:** The `node.js` process may crash on SSR120, SSR130, and other branch router devices during SSR application startup while generating Swagger documentation. This is due to an internal error, and will generate a `node.js` coredump, but has **no impact** on the SSR. Swagger documentation is generated on a subsequent restart of the SSR. This is not service impacting.
-
+------
+- **I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:** In dual node High Availability configurations, highway crashes happen when `node1` does not successfully classify during the TCP handshake, but `node2` does successfully classify. This issue is currently under investigation and will be resolved in an upcoming release. For this release, defensive code has been added to preserve the session state and avoid a crash.
 
 ## Release 6.3.0-107r1
 

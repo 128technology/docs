@@ -8,8 +8,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 export const releases = [
   {
     version: '6.3.3',
-    url: '/docs/release_notes_128t_6.3#release-633-36r2',
-    releaseDate: 'January 3, 2025',
+    url: '/docs/release_notes_128t_6.3#release-633-40r2',
+    releaseDate: 'January 9, 2025',
   },
   {
     version: '5.6.16',
