@@ -169,7 +169,7 @@ The information below describes the asset states reported on SSR Software versio
 - **Key Accepted:** The SALT master has accepted the SALT minion's public key. This action is triggered by the user associating the asset ID of the system with a node in configuration. This does not indicate that the SALT minion has connectivity.
 - **Synchronizing:** The minion has connected and the SALT master is running highstate. 
 - **Synchronized:** Highstate is complete and the minion is in steady state. 
-- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user the user issued the `send command sync` command. 
+- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user issued the `send command sync` command. 
 - **Reinitializing:** The conductor has detected that the 128T service is not provisioned correctly and is stopping the service to reinitialize it.
 
 Additionally, individual statuses are displayed under `show assets <asset-id>` for the following functions:
