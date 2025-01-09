@@ -82,7 +82,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-58528 SSR OS renaming:** The SSR OS has been renamed/rebranded from "CentOS7" to "SSR OS" to more accurately reflect its customized Linux distribution. All internal naming has been updated.
 ------
-- **I95-58539 The `validate` command does not check or test for router `applies-to` config:** Resolved an issue where the DHCP relay inspector rule that validates whether an interface is not being used for DHCP relay and other DHCP functions, was not considering router-based services. Errors from this rule are now warnings.
+- **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
 ------
 - **I95-58569 OSPF Graceful Restart link missing from GUI:** Resolved an issue that prevented the link to the Graceful Restart page from displaying. 
 ------
@@ -102,7 +102,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-59131 Next Hops not updated properly when OSPF is used:** Resolved a race condition found in OSPF and the end of FIB update message.
 ------
-- **I95-59146 BGP confederation member-as modify path incorrect:** Resolved an issue where modifications to `bgp confederation member-as` were not comparing and validating the changes correctly. 
+- **I95-59146 BGP confederation member-as not dynamically reconfigurable:** Resolved an issue where modifications to `bgp confederation member-as` were not comparing and validating the changes correctly. 
 ------
 - **I95-59264 BGP community data model regex incorrect:** Resolved an issue with the validation pattern in the routing policy for extended communities. 
 ------
