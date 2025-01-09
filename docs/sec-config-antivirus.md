@@ -3,7 +3,7 @@ title: SSR Anti-Virus
 sidebar_label: SSR Anti-Virus
 ---
 
-The SSR provides Anti-Virus protection on spoke and hub devices, and is configurable on a per-application basis. SSR Anti-Virus runs with or without IDP configuration, reports metrics to the User Interface, and will generate alarms if the anti-virus engine fails for any reason. With both built-in and user-customizable security profiles, it provides a high level of flexibility.
+The SSR provides Anti-Virus protection on spoke devices, and is configurable on a per-application basis. SSR Anti-Virus runs with or without IDP configuration, reports metrics to the User Interface, and will generate alarms if the anti-virus engine fails for any reason. With both built-in and user-customizable security profiles, it provides a high level of flexibility.
 
 ## How Does It Work?
 
