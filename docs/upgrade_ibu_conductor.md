@@ -67,6 +67,8 @@ The states displayed in the `status` column under `show assests` have changed. T
 | Running | Synchronized |
 :::
 
+For more information about asset status and state descriptions, see [Asset Status](ts_ap_salt_minion.md#asset-status).
+
 **Image Based**
 
 ```
@@ -113,3 +115,6 @@ In a high availability configuration, the default behavior is to perform a seque
 #### Plugin Support
 
 The conversion/upgrade process preserves the currently installed plugin packages. In cases where the plugin has version dependencies, the plugin is upgraded. 
+
+
+
