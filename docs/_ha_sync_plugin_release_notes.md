@@ -3,6 +3,16 @@
 The plugin must be updated to version 1.1.0 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 2.1.0
+
+**Release Date:** Jan 8, 2025
+
+#### New Features and Improvements
+- **PLUGIN-2626** Support configuring MTU, DSCP Map, and Transmit Cap options which will be applied to the auto-generted HA fabric interface.
+
+#### Issues Fixed
+- **PLUGIN-2721** Resolve plugin downgrade config removal
+
 ### Release 2.0.0
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
