@@ -1,6 +1,6 @@
 ---
-title: Automated Provisioner: Salt Minion
-sidebar_label: AP: Salt Minion
+title: "Automated Provisioner: Salt Minion"
+sidebar_label: "AP: Salt Minion"
 ---
 
 This document describes the process for troubleshooting issues with Automated Provisioning (AP) using Salt.
