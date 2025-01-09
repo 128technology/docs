@@ -144,8 +144,8 @@ The information below describes the Asset states reported on SSR Software versio
 - **Connected:** The SALT minion has connected and the SALT master is running highstate.
 - **Disconnected:** The SALT minion has disconnected.
 - **Not Installed:** After running highstate, the SALT master has detected that SSR is not installed on the asset.
-Installed: After running highstate, the SALT master has detected that SSR is installed and is detecting whether SSR is provisioned correctly, and if the 128T service is running.
-- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user sent the `sync` command.
+- **Installed:** After running highstate, the SALT master has detected that SSR is installed and is detecting whether SSR is provisioned correctly, and if the 128T service is running.
+- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user issued the `send command sync` command.
 - **Reinitializing:** The conductor has detected that the 128T service is not provisioned correctly and is stopping the service to reinitialize it.
 - **Starting:** The SALT minion has reported that the 128T service is running but is trying to detect whether the service has fully started by retrieving the process state to see if all processes are running. The process state is retrieved via the SSH tunnels and the conductor may not have SSH connectivity to the asset yet.
 - **Stopped:** The 128T service is stopped.
@@ -169,7 +169,7 @@ The information below describes the asset states reported on SSR Software versio
 - **Key Accepted:** The SALT master has accepted the SALT minion's public key. This action is triggered by the user associating the asset ID of the system with a node in configuration. This does not indicate that the SALT minion has connectivity.
 - **Synchronizing:** The minion has connected and the SALT master is running highstate. 
 - **Synchronized:** Highstate is complete and the minion is in steady state. 
-- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user sent the sync command. 
+- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user the user issued the `send command sync` command. 
 - **Reinitializing:** The conductor has detected that the 128T service is not provisioned correctly and is stopping the service to reinitialize it.
 
 Additionally, individual statuses are displayed under `show assets <asset-id>` for the following functions:
@@ -194,7 +194,7 @@ Retrieving assets...
   Node:                         t163-dut4
   Current Version:              6.3.0-107.r1.el7
   Install Type:                 Image
-  Status:                       Synchronized <========= salt status
+  Status:                       Synchronized <========= Salt status
   Conductor Connectivity:       Connected <============ SSR connectivity status to current conductor node
   Peer Conductor Connectivity:  Connected <============ SSR connectivity status to peer conductor node (if exists)
   Service Status:               Running   <============ SSR process status
