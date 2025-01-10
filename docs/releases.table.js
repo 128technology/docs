@@ -7,6 +7,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 // ----------------------------------------------------------------------------
 export const releases = [
   {
+    version: '6.3.3',
+    url: '/docs/release_notes_128t_6.3#release-633-40r2',
+    releaseDate: 'January 9, 2025',
+  },
+  {
     version: '5.6.16',
     url:'/docs/release_notes_128t_5.6#release-5616-16',
     releaseDate: 'November 25, 2024',
