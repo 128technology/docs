@@ -68,7 +68,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-57784 Add `show network-interface redundancy` command output to TSI collection:** The `show network-interface redundancy` command has been added to the TSI output to aid in troubleshooting.
 ------
-- **I95-58201 Increase performance for SSR1200, SSR1500 and whitebox AMD platforms:** Throughput performance on AMD processors has been improved through the tuning of kernel parameters.
+- **I95-58201 Throughput Performance Improvements Across Platforms:** Kernel parameter tuning has improved throughput performance on most AMD and Intel platforms (excluding Intel Atom), with the greatest gains on AMD processors. This includes Juniper-branded platforms like the SSR1200 and SSR1500, as well as cloud instances, VM hosts, and other hardware configurations.
 ------
 - **I95-58264 EoSVR session breaks after upgrading:** Resolved an issue where a high number of STEP route updates carried in an FPM message disconnected the Routing manager to agent connection. This has been resolved by limiting the max number of STEP paths in a single STEP route.
 ------
