@@ -7,6 +7,7 @@ sidebar_label: Authentication Methods
 | ------- | ------------ |
 | 5.6.0   | Feature introduced |
 | 6.2.4   | Enabled automatic account creation for authorized RADIUS users |
+| 6.1.11  | Require the configuration of `message-authenticator` |
 
 ## Overview
 
@@ -37,6 +38,12 @@ Using the RADIUS Vendor Specific Attribute (VSA) allows the administrator to ide
                 Reply-Message = "Hello, %{User-Name}",
                 Juniper-Local-User-Name = "128t-user"               
   ```
+
+#### Message Authenticator
+
+To remain current with network security standards, the use of the `message-authenticator` VSA on `access-accept` and `access-reject` messages is now required. If your radius server is not configured to provide this VSA, RADIUS authentication will not function.
+
+Please refer to your RADIUS server documentation for information on setting the `message-authenticator`. 
 
 ### Enable RADIUS Account Creation on the SSR
 
