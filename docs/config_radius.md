@@ -7,6 +7,7 @@ sidebar_label: Authentication Methods
 | ------- | ------------ |
 | 5.6.0   | Feature introduced |
 | 6.2.4   | Enabled automatic account creation for authorized RADIUS users |
+| 6.1.11  | Require the configuration of `message-authenticator` |
 
 ## Overview
 
@@ -38,6 +39,25 @@ Using the RADIUS Vendor Specific Attribute (VSA) allows the administrator to ide
                 Juniper-Local-User-Name = "128t-user"               
   ```
 
+#### Message Authenticator
+
+To remain current with network security standards, the use of the `message-authenticator` VSA on `access-accept` and `access-reject` messages is now required. If your radius server is not configured to provide this VSA, RADIUS authentication will not function.
+
+Please refer to your RADIUS server documentation for information on setting the `message-authenticator`. 
+
+In versions 6.1.12, 6.2.8, 6.3.3, and later, an option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses was added. **Disabling this check is NOT recommended**, but may be necessary for some backwards compatiblity scenarios. 
+
+:::important
+Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for user authentication.
+:::
+
+The following example illustrates disabling the message-authenticator requirement:
+```
+configure authority 
+    router Fabric128 
+    node node-1 
+        radius enable-message-authenticator false
+```
 ### Enable RADIUS Account Creation on the SSR
 
 Automatic account creation is an option within the SSR configuration, based on data configured on the RADIUS server. Using the command `config authority radius-server <name> account-creation <[ manual | automatic ]>` and setting `automatic` enables users that exist in RADIUS to log in to the SSR. 
