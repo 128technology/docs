@@ -128,7 +128,7 @@ Additional Conductor configuration options can be found in [Initialize Your Devi
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
 
 1. Log into the instance using the default AWS username `ec2-user` and the key pair provided when launching.
-2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
+2. Run `sudo /usr/libexec/hardwareBootstrapper128t config-generator`
 3. Follow the prompts to generate and apply the onboarding configuration.
 4. Upon completion, the instance will reboot once.
 
@@ -370,7 +370,7 @@ write_files:
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
 
 1. Log into the instance using the default AWS username `ec2-user` and the key pair provided when launching.
-2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
+2. Run `sudo /usr/libexec/hardwareBootstrapper128t config-generator`
 3. Follow the prompts to generate and apply the onboarding configuration.
 
 ### Network Interfaces Layout
