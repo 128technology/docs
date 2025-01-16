@@ -45,7 +45,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-## Release 6.1.12-5-lts
+## Release 6.1.12-12-lts
 
 **Release Date:** January 16, 2025
 
