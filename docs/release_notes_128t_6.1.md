@@ -51,11 +51,9 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2021-27290, CVE-2022-24999
+- **The following CVE's have been identified and addressed in this release:** CVE-2021-27290, CVE-2022-24999.
 ------
 - **I95-55179 FIPS-enabled SSR Conductors not creating HA connection:** The SSH library used by the initializer was using md5 internally for key identification and logging purposes. Since md5 is not supported with FIPS, it raised an error. The SSH library has been upgraded to use a FIPS compliant key generator.
-
-
 ------
 - **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused. 
 ------
