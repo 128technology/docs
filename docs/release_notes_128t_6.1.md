@@ -45,6 +45,67 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.12-5-lts
+
+**Release Date:** January 16, 2025
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2021-27290, CVE-2022-24999
+------
+- **I95-55179 FIPS-enabled SSR Conductors not creating HA connection:** The SSH library used by the initializer was using md5 internally for key identification and logging purposes. Since md5 is not supported with FIPS, it raised an error. The SSH library has been upgraded to use a FIPS compliant key generator.
+
+
+------
+- **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused. 
+------
+- **I95-58428 DSCP Steering Collision on Flow Move:** When IPSec traffic exists on a router and the DSCP steering feature is enabled, upon a flow-move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly.
+------
+- **I95-58444 DSCP steering is not correctly using revertible-failover:** Resolved an issue where DSCP Steering on child services were not using learned peer routes from the parent service. DSCP steering child services now properly utilize revertible-failover resiliency policies.
+------
+- **I95-58528 SSR OS renaming:** The SSR OS has been renamed/rebranded from "CentOS7" to "SSR OS" to more accurately reflect its customized Linux distribution. All internal naming has been updated.
+------
+- **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
+------
+- **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
+------
+- **I95-58569 OSPF Graceful Restart link missing from GUI:** Resolved an issue that prevented the link to the Graceful Restart page from displaying. 
+------
+- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios. 
+------ 
+- **I95-58637 Relax API RBAC policies for quickstart files:** Users with config-read permissions are now able to generate quickstart files.
+------
+- **I95-58722 Update allowed Key Exchange Algorithms to add better support for Gov Cloud environments:** Expand the list of supported Key Exchange Algorithms in both FIPS and non-FIPS mode.
+------
+- **I95-58787 DHCP stopped working:** Resolved an issue where multiple redundant VLAN interfaces with a DHCP server configured would not recover after a highway crash, until manually restarted. 
+------
+- **I95-58885 Add `identifier` to option to PCLI interface ping command:** The `ping` action now allows you to set a custom identifier.
+------
+- **I95-59130 `save tech-support-info since 1d`:** The default action of the `save tech-support-info since 1d` command or the **Save TSI** button in the GUI now includes at least one log file from each application, even if the file is outdated based on the since flag.
+------
+- **I95-59131 Next Hops not updated properly when OSPF is used:** Resolved a race condition found in OSPF and the end of FIB update message.
+------
+- **I95-59146 BGP confederation member-as not dynamically reconfigurable:** Resolved an issue where modifications to `bgp confederation member-as` were not comparing and validating the changes correctly. 
+------
+- **I95-59264 BGP community data model regex incorrect:** Resolved an issue with the validation pattern in the routing policy for extended communities. 
+------
+- **I95-59367 Highway crash on head-end HA router:** Resolved a race condition between configuration processing and packet processing, which led to invalid memory access and resulted in a highway crash.
+------
+- **I95-59431 Incorrect ifcfg update for KNI namespace:** Resolved an issue where the namespace target KNI resource incorrectly sets target-interface MTU based on network-interface maxMTUs. This was caused when PPPOE connections would break due to an MTU mismatch after issues were encountered with restarts of the 128T service.
+------
+- **I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:** Resolved an issue in dual node High Availability configurations, highway crashes happen when `node1` does not successfully classify during the TCP handshake, but `node2` does successfully classify. See I95-59563, I95-59618 below for additional information.
+------
+- **I95-59537, I95-59551 Apply `ingress-source-nat-pool` to local breakout sessions:** Resolved an issue where `ingress-source-nat-pool`  was only applied to SVR sessions. The `ingress-source-nat-pool` has been updated with the `applies-to-local-breakout` flag.
+------
+- **I95-59563, I95-59618 SSR services crashing, taking interfaces down and causing peer path bounce:** Resolved an issue with potential mismatched App-ID classification between nodes. An IP-Port-Protocol application director lookup is now only performed for new sessions on the ingress node, instead of every node / router.
+------
+- **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism
+```
+  "datapath": {
+    "lockupDetectionEnabled": true/false
+  },
+```
+
 ## Release 6.1.11-5-lts
 
 **Release Date:** October 17, 2024
