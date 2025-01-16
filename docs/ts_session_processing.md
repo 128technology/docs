@@ -147,8 +147,109 @@ The values `cpu system-usage`, `cpu usage`, and `cpu user-usage` are percentages
 High values for queue depth and queue delay, coupled with high CPU usage values, are indicative of the service area threads not keeping up.
 
 
+
+### Metrics Retention
+
+To view metrics over a longer period of time, you can adjust the retention for key metrics relating to session processing. 
+
+:::info
+
+For more on metrics retention profiles, see [here](config_in-memory_metrics.md).
+
+:::
+
+See the following examples of setting long retention for session processing metrics in both CLI and GUI.
+
+#### CLI
+
+First, create a new metrics-profile referencing the key session processing metrics. Example:
+
+```
+config
+    authority
+        metrics-profile  session-processing-metrics-profile
+            name    session-processing-metrics-profile
+            metric  /traffic-eng/internal-application/sent-timeout
+                id           /traffic-eng/internal-application/sent-timeout
+                description  "Internal application sent-timeout"
+            exit
+            metric  /aggregate-session/node/session-arrival-rate
+                id           /aggregate-session/node/session-arrival-rate
+                description  "Session arrival rate"
+            exit
+            metric  /process/thread/queue/delay
+                id           /process/thread/queue/delay
+                description  "Packet processing thread queue delay"
+            exit
+            metric  /process/thread/cpu/usage
+                id           /process/thread/cpu/usage
+                description  "CPU thread usage"
+            exit
+            metric  /process/thread/queue/depth
+                id           /process/thread/queue/depth
+                description  "Packet processing thread queue depth"
+            exit
+        exit
+    exit
+exit
+```
+
+Then for a given router, reference the metrics profile in the `system` -> `metrics` settings, and set the retention to `long`. Example:
+
+```
+config
+    authority
+        router           my-router
+            system
+                metrics
+                    profile  session-processing-metrics-profile
+                        name       session-processing-metrics-profile
+                        retention  long
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+#### GUI
+
+First, create a new Metrics Profile referencing the key session processing metrics. Example:
+
+1. On the Conductor GUI, navigate to `CONFIGURATION` then `Authority`.
+![Authority config](/img/ts_sp_session_processing_metrics_config_1.png)
+2. Create a new Metrics Profile.
+![New metrics profile](/img/ts_sp_session_processing_metrics_config_2.png)
+3. Name the new Metrics Profile (example: `session-processing-metrics-profile`)
+![Name new metrics profile](/img/ts_sp_session_processing_metrics_config_3.png)
+4. Add each of the following session processing metrics to the profile:
+* `/traffic-eng/internal-application/sent-timeout`
+* `/aggregate-session/node/session-arrival-rate`
+* `/process/thread/queue/delay`
+* `/process/thread/cpu/usage`
+* `/process/thread/cpu/depth`
+
+![Session processing metrics profile](/img/ts_sp_session_processing_metrics_config_4.png)
+
+Then for a given router, reference the metrics profile in the `System` -> `Metrics` settings, and set the retention to `long`. Example:
+
+1. On the Conductor GUI, navigate to a router you wish to set up long retention of session processing metrics.
+2. Navigate to the `System` then `Metrics` settings for the router.
+![Router config](/img/ts_sp_session_processing_metrics_config_5.png)
+![Metrics config](/img/ts_sp_session_processing_metrics_config_6.png)
+3. Add a new `Metrics Profile`.
+![Metrics profile config](/img/ts_sp_session_processing_metrics_config_7.png)
+4. Select your session processing metrics profile from the dropdown, and save.
+![Metrics profile name](/img/ts_sp_session_processing_metrics_config_8.png)
+5. Set the retention to `long`.
+![Metrics profile retention long](/img/ts_sp_session_processing_metrics_config_9.png)
+
 ### Creating a Dashboard for Active Monitoring
+
 Creating a `Custom Report` on the Conductor is strongly recommended for each head-end router in an authority. Head-ends are central aggregation points for traffic and typically have the highest utilization and blast radius.
+
+#### Dashboard Setup
 
 To create a custom report, use the following procedure:
 
