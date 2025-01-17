@@ -20,8 +20,8 @@ The session processing thread is responsible for session setup and modify operat
 
 The SSR should be operating at no more than 80% utilization of its session processing threads, allowing it to handle bursty conditions that are triggered as a result of path migrations. When a path failure occurs, or a service is no longer within SLA, the SSR modifies existing sessions to ensure they are traversing the optimal pathway. For systems carrying considerable load, this could be many thousands of sessions that need to be updated.
 
-
 ### Enabling Multi-Threading
+
 While SSR software versions 6.1.x support multi-threading for session processing, it is not enabled by default. Reference the [Configuration Element Reference guide](config_reference_guide.md#session-setup-scaling) for details on the configuration parameters. Note that this feature must be enabled on both nodes if operating in a HA cluster.
 
 :::warning
@@ -35,11 +35,12 @@ config authority router <router-name> node <node-name> session-processor-mode  a
 
 Once the configuration changes have been made and committed, a restart of the SSR service is required for the changes to take effect.
 
-
 ### Examining Utilization of Session Processing Threads
+
 To view and understand host CPU usage, you must look at the individual session processing threads _as well as_ the other threads in the system. This is due to how the OS scheduler works, distributing compute cycles to available CPUs.
 
 #### SSR Versions < 6.1
+
 In software versions prior to 6.1, examine the utilization of the **PacketProcessing** thread by viewing the output of the command `top -H d 1.0 | grep PacketProcess` from the OS shell, as seen below.
 
 ```
@@ -57,6 +58,7 @@ In software versions prior to 6.1, examine the utilization of the **PacketProces
 ```
 
 #### SSR Versions >= 6.1
+
 In software versions 6.1 and greater, the session processing thread(s) are named `Session-Proc-XX` where `XX` is a zero-based index of the number of threads allocated to session processing. An easy way to view the number of threads allocated to session processing as well as seeing current utilization is to run the command `show stats process thread process-name highway | grep SessionProc | grep "cpu usage"`.
 
 ```
@@ -146,23 +148,27 @@ The values `cpu system-usage`, `cpu usage`, and `cpu user-usage` are percentages
  
 High values for queue depth and queue delay, coupled with high CPU usage values, are indicative of the service area threads not keeping up.
 
-
-
 ### Metrics Retention
 
-To view metrics over a longer period of time, you can adjust the retention for key metrics relating to session processing. 
+To view metrics over a longer period of time than the defaults, you can adjust the retention for key metrics relating to session processing. The current metrics retention defaults are as follows:
 
-:::info
+| Retention | State | Interval | Duration |
+| --- | --- | --- | --- |
+| short | Enabled: true | 5 seconds | 1 hour |
+| intermediate | Enabled: true | 5 minutes | 1 day |
+| long | Enabled: true | 1 hour | 180 days |
 
-For more on metrics retention profiles, see [here](config_in-memory_metrics.md).
-
+:::note
+Increasing the retention duration and/or decreasing the interval from the defaults has the potential to impact system overhead and should be carefully considered.
 :::
 
-See the following examples of setting long retention for session processing metrics in both CLI and GUI.
+For additional details about metrics retention profiles, see [Configuring In-Memory Metrics](config_in-memory_metrics.md).
+
+Use the following processes and examples to adjust the retention time for session processing metrics. Procedures for both the CLI and GUI are provided.
 
 #### CLI
 
-First, create a new metrics-profile referencing the key session processing metrics. Example:
+1. Create a new metrics-profile referencing the key session processing metrics. Example:
 
 ```
 config
@@ -194,7 +200,7 @@ config
 exit
 ```
 
-Then for a given router, reference the metrics profile in the `system` -> `metrics` settings, and set the retention to `long`. Example:
+2. For each router, reference the metrics profile in the `system` -> `metrics` settings, and set the retention to `long`. Example:
 
 ```
 config
@@ -215,7 +221,7 @@ exit
 
 #### GUI
 
-First, create a new Metrics Profile referencing the key session processing metrics. Example:
+Use the process below to create a new Metrics Profile referencing the key session processing metrics.
 
 1. On the Conductor GUI, navigate to `CONFIGURATION` then `Authority`.
 ![Authority config](/img/ts_sp_session_processing_metrics_config_1.png)
@@ -232,9 +238,9 @@ First, create a new Metrics Profile referencing the key session processing metri
 
 ![Session processing metrics profile](/img/ts_sp_session_processing_metrics_config_4.png)
 
-Then for a given router, reference the metrics profile in the `System` -> `Metrics` settings, and set the retention to `long`. Example:
+For each router, reference the metrics profile in the `System` -> `Metrics` settings, and set the retention to `long`. Example:
 
-1. On the Conductor GUI, navigate to a router you wish to set up long retention of session processing metrics.
+1. On the Conductor GUI, navigate to the router you wish to set up longer retention of session processing metrics.
 2. Navigate to the `System` then `Metrics` settings for the router.
 ![Router config](/img/ts_sp_session_processing_metrics_config_5.png)
 ![Metrics config](/img/ts_sp_session_processing_metrics_config_6.png)
