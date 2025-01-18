@@ -175,23 +175,23 @@ config
     authority
         metrics-profile  session-processing-metrics-profile
             name    session-processing-metrics-profile
-            metric  /traffic-eng/internal-application/sent-timeout
+            metric  /stat/traffic-eng/internal-application/sent-timeout
                 id           /traffic-eng/internal-application/sent-timeout
                 description  "Internal application sent-timeout"
             exit
-            metric  /aggregate-session/node/session-arrival-rate
+            metric  /stat/aggregate-session/node/session-arrival-rate
                 id           /aggregate-session/node/session-arrival-rate
                 description  "Session arrival rate"
             exit
-            metric  /process/thread/queue/delay
+            metric  /stat/process/thread/queue/delay
                 id           /process/thread/queue/delay
                 description  "Packet processing thread queue delay"
             exit
-            metric  /process/thread/cpu/usage
+            metric  /stat/process/thread/cpu/usage
                 id           /process/thread/cpu/usage
                 description  "CPU thread usage"
             exit
-            metric  /process/thread/queue/depth
+            metric  /stat/process/thread/queue/depth
                 id           /process/thread/queue/depth
                 description  "Packet processing thread queue depth"
             exit
@@ -230,11 +230,11 @@ Use the process below to create a new Metrics Profile referencing the key sessio
 3. Name the new Metrics Profile (example: `session-processing-metrics-profile`)
 ![Name new metrics profile](/img/ts_sp_session_processing_metrics_config_3.png)
 4. Add each of the following session processing metrics to the profile:
-* `/traffic-eng/internal-application/sent-timeout`
-* `/aggregate-session/node/session-arrival-rate`
-* `/process/thread/queue/delay`
-* `/process/thread/cpu/usage`
-* `/process/thread/cpu/depth`
+* `/stat/traffic-eng/internal-application/sent-timeout`
+* `/stat/aggregate-session/node/session-arrival-rate`
+* `/stat/process/thread/queue/delay`
+* `/stat/process/thread/cpu/usage`
+* `/stat/process/thread/cpu/depth`
 
 ![Session processing metrics profile](/img/ts_sp_session_processing_metrics_config_4.png)
 
