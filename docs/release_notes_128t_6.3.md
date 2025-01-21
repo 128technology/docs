@@ -80,7 +80,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-58444 DSCP steering is not correctly using revertible-failover:** Resolved an issue where DSCP Steering on child services were not using learned peer routes from the parent service. DSCP steering child services now properly utilize revertible-failover resiliency policies.
 ------
-- **I95-58528 SSR OS renaming:** The SSR OS has been renamed/rebranded from "CentOS7" to "SSR OS" to more accurately reflect its customized Linux distribution. All internal naming has been updated.
+- **I95-58528 SSR OS renaming:** The SSR OS version has been updated from "CentOS" to "Oracle Linux" to accurately reflect its upstream Linux distribution. All internal naming has been updated.
 ------
 - **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
 ------
