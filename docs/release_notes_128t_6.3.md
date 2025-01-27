@@ -24,6 +24,98 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.3.3-40r2
+
+**Release Date:** January 9, 2025
+
+### New Features
+
+- **I95-50045 IDP Throughput Improvements:** Improvements have been made to increase IDP performance on SSR Devices. While improvements have been made on all SSRs, the larger multi-core SSR devices now auto-size to scale IDP processing and throughput. 
+------
+- **I95-51685 WAN Edge Firmware Downgrade:** Due to network expansion or an RMA, you may need to add or replace a device that is preinstalled with firmware newer than what is currently running on your network. The SSR provides a process for an image-based reinstall to an SSR firmware version which is less than the firmware version on the target device. For additional information, see [Reinstallation](intro_rollback.md#reinstallation). 
+------
+- **I95-54553 DCSP Steering with BGP over SVR:** DSCP Steering service will now utilize a routing lookup when no explicit service-route configuration is present. For more information, see [Configuring DSCP Steering](config_dscp_steering.md#service-route-configuration).
+------
+- **I95-55228 IDP Critical Profile:** A new **Critical** profile has been added to the IDP feature. This profile focuses on `critical` level attacks, and has a more focused policy, improving the processing time. For more information about IDP, see [Intrusion Detection and Prevention](concepts_ssr_idp.md). 
+------
+- **I95-55342 Anti-Virus for SSR:** The SSR now offers Anti-Virus protection on spoke and branch devices, configurable on a per-application basis. The SSR Anti-Virus protection can run with or without IDP configuration, reports metrics to the User Interface, and generates alarms if the anti-virus engine fails for any reason. For more information, see [SSR Anti-Virus](sec-config-antivirus.md). 
+------
+- **I95-55574 Events Sync Improvements:** In the event of broken communication between HA nodes, each node provides access to one hour of peer events leading up to the disconnection. This is reduced from the full history of events to lower storage needs and expedite restoration and troubleshooting. 
+------
+- **I95-56292 Increase the length of SSH keys to 4096:** The size of the Salt and SSH keys has been changed to 4096 bits for newly deployed systems.
+------
+- **I95-56936 OS Hardening:** To provide greater security on the SSR devices, the ability to disable USB booting and storage, as well as disable the console output has been implemented. For additional details, please see [USB Boot and Storage Security](sec-usb-security.md) and [Disable Console Output](sec-disable-console-output.md).
+------
+- **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused. 
+------
+- **I95-57471 Allow RADIUS configuration per router:** RADIUS servers can now be configured at the router level. The servers can continue to be configured at the Authority level. If a radius server is configured at the Authority level but not the router, then the Authority value will be used. If it is configured at the Authority and the router level, the router value will be used.
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-27052, CVE-2024-27056, CVE-2024-27059, CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564, CVE-2021-27290, CVE-2022-24999.
+------
+- **I95-53274 PIM multicast routes unable to maintain more than 1,400 concurrent (Source, Group) sessions:** The SSR cannot maintain more than 1400 active (Source,Group) sessions. This scaling limitation has been addressed. 
+------
+- **I95-54366 Unable to assign an SNMP view name via the GUI:** Resolved an issue that prevented configuring SNMP (v3) Access Policy View in the GUI.
+------
+- **I95-57128 Inter-VLAN traffic on the same x710 or x722 port has 8ms delay:** Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value. This has been resolved and latency reduced to 32us.
+------
+- **I95-57205 Race condition on startup with LTE or PPPoE interfaces configured for DHCP, causing system to crash:** This issue has been resolved.
+------
+- **I95-57711 Source NATing on the underlay path is not working:** Resolved an issue where bi-directional and dynamic ingress source nat for non-svr sessions was not working. The ingress source is now applied to local breakout sessions for bi-directional and dynamic source-nat.
+------
+- **I95-57730 Peer Service Next Hops Not Reloaded After Provisional Status Change:** Resolved an issue where a `bgp-over-svr service-route` does not failback to primary node on a `provisional-status` change.
+------
+- **I95-57784 Add `show network-interface redundancy` command output to TSI collection:** The `show network-interface redundancy` command has been added to the TSI output to aid in troubleshooting.
+------
+- **I95-58201 Throughput Performance Improvements Across Platforms:** Kernel parameter tuning has improved throughput performance on most AMD and Intel platforms (excluding Intel Atom), with the greatest gains on AMD processors. This includes Juniper-branded platforms like the SSR1200 and SSR1500, as well as cloud instances, VM hosts, and other hardware configurations.
+------
+- **I95-58264 EoSVR session breaks after upgrading:** Resolved an issue where a high number of STEP route updates carried in an FPM message disconnected the Routing manager to agent connection. This has been resolved by limiting the max number of STEP paths in a single STEP route.
+------
+- **I95-58332 Show service-path incorrectly shows the state as `up` in an unreachable next-hop:** In a config where a `service-route next-hop` is pointing to an unreachable address, the show service-path shows the state is being up. This has been resolved by adding a next-hop reachability check to `show service-path`.
+------
+- **I95-58427 Capture SNMP configuration in TSI:** The `/etc/snmp` directory is now captured in the TSI, allowing the inspection of the output.
+------
+- **I95-58428 DSCP Steering Collision on Flow Move:** When IPSec traffic exists on a router and the DSCP steering feature is enabled, upon a flow-move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly. 
+------
+- **I95-58444 DSCP steering is not correctly using revertible-failover:** Resolved an issue where DSCP Steering on child services were not using learned peer routes from the parent service. DSCP steering child services now properly utilize revertible-failover resiliency policies.
+------
+- **I95-58528 SSR OS renaming:** The SSR OS version has been updated from "CentOS" to "Oracle Linux" to accurately reflect its upstream Linux distribution. All internal naming has been updated.
+------
+- **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
+------
+- **I95-58569 OSPF Graceful Restart link missing from GUI:** Resolved an issue that prevented the link to the Graceful Restart page from displaying. 
+------
+- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios. 
+------ 
+- **I95-58637 Relax API RBAC policies for quickstart files:** Users with config-read permissions are now able to generate quickstart files.
+------
+- **I95-58722 Update allowed Key Exchange Algorithms to add better support for Gov Cloud environments:** Expand the list of supported Key Exchange Algorithms in both FIPS and non-FIPS mode.
+------
+- **I95-58881 Multicast forwarding to spoke without any PIM signaling present:** This issue has been resolved; the routing engine now correctly removes the SVR OIF.
+------
+- **I95-58885 Add `identifier` to option to PCLI interface ping command:** The `ping` action now allows you to set a custom identifier.
+------
+- **I95-59054 Add the Downgrade option to the GUI selection:** The software version selection dropdown now displays and allows you to select versions older than the currently installed version.
+------
+- **I95-59130 `save tech-support-info since 1d`:** The default action of the `save tech-support-info since 1d` command or the **Save TSI** button in the GUI now includes at least one log file from each application, even if the file is outdated based on the since flag.
+------
+- **I95-59131 Next Hops not updated properly when OSPF is used:** Resolved a race condition found in OSPF and the end of FIB update message.
+------
+- **I95-59146 BGP confederation member-as not dynamically reconfigurable:** Resolved an issue where modifications to `bgp confederation member-as` were not comparing and validating the changes correctly. 
+------
+- **I95-59264 BGP community data model regex incorrect:** Resolved an issue with the validation pattern in the routing policy for extended communities. 
+------
+-  **I95-59537, I95-59551 Apply `ingress-source-nat-pool` to local breakout sessions:** Resolved an issue where `ingress-source-nat-pool`  was only applied to SVR sessions. The `ingress-source-nat-pool` has been updated with the `applies-to-local-breakout` flag.
+
+### Caveats
+
+- **I95-58622 IDP Engine Intermittent Start-up:** 6.3.3-R2 introduces the support of multi-core capabilities for IDP for image-based routers. For legacy package-based routers, multi-core IDP capability is not supported, and those systems will continue to operate in the single-core mode. For customers running IDP on older image-based firmware versions (6.3.0-R1 and under) on the SSR1300, SSR1400, and SSR1500, IDP multicore will be automatically enabled when upgrading to 6.3.3-R2. In some cases, after an upgrade the IDP engine can fail to start as it transitions from single-core to multi-core mode. When the IDP engine fails to start, the following alarm will be generated on the system:  `IDP engine unable to start; reboot-required`. In this situation, it is recommended to reboot the system post-upgrade to ensure future reliable reboots with IDP multi-core enabled.
+------
+- **I95-58782 `node.js` process may crash on SSR120, SSR130, and other branch router devices while generating Swagger documentation:** The `node.js` process may crash on SSR120, SSR130, and other branch router devices during SSR application startup while generating Swagger documentation. This is due to an internal error, and will generate a `node.js` coredump, but has **no impact** on the SSR. Swagger documentation is generated on a subsequent restart of the SSR. This is not service impacting.
+------
+- **I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:** In dual node High Availability configurations, highway crashes happen when `node1` does not successfully classify during the TCP handshake, but `node2` does successfully classify. This issue is currently under investigation and will be resolved in an upcoming release. For this release, defensive code has been added to preserve the session state and avoid a crash.
+
 ## Release 6.3.0-107r1
 
 **Release Date:** September 30, 2024
@@ -61,6 +153,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 	| - | BorderRouters |
 ------
 - **I95-53821 Radius Remote Authentication:** Users can now be added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography. See [Configuring RADIUS](config_radius.md#configuring-radius) for more information.
+------
+- **I95-53862 Alarm Suppression Support:** The Alarm Suppression feature allows you to filter or hide individual alarms as well as alarm types. You can write custom shelves, allowing you to silence alarming on interfaces that are intentionally configured as administratively down, for example. For more information, see [Alarm Suppression](config_alarm_suppression.md).
 ------
 - **I95-54300 Session performance capacity tracking and troubleshooting:** Added Session Performance Metric in Node Health. Session Processing CPU that displays average CPU, with an expandable selection that shows the individual CPU of each of the session processing threads that come from system resource scaling/config.
 ------

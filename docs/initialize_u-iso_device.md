@@ -3,7 +3,17 @@ title: Initialize Your Device - Web Workflow
 sidebar_label: Initialize Your Device - Web Workflow
 ---
 
-This is the part where configuring your device gets really easy! Using your browser, choose the workflow below that best suits your needs: 
+This is the part where configuring your device gets really easy!
+
+<!-- markdown-link-check-disable -->
+As a first step, connect your laptop or other device to any of the designated LAN ports and connect to https://192.168.128.1 to access the SSR onboarding UI.
+<!-- markdown-link-check-enable -->
+
+:::note
+The laptop or other client device must be assigned a static IP address within the range of `192.168.128.2` to `192.168.128.254` along with a subnet mask of `/24` or `255.255.255.0`.
+:::
+
+Using your browser, choose the workflow below that best suits your needs:
 
 Installing a Conductor-managed network? Start with [Initialize a Conductor](#initialize-a-conductor), then [Initialize a Conductor-managed Router](#initialize-a-conductor-managed-router).
 
@@ -19,14 +29,14 @@ Use the following process to initialize your device as a Conductor.
 
   ![SSR Conductor](/img/u-iso8a_initialize_conductor.png)
 
-2. To initialize a standalone conductor, select **STANDALONE**. To initialize the first conductor of an HA pair, select **HA NODE 0**. Select the address type (DHCP or STATIC). 
+2. To initialize a standalone conductor, select **STANDALONE**. To initialize the first conductor of an HA pair, select **HA NODE 0**. Select the address type (DHCP or STATIC).
 
 :::note
 In an HA configuration, **HA NODE 0** must always be configured before HA NODE 1. Configuring Node 1 first prevents Node 0 from starting.
 :::
 
-Enter the following information: 
- 
+Enter the following information:
+
 	- Conductor name
 	- Node IP Address (Static)
 	- Node Gateway (Static)
@@ -36,7 +46,7 @@ Enter the following information:
 
  ![Conductor Association](/img/u-iso9_define_conductor.png)
 
-3. Click **ASSOCIATE** 
+3. Click **ASSOCIATE**
 
 4. The device reboots and comes online as a Conductor.
 
@@ -53,7 +63,7 @@ Enter the following information:
 
 5. Click **ASSOCIATE** when you have completed the required information. The device reboots and comes online as the second Conductor.
 
-For information about deploying and configuring a conductor, see [Conductor Deployment](bcp_conductor_deployment.md) and [Import Configurations to the Conductor](single_conductor_config.md). Otherwise, continue with [Initialize a Conductor-Managed Router](#initialize-a-conductor-managed-router). 
+For information about deploying and configuring a conductor, see [Conductor Deployment](bcp_conductor_deployment.md) and [Import Configurations to the Conductor](single_conductor_config.md). Otherwise, continue with [Initialize a Conductor-Managed Router](#initialize-a-conductor-managed-router).
 
 ## Initialize a Conductor-Managed Router
 
@@ -66,9 +76,9 @@ Use the following process to initialize your device as a Conductor-managed route
 
   ![Conductor Managed Association](/img/u-iso11_cond-mngd-assoc.png)
 
-3. Click **ASSOCIATE** when you have completed the required information. 
+3. Click **ASSOCIATE** when you have completed the required information.
 
-The Router will onboard itself to the Conductor. Router configuration is performed from the Conductor. See [Basic Router Configuration](intro_basic_router_config.md) for more information. 
+The Router will onboard itself to the Conductor. Router configuration is performed from the Conductor. See [Basic Router Configuration](intro_basic_router_config.md) for more information.
 
 ## Initialize a Mist-Managed Router
 
@@ -78,7 +88,7 @@ You can use either of the following processes to initialize your device as a Mis
 
 ### Mist Organization Selection
 
-1. Select Mist Organization Selection under **Mist Cloud Managed**. 
+1. Select Mist Organization Selection under **Mist Cloud Managed**.
 
   ![Mist Org Selection](/img/u-iso12_select_mist_managed.png)
 
@@ -138,15 +148,15 @@ Use the following procedure to retrieve the Mist registration code from your Mis
 
 3. On the Inventory list for the Organization, select the newly installed router.
 
-4. Use the **Site** dropdown and select **Assign To Site**. 
+4. Use the **Site** dropdown and select **Assign To Site**.
 
   ![Mist Inventory](/img/u-iso15_router-in-mist.png)
 
-5. Place a check in the **Manage configuration with Mist** checkbox. 
+5. Place a check in the **Manage configuration with Mist** checkbox.
 
   ![Assign to site](/img/u-iso17_assign_wan_edges.png)
 
 6. Click **Assign to Site**.
 
-The router is now assigned to the selected site, and managed by Mist. 
+The router is now assigned to the selected site, and managed by Mist.
 

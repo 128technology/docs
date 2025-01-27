@@ -75,6 +75,9 @@ module.exports = {
       "intro_installation",
 
     ],
+    "RMA Workflows": [
+      "rma_wan_assurance",
+    ],
     "SSR Universal ISO Installation": [
       "intro_installation_univ-iso",
       "install_univ_iso",
@@ -335,6 +338,8 @@ module.exports = {
           "sec_firewall_filtering",
           "sec_security_policy",
           "sec_hardening_guidelines",
+          "sec-usb-security",
+          "sec-disable-console-output",
         ],
       },
       {
@@ -344,6 +349,7 @@ module.exports = {
           "concepts_ssr_idp",
           "config_idp",
           "ts_idp",
+          "sec-config-antivirus",
         ],
       },
       {

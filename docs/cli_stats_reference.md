@@ -42386,6 +42386,7 @@ show stats dpi received success [since <since>] [force] [router <router>] [node 
 | [`add`](#show-stats-dpi-received-success-add) | Number of segments added to the packet cache |
 | [`duplicate`](#show-stats-dpi-received-success-duplicate) | Number of segments discarded due to duplicate sequence numbers |
 | [`ready-to-parse`](#show-stats-dpi-received-success-ready-to-parse) | Number of packets ready for parsing |
+| [`segmented-client-hello`](#show-stats-dpi-received-success-segmented-client-hello) | The number of segmented TLS Client Hello packets that have been seen |
 
 ## `show stats dpi received success add`
 
@@ -42445,6 +42446,31 @@ Number of packets ready for parsing
 
 ```
 show stats dpi received success ready-to-parse [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats dpi received success segmented-client-hello`
+
+The number of segmented TLS Client Hello packets that have been seen
+
+#### Usage
+
+```
+show stats dpi received success segmented-client-hello [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -46915,6 +46941,7 @@ show stats icmp sent failure [since <since>] [force] [router <router>] [node <no
 | command | description |
 | ------- | ----------- |
 | [`destination-unreachable-packet-too-big`](#show-stats-icmp-sent-failure-destination-unreachable-packet-too-big) | The number of ICMP Unreachable Packet Too Big packets failed to be transmitted |
+| [`duplicate-reverse-flow`](#show-stats-icmp-sent-failure-duplicate-reverse-flow) | Number of flows that failed to be installed due to reverse flow matching an existing flow |
 | [`echo-reply`](#show-stats-icmp-sent-failure-echo-reply) | The number of ICMP Echo replies that failed to be transmitted |
 | [`echo-reply-drop`](#show-stats-icmp-sent-failure-echo-reply-drop) | The number of ICMP Echo replies not sent because of ICMP Blackhole |
 
@@ -46926,6 +46953,31 @@ The number of ICMP Unreachable Packet Too Big packets failed to be transmitted
 
 ```
 show stats icmp sent failure destination-unreachable-packet-too-big [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp sent failure duplicate-reverse-flow`
+
+Number of flows that failed to be installed due to reverse flow matching an existing flow
+
+#### Usage
+
+```
+show stats icmp sent failure duplicate-reverse-flow [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -47208,9 +47260,1914 @@ show stats idp [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | command | description |
 | ------- | ----------- |
+| [`antivirus`](#show-stats-idp-antivirus) | Metrics for antivirus security |
 | [`attacks`](#show-stats-idp-attacks) | IDP metrics for attacks |
 | [`bytes`](#show-stats-idp-bytes) | Metrics for packets |
 | [`packets`](#show-stats-idp-packets) | IDP metrics for packets |
+| [`performance`](#show-stats-idp-performance) | Metrics for IDP performance |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus`
+
+Metrics for antivirus security
+
+#### Usage
+
+```
+show stats idp antivirus [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`basic`](#show-stats-idp-antivirus-basic) | basic antivirus stats |
+| [`decompress-err`](#show-stats-idp-antivirus-decompress-err) | Decompress Err action |
+| [`engine-not-ready`](#show-stats-idp-antivirus-engine-not-ready) | Engine Not Ready action |
+| [`max-content-size`](#show-stats-idp-antivirus-max-content-size) | Max Content Size action |
+| [`others`](#show-stats-idp-antivirus-others) | Others action |
+| [`out-of-resource`](#show-stats-idp-antivirus-out-of-resource) | Out Of Resource action |
+| [`scan`](#show-stats-idp-antivirus-scan) | scan antivirus stats |
+| [`server-conn-err`](#show-stats-idp-antivirus-server-conn-err) | Server Conn Err action |
+| [`timeout`](#show-stats-idp-antivirus-timeout) | Timeout action |
+| [`too-many-requests`](#show-stats-idp-antivirus-too-many-requests) | Too Many Requests action |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus basic`
+
+basic antivirus stats
+
+#### Usage
+
+```
+show stats idp antivirus basic [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`mime-skip`](#show-stats-idp-antivirus-basic-mime-skip) | mime-skip (count) |
+| [`pre-scanning`](#show-stats-idp-antivirus-basic-pre-scanning) | pre-scanning (count) |
+| [`session-abort`](#show-stats-idp-antivirus-basic-session-abort) | session-abort (count) |
+| [`url-skip`](#show-stats-idp-antivirus-basic-url-skip) | url-skip (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus basic mime-skip`
+
+mime-skip (count)
+
+#### Usage
+
+```
+show stats idp antivirus basic mime-skip [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus basic pre-scanning`
+
+pre-scanning (count)
+
+#### Usage
+
+```
+show stats idp antivirus basic pre-scanning [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus basic session-abort`
+
+session-abort (count)
+
+#### Usage
+
+```
+show stats idp antivirus basic session-abort [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus basic url-skip`
+
+url-skip (count)
+
+#### Usage
+
+```
+show stats idp antivirus basic url-skip [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus decompress-err`
+
+Decompress Err action
+
+#### Usage
+
+```
+show stats idp antivirus decompress-err [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-decompress-err-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-decompress-err-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-decompress-err-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus decompress-err block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus decompress-err block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus decompress-err log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus decompress-err log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus decompress-err permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus decompress-err permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus engine-not-ready`
+
+Engine Not Ready action
+
+#### Usage
+
+```
+show stats idp antivirus engine-not-ready [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-engine-not-ready-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-engine-not-ready-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-engine-not-ready-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus engine-not-ready block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus engine-not-ready block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus engine-not-ready log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus engine-not-ready log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus engine-not-ready permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus engine-not-ready permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus max-content-size`
+
+Max Content Size action
+
+#### Usage
+
+```
+show stats idp antivirus max-content-size [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-max-content-size-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-max-content-size-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-max-content-size-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus max-content-size block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus max-content-size block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus max-content-size log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus max-content-size log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus max-content-size permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus max-content-size permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus others`
+
+Others action
+
+#### Usage
+
+```
+show stats idp antivirus others [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-others-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-others-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-others-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus others block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus others block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus others log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus others log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus others permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus others permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus out-of-resource`
+
+Out Of Resource action
+
+#### Usage
+
+```
+show stats idp antivirus out-of-resource [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-out-of-resource-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-out-of-resource-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-out-of-resource-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus out-of-resource block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus out-of-resource block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus out-of-resource log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus out-of-resource log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus out-of-resource permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus out-of-resource permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus scan`
+
+scan antivirus stats
+
+#### Usage
+
+```
+show stats idp antivirus scan [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`clean`](#show-stats-idp-antivirus-scan-clean) | clean (count) |
+| [`fallback`](#show-stats-idp-antivirus-scan-fallback) | fallback (count) |
+| [`threat`](#show-stats-idp-antivirus-scan-threat) | threat (count) |
+| [`total`](#show-stats-idp-antivirus-scan-total) | total (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus scan clean`
+
+clean (count)
+
+#### Usage
+
+```
+show stats idp antivirus scan clean [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus scan fallback`
+
+fallback (count)
+
+#### Usage
+
+```
+show stats idp antivirus scan fallback [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus scan threat`
+
+threat (count)
+
+#### Usage
+
+```
+show stats idp antivirus scan threat [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus scan total`
+
+total (count)
+
+#### Usage
+
+```
+show stats idp antivirus scan total [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus server-conn-err`
+
+Server Conn Err action
+
+#### Usage
+
+```
+show stats idp antivirus server-conn-err [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-server-conn-err-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-server-conn-err-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-server-conn-err-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus server-conn-err block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus server-conn-err block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus server-conn-err log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus server-conn-err log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus server-conn-err permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus server-conn-err permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus timeout`
+
+Timeout action
+
+#### Usage
+
+```
+show stats idp antivirus timeout [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-timeout-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-timeout-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-timeout-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus timeout block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus timeout block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus timeout log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus timeout log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus timeout permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus timeout permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus too-many-requests`
+
+Too Many Requests action
+
+#### Usage
+
+```
+show stats idp antivirus too-many-requests [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`block`](#show-stats-idp-antivirus-too-many-requests-block) | block (count) |
+| [`log-and-permit`](#show-stats-idp-antivirus-too-many-requests-log-and-permit) | log-and-permit (count) |
+| [`permit`](#show-stats-idp-antivirus-too-many-requests-permit) | permit (count) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus too-many-requests block`
+
+block (count)
+
+#### Usage
+
+```
+show stats idp antivirus too-many-requests block [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus too-many-requests log-and-permit`
+
+log-and-permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus too-many-requests log-and-permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp antivirus too-many-requests permit`
+
+permit (count)
+
+#### Usage
+
+```
+show stats idp antivirus too-many-requests permit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -47323,7 +49280,6 @@ show stats idp attacks missed [since <since>] [force] [router <router>] [node <n
 | [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 #### Description
-
 For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
 
 ## `show stats idp attacks mist-sent`
@@ -47417,7 +49373,6 @@ show stats idp attacks received [since <since>] [force] [router <router>] [node 
 #### Description
 
 For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
-
 ## `show stats idp attacks total`
 
 Number of attacks sent in total (count) (in-memory)
@@ -47697,7 +49652,6 @@ show stats idp packets dropped [since <since>] [force] [router <router>] [node <
 #### Description
 
 For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
-
 ## `show stats idp packets processed`
 
 Number of packets processed (in-memory)
@@ -48038,6 +49992,182 @@ show stats idp packets transmitted [netintf <netintf>] [since <since>] [force] [
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | netintf | The network interface for which this metric was generated (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp performance`
+
+Metrics for IDP performance
+
+#### Usage
+
+```
+show stats idp performance [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`memory-utilization`](#show-stats-idp-performance-memory-utilization) | memory utilization (count) |
+| [`packet-processing-utilization`](#show-stats-idp-performance-packet-processing-utilization) | cpu utilization (count) |
+| [`session-count`](#show-stats-idp-performance-session-count) | session count utilization |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp performance memory-utilization`
+
+memory utilization (count)
+
+#### Usage
+
+```
+show stats idp performance memory-utilization [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp performance packet-processing-utilization`
+
+cpu utilization (count)
+
+#### Usage
+
+```
+show stats idp performance packet-processing-utilization [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp performance session-count`
+
+session count utilization
+
+#### Usage
+
+```
+show stats idp performance session-count [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node generating this metric |
 | router | The router for which to display stats (default: &lt;current router&gt;) |
 | since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
@@ -75505,6 +77635,7 @@ show stats service-area received [since <since>] [force] [router <router>] [node
 | [`new-tcp-connection-denied`](#show-stats-service-area-received-new-tcp-connection-denied) | Number of new TCP connections denied do to exceeding the half-open connection limit |
 | [`no-fib-entry`](#show-stats-service-area-received-no-fib-entry) | Number of packets that did not match a FIB entry |
 | [`non-fabric-packets`](#show-stats-service-area-received-non-fabric-packets) | The number of packets received in the Service Area from outside the Fabric |
+| [`non-fib-routing-lookup-success`](#show-stats-service-area-received-non-fib-routing-lookup-success) | Number of successful routing next-hop lookups for non-FIB service packets |
 | [`packets-with-stale-flow-hit`](#show-stats-service-area-received-packets-with-stale-flow-hit) | Number of packets that are dropped when received after a flow hit and have no associated sessions with it |
 | [`packets-with-stale-flow-move-keep-alive`](#show-stats-service-area-received-packets-with-stale-flow-move-keep-alive) | Number of packets that are discarded when received with stale flow-move keep-alive and have no associated flows with it (in-memory) |
 | [`packets-with-stale-reverse-metadata`](#show-stats-service-area-received-packets-with-stale-reverse-metadata) | Number of packets that are dropped when received with stale reverse metadata and have no associated flows with it |
@@ -76730,6 +78861,31 @@ The number of packets received in the Service Area from outside the Fabric
 
 ```
 show stats service-area received non-fabric-packets [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received non-fib-routing-lookup-success`
+
+Number of successful routing next-hop lookups for non-FIB service packets
+
+#### Usage
+
+```
+show stats service-area received non-fib-routing-lookup-success [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -78260,6 +80416,7 @@ show stats service-area session-install-errors [since <since>] [force] [router <
 | [`fib-lookup`](#show-stats-service-area-session-install-errors-fib-lookup) | Number of session installation failures due to unsuccessful FIB route lookup |
 | [`gateway-lookup-failure`](#show-stats-service-area-session-install-errors-gateway-lookup-failure) | Number of session installation failures due to gateway lookup failure |
 | [`invalid-packet`](#show-stats-service-area-session-install-errors-invalid-packet) | Number of session installation failures due to invalid packet |
+| [`non-fib-routing-lookup-failure`](#show-stats-service-area-session-install-errors-non-fib-routing-lookup-failure) | Number of session installation failures due to a routing next-hop lookup failure for non-FIB services |
 | [`service-paths-unavailable`](#show-stats-service-area-session-install-errors-service-paths-unavailable) | Number of sessions that failed to be installed due to service paths not being available |
 | [`urpf-check-failure`](#show-stats-service-area-session-install-errors-urpf-check-failure) | Number of session installation failures due to uRPF check failure |
 | [`waypoint-allocation`](#show-stats-service-area-session-install-errors-waypoint-allocation) | Number of session installation failures due to waypoint allocation failure |
@@ -78347,6 +80504,31 @@ Number of session installation failures due to invalid packet
 
 ```
 show stats service-area session-install-errors invalid-packet [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area session-install-errors non-fib-routing-lookup-failure`
+
+Number of session installation failures due to a routing next-hop lookup failure for non-FIB services
+
+#### Usage
+
+```
+show stats service-area session-install-errors non-fib-routing-lookup-failure [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments

@@ -10,6 +10,10 @@ This guide describes the process for deploying a Conductor-managed Session Smart
 * Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
 * Deploying the [Session Smart Conductor-managed Router](#session-smart-conductor-managed-router-deployment).
 
+:::note
+BYOL instances only support image-based installations, and require the conductor to run 6.3.0-R1 or newer in order to manage these instances.
+:::
+
 ## Selecting the Azure Plan
 
 The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of the SSR software on an Azure VM. Artifactory credentials are required to authenticate access to the installation repositories. Select the BYOL plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
@@ -54,7 +58,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-5. Click the **Launch** link on the **Juniper Session Smart Conductor** template to open the template. 
+5. Click the **Launch** link on the **Juniper Session Smart Conductor** template to open the template.
 
 ![ARM Template](/img/azure-byol-conductor-template.png)
 
@@ -72,7 +76,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 - Who is going to be the administrator?
   - Provide the content of your public SSH key in the `Admin Public Key Data` field.
 
-7. Agree to the terms of use and conditions of the deployment. 
+7. Agree to the terms of use and conditions of the deployment.
 
 8. Click **Purchase** to launch the deployment.
 
@@ -342,7 +346,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 - Who is going to be the administrator?
   - Provide the content of your public SSH key in the `Admin Public Key Data` field.
 
-7. Agree to the terms of use and conditions of the deployment. 
+7. Agree to the terms of use and conditions of the deployment.
 
 8. Click **Purchase** to launch the deployment.
 
@@ -386,11 +390,11 @@ When launching an instance using the CLI, Powershell, or using automation, the f
 write_files:
   - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
     content: |
-        { 
+        {
             "name": "<router-name>",
             "ssr-version": "<version>",
-            “mode”: "conductor-managed", 
-            “conductor-hosts”: ["<conductor-host>"] 
+            “mode”: "conductor-managed",
+            “conductor-hosts”: ["<conductor-host>"]
         }
 ```
 | Option | Meaning |

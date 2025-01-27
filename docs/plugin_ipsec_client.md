@@ -1070,6 +1070,24 @@ When using the 128T-ipsec-client and 128T-mist-wan-assurance plugins together, i
 
   _**Resolution**_ The configuration validation now accepts this configuration flow
 
+### Release 3.4.1
+
+A bug fix release that is only compatible with SSR < 6.3.
+
+**Release Date:** Dec 11, 2024
+
+**Router Version** 128T-ipsec-2.2.5-2
+
+#### Issues Fixed
+
+- **PLUGIN-2833** Tunnels can flap due to rekey when connecting to some servers.
+
+  _**Resolution:**_ Release ipsec client with libreswan-3.23 compatability that is known to not have rekeying issues with some servers.
+
+- **WAN-3229** IPSec tunnels can restart due to unrelated config changes.
+
+  _**Resolution:**_ IPSec config handler manages the config changes more gracefully to avoid spurious restarts.
+
 ### Release 3.4.0
 
 **Release Date:** Jul 13, 2022

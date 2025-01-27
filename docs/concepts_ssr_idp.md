@@ -19,6 +19,8 @@ You can apply a profile (Alert, Standard, Strict) to an `access-policy`. Each pr
 
 - **Strict** - The **Strict** profile contains a similar set of IDP signatures and rules as the Standard profile. However, when an attack is detected the actions are more likely to actively block any malicious traffic or other attacks detected in the network.
 
+- **Critical** - The **Critical** profile (added in V6.3.3-r2) focuses on `critical` level attacks, and has a more focused policy, improving the processing time. The default actions are more likely to block traffic to prevent access to the network. 
+
 ### Security Events Dashboard
 
 Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours, and can be viewed on the Security Event History page on the SSR GUI, or from the PCLI using the `show idp events` command. 

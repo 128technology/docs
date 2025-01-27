@@ -3,24 +3,61 @@ title: System Requirements
 sidebar_label: System Requirements
 ---
 ## Hardware Requirements
-The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
 
-Please review the router and conductor [minimum requirements](about_supported_platforms.md#minimum-platform-specifications). See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
+The Session Smart Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required.
+
+### Minimum Platform Specifications
+
+These are the minimum platform specifications for running the SSR Networking Platform software.
+
+- 4 Core x86_64-v2 processor, single socket
+- 8GB Memory, ECC strongly recommended
+- 120GB Storage
+- 1 DPDK-enabled NIC port for standalone systems (two recommended)
+- 2 DPDK-enabled NIC ports for HA systems (three recommended)
+- 1 dedicated NIC port for HA synchronization
+- (Optional) 1 dedicated NIC port for out-of-band management
+
+### Conductor Scaling Recommendations
+
+| Number of managed routers | Physical Cores | Memory |
+| ------------------------- | -------------- | ------ |
+| 1 to 10                   | 2 Xeon         | 8 GB   |
+| 1 to 25                   | 4 Xeon         | 8 GB   |
+| 25 to 100                 | 8 Xeon         | 16 GB  |
+| 100 to 500                | 12 Xeon        | 48 GB  |
+| 500 to 1000               | 24 Xeon        | 96 GB  |
+| 1000 to 1500              | 32 Xeon        | 128 GB |
+| 1500 to 2000              | 48 Xeon        | 160 GB |
+
+Hyperthreading should be enabled on Conductor platforms.
+
+### Compatible Platform BIOS and UEFI Recommendations  
+
+Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running SSR on compatible platforms, the following are the recommended boot firmware settings: 
+
+- Hyperthreading disabled for platform operating as a router 
+- Hyperthreading enabled for platform operating as a conductor 
+- LAN bypass disabled 
+- Wake on LAN disabled 
+- Date time format: UTC format / GMT time zone 
+- Power on setting: always on 
+- Setup prompt timeout value: 3 seconds 
+- Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted) 
+- Boot order: HDD, USB, PXE 
+- Watchdog timer: disabled 
+- SR-IOV: enabled 
+- Secure Boot: disabled 
+- Serial Port Baud Rate: 115200/8-n-1 (To be used for console installation) 
+- Power profile: maximum performance 
+- System version, release date, manufacturer's part number, and serial number set in DMI table 
 
 :::info
-Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for hardware profile examples.
+Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs.
 :::
 
 :::important
 While the SSR uses a journaled filesystem to limit the risk of data corruption during a power failure, the use of an uninterrupted power supply (UPS) is recommended whenever practical.
-:::
-
-:::important
-When run as a virtual machine, CPU cores must be dedicated to the SSR router using core affinity.
-:::
-
-:::important
-It is strongly recommended to use ECC memory for all hardware platforms.
 :::
 
 ## Environmental Requirements

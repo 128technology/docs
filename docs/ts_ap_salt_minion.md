@@ -6,7 +6,7 @@ sidebar_label: "AP: Salt Minion"
 This document describes the process for troubleshooting issues with Automated Provisioning (AP) using Salt.
 
 :::note
-The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
+The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting an SSR router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
 :::
 
 ## Symptoms
@@ -56,9 +56,9 @@ At certain times some errors that are seen may be transient during periods of in
 
 ## Steps to Rectify
 
-Throughout the lifecycle of a 128T asset, some errors are normal and will clear on their own over time. The first steps are to ensure there is working connectivity between the minion and the salt-master.
+Throughout the lifecycle of an SSR asset, some errors are normal and will clear on their own over time. The first steps are to ensure there is working connectivity between the minion and the salt-master.
 
-### Diagnosing the issues
+### Diagnosing the Issues
 
 The following steps can help diagnose issues with salt-minion which may be affecting AP:
 
@@ -130,3 +130,76 @@ sudo systemctl restart salt-minion
 ```
 
 If it appears there are connectivity issues that are preventing AP from functioning, correct any networking issues that exist.
+
+## Asset Status
+
+In versions of SSR Software prior to 6.3.0, the asset states were a combination of SALT statuses and SSR statuses. This caused ambiguity with the true state of the SSR. In order to provide a clearer picture of asset states, beginning with version 6.3.0 the SALT status and the SSR status have been decoupled. This document provides a summary of the SSR asset states seen when upgrading or installing SSR software, as well as any time `show assets asset-id` is run. 
+
+### Asset States in Versions Earlier than 6.3.0
+
+The information below describes the Asset states reported on SSR Software versions prior to 6.3.0, and provides context for the changes put in place with version 6.3.0. 
+
+- **Pending:** The SALT minion has sent its public key to the conductor and is waiting to be accepted. This does not indicate that the minion is currently reaching out; it may have sent the key to the conductor and is waiting, it may have sent the key and then shut down while waiting, or it may have been disconnected.
+- **Key Accepted:** The SALT master has accepted the SALT minion's public key. This action is triggered by the user associating the asset ID of the system with a node in configuration. This does not indicate that the SALT minion has connectivity.
+- **Connected:** The SALT minion has connected and the SALT master is running highstate.
+- **Disconnected:** The SALT minion has disconnected.
+- **Not Installed:** After running highstate, the SALT master has detected that SSR is not installed on the asset.
+- **Installed:** After running highstate, the SALT master has detected that SSR is installed and is detecting whether SSR is provisioned correctly, and if the 128T service is running.
+- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user issued the `send command sync` command.
+- **Reinitializing:** The conductor has detected that the 128T service is not provisioned correctly and is stopping the service to reinitialize it.
+- **Starting:** The SALT minion has reported that the 128T service is running but is trying to detect whether the service has fully started by retrieving the process state to see if all processes are running. The process state is retrieved via the SSH tunnels and the conductor may not have SSH connectivity to the asset yet.
+- **Stopped:** The 128T service is stopped.
+- **Running:** The conductor has detected that all SSR processes are running. The Running state implies the following:
+    * The salt minion is connected and has applied highstate
+    * All SSR processes are in the Running state
+    * The asset has SSH connectivity to the conductor
+It is important to note that the Running state only indicates that the current configuration has been processed. It does not mean that traffic is routing correctly. 
+
+These asset states are a combination of SALT statuses and SSR statuses. The following example describes the potential confusion with the SSR statuses and SALT statuses being combined: 
+
+Let's assume an asset is in running. If the SALT minion disconnects (which they often do), then the asset will transition to disconnected. The SSR processes are still in running, and the SSH connectivity is still connected, but the customer sees disconnected and worries that the asset is no longer routing traffic. 
+
+In order to provide a clearer picture of asset states, the SALT status and the SSR status have been decoupled beginning with version 6.3.0. 
+
+### Versions 6.3.0 and Above
+
+The information below describes the asset states reported on SSR Software version 6.3.0 and higher.
+
+- **Pending:** The SALT minion has sent its public key to the conductor and is waiting to be accepted. This does not indicate that the minion is currently reaching out; it may have sent the key to the conductor and is waiting, it may have sent the key and then shut down while waiting, or it may have been disconnected.
+- **Key Accepted:** The SALT master has accepted the SALT minion's public key. This action is triggered by the user associating the asset ID of the system with a node in configuration. This does not indicate that the SALT minion has connectivity.
+- **Synchronizing:** The minion has connected and the SALT master is running highstate. 
+- **Synchronized:** Highstate is complete and the minion is in steady state. 
+- **Resynchronizing:** Highstate is being reapplied, either due to a config change or because the user issued the `send command sync` command. 
+- **Reinitializing:** The conductor has detected that the 128T service is not provisioned correctly and is stopping the service to reinitialize it.
+
+Additionally, individual statuses are displayed under `show assets <asset-id>` for the following functions:
+
+- SALT status
+- Conductor Connectivity
+- Peer Conductor Connectivity
+- Service Status
+
+### Example Output
+
+The SSR process state and SSH connectivity state are individually displayed in the `show assets detail` view:
+```
+admin@t163-dut1.Conductor# show assets t163-dut4.novalocal
+Thu 2024-10-17 17:49:36 UTC
+Retrieving assets...
+
+====================================================
+ t163-dut4.novalocal
+====================================================
+  Router:                       Router
+  Node:                         t163-dut4
+  Current Version:              6.3.0-107.r1.el7
+  Install Type:                 Image
+  Status:                       Synchronized <========= Salt status
+  Conductor Connectivity:       Connected <============ SSR connectivity status to current conductor node
+  Peer Conductor Connectivity:  Connected <============ SSR connectivity status to peer conductor node (if exists)
+  Service Status:               Running   <============ SSR process status
+  First Connection Date:        2024-10-08 15:02:59
+  Time in Status:               1d 15h 55m 32s
+
+Completed in 0.42 seconds
+```
