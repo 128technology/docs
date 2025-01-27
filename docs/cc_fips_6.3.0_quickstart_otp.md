@@ -157,13 +157,13 @@ Fri 2024-03-01 16:23:37 UTC
 =========== =========== ========= ======== ====================== =====================
  Router      Node        Version   Status   Build Date             Package
 =========== =========== ========= ======== ====================== =====================
- 128t-east   128t-east   6.2.5     r2       2024-06-06T23:56:25Z   128T-6.2.5-5r2.el
+ 128t-east   128t-east   6.3.0     r1       2024-06-06T23:56:25Z   128T-6.3.0-107.el
                                                                    7 (package based)
 
 Completed in 0.05 seconds
 admin@conductor.conductor#
 ```
- It should report Version 6.2.5 and Status r2.
+ It should report Version 6.3.0 and Status r1.
  
 3. Type `shell` to suspend the CLI and enter the Linux shell. 
 4. Execute the command `sudo systemctl status 128T` and verify the service is listed as `active (running)`.

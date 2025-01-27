@@ -61,9 +61,9 @@ Firewall rules may be applied to each network interface separately, and are appl
 
 ### System Crashes 
 
-The SSR `processManager` automatically restarts the failed processes based on system policy. Core files should be considered to contain customer confidential data and be handled with appropriate security. Core files are stored in `/var/lib/system/coredump` and can be removed by the administrator if not required. 
+The SSR `processManager` automatically restarts the failed processes based on system policy. Core files should be considered to contain customer confidential data and be handled with appropriate security. Core files are stored in `/var/lib/systemd/coredump` and can be removed by the administrator if not required. 
 
-`$ sudo rm -f /var/lib/system/coredump/core*` 
+`$ sudo rm -f /var/lib/systemd/coredump/core*` 
 
 The `coredumpctl list` command is used from the Linux shell to display crash history from the system journal. 
 
