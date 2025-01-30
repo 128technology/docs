@@ -71,7 +71,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-58722 Update allowed Key Exchange Algorithms to add better support for Gov Cloud environments:** Expand the list of supported Key Exchange Algorithms in both FIPS and non-FIPS mode.
 ------
-- **I95-58787 DHCP stopped working:** Resolved an issue where multiple redundant VLAN interfaces with a DHCP server configured would not recover after a highway crash, until manually restarted. 
+- **I95-58797 DHCP stopped working:** Resolved an issue where multiple redundant VLAN interfaces with a DHCP server configured would not recover after a highway crash, until manually restarted. 
 ------
 - **I95-58885 Add `identifier` to option to PCLI interface ping command:** The `ping` action now allows you to set a custom identifier.
 ------
