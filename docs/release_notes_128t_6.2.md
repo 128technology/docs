@@ -29,7 +29,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 **Release Date:** January 30, 2025
 
 ### Resoved Issues
-- **The following CVEs have been identified and resolved in this release:** CVE-2021-27290, CVE-2022-24999
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2021-27290, CVE-2022-24999.
 ------
 - **I95-54366 Unable to assign an SNMP view name via the GUI:** Resolved an issue that prevented configuring SNMP (v3) Access Policy View in the GUI.
 ------
@@ -104,12 +105,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
   },
 ```
 ------
-- **I95-59677
-------
 - **I95-59745 Routers are stuck in the connected state:** Resolved an issue where the router would unnecessarily write to `yum.dnf` and `dnf.conf`, resulting in a race condition.
-
-
-
+------
+- **I95-59813 The `unrelease mist agent` command fails:** Resolved an issue that caused the `unrelease mist agent` command to fail when run from a conductor against a router. 
 
 ## Release 6.2.7-4-sts
 
