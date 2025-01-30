@@ -24,6 +24,93 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.8-10-lts
+
+**Release Date:** January 30, 2025
+
+### Resoved Issues
+- **The following CVEs have been identified and resolved in this release:** CVE-2021-27290, CVE-2022-24999
+------
+- **I95-54366 Unable to assign an SNMP view name via the GUI:** Resolved an issue that prevented configuring SNMP (v3) Access Policy View in the GUI.
+------
+- **I95-56259 Upgrade to 6.2.4 failed to bring up KNI and management interfaces:** Resolved an issue in which large-scale systems with many interfaces would not be able to activate all interfaces. 
+------
+- **I95-56665 Unable to change the default security policy for PIM:** The security and service policies for PIM and MSDP services can now be configured using `bgp-service-generation`.
+------
+- **I95-57128 Inter-VLAN traffic slow:** Identified an issue where devices controlled by the i40e driver (x710, x722) were incurring 8ms latency due to incorrectly setting a device throttling register to a MAX of 8ms. This has been reduced to 32us to resolve the issue.
+------
+- **I95-57145 Unable to change the default security policy for MSDP:** The configured security policy for MSDP SVR generated services can now be changed using `bgp-service-generation`.
+------
+- **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine when the session will expire following inactivity. 
+------
+- **I95-57730 Peer Service Next Hops Not Reloaded After Provisional Status Change:** Resolved an issue where a `bgp-over-svr service-route` does not failback to primary node on a `provisional-status` change.
+------
+- **I95-58264 EoSVR session breaks after upgrading:** Resolved an issue where a high number of STEP route updates carried in an FPM message disconnected the Routing manager to agent connection. This has been resolved by limiting the max number of STEP paths in a single STEP route.
+------
+- **I95-58332 Show service-path incorrectly shows the state as `up` in an unreachable next-hop:** In a config where a `service-route next-hop` is pointing to an unreachable address, the show service-path shows the state is being up. This has been resolved by adding a next-hop reachability check to `show service-path`.
+------
+- **I95-58427 Capture SNMP configuration in TSI:** The `/etc/snmp` directory is now captured in the TSI, allowing the inspection of the output.
+------
+- **I95-58428 DSCP Steering Collision on Flow Move:** When IPSec traffic exists on a router and the DSCP steering feature is enabled, upon a flow-move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly. 
+------
+- **I95-58444 DSCP steering is not correctly using revertible-failover:** Resolved an issue where DSCP Steering on child services were not using learned peer routes from the parent service. DSCP steering child services now properly utilize revertible-failover resiliency policies.
+------
+- **I95-58528 SSR OS renaming:** The SSR OS version has been updated from "CentOS" to "Oracle Linux" to accurately reflect its upstream Linux distribution. All internal naming has been updated.
+------
+- **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
+------
+- **I95-58569 OSPF Graceful Restart link missing from GUI:** Resolved an issue that prevented the link to the Graceful Restart page from displaying. 
+------
+- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios. 
+------ 
+- **I95-58637 Relax API RBAC policies for quickstart files:** Users with config-read permissions are now able to generate quickstart files.
+------
+- **I95-58722 Update allowed Key Exchange Algorithms to add better support for Gov Cloud environments:** Expand the list of supported Key Exchange Algorithms in both FIPS and non-FIPS mode.
+------
+- **I95-58745 Multicast receiver could not join the multicast group:** When sending a protocol control message to an SVR peer, choosing an interface with a vlan confused the internal logic and caused forwarding issues. This issue has been resolved by only selecting a well-known internal interface as the source interface.
+------
+- **I95-58763 Provide a way to correlate running config to log entries:** The output of the `show events type admin.running_config_change detail` command has been added to the TSI output. This provides visibility into the last 25 config changes. 
+------
+- **I95-58797 DHCP stopped working:** Resolved an issue where multiple redundant VLAN interfaces with a DHCP server configured would not recover after a highway crash, until manually restarted. 
+------
+- **I95-58881 Multicast forwarding to spoke without any PIM signaling present:** This issue has been resolved; the routing engine now correctly removes the SVR OIF.
+------
+- **I95-58885 Add `identifier` to option to PCLI interface ping command:** The `ping` action now allows you to set a custom identifier.
+------
+- **I95-59130 `save tech-support-info since 1d`:** The default action of the `save tech-support-info since 1d` command or the **Save TSI** button in the GUI now includes at least one log file from each application, even if the file is outdated based on the since flag.
+------
+- **I95-59131 Next Hops not updated properly when OSPF is used:** Resolved a race condition found in OSPF and the end of FIB update message.
+------
+- **I95-59146 BGP confederation member-as not dynamically reconfigurable:** Resolved an issue where modifications to `bgp confederation member-as` were not comparing and validating the changes correctly. 
+------
+- **I95-59264 BGP community data model regex incorrect:** Resolved an issue with the validation pattern in the routing policy for extended communities. 
+------
+- **I95-59367 Race condition during configuration change, resulting in highway crash:** Resolved a race condition between configuration processing and packet processing, which led to invalid memory access and resulted in a highway crash.
+------
+- **I95-59431 MTU mismatch on PPPoE interfaces:** Resolved an issue where the namespace target KNI resource incorrectly sets target-interface MTU based on network-interface maximum MTU. This issue was encountered with restarts of the 128T service.
+------
+- **I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:** Resolved an issue in dual node High Availability configurations, highway crashes happen when `node1` does not successfully classify during the TCP handshake, but `node2` does successfully classify. See I95-59563, I95-59618 below for additional information.
+------
+- **I95-59478 Recover PPPoE after highway crash:** Updated the PPPoE re-init script to resolve an issue where, after a highway crash, the PPPoE  NSID becomes invalid and causes the device status to stay `down` even if the monitoring script reports `up`.
+------
+- **I95-59537, I95-59551 Apply `ingress-source-nat-pool` to local breakout sessions:** Resolved an issue where `ingress-source-nat-pool`  was only applied to SVR sessions. The `ingress-source-nat-pool` has been updated with the `applies-to-local-breakout` flag.
+------
+- **I95-59563, I95-59618 SSR crashing, downing interfaces and causing peer path flap:** Resolved an issue with mismatched App-ID classification between nodes of an HA pair. An IP-Port-Protocol application classification is now only performed for new sessions on the ingress node, instead of every node / router.
+------
+- **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism
+```
+  "datapath": {
+    "lockupDetectionEnabled": true/false
+  },
+```
+------
+- **I95-59677
+------
+- **I95-59745 Routers are stuck in the connected state:** Resolved an issue where the router would unnecessarily write to `yum.dnf` and `dnf.conf`, resulting in a race condition.
+
+
+
+
 ## Release 6.2.7-4-sts
 
 **Release Date:** October 3, 2024
