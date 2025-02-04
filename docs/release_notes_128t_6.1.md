@@ -45,6 +45,14 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.13-6-lts
+
+**Release Date:** February 4, 2025
+
+### Resolved Issues
+
+- **I95-59745 Routers are stuck in the connected state:** Resolved an issue where the router would unnecessarily write to `yum.dnf` and `dnf.conf`, resulting in a race condition.
+
 ## Release 6.1.12-12-lts
 
 **Release Date:** January 16, 2025
