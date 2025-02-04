@@ -15,6 +15,10 @@ Beginning with SSR version 6.1.4, DSCP Steering is enabled for BGP over SVR tunn
 - Configure a parent service that matches the traffic profile of the tunnel
 - Configure a child service that defines the `dscp-range` to steer
 
+:::info
+When configuring DSCP steering it is important to have all possible DSCP values (0-63) configured over the collective of child services that share a parent. Omiting a value, can lead to traffic which matches the parent service but whose DSCP is not covered by a child service failing with a "No ServicePaths available" error.
+:::
+
 #### Example Config
 
 Configure the `network-interface` for `dcsp-steering`:
