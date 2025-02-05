@@ -85,6 +85,10 @@ Use the following examples to generate a client certificate for use on the devic
 
 Use the `create certificate request client` command to generate the signing request.
 
+:::note
+Use of an IP-based `Subject Alternative Name` is not supported under Common Criteria. Use of this parameter will result in a non-conforming configuration. 
+:::
+
 ```
 admin@conductor-node-1.Conductor# create certificate request client radsec
 Country name (2 letter code): US
@@ -106,7 +110,6 @@ Organization unit (eg: engineering):
 Common name: dut1
 Email address:
 Subject Alternative Name - DNS (fully qualified domain name): dut1
-Subject Alternative Name - IP Address: 10.27.32.203
 
 Request successfully generated:
 

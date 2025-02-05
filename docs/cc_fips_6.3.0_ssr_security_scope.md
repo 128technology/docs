@@ -14,11 +14,11 @@ The SSR implements cryptographic functions allowing secure communication with ex
 
 All cryptographic algorithms are validated through the Cryptographic Algorithm Validation Program (CAVP) to ensure correct functioning.
 
-## SSH 
+## Syslog Over TLS 
 
 The SSR implements [Syslog over TLS](cc_fips_6.3.0_config_audit_event.md#configuring-syslog-over-tls) for secure communication between the SSR and external devices such as an audit server or remote management device. Communication between the SSR and external devices uses Port 6514. The SSR implements public-key based authentication between itself and other devices. The public keys are stored in key containers. 
 
-The SSR does not implement X.509 certificate-based authentication mechanisms. Once the SSH connection between the SSR and a remote management device is established, the user is authenticated with a username and password.
+The SSR implements X.509 certificate-based authentication mechanisms. 
 
 Both the Command Line Interface (CLI) and the Web Interface can be used to manage the SSR. They may be accessed by successfully authenticated Administrators locally from console, or remotely over SSH. Once authenticated, the Administrator uses the Conductor to manage one or more SSRs (routers). Management communication is also protected by SSH.
 

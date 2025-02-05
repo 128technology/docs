@@ -70,7 +70,9 @@ exit
 
 ### Set the Disk Full Action
 
-Common Criteria compliance does not permit the system to be operated without audit logging enabled. Configuring the `disk-full-action` as `halt` ensures that the system automatically shuts down when the disk has no free space remaining to write audit logs. 
+Common Criteria compliance does not permit the system to be operated without audit logging enabled. This requirement is met by configuring the `disk-full-action` as `halt` ensures that the SSR device will automatically shut down when the disk has no free space remaining to write audit logs. 
+
+The `halt` operation is not the default action for the SSR device, and must be configured to meet compliance.
 
 ```
 config
@@ -208,6 +210,8 @@ config
 
 ```
 
+Once set, any time a connection is lost between the SSR and the remote logging server, the SSR will automatically attempt to reconnect with the server. In a case where the server is unreachable, the device will shut down.
+
 ## Configuring Syslog Over TLS
 
 Syslog over TLS allows the secure transportation of system log messages from the syslog client to the syslog server. TLS uses certificates to authenticate and encrypt the communication.
@@ -219,6 +223,10 @@ Use the following examples to generate a client certificate for use on the devic
 #### 1. Generate the Signing Request
 
 Use the `create certificate request client` command to generate the signing request.
+
+:::note
+Use of an IP-based `Subject Alternative Name` is not supported under Common Criteria. Use of this parameter will result in a non-conforming configuration. 
+:::
 
 ```
 admin@conductor-node-1.Conductor# create certificate request client syslog
@@ -241,7 +249,6 @@ Organization unit (eg: engineering):
 Common name: dut1
 Email address:
 Subject Alternative Name - DNS (fully qualified domain name): dut1
-Subject Alternative Name - IP Address: 10.27.32.203
 
 Request successfully generated:
 
