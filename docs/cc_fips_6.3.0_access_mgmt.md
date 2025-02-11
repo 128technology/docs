@@ -142,7 +142,17 @@ The following example manually configures the key to the conductor node `192.168
 
 Imported webserver and X.509 certificates are validated against trusted certificates configured using `trusted-ca-certificate`. Use the following information to create, sign, and import the certificates to the webserver.
 
-### 1. Configure a Trusted Certificate
+### 1. Configure SSL Ciphers
+
+Ciphers for TLS connections are required on both the conductor and router.
+
+Use the following command to configure webserver ssl ciphers. Note that `<router_name>` is the name of the router or conductor.
+
+```
+configure authority router <router_name> system webserver ssl ciphers TLSv1.2+HIGH:TLSv1+AES:!aNULL:!DSS:!kDH:!PSK:!kECDH
+```
+
+### 2. Configure a Trusted Certificate
 
 Certificates are pasted in as a multi-line config. 
 
@@ -155,7 +165,7 @@ Enter plain for content (Press CTRL-D to finish):
 <paste-cert-file-content-here>
 ```
 
-### 2. Create the Signing Request
+### 3. Create the Signing Request
 
 Use the `create certificate request webserver` command to generate the certificate signing request.
 
@@ -183,7 +193,7 @@ EwJVUzERMA8GA1UEBwwIV2VzdGZvcmQxEDAOBgNVBAoMB0p1bmlwZXIxFDASBgNV
 -----END CERTIFICATE REQUEST-----
 ```
 
-### 3. Import the Certificate
+### 4. Import the Certificate
 
 After the certificate is signed and returned, it is imported into the SSR for use by the webserver using the `import certificate webserver`  command. This process validates the imported certificate against the trusted certificates entered using `trusted-ca-certificate`, and checks for insecure algorithms and invalid configurations. 
 

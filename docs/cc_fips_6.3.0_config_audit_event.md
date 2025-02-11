@@ -133,16 +133,6 @@ config
 For a detailed explanation of configuring the Monitoring Agent to handle audit events, refer to the [SSR Monitoring Agent](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_monitoring) documentation.
 :::
 
-#### On the syslog server:
-
-1. Generate a private/public key using the utility `ssh-keygen -t rsa -b 4096`.
-
-2. Open (or create if necessary) a known host file `/root/.ssh/known_hosts` and authorize the host; prepend the IP address of the host with the public key from the SSR `/etc/ssh/ssh_host_rsa_key.pub`:
-
-```
-192.168.1.14 ssh-rsa 
-AAAAB3NzaC1yc2EAAAADAQABAAABAQC4UZe/Q8jce6c02IfFM64UcSJ/IZu3GQNLuElbzsrVZHEVu3/EfNp10acbx1PqlhSxJSJQwXe1Q1vEq6bMR8/tZU3fa6NwCt8rgGs8BT8NQuVHKj5s2CAKtBqhMHQmtngddbEHAj1WJShe3GBr4Xou1uw6o4SEo+8EjO56L3lzSK60dXOx/vDiuDFsNNUjfqD9qSRuwsHPkzdX5s6P8XTYo4OlvMPRplnhEmgczxjGeMQSPBp+vHf6uMHNOKUQqLQsA0dSVKM1CNApXuMsy7HakP1oOn9eKX/uf4VofNfrOW90PrKNd+E9jUgGiiSVc5H8QbCVmO2KhKmGh4wraGa/
-```
 #### On the SSR
 
 1. Authorize the **server** public key. 
@@ -166,7 +156,7 @@ Refer to [Event Collector](https://www.juniper.net/documentation/us/en/software/
 
 ```toml
 [[outputs.syslog]]
-  address = "udp://<ip>:514"
+  address = "udp://127.20.20.20::1"
   default_sdid = "128T"
 ```
 
