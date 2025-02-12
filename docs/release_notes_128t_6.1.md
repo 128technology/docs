@@ -51,7 +51,7 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues
 
-- **I95-59745 Routers are stuck in the connected state:** Resolved an issue where the router would unnecessarily write to `yum.dnf` and `dnf.conf`, resulting in a race condition.
+- **I95-59745 Routers are stuck in the connected state:** Resolved an issue where the router would unnecessarily write to `yum.dnf` and `dnf.conf`, resulting in a race condition that prevented them from reaching the `running` state.
 
 ## Release 6.1.12-12-lts
 
