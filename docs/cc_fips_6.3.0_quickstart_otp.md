@@ -38,7 +38,7 @@ When a router configuration has been added to the conductor but the device has n
 
 ![QuickStart File Accepted](/img/intro_ztp_quickstart_client_3.png)
 
-After a couple minutes, this process completes and your SSR Router is fully configured.
+After a few minutes, this process completes and your SSR Router is fully configured.
 
 ![QuickStart Working](/img/intro_ztp_quickstart_client_4.png)
 

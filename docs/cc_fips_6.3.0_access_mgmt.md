@@ -269,6 +269,7 @@ The template file will be overwritten when newer versions of `128T` software are
 - The SSH login grace time is limited to waiting for one minute for a password to be entered.
 - SSH access is limited to users assigned to the `wheel` group.
 - When creating a user with SSH privileges from the UI, that user must be assigned to an admin user group.
+- The SSH client may be used with the `/usr/bin/openssh-fips/ssh` command. When this command is run, the client uses the default ssh client config from `/etc/ssh/ssh_config` with additional restrictions that are hard-coded into the `ssh-fips` client and server.
 
 ## Limiting Login Attempts
 

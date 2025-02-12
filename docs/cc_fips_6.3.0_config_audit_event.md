@@ -70,7 +70,7 @@ exit
 
 ### Set the Disk Full Action
 
-Common Criteria compliance does not permit the system to be operated without audit logging enabled. This requirement is met by configuring the `disk-full-action` as `halt` ensures that the SSR device will automatically shut down when the disk has no free space remaining to write audit logs. 
+Common Criteria compliance does not permit the system to be operated without audit logging enabled. To meet compliance, you must configure the `disk-full-action` as `halt`. This ensures that the SSR device automatically shuts down when the disk has no free space remaining to write audit logs. 
 
 The `halt` operation is not the default action for the SSR device, and must be configured to meet compliance.
 
@@ -382,8 +382,8 @@ Enter plain for content (Press CTRL-D to finish):
 The following configuration example will add a syslog server named `syslog` that will use the previously configured client certificate. 
 
 ```
-*admin@t327-dut1.cond# configure authority router cond system syslog server 192.168.1.100 6514
-*admin@t327-dut1.cond (server[ip-address=192.168.1.100][port=6514])# up
+*admin@t327-dut1.cond# configure authority router cond system syslog server
+*admin@t327-dut1.cond (server [syslog])# up
 *admin@t327-dut1.cond (syslog)# client-certificate-name syslog
 *admin@t327-dut1.cond (syslog)# protocol tls
 *admin@t327-dut1.cond (syslog)# ocsp strict
@@ -392,7 +392,7 @@ The following configuration example will add a syslog server named `syslog` that
 *admin@t327-dut1.cond (syslog)# top
 ```
 
-To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to `192.168.1.100:6514` over TLS.
+To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to the server `syslog` over TLS.
 
 ## Secure Audit Logs Transport 
 

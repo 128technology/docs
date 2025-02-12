@@ -15,7 +15,6 @@ The following configuration example will add a radius server named `radsec`
 
 ```
 admin@t327-dut1.cond# configure authority radius-server radsec
-admin@t327-dut1.cond (radius-server[name=radsec])# address 172.18.5.224
 admin@t327-dut1.cond (radius-server[name=radsec])# port 2083
 admin@t327-dut1.cond (radius-server[name=radsec])# protocol tls
 admin@t327-dut1.cond (radius-server[name=radsec])# account-creation manual
