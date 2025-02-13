@@ -47,7 +47,7 @@ This issue will be corrected in an upcoming release.
 
 ## Release 6.1.13-6-lts
 
-**Release Date:** February 4, 2025
+**Release Date:** February 14, 2025
 
 ### Resolved Issues
 
