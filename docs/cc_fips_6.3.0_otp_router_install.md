@@ -74,7 +74,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 1. Use the Up/Down keys to select the `OTP Install 128T Routing Software Serial Console` option. This is a supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
 
-  ![Serial Install Selection](/img/cc_fips_otp_serial.png)
+  ![Serial Install Selection](/img/cc_fips_otp_serial-6.3.0.png)
 
   Selecting the wrong type of console may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
@@ -90,7 +90,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
-  ![FIPS Parameter](/img/cc_fips_otp_serial2.png)
+  ![FIPS Parameter](/img/cc_fips_otp_serial2-6.3.0.png)
 
 4. Press **Enter** to start the install. 
 
