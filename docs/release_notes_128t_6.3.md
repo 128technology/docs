@@ -26,11 +26,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.3.4-7r2
 
-**Release Date:** February 13, 2025
+**Release Date:** February 14, 2025
 
 ### Resolved Issues:
 
-- **I95-60088 IDP engine using too much memory:** Resolved an issue introduced in 6.3.3; the new IDP engine allocates maximum memory on startup versus growing dynamically as needed. The default sizing on the SSR130 could result in memory threshold alarms as soon as IDP starts. The IDP engine size on the SSR130 has been reduced to decrease the overall memory usage.
+- **I95-60088 Memory Alarm on SSR130 when enabling IDP:** Resolved an issue introduced in 6.3.3; the new IDP engine allocates maximum memory on startup versus growing dynamically as needed. The default sizing on the SSR130 could result in memory threshold alarms as soon as IDP starts. The IDP engine size on the SSR130 has been reduced to decrease the overall memory usage.
 
 ## Release 6.3.3-40r2
 
