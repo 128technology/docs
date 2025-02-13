@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.3.4-7r2
+
+**Release Date:** February 13, 2025
+
+### Resolved Issues:
+
+- **I95-60088 IDP engine using too much memory:** Resolved an issue introduced in 6.3.3; the new IDP engine allocates maximum memory on startup versus growing dynamically as needed. The default sizing on the SSR130 could result in memory threshold alarms as soon as IDP starts. The IDP engine size on the SSR130 has been reduced to decrease the overall memory usage.
+
 ## Release 6.3.3-40r2
 
 **Release Date:** January 9, 2025
