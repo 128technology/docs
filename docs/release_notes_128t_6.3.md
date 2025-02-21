@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.3.4-7r2
 
-**Release Date:** February 14, 2025
+**Release Date:** February 21, 2025
 
 ### Resolved Issues:
 
