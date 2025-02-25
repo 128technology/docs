@@ -9,7 +9,12 @@ export const releases = [
   {
     version: '6.1.13',
     url: '/docs/release_notes_128t_6.1#release-6113-6-lts',
-    releaseDate: 'February 14, 2025',
+    releaseDate: 'February 26, 2025',
+  },  
+  {
+    version: '6.3.4',
+    url: '/docs/release_notes_128t_6.3#release-634-7r2',
+    releaseDate: 'February 21, 2025',
   },  
   {
     version: '6.2.8',
@@ -17,7 +22,7 @@ export const releases = [
     releaseDate: 'January 30, 2025',
   },  
   {
-    version: '5.6.17-1',
+    version: '5.6.17',
     url:'/docs/release_notes_128t_5.6#release-5617-1',
     releaseDate: 'January 30, 2025',
   },  
