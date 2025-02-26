@@ -105,6 +105,10 @@ Completed in 0.04 seconds
 
 In a high availability configuration, the default behavior is to perform a sequenced self-upgrade from the CLI. Executing the `request system software upgrade router <conductor-router-name>` from an HA conductor launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. When the upgrade is complete on the first node, you may run the command on the second node.  
 
+:::note
+When upgrading an HA conductor from a version earlier than 6.3.0, it is necessary to upgrade **both nodes** before the asset status will be available on the upgraded nodes. The salt master services on the new software are not started until both nodes have been upgraded.
+:::
+
 #### Other HA Considerations
 
 * If an HA pair is discovered to have a mismatched software state (image-based and package-based) an Alarm is reported. The software state must be the same for both nodes.
