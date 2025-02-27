@@ -817,9 +817,20 @@ exit
 #### Issues Fixed
 
 - **PLUGIN-2721** Resolve configuration removal after plugin downgrade
-- **WAN-2528** Improve tunnel startup during error scenarios
-- **MIST-136625** Cleanup stale journal parser processes
-- **PLUGIN-2891** Handle state retrievals for down tunnels
+
+  _**Resolution:**_ Increase plugin-support-files minimum dependency.
+
+- **WAN-2528** Improve tunnel startup
+
+  _**Resolution:**_ IPSec Controller handles restarts/upgrades/errors more gracefully.
+
+- **MIST-136625** Memory Increasing for IPSec Plugin
+
+  _**Resolution:**_ Properly cleanup journal command processes when they are no longer valid.
+
+- **PLUGIN-2891** Received 500 for tunnel status command
+
+  _**Resolution:**_ Handle missing state data for tunnels due to "down" state and return valid data.
 
 ### Release 4.0.1
 
