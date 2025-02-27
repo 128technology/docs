@@ -805,6 +805,22 @@ exit
 
 ## Release Notes
 
+### Release 4.1.0
+
+**Release Date:** Feb 27, 2025
+
+#### New Features and Improvements
+
+- **PLUGIN-2780** Support multiple algorithms per tunnel for IKE and Phase2 settings.
+- **PLUGIN-2782** Deprecate modp1024 algorithm that is less secure. Starting in IPSec 5.0; modp1024 algorithms will be removed completely.
+
+#### Issues Fixed
+
+- **PLUGIN-2721** Resolve on plugin downgrade config removal
+- **WAN-2528** Improve tunnel startup during error scenarios
+- **MIST-136625** Cleanup stale journal parser processes
+- **PLUGIN-2891** Handle state retrievals for down tunnels
+
 ### Release 4.0.1
 
 **Release Date:** Oct 31, 2024
