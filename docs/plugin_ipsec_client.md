@@ -816,7 +816,7 @@ exit
 
 #### Issues Fixed
 
-- **PLUGIN-2721** Resolve on plugin downgrade config removal
+- **PLUGIN-2721** Resolve configuration removal after plugin downgrade
 - **WAN-2528** Improve tunnel startup during error scenarios
 - **MIST-136625** Cleanup stale journal parser processes
 - **PLUGIN-2891** Handle state retrievals for down tunnels
