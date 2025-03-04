@@ -36,7 +36,6 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 | sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
 | up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before transitioning from down to up state |
-| use-proxy | boolean | default: false | Whether to use http/https proxy when sending probe |
 | proxy-settings | container | optional | Proxy settings if chosen to use proxy. See [Proxy Settings](#proxy-settings) for more information |
 
 * Example:
