@@ -129,7 +129,7 @@ exit
 | -------- | ------------------------------------- |
 | 2.3.0    | `http-probe-profile > proxy-settings` introduced |
 
-Proxy settings is used to specify the http proxy server to use when sending probe traffic.
+Proxy settings can be used to specify the http proxy server to use when sending probe traffic.
 
 ```
 router
@@ -151,7 +151,7 @@ exit
 
 | Name  | Constraints | Type    | Description |
 | --    | --          | --      | --          |
-| proxy-address | key | string | proxy server ip address, only http is supported currently, port number is optional |
+| proxy-address | key | ipv4-address | proxy server ip address |
 | proxy-port | optional | uint32 | proxy server port, if address is given, this port will be default to use port 80 |
 
 
