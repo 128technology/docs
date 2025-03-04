@@ -152,7 +152,7 @@ exit
 | Name  | Constraints | Type    | Description |
 | --    | --          | --      | --          |
 | proxy-address | key | ipv4-address | proxy server ip address |
-| proxy-port | optional | uint32 | proxy server port, if address is given, this port will be default to use port 80 |
+| proxy-port | optional | uint32 | Proxy server port. If an address is given, this port will default to port 80. |
 
 
 ### HTTP Probe Log Level
