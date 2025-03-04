@@ -151,7 +151,7 @@ exit
 
 | Name  | Constraints | Type    | Description |
 | --    | --          | --      | --          |
-| proxy-address | key | ipv4-address | proxy server ip address |
+| proxy-address | key | ipv4-address | Proxy server IP address. |
 | proxy-port | optional | uint32 | Proxy server port. If an address is given, this port will default to port 80. |
 
 
