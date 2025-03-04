@@ -36,7 +36,7 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 | sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
 | up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before transitioning from down to up state |
-| proxy-settings | container | optional | Proxy settings if chosen to use proxy. See [Proxy Settings](#proxy-settings) for more information |
+| proxy-settings | container | optional | Proxy settings if choosing to use proxy. See [Proxy Settings](#proxy-settings) for more information |
 
 * Example:
 ```config {9-14}
@@ -151,7 +151,7 @@ exit
 
 | Name  | Constraints | Type    | Description |
 | --    | --          | --      | --          |
-| proxy-address | key | string | proxy server address (ip/fqdn), only http is supported currently, port number is optional |
+| proxy-address | key | string | proxy server ip address, only http is supported currently, port number is optional |
 | proxy-port | optional | uint32 | proxy server port, if address is given, this port will be default to use port 80 |
 
 
