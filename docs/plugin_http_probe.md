@@ -476,7 +476,7 @@ Completed in 0.21 seconds
 **Release Date:** March 4, 2025
 
 #### New Features and Improvements
-- **PLUGIN-2505** Http Probe Proxy Support
+- **PLUGIN-2505** HTTP Probe Proxy Support
 
 ### Release 2.2.0
 
