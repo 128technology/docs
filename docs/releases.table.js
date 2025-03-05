@@ -7,6 +7,26 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 // ----------------------------------------------------------------------------
 export const releases = [
   {
+    version: '6.1.13',
+    url: '/docs/release_notes_128t_6.1#release-6113-7-lts',
+    releaseDate: 'February 25, 2025',
+  },  
+  {
+    version: '6.3.4',
+    url: '/docs/release_notes_128t_6.3#release-634-7r2',
+    releaseDate: 'February 21, 2025',
+  },  
+  {
+    version: '6.2.8',
+    url: '/docs/release_notes_128t_6.2#release-628-10-lts',
+    releaseDate: 'January 30, 2025',
+  },  
+  {
+    version: '5.6.17',
+    url:'/docs/release_notes_128t_5.6#release-5617-1',
+    releaseDate: 'January 30, 2025',
+  },  
+  {
     version: '6.1.12',
     url: '/docs/release_notes_128t_6.1#release-6112-12-lts',
     releaseDate: 'January 16, 2025',

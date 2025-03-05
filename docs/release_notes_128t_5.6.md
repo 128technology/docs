@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.6.17-1
+
+**Release Date:** January 30, 2025
+
+### Resolved Issues
+
+This release provides updates for AWS and Azure cloud deployments.
+
 ## Release 5.6.16-16
 
 **Release Date:** November 25, 2024

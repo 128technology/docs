@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.3.4-7r2
+
+**Release Date:** February 21, 2025
+
+### Resolved Issues:
+
+- **I95-60088 Memory Alarm on SSR130 when enabling IDP:** Resolved an issue introduced in 6.3.3; the new IDP engine allocates maximum memory on startup versus growing dynamically as needed. The default sizing on the SSR130 could result in memory threshold alarms as soon as IDP starts. The IDP engine size on the SSR130 has been reduced to decrease the overall memory usage.
+
 ## Release 6.3.3-40r2
 
 **Release Date:** January 9, 2025
@@ -106,7 +114,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-59264 BGP community data model regex incorrect:** Resolved an issue with the validation pattern in the routing policy for extended communities. 
 ------
--  **I95-59537, I95-59551 Apply `ingress-source-nat-pool` to local breakout sessions:** Resolved an issue where `ingress-source-nat-pool`  was only applied to SVR sessions. The `ingress-source-nat-pool` has been updated with the `applies-to-local-breakout` flag.
+- **I95-59537, I95-59551 Apply `ingress-source-nat-pool` to local breakout sessions:** Resolved an issue where `ingress-source-nat-pool`  was only applied to SVR sessions. The `ingress-source-nat-pool` has been updated with the `applies-to-local-breakout` flag.
 
 ### Caveats
 
