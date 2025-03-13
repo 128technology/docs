@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dita>
+<topic id="ipsec-client-plugin">
+  <title>IPsec Client plugin</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the SSR. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the SSR will failover between them. This is accomplished by performing a <xref href='plugin_intro.md' format='dita' scope='local' xtrf='#service-function-chaining'>Service Function Chain (SFC)</xref> with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your SSR.</p>
+<p>The instructions for installing and managing the plugin can be found <xref href='plugin_intro.md' format='dita' scope='local' xtrf='#installation-and-management'>here</xref>.</p>
+  </body>
+</topic>
+<topic id="configuration">
+  <title>Configuration</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The IPsec plugin setup has the following key parts to the configuration.
+* ipsec-profile describing the mechanism with which to connect to the server.
+* ipsec-client represent the remote endpoints or server with which the ipsec client communicates.
+* service-route's to route the traffic through the tunnels</p>
+  </body>
+</topic>
+<topic id="profiles">
+  <title>Profiles</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The router > ipsec-profile's are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint remotes. The table below represents the most common configuration elements for a valid ipsec profile.</p>
+<p>The above configuration example represents a typical profile used for a IPSec provider such as Zscaler. Please tune the settings to match the settings recommended by your provider.</p>
+<p>This plugin can only connect to IPsec endpoints that support pre-shared key authentication.</p>
+<p>The custom-option allows the user to configure additional obscure libreswan options that are not exposed via the profile and remote configuration.</p>
+<p>:::warning
+The custom-option is added to the libreswan config file; any invalid option could prevent the application from starting up.
+:::</p>
+  </body>
+</topic>
+<topic id="clients">
+  <title>Clients</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Clients are a collection of remote endpoints which can be used for connection and failover purposes.</p>
+<p>The main config properties of a remote endpoint are as follows.</p>
+<p>Example:</p>
+<p>Only one ipsec-client can be configured per node, but two remotes can be configured per client.</p>
+<p>:::warning
+The ipsec-client > name cannot start with ipsec or mast. See notes <xref href='' format='dita' scope='local' xtrf='#release-340'>here</xref>.
+:::</p>
+<p>Each remote represents a unique tunnel destination and can be used to route traffic in/out of the tunnels. Typically each node has two tunnels to act as primary and backup.</p>
+  </body>
+</topic>
+<topic id="tunnel-monitoring">
+  <title>Tunnel Monitoring</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Tunnel monitoring is a way to monitor the health of individual tunnels and have them automatically restart if they become unhealthy. An ICMP ping is used for the traffic. For each remote, you can specify a destination, interval, timeout, and the number of max retries for each interval.</p>
+  </body>
+</topic>
+<topic id="configuring-services-for-tunnel-traffic">
+  <title>Configuring services for tunnel traffic</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The user can define up to four ipsec-client > remote endpoints per node. In addition, the user must also define the necessary service and service-routes to route the tunnel traffic over the desired WAN interface.</p>
+<p>The following example shows a configuration for capturing the egress tunnel traffic and allows the ipsec tenant as defined in router > ipsec-client > tenant config above.</p>
+<p>The <remote-address-1> and <remote-address-2> represent the node > ipsec-client > remote > host address. The ipsec tenant is allowed as per the tenant defined under ipsec-client > tenant. The user can split the tunnels into separate services per the routing requirements.</p>
+<p>Various features introduced as part of the <xref href='' format='dita' scope='local' xtrf='#release-360'>3.6.0</xref> version require the user to enable session records on the egress tunnel services such as ipsec-tunnel shown above. The following sample config shows the recommend profile that can be configured and associated with the egress tunnel service.</p>
+<p>Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.</p>
+  </body>
+</topic>
+<topic id="directing-traffic-through-the-tunnel">
+  <title>Directing traffic through the tunnel</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The user can leverage standard SSR service and service-route to direct intended traffic over the ipsec tunnel. In the example below, all guest internet traffic is sent over the ipsec tunnel for break and inspect. This can be accomplished as follows:</p>
+<p>The service-route > next-hop > interface must point to the corresponding ipsec-client > remote > name-intf to route the traffic through the tunnel. All available SSR routing techniques including using vectors, service-policy, etc., can be leveraged to define how the untrusted traffic is sent over the tunnels, and how to route the traffic. The SSR routes the packets through the appropriate IPSec tunnels and manages the failover as per the policy. On the return path, the encrypted traffic is processed, decrypted, and send back to the client that originated the session.</p>
+  </body>
+</topic>
+<topic id="redundancy">
+  <title>Redundancy</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>By default both nodes of an HA pair will create and maintain the tunnels configured for them.</p>
+<p>This mode of operation can be configured on a per router basis under router > ipsec.</p>
+  </body>
+</topic>
+<topic id="thirdparty-software-licenses">
+  <title>Thirdparty Software & Licenses</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>Libreswan v3.28-1.el7_5 (GNU GPLv2)</li></ul>
+  </body>
+</topic>
+<topic id="data-model">
+  <title>Data Model</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>If the data model doesn’t appear in the PCLI or GUI, make sure that you have restarted the SSR service.</p>
+  </body>
+</topic>
+<topic id="logging">
+  <title>Logging</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The /var/log/128technology/persistentDataManager.log file at trace level will hold whether the configuration generation was run as well as output and return code.
+The /var/log/128technology/automatedProvisioner.log file at trace level will hold whether the pillar generation was run as well as output and return code.
+Configuration and pillar generation logs can be found on the conductor under /var/log/128technology/plugins/ipsec-client-config-generation.log and /var/log/128technology/plugins/ipsec-client-pillar-generation.log respectively.</p>
+  </body>
+</topic>
+<topic id="salt">
+  <title>Salt</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Salt status can be found on the conductor by utilizing the PCLI’s show assets and show assets <asset-id> commands.</p>
+  </body>
+</topic>
+<topic id="pcli-enhancements">
+  <title>PCLI Enhancements</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the show device-interface command as well as the show plugin state command.</p>
+<p>Example output for a healthy tunnel:</p>
+<p>Example output for a tunnel that is down:</p>
+<p>If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring state is included in the pcli commands.</p>
+  </body>
+</topic>
+<topic id="metrics">
+  <title>Metrics</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Non-persistent metrics were added for the ingress/egress packets/bytes of the tunnels.</p>
+  </body>
+</topic>
+<topic id="commands">
+  <title>Commands</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>The restart ipsec remote command can be used to restart an individual IPSec tunnel via the conductor PCLI and UI.</p>
+<p>From the conductor UI, the command can be accessed as shown in the screenshot below.</p>
+<p></p>
+  </body>
+</topic>
+<topic id="systemd-services">
+  <title>Systemd Services</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>To check the status of the IPsec client service on the router, you can run show system services which will show all SSR related services running on the specified node. The one for this plugin is named 128t-ipsec.</p>
+<p>To verify that the services are running properly on the SSR:
+* systemctl status 128t-ipsec@<client>.service</p>
+  </body>
+</topic>
+<topic id="failover-alarms">
+  <title>Failover Alarms</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>If a tunnel goes down, we set the corresponding ingress KNI to be operationally down. An alarm will be created when this happens.</p>
+<p>Example output when the tunnel for rem1 goes down:</p>
+  </body>
+</topic>
+<topic id="generated-ssr-configuration">
+  <title>Generated SSR Configuration</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>A KNI per remote is created with the name of the remote and a single egress KNI is created with the name of the ipsec-client.</p>
+  </body>
+</topic>
+<topic id="user-specific-ssr-configuration">
+  <title>User-Specific SSR Configuration</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>To allow the maximum flexibility on getting the traffic into the plugin's network namespace and getting the traffic out, we rely on the user to configure those means (usually through services and service routes).</p>
+<p>You will need to have the IPsec endpoint bound traffic sent into the KNIs with the names of the remotes. You can use builtin SSR failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPsec endpoint after being encrypted. All of this encrypted traffic will be assigned to the tenant configured under ipsec-client.</p>
+  </body>
+</topic>
+<topic id="complete-example-configuration">
+  <title>Complete Example Configuration</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Below is an example of a complete, but minimal configuration entered by the user.</p>
+<p>:::warning
+This example configuration is good to understand all of the concepts but should not be used on a system as is.
+:::</p>
+<p>Upon commit, the plugin will generate other configuration as shown below:</p>
+  </body>
+</topic>
+<topic id="release-4-1-0">
+  <title>Release 4.1.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Feb 27, 2025</p>
+<ul><li>PLUGIN-2780 Support multiple algorithms per tunnel for IKE and Phase2 settings.</li><li>PLUGIN-2782 Deprecate modp1024 algorithm that is less secure. Starting in IPSec 5.0; modp1024 algorithms will be removed completely.</li></ul>
+<ul><li>PLUGIN-2721 Resolve configuration removal after plugin downgrade</li></ul>
+<p>Resolution: Increase plugin-support-files minimum dependency.</p>
+<ul><li>WAN-2528 Improve tunnel startup</li></ul>
+<p>Resolution: IPSec Controller handles restarts/upgrades/errors more gracefully.</p>
+<ul><li>MIST-136625 Memory Increasing for IPSec Plugin</li></ul>
+<p>Resolution: Properly cleanup journal command processes when they are no longer valid.</p>
+<ul><li>PLUGIN-2891 Received 500 for tunnel status command</li></ul>
+<p>Resolution: Handle missing state data for tunnels due to "down" state and return valid data.</p>
+  </body>
+</topic>
+<topic id="release-4-0-1">
+  <title>Release 4.0.1</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Oct 31, 2024</p>
+<ul><li>PLUGIN-2721 Resolve on plugin downgrade config removal</li></ul>
+  </body>
+</topic>
+<topic id="release-4-0-0">
+  <title>Release 4.0.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Image based install and upgrade (IBU) support for SSR 6.3.0.</p>
+<p>Release Date: Sep 30, 2024</p>
+  </body>
+</topic>
+<topic id="release-3-6-2">
+  <title>Release 3.6.2</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Aug 7th, 2024</p>
+<p>Router Version 128T-ipsec-2.4.4-2</p>
+<ul><li>WAN-3229 IPSec tunnels can restart due to unrelated config changes.</li></ul>
+<p>Resolution: IPSec config handler manages the config changes more gracefully to avoid spurious restarts.</p>
+<ul><li>WAN-3334 IPSec tunnels can sometimes fail to start on boot.</li></ul>
+<p>Resolution: The pluto runtime directories are created dynamically to avoid certain types of startup failures.</p>
+<ul><li>PLUGIN-2490 IPSec plugin validation shows incorrect warning about empty local-id</li></ul>
+<p>Resolution: The validation logic was made more robust to better handle cases for empty and existing configuration.</p>
+<ul><li>PLUGIN-2550 IPSec plugin causing monitoring script to get stuck forever</li></ul>
+<p>Resolution: The DNS resolution from IPSec namespace enforces better controls and limits to avoid a startup race condition due to which the monitoring script was getting stuck forever. The graceful handling would prevent other scripts from getting stuck indefinetly.</p>
+  </body>
+</topic>
+<topic id="release-3-6-1">
+  <title>Release 3.6.1</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: May 29, 2024</p>
+<p>Router Version 128T-ipsec-2.4.3-2</p>
+<ul><li>PLUGIN-2232 Configured and enabled tunnels remain down.</li></ul>
+<p>Resolution: File corruption is now handled more gracefully, preventing IPSEC tunnels from going down.</p>
+<ul><li>PLUGIN-2197 DNS resolution failure causes plugin to become stuck.</li></ul>
+<p>Resolution: When FQDNs are defined in the ipsec-client > remote > host fields, the plugin will not start the tunnels if the FQDNs of the tunnels are unresolvable.</p>
+<ul><li>WAN-1848 Tunnel monitoring failures did not cause traffic failover to other tunnels.</li></ul>
+<p>Resolution: If tunnel monitoring is configured, the tunnel monitoring status will be tied into the ingress KNI's operational status which will cause traffic to failover.</p>
+<ul><li>WAN-2648 Excessive logging in ipsec-controller journal.</li></ul>
+<p>Resolution: Reduced logging to provide a simplified journal.</p>
+<ul><li>WAN-2994 Port 500 sessions were stuck even with session deletion feature.</li></ul>
+<p>Resolution: Delete the port 500 and 4500 sessions whenever the tunnel does not come up.</p>
+  </body>
+</topic>
+<topic id="release-3-6-0">
+  <title>Release 3.6.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Oct 13, 2023</p>
+<p>Router Version 128T-ipsec-2.4.0-4</p>
+<ul><li>WAN-2815 Improve the memory and cpu consumption of the IPsec plugin on the router</li></ul>
+<p>For the IPsec plugin, several individual processes were consolidated into a single controller process providing an overall reduction in CPU and memory when the plugin is enabled on an SSR.</p>
+<ul><li>I95-50410 SSR VPN to Azure interface not working due to a stuck session</li></ul>
+<p>The new version adds support for automatically detecting egress tunnel sessions that are not able to communicate with the IPsec remote server anymore. The recovery happens in the form of automatically deleting those sessions allowing new egress tunnel sessions to be formed. Please refer to the <xref href='' format='dita' scope='local' xtrf='#session-record'>session-record</xref> section on how to enable this new feature.</p>
+<ul><li>WAN-2361 Include the egress wan interface being used for ipsec tunnel for better tunnel insights</li></ul>
+<p>Please refer to the <xref href='' format='dita' scope='local' xtrf='#session-record'>session-record</xref> section on how to enable this new feature.</p>
+<ul><li>WAN-1847 Support for custom source-ip for tunnel-monitoring</li></ul>
+<p>The new version simplifies the configuration for specifying a source ip to be used for the tunnel-monitoring feature.</p>
+<ul><li>PLUGIN-1999 MTU and auto-mss adjustment not working for IPsec tunnel KNIs.</li></ul>
+<p>Resolution: The mtu configuration is not correctly reflected on the tunnel KNIs as well as the underlying libreswan config.</p>
+<ul><li>I95-49643 Tunnel has been flapping constantly and dropping traffic.</li></ul>
+<p>Resolution: When dead-peer detection triggers on an IPsec connection using multiple left and/or right subnets the tunnels will be automatically restarted to avoid an issue encountered with the third-party code.</p>
+  </body>
+</topic>
+<topic id="release-3-5-0">
+  <title>Release 3.5.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Mar 17, 2023</p>
+<p>Router Version 128T-ipsec-2.3.0-4</p>
+<ul><li>WAN-1298 Upgrade libreswan version</li></ul>
+<p>Upgraded from 3.23-5 to 3.28-1.</p>
+<ul><li>PLUGIN-1981 Enhance the plugin state output for better insights into the tunnels</li></ul>
+<p>The plugin now supports more helpful plugin state output such as:
+* Down reason
+* Chosen ike proposal
+* Chosen ipsec proposal
+* More accurate uptime
+* More accurate ingress/egress bytes/packets
+* Ike version</p>
+<p>Example output can be found in the <xref href='' format='dita' scope='local' xtrf='#pcli-enhancements'>PCLI Enhancements</xref> section.</p>
+<ul><li>PLUGIN-1911 Support an active-standby HA mode</li></ul>
+<p>The plugin now supports the redundancy-enabled <xref href='' format='dita' scope='local' xtrf='#redundancy'>configuration option</xref>. This ensures that tunnels are being created by only one node at a time. The default behavior remains active-active.</p>
+<ul><li>PLUGIN-1913 Add metrics for tunnel statistics</li></ul>
+<p>The plugin now supports non-persisted metrics for tunnels. More details and examples can be found in the <xref href='' format='dita' scope='local' xtrf='#metrics'>Metrics</xref> section.</p>
+<ul><li>PLUGIN-1996 WAN Assurance 1.0 will display conductor managed ipsec tunnels</li></ul>
+<p>When using the 128T-ipsec-client and 128T-mist-wan-assurance plugins together, ipsec tunnel details will show up in the Mist UI.</p>
+<ul><li>PLUGIN-1999 Tunnels failed to come up because of unresolvable DNS during startup</li></ul>
+<p>Resolution: The salt application no longer requires DNS to generate libreswan configuration.</p>
+<ul><li>PLUGIN-1906 DNS Proxy services were not being used for ipsec hostname resolution</li></ul>
+<p>Resolution The plugin now automatically adds the configured ipsec tenant to dns-proxy services.</p>
+<ul><li>PLUGIN-1782 Removing destinations from tunnel monitoring config causes invalid configuration</li></ul>
+<p>Resolution The configuration validation now accepts this configuration flow</p>
+  </body>
+</topic>
+<topic id="release-3-4-1">
+  <title>Release 3.4.1</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>A bug fix release that is only compatible with SSR < 6.3.</p>
+<p>Release Date: Dec 11, 2024</p>
+<p>Router Version 128T-ipsec-2.2.5-2</p>
+<ul><li>PLUGIN-2833 Tunnels can flap due to rekey when connecting to some servers.</li></ul>
+<p>Resolution: Release ipsec client with libreswan-3.23 compatability that is known to not have rekeying issues with some servers.</p>
+<ul><li>WAN-3229 IPSec tunnels can restart due to unrelated config changes.</li></ul>
+<p>Resolution: IPSec config handler manages the config changes more gracefully to avoid spurious restarts.</p>
+  </body>
+</topic>
+<topic id="release-3-4-0">
+  <title>Release 3.4.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Jul 13, 2022</p>
+<p>Router Version 128T-ipsec-2.2.4-2</p>
+<ul><li>PLUGIN-1720 Added support for new ciphers for Phase-1 and Phase-2 security</li></ul>
+<p>The plugin now support aes-256-gcm, dh-20, sha512 and no-auth encryption schemes.</p>
+<ul><li>PLUGIN-880 IPSec client connection is not initiated for certain config combinations</li></ul>
+<p>Resolution: The ipsec client names beginning with ipsec and mast are not supported by libreswan. As part of the fix, a new config rule was added to enforce this requirement.</p>
+<ul><li>PLUGIN-1807 IPSec health monitoring configuration does not report correct status</li></ul>
+<p>Resolution: The monitoring scripts were writing data to a non-persistent path resulting in the failure across reboots. The state directory will not be automatically re-generated on system reboots.</p>
+<ul><li>PLUGIN-1810 Trace logging in configuration results in IPSec failures</li></ul>
+<p>Resolution: Trace level logging is now converted appropriately for IPSec configuration to prevent underlying failures.</p>
+  </body>
+</topic>
+<topic id="release-3-3-1">
+  <title>Release 3.3.1</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: May 25, 2022</p>
+<p>Router Version 128T-ipsec-2.2.2-1</p>
+<ul><li>PLUGIN-1730 Invalid libreswan configuration was being generated when multiple local or remote subnets were configured.</li></ul>
+<p>Resolution The issue with the libreswan configuration generation has been resolved.</p>
+  </body>
+</topic>
+<topic id="release-3-3-0">
+  <title>Release 3.3.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <p>Release Date: Apr 27, 2022</p>
+<ul><li>PLUGIN-630 Raise the number of supported IPSec client tunnels from 2 to 4</li></ul>
+<p>The plugin now supports up to 4 IPSec tunnels per node.</p>
+<ul><li>PLUGIN-1641 Optimize the initial IPSec environment setup</li></ul>
+<p>The majority of the IPSec config and environment management is performed locally on the router thereby minimizing the interaction with salt states.</p>
+<ul><li>PLUGIN-1533 Create a command to restart an individual tunnel</li></ul>
+<p>A new command was added to allow the user to restart an individual tunnel. More details can be found in the <xref href='' format='dita' scope='local' xtrf='#commands'>commands section</xref></p>
+<ul><li>PLUGIN-1532 Enable additional configuration options for IPSec tunnels.</li></ul>
+<p>The encapsulation and remote-peer-type options are now available for configuration.</p>
+<ul><li>PLUGIN-1554 Collect ipsec-client plugin data as part of tech support info</li></ul>
+<p>The detailed tech support info bundle will now include the necessary logs and data for troubleshooting ipsec-client plugin related problems.</p>
+<ul><li>PLUGIN-1598 - Support custom options for obscure libreswan config fields</li></ul>
+<p>A new config option has been added to enable libreswan features that are not made available as first class configuration.</p>
+<ul><li>PLUGIN-1591 Add cpu, memory, and  status tracking for ipsec services.</li></ul>
+<p>The system will now track the cpu, memory and usage information for various IPSec client related processes.</p>
+<ul><li>PLUGIN-1628 Incorrect network-script path was being used in the auto generated device-interface configuration</li></ul>
+<p>Resolution The auto configuration was updated to use the correct script path.</p>
+<ul><li>PLUGIN-1610 The IPSec environment setup can fail on first time plugin install</li></ul>
+<p>Resolution The salt states were improved to have better interdependencies to avoid the first time boot failure.</p>
+  </body>
+</topic>
+<topic id="release-3-2-0">
+  <title>Release 3.2.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-1509 Ability to configure tunnel monitors</li></ul>
+<p>The feature adds support for configuring tunnel monitors using ping. See <xref href='' format='dita' scope='local' xtrf='#tunnel-monitoring'>the tunnel monitoring section</xref> for more details.</p>
+<ul><li>PLUGIN-1389 Corrupt encryption database caused tunnels to not come up.</li></ul>
+<p>Resolution The service on the router will clean up these database files on startup.</p>
+<ul><li>PLUGIN-1467 Configuring aes_gcm256 for phase2-encryption resulted in invalid libreswan configuration.</li></ul>
+<p>Resolution The libreswan config generation will generate valid configuration for aes_gcm256.</p>
+  </body>
+</topic>
+<topic id="release-3-1-3">
+  <title>Release 3.1.3</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-1480 IPSec tunnels were removed from all previously configured routers after config commit</li></ul>
+<p>Resolution: The config generation logic for the plugin will handle config with long lines correctly</p>
+  </body>
+</topic>
+<topic id="release-2-2-0-3-1-0">
+  <title>Release 2.2.0, 3.1.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-1289 Ability to provision custom MSS on the remote tunnel interfaces</li></ul>
+<p>The feature adds support for configuring a custom MSS value on the remote IPSec tunnel interface. The new configuration can be found under router > node > ipsec-client > remote > enforced-mss. The configuration follows the same format as the <xref href='config_reference_guide.md' format='dita' scope='local' xtrf='#network-interface'>network-interface > enforced-mss</xref>.</p>
+  </body>
+</topic>
+<topic id="release-1-0-7-2-0-7-2-1-0-3-0-2">
+  <title>Release 1.0.7, 2.0.7, 2.1.0, 3.0.2</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-1092 IPSec left and right subnet configuration does not always work correctly</li></ul>
+<p>Resolution: The non-default left and right subnet configuration is correctly translated to corresponding libreswan configuration.</p>
+<ul><li>PLUGIN-1103 IPSec remote host does not appear as link on the GUI</li></ul>
+<p>Resolution: The GUI presentation model was updated to include the missing key field.</p>
+  </body>
+</topic>
+<topic id="release-3-0-1">
+  <title>Release 3.0.1</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-1092 Added fix for local and remote subnet configuration option to allow a single value or a list of values.</li></ul>
+  </body>
+</topic>
+<topic id="release-3-0-0">
+  <title>Release 3.0.0</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-768 Support the IPSec client plugin in SSR versions 5.1.0 and greater.</li><li>PLUGIN-611 Added support for plugin state. Plugin state information can be accessed on the PCLI using show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-ipsec-client</li></ul>
+  </body>
+</topic>
+<topic id="release-1-0-6-2-0-6">
+  <title>Release 1.0.6, 2.0.6</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-1057 Ensure all critical IPsec client directories are created during installation of the plugin.</li><li>PLUGIN-1053 Added an inactive IPsec client plugin state to allow seamless migration from zscaler. The inactive state is achieved by excluding ipsec-client from the configuration.</li><li>PLUGIN-1046 Provide IPsec client auto-upgrade capability while crossing the SSR version 4.3.0 boundary.</li></ul>
+  </body>
+</topic>
+<topic id="release-1-0-5-2-0-5">
+  <title>Release 1.0.5, 2.0.5</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-994 The ipsec-client > remote-id configuration is not being used correctly when generating the libreswan config.</li></ul>
+  </body>
+</topic>
+<topic id="release-1-0-4-2-0-4">
+  <title>Release 1.0.4, 2.0.4</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-384 Added an MTU configuration option to the ipsec profile.</li><li>PLUGIN-333 The plugin-network ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.</li><li>PLUGIN-336 Using the vector-name configuration option would generate invalid configuration.</li><li>PLUGIN-400 Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.</li></ul>
+  </body>
+</topic>
+<topic id="release-1-0-1-2-0-1">
+  <title>Release 1.0.1, 2.0.1</title>
+  <shortdesc></shortdesc>
+  <body>
+    <ul><li>PLUGIN-47 Created generic IPsec client plugin to provide connectivity to remote ipsec endpoints. This version supports a single client with up to two remote endpoints.</li></ul>
+  </body>
+</topic>
+</dita>
