@@ -96,3 +96,7 @@ Report the client lease information when SSR acts as DHCP server to MIST cloud.
  - **WAN-3649 Certain tenant/service changes can go undetected in the policy access feature**
 
     _**Resolution:**_ Improve the matching nad hashing scheme for the feature to cover all tenants and service style configurations.
+
+  - **WAN-3847: unrelease mist agent command rename**
+
+    _**Resolution:**_ To avoid a bug in the web server proxy code, the `unrelease mist agent` command has been renamed to `unrelease-mist-agent`. The behavior and functionality of the command remains the same.
