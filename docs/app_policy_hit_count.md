@@ -78,7 +78,7 @@ exit
 
 The cleanup of expired counters runs automatically every 30 minutes. However, in some situations it may be necessary to manually clear hit count entries. In this situation the following command is available:.
 
-clear application-policy-hit-counts [force] [node <node>] {router <router> | resource-group <resource-group>}
+`clear application-policy-hit-counts [force] [node <node>] {router <router> | resource-group <resource-group>}`
 
 This command manually triggers the cleanup process. The execution does not change or prevent the scheduled cleanup run. However, executing the command twice will move cleanup forward by an hour and fully clear the policy hit count metrics.
 

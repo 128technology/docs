@@ -235,6 +235,7 @@ module.exports = {
           "concepts_appid",
           "config_app_ident",
           "how_to_use_app_summary",
+          "app_policy_hit_count",
         ],
       },
       {
@@ -316,6 +317,7 @@ module.exports = {
           "sec_hardening_guidelines",
           "sec-usb-security",
           "sec-disable-console-output",
+          "cert_based_sec_encrypt",
         ],
       },
       {
@@ -423,6 +425,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.0",
           "release_notes_128t_6.3",
           "release_notes_128t_6.2",
           "release_notes_128t_6.1",
