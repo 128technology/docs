@@ -33,9 +33,9 @@ ODM, virtualized, or other non-Juniper hardware platforms cannot use self-signed
 
 ### Certificate Security
 
-The Certificate Revocation List (CRL) Manager handles the discovery, fetching, and periodic updates to CRLs. From this process a list of all known revoked certificates from all CRL sources is created the master list is published to disk.
+The Certificate Revocation List (CRL) Manager handles the discovery, fetching, and periodic updates to CRLs. From this process a list of all known revoked certificates from all CRL sources is created, and the master list is published to disk.
 
-The following list outlines certificate security.
+The following are some details of certificate security.
 
 - The Trusted Platform Module (TPM) stores the private key of the base certificate. The certificate and any keys are not included in any configuration.
 
@@ -55,7 +55,7 @@ While this document refers to the use of Elliptic Curve certificates and Ellipti
 
 Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs using the configuration commands and parameters provided in Configuration Commands and Parameters. These parameters generate a list of all known valid and revoked certificates from all CRL sources and saves this information to disk. The CRL configuration parameters include:
 
-**There do not seem to be any commands directly associated with creating a CRL other than certificate-revocation url and polling-interval. If there are others, please provide pointers.**
+**There does not seem to be any commands directly associated with creating a CRL other than certificate-revocation url and polling-interval. If there are others, please provide pointers.**
 
 ## Installing Certificates
 
@@ -84,7 +84,7 @@ The router periodically checks the Certificate Revocation List (CRL) from existi
 
 ## Peer Authentication
 
-Peer validation is done once. When a certificate is received from a peer on multiple peer paths a cached validation response is used. Validation is accomplished by verifying the routerID of its peer matches that of the certificate.
+Peer validation is done once. When a certificate is received from a peer on multiple peer paths, a cached validation response is used. Validation is accomplished by verifying the routerID of its peer matches that of the certificate.
 
 The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
 
@@ -100,17 +100,17 @@ If a peer sends BFD with Key Request to a peer for which there is no valid key a
 The peer continues to resend requests at periodic intervals as defined in the configuration setting `authority > security-key-management > peer-key-retransmit-interval`. If there is no response after the time defined by `authority > security-key-management > peer-key-timeout`, the peer path is declared invalid and removed from service. Once the peer is taken out of service due to key timeout, it will continue to send rekey attempts at the `peer-key-timeout intervals`, or upon interface state change.
 
 | Key Type | Lifetime | Use |
-|
-| Mist Certificate	10 years	ZTP Onboarding and Authentication
-| Key Encryption	15 years	Secure Boot
-| X.509 Certificate	10 years	Used for generating ECDH Peer Keys
-| Peer Key	rekey-interval configuration	Metadata Encryption
-| Payload Key	rekey-interval configuration	Payload Encryption
-| Software Access Token	Active Contract	Access to SSR software repositories
+| --- | --- | --- |
+| Mist Certificate | 10 years | ZTP Onboarding and Authentication |
+| Key Encryption | 15 years | Secure Boot |
+| X.509 Certificate	| 10 years | Used for generating ECDH Peer Keys |
+| Peer Key | rekey-interval configuration | Metadata Encryption |
+| Payload Key | rekey-interval configuration | Payload Encryption |
+| Software Access | Token | Active Contract	Access to SSR software repositories |
 
 ## High Availability
 
-Each node of an HA pair manages its own unique certificate - certificates are not shared between nodes. Each node manages their own unique connection to its peers.
+Each node of an HA pair manages its own unique certificate - certificates are not shared between nodes. Each node manages its own unique connection to its peers.
 
 When two nodes are configured as a redundant pair, each of the keys need to be exchanged between nodes. This is done to avoid rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over a SSH connection.
 
@@ -119,9 +119,9 @@ When two nodes are configured as a redundant pair, each of the keys need to be e
 
 ### PCLI commands
 
-- `show certificate` - show basic certificate information
-- `show certificate detail` - show all OpenSSL details about the certificate
-- `show certificate crl` - shows basic information about the CRL (including source)
+- `show certificate` - Show basic certificate information
+- `show certificate detail` - Show all OpenSSL details about the certificate
+- `show certificate crl` - Show basic information about the CRL (including source)
 
 ### Audit Events/Logging
 
@@ -132,43 +132,43 @@ Audit events and logs will be added whenever certain events take place, both in 
 
 ### Configuration Commands and Parameters
 
-enhanced-security-key-management
+**`enhanced-security-key-management`**
 
 - authority > enhanced-security-key-management
 - Boolean, default=false. Flag for using the security key management capabilities. Restart of the entire authority is required if enabled post deployment.
 
-security-key-management
+**`security-key-management`**
 
 - authority > security-key-management
 - Container for authority-wide security policies pertaining to SVR encryption.
 
-peer-key-rekey-interval
+**`peer-key-rekey-interval`**
 
 - authority > security-key-management > peer-key-rekey-interval
 - Hours between security key regeneration for peer routers
 - uint value of 0-720, units = hours, default = 24
 
-peer-key-retransmit-interval
+**`peer-key-retransmit-interval`**
 
 - authority > security-key-management > peer-key-retransmit-interval
 - Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged.
 - uint value of 5-3600, units = seconds, default = 30.
 
-peer-key-timeout
+**`peer-key-timeout`**
 
 - authority > security-key-management > peer-key-timeout
 - Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged.
 - uint value, units = seconds, default = 3600.
 
-invalid-certificate-behavior
+**`invalid-certificate-behavior`**
 
 - authority > security-key-management > invalid-certificate-behavior
 - Behavior when a certificate is revoked, expired, or invalid.
-- enumeration of fail-soft or fail-hard. Default = fail-soft.
-- fail-soft will provide an alert indicating action needs to be taken.
-- fail-hard will remove all peering relationships. Does it also provide an alert as the soft fail does?
+- enumeration of `fail-soft `or `fail-hard`. Default = `fail-soft`.
+- `fail-soft` generates an alert indicating action needs to be taken.
+- `fail-hard` removes all peering relationships. **Does it also provide an alert as the soft fail does?**
 
-ca-profile
+**`ca-profile`**
 
 - authority > security-key-management > ca-profile
 - Container for certificate authority properties in use with SVR certificates.
@@ -178,25 +178,25 @@ ca-profile url
 - authority > security-key-management > ca-profile > url
 - Location of the CA.
 
-revocation-check-interval
+**`revocation-check-interval`**
 
 - authority > security-key-management > ca-profile > revocation-check-interval
 - Hours between security key revocation check.
 - uint value of 0-720, units = hours, default = 48.
 
-key-exchange-algorithm
+**`key-exchange-algorithm`**
 
 - authority > security-key-management > key-exchange-algorithm
 - The algorithm to use for exchanging keys between peers.
-- enumeration of diffie-hellman, ml-kem or diffie-hellman-ml-kem.
+- enumeration of diffie-hellman, ml-kem, or diffie-hellman-ml-kem.
 
-diffie-hellman-key-size
+**`diffie-hellman-key-size`**
 
 - authority > security-key-management > diffie-hellman > diffie-hellman-key-size
 - Definition of the key size to use when key-exchange-algorithm is set to diffie-hellman.
 - Enumeration of the values 1024, 2048 or 4096.
 
-ml-kem-key-size
+**`ml-kem-key-size`**
 
 - authority > security-key-management > ml-kem > ml-kem-key-size
 - Definition of the key size to use when key-exchange-algorithm is set to ml-kem.
@@ -204,7 +204,6 @@ ml-kem-key-size
 
 ## Configuration
 
-Simple Config
+The following configuration examples show how to enable peer certificate validation. 
 
-
-Detailed Config
+AWAITING INPUT

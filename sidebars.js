@@ -317,7 +317,7 @@ module.exports = {
           "sec_hardening_guidelines",
           "sec-usb-security",
           "sec-disable-console-output",
-          "cert_based_sec_encrypt",
+          "cert_based_sec_encrpt",
         ],
       },
       {
