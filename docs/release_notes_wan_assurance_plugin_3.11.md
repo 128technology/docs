@@ -13,7 +13,7 @@ Add support for IDP based services for Application Path Insights feature
 
 - **WAN-3075 DHCP Lease Visibility**
 
-Report the client lease information when SSR acts as DHCP server to MIST cloud.
+Report the client lease information when SSR acts as a DHCP server to the MIST cloud.
 
 ### Resolved Issues
 
@@ -23,7 +23,7 @@ Report the client lease information when SSR acts as DHCP server to MIST cloud.
 
  - **WAN-2584 TSI status/ep-command stuck on the device**
 
-    _**Resolution:**_ Increase the duration to get support files and add an expiry in case command gets stuck.
+    _**Resolution:**_ Increase the duration to get support files and add an expiry in case the command gets stuck.
 
  - **WAN-2716 MDD event generated but no evidence on device**
 
@@ -55,15 +55,15 @@ Report the client lease information when SSR acts as DHCP server to MIST cloud.
 
  - **WAN-3315 Custom app not being populated for some app summaries**
 
-    _**Resolution:**_ Improve the tagging of custom applications when processing app summary document.
+    _**Resolution:**_ Improve the tagging of custom applications when processing the app summary document.
 
  - **WAN-3374 Exclude the paths with infinite cost for ARV**
 
     _**Resolution:**_ Paths with infinite cost are invalid and are removed from Application Path Insights.
 
- - **WAN-3384 Static reservation ip should be included in the Total IP count (if not within the pool range) under DHCP Statistics**
+ - **WAN-3384 Static reservation IP should be included in the Total IP count (if not within the pool range) under DHCP Statistics**
 
-    _**Resolution:**_ When static IPs are outside the range of dynamic IPs, they would be reported to the total capacity.
+    _**Resolution:**_ When static IPs are outside the range of dynamic IPs, they are reported to the total capacity.
 
  - **WAN-3401 "WAN Edge DHCP Pool Exhausted" event is seen when no IP is leased for a network**
 
@@ -73,11 +73,11 @@ Report the client lease information when SSR acts as DHCP server to MIST cloud.
 
     _**Resolution:**_ To improve the efficiency and prevent data loss, the application path insights data is reported once a day.
 
- - **WAN-3434 DHCP leased ips information missing on UI in all prod envs.**
+ - **WAN-3434 DHCP leased IP information is missing on the UI in all product environments.**
 
-    _**Resolution:**_ During onboarding, the node name change from default to configured nodw is now handled more gracefully.
+    _**Resolution:**_ During onboarding, the node name change from default to configured is now handled more gracefully.
 
- - **WAN-3439 LACP state is shown as blank for LAG LAN interfaces LACP Force up**
+ - **WAN-3439 LACP state is shown as blank for LAG LAN interfaces during LACP Force up**
 
     _**Resolution:**_ Adjust the LACP state and stats based on the force up state and configuration.
 
@@ -91,11 +91,11 @@ Report the client lease information when SSR acts as DHCP server to MIST cloud.
 
  - **WAN-3461 ARP Unresolved Service events when Peerpath is down**
 
-    _**Resolution:**_ When interface is down, device will no longer generate an ARP unresolved event.
+    _**Resolution:**_ When an interface is down, the device will no longer generate an ARP unresolved event.
 
  - **WAN-3649 Certain tenant/service changes can go undetected in the policy access feature**
 
-    _**Resolution:**_ Improve the matching nad hashing scheme for the feature to cover all tenants and service style configurations.
+    _**Resolution:**_ Improve the matching and hashing scheme to cover all tenants and service style configurations.
 
   - **WAN-3847: unrelease mist agent command rename**
 
