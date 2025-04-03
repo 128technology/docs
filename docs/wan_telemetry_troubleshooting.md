@@ -111,9 +111,13 @@ Once the necessary changes have been made to the registration-code and other con
 
 ![Enable MWA Plugin](/img/wana_enabled_mwa.png)
 
-4. Switch to the `Command` tab, select the router from the `Router Context` menu and select the `unrelease mist agent` command.
+4. Switch to the `Command` tab, select the router from the `Router Context` menu and select the `unrelease-mist-agent` command.
 
  ![Plugins Command Context Menu](/img/wana_plugin_command_context.png)
+
+:::note
+The `unrelease mist agent` command was renamed to `unrelease-mist-agent` in 128T-mist-wan-assurance plugin version 3.11 and above.
+:::
 
 5. Click on `Execute` to initiate the re-onboarding process using the registration-code currently available on the system.
 
@@ -154,9 +158,9 @@ admin@node1.conductor1# config authority router 128t-east mist-wan-assurance ena
 3. Unrelease the router to initiate the re-onboarding process.
 
 ```console
-admin@node1.conductor1# unrelease mist agent
+admin@node1.conductor1# unrelease-mist-agent
 node   router
-admin@node1.conductor1# unrelease mist agent router 128t-east node node1
+admin@node1.conductor1# unrelease-mist-agent router 128t-east node node1
 ✔ Retrieving...
 Target: node1.conductor1
 
