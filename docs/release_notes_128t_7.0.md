@@ -62,7 +62,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-59758 Interactive Initializer updates all system account passwords:** Interactive initialization now changes the `admin`, `t128` and `root` user passwords to the same value. The initialization preference file has the fields, `t128-password`, `root-password`, and `admin-password`, to set password hashes for each user, respectively.
 ------
-- **I95-59996 GUI Initialization sets passwords for all system accounts:** GUI initialization now changes the `admin`, `t128` and `root` user passwords to the same value.
+- **I95-59996 GUI Initialization sets passwords for all system accounts:** GUI initialization now changes the `admin`, `t128` and `root` user passwords to the same value. See [Password Security](config_password_security.md) for additional information. 
 ------
 - **I95-60041 `initialize conductor` command sets password for all system accounts:** The system accounts `admin`, `t128` and `root` are simultaneously set to the provided password hash, ensuring default passwords are not used.
 ------

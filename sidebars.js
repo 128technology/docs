@@ -296,6 +296,7 @@ module.exports = {
           "config_radsec",
           "config_syslog_tls",
           "config_webserver_certs",
+          "config_password_security",
           "config_password_policies",
           "howto_reset_user_password",
         ],
