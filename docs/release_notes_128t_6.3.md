@@ -9,9 +9,9 @@ Beginning with SSR v6.3.0, the use of the interactive installer is not supported
 
 ### Installation from ISO
 
-When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - identified by the filename prefix "SSR": `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`. Installation documentation for the image-based process can be found here: https://docs.128technology.com/docs/intro_installation_univ-iso. 
+When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - identified by the filename prefix "SSR": `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`. Installation documentation for the image-based process can be found in the [Image-based ISO Installation Overview](https://docs.128technology.com/docs/intro_installation_univ-iso). 
 
-The traditional package-based ISOs are identified by the filename prefix "128T": (`128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`). These are available for offline-mode conductor upgrades to 6.3 before being able to support the image-based installation. Details on upgrading a conductor deployment configured in offline-mode to 6.3 can be found here: https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/upgrade_restricted_access/#single-version-630-upgrade
+The traditional package-based ISOs are identified by the filename prefix "128T": (`128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`). These are available for offline-mode conductor upgrades to 6.3 before being able to support the image-based installation. Details on upgrading a conductor deployment configured in offline-mode to 6.3 can be found in the [Single-Version 6.3.0 Upgrade](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/upgrade_restricted_access/#single-version-630-upgrade) instructions.
 
 
 ### Upgrade Considerations
