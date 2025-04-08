@@ -3,15 +3,15 @@ title: SSR 6.3 Release Notes
 sidebar_label: '6.3'
 ---
 
-SSR release 6.3.0 represents a significant change in the software delivery of the SSR. We are moving away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your "standard" procedures for installation and upgrade of SSR Software. 
+SSR release 6.3.0 represents a significant change in the software delivery of the SSR. The SSR has away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your "standard" procedures for installation and upgrade of SSR Software. 
 
 Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the Web Interface or the Command Line Interface. 
 
 ### Installation from ISO
 
-When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - identified by the filename prefix "SSR": `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`. Installation documentation for the image-based process can be found in the [Image-based ISO Installation Overview](https://docs.128technology.com/docs/intro_installation_univ-iso). 
+When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - identified by the filename prefix "SSR": `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`. Installation documentation for the image-based process can be found in the [Image-based ISO Installation Overview](intro_installation_univ-iso.md). 
 
-The traditional package-based ISOs are identified by the filename prefix "128T": (`128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`). These are available for offline-mode conductor upgrades to 6.3 before being able to support the image-based installation. Details on upgrading a conductor deployment configured in offline-mode to 6.3 can be found in the [Single-Version 6.3.0 Upgrade](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/upgrade_restricted_access/#single-version-630-upgrade) instructions.
+The traditional package-based ISOs are identified by the filename prefix "128T": (`128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`). These are available for offline-mode conductor upgrades to 6.3 before being able to support the image-based installation. Details on upgrading a conductor deployment configured in offline-mode to 6.3 can be found in the [Single-Version 6.3.0 Upgrade](upgrade_restricted_access.md#single-version-630-upgrade) instructions.
 
 
 ### Upgrade Considerations
@@ -22,7 +22,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Offline-Mode: Upgrading 6.3.x Conductor Deployments to 6.3.x+**
 
-An issue has been identified that may be observed in conductor deployments running version 6.3.x software, when attempting to upgrade from one 6.3.x patch release to another. This results in the message, “SSR firmware upgrade failed for the local node: SSR upgrade failed after reboot”. To work around this, run the request system software upgrade installation-service` command from the command line of the Conductor, after importing the image-based ISO. Once complete, perform the full system upgrade from the Web-interface. This issue will be resolved in a future release. 
+An issue has been identified that may be observed in conductor deployments running version 6.3.x software, when attempting to upgrade from one 6.3.x patch release to another. This results in the message, “SSR firmware upgrade failed for the local node: SSR upgrade failed after reboot”. To work around this, run `request system software upgrade installation-service` from the command line of the Conductor, after importing the image-based ISO. Once complete, perform the full system upgrade from the Web-interface. This issue will be resolved in a future release. 
 
 **Offline-Mode: Onboarding Routers Running older SSR Software to a 6.3.x Conductor**
 

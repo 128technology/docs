@@ -56,7 +56,7 @@ Use these procedures for upgrades only. When performing an initial installation 
 
 **Offline-Mode: Upgrading 6.3.x Conductor Deployments to 6.3.x+**
 
-An issue has been identified that may be observed in conductor deployments running version 6.3.x software, when attempting to upgrade from one 6.3.x patch release to another. This results in the message, `SSR firmware upgrade failed for the local node: SSR upgrade failed after reboot`. To work around this, run the `request system software upgrade installation-service` command from the command line of the Conductor, after importing the image-based ISO. Once complete, perform the full system upgrade from the Web-interface. This issue will be resolved in a future release. 
+An issue has been identified that may be observed in conductor deployments running version 6.3.x software, when attempting to upgrade from one 6.3.x patch release to another. This results in the message, `SSR firmware upgrade failed for the local node: SSR upgrade failed after reboot`. To work around this, run `request system software upgrade installation-service` from the command line of the Conductor, after importing the image-based ISO. Once complete, perform the full system upgrade from the Web-interface. This issue will be resolved in a future release. 
 
 **Offline-Mode: Onboarding Routers Running older SSR Software to a 6.3.x Conductor**
 
