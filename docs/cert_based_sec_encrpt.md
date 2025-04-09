@@ -39,7 +39,7 @@ The following are some details of certificate security.
 
 - Contained within the SVR certificate is a router identifier, which must match the identifier of the router in the peer configuration. This router identifier is a UUID and guaranteed to be unique per node, even across RMAs.
 
-- The public key is used to create an X.509 certificate signing request (CSR) with the common name field set to the router's UUID. A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by [RFC7468]. 
+- The public key is used to create an X.509 certificate signing request (CSR) with the common name field set to the router's UUID. A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
 
 ## Certificate Revocation List
 
@@ -49,7 +49,7 @@ Managing the Certificate Revocation List (CRL) includes the discovery, fetching,
 
 ## Installing Certificates
 
-Installing a trusted CA certificate on the SSR uses the existing functionality as described in https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/howto_trusted_ca_certificate.
+Installing a trusted CA certificate on the SSR uses the existing functionality as described in [Adding a Trusted Certificate](howto_trusted_ca_certificate.md).
 
 ## Replace or Revoke a Certificate
 
@@ -277,8 +277,3 @@ Audit events and logs are generated for the following events:
 - Definition of the key size to use when key-exchange-algorithm is set to ml-kem.
 - Enumeration of the values 512, 768 or 1024.
 
-## Configuration
-
-The following configuration examples show how to enable peer certificate validation. 
-
-AWAITING INPUT
