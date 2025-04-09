@@ -3,7 +3,7 @@ title: SSR 6.3 Release Notes
 sidebar_label: '6.3'
 ---
 
-SSR release 6.3.0 represents a significant change in the software delivery of the SSR. The SSR has away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your "standard" procedures for installation and upgrade of SSR Software. 
+SSR release 6.3.0 represents a significant change in the software delivery of the SSR. The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your "standard" procedures for installation and upgrade of SSR Software. 
 
 Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the Web Interface or the Command Line Interface. 
 
