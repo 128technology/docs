@@ -104,6 +104,10 @@ After the Linux installation is complete, the SSR software installation begins. 
 
 Select `<Yes>` to shut down the system. Remove the bootable media, then power the system up to complete the installation process. 
 
+:::note
+In some cases, the screen above does appear, but becomes unresponsive after you select `Yes`. In this situation, you must manually power down the device, wait 15 seconds, and power it back up.
+:::
+
 ### Initial Boot and Management Network Configuration
 
 When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
@@ -152,13 +156,24 @@ The following user accounts and passwords are created during the ISO installatio
 | root     | 128tRoutes |
 | t128     | 128tRoutes |
 
-Change these passwords immediately. Use the `passwd` command from the Linux shell.
+Change these passwords immediately. Log in to the Linux shell using the default password. 
+
+```
+Oracle Linux Server 7.9
+Kernel 4.18.0-553.16.1.el8_10.x86_64 on and x86_64
+
+localhost login: t128
+Password: 
+Last login Wed March 26 18:17:28 on pts/0
+```
+
+Then use the `passwd` command to change the `root` and `t128` passwords.
 
 ```
 [t128@test-router ~]$ passwd
 Changing password for user t128
 Changing password for t128
-(current)UNIX password:
+(current)Linux password:
 New password:
 Retype new password: 
 passwd: all authentication tokens updated successfully.
@@ -171,6 +186,10 @@ Retype new password:
 passwd: all authentication tokens updated successfully.
 [root@test-router ~]#
 ```
+
+:::note
+The root account will not be used for day-to-day access, but the root account password should be stored securely off-box so that it can be used for admin account recovery if required. 
+:::
 
 ### Root Access
 To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
@@ -190,35 +209,6 @@ During an upgrade, if the existing version allows SSH Root login, it will be dis
  ```
 6. Save the file and exit from `visudo`.
 7. Type `exit` to leave the `su` prompt. 
-
-### Change the Default Passwords
-
-The following user accounts and passwords are created during the ISO installation process:
-
-| Username | Password   |
-| -------- | ---------- |
-| root     | 128tRoutes |
-| t128     | 128tRoutes |
-
-Change these passwords immediately. Use the `passwd` command from the Linux shell to individually set the password for each username. 
-
-```
-[admin@localhost ~]$ sudo passwd t128
-Changing password for user t128
-New password:
-Retype new password: 
-passwd: all authentication tokens updated successfully.
-[admin@localhost ~]$ sudo passwd root 
-Changing password for user root.
-New password:
-Retype new password: 
-passwd: all authentication tokens updated successfully.
-[admin@localhost ~]$
-```
-
-:::note
-The root account will not be used for day-to-day access, but the root account password should be stored securely off-box so that it can be used for admin account recovery if required. 
-:::
 
 ### Software Compliance Validation
 
