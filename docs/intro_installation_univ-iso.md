@@ -3,7 +3,7 @@ title: SSR Image-based ISO Installation Overview
 sidebar_label: SSR Image-based ISO Installation Overview
 ---
 
-Beginning with version 6.3.0, the SSR uses a single image-based SSR ISO with a significantly simplified installation process. After the SSR installation completes, the GUI provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
+Beginning with version 6.3.0, the SSR uses a single image-based SSR ISO with a significantly simplified installation process. After the SSR installation completes, the Web interface provides clear choices and processes for each of the device configuration options: Conductor, a Conductor-managed router, or a Mist-managed router. 
 
 #### Version History
 
@@ -20,6 +20,10 @@ The installation workflow consists of the following steps:
 - [Device Initialization](initialize_u-iso_device.md)
 
 ## Download
+
+When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - identified by the filename prefix "SSR": `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`. 
+
+The traditional package-based ISOs are identified by the filename prefix "128T": (`128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`). *These are available for offline-mode conductor upgrades to 6.3 before being able to support the image-based installation.* 
 
 The image-based SSR ISOs are available for download at the following location:
 
