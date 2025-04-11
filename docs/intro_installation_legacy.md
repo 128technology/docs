@@ -24,10 +24,10 @@ The examples listed in this guide generally prefer running commands as a non-roo
    - [Download the ISOs](intro_downloading_iso.md)
    - [Create Bootable Media](intro_creating_bootable_usb.md)
 - Legacy Installation 
-   - [Perform the Interactive ISO installation](intro_installation_bootable_media.mdx) 
+   - [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
    - [Install a Conductor](install_conductor_overview.md)
    - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
-   - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
+   - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.md)
 
 A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
 
@@ -41,7 +41,7 @@ An image-based ISO installation process is available for users who manage their 
 The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for versions 6.0.x - 6.2.x in a conductor-managed WAN Telemetry deployment.
 :::
 
-For customers with legacy conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) continues to be used for upgrades and new installations.
+For customers with legacy conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) continues to be used for upgrades and new installations.
 
 ## Upgrades
 

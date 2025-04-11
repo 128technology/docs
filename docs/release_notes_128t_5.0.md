@@ -8,7 +8,7 @@ Issues resolved in a release are merged into subsequent releases chronologically
 
 If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
 
-Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
 ## Release 5.0.1
@@ -16,7 +16,7 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 
 ### Resolved Issues Requiring Configuration Changes
 
-- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.mdx). 
+- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.md). 
 
 ### Resolved Issues
 

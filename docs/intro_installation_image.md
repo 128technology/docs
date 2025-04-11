@@ -9,7 +9,7 @@ Beginning with version 6.0, an image-based ISO installation process has been imp
 If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
 :::
 
-The [package-based installation](intro_installation_bootable_media.mdx) is still available for older installations and upgrades. 
+The [package-based installation](intro_installation_bootable_media.md) is still available for older installations and upgrades. 
 
 The image-based installation creates two volumes on the disk, installs the full 6.0.x image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 

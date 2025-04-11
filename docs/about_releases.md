@@ -65,9 +65,3 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 Please refer to the [Software Support Policy](about_support_policy.md) page to understand the lifecycle of SSR releases.
 
-## All Releases - Limited, General Availability and Out of Support
-
-<PesterDataTable
-  columns={ columns }
-  data={ releases }
-/>

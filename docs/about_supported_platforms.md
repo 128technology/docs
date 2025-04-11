@@ -52,4 +52,4 @@ Juniper supports the SSR Networking Platform software running on SKUs listed und
 
 Juniper provides no support, or commitments to functionality, stability, or performance of the SSR Networking Platform software on platforms that have not been certified.
 
-For a complete listing of certified plaforms, please see our [Certified Portfolio](about_certified_platforms.mdx).
+For a complete listing of certified plaforms, please see our [Certified Portfolio](about_certified_platforms.md).
