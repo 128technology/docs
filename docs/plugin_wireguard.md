@@ -86,7 +86,7 @@ exit
 
 ## Services and Tenants with Wireguard
 
-Configuration of a wireguard profile on an SSR interface does **not** provide access to network services. It simply allows the endpoint to connect to the router using wireguard for secure transport, and all sessions will still be subject to the rules of [tenants and services](concepts_glossary.md#service-layer). To facilitate network tenancy being given to traffic coming from wireguard peers, a profile is configured with a neighborhood. The neighborhood in the wireguard profile will function as a named Layer 3 network, and used in defining [neighborhood based tenancy](bcp_tenants.mdx#per-neighborhood-tenancy) to provide access to services.
+Configuration of a wireguard profile on an SSR interface does **not** provide access to network services. It simply allows the endpoint to connect to the router using wireguard for secure transport, and all sessions will still be subject to the rules of [tenants and services](concepts_glossary.md#service-layer). To facilitate network tenancy being given to traffic coming from wireguard peers, a profile is configured with a neighborhood. The neighborhood in the wireguard profile will function as a named Layer 3 network, and used in defining [neighborhood based tenancy](bcp_tenants.md#per-neighborhood-tenancy) to provide access to services.
 
 :::tip
 If you do not have a pre-defined tenant to use for wireguard endpoints, you can optionally configure a `tenant` in the profile, and one will be automatically generated for you.

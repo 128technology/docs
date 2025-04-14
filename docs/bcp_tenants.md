@@ -41,26 +41,7 @@ As new sessions arrive at an SSR, the router will attempt to classify the source
 
 Should none of these result in a definitive determination on the tenant of the source of this session request, the session is associated with the *global tenant* (see the section on "Special Tenants" for more information on the global tenant). Once the tenant has been identified – either as a specific tenant, or as the global tenant – this acts as a filter into the SSR’s FIB. Only the routes associated with that tenant are available to that user group. While this somewhat resembles the way a legacy router uses VRFs to create separate RIBs and FIBs, the segment by *tenant* is pervasive among all routers within an Authority by design, and is applied ubiquitously among all varieties of networks: public IP space, private, cloud, IPv4, IPv6, etc.
 
-<Flowchart
-  chartCode={`
-    st=>start: Packet Arrives
-      metadata=>condition: Packet has metadata?
-      int=>condition: Interface has a tenant?
-      nh=>condition: Neighborhood-based tenant?
-      tm=>operation: Tenant taken from metadata
-      ti=>operation: Tenant taken from interface
-      th=>operation: Tenant taken from neighborhood
-      global=>operation: Tenant assigned as "global"
-      e=>end: Proceed to FIB lookup
-    st->metadata
-    metadata(no)->int
-    metadata(yes,right)->tm->e
-    int(yes,right)->ti->e
-    int(no)->nh
-    nh(yes,right)->th->e
-    nh(no)->global->e
-  `}
-/>
+![Tenant Flowchart](/img/bcp-tenant-flowchart.png)
 
 #### Viewing a Router's Tenancy
 
