@@ -3,8 +3,6 @@ title: Router Installation Using OTP
 sidebar_label: Router Installation Using OTP
 ---
 
-import Flowchart from '../src/components/Flowchart';
-
 :::important
 If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
 :::
@@ -178,50 +176,7 @@ Any stdout/stderr output generated from the scriptlets is logged in `/var/log/12
 ### Bootstrapping Flow Chart
 The diagram below shows the procedure the Bootstrap utility follows during the first bootup of the platform after the ISO installation completes. 
 
-<Flowchart
-  chartCode={`
-    st=>start: Start
-      bs=>operation: Check for Pre-Bootstrap Scriptlet
-      usb1=>condition: On USB?
-      def1=>condition: Default?
-      es=>inputoutput: Execute Pre-Bootstrap Scriptlet
-      smh=>operation: Set Minion ID\nSet Hostname\nSynchronize Clock
-      sfd=>operation: Set 128T Factory Defaults
-      usb2=>condition: On USB?
-      def2=>condition: Default?
-      rest=>condition: REST get?
-      aq=>inputoutput: Apply quickstart.txt
-      aotpd=>inputoutput: Apply OTP Defaults
-      ist=>operation: Setup IFCFG\nEnable salt-minion\nEnable 128T
-      pbs=>operation: Check for Post-Bootstrap Scriptlet
-      usb3=>condition: On USB?
-      def3=>condition: Default?
-      es2=>inputoutput: Execute Post-Bootstrap Scriptlet
-      fin=>operation: Finalize
-      wbr=>subroutine: Write Bootstrap Report
-      reb=>operation: Reboot
-      e=>end: End
-    st->bs->usb1
-    usb1(no)->def1
-    usb1(yes)->es
-    def1(yes)->es
-    def1(no)->smh
-    es->smh
-    smh->sfd->usb2
-    usb2(no, right)->def2
-    usb2(yes, right)->aq
-    def2(yes)->aq
-    def2(no)->rest
-    rest(no)->aotpd
-    rest(yes)->aq->ist
-    aotpd->ist->pbs->usb3
-    usb3(yes)->es2
-    usb3(no)->def3
-    def3(yes)->es2->fin
-    def3(no)->fin
-    fin->wbr->reb->e
-  `}
-/>
+![Bootstrapping Flowchart](/img/intro-otp-iso-install-flowchart.png)
 
 ### QuickStart File via REST
 
