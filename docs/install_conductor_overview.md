@@ -16,7 +16,7 @@ The [Conductor Deployment](bcp_conductor_deployment.md) section is a great start
 The following Conductor installation processes are covered in this guide:
 
 - [Standalone Conductor](single_conductor_install.mdx)
-- [High Availability](ha_conductor_install.mdx)
+- [High Availability](ha_conductor_install.md)
 - [Import Configurations to the Conductor](single_conductor_config.md)
 - [Conductor Software Upgrades](conductor_upgrade.md)
 - [Conversion of an SSR Router to a Conductor](single_conductor_install.mdx#conductor-conversion)
