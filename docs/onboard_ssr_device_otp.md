@@ -80,7 +80,7 @@ Use the process specific to your device to complete the re-imaging process.
 2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
 
  ![Select Boot Device](/img/onboard_otp_boot_device.png)
-3. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
+3. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.md#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
 
 #### SSR1000 Series Devices
 
@@ -93,5 +93,5 @@ Use the process specific to your device to complete the re-imaging process.
 
  ![Boot Override list](/img/1x00_boot-override.png)
 4. Press Enter to confirm boot from the USB device.
-5. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
+5. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.md#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
 

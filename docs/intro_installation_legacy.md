@@ -27,7 +27,7 @@ The examples listed in this guide generally prefer running commands as a non-roo
    - [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
    - [Install a Conductor](install_conductor_overview.md)
    - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
-   - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.md)
+   - [Install the Router using the OTP ISO](intro_otp_iso_install.md) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.md)
 
 A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
 

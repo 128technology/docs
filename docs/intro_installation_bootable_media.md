@@ -11,7 +11,7 @@ The steps in this section describe the interactive installation from the package
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
 :::
 
-The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used for whitebox and air-gap, conductor-managed network installations. 
+The [Router Installation Using OTP](intro_otp_iso_install.md) procedure can be used for whitebox and air-gap, conductor-managed network installations. 
 
 :::important
 If you are installing SSR Version 6.3.x, use the [Universal ISO Installation process](intro_installation_univ-iso.md).
@@ -259,3 +259,5 @@ Use the following procedure to enable FIPS enforcement.
   ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
 
 4. Press Enter to start the install. 
+
+Return to the [Linux and SSR Install](#linux-install-and-ssr-install).
