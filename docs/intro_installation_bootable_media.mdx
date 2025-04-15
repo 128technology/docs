@@ -76,23 +76,9 @@ To install using the Interactive Installation, use the arrow keys to select eith
 
 ![VGA Boot with Interactive Install](/img/install_select_interactive.png)
 
-### FIPS Compliance
+#### FIPS Compliance
 
-If you require strict FIPS compliance, the `fips=1` kernel option must be added to the kernel command line during system installation to ensure that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
-
-If you do not require FIPS compliance, skip this section. 
-
-1. Use up/down keys to highlight the desired install mode. 
-
-  ![Bios Install](/img/56fips_BIOSinstall_1.png)
-
-2. Press TAB to edit the configuration.
-
-3. Add `fips=1` to the end of the `vmlinuz` parameters.
-
-  ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
-
-4. Press Enter to start the install. 
+If you require FIPS compliance, skip to the steps in [FIPS Enforcement Mode](#fips-enforcement-mode). When required, it is considered best practice to enable FIPS during installation.
 
 #### Install via Serial Console
 
@@ -114,7 +100,7 @@ Use this option when running on hardware that has onboard graphics chipsets. Thi
 
 The procedure that follows here is the **Interactive Install on the VGA Console**.
 
-## Linux Install and SSR Install
+## Linux and SSR Install
 
 After the Linux installation is complete, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the installation has completed, the following screen is displayed:
 
@@ -248,3 +234,20 @@ passwd: all authentication tokens updated successfully.
 [root@test-router ~]#
 ```
 
+### FIPS Enforcement Mode
+
+If you require strict FIPS compliance, the `fips=1` kernel option must be added to the kernel command line during system installation to ensure that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+
+1. Use up/down keys to highlight the desired install mode. 
+
+  ![Bios Install](/img/56fips_BIOSinstall_1.png)
+
+2. Press TAB to edit the configuration.
+
+3. Add `fips=1` to the end of the `vmlinuz` parameters.
+
+  ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
+
+4. Press Enter to start the install. 
+
+Return to [Linux and SSR Install](#linux-and-ssr-install) to continue with the installation. 
