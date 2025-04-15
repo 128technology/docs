@@ -17,7 +17,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
 | [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
 | [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
-| [`cli-messages`](#configure-authority-cli-messages) | Configure Cli Messages |
+| [`cli-messages`](#configure-authority-cli-messages) | Configure CLI Messages |
 | [`client-certificate`](#configure-authority-client-certificate) | The client-certificate configuration contains client certificate content. |
 | `clone` | Clone a list item |
 | [`conductor-address`](#configure-authority-conductor-address) | IP address or FQDN of the conductor |

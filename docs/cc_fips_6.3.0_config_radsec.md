@@ -1,6 +1,6 @@
 ---
-title: Configuring RADUIS over TLS
-sidebar_label: Configuring RADIUS over TLS
+title: RADUIS over TLS
+sidebar_label: RADIUS over TLS
 ---
 
 RADIUS over TLS is designed to provide secure communication of RADIUS requests using the Transport Secure Layer (TLS) protocol. RADIUS over TLS, also known as RADSEC, redirects regular RADIUS traffic to remote RADIUS servers connected over TLS. RADSEC allows RADIUS authentication, authorization, and accounting data to be passed safely across untrusted networks.
@@ -15,7 +15,6 @@ The following configuration example will add a radius server named `radsec`
 
 ```
 admin@t327-dut1.cond# configure authority radius-server radsec
-admin@t327-dut1.cond (radius-server[name=radsec])# address 172.18.5.224
 admin@t327-dut1.cond (radius-server[name=radsec])# port 2083
 admin@t327-dut1.cond (radius-server[name=radsec])# protocol tls
 admin@t327-dut1.cond (radius-server[name=radsec])# account-creation manual
@@ -85,6 +84,10 @@ Use the following examples to generate a client certificate for use on the devic
 
 Use the `create certificate request client` command to generate the signing request.
 
+:::note
+Use of an IP-based `Subject Alternative Name` is not supported under Common Criteria. Use of this parameter will result in a non-conforming configuration. 
+:::
+
 ```
 admin@conductor-node-1.Conductor# create certificate request client radsec
 Country name (2 letter code): US
@@ -106,7 +109,6 @@ Organization unit (eg: engineering):
 Common name: dut1
 Email address:
 Subject Alternative Name - DNS (fully qualified domain name): dut1
-Subject Alternative Name - IP Address: 10.27.32.203
 
 Request successfully generated:
 

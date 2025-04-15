@@ -88,6 +88,7 @@ supports-priv-flags: yes
 ## Installation
 
 The BIOS update package can be installed using either of two methods:
+
 - On-line install from Juniper SSR repositories.
 - RPM download & off-line installation.
 
@@ -97,6 +98,7 @@ On systems with internet access, use the following steps to download and install
 
 1. Login to your SSR device using SSH or through the console.
 2. Enter the following command:
+
   `sudo dnf install -y afulnx`
 
 ```
@@ -162,6 +164,7 @@ DO NOT INTERRUPT THIS PROCESS AFTER CONFIRMING! Doing so may result in an unboot
 :::
 
 3. The upgrade process takes place:
+
   - Current BIOS version is saved as a backup.
   - Current DMI information is saved.
   - BIOS, ME, and NIC firmware is updated.
