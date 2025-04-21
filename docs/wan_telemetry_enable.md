@@ -29,6 +29,7 @@ Create a unique site for each physical (or logical) location in the network. For
 <!-- markdown-link-check-disable
 For detailed information about the fields used to create a site, please refer to the Mist [Site Configuration documenation](https://www.mist.com/documentation/mist-edge-getting-started-guide-2/#Create_a_Site_for_Campus_Branches).
 markdown-link-check-enable -->
+
 1. From the Mist menu on the left, select **Organization** and select **Site Configuration** from the menu.
 
     ![Site Configuration](/img/wan_org_site_config.png)
