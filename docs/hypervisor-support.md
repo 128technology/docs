@@ -17,7 +17,7 @@ Hypervisor is supported with the following minimum requirements:
 
 Performance is based on these resources, and increasing each of these may enhance performance. 
 
-- VM CPU cores must be tied to a single NUMA node on the host CPU. To ensure high performance, configure virtual SSR CPUs scheduling and affinity on the hypervisor as a dedicated resource for that VM. 
+- VM CPU cores must be tied to a single NUMA node on the host CPU. To ensure high performance, SSR virtual machines should be configured with dedicated vCPU resources that are not shared by other virtual machines or applications on the host. This can be configured on the hypervisor through CPU scheduling and affinity. Please consult your hypervisor's documentation for specifics. 
 
 ### Hyper-V: 
 
