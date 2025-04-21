@@ -21,14 +21,15 @@ Create an account on the [Mist portal](https://manage.mist.com/).
 
     ![Organization Panel](/img/wan_create_org.png)
 <!-- markdown-link-check-disable
-    For additional information about creating an Organization, please refer to the Mist [Organization Configuration documentation](https://www.mist.com/documentation/create-mist-org/).
+    For additional information about creating an Organization, please refer to the Mist [Organization Configuration documentation](https://www.mist.com/documentation/create-mist-org/). markdown-link-check-enable -->
 
 ## Create a Site
 
 Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
-
+<!-- markdown-link-check-disable
 For detailed information about the fields used to create a site, please refer to the Mist [Site Configuration documenation](https://www.mist.com/documentation/mist-edge-getting-started-guide-2/#Create_a_Site_for_Campus_Branches).
-markdown-link-check-enable --> 
+markdown-link-check-enable -->
+
 1. From the Mist menu on the left, select **Organization** and select **Site Configuration** from the menu.
 
     ![Site Configuration](/img/wan_org_site_config.png)
