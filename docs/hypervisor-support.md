@@ -2,10 +2,8 @@
 title: Hypervisor Support 
 sidebar_label: Hypervisor Support
 ---
-**NOTE TO REVIEWERS:** The minimum versions are stated here, however, later in the text Lane suggested that VLAN support had a minimum of 6.2.4, and HA had a 6.3.0 minimum. I think that if we are identifying support starting with 6.2.7 and 6.3.4, those should be called out as the minimum for those features. If Hypervisor is supported on the earlier versions, they perhaps we use those as starting versions. Please comment.
----
 
-Beginning with SSR Software versions 6.2.7 and 6.3.4, Hypervisor is supported with the following minimum requirements: 
+Hypervisor is supported with the following minimum requirements: 
 
 - The host system must be running an Intel x86_64 processor with Intel VT-x and VT-d support enabled in the BIOS. 
 
@@ -36,4 +34,3 @@ Virtualized instances of the SSR are supported in KVM on a Linux host running a 
 ### Live Migrations
 
 A live-migration in a virtualized environment is a service impacting event. The snapshots taken to migrate the virtual instance to the new environment cannot be performed in a timeframe that avoids packet loss. It is recommended to deploy systems in an HA cluster to minimize service interruption. VM migration should be performed one node at a time with the SSR being migrated in stopped state. Once the first node has been migrated, the other node may follow. Depending on the distance between hypervisors (ensure systems meet the [minimum requirements](concepts_machine_communication.md#node-to-node-connectivity-high-availability)), the system may result in a split-brain. If the system does not meet these specifications, both nodes must be stopped and migrated simultaneously.
-
