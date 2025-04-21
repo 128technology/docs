@@ -25,7 +25,7 @@ Virtualized instances of the SSR are supported on Microsoft Hyper-V running Wind
 
 ### VMWare: 
 
-Virtualized instances of the SSR are supported on VMWare ESXi versions 6.7, 7.0, and 8.0. The use of VMXNET3 type adapters is required. For High Availability configurations (VRRP, use-physical-mac), SSR 6.3.0 is the required minimum version.
+Virtualized instances of the SSR are supported on VMWare ESXi versions 6.7, 7.0, and 8.0. The use of VMXNET3 type adapters is required. Support for high availability in VMWare requires configuring VRRP on redundant interfaces with the setting `use-physical-address` set to `true`. This option was introduced in SSR 6.3.0
 
 ### KVM 
 
