@@ -71,7 +71,7 @@ sidebar_label: '3.7'
 ### New Features
 - **WAN-2423 Application Path Insights for conductor managed routers**
 
-Support for the [Application Path Insights](https://www.mist.com/documentation/september-28th-2023-updates/) feature in MIST has been extended to conductor managed routers as part of this release. The feature is enabled on all spoke routers by default upon installing the plugin. The feature can be turned off at the authority and router level if needed.
+Support for the [Application Path Insights](https://www.juniper.net/documentation/us/en/software/mist/product-updates/2023/september-28th-2023-updates.html) feature in MIST has been extended to conductor managed routers as part of this release. The feature is enabled on all spoke routers by default upon installing the plugin. The feature can be turned off at the authority and router level if needed.
 
 ### Resolved Issues
 
