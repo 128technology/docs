@@ -10,7 +10,7 @@ Beginning with SSR Software versions 6.2.7 and 6.3.4, Hypervisor is supported wi
 | --- | --- |
 | Microsoft Hyper-V | Hyper-V Server 2022 |
 | VMWare ESXi | VMware ESXi version 7.0.0 |
-| Linux KVM | OpenStack 2023.2 |
+| Linux KVM | OpenStack 2023.2 KVM-9.0.0-10 |
 | Memory | 8GB |
 | Disk Size | 120GB |
 | vCPUs | 4 |
