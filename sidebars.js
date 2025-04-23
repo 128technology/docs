@@ -62,6 +62,7 @@ module.exports = {
     ],
     "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
+      "hypervisor-support",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
       {
@@ -462,6 +463,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.11",
           "release_notes_wan_assurance_plugin_3.10",
           "release_notes_wan_assurance_plugin_3.9",
           "release_notes_wan_assurance_plugin_3.8",
