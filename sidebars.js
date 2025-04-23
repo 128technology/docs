@@ -118,6 +118,7 @@ module.exports = {
     ],
     "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
+      "hypervisor-support",
       "install_vmware_config",
       "intro_initialize_HA_conductor",
       {

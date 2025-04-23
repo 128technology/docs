@@ -52,6 +52,16 @@ The following are use cases for upgrades within an air-gap network.
 Use these procedures for upgrades only. When performing an initial installation of version 6.3.x software or greater, the image-based SSR ISO is required. 
 :::
 
+### Upgrade Considerations
+
+**Offline-Mode: Upgrading 6.3.x Conductor Deployments to 6.3.x+**
+
+An issue has been identified that may be observed in conductor deployments running version 6.3.x software, when attempting to upgrade from one 6.3.x patch release to another. This results in the message, `SSR firmware upgrade failed for the local node: SSR upgrade failed after reboot`. To work around this, run `request system software upgrade installation-service` from the command line of the Conductor, after importing the image-based ISO. Once complete, perform the full system upgrade from the Web-interface. This issue will be resolved in a future release. 
+
+**Offline-Mode: Onboarding Routers Running older SSR Software to a 6.3.x Conductor**
+
+We have identified an issue when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
+
 ### Single-Version 6.3.0 Upgrade
 
 The following process is used to upgrade a Conductor and Conductor-managed Routers to **version 6.3.0** of the SSR software. Beginning with SSR software version 6.3.0, a conductor can manage routers running image-based software installations. 
