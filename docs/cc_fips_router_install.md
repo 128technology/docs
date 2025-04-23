@@ -105,7 +105,7 @@ After the Linux installation is complete, the SSR software installation begins. 
 Select `<Yes>` to shut down the system. Remove the bootable media, then power the system up to complete the installation process. 
 
 :::note
-In some cases, the screen above does appear, but becomes unresponsive after you select `Yes`. In this situation, you must manually power down the device, wait 15 seconds, and power it back up.
+In some cases, the screen above does appear, but becomes unresponsive after you select `Yes`. In this situation, you must manually power down the device (hold the power button for approximately 15 seconds), wait 10 seconds, and power it back up.
 :::
 
 ### Initial Boot and Management Network Configuration
