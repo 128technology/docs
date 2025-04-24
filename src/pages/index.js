@@ -1,4 +1,15 @@
 import React from 'react';
+
+function Home() {
+  React.useEffect(() => {
+    window.location.href = 'https://www.juniper.net/documentation/product/us/en/session-smart-router/'
+  }, []);
+  return null;
+}
+export default Home;
+
+/*
+import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -165,3 +176,4 @@ function Home() {
 }
 
 export default Home;
+*/
