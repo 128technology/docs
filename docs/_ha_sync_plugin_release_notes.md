@@ -9,7 +9,7 @@ The plugin must be updated to version 1.1.0 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-2939** Handle User configured host address for fabric-network more gracefully
+- **PLUGIN-2939** Improve handling of user-configured host address for fabric-network
 - **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
 
 ### Release 2.1.0
