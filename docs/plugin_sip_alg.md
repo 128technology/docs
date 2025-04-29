@@ -479,6 +479,14 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 4.0.3
+
+**Release Date:** Apr 30, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+
 ### Release 4.0.2
 
 **Release Date:** Nov 14, 2024

@@ -842,6 +842,24 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ## Monitoring Agent Plugin Release Notes
 
+### Release 4.1.0
+
+**Release Date:** Apr 30, 2025
+
+#### New Features and Improvements:
+
+- **I95-58843** Version agnostic HTTP input for SSR input APIs
+
+The monitoring-agent t128_http input prefers socket based HTTP APIs over legacy implementations.
+
+- **PLUGIN-2628** The CPU collector performance has been improved for SSR >= 6.3
+
+The CPU collector now monitors a static set of datapath and control cores, reducing the collection time of the data.
+
+#### Issues Fixed
+
+- **WAN-4027** Resolve defunct telegraf instances on system startup
+
 ### Release 4.0.1
 
 **Release Date:** Oct 31, 2024
