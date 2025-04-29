@@ -854,7 +854,7 @@ The monitoring-agent t128_http input prefers socket based HTTP APIs over legacy 
 
 - **PLUGIN-2628** The CPU collector performance has been improved for SSR >= 6.3
 
-The CPU collector will new perfer a static set of datapath and control cores to monitor to reduce gathering time for the data.
+The CPU collector now monitors a static set of datapath and control cores, reducing the collection time of the data.
 
 #### Issues Fixed
 
