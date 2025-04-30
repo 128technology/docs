@@ -1096,6 +1096,14 @@ The following configuration is an example only - It is not for use on a system.
 
 ## Release Notes
 
+### Release 4.0.2
+
+**Release Date:** Apr 30, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+
 ### Release 4.0.1
 
 **Release Date:** Oct 31, 2024
