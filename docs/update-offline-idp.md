@@ -5,6 +5,10 @@ sidebar_label: Updating the IDP Signature Database Manually
 
 The IDP signature database is configured by default to download the latest signature updates on a weekly basis. While that timestamp is configurable, in situations where an internal network does not have internet access, updates can be provided by manually downloading the recent updates to the system.
 
+CVE's can exist between clients and Windows or Linux servers even in 
+
+There can be all kinds of CVEs discovered simply between clients and Windows/Linux servers. If we had full customization, we could add things like SSH brute force detection, but those do require SRX commands to enable. As for the SRX commands in this doc — that’s because the IDP is an embedded cSRX. Since we don’t have any way of updating via SSR, CLI commands are required to update the files in the container directly. 
+
 1. Log into the SSR using an account with full shell access (e.g. t128/128tRoutes).
 2. Access the device command line interface:
 sudo docker exec -it csrx cli 
