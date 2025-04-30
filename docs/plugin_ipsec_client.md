@@ -805,6 +805,14 @@ exit
 
 ## Release Notes
 
+### Release 4.1.1
+
+**Release Date:** Apr 30, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+
 ### Release 4.1.0
 
 **Release Date:** Feb 27, 2025
