@@ -8,33 +8,48 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>About</>,
-    link: 'docs/about_128t',
+    title: <>Plan</>,
     description: (
       <>
-        Software Releases, policies, and contribution guidelines
+        See what the SSR can do for your network!
       </>
     ),
   },
   {
-    title: <>Getting Started</>,
+    title: <>Set Up</>,
+    description: (
+      <>
+        Install or upgrade your software.
+      </>
+    ),
+  },
+    {
+    title: <>Manage</>,
+    description: (
+      <>
+        Use the SSR to monitor and manage your network.
+      </>
+    ),
+  },
+  {
+    title: <>About the Session Smart Router</>,
     link: 'docs/intro_getting_started',
     description: (
       <>
-        Install and set up your SSR
+        Start here for a look into the SSR
       </>
     ),
   },
   {
-    title: <>Concepts</>,
-    link: 'docs/concepts_glossary',
+    title: <>Installation Guide</>,
+    link: 'docs/intro_installation',
     description: (
       <>
-        SSR architecture concepts and components
+        Software download and installation information.
       </>
     ),
   },
-  {
+    {
     title: <>Administration</>,
     link: 'docs/config_basics',
     description: (
@@ -44,11 +59,38 @@ const features = [
     ),
   },
   {
-    title: <>WAN Assurance</>,
-    link: 'docs/wan_overview',
+    title: <>Release Notes</>,
+    link: 'docs/release_notes_128t_6.3', 
     description: (
       <>
-        Onboard and Adopt the SSR into the Mist Cloud
+       Release information for SSR Software and components.
+      </>
+    ),
+  },
+  {
+    title: <>Software Upgrades</>,
+    link: 'docs/intro_upgrade_considerations',
+    description: (
+      <>
+        Old software? Need an upgrade? Start here!
+      </>
+    ),
+  },
+  {
+    title: <>Security</>,
+    link: 'docs/config_access_mgmt',
+    description: (
+      <>
+        Understand and configure the security features.
+      </>
+    ),
+  },
+  {
+    title: <>Supported Hardware Platforms</>,
+    link: 'docs/intro_system_reqs',
+    description: (
+      <>
+        List of SSR supported platforms.
       </>
     ),
   },
@@ -62,11 +104,29 @@ const features = [
     ),
   },
   {
-    title: <>CLI Reference</>,
+    title: <>Command References</>,
     link: 'docs/cli_reference',
     description: (
       <>
         Settings and functionality of the SSR CLI
+      </>
+    ),
+  },
+  {
+    title: <>Concepts</>,
+    link: 'docs/concepts_application_discovery',
+    description: (
+      <>
+        Learn how the SSR Software does what it does so well!
+      </>
+    ),
+  },
+  {
+    title: <></>,
+    link: '',
+    description: (
+      <>
+        
       </>
     ),
   },
@@ -80,11 +140,29 @@ const features = [
     ),
   },
   {
-    title: <>Software Releases</>,
-    link: 'docs/about_releases',
+    title: <>WAN Assurance</>,
+    link: 'docs/wan_overview',
     description: (
       <>
-        List of all SSR software releases
+        Onboard and Adopt the SSR into the Mist Cloud
+      </>
+    ),
+  },
+  {
+    title: <></>,
+    link: '',
+    description: (
+      <>
+        
+      </>
+    ),
+  },
+  {
+    title: <>High Availability</>,
+    link: 'docs/config_ha',
+    description: (
+      <>
+        Learn about HA options and configuration
       </>
     ),
   }
