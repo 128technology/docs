@@ -72,6 +72,7 @@ module.exports = {
       },
     ],
     "Supported Hardware Platforms":[
+      "supported-devices-overview",
       "intro_system_reqs",
       "config_firewall_ports",
       "about_supported_platforms",
@@ -79,6 +80,7 @@ module.exports = {
       "rma_wan_assurance",
     ],
     "Concepts": [
+      "concepts-overview",
       "concepts_application_discovery",
       "concepts_EthOverSVR",
       "concepts_ha_theoryofoperation",
@@ -331,6 +333,7 @@ module.exports = {
         },
     ],
     "Security":[
+      "security-overview",
       {
         "type": "category",
         "label": "Access Management and Authentication",
