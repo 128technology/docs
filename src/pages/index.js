@@ -12,6 +12,7 @@ const features = [
     description: (
       <>
         See what the SSR can do for your network!
+        _______________________________________________
       </>
     ),
   },
@@ -20,6 +21,7 @@ const features = [
     description: (
       <>
         Install or upgrade your software.
+        _______________________________________________
       </>
     ),
   },
@@ -28,6 +30,7 @@ const features = [
     description: (
       <>
         Use the SSR to monitor and manage your network.
+        _______________________________________________
       </>
     ),
   },
@@ -39,7 +42,7 @@ const features = [
         Start here for a look into the SSR
       </>
     ),
-  },
+  },  
   {
     title: <>Installation Guide</>,
     link: 'docs/intro_installation',
@@ -49,7 +52,7 @@ const features = [
       </>
     ),
   },
-    {
+  {
     title: <>Administration</>,
     link: 'docs/config_basics',
     description: (
@@ -78,7 +81,7 @@ const features = [
   },
   {
     title: <>Security</>,
-    link: 'docs/seurity-overview',
+    link: 'docs/security-overview',
     description: (
       <>
         Understand and configure the security features.
@@ -126,7 +129,7 @@ const features = [
     link: '',
     description: (
       <>
-        
+       
       </>
     ),
   },
