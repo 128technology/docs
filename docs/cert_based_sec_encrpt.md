@@ -3,9 +3,9 @@ title: Certificate-based Security Encryption
 sidebar_label: Certificate-based Security Encryption
 ---
 
-Security is a critical component of SD-WAN products in today’s market. The effectiveness of any security strategy relies on the strength of its security algorithm and how related information is exchanged between participants.
+Security is a critical component of SD-WAN products in today’s world. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
-The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network, as well as a peer-to-peer security key exchange between SSRs. The configuration is no longer used as the vehicle for distributing and managing security keys. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network, as well as a peer-to-peer security key exchange between SSRs. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
 ## How Does It Work?
 
@@ -33,7 +33,7 @@ The following are some details of certificate security.
 
 - The Trusted Platform Module (TPM) stores the private key of the base certificate. The certificate and any keys are not included in any configuration.
 
-- Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines.
+- Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines. 
 
 - When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create an elliptic-curve public/private key pair (see [RFC8422]) 
 
