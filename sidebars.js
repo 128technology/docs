@@ -361,6 +361,7 @@ module.exports = {
           "sec-usb-security",
           "sec-disable-console-output",
           "cert_based_sec_encrpt",
+          "svr-ztna",
         ],
       },
       {

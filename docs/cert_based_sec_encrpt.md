@@ -7,11 +7,7 @@ Security is a critical component of SD-WAN products in today’s world. The effe
 
 The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network, as well as a peer-to-peer security key exchange between SSRs. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
-## How Does It Work?
-
-The security rekeying mechanism is configured at the Authority, and requires that all routers and conductors are running the same version of software that supports this capability. Any SSR unable to participate in the key exchange (running an older version of software) will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
-
-### Certificate Management 
+## Certificate Management 
 
 Certificate management is performed from the CLI using the commands and parameters provided in Configuration Commands and Parameters. The Certificate Signing Request Workflow is interactive, asking the user what they would like placed in the CSR. The following three validity checks take place upon importing a certificate:
 
@@ -84,15 +80,6 @@ Peer validation is done whenever a new certificate is added, or peer configurati
 The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
 
 When receiving a certificate from a peer router and performing validation, the receiving router must extract the peer router's public key and save it. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
-
-### Peer Key and Rekey
-A single symmetric key is used for all paths between two routers. The key is saved and remains valid during network outages and path failures, until a new key is accepted as a replacement.
-
-During the rekeying period the old key is used. A wait time of 30 seconds is added post key computation to prevent any retransmitted packets, delayed packets, or long latency packets not having a key ready for use.
-
-If a peer sends a Key Request to a peer for which there is no valid key and receives no response, then the peer path remains out of service until there is a valid response.
-
-The peer continues to resend requests at periodic intervals as defined in the configuration setting `authority > security-key-management > peer-key-retransmit-interval`. If there is no response after the time defined by `authority > security-key-management > peer-key-timeout`, the peer path is declared invalid and removed from service. Once the peer is taken out of service due to key timeout, it will continue to send rekey attempts at the `peer-key-timeout intervals`, or upon interface state change.
 
 ## High Availability
 
@@ -180,7 +167,7 @@ Audit events and logs are generated for the following events:
  Permitted:          True
 ```
 
-### Show Stats Commands
+### Show Stats Commands 
 
 #### Event Counters
 
@@ -205,75 +192,5 @@ Audit events and logs are generated for the following events:
 `show stats security peer certificate invalid` 
 `show stats security peer certificate revoked` 
 
-### Configuration Commands and Parameters
 
-**`enhanced-security-key-management`**
-
-- authority > enhanced-security-key-management
-- Boolean, default=false. Flag for using the security key management capabilities. Restart of the entire authority is required if enabled post deployment.
-
-**`security-key-management`**
-
-- authority > security-key-management
-- Container for authority-wide security policies pertaining to SVR encryption.
-
-**`peer-key-rekey-interval`**
-
-- authority > security-key-management > peer-key-rekey-interval
-- Hours between security key regeneration for peer routers
-- uint value of 0-720, units = hours, default = 24
-
-**`peer-key-retransmit-interval`**
-
-- authority > security-key-management > peer-key-retransmit-interval
-- Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged.
-- uint value of 5-3600, units = seconds, default = 30.
-
-**`peer-key-timeout`**
-
-- authority > security-key-management > peer-key-timeout
-- Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged.
-- uint value, units = seconds, default = 3600.
-
-**`invalid-certificate-behavior`**
-
-- authority > security-key-management > invalid-certificate-behavior
-- Behavior when a certificate is revoked, expired, or invalid.
-- enumeration of `fail-soft `or `fail-hard`. Default = `fail-soft`.
-- `fail-soft` generates an alert indicating action needs to be taken.
-- `fail-hard` removes all peering relationships. **Does it also provide an alert as the soft fail does?**
-
-**`ca-profile`**
-
-- authority > security-key-management > ca-profile
-- Container for certificate authority properties in use with SVR certificates.
-
-**ca-profile url**
-
-- authority > security-key-management > ca-profile > url
-- Location of the CA.
-
-**`revocation-check-interval`**
-
-- authority > security-key-management > ca-profile > revocation-check-interval
-- Hours between security key revocation check.
-- uint value of 0-720, units = hours, default = 48.
-
-**`key-exchange-algorithm`**
-
-- authority > security-key-management > key-exchange-algorithm
-- The algorithm to use for exchanging keys between peers.
-- enumeration of diffie-hellman, ml-kem, or diffie-hellman-ml-kem.
-
-**`diffie-hellman-key-size`**
-
-- authority > security-key-management > diffie-hellman > diffie-hellman-key-size
-- Definition of the key size to use when key-exchange-algorithm is set to diffie-hellman.
-- Enumeration of the values 1024, 2048 or 4096.
-
-**`ml-kem-key-size`**
-
-- authority > security-key-management > ml-kem > ml-kem-key-size
-- Definition of the key size to use when key-exchange-algorithm is set to ml-kem.
-- Enumeration of the values 512, 768 or 1024.
 
