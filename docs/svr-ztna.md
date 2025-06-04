@@ -5,7 +5,7 @@ sidebars-label: SVR Zero Trust Network Architecture
 
 Security is a critical component of SD-WAN products in today’s market. The SSR (Session Smart Router) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata and authentication for metadata.
 
-As an example, lets look at the needs of a financial institution. They have to keep transaction traffic secure. If it is not kept secure, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time common with IPSec. This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If it is not kept secure, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time common with IPSec. This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
 In a newly deployed network, SVR ZTNA is more secure than the default security implementation of SVR, and far more secure than IPSec. SVR ZTNA affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations.
 
@@ -69,7 +69,7 @@ config
     authority
         enhanced-security-key-management  true
 ```
-And configure a `peering-common-name` on each router. This enables SVR and key rotation between all associated routers.
+And configure a `peering-common-name` on each router. This enables SVR and key rotation between all associated routers, and provides excellent security.
 
 ```
         router                            combo-east
