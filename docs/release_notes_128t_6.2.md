@@ -50,7 +50,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-59758 Prompt for password change:** The user is now prompted to change the admin, t128, and root passwords during installation. The password is changed to the same value in all three fields. 
 ------
-- **I95-60038 `show fib` lookup fails for IPv6 addresses:** 
+- **I95-60038 `show fib` lookup fails for IPv6 addresses:** In an HTTP request for a FIB lookup containing an IPv6 address, the IPv6 address has ":". These are typically escaped using "%3A". But while processing the FIB lookup request, fields in the query parameters are not un-escaped, and the "%3A" in Ipv6 address makes it invalid. The code has been updated to un-escape the query parameters before processing.
+------
+- **I95-60180 CentOS 7 still shows on install screen:** After the OS rebranding to SSR OS, the option to install erroneously shows on the install screen. This has been removed. 
+------
+- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
+------
+- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** 
+
 
 
 
