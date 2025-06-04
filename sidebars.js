@@ -53,6 +53,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance Plugin",
         "items": [
+          "release_notes_wan_assurance_plugin_3.11",
           "release_notes_wan_assurance_plugin_3.10",
           "release_notes_wan_assurance_plugin_3.9",
           "release_notes_wan_assurance_plugin_3.8",
@@ -116,7 +117,7 @@ module.exports = {
       "install_univ_iso",
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
-      "intro_installation_image",      
+      "intro_installation_image",
     ],
     "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
@@ -249,7 +250,7 @@ module.exports = {
           "events_events",
           "config_alarm_suppression",
           "howto_maintenance_mode",
-          ],  
+          ],
         },
         {
         "type": "category",
@@ -261,20 +262,20 @@ module.exports = {
           "config_nat_pools",
           "ts_nat_troubleshooting",
           ],
-        }, 
+        },
         {
         "type": "category",
         "label": "Network Features",
         "items": [
           "config_dhcp",
-          "config_session_recovery",      
+          "config_session_recovery",
           "config_forward_error_correction",
           "config_management_over_forwarding",
           "config_domain-based_web_filter",
           "config_EthoSVR",
           "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
-          "config_gre_tunnel",      
+          "config_gre_tunnel",
           "config_service_health",
           "config_static_hostname_mapping",
           "config_transport_encryption",
@@ -287,7 +288,7 @@ module.exports = {
         "items": [
           "config_dscp_steering",
           "config_dscp_preservation",
-          "config_vrf_learning",      
+          "config_vrf_learning",
           "config_session_optimization",
           "config_bgp",
           "config_vrf_route_leaking",
@@ -296,14 +297,14 @@ module.exports = {
           "config_bfd_tunnel",
           "howto_tune_bfd",
           "howto_config_PPPoE",
-          "howto_pppoe_vlan",      
+          "howto_pppoe_vlan",
           "config_multicast",
           "config_lacp",
           "howto_update_bios",
           "howto_lte",
           "bcp_lte_peering",
           ],
-        },  
+        },
         {
         "type": "category",
         "label": "SNMP",
@@ -316,7 +317,7 @@ module.exports = {
         {
         "type": "category",
         "label": "Tenants",
-        "items": [        
+        "items": [
           "config_tenants",
           "bcp_tenants",
           ],
@@ -402,7 +403,7 @@ module.exports = {
           "cc_fips_appendix",
         ],
       },
-    ],  
+    ],
     "High Availability": [
       "config_ha",
       "config_dual_router_ha",
