@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "/SysSchema/dita13/dtd/technicalContent/dtd/topic.dtd">
 <dita>
-<topic id="ipsec-client-plugin">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="ipsec-client-plugin" xml:lang="en-US">
   <title>IPsec Client plugin</title>
   <shortdesc></shortdesc>
   <body>
     <p>The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the SSR. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the SSR will failover between them. This is accomplished by performing a <xref href='plugin_intro.md' format='dita' scope='local' xtrf='#service-function-chaining'>Service Function Chain (SFC)</xref> with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your SSR.</p>
-<p>The instructions for installing and managing the plugin can be found <xref href='plugin_intro.md' format='dita' scope='local' xtrf='#installation-and-management'>here</xref>.</p>
+<p>:::note
+The instructions for installing and managing the plugin can be found <xref href='plugin_intro.md' format='dita' scope='local' xtrf='#installation-and-management'>here</xref>.
+:::</p>
   </body>
 </topic>
-<topic id="configuration">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="configuration" xml:lang="en-US">
   <title>Configuration</title>
   <shortdesc></shortdesc>
   <body>
@@ -18,41 +21,45 @@
 * service-route's to route the traffic through the tunnels</p>
   </body>
 </topic>
-<topic id="profiles">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="profiles" xml:lang="en-US">
   <title>Profiles</title>
   <shortdesc></shortdesc>
   <body>
     <p>The router > ipsec-profile's are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint remotes. The table below represents the most common configuration elements for a valid ipsec profile.</p>
 <p>The above configuration example represents a typical profile used for a IPSec provider such as Zscaler. Please tune the settings to match the settings recommended by your provider.</p>
-<p>This plugin can only connect to IPsec endpoints that support pre-shared key authentication.</p>
+<p>:::note
+This plugin can only connect to IPsec endpoints that support pre-shared key authentication.
+:::</p>
 <p>The custom-option allows the user to configure additional obscure libreswan options that are not exposed via the profile and remote configuration.</p>
 <p>:::warning
 The custom-option is added to the libreswan config file; any invalid option could prevent the application from starting up.
 :::</p>
   </body>
 </topic>
-<topic id="clients">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="clients" xml:lang="en-US">
   <title>Clients</title>
   <shortdesc></shortdesc>
   <body>
     <p>Clients are a collection of remote endpoints which can be used for connection and failover purposes.</p>
 <p>The main config properties of a remote endpoint are as follows.</p>
 <p>Example:</p>
-<p>Only one ipsec-client can be configured per node, but two remotes can be configured per client.</p>
+<p>:::note
+Only one ipsec-client can be configured per node, but two remotes can be configured per client.
+:::</p>
 <p>:::warning
 The ipsec-client > name cannot start with ipsec or mast. See notes <xref href='' format='dita' scope='local' xtrf='#release-340'>here</xref>.
 :::</p>
 <p>Each remote represents a unique tunnel destination and can be used to route traffic in/out of the tunnels. Typically each node has two tunnels to act as primary and backup.</p>
   </body>
 </topic>
-<topic id="tunnel-monitoring">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="tunnel-monitoring" xml:lang="en-US">
   <title>Tunnel Monitoring</title>
   <shortdesc></shortdesc>
   <body>
     <p>Tunnel monitoring is a way to monitor the health of individual tunnels and have them automatically restart if they become unhealthy. An ICMP ping is used for the traffic. For each remote, you can specify a destination, interval, timeout, and the number of max retries for each interval.</p>
   </body>
 </topic>
-<topic id="configuring-services-for-tunnel-traffic">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="configuring-services-for-tunnel-traffic" xml:lang="en-US">
   <title>Configuring services for tunnel traffic</title>
   <shortdesc></shortdesc>
   <body>
@@ -63,7 +70,7 @@ The ipsec-client > name cannot start with ipsec or mast. See notes <xref href=''
 <p>Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.</p>
   </body>
 </topic>
-<topic id="directing-traffic-through-the-tunnel">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="directing-traffic-through-the-tunnel" xml:lang="en-US">
   <title>Directing traffic through the tunnel</title>
   <shortdesc></shortdesc>
   <body>
@@ -71,7 +78,7 @@ The ipsec-client > name cannot start with ipsec or mast. See notes <xref href=''
 <p>The service-route > next-hop > interface must point to the corresponding ipsec-client > remote > name-intf to route the traffic through the tunnel. All available SSR routing techniques including using vectors, service-policy, etc., can be leveraged to define how the untrusted traffic is sent over the tunnels, and how to route the traffic. The SSR routes the packets through the appropriate IPSec tunnels and manages the failover as per the policy. On the return path, the encrypted traffic is processed, decrypted, and send back to the client that originated the session.</p>
   </body>
 </topic>
-<topic id="redundancy">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="redundancy" xml:lang="en-US">
   <title>Redundancy</title>
   <shortdesc></shortdesc>
   <body>
@@ -79,21 +86,21 @@ The ipsec-client > name cannot start with ipsec or mast. See notes <xref href=''
 <p>This mode of operation can be configured on a per router basis under router > ipsec.</p>
   </body>
 </topic>
-<topic id="thirdparty-software-licenses">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="thirdparty-software-licenses" xml:lang="en-US">
   <title>Thirdparty Software & Licenses</title>
   <shortdesc></shortdesc>
   <body>
     <ul><li>Libreswan v3.28-1.el7_5 (GNU GPLv2)</li></ul>
   </body>
 </topic>
-<topic id="data-model">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="data-model" xml:lang="en-US">
   <title>Data Model</title>
   <shortdesc></shortdesc>
   <body>
     <p>If the data model doesn’t appear in the PCLI or GUI, make sure that you have restarted the SSR service.</p>
   </body>
 </topic>
-<topic id="logging">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="logging" xml:lang="en-US">
   <title>Logging</title>
   <shortdesc></shortdesc>
   <body>
@@ -102,14 +109,14 @@ The /var/log/128technology/automatedProvisioner.log file at trace level will hol
 Configuration and pillar generation logs can be found on the conductor under /var/log/128technology/plugins/ipsec-client-config-generation.log and /var/log/128technology/plugins/ipsec-client-pillar-generation.log respectively.</p>
   </body>
 </topic>
-<topic id="salt">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="salt" xml:lang="en-US">
   <title>Salt</title>
   <shortdesc></shortdesc>
   <body>
     <p>Salt status can be found on the conductor by utilizing the PCLI’s show assets and show assets <asset-id> commands.</p>
   </body>
 </topic>
-<topic id="pcli-enhancements">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="pcli-enhancements" xml:lang="en-US">
   <title>PCLI Enhancements</title>
   <shortdesc></shortdesc>
   <body>
@@ -119,14 +126,14 @@ Configuration and pillar generation logs can be found on the conductor under /va
 <p>If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring state is included in the pcli commands.</p>
   </body>
 </topic>
-<topic id="metrics">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="metrics" xml:lang="en-US">
   <title>Metrics</title>
   <shortdesc></shortdesc>
   <body>
     <p>Non-persistent metrics were added for the ingress/egress packets/bytes of the tunnels.</p>
   </body>
 </topic>
-<topic id="commands">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="commands" xml:lang="en-US">
   <title>Commands</title>
   <shortdesc></shortdesc>
   <body>
@@ -135,7 +142,7 @@ Configuration and pillar generation logs can be found on the conductor under /va
 <p></p>
   </body>
 </topic>
-<topic id="systemd-services">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="systemd-services" xml:lang="en-US">
   <title>Systemd Services</title>
   <shortdesc></shortdesc>
   <body>
@@ -144,7 +151,7 @@ Configuration and pillar generation logs can be found on the conductor under /va
 * systemctl status 128t-ipsec@<client>.service</p>
   </body>
 </topic>
-<topic id="failover-alarms">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="failover-alarms" xml:lang="en-US">
   <title>Failover Alarms</title>
   <shortdesc></shortdesc>
   <body>
@@ -152,14 +159,14 @@ Configuration and pillar generation logs can be found on the conductor under /va
 <p>Example output when the tunnel for rem1 goes down:</p>
   </body>
 </topic>
-<topic id="generated-ssr-configuration">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="generated-ssr-configuration" xml:lang="en-US">
   <title>Generated SSR Configuration</title>
   <shortdesc></shortdesc>
   <body>
     <p>A KNI per remote is created with the name of the remote and a single egress KNI is created with the name of the ipsec-client.</p>
   </body>
 </topic>
-<topic id="user-specific-ssr-configuration">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="user-specific-ssr-configuration" xml:lang="en-US">
   <title>User-Specific SSR Configuration</title>
   <shortdesc></shortdesc>
   <body>
@@ -167,7 +174,7 @@ Configuration and pillar generation logs can be found on the conductor under /va
 <p>You will need to have the IPsec endpoint bound traffic sent into the KNIs with the names of the remotes. You can use builtin SSR failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPsec endpoint after being encrypted. All of this encrypted traffic will be assigned to the tenant configured under ipsec-client.</p>
   </body>
 </topic>
-<topic id="complete-example-configuration">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="complete-example-configuration" xml:lang="en-US">
   <title>Complete Example Configuration</title>
   <shortdesc></shortdesc>
   <body>
@@ -178,7 +185,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Upon commit, the plugin will generate other configuration as shown below:</p>
   </body>
 </topic>
-<topic id="release-4-1-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-4-1-0" xml:lang="en-US">
   <title>Release 4.1.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -194,7 +201,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: Handle missing state data for tunnels due to "down" state and return valid data.</p>
   </body>
 </topic>
-<topic id="release-4-0-1">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-4-0-1" xml:lang="en-US">
   <title>Release 4.0.1</title>
   <shortdesc></shortdesc>
   <body>
@@ -202,7 +209,7 @@ This example configuration is good to understand all of the concepts but should 
 <ul><li>PLUGIN-2721 Resolve on plugin downgrade config removal</li></ul>
   </body>
 </topic>
-<topic id="release-4-0-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-4-0-0" xml:lang="en-US">
   <title>Release 4.0.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -210,7 +217,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Release Date: Sep 30, 2024</p>
   </body>
 </topic>
-<topic id="release-3-6-2">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-6-2" xml:lang="en-US">
   <title>Release 3.6.2</title>
   <shortdesc></shortdesc>
   <body>
@@ -226,7 +233,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: The DNS resolution from IPSec namespace enforces better controls and limits to avoid a startup race condition due to which the monitoring script was getting stuck forever. The graceful handling would prevent other scripts from getting stuck indefinetly.</p>
   </body>
 </topic>
-<topic id="release-3-6-1">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-6-1" xml:lang="en-US">
   <title>Release 3.6.1</title>
   <shortdesc></shortdesc>
   <body>
@@ -244,7 +251,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: Delete the port 500 and 4500 sessions whenever the tunnel does not come up.</p>
   </body>
 </topic>
-<topic id="release-3-6-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-6-0" xml:lang="en-US">
   <title>Release 3.6.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -264,7 +271,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: When dead-peer detection triggers on an IPsec connection using multiple left and/or right subnets the tunnels will be automatically restarted to avoid an issue encountered with the third-party code.</p>
   </body>
 </topic>
-<topic id="release-3-5-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-5-0" xml:lang="en-US">
   <title>Release 3.5.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -295,7 +302,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution The configuration validation now accepts this configuration flow</p>
   </body>
 </topic>
-<topic id="release-3-4-1">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-4-1" xml:lang="en-US">
   <title>Release 3.4.1</title>
   <shortdesc></shortdesc>
   <body>
@@ -308,7 +315,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: IPSec config handler manages the config changes more gracefully to avoid spurious restarts.</p>
   </body>
 </topic>
-<topic id="release-3-4-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-4-0" xml:lang="en-US">
   <title>Release 3.4.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -324,7 +331,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: Trace level logging is now converted appropriately for IPSec configuration to prevent underlying failures.</p>
   </body>
 </topic>
-<topic id="release-3-3-1">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-3-1" xml:lang="en-US">
   <title>Release 3.3.1</title>
   <shortdesc></shortdesc>
   <body>
@@ -334,7 +341,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution The issue with the libreswan configuration generation has been resolved.</p>
   </body>
 </topic>
-<topic id="release-3-3-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-3-0" xml:lang="en-US">
   <title>Release 3.3.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -359,7 +366,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution The salt states were improved to have better interdependencies to avoid the first time boot failure.</p>
   </body>
 </topic>
-<topic id="release-3-2-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-2-0" xml:lang="en-US">
   <title>Release 3.2.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -371,7 +378,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution The libreswan config generation will generate valid configuration for aes_gcm256.</p>
   </body>
 </topic>
-<topic id="release-3-1-3">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-1-3" xml:lang="en-US">
   <title>Release 3.1.3</title>
   <shortdesc></shortdesc>
   <body>
@@ -379,7 +386,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: The config generation logic for the plugin will handle config with long lines correctly</p>
   </body>
 </topic>
-<topic id="release-2-2-0-3-1-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-2-2-0-3-1-0" xml:lang="en-US">
   <title>Release 2.2.0, 3.1.0</title>
   <shortdesc></shortdesc>
   <body>
@@ -387,7 +394,7 @@ This example configuration is good to understand all of the concepts but should 
 <p>The feature adds support for configuring a custom MSS value on the remote IPSec tunnel interface. The new configuration can be found under router > node > ipsec-client > remote > enforced-mss. The configuration follows the same format as the <xref href='config_reference_guide.md' format='dita' scope='local' xtrf='#network-interface'>network-interface > enforced-mss</xref>.</p>
   </body>
 </topic>
-<topic id="release-1-0-7-2-0-7-2-1-0-3-0-2">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-1-0-7-2-0-7-2-1-0-3-0-2" xml:lang="en-US">
   <title>Release 1.0.7, 2.0.7, 2.1.0, 3.0.2</title>
   <shortdesc></shortdesc>
   <body>
@@ -397,42 +404,42 @@ This example configuration is good to understand all of the concepts but should 
 <p>Resolution: The GUI presentation model was updated to include the missing key field.</p>
   </body>
 </topic>
-<topic id="release-3-0-1">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-0-1" xml:lang="en-US">
   <title>Release 3.0.1</title>
   <shortdesc></shortdesc>
   <body>
     <ul><li>PLUGIN-1092 Added fix for local and remote subnet configuration option to allow a single value or a list of values.</li></ul>
   </body>
 </topic>
-<topic id="release-3-0-0">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-3-0-0" xml:lang="en-US">
   <title>Release 3.0.0</title>
   <shortdesc></shortdesc>
   <body>
     <ul><li>PLUGIN-768 Support the IPSec client plugin in SSR versions 5.1.0 and greater.</li><li>PLUGIN-611 Added support for plugin state. Plugin state information can be accessed on the PCLI using show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-ipsec-client</li></ul>
   </body>
 </topic>
-<topic id="release-1-0-6-2-0-6">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-1-0-6-2-0-6" xml:lang="en-US">
   <title>Release 1.0.6, 2.0.6</title>
   <shortdesc></shortdesc>
   <body>
     <ul><li>PLUGIN-1057 Ensure all critical IPsec client directories are created during installation of the plugin.</li><li>PLUGIN-1053 Added an inactive IPsec client plugin state to allow seamless migration from zscaler. The inactive state is achieved by excluding ipsec-client from the configuration.</li><li>PLUGIN-1046 Provide IPsec client auto-upgrade capability while crossing the SSR version 4.3.0 boundary.</li></ul>
   </body>
 </topic>
-<topic id="release-1-0-5-2-0-5">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-1-0-5-2-0-5" xml:lang="en-US">
   <title>Release 1.0.5, 2.0.5</title>
   <shortdesc></shortdesc>
   <body>
     <ul><li>PLUGIN-994 The ipsec-client > remote-id configuration is not being used correctly when generating the libreswan config.</li></ul>
   </body>
 </topic>
-<topic id="release-1-0-4-2-0-4">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-1-0-4-2-0-4" xml:lang="en-US">
   <title>Release 1.0.4, 2.0.4</title>
   <shortdesc></shortdesc>
   <body>
     <ul><li>PLUGIN-384 Added an MTU configuration option to the ipsec profile.</li><li>PLUGIN-333 The plugin-network ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.</li><li>PLUGIN-336 Using the vector-name configuration option would generate invalid configuration.</li><li>PLUGIN-400 Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.</li></ul>
   </body>
 </topic>
-<topic id="release-1-0-1-2-0-1">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="release-1-0-1-2-0-1" xml:lang="en-US">
   <title>Release 1.0.1, 2.0.1</title>
   <shortdesc></shortdesc>
   <body>

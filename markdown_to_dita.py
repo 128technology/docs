@@ -86,7 +86,7 @@ def convert_html_to_dita(soup, main_title, main_desc):
 
 def build_dita_topic(topic_id, title, shortdesc, body):
     """Creates a DITA topic structure."""
-    return f'''<topic id="{topic_id}">
+    return f'''<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="{topic_id}" xml:lang="en-US">
   <title>{title}</title>
   <shortdesc>{shortdesc}</shortdesc>
   <body>
@@ -108,6 +108,7 @@ def process_links(tag):
 def wrap_in_dita_document(dita_topics):
     """Wraps all DITA topics in a single DITA document with one XML declaration."""
     return f'''<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "/SysSchema/dita13/dtd/technicalContent/dtd/topic.dtd">
 <dita>
 {dita_topics}
 </dita>'''
