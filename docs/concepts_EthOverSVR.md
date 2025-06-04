@@ -71,7 +71,7 @@ If more addresses are involved, they are added to the existing service. All VxLA
 
 ### Ethernet Over Secure Vector Routing across a NAT boundary
 
-Due to differences in the nature of EoSVR vs regular SVR, standard methods for stuck session detection and prevention may not function as well for EoSVR traffic. In scenarios where a spoke router needs to sit behind a NAT from the perspective of the hub it is recommended to have the NAT device set as a 1:1 NAT to the SSR as opposed to doing an NAPT.
+Due to differences in the nature of EoSVR versus regular SVR, standard methods for [Session Recovery Detection](config_session_recovery.md#session-recovery-detection) and prevention may not function as well for EoSVR traffic. In scenarios where a spoke router needs to sit behind a NAT in relation to the hub, it is recommended to set the NAT device to 1:1 NAT to the SSR, rather than implementing NAPT.
 
 
 
