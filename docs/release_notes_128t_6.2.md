@@ -24,6 +24,37 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.9-5-lts
+
+**Release Date:** June 13, 2025
+
+### Resoved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-24806, CVE-2023-26916, CVE-2024-56171, CVE-2025-24928, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2025-27363.
+------
+- **I95-56557 `show service` command not displaying URL:** Resolved an issue where even after adding a URL to the service, the URL was not showing in the output of the `show service` command. This has been resolved. 
+------
+- **I95-57265 Highway crash when generating TSI on Azure instance:** An Azure instance can crash when performing a save tech-support operation, allowing access to an uninitialized RX queue. This invalid access to the uninitilaized RX queue during this operation has been prevented and the issue resolved.
+-------
+- **I95-57508 Traffic from node1 LAN to node1 WAN does not show on graph:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
+------ 
+- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. ADD LINK HERE AND ADD RELEVANT INFO TO COMMAND GUIDE FOR `igmp-interface source-address-prefix-list` RE: BLOCKED/ALLOWED SOUUCE ADDRESSES.
+------
+- **I95-58017 FIB entries on `show fib` not available for all headends:** Resolved an issue with `show fib` stalling and not returning complete data. 
+------
+- **I95-58999 CPU usage for Packet Processing CPU always reads 100%:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted when `transmit-on-standby` fails. The correct information is now provided.
+------
+- **I95-59676 Alarm when default passwords are not changed:** An alarm has been added to detect when default password hashes are detected for standard system users. It is highly recommended that all system user passwords be updated to a secure password as soon as possible.
+------
+- **I95-59745 Routers are stuck in the connected state and not transitioning to running:** Resolved an issue where the router repeatedly sent the same incorrect values to the config during startup, resulting in a race condition. 
+------
+- **I95-59758 Prompt for password change:** The user is now prompted to change the admin, t128, and root passwords during installation. The password is changed to the same value in all three fields. 
+------
+- **I95-60038 `show fib` lookup fails for IPv6 addresses:** 
+
+
+
+
 ## Release 6.2.8-10-lts
 
 **Release Date:** January 30, 2025
