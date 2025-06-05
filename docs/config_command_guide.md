@@ -45059,7 +45059,7 @@ Length: 0-63
 
 Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss.
 
-:::caution
+:::note
 The `packet-resiliency` modes `packet-retransmission` and `packet-retransmission-with-dpi` were developed for a specific customer in a very narrow use case. We do not recommend using either of these settings unless directed to do so by Juniper personnel.
 ::: 
 
