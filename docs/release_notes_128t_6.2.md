@@ -28,6 +28,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** June 13, 2025
 
+### New Features
+
+- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. ADD LINK HERE AND ADD RELEVANT INFO TO COMMAND GUIDE FOR `igmp-interface source-address-prefix-list` RE: BLOCKED/ALLOWED SOUUCE ADDRESSES.
+------
+- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the `service-metric-use-lsa` (under the `routing default-instance`) to `false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
+------
+**I95-60471 Add the ability to configure the RP address of MSDP SA packets:** 
+
+
 ### Resoved Issues
 
 - **The following CVEs have been identified and resolved in this release:** CVE-2024-24806, CVE-2023-26916, CVE-2024-56171, CVE-2025-24928, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2025-27363.
@@ -38,8 +47,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 -------
 - **I95-57508 Traffic from node1 LAN to node1 WAN does not show on graph:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
 ------ 
-- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. ADD LINK HERE AND ADD RELEVANT INFO TO COMMAND GUIDE FOR `igmp-interface source-address-prefix-list` RE: BLOCKED/ALLOWED SOUUCE ADDRESSES.
-------
 - **I95-58017 FIB entries on `show fib` not available for all headends:** Resolved an issue with `show fib` stalling and not returning complete data. 
 ------
 - **I95-58999 CPU usage for Packet Processing CPU always reads 100%:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted when `transmit-on-standby` fails. The correct information is now provided.
@@ -56,7 +63,26 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
 ------
-- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** 
+- **I95-60321 DHCP relay service not reprocessed after adding a new tenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
+------
+- **I95-60505 Download in progress message not clearing after software download complete:** Resolved an issue where the GUI would display that a download was still in progress even though the download had completed.
+------
+- **I95-60507 URL Filter blocking networks not on Block List:** Resolved an issue where module traffic received via SVR was treated as an AppId session. The SVR modules are now handled correctly, preventing inadvertent TCP resets and AppId deny events.
+------
+- **I95-60647 Migrate command not forcing a router re-sync:** Resolved an issue where a router is successfully migrated from one conductor to another conductor and establishes connectivity, but does not apply the configuration from the new conductor until a commit is performed.
+------
+- **I95-60688 Password change upon first login throws error message:** Resolved an issue that prevented users from changing their password on the secondary node of an HA pair. This would happen with both an expired password, or upon first login. 
+------
+- **I95-60730 Mulitcast stream connected to LHR never recovers after failover:** 
+------
+- **I95-60741 KNI no longer passes traffic when it is operationally down:** Resolved an issue with the KNI interface that prevented transmit-through even when the interface is operationally down. This prevented the IPSec Plugin from functioning correctly.
+------
+- **I95-60765 Application module does not clear previous entries:** 
+------
+- **I95-60948 RADIUS secret length limited to 16 characters:** The RADIUS secret size was erroneously set to 16 octets. The allowable RADIUS secret size has been updated from 1 to 255.
+------
+- **I95-60960 ip pim rp X moved from base instance to a VRF after reboot:** 
+
 
 
 

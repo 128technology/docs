@@ -23239,6 +23239,7 @@ configure authority router routing <type>
 | [`rib-policy`](#configure-authority-router-routing-rib-policy) | List of protocol specific RIB policies |
 | [`routing-protocol`](#configure-authority-router-routing-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-service-admin-distance) | Administrative distance for routes generated from services. |
+| [`service-metric-use-lsa`](#configure-authority-router-routing-service-metric-use-sla) | Consider peer path SLA in metric of routes generated from services. |
 | `show` | Show configuration data for &#x27;routing&#x27; |
 | [`static-route`](#configure-authority-router-routing-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB). |
 | [`type`](#configure-authority-router-routing-type) | The type of the routing instance. |
@@ -29274,6 +29275,33 @@ Default: 254
 An unsigned 8-bit integer.
 
 Range: 1-255
+
+## `configure authority router routing service-metric-use-sla`
+
+Consider peer path SLA in metric of routes generated from services.
+
+#### Usage
+
+```
+configure authority router routing service-metric-use-sla [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 
 ## `configure authority router routing static-route`
 
