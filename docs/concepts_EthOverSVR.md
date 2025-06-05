@@ -69,6 +69,9 @@ Service Vxlan_To_R1
 ```
 If more addresses are involved, they are added to the existing service. All VxLAN traffic is sent over SVR with new fields in ebedded in the metadata. 
 
+### Ethernet Over Secure Vector Routing across a NAT boundary
+
+Due to differences in the nature of EoSVR versus regular SVR, standard methods for [Session Recovery Detection](config_session_recovery.md#session-recovery-detection) and prevention may not function as well for EoSVR traffic. In scenarios where a spoke router needs to sit behind a NAT in relation to the hub, it is recommended to set the NAT device to 1:1 NAT to the SSR, rather than implementing NAPT.
 
 
 
