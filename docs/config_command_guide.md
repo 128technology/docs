@@ -45059,6 +45059,10 @@ Length: 0-63
 
 Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss.
 
+:::caution
+The `packet-resiliency` modes `packet-retransmission` and `packet-retransmission-with-dpi` were developed for a specific customer in a very narrow use case. We do not recommend using either of these settings unless directed to do so by Juniper personnel.
+::: 
+
 #### Usage
 
 ```
@@ -45079,12 +45083,12 @@ Default: none
 
 A value from a set of predefined names.
 
-Options:
+#### Options:
 
-- none:                              No resiliency for packet loss.
-- packet-retransmission:             Enable packet loss detection. Lost packets within buffer are retransmitted.
-- packet-retransmission-with-dpi:    Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
-- forward-error-correction:          Enable Forward Error Correction, which will send parity packets to reconstruct lost packets.
+- `none`:                              No resiliency for packet loss.
+- `packet-retransmission`:             Enable packet loss detection. Lost packets within buffer are retransmitted.
+- `packet-retransmission-with-dpi`:    Enable packet loss detection. Lost packets within buffer are retransmitted. Additionally, if the service traffic is contained within a tunnel, apply packet retransmission to individual sessions within the tunnel.
+- `forward-error-correction`:          Enable Forward Error Correction, which will send parity packets to reconstruct lost packets.
 
 ## `configure authority service-policy path-quality-filter`
 
