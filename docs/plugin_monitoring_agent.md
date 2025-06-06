@@ -842,6 +842,16 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ## Monitoring Agent Plugin Release Notes
 
+### Release 4.1.1
+
+**Release Date:** Jun 11, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-3029** Errors conifgureing metric-id with monitoring-agent metric input
+
+    _**Resolution**_ The regular expression for metric-id was adjusted to work correctly with UI and PCLI
+
 ### Release 4.1.0
 
 **Release Date:** Apr 30, 2025
