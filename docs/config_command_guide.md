@@ -23907,6 +23907,7 @@ configure authority router routing igmp interface <node> <interface>
 | [`node`](#configure-authority-router-routing-igmp-interface-node) | Interface node name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;interface&#x27; |
+| [`source-address-prefix-list`](#configure-authority-router-routing-igmp-interface-source-address-prefix-list) | Configure a prefix list of source-addresses from which IGMP messages will be blocked. |
 | [`version`](#configure-authority-router-routing-igmp-interface-version) | IGMP Version |
 
 ## `configure authority router routing igmp interface interface`
@@ -24026,6 +24027,20 @@ configure authority router routing igmp interface node [<leafref>]
 ##### leafref
 
 A reference to an existing value in the instance data.
+
+## `configure authority router routing igmp interface source-address-prefix-list`
+
+Prefix list of source-addresses from which IGMP messages will be blocked.
+
+#### Usage
+
+```
+configure authority router routing igmp interface source-address-prefix-list <list name>
+```
+
+#### Description
+
+Configure a prefix list of source-addresses from which IGMP messages will be blocked. The prefix list is then added to the IGMP configuration. If no `source-address-prefix-list` is provided, then IGMP messages are accepted from all addresses.
 
 ## `configure authority router routing igmp interface version`
 
