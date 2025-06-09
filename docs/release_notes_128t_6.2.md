@@ -74,7 +74,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-60741 KNI no longer passes traffic when it is operationally down:** Resolved an issue with the KNI interface that prevented transmit-through even when the interface is operationally down. This prevented the IPSec Plugin from functioning correctly.
 ------
-- **I95-60765 Application module does not clear previous entries:** 
+- **I95-60765 Application module does not clear previous entries:** Resolved an issue where if a module has services configured, using the REST API to send the clear command to delete those services from the module does not work. The list may appear empty, but the services still persist on the module. This issue has been resolved and the services list is now cleared properly. 
 ------
 - **I95-60948 RADIUS secret length limited to 16 characters:** The RADIUS secret size was erroneously set to 16 octets. The allowable RADIUS secret size has been updated from 1 to 255.
 ------
@@ -82,7 +82,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service. 
 ------
-- **I95-61093 Very long Router first time synchronization:** Resolved an issue where a minion is restarted multiple times resulting an extended time-lapse before synchronization before the first time connection to the Conductor.
+- **I95-61093 Router first time synchronization :** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
 ------
 - **I95-61201 Renaming VRF on an active VRF stream causes a coredump:** Resolved a race condition between the EPM and the service manager that caused the service route monitor to throw an exception to the Service Manager, and cause a coredump.
 
