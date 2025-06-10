@@ -24030,7 +24030,7 @@ A reference to an existing value in the instance data.
 
 ## `configure authority router routing igmp interface source-address-prefix-list`
 
-Prefix list of source-addresses from which IGMP messages will be blocked.
+Prefix list of source-addresses from which IGMP messages will be permitted. All other addresses will be blocked.
 
 #### Usage
 
@@ -24040,7 +24040,7 @@ configure authority router routing igmp interface source-address-prefix-list <li
 
 #### Description
 
-Configure a prefix list of source-addresses from which IGMP messages will be blocked. The prefix list is then added to the IGMP configuration. If no `source-address-prefix-list` is provided, then IGMP messages are accepted from all addresses.
+Configure a prefix list of source-addresses from which IGMP messages will be permitted. The prefix list is then added to the IGMP configuration. If no `source-address-prefix-list` is provided, then IGMP messages are accepted from all addresses.
 
 ## `configure authority router routing igmp interface version`
 
@@ -29305,7 +29305,7 @@ configure authority router routing service-metric-use-sla [<boolean>]
 
 | name | description |
 | ---- | ----------- |
-| boolean | The value to set for this field |
+| boolean | Default: True (enabled). Enable or disable the use of the `service-metric-use-sla` feature. |
 
 #### Description
 
@@ -29320,7 +29320,7 @@ Options: true or false
 
 ## `configure authority router routing static-route`
 
-A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB).
+A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR's Routing Information Base (RIB).
 
 #### Usage
 
