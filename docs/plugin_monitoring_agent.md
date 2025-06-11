@@ -848,7 +848,7 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 #### Issues Fixed
 
-- **PLUGIN-3029** Errors conifiguring metric-id with monitoring-agent metric input
+- **PLUGIN-3029** Errors configuring metric-id with monitoring-agent metric input
 
     _**Resolution**_ The regular expression for metric-id was adjusted to work correctly with UI and PCLI.
 
