@@ -50,7 +50,7 @@ The Security Key Manager is enabled by setting `enhanced-security-key-management
 - HMAC key
 - HMAC cipher 
 
-The router sends this and other information to the peers, which store the metadata key that allows the peer to encrypt and decrypt messages. This allows peer authentication, and the dynamic key generation and exchange provides the encryption of Secure Vector Routing (SVR) traffic. Routers generate their own keys based on X.509 certificates for encrypting metadata (metadata keys) and distribute them to their peers by BFD metadata. Sessions are encrypted using payload keys generated on demand, encrypted, and distributed to the peer by SVR.
+The router sends this and other information to the peers, which store the metadata key that allows the peer to encrypt and decrypt messages. This allows peer authentication, and the dynamic key generation and exchange provides the encryption of Secure Vector Routing (SVR) traffic. Routers generate their own keys based on X.509 certificates for encrypting metadata (metadata keys) and distribute them to their peers by BFD metadata. Sessions are encrypted using payload keys generated on demand, encrypted, and distributed to the peer over SVR.
 
 ### Requirements
 
