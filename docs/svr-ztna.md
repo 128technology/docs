@@ -2,12 +2,17 @@
 title: SVR Zero Trust Network Architecture
 sidebars-label: SVR Zero Trust Network Architecture
 ---
+#### Version History
 
-Security is a critical component of SD-WAN products in today’s market. The SSR (Session Smart Router) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata and authentication for metadata.
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.0.0   | SVR Zero-trust Network Architecture support added. |
 
-As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If it is not kept secure, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time common with IPSec. This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
-In a newly deployed network, SVR ZTNA is more secure than the default security implementation of SVR, and far more secure than IPSec. SVR ZTNA affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations.
+As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If it is not kept secure, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+
+In a newly deployed network, SVR ZTNA is more secure than the default security implementation of SVR, and far more secure than IPSec. SVR ZTNA affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations for any network topology.
 
 Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
@@ -34,9 +39,9 @@ The SVR ZTNA is a more secure, more flexible, and more efficient transport netwo
 
 Key rotation provides a high level of transport security. Configuring this feature creates a specific interval for the router to generate a new security key/payload key and distribute it across the network (or session?).
 
-The security rekeying mechanism (key rotation) is configured on the conductor, at the Authority level, and requires that all routers and conductors are running the same version of software that supports this feature. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
+The security rekeying mechanism (key rotation) is configured on the conductor, at the Authority level, and requires that all routers and conductors are running the same version of software that supports this feature. 
 
-The Security Key Manager is enabled by setting `enhanced-security-key-management` to `true`. The leader node then generates a local metadata key, which includes the following data:
+The Security Key Manager is enabled by setting `enhanced-security-key-management` to `true`. The router then generates a local metadata key, which includes the following data:
 
 - rekey index
 - encryption key
@@ -45,9 +50,11 @@ The Security Key Manager is enabled by setting `enhanced-security-key-management
 - HMAC key
 - HMAC cipher 
 
-The leader node sends this and other information to the peer node(s), which stores the metadata key that allows the peer to encrypt and decrypt messages.
+The router sends this and other information to the peers, which store the metadata key that allows the peer to encrypt and decrypt messages. This allows peer authentication, and the dynamic key generation and exchange provides the encryption of Secure Vector Routing (SVR) traffic. Routers generate their own keys based on X.509 certificates for encrypting metadata (metadata keys) and distribute them to their peers by BFD metadata. Sessions are encrypted using payload keys generated on demand, encrypted, and distributed to the peer by SVR.
 
-This allows peer authentication, and the dynamic key generation and exchange provides the encryption of Secure Vector Routing (SVR) traffic. Routers generate their own keys based on X.509 certificates for encrypting metadata (metadata keys) and distribute them to their peers by BFD metadata. Sessions are encrypted using payload keys generated on demand, encrypted, and distributed to the peer by SVR.
+### Requirements
+
+Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
 
 ### Peer Key and Key Rotation
 
