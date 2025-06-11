@@ -848,11 +848,11 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 #### Issues Fixed
 
-- **PLUGIN-3029** Errors conifguring metric-id with monitoring-agent metric input
+- **PLUGIN-3029** Errors conifiguring metric-id with monitoring-agent metric input
 
     _**Resolution**_ The regular expression for metric-id was adjusted to work correctly with UI and PCLI.
 
-- **WAN-4111** Race condition in concurrent index updates and persistence in telegraf
+- **WAN-4111** Race condition in index updates can cause events to be incorrectly retransmitted
 
     _**Resolution**_ The SSR now reliably tracks and persists the highest observed index to eliminate the race condition.
 
