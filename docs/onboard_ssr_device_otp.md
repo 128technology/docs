@@ -21,7 +21,7 @@ You will be prompted for your username and token to access the web page listing 
 See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for important information about the download process.
 
 :::info
-- Use of a non-GA software release will void the Juniper device warranty. Refer to [**SSR Releases - General Availability**](about_releases.mdx#general-availability) for the list of GA releases.
+- Use of a non-GA software release will void the Juniper device warranty. Refer to [**SSR Releases - General Availability**](about_releases.md#general-availability) for the list of GA releases.
 :::
 
 ### Prerequisites
@@ -30,7 +30,7 @@ See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for import
 
 - The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
 
-- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.mdx#general-availability), and at a minumum, version 5.4.9. 
+- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.md#general-availability), and at a minumum, version 5.4.9. 
 
 ## OTP Re-Imaging Process
 
