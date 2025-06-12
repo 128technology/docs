@@ -3,9 +3,6 @@ title: List of Releases
 sidebar_label: SSR Releases
 ---
 
-import { PesterDataTable } from "@site/src/components/PesterDataTable";
-import { columns, releases, moduleTests } from "./releases.table";
-
 The SSR software follows a semantic versioning scheme. Semantic versioning is a simple scheme built around the `name-X.Y.Z-build-milestone` concept. `X` is incremented for every major release. A major release can be the introduction of major features or when backwards compatibility _may_ be broken. `Y` is a minor release with solely non-breaking feature additions. `Z` is designated for bug fixes in previous releases. `-build` is used to denote the incremental process of development until the culmination in the final release. `-milestone` can be one of `r1`, `r2`, `sts` or `lts`.
 
 Starting with version `5.4.0` the `-build` will reflect the number of iterations the release candidate went through prior to release. The build number will never increment once the software has been released. The build number will be included in the release notes for the respective version.
@@ -39,7 +36,7 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 | Version | Initial GA Version | First Release Shipping Date | Latest GA Version | End of Engineering support | End of Support |
 | -- | -- | -- | -- | -- | -- |
 | Release 6.3 | [6.3.0](release_notes_128t_6.3.md#release-630-107r1) | September 30, 2024 | [6.3.4-r2](release_notes_128t_6.3.md#release-634-7r2) | March 26, 2026 | September 26, 2026 |
-| Release 6.2 | [6.2.0](release_notes_128t_6.2.md#release-620-39r1) | November 16, 2023 | [6.2.8-lts](release_notes_128t_6.2.md#release-628-10-lts) | September 6, 2026 | March 6, 2027 |
+| Release 6.2 | [6.2.0](release_notes_128t_6.2.md#release-620-39r1) | November 16, 2023 | [6.2.9-lts](release_notes_128t_6.2.md#release-629-5-lts) | September 6, 2026 | March 6, 2027 |
 | Release 6.1 | [6.1.0](release_notes_128t_6.1.md#release-610-55r1) | April 14, 2023 | [6.1.13-lts](release_notes_128t_6.1.md#release-6113-7-lts) | July 14, 2025 | January 14, 2026 |
 | Release 5.6 | [5.6.7](release_notes_128t_5.6.md#release-567-4) | March 16, 2023 | [5.6.17](release_notes_128t_5.6.md#release-5617-1) | June 16, 2024 | December 16, 2024 |
 
@@ -64,10 +61,3 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 
 Please refer to the [Software Support Policy](about_support_policy.md) page to understand the lifecycle of SSR releases.
-
-## All Releases - Limited, General Availability and Out of Support
-
-<PesterDataTable
-  columns={ columns }
-  data={ releases }
-/>
