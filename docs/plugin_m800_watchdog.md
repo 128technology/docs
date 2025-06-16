@@ -36,6 +36,14 @@ Feb 12 16:28:14 sol_acm800_dut1 systemd[1]: Stopped Watchdog for the Audiocodes 
 
 ## Release Notes
 
+### Release 3.0.2
+
+**Release Date:** Apr 30, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+
 ### Release 3.0.1
 
 **Release Date:** Oct 31, 2024
