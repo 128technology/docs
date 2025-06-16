@@ -251,7 +251,7 @@ After creating a new ruleset for IDP, the traffic will initially be routed "arou
 
 This procedure provides steps to download and install an updated IDP Signature Database when the device does not have an Internet connection (Air-Gap network). A single compressed file is downloaded, which is then copied to the device.
 
-1. Log into the SSR using an account with full shell access (e.g., `t128`/`128tRoutes`).
+1. Log into the SSR using an account with full shell access.
 2. Access the cSRX command line interface directly from the SSR shell:
 
     `sudo docker exec -it csrx cli` 
@@ -327,9 +327,11 @@ exit
 
 - Check the install status: 
 
-```
-request security idp security-package install status
+`request security idp security-package install status`
 
+Example output:
+
+```
 Done;policy-templates has been successfully updated into internal repository
 (=>/var/db/scripts/commit/templates.xsl)!
 ```
@@ -373,8 +375,11 @@ templates.xml*
 
 4. Check the install status.
 
+`run request security idp security-package install status`
+
+Example output:
+
 ```
-# run request security idp security-package install status
 Done;policy-templates has been successfully updated into internal repository
 (=>/var/db/scripts/commit/templates.xsl)!
 ```
