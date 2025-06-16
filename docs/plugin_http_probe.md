@@ -36,6 +36,7 @@ The plugin leverages the existing SSR reachability detection and enforcement con
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 | sla | container | optional | SLA requirements for http probe. See [SLA](#sla) for more information. |
 | up-delay-timer | uint32 | default: 0 | The duration (in seconds) a probe is held down before transitioning from down to up state |
+| proxy-settings | container | optional | Proxy settings if choosing to use proxy. See [Proxy Settings](#proxy-settings) for more information. |
 
 * Example:
 ```config {9-14}
@@ -118,6 +119,40 @@ exit
 | max-jitter  | uint32 | Maximum difference between the maximum and minimum RTT of the HTTP probe in milliseconds |
 | average-rtt | unit32 | Maximum average RTT for an HTTP probe test to be up in milliseconds |
 | max-loss    | unit8  | Number of failed HTTP(s) probe requests to mark the test down |
+
+
+### Proxy Settings
+
+##### Version History
+
+| Release  | Modification                          |
+| -------- | ------------------------------------- |
+| 2.3.0    | `http-probe-profile > proxy-settings` introduced |
+
+Proxy settings can be used to specify the http proxy server to use when sending probe traffic.
+
+```
+router
+    http-probe-profile      http-probe-1
+        name                http-probe-1
+        url                 http://172.16.2.5:5060/
+        valid-status-code   202
+        valid-status-code   200
+        probe-duration      6
+        probe-interval      10
+        number-of-attemps   3
+        proxy-settings
+            proxy-address   192.168.1.48
+            proxy-port      8080
+        exit
+    exit
+exit
+```
+
+| Name  | Constraints | Type    | Description |
+| --    | --          | --      | --          |
+| proxy-address | key | ipv4-address | Proxy server IP address. |
+| proxy-port | optional | uint32 | Proxy server port. If an address is given, this port will default to port 80. |
 
 
 ### HTTP Probe Log Level
@@ -435,6 +470,17 @@ Completed in 0.21 seconds
 ```
 
 ## Release Notes
+
+### Release 2.3.0
+
+**Release Date:** Apr 30, 2025
+
+#### New Features and Improvements
+- **PLUGIN-2505** HTTP Probe Proxy Support
+
+#### Issues Fixed
+
+- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
 
 ### Release 2.2.0
 
