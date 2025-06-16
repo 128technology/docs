@@ -304,7 +304,7 @@ Ensure the correct URL is used for your device and version.
 
 7. Paste your edited URL into a browser, and press `Enter`. The `offline-update.tar.gz` file is downloaded to your system. 
 
-8. Upload this file onto an SCP server that is reachable by the SSR device through the management connection. This may require enabling the _internal_ tenant to reach the SCP server through a management service on TCP port 22. For information about configuring this port, see the [Management Services](config_management_over_forwarding.md/#management-services) documentation.
+8. Upload this file onto an SCP server that is reachable by the SSR device through the management connection. This may require enabling the _internal_ tenant to reach the SCP server through a management service on TCP port 22. For information about configuring this port, see the [Management Services](config_management_over_forwarding.md#management-services) documentation.
 
 9. Enter the shell and download the security packages using the following CLI commands:
 
