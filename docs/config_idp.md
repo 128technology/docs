@@ -249,9 +249,9 @@ After creating a new ruleset for IDP, the traffic will initially be routed "arou
 
 ## Offline IDP Policy Updates
 
-This procedure provides steps to download and install an updated IDP Signature Database when the device does not have an Internet connection (Air-Gap network). A single compressed file is downloaded, which is then copied to the device.
+This procedure provides steps to download and install an updated IDP Signature Database when the device does not have an internet connection (Air-Gap network). A single compressed file is downloaded, which is then copied to the device.
 
-1. Log into the SSR using an account with full shell access.
+1. Log into the SSR using the admin account (full shell access is necessary).
 2. Access the cSRX command line interface directly from the SSR shell:
 
     `sudo docker exec -it csrx cli` 
@@ -271,12 +271,13 @@ This procedure provides steps to download and install an updated IDP Signature D
 
     `request security idp security-package download full-update` 
 
-
     This command will construct the download URL in the idpd log file, which is specific to the software version running on the device. Since the security engine does not expect to have an internet connection, the command will return a failure status in the CLI. This is expected.
 
-5. To get the correct URL of the security package for your device from the `/var/log/idpd` file, run the following:
+5. Run the following command: 
 
     `show log idpd | match SecPackage`
+
+    This will get the correct URL of the security package for your device from the `/var/log/idpd` file:
 
     **Sample URL** from the `/var/log/idpd` log:
 
@@ -286,7 +287,7 @@ Jul 19 05:58:37 [idp_secpack_download_handler]: URL sent to get the SecPackage i
 "https://signatures.juniper.net/cgi-bin/index.cgi?device=vsrx&adv_dev_info=&feature=idp&os=21.3&build=30&dfa=hs&platform_version=19.4&detector=12.6.130240409&from=&to=latest&type=update&sn=&release=10.3"
 ```
 
-6. Copy the URL from `show log idpd | match SecPackage` and change the "type" parameter value to "offline" as shown below:
+6. Copy the URL from `show log idpd | match SecPackage` and change the **type** parameter value to **offline** as shown below:
 
     `type=update`
 
@@ -302,7 +303,7 @@ https://signatures.juniper.net/cgi-bin/index.cgi?device=vsrx&adv_dev_info=&featu
 Ensure the correct URL is used for your device and version.
 ::: 
 
-7. Paste your edited URL into a browser, and press `Enter`. The `offline-update.tar.gz` file is downloaded to your system. 
+7. Paste your edited URL into a browser on a system with internet access, and press `Enter`. The `offline-update.tar.gz` file is downloaded to your system. 
 
 8. Upload this file onto an SCP server that is reachable by the SSR device through the management connection. This may require enabling the _internal_ tenant to reach the SCP server through a management service on TCP port 22. For information about configuring this port, see the [Management Services](config_management_over_forwarding.md#management-services) documentation.
 
@@ -327,7 +328,7 @@ exit
 
 - Check the install status: 
 
-`request security idp security-package install status`
+    `request security idp security-package install status`
 
 Example output:
 
@@ -348,8 +349,8 @@ Done;policy-templates has been successfully updated into internal repository
 
 In some cases you may see the following error:
 ```
-# run request security idp security-package install policy-templates
-opening file(/var/db/idpd/sec-download/sub-download/SignatureUpdate.xml) failed;No such file or directory
+run request security idp security-package install policy-templates
+opening file (/var/db/idpd/sec-download/sub-download/SignatureUpdate.xml) failed; No such file or directory
 ```
 
 In this instance, the `SignatureUpdate.xml` file has not been copied to the `/var/db/idpd/sec-download/sub-download/` directory.
@@ -360,8 +361,12 @@ Manually copy `SignatureUpdate.xml` and `templates.xml` to `/var/db/idpd/sec-dow
 2.  Transfer the `templates.xml` and `SignatureUpdate.xml` to `/var/db/idpd/sec-download/sub-download/`:
 
 ```
-# run file list /var/db/idpd/sec-download/sub-download/
+run file list /var/db/idpd/sec-download/sub-download/
+```
 
+Example output:
+
+```
 /var/db/idpd/sec-download/sub-download/:
 SignatureUpdate.xml*
 templates.xml*
@@ -369,13 +374,13 @@ templates.xml*
 
 3. Install policy templates:
 
-    `# run request security idp security-package install policy-templates`
+    `run request security idp security-package install policy-templates`
 
     This is processed in async mode. 
 
 4. Check the install status.
 
-`run request security idp security-package install status`
+    `run request security idp security-package install status`
 
 Example output:
 
@@ -385,7 +390,3 @@ Done;policy-templates has been successfully updated into internal repository
 ```
 
 If you require additional assistance, contact Juniper Technical Support.
-
-
-
-
