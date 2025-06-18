@@ -130,4 +130,6 @@ config
             location             usa
             inter-node-security  internal
 ```
+### Real World Configuration
 
+What is a reasonable set of values that a customer would actually configure to truly utilize key rotation in a production environment, that would provide true security? 
