@@ -36,6 +36,77 @@ An issue has been identified that may be observed in conductor deployments runni
 
 We have identified an issue when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 6.3.5-27r2
+
+**Release Date:** June 26, 2025
+
+### Resolved Issues:
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2023-26916
+------
+- **I95-56557 `show service` command not displaying URL:** Resolved an issue where even after adding a URL to the service, the URL was not showing in the output of the `show service` command. This has been resolved. 
+------
+- **I95-56665 Unable to change the default security policy for PIM:** The security and service policies for PIM and MSDP services can now be configured using `bgp-service-generation`.
+------
+- **I95-57145 Unable to change the default security policy for MSDP:** The configured security policy for MSDP SVR generated services can now be changed using `bgp-service-generation`.
+------
+- **I95-57265 Highway crash when generating TSI on Azure instance:** An Azure instance can crash while accessing an uninitialized RX queue. This invalid access has been prevented and the issue resolved.
+-------
+- **I95-57508 Traffic from node1 LAN to node1 WAN does not show on graph:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
+------
+- **I95-58017 FIB entries on `show fib` not available for all headends:** Resolved an issue with `show fib` stalling and not returning complete data. 
+------
+- **I95-58999 CPU usage for Packet Processing CPU always reads 100%:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted when `transmit-on-standby` fails. The correct information is now provided.
+------
+- **I95-59338 Drop in performance on SSR130:** Resolved an issue where disabling kernel mitigations negatively impacted performance. Kernel mitigations are no longer disabled by default. 
+------
+- **I95-59367 Race condition during configuration change, resulting in highway crash:** Resolved a race condition between configuration processing and packet processing, which led to invalid memory access and resulted in a highway crash.
+------
+- **I95-59478 Recover PPPoE after highway crash:** Updated the PPPoE re-init script to resolve an issue where, after a highway crash, the PPPoE NSID becomes invalid and causes the device status to stay `down` even if the monitoring script reports `up`.
+------
+- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](how_to_local_config_override.md#using-the-gui).
+------
+- **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism.
+```
+  "datapath": {
+    "lockupDetectionEnabled": true/false
+  },
+```
+------
+- **I95-59676 Alarm when default passwords are not changed:** An alarm has been added to detect when default password hashes are detected for standard system users. It is highly recommended that all system user passwords be updated to a secure password as soon as possible.
+------
+- **I95-59745 Routers are stuck in the connected state and not transitioning to running:** Resolved an issue where the router repeatedly sent the same incorrect values to the config during startup, resulting in a race condition. 
+------
+- **I95-59758 Prompt for password change:** The user is now prompted to change the `admin`, `t128`, and `root` passwords during installation. The password is changed to the same value for all three users. 
+------
+- **I95-59855 The hardware bootstrapper created bridge is not removed during intialization:** During installation, the hardware bootstrapper creates a bridge in Linux and binds all of the designated LAN NICs to the bridge to allow SSH. This bridge is removed during intialization of the conductor, and Mist managed routers, but is not removed from conductor managed routers. This has been addressed and the issue resolved. 
+------
+- **I95-59860 Incorrect timestamps shown on IDP startup:** The `Engine started` and `Last Commit` timestamps have been updated to provide accurate readings when the engine has not yet started, or the values are not available.
+------ 
+- **I95-59996 Force password change in GUI:** Steps have been added during the initialization workflow in the GUI to require that the user change the default password.
+------
+- **I95-60038 `show fib` lookup fails for IPv6 addresses:** Parsing IPv6 addresses was not performed properly, resulting in an invalid query. The code has been updated to properly parse the request before processing.
+------
+- **I95-60041 Force password change in the CLI:** Steps have been added during the initialization workflow in the CLI to require that the user change the default password.
+------
+- **I95-60180 Installation screen displays incorrect SSR OS:** After the OS rebranding to SSR OS, the option to install erroneously shows on the install screen. This has been removed. 
+------
+- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
+------
+- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the `service-metric-use-lsa` (under the `routing default-instance`) to `false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
+------
+- **I95-60424 Anti-Virus whitelist not implemented:** Resolved an issue where a configuration error in the cSRX generated an error that was being ignored. The error is now handled correctly and the whitelist is implemented.
+------
+- **I95-60438 Max filesize setting not honoring the custom profile setting:** Resolved an issue where the max filesize setting would override to 10000 any time the configured value was less than 10000. 
+------
+- **I95-60465 Warning added when routers running V5.4.0 or less are detected:** Routers running V5.4.0 or less are not compatible with software versions 6.3.5 and higher. A warning has been added, noting that routers must be upgraded to avoid configuration issues.
+------
+
+
+
+
+
+
 ## Release 6.3.4-7r2
 
 **Release Date:** February 21, 2025
