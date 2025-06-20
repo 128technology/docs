@@ -36,9 +36,21 @@ An issue has been identified that may be observed in conductor deployments runni
 
 We have identified an issue when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 6.3.5-27r2
+**SSR-6.3.5 Software and Version Compatibility** 
+
+Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must be managed by conductors running SSR-6.3.5 or higher software. Internal updates to the software prevent successful management from a lower patch version on the conductor when 6.3.5 is installed on the router. For example:
+
+- Conductor: SSR-6.3.5 / Router: SSR-6.3.5 Compatible
+- Conductor: SSR-6.3.5+ / Router: SSR-6.3.5 Compatible
+- Conductor: SSR-6.3.5 / Router: SSR-6.2.6 Compatible
+- Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
+- Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
+
+## Release 6.3.5-27-sts
 
 **Release Date:** June 26, 2025
+
+**Before installing, please see the note above on Conductor/Router compatibility**
 
 ### Resolved Issues:
 
@@ -52,11 +64,11 @@ We have identified an issue when onboarding SSR routers installed with older ver
 ------
 - **I95-57265 Highway crash when generating TSI on Azure instance:** An Azure instance can crash while accessing an uninitialized RX queue. This invalid access has been prevented and the issue resolved.
 -------
-- **I95-57508 Traffic from node1 LAN to node1 WAN does not show on graph:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
+- **I95-57508 `icmp-probe-manager` not running:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
 ------
-- **I95-58017 FIB entries on `show fib` not available for all headends:** Resolved an issue with `show fib` stalling and not returning complete data. 
+- **I95-58017 `show fib` output incomplete on routers:** Resolved an issue with `show fib` stalling and not returning complete data where the next hop entries are in excess of 200. The `show fib` output now correctly handles larger output. 
 ------
-- **I95-58999 CPU usage for Packet Processing CPU always reads 100%:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted when `transmit-on-standby` fails. The correct information is now provided.
+- **I95-58999 Packet Processing CPU reads 100% when interface is operationally down:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted. The correct information is now provided.
 ------
 - **I95-59338 Drop in performance on SSR130:** Resolved an issue where disabling kernel mitigations negatively impacted performance. Kernel mitigations are no longer disabled by default. 
 ------
@@ -93,13 +105,13 @@ We have identified an issue when onboarding SSR routers installed with older ver
 ------
 - **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
 ------
-- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the `service-metric-use-lsa` (under the `routing default-instance`) to `false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
+- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting `routing default-instance > service-metric-use-lsa > false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
 ------
 - **I95-60424 Anti-Virus whitelist not implemented:** Resolved an issue where a configuration error in the cSRX generated an error that was being ignored. The error is now handled correctly and the whitelist is implemented.
 ------
-- **I95-60438 Max filesize setting not honoring the custom profile setting:** Resolved an issue where the max filesize setting would override to 10000 any time the configured value was less than 10000. 
+- **I95-60438 `anti-virus-profile custom-profile max-filesize` setting not honoring the custom profile setting:** Resolved an issue when configuring a custom anti-virus profile, configuring a value for the `max-filesize` was not honored. Any time the filesize was set to any value less than 10,000 bytes (default) it would be overridden and set to back to 10,000 bytes. This issue has been resolved. 
 ------
-- **I95-60465 Warning added when routers running V5.4.0 or less are detected:** Routers running V5.4.0 or less are not compatible with software versions 6.3.5 and higher. A warning has been added, noting that routers must be upgraded to avoid configuration issues.
+- **I95-60465 Warning added when routers running SSR-5.4.0 or less are detected:** Routers running version 5.4.0 or less are not compatible with software versions 6.3.5 and higher. A warning has been added, noting that routers must be upgraded to avoid configuration issues.
 ------
 - **I95-60471 Add the ability to configure the RP address of MSDP SA packets:** The `router-id` command has been added to provide a method to configure a general routing `router-id`. When sending an MSDP SA message, the configured `router-id` will be used as the **RP Address** field. For example, `config authority router hub1 routing default-instance router-id 10.10.110.10`.
 ------
@@ -109,7 +121,7 @@ We have identified an issue when onboarding SSR routers installed with older ver
 ------
 - **I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:** Resolved an issue where assets would transition to `Reinitializing` and get stuck there because the asset was unable to succesfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to `Reinitializing`.
 ------
-- **I95-60651 vSSR upgrade from 6.3.0 to 6.3.3 reboots back to 6.3.0:** Resolved an issue where the Conductor was unable to upgrade router packages to the latest version even though the packages were available on the Conductor. A `dnf refresh` now runs to ensure package accessibility. 
+- **I95-60651 SSR upgrade from 6.3.0 to 6.3.3 reboots back to 6.3.0:** Resolved an issue where the Conductor was unable to upgrade router packages to the latest version even though the packages were available on the Conductor. A `dnf refresh` now runs to ensure package accessibility. 
 ------
 - **I95-60688 Password change upon first login throws error message:** Resolved an issue that prevented users from changing their password on the secondary node of an HA pair. This would happen with both an expired password, or upon first login. 
 ------
