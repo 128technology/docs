@@ -471,6 +471,14 @@ Completed in 0.21 seconds
 
 ## Release Notes
 
+### Release 2.3.1
+
+**Release Date:** Jun 18, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-3017** Resolve issue where SLA was not respected due to a mismatch in time magnitude comparisons (seconds vs milliseconds).
+
 ### Release 2.3.0
 
 **Release Date:** Apr 30, 2025

@@ -8,10 +8,10 @@ The Session Smart Networking Platform runs on both bare metal servers and as a v
 
 ### Minimum Platform Specifications
 
-These are the minimum platform specifications for running the SSR Networking Platform software.
+These are the minimum platform specifications for running the SSR Networking Platform software, on bare-metal or for the host platform when running virtualized SSR.
 
 - 4 Core x86_64-v2 processor, single socket
-- 8GB Memory, ECC strongly recommended
+- 8GB Memory, ECC required
 - 120GB Storage
 - 1 DPDK-enabled NIC port for standalone systems (two recommended)
 - 2 DPDK-enabled NIC ports for HA systems (three recommended)
