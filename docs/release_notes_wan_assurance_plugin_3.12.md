@@ -4,7 +4,7 @@ sidebar_label: '3.12'
 ---
 ### Release 3.12.0
 
-**Release Date:** Jun 23, 2025
+**Release Date:** Jun 24, 2025
 
 ### New Features
 - **WAN-2944 App Routing Insights for IDP**
