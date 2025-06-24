@@ -48,7 +48,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 
 ## Release 6.3.5-27-sts
 
-**Release Date:** June 26, 2025
+**Release Date:** July 10, 2025
 
 **Before installing, please see the note above on Conductor/Router compatibility**
 
@@ -68,7 +68,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-58017 `show fib` output incomplete on routers:** Resolved an issue with `show fib` stalling and not returning complete data where the next hop entries are in excess of 200. The `show fib` output now correctly handles larger output. 
 ------
-- **I95-58999 Packet Processing CPU reads 100% when interface is operationally down:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted. The correct information is now provided.
+- **I95-58999 Packet Processing CPU reads 100% when interface is operationally down:** Resolved an issue where an attempt to transmit packets on an operationally down standby interface resulted in a persistent false report of packet processing activity, which led to an erroneous calculation of 100% CPU utilization.
 ------
 - **I95-59338 Drop in performance on SSR130:** Resolved an issue where disabling kernel mitigations negatively impacted performance. Kernel mitigations are no longer disabled by default. 
 ------
