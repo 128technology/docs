@@ -44,7 +44,8 @@ The following diagram provides a look at a typical SSR/SVR deployment.
 In this topology, the selected path through the network is: Host 1 – R2 – R3 – R4 – Host 5
 
 The payload for the first flow - `Blue` - consists of data packets A, B, and C. Additional flows may have the same source and destination (Host 1/Host 5) but to satisfy SLA requirements they could take a different physical path through Router 6.
-This illustrates an important difference between SVR and IPSec tunnels; Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing different flows to have different SLA-driven physical paths. SVR does not have this limitation. 
+
+This illustrates an important difference between SVR and IPSec tunnels; traffic encrypted within an IPSec Tunnel always follows the same path, not allowing different flows to have different SLA-driven physical paths. SVR does not have this limitation. 
 
 ### Key Rotation
 
@@ -123,7 +124,7 @@ config
     authority
         enhanced-security-key-management  true
 ```
-2. Configure a `peering-common-name` on each router. The `peering-common-name` is the identity of the peer router, as defined in the Certificate (self-signed or CA signed) installed on the device. This enables SVR and key rotation between all associated routers, and provides excellent security.
+2. Configure a `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is an alias that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
 
 ```
         router                            combo-east
@@ -134,9 +135,7 @@ config
             inter-node-security  internal
 ```
 
-To identify the `peering-common-name` do this:
-
-Rekeying (Key Rotation) atttributes and default values:
+#### Rekeying (Key Rotation) Atttributes and Default Values
 
 | Configuration Attributes | Description | 
 | --- | --- |
@@ -182,3 +181,8 @@ config
 ### Real World Configuration
 
 What is a reasonable set of values that a customer would actually configure to truly utilize key rotation in a production environment, that would provide true security? 
+
+## Troubleshooting
+
+
+
