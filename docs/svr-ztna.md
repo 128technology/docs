@@ -22,26 +22,37 @@ To understand the value of the SVR zero-trust network architecture (SVR ZTNA), w
 
 | Characteristic | IPSec/IKE | SVRv2 |
 | --- | --- | --- |
-| Payload Encryption | Yes—via ESP | Yes; encrypted with per-Flow AES-CBC-256 payload key. |
-| Encrypt Original IP SA/DA	| Yes—via ESP | Yes; encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
-| Secure Channel to exchange keys | Yes, via IKEv2 | Yes, via Diffie-Hellman-Ephemeral. DH-E provides 4096-bit Peer key used to encrypt BFD Metadata. | 
+| Payload Encryption | ESP | Encrypted with per-Flow AES-CBC-256 payload key. |
+| Encrypt Original IP SA/DA	| ESP | Encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
+| Secure Channel to exchange keys | IKEv2 | Diffie-Hellman-Ephemeral. DH-E provides 4096-bit Peer key used to encrypt BFD Metadata. | 
 | Confidentiality | Payload is encrypted with the IPSec Tunnel key; however, all individual sessions with the same IPSec tunnel share the same key. There is no confidentiality between sessions sharing the same source and destination address. | Payload encrypted with Per-Flow Payload key; SVR Metadata (containing the Per-Flow Payload key) is encrypted with the SVR Metadata Key. Because each flow has a separate key, each flow has confidentiality, even between the same source and destination address. | 
 | Integrity	| ESP Authentication Header | HMAC SHA-384 signature signs all SVR Metadata and/or Payload in SVR packet. | 
-| Authentication | IKEv2 PSK or x.509v3 certificates | Yes. Via SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR| 
+| Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR| 
 | Data Origin Authentication | HMAC-SHA-384 | HMAC SHA-384 signature| 
-| Replay Protection	Yes	| Yes. Nonce added for Replay Protection.| 
-| Perfect Forward Secrecy | Yes	| Yes. Ephemeral Keys in DH-E are seeded by salt. | 
+| Replay Protection | Yes | Nonce added for Replay Protection.| 
+| Perfect Forward Secrecy | Yes	| Ephemeral Keys in DH-E are seeded by salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
 The SVR ZTNA is a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option. 
 
 ## How It Works
 
+The following diagram provides a look at a typical SSR/SVR deployment.
+
+![sample topology](/img/ztna-sample-topo.png)
+
+In this topology, the selected path through the network is: Host 1 – R2 – R3 – R4 – Host 5
+
+The payload for the first flow - `Blue` - consists of data packets A, B, and C. Additional flows may have the same source and destination (Host 1/Host 5) but to satisfy SLA requirements they could take a different physical path through Router 6.
+This illustrates an important difference between SVR and IPSec tunnels; Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing different flows to have different SLA-driven physical paths. SVR does not have this limitation. 
+
+### Key Rotation
+
 Key rotation provides a high level of transport security. Configuring this feature creates a specific interval for the router to generate a new security key/payload key and distribute it across the network (or session?).
 
 The security rekeying mechanism (key rotation) is configured on the conductor, at the Authority level, and requires that all routers and conductors are running the same version of software that supports this feature. 
 
-The Security Key Manager is enabled by setting `enhanced-security-key-management` to `true`. The router then generates a local metadata key, which includes the following data:
+The Security Key Manager is enabled by setting `enhanced-security-key-management` to `true`. The router then generates **a local metadata key**, which includes the following data:
 
 - rekey index
 - encryption key
@@ -50,11 +61,41 @@ The Security Key Manager is enabled by setting `enhanced-security-key-management
 - HMAC key
 - HMAC cipher 
 
-The router sends this and other information to the peers, which store the metadata key that allows the peer to encrypt and decrypt messages. This allows peer authentication, and the dynamic key generation and exchange provides the encryption of Secure Vector Routing (SVR) traffic. Routers generate their own keys based on X.509 certificates for encrypting metadata (metadata keys) and distribute them to their peers by BFD metadata. Sessions are encrypted using payload keys generated on demand, encrypted, and distributed to the peer over SVR.
+### SSR Keys
 
-### Requirements
+The router sends the **metadata key** and other information to the peers, allowing peer authentication and the ability to encrypt and decrypt messages. The peers store this key until a new key is accepted as a replacement. This dynamic key generation and exchange provides the encryption of Secure Vector Routing (SVR) traffic. 
 
-Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
+- Metadata Key (asymmetric – AES-CBC-256)
+    - Transmitted within BFD Metadata
+    - Metadata Key is same for all peer router connections
+    - Encrypts SVR TLVs
+
+Routers generate their own **peer keys** based on X.509 certificates for encrypting metadata and distribute them to their peers by BFD metadata. 
+
+- Peer Key (symmetric)
+    - Generated via DHE/ECDH from PKI
+    - Encrypts BFD Metadata
+
+Sessions are encrypted using **payload keys** generated on demand, encrypted, and distributed to the peer over SVR.
+
+- Payload Key (symmetric – AES-CBC-256)
+    - Transmitted within SVR Metadata
+    - Encrypts Payload per-flow
+
+The following diagram illustrates the SSR Key Exchange process:
+
+![ZTNA Key Exchange](/img/svr-ztna-key-exchange.png)
+
+1. SVR certificates are installed onto the SSR from the Conductor.
+    - SCEP is used to communicate to an intermediate/root CA.
+
+2. The DH-E key exchange between routers creates a **peer key**.
+
+3. Each router generates a **metadata key** and transmits this via BFD Metadata, encrypted using the Peer Key. 
+    - Each Peer creates their own key. 
+    - The originating router encrypts SVR Metadata with the peer’s **metadata key**.
+
+4. Each router generates unique **payload key** per flow, and transmits this key in the metadata TLV, encrypted using the **metadata key** on a router-to-router basis (end-to-end).
 
 ### Peer Key and Key Rotation
 
@@ -66,9 +107,15 @@ If a peer sends a Key Request to a peer for which there is no valid key and rece
 
 The peer continues to resend requests at periodic intervals as defined in the configuration setting `authority > security-key-management > peer-key-retransmit-interval`. If there is no response after the time defined by `authority > security-key-management > peer-key-timeout`, the peer path is declared invalid and removed from service. Once the peer is taken out of service due to key timeout, it will continue to send rekey attempts at the `peer-key-timeout intervals`, or upon interface state change.
 
+### Requirements
+
+SSR-7.0.0 is required on all devices participating in the SVR ZTNA. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
+
 ## Configuration
 
-Configuration is performed on the conductor, at the Authority level, on a per router basis. To accept the default values for enhanced and security key management, simply set `enhanced-security-key-management` to `true`; 
+Configuration is performed on the conductor, at the Authority level, on a per router basis. To accept the default values for enhanced security key management: 
+
+1. Set `enhanced-security-key-management` to `true`; 
 
 ```
 config
@@ -76,7 +123,7 @@ config
     authority
         enhanced-security-key-management  true
 ```
-And configure a `peering-common-name` on each router. This enables SVR and key rotation between all associated routers, and provides excellent security.
+2. Configure a `peering-common-name` on each router. The `peering-common-name` is the identity of the peer router, as defined in the Certificate (self-signed or CA signed) installed on the device. This enables SVR and key rotation between all associated routers, and provides excellent security.
 
 ```
         router                            combo-east
@@ -87,14 +134,16 @@ And configure a `peering-common-name` on each router. This enables SVR and key r
             inter-node-security  internal
 ```
 
-The default values for rekeying (Key Rotation) are the following:
+To identify the `peering-common-name` do this:
+
+Rekeying (Key Rotation) atttributes and default values:
 
 | Configuration Attributes | Description | 
 | --- | --- |
 | key-exchange-algorithm  | Configure Key Exchange Algorithm |
 | payload-key-rekey-interval | Hours between payload security key regeneration. Range is 1-720, or never. Default is 24 hours.  |
 | peer-key-rekey-interval | Hours between security key regeneration for peer routers. Range is 1-720, or never. Default is 24 hours. |
-| peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600, default is 30 seconds. |
+| peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
 | peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
 
 #### Sample Default Configuration: 

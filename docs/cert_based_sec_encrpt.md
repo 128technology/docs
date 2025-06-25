@@ -2,6 +2,11 @@
 title: Certificate-based Security Encryption
 sidebar_label: Certificate-based Security Encryption
 ---
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.0.0   | Certificate-based Security Encryption support added. |
 
 Security is a critical component of SD-WAN products in today’s world. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
@@ -65,7 +70,7 @@ If a certificate expires within a month, a minor alarm is generated.
 If a certificate expires within a week, a major alarm is generated. 
 If a certificate is expired or otherwise invalid, a critical alarm is generated. 
 
-When a router's certificate is about to expire or needs to be replaced, a new certificate can be added to the system using the [installation procedure](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/howto_trusted_ca_certificate). Once the new certificate file has been loaded into the system, an event is triggered to restart the peer authentication procedure again.
+When a router's certificate is about to expire or needs to be replaced, a new certificate can be added to the system using the [installation procedure](howto_trusted_ca_certificate.md). Once the new certificate file has been loaded into the system, an event is triggered to restart the peer authentication procedure.
 
 ### Compromised Certificate
 
