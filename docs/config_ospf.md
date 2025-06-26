@@ -120,7 +120,7 @@ exit
 
 ![OSPF Redistribution](/img/ospfv2-image9.png)
 
-To enable service routing (service-route elements) to leverage the learned routes that a SSR has exchanged via OSPF (or any routing protocol), the “use-learned-routes” selector should be enabled in the appropriate service-route configuration.
+To enable service routing ([service-route elements](concepts_glossary.md#service-routes)) to leverage the learned routes that a SSR has exchanged via OSPF (or any routing protocol), the “use-learned-routes” selector should be enabled in the appropriate service-route configuration.
 ```
 *admin@labsystem1.fiedler (router[name=burlington])# service-route rte_internet
 *admin@labsystem1.fiedler (service-route[name=rte_internet])# use-learned-routes
