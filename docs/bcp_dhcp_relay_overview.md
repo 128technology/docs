@@ -99,6 +99,8 @@ config
 exit
 ```
 
+See [Service Routes](concepts_glossary.md#service-routes) for additional information.
+
 ### Network Interface
 
 On the router processing the DHCP relay requests (Branch 2), the unique tenant created must be applied to the network-interface receiving the DHCP broadcasts. These DHCP request broadcasts are tagged by the tenant and associated with the `dhcp-relay` service. After the association is made, the SSR will convert the broadcast into a unicast and forward it to the IP of the DHCP servers.
