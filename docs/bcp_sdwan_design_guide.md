@@ -115,9 +115,7 @@ Many times, the customer may have an accelerated timeline and wish to deploy wit
 
 One larger consideration for a large deployment is FIB size. FIB entries consume memory resources on the router. One way to avoid this is to avoid creating FIB entries where they are not needed. If a service does not apply to all routers in the configuration, we should restrict it to apply only where it is needed. We can do this by creating router groups. In the first portion of this document, one item was to enumerate the applications used by the customer and to indicate the site categories that used the services, either as the source or destination. These site categories can be used to create router groups, which is a label we can apply in config to any router that fits within this category. In our service configurations, we can configure an applies-to setting that indicates the particular router groups to which it should apply.
 
-### Routing Design
-
-#### Routing Services
+### Routing Design - Service Routes
 
 The SSR allows for routing on more criteria than simply L3 address. Routing decisions can be made based on the services that network operators define, which includes transport protocols and port ranges. As mentioned in the section on service design, in order for any traffic to pass through an SSR, its source must be classified as belonging to a tenant, its destination needs to match a configured service to which this tenant has access, and a next-hop must be available for this service traffic. This section attempts to provide details of where those next-hops come from.
 
@@ -140,6 +138,8 @@ Another non intuitive scenario exists with BGPoSVR and learned routes. If the le
 One design consideration to keep in mind when using BGPoSVR is that for services that leverage these learned routes, a service-route should not be used as they will override the learned routes. This is most applicable to scenarios where breakout internet is preferred to be sent out of the branch as local break out with a fallback path to the data center through a learned default route (for example, if the alternative transport at the branch is MPLS, we can reach the data center SSR over MPLS and allow the data center to route this traffic out to the internet as a fallback mechanism). In this scenario, a service-route should not be used within the branch to influence the traffic out locally (or through an SFC IPsec tunnel). If so, traffic will never fallback to using the learned route. Instead, a static route should be added with a more preferred metric out the local interface. In this case, if the interface goes down, the static route is withdrawn and the learned route will be used.
 
 A single SD-WAN deployment can leverage both BGP over SVR for certain services and service-routes for other services. Likely, the two use of these design options will be driven by the customer's routing architecture in the remote data center that hosts the applications. In the next section, we will explore this in more detail.
+
+For a list of the service route types, see [Service Routes](concepts_glossary.md#service-routes).
 
 #### Integrating into a customer's existing routing infrastructure
 

@@ -46,6 +46,8 @@ FIB:
 
 ```
 
+See [Service Routes](concepts_glossary.md#service-routes) for additional information.
+
 ### FIB Sprawl
 
 The amount of RAM present in the system dictates the maximum number of entries allowed in the FIB table. Therefore, FIB space is a limited resource on the platform and should be considered during configuration design. Design decisions of the tenant/service model for a deployment have a major impact on the size of the FIB. The number of service addresses, transport/port-ranges, and tenant access-policies configured have a major influence on how the FIB is built, as do the number of routes seen in the RIB. 
