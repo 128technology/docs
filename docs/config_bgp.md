@@ -950,6 +950,9 @@ Because routingManager’s active node is non-deterministic, repeated failover t
 
 Graceful restart ensures that even if BGP flaps during failover, the recovery is smooth and impact is minimal.
 
+:::note
+For graceful restart to work as intended, it must be configured on both the SSR and its external BGP peer router.
+:::
 
 ### Configuring BGP `graceful-restart`
 Users can configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. Additionally, the graceful restart mode on BGP neighbors can be configured differently than on the BGP instance. Historically there was no separate neighbor configuration. The graceful restart mode must be explicitly enabled, otherwise the default mode is **helper**. 
