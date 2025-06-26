@@ -924,7 +924,38 @@ BGP neighbor is 11.1.1.5, remote AS 5, local AS 2, external link
 
 ## BGP Graceful Restart
 
-Users can now configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. Additionally, the graceful restart mode on BGP neighbors can be configured differently than on the BGP instance. Historically there was no separate neighbor configuration. The graceful restart mode must be explicitly enabled, otherwise the default mode is **helper**. 
+In some node failover scenarios, it's normal for BGP connections to drop and reconnect. To minimize disruption, we recommend using graceful restart.
+
+**What’s Happening Behind the Scenes**
+
+Imagine a cluster with two nodes (node0 and node1) connected to a BGP peer via a redundant VRRP interface. Node0 is currently active for VRRP, and node1 is standby. Both nodes share synchronized flow and FIB state.
+
+The BGP control plane is managed by a process called routingManager, which also runs in an active/standby mode—independent of the VRRP roles. So, routingManager could be active on either node at any time.
+
+**Two Failover Scenarios**
+1. routingManager is active on node1, node0 fails
+* VRRP on node1 becomes active.
+* routingManager is already active on node1.
+* No BGP flap occurs—traffic continues smoothly.
+2. routingManager is active on node0, node0 fails
+* VRRP on node1 becomes active.
+* routingManager must also fail over to node1.
+* BGP flaps briefly to allow graceful restart and route recovery.
+
+**Why BGP May or May Not Flap**
+
+Because routingManager’s active node is non-deterministic, repeated failover tests may or may not cause a BGP flap. The forwarding plane is always ready to forward traffic quickly due to synchronized state, but without graceful restart, route reconvergence may take longer.
+
+**Key Takeaway**
+
+Graceful restart ensures that even if BGP flaps during failover, the recovery is smooth and impact is minimal.
+
+:::note
+For graceful restart to work as intended, it must be configured on both the SSR and its external BGP peer router.
+:::
+
+### Configuring BGP `graceful-restart`
+Users can configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. Additionally, the graceful restart mode on BGP neighbors can be configured differently than on the BGP instance. Historically there was no separate neighbor configuration. The graceful restart mode must be explicitly enabled, otherwise the default mode is **helper**. 
 
 Example New Data Model Objects
 ```
