@@ -171,7 +171,7 @@ A description of the parameters of the template are listed in the following tabl
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
 | Control Subnet Name  | The name of the management subnet within the VNet. |
 | Control Allowed CIDR      | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet.  |
-| Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered.  |
+| Admin Allowed CIDR      | Allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. Default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered.  |
 | Admin Public Key Data | Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 
 
@@ -314,7 +314,7 @@ A Session Smart Conductor-managed Router can be deployed manually via the [Azure
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * Virtual machine with the Session Smart image specified in the template.
-* The router is deployed with three network interfaces: public, private and optional management interfaces.
+* The router is deployed with three network interfaces: public, private, and optional management interfaces.
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and optional management interfaces have a unique and static public IP address associated.
 
@@ -339,7 +339,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 6. Answer the following questions to launch the deployment of a Conductor-managed Router. For a description of the parameters of the template, please refer to [Launch the Conductor-managed Template](#launch-the-conductor-managed-template).
 
 - Where do you want to deploy it?
-  - Provide the location where the VNet exists in the **Location** field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
+  - Provide the location where the VNet exists in the **Location** field (for example: eastus). See [Locations](https://azure.microsoft.com/en-us/global-infrastructure/locations) for a full list of locations. Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
 - Provide the name of the availability set in the **Availability Set Name** field (for example: `128TSet`).
 - What name do you want to give it?
   - Provide it in the **Instance Name** field (for example: Router).
@@ -448,9 +448,9 @@ A description of the parameters of the template are listed in the following tabl
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
 | Public Subnet Name      | The name of the public subnet within the VNet. |
 | Public Subnet Allowed CIDR     | Corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
-| Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
+| Admin Allowed CIDR      | Allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. Default is set to 0.0.0.0/0 allowing every IP address to reach the interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Private Subnet Name     | The name of the private subnet within the VNet. |
-| Private Subnet Allowed CIDR    | Corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.  |
+| Private Subnet Allowed CIDR    | Corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. Default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.  |
 | [OPTIONAL] Management Subnet Name  | The name of the management subnet within the VNet. |
 | Admin Public Key Data | Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 

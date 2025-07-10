@@ -39,7 +39,7 @@ Please note that deploying Session Smart Routers without a valid token is limite
 :::
 
 #### [Optional] Management Subnet
-This subnet must provide connectivity to the mist cloud
+This subnet must provide connectivity to the Mist cloud
 
 
 ## Deployment
@@ -48,7 +48,7 @@ A Session Smart Router can be deployed manually via the [Azure Portal](https://p
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * Virtual machine with the Session Smart image specified in the template.
-* The router is deployed with three network interfaces: public, private and optional management interfaces.
+* The router is deployed with three network interfaces: public, private, and optional management interfaces.
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
 
@@ -154,7 +154,7 @@ Once the instance is launched with the correct registration-code, the device wil
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys a VM for the SSR with three network interfaces. The template attaches the network interfaces to the VM in the following order: Public, Private and Management. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys a VM for the SSR with three network interfaces. The template attaches the network interfaces to the VM in the following order: Public, Private, and Management. The network interfaces to be used in Mist configuration are as follows:
 
 | Network Interface Name | Subnet           | Mist Config Name     |
 | ---------------------- | ---------------- | ----------------|
@@ -246,7 +246,7 @@ A description of the parameters of the template are listed in the following tabl
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to. |
 | Public Subnet Name      | The name of the public subnet within the VNet. |
 | Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
-| Admin Allowed CIDR      | It allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. By default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
+| Admin Allowed CIDR      | Allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. Default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
 | Private Subnet Name     | The name of the private subnet within the VNet. |
 | Private Subnet Allowed CIDR    | It corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.                                                                             |
 | Management Subnet Name  | [OPTIONAL] The name of the management subnet within the VNet. |
