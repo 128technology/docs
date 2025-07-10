@@ -72,7 +72,23 @@ The user can diff the router current config against either the `last-seen-conduc
 
 Use the command `set config local-override disable` to disable the local override mode. The router fetches the latest configuration from the conductor and applies it to the local configuration. Any changes that were made to the local router while in local override mode will be lost. If you wish to keep the router local configuration changes, they must be made on the conductor prior to disabling local override mode.   
 
-### Show Commands
+### Using the GUI
+
+To disable the local override mode using the user interface: 
+
+1. Select the vertical elipse next to the Validate and Commit buttons.
+
+![Vertical Elipse](/img/local-override-gui-1.png)
+
+2. Select **Disable Local Override** from the menu that appears.
+
+![Disable Local Override](/img/local-override-gui-2.png)
+
+3. A warning message appears. Select **Disable**.
+
+![Disable button](/img/local-override-gui-3.png)
+
+## Show Commands
 
 The following commands are used to view the local configuration override status of the router.
 
