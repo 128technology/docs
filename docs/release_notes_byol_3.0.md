@@ -4,7 +4,7 @@ sidebar_label: '3.0'
 ---
 ## Release 3.0.0
 
-**Release Date:** June 26, 2025
+**Release Date:** July 10, 2025
 
 ### New Features
 - **I95-59197 BYOL support for EL9:** Update The base BYOL image to use Oracle Linux 9.
