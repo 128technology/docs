@@ -67,16 +67,16 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Template](#launch-the-template).
 
-- What version of SSR software do you want to install?
 - What name do you want to give the instance?
-  - Provide it in the **Stack name** field (for example: SSR_1_Router).
-- Where do you want to deploy it?
-  - Select the VPC in the region.
-  - Select the public, private, and management subnets within the VPC.
+  - Provide it in the **Router Name** field (for example: SSR_1_Router).
 - Which Mist organization is going to manage it?
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist organization.
+- What version of SSR software do you want to install?
 - Who is going to be the administrator?
   - Select the IAM user key.
+- Where do you want to deploy it?
+  - Select the VPC in the region.
+  - Select the public, private, and optional management subnets within the VPC.
 8. Click the **Next** button.
 9. Click on the **Create stack** button to launch the deployment.
 
@@ -118,7 +118,7 @@ write_files:
 ### Manual Onboarding
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
 
-1. Log into the instance using the default AWS username `ec2-user` and the key pair provided when launching.
+1. Log into the instance using the default SSR username `t128` and the key pair provided when launching.
 2. Run `/usr/libexec/hardwareBootstrapper128t config-generator`
 3. Follow the prompts to generate and apply the onboarding configuration.
 
@@ -136,12 +136,13 @@ If the device does not show up in the Mist organization or the desired SSR versi
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, private, and Management. The network interfaces to be used in Mist configuration are as follows:
 
 | Network Interface Name | Subnet           | Mist Config Name     |
 | ---------------------- | ---------------- | ----------------|
 | ge-0-0                 | Public           | ge-0/0/0    |
 | ge-0-1                 | Private          | ge-0/0/1    |
+| ge-0-2                 | Management       | Out Of Band Management    |
 
 #### Interface Tagging
 
@@ -149,11 +150,12 @@ In addition to using the cloud formation template, the admin can tag the interfa
 
 | Tag Value | Meaning |
 | --------- | ------- |
-| WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to Mist cloud infrastructure. |
+| WAN       | Interface is marked as WAN for onboarding purposes. Without a MGMT interface, it is assumed to have connectivity to Mist cloud infrastructure. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
+| MGMT       | Interface is marked as MGMT and is assumed to have connectivity to Mist cloud infrastructure. |
 
 :::note
-The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
+The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging. This is automatically done when using the provided templates.
 :::
 
 ## Source / Destination Check
@@ -180,17 +182,18 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Stack name           | Fill out the Instance Name field to provide a name to the VM for the Mist-managed router.|
-| VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
-| Public Subnet ID     | ID of the public subnet within the VPC. |
-| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
-| Private Subnet ID    | ID of the private subnet within the VPC. |
-| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
-| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
-| Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| Router Name          | Name of the VM for the Mist-managed router.|
 | Version | SSR software version installed on the instance. |
+| Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
 | Instance size        | Size of the EC2 instance.|
-| Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+| SSH IAM Key             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+| VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
+| Public Inteface Subnet     | ID of the public subnet within the VPC. |
+| Public Interface Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
+| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
+| Private Interface Subnet    | ID of the private subnet within the VPC. |
+| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
+| Mangement Interface Subnet [OPTIONAL]    | Optional ID of the management subnet within the VPC. |
 
 #### AWS Console
 
@@ -226,17 +229,18 @@ Paste the following JSON content. Please adjust the values to your specific envi
 
 ```
 {
-  "StackName": "<instance name>",
+  "Name": "<instance name>",
+  "Version": "<ssr-version>",
+  "RegistrationCode": "<Registration-code>",
+  "InstanceType": "c5.xlarge",
+  "KeyName": "<ssh-key-name>"
   "VpcId": "<ID of the VPC>",
   "PublicSubnet": "<ID of the public subnet within the VPC>",
   "PublicSubnetAllowedCidr": "0.0.0.0/0",
-  "PrivateSubnet": "<ID of the public subnet within the VPC>",
-  "PrivateSubnetAllowedCidr": "0.0.0.0/0",
   "AdminAllowedCidr": "0.0.0.0/0",
-  "RegistrationCode": "<Registration code>",
-  "SSRVersion": "<ssr-version>",
-  "InstanceType": "c5.xlarge",
-  "KeyName": "<username>"
+  "PrivateSubnet": "<ID of the private subnet within the VPC>",
+  "PrivateSubnetAllowedCidr": "0.0.0.0/0",
+  "ManagementSubnet": "<Optional ID of the management subnet within the VPC>"
 }
 ```
 

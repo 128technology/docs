@@ -64,12 +64,12 @@ To deploy the Session Smart Networking software via the AWS Console:
 7. Answer the following questions to launch the deployment of an SSR. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
 
 - What name do you want to give the instance?
-  - Provide it in the **Stack name** field (for example: Conductor).
+  - Provide it in the **Conductor Name** field (for example: conductor).
 - What version of SSR software do you want to install?
+- What are the artifactory credentials used to install the software?
 - Where do you want to deploy it?
   - Select the VPC in the region.
   - Select the subnet within the VPC.
-- What are the artifactory credentials used to install the software?
 - Who is going to be the administrator?
   - Select the IAM user key.
 8. Click **Next**.
@@ -110,7 +110,8 @@ write_files:
             "mode": "conductor",
             "artifactory-user": "<username>",
             "artifactory-password": "<password>",
-            "node-name": "node0"
+            "node-name": "node0",
+            "cloud-provider": "aws"
         }
 ```
 
@@ -143,14 +144,15 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Stack name           | The Instance Name field provides a name to the VM for the device.|
-| VPC ID               | ID of the existing VPC where the device is going to be deployed. |
-| Public Subnet ID     | ID of the management subnet within the VPC. |
-| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet. |
+| Name           | The Instance Name field provides a name to the VM for the device.|
+| Instance Type        | Size of the EC2 instance.|
+| SSR Version | SSR software version installed on the instance. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
 | Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
-| Version | SSR software version installed on the instance. |
-| Instance size        | Size of the EC2 instance.|
+| VPC ID               | ID of the existing VPC where the device is going to be deployed. |
+| Control Subnet ID     | ID of the control subnet within the VPC. |
+| Control Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet. |
+| Admin Allowed CIDR | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Conductor's GUI. |
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 
 
@@ -171,7 +173,7 @@ Once the deployment of the template is complete, information about the new route
 
 The information listed in the Outputs tab is the following:
 * Instance ID of the Router EC2 instance.
-* Public IP address of the public interface for administration purposes.
+* Public IP address of the Control interface for administration purposes.
 * SSH command to login to the Linux VM.
 
 #### AWS CLI
@@ -188,14 +190,15 @@ Paste the following JSON content. Please adjust the values to your specific envi
 
 ```
 {
-  "StackName": "<instance name>",
-  "VpcId": "<ID of the VPC>",
-  "ManagementSubnet": "<ID of the management subnet within the VPC>",
-  "ManagementSubnetAllowedCidr": "0.0.0.0/0",
+  "Name": "<instance name>",
+  "Version": "<ssr-version>",
+  "InstanceType": "c5.xlarge",
   "ArtifactoryUsername": "<username>",
   "ArtifactoryUsername": "<password>",
-  "SSRVersion": "<ssr-version>",
-  "InstanceType": "c5.xlarge",
+  "VpcId": "<ID of the VPC>",
+  "ControlSubnet": "<ID of the management subnet within the VPC>",
+  "ControlAllowedCidr": "0.0.0.0/0",
+  "AdminAllowedCidr": "0.0.0.0/0",
   "KeyName": "<username>"
 }
 ```
@@ -269,7 +272,7 @@ The following infrastructure must exist in your AWS account:
 * The existing VPC is segmented with at least the following three subnets:
   - **Public Subnet**: This subnet must provide connectivity to enable communication with external/remote SSR peers.
   - **Private Subnet**: This subnet must provide connectivity to internal workloads within the cloud.
-  - **Management Subnet**: This subnet is used for conductor-managed deployments, and has the following requirements:
+  - **[OPTIONAL] Management Subnet**: This subnet is used for conductor-managed deployments, and has the following requirements:
     * The subnet is reachable for SSH for administration purposes.
     * The interface of the Conductor that manages this router must be reachable from this subnet.
 * [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer:
@@ -312,7 +315,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 - What version of SSR software do you want to install?
 - Where do you want to deploy it?
   - Select the VPC in the region.
-  - Select the public, private, and management subnets within the VPC.
+  - Select the public, private, and optional management subnets within the VPC.
 - What are the artifactory credentials used to install the software?
 - What is the control IP address of the Conductor used to manage it?
 - **Optional** What is the secondary control IP address of the Conductor used to manage it?
@@ -354,7 +357,8 @@ write_files:
             "name": "<router-name>",
             "ssr-version": "<version>",
             “mode”: "conductor-managed",
-            “conductor-hosts”: ["<conductor-host>"]
+            “conductor-hosts”: ["<conductor-host>"],
+            "cloud-provider": "aws"
         }
 ```
 | Option | Meaning |
@@ -379,9 +383,9 @@ The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two
 
 | Network Interface name | Subnet           | PCI Address     |
 | ---------------------- | ---------------- | ----------------|
-| ge-0-0                 | Management       | 0000:00:05.0    |
-| ge-0-1                 | Public           | 0000:00:06.0    |
-| ge-0-2                 | Private          | 0000:00:07.0    |
+| ge-0-0                 | Public           | 0000:00:05.0    |
+| ge-0-1                 | Private          | 0000:00:06.0    |
+| ge-0-2                 | Management       | 0000:00:07.0    |
 
 ### Launch the Conductor Managed Template
 
@@ -393,21 +397,22 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Stack name           | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
-| VPC ID               | ID of the existing VPC where the conductor-managed router is going to be deployed. |
-| Public Subnet ID     | ID of the public subnet within the VPC. |
-| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
-| Private Subnet ID    | ID of the private subnet within the VPC. |
-| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
-| Management Subnet ID | ID of the management subnet within the VPC. |
-| Management Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
+| Name           | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
+| Version | SSR software version installed on the instance. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
 | Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
 | Primary Control IP | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
-| Version | SSR software version installed on the instance. |
-| Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+| Instance size        | Size of the EC2 instance.|
+| VPC ID               | ID of the existing VPC where the conductor-managed router is going to be deployed. |
+| Public Subnet ID     | ID of the public subnet within the VPC. |
+| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
+| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
+| Private Subnet ID    | ID of the private subnet within the VPC. |
+| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
+| Management Subnet ID | [OPTIONAL] ID of the management subnet within the VPC. |
+
 
 #### Using the AWS Console
 
@@ -443,20 +448,21 @@ Paste the following JSON content. Please adjust the values to your specific envi
 
 ```
 {
-  "StackName": "<instance name>",
+  "Name": "<instance name>",
+  "Version": "<ssr-version>",
+  "ArtifactoryUsername": "<username>",
+  "ArtifactoryToken": "<password>",
+  "conductorPrimaryControlIP": "<control-ip>",
+  "conductorSecondaryControlIP": "<control-ip>",
+  "InstanceType": "c5.xlarge",
+  "KeyName": "<username>"
   "VpcId": "<ID of the VPC>",
   "PublicSubnet": "<ID of the public subnet within the VPC>",
   "PublicSubnetAllowedCidr": "0.0.0.0/0",
   "PrivateSubnet": "<ID of the public subnet within the VPC>",
   "PrivateSubnetAllowedCidr": "0.0.0.0/0",
   "AdminAllowedCidr": "0.0.0.0/0",
-  "conductorPrimaryControlIP": "<control-ip>",
-  "conductorSecondaryControlIP": "<control-ip>",
-  "ArtifactoryUsername": "<username>",
-  "ArtifactoryUsername": "<password>",
-  "SSRVersion": "<ssr-version>",
-  "InstanceType": "c5.xlarge",
-  "KeyName": "<username>"
+  "ManagementSubnet": "<[OPTIONAL] ID of the management subnet within the VPC>",
 }
 ```
 
@@ -527,6 +533,7 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | --------- | ------- |
 | WAN       | Interface is marked as WAN for onboarding purposes. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
+| MGMT       | Interface is marked as MGMT and is assumed to have SSH connectivity. |
 
 :::note
 The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
