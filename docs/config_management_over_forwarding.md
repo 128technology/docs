@@ -3,6 +3,12 @@ title: Management Traffic over Forwarding Interfaces
 sidebar_label: Management over Forwarding
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.0.0   | Support for IPv6 over management added. |
+
 Management traffic is any service that makes direct contact to another asset, either to retrieve or interface with the configuration and status of hardware components (conductor to router), the core operating system (NTP), features of user interfaces to the OS (DNS), or the business application, sometimes taking subsequent action to maintain or change configurations. All actions ultimately provide underlying support to the service being delivered by the managed resource to its users. Access is typically controlled via a set of privileges and will usually allow either modification and/or viewing of sensitive system configurations. Management traffic includes three categories: management, monitoring, and data backups and restores.
 
 Networking equipment's management traffic typically traverses a separate physical interface for the purposes of network isolation and policing.
@@ -34,6 +40,8 @@ One of the strengths of the SSR data model is to dynamically apply policy only a
 * [IPFIX](config_reference_guide.md#syslog)
 
 ## Configuration
+
+With the release of SSR release 7.0.0, all router to conductor communication along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. However in an IPv6 managed node, devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
 
 When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the SSR packet forwarding engine. Thus, standard SSR forwarding rules apply: any traffic originated by the host operating system that does not match a configured service will be dropped. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
 
@@ -98,6 +106,8 @@ Management interfaces can be configured for redundancy between nodes of a HA pai
 
 
 ### Sample Configuration
+
+**To configure IPv6 addresses, just enter the addresss as you would an IPv4 addresss.
 
 ```
 config

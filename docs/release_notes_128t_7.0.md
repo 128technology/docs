@@ -41,7 +41,7 @@ We have identified an issue when onboarding SSR routers installed with older ver
 
 ### New Features
 
-- **I95-22432 Conductor Management IPv6:** All router to conductor communication along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. However in an IPv6 managed node, devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
+- **I95-22432 Conductor Management over IPv6:** All router to conductor communication along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. However in an IPv6 managed node, devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
 ------
 - **I95-29382 Certificate-based Security Encryption for SVR:** Introduces a new peer-to-peer, certificate-based key exchange mechanism to the SVR protocol. This key exchange avoids mid-network re-encryption, provides the ability to rotate keys as required, and supports all deployment scenarios. The security rekeying mechanism is configured at the Authority, and requires that all routers and conductors be running the same version of software that supports this capability. The existing security key exchange mechanisms continue to exist and will be supported during the transition to the new model. The two security approaches cannot coexist at the same time within an authority. See [Certificate-based Security Encryption](cert_based_sec_encrpt.md) for more information.
 ------
