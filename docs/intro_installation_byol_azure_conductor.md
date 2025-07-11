@@ -124,7 +124,8 @@ write_files:
             "mode": "conductor",
             "artifactory-user": "<username>",
             "artifactory-password": "<password>",
-            "node-name": "node0"
+            "node-name": "node0",
+            "cloud-provider": "azure"
         }
 ```
 
@@ -159,16 +160,18 @@ A description of the parameters of the template are listed in the following tabl
 | Subscription            | Subscription for the deployment. |
 | Resource group          | Select an existing resource group or create a new one. |
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
-| Instance Name           | Provide a name to the VM for the Session Smart Conductor. |
-| Version                 | SSR software version installed on the instance. |
 | Location                | As indicated in the requirements, the Session Smart Conductor is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia).     |
-| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
 | Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above where the device will be deployed. |
-| Management Subnet Name  | The name of the management subnet within the VNet. |
-| Management Allowed CIDR      | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet.  |
+| Instance size        | Select the size of the VM in the field Instance Size. |
+| Instance Name           | Provide a name to the VM for the Session Smart Conductor. |
+| SSR Version                 | SSR software version installed on the instance. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
 | Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
-| Instance size        | Select the size of the VM in the field Instance Size. |
+| Managed Identity | The Azure Managed identity used to manage permissions for the router instance. |
+| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
+| Control Subnet Name  | The name of the management subnet within the VNet. |
+| Control Allowed CIDR      | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet.  |
+| Admin Allowed CIDR      | Allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. Default is set to 0.0.0.0/0 allowing every IP address to reach the management interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered.  |
 | Admin Public Key Data | Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 
 
@@ -215,26 +218,20 @@ Paste the following JSON content. Please adjust the values to your specific envi
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "instanceName": {
-      "value": "<instance name>"
-    },
-    "version": {
-      "value": "<ssr version to be installed>"
-    },
     "location": {
       "value": "<location of the VNet>"
-    },
-    "virtualNetworkName": {
-      "value": "<name of the VNet>"
     },
     "availabilitySetName": {
       "value": "<name of the Availability Set>"
     },
-    "managementSubnetName": {
-      "value": "<name of the management subnet>"
+    "instanceSize": {
+      "value": "Standard_DS3_v2"
     },
-    "managemnetAllowedCidr": {
-      "value": "0.0.0.0/0"
+    "instanceName": {
+      "value": "<instance name>"
+    },
+    "SSR Version": {
+      "value": "<ssr version to be installed>"
     },
     "artifactoryUsername": {
       "value": "The username portion of the artifactory credentials"
@@ -242,8 +239,20 @@ Paste the following JSON content. Please adjust the values to your specific envi
     "artifactoryToken": {
       "value": "The password portion of the artifactory credentials"
     },
-    "instanceSize": {
-      "value": "Standard_DS3_v2"
+    "managedIdentity": {
+      "value": "<name of the managed identity>"
+    },
+    "virtualNetworkName": {
+      "value": "<name of the VNet>"
+    },
+    "controlSubnetName": {
+      "value": "<name of the management subnet>"
+    },
+    "controlAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "adminAllowedCidr": {
+      "value": "0.0.0.0/0"
     },
     "adminPublicKeyData": {
       "value": "<content of ssh-rsa key>"
@@ -296,7 +305,7 @@ The following infrastructure must exist in your Azure subscription:
 * The existing VNet is segmented with at least the following three subnets:
   - **Public Subnet**: This subnet must provide connectivity to enable communication with external/remote SSR peers.
   - **Private Subnet**: This subnet must provide connectivity to internal workloads within the cloud.
-  - **Management Subnet**: This subnet is used for conductor-managed deployments, and has the following requirements:
+  - **[OPTIONAL] Management Subnet**: This subnet is used for conductor-managed deployments, and has the following requirements:
     * The subnet is reachable for SSH for administration purposes.
     * The interface of the Conductor that manages this router must be reachable from this subnet.
 
@@ -305,9 +314,9 @@ A Session Smart Conductor-managed Router can be deployed manually via the [Azure
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * Virtual machine with the Session Smart image specified in the template.
-* The router is deployed with three network interfaces: public, private and management interfaces.
+* The router is deployed with three network interfaces: public, private, and optional management interfaces.
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
-* The public and management interfaces have a unique and static public IP address associated.
+* The public and optional management interfaces have a unique and static public IP address associated.
 
 The following image shows the infrastructure elements deployed:
 
@@ -329,20 +338,20 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 6. Answer the following questions to launch the deployment of a Conductor-managed Router. For a description of the parameters of the template, please refer to [Launch the Conductor-managed Template](#launch-the-conductor-managed-template).
 
+- Where do you want to deploy it?
+  - Provide the location where the VNet exists in the **Location** field (for example: eastus). See [Locations](https://azure.microsoft.com/en-us/global-infrastructure/locations) for a full list of locations. Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
+- Provide the name of the availability set in the **Availability Set Name** field (for example: `128TSet`).
 - What name do you want to give it?
   - Provide it in the **Instance Name** field (for example: Router).
 - What version of SSR software do you want to install?
-- Where do you want to deploy it?
-  - Provide the location where the VNet exists in the **Location** field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
-  - Provide the name of the VNet in the **Virtual Network Name** field (for example: `128T-VNet`).
-  - Provide the name of the availability set in the **Availability Set Name** field (for example: `128TSet`).
+- What are the artifactory credentials used to install the software?
+- Provide the name of the VNet in the **Virtual Network Name** field (for example: `128T-VNet`).
   - Provide the name of the **Public Subnet Name**
   - Provide the name of the **Private Subnet Name**
-  - Provide the name of the **Management Subnet**
+  - Provide the name of the Optional **Management Subnet**
 - What Conductor is going to manage the router?
   - Provide the **Primary Control IP**
   - Optionally, provide the **Seoncdary Control IP**
-- What are the artifactory credentials used to install the software?
 - Who is going to be the administrator?
   - Provide the content of your public SSH key in the `Admin Public Key Data` field.
 
@@ -394,7 +403,8 @@ write_files:
             "name": "<router-name>",
             "ssr-version": "<version>",
             “mode”: "conductor-managed",
-            “conductor-hosts”: ["<conductor-host>"]
+            “conductor-hosts”: ["<conductor-host>"],
+            "cloud-provider": "azure"
         }
 ```
 | Option | Meaning |
@@ -426,23 +436,22 @@ A description of the parameters of the template are listed in the following tabl
 | Subscription            | Subscription for the deployment. |
 | Resource group          | Select an existing resource group or create a new one. |
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
-| Instance Name           | Provide a name to the VM for the Session Smart Router. |
-| Version                 | SSR software version installed on the instance. |
 | Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia).     |
-| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
 | Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above. |
-   |
-| Public Subnet Name      | The name of the public subnet within the VNet. |
-| Public Subnet Allowed CIDR     | Corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
-| Private Subnet Name     | The name of the private subnet within the VNet. |
-| Private Subnet Allowed CIDR    | Corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. By default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.                                                                             |
+| Instance size        | Select the size of the VM in the field Instance Size. |
+| Instance Name           | Provide a name to the VM for the Session Smart Router. |
+| SSR Version                 | SSR software version installed on the instance. |
 | Primary Control IP | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
-| Management Subnet Name  | The name of the management subnet within the VNet. |
-| Management Allowed CIDR      | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet.  |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
 | Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
-| Instance size        | Select the size of the VM in the field Instance Size. |
+| Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
+| Public Subnet Name      | The name of the public subnet within the VNet. |
+| Public Subnet Allowed CIDR     | Corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
+| Admin Allowed CIDR      | Allows for restricting reachability to the management interface of the router to a well known source IP address CIDR range. Default is set to 0.0.0.0/0 allowing every IP address to reach the interface. Once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Session Smart Router will be administered. |
+| Private Subnet Name     | The name of the private subnet within the VNet. |
+| Private Subnet Allowed CIDR    | Corresponds to the source IP CIDR range of the internal workloads/endpoints allowed to originate traffic to the private interface of the router. This field allows for defining a well defined and trusted IP address range. Default is set to 0.0.0.0/0 to allow every workload/endpoint to communicate with the router.  |
+| [OPTIONAL] Management Subnet Name  | The name of the management subnet within the VNet. |
 | Admin Public Key Data | Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys). |
 
 ### Azure Portal
@@ -488,38 +497,20 @@ Paste the following JSON content. Please adjust the values to your specific envi
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "instanceName": {
-      "value": "<instance name>"
-    },
-    "version": {
-      "value": "<ssr version to be installed>"
-    },
     "location": {
       "value": "<location of the VNet>"
-    },
-    "virtualNetworkName": {
-      "value": "<name of the VNet>"
     },
     "availabilitySetName": {
       "value": "<name of the Availability Set>"
     },
-    "publicSubnetName": {
-      "value": "<name of the public subnet>"
+    "instanceSize": {
+      "value": "Standard_DS3_v2"
     },
-    "publicSubnetAllowedCidr": {
-      "value": "0.0.0.0/0"
+    "instanceName": {
+      "value": "<instance name>"
     },
-    "privateSubnetName": {
-      "value": "<name of the private subnet>"
-    },
-    "privateSubnetAllowedCidr": {
-      "value": "0.0.0.0/0"
-    },
-    "managementSubnetName": {
-      "value": "<name of the management subnet>"
-    },
-    "managemnetAllowedCidr": {
-      "value": "0.0.0.0/0"
+    "SSR Version": {
+      "value": "<ssr version to be installed>"
     },
     "conductorPrimaryControlIP": {
         "value" "The primary control IP of the Conductor",
@@ -533,8 +524,29 @@ Paste the following JSON content. Please adjust the values to your specific envi
     "artifactoryToken": {
       "value": "The password portion of the artifactory credentials"
     },
-    "instanceSize": {
-      "value": "Standard_DS3_v2"
+    "managedIdentity": {
+      "value": "Name of the user managed identity resource to be assigned to the Router."
+    },
+    "virtualNetworkName": {
+      "value": "<name of the VNet>"
+    },
+    "publicSubnetName": {
+      "value": "<name of the public subnet>"
+    },
+    "publicSubnetAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "adminAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "privateSubnetName": {
+      "value": "<name of the private subnet>"
+    },
+    "privateSubnetAllowedCidr": {
+      "value": "0.0.0.0/0"
+    },
+    "managementSubnetName": {
+      "value": "<name of the management subnet>"
     },
     "adminPublicKeyData": {
       "value": "<content of ssh-rsa key>"
@@ -583,6 +595,7 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | --------- | ------- |
 | WAN       | Interface is marked as WAN for onboarding purposes. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
+| MGMT       | Interface is marked as MGMT and is assumed to have SSH connectivity. |
 
 ## Troubleshooting
 
