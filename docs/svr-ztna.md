@@ -110,7 +110,7 @@ The peer continues to resend requests at periodic intervals as defined in the co
 
 ### Requirements
 
-SSR-7.0.0 is required on all devices participating in the SVR ZTNA. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
+SSR 7.0.0 is required on all devices participating in the SVR ZTNA. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
 
 ## Configuration
 
@@ -145,7 +145,7 @@ config
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
 | peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
 
-In cases where you want to manually force key rotation on the routers, you can use the `security metadata-key regenerate` command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node and highway process.
+In cases where you want to manually force key rotation on the routers, use the `security metadata-key regenerate` command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
 
 #### Sample Default Configuration: 
 
@@ -180,11 +180,42 @@ config
             location             usa
             inter-node-security  internal
 ```
-### Real World Configuration
+### Sample Advanced Configuration
 
 What is a reasonable set of values that a customer would actually configure to truly utilize key rotation in a production environment, that would provide true security? 
 
 ## Troubleshooting
 
+Logs are available, indicating when metadata keys are generated or received.  
 
+The commands above can be used to query the current state and restart the metadata key generation and distribution process. 
 
+Alarms are generated if the certificate received from the peer is invalid or expires. Reasons may show as `Revoked` or `Malformed`. A more detailed string is returned using the validation API. 
+
+As an example, the following alarm is generated if the certificate state is invalid: 
+
+```
+=============== ===================== ============ ==================== ================ ======================================================================== 
+
+      ID              Time              Severity    Source              Category        Message 
+
+=============== ===================== ============ ==================== ================ ======================================================================== 
+
+combo-east-1:4   2025-01-28 19:07:00   MAJOR       INTERFACE                                DHCP address for interface [wan-intf] has not been resolved 
+combo-east-1:5   2025-01-28 19:07:00   MAJOR       INTERFACE                                DHCP address for interface [lan-intf] has not been resolved 
+combo-east-1:13  2025-01-28 19:12:21   CRITICAL    RTR_WEST_COMBO           PEER            Peer RTR_WEST_COMBO certificate is invalid: expired - testing-detail 
+
+admin@combo-east-1.RTR_EAST_COMBO# show alarms id combo-east-1:13 
+Tue 2025-01-28 19:17:39 UTC 
+✔ Retrieving alarms... 
+============================================================================================ 
+combo-east-1:13 
+============================================================================================ 
+Time: 2025-01-28 19:12:21 
+Severity: CRITICAL 
+Source: RTR_WEST_COMBO 
+Category: PEER 
+Process: stateMonitor 
+Message: Peer RTR_WEST_COMBO certificate is invalid: expired - testing-detail 
+Completed in 0.02 seconds 
+```

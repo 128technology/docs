@@ -41,7 +41,9 @@ One of the strengths of the SSR data model is to dynamically apply policy only a
 
 ## Configuration
 
-With the release of SSR release 7.0.0, all router to conductor communication along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. However in an IPv6 managed node, devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
+:::note
+With the release of SSR 7.0.0, all router to conductor communication, along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. Be advised that in an IPv6 managed node, all devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
+:::
 
 When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the SSR packet forwarding engine. Thus, standard SSR forwarding rules apply: any traffic originated by the host operating system that does not match a configured service will be dropped. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
 
@@ -49,7 +51,7 @@ When enabled, a default route will be configured in Linux's routing table to sen
 Because a default route is added in Linux, all traffic not captured by a static route, will be sent to the SSR. This means that the traffic will either be dropped, or match an existing service and route.
 :::
 
-For each of the [management services](#management-services) configured, the SSR will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `_management_`.
+For each of the [management services](#management-services) configured, the SSR will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `management`.
 
 Each of the service and service-routes share one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration work-flows involving the `generated` flag, refer to the [SSR software documentation](config_basics.md#generated-configuration).
 
