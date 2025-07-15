@@ -23239,6 +23239,7 @@ configure authority router routing <type>
 | [`rib-policy`](#configure-authority-router-routing-rib-policy) | List of protocol specific RIB policies |
 | [`routing-protocol`](#configure-authority-router-routing-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-service-admin-distance) | Administrative distance for routes generated from services. |
+| [`service-metric-use-lsa`](#configure-authority-router-routing-service-metric-use-sla) | Consider peer path SLA in metric of routes generated from services. |
 | `show` | Show configuration data for &#x27;routing&#x27; |
 | [`static-route`](#configure-authority-router-routing-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB). |
 | [`type`](#configure-authority-router-routing-type) | The type of the routing instance. |
@@ -23906,6 +23907,7 @@ configure authority router routing igmp interface <node> <interface>
 | [`node`](#configure-authority-router-routing-igmp-interface-node) | Interface node name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;interface&#x27; |
+| [`source-address-prefix-list`](#configure-authority-router-routing-igmp-interface-source-address-prefix-list) | Configure a prefix list of source-addresses from which IGMP messages will be blocked. |
 | [`version`](#configure-authority-router-routing-igmp-interface-version) | IGMP Version |
 
 ## `configure authority router routing igmp interface interface`
@@ -24025,6 +24027,20 @@ configure authority router routing igmp interface node [<leafref>]
 ##### leafref
 
 A reference to an existing value in the instance data.
+
+## `configure authority router routing igmp interface source-address-prefix-list`
+
+Prefix list of source-addresses from which IGMP messages will be permitted. All other addresses will be blocked.
+
+#### Usage
+
+```
+configure authority router routing igmp interface source-address-prefix-list <list name>
+```
+
+#### Description
+
+Configure a prefix list of source-addresses from which IGMP messages will be permitted. The prefix list is then added to the IGMP configuration. If no `source-address-prefix-list` is provided, then IGMP messages are accepted from all addresses.
 
 ## `configure authority router routing igmp interface version`
 
@@ -29275,9 +29291,36 @@ An unsigned 8-bit integer.
 
 Range: 1-255
 
+## `configure authority router routing service-metric-use-sla`
+
+Consider peer path SLA in metric of routes generated from services.
+
+#### Usage
+
+```
+configure authority router routing service-metric-use-sla [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | Default: True (enabled). Enable or disable the use of the `service-metric-use-sla` feature. |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+
 ## `configure authority router routing static-route`
 
-A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB).
+A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR's Routing Information Base (RIB).
 
 #### Usage
 
