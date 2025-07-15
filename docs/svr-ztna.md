@@ -16,7 +16,7 @@ In a newly deployed network, SVR ZTNA is more secure than the default security i
 
 Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
-## SVRv2 and IPSec
+## SVRv2 and IPSec 
 
 To understand the value of the SVR zero-trust network architecture (SVR ZTNA), we can draw some comparisons against IPSec. Not with IPSec, but against it.  
 
@@ -46,6 +46,27 @@ In this topology, the selected path through the network is: Host 1 – R2 – R3
 The payload for the first flow - `Blue` - consists of data packets A, B, and C. Additional flows may have the same source and destination (Host 1/Host 5) but to satisfy SLA requirements they could take a different physical path through Router 6.
 
 This illustrates an important difference between SVR and IPSec tunnels; traffic encrypted within an IPSec Tunnel always follows the same path, not allowing different flows to have different SLA-driven physical paths. SVR does not have this limitation. 
+
+---
+## Replace or Revoke a Certificate
+
+When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
+
+Soft failure results in a notification that the certificate is no longer valid and that appropriate action must be taken. 
+
+Hard failure results in the same notification, as well as the removal of all peering relationships. This stops the device from participating in SVR. 
+
+---
+
+## Peer Authentication - svrv2
+
+Peer validation is done whenever a new certificate is added, or peer configuration has changed. When a certificate is received from a peer on multiple peer paths, a cached validation response is used. Validation is accomplished by verifying the routerID of its peer matches that of the certificate.
+
+The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
+
+When receiving a certificate from a peer router and performing validation, the receiving router must extract the peer router's public key and save it. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
+
+---
 
 ### Key Rotation
 
@@ -147,6 +168,16 @@ config
 
 In cases where you want to manually force key rotation on the routers, use the `security metadata-key regenerate` command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
 
+---
+### Peer Certificate Validation **svrv2**
+
+config peer-validation 
+    - validate peering connections on this router
+    - values: true/false
+    - default: false
+
+---
+
 #### Sample Default Configuration: 
 
 ```
@@ -219,3 +250,10 @@ Process: stateMonitor
 Message: Peer RTR_WEST_COMBO certificate is invalid: expired - testing-detail 
 Completed in 0.02 seconds 
 ```
+
+---
+### Peer Certificate Validation **svrv2**
+
+(Need example)
+
+

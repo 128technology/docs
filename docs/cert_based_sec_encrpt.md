@@ -4,7 +4,7 @@ sidebar_label: Certificate-based Security Encryption
 ---
 #### Version History
 
-| Release | Modification                |
+| Release | Modification                | 
 | ------- | --------------------------- |
 | 7.0.0   | Certificate-based Security Encryption support added. |
 
@@ -54,13 +54,7 @@ Installing a trusted CA certificate on the SSR uses the existing functionality a
 
 ## Replace or Revoke a Certificate
 
-When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
-
-Soft failure results in a notification that the certificate is no longer valid and that appropriate action must be taken. 
-
-Hard failure results in the same notification, as well as the removal of all peering relationships. This stops the device from participating in SVR.
-
-The following sections describe the procedures for replacing and revoking certificates.
+When a certificate is revoked, expired, or invalid, the SSR generates an alarm. The following sections describe the procedures for replacing and revoking certificates.
 
 ### Expiring Certificate
 
@@ -78,13 +72,7 @@ In the case of a compromised system or certificate, the certificate will be revo
 
 The router periodically checks the Certificate Revocation List (CRL) from existing certificate authority servers for any revocations, according to the interval defined in the configuration. If a revocation has taken place, the router takes the action defined in the configuration (fail-soft or fail-hard). 
 
-## Peer Authentication
 
-Peer validation is done whenever a new certificate is added, or peer configuration has changed. When a certificate is received from a peer on multiple peer paths, a cached validation response is used. Validation is accomplished by verifying the routerID of its peer matches that of the certificate.
-
-The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
-
-When receiving a certificate from a peer router and performing validation, the receiving router must extract the peer router's public key and save it. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
 
 ## High Availability
 
@@ -105,14 +93,6 @@ config certificate-revocation
 	- units: seconds
 	- type: uint32
 	- default: ?
-
-Peer Certificate Validation
-
-config peer-validation 
-	- validate peering connections on this router
-	- values: true/false
-	- default: false
-
 
 ## Troubleshooting
 
@@ -155,10 +135,6 @@ Audit events and logs are generated for the following events:
  Permitted:          True
 ```
 
-- Peer Certificate Validation
-
-(Need example)
-
 - CRL Update
 ```
 ========================================================================================================================================================================================================
@@ -191,7 +167,7 @@ Audit events and logs are generated for the following events:
 `show stats security certificate invalid` 
 `show stats security certificate revoked` 
 
-#### Peer Certificate Event Counters
+#### Peer Certificate Event Counters - SVRv2
 
 `show stats security peer certificate expired` 
 `show stats security peer certificate invalid` 
