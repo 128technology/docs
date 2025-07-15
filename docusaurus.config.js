@@ -3,7 +3,7 @@ module.exports = {
   tagline: 'The documentation source for the Session Smart Networking Platform',
   url: 'https://docs.128technology.com',
   baseUrl: process.env.OFFLINE_DOCS ? '/offline-docs/' : '/',
-  favicon: 'img/favicon.png',
+  favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   onBrokenAnchors: 'throw',

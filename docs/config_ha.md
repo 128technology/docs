@@ -268,7 +268,7 @@ Available with SSR Version 5.4 and higher.
 
 #### `enable-failover` on the `service-route`:
 
-Service routes are used to influence traffic destinations for services. By enabling failover on the service route, failover includes the existing sessions, eliminating the lag time previously encountered as those sessions were re-established. Service route redundancy is not exclusive to dual node, high availability configurations. It is configured as shown below.
+[Service Routes](concepts_glossary.md#service-routes) are used to influence traffic destinations for services. By enabling failover on the service route, failover includes the existing sessions, eliminating the lag time previously encountered as those sessions were re-established. Service route redundancy is not exclusive to dual node, high availability configurations. It is configured as shown below.
 
 To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
 
