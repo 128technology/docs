@@ -48,7 +48,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 
 ## Release 6.3.5-34-sts
 
-**Release Date:** July 17, 2025
+**Release Date:** July 24, 2025
 
 **Before installing, please see the note above on Conductor/Router compatibility**
 
