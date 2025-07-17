@@ -154,7 +154,7 @@ Once the instance is launched with the correct registration-code, the device wil
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys a VM for the SSR with three network interfaces. The template attaches the network interfaces to the VM in the following order: Public, Private, and Management. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys a VM for the SSR with two network interfaces and an optional third network interface. The template attaches the network interfaces to the VM in the following order: Public, Private, and Management. The network interfaces to be used in Mist configuration are as follows:
 
 | Network Interface Name | Subnet           | Mist Config Name     |
 | ---------------------- | ---------------- | ----------------|
@@ -271,7 +271,7 @@ Once the deployment of the template is complete, information about the new route
 
 The information listed in the Outputs tab is the following:
 * Name of the VM instance.
-* Public IP address assigned to the management interface of the instance.
+* Public IP address of the interface used to SSH into the instance.
 * SSH command to login to the Linux VM via the management interface.
 
 :::important
