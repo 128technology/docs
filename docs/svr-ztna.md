@@ -2,6 +2,7 @@
 title: SVR Zero Trust Network Architecture
 sidebars-label: SVR Zero Trust Network Architecture
 ---
+
 #### Version History
 
 | Release | Modification                |
@@ -33,7 +34,7 @@ To understand the value of the SVR zero-trust network architecture (SVR ZTNA), w
 | Perfect Forward Secrecy | Yes	| Ephemeral Keys in DH-E are seeded by salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
-The SVR ZTNA is a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option. 
+The SVR ZTNA is a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
 
 ## How It Works
 
@@ -46,27 +47,6 @@ In this topology, the selected path through the network is: Host 1 – R2 – R3
 The payload for the first flow - `Blue` - consists of data packets A, B, and C. Additional flows may have the same source and destination (Host 1/Host 5) but to satisfy SLA requirements they could take a different physical path through Router 6.
 
 This illustrates an important difference between SVR and IPSec tunnels; traffic encrypted within an IPSec Tunnel always follows the same path, not allowing different flows to have different SLA-driven physical paths. SVR does not have this limitation. 
-
----
-## Replace or Revoke a Certificate
-
-When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
-
-Soft failure results in a notification that the certificate is no longer valid and that appropriate action must be taken. 
-
-Hard failure results in the same notification, as well as the removal of all peering relationships. This stops the device from participating in SVR. 
-
----
-
-## Peer Authentication - svrv2
-
-Peer validation is done whenever a new certificate is added, or peer configuration has changed. When a certificate is received from a peer on multiple peer paths, a cached validation response is used. Validation is accomplished by verifying the routerID of its peer matches that of the certificate.
-
-The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
-
-When receiving a certificate from a peer router and performing validation, the receiving router must extract the peer router's public key and save it. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
-
----
 
 ### Key Rotation
 
@@ -129,6 +109,22 @@ If a peer sends a Key Request to a peer for which there is no valid key and rece
 
 The peer continues to resend requests at periodic intervals as defined in the configuration setting `authority > security-key-management > peer-key-retransmit-interval`. If there is no response after the time defined by `authority > security-key-management > peer-key-timeout`, the peer path is declared invalid and removed from service. Once the peer is taken out of service due to key timeout, it will continue to send rekey attempts at the `peer-key-timeout intervals`, or upon interface state change.
 
+### Certificate Replacement or Revocation
+
+**When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.**
+
+Soft failure results in a notification that the certificate is no longer valid and that appropriate action must be taken. 
+
+Hard failure results in the same notification, as well as the removal of all peering relationships. This stops the device from participating in SVR. 
+
+### Peer Authentication
+
+Peer validation is done whenever a new certificate is added, or peer configuration has changed. When a certificate is received from a peer on multiple peer paths, a cached validation response is used. Validation is accomplished by verifying the routerID of its peer matches that of the certificate.
+
+The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
+
+When receiving a certificate from a peer router and performing validation, the receiving router must extract the peer router's public key and save it. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
+
 ### Requirements
 
 SSR 7.0.0 is required on all devices participating in the SVR ZTNA. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
@@ -166,17 +162,20 @@ config
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
 | peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
 
+#### Configuration Example
+
+```
+config 
+    authority 
+        security-key-management 
+            payload-key-rekey-interval    24
+            peer-key-rekey-interval       24
+            peer-key-retransmit-interval  30
+            peer-key-timeout              3600
+            invalid-certificate-behavior  fail-soft
+```
+
 In cases where you want to manually force key rotation on the routers, use the `security metadata-key regenerate` command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
-
----
-### Peer Certificate Validation **svrv2**
-
-config peer-validation 
-    - validate peering connections on this router
-    - values: true/false
-    - default: false
-
----
 
 #### Sample Default Configuration: 
 
@@ -186,40 +185,39 @@ config
     authority
         enhanced-security-key-management  true
 		
+        router                  RTR_EAST_CONDUCTOR
+            name                RTR_EAST_CONDUCTOR
 
-
-        router                            RTR_EAST_CONDUCTOR
-            name  RTR_EAST_CONDUCTOR
-
-            node  conductor-east-1
-                name  conductor-east-1
+            node                conductor-east-1
+                name            conductor-east-1
             exit
         exit
 
-        router                            combo-east
+        router                   combo-east
             name                 combo-east
             peering-common-name  second-fake-alias-2
             location             usa
             description          "router 1"
             inter-node-security  internal
 
-
-
-        router                            combo-west
+        router                   combo-west
             name                 combo-west
             peering-common-name  second-fake-alias-3
             location             usa
             inter-node-security  internal
 ```
-### Sample Advanced Configuration
-
-What is a reasonable set of values that a customer would actually configure to truly utilize key rotation in a production environment, that would provide true security? 
 
 ## Troubleshooting
 
-Logs are available, indicating when metadata keys are generated or received.  
+The following Events, Alarms, and Show commands are available to troubleshoot issues encountered with SVR-ZTNA. 
 
-The commands above can be used to query the current state and restart the metadata key generation and distribution process. 
+#### Events and Alarms
+
+- Certificate Expired
+- Certificate about to Expire (one month prior)
+- Certificate Revoked
+- Certificate Invalid
+- Unable to Authenticate Peer
 
 Alarms are generated if the certificate received from the peer is invalid or expires. Reasons may show as `Revoked` or `Malformed`. A more detailed string is returned using the validation API. 
 
@@ -235,7 +233,9 @@ As an example, the following alarm is generated if the certificate state is inva
 combo-east-1:4   2025-01-28 19:07:00   MAJOR       INTERFACE                                DHCP address for interface [wan-intf] has not been resolved 
 combo-east-1:5   2025-01-28 19:07:00   MAJOR       INTERFACE                                DHCP address for interface [lan-intf] has not been resolved 
 combo-east-1:13  2025-01-28 19:12:21   CRITICAL    RTR_WEST_COMBO           PEER            Peer RTR_WEST_COMBO certificate is invalid: expired - testing-detail 
+```
 
+```
 admin@combo-east-1.RTR_EAST_COMBO# show alarms id combo-east-1:13 
 Tue 2025-01-28 19:17:39 UTC 
 ✔ Retrieving alarms... 
@@ -251,9 +251,44 @@ Message: Peer RTR_WEST_COMBO certificate is invalid: expired - testing-detail
 Completed in 0.02 seconds 
 ```
 
----
-### Peer Certificate Validation **svrv2**
+#### Show Commands
 
-(Need example)
+- show session detail
+- show certificate router 
+- show security pki local-certificate
+- show security pki ca-certificate
+- show security pki ca-certificate detail
+- show security pki ca-certificate ca-profile Root-CA
+
+`show security security-associations`
+
+```
+admin@node0# show security security-associations
+Fri 2024-03-01 14:28:03 UTC Retrieving security associations...
+============== =========== ======= =================== ================ ======== 
+ Peer           Peer Name   Node    Network Interface   Destination      Status
+============== =========== ======= =================== ================ ======== 
+ 0200019a8f31   Hub1        node0   ge-0-0              192.168.10.101   up
+ 0200019a8f31   Hub1        node0   ge-0-1              172.25.22.2      up
+ 0200019a8f31   Hub1        node1   ge-0-0              192.168.10.101   up
+ 0200019a8f31   Hub1        node1   ge-0-1              172.25.22.2      up
+```
+
+`show security security-associations [peer-name] detail`
+
+```
+admin@node0# show security security-associations Hub1 detail
+Fri 2024-03-01 14:28:03 UTC Retrieving security associations...
+Peer Name: Hub1
+State: UP
+Peer Certificate: Valid
+Public Key: Valid
+Local salt: b869b3424513340a, Remote salt: 4cb3488cb19397c3
+Peer Key Rekey In: 20 hrs 2 min 56 sec
+Peer Rekey Count: 5
+Metadata Key Rekey In: 2 hrs 13 min 12 sec
+Local Metadata Key Index: 12 (2), Remote Metadata Key Index: 13 (1)
+```
+
 
 

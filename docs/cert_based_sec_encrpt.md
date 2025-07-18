@@ -5,8 +5,8 @@ sidebar_label: Certificate-based Security Encryption
 #### Version History
 
 | Release | Modification                | 
-| ------- | --------------------------- |
-| 7.0.0   | Certificate-based Security Encryption support added. |
+| ------- | --------------------------- | 
+| 7.1.0   | Certificate-based Security Encryption support added. |
 
 Security is a critical component of SD-WAN products in today’s world. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
@@ -24,7 +24,7 @@ Certificate management is performed from the CLI using the commands and paramete
 
 If the above three checks pass, then the private key and certificate are accepted and imported
 
-Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the rekey feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
+Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the **Rekey** feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
 
 ### Certificate Security
 
@@ -45,8 +45,6 @@ The following are some details of certificate security.
 ## Certificate Revocation List
 
 Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs using the configuration commands and parameters provided in Configuration Commands and Parameters. These parameters generate a list of all known valid and revoked certificates from all CRL sources and saves this information to disk. The CRL configuration parameters include:
-
-**There does not seem to be any commands directly associated with creating a CRL other than certificate-revocation url and polling-interval. If there are others, please provide pointers.**
 
 ## Installing Certificates
 
@@ -71,8 +69,6 @@ When a router's certificate is about to expire or needs to be replaced, a new ce
 In the case of a compromised system or certificate, the certificate will be revoked. 
 
 The router periodically checks the Certificate Revocation List (CRL) from existing certificate authority servers for any revocations, according to the interval defined in the configuration. If a revocation has taken place, the router takes the action defined in the configuration (fail-soft or fail-hard). 
-
-
 
 ## High Availability
 

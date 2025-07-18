@@ -7,15 +7,17 @@ sidebar_label: Custom Certificates
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.0.0   | Certificate-based Security Encryption support added. |
+| 7.0.0   | Custom Certificate support added. | 
 
 Security is a critical component of SD-WAN products in today’s world. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
-The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network, as well as a peer-to-peer security key exchange between SSRs. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+
+If you are implementing a complete, zero-trust network architecture, that will be impervious to Man-in-the-Middle attacks, you must configure the use of a custom, customer-provided signed certificate. 
 
 ## Certificate Management 
 
-Certificate management is performed from the CLI using the commands and parameters provided in Configuration Commands and Parameters. The Certificate Signing Request Workflow is interactive, asking the user what they would like placed in the CSR. The following three validity checks take place upon importing a certificate:
+Custom certificate management allows you to provision a customer-provided certificate for use with SVR-ZTNA. The following three validity checks take place upon importing a certificate:
 
 - Ensure that there is no private key accompanying the certificate. On 100 and 1000 series platforms the private key is parsed and validated against the matching private key on disk.
 
@@ -23,7 +25,7 @@ Certificate management is performed from the CLI using the commands and paramete
 
 - Check the certificate against the known revoked certificates (CRL).
 
-If the above three checks pass, then the private key and certificate are accepted and imported
+If the above three checks pass, then the private key and certificate are accepted and imported.
 
 Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the rekey feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
 
@@ -45,7 +47,11 @@ The following are some details of certificate security.
 
 ## Provisioning Process
 
-Use this procedure to provision a customer provided certificate for use with SVRv2.
+:::important
+It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by SVR-ZTNA in 7.0. This is a reserved name specifically used by SVR-ZTNA.
+:::
+
+Use this procedure to provision a customer provided certificate for use with SVR-ZTNA.
 
 ### Prerequisites
 
@@ -53,7 +59,7 @@ A configured, functioning Certificate Authority (CA) is required.
 
 ### Install the trusted CA certificate(s)
 
-In order to provision a certificate on the system, the public certificate of the Certificate Authority as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file.  As an example, here is what that might look like:
+In order to provision a certificate on the system, install the public certificate of the Certificate Authority, as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file. For example:
 
 ```
 -----BEGIN CERTIFICATE-----
@@ -94,7 +100,7 @@ dw/lPbQR6X0pLegSikirHeKVX0UHyDZkOv8=
 -----END CERTIFICATE-----
 ```
 
-Once this file has been obtained, its contents must be placed into the SSR configuration at the authority level.  Here is an example:
+Once this file has been obtained, the contents are placed into the SSR configuration at the authority level:
 
 ```
 admin@conductor-east-1.RTR_EAST_CONDUCTOR# config authority
@@ -112,15 +118,15 @@ Configuration committed
 
 #### Additional Information
 
-The name of the trusted-ca-certificate can be anything the user would like, `svrv2-root-of-trust` was chosen for illustration purposes.
+The name of the `trusted-ca-certificate` should be easily identifiable; `svrv2-root-of-trust` was chosen for illustration purposes.
 
-`validation-mode warn` is there in case there are any issues discovered with the certificate.  We will allow the certificate chain to be committed, but we will warn the user about those issues.  If the `validation-mode` is set to `strict` instead, we will not allow the certificate-chain to be committed.
+The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but we warnings are generated for those issues. If the `validation-mode` is set to `strict` instead, the certificate-chain is not committed.
 
 ### Authenticate to Use REST
 
 In order to call into the SSRs REST interfaces, a user must authenticate first. This is accomplished by logging in, and storing the bearer token.
 
-Here is an example:
+**Example:**
 
 ```
 curl 'https://10.27.35.89/api/v1/login' --compressed -k -X POST \
@@ -141,7 +147,7 @@ curl 'https://10.27.35.89/api/v1/login' --compressed -k -X POST \
   --data-raw '{"username":"admin","password":"TheAdminPassword1234","application":"GUI"}'
 ```
 
-Conductor Response:
+**Conductor Response:**
 
 ```
 {"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiJdLCJzY29wZXMiOlsiY29uZmlndXJlIiwic2hvdy1jb21tYW5kcyJdLCJjYXBhYmlsaXRpZXMiOlsiY29uZml
@@ -151,15 +157,21 @@ Conductor Response:
 xueOlHpcNYuZlygk_-VuLPJ_gWRADyj4HjlTibt_TzMvrvv_b7V37uFHgdiR_sfaj2DOGj4T4sRz6dZHW_ojv9pPmjwFJsceqXViYbMYkNQfyaXGmp5vb8jH47fYiay02xcC-qZ18ICMuQ0ozCZ2mI9PnlS50u1jnUhwgf24vfgJsJkZOg6Q4vGxBmRtKcG49Nc5HQOhUWfUctmT5e7cvVfZw"}
 ```
 
-Store the value of the token in a file called token.txt for use later.
+Store the value of the token in a file called `token.txt` for use later.
 
-### Issue a private-key creation request to the SSR
+### Issue a Private-key Creation Request
 
 :::important
-It is necessary for all of the following REST APIs to use the name custom_ssr_peering in order for this private key and eventual certificate to be visible and usable by SVRv2 in 7.0. This is a reserved name that SVRv2 looks for. This is a restriction ONLY on 7.0 and will be much more flexible in 7.1+
+It is necessary for all of the following REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by SVR-ZTNA in 7.0. This is a reserved name specifically used by SVR-ZTNA.
 :::
 
-One of the main goals of this workflow is to ensure that the private key of the SSR never leaves the SSR. In order to do that, we need to instruct the SSR to create a private key. To do this, we need to give the SSR some details about what algorithm it should use, how big the key size should be, and what the key should be named. Create the following file (updated to the customers algorithm/key size preference):
+The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, we need to instruct the SSR to create a private key. To accomplish this, we provide the SSR some details, including:
+
+- what algorithm it should use, 
+- how big the key size should be, and 
+- what the key should be named. 
+
+Create the following file (updated to the customers algorithm/key size preference):
 
 **key_request.json**
 
@@ -180,11 +192,13 @@ curl -k -X POST https://10.27.35.89/api/v1/private-key
   -d @key_request.json
 ```
 
-This should result in a 200 OK.  Once done, the customer can verify that the key was created by logging on to the SSR, dropping into the shell and ensuring that /etc/128technology/pki/custom_ssr_peering.key exists on disk.
+Upon success, you can verify that the key was created by logging on to the SSR, dropping into the shell, and ensuring that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
 
-### Issue a request to create a certificate-signing-request to the SSR
+### Issue a `certificate-signing-request`
 
-In order to create a signed certificate by the CA for the SSR, the CA will need a certificate-signing-request.  We instruct the SSR to create one with the values we would like, like the common-name and then  have the SSR sign the request with its private-key.  First, lets create a file that contains the body of the CSR-request, again taking note to use the same custom_ssr_peering name as above:
+In order to create a signed certificate by the CA for the SSR, the CA needs a `certificate-signing-request`. Instruct the SSR to create the request using the values provided; at a minimum the `name` and `common-name`. The SSR must sign the request with its private-key.
+
+1. Create a file that contains the body of the CSR-request. At a minimum this must include the name `custom_ssr_peering`, and the common name:
 
 **csr_request.json**
 
@@ -195,7 +209,20 @@ In order to create a signed certificate by the CA for the SSR, the CA will need 
 }
 ```
 
-There are many more available details that can be placed into the request, but this is the bare minimum.  Once we have this file, we can issue the CSR request to the SSR:
+This example represents the minimum requirements. Any of the following additional details may be added to the request:
+
+- country_name (string, optional): The country name.
+- state_province_name (string, optional): The state or province name.
+- locality_name (string, optional): The locality name.
+- organization_name (string, optional): The organization name.
+- organizational_unit_name (string, optional): The organizational unit name.
+- email_address (string, optional): The email address.
+- algorithm (string): The cryptographic algorithm family to use when generating the private key. Acceptable options are: (RSA, ECC)
+- rsa_key_size (integer, optional): The RSA key size. Only valid when algorithm is set to “RSA”. Valid key sizes are any multiple of 256 between 2048 and 4096.
+- ecc_curve (string, optional): The ECC curve to use. Valid curves are: (SECP256R, SECP384R1, SECP521R1)
+- validity_period (integer, optional): The validity period in days.
+
+2. Issue the CSR request to the SSR:
 
 ```
 curl -k -X GET https://10.27.35.89/api/v1/certificate-request     
@@ -204,7 +231,7 @@ curl -k -X GET https://10.27.35.89/api/v1/certificate-request
   -d @csr_request.json
 ```
 
-The SSR will return:
+The SSR returns the following certificate request:
 
 ```
 {
@@ -219,11 +246,11 @@ PaH00Oujf4Jj+8EZgzYAACPQUJRW
 }
 ```
 
-The customer can take this certificate signing request to the CA and have it issue a certificate.
+Provide the certificate signing request to the CA. 
 
-### Ingest the certificate
+### Ingest the Certificate
 
-With that certificate in hand, we can instruct the SSR to ingest the certificate.  As usual, we need to associate the certificate with the name we used in the past two API calls, so we’ll create a json file for the body again:
+When the signed certificate is returned, instruct the SSR to ingest the certificate. The certificate must be associated with the name used in the two earlier API calls. Create the following json file:
 
 **certificate.json**
 
@@ -243,9 +270,14 @@ nN+SyOi2yA4nuorapmprew==
 }
 ```
 
-This should result in a 200OK.  Once done, the customer can verify that the certificate was ingested by logging on to the SSR, dropping into the shell and ensuring that /etc/128technology/pki/custom_ssr_peering.pem exists on disk.
+Once the certificate is successfully ingested, verify that the certificate was accepted.
 
-SVRv2 should now be able to use the private key and certificate.
+1. ssh to the SSR. 
+2. Log in as the root user: `sudo su`.
+3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
+  `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
+
+SVR-ZTNA can now use the private key and certificate.
 
 
 
