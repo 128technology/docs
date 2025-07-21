@@ -136,7 +136,7 @@ If the device does not show up in the Mist organization or the desired SSR versi
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, private, and Management. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces and an optional third network interface. The template attaches the network interfaces to the EC2 instance in the following order: Public, Private, and Management. The network interfaces to be used in Mist configuration are as follows:
 
 | Network Interface Name | Subnet           | Mist Config Name     |
 | ---------------------- | ---------------- | ----------------|
