@@ -11,7 +11,7 @@ sidebars-label: SVR Zero Trust Network Architecture
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
-As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If it is not kept secure, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
 In a newly deployed network, SVR ZTNA is more secure than the default security implementation of SVR, and far more secure than IPSec. SVR ZTNA affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations for any network topology.
 
@@ -40,9 +40,9 @@ The SVR ZTNA is a more secure, more flexible, and more efficient transport netwo
 
 The foundation of SVR ZTNA is the ability to define peer-to-peer certificate-based security and key rotation within your SVR peer network. There are two ways you can provision this level of security. 
 
-With the release of SSR 7.0.0, the SSR provides a self-signed certificate for use with SVR ZTNA. This allows you to configure ZTNA simply and quickly. However, because it is a self-signed certificate, it is not impervious to Man-in-the-Middle DOS attacks. 
+With the release of SSR 7.0.0, the SSR provides a self-signed certificate for use with SVR ZTNA. This allows you to configure ZTNA simply and quickly. However, because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure ZTNA using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
-To provide thorough, end-to-end security against MITM DOS attacks, the use of a custom, cutomer-provided/trusted/provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring a Custom Certificate](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+To provide thorough, end-to-end security the use of a custom, cutomer-provided/trusted/provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring a Custom Certificate](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
 The user provided custom certificates and signing authority must be in place before installing and configuring SVR ZTNA. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
@@ -121,11 +121,11 @@ The peer continues to resend requests at periodic intervals as defined in the co
 
 ### Certificate Replacement or Revocation
 
-**When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.**
+When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
 
-Soft failure results in a notification that the certificate is no longer valid and that appropriate action must be taken. 
+`fail-soft` results in a notification that the certificate is no longer valid and that appropriate action must be taken. 
 
-Hard failure results in the same notification, as well as the removal of all peering relationships. This stops the device from participating in SVR. 
+`fail-hard` results in a notification that the certificate is no longer valid, as well as the removal of all peering relationships. This severs the peer connection and stops the device from participating in SVR. 
 
 ### Peer Authentication
 
@@ -133,7 +133,7 @@ Peer validation is done whenever a new certificate is added, or peer configurati
 
 The public key is sent by both routers on both pathways, but only needs to be validated one time for each router peer.
 
-When receiving a certificate from a peer router and performing validation, the receiving router must extract the peer router's public key and save it. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
+When receiving a certificate from a peer router and performing validation, the receiving router extracts and saves the peer router's public key. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
 
 ### Requirements
 
@@ -172,7 +172,7 @@ config
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
 | peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
 
-#### Configuration Example
+#### Default Configuration Example
 
 ```
 config 
@@ -287,20 +287,73 @@ Completed in 0.02 seconds
                   Metadata Next Rekey:      1 hrs 2 min 57 sec
 ```
 
-`show peers security` now includes the following information:
+`show peers security` includes the following information:
 
--   security state machine state
--   local salt value
--   peer salt value
--   local metadata key index
--   peer metadata key index
--   if peer’s certificate has been received
--   if local certificate has been acknowledged by peer
--   if peer’s salt has been received
--   if local salt has been acknowledged by peer
--   if peer’s metadata key has been received
--   if local metadata key has been acknowledged by peer
+-   Security state machine state
+-   Local salt value
+-   Peer salt value
+-   Local metadata key index
+-   Peer metadata key index
+-   Whether a peer’s certificate has been received
+-   Whether a local certificate has been acknowledged by peer
+-   Whether a peer’s salt has been received
+-   Whether a local salt has been acknowledged by peer
+-   Whether a peer’s metadata key has been received
+-   Whether a local metadata key has been acknowledged by peer
 
+```
+admin@test1.headend# show peers security
+Mon 2025-07-21 20:28:18 UTC
+✔ Retrieving peer paths...
+
+==============
+ Peer: branch
+==============
+  Peer:               branch
+  Node:               test1
+  Network Interface:  intf11
+  Destination:        172.16.4.5
+  Status:             up
+  Hostname:           unavailable
+  Path Mtu:           unavailable
+  Security Status:    MKEY_EXCH_COMP
+  Salt:               3565600980
+  Peer Salt:          1668479739
+  Key Index:          5
+  Peer Ki:            253
+  Cert Rec:           True
+  Cert Ack:           True
+  Salt Rec:           True
+  Salt Ack:           True
+  Key Rec:            True
+  Key Ack:            True
+
+
+==============
+ Peer: branch
+==============
+  Peer:               branch
+  Node:               test1
+  Network Interface:  intf12
+  Destination:        172.16.4.7
+  Status:             up
+  Hostname:           unavailable
+  Path Mtu:           unavailable
+  Security Status:    MKEY_EXCH_COMP
+  Salt:               3565600980
+  Peer Salt:          1668479739
+  Key Index:          5
+  Peer Ki:            253
+  Cert Rec:           True
+  Cert Ack:           True
+  Salt Rec:           True
+  Salt Ack:           True
+  Key Rec:            True
+  Key Ack:            True
+
+Completed in 0.10 seconds
+admin@test1.headend#
+```
 
 `show security security-associations`
 
@@ -332,12 +385,4 @@ Metadata Key Rekey In: 2 hrs 13 min 12 sec
 Local Metadata Key Index: 12 (2), Remote Metadata Key Index: 13 (1)
 ```
 
-**Additional Show Commands**
-
-- show session detail
-- show certificate router 
-- show security pki local-certificate
-- show security pki ca-certificate
-- show security pki ca-certificate detail
-- show security pki ca-certificate ca-profile Root-CA
 
