@@ -38,6 +38,16 @@ The SVR ZTNA is a more secure, more flexible, and more efficient transport netwo
 
 ## How It Works
 
+The foundation of SVR ZTNA is the ability to define peer-to-peer certificate-based security and key rotation within your SVR peer network. There are two ways you can provision this level of security. 
+
+With the release of SSR 7.0.0, the SSR provides a self-signed certificate for use with SVR ZTNA. This allows you to configure ZTNA simply and quickly. However, because it is a self-signed certificate, it is not impervious to Man-in-the-Middle DOS attacks. 
+
+To provide thorough, end-to-end security against MITM DOS attacks, the use of a custom, cutomer-provided/trusted/provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring a Custom Certificate](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+
+:::note
+The user provided custom certificates and signing authority must be in place before installing and configuring SVR ZTNA. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
+:::
+
 The following diagram provides a look at a typical SSR/SVR deployment.
 
 ![sample topology](/img/ztna-sample-topo.png)
@@ -211,7 +221,9 @@ config
 
 The following Events, Alarms, and Show commands are available to troubleshoot issues encountered with SVR-ZTNA. 
 
-#### Events and Alarms
+### Events and Alarms
+
+The following alarms are generated if the certificate received from the peer is invalid, expired, or if the router is unable to authenticate the peer. Use the `show alarms` command to see details about the alarm. 
 
 - Certificate Expired
 - Certificate about to Expire (one month prior)
@@ -219,9 +231,7 @@ The following Events, Alarms, and Show commands are available to troubleshoot is
 - Certificate Invalid
 - Unable to Authenticate Peer
 
-Alarms are generated if the certificate received from the peer is invalid or expires. Reasons may show as `Revoked` or `Malformed`. A more detailed string is returned using the validation API. 
-
-As an example, the following alarm is generated if the certificate state is invalid: 
+The following is an example of an alarm generated if the certificate state is invalid: 
 
 ```
 =============== ===================== ============ ==================== ================ ======================================================================== 
@@ -251,14 +261,46 @@ Message: Peer RTR_WEST_COMBO certificate is invalid: expired - testing-detail
 Completed in 0.02 seconds 
 ```
 
-#### Show Commands
+### Show Commands
 
-- show session detail
-- show certificate router 
-- show security pki local-certificate
-- show security pki ca-certificate
-- show security pki ca-certificate detail
-- show security pki ca-certificate ca-profile Root-CA
+`show security key-status` provides the following additional information: 
+
+- `metadata rekey index` - Index of the current rekey interval.
+- `metadata last rekey` - Number of seconds since the last rekey occurred.
+- `metadata next rekey` - Number of seconds until the next rekey occurs.
+- `metadata manager status` - Indicates whether the current node is Active-Leader or Redundant-Peer, or displays inactive when the feature is not enabled.
+
+```
+                ================================================
+                 N1
+                ================================================
+                  Key Manager State:        Active Leader
+                  Rekey Index:              189000
+                  Last Rekey:               0 hrs 20 min 24 sec
+                  Next Rekey:               1 hrs 2 min 56 sec
+                  Key Change Count:         5
+                  Config Key Change Count:  2
+                  Key Change Error:         key error
+                  Config Key Change Error:  config error
+                  Metadata Rekey Index:     199000
+                  Metadata Last Rekey:      0 hrs 20 min 25 sec
+                  Metadata Next Rekey:      1 hrs 2 min 57 sec
+```
+
+`show peers security` now includes the following information:
+
+-   security state machine state
+-   local salt value
+-   peer salt value
+-   local metadata key index
+-   peer metadata key index
+-   if peer’s certificate has been received
+-   if local certificate has been acknowledged by peer
+-   if peer’s salt has been received
+-   if local salt has been acknowledged by peer
+-   if peer’s metadata key has been received
+-   if local metadata key has been acknowledged by peer
+
 
 `show security security-associations`
 
@@ -290,5 +332,12 @@ Metadata Key Rekey In: 2 hrs 13 min 12 sec
 Local Metadata Key Index: 12 (2), Remote Metadata Key Index: 13 (1)
 ```
 
+**Additional Show Commands**
 
+- show session detail
+- show certificate router 
+- show security pki local-certificate
+- show security pki ca-certificate
+- show security pki ca-certificate detail
+- show security pki ca-certificate ca-profile Root-CA
 

@@ -21,7 +21,7 @@ Timed Based HMAC signatures can be used to protect SVR pathways against replay a
 The SSR uses industry hardened AES encryption ciphers that rely on the use of an encryption key and an initialization vector (IV). The IV is used to "prime the session" as a unique IV is generated per packet, allowing encryption to be stateless.
 When creating a new security policy within the SSR, the SSR will automatically generate random values for the key and IV and store them securely within the device. It is not recommended to manually supply values for these attributes as this _may_ compromise the security of the network.
 
-There are three locations where security policies can be defined:
+There are four locations where security policies can be defined:
 * The security policy defined in the `service > security-policy` serves to encrypt and decrypt the payload of packets within a session. The encryption keys and algorithms defined at the service are always symmetric between SSR nodes.
 * A security policy can be defined in `network-interface > inter-router-security`. This security policy defines how metadata are **decrypted** for SVR traffic received on the respective interface.
 * A security policy can be defined on `network-interface > adjacency > inter-router-security`. The security policy associated with the adjacency defines what keys and **encryption** algorithms are used for encrypting metadata (and hmac signing packets) sent to an SVR peer.
