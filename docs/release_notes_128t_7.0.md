@@ -43,13 +43,13 @@ We have identified an issue when onboarding SSR routers installed with older ver
 
 - **I95-22432 Conductor Management over IPv6:** All router to conductor communication along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. However in an IPv6 managed node, devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
 ------
-- **I95-29382 Zero-Trust Network Architecture for SVR:** Introduces a new peer-to-peer, certificate-based key exchange mechanism to the SVR protocol. This key exchange avoids mid-network re-encryption and provides the ability to rotate keys as required. The security rekeying mechanism is configured at the Authority, and requires that all routers and conductors be running the same version of software that supports this capability. The existing security key exchange mechanisms continue to exist and will be supported during the transition to the new model. The two security approaches cannot coexist at the same time within an authority. See [CSVR Zero Trust Network Architecture](svr-ztna.md) for more information.
+- **I95-29382 Zero-Trust Network Architecture for SVR:** Introduces a new peer-to-peer, certificate-based key exchange mechanism to the SVR protocol. This key exchange avoids mid-network re-encryption and provides the ability to rotate keys as required. The security rekeying mechanism is configured at the Authority, and requires that all routers and conductors be running the same version of software that supports this capability. The existing security key exchange mechanisms continue to exist and will be supported during the transition to the new model. The two security approaches cannot coexist at the same time within an authority. See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for more information.
 ------
 - **I95-52924 NIC Driver FEC Support:** Support has been added to configure optical FEC for SFPs.
 ------
 - **I95-53993 Display LLDP Neighbors:** A CLI command to output neighbors discovered through LLDP has been added.
 ------
-- **I95-57454 Management traffic over SVR (in-band management):** Router to Conductor communication is supported over SVR with the use of [rekey](svr-ztna.md#peer-key-and-key-rotation).
+- **I95-57454 Management traffic over SVR (in-band management):** Router to Conductor communication is supported over SVR with the use of [rekey](enhanced-sec-key-mgmt.md#peer-key-and-key-rotation).
 ------
 - **I95-58635 Source Peer added to output of `show session by-id`:** Added information to the output of `show session by-id`, making it easier to troubleshoot sessions.
 ------

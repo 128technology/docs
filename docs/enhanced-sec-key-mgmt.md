@@ -1,25 +1,25 @@
 --- 
-title: SVR Zero Trust Network Architecture
-sidebars-label: SVR Zero Trust Network Architecture
+title: Enhanced Security Key Management
+sidebars-label: Enhanced Security Key Management
 ---
 
 #### Version History
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.0.0   | SVR Zero-trust Network Architecture support added. |
+| 7.0.0   | Enhanced Security Key Management support added. |
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
-As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR to create a Zero Trust Network Architecture (ZTNA), allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
-In a newly deployed network, SVR ZTNA is more secure than the default security implementation of SVR, and far more secure than IPSec. SVR ZTNA affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations for any network topology.
+In a newly deployed network, Enhanced Security Key Management is more secure than the default security implementation of SVR, and far more secure than IPSec. Enhanced Security Key Management affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations for any network topology.
 
 Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
 ## SVRv2 and IPSec 
 
-To understand the value of the SVR zero-trust network architecture (SVR ZTNA), we can draw some comparisons against IPSec. Not with IPSec, but against it.  
+To understand the value of Enhanced Security Key Management, we can draw some comparisons against IPSec.  
 
 | Characteristic | IPSec/IKE | SVRv2 |
 | --- | --- | --- |
@@ -34,18 +34,18 @@ To understand the value of the SVR zero-trust network architecture (SVR ZTNA), w
 | Perfect Forward Secrecy | Yes	| Ephemeral Keys in DH-E are seeded by salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
-The SVR ZTNA is a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
+The Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
 
 ## How It Works
 
-The foundation of SVR ZTNA is the ability to define peer-to-peer certificate-based security and key rotation within your SVR peer network. There are two ways you can provision this level of security. 
+The foundation of Enhanced Security Key Management is the ability to define peer-to-peer certificate-based security and key rotation within your SVR peer network. There are two ways you can provision this level of security. 
 
-With the release of SSR 7.0.0, the SSR provides a self-signed certificate for use with SVR ZTNA. This allows you to configure ZTNA simply and quickly. However, because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure ZTNA using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
+With the release of SSR 7.0.0, the SSR provides a self-signed certificate for use with Enhanced Security Key Management. This allows you to configure Enhanced Security Key Management simply and quickly. However, because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
 To provide thorough, end-to-end security the use of a custom, cutomer-provided/trusted/provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring a Custom Certificate](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
-The user provided custom certificates and signing authority must be in place before installing and configuring SVR ZTNA. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
+The user provided custom certificates and signing authority must be in place before installing and configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
 :::
 
 The following diagram provides a look at a typical SSR/SVR deployment.
@@ -96,7 +96,7 @@ Sessions are encrypted using **payload keys** generated on demand, encrypted, an
 
 The following diagram illustrates the SSR Key Exchange process:
 
-![ZTNA Key Exchange](/img/svr-ztna-key-exchange.png)
+![Key Exchange](/img/svr-ztna-key-exchange.png)
 
 1. SVR certificates are installed onto the SSR from the Conductor.
     - SCEP is used to communicate to an intermediate/root CA.
@@ -137,7 +137,7 @@ When receiving a certificate from a peer router and performing validation, the r
 
 ### Requirements
 
-SSR 7.0.0 is required on all devices participating in the SVR ZTNA. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
+SSR 7.0.0 is required on all devices participating in Enhanced Security Key Management. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
 
 ## Configuration
 
@@ -219,7 +219,7 @@ config
 
 ## Troubleshooting
 
-The following Events, Alarms, and Show commands are available to troubleshoot issues encountered with SVR-ZTNA. 
+The following Events, Alarms, and Show commands are available to troubleshoot issues encountered with Enhanced Security Key Management. 
 
 ### Events and Alarms
 
