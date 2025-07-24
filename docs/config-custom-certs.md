@@ -13,11 +13,11 @@ Security is a critical component of SD-WAN products in today’s world. The effe
 
 The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
-If you are implementing a complete, zero-trust network architecture, that will be impervious to Man-in-the-Middle attacks, you must configure the use of a custom, customer-provided signed certificate. 
+If you are implementing a complete, zero-trust network architecture, that will be impervious to Man-in-the-Middle attacks, you must configure a trusted certificate-authority signed certificate. 
 
 ## Certificate Management 
 
-Custom certificate management allows you to provision a customer-provided certificate for use with SVR-ZTNA. The following three validity checks take place upon importing a certificate:
+Custom certificate management allows you to provision a certificate for use with Enhanced Security Key Management. The following three validity checks take place upon importing a certificate:
 
 - Ensure that there is no private key accompanying the certificate. On 100 and 1000 series platforms the private key is parsed and validated against the matching private key on disk.
 
@@ -27,7 +27,7 @@ Custom certificate management allows you to provision a customer-provided certif
 
 If the above three checks pass, then the private key and certificate are accepted and imported.
 
-Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the rekey feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
+Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
 
 ### Certificate Security
 
@@ -35,29 +35,27 @@ The Certificate Revocation List (CRL) Manager handles the discovery, fetching, a
 
 The following are some details of certificate security.
 
-- The Trusted Platform Module (TPM) stores the private key of the base certificate. The certificate and any keys are not included in any configuration.
-
-- Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines. 
+- Periodic revocation checks of the router's certificate are performed based on the configuration defaults or user configured timelines. 
 
 - When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create an elliptic-curve public/private key pair (see [RFC8422]). 
 
-- Contained within the SVR certificate is a router identifier, which must match the identifier of the router in the peer configuration. This router identifier is a UUID and guaranteed to be unique per node, even across RMAs.
+- Contained within the SVR certificate is a custom identifier, which must match the identifier of the router in the peer configuration. 
 
-- The public key is used to create an X.509 certificate signing request (CSR) with the common name field set to the router's UUID. A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
+- The public key is used to create an X.509 certificate signing request (CSR) with the common name field referencing the `peering-common-name`. When creating the CSR, ensure that the common-name matches the [configured `peering-common-name`](enhanced-sec-key-mgmt.md#configuration). A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
 
 ## Provisioning Process
 
 :::important
-It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by SVR-ZTNA in 7.0. This is a reserved name specifically used by SVR-ZTNA.
+It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Management in 7.0. This is a reserved name specifically used by the Enhanced Security Key Management feature.
 :::
 
-Use this procedure to provision a customer provided certificate for use with SVR-ZTNA.
+Use this procedure to provision a custom certificate for use with Enhanced Security Key Management.
 
 ### Prerequisites
 
 A configured, functioning Certificate Authority (CA) is required.
 
-### Install the trusted CA certificate(s)
+### Install the Trusted CA Certificate
 
 In order to provision a certificate on the system, install the public certificate of the Certificate Authority, as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file. For example:
 
@@ -120,7 +118,7 @@ Configuration committed
 
 The name of the `trusted-ca-certificate` should be easily identifiable; `svrv2-root-of-trust` was chosen for illustration purposes.
 
-The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but we warnings are generated for those issues. If the `validation-mode` is set to `strict` instead, the certificate-chain is not committed.
+The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but warnings are generated for those issues. If the `validation-mode` is set to `strict` the certificate-chain is not committed.
 
 ### Authenticate to Use REST
 
@@ -162,7 +160,7 @@ Store the value of the token in a file called `token.txt` for use later.
 ### Issue a Private-key Creation Request
 
 :::important
-It is necessary for all of the following REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by SVR-ZTNA in 7.0. This is a reserved name specifically used by SVR-ZTNA.
+It is necessary for all of the following REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Managementin 7.0. This is a reserved name specifically used by Enhanced Security Key Management.
 :::
 
 The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, we need to instruct the SSR to create a private key. To accomplish this, we provide the SSR some details, including:
@@ -192,7 +190,7 @@ curl -k -X POST https://10.27.35.89/api/v1/private-key
   -d @key_request.json
 ```
 
-Upon success, you can verify that the key was created by logging on to the SSR, dropping into the shell, and ensuring that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
+Upon success, you can verify that the key was created by logging on to the SSR, `ssh` into a linux shell, and ensuring that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
 
 ### Issue a `certificate-signing-request`
 
@@ -272,16 +270,9 @@ nN+SyOi2yA4nuorapmprew==
 
 Once the certificate is successfully ingested, verify that the certificate was accepted.
 
-1. ssh to the SSR. 
+1. `ssh` to the SSR. 
 2. Log in as the root user: `sudo su`.
 3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
   `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
 
-SVR-ZTNA can now use the private key and certificate.
-
-
-
-
-
-
-
+Enhanced Security Key Management can now use the private key and certificate.
