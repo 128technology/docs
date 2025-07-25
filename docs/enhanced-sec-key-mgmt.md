@@ -19,7 +19,7 @@ The following diagrams show simple examples of how Enhanced Security Key Managem
 
 ![Conductor behind](/img/conductor-behind-svrv2.png)
 
-In this example, green represents management traffic on TCP/930 and TCP/4505-4506. Blue represents SVR between the hub and spokes. The management traffic flows inside the SVR path to the hub. The hub then sends it over the LAN to the conductor. Management traffic can be configured to traverse SVR paths if required. Red represents customer traffic between the hub and spokes. For additional deployment information, see [Conductor Deployment - Conductor Behind SSR.](bcp_conductor_deployment.md/#conductor-behind-ssr)
+In this example, green represents management traffic on TCP/930 and TCP/4505-4506. Blue represents SVR between the hub and spokes. The management traffic flows inside the SVR path to the hub. The hub then sends it over the LAN to the conductor. Management traffic can be configured to traverse SVR paths if required. Red represents customer traffic between the hub and spokes. For additional deployment information, see [Conductor Deployment - Conductor Behind SSR.](bcp_conductor_deployment.md#conductor-behind-ssr)
 
 #### Multi-hop Hub and Spoke
 
