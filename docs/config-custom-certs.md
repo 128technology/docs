@@ -39,8 +39,6 @@ The following are some details of certificate security.
 
 - When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create an elliptic-curve public/private key pair (see [RFC8422]). 
 
-- Contained within the SVR certificate is a custom identifier, which must match the identifier of the router in the peer configuration. 
-
 - The public key is used to create an X.509 certificate signing request (CSR) with the common name field referencing the `peering-common-name`. When creating the CSR, ensure that the common-name matches the [configured `peering-common-name`](enhanced-sec-key-mgmt.md#configuration). A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
 
 ## Provisioning Process

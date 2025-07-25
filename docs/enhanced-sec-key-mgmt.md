@@ -13,6 +13,18 @@ Security is a critical component of [SD-WAN (software-defined wide area network)
 
 As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
+The following diagrams show simple examples of how Enhanced Security Key Management can be deployed. 
+
+#### Conductor Hub and Spoke 
+
+![Conductor behind](conductor-behind-svrv2.png)
+
+In this example, green represents management traffic on TCP/930 and TCP/4505-4506. Blue represents SVR between the hub and spokes. The management traffic flows inside the SVR path to the hub. The hub then sends it over the LAN to the conductor. Management traffic can be configured to traverse SVR paths if required. Red represents customer traffic between the hub and spokes.
+
+![Multi-hop hub and spoke](hub-n-spoke-svrv2.png)
+
+This example shows a multi-hop hub and spoke deployment. Red represents customer traffic between the hubs and spoke, and out to a public network. Blue represents the SVR connection between spokes and the hub. The traffic flows inside the SVR path from spoke to hub or spoke to hub to spoke. 
+
 In a newly deployed network, Enhanced Security Key Management is more secure than the default security implementation of SVR, and far more secure than IPSec. Enhanced Security Key Management affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations for any network topology.
 
 Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
