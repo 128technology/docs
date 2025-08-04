@@ -141,7 +141,7 @@ Forward Error Correction has the following limitations:
 
 ## FEC Support on High Speed Ports
 
-The `fec-mode` feature provides compatibility with other devices (Dell, Broadcom, etc) that use optical ports, allowing you to set the port speed for these high speed optical ports. The feature is enabled on 100GB NIC ports at the device-interface level, and is an advanced or administrator only feature/command. 
+The `fec-mode`, or more commonly known as "optical FEC", feature provides compatibility with other devices (Dell, Broadcom, etc.) that use optical ports, allowing you to set the port speed for these high speed optical ports. The feature is enabled on 100GB NIC ports at the device-interface level, and is an advanced or administrator only feature/command. 
 
 The `fec-mode` is configured as `auto`, `baser`, `rs`, or `none`. For example:
 

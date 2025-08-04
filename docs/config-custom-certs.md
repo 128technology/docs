@@ -19,7 +19,7 @@ If you are implementing a complete, zero-trust network architecture, that will b
 
 Custom certificate management allows you to provision a certificate for use with Enhanced Security Key Management. The following three validity checks take place upon importing a certificate:
 
-- Ensure that there is no private key accompanying the certificate. On 100 and 1000 series platforms the private key is parsed and validated against the matching private key on disk.
+- Ensure that there is no private key accompanying the certificate. On 100 and 1000 series platforms the public key is parsed and validated against the matching private key on disk.
 
 - Parse the certificate and then validate it (dates/roles/other restrictions, etc.).
 
@@ -27,7 +27,7 @@ Custom certificate management allows you to provision a certificate for use with
 
 If the above three checks pass, then the private key and certificate are accepted and imported.
 
-Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
+Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
 
 ### Certificate Security
 

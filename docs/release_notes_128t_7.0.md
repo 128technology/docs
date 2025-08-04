@@ -33,7 +33,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 **Offline-Mode: Onboarding Routers Running older SSR Software to a 6.3.x Conductor**
 
-We have identified an issue when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
+An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
 ## Release 7.0.0-63r1
 
@@ -61,7 +61,7 @@ We have identified an issue when onboarding SSR routers installed with older ver
 | Failed | The session could not be created. |
 | Denied due to Access Policy | The packet was denied because an access policy explicitly disallows access. |
 | Denied due to URL Filtering | The session was created was blocked once app classification was completed. |
-| Denied due to Local Service Definition | The session was allowed on another ingress router, but is denied here based on the rules of this router (relates to hierarchical services). |
+| Denied due to Local Service Definition | The session was allowed on another ingress router, but is denied here based on the policy on this router (commonly related to hierarchical services). | 
 ------
 - **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism.
 

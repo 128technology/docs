@@ -27,7 +27,7 @@ In this example, green represents management traffic on TCP/930 and TCP/4505-450
 
 This example shows a multi-hop hub and spoke deployment. Red represents customer traffic between the hubs and spoke, and out to a public network. Blue represents the SVR connection between spokes and the hub. The traffic flows inside the SVR path from spoke to hub or spoke to hub to spoke. 
 
-In a newly deployed network, Enhanced Security Key Management is more secure than the default security implementation of SVR, and far more secure than IPSec. Enhanced Security Key Management affords you the best security strength not only because of the encryption key exchange, but through its ability to perform key rotations for any network topology.
+In a newly deployed network, Enhanced Security Key Management is more secure than the default security implementation of SVR, and far more secure than IPSec. Enhanced Security Key Management affords you the best security strength not only because of the encryption key exchange, and its unique per-session encryption keys, but through its ability to perform key rotations for any network topology.
 
 Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
@@ -40,7 +40,7 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Payload Encryption | ESP | Encrypted with per-Flow AES-CBC-256 payload key. |
 | Encrypt Original IP SA/DA	| ESP | Encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
 | Secure Channel to exchange keys | IKEv2 | Diffie-Hellman. DH provides 4096-bit Peer key used to encrypt BFD Metadata. | 
-| Confidentiality | Payload is encrypted with the IPSec Tunnel key; however, all individual sessions with the same IPSec tunnel share the same key. There is no confidentiality between sessions sharing the same source and destination address. | Payload encrypted with Per-Flow Payload key; SVR Metadata (containing the Per-Flow Payload key) is encrypted with the SVR Metadata Key. Because each flow has a separate key, each flow has confidentiality, even between the same source and destination address. | 
+| Confidentiality | Payload is encrypted with the IPSec Tunnel key; however, all individual sessions with the same IPSec tunnel share the same key. There is no confidentiality between sessions sharing the same source and destination address. | Payload encrypted with Per-Flow Payload key; SVR Metadata (containing the Per-Flow Payload key) is encrypted with the SVR Metadata Key. Because each session has a separate key, each session has confidentiality, even between the same source and destination address. | 
 | Integrity	| ESP Authentication Header | HMAC SHA-384 signature signs all SVR Metadata and/or Payload in SVR packet. | 
 | Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR| 
 | Data Origin Authentication | HMAC-SHA-384 | HMAC SHA-384 signature| 
@@ -56,10 +56,10 @@ The foundation of Enhanced Security Key Management is the ability to define peer
 
 When configured to used Enhanced Security Key Management, the SSR will automatically create a self-signed certificate. This allows you to configure peering between SSRs quickly, however because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
-To provide thorough, end-to-end security the use of a custom trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring a Custom Certificate](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+To provide thorough, end-to-end security the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring a Custom Certificate](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
-The user provided custom certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
+The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
 :::
 
 The following diagram provides a look at a typical SSR/SVR deployment.
@@ -99,7 +99,7 @@ Sessions are encrypted using **payload keys** generated on demand, encrypted, an
 
 - Payload Key
     - Transmitted within SVR Metadata encrypted by the peer key
-    - Encrypts Payload per-flow
+    - Encrypts Payload per-session
 
 The following diagram illustrates the SSR Key Exchange process:
 
@@ -114,7 +114,7 @@ The following diagram illustrates the SSR Key Exchange process:
     - Each Peer creates their own key. 
     - The originating router encrypts SVR Metadata with the peer’s **metadata key**.
 
-4. Each router generates unique **payload key** per flow, and transmits this key in the metadata TLV, encrypted using the **metadata key** on a router-to-router basis (end-to-end).
+4. Each router generates unique **payload key** per session, and transmits this key in the metadata TLV, encrypted using the **metadata key** on a router-to-router basis (end-to-end).
 
 ### Peer Key and Key Rotation
 

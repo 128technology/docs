@@ -3,7 +3,7 @@ title: Application Policy Hit Count
 sidebar_label: Application Policy Hit Count
 ---
 
-Application Policy Hit Count (APHC) provides insight into the routing policies being referenced to direct traffic in your network operations; it reports which policies are being referenced ("hit") and how. These values are presented as metrics tracked per service, per tenant; where each tenant service combination could be "hit" in one of the following ways.
+Application Policy Hit Count (APHC) provides insight into the routing policies being used to direct traffic in your network operations; it reports which policies are seeing active traffic ("hit") and how. These values are presented as metrics tracked per service, per tenant; where each tenant service combination could be "hit" in one of the following ways.
 
 | Count  | Description |
 | ---- | ----------- |
@@ -11,7 +11,7 @@ Application Policy Hit Count (APHC) provides insight into the routing policies b
 | Failed | The session could not be created. |
 | Denied due to Access Policy | The packet was denied because an access policy explicitly disallows access. |
 | Denied due to URL Filtering | The session was created but was blocked once app classification was completed. |
-| Denied due to Local Service Definition | The session was allowed on another ingress router, but is denied here based on the rules of this router (relates to hierarchical services). |
+| Denied due to Local Service Definition | The session was allowed on another ingress router, but is denied here based on the policy on this router (commonly related to hierarchical services). |
 
 ## How Does It Work?
 

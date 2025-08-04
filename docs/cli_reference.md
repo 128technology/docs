@@ -38,7 +38,6 @@ If you know the ID of the organization in Mist, or the registration code for the
 :::note
 This command can only be run on a Router.
 :::
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.0   | This feature was introduced |
@@ -61,7 +60,7 @@ clear app-id cache [force] [stale-entries] [node <node>] {router <router> | reso
 | force | Skip confirmation prompt |
 | node | The node on which to clear app-id cache entries |
 | resource-group | The name of the resource group |
-| router | The router on which to clear app-idcache entries |
+| router | The router on which to clear app-id cache entries |
 | stale-entries | Only clear the stale (expired) entries |
 
 ##### Positional Arguments
@@ -220,9 +219,28 @@ clear app-id stats [force] [node <node>] {router <router> | resource-group <reso
 | ------- | ----------- |
 | [`show stats app-id applications`](cli_stats_reference.md#show-stats-app-id-applications) | Statistics for &#x27;applications&#x27; |
 
+## `clear application-policy-hit-counts`
+
+Clear expiring application policy hit counts
+
+#### Usage
+
+```
+clear application-policy-hit-counts [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to clear expiring hit counts |
+| resource-group | The name of the resource group |
+| router | The router on which to clear expiring hit counts |
+
 ## `clear arp`
 
-Refresh the entire ARP cache or a subset if arguments are provided.
+Clear the entire ARP cache or a subset if arguments are provided.
 
 #### Usage
 
@@ -234,13 +252,13 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 | name | description |
 | ---- | ----------- |
-| device-interface | The device interface on which to refresh the ARP cache (default: all). |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;). [type: IP address] |
-| node | The name of the node. |
-| resource-group | The name of the resource group. |
-| router | The name of the router. |
-| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;). [type: int] |
+| device-interface | The device interface on which to clear the ARP cache (default: all) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;) [type: IP address] |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router |
+| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;) [type: int] |
 
 ##### See Also
 
@@ -250,16 +268,7 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting to force a refresh of ARP (Address Resolution Protocol) entries from an SSR or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which entry to refresh. The PCLI auto-completes typed entries for improved accuracy. 
-
-:::note
-ARP entries are not removed or deleted; instead the command forces a refresh of the cache outside of the scheduled ARP timeout.
-:::
-
-#### Version History
-| Release | Modification                |
-| ------- | --------------------------- |
-| 3.2.0   | This feature was introduced |
+The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from an SSR or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove.
 
 ## `clear bgp`
 
@@ -295,10 +304,9 @@ clear bgp [{in | out | soft}] [vrf <vrf>] [force] {router <router> | resource-gr
 | ------- | ----------- |
 | [`show bgp`](#show-bgp) | Displays information about the state of the BGP process on the SSR. |
 
-
 ## `clear history`
 
-Clear the PCLI's command history for this user.
+Clear the PCLI&#x27;s command history for this user.
 
 #### Usage
 
@@ -330,6 +338,37 @@ clear pim mroute [vrf <vrf>] [force] {router <router> | resource-group <resource
 | resource-group | The name of the resource group |
 | router | The name of the router for which to clear multicast routes |
 | vrf | VRF name |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear pimv6 mroute`](#clear-pimv6-mroute) | Clears all multicast routes. |
+
+## `clear pimv6 mroute`
+
+Clears all multicast routes.
+
+#### Usage
+
+```
+clear pimv6 mroute [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to clear multicast routes |
+| vrf | VRF name |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear pim mroute`](#clear-pim-mroute) | Clears all multicast routes. |
 
 ## `commit`
 
@@ -405,7 +444,6 @@ on the service.
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | `force` feature was added   |
-
 
 ## `compare config`
 
@@ -490,7 +528,6 @@ admin@labsystem1.fiedler#
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Version History
@@ -506,7 +543,6 @@ admin@labsystem1.fiedler#
 ```
 configure [authority [ ... ] ]
 ```
-
 #### Description
 
 The `configure` command places administrators into the configuration tree (hierarchy), where they will be making changes to the _candidate configuration_. When entered as a standalone command (i.e., `configure` by itself), the administrator is placed at the top of the configuration tree.
@@ -522,8 +558,7 @@ Alternatively, administrators may execute the `configure` command with optional 
 admin@labsystem1.fiedler# configure authority router Fabric128
 admin@labsystem1.fiedler (router[name=Fabric128])#
 ```
-
-By supplying optional arguments to the configure command as in the above example, the administrator has entered into the configuration tree at the "router" tier, within the router element named "Fabric128". Not only can administrators enter into the configuration tree at any point through this technique, but new configuration can also applied directly in this same way.
+The `compare` command presents a list of differences between the two configurations specified as arguments on the command line. The one listed first influences the output in a very important way: the SSR will return a list of configuration commands that will cause the configuration to be listed _first_ to be brought to parity with the one listed _second_. (Note: since the only editable configuration is the &quot;candidate&quot; configuration, the changes outlined by the _compare_ command cannot be directly applied to the &quot;running&quot; configuration.)
 
 ```
 admin@labsystem1.fiedler# configure auth router Fabric128 description "sample description"
@@ -563,10 +598,9 @@ Options: internal, aes1, or test
 | 1.0.0   | This feature was introduced |
 | 2.0.0   | Command was renamed to `configure` from `config` |
 
-
 ## `connect`
 
-Connect to a Managed Router.  For more information, read [Connecting to SSRs from Conductor](ts_connecting_to_routers.md).
+Connect to a Managed Router.  For more information, see [Connecting to SSRs from Conductor](ts_connecting_to_routers.md).
 
 #### Usage
 
@@ -632,16 +666,22 @@ Successfully created capture-filter
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.4.0   | This feature was introduced |
-
-## `create certificate request webserver`
+## `create certificate request`
 
 Create a certificate signing request.
 
 #### Usage
 
 ```
-create certificate request webserver
+create certificate request <type> [<name>]
 ```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| type | Whether to create a request for a webserver or client certificate. |
+| name | An identifier for a client certificate. |
 
 ##### See Also
 
@@ -649,12 +689,12 @@ create certificate request webserver
 | ------- | ----------- |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
+| [`import certificate`](#import-certificate) | Import a certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
 
-The `create certificate request webserver` generates a certificate-request, which is then sent to a Certificate Authority. The SSR will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
+The `create certificate request` generates a certificate-request, which is then sent to a Certificate Authority. The SSR will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
 
 The certificate created by the `create certificate` command stores its output file at `/etc/128technology/pki/`.
 
@@ -672,14 +712,14 @@ create certificate self-signed webserver
 
 | command | description |
 | ------- | ----------- |
-| [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
+| [`create certificate request`](#create-certificate-request) | Create a certificate signing request. |
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
+| [`import certificate`](#import-certificate) | Import a certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
 
-The `create certificate self-signed webserver` generates a self-signed certificate which is used for the local webserver. The SSR will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
+The `create certificate self-signed` generates a self-signed certificate which is used for the local webserver. The SSR will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
 
 #### Example
 
@@ -698,7 +738,6 @@ Certificate:
         Serial Number: 31228 (0x79fc)
 ...
 ```
-
 ## `create config autogenerated`
 
 Run configuration generation.
@@ -708,7 +747,6 @@ Run configuration generation.
 ```
 create config autogenerated
 ```
-
 #### Description
 
 Forces re-generation of all automatically generated configuration items, and stages the configuration changes into the current candidate configuration. Configuration generation is done automatically as part of a `commit`. This command serves only to aid in debugging, and allows you to validate, inspect, and make edits, without committing the changes.
@@ -728,14 +766,13 @@ Forces re-generation of all automatically generated configuration items, and sta
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
-#### Version History
+#### Description
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 5.1.0   | This feature was introduced |
+Force re-generation of all automatically generated configuration items. Both internal and plugin configuration generation is run when. Changes are staged into the candidate configuration.
+
+Configuration generation is done automatically as part of a `commit`. This command serves only to aid in debugging.
 
 ## `create session-capture`
 
@@ -900,9 +937,8 @@ create user [<username>]
 The `create user` command allows administrators to create user accounts for user and/or administrative access to the SSR's management port. Issuing the `create user <username>` launches an interactive session that prompts for the new user's full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
 
 :::note
-Please see [Password Policies](config_password_policies.md) for additional information. 
+The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, and cannot contain any characters that repeat more than three times. Please see [Password Policies](config_password_policies.md) for additional information.
 :::
-
 #### Example
 
 ```
@@ -997,7 +1033,6 @@ Operation canceled
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 
-
 ## `delete certificate webserver`
 
 Delete the webserver certificate.
@@ -1018,15 +1053,14 @@ delete certificate webserver [force]
 
 | command | description |
 | ------- | ----------- |
-| [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
+| [`create certificate request`](#create-certificate-request) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
+| [`import certificate`](#import-certificate) | Import a certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
 
-The _delete certificate webserver_ command allows administrators to delete certificates that are stored on the SSR. Note that the SSR will always prompt the administrator to confirm deletion (the &quot;force&quot; keyword is not allowed).
-
+The _delete certificate webserver command allows administrators to delete certificates that are stored on the SSR. Note that the SSR will always prompt the administrator to confirm deletion (the &quot;force&quot; keyword is not allowed).
 #### Example
 
 ```
@@ -1078,7 +1112,6 @@ delete config exported [force] <name>
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
@@ -1124,11 +1157,9 @@ delete flows [force] [node <node>] {router <router> | resource-group <resource-g
 The _delete flows_ command clears all active flow data from this node. Administrators can specify which node to clear flow data from by adding the node name as an optional argument to the command.
 
 This command has been maintained for backward compatibility to older versions of software. The delete sessions command is preferred in versions newer than 3.2.0.
-
 :::warning
 This may be a service impacting operation.
 :::
-
 #### Example
 
 ```
@@ -1239,6 +1270,7 @@ delete sessions [{session-id <session-id> | service-name <service-name>}] [force
 #### Description
 
 The _delete sessions_ command removes all current sessions or a subset if arguments are provided.
+
 :::warning
 This may be a service impacting operation.
 :::
@@ -1374,12 +1406,14 @@ delete system software [{router <router> | resource-group <resource-group>}] [fo
 
 | command | description |
 | ------- | ----------- |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -1431,19 +1465,6 @@ delete user [force] <username>
 | [`show user`](#show-user) | Display information for user accounts. |
 | [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
-#### Example
-
-```
-admin@labsystem1.fiedler# delete user jdeveloper
-Delete account 'jdeveloper'? [y/N]: y
-Account 'jdeveloper' successfully deleted
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 2.0.0   | This feature was introduced |
 ## `delete user tokens`
 
 Revoke API access tokens for a user.
@@ -1516,8 +1537,9 @@ edit prompt <format>
 
 #### Description
 
-The _edit prompt_ command lets administrators change the display of the PCLI prompt, and includes a flexible array of options for customizability. In addition to various variables, the prompt string can include conditional statements, to affect the display of the prompt under different operating modes. All of this is accomplished by supplying a _format string_, which contains the syntax of the desired PCLI prompt.
-```
+<!-- markdownlint-disable heading-style code-block-style -->
+The format string can accept the following special variables and patterns:
+
 State Variables
 ===============
 
@@ -1549,13 +1571,13 @@ The condition is true if a state variable is not an empty string or if a conditi
 
 For example:
 
-    'This prompt is [top-level?definitely:not] top level'
+    &#x27;This prompt is [top-level?definitely:not] top level&#x27;
 
 Yields one of the following:
 
-    'This prompt is definitely top level' (if top-level is true or has a value)
+    &#x27;This prompt is definitely top level&#x27; (if top-level is true or has a value)
 
-    'This prompt is not top level' (if top-level is false or has no value)
+    &#x27;This prompt is not top level&#x27; (if top-level is false or has no value)
 
 Timestamps
 ==========
@@ -1564,37 +1586,29 @@ Custom timestamps are created with the use of standard strftime format codes
 
 For example:
 
-    '(%x %H:%M) {user}@{address}$ '
+    &#x27;(%x %H:%M) {user}@{address}$ &#x27;
 
 Yields:
 
-    '(03/08/17 11:46) admin@node.router$ '
+    &#x27;(03/08/17 11:46) admin@node.router$ &#x27;
 
-See <https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior> for all format codes
+See https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior for all format codes
 
-Any '?'s that appear in a timestamp must be escaped with a '\'
+Any &#x27;?&#x27;s that appear in a timestamp must be escaped with a &#x27;\&#x27;
 
 Special characters*
 ==================
 
 \n - Newline
 \t - Tab
-\[ - Literal '['
-\] - Literal ']'
-{{ - Literal '{'
-}} - Literal '}'
-%% - Literal '%'
+\[ - Literal &#x27;[&#x27;
+\] - Literal &#x27;]&#x27;
+{{ - Literal &#x27;{&#x27;
+}} - Literal &#x27;}&#x27;
+%% - Literal &#x27;%&#x27;
 
 * Use \\ if not using a quoted string to specify the prompt
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 3.1.0   | This feature was introduced |
-
-
+<!-- markdownlint-enable heading-style code-block-style -->
 ## `edit user`
 
 Modify an existing user account
@@ -1785,7 +1799,6 @@ export config <datastore> <export-name>
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
@@ -1795,41 +1808,34 @@ The _export_ command takes the running or candidate configuration from the SSR a
 Exported files are stored in /etc/128technology/config-exports/ and are stored as GZIP compressed files.
 
 The _export_ command&#x27;s complement, _import_ is used to reverse the process, taking a configuration archive and restoring it onto a system.
+
 The _delete config exported_ command removes unneeded exported configurations.
-#### Example
 
-```
-admin@labsystem1.fiedler# export config candidate myCandidate
-Successfully exported configuration: /etc/128technology/config-exports/myCandidate.gz
-admin@labsystem1.fiedler#
-```
+## `import certificate`
 
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 2.0.0   | This feature was introduced |
-| 3.1.0   | The location of the exported configuration changed |
-
-## `import certificate webserver`
-
-Import a certificate to be used by the webserver.
+Import a certificate.
 
 #### Usage
 
 ```
-import certificate webserver
+import certificate <type> [<name>]
 ```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| type | webserver \| client |
+| name |  |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
+| [`create certificate request`](#create-certificate-request) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
-
 #### Description
 
 This command allows administrators to load certificates into their SSR by pasting them into their active PCLI session. By issuing the `import certificate` command, the PCLI prompts the user for the name of the certificate they plan to import, then asks whether it is a CA (certificate authority) certificate or not. Once these questions are answered, administrators can paste the certificate, and is reminded to press CTRL-D once the pasting is complete. Pressing CTRL-D causes the SSR to validate the configuration to ensure it is a valid X.509 certificate before loading it into persistent storage. If the X.509 validation fails, the user is informed as follows:
@@ -1886,7 +1892,6 @@ import config [force] <name>
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
@@ -1907,10 +1912,9 @@ admin@labsystem1.fiedler#
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
-
 ## `import iso`
 
-Import SSR ISO to the local repository
+Import SSR ISO, checksum and signature files to the local repository
 
 #### Usage
 
@@ -1928,6 +1932,27 @@ import iso [check-rpm-signature <check-rpm-signature>] [force] [verbose] {hunt |
 | hunt | Find and import all image, checksum and signature files from the filesystem matching 128T*.iso, SSR*.iso or SSR*.tar and any corresponding checksum and signature files |
 | verbose | Increase log level verbosity |
 
+## `import rpm`
+
+Import RPMs to the local repository
+
+#### Usage
+
+```
+import rpm [check-rpm-signature <check-rpm-signature>] [force] [verbose] filepath <filepath> distribution <distribution> architecture <architecture>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| architecture | architecture of RPM(s) to import (x86_64 \| aarch64) |
+| check-rpm-signature | required \| allow-unsigned \| disabled (default: required) |
+| distribution | distribution of RPM(s) to import (el7 \| el9) |
+| filepath | The absolute filepath to the RPM or a directory containing RPMs. |
+| force | Skip confirmation prompt |
+| verbose | Increase log level verbosity |
+
 ## `initialize conductor`
 
 Initializes the current device as a conductor.
@@ -1935,7 +1960,7 @@ Initializes the current device as a conductor.
 #### Usage
 
 ```
-initialize conductor [artifactory-user <artifactory-user>] [artifactory-password <artifactory-password>] [dns-servers <dns-servers>] [node-ip <node-ip>] [node-gateway <node-gateway>] [interface-name <interface-name>] [clustered] [ha-ip <ha-ip>] [ha-interface-name <ha-interface-name>] [ha-peer-ip <ha-peer-ip>] [ha-peer-name <ha-peer-name>] [learn-from-ha-peer] [ha-peer-username <ha-peer-username>] [unsafe-ha-peer-password <unsafe-ha-peer-password>] router-name <router-name> node-name <node-name>
+initialize conductor [password-hash <password-hash>] [artifactory-user <artifactory-user>] [artifactory-password <artifactory-password>] [dns-servers <dns-servers>] [node-ip <node-ip>] [node-gateway <node-gateway>] [interface-name <interface-name>] [clustered] [ha-ip <ha-ip>] [ha-interface-name <ha-interface-name>] [ha-peer-ip <ha-peer-ip>] [ha-peer-name <ha-peer-name>] [learn-from-ha-peer] [ha-peer-username <ha-peer-username>] [unsafe-ha-peer-password <unsafe-ha-peer-password>] router-name <router-name> node-name <node-name>
 ```
 
 ##### Keyword Arguments
@@ -1956,6 +1981,7 @@ initialize conductor [artifactory-user <artifactory-user>] [artifactory-password
 | node-gateway | The IP address of the gateway of the node being provisioned |
 | node-ip | The IPv4 address of the node being provisioned (x.x.x.x/y) |
 | node-name | The name of the node being provisioned |
+| password-hash | A salted SHA-512 hash of the password to set for the &#x27;admin&#x27;, &#x27;t128&#x27; and &#x27;root&#x27; users. |
 | router-name | Assign a name to the router |
 | unsafe-ha-peer-password | The password for the user on the peer node to authenticate as. WARNING: If this field is used, the preferences file should not be world-readable to avoid leaking the peer node password. Required if &#x27;learn-from-ha-peer&#x27; is true. |
 
@@ -1972,7 +1998,7 @@ Initializes the current device as a conductor-managed router.
 #### Usage
 
 ```
-initialize conductor-managed router-name <router-name> conductor-ip <address> [<address>]
+initialize conductor-managed [password-hash <password-hash>] [management-proxy <management-proxy>] router-name <router-name> conductor-ip <address> [<address>]
 ```
 
 ##### Keyword Arguments
@@ -1980,6 +2006,8 @@ initialize conductor-managed router-name <router-name> conductor-ip <address> [<
 | name | description |
 | ---- | ----------- |
 | conductor-ip | The address(es) of the conductor node(s) |
+| management-proxy | A proxy server(s) including port (x.x.x.x:port). |
+| password-hash | A salted SHA-512 hash of the password to set for the &#x27;admin&#x27;, &#x27;t128&#x27; and &#x27;root&#x27; users. |
 | router-name | Assign a name to the router |
 
 ##### See Also
@@ -2158,19 +2186,16 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 
 | command | description |
 | ------- | ----------- |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
 | [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `ping`
@@ -2180,7 +2205,7 @@ Send an ICMP request through a network interface.
 #### Usage
 
 ```
-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [egress-interface <egress-interface>] [gateway-ip <gateway-ip>] router <router> node <node> <destination-ip>
+ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [identifier <identifier>] [egress-interface <egress-interface>] [gateway-ip <gateway-ip>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
@@ -2190,6 +2215,7 @@ ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [egress-inte
 | count | Number of ping requests to send [type: int] (default: 4) |
 | egress-interface | Network interface from which to ping |
 | gateway-ip | Gateway IP address from which to ping [type: IP address] |
+| identifier | Set a custom identifier (default: random integer) [type: uint16_t] |
 | node | The node from which to send the ping request |
 | router | The router from which to send the ping request |
 | set-df-bit | Set the IPv4 &#x27;Don&#x27;t Fragment&#x27; bit on the request packet |
@@ -2222,7 +2248,6 @@ Ping from 8.8.8.8 (8.8.8.8): icmp_seq=3 ttl=57 time=10.444ms
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced. The previous behavior of the _ping_ command is now realized as _service-ping_ |
-
 ## `quit`
 
 Quit the PCLI.
@@ -2236,12 +2261,6 @@ quit
 #### Description
 
 This command logs the user out, and quits the PCLI.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced |
 
 ## `refresh dns resolutions`
 
@@ -2293,6 +2312,7 @@ release dhcp lease [force] [node <node>] {router <router> | resource-group <reso
 
 | command | description |
 | ------- | ----------- |
+| [`show dhcp learned-proxies`](#show-dhcp-learned-proxies) | Display dhcp proxy info for network-interfaces. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
@@ -2312,15 +2332,15 @@ repeat [beep] [exit-on-failure] [interval <interval>] <command> [<command> ...]
 
 | name | description |
 | ---- | ----------- |
-| beep | Beep if the command fails to execute |
-| exit-on-failure | Exit if the command fails to execute |
-| interval | Seconds to wait between updates [type: int] (default: 2) |
+| beep | beep if the command fails to execute |
+| exit-on-failure | exit if the command fails to execute |
+| interval | seconds to wait between updates [type: int] (default: 2) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| command | Command to repeat |
+| command | command to repeat |
 
 #### Description
 
@@ -2347,7 +2367,6 @@ Device Interface Management Stats
 
 Completed in 1.66 seconds
 ```
-
 ## `replace config`
 
 Search for and replace configuration data that matches a specified pattern.
@@ -2358,23 +2377,16 @@ Search for and replace configuration data that matches a specified pattern.
 replace config <find> <replace>
 ```
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Replace all matching data without prompts |
-
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| find | The text to find in the candidate configuration |
-| replace | The new value to replace &#x27;find&#x27; with |
+| find | the text to find in the candidate configuration |
+| replace | the new value to replace &#x27;find&#x27; with |
 
 #### Description
 
-The replace command is a powerful tool for making sweeping configuration changes, similar to a "find and replace" operation in a word processor.
-
+The _replace_ command is a powerful tool for making sweeping configuration changes, similar to a &quot;find and replace&quot; operation.
 #### Example
 
 ```
@@ -2433,7 +2445,6 @@ request idp restart [force] [rebuild] router <router> node <node>
 #### Description
 
 Initiate a restart of the underlying IDP engine.
-
 #### Version History
 
 | Release | Modification                |
@@ -2472,20 +2483,76 @@ Query and display the IDP signature database connectivity details.
 | [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
-| [`show idp events`](#show-idp-events) | Show all IDP events. |
-| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
-| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
-| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp events`](#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](#show-idp-network) | Show IDP networks |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
-#### Version History
+#### Description
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 6.0.4   | This feature was introduced |
+Query and display the IDP signature database connectivity details.
+
+## `request system software downgrade`
+
+Downgrade to a new version of the SSR.
+
+#### Usage
+
+```
+request system software downgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-health-check] [skip-post-health-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The router on which to downgrade SSR software (default: &lt;current router&gt;) |
+| simultaneous | Downgrade both nodes in an HA router at the same time to maximize speed but interrupt service. Only valid when targeting a router. |
+| skip-package-transfer | Don&#x27;t transfer any packages installed on top of the current SSR ISO to the new SSR ISO. Only valid for image based systems. |
+| skip-post-health-check | Skip the post downgrade health check, which reverts to the previous version upon failure. |
+| skip-pre-health-check | Skip the pre downgrade health check, which prevents the downgrade from starting upon failure. |
+| version | The version to downgrade to. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+#### Description
+
+Downgrade a router to a new version of the SSR software. Sequenced downgrades are not supported and an error will be returned if the user attempts to target an HA router with the downgrade command. The user may bypass this error by passing the &#x27;simultaneous&#x27; flag and downgrading both nodes at once to maximize speed but impact service.
+
+When targeting a node in an HA router with the downgrade command, only the target node will be downgraded.
+
+:::warning
+This operation may result in a loss of functionality and/or data.
+:::
+
+:::warning
+This may be a service impacting operation.
+:::
 
 ## `request system software download`
 
@@ -2494,7 +2561,7 @@ Download a new version of the SSR.
 #### Usage
 
 ```
-request system software download [{router <router> | resource-group <resource-group>}] [skip-version-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
+request system software download [{router <router> | resource-group <resource-group>}] [cohort-id <cohort-id>] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
@@ -2506,7 +2573,6 @@ request system software download [{router <router> | resource-group <resource-gr
 | node | The node on which to download SSR software |
 | resource-group | The name of the resource group |
 | router | The router on which to download SSR software (default: &lt;current router&gt;) |
-| skip-version-check | Skip the version check to allow downloading SSR software at a lower version than what is currently installed. |
 | version | The version to download. |
 
 ##### See Also
@@ -2514,11 +2580,13 @@ request system software download [{router <router> | resource-group <resource-gr
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2556,10 +2624,13 @@ request system software health-check [{router <router> | resource-group <resourc
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2593,10 +2664,13 @@ request system software revert [{router <router> | resource-group <resource-grou
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2639,16 +2713,24 @@ request system software upgrade [{router <router> | resource-group <resource-gro
 | skip-pre-health-check | Skip the pre upgrade health check, which prevents the upgrade from starting upon failure. |
 | version | The version to upgrade to. |
 
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`installation-service`](#request-system-software-upgrade-installation-service) | Upgrade the SSR installation service. |
+
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -2665,6 +2747,30 @@ When targeting a node in an HA router with the upgrade command, only the target 
 :::warning
 This may be a service impacting operation.
 :::
+
+## `request system software upgrade installation-service`
+
+Upgrade the SSR installation service.
+
+#### Usage
+
+```
+request system software upgrade installation-service [{router <router> | resource-group <resource-group>}] [version <version>] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to upgrade the installation service |
+| resource-group | The name of the resource group |
+| router | The router on which to upgrade the installation service (default: &lt;current router&gt;) |
+| version | The version to upgrade the installation-service to (default: latest) |
+
+#### Description
+
+Launch an upgrade for the installation-service on a router or node. When targeting a router, both nodes will issue the installation-service upgrade at the same time. The command can also be addressed to all routers or a particular resource-group. If no version is specified, the installation-service will be upgraded to the latest version available.
 
 ## `restore config factory-default`
 
@@ -2697,7 +2803,6 @@ restore config factory-default [force]
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
@@ -2755,13 +2860,11 @@ restore config running [force] [<username>]
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
 
 This command removes all administrator-added configuration since the last _commit_, effectively bringing the running configuration and the candidate configuration back to parity. The PCLI will prompt for confirmation before resetting the configuration, unless the optional _force_ modifier is added.
-
 #### Example
 
 ```
@@ -2828,6 +2931,7 @@ admin@gouda.novigrad#
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.1.0   | This feature was introduced |
+
 ## `restore system factory-default`
 
 Restore the system to factory defaults.
@@ -2835,7 +2939,7 @@ Restore the system to factory defaults.
 #### Usage
 
 ```
-restore system factory-default [force] [router <router>] [node <node>]
+restore system factory-default [force] [router <router>] [node <node>] [<mode>]
 ```
 
 ##### Keyword Arguments
@@ -2845,6 +2949,12 @@ restore system factory-default [force] [router <router>] [node <node>]
 | force | Skip confirmation prompt |
 | node | The name of the node |
 | router | The name of the router (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| mode | Whether to reboot or shutdown the device after reset (default: reboot) |
 
 #### Description
 
@@ -2886,12 +2996,6 @@ restore users factory-default [force]
 
 The _restore users factory-default_ command deletes all administratively created user accounts (i.e., all but the ones that are installed with the SSR routing software natively) and leaves the system with just the _admin_ and _user_ accounts.
 
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 2.0.0   | This feature was introduced |
-
 ## `rotate log`
 
 Rotate log files.
@@ -2932,8 +3036,6 @@ The _rotate log_ command is useful prior to engaging in troubleshooting exercise
 
 Without any arguments, the _rotate log_ command will rotate all log files on all nodes.
 
-For more information about SSR logging read [Understanding Logs on the SSR](ts_logs.md)
-
 #### Example
 
 ```
@@ -2968,6 +3070,24 @@ In this example you can see that what was previously named highwayManager.4.log 
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 
+
+## `rotate security metadata-key`
+
+Regenerate the security metadata key
+
+#### Usage
+
+```
+rotate security metadata-key router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to regenerate the security metadata key |
+| router | The router on which to regenerate the security metadata key |
+
 ## `save packet-buffer-snapshot`
 
 Gathers packet buffer pool information and stores it in a logfile.
@@ -2997,32 +3117,21 @@ Gathers runtime process stats and stores it in a logfile.
 #### Usage
 
 ```
-save runtime-stats [{router <router> | resource-group <resource-group>}] [force] [node <node>] <filename> [<process-name>]
+save runtime-stats router <router> node <node> <filename>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
 | node | Target node from which to gather runtime stats |
-| resource-group | The name of the resource group |
-| router | Target router from which to gather runtime stats (default: &lt;current router&gt;) |
+| router | Target router from which to gather runtime stats |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
 | filename | Custom filename to store system information |
-| process-name | Target process from which to gather runtime stats (default: all) |
-
-#### Example
-
-```
-admin@gouda.novigrad# save runtime-stats stats.txt
-Retrieving Runtime Stats...
-Runtime stats saved to /var/log/128technology/stats.txt
-```
 
 ## `save tech-support-info`
 
@@ -3052,14 +3161,13 @@ save tech-support-info [force] [manifest <manifest>] [since <since>] [router <ro
 
 #### Description
 
-This command packages statistics, logs and other diagnostic data, to exchange with Juniper's support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.tar.gz`).
+This command packages statistics, logs and other diagnostic data, to exchange with the Juniper support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.zip`).
 
 New manifest files can be created and placed into `/etc/128technology/tech-support-manifests`. Each manifest contains a list of PCLI commands, shell commands, files, and systemd journal&#x27;s to collect.
 
 :::note
-This command collect a lot of data, and may take some time to complete.
+This command collects a lot of data, and may take some time to complete.
 :::
-
 #### Example
 
 ```
@@ -3068,7 +3176,6 @@ admin@labsystem1.fiedler# save tech-support-info
 Retrieving Tech Support Info...
 /var/log/128technology/tech-support-info.tar.gz
 ```
-
 
 ## `search`
 
@@ -3233,7 +3340,6 @@ Candidate Configuration:
 
 admin@labsystem1.fiedler#
 ```
-
 ## `search config running`
 
 Search running configuration data
@@ -3255,7 +3361,6 @@ search config running [limit <limit>] <find>
 | name | description |
 | ---- | ----------- |
 | find | Find all the matching text |
-
 #### Example
 
 ```
@@ -3290,8 +3395,8 @@ search config-attributes [limit <limit>] <find>
 | find | Find all the matching text |
 
 #### Description
-The output of _search_ can be filtered by explicitly specifying _config-attributes_ configuration.
 
+The output of _search_ can be filtered by explicitly specifying _config-attributes_ configuration.
 #### Example
 
 ```
@@ -3353,7 +3458,6 @@ send command download [{router <router> | resource-group <resource-group>}] [for
 
 | name | description |
 | ---- | ----------- |
-| dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node |
 | resource-group | The name of the resource group |
@@ -3382,8 +3486,7 @@ send command reboot [force] router <router> node <node>
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt 
-| version | The version of SSR as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
+| force | Skip confirmation prompt |
 | node | The node to reboot |
 | router | The router to reboot |
 
@@ -3391,18 +3494,16 @@ send command reboot [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3438,18 +3539,16 @@ send command reconnect [router <router>] [node <node>]
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `send command reconnect disconnected`
@@ -3472,18 +3571,16 @@ send command reconnect disconnected [force]
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3514,18 +3611,16 @@ send command restart [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3536,12 +3631,12 @@ This command can only be run on a Conductor.
 
 ## `send command rollback`
 
-Rollback a SSR router to the previously installed version
+This rollback command is now obsolete.
 
 #### Usage
 
 ```
-send command rollback [force] {router <router> | resource-group <resource-group>}
+send command rollback [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3551,29 +3646,16 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node |
 | resource-group | The name of the resource group |
-| router | The router to rollback |
-##### See Also
-| command | description |
-| ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
-| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
-| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+| router | The name of the router (default: &lt;current router&gt;) |
 
 #### Description
 
-:::note
-This command can only be run on a Conductor.
-:::
+Please use the following commands to perform software maintenance:
+
+show system software ...
+request system software ...
+set system software ...
+delete system software ...
 
 ## `send command start`
 
@@ -3597,18 +3679,16 @@ send command start [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3639,18 +3719,16 @@ send command stop [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3673,7 +3751,7 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 
 | name | description |
 | ---- | ----------- |
-| force | A single `force` forces the synchronization by disabling the smart sync skip mechanism. A second `force` skips the confirmation prompt. This argument can be repeated up to 2 times. |
+| force | A single &#x27;force&#x27; forces the synchronization by disabling the smart sync skip mechanism. A second &#x27;force&#x27; skips the confirmation prompt. This argument can be repeated up to 2 times |
 | node | The node to sync |
 | resource-group | The name of the resource group |
 | router | The router to sync (default: &lt;current router&gt;) |
@@ -3682,67 +3760,58 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-Transition an asset back to &#x27;connected&#x27; and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
+Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
 
 :::note
 This command can only be run on a Conductor.
 :::
 
-## `send command upgrade`
+## `send command system-check post-operation`
 
-Upgrade a SSR node
+Post-operation an SSR node
 
 #### Usage
 
 ```
-send command upgrade [dry-run] [force] {router <router> | resource-group <resource-group>} <version>
+send command system-check post-operation [cohort-id <cohort-id>] [force] router <router>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| dry-run | View version changes without command execution |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| resource-group | The name of the resource group |
-| router | The router to upgrade |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| router | The router to post-operation |
 
-##### Positional Arguments
-| name | description |
-| ---- | ----------- |
-| version | The version of SSR as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3751,40 +3820,38 @@ send command upgrade [dry-run] [force] {router <router> | resource-group <resour
 This command can only be run on a Conductor.
 :::
 
-## `send command yum-cache-refresh`
+## `send command system-check pre-operation`
 
-Refresh the yum cache as well as the SSR software versions available for download and upgrade.
+Pre-operation an SSR node
 
 #### Usage
 
 ```
-send command yum-cache-refresh [force] {router <router> | resource-group <resource-group>}
+send command system-check pre-operation [cohort-id <cohort-id>] [force] router <router>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| resource-group | The name of the resource group |
-| router | The router to refresh |
+| cohort-id | Assign a cohort ID to the operation. |
+| force | Skip confirmation prompt |
+| router | The router to pre-operation |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3851,12 +3918,12 @@ delete system software ...
 
 ## `service-ping`
 
-Send an ICMP request using a service or tenant
+Ping that uses a tenant or service to make an ICMP request.
 
 #### Usage
 
 ```
-service-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [service-name <service-name>] [tenant <tenant>] [source-ip <source-ip>] router <router> node <node> <destination-ip>
+service-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [identifier <identifier>] [service-name <service-name>] [tenant <tenant>] [source-ip <source-ip>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
@@ -3864,6 +3931,7 @@ service-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [ser
 | name | description |
 | ---- | ----------- |
 | count | Number of ping requests to send [type: int] (default: 4) |
+| identifier | Set a custom identifier (default: random integer) [type: uint16_t] |
 | node | The node from which to send the ping request |
 | router | The router from which to send the ping request |
 | service-name | Name of service which includes the destination trying to be reached; only required if service is ambiguous |
@@ -3881,8 +3949,7 @@ service-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [ser
 
 #### Description
 
-This issues ICMP requests to the specified _destination-ip_, and offers the administrators a variety of ways to formulate the request. The _tenant_ and _service-name_ modifiers specify which "source tenant" to use for the request, and the name of the service for which the _destination-ip_ applies. The _count_ modifier will affect the number of pings that are issued. The _interface_ modifier lets administrators specify the egress interface for issuing the pings. The _timeout_ modifier will set the waiting period for a reply before declaring the ping as a failure. The _set-df-bit_ and _record-route_ options enable the respective flags in the outgoing ICMP request.
-
+This issues ICMP requests to the specified _destination-ip_, and offers the administrators a variety of ways to formulate the request. The _tenant_ and _service-name_ modifiers specify which &quot;source tenant&quot; to use for the request, and the name of the service for which the _destination-ip_ applies. The _count_ modifier will affect the number of pings that are issued. The _timeout_ modifier will set the waiting period for a reply before declaring the ping as a failure. The _set-df-bit_ and _record-route_ options enable the respective flags in the outgoing ICMP request.
 #### Example
 
 ```
@@ -3942,7 +4009,6 @@ set config encryption [{router <router> | resource-group <resource-group>}] [for
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Example
@@ -3993,7 +4059,6 @@ Configuration encryption was successfully disabled.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.5.0   | This feature was introduced |
-
 ## `set config local-override`
 
 This command enables the local config override mode on an SSR Managed Router.
@@ -4001,7 +4066,6 @@ This command enables the local config override mode on an SSR Managed Router.
 #### Description
 
 Engaging local config override mode allows the user to make changes to the local configuration that will not be overwritten by the Conductor until local config override mode is disabled.
-
 
 #### Usage
 
@@ -4060,12 +4124,12 @@ set config local-override disabled [force] router <router>
 | force | Skip confirmation prompt |
 | router | The router on which to disable local override |
 
-#### Version History
+#### Description
 
+Engaging local config override mode allows the user to make changes to the local configuration that will not be overwritten by the Conductor until local config override mode is disabled.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.2.0   | This feature was introduced |
-
 
 ## `set dns resolution`
 
@@ -4109,7 +4173,6 @@ Successfully set hostname resolution on node node1
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.5.0   | This feature was introduced |
-
 ## `set log level`
 
 Set the log level of a process.
@@ -4165,7 +4228,7 @@ The category can be any of the following:
 | Category Name | Long Name | Description |
 | ------------- | --------- | ----------- |
 | ATCS | Analytics | Components related to the SSR Analytics Engine. |
-| CFGD | Config Director | Components related to the 128T Configuration Engine. |
+| CFGD | Config Director | Components related to the SSR Configuration Engine. |
 | DATA | Metadata Database | Components related to the configuration and state databases. |
 | DISC | Discovery | Discovery-based components (except BFD). Today this is DHCP and ARP. |
 | USER | User | User-created log messages, generated via the &#x27;write&#x27; command. |
@@ -4192,14 +4255,6 @@ The category can be any of the following:
 | LDAP | LDAP | All the System Security Services Daemon logs. |
 | RIB | RIB | Components related to routing changes. |
 | IDP | IDP | Components related to IDP. |
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 2.0.0   | This feature was introduced |
-| 3.1.0   | Log categories introduced   |
-| 6.0.0   | LDAP category added         |
 
 ## `set log level configured`
 
@@ -4259,6 +4314,7 @@ set password
 #### Description
 
 The _set password_ command allows a PCLI user to change their password. As is typical with most password changing routines, as a security precaution the user must enter their current password before they&#x27;re permitted to change it.
+
 :::note
 This command can only be run on a locally authenticated user.
 :::
@@ -4268,7 +4324,6 @@ This command can only be run on a locally authenticated user.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
-
 
 ## `set provisional-status`
 
@@ -4330,51 +4385,59 @@ Set credentials for accessing SSR software repositories on the local node.
 #### Usage
 
 ```
-set software access-token [{router <router> | resource-group <resource-group>}] [force] [node <node>] <username> <token>
+set software access-token [force] <username> <token> [<channel>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The name of the node |
-| resource-group | The name of the resource group |
-| router | The name of the router (default: &lt;current router&gt;) |
+| force | Skip confirmation prompt |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| username | The username for the software access account. |
-| token | Authentication token for SSR software. |
+| username | The username for the software access account |
+| token | Authentication token for SSR software |
+| channel | The software access channel (default: release) |
 
-## `set system software image`
+## `set system software boot-volume`
 
-Set the boot image.
+Set the boot volume.
 
 #### Usage
 
 ```
-set system software image <image>
+set system software boot-volume [force] [router <router>] [node <node>] <id>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to set the boot volume |
+| router | The router on which to set the boot volume (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| image | The image to load on next boot |
+| id | The boot volume ID to load on next boot |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -4385,6 +4448,7 @@ set system software image <image>
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.0   | This feature was introduced |
+
 ## `set time`
 
 Set the system date and time.
@@ -4405,27 +4469,24 @@ set time [force] <date>
 
 | name | description |
 | ---- | ----------- |
-| date | The date to be used for the system date |
+| date | the date to set the system to |
 
 #### Description
 
-`date` can be in almost any common format. It can contain month names, time zones, **AM** and **PM**, yesterday, etc. 
-For example,
+&#x27;date&#x27; can be in almost any common format. It can contain month names, time zones, &#x27;am&#x27; and &#x27;pm&#x27;, &#x27;yesterday&#x27;, etc. For example,
 
-```
-set time 2020-07-21 14:19:13.489392193 +0530
-```
+set time &quot;2020-07-21 14:19:13.489392193 +0530&quot;
 
 specifies the instant of time that is 489,392,193 nanoseconds after July 21, 2020 at 2:19:13 PM in a time zone that is 5 hours and 30 minutes east of UTC.
 
 Relative times can also be used. 
-For example,
+For example:
 ```
 set time +2 hours
 
 set time -5 min
 ```
-the first adds two hours to the current time and the second moves the clock back by five minutes.
+The first adds two hours to the current time and the second moves the clock back by five minutes.
 
 | Release | Modification                |
 | ------- | ----------------------------|
@@ -4620,31 +4681,29 @@ Display registered application-modules.
 #### Usage
 
 ```
-show application modules registration [force] [node <node>] {router <router> | resource-group <resource-group>}
+show application modules registration router <router> node <node>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node |
-| resource-group | The name of the resource group |
 | router | The name of the router |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show application modules status`](#show-application-modules-status) | Display applications provided by a module. |
+| [`show application modules status`](#show-application-modules-status) | Display &quot;applications&quot; provided by a module. |
 
 #### Description
 
-The _show application modules registration_ subcommand shows all of the modules that provide application names to SSR as part of its Application Classification feature.
+The _show application modules registration_ subcommand shows all of the modules that provide &quot;application&quot; names to SSR as part of its Application Classification feature.
 
 ## `show application modules status`
 
-Display applications provided by a module.
+Display &quot;applications&quot; provided by a module.
 
 #### Usage
 
@@ -4701,7 +4760,7 @@ show application names [rows <rows>] [force] [node <node>] {router <router> | re
 
 #### Description
 
-The _show application names_ subcommand shows all of the application names that the SSR has learned, or been configured to recognize, as part of its Application Classification feature.
+The _show application names_ subcommand shows all of the &quot;application&quot; names that the SSR has learned, or been configured to recognize, as part of its Application Classification feature.
 
 #### Example
 
@@ -4780,7 +4839,6 @@ show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <
 #### Description
 
 The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output is controlled through the use of the optional _rows_ attribute. When the *rows* command is not present, the SSR will default to displaying the first 50 rows of the specified node's ARP table. Using `detail` displays additional information including time to next refresh (ms), retry count (if expired), and time of last resolved ARP.
-
 
 #### Example
 
@@ -4892,25 +4950,23 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 | command | description |
 | ------- | ----------- |
 | [`errors`](#show-assets-errors) | Shows the SSR nodes that have errors. |
-| [`software`](#show-assets-software) | Shows assets software information. |
 | [`summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+| [`upgrade-required`](#show-assets-upgrade-required) | Shows the SSR nodes that require an upgrade. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -4920,7 +4976,6 @@ The _show assets_ command displays the automated provisioning status of the SSR 
 :::note
 This command can only be run on a Conductor.
 :::
-
 #### Example
 
 ```
@@ -5114,19 +5169,17 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
-| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
-| [`show assets software`](#show-assets-software) | Shows assets software information. |
 
 #### Description
 
@@ -5136,7 +5189,7 @@ _show assets summary_ will display a total of all assets in each state.
 This command can only be run on a Conductor.
 :::
 
-#### Example
+### Example
 
 ```
 admin@labsystem1.fiedler# show assets summary
@@ -5153,15 +5206,41 @@ Fri 2017-07-21 15:41:54 UTC
   assets with errors:      2
 ```
 
-#### Version History
+## `show assets upgrade-required`
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 4.4.0   | This feature was introduced |
+Shows the SSR nodes that require an upgrade.
+
+#### Usage
+
+```
+show assets upgrade-required [{router <router> | resource-group <resource-group>}] [force] [<id>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router for which to display if an upgrade is required (default: all) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| id | The asset id of the SSR node from which to retrieve if an upgrade is required |
+
+#### Description
+
+_show assets upgrade-required_ will display all assets which require an upgrade to function correctly.
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show bfd`
 
-Show BFD Peer &lt;&gt;
+Show Bfd Peer &lt;&gt;
 
 #### Usage
 
@@ -5173,10 +5252,10 @@ show bfd [vrf <vrf>] [peer <ip>] [force] {router <router> | resource-group <reso
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| peer | Retrieve BFD information for this peer. |
-| resource-group | The name of the resource group. |
-| router | The router to request BFD information from. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| peer | retrieve BFD information for this peer |
+| resource-group | The name of the resource group |
+| router | The router to request BFD information from |
 | vrf | VRF name |
 
 ##### Positional Arguments
@@ -5215,10 +5294,10 @@ show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <re
 
 | command | description |
 | ------- | ----------- |
-| [`ipv4-vpn`](#show-bgp-ipv4-vpn) | Displays information about the state of the BGP IPv4 vpn table on the SSR router. |
-| [`ipv6`](#show-bgp-ipv6) | Displays information about the state of the BGP IPv6 routes on the SSR router. |
-| [`ipv6-vpn`](#show-bgp-ipv6-vpn) | Displays information about the state of the BGP IPv6 vpn table on the SSR router. |
-| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the SSR router. |
+| [`ipv4-vpn`](#show-bgp-ipv4-vpn) | Displays information about the state of the BGP IPv4 vpn table on the SSR. |
+| [`ipv6`](#show-bgp-ipv6) | Displays information about the state of the BGP IPv6 routes on the SSR. |
+| [`ipv6-vpn`](#show-bgp-ipv6-vpn) | Displays information about the state of the BGP IPv6 vpn table on the SSR. |
+| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the SSR. |
 | [`path-based-policy`](#show-bgp-path-based-policy) | Show the current BGP path-based-policy summary from the routing manager. |
 | [`summary`](#show-bgp-summary) | Show the current BGP summary from the routing manager. |
 
@@ -5274,7 +5353,7 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 | 5.1.0 | Added VFR support |
 ## `show bgp ipv4-vpn`
 
-Displays information about the state of the BGP IPv4 vpn table on the SSR router.
+Displays information about the state of the BGP IPv4 vpn table on the SSR.
 
 #### Usage
 
@@ -5303,10 +5382,9 @@ show bgp ipv4-vpn [rows <rows>] [force] {router <router> | resource-group <resou
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.2.0   | This feature was introduced |
-
 ## `show bgp ipv6`
 
-Displays information about the state of the BGP IPv6 routes on the SSR router.
+Displays information about the state of the BGP IPv6 routes on the SSR.
 
 #### Usage
 
@@ -5332,7 +5410,7 @@ show bgp ipv6 [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-grou
 
 ## `show bgp ipv6-vpn`
 
-Displays information about the state of the BGP IPv6 vpn table on the SSR router.
+Displays information about the state of the BGP IPv6 vpn table on the SSR.
 
 #### Usage
 
@@ -5421,6 +5499,7 @@ link
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 5.1.0 | Added VFR support |
+
 ## `show bgp path-based-policy`
 
 Show the current BGP path-based-policy summary from the routing manager.
@@ -5612,41 +5691,15 @@ show certificate webserver
 
 | command | description |
 | ------- | ----------- |
-| [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
+| [`create certificate request`](#create-certificate-request) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
-
-#### Example
-
-```
-admin@labsystem1.fiedler# show certificate webserver
-
-Certificate:
-    Data:
-        Version: 3 (0x2)
-        Serial Number: 17087 (0x42bf)
-    Signature Algorithm: sha256WithRSAEncryption
-        Issuer: C=US, ST=MA, O=a, CN=a
-        Validity
-            Not Before: May  5 04:49:02 2016 GMT
-            Not After : May  6 04:49:02 2017 GMT
-        Subject: C=US, ST=MA, O=a, CN=a
-        Subject Public Key Info:
-            Public Key Algorithm: rsaEncryption
-...
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced |
-
+| [`import certificate`](#import-certificate) | Import a certificate. |
 
 ## `show config candidate`
 
 Display candidate configuration data
+
 #### Usage
 
 ```
@@ -5717,13 +5770,19 @@ config
         exit
 ...
 ```
-
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
 | flat | Display with full paths on each line instead of as a hierarchy |
 | verbose | Display all config data, including default values |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
+| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config disk-cache`
 
@@ -5743,12 +5802,6 @@ show config disk-cache [{router <router> | resource-group <resource-group>}] [fo
 | node | The name of the node |
 | resource-group | The name of the resource group |
 | router | The name of the router (default: &lt;current router&gt;) |
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 6.2.0   | This feature was introduced |
 
 ## `show config exports`
 
@@ -5788,9 +5841,7 @@ The _show config exports_ command has two optional flags: _name_ and _flat_. Use
 | [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
-
 
 #### Example 1
 
@@ -5847,7 +5898,6 @@ config authority access-management token expiration  1800
 Completed in 0.18 seconds
 admin@conductor-east-1.RTR_EAST_CONDUCTOR#
 ```
-
 #### Version History
 
 | Release | Modification                |
@@ -5858,7 +5908,6 @@ admin@conductor-east-1.RTR_EAST_CONDUCTOR#
 ## `show config local-override`
 
 Display local config override status.
-
 #### Description
 
 This command displays the local config override mode status for a Managed SSR Router. Engaging local config override mode allows the user to make changes to the local configuration that will not be overwritten by the Conductor until local config override mode is disabled.
@@ -5899,7 +5948,6 @@ show config local-override [{router <router> | resource-group <resource-group>}]
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.2.0   | This feature was introduced |
-
 
 ## `show config locally-modified`
 
@@ -5988,13 +6036,19 @@ config
         exit
 ...
 ```
-
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
 | flat | Display with full paths on each line instead of as a hierarchy |
 | verbose | Display all config data, including default values |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
+| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config version`
 
@@ -6029,13 +6083,11 @@ show config version [{router <router> | resource-group <resource-group>}] [force
 | [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
 
 This command displays the version number of the running configuration on the SSR. This version number is auto-generated, and is the UNIX timestamp when the configuration is committed. (As a consequence, you should expect that successive commits to the same configuration will increment the version by more than one. This is a change in behavior from pre-2.0 software, which used a monotonically incrementing integer to represent the configuration version.)
-
 #### Example
 
 ```
@@ -6054,48 +6106,6 @@ Completed in 0.17 seconds
 | 2.0.0   | The behavior changed as described in the Description text above |
 | 3.0.0   | Updated to display the timestamp of the configuration change in human readable form |
 
-## show context stats start-time
-
-#### Usage
-
-```
-show context stats start-time
-```
-
-#### Description
-
-The _show context stats start-time_ subcommand shows the _stats start-time_ (if set), or indicates that there is no start-time currently set. For more information on setting _stats start-time_, please refer to _set context_ in this manual.
-
-#### Example
-
-```
-admin@cnd1.conductor# show context stats start-time
-No stats start time set, show stats will be relative to launch time
-
-admin@cnd1.conductor# set context stats start-time "December 25, 2017"
-Stats start time set to: 2017-12-25 00:00:00
-
-admin@cnd1.conductor# show context stats start-time
-Stats start time set to: 2017-12-25 00:00:00
-
-admin@cnd1.conductor# clear context stats start-time
-Success
-
-admin@cnd1.conductor# show context stats start-time
-No stats start time set, show stats will be relative to launch time
-```
-
-#### Privileges Required
-
-Available to _admin_ and _user_.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 3.2.0   | This feature was introduced |
-| 5.0.0   | This feature was removed |
-
 ## `show device-interface`
 
 Display detailed device interface information.
@@ -6110,7 +6120,7 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Device interface to display (if omitted, all will be displayed) (default: all) |
 | node | The node for which to display device interfaces |
 | router | The router for which to display device interfaces |
@@ -6127,49 +6137,35 @@ This command displays detailed information about device interface(s) (i.e., phys
 
 Omitting all optional arguments will display detailed information on all device interfaces defined within the SSR.
 
-#### Example
+## `show dhcp learned-proxies`
+
+Display dhcp proxy info for network-interfaces.
+
+#### Usage
 
 ```
-admin@test1.Fabric128# show device-interface name 10
-Mon 2020-11-23 20:45:37 UTC
-
-✔ Retrieving device interface information...
-
-========================================
- test1:10
-========================================
- Type:                ethernet
- Forwarding:          true
- PCI Address:         0000:00:04.0
- MAC Address:         fa:16:3e:16:42:6c
-
- Admin Status:        up
- Operational Status:  up
- Provisional Status:  up
- Redundancy Status:   non-redundant
- Speed:               1 Gb/s
- Duplex:              full
-
- in-octets:                           0
- in-unicast-pkts:                     0
- in-errors:                           0
- out-octets:                          0
- out-unicast-pkts:                    0
- out-errors:                          0
-
- Plugin Info:         unavailable
-
-Completed in 0.17 seconds
+show dhcp learned-proxies [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
-#### Version History
+##### Keyword Arguments
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 2.0.0   | This feature was introduced |
-| 3.0.0   | Added requirement for prepending keywords to the _device-interface-id_ and _node_ arguments to avoid command line ambiguity |
-| 3.2.0   | Device-interface is keyed by _name_ rather than _id_ |
-| 4.5.3   | Added support for Provisional Status |
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| name | Network interface to display (default: all) |
+| node | The node for which to display dhcp proxy info |
+| resource-group | The name of the resource group |
+| router | The router for which to display dhcp proxy info |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
+| [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
+| [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
+| [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
+| [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
 
 ## `show dhcp mappings`
 
@@ -6196,10 +6192,10 @@ show dhcp mappings [rows <rows>] [force] [node <node>] {router <router> | resour
 | command | description |
 | ------- | ----------- |
 | [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
+| [`show dhcp learned-proxies`](#show-dhcp-learned-proxies) | Display dhcp proxy info for network-interfaces. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
-
 #### Example
 
 ```
@@ -6248,10 +6244,10 @@ show dhcp prefix-delegation [group <group>] [force] {router <router> | resource-
 | command | description |
 | ------- | ----------- |
 | [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
+| [`show dhcp learned-proxies`](#show-dhcp-learned-proxies) | Display dhcp proxy info for network-interfaces. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
-
 #### Example
 
 ```
@@ -6297,10 +6293,10 @@ show dhcp v4 [name <name>] [force] [node <node>] {router <router> | resource-gro
 | command | description |
 | ------- | ----------- |
 | [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
+| [`show dhcp learned-proxies`](#show-dhcp-learned-proxies) | Display dhcp proxy info for network-interfaces. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
-
 #### Example
 
 ```
@@ -6375,10 +6371,10 @@ show dhcp v6 [name <name>] [force] [node <node>] {router <router> | resource-gro
 | command | description |
 | ------- | ----------- |
 | [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
+| [`show dhcp learned-proxies`](#show-dhcp-learned-proxies) | Display dhcp proxy info for network-interfaces. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
-
 #### Example
 
 ```
@@ -6581,28 +6577,6 @@ show entitlement [{router <router> | resource-group <resource-group>}] [force]
 
 The SSR Networking Platform calculates the Peak Router Bandwidth Capacity; this is the highest router bandwidth value of any 5 second interval over the specific license period. The Router Bandwidth is calculated based on the aggregate of sessions traversing the router.
 
-#### Example
-
-```
-admin@gouda.novigrad# show entitlement
-Tue 2020-04-21 18:56:30 UTC
-============= =========== ======================
- Project           Month   Entitlement Utilized
-============= =========== ======================
- Lab Router    *Apr 2020             11.94 Mbps
-                Mar 2020             14.23 Mbps
-
-Completed in 0.63 seconds
-```
-
-The asterisk next to the date indicates the current month and therefore a partial entitlement calcuation.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.1.0   | This feature was introduced |
-
 ## `show events`
 
 Show events from the historical events database.
@@ -6624,7 +6598,7 @@ show events [{router <router> | resource-group <resource-group>}] [from <from>] 
 | resource-group | The name of the resource group |
 | router | The name of the router for which to display events (default: &lt;current router&gt;) |
 | rows | The number of events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| to | Only show events before the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] |
+| to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 | type | Filter events based on the event type and subtype |
 
 ##### Positional Arguments
@@ -6638,10 +6612,9 @@ show events [{router <router> | resource-group <resource-group>}] [from <from>] 
 | command | description |
 | ------- | ----------- |
 | [`show alarms`](#show-alarms) | Display currently active or shelved alarms |
-
 #### Description
 
-The _show events_ command displays various event records that the SSR collects during operation. 
+The _show events_ command displays various event records that the SSR collects during operation.
 
 The output can be optionally restricted to specific time windows using the `from` and `to` qualifiers. Because this command can generate a lot of output, the `rows` limiter is particularly useful on busy systems.
 
@@ -6655,168 +6628,11 @@ Categories can be enabled or disabled individually in `config &gt; authority &gt
 
 * traffic: A record of whether traffic was allowed or denied. By default this is disabled.
 
-* provisioning: A historical record of `show assets` including unique events for each internal state transition.
+* provisioning: A historical record of &#x27;show assets&#x27; including unique events for each internal state transition.
 
 Additional filtering can be done by specifying a dot (.) followed by a subtype. For example, `type admin.running_config_change` will only show configuration change events, while `type system.ntp_adjustment` will only display NTP adjustment events.
+
 The output can be optionally restricted to specific time windows using the `from` and `to` qualifiers. Because this command can generate a lot of output, the `rows` and `limit` limiters are particularly useful on busy systems.
-
-#### Example
-
-```
-user@labsystem1.fiedler> show events alarm
-Fri 2017-07-21 11:59:51 EDT
-=================== ============ ====================== ==========
- Node                Event Type   Time                   Severity   ...
-=================== ============ ====================== ==========
- labsystem1          clear        2017-07-21T15:24:04Z   major
- labsystem1          clear        2017-07-21T15:24:04Z   major
- labsystem1          add          2017-07-21T15:23:59Z   major
- labsystem2          add          2017-07-21T15:23:59Z   major
- labsystem2          clear        2017-07-21T15:23:19Z   major
- labsystem1          clear        2017-07-21T15:23:19Z   major
- labsystem1          clear        2017-07-21T15:23:19Z   major
- labsystem1          clear        2017-07-21T15:23:19Z   major
- labsystem1          add          2017-07-21T15:23:14Z   major
-
-Completed in 0.11 seconds
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| verbosity | detail \| summary (default: summary) |
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 3.1.0   | This feature was introduced |
-
-## `show events config commit`
-
-Shows events related to running config change
-
-#### Usage
-
-```
-show events config commit [{router <router> | resource-group <resource-group>}] [flat] [from <from>] [to <to>] [force] [<verbosity>]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| flat | Display with full paths on each line instead of as a hierarchy |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
-| resource-group | The name of the resource group |
-| router | The router for which to display config commit events (default: &lt;current router&gt;) |
-| to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| verbosity | detail \| summary (default: detail) |
-
-##### See Also
-
-| command | description |
-| ------- | ----------- |
-| [`compare config`](#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
-| [`show config exports`](#show-config-exports) | Display configuration exports. |
-| [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
-
-#### Example
-
-```
-admin@node1.t128# configure authority router t128 description "test router"
-*admin@node1.t128# commit
-Are you sure you want to commit the candidate config? [y/N]: y
-✔ Validating, then committing...
-Configuration committed
-admin@node1.t128# show events config commit
-Thu 2020-06-04 12:47:59 UTC
-✔ Retrieving configuration events...
-
-======================================================================
- 2020-06-04T12:47:53.487Z admin changed running configuration on t128
-======================================================================
-
-config
-
-    authority
-
-        router  t128
-            name         t128
-            description  "test router"
-        exit
-    exit
-exit
-
-Completed in 0.09 seconds
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 4.5.0   | This feature was introduced |
-
-## `show events config encryption`
-
-Shows events related to config encryption change
-
-#### Usage
-
-```
-show events config encryption [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [force]
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-| resource-group | The name of the resource group |
-| router | The router for which to display config encryption events (default: &lt;current router&gt;) |
-| to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-
-#### Example
-
-```
-admin@node1.t128# show events config encryption
-Thu 2020-06-04 13:24:47 UTC
-✔ Retrieving configuration events...
-
-========================================================================
- 2020-06-04T12:38:17.409Z root changed configuration encryption on t128
-========================================================================
-enable encryption
-
-========================================================================
- 2020-06-04T12:39:37.930Z root changed configuration encryption on t128
-========================================================================
-disable encryption
-
-Completed in 0.08 seconds
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 4.5.0   | This feature was introduced |
 
 ## `show fib`
 
@@ -6861,9 +6677,9 @@ show fib [{service-name <name> | hierarchy-service-name <name> | contains-servic
 
 #### Description
 
-This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the `node-name` argument. The output may be limited to a specified number of rows by adding the optional `rows` modifier at the end of the command.
+This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the &lt;node-name&gt; argument. The output may be limited to a specified number of rows by adding the optional _&lt;rows&gt;_ modifier at the end of the command.
 
-This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the `rows` modifier. 
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the &lt;rows&gt; modifier.
 
 #### Example
 
@@ -6914,7 +6730,6 @@ Capacity:    19051
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
 | 5.1.0   | Added next hop details, and the ability to filter by VFR, resource-group, and tenant. |
 | 5.2.0   | Added and the following arguments: service-name, hierarchy-service-name, contains-service-name, match-service-name, source-ip, and source-interface. |
-
 ## `show fib lookup`
 
 Shows current FIB entries at the specified node using incoming packet info.
@@ -6943,10 +6758,9 @@ show fib lookup [tenant <tenant>] [source-ip <source-ip>] [source-interface <sou
 
 #### Description
 
-This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the `node-name` argument. The output may be limited to a specified number of rows by adding the optional `rows` modifier at the end of the command.
+This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the &lt;node-name&gt; argument. The output may be limited to a specified number of rows by adding the optional _&lt;rows&gt;_ modifier at the end of the command.
 
-This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the `rows` modifier.
-
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the &lt;rows&gt; modifier.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 5.2.0   | Introduced the command |
@@ -6993,7 +6807,6 @@ admin@gouda.novigrad# show history
  469   show network-interface application
  470   show history
 ```
-
 ## `show idp application details`
 
 Show IDP engine details.
@@ -7008,31 +6821,32 @@ show idp application details [force] [node <node>] {router <router> | resource-g
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The node for which engine started. |
-| resource-group | The name of the resource group. |
-| router | The router for which engine started. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which engine started |
+| resource-group | The name of the resource group |
+| router | The router for which engine started |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
-| [`show idp events`](#show-idp-events) | Show all IDP events. |
-| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application. |
-| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type. |
-| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level. |
-| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp events`](#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](#show-idp-network) | Show IDP networks |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
 #### Description
 
 Query and display the IDP engine details.
+
 ## `show idp application status`
 
 Show underlying IDP application status.
@@ -7047,10 +6861,10 @@ show idp application status [force] [node <node>] {router <router> | resource-gr
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The node for which to display status. |
-| resource-group | The name of the resource group. |
-| router | The router for which to display status. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display status |
+| resource-group | The name of the resource group |
+| router | The router for which to display status |
 
 ##### See Also
 
@@ -7078,7 +6892,6 @@ Query and display the current state of the IDP application along with detailed m
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.4   | This feature was introduced. |
-
 ## `show idp details`
 
 Show underlying IDP details.
@@ -7121,7 +6934,7 @@ Query and display the IDP details.
 
 ## `show idp events`
 
-Show all IDP events.
+Show all IDP events
 
 #### Usage
 
@@ -7133,27 +6946,27 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 
 | name | description |
 | ---- | ----------- |
-| from | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| node | The name of the node. |
-| router | The name of the router. |
-| rows | The number of event entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
-| since | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| to | Only show events before the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| verbose | Get detailed event information. |
+| from | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified)or a delta, such as 45m, 2h, 1d [type: timestamp] |
+| node | The name of the node |
+| router | The name of the router |
+| rows | The number of event entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| since | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified)or a delta, such as 45m, 2h, 1d [type: timestamp] |
+| to | Only show events before the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified)or a delta, such as 45m, 2h, 1d [type: timestamp] |
+| verbose | Get detailed event information |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`by-application`](#show-idp-events-by-application) | Show IDP event by application. |
-| [`by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type. |
-| [`by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level. |
+| [`by-application`](#show-idp-events-by-application) | Show IDP event by application |
+| [`by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
@@ -7164,7 +6977,7 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
 #### Version History
 
@@ -7212,16 +7025,9 @@ show idp events by-application [{from <from> | since <since>}] [to <to>] [verbos
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
-
 #### Description
 
-Query by application name and display summary, brief or detailed, of filtered events.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 6.0.4   | This feature was introduced. |
+Query by application name and display summary; brief or detailed events
 
 ## `show idp events by-attack`
 
@@ -7265,14 +7071,13 @@ show idp events by-attack [{from <from> | since <since>}] [to <to>] [verbose] [n
 
 #### Description
 
-Query by attack type and display summary, brief or detailed, of filtered events.
+Query by attack type and display summary; brief or detailed events
 
 #### Version History
 
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.4   | This feature was introduced. |
-
 ## `show idp events by-severity`
 
 Show IDP events by severity level.
@@ -7362,7 +7167,6 @@ show idp network [force] [node <node>] {router <router> | resource-group <resour
 #### Description
 
 Query and display the current state of the IDP network along with detailed messages.
-
 #### Version History
 
 | Release | Modification                |
@@ -7383,16 +7187,16 @@ show idp platform [force] [node <node>] {router <router> | resource-group <resou
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The node for which to display IDP platform informatiion. |
-| resource-group | The name of the resource group. |
-| router | The router for which to display IDP platform information. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display IDP platform informatiion |
+| resource-group | The name of the resource group |
+| router | The router for which to display IDP platform informatiion |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
@@ -7403,7 +7207,7 @@ show idp platform [force] [node <node>] {router <router> | resource-group <resou
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
 #### Description
 
@@ -7429,10 +7233,10 @@ show idp signatures [force] [node <node>] {router <router> | resource-group <res
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The node for which to display signature package details. |
-| resource-group | The name of the resource group. |
-| router | The router for which to display signature package details. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display signature package details |
+| resource-group | The name of the resource group |
+| router | The router for which to display signature package details |
 
 ##### See Also
 
@@ -7516,6 +7320,30 @@ show igmp interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <n
 | ---- | ----------- |
 | verbosity | detail \| summary (default: summary) |
 
+## `show lldp-neighbors`
+
+Display the lldp neighbors.
+
+#### Usage
+
+```
+show lldp-neighbors [port <port>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | Node for which to display neighbors information |
+| port | Display the neighbors on the given port |
+| resource-group | The name of the resource group |
+| router | Router for which to display neighbors information |
+
+#### Description
+
+This command displays the neighbors of the router parsed through lldp packets.
+
 ## `show load-balancer`
 
 Shows current load balancer agent entries from the highway manager at the specified node.
@@ -7540,47 +7368,11 @@ show load-balancer [service <service>] [agent <agent>] [rows <rows>] [force] [no
 
 #### Description
 
-The `show load-balancer` command provides feedback on the SSR&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
+The _show load-balancer_ command provides feedback on the SSR&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
 
 This command, when issued without any filters (agent, node, or service) will display all agents, nodes, and services that are subject to load balancing. (The output can be quite verbose.) These filters may be combined to &quot;hone in&quot; on specific agents/nodes/services selectively.
 
 This command is extremely helpful for identifying why the SSR selected specific destinations for its session-oriented traffic.
-
-#### Example
-
-```
-admin@labsystem1.fiedler# show load-balancer
-===============================================================================
-Service:  web
-Strategy: proportional
-+-----------+--------+-----------+
-|   Agent   |  Node  |  Service  |
-|-----------+--------+-----------|
-| agent_2_a | test1  |    web    |
-+-----------+--------+-----------+
-
-Capacity:
-======  =====  ======  ======
-  Used    Max    Util    Rate
-======  =====  ======  ======
-     0   2000    0.0%     0/s
-======  =====  ======  ======
-
-Paths (count 1):
-intf10.0 gateway 172.16.12.1
-======  =========  =======  =======  =========  ========
-  Type    Quality    State     Loss    Latency    Jitter
-======  =========  =======  =======  =========  ========
- local         30  unknown  unknown    unknown   unknown
-======  =========  =======  =======  =========  ========
-...
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.1.0   | This feature was introduced |
 
 ## `show lte`
 
@@ -7641,7 +7433,6 @@ This command queries the LTE devices and displays the following state info:
 - registration-status
 - connection-status 
 - netstat (tx, rx, tx-error, rx-error, etc)
-
 ## `show lte detail`
 
 Display LTE detail.
@@ -7662,39 +7453,9 @@ show lte detail [device-interface <device-interface>] [force] [node <node>] {rou
 | resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
-## `show lte firmware`
-
-Display lte firmware information.
-
-#### Usage
-
-```
-show lte firmwware [device-interface <device-interface>] [force] [node <node>] router <router>
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| device-interface | LTE device interface (default: all) |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node for which to display LTE data |
-| router | The router for which to display LTE data |
-
-#### Description
-
-This command queries the LTE devices and displays the following state info:
-
-- carrier-name
-- FW-version
-- IMEI
-- card-model
-- bands-supported
-- bands-enabled
-
 ## `show lte modem`
 
-Display LTE modem.
+Display lte modem.
 
 #### Usage
 
@@ -7780,7 +7541,6 @@ This command queries the LTE devices and displays the following state info:
 - RSSI
 - SNR
 - carrier-name
-
 ## `show lte sim`
 
 Display LTE sim.
@@ -7810,7 +7570,6 @@ This command queries the LTE devices and displays the following state info:
 - carrier-name
 - carrier-mcc
 - carrier-mnc
-
 ## `show lte summary`
 
 Display lte device summary.
@@ -7838,10 +7597,9 @@ This command queries the LTE devices and displays the following state info:
 - registration-status
 - connection-status (show IP if connected, otherwise, show previous error)
 - signal-strength (rating, RSSI, and SNR)
-
 ## `show mist`
 
-Display information about the link between the SSR and the Mist Cloud.
+Display information about the link between the SSR and the Mist Cloud
 
 #### Usage
 
@@ -7870,9 +7628,61 @@ show mist [{router <router> | resource-group <resource-group>}] [force] [node <n
 | ------- | ----------- |
 | [`adopt`](#adopt) | Assign the current router to a Mist organization. |
 
-| Release | Modification                |
-| ------- | ----------------------------|
-| 5.5.2   | This feature was introduced |
+## `show mld groups`
+
+Show MLD groups
+
+#### Usage
+
+```
+show mld groups [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual MLD group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request MLD information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show mld interface`
+
+Show MLD interface
+
+#### Usage
+
+```
+show mld interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual Interface [type: IP address] |
+| name | Specify name to see individual MLD interface |
+| resource-group | The name of the resource group |
+| router | The router to request MLD information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
 ## `show msdp mesh-group`
 
 Show MSDP mesh-groups
@@ -7937,7 +7747,6 @@ show msdp peer [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {rout
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.2.0   | This feature was introduced |
-
 ## `show msdp sa`
 
 Show MSDP SA (Source-Active)
@@ -8028,7 +7837,6 @@ Completed in 0.33 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
-
 ## `show network-interface application`
 
 Display application data info for network-interfaces.
@@ -8115,6 +7923,7 @@ Tue 2020-04-21 15:26:19 UTC
 
 Completed in 0.76 seconds
 ```
+
 ## `show network-interface redundancy`
 
 Display redundancy info for network-interfaces.
@@ -8217,7 +8026,6 @@ The "Ref. ID" field is a four letter ASCII string assigned to the reference cloc
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
-
 ## `show ospf`
 
 Show general information about OSPF.
@@ -8580,7 +8388,6 @@ Fri 2020-04-17 19:13:37 UTC
 
 Completed in 0.34 seconds
 ```
-
 ## `show ospf database lsa`
 
 Show OSPF database LSA information.
@@ -8758,7 +8565,6 @@ Fri 2020-04-17 19:17:24 UTC
 
 Completed in 0.26 seconds
 ```
-
 ## `show ospf database max-age`
 
 Show OSPF LSAs which have reached maximum age.
@@ -9412,7 +9218,6 @@ show ospfv3 routes [rows <rows>] [vrf <vrf>] [force] {router <router> | resource
 | ---- | ----------- |
 | verbosity | detail \| summary (default: summary) |
 
-
 ## `show packet-buffer-locations`
 
 Display the packet buffer pool locations.
@@ -9435,7 +9240,6 @@ show packet-buffer-locations [pool <pool>] router <router> node <node>
 
 This command displays the total number of allocated buffers, capacity and their buffer pool location in the highway.
 
-
 ## `show peers`
 
 Display peer information.
@@ -9443,18 +9247,20 @@ Display peer information.
 #### Usage
 
 ```
-show peers [name <name>] [dynamic-damping] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show peers [name <name>] [dynamic-damping] [security] [certificate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| certificate | display BFD certificate info |
 | dynamic-damping | display BFD dynamic-damping stats |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Peer to display (default: all) |
 | resource-group | The name of the resource group |
 | router | The router on which to display peers |
+| security | display BFD security stats |
 
 ##### Positional Arguments
 
@@ -9568,6 +9374,7 @@ show peers hostnames [{router <router> | resource-group <resource-group>}] [forc
 | router | The router on which to display peer hostnames (default: all) |
 
 #### Description
+
 :::note
 This command can only be run on a Conductor.
 :::
@@ -9739,6 +9546,170 @@ show pim state [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {rout
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | ip-address | Specify group address to see individual PIM group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pimv6 interface`
+
+Show PIMv6 interface
+
+#### Usage
+
+```
+show pimv6 interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIMv6 Interface [type: IP address] |
+| name | The global interface to fetch PIMv6 information for |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pimv6 join`
+
+Show PIMv6 join
+
+#### Usage
+
+```
+show pimv6 join [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIMv6 group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pimv6 mroute`
+
+Show PIMv6 mroute
+
+#### Usage
+
+```
+show pimv6 mroute [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | The Source or Group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pimv6 neighbor`
+
+Show PIMv6 neighbor
+
+#### Usage
+
+```
+show pimv6 neighbor [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIMv6 Neighbor [type: IP address] |
+| name | See all neighbors for this interface |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pimv6 rp-info`
+
+Show PIMv6 rp-info
+
+#### Usage
+
+```
+show pimv6 rp-info [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIMv6 RP [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pimv6 state`
+
+Show PIMv6 state
+
+#### Usage
+
+```
+show pimv6 state [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify group address to see individual PIMv6 group [type: IP address] |
 | resource-group | The name of the resource group |
 | router | The router to request PIM information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
@@ -10242,6 +10213,7 @@ Display all configured roles
 ```
 show roles [name <name>] [rows <rows>]
 ```
+
 ##### Keyword Arguments
 
 | name | description |
@@ -10523,8 +10495,8 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 | command | description |
 | ------- | ----------- |
-| [`by-id`](#show-sessions-by-id) | Show information of a session for a given ID |
-| [`top`](#show-sessions-top-bandwidth) | Display the top sessions ordered by bandwidth |
+| [`by-id`](#show-sessions-by-id) | Show information of a session for a given Id |
+| [`top`](#show-sessions-top) | &lt;bandwidth&gt; |
 
 #### Description
 
@@ -10563,6 +10535,7 @@ Node: gouda
 Show information of a session for a given ID.
 
 #### Usage
+
 ```
 show sessions by-id [node <node>] router <router> <id> [<verbosity>]
 ```
@@ -10837,8 +10810,9 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`connectivity`](#show-system-connectivity) | Display inter-node connection statuses. |
 | [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
 | [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`resource-allocation`](#show-system-resource-allocation) | Display information for reserved hugepages and CPU core masks. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
-| [`software`](#show-system-software) | &lt;available&gt; \| &lt;download&gt; \| &lt;health-check&gt; \| &lt;revert&gt; \| &lt;sources&gt; \| &lt;upgrade&gt; |
+| [`software`](#show-system-software) | &lt;available&gt; \| &lt;downgrade&gt; \| &lt;download&gt; \| &lt;health-check&gt; \| &lt;revert&gt; \| &lt;sources&gt; \| &lt;upgrade&gt; |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
@@ -10954,6 +10928,7 @@ show system connectivity authorized-keys [{router <router> | resource-group <res
 Displays the public keys used by the router for inter-node communication.
 
 #### Usage
+
 ```
 show system connectivity host-keys [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
@@ -11238,6 +11213,50 @@ Wed 2020-04-15 20:39:35 UTC
  ...
 ```
 
+## `show system resource-allocation`
+
+Display information for reserved hugepages and CPU core masks.
+
+#### Usage
+
+```
+show system resource-allocation [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display resource-allocation |
+| resource-group | The name of the resource group |
+| router | The router for which to display resource-allocation |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`active`](#show-system-resource-allocation-active) | Display information for reserved hugepages and CPU core masks. |
+
+## `show system resource-allocation active`
+
+Display information for reserved hugepages and CPU core masks.
+
+#### Usage
+
+```
+show system resource-allocation active [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display resource-allocation |
+| resource-group | The name of the resource group |
+| router | The router for which to display resource-allocation |
+
 ## `show system services`
 
 Display a table summarizing statuses of SSR systemd services.
@@ -11334,16 +11353,16 @@ Display new versions of the SSR that can be installed.
 #### Usage
 
 ```
-show system software available [skip-version-check] [router <router>] [node <node>] [<verbosity>]
+show system software available [downgrade] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| node | The target node to show SSR versions to download. |
-| router | The target router to show SSR versions available for download (default: &lt;current router&gt;). |
-| skip-version-check | Skip the version check to show available SSR software at a lower version than what is currently installed. |
+| downgrade | Show available SSR software at a lower version than what is currently installed. |
+| node | The node to show SSR versions to download for |
+| router | The router to show SSR versions to download for (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -11356,11 +11375,51 @@ show system software available [skip-version-check] [router <router>] [node <nod
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
+| [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
+| [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `show system software downgrade`
+
+Display in-progress and completed downgrades to lower SSR versions.
+
+#### Usage
+
+```
+show system software downgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node to show an in-progress downgrade for |
+| resource-group | The name of the resource group |
+| router | The router to show an in-progress downgrade for (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
+| [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11375,7 +11434,7 @@ Display in-progress and completed downloads of new SSR versions.
 #### Usage
 
 ```
-show system software download [{router <router> | resource-group <resource-group>}] [version <version>] [skip-version-check] [force] [node <node>]
+show system software download [{router <router> | resource-group <resource-group>}] [version <version>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -11386,7 +11445,6 @@ show system software download [{router <router> | resource-group <resource-group
 | node | The target node to show downloaded SSR versions. |
 | resource-group | The name of the resource group |
 | router | The target router to show downloaded SSR versions (default: &lt;current router&gt;). |
-| skip-version-check | Skip the version check to allow showing downloaded SSR software at a lower version than what is currently installed. |
 | version | Display state about only a single version. |
 
 ##### See Also
@@ -11394,11 +11452,14 @@ show system software download [{router <router> | resource-group <resource-group
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
@@ -11419,10 +11480,10 @@ show system software health-check [{router <router> | resource-group <resource-g
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The node on which to show available health-checks. |
-| resource-group | The name of the resource group. |
-| router | The router on which to show available health-checks (default: &lt;current router&gt;). |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node on which to show available health-checks |
+| resource-group | The name of the resource group |
+| router | The router on which to show available health-checks (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -11435,11 +11496,14 @@ show system software health-check [{router <router> | resource-group <resource-g
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
@@ -11470,11 +11534,14 @@ show system software revert [{router <router> | resource-group <resource-group>}
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
@@ -11511,12 +11578,14 @@ show system software sources [include-disabled] [router <router>] [node <node>] 
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11530,7 +11599,7 @@ Display in-progress and completed upgrades to higher SSR versions.
 #### Usage
 
 ```
-show system software upgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]`
+show system software upgrade [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -11547,12 +11616,14 @@ show system software upgrade [{router <router> | resource-group <resource-group>
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
-| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11589,11 +11660,14 @@ show system version [{router <router> | resource-group <resource-group>}] [force
 | command | description |
 | ------- | ----------- |
 | [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software downgrade`](#request-system-software-downgrade) | Downgrade to a new version of the SSR. |
 | [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
 | [`request system software health-check`](#request-system-software-health-check) | Perform a health check of an SSR. |
 | [`request system software revert`](#request-system-software-revert) | Revert to a previous version of the SSR. |
 | [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software boot-volume`](#set-system-software-boot-volume) | Set the boot volume. |
 | [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software downgrade`](#show-system-software-downgrade) | Display in-progress and completed downgrades to lower SSR versions. |
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software health-check`](#show-system-software-health-check) | Show available health checks of an SSR. |
 | [`show system software revert`](#show-system-software-revert) | Display in-progress and reversions to previous SSR versions. |
@@ -11869,7 +11943,6 @@ show user activity [from <from>] [to <to>] [rows <rows>] [<username>]
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
 | rows | The number of events to display at once [type: int] (default: 50) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-
 
 ##### Positional Arguments
 
@@ -12258,7 +12331,7 @@ write log message [force] [router <router>] [node <node>] <message> [<process-na
 | name | description |
 | ---- | ----------- |
 | message | The message to write to the log (messages with a space must be surrounded with quotes) |
-| process-name | The process to which to write a log message (default: all) |
+| process-name | the process to which to write a log message (default: all) |
 
 ##### See Also
 
