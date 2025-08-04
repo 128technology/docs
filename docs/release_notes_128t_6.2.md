@@ -39,7 +39,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-57508 Traffic from node1 LAN to node1 WAN does not show on graph:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
 ------
 - **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see [`source-address-prefix-list`](config_command_guide.md#configure-authority-router-routing-igmp-interface-source-address-prefix-list)
------- 
+------
 - **I95-58017 FIB entries on `show fib` not available for all headends:** Resolved an issue with `show fib` stalling and not returning complete data. 
 ------
 - **I95-58999 CPU usage for Packet Processing CPU always reads 100%:** Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted when `transmit-on-standby` fails. The correct information is now provided.
@@ -54,7 +54,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-60180 Installation screen displays incorrect SSR OS:** After the OS rebranding to SSR OS, the option to install erroneously shows on the install screen. This has been removed. 
 ------
-- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
+- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `logrotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
 ------
 - **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the `service-metric-use-lsa` (under the `routing default-instance`) to `false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
 ------
@@ -123,7 +123,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-58569 OSPF Graceful Restart link missing from GUI:** Resolved an issue that prevented the link to the Graceful Restart page from displaying. 
 ------
 - **I95-58583 Bypass message-authentication in RADIUS:** An option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios. 
------- 
+------
 - **I95-58637 Relax API RBAC policies for quickstart files:** Users with config-read permissions are now able to generate quickstart files.
 ------
 - **I95-58722 Update allowed Key Exchange Algorithms to add better support for Gov Cloud environments:** Expand the list of supported Key Exchange Algorithms in both FIPS and non-FIPS mode.
@@ -204,13 +204,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide addtional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
 ------
 - **I95-49712 Configuration validation error uniformative:** Resolved an issue that when configuring an SSR, invalid configuration parameters were returning errors that were not specific enough to allow the user to locate the invalid configuration. Now when invalid configuration elements are identified during validation, the messages include relevant information for the invalid element, such as an IP address, node name, router name, interface names, etc.
------- 
+------
 - **I95-55725 Highway crashes when peer-path routers are removed:** Resolved a race condition that could cause a crash in the highway worker-core packet-processor if peer routers are removed from the configuration.
 ------
 - **I95-55965 IDP engine not starting due to invalid environmental conditions:**  In cases where the IDP engine does not shut down cleanly, the IDP engine will fail to restart. These conditions are now detected and handled correctly.
 ------
 - **I95-56013 Automatically created Conductor user accounts show as "LDAP":** Resolved an issue with user authentication where accounts were listed as `LDAP` rather than `Remote`.
------- 
+------
 - **I95-56233 / I95-56546 Relay routers in AWS unresponsive, showing device errors:** Resolved an issue where ENA devices in some environments have shown command queue failures and are no longer able to retrieve device stats, or pass traffic. The device is now reinitialized when the driver watchdog issues a reset event.
 ------
 - **I95-56236 Quick Start config validation failures not being reported:** Made changes to the initialization process such that quick start errors can be reported.
@@ -521,7 +521,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 	* **TCP Half-open Connection Limit:** Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections.
 ------
 - **I95-51648 Application ID Database Memory Improvements:** Internal improvements have been made to reduce memory consumption of the Application Identification IP database.
------- 
+------
 - **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details availble on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
 ------
 - **I95-53045 Increase default redundancy and capacity settings:** The default values have been adjusted for deployments with large configurations and potentially high latency between nodes. 
@@ -673,7 +673,7 @@ Valid values for `remove-as-path`:
 - **I95-47838 SSR does not remove networks on stop:** Resolved an issue where the SSR does not remove networks on stop. This has been corrected and the SSR now will cleanup networks on container stop and create them on restart to optimize start/restart process. 
 ------
 - **I95-48346 BGP peering between two SSRs not coming up:** When a network interface is configured with tenant-prefixes and these match a BGP neighbor, then that neighbor cannot establish a connection with the router. The SSR now creates FIB entries that allow communication from routing protocol neighbors.
-------   
+------
 - **I95-50539 SSR not handling and logging Multicast packets correctly:** Per security best practices, the SSR now filters and drops packets if the source address is a multicast source IP address. 
 ------
 - **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
@@ -734,7 +734,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-53000 process highway disconnected messages caused by NIC driver bug:** The DPDK driver code for the Broadcom NICs contained a bug that caused the querying of the extended statistic to fail. The Broadcom NIC driver has been upgraded to resolve the issue.
 ------
 - **I95-53002 NTP setup check fails on startup:** Resolved an issue in the NTP startup sequence, due to an incorrect path for the NTP configuration.
------- 
+------
 - **I95-53009 RPM signature verification missing for all artifacts:** Verification for all ISO RPMs has been added.
 ------
 - **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
