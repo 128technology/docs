@@ -1538,7 +1538,7 @@ edit prompt <format>
 #### Description
 
 <!-- markdownlint-disable heading-style code-block-style -->
-The format string can accept the following special variables and patterns:
+```The format string can accept the following special variables and patterns:
 
 State Variables
 ===============
@@ -1608,7 +1608,8 @@ Special characters*
 %% - Literal &#x27;%&#x27;
 
 * Use \\ if not using a quoted string to specify the prompt
-<!-- markdownlint-enable heading-style code-block-style -->
+```
+
 ## `edit user`
 
 Modify an existing user account
