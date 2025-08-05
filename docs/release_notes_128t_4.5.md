@@ -676,7 +676,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-33427** [Per-Service Rate Limiting](config_rate_limiting.md)
 ------
-- **I95-33776** [`show config events`](cli_reference.md#show-events-config-commit) tracks configuration changes
+- **I95-33776** [`show config events`](cli_reference.md#show-events) tracks configuration changes
 
 ### Resolved Issues
 

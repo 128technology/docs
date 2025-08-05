@@ -5782,8 +5782,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for &#x27;authority&#x27; |
+| `generated` | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config disk-cache`
 
@@ -6048,8 +6048,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for &#x27;authority&#x27; |
+| `generated` | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config version`
 
@@ -10497,7 +10497,7 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 | command | description |
 | ------- | ----------- |
 | [`by-id`](#show-sessions-by-id) | Show information of a session for a given Id |
-| [`top`](#show-sessions-top) | &lt;bandwidth&gt; |
+| [`top`](#show-sessions-top-bandwidth) | Display the top sessions ordered by bandwidth |
 
 #### Description
 
