@@ -1,13 +1,13 @@
 ---
-title: Custom Certificates
-sidebar_label: Custom Certificates
+title: Configure Certificate Management
+sidebar_label: Configure Certificate Management
 ---
 
 #### Version History
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.0.0   | Custom Certificate support added. | 
+| 7.0.0   | Certificate Management support added. | 
 
 Security is a critical component of SD-WAN products in today’s world. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
@@ -17,15 +17,25 @@ If you are implementing a complete, zero-trust network architecture, that will b
 
 ## Certificate Management 
 
-Custom certificate management allows you to provision a certificate for use with Enhanced Security Key Management. The following three validity checks take place upon importing a certificate:
+Certificate management allows you to provision a certificate for use with Enhanced Security Key Management. There are four steps to provision a certificate.
 
-- Ensure that there is no private key accompanying the certificate. On 100 and 1000 series platforms the public key is parsed and validated against the matching private key on disk.
+1. Instruct the SSR to generate a private key.
+
+2. Instruct the SSR to create and return a CSR using the above key.
+
+3. Send the CSR to the CA and have it issue a certificate.
+
+4. Instruct the SSR to import the certificate.
+
+Before the certificate is accepted, the following three validity checks take place upon importing a certificate:
+
+- Ensure that there is no private key accompanying the certificate.
 
 - Parse the certificate and then validate it (dates/roles/other restrictions, etc.).
 
 - Check the certificate against the known revoked certificates (CRL).
 
-If the above three checks pass, then the private key and certificate are accepted and imported.
+If the above three checks pass, then the certificate is accepted and imported. 
 
 Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
 
@@ -37,8 +47,6 @@ The following are some details of certificate security.
 
 - Periodic revocation checks of the router's certificate are performed based on the configuration defaults or user configured timelines. 
 
-- When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create an elliptic-curve public/private key pair (see [RFC8422]). 
-
 - The public key is used to create an X.509 certificate signing request (CSR) with the common name field referencing the `peering-common-name`. When creating the CSR, ensure that the common-name matches the [configured `peering-common-name`](enhanced-sec-key-mgmt.md#configuration). A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
 
 ## Provisioning Process
@@ -47,7 +55,7 @@ The following are some details of certificate security.
 It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Management in 7.0. This is a reserved name specifically used by the Enhanced Security Key Management feature.
 :::
 
-Use this procedure to provision a custom certificate for use with Enhanced Security Key Management.
+Use this procedure to provision a certificate for use with Enhanced Security Key Management.
 
 ### Prerequisites
 
@@ -215,7 +223,7 @@ This example represents the minimum requirements. Any of the following additiona
 - email_address (string, optional): The email address.
 - algorithm (string): The cryptographic algorithm family to use when generating the private key. Acceptable options are: (RSA, ECC)
 - rsa_key_size (integer, optional): The RSA key size. Only valid when algorithm is set to “RSA”. Valid key sizes are any multiple of 256 between 2048 and 4096.
-- ecc_curve (string, optional): The ECC curve to use. Valid curves are: (SECP256R, SECP384R1, SECP521R1)
+- ecc_curve (string, optional): The ECC curve to use. Only valid when algorithm is set to “ECC”.Valid curves are: (SECP256R, SECP384R1, SECP521R1)
 - validity_period (integer, optional): The validity period in days.
 
 2. Issue the CSR request to the SSR:

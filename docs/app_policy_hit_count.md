@@ -17,7 +17,7 @@ Application Policy Hit Count (APHC) provides insight into the routing policies b
 
 Application Policy Hit Count is enabled by default, tracking counts for all observed service and tenant combinations, including the `access policy denied` counters.
 
-The system maintains the current value in memory and will not provide a historical time series of the data. To prevent excessive consumption of memory resources, the device periodically removes combinations that are no longer being observed. Inactive tenant service combinations remain in the system for 30 to 60 minutes before being removed.
+The system maintains the current value in memory and will not provide a historical time series of the data unless configured to do so. To prevent excessive consumption of memory resources, the device periodically removes combinations that are no longer being observed. Inactive tenant service combinations remain in the system for 30 to 60 minutes before being removed.
 
 ## Configuration
 
@@ -129,7 +129,6 @@ configure
   exit
 exit
 ```
-
 
 ### Router Configuration
 
