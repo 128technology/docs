@@ -106,7 +106,7 @@ The following diagram illustrates the SSR Key Exchange process:
 ![Key Exchange](/img/svr-ztna-key-exchange.png)
 
 1. SVR certificates are installed onto the SSR from the Conductor.
-    - SCEP is used to communicate to an intermediate/root CA.
+ <!---   - SCEP is used to communicate to an intermediate/root CA. This will become part of the 7.1 release ---> 
 
 2. The DH key exchange between routers creates a **peer key**.
 
