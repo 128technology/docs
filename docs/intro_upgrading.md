@@ -28,10 +28,23 @@ Prerequisites for upgrades include configuring a user with super user (sudo) pri
 
 ### Version Dependencies
 
-The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
+**SSR-6.3.5 Software and Version Compatibility** 
+
+Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must be managed by conductors running SSR-6.3.5 or higher software. Internal updates to the software prevent successful management from a lower patch version on the conductor when 6.3.5 is installed on the router. For example:
+
+- Conductor: SSR-6.3.5 / Router: SSR-6.3.5 Compatible
+- Conductor: SSR-6.3.5+ / Router: SSR-6.3.5 Compatible
+- Conductor: SSR-6.3.5 / Router: SSR-6.2.6 Compatible
+- Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
+- Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
+
+#### General Dependency Information
+
+The conductor `major.minor.patch` version must be greater than or equal to the router version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
 
 Examples:
-- Conductor running version 6.2.6, managing Routers running version 6.2.5: Supported.
-- Conductor running version 6.2.5, managing Routers running version 6.2.6: Supported.
-- Conductor running version 6.3.0, managing Routers running version 6.1.10: Supported.
-- Conductor running version 5.6.10, managing Routers running version 6.1.3; Not supported.
+- Conductor running version 6.0.10, managing Routers running version 6.0.5: Supported.
+- Conductor running version 5.6.7, managing Routers running version 5.6.17: Not supported.
+- Conductor running version 6.2.5, managing Routers running version 5.6.17: Supported.
+- Conductor running version 5.6.8, managing Routers running version 6.1.3; Not supported.
+
