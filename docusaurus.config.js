@@ -1,8 +1,10 @@
 module.exports = {
   title: 'SSN Docs',
   tagline: 'The documentation source for the Session Smart Networking Platform',
-  url: 'https://docs.128technology.com',
-  baseUrl: process.env.OFFLINE_DOCS ? '/offline-docs/' : '/',
+  //url: 'https://docs.128technology.com',
+  url: 'https://uat.juniper.net',
+  //baseUrl: process.env.OFFLINE_DOCS ? '/offline-docs/' : '/',
+  baseUrl: '/documentation/us/en/software/session-smart-router/',
   favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
