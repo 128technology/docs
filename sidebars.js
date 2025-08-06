@@ -13,6 +13,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.0",
           "release_notes_128t_6.3",
           "release_notes_128t_6.2",
           "release_notes_128t_6.1",
@@ -240,6 +241,7 @@ module.exports = {
           "concepts_appid",
           "config_app_ident",
           "how_to_use_app_summary",
+          "app_policy_hit_count",
           ],
         },
         {
@@ -349,6 +351,7 @@ module.exports = {
           "config_syslog_tls",
           "config_webserver_certs",
           "howto_trusted_ca_certificate",
+          "config_password_security",
           "config_password_policies",
           "howto_reset_user_password",
           "config_ntp_auth",
@@ -364,6 +367,8 @@ module.exports = {
           "sec_hardening_guidelines",
           "sec-usb-security",
           "sec-disable-console-output",
+          "config-custom-certs",
+          "enhanced-sec-key-mgmt",
         ],
       },
       {
