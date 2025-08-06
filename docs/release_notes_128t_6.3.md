@@ -36,6 +36,111 @@ An issue has been identified that may be observed in conductor deployments runni
 
 We have identified an issue when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+**SSR-6.3.5 Software and Version Compatibility** 
+
+Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must be managed by conductors running SSR-6.3.5 or higher software. Internal updates to the software prevent successful management from a lower patch version on the conductor when 6.3.5 is installed on the router. For example:
+
+- Conductor: SSR-6.3.5 / Router: SSR-6.3.5 Compatible
+- Conductor: SSR-6.3.5+ / Router: SSR-6.3.5 Compatible
+- Conductor: SSR-6.3.5 / Router: SSR-6.2.6 Compatible
+- Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
+- Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
+
+## Release 6.3.5-37-sts
+
+**Release Date:** August 6, 2025
+
+**Before installing, please see the note above on Conductor/Router compatibility**
+
+### Resolved Issues:
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2023-26916, CVE-2025-24928, CVE-2024-56171, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2023-26604, CVE-2025-27363, CVE-2025-0624.
+------
+- **I95-56557 `show service` command not displaying URL:** Resolved an issue where even after adding a URL to the service, the URL was not showing in the output of the `show service` command. This has been resolved. 
+------
+- **I95-56665 Unable to change the default security policy for PIM:** The security and service policies for PIM and MSDP services can now be configured using `bgp-service-generation`.
+------
+- **I95-57145 Unable to change the default security policy for MSDP:** The configured security policy for MSDP SVR generated services can now be changed using `bgp-service-generation`.
+------
+- **I95-57265 Highway crash when generating TSI on Azure instance:** An Azure instance can crash while accessing an uninitialized RX queue. This invalid access has been prevented and the issue resolved.
+-------
+- **I95-57508 `icmp-probe-manager` not running:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
+------
+- **I95-58017 `show fib` output incomplete on routers:** Resolved an issue with `show fib` stalling and not returning complete data where the next hop entries are in excess of 200. The `show fib` output now correctly handles larger output. 
+------
+- **I95-58999 Packet Processing CPU reads 100% when interface is operationally down:** Resolved an issue where an attempt to transmit packets on an operationally down standby interface resulted in a persistent false report of packet processing activity, which led to an erroneous calculation of 100% CPU utilization.
+------
+- **I95-59338 Drop in performance on SSR130:** Resolved an issue where disabling kernel mitigations negatively impacted performance. Kernel mitigations are no longer disabled by default. 
+------
+- **I95-59367 Race condition during configuration change, resulting in highway crash:** Resolved a race condition between configuration processing and packet processing, which led to invalid memory access and resulted in a highway crash.
+------
+- **I95-59478 Recover PPPoE after highway crash:** Updated the PPPoE re-init script to resolve an issue where, after a highway crash, the PPPoE NSID becomes invalid and causes the device status to stay `down` even if the monitoring script reports `up`.
+------
+- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](how_to_local_config_override.md#using-the-gui).
+------
+- **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism.
+```
+  "datapath": {
+    "lockupDetectionEnabled": true/false
+  },
+```
+------
+- **I95-59676 Alarm when default passwords are not changed:** An alarm has been added to detect when default password hashes are detected for standard system users. It is highly recommended that all system user passwords be updated to a secure password as soon as possible.
+------
+- **I95-59745 Routers are stuck in the connected state and not transitioning to running:** Resolved an issue where the router repeatedly sent the same incorrect values to the config during startup, resulting in a race condition. 
+------
+- **I95-59758 Prompt for password change:** The user is now prompted to change the `admin`, `t128`, and `root` passwords during installation. The password is changed to the same value for all three users. 
+------
+- **I95-59855 The hardware bootstrapper created bridge is not removed during intialization:** During installation, the hardware bootstrapper creates a bridge in Linux and binds all of the designated LAN NICs to the bridge to allow SSH. This bridge is removed during intialization of the conductor, and Mist managed routers, but is not removed from conductor managed routers. This has been addressed and the issue resolved. 
+------
+- **I95-59860 Incorrect timestamps shown on IDP startup:** The `Engine started` and `Last Commit` timestamps have been updated to provide accurate readings when the engine has not yet started, or the values are not available.
+------ 
+- **I95-59996 Force password change in GUI:** Steps have been added during the initialization workflow in the GUI to require that the user change the default password.
+------
+- **I95-60038 `show fib` lookup fails for IPv6 addresses:** Parsing IPv6 addresses was not performed properly, resulting in an invalid query. The code has been updated to properly parse the request before processing.
+------
+- **I95-60041 Force password change in the CLI:** Steps have been added during the initialization workflow in the CLI to require that the user change the default password.
+------
+- **I95-60180 Installation screen displays incorrect SSR OS:** After the OS rebranding to SSR OS, the option to install erroneously shows on the install screen. This has been removed. 
+------
+- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
+------
+- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting `routing default-instance > service-metric-use-lsa > false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
+------
+- **I95-60424 Anti-Virus whitelist not implemented:** Resolved an issue where a configuration error in the cSRX generated an error that was being ignored. The error is now handled correctly and the whitelist is implemented.
+------
+- **I95-60438 `anti-virus-profile custom-profile max-filesize` setting not honoring the custom profile setting:** Resolved an issue when configuring a custom anti-virus profile, configuring a value for the `max-filesize` was not honored. Any time the filesize was set to any value less than 10,000 bytes (default) it would be overridden and set to back to 10,000 bytes. This issue has been resolved. 
+------
+- **I95-60465 Warning added when routers running SSR-5.4.0 or less are detected:** Routers running version 5.4.0 or less are not compatible with software versions 6.3.5 and higher. A warning has been added, noting that routers must be upgraded to avoid configuration issues.
+------
+- **I95-60471 Add the ability to configure the RP address of MSDP SA packets:** The `router-id` command has been added to provide a method to configure a general routing `router-id`. When sending an MSDP SA message, the configured `router-id` will be used as the **RP Address** field. For example, `config authority router hub1 routing default-instance router-id 10.10.110.10`.
+------
+- **I95-60505 Download in progress message not clearing after software download complete:** Resolved an issue where the GUI would display that a download was still in progress even though the download had completed.
+------
+- **I95-60507 URL Filter blocking networks not on Block List:** Resolved an issue where SVR traffic was treated as an AppId session. The SVR traffic is now handled correctly, preventing inadvertent TCP resets and AppId deny events.
+------
+- **I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:** Resolved an issue where assets would transition to `Reinitializing` and get stuck there because the asset was unable to succesfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to `Reinitializing`.
+------
+- **I95-60651 SSR upgrade from 6.3.0 to 6.3.3 reboots back to 6.3.0:** Resolved an issue where the Conductor was unable to upgrade router packages to the latest version even though the packages were available on the Conductor. A `dnf refresh` now runs to ensure package accessibility. 
+------
+- **I95-60688 Password change upon first login throws error message:** Resolved an issue that prevented users from changing their password on the secondary node of an HA pair. This would happen with both an expired password, or upon first login. 
+------
+- **I95-60741 KNI no longer passes traffic when it is operationally down, preventing IPSec from functioning:** Resolved an issue with the KNI interface that prevented transmit-through even when the interface is operationally down.
+------
+- **I95-60750 Password Confirmation missing:** When onboarding an SSR using the web interface, users are now required to confirm the password change.
+------
+- **I95-60768 Rare race condition between packet processing and configuration update:** Resolved a rare race condition where invalid memory was accessed during packet processing if config was being loaded at the same time.
+------
+- **I95-60924 Adopt command error message is misleading:** Resolved an issue where username/password login failures are not clear. The `adopt` PCLI command now interactively prompts for `mist-instance` if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adopting using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.
+------
+- **I95-61024 Pagination issues when performing `show events`:** Resolved an issue where `show events` fails to produce multiple pages.
+------
+- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service. 
+------
+- **I95-61093 Router first time synchronization :** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
+------
+- **I95-61458 BGP-VRF Conductor in `Connected` state instead of `Running` state:** Resolved an issue where salt modules fell out of sync, causing unexpected exceptions and preventing the system from picking up configuration changes.
+
 ## Release 6.3.4-7r2
 
 **Release Date:** February 21, 2025
