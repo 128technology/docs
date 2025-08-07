@@ -120,6 +120,7 @@ module.exports = {
       "install_univ_iso",
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
+      "sec-ztp-web-proxy",
       "intro_installation_image",
     ],
     "Cloud / Hypervisor Installations": [
@@ -367,8 +368,10 @@ module.exports = {
           "sec_hardening_guidelines",
           "sec-usb-security",
           "sec-disable-console-output",
+          "sec-disable-ports",
           "config-custom-certs",
           "enhanced-sec-key-mgmt",
+          "sec-secure-boot",
         ],
       },
       {
