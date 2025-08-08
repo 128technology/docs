@@ -72,7 +72,7 @@ If **both** the Serial Console Port and Firmware Recovery are disabled, and an i
 This process has not been implemented at this time. It will be provided in a future Beta release.
 :::
 
-1. Power off the system. Wait 10 seconds.
+1. Power off the system. 
 
 2. Press and hold the Reset switch.
 
@@ -89,6 +89,10 @@ If you release the Reset switch during the 10 seconds of red to black fade, the 
 6. Release the Reset switch.
 
 7. The LED will slowly fade white to black every two seconds until the reset is complete. 
+
+:::important
+DO NOT reboot during this process. The factory reset will not complete.
+:::
 
 8. When the LED has stopped the slow white to black fade, it has returned to the factory settings and will shut down. You can then power up the system. 
 
