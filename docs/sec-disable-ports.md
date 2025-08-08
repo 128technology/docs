@@ -3,20 +3,15 @@ title: Disable SSR4x0 Management Interfaces
 sidebar_label: Disable SSR4x0 Management Interfaces
 ---
 
-Use the following commands to disable out of band management ports on the SSR 400/440 (Models 1 and 2) - the USB, serial and JTAG ports and block the local admin access. There are no HDMI, VGA, or dedicated network management ports on the SSR 400/440 (Models 1 and 2).
-
-These commands are also available to disable out of band management ports on the SSR1x0 and SSR1x00 devices and virtual platforms, which include the USB, serial, JTAG, HDMI, VGA, and dedicated network management ports.
-
-**Is this statement true? My belief is yes, because it is a software command (?).**
-
-The following configuration commands have been added to control physical security features on the SSR-400 series:
+The following configuration fields have been added to node configuration, allowing you to control physical security features on the SSR-400 series. A `true` setting enables the feature, `false` disables the feature. 
 
 ```
-usb-mass-storage-enabled true/false 
-serial-console-enabled true/false 
-recovery-mode-enabled true/false 
-reset-button-enabled true/false 
+usb-mass-storage-enabled true 
+serial-console-enabled true 
+recovery-mode-enabled true 
+reset-button-enabled true
 ```
+Use the following configuration commands to disable out of band management ports on the SSR 400/440 (Models 1 and 2) - the USB and Serial ports, and block the local admin access.
 
 #### Setting via PCLI:
 
@@ -24,38 +19,36 @@ reset-button-enabled true/false
 The flags are marked as `advanced` config and do not autocomplete.
 :::
 
-**Does `true` enable or disable the port? I hope `false` disables...**
-
 ```
-config authority router router1 node node1 usb-mass-storage-enabled true/false 
-config authority router router1 node node1 serial-console-enabled true/false
-config authority router router1 node node1 recovery-mode-enabled true/false 
-config authority router router1 node node1 reset-button-enabled true/false
+config authority router router1 node node1 usb-mass-storage-enabled true
+config authority router router1 node node1 serial-console-enabled true
+config authority router router1 node node1 recovery-mode-enabled true 
+config authority router router1 node node1 reset-button-enabled true
 ```
 
 #### Setting via GUI:
 
-**Insert Image Here**
+![Disable ports from the GUI](/img/sec-disable-ports-gui.png)
 
 :::note
-Changes made and committed using the GUI require a reboot to display.
+Changes made and committed require a reboot to enable or disable.
 :::
 
 ### How It Works
 
 Each of the port commands is described below.
 
-#### Disable Linux USB
+#### Disable USB
 
-When disabled (set to **false**), the Linux USB host controller is excluded from the `devicetree`. No driver is bound by the operating system or applications.
+When disabled (set to **false**), the USB host controller is excluded from the `devicetree`. No driver is bound by the operating system or applications.
 
 #### Disable Reset Pushbutton
 
-When disabled (set to **false**), the pushbutton interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push.
+When disabled (set to **false**), the pushbutton interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push. However, with the pushbutton disabled, device reboot is possible from either the command line or through Mist. 
 
-#### Disable Linux Serial Console Port
+#### Disable Serial Console Port
 
-When disabled (set to **false**), the Linux serial console is excluded from the kernel cmdline, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
+When disabled (set to **false**), the serial console is excluded from the kernel cmdline, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
 
 See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
 
@@ -67,8 +60,8 @@ See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for impo
 
 #### Uninterruptable Boot Process
 
-This feature is configured on the SSR4x0 by setting **both** the Linux Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
+This feature is configured on the SSR4x0 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
 
-If **both** the Linux Serial Console Port and Firmware Recovery are disabled, **and** no IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), there is no access to the system. This will require an RMA for recovery.
+If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), there is no access to the system. This will require an RMA for recovery.
 
 **It is strongly recommended that recovery not be disabled on production units until post-deployment boot has been successfully validated.**
