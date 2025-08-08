@@ -62,6 +62,34 @@ See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for impo
 
 This feature is configured on the SSR4x0 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
 
-If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), there is no access to the system. This will require an RMA for recovery.
+If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the Fail-Safe Restore process for recovery.
 
 **It is strongly recommended that recovery not be disabled on production units until post-deployment boot has been successfully validated.**
+
+#### Fail-Safe Restore Process
+
+:::important
+This process has not been implemented at this time. It will be provided in a future Beta release.
+:::
+
+1. Power off the system. Wait 10 seconds.
+
+2. Press and hold the Reset switch.
+
+3. Power on the system. Do not release the Reset switch. When the switch is detected, the LED will fade to Red.
+
+4. Continue to hold the Reset switch for 10 seconds. The LED will slowly fade from red to black. 
+
+:::important
+If you release the Reset switch during the 10 seconds of red to black fade, the system will simply reboot without resetting.
+:::
+
+5. The LED will turn white, and fade to black. 
+
+6. Release the Reset switch.
+
+7. The LED will slowly fade white to black every two seconds until the reset is complete. 
+
+8. When the LED has stopped the slow white to black fade, it has returned to the factory settings and will shut down. You can then power up the system. 
+
+
