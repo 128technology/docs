@@ -84,3 +84,109 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **WAN-3834 Remove Private AS for BGP Neighbor:**
 
 ### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2023-4527, CVE-2023-4806, CVE-2023-4813, CVE-2023-4911, CVE-2024-3651, CVE-2024-24806, CVE-2024-56171, CVE-2025-24928, CVE-2024-6232, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-56326, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2023-48161, CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2022-1304, CVE-2023-26604, CVE-2025-27363, CVE-2025-0624, CVE-2024-55549, CVE-2025-24855, CVE-2024-7347, CVE-2025-23419, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2016-9840, CVE-2024-12718, CVE-2025-4138, CVE-2025-4330, CVE-2025-4435, CVE-2025-4517, CVE-2025-32462, CVE-2025-4802, CVE-2025-5702, CVE-2025-6020, CVE-2025-47268, CVE-2025-25724, CVE-2025-3576, CVE-2025-49794, CVE-2025-49796, CVE-2025-6021, CVE-2023-26916, CVE-2025-47273, CVE-2024-23337, CVE-2025-48060, CVE-2023-52572, CVE-2023-52621, CVE-2023-52757, CVE-2024-26686, CVE-2024-26739, CVE-2024-26952, CVE-2024-27402, CVE-2024-35790, CVE-2024-35866, CVE-2024-35867, CVE-2024-35943, CVE-2024-36350, CVE-2024-36357, CVE-2024-36908, CVE-2024-38540, CVE-2024-38541, CVE-2024-42160, CVE-2024-42322, CVE-2024-44938, CVE-2024-46742, CVE-2024-46751, CVE-2024-46774, CVE-2024-46784, CVE-2024-46816, CVE-2024-49960, CVE-2024-49989, CVE-2024-50047, CVE-2024-50125, CVE-2024-50258, CVE-2024-50272, CVE-2024-50280, CVE-2024-53128, CVE-2024-53185, CVE-2024-53203, CVE-2024-54458, CVE-2024-56551, CVE-2024-56599, CVE-2024-56655, CVE-2024-56658, CVE-2024-56751, CVE-2025-21681, CVE-2025-21839, CVE-2025-21853, CVE-2025-22027, CVE-2025-22062, CVE-2025-23140, CVE-2025-23142, CVE-2025-23144, CVE-2025-23145, CVE-2025-23146, CVE-2025-23147, CVE-2025-23148, CVE-2025-23150, CVE-2025-23151, CVE-2025-23156, CVE-2025-23157, CVE-2025-23158, CVE-2025-23159, CVE-2025-23161, CVE-2025-23163, CVE-2025-37738, CVE-2025-37739, CVE-2025-37740, CVE-2025-37741, CVE-2025-37742, CVE-2025-37749, CVE-2025-37752, CVE-2025-37756, CVE-2025-37757, CVE-2025-37758, CVE-2025-37765, CVE-2025-37766, CVE-2025-37767, CVE-2025-37768, CVE-2025-37770, CVE-2025-37771, CVE-2025-37773, CVE-2025-37780, CVE-2025-37781, CVE-2025-37787, CVE-2025-37788, CVE-2025-37789, CVE-2025-37790, CVE-2025-37792, CVE-2025-37794, CVE-2025-37796, CVE-2025-37797, CVE-2025-37803, CVE-2025-37805, CVE-2025-37808, CVE-2025-37810, CVE-2025-37812, CVE-2025-37817, CVE-2025-37819, CVE-2025-37823, CVE-2025-37824, CVE-2025-37829, CVE-2025-37830, CVE-2025-37836, CVE-2025-37838, CVE-2025-37839, CVE-2025-37840, CVE-2025-37841, CVE-2025-37844, CVE-2025-37850, CVE-2025-37857, CVE-2025-37858, CVE-2025-37859, CVE-2025-37862, CVE-2025-37867, CVE-2025-37875, CVE-2025-37881, CVE-2025-37883, CVE-2025-37885, CVE-2025-37890, CVE-2025-37892, CVE-2025-37905, CVE-2025-37909, CVE-2025-37911, CVE-2025-37913, CVE-2025-37914, CVE-2025-37915, CVE-2025-37923, CVE-2025-37927, CVE-2025-37929, CVE-2025-37930, CVE-2025-37940, CVE-2025-37949, CVE-2025-37967, CVE-2025-37969, CVE-2025-37970, CVE-2025-37982, CVE-2025-37983, CVE-2025-37985, CVE-2025-37989, CVE-2025-37990, CVE-2025-37991, CVE-2025-37992, CVE-2025-37994, CVE-2025-37995, CVE-2025-37997, CVE-2025-37998, CVE-2025-38005, CVE-2025-38009, CVE-2025-38023, CVE-2025-38024, CVE-2025-38031, CVE-2025-38089.
+------
+- **I95-55698 BGP advertisement not forwarded from HA spoke after VRRP LAN failover:** Resolved an issue where the `minimum-advertisement-interval` in the SSR was set incorrectly, causing BGP to react slower than necessary during VRRP LAN failovers. The `minimum-advertisement-interval` has been set to 0 for MIST BGP LAN neighbors.
+------
+- **I95-56168 Health check messages unclear:** Improved wording and capitalization of the error messages to provide a better user experience. 
+------
+- **I95-56537 `show software` does not handle `router node all`:** Resolved an issue where the `node all` option was not handled correctly and indicated that node all did not exist. The SSR now reads the command correctly and provides accurate results.
+------
+- **I95-56557 `show service` command not displaying URL:** Resolved an issue where even after adding a URL to the service, the URL was not showing in the output of the `show service` command. This has been resolved. 
+------
+- **I95-56665 Unable to change the default security policy for PIM:** The security and service policies for PIM and MSDP services can now be configured using `bgp-service-generation`. 
+------
+- **I95-57145 Unable to change the default security policy for MSDP:** The configured security policy for MSDP SVR generated services can now be changed using `bgp-service-generation`.
+------
+- **I95-57265 Highway crash when generating TSI on Azure instance:** An Azure instance can crash while accessing an uninitialized RX queue. This invalid access has been prevented and the issue resolved.
+-------
+- **I95-57508 `icmp-probe-manager` not running:** When an HA interface becomes non-redundant (reconfigured as non-HA), state updates were not showing on the active-interface path. This led to the icmp-probe-manager not running. This issue has been resolved.
+------
+- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see [`source-address-prefix-list`](config_command_guide.md#configure-authority-router-routing-igmp-interface-source-address-prefix-list)
+------
+- **I95-58017 FIB entries on `show fib` not available for all headends:** Resolved an issue with `show fib` stalling and not returning complete data. 
+------
+- **I95-58999 Packet Processing CPU reads 100% when interface is operationally down:** Resolved an issue where an attempt to transmit packets on an operationally down standby interface resulted in a persistent false report of packet processing activity, which led to an erroneous calculation of 100% CPU utilization.
+------
+- **I95-59338 Drop in performance on SSR130:** Resolved an issue where disabling kernel mitigations negatively impacted performance. Kernel mitigations are no longer disabled by default. 
+------
+- **I95-59367 Race condition during configuration change, resulting in highway crash:** Resolved a race condition between configuration processing and packet processing, which led to invalid memory access and resulted in a highway crash.
+------
+- **I95-59407 Ping utility in the Web interface does not accept an IPv6 address:** Resolved an issue where the web interface ping utility was hardcoded to only accept IPv4 addresses. This has been resolved.
+------
+- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](how_to_local_config_override.md#using-the-gui).
+------
+- **I95-59745 Routers are stuck in the connected state and not transitioning to running:** Resolved an issue where the router repeatedly sent the same incorrect values to the config during startup, resulting in a race condition. 
+------
+- **I95-59860 Incorrect timestamps shown on IDP startup:** The `Engine started` and `Last Commit` timestamps have been updated to provide accurate readings when the engine has not yet started, or the values are not available.
+------ 
+- **I95-60038 `show fib` lookup fails for IPv6 addresses:** Parsing IPv6 addresses was not performed properly, resulting in an invalid query. The code has been updated to properly parse the request before processing.
+------
+- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
+------
+- **I95-60321 DHCP relay service not honoring configuration change for the addition of a new subtenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
+------
+- **I95-60377 Alarm suppression - alarms not unshelved after deleting the shelf:** Resolved an issue where user-defined Alarm Shelves created on version 6.3+ conductors experience unexpected behavior on routers version 6.2 and below. This issue has been resolved and routers receiving user-defined shelves now handle them correctly.
+------
+- **I95-60425 Router Advertisement (RA) responses to Router Solicitation (RS) are dropped as `unknown-dropped-from-application`:** Support has been added to send a unicast IPv6 RA to the LAN client immediately upon receiving a IPv6 RS from the LAN client.
+------
+- **I95-60471 Add the ability to configure the RP address of MSDP SA packets:** The `router-id` command has been added to provide a method to configure a general routing `router-id`. When sending an MSDP SA message, the configured `router-id` will be used as the **RP Address** field. For example, `config authority router hub1 routing default-instance router-id 10.10.110.10`.
+------
+- **I95-60505 Download in progress message not clearing after software download complete:** Resolved an issue where the GUI would display that a download was still in progress even though the download had completed.
+------
+- **I95-60507 URL Filter blocking networks not on Block List:** Resolved an issue where SVR traffic was treated as an AppId session. The SVR traffic is now handled correctly, preventing inadvertent TCP resets and AppId deny events.
+------
+- **I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:** Resolved an issue where assets would transition to `Reinitializing` and get stuck there because the asset was unable to succesfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to `Reinitializing`.
+------
+- **I95-60647 Migrate command not forcing a router re-sync:** Resolved an issue where a router is successfully migrated from one conductor to another conductor and establishes connectivity, but does not apply the configuration from the new conductor until a commit is performed.
+------
+- **I95-60651 SSR upgrade from 6.3.0 to 6.3.3 reboots back to 6.3.0:** Resolved an issue where the Conductor was unable to upgrade router packages to the latest version even though the packages were available on the Conductor. A `dnf refresh` now runs to ensure package accessibility. 
+------
+- **I95-60688 Password change upon first login throws error message:** Resolved an issue that prevented users from changing their password on the secondary node of an HA pair. This would happen with both an expired password, or upon first login. 
+------
+- **I95-60741 KNI no longer passes traffic when it is operationally down, preventing IPSec from functioning:** Resolved an issue with the KNI interface that prevented transmit-through even when the interface is operationally down.
+------
+- **I95-60750 Password Confirmation missing:** When onboarding an SSR using the web interface, users are now required to confirm the password change.
+------
+- **I95-60765 Application module does not clear previous entries:** Resolved an issue where if a module has services configured, using the REST API to send the clear command to delete those services from the module does not work. The list may appear empty, but the services still persist on the module. This issue has been resolved and the services list is now cleared properly. 
+------
+- **I95-60767 ServiceRouteNextHops validation rejects configuration:** Resolved an issue where the rule validator did not consider the `service application-type` as DNS proxy into consideration during the configuration rule validation. This issue has been resolved.
+------
+- **I95-60768 Rare race condition between packet processing and configuration update:** Resolved a rare race condition where invalid memory was accessed during packet processing if config was being loaded at the same time.
+------
+- **I95-60924 Adopt command error message is misleading:** Resolved an issue where username/password login failures are not clear. The `adopt` PCLI command now interactively prompts for `mist-instance` if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adopting using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.
+------
+- **I95-60948 RADIUS secret length limited to 16 characters:** The RADIUS secret size was erroneously set to 16 octets. The allowable RADIUS secret size has been updated from 1 to 255.
+------
+- **I95-60960 After reboot, the PIM RP IP address moves to a VRF:** Resolved an issue where after reboot the PIM RP IP moves to a VRF, leaving the base instance without a PIM RP IP address. The VRF is now explicitly added to the config, preventing this issue. 
+------
+- **I95-61024 Pagination issues when performing `show events`:** Resolved an issue where `show events` fails to produce multiple pages.
+------
+- **I95-61058 Peer paths fail when additional IPs are added to a WAN interface:** Resolved a case where adding a second address for use in nat-pools to a peering interface caused continuous bfd peer flaps. The SSR now handles address changes when the local IP address changes.
+------
+- **I95-61075 BGP does not re-establish after firewall failover:** 
+
+
+- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service. 
+------
+- **I95-61093 Router first time synchronization :** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
+------
+- **I95-61201 Renaming VRF on an active VRF stream causes a coredump:** Resolved a race condition during configuration processing while active traffic uses the same VRF, causing a coredump.
+------
+- **I95-61275 Network Interface Alarm shows as Category: Interface:** Resolved an issue with a mismatch in underlying alarm shelf categories. Alarm Shelves set to the category `Interface` will now correctly shelve alarms that display as Interface in the alarm list. 
+------
+- **I95-61276 Modifying Alarm Shelves does not correctly propagate the change:** Modifying the shelving criteria of an alarm shelf will now correctly shelve alarms according to the new criteria. 
+------
+- **I95-61453 'mist' user missing from '128t-user' group at login:** Resolved an issue where exisitng empty lock files prevented group utility tools from modifying files and failing with errors such as
+```
+grpconv: existing lock file /etc/group.lock without a PID
+grpconv: cannot lock /etc/group; try again later.
+```
+
+
+
+
+
+
+
