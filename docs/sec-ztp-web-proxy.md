@@ -3,7 +3,7 @@ title: Secure ZTP Onboarding Using a Mist Proxy
 sidebar_label: Secure ZTP Onboarding Using a Mist Proxy
 ---
 
-With only MPLS or private connectivity available, it is possible to leverage a connection to MIST using a non-transparent proxy and a private web proxy in the network. This type of web proxy is often used to bridge the gap between private and public networks.
+With only MPLS or private connectivity available, it is possible to leverage a connection to MIST using an explicit proxy and a private web proxy in the network. This type of web proxy is often used to bridge the gap between private and public networks.
 
 This document provides information to configure the SSR to identify and use the non-transparent proxy, and use that address to perform the secure ZTP onboarding process.
 
@@ -11,7 +11,7 @@ It is recommended that before configuring the web proxy and secure ZTP, you prov
 
 ## Configure an SSR Mist Web Proxy
 
-By default the SSR uses DHCP to identify the SSR web proxy addresses. To leverage a connection to MIST using a non-transparent proxy and a private web proxy, you can configure the SSR to either configure a static proxy IP address and port, or dynamically learn the proxy address. 
+By default the SSR uses DHCP to identify the SSR web proxy addresses. To leverage a connection to MIST using an explicit proxy and a private web proxy, you can configure the SSR to either configure a static proxy IP address and port, or dynamically learn the proxy address. 
 
 ### Static 
 
