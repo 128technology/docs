@@ -185,7 +185,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-61580 CLI does not prompt for required router restart:** Resolved an issue where making a configuration change requiring a restart only generates a warning only for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.
 ------
-
+- **I95-61866 Unnecessary events sync:** Resolved an issue where data is unintentionally synched between HA nodes. 
 
 
 
