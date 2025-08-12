@@ -165,9 +165,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-61058 Peer paths fail when additional IPs are added to a WAN interface:** Resolved a case where adding a second address for use in nat-pools to a peering interface caused continuous bfd peer flaps. The SSR now handles address changes when the local IP address changes.
 ------
-- **I95-61075 BGP does not re-establish after firewall failover:** 
-
-
+- **I95-61075 BGP does not re-establish after firewall failover:** Resolved an issue where when initiating a BFD for BGP session, the cached MAC to IP mapping was being used. If the MAC address had changed, stale information was used and the BFD session would not be established. We now issue an ARP request to get the latest MAC Address.
+------
 - **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service. 
 ------
 - **I95-61093 Router first time synchronization :** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
@@ -178,12 +177,14 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-61276 Modifying Alarm Shelves does not correctly propagate the change:** Modifying the shelving criteria of an alarm shelf will now correctly shelve alarms according to the new criteria. 
 ------
-- **I95-61453 'mist' user missing from '128t-user' group at login:** Resolved an issue where exisitng empty lock files prevented group utility tools from modifying files and failing with errors such as
-```
-grpconv: existing lock file /etc/group.lock without a PID
-grpconv: cannot lock /etc/group; try again later.
-```
-
+- **I95-61453 'mist' user missing from '128t-user' group at login:** Resolved an issue that prevented the modification of lock files causing the process responsible for managing user permissions to fail.
+------
+- **I95-61458 BGP-VRF Conductor in `Connected` state instead of `Running` state:** Resolved an issue where salt modules fell out of sync, causing unexpected exceptions and preventing the system from picking up configuration changes.
+------
+- **I95-61579 Highway crashes when executing command `show device-interface name <name> registers` on an i40e network port:** Resolved an issue with the `registers` sub option that caused the crash on the i40e network port. The sub option has been removed. 
+------
+- **I95-61580 CLI does not prompt for required router restart:** Resolved an issue where making a configuration change requiring a restart only generates a warning only for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.
+------
 
 
 
