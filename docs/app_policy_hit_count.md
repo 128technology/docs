@@ -174,3 +174,10 @@ Highway Manager application policy hit count Stats
 
 Completed in 0.06 seconds
 ```
+### Application Policy Hit Count - Mist Output
+
+![Application Policy Hit Count - Mist Output](/img/app-policy-hit-count-mist.png)
+
+
+
+

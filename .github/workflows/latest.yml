@@ -1,0 +1,27 @@
+name: Tag 'latest' on master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tag-latest:
+    runs-on: ubuntu-latest
+    name: Update the 'latest' tag
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Create or move 'latest' tag to HEAD
+        run: |
+          git tag -f latest
+          git push origin latest --force
