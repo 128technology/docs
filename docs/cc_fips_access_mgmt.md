@@ -230,12 +230,8 @@ If the calculated HMAC matches the stored value, the bootloader continues loadin
 The validation status is displayed very briefly on console during boot - it scrolls by quickly unless there is an error.
 
 ![validation status](/img/cc_fips_software_self_test1.png)
- 
-It is recorded in `/var/log/messages` for the current boot: 
 
-![Validation status messages](/img/cc_fips_software_self_test2.png)
-
-It is also recorded in the systemd journal for historical data: 
+It is recorded in the `systemd` journal for historical data: 
 
 ![Validation status messages](/img/cc_fips_software_self_test3.png)
 
@@ -245,13 +241,7 @@ If the calculated HMAC does not match the stored value, the bootloader denies lo
 
 ### Kernel Known Answer Tests 
  
-The Kernel Known Answer Tests (KAT) for the FIPS subsystem run automatically at startup. Any failures are displayed on the system console during boot. These scroll quickly off screen, but are recorded in `/var/log/messages` for the current boot: 
-
-![KAT Test Failure Log](/img/cc_fips_software_self_test5.png)
-
-The list shown here is edited for brevity. There are over 120 tests in total. 
- 
-It is also recorded in the systemd journal for historical data:  
+The Kernel Known Answer Tests (KAT) for the FIPS subsystem run automatically at startup. Any failures are displayed on the system console during boot. These scroll quickly off screen, but are recorded in the `systemd` journal for historical data:  
 
 ![KAT Test Failure Journal](/img/cc_fips_software_self_test6.png)
 
