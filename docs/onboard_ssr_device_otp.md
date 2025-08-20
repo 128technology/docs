@@ -1,6 +1,6 @@
 ---
-title: Reimage a SSR Device using OTP
-sidebar_label: Reimage a SSR Device using OTP
+title: Reimage an SSR Device using OTP
+sidebar_label: Reimage an SSR Device using OTP
 ---
 
 The steps in this section describe the process of **re-imaging an SSR100 or SSR1000 series device** for onboarding to a Conductor using the OTP process. This process is for SSR devices that **cannot** use Mist for onboarding, telemetry, or WAN Assurance. 
