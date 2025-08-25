@@ -80,8 +80,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-60220 SSR OS Upgrade:** SSR OS distribution has been upgraded to Oracle Linux 9.
 ------
 - **WAN-2284 Critical IDP Profile:** A new **Critical** attack list profile that is more lightweight has been added to reduce the commit/policy change times.
-------
-- **WAN-3834 Remove Private AS for BGP Neighbor:**
 
 ### Resolved Issues
 
