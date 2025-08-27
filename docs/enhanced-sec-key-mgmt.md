@@ -31,11 +31,11 @@ In a newly deployed network, Enhanced Security Key Management is more secure tha
 
 Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
-## SVRv2 and IPSec 
+## Enhanced Security Key Management and IPSec 
 
 To understand the value of Enhanced Security Key Management, we can draw some comparisons against IPSec.  
 
-| Characteristic | IPSec/IKE | SVRv2 |
+| Characteristic | IPSec/IKE | Enhanced Security Key Management |
 | --- | --- | --- |
 | Payload Encryption | ESP | Encrypted with per-Flow AES-CBC-256 payload key. |
 | Encrypt Original IP SA/DA	| ESP | Encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
@@ -48,7 +48,7 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Perfect Forward Secrecy | Yes	| Keys in DH are seeded by Salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
-The Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
+Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
 
 ## How It Works
 
@@ -106,7 +106,7 @@ The following diagram illustrates the SSR Key Exchange process:
 ![Key Exchange](/img/svr-ztna-key-exchange.png)
 
 1. SVR certificates are installed onto the SSR from the Conductor.
- <!---   - SCEP is used to communicate to an intermediate/root CA. This will become part of the 7.1 release ---> 
+    - SCEP is used to communicate to an intermediate/root CA. 
 
 2. The DH key exchange between routers creates a **peer key**.
 
