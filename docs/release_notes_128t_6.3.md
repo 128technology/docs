@@ -48,7 +48,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 
 ## Release 6.3.6-6-sts
 
-**Release Date:** August 28, 2025
+**Release Date:** September 4, 2025
 
 **Before installing, please see the note above on Conductor/Router compatibility**
 
@@ -60,8 +60,6 @@ CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2024-56326, 
 - **I95-39653 Negative duration in session table after applying filter:** Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration. This issue has been resolved.
 ------
 - **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see [`source-address-prefix-list`](config_command_guide.md#configure-authority-router-routing-igmp-interface-source-address-prefix-list)
-------
-- **I95-59894 Disable the bridge interface in linux when SSR is bound:**
 ------
 - **I95-60321 DHCP relay service not honoring configuration change for the addition of a new subtenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
 ------
@@ -81,11 +79,11 @@ CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2024-56326, 
 ------
 - **I95-60765 Application module does not clear previous entries:** Resolved an issue where if a module has services configured, using the REST API to send the clear command to delete those services from the module does not work. The list may appear empty, but the services still persist on the module. This issue has been resolved and the services list is now cleared properly.
 ------
-- **I95-60767 ServiceRouteNextHops validation rejects configuration:** Resolved an issue where the rule validator did not consider the service application-type as DNS proxy into consideration during the configuration rule validation. This issue has been resolved.
+- **I95-60767 `service-route > next-hop` validation rejects configuration:** Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.
 ------
-- **I95-60768 Rare race condition between packet processing and configuration update:** Resolved a rare race condition where invalid memory was accessed during packet processing if config was being loaded at the same time.
+- **I95-60768 Rare race condition between packet processing and configuration update:** Resolved a rare race condition where invalid memory was accessed during packet processing if the configuration was being loaded at the same time.
 ------
-- **I95-60924 Adopt command error message is misleading:** Resolved an issue where username/password login failures are not clear. The `adopt` PCLI command now interactively prompts for `mist-instance` if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adopting using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.
+- **I95-60924 Adopt command error message is misleading:** Resolved an issue where username/password login failures are not clear. The `adopt` PCLI command now interactively prompts for `mist-instance` if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adoption using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.
 ------
 - **I95-60948 RADIUS secret length limited to 16 characters:** The RADIUS secret size was erroneously set to 16 octets. The allowable RADIUS secret size has been updated from 1 to 255.
 ------
@@ -111,7 +109,7 @@ CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2024-56326, 
 ------
 - **I95-61579 Highway crashes when executing command show device-interface name `<name>` registers on an i40e network port:** Resolved an issue with the registers sub option that caused the crash on the i40e network port. The sub option has been removed.
 ------
-- **I95-61580 CLI does not prompt for required router restart:** Resolved an issue where making a configuration change requiring a restart only generates a warning only for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.
+- **I95-61580 CLI does not prompt for required router restart:** Resolved an issue where making a configuration change requiring a restart only generates a warning for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.
 ------
 - **I95-61866 Unnecessary events sync:** Resolved an issue where data is unintentionally sync'ed between HA nodes.
 ------
