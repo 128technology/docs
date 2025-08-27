@@ -22,7 +22,7 @@
     "broken-link-checker-local": "^0.2.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
-    "mermaid": "^11.4.1",
+    "mermaid": "^11.10.0",
     "@mdx-js/react": "^3.0.0",
     "prism-react-renderer": "^2.1.0",
     "react": "^18.2.0",
