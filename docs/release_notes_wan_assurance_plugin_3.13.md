@@ -1,6 +1,22 @@
 ---
 title: WAN Assurance Plugin 3.13 Release Notes
 sidebar_label: '3.13'
+
+---
+## Release 3.13.1
+
+**Release Date:** September 2, 2025
+
+### Resolved Issues
+
+- **WAN-4357 Sites migrated from Conductor managed to MIST Managed failed to upgrade SSR software**
+
+  _**Resolution**_ The plugin now performs additional salt state cleanup during migration which prevented the SSR software image from being successfully downloaded.
+
+- **WAN-4414 Remove debug log level in mist-wan-assurance config-gen log**
+
+  _**Resolution**_ The config generation logic will no longer generate verbose logging by default.
+
 ---
 ## Release 3.13.0
 
