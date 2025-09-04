@@ -46,6 +46,81 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 - Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
 - Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
 
+## Release 6.3.6-6-sts
+
+**Release Date:** September 4, 2025
+
+**Before installing, please see the note above on Conductor/Router compatibility**
+
+### Resolved Issues:
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-3651, CVE-2024-24806, CVE-2024-6232, CVE-2023-48161
+CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2024-56326, CVE-2022-1304, CVE-2023-26604, CVE-2025-27363, CVE-2025-0624, CVE-2024-55549, CVE-2025-24855, CVE-2024-7347, CVE-2025-23419, CVE-2022-49011, CVE-2024-40906, CVE-2024-43842, CVE-2024-44970, CVE-2024-53141, CVE-2025-21756, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2024-0727, CVE-2023-5678, CVE-2024-5535, CVE-2024-9143, CVE-2024-13176, CVE-2016-9840. 
+------
+- **I95-39653 Negative duration in session table after applying filter:** Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration. This issue has been resolved.
+------
+- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see [`source-address-prefix-list`](config_command_guide.md#configure-authority-router-routing-igmp-interface-source-address-prefix-list)
+------
+- **I95-60321 DHCP relay service not honoring configuration change for the addition of a new subtenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
+------
+- **I95-60377 Alarm suppression - alarms not unshelved after deleting the shelf:** Resolved an issue where user-defined Alarm Shelves created on version 6.3+ conductors experience unexpected behavior on routers version 6.2 and below. This issue has been resolved and routers receiving user-defined shelves now handle them correctly.
+------
+- **I95-60425 Router Advertisement (RA) responses to Router Solicitation (RS) are dropped as unknown-dropped-from-application:** Support has been added to send a unicast IPv6 RA to the LAN client immediately upon receiving a IPv6 RS from the LAN client.
+------
+- **I95-60471 Add the ability to configure the RP address of MSDP SA packets:** The `router-id` command has been added to provide a method to configure a general routing `router-id`. When sending an MSDP SA message, the configured `router-id` will be used as the RP Address field. For example, `config authority router hub1 routing default-instance router-id 10.10.110.10`.
+------
+- **I95-60507 URL Filter blocking networks not on Block List:** Resolved an issue where SVR traffic was treated as an AppId session. The SVR traffic is now handled correctly, preventing inadvertent TCP resets and AppId deny events.
+------
+- **I95-60647 Migrate command not forcing a router re-sync:** Resolved an issue where a router is successfully migrated from one conductor to another conductor and establishes connectivity, but does not apply the configuration from the new conductor until a commit is performed.
+------
+- **I95-60730 Mulitcast stream is not recovering after failover:** Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.
+------
+- **I95-60747 TANK thread failure:** Resolved a rare issue where exceptions in the TANK response handling logic resulted in data missing from the GUI and PCLI. This issue has been resolved.
+------
+- **I95-60765 Application module does not clear previous entries:** Resolved an issue where if a module has services configured, using the REST API to send the clear command to delete those services from the module does not work. The list may appear empty, but the services still persist on the module. This issue has been resolved and the services list is now cleared properly.
+------
+- **I95-60767 `service-route > next-hop` validation rejects configuration:** Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.
+------
+- **I95-60768 Rare race condition between packet processing and configuration update:** Resolved a rare race condition where invalid memory was accessed during packet processing if the configuration was being loaded at the same time.
+------
+- **I95-60924 Adopt command error message is misleading:** Resolved an issue where username/password login failures are not clear. The `adopt` PCLI command now interactively prompts for `mist-instance` if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adoption using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.
+------
+- **I95-60948 RADIUS secret length limited to 16 characters:** The RADIUS secret size was erroneously set to 16 octets. The allowable RADIUS secret size has been updated from 1 to 255.
+------
+- **I95-61024 Pagination issues when performing show events:** Resolved an issue where `show events` fails to produce multiple pages.
+------
+- **I95-61058 Peer paths fail when additional IPs are added to a WAN interface:** Resolved a case where adding a second address for use in nat-pools to a peering interface caused continuous bfd peer flaps. The SSR now handles address changes when the local IP address changes.
+------
+- **I95-61075 BGP does not re-establish after firewall failover:** Resolved an issue where when initiating a BFD for BGP session, the cached MAC to IP mapping was being used. If the MAC address had changed, stale information was used and the BFD session would not be established. We now issue an ARP request to get the latest MAC Address.
+------
+- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.
+------
+- **I95-61093 Router first time synchronization:** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
+------
+- **I95-61201 Renaming VRF on an active VRF stream causes a coredump:** Resolved a race condition during configuration processing while active traffic uses the same VRF, causing a coredump.
+------
+- **I95-61275 Network Interface Alarm shows as Category: Interface:** Resolved an issue with a mismatch in underlying alarm shelf categories. Alarm Shelves set to the category `Interface` will now correctly shelve alarms that display as `Interface` in the alarm list.
+------
+- **I95-61276 Modifying Alarm Shelves does not correctly propagate the change:** Modifying the shelving criteria of an alarm shelf will now correctly shelve alarms according to the new criteria.
+------
+- **I95-61458 BGP-VRF Conductor in `Connected` state instead of Running state:** Resolved an issue where salt modules fell out of sync, causing unexpected exceptions and preventing the system from picking up configuration changes.
+------
+- **I95-61483 Remove outdated CA certificates:** Improved security posture by removing outdated and untrusted certificates.
+------
+- **I95-61579 Highway crashes when executing command show device-interface name `<name>` registers on an i40e network port:** Resolved an issue with the registers sub option that caused the crash on the i40e network port. The sub option has been removed.
+------
+- **I95-61580 CLI does not prompt for required router restart:** Resolved an issue where making a configuration change requiring a restart only generates a warning for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.
+------
+- **I95-61866 Unnecessary events sync:** Resolved an issue where data is unintentionally sync'ed between HA nodes.
+------
+- **I95-61869 Peer paths not coming back up after manual reboot:** Resolved an issue with the control message capacity. In configurations with more than 1000 VLANs, the aggregate size of all the control messages grew larger than the space allocated for the messages, and messages failed to send and some packet processing threads were left with incomplete interface tables. The capacity to handle these messages has been increased and can now handle up to 12,000 VLANs.
+------
+- **I95-61910 FIPS installation failure:** Resolved an issue where package renaming resulted in missing installation files.
+------
+- **WAN-4308 Dynamic calculation of service path:** Service path calculations are now done dynamically.
+------
+- **WAN-4344 Hub crashes due to duplicate flows:** Resolved an issue where traffic received from different tenants for the same S,G may cause the creation of a session without the Detour path, resulting in collisions. The old session is now removed.
+
 ## Release 6.3.5-37-sts
 
 **Release Date:** August 6, 2025

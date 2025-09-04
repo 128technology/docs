@@ -35,16 +35,16 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 | Version | Initial GA Version | First Release Shipping Date | Latest GA Version | End of Engineering support | End of Support |
 | -- | -- | -- | -- | -- | -- |
-| Release 6.3 | [6.3.0](release_notes_128t_6.3.md#release-630-107r1) | September 30, 2024 | [6.3.5-37-sts](release_notes_128t_6.3.md#release-635-37-sts) | May 6, 2026 | November 6, 2026 |
+| Release 6.3 | [6.3.0](release_notes_128t_6.3.md#release-630-107r1) | September 30, 2024 | [6.3.6-6-sts](release_notes_128t_6.3.md#release-636-6-sts) | May 6, 2026 | November 6, 2026 |
 | Release 6.2 | [6.2.0](release_notes_128t_6.2.md#release-620-39r1) | November 16, 2023 | [6.2.9-lts](release_notes_128t_6.2.md#release-629-5-lts) | September 6, 2026 | March 6, 2027 |
 | Release 6.1 | [6.1.0](release_notes_128t_6.1.md#release-610-55r1) | April 14, 2023 | [6.1.13-lts](release_notes_128t_6.1.md#release-6113-7-lts) | July 14, 2025 | January 14, 2026 |
-| Release 5.6 | [5.6.7](release_notes_128t_5.6.md#release-567-4) | March 16, 2023 | [5.6.17](release_notes_128t_5.6.md#release-5617-1) | June 16, 2024 | December 16, 2024 |
 
 ## Out of Support
 
 | Version     | FRS Date          | End of Engineering support | End of Support     |
 | ----------- | ----------------- | -------------------------- | ------------------ |
 | Release 6.0 | July 18, 2022     | November 30, 2023          | November 30, 2023  |
+| Release 5.6 | March 16, 2023    | June 16, 2024              | December 16, 2024  |
 | Release 5.5 | August 11, 2022   | November 19, 2023          | May 19, 2024       |
 | Release 5.4 | February 18, 2022 | December 18, 2022          | June 18, 2023      |
 | Release 5.3 | August 6, 2021    | February 6, 2022           | August 6, 2022     |
