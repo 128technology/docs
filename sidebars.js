@@ -365,6 +365,7 @@ module.exports = {
           "sec_firewall_filtering",
           "sec_security_policy",
           "sec_hardening_guidelines",
+          "sec-ddos-resilience",
           "sec-usb-security",
           "sec-disable-console-output",
           "config-custom-certs",
