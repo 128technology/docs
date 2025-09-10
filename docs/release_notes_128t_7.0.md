@@ -35,9 +35,9 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.0-63r1
+## Release 7.0.0-55r1
 
-**Release Date:** July 10, 2025
+**Release Date:** September 19, 2025
 
 ### New Features
 
@@ -80,8 +80,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-60220 SSR OS Upgrade:** SSR OS distribution has been upgraded to Oracle Linux 9.
 ------
 - **WAN-2284 Critical IDP Profile:** A new **Critical** attack list profile that is more lightweight has been added to reduce the commit/policy change times.
-------
-- **WAN-3834 Remove Private AS for BGP Neighbor:**
 
 ### Resolved Issues
 
