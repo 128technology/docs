@@ -14,20 +14,19 @@ Many customers operate independent (third party) Security Event and Incident Man
 SSR supports a structured, standardized syslog format to export the information off-box, in real time, and allows faster and easier integration with SIEM providers. Some of the information collected and exported for analysis are:
 
 - System login details
-- Config Changes
+- Configuration Changes
 - Traffic Events
 - Sites blocked by URL filtering
-- Vulnerabilities reported IDP, AV and other L7 Security solutions
+- Vulnerabilities reported by IDP, AV, and other L7 Security solutions
 
 SEIM integration on the SSR allows you to:
 
 - Configure multiple syslog servers
-- Support UDP, TCP and TLS as available transports per server
+- Support UDP, TCP, and TLS as available transports per server
 - Configure the type of data to be exported to each syslog server
 - Export system login attempts
 - Export traffic events off box
 - Control the traffic event per policy
-- Store these events on disk using a configuration option
 
 ## How Does It Work?
 
@@ -41,7 +40,7 @@ There are three elements to configure:
 Configure a syslog policy. This identifies which messages are of interest.
 
 ```
-config authority syslog-policy target-policy ?
+config authority syslog-policy target-policy
   enabled true          # can be disabled to stop sending for this policy
   create true           # export on create messages
   close true            # close messages
@@ -55,6 +54,8 @@ The syslog policy is associated with an access policy to indicate that messages 
 ```
 config authority service target-servers access-policy server-access syslog syslog-policy target-policy
 ```
+
+If you configure a syslog policy and an access policy, but do not reference the syslog policy from the access policy, then the information will not be logged.
 
 ### Configure the Syslog Server
 
@@ -88,12 +89,12 @@ The existing syslog config under **authority > router > syslog** expands the sup
 
 #### Auth(entication) Facility Considerations
 
-Syslog RFC5424 supports standard facility codes (see Section 6.2.1 of RFC). It is common industry practice to use `auth facility` for sending flow related events. By default, the SSR uses the `auth facility` for configuration change and session related events. The `auth facility` in syslog also captures all the login/authentication style events. By default, when a user enables the `auth facility` they also receive those events. For the MIST users this might not be desirable. The SSR provides a filter to only allow the session events through. 
+Syslog RFC5424 supports standard facility codes (see Section 6.2.1 of RFC). It is common industry practice to use `auth facility` for sending flow related events. By default, the SSR uses the `auth facility` for configuration change and session related events. The `auth facility` in syslog also captures all the login/authentication style events. By default, when a user enables the `auth facility` they also receive those events. For MIST users this might not be desirable. The SSR provides a filter to only allow the session events through. 
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | authority > router > system > syslog > auth > include | enum list with options <br/> [all, login, session, config-change]	| all | Since `auth` contains many different types of events, this filter will allow the users to pick which changes should be sent to the remote server. |
-
+<!---
 #### Disk Retention Configuration
 
 To capture the syslog events on disk, use the following configuration parameters under **authority > router > system > syslog > retention**.
@@ -103,8 +104,8 @@ To capture the syslog events on disk, use the following configuration parameters
 | authority > router > system > syslog > retention | enabled | Default: False | Default is disabled but can be enabled to log syslog messages to disk |
 | authority > router > system > syslog > retention | max-duration | Default: 1h<br/> Max: 1d<br/> Type: t128ext:duration | Log all the syslog messages sent to the server to disk under /var/log/128technology/syslog/events.log |
 | authority > router > system > syslog > retention | max-files | Default: 10<br/> Range: 1 to 20 | Maximum number of files stored on disk for the allowed duration. Each file is only allowed to be 10M. |
-
-#### Control the traffic event per policy
+--->
+#### Control the Traffic Event per Policy
 
 The config > authority > service > access-policy references a syslog-policy and allows the user to toggle the sending of syslog messages as well as control the types of messages generated for the service.
 
@@ -115,7 +116,6 @@ Path: **config > authority > syslog-policy**
 | name | string | **Required** | The name by which this profile will be referenced |
 | enabled | bool | true | Whether to send syslog messages for access policies referencing this policy |
 | create | bool | false | Whether to send a syslog message on session creation |
-| modify | bool | false | Whether to send a syslog message on session modify |
 | close | bool | true | Whether to send a syslog message session deletion |
 | error | bool | true | Whether to send a syslog message on failure to create a session |
 | security | bool | true | Whether to send a syslog message for any access-policy deny or block triggered by L7 security feature such as URL filtering, IDP or antivirus on this service |
