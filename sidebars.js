@@ -365,6 +365,7 @@ module.exports = {
           "sec_adaptive_encrypt",
           "sec_firewall_filtering",
           "sec_security_policy",
+          "sec-config-seim-syslog",
           "sec_hardening_guidelines",
           "sec-ddos-resilience",
           "sec-usb-security",
