@@ -19,6 +19,10 @@ Offline mode conductor and router upgrades to image-based installations are deta
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
+:::warning
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
+::: 
+
 **System Disk Considerations**
 
 As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is succesful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
@@ -35,9 +39,13 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.0-55r1
+## Release 7.0.0-57r1
 
 **Release Date:** September 19, 2025
+
+:::warning
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
+::: 
 
 ### New Features
 
@@ -76,6 +84,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ```
 ------
 - **I95-59758 Interactive Initializer updates all system account passwords:** Interactive initialization now changes the `admin`, `t128` and `root` user passwords to the same value. The initialization preference file has the fields, `t128-password`, `root-password`, and `admin-password`, to set password hashes for each user, respectively.
+------
+- **I95-59819 SEIM Syslog Integration:** The SSR provides Syslog integration with Security Event and Incident Management (SEIM) platforms for aggregating and analyzing security events across vendors and devices. For more information see [SEIM Syslog Integration](sec-config-seim-syslog.md).
 ------
 - **I95-59996 GUI Initialization sets passwords for all system accounts:** GUI initialization now changes the `admin`, `t128` and `root` user passwords to the same value. See [Password Security](config_password_security.md) for additional information. 
 ------
