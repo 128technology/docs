@@ -32,9 +32,9 @@ SEIM integration on the SSR allows you to:
 ## How Does It Work?
 
 There are three elements to configure:
-- A Syslog Policy
-- Associate the policy with an Access Policy
-- Configure the Syslog Server to receive the exported data
+- A syslog policy
+- Associate the policy with an access-policy
+- Configure the syslog server to receive the exported data
 
 ### Syslog Policy
 
@@ -78,7 +78,7 @@ The existing syslog config under **authority > router > syslog** expands the sup
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| protocol  | enum:[udp|tcp|tls]  |  udp |  Transport to use to connect to the server |
+| protocol  | enum: udp, tcp, tls  |  udp |  Transport to use to connect to the server |
 |  filter | list |  Empty |  List of facility and severity to be configured for a server |
 |  filter > facility |  existing enum |  local0 (existing) |  The facility or the type of syslog message to be sent to the server. <br/> For session and config-change events, SSR will use the auth facility as that’s the convention for most firewall and gateway devices. |
 | filter > severity  | existing enum  |  error |  The log level for the given facility at which the message will be sent to the server. |
@@ -96,8 +96,7 @@ Syslog RFC5424 supports standard facility codes (see Section 6.2.1 of RFC). It i
 
 #### Disk Retention Configuration
 
-To optionally capture the syslog events on disk per REQ#7, the following config will be added:
-Path: authority > router > system > syslog > retention
+To capture the syslog events on disk, use the following configuration parameters under **authority > router > system > syslog > retention**.
 
 | Base Path | Name | Options | Description |
 | --- | --- | --- | --- |

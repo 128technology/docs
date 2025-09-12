@@ -213,7 +213,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-61458 BGP-VRF Conductor in `Connected` state instead of `Running` state:** Resolved an issue where salt modules fell out of sync, causing unexpected exceptions and preventing the system from picking up configuration changes.
 ------
-- **I95-61567 LLDP neighbors shown as from the same port:** Resolved an issue that when LLDP was enabled on a bond interface, the LLDP neighbor for each member was shown coming from the same physical port. The SSR now explicitly defines which bond/LAG member the packet is sent out on for LLDP frames. 
+- **I95-61567 LLDP neighbors shown as from the same port:** Resolved an issue that when LLDP was enabled on a bond interface, the LLDP neighbor for each member was shown coming from the same physical port. When LLDP is enabled on a bond device-interface, each member interface will now properly send an LLDP frame. 
 ------
 - **I95-61579 Highway crashes when executing command `show device-interface name <name> registers` on an i40e network port:** Resolved an issue with the `registers` sub option that caused the crash on the i40e network port. The sub option has been removed. 
 ------
@@ -225,11 +225,9 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-61999 ATT SIM card MNC code update:** Resolved an issue with the ATT SIM card using an unexpected MNC code.
 ------
-- **I95-62283
+- **I95-62283 Enhance keypress detection logic:** Resolved an issue that during ISO installation, pressing any key during the install countdown reduced the the remaining countdown. This issue has been resolved. 
 ------
 - **I95-62291 Conductor minion watchdog may incorrectly restart the minion:** Updated the `128T-minion-watchdog` package to version 2.0 which does not restart the salt-minion if it has an active connection to 1/2 conductor nodes in an HA conductor.
-------
-- **I95-62413 
 
 
 
