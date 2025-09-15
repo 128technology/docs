@@ -203,8 +203,18 @@ When SESSION_CREATE is enabled, messages are generated when a session is created
 
 #### Example Output
 
-```
-<134>1 2025-01-10T15:45:12.345Z mynode.myrouter SSR 1234 SESSION_CREATE [ssr@2636.1.0.0 session-id="abcdabcd-ffff-ffff-ffff-ffffffffffff" source-address="1.1.1.1" source-port="1234" destination-address="2.2.2.2" destination-port="5678" protocol-id="6" protocol="tcp" ingress-interface="lan-intf" tenant="corp-lan" service="web" policy="-" session-source="PUBLIC" application="Facebook" category="SocialMedia" sub-category="SocialWeb-Facebook" next-hop-type="PUBLIC" next-hop-interface="wan-intf" source-nat-address="20.20.20.20" source-nat-port="10000" soure-nat-protocol-id="6" source-nat-protocol="tcp" peer-name="-" destination-nat-address="100.100.100.100" destination-nat-port="20000" dscp="-" time-to-live="60"]
+``` 
+<134>1 2025-01-10T15:45:12.345Z mynode.myrouter SSR 1234 SESSION_CREATE
+[ssr@2636.1.0.0 session-id="abcdabcd-ffff-ffff-ffff-ffffffffffff"
+source-address="1.1.1.1" source-port="1234" destination-address="2.2.2.2"
+destination-port="5678" protocol-id="6" protocol="tcp"
+ingress-interface="lan-intf" tenant="corp-lan" service="web" policy="-"
+session-source="PUBLIC" application="Facebook" category="SocialMedia"
+sub-category="SocialWeb-Facebook" next-hop-type="PUBLIC"
+next-hop-interface="wan-intf" source-nat-address="20.20.20.20"
+source-nat-port="10000" soure-nat-protocol-id="6" source-nat-protocol="tcp"
+peer-name="-" destination-nat-address="100.100.100.100"
+destination-nat-port="20000" dscp="-" time-to-live="60"] 
 ```
 <!---
 ### SESSION_MODIFY
@@ -262,8 +272,17 @@ The messages contain the following fields, including details on the reason for t
 
 **Example of syslog IDP Event**
 
-```
-<38> Jun 5 12:10:07 node0.Spoke1 SSR 128 SESSION_BLOCK [ssr@2636.1.0.0 source-address="172.16.3.9" destination-address="10.73.3.11" count="0" action="CLOSE" session-source="-" reason="HTTP:UNIX-FILE:ETC-PASSWD" session-id="1db28fc8-65c5-430f-8345-f035a5add46a" source-port="58872" destination-port="80" ingress-interface="ge-0/0/0.0" tenant="spoke1-to-traffic-gen" policy="localbreakout" category="-" protocol="TCP" application="HTTP" severity="6" start-time="1749125403" threat-severity="MEDIUM" egress-interface="ge-0/0/1.0" protocol-id="6" sub-category="-" service="localbreakout" block-type="idp" cve-id="N/A"]
+``` 
+<38> Jun 5 12:10:07 node0.Spoke1 SSR 128 SESSION_BLOCK
+[ssr@2636.1.0.0 source-address="172.16.3.9" destination-address="10.73.3.11"
+count="0" action="CLOSE" session-source="-"
+reason="HTTP:UNIX-FILE:ETC-PASSWD"
+session-id="1db28fc8-65c5-430f-8345-f035a5add46a" source-port="58872"
+destination-port="80" ingress-interface="ge-0/0/0.0"
+tenant="spoke1-to-traffic-gen" policy="localbreakout" category="-"
+protocol="TCP" application="HTTP" severity="6" start-time="1749125403"
+threat-severity="MEDIUM" egress-interface="ge-0/0/1.0" protocol-id="6"
+sub-category="-" service="localbreakout" block-type="idp" cve-id="N/A"] 
 ```
 
 #### Anti-Virus Fields
@@ -274,7 +293,8 @@ The messages contain the following fields, including details on the reason for t
 
 **Example of Anti-Virus Event**
 
-``` <38> Jun 5 11:59:35 node0.Spoke1 SSR 128 SESSION_BLOCK
+``` 
+<38> Jun 5 11:59:35 node0.Spoke1 SSR 128 SESSION_BLOCK
 [ssr@2636.1.0.0 start-time="-" verdict-number="0"
 session-id="a2f55654-b513-4c1a-b1ab-3ea76a771364" service="localbreakout"
 policy="localbreakout" application="-" count="0" url="-" session-source="-"
@@ -283,7 +303,7 @@ block-type="antivirus" protocol-id="-" category="-"
 reason="secure.eicar.org/eicar.com.txt:80" destination-port="80"
 protocol="http" ingress-interface="-" sub-category="-" source-port="58868"
 destination-address="10.73.3.11" severity="4"] ```
-
+```
 ## Example Configurations
 
 #### Default Configuration
@@ -308,6 +328,55 @@ exit
 
 ```
 
+#### Custom Configuration
 
+The following is an example with two servers (server 10.20.30.40 514, and server 11.21.31.40 514) where each is using filtering to select which messages it receives.
 
-
+```
+config
+  authority
+    syslog-policy target-syslog-policy
+      name target-syslog-policy
+      enabled true
+      close true
+      create false
+      error false
+      security true
+    exit
+    service internet
+      name internet
+      access-policy lan
+        source lan
+        syslog
+          syslog-policy target-syslog-policy
+        exit
+      exit
+    exit
+    router target-router
+      name target-router
+      system
+        syslog
+          server 10.20.30.40 514
+            ip-address 10.20.30.40
+            port 514
+            protocol udp
+            filter kern
+              facility kern
+              severity notice
+            exit
+          exit
+          server 11.21.31.40 514
+            ip-address 11.21.31.40
+            port 514
+            protocol udp
+            filter auth
+              facility auth
+              severity info
+            exit
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
