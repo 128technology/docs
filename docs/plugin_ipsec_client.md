@@ -807,7 +807,7 @@ exit
 
 ### Release 4.2.0
 
-**Release Date:** Sept 11, 2025
+**Release Date:** Sept 15, 2025
 
 #### New Features and Improvements
 
