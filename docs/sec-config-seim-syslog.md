@@ -30,12 +30,12 @@ SEIM integration on the SSR allows you to:
 
 ## How Does It Work?
 
-There are three elements to configure:
-- A syslog policy
+There are three steps for SEIM integration:
+- Configure a syslog policy
 - Associate the policy with an access-policy
 - Configure the syslog server to receive the exported data
 
-### Syslog Policy
+### Configure a Syslog Policy
 
 [Configure a syslog policy](#syslog-policy-configuration). This identifies which messages are of interest.
 
@@ -96,8 +96,8 @@ The existing syslog config under **authority > router > system > syslog** expand
 | --- | --- | --- | --- |
 | protocol | enum: udp, tcp, tls | udp | Transport to use to connect to the server. |
 | filter | list | Empty | List of facility and severity to be configured for a server. |
-| filter > facility | existing enum | local0 (existing) | The facility or the type of syslog message to be sent to the server. <br/> For session and config-change events, SSR will use the auth facility as that’s the convention for most firewall and gateway devices. |
-| filter > severity | existing enum | error | The message is sent to the server using the configured log level for the facility, or a less severe level if applicable. |
+| filter > facility | enum | local0 (existing) | The facility or the type of syslog message to be sent to the server. <br/> For session and config-change events, SSR will use the auth facility as that’s the convention for most firewall and gateway devices. |
+| filter > severity | enum | error | The message is sent to the server using the configured log level for the facility, or a less severe level if applicable. |
 | filter > match | string | empty | Regex match that will be applied to the raw syslog message to filter specific messages for the configured facility and severity. |
 | ocsp | Same as config > authority > router > system > syslog > ocsp | When protocol=tls |  |
 | certificate | Same as config > authority > router > system > syslog > certificate | When protocol=tls |  |
