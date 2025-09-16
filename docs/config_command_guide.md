@@ -48975,7 +48975,6 @@ configure authority syslog-policy <name>
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-syslog-policy-enabled) | Controls whether syslog messages should be generated for this profile. |
 | [`error`](#configure-authority-syslog-policy-error) | Whether to send a syslog message on failure to create a session |
-| [`modify`](#configure-authority-syslog-policy-modify) | Whether to send a syslog message on session modify |
 | [`name`](#configure-authority-syslog-policy-name) | A unique name for the syslog profile. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`security`](#configure-authority-syslog-policy-security) | Whether to send a syslog message for any access-policy deny or block triggered by L7 security feature such as URL filtering, IDP or antivirus on this service. |
@@ -49084,7 +49083,7 @@ Default: true
 A true or false value.
 
 Options: true or false
-
+<!---
 ## `configure authority syslog-policy modify`
 
 Whether to send a syslog message on session modify
@@ -49110,7 +49109,7 @@ Default: false
 A true or false value.
 
 Options: true or false
-
+--->
 ## `configure authority syslog-policy name`
 
 A unique name for the syslog profile.
