@@ -49084,7 +49084,7 @@ Default: true
 A true or false value.
 
 Options: true or false
-
+<!---
 ## `configure authority syslog-policy modify`
 
 Whether to send a syslog message on session modify
@@ -49110,7 +49110,7 @@ Default: false
 A true or false value.
 
 Options: true or false
-
+--->
 ## `configure authority syslog-policy name`
 
 A unique name for the syslog profile.

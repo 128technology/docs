@@ -37,14 +37,19 @@ There are three elements to configure:
 
 ### Syslog Policy
 
-Configure a syslog policy. This identifies which messages are of interest.
+[Configure a syslog policy](#syslog-policy-configuration). This identifies which messages are of interest.
 
 ```
-config authority syslog-policy target-policy
-  enabled true          # can be disabled to stop sending for this policy
-  create true           # export on create messages
-  close true            # close messages
-  security true         # security messages
+config
+  authority
+    syslog-policy target-syslog-policy
+      name target-syslog-policy
+      enabled true
+      close true
+      create false
+      error false
+      security true
+    exit
 ```
 
 ### Associate the Syslog Policy with an Access Policy
@@ -59,14 +64,24 @@ If you configure a syslog policy and an access policy, but do not reference the 
 
 ### Configure the Syslog Server
 
-A syslog server must be in place to receive the data/messages, and must be identified in the SSR configuration. Additionally, a filter can be applied according to syslog standards, a match regex can be provided to further filter, and the protocol is specified. 
+A [syslog server](#syslog-server-configuration) must be in place to receive the data/messages, and must be identified in the SSR configuration. Additionally, a filter can be applied according to syslog standards, a match regex can be provided to further filter, and the protocol specified. 
 
 ```
-config authority router <router> system syslog
-    server <syslog-server-ip> <syslog-server-port>
-        filter auth
-        match ".*connect.*"
-        protocol UDP
+config
+  authority
+    router target-router
+      name target-router
+      system
+        syslog
+          server 10.20.30.40 514
+            ip-address 10.20.30.40
+            port 514
+            protocol udp
+            filter kern
+              facility kern
+              severity notice
+            exit
+          exit
 ```
 
 ## Configuration Parameters
@@ -75,14 +90,14 @@ This section covers the parameters associated with SEIM syslog configuration.
 
 ### Syslog Server Configuration Parameters
 
-The existing syslog config under **authority > router > syslog** expands the support of facility, severity, transport and other relevant config parameters per server. The configuration on a per server will take precedence over the configuration at the syslog level.
+The existing syslog config under **authority > router > system > syslog** expands the support of facility, severity, transport and other relevant config parameters per server. The configuration on a per server will take precedence over the configuration at the syslog level.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | protocol | enum: udp, tcp, tls | udp | Transport to use to connect to the server. |
 | filter | list | Empty | List of facility and severity to be configured for a server. |
 | filter > facility | existing enum | local0 (existing) | The facility or the type of syslog message to be sent to the server. <br/> For session and config-change events, SSR will use the auth facility as that’s the convention for most firewall and gateway devices. |
-| filter > severity | existing enum | error | The log level for the given facility at which the message will be sent to the server. |
+| filter > severity | existing enum | error | The message is sent to the server using the configured log level for the facility, or a less severe level if applicable. |
 | filter > match | string | empty | Regex match that will be applied to the raw syslog message to filter specific messages for the configured facility and severity. |
 | ocsp | Same as config > authority > router > system > syslog > ocsp | When protocol=tls |  |
 | certificate | Same as config > authority > router > system > syslog > certificate | When protocol=tls |  |
@@ -306,31 +321,64 @@ destination-address="10.73.3.11" severity="4"] ```
 ```
 ## Example Configurations
 
-#### Default Configuration
+### Syslog Server Configuration
+
+Syslog server configuration allows administrators to configure SSR interaction with external syslog services. The following example shows a syslog server configuration with filtering to select the messages received. Note that the default protocol is `udp`. For more information about syslog server configuration and command parameters, see [`configure authority router system syslog`](config_command_guide.md#configure-authority-router-system-syslog)
 
 ```
-config authority
-  router ROUTER system syslog
-    server 192.168.1.54 514
-        protocol UDP
-    exit
-  exit
-  service target-servers
-    access-policy server-access
-      syslog
-        syslog-policy default-syslog-policy
+config
+  authority
+    router target-router
+      name target-router
+      system
+        syslog
+          server 11.21.31.40 514
+            ip-address 11.21.31.40
+            port 514
+            protocol udp
+            filter auth
+              facility auth
+              severity info
+            exit
+          exit
+        exit
       exit
     exit
   exit
-  syslog-policy default-syslog-policy
-  exit
 exit
-
 ```
 
-#### Custom Configuration
+### Syslog Policy Configuration
 
-The following is an example with two servers (server 10.20.30.40 514, and server 11.21.31.40 514) where each is using filtering to select which messages it receives.
+The following is a syslog policy example with two servers (server 10.20.30.40 514, and server 11.21.31.40 514) where each is using filtering to select which messages it receives. It is associated with the access-policy `lan`. 
+
+For configuration command and parameter information, see [`configure authority syslog-policy`](config_command_guide.md#configure-authority-syslog-policy).
+
+```
+config
+  authority
+    syslog-policy target-syslog-policy
+      name target-syslog-policy
+      enabled true
+      close true
+      create false
+      error false
+      security true
+    exit
+    service internet
+      name internet
+      access-policy lan
+        source lan
+        syslog
+          syslog-policy target-syslog-policy
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
+### Syslog Policy and Server Sample Configuration
 
 ```
 config
