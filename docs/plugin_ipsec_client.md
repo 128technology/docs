@@ -805,6 +805,19 @@ exit
 
 ## Release Notes
 
+### Release 4.2.0
+
+**Release Date:** Sept 15, 2025
+
+#### New Features and Improvements
+
+- **PLUGIN-3014** Add debug log-level in configuration per router for simplified troubleshooting
+- **PLUGIN-3016** Improve tunnel status monitoring and reporting of issues through existing state commands
+
+#### Issues Fixed
+
+- **PLUGIN-3059** Resolve ping-monitor restart issue after upgrade
+
 ### Release 4.1.1
 
 **Release Date:** Apr 30, 2025
