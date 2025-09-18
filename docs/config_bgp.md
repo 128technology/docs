@@ -110,7 +110,7 @@ You can apply policies to these routes (i.e., policy and filters) individually. 
 In this example we're advertising the CIDR `172.16.255.0/30`, and it will use the global route policy named `allow` (not shown).
 
 #### Redistributing Routes
-To redistribute connected, static, service routes and/or routes learned through OSPF, you can use the `redistribute` configuration.
+To redistribute connected, static, service routes, or routes learned through OSPF, you can use the [`redistribute`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol) configuration.
 
 ```
 admin@branchoffice1.seattlesite1# config auth
@@ -119,6 +119,11 @@ admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-in
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-protocol bgp
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute connected
 ```
+
+#### BGP Peering and Service Routes
+When using BGP peering to the core router, the default route is learned from the core, added to the RIB, and selected as the default route. If you create application policies that include traffic steering and apply them AFTER the default route is learned via BGP, the SSR will recognize this as a [`redistribute service`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol) configuration. 
+
+In this scenario, the kernel routes for each address are redistributed into a protocol and become available routes. If the default route fails or becomes inaccessible, the kernel route becomes the new default route in the hub BGP table as a route originating from this SSR. The SSR then advertises it to any BGP neighbor.
 
 ## BGP over SVR (BGPoSVR)
 Use BGP over SVR when peering with an SSR to gain the benefit of Secure Vector Routing for all BGP traffic flowing to-and-from the SSR peers. 

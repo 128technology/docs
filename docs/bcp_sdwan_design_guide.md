@@ -167,13 +167,42 @@ In other cases, the customer may have an existing mechanism to provide georedund
 
 In this example, we assume that the router for AS65412 is announcing routes for the primary data center and the router for AS64513 is announcing routes for the backup data center. There is a path on a private link between these two data centers and the routers have a BGP neighbor relationship and a route filter on each one is prepending each one's AS three times in front of the AS path. The SSR in each data center has a BGP neighbor relationship with the local router in its data center. The SSR branch router with AS65535 is configured with a BGP over SVR peering relationship to both data center SSRs. It learns routes for the primary data center and the secondary data center from both BGP peers. However, the AS path is shorter for each route through the SSR locally within the data center so in a normal case, traffic will flow from the branch router over SVR to the SSR peer in the same data center as the IP space. If all peer paths to the SSR in the primary data center go down to the branch router, the BGP connection will time out and the routes through this router will be withdrawn from the RIB and now the only routes to the IP space in the primary data center will be through the SSR in the backup data center. Traffic will now flow from branch router over SVR to the SSR peer router in the backup data center. This traffic will leave the SSR as non-SVR traffic and flow up to the router at AS65413 and then across the private link to the router at AS64512 in order to reach this IP space. At the same time, since the peer paths from the SSR in the primary data center have gone down and the BGP connection to the branch router has expired, it will withdraw the route to the branch router from its neighbor at AS65412 and the best return path for this traffic will flow back across the intra data center link.
 
-A variation of this failover model is also possible without using BGP over SVR. The SSR offers a configuration option called "redistribute service" in both OSPF and BGP configurations that allows us to announce routes associated with a service when there is peer path connectivity to reach the remote router hosting the service. This is illustrated in the drawing below.
+A variation of this failover model is also possible without using BGP over SVR. The SSR offers a configuration option called [`redistribute service`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol) in both OSPF and BGP configurations that allows us to announce routes associated with a service when there is peer path connectivity to reach the remote router hosting the service. This is illustrated in the drawing below.
 
 ![announcing routes](/img/bcp_sdwan_design_5.png)
 
 In this drawing, a service exists covering the IP address space of the branch. A peer service-route exists on both the SSR in the primary and the backup data center and redistribute service is enabled in the BGP configuration of these routers. When the peer path connectivity is up between the data center and branch router, the routes are advertised to the BGP neighbor within the data center. If all peer paths to the branch go down, the route is withdrawn.
 
 The service-policy for these services should have `peer-path-resiliency` set to `true` in order to allow sessions to fail over between the two data center routers.
+
+#### BGP Peering and Service Routes
+
+When using BGP peering to the core router, the default route is learned from the core, added to the RIB, and selected as the default route. If you create application policies that include traffic steering and apply them AFTER the default route is learned via BGP, the SSR will recognize this as a [`redistribute service`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol) configuration. 
+
+In this scenario, the kernel routes for each address are redistributed into a protocol and become available routes. If the default route fails or becomes inaccessible, the kernel route becomes the new default route in the hub BGP table as a route originating from this SSR. The SSR then advertises it to any BGP neighbor.
+
+#### Mist WAN Assurance and `redistribute service`
+
+In some deployments, there may be a need to learn upstream BGP routes from core devices and propagate these routes to the spokes, without using dynamic routing with the SSR fabric. In those cases, we need a way to inject routes into the overlay. The general scenario for this is to route internal traffic bound for the Internet to the hub and inspect it using a firewall on the hub LAN before being sent out to the Internet.
+
+The method undertaken by the SSR for originating this route is a redistribution scenario referred to as [`redistribute service`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol). 
+
+By default, the SSR creates kernel route entries with a default administrative distance=254 for each address configured for an application. 
+
+The Mist Intent Configuration that triggers the origination of the route is generated by creating an application policy on the hub that meets these conditions:
+
+- Traffic steering pointing out an interface (LAN or WAN - but not to the overlay)
+- All networks allowed on the application policy must originate at spokes (no local networks allowed)
+
+When the above conditions are met - Traffic Steering enabled in Mist, and networks on the application policy originate at a spoke - any prefixes associated with matching applications are placed in a prefix filter. There is a redistribute service configuration option in the BGP configuration with a routing policy that only allows the matching prefixes into BGP.
+
+**When administering the SSR using Mist**, there is a specific scenario that triggers the automatic creation of the `redistribute service` configuration that builds off of an SSR configuration which includes the two conditions listed above as well as the following: 
+
+- A hub configuration built including BGP peering to the (core) router. The default route is learned from the core, installed in the RIB, and selected. 
+
+- Application policies that are created and committed after the default route was learned via BGP. This adds the configuration necessary to trigger the “redistribute service” configuration with a policy to allow the default route to be redistributed. 
+
+	In this scenario, the kernel routes for each address are redistributed into a protocol and become available routes. If the default route fails or becomes inaccessible, the kernel route becomes the new default route in the hub BGP table as a route originating from this SSR. The SSR then advertises it to any BGP neighbor.
 
 ### Neighborhood Design
 
