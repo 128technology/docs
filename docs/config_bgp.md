@@ -120,10 +120,11 @@ admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-proto
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute connected
 ```
 
-#### BGP Peering and Service Routes
-When using BGP peering to the core router, the default route is learned from the core, added to the RIB, and selected as the default route. If you create application policies that include traffic steering and apply them AFTER the default route is learned via BGP, the SSR will recognize this as a [`redistribute service`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol) configuration. 
+#### Redistribute Service
 
-In this scenario, the kernel routes for each address are redistributed into a protocol and become available routes. If the default route fails or becomes inaccessible, the kernel route becomes the new default route in the hub BGP table as a route originating from this SSR. The SSR then advertises it to any BGP neighbor.
+In addition to standard redistribution statements like `redistribute connected` and `redistribute static`, the SSR has the option to [`redistribute service`](config_command_guide#configure-authority-router-routing-ospf-redistribute-protocol). When a service route is created for a service on a router, a kernel route is also created for each of the addresses in the service. When the SSR determines that the service-route is down, (e.g., a peer service-route, and the peer is unreachable) the kernel route is removed. When the service-route transitions back up, the kernel route is re-added. The `redistribute service` setting triggers the redistribution of these kernel routes into the routing protocol (OSPF or BGP). The SSR announces these routes when the service-route is up and withdraws the routes when the service-route is down. For added control, the `redistribute service` configuration also allows setting a policy to control which routes may be advertised.
+
+In some Mist deployments, a specific combination of SSR and Mist configuration can result in a protocol redistribution scenario on the SSR for addresses configured for the application. In the case of the service **any** defined as `0.0.0.0/0`, this can result in the SSR originating the default route. In scenarios where you are leveraging BGP between the SSR and an existing network, this is likely undesirable. For more details about this interaction between `redistribute service` and Mist WAN Assurance, please refer to [Mist Traffic Steering](https://www.juniper.net/documentation/us/en/software/mist/mist-wan/topics/topic-map/traffic-steering.html).
 
 ## BGP over SVR (BGPoSVR)
 Use BGP over SVR when peering with an SSR to gain the benefit of Secure Vector Routing for all BGP traffic flowing to-and-from the SSR peers. 
