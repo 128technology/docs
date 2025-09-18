@@ -34,31 +34,31 @@ config authority router router1 node node1 reset-button-enabled true
 Changes made and committed require a reboot to enable or disable.
 :::
 
-### How It Works
+## How It Works
 
 Each of the port commands is described below.
 
-#### Disable USB
+### Disable USB
 
 When disabled (set to **false**), the USB host controller is excluded from the `devicetree`. No driver is bound by the operating system or applications.
 
-#### Disable Reset Pushbutton
+### Disable Reset Pushbutton
 
 When disabled (set to **false**), the pushbutton interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push. However, with the pushbutton disabled, device reboot is possible from either the command line or through Mist. 
 
-#### Disable Serial Console Port
+### Disable Serial Console Port
 
 When disabled (set to **false**), the serial console is excluded from the kernel cmdline, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
 
 See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
 
-#### Disable Firmware Recovery
+### Disable Firmware Recovery
 
 When disabled (set to **false**), the boot firmware `Press Esc to boot from USB` option and the image boot menu are prevented. The configured active boot image will be auto loaded; no recovery paths are available in the event of a boot failure.
 
 See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
 
-#### Uninterruptable Boot Process
+### Uninterruptable Boot Process
 
 This feature is configured on the SSR4x0 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
 
@@ -66,7 +66,7 @@ If **both** the Serial Console Port and Firmware Recovery are disabled, and an i
 
 **It is strongly recommended that recovery not be disabled on production units until post-deployment boot has been successfully validated.**
 
-#### Fail-Safe Restore Process
+### Fail-Safe Restore Process
 
 :::important
 This process has not been implemented at this time. It will be provided in a future Beta release.
