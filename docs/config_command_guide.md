@@ -26613,7 +26613,7 @@ Range: 1-8
 
 ## `configure authority router routing ospf redistribute`
 
-List of routing protocols to redistribute into OSPF
+List of routing protocols to redistribute into OSPF. Allows administrators to control which sources of routes will get redistributed into OSPF by the SSR.
 
 #### Usage
 
@@ -26734,14 +26734,16 @@ configure authority router routing ospf redistribute protocol [<redistribute-int
 
 ##### redistribute-into-ospf (enumeration)
 
-A value from a set of predefined names.
+A value from a set of predefined names. Valid values: bgp, connected, service, static. This controls which types of routes the redistribution will include. The service value will control whether this router will advertise SSR's service routes into OSPF.
 
 Options:
 
-- bgp:          BGP routes
-- connected:    Interface routes
-- service:      Service routes
-- static:       Static routes
+| name | description |
+| ---- | ----------- |
+| bgp | BGP routes |
+| connected | Interface routes |
+| service | Service routes |
+| static | Static routes |
 
 ## `configure authority router routing ospf router-id`
 
