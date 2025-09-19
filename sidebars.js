@@ -13,6 +13,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.0",
           "release_notes_128t_6.3",
           "release_notes_128t_6.2",
           "release_notes_128t_6.1",
@@ -119,6 +120,7 @@ module.exports = {
       "install_univ_iso",
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
+      "sec-ztp-web-proxy",
       "intro_installation_image",
     ],
     "Cloud / Hypervisor Installations": [
@@ -240,6 +242,7 @@ module.exports = {
           "concepts_appid",
           "config_app_ident",
           "how_to_use_app_summary",
+          "app_policy_hit_count",
           ],
         },
         {
@@ -349,6 +352,7 @@ module.exports = {
           "config_syslog_tls",
           "config_webserver_certs",
           "howto_trusted_ca_certificate",
+          "config_password_security",
           "config_password_policies",
           "howto_reset_user_password",
           "config_ntp_auth",
@@ -361,10 +365,15 @@ module.exports = {
           "sec_adaptive_encrypt",
           "sec_firewall_filtering",
           "sec_security_policy",
+          "sec-config-seim-syslog",
           "sec_hardening_guidelines",
           "sec-ddos-resilience",
           "sec-usb-security",
           "sec-disable-console-output",
+          "sec-disable-ports",
+          "config-custom-certs",
+          "enhanced-sec-key-mgmt",
+          "sec-secure-boot",
         ],
       },
       {
