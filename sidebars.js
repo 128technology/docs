@@ -205,6 +205,7 @@ module.exports = {
       "upgrade_ibu_conductor",
       "upgrade_router",
       "upgrade_restricted_access",
+      "upgrade-ssr-4x0-manual",
       "upgrade_legacy",
       "intro_rollback",
     ],
