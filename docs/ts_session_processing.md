@@ -75,11 +75,11 @@ admin@test1.combo1# show stats process thread process-name highway | grep Sessio
 `Top` can be used to follow the session processing threads:
 ```
 [centos@SOL-DL360-DUT1 ~]$ top -H d 1.0 | grep SessionProc
- 7532 root      20   0  266.9g   8.8g 120940 S 60.0  3.5  39:48.64 SessionProc-00                                                                 
- 7533 root      20   0  266.9g   8.8g 120940 R 55.0  3.5  37:18.75 SessionProc-01                                                     
- 7534 root      20   0  266.9g   8.8g 120940 S 55.0  3.5  34:42.19 SessionProc-02                                                       
- 7535 root      20   0  266.9g   8.8g 120940 S 45.0  3.5  31:33.67 SessionProc-03                                                          
- 7536 root      20   0  266.9g   8.8g 120940 S 35.0  3.5  27:27.56 SessionProc-04                                                          
+ 7532 root      20   0  266.9g   8.8g 120940 S 60.0  3.5  39:48.64 SessionProc-00
+ 7533 root      20   0  266.9g   8.8g 120940 R 55.0  3.5  37:18.75 SessionProc-01
+ 7534 root      20   0  266.9g   8.8g 120940 S 55.0  3.5  34:42.19 SessionProc-02
+ 7535 root      20   0  266.9g   8.8g 120940 S 45.0  3.5  31:33.67 SessionProc-03
+ 7536 root      20   0  266.9g   8.8g 120940 S 35.0  3.5  27:27.56 SessionProc-04
  7537 root      20   0  266.9g   8.8g 120940 S 20.0  3.5  22:51.79 SessionProc-05
 ```
 
@@ -143,9 +143,9 @@ Completed in 0.02 seconds
 
 The units for `queue delay` and `task execution-time` are in microseconds.
 All values are rolling averages, except for `queue total` and `task total` which are counters.
- 
+
 The values `cpu system-usage`, `cpu usage`, and `cpu user-usage` are percentages and indicate utilization of the service area thread performing session setup.
- 
+
 High values for queue depth and queue delay, coupled with high CPU usage values, are indicative of the service area threads not keeping up.
 
 ### Metrics Retention
@@ -175,24 +175,32 @@ config
     authority
         metrics-profile  session-processing-metrics-profile
             name    session-processing-metrics-profile
-            metric  /stat/traffic-eng/internal-application/sent-timeout
-                id           /traffic-eng/internal-application/sent-timeout
+            metric  /stats/traffic-eng/internal-application/sent-success
+                id           /stats/traffic-eng/internal-application/sent-success
                 description  "Internal application sent-timeout"
             exit
-            metric  /stat/aggregate-session/node/session-arrival-rate
-                id           /aggregate-session/node/session-arrival-rate
+            metric  /stats/traffic-eng/internal-application/sent-timeout
+                id           /stats/traffic-eng/internal-application/sent-timeout
+                description  "Internal application sent-timeout"
+            exit
+            metric  /stats/traffic-eng/internal-application/sent-retry
+                id           /stats/traffic-eng/internal-application/sent-retry
+                description  "Internal application sent-retry"
+            exit
+            metric  /stats/aggregate-session/node/session-arrival-rate
+                id           /stats/aggregate-session/node/session-arrival-rate
                 description  "Session arrival rate"
             exit
-            metric  /stat/process/thread/queue/delay
-                id           /process/thread/queue/delay
+            metric  /stats/process/thread/queue/delay
+                id           /stats/process/thread/queue/delay
                 description  "Packet processing thread queue delay"
             exit
-            metric  /stat/process/thread/cpu/usage
-                id           /process/thread/cpu/usage
+            metric  /stats/process/thread/cpu/usage
+                id           /stats/process/thread/cpu/usage
                 description  "CPU thread usage"
             exit
-            metric  /stat/process/thread/queue/depth
-                id           /process/thread/queue/depth
+            metric  /stats/process/thread/queue/depth
+                id           /stats/process/thread/queue/depth
                 description  "Packet processing thread queue depth"
             exit
         exit
@@ -230,11 +238,11 @@ Use the process below to create a new Metrics Profile referencing the key sessio
 3. Name the new Metrics Profile (example: `session-processing-metrics-profile`)
 ![Name new metrics profile](/img/ts_sp_session_processing_metrics_config_3.png)
 4. Add each of the following session processing metrics to the profile:
-* `/stat/traffic-eng/internal-application/sent-timeout`
-* `/stat/aggregate-session/node/session-arrival-rate`
-* `/stat/process/thread/queue/delay`
-* `/stat/process/thread/cpu/usage`
-* `/stat/process/thread/cpu/depth`
+* `/stats/traffic-eng/internal-application/sent-timeout`
+* `/stats/aggregate-session/node/session-arrival-rate`
+* `/stats/process/thread/queue/delay`
+* `/stats/process/thread/cpu/usage`
+* `/stats/process/thread/cpu/depth`
 
 ![Session processing metrics profile](/img/ts_sp_session_processing_metrics_config_4.png)
 
@@ -260,8 +268,8 @@ Creating a `Custom Report` on the Conductor is strongly recommended for each hea
 To create a custom report, use the following procedure:
 
 1. On the Conductor GUI, navigate to `CUSTOM REPORTS`.
-2. Click on `NEW` in the top-right corner. 
-3. Select `New Empty Report`. 
+2. Click on `NEW` in the top-right corner.
+3. Select `New Empty Report`.
 4. Name the report. For example: `Session Processing Utilization - <Router Name>` (where `<Router Name>` is the name of the router on which these reports will be customized).
 
 :::note
