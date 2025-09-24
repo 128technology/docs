@@ -3,7 +3,7 @@ title: Upgrade the SSR400/440
 sidebars_label: Upgrade the SSR400/440
 ---
 
-Use the following procedure to upgrade an SSR400/440 in an air gap network.
+Use the following procedure to manually upgrade an SSR400/440 using a USB drive. This procedure is most common in secure networks with no external internet connection, or in a case where the SSR400/440 is upgraded prior to deployment.
 
 This procedure assumes you have already copied the SSR-7.1.x*.aarch64*.iso to a USB flash drive. For information about the procedure, see [Creating a Bootable USB](intro_creating_bootable_usb.md). 
 
@@ -98,7 +98,7 @@ Press a number/letter to change current selections,
 Installation will begin in 30 seconds...
 ```
 
-5. The default install options for the SSR400 series are **FIPS enabled** and **cloud-init disabled**. Press 1 or 2 to toggle the options if required. Press **Enter**, or wait for the countdown timer to expire. The System LED flashes Teal, indicating the installation is in progress.
+5. The default install options for the SSR400/440 are **FIPS enabled** and **cloud-init disabled**. Press 1 or 2 to toggle the options if required. Press **Enter**, or wait for the countdown timer to expire. The System LED flashes Teal, indicating the installation is in progress.
 
 ``` 
 Install device selections total 2 GB for boot and 81 GB for root
