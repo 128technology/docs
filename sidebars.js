@@ -373,6 +373,7 @@ module.exports = {
           "sec-disable-console-output",
           "sec-disable-ports",
           "config-custom-certs",
+          "sec-cert-based-encrypt",
           "enhanced-sec-key-mgmt",
           "sec-secure-boot",
         ],
