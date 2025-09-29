@@ -15,8 +15,6 @@ This document covers dual router high availability using iBGP - two instances of
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).
 - No state synchronization between the two devices (and hence no "HA link"). While this improves overall performance for the routers (since there is no overhead incurred due to state synchronization), the implication is that there are some capabilities not supported in this design. See [Unsupported Features](#unsupported-features), below.
 
-Dual router high availability is recommended for data center designs where there will be a large volume of traffic; the elimination of shared state synchronization yields a simpler design, benefitting critical infrastructure.
-
 ## Unsupported Features
 
 When deploying two nodes in a dual router high availability deployment, several features that rely on synchronized state between nodes are no longer available.
