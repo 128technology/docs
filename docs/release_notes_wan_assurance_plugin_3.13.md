@@ -3,6 +3,26 @@ title: WAN Assurance Plugin 3.13 Release Notes
 sidebar_label: '3.13'
 
 ---
+## Release 3.13.2
+
+**Release Date:** October 2, 2025
+
+### Resolved Issues
+
+- **WAN-4450 Migration script fails when running 3.13.1**
+
+  _**Resolution**_ The migration script will no longer rely on local salt calls which can fail on certain environments. The new version explicitly performs the necessary steps without relying on salt.
+
+- **WAN-4487 Migration fails on an HA system due to incorrect init files**
+
+  _**Resolution**_ Added support for migration for HA systems.
+
+- **WAN-4505 Revert workflow does not work when the router is already Mist managed.**
+
+  _**Resolution**_ The revert operation was originally expected to be run while the site was not Mist managed. A new flag is added to skip this validation and continue with the revert operation even after Mist config was applied on the router.
+
+
+---
 ## Release 3.13.1
 
 **Release Date:** September 2, 2025
