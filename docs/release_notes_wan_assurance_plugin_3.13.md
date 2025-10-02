@@ -17,9 +17,9 @@ sidebar_label: '3.13'
 
   _**Resolution**_ Added support for migration for HA systems.
 
-- **WAN-4505 Revert workflow does not work when the router is already MIST managed.**
+- **WAN-4505 Revert workflow does not work when the router is already Mist managed.**
 
-  _**Resolution**_ The revert operation was originally expected to be run while the site was not mist managed. A new flag is added to skip this validation and continue with the revert operation even after MIST config was applied on the router.
+  _**Resolution**_ The revert operation was originally expected to be run while the site was not Mist managed. A new flag is added to skip this validation and continue with the revert operation even after Mist config was applied on the router.
 
 
 ---
