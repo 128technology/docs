@@ -6,23 +6,37 @@ sidebar_label: Certificate-based Security Encryption
 
 | Release | Modification                | 
 | ------- | --------------------------- | 
-| 7.1.0   | Certificate-based Security Encryption support added. |
+| 7.1.0   | Certificate-based Security Encryption support added. | 
 
 In addition to Enhanced Security Key Management, the SSR offers certificate based security encryption to encrypt, validate, and exchange certificates between devices within the network. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
 ## Certificate Management 
 
-Certificate management is performed from the CLI. The Certificate Signing Request (CSR) Workflow is interactive, asking the user what they would like placed in the CSR. The following three validity checks take place upon importing a certificate:
+Certificate management allows you to provision a certificate for use with Enhanced Security Key Management. There are four steps to provision a certificate.
 
-- Ensure that there is no private key accompanying the certificate. On 100 and 1000 series platforms the private key is parsed and validated against the matching private key on disk.
+1. Instruct the SSR to generate a private key.
+
+2. Instruct the SSR to create and return a CSR using the above key.
+
+3. Send the CSR to the CA and have it issue a certificate.
+
+4. Instruct the SSR to import the certificate.
+
+Before the certificate is accepted, the following three validity checks take place upon importing a certificate:
+
+- Ensure that there is no private key accompanying the certificate.
 
 - Parse the certificate and then validate it (dates/roles/other restrictions, etc.).
 
 - Check the certificate against the known revoked certificates (CRL).
 
-If the above three checks pass, then the private key and certificate are accepted and imported
+If the above three checks pass, then the certificate is accepted and imported. 
 
-(**this has changed**) Long-lived Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the **Rekey** feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
+**
+Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
+
+Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the **Rekey** feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
+**
 
 ### Certificate Security
 
@@ -42,11 +56,18 @@ The following are some details of certificate security.
 
 ## Certificate Revocation List
 
-Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs using the configuration commands and parameters provided in Configuration Commands and Parameters. These parameters generate a list of all known valid and revoked certificates from all CRL sources and saves this information to disk. The CRL configuration parameters include:
+Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs. The SSR can be configured to either dynamically learn revoked and expired certificates and add them to the CRL, or have the location of the CRL assigned and poll that location at set intervals. The lists of known valid and revoked certificates are gathered and saved locally.
 
-**ADD THE LIST HERE
+If the CRL cannot be retrieved, an alarm will fire and persist until such time as that CRL can be retrieved. 
 
-SEE MIKE'S SPEC, CERT MGMT
+### Configuration
+
+```
+configure authority
+	certificate-revocation-list <url> 
+		polling-interval 24hrs
+		backoff-interval 60sec
+```
 
 ## Installing Certificates
 

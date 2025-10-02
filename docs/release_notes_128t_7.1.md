@@ -42,3 +42,40 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.1.0-xxr1
 
+**Release Date:** November 13, 2025
+
+### New Features
+
+- **I95-54238 Uninterruptable Boot Process:**
+------
+- **I95-54244 Secure Boot:**
+------
+- **I95-54247 SSR signed packages only execution - IMA:**
+------
+- **I95-55746 Connection to Mist via proxy server:**
+------
+- **I95-55936 Alarm and Events when service area hits threshold:**
+------
+- **I95-57174 DCSP Steering - UDP/TCP destination port:**
+------
+- **I95-58446 EoSVR Active/Standby Loop prevention:**
+------
+- **I95-58502 Disable on box management ports:**
+------
+- **I95-59235 HTTP/S proxy server for all public URLs:**
+------
+- **I95-59330 FIPS Mode Updated:** Disabled by default on software and 1x0/1x00 platforms, but enabled by default on 4x0's. 
+------
+- **I95-54237 Hardware TPM  support for SSR400 series:**
+------
+
+
+Configuration Integrity
+ML-KEM
+Smart OS-Download
+Secure Conductor Onboarding
+
+
+
+
+
