@@ -121,6 +121,7 @@ module.exports = {
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
       "sec-ztp-web-proxy",
+      "sec-conductor-onboard",
       "intro_installation_image",
     ],
     "Cloud / Hypervisor Installations": [

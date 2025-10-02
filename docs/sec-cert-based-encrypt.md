@@ -44,6 +44,10 @@ The following are some details of certificate security.
 
 Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs using the configuration commands and parameters provided in Configuration Commands and Parameters. These parameters generate a list of all known valid and revoked certificates from all CRL sources and saves this information to disk. The CRL configuration parameters include:
 
+**ADD THE LIST HERE
+
+SEE MIKE'S SPEC, CERT MGMT
+
 ## Installing Certificates
 
 Installing a trusted CA certificate on the SSR uses the existing functionality as described in [Adding a Trusted Certificate](howto_trusted_ca_certificate.md).
