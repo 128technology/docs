@@ -13,6 +13,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.1",
           "release_notes_128t_7.0",
           "release_notes_128t_6.3",
           "release_notes_128t_6.2",
@@ -341,7 +342,7 @@ module.exports = {
           ],
         },
     ],
-    "Security":[
+    "Software and Hardware Security":[
       "security-overview",
       {
         "type": "category",
@@ -364,19 +365,19 @@ module.exports = {
         "type": "category",
         "label": "Security",
         "items": [
-          "sec_adaptive_encrypt",
-          "sec_firewall_filtering",
-          "sec_security_policy",
-          "sec-config-seim-syslog",
           "sec_hardening_guidelines",
-          "sec-ddos-resilience",
+          "sec_security_policy",
+          "sec_adaptive_encrypt",
+          "sec_firewall_filtering",          
+          "sec-config-seim-syslog",          
+          "sec-ddos-resilience",          
           "sec-usb-security",
+          "sec-secure-boot",
           "sec-disable-console-output",
           "sec-disable-ports",
           "config-custom-certs",
           "sec-cert-based-encrypt",
-          "enhanced-sec-key-mgmt",
-          "sec-secure-boot",
+          "enhanced-sec-key-mgmt",          
         ],
       },
       {

@@ -46,11 +46,17 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### New Features
 
+- **I95-34739 SSR1x0/1x00 Factory reset:**
+------
+- **I95-53402 SSR400/SSR440 Chassis Manager:**
+------
+- **I95-53404 PHY manager for SFP and switched RJ45:**
+------
+- **I95-53405 5G modem support:**
+------
 - **I95-54238 Uninterruptable Boot Process:**
 ------
 - **I95-54244 Secure Boot:**
-------
-- **I95-54247 SSR signed packages only execution - IMA:**
 ------
 - **I95-55746 Connection to Mist via proxy server:**
 ------
@@ -63,17 +69,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-58502 Disable on box management ports:**
 ------
 - **I95-59235 HTTP/S proxy server for all public URLs:**
-------
-- **I95-59330 FIPS Mode Updated:** Disabled by default on software and 1x0/1x00 platforms, but enabled by default on 4x0's. 
-------
-- **I95-54237 Hardware TPM  support for SSR400 series:**
-------
 
+### Resolved Issues
 
-Configuration Integrity
-ML-KEM
-Smart OS-Download
-Secure Conductor Onboarding
 
 
 

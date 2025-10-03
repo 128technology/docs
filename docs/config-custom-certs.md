@@ -9,7 +9,7 @@ sidebar_label: Configure Certificate Management
 | ------- | --------------------------- |
 | 7.0.0   | Certificate Management support added. | 
 
-Security is a critical component of SD-WAN products in today’s world. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
+Security is a critical component of SD-WAN products. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
 The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 

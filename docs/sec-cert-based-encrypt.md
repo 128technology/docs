@@ -56,11 +56,13 @@ The following are some details of certificate security.
 
 ## Certificate Revocation List
 
-Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs. The SSR can be configured to either dynamically learn revoked and expired certificates and add them to the CRL, or have the location of the CRL assigned and poll that location at set intervals. The lists of known valid and revoked certificates are gathered and saved locally.
+Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs. The SSR can be configured to either dynamically learn revoked and expired certificates and add them to the local CRL, or have the location or locations of the CRL assigned and poll that location at set intervals. The lists of known valid and revoked certificates are gathered and saved locally. The list is then shared with the configured routers.
 
 If the CRL cannot be retrieved, an alarm will fire and persist until such time as that CRL can be retrieved. 
 
 ### Configuration
+
+There are two configuration parameters, an optional list of CRL URLs to fetch updates, and the polling interval for those CRL URLs. 
 
 ```
 configure authority
@@ -69,49 +71,160 @@ configure authority
 		backoff-interval 60sec
 ```
 
-## Installing Certificates
+- URL: Enter one or more URLs where CRLs are hosted.
+- `polling-interval`: Frequency in hours at which to fetch CRLs. Default is 24.
+- `backoff-interval`: Delay in seconds to apply to the polling-interval. Default is 60.
+
+### Peer Certificate 
+
+Peer certificate validation can be configured on a per-router basis as needed. This allows individual routers to check the validity of a peer certificate against the conductor provided CRL, as well as the local in-memory cache of revoked or expired certificates.
+
+```
+configure authority router router1
+	peer-validation true
+```
+By default, `peer-validation` is false. 
+
+## Provisioning Process
+**can we modify the custom certs prov process for use here? Is it similar?**
+
+Use this procedure to provision a certificate for use with Enhanced Security Key Management.
+
+### Prerequisites
+
+A configured, functioning Certificate Authority (CA) is required.
+
+### Install the Trusted CA Certificate
+
+In order to provision a certificate on the system, install the public certificate of the Certificate Authority, as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file. For example:
+
+```
+-----BEGIN CERTIFICATE-----
+MIIEYTCCAsmgAwIBAgIUWfoRok+PTcDoz5BRhnuOIE28wlwwDQYJKoZIhvcNAQEL
+BQAwWjELMAkGA1UEBhMCREUxETAPBgNVBAoMCE9wZW5YUEtJMQwwCgYDVQQLDANQ
+S0kxKjAoBgNVBAMMIU9wZW5YUEtJIERlbW8gSXNzdWluZyBDQSAyMDI1MDUwNzAe
+
+<edited for security>
+
+sWBdyw2UTZuusUGqELN4UpmYryJkDt6PD9kAMLl/Eawx26ztQbwUpj/vxeLPpc7i
+V0fDiiXyWtCeiorR1ipXKMCik13N
+-----END CERTIFICATE-----
+
+-----BEGIN CERTIFICATE-----
+MIIErjCCAxagAwIBAgIUWfoRok+PTcDoz5BRhnuOIE28wlswDQYJKoZIhvcNAQEL
+BQAwJDEiMCAGA1UEAwwZT3BlblhQS0kgUm9vdCBDQSAyMDI1MDUwNzAeFw0yNTA1
+MDcyMDAzMDhaFw0zMDA1MDkyMDAzMDhaMFoxCzAJBgNVBAYTAkRFMREwDwYDVQQK
+DAhPcGVuWFBLSTEMMAoGA1UECwwDUEtJMSowKAYDVQQDDCFPcGVuWFBLSSBEZW1v
+
+<edited for security>
+
+bVeO0DwOwawBo0O47NaOLhLKWC1jkMsfxqbDj7c3tSY7xDcahzls8KVDNJVnS133
+pVnxbgovybrE8JRlOyXgr1lCmMKTiLeza8aFTsA6b+xIsT316D1d5IhlKIM68T7Z
+zxK3jfn0veR9W1e2WOgo22jDIx67nkPS54skZEO1XvuOBLmKB/74GUFVZ5+OPxxW
+QQwlZqZrgeqUSAZ9gvOv683ouzXCI4+vuATvoYBDe9j9kIPQ1tt32V0YZ790Wo4U
+PxE=
+-----END CERTIFICATE-----
+
+-----BEGIN CERTIFICATE-----
+MIIENjCCAp6gAwIBAgIUY6hJlss7siI3SHZzPH9YiyolzWIwDQYJKoZIhvcNAQEL
+BQAwJDEiMCAGA1UEAwwZT3BlblhQS0kgUm9vdCBDQSAyMDI1MDUwNzAeFw0yNTA1
+MDcyMDAzMDhaFw0zNTA1MTAyMDAzMDhaMCQxIjAgBgNVBAMMGU9wZW5YUEtJIFJv
+
+<edited for security>
+
+ms1+sB5RcH9jGNVGSEQnz8kcgX+W+GEKqk1m3JswfOAe68BpiakqKTN5GA3PdbQM
+dw/lPbQR6X0pLegSikirHeKVX0UHyDZkOv8=
+-----END CERTIFICATE-----
+```
+
+Once this file has been obtained, the contents are placed into the SSR configuration at the authority level:
+
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# config authority
+admin@conductor-east-1.RTR_EAST_CONDUCTOR (authority)# trusted-ca-certificate svrv2-root-of-trust
+admin@conductor-east-1.RTR_EAST_CONDUCTOR (trusted-ca-certificate[name=svrv2-root-of-trust])# content
+Enter plain for content (Press CTRL-D to finish):
+<paste the contents here>
+admin@conductor-east-1.RTR_EAST_CONDUCTOR (trusted-ca-certificate[name=svrv2-root-of-trust])# validation-mode warn
+admin@conductor-east-1.RTR_EAST_CONDUCTOR (trusted-ca-certificate[name=svrv2-root-of-trust])# top
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# commit
+Are you sure you want to commit the candidate config? [y/N]: y
+⚠ Validating, then committing...
+Configuration committed
+```
+
+#### Additional Information
+
+The name of the `trusted-ca-certificate` should be easily identifiable; `svrv2-root-of-trust` was chosen for illustration purposes.
+
+The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but warnings are generated for those issues. If the `validation-mode` is set to `strict` the certificate-chain is not committed.
+
+### Authenticate to Use REST
+
+In order to call into the SSRs REST interfaces, a user must authenticate first. This is accomplished by logging in, and storing the bearer token.
+
+**Example:**
+
+```
+curl 'https://10.27.35.89/api/v1/login' --compressed -k -X POST \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:137.0) Gecko/20100101 Firefox/137.0' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.5' \
+  -H 'Accept-Encoding: gzip, deflate, br, zstd' \
+  -H 'Referer: https://10.27.35.89/' \
+  -H 'Content-Type: application/json' \
+  -H 'X-Request-Id: MmUzMGMzNj' \
+  -H 'Origin: https://10.27.35.89' \
+  -H 'Connection: keep-alive' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Priority: u=0' \
+  -H 'TE: trailers' \
+  --data-raw '{"username":"admin","password":"TheAdminPassword1234","application":"GUI"}'
+```
+
+**Conductor Response:**
+
+```
+{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiJdLCJzY29wZXMiOlsiY29uZmlndXJlIiwic2hvdy1jb21tYW5kcyJdLCJjYXBhYmlsaXRpZXMiOlsiY29uZml
+
+<edited for security>
+
+xueOlHpcNYuZlygk_-VuLPJ_gWRADyj4HjlTibt_TzMvrvv_b7V37uFHgdiR_sfaj2DOGj4T4sRz6dZHW_ojv9pPmjwFJsceqXViYbMYkNQfyaXGmp5vb8jH47fYiay02xcC-qZ18ICMuQ0ozCZ2mI9PnlS50u1jnUhwgf24vfgJsJkZOg6Q4vGxBmRtKcG49Nc5HQOhUWfUctmT5e7cvVfZw"}
+```
+
+Store the value of the token in a file called `token.txt` for use later.
+
+#### Installing Certificates
 
 Installing a trusted CA certificate on the SSR uses the existing functionality as described in [Adding a Trusted Certificate](howto_trusted_ca_certificate.md).
 
-## Replace or Revoke a Certificate
+**COMMENT: I believe the above paragraph is unnecessary if we are using the Provisioning Process, but for this iteration of the feature I need to know which is used** 
 
-When a certificate is revoked, expired, or invalid, the SSR generates an alarm. The following sections describe the procedures for replacing and revoking certificates.
+## Certificate Replacement or Revocation
+
+When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
+
+- `fail-soft` results in a notification that the certificate is no longer valid and that appropriate action must be taken.
+
+- `fail-hard` sends a notification that the certificate is no longer valid, and removes all peering relationships. The peer connection is severed and the device is prevented from participating in SVR.
 
 ### Expiring Certificate
 
 Expiring certificates will generate the following alarms.
 
-If a certificate expires within a month, a minor alarm is generated. 
-If a certificate expires within a week, a major alarm is generated. 
-If a certificate is expired or otherwise invalid, a critical alarm is generated. 
+- Within a month; Minor alarm. 
+- Within a week; Major alarm. 
+- Currently expired or otherwise invalid; Critical alarm. 
 
 When a router's certificate is about to expire or needs to be replaced, a new certificate can be added to the system using the [installation procedure](howto_trusted_ca_certificate.md). Once the new certificate file has been loaded into the system, an event is triggered to restart the peer authentication procedure.
-
-### Compromised Certificate
-
-In the case of a compromised system or certificate, the certificate will be revoked. 
-
-The router periodically checks the Certificate Revocation List (CRL) from existing certificate authority servers for any revocations, according to the interval defined in the configuration. If a revocation has taken place, the router takes the action defined in the configuration (fail-soft or fail-hard). 
 
 ## High Availability
 
 Each node of an HA pair manages its own unique certificate - certificates are not shared between nodes. Each node manages its own unique connection to its peers.
 
-When two nodes are configured as a redundant pair, each of the keys need to be exchanged between nodes. This is done to avoid rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over a SSH connection.
-
-## Configuration
-
-config certificate-revocation 
- - url    blah.bla.com
- - polling interval 
-	- Frequency to fetch CRL
-	- units: hours
-	- range: 1-168 
-	- default: 24
- - backoff- interval: delay in seconds to apply to the polling-interval
-	- units: seconds
-	- type: uint32
-	- default: ?
+When two nodes are configured as a redundant pair, each of the keys are exchanged between nodes. This will avoid rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
 
 ## Troubleshooting
 
