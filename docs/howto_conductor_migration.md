@@ -27,13 +27,13 @@ Copy the following files into a tarball (a `*.tar.gz` file) on the existing cond
 Use the following command to create the `*.tar.gz` file. 
 
 ```
-tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d').tar.gz <list of files>
+tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz <list of files>
 ```
 
 For example:
 
 ```
-tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d').tar.gz \
+tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz \
 /var/lib/128technology/t128-running.json \ 
 /var/lib/128technology/user-running.json \ 
 /etc/128technology/salt/pki/master/master.pem \ 
