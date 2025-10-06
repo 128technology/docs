@@ -39,9 +39,9 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.0-67r1
+## Release 7.0.0-69r1
 
-**Release Date:** October 2, 2025
+**Release Date:** October 7, 2025
 
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
@@ -228,3 +228,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 - **I95-62283 Enhance keypress detection logic:** Resolved an issue that during ISO installation, pressing any key during the install countdown reduced the the remaining countdown. This issue has been resolved. 
 ------
 - **I95-62291 Conductor minion watchdog may incorrectly restart the minion:** Updated the `128T-minion-watchdog` package to version 2.0 which does not restart the salt-minion if it has an active connection to 1/2 conductor nodes in an HA conductor.
+
+### Caveats
+
+- **I95-62478 Salt Master Memory Leak:** A conductor memory leak has been identified due to an issue within the Salt Master. We are currently working independetly and with Salt to resolve this issue, but it is still under investigation. Please refer to the SSR Knowledge Base for more information on a workaround.
