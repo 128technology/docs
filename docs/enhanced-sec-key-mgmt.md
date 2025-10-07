@@ -7,7 +7,7 @@ sidebars-label: Enhanced Security Key Management
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.0.0   | Enhanced Security Key Management support added. |
+| 7.0.1   | Enhanced Security Key Management support added. |
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
@@ -142,7 +142,7 @@ When receiving a certificate from a peer router and performing validation, the r
 
 ### Requirements
 
-SSR 7.0.0 is required on all devices participating in Enhanced Security Key Management. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
+SSR 7.0.1 is required on all devices participating in Enhanced Security Key Management. Any SSR running an older version of software that does not support this functionality will cause traffic to fail between those peers. In these cases, events will be generated when peering fails to establish.
 
 ## Configuration
 
