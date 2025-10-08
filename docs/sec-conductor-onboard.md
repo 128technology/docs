@@ -3,9 +3,9 @@ title: Secure Conductor Onboarding
 sidebar_label: Secure Conductor Onboarding
 ---
 
-Secure Conductor Onboarding (SCO) is an onboarding protocol between a router and the conductor that employs asymmetric cryptography (e.g., RSA key pairs) to perform digital signatures and verification. It ensures that each party proves possession of a private key, and that the connection is trusted and authenticated. The secure conductor onboarding process leverages either the physical or virtual TPM module detected on the platform for mutual authentication. 
+Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. SCO employs asymmetric cryptography (e.g., RSA key pairs) to perform digital signatures and verification. The secure conductor onboarding process leverages the physical or virtual TPM module for mutual authentication. 
 
-When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505 and 4506 are disabled on the conductor, so any devices not using this feature will fail to onboard to the conductor. In addition, if an SCO enabled device attempts to onboard using the legacy method the onboarding will be rejected.
+When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505 and 4506 are disabled on the conductor, so any devices not using this feature will fail to onboard to the conductor. In addition, if an SCO enabled device attempts to onboard using the legacy method, the onboarding is rejected.
 
 ## Configuration
 

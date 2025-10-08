@@ -123,7 +123,6 @@ module.exports = {
       "initialize_u-iso_adv_workflow",
       "sec-ztp-web-proxy",
       "sec-conductor-onboard",
-      "intro_installation_image",
     ],
     "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
@@ -155,6 +154,7 @@ module.exports = {
       "intro_installation_legacy",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
+      "intro_installation_image",
       {
        "type": "category",
           "label": "Conductor Installation",
