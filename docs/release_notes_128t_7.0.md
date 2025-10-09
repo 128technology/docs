@@ -41,7 +41,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.0.1-1r1
 
-**Release Date:** October 9, 2025
+**Release Date:** October 13, 2025
 
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
@@ -228,4 +228,8 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 - **I95-62283 Enhance keypress detection logic:** Resolved an issue that during ISO installation, pressing any key during the install countdown reduced the the remaining countdown. This issue has been resolved. 
 ------
 - **I95-62291 Conductor minion watchdog may incorrectly restart the minion:** Updated the `128T-minion-watchdog` package to version 2.0 which does not restart the salt-minion if it has an active connection to 1/2 conductor nodes in an HA conductor.
+
+### Caveats
+
+- **WAN-4457 Incorrect VPN Peer path state reported in `oc-stats`:** Peer path stats are not reported correctly from the device. This issue has been identified and resolved in a separate WAN Assurance plugin release, 3.100.1. This plugin will be generally available after the SSR 7.0.1 release, and should be manually installed to resolve the peer path stats issue. 
 
