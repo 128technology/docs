@@ -231,5 +231,9 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 
 ### Caveats
 
+- **I95-62830 Redundant conductor does not sync secondary node:** Due to a change in the Salt watchdog process, an asset may not sync automatically to both conductor nodes in an HA conductor configuration after upgrading to 7.0.1. If you encounter this behavior, restarting the salt minion will resolve this issue. This will be resolved in a future release. 
+------
+- **I95-62836 IDP Engine failed to start up on the SSR1500 after upgrade to 7.0.1:** In 7.0.1, the default allocations used by the SSR are not sufficient to launch the security engine on the SSR1500 preventing IDP, AV, and other security features from functioning. If you are using these features on an SSR1500, it is not recommended to upgrade to 7.0.1 at this time. This issue will be addressed in a future patch of 7.0.1.
+------
 - **WAN-4457 Incorrect VPN Peer path state reported in `oc-stats`:** Peer path stats are not reported correctly from the device. This issue has been identified and resolved in a separate WAN Assurance plugin release, 3.100.1. This plugin will be generally available after the SSR 7.0.1 release, and should be manually installed to resolve the peer path stats issue. 
 
