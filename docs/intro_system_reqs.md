@@ -34,6 +34,8 @@ Hyperthreading (Intel) or Symmetric Multi-Threading (AMD) must be enabled on Con
 | 1000 to 1500              | 32 Xeon        | 64      | 128 GB |
 | 1500 to 2000              | 48 Xeon        | 96      | 256 GB |
 
+Hyperthreading should be enabled on Conductor platforms.
+
 ### Compatible Platform BIOS and UEFI Recommendations  
 
 Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running SSR on compatible platforms, the following are the recommended boot firmware settings: 

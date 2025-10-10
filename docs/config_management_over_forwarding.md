@@ -3,6 +3,12 @@ title: Management Traffic over Forwarding Interfaces
 sidebar_label: Management over Forwarding
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.0.1   | Support for IPv6 over management added. |
+
 Management traffic is any service that makes direct contact to another asset, either to retrieve or interface with the configuration and status of hardware components (conductor to router), the core operating system (NTP), features of user interfaces to the OS (DNS), or the business application, sometimes taking subsequent action to maintain or change configurations. All actions ultimately provide underlying support to the service being delivered by the managed resource to its users. Access is typically controlled via a set of privileges and will usually allow either modification and/or viewing of sensitive system configurations. Management traffic includes three categories: management, monitoring, and data backups and restores.
 
 Networking equipment's management traffic typically traverses a separate physical interface for the purposes of network isolation and policing.
@@ -35,13 +41,17 @@ One of the strengths of the SSR data model is to dynamically apply policy only a
 
 ## Configuration
 
+:::note
+With the release of SSR 7.0.1, all router to conductor communication, along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. Be advised that in an IPv6 managed node, all devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
+:::
+
 When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the SSR packet forwarding engine. Thus, standard SSR forwarding rules apply: any traffic originated by the host operating system that does not match a configured service will be dropped. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
 
 :::important
 Because a default route is added in Linux, all traffic not captured by a static route, will be sent to the SSR. This means that the traffic will either be dropped, or match an existing service and route.
 :::
 
-For each of the [management services](#management-services) configured, the SSR will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `_management_`.
+For each of the [management services](#management-services) configured, the SSR will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `management`.
 
 Each of the service and service-routes share one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration work-flows involving the `generated` flag, refer to the [Generated Configuration documentation](config_basics.md#generated-configuration).
 
@@ -98,6 +108,8 @@ Management interfaces can be configured for redundancy between nodes of a HA pai
 
 
 ### Sample Configuration
+
+**To configure IPv6 addresses, just enter the addresss as you would an IPv4 addresss.
 
 ```
 config
