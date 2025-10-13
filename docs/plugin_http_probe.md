@@ -471,6 +471,12 @@ Completed in 0.21 seconds
 
 ## Release Notes
 
+### Release 3.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 2.3.1
 
 **Release Date:** Jun 18, 2025

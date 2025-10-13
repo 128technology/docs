@@ -669,6 +669,13 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 :::warning
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
+
+### Release 4.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 3.0.2
 
 **Release Date:** Apr 30, 2025

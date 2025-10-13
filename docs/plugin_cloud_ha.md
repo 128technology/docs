@@ -1096,6 +1096,12 @@ The following configuration is an example only - It is not for use on a system.
 
 ## Release Notes
 
+### Release 5.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 4.0.2
 
 **Release Date:** Apr 30, 2025

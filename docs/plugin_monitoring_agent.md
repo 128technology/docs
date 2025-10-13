@@ -842,6 +842,12 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ## Monitoring Agent Plugin Release Notes
 
+### Release 5.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 4.1.1
 
 **Release Date:** Jun 11, 2025

@@ -341,6 +341,12 @@ exit
 The plugin must be updated to version 3.1.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 5.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 4.0.2
 
 **Release Date:** Apr 30, 2025

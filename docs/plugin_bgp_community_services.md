@@ -228,6 +228,12 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 ## Release Notes
 
+### Release 4.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 3.0.2
 
 **Release Date:** Apr 30, 2025

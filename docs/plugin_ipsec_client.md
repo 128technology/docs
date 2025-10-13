@@ -805,6 +805,12 @@ exit
 
 ## Release Notes
 
+### Release 5.0.0
+
+SSR 7.0 OS Support Release
+
+**Release Date:** Oct 13, 2025
+
 ### Release 4.2.0
 
 **Release Date:** Sept 15, 2025
