@@ -38,7 +38,14 @@ Feb 12 16:28:14 sol_acm800_dut1 systemd[1]: Stopped Watchdog for the Audiocodes 
 
 ### Release 4.0.0
 
-SSR 7.0 OS Support Release
+#### New Features and Improvements
+
+Support for install and upgrade of Oracle Linux 9 based SSR OS distribution for 7.0 and above.
+
+:::note
+On conductor, the plugin will auto upgrade to this version when upgrading from 6.x to 7.x version of SSR software. In addition, all routers will also be auto upgraded to their respective Oracle Linux 7 or Oracle Linux 9 plugin version depending on the SSR version running on the device.
+:::
+
 
 **Release Date:** Oct 13, 2025
 
