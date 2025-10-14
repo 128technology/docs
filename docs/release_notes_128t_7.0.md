@@ -41,7 +41,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.0.1-1r1
 
-**Release Date:** October 13, 2025
+**Release Date:** October 14, 2025
 
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
