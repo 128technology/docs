@@ -139,6 +139,46 @@ Forward Error Correction has the following limitations:
 
 - Packet retransmission will not work when FEC is enabled. 
 
+## FEC Support on High Speed Ports
+
+The `fec-mode`, or more commonly known as "optical FEC", feature provides compatibility with other devices (Dell, Broadcom, etc.) that use optical ports, allowing you to set the port speed for these high speed optical ports. The feature is enabled on 100GB NIC ports at the device-interface level, and is an advanced or administrator only feature/command. 
+
+The `fec-mode` is configured as `auto`, `baser`, `rs`, or `none`. For example:
+
+#### Configuration Example:
+
+```
+config 
+    authority 
+        router router-b 
+            node node 
+                device-interface xe-4-2 
+                fec-mode baser
+
+
+        router router-b 
+            node node 
+                device-interface xe-4-3 
+                fec-mode auto
+            exit
+        exit
+    exit
+exit
+
+
+admin@node.router-b# show config running flat | grep fec
+✔ Piping output...
+config authority router router-b node node device-interface xe-4-2 fec-mode    baser
+config authority router router-b node node device-interface xe-4-3 fec-mode    auto
+```
+
+If the switch speed and port speed do not match, the link will be reported as `down`.
+
+- Switch set to default (fec74); SSR port is `auto` or `baser` (fec74): fec74 on both ends; link is up
+- Set switch to fec108; SSR port is `auto` or `rs` (fec108): fec108 on both ends; link is up
+- Set switch to fec108; SSR port is `baser` (fec74): link is down
+- Set switch to fec74; SSR port is `rs` (fec108): link is down
+
 ## Troubleshooting
 
 Metrics for FEC are categorized into success and failure counters. Use the following counters to help diagnose any issues that arise.

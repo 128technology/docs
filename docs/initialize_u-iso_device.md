@@ -31,20 +31,25 @@ Use the following process to initialize your device as a Conductor.
 
 2. To initialize a standalone conductor, select **STANDALONE**. To initialize the first conductor of an HA pair, select **HA NODE 0**. Select the address type (DHCP or STATIC).
 
-:::note
-In an HA configuration, **HA NODE 0** must always be configured before HA NODE 1. Configuring Node 1 first prevents Node 0 from starting.
-:::
+ :::note
+ In an HA configuration, **HA NODE 0** must always be configured before HA NODE 1. Configuring Node 1 first prevents Node 0 from starting.
+ :::
 
-Enter the following information:
+ Enter the following information:
 
-	- Conductor name
-	- Node IP Address (Static)
-	- Node Gateway (Static)
-	- Interface Name (Static)
-	- DNS Server address (Optional)
-	- Artifactory username and password (if available)
+ - Conductor name
+ - Node IP Address (Static)
+ - Node Gateway (Static)
+ - Interface Name (Static)
+ - DNS Server address (Optional)
+ - Admin and system accounts password
+ - Artifactory username and password (if available)
 
  ![Conductor Association](/img/u-iso9_define_conductor.png)
+
+:::note
+Setting the password for the system accounts (`admin`, `root`, and `t128`) is performed during initialization from either the web interface or the conductor command line. All system account passwords are set to the same value.
+:::
 
 3. Click **ASSOCIATE**
 
@@ -57,9 +62,10 @@ Enter the following information:
 	- Node Gateway (Static)
 	- Interface Name (Static)
 	- DNS Server address (Optional)
+	- Admin and system account passwords
 	- Artifactory username and password (if available)
 
- ![HA Conductor Association](/img/u-iso9a_ha_conductor.png)
+ ![HA Conductor Association](/img/u-iso9a_ha_conductor1.png)
 
 5. Click **ASSOCIATE** when you have completed the required information. The device reboots and comes online as the second Conductor.
 
@@ -72,9 +78,9 @@ Use the following process to initialize your device as a Conductor-managed route
 
   ![SSR Conductor-managed router](/img/u-iso10_cond-mngd_router.png)
 
-2. Enter the router name and the associated Conductor IP address.
+2. Enter the router name, the associated Conductor IP address, and the Admin and system account passwords.
 
-  ![Conductor Managed Association](/img/u-iso11_cond-mngd-assoc.png)
+  ![Conductor Managed Association](/img/u-iso11_cond-mngd-assoc-new.png)
 
 3. Click **ASSOCIATE** when you have completed the required information.
 
