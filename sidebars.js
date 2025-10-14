@@ -53,6 +53,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance Plugin",
         "items": [
+          "release_notes_wan_assurance_plugin_3.100",
           "release_notes_wan_assurance_plugin_3.13",
           "release_notes_wan_assurance_plugin_3.12",
           "release_notes_wan_assurance_plugin_3.11",
