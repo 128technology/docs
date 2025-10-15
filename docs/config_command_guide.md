@@ -17,6 +17,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
 | [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
 | [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
+| [`certificate-revocation`](#configure-authority-certificate-revocation) | Certificate revocation list with CRL details. |
 | [`cli-messages`](#configure-authority-cli-messages) | Configure Cli Messages |
 | [`client-certificate`](#configure-authority-client-certificate) | The client-certificate configuration contains client certificate content. |
 | `clone` | Clone a list item |
@@ -26,6 +27,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`district`](#configure-authority-district) | Districts in the authority. |
 | [`dscp-map`](#configure-authority-dscp-map) | Configure Dscp Map |
 | [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`. |
+| [`enhanced-security-key-management`](#configure-authority-enhanced-security-key-management) | Use certificate-based security key management. |
 | [`fib-service-match`](#configure-authority-fib-service-match) | When creating FIB entries by matching route updates to service addresses, consider the specified service addresses. |
 | [`forward-error-correction-profile`](#configure-authority-forward-error-correction-profile) | A profile for Forward Error Correection parameters, describing how often to send parity packets. |
 | [`icmp-control`](#configure-authority-icmp-control) | Settings for ICMP packet handling |
@@ -34,6 +36,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`ipv4-option-filter`](#configure-authority-ipv4-option-filter) | Configure Ipv 4 Option Filter |
 | [`ldap-server`](#configure-authority-ldap-server) | LDAP Servers against which to authenticate user credentials. |
 | [`management-service-generation`](#configure-authority-management-service-generation) | Configure Management Service Generation |
+| [`metrics`](#configure-authority-metrics) | Configuration for metrics collection. |
 | [`metrics-profile`](#configure-authority-metrics-profile) | A collection of metrics |
 | [`name`](#configure-authority-name) | The identifier for the Authority. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
@@ -47,6 +50,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`router`](#configure-authority-router) | The router configuration element serves as a container for holding the nodes of a single deployed router, along with their policies. |
 | [`routing`](#configure-authority-routing) | authority level routing configuration |
 | [`security`](#configure-authority-security) | The security elements represent security policies for governing how and when the SSR encrypts and/or authenticates packets. |
+| [`security-key-management`](#configure-authority-security-key-management) | Configure Security Key Management |
 | [`service`](#configure-authority-service) | The service configuration is where you define the services that reside within the authority&#x27;s tenants as well as the policies to apply to those services. |
 | [`service-class`](#configure-authority-service-class) | Defines the association between DSCP value and a priority queue. |
 | [`service-policy`](#configure-authority-service-policy) | A service policy, which defines parameters applied to services that reference the policy |
@@ -59,6 +63,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`software-update`](#configure-authority-software-update) | Configure Software Update |
 | [`step`](#configure-authority-step) | Configure Step |
 | [`step-repo`](#configure-authority-step-repo) | List of Service and Topology Exchange Protocol repositories. |
+| [`syslog-policy`](#configure-authority-syslog-policy) | Configuration for syslog message generation. |
 | [`tenant`](#configure-authority-tenant) | A customer or user group within the Authority. |
 | [`traffic-profile`](#configure-authority-traffic-profile) | A set of minimum guaranteed bandwidths, one for each traffic priority |
 | [`trusted-ca-certificate`](#configure-authority-trusted-ca-certificate) | The trusted-ca-certificate configuration contains CA certificate content. |
@@ -187,7 +192,7 @@ configure authority access-management role exclude-resource <id>
 
 ## `configure authority access-management role exclude-resource id`
 
-Configure ID
+Configure Id
 
 #### Usage
 
@@ -292,7 +297,7 @@ Options: true or false
 
 ## `configure authority access-management role resource id`
 
-Configure ID
+Configure Id
 
 #### Usage
 
@@ -394,7 +399,8 @@ Range: 1-18446744073709551615
 A value from a set of predefined names.
 
 Options:
-never    Never expire
+
+- never:    Never expire
 
 ## `configure authority alarm-shelving`
 
@@ -563,6 +569,7 @@ configure authority alarm-shelving shelf applies-to type [<enumeration>]
 A value from a set of predefined names.
 
 Options:
+
 - authority:         Applies to all routers in the authority.
 - router:            Router(s) to which the configuration applies.
 - router-group:      Logical group of router(s) to which the configuration applies.
@@ -593,6 +600,7 @@ Default: none
 A value from a set of predefined names.
 
 Options:
+
 - none:                 A Category of &quot;none&quot; indicates that Category will not be considered when evaluating alarms against this shelf
 - extensible-alarm:     Shelve alarms with a category of &quot;extensible-alarm&quot;
 - system:               Shelve alarms with a category of &quot;system&quot;
@@ -662,6 +670,7 @@ Default: all
 A value from a set of predefined names.
 
 Options:
+
 - all:    All items in the shelf must match an alarm in order to trigger the shelving.
 - any:    At least one item in the shelf must match an alarm in order to trigger the shelving
 
@@ -1190,6 +1199,218 @@ configure authority bgp-service-generation service-policy [<service-policy-ref>]
 
 This type is used by other entities that need to reference configured service policies.
 
+## `configure authority certificate-revocation`
+
+Certificate revocation list with CRL details.
+
+#### Usage
+
+```
+configure authority certificate-revocation <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | An identifier for the certificate revocation. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`backoff-interval`](#configure-authority-certificate-revocation-backoff-interval) | A delay in seconds to apply between polling different CRL endpoints to avoid excessive concurrent download attempts. |
+| `clone` | Clone a list item |
+| [`crl-endpoint`](#configure-authority-certificate-revocation-crl-endpoint) | Configure Crl Endpoint |
+| `delete` | Delete configuration data |
+| [`name`](#configure-authority-certificate-revocation-name) | An identifier for the certificate revocation. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`polling-interval`](#configure-authority-certificate-revocation-polling-interval) | Frequency in minutes at which to fetch CRLs. Default is 60 minutes. Valid range is (1,10080). |
+| `show` | Show configuration data for &#x27;certificate-revocation&#x27; |
+
+## `configure authority certificate-revocation backoff-interval`
+
+A delay in seconds to apply between polling different CRL endpoints to avoid excessive concurrent download attempts.
+
+#### Usage
+
+```
+configure authority certificate-revocation backoff-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 5
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-60
+
+## `configure authority certificate-revocation crl-endpoint`
+
+Configure CRL Endpoint
+
+#### Usage
+
+```
+configure authority certificate-revocation crl-endpoint <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | Configure Name |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`delta-uri`](#configure-authority-certificate-revocation-crl-endpoint-delta-uri) | Override the URL to use to fetch a delta CRL. |
+| [`name`](#configure-authority-certificate-revocation-crl-endpoint-name) | Configure Name |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;crl-endpoint&#x27; |
+| [`uri`](#configure-authority-certificate-revocation-crl-endpoint-uri) | Override the URL to use to fetch a CRL. |
+
+## `configure authority certificate-revocation crl-endpoint delta-uri`
+
+Override the URL to use to fetch a delta CRL.
+
+#### Usage
+
+```
+configure authority certificate-revocation crl-endpoint delta-uri [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must start with scheme: `http`  Must contain contain only alphanumeric characters
+Length: 1-18446744073709551615
+
+## `configure authority certificate-revocation crl-endpoint name`
+
+Configure Name
+
+#### Usage
+
+```
+configure authority certificate-revocation crl-endpoint name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
+## `configure authority certificate-revocation crl-endpoint uri`
+
+Override the URL to use to fetch a CRL.
+
+#### Usage
+
+```
+configure authority certificate-revocation crl-endpoint uri [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must start with scheme: http  Must contain contain only alphanumeric characters
+Length: 1-18446744073709551615
+
+## `configure authority certificate-revocation name`
+
+An identifier for the certificate revocation.
+
+#### Usage
+
+```
+configure authority certificate-revocation name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
+## `configure authority certificate-revocation polling-interval`
+
+Frequency in minutes at which to fetch CRLs. Default is 60 minutes. Valid range is 1-10080.
+
+#### Usage
+
+```
+configure authority certificate-revocation polling-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: minutes
+
+Default: 60
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-10080
+
 ## `configure authority cli-messages`
 
 Configure Cli Messages
@@ -1356,20 +1577,20 @@ IP address or FQDN of the conductor
 #### Usage
 
 ```
-configure authority conductor-address [<hostv4>]
+configure authority conductor-address [<host>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| hostv4 | Value to add to this list |
+| host | Value to add to this list |
 
 #### Description
 
-##### hostv4 (union)
+##### host (union)
 
-The host type represents either an IPv4 address or a DNS domain name.
+The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
@@ -1379,7 +1600,24 @@ The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-##### (1) domain-name (string)
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+##### (2) domain-name (string)
 
 The domain-name type represents a DNS domain name.  The
 name SHOULD be fully qualified whenever possible.
@@ -1904,6 +2142,32 @@ Must contain substitution variables:
 For example, `interface-{interface-id}.{router-name}.{authority-name}`.
 Any other characters must be alphanumeric or any of the
 following: - _ .
+
+## `configure authority enhanced-security-key-management`
+
+Use certificate-based security key management.
+
+#### Usage
+
+```
+configure authority enhanced-security-key-management [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority fib-service-match`
 
@@ -2648,19 +2912,13 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union) (required)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-###### (0) ipv4-address (string) (required):
+##### (0) ipv4-address (string) (required)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-###### (1) ipv6-address (string) (required):
+##### (1) ipv6-address (string) (required)
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -2677,7 +2935,7 @@ not allowed.
 
 Must be a valid IPv6 address.
 
-##### (1) domain-name (string) (required)
+##### (2) domain-name (string) (required)
 
 The domain-name type represents a DNS domain name.  The
 name SHOULD be fully qualified whenever possible.
@@ -3038,13 +3296,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-###### (0) ip-address (union) (required)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-###### (0) ipv4-address (string) (required):
+##### (0) ipv4-address (string) (required)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -3493,8 +3745,60 @@ A value from a set of predefined names.
 
 Options:
 
-- paths-as-next-hop:        Generate paths on a node as next-hops
+- paths-as-next-hop:         Generate paths on a node as next-hops
 - paths-as-service-route:    Generate paths on a node as service-route
+
+## `configure authority metrics`
+
+Configuration for metrics collection.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`application-policy-hit-count-tracking`](#configure-authority-metrics-application-policy-hit-count-tracking) | Configure Application Policy Hit Count Tracking |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;metrics&#x27; |
+
+## `configure authority metrics application-policy-hit-count-tracking`
+
+Configure Application Policy Hit Count Tracking
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`enabled`](#configure-authority-metrics-application-policy-hit-count-tracking-enabled) | Enable/disable tracking of policy hit counts for applications |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;application-policy-hit-count-tracking&#x27; |
+
+## `configure authority metrics application-policy-hit-count-tracking enabled`
+
+Enable/disable tracking of policy hit counts for applications
+
+#### Usage
+
+```
+configure authority metrics application-policy-hit-count-tracking enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority metrics-profile`
 
@@ -4272,13 +4576,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union) (required)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-###### (0) ipv4-address (string) (required):
+##### (0) ipv4-address (string) (required)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -4389,6 +4687,7 @@ configure authority radius-server ocsp [<ocsp>]
 Whether to check the revocation status of a server&#x27;s certificate.
 
 Options:
+
 - strict:    Require a successful OCSP check in order to establish a connection.
 - off:       Do not check revocation status of the server certificate.
 
@@ -4475,11 +4774,11 @@ configure authority radius-server secret [<string>]
 
 #### Description
 
-##### string (required)
+##### string
 
 A text value.
 
-Length: 1-16
+Length: 1-255
 
 ## `configure authority radius-server server-name`
 
@@ -4552,6 +4851,10 @@ configure authority rekey-interval [<union>]
 Units: hours
 
 Default: never
+
+:::warning
+&amp;#x27;rekey-interval&amp;#x27; is deprecated and will be removed in a future software version
+:::
 
 ##### union
 
@@ -4708,6 +5011,7 @@ configure authority router <name>
 | [`administrative-group`](#configure-authority-router-administrative-group) | An identifier that associates this router with an administrative group. |
 | [`application-identification`](#configure-authority-router-application-identification) | Configure Application Identification |
 | [`bfd`](#configure-authority-router-bfd) | BFD parameters for sessions between nodes within the router. |
+| [`certificate-revocations`](#configure-authority-router-certificate-revocations) | Configure Certificate Revocations |
 | `clone` | Clone a list item |
 | [`conductor-address`](#configure-authority-router-conductor-address) | IP address or FQDN of the conductor |
 | `delete` | Delete configuration data |
@@ -4723,6 +5027,7 @@ configure authority router <name>
 | [`location`](#configure-authority-router-location) | A descriptive location for this SSR. |
 | [`location-coordinates`](#configure-authority-router-location-coordinates) | The geolocation of this router in ISO 6709 format. Some examples: (1) Degrees only: +50.20361-074.00417/ (2) Degrees and minutes: +5012.22-07400.25/ or (3) Degrees, minutes, and seconds: +501213.1-0740015.1/ |
 | [`maintenance-mode`](#configure-authority-router-maintenance-mode) | When enabled, the router will be in maintenance mode and alarms related to this router will be shelved. |
+| [`management-proxy`](#configure-authority-router-management-proxy) | Settings to enable forwarding of SSR management traffic to a proxy |
 | [`management-service-generation`](#configure-authority-router-management-service-generation) | Configure Management Service Generation |
 | [`max-inter-node-way-points`](#configure-authority-router-max-inter-node-way-points) | Maximum number of way points to be allocated on inter-node path. |
 | [`name`](#configure-authority-router-name) | An identifier for the router. |
@@ -4730,7 +5035,8 @@ configure authority router <name>
 | [`node`](#configure-authority-router-node) | List of one or two SSR software instances, comprising an SSR. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`path-mtu-discovery`](#configure-authority-router-path-mtu-discovery) | Automatic path MTU discovery between nodes within the router. |
-| [`peer`](#configure-authority-router-peer) | Defines the properties associated with peer SSRs. The peer may be another router in the same authority or a router in a different authority |
+| [`peer`](#configure-authority-router-peer) | Defines the properties associated with peer SSR routers. The peer may be another router in the same authority or a router in a different authority |
+| [`peering-common-name`](#configure-authority-router-peering-common-name) | The identifier to use with enhanced-security-key-management. |
 | [`rate-limit-policy`](#configure-authority-router-rate-limit-policy) | Configuration for rate limiting policy for all associated service traffic across all interfaces on a given node, when configured within a service-class. |
 | [`reachability-profile`](#configure-authority-router-reachability-profile) | Defines a traffic profile for reachability-detection enforcement |
 | [`redundancy-group`](#configure-authority-router-redundancy-group) | A group of redundant interfaces which will fail over together if one goes down for any reason. |
@@ -5694,6 +6000,28 @@ Options:
 - enabled:     BFD is enabled on all nodes of this router.
 - disabled:    BFD is disabled on all nodes of this router.
 
+## `configure authority router certificate-revocations`
+
+Configure Certificate Revocations
+
+#### Usage
+
+```
+configure authority router certificate-revocations [<certificate-revocation-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| certificate-revocation-ref | The value to set for this field |
+
+#### Description
+
+##### certificate-revocation-ref (leafref)
+
+This type is used by other entities that need to reference configured client revocation.
+
 ## `configure authority router conductor-address`
 
 IP address or FQDN of the conductor
@@ -5701,20 +6029,20 @@ IP address or FQDN of the conductor
 #### Usage
 
 ```
-configure authority router conductor-address [<hostv4>]
+configure authority router conductor-address [<host>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| hostv4 | Value to add to this list |
+| host | Value to add to this list |
 
 #### Description
 
-##### hostv4 (union)
+##### host (union)
 
-The host type represents either an IPv4 address or a DNS domain name.
+The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
@@ -5724,7 +6052,24 @@ The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-##### (1) domain-name (string)
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+
+##### (2) domain-name (string)
 
 The domain-name type represents a DNS domain name.  The
 name SHOULD be fully qualified whenever possible.
@@ -6680,6 +7025,125 @@ A true or false value.
 
 Options: true or false
 
+## `configure authority router management-proxy`
+
+Settings to enable forwarding of SSR management traffic to a proxy
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`mode`](#configure-authority-router-management-proxy-mode) | Configure Mode |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`proxy`](#configure-authority-router-management-proxy-proxy) | Configure Proxy |
+| `show` | Show configuration data for &#x27;management-proxy&#x27; |
+
+## `configure authority router management-proxy mode`
+
+Configure Mode
+
+#### Usage
+
+```
+configure authority router management-proxy mode [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- learned:
+- disabled:
+- static:
+
+## `configure authority router management-proxy proxy`
+
+Configure Proxy
+
+#### Usage
+
+```
+configure authority router management-proxy proxy <address>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| address | Configure Address |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`address`](#configure-authority-router-management-proxy-proxy-address) | Configure Address |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`port`](#configure-authority-router-management-proxy-proxy-port) | Configure Port |
+| `show` | Show configuration data for &#x27;proxy&#x27; |
+
+## `configure authority router management-proxy proxy address`
+
+Configure Address
+
+#### Usage
+
+```
+configure authority router management-proxy proxy address [<ipv4-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ipv4-address | The value to set for this field |
+
+#### Description
+
+##### ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+## `configure authority router management-proxy proxy port`
+
+Configure Port
+
+#### Usage
+
+```
+configure authority router management-proxy proxy port [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16 (required)
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
+
 ## `configure authority router management-service-generation`
 
 Configure Management Service Generation
@@ -6793,7 +7257,7 @@ configure authority router max-inter-node-way-points [<uint32>]
 Default: 50000
 
 :::warning
-A restart is required if max-inter-node-way-points is created, modified, or deleted
+a restart is required if max-inter-node-way-points is created, modified, or deleted
 :::
 
 ##### uint32
@@ -6821,7 +7285,7 @@ configure authority router name [<reserved-name-id>]
 #### Description
 
 :::warning
-A restart is required if name is created or deleted
+a restart is required if name is created or deleted
 :::
 
 ##### reserved-name-id (string)
@@ -6852,6 +7316,7 @@ configure authority router nat-pool <name>
 | command | description |
 | ------- | ----------- |
 | [`address-pool`](#configure-authority-router-nat-pool-address-pool) | Defines the NAT prefix and ports in the pool. |
+| [`applies-to-local-breakout`](#configure-authority-router-nat-pool-applies-to-local-breakout) | Whether the nat pool applies to local breakout sessions. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | `move` | Move list items |
@@ -6914,7 +7379,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-###### (0) ipv4-prefix (string)
+##### (0) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -6928,7 +7393,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-###### (1) ipv6-prefix (string)
+##### (1) ipv6-prefix (string)
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -7004,6 +7469,32 @@ configure authority router nat-pool address-pool tenant-name [<tenant-ref>]
 
 This type is used by other entities that need to reference configured tenants.
 
+## `configure authority router nat-pool applies-to-local-breakout`
+
+Whether the nat pool applies to local breakout sessions.
+
+#### Usage
+
+```
+configure authority router nat-pool applies-to-local-breakout [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 ## `configure authority router nat-pool name`
 
 An identifier for the NAT Pool.
@@ -7059,7 +7550,7 @@ configure authority router node <name>
 | [`enabled`](#configure-authority-router-node-enabled) | Enable/disable the whole node. |
 | [`forwarding-core-count`](#configure-authority-router-node-forwarding-core-count) | The number of CPU cores to dedicate to traffic forwarding when using &#x27;manual&#x27; forwarding core mode. |
 | [`forwarding-core-mode`](#configure-authority-router-node-forwarding-core-mode) | The method by which the number of CPU cores dedicated to traffic forwarding should be determined. |
-| [`idp`](#configure-authority-router-node-idp) | Configure IDP |
+| [`idp`](#configure-authority-router-node-idp) | Configure Idp |
 | [`ipfix`](#configure-authority-router-node-ipfix) | Node specific IPFIX configuration |
 | [`location`](#configure-authority-router-node-location) | A text description of the node&#x27;s physical location. |
 | [`loopback-address`](#configure-authority-router-node-loopback-address) | The loopback IP address to use for management traffic originating on this node when routed via SVR. |
@@ -7070,15 +7561,13 @@ configure authority router node <name>
 | [`radius`](#configure-authority-router-node-radius) | Radius authentication parameters for this node. |
 | [`reachability-detection`](#configure-authority-router-node-reachability-detection) | Layer 2 reachability detection |
 | [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the SSR system. |
-| [`serial-console-enabled`](#configure-authority-router-node-serial-console-enabled) | Enable serial console. |
 | [`session-processor-count`](#configure-authority-router-node-session-processor-count) | The number of threads to use for session processing when using &#x27;manual&#x27; session-processor mode. |
 | [`session-processor-mode`](#configure-authority-router-node-session-processor-mode) | The method by which the number of threads used for session processing should be determined. |
 | [`session-setup-scaling`](#configure-authority-router-node-session-setup-scaling) | Whether or not to enable session setup scaling. |
 | `show` | Show configuration data for &#x27;node&#x27; |
-| [`ssh-keepalive`](#configure-authority-router-node-ssh-keepalive) | Configure SSH Keepalive |
-| [`ssh-settings`](#configure-authority-router-node-ssh-settings) | Configure SSH Settings |
+| [`ssh-keepalive`](#configure-authority-router-node-ssh-keepalive) | Configure Ssh Keepalive |
+| [`ssh-settings`](#configure-authority-router-node-ssh-settings) | Configure Ssh Settings |
 | [`top-sessions`](#configure-authority-router-node-top-sessions) | Views of top sessions by an ordering criteria. |
-| [`usb-mass-storage-enabled`](#configure-authority-router-node-usb-mass-storage-enabled) | Allow mounting of USB mass-storage devices. |
 
 ## `configure authority router node anti-virus`
 
@@ -7250,6 +7739,7 @@ configure authority router node device-interface <name>
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-description) | A description of the device-interface. |
 | [`enabled`](#configure-authority-router-node-device-interface-enabled) | Whether this interface is administratively enabled. |
+| [`fec-mode`](#configure-authority-router-node-device-interface-fec-mode) | Forward Error Correction (FEC) mode for the Ethernet link |
 | [`forwarding`](#configure-authority-router-node-device-interface-forwarding) | Whether this interface is used for forwarding traffic. |
 | [`interface-name`](#configure-authority-router-node-device-interface-interface-name) | The interface name associated with the OS network device. |
 | [`link-settings`](#configure-authority-router-node-device-interface-link-settings) | Ethernet link settings on the interface |
@@ -7466,6 +7956,37 @@ Default: true
 A true or false value.
 
 Options: true or false
+
+## `configure authority router node device-interface fec-mode`
+
+Forward Error Correction (FEC) mode for the Ethernet link
+
+#### Usage
+
+```
+configure authority router node device-interface fec-mode [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: auto
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- auto:     Enable automatic FEC mode negotiation
+- baser:    Enable BASE-R FEC mode
+- rs:       Enable Reed-Solomon FEC mode
+- none:     Disable FEC
 
 ## `configure authority router node device-interface forwarding`
 
@@ -7974,6 +8495,7 @@ configure authority router node device-interface network-interface <name>
 | [`dscp-steering`](#configure-authority-router-node-device-interface-network-interface-dscp-steering) | Configure Dscp Steering |
 | [`dynamic-source-nat`](#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat) | Defines the prefixes that need to be dynamically source natted for packets ingressing this interface. |
 | [`egress-source-nat-pool`](#configure-authority-router-node-device-interface-network-interface-egress-source-nat-pool) | Indicates whether source address and port translation (NAPT) is performed for flows egressing the interface to the final destination. |
+| [`enable-proxy-learning`](#configure-authority-router-node-device-interface-network-interface-enable-proxy-learning) | Enable/Disable Proxy Learning |
 | [`enforced-mss`](#configure-authority-router-node-device-interface-network-interface-enforced-mss) | Maximum allowed value for maximum segment size (MSS) on this interface. |
 | [`ethernet-over-svr`](#configure-authority-router-node-device-interface-network-interface-ethernet-over-svr) | L2 Bridge this network interface is assigned to. |
 | [`filter-rule`](#configure-authority-router-node-device-interface-network-interface-filter-rule) | A rule for dropping packets. |
@@ -8014,7 +8536,7 @@ configure authority router node device-interface network-interface <name>
 | [`tunnel`](#configure-authority-router-node-device-interface-network-interface-tunnel) | Configure Tunnel |
 | [`type`](#configure-authority-router-node-device-interface-network-interface-type) | Type of network that the interface is connected to. Type is fabric for inter-node traffic, external for regular traffic, and shared for both fabric and external. |
 | [`vlan`](#configure-authority-router-node-device-interface-network-interface-vlan) | The VLAN id for the interface (0 for no VLAN, otherwise 1-4094). |
-| [`vrrp`](#configure-authority-router-node-device-interface-network-interface-vrrp) | Configure VRRP |
+| [`vrrp`](#configure-authority-router-node-device-interface-network-interface-vrrp) | Configure Vrrp |
 
 ## `configure authority router node device-interface network-interface address`
 
@@ -8156,6 +8678,7 @@ configure authority router node device-interface network-interface address host-
 | [`permission`](#configure-authority-router-node-device-interface-network-interface-address-host-service-access-policy-permission) | Whether or not to allow access to the service. |
 | `show` | Show configuration data for &#x27;access-policy&#x27; |
 | [`source`](#configure-authority-router-node-device-interface-network-interface-address-host-service-access-policy-source) | The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service |
+| [`syslog`](#configure-authority-router-node-device-interface-network-interface-address-host-service-access-policy-syslog) | Configure Syslog |
 
 ## `configure authority router node device-interface network-interface address host-service access-policy permission`
 
@@ -8210,13 +8733,7 @@ A source address prefix, QSN, service-group or combination of tenant-name and pr
 
 Must be one of the following types:
 
-##### (0) ip-prefix (union)
-
-The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-###### (0) ipv4-prefix (string):
+##### (0) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -8277,6 +8794,44 @@ A string identifier for a tenant prefix. Consists of a valid tenant name, follow
 
 Must contain a valid tenant name, followed by @  and a valid IP Address.
 Length: 0-280
+
+## `configure authority router node device-interface network-interface address host-service access-policy syslog`
+
+Configure Syslog
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;syslog&#x27; |
+| [`syslog-policy`](#configure-authority-router-node-device-interface-network-interface-address-host-service-access-policy-syslog-syslog-policy) | Syslog policy to be applied to the access policy. |
+
+## `configure authority router node device-interface network-interface address host-service access-policy syslog syslog-policy`
+
+Syslog policy to be applied to the access policy.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service access-policy syslog syslog-policy [<syslog-policy-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| syslog-policy-name | The value to set for this field |
+
+#### Description
+
+##### syslog-policy-name (string)
+
+This type is used by other entities that need to reference configured syslog profiles.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-15
 
 ## `configure authority router node device-interface network-interface address host-service address-pool`
 
@@ -9960,6 +10515,7 @@ Default: singular
 A value from a set of predefined names.
 
 Options:
+
 - singular
 - array
 
@@ -10229,8 +10785,7 @@ Options:
 - boolean
 - ipv4-address
 - int32
-- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
-
+- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information enterprise-number`
 
@@ -12543,13 +13098,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-###### (0) ipv4-address (string):
+##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -12682,12 +13231,6 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -12772,7 +13315,7 @@ configure authority router node device-interface network-interface adjacency max
 Default: 50000
 
 :::warning
-A restart is required if max-way-points is created, modified, or deleted
+a restart is required if max-way-points is created, modified, or deleted
 :::
 
 ##### uint32
@@ -14012,11 +14555,38 @@ configure authority router node device-interface network-interface bidirectional
 
 | command | description |
 | ------- | ----------- |
+| [`applies-to-local-breakout`](#configure-authority-router-node-device-interface-network-interface-bidirectional-nat-applies-to-local-breakout) | Whether the bidirectional nat applies to local breakout sessions. |
 | `delete` | Delete configuration data |
 | [`local-ip`](#configure-authority-router-node-device-interface-network-interface-bidirectional-nat-local-ip) | For packets ingressing this interface, local IP will be source natted to remote IP. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`remote-ip`](#configure-authority-router-node-device-interface-network-interface-bidirectional-nat-remote-ip) | For packets egressing this interface, the remote IP will be destination natted to local IP. |
 | `show` | Show configuration data for &#x27;bidirectional-nat&#x27; |
+
+## `configure authority router node device-interface network-interface bidirectional-nat applies-to-local-breakout`
+
+Whether the bidirectional nat applies to local breakout sessions.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface bidirectional-nat applies-to-local-breakout [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node device-interface network-interface bidirectional-nat local-ip`
 
@@ -14623,11 +15193,38 @@ configure authority router node device-interface network-interface dynamic-sourc
 
 | command | description |
 | ------- | ----------- |
+| [`applies-to-local-breakout`](#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-applies-to-local-breakout) | Whether the dynamic source nat applies to local breakout sessions. |
 | `delete` | Delete configuration data |
 | [`local-ip`](#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-local-ip) | For packets ingressing this interface, the IP which will be source natted to remote-ip IP. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`remote-ip`](#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-remote-ip) | For packets ingressing this interface, the IP to which the local-ip IP will be source natted. |
 | `show` | Show configuration data for &#x27;dynamic-source-nat&#x27; |
+
+## `configure authority router node device-interface network-interface dynamic-source-nat applies-to-local-breakout`
+
+Whether the dynamic source nat applies to local breakout sessions.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface dynamic-source-nat applies-to-local-breakout [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node device-interface network-interface dynamic-source-nat local-ip`
 
@@ -14653,7 +15250,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-###### (0) ipv4-prefix (string)
+##### (0) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -14667,7 +15264,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-###### (1) ipv6-prefix (string)
+##### (1) ipv6-prefix (string)
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -14716,7 +15313,7 @@ The ip-prefix type represents an IP prefix and is IP version neutral. The format
 
 Must be one of the following types:
 
-###### (0) ipv4-prefix (string) (required)
+##### (0) ipv4-prefix (string) (required)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -14730,7 +15327,7 @@ The canonical format of an IPv4 prefix has all bits of
 the IPv4 address set to zero that are not part of the
 IPv4 prefix.
 
-###### (1) ipv6-prefix (string) (required)
+##### (1) ipv6-prefix (string) (required)
 
 The ipv6-prefix type represents an IPv6 address prefix.
 The prefix length is given by the number following the
@@ -14776,6 +15373,32 @@ configure authority router node device-interface network-interface egress-source
 ##### nat-pool-ref (leafref)
 
 This type is used by other entities that need to reference configured NAT pools.
+
+## `configure authority router node device-interface network-interface enable-proxy-learning`
+
+Enable/Disable Proxy Learning
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface enable-proxy-learning [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node device-interface network-interface enforced-mss`
 
@@ -15232,6 +15855,7 @@ configure authority router node device-interface network-interface host-service 
 | [`permission`](#configure-authority-router-node-device-interface-network-interface-host-service-access-policy-permission) | Whether or not to allow access to the service. |
 | `show` | Show configuration data for &#x27;access-policy&#x27; |
 | [`source`](#configure-authority-router-node-device-interface-network-interface-host-service-access-policy-source) | The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service |
+| [`syslog`](#configure-authority-router-node-device-interface-network-interface-host-service-access-policy-syslog) | Configure Syslog |
 
 ## `configure authority router node device-interface network-interface host-service access-policy permission`
 
@@ -15283,12 +15907,6 @@ configure authority router node device-interface network-interface host-service 
 ##### source-spec (union)
 
 A source address prefix, QSN, service-group or combination of tenant-name and prefix.
-
-Must be one of the following types:
-
-##### (0) ip-prefix (union)
-
-The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
 
 Must be one of the following types:
 
@@ -15353,6 +15971,44 @@ A string identifier for a tenant prefix. Consists of a valid tenant name, follow
 
 Must contain a valid tenant name, followed by @  and a valid IP Address.
 Length: 0-280
+
+## `configure authority router node device-interface network-interface host-service access-policy syslog`
+
+Configure Syslog
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;syslog&#x27; |
+| [`syslog-policy`](#configure-authority-router-node-device-interface-network-interface-host-service-access-policy-syslog-syslog-policy) | Syslog policy to be applied to the access policy. |
+
+## `configure authority router node device-interface network-interface host-service access-policy syslog syslog-policy`
+
+Syslog policy to be applied to the access policy.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface host-service access-policy syslog syslog-policy [<syslog-policy-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| syslog-policy-name | The value to set for this field |
+
+#### Description
+
+##### syslog-policy-name (string)
+
+This type is used by other entities that need to reference configured syslog profiles.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-15
 
 ## `configure authority router node device-interface network-interface host-service description`
 
@@ -16497,12 +17153,6 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -16587,7 +17237,7 @@ configure authority router node device-interface network-interface neighborhood 
 Default: 50000
 
 :::warning
-A restart is required if max-way-points is created, modified, or deleted
+a restart is required if max-way-points is created, modified, or deleted
 :::
 
 ##### uint32
@@ -17202,7 +17852,7 @@ Update frequency and timeliness of the STEP peer path advertisements for this ne
 
 ## `configure authority router node device-interface network-interface neighborhood step-peer-path-advertisement sla-metrics`
 
-Configure SLA Metrics
+Configure Sla Metrics
 
 ##### Subcommands
 
@@ -18377,7 +19027,6 @@ configure authority router node device-interface network-interface tenant-prefix
 
 This type is used by other entities that need to reference configured tenants.
 
-
 ## `configure authority router node device-interface network-interface traffic-engineering`
 
 Configure Traffic Engineering
@@ -18503,12 +19152,6 @@ configure authority router node device-interface network-interface tunnel destin
 ##### host (union) (required)
 
 The host type represents either an IP address or a DNS domain name.
-
-Must be one of the following types:
-
-##### (0) ip-address (union) (required)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
 Must be one of the following types:
 
@@ -18758,7 +19401,7 @@ Range: 0-4094
 
 ## `configure authority router node device-interface network-interface vrrp`
 
-Configure VRRP
+Configure Vrrp
 
 ##### Subcommands
 
@@ -19698,7 +20341,7 @@ configure authority router node forwarding-core-count [<uint8>]
 #### Description
 
 :::warning
-A restart is required if forwarding-core-count is created, modified, or deleted
+a restart is required if forwarding-core-count is created, modified, or deleted
 :::
 
 ##### uint8
@@ -19728,7 +20371,7 @@ configure authority router node forwarding-core-mode [<enumeration>]
 Default: automatic
 
 :::warning
-A restart is required if forwarding-core-mode is created, modified, or deleted
+a restart is required if forwarding-core-mode is created, modified, or deleted
 :::
 
 ##### enumeration
@@ -19801,6 +20444,7 @@ Options:
 - 20CPU-48G:    Set 20CPU-40G as platform size
 - 20CPU-64G:    Set 20CPU-64G as platform size
 - 32CPU-64G:    Set 32CPU-64G as platform size
+
 ## `configure authority router node ipfix`
 
 Node specific IPFIX configuration
@@ -19928,7 +20572,7 @@ configure authority router node name [<reserved-name-id>]
 #### Description
 
 :::warning
-A restart is required if name is created or deleted
+a restart is required if name is created or deleted
 :::
 
 ##### reserved-name-id (string)
@@ -20093,12 +20737,6 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -20232,12 +20870,6 @@ configure authority router node port-forwarding server-address [<host>]
 ##### host (union)
 
 The host type represents either an IP address or a DNS domain name.
-
-Must be one of the following types:
-
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
 Must be one of the following types:
 
@@ -20375,7 +21007,7 @@ configure authority router node power-saver [<boolean>]
 Default: false
 
 :::warning
-A restart is required if power-saver is created, modified, or deleted
+a restart is required if power-saver is created, modified, or deleted
 :::
 
 ##### boolean
@@ -20422,6 +21054,7 @@ configure authority router node radius client-certificate-name [<client-certific
 ##### client-certificate-ref (leafref)
 
 This type is used by other entities that need to reference configured client certificate.
+
 ## `configure authority router node radius enable-message-authenticator`
 
 Enable enforcement of Message-Authenticator for all requests and responses. WARNING: It is considered unsafe to disable this enforcement and can expose the system to authentication attacks.
@@ -20717,7 +21350,7 @@ configure authority router node role [<node-role>]
 #### Description
 
 :::warning
-A restart is required if role is created, modified, or deleted
+a restart is required if role is created, modified, or deleted
 :::
 
 ##### node-role (enumeration) (required)
@@ -20730,36 +21363,6 @@ Options:
 - slice:        A Software Line-Card Engine node.
 - combo:        A combined Control and Slice.
 - conductor:    A remote management system.
-
-## `configure authority router node serial-console-enabled`
-
-Enable serial console.
-
-#### Usage
-
-```
-configure authority router node serial-console-enabled [<boolean>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| boolean | The value to set for this field |
-
-#### Description
-
-Default: true
-
-:::warning
-a restart is required if serial-console-enabled is created, modified, or deleted
-:::
-
-##### boolean
-
-A true or false value.
-
-Options: true or false
 
 ## `configure authority router node session-processor-count`
 
@@ -20780,7 +21383,7 @@ configure authority router node session-processor-count [<uint8>]
 #### Description
 
 :::warning
-A restart is required if session-processor-count is created, modified, or deleted
+a restart is required if session-processor-count is created, modified, or deleted
 :::
 
 ##### uint8
@@ -20810,7 +21413,7 @@ configure authority router node session-processor-mode [<enumeration>]
 Default: automatic
 
 :::warning
-A restart is required if session-processor-mode is created, modified, or deleted
+a restart is required if session-processor-mode is created, modified, or deleted
 :::
 
 ##### enumeration
@@ -20843,7 +21446,7 @@ configure authority router node session-setup-scaling [<boolean>]
 Default: true
 
 :::warning
-A restart is required if session-setup-scaling is created, modified, or deleted
+a restart is required if session-setup-scaling is created, modified, or deleted
 :::
 
 ##### boolean
@@ -20854,7 +21457,7 @@ Options: true or false
 
 ## `configure authority router node ssh-keepalive`
 
-Configure SSH Keepalive
+Configure Ssh Keepalive
 
 ##### Subcommands
 
@@ -20970,7 +21573,7 @@ configure authority router node ssh-keepalive inter-conductor-router-server inte
 Default: 5
 
 :::warning
-A restart is required if interval is created, modified, or deleted
+a restart is required if interval is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-interval (uint8)
@@ -21000,7 +21603,7 @@ configure authority router node ssh-keepalive inter-conductor-router-server max-
 Default: 4
 
 :::warning
-A restart is required if max-attempts is created, modified, or deleted
+a restart is required if max-attempts is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-max-attempts (uint8)
@@ -21044,7 +21647,7 @@ configure authority router node ssh-keepalive inter-node interval [<ssh-keepaliv
 Default: 1
 
 :::warning
-A restart is required if interval is created, modified, or deleted
+a restart is required if interval is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-interval (uint8)
@@ -21074,7 +21677,7 @@ configure authority router node ssh-keepalive inter-node max-attempts [<ssh-keep
 Default: 9
 
 :::warning
-A restart is required if max-attempts is created, modified, or deleted
+a restart is required if max-attempts is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-max-attempts (uint8)
@@ -21118,7 +21721,7 @@ configure authority router node ssh-keepalive inter-node-server interval [<ssh-k
 Default: 1
 
 :::warning
-A restart is required if interval is created, modified, or deleted
+a restart is required if interval is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-interval (uint8)
@@ -21148,7 +21751,7 @@ configure authority router node ssh-keepalive inter-node-server max-attempts [<s
 Default: 9
 
 :::warning
-A restart is required if max-attempts is created, modified, or deleted
+a restart is required if max-attempts is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-max-attempts (uint8)
@@ -21192,7 +21795,7 @@ configure authority router node ssh-keepalive inter-router interval [<ssh-keepal
 Default: 5
 
 :::warning
-A restart is required if interval is created, modified, or deleted
+a restart is required if interval is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-interval (uint8)
@@ -21222,7 +21825,7 @@ configure authority router node ssh-keepalive inter-router max-attempts [<ssh-ke
 Default: 4
 
 :::warning
-A restart is required if max-attempts is created, modified, or deleted
+a restart is required if max-attempts is created, modified, or deleted
 :::
 
 ##### ssh-keepalive-max-attempts (uint8)
@@ -21233,7 +21836,7 @@ Range: 1-20
 
 ## `configure authority router node ssh-settings`
 
-Configure SSH Settings
+Configure Ssh Settings
 
 ##### Subcommands
 
@@ -21279,7 +21882,7 @@ configure authority router node ssh-settings inter-node host-key-checking [<ssh-
 Default: no
 
 :::warning
-A restart is required if host-key-checking is created, modified, or deleted
+a restart is required if host-key-checking is created, modified, or deleted
 :::
 
 ##### ssh-host-key-checking (enumeration)
@@ -21291,7 +21894,6 @@ Options:
 - no:            Do not check host keys.
 - yes:           Check host keys.
 - accept-new:    Accept new host keys.
-
 
 ## `configure authority router node ssh-settings inter-router`
 
@@ -21327,7 +21929,7 @@ configure authority router node ssh-settings inter-router host-key-checking [<ss
 Default: no
 
 :::warning
-A restart is required if host-key-checking is created, modified, or deleted
+a restart is required if host-key-checking is created, modified, or deleted
 :::
 
 ##### ssh-host-key-checking (enumeration)
@@ -21712,36 +22314,6 @@ configure authority router node top-sessions bandwidth tstamp [<timestamp>]
 
 Number of seconds since UNIX epoch.
 
-## `configure authority router node usb-mass-storage-enabled`
-
-Allow mounting of USB mass-storage devices.
-
-#### Usage
-
-```
-configure authority router node usb-mass-storage-enabled [<boolean>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| boolean | The value to set for this field |
-
-#### Description
-
-Default: true
-
-:::warning
-a restart is required if usb-mass-storage-enabled is created, modified, or deleted
-:::
-
-##### boolean
-
-A true or false value.
-
-Options: true or false
-
 ## `configure authority router path-mtu-discovery`
 
 Automatic path MTU discovery between nodes within the router.
@@ -21812,7 +22384,7 @@ Range: 1-86400
 
 ## `configure authority router peer`
 
-Defines the properties associated with peer SSRs. The peer may be another router in the same authority or a router in a different authority
+Defines the properties associated with peer SSR routers. The peer may be another router in the same authority or a router in a different authority
 
 #### Usage
 
@@ -21832,11 +22404,14 @@ configure authority router peer <name>
 | ------- | ----------- |
 | [`authority-name`](#configure-authority-router-peer-authority-name) | Name of the authority of the peer router. |
 | [`bfd`](#configure-authority-router-peer-bfd) | BFD parameters for the peer router (deprecated). This is being replaced by BFD parameters in the neighborhood and adjacency in network-interfaces. |
+| [`client-certificate-name`](#configure-authority-router-peer-client-certificate-name) | The name of the certificate to use for authentication for this peer router, if empty or not configured, the default certificate will be used |
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-peer-description) | A description of the peer router. |
 | [`generated`](#configure-authority-router-peer-generated) | Indicates whether or not the Peer was automatically generated as a result of routers existing in the same neighborhood. |
 | [`name`](#configure-authority-router-peer-name) | An arbitrary name that represents the properties associated with the peer router. Typically this will be the name of the authority or the value of the name field in the peer&#x27;s router configuration. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`peering-common-name`](#configure-authority-router-peer-peering-common-name) | The identifier to use with enhanced-security-key-management. |
+| [`router-client-certificate-name`](#configure-authority-router-peer-router-client-certificate-name) | The name of the certificate to use for authentication for this peer router, if empty or not configured, the default certificate will be used |
 | [`router-name`](#configure-authority-router-peer-router-name) | Name of the peer router. |
 | `show` | Show configuration data for &#x27;peer&#x27; |
 
@@ -22243,6 +22818,28 @@ Options:
 - enabled:     BFD is enabled on all nodes of this router.
 - disabled:    BFD is disabled on all nodes of this router.
 
+## `configure authority router peer client-certificate-name`
+
+The name of the certificate to use for authentication for this peer router, if empty or not configured, the default certificate will be used
+
+#### Usage
+
+```
+configure authority router peer client-certificate-name [<client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate.
+
 ## `configure authority router peer description`
 
 A description of the peer router.
@@ -22315,6 +22912,54 @@ Must contain only alphanumeric characters or any of the following: - _ .
 (e.g., MyFirst-SSR-Router).
 Length: 0-253
 
+## `configure authority router peer peering-common-name`
+
+The identifier to use with enhanced-security-key-management.
+
+#### Usage
+
+```
+configure authority router peer peering-common-name [<peer-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| peer-name | The value to set for this field |
+
+#### Description
+
+##### peer-name (string)
+
+A string identifier for a peer, which uses alphanumerics, underscores, dots, or dashes, and cannot exceed 253 characters.
+
+Must contain only alphanumeric characters or any of the following: - _ .
+(e.g., MyFirst-SSR-Router).
+Length: 0-253
+
+## `configure authority router peer router-client-certificate-name`
+
+The name of the certificate to use for authentication for this peer router, if empty or not configured, the default certificate will be used
+
+#### Usage
+
+```
+configure authority router peer router-client-certificate-name [<router-client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### router-client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate for a specific router.
+
 ## `configure authority router peer router-name`
 
 Name of the peer router.
@@ -22339,6 +22984,32 @@ A text value.
 
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
+
+## `configure authority router peering-common-name`
+
+The identifier to use with enhanced-security-key-management.
+
+#### Usage
+
+```
+configure authority router peering-common-name [<peer-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| peer-name | The value to set for this field |
+
+#### Description
+
+##### peer-name (string)
+
+A string identifier for a peer, which uses alphanumerics, underscores, dots, or dashes, and cannot exceed 253 characters.
+
+Must contain only alphanumeric characters or any of the following: - _ .
+(e.g., MyFirst-SSR-Router).
+Length: 0-253
 
 ## `configure authority router rate-limit-policy`
 
@@ -23232,14 +23903,17 @@ configure authority router routing <type>
 | [`igmp`](#configure-authority-router-routing-igmp) | IGMP configuration |
 | [`interface`](#configure-authority-router-routing-interface) | Internal loopback interface used for routing protocols |
 | [`mist-events`](#configure-authority-router-routing-mist-events) | MIST Event Configuration. |
+| [`mld`](#configure-authority-router-routing-mld) | MLD configuration |
 | [`msdp`](#configure-authority-router-routing-msdp) | MSDP configuration |
 | [`ospf`](#configure-authority-router-routing-ospf) | OSPF instance configuration |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pim`](#configure-authority-router-routing-pim) | PIM configuration |
+| [`pimv6`](#configure-authority-router-routing-pimv6) | PIMv6 configuration |
 | [`rib-policy`](#configure-authority-router-routing-rib-policy) | List of protocol specific RIB policies |
+| [`router-id`](#configure-authority-router-routing-router-id) | Router ID - 32-bit number in the form of a dotted quad. Some protocols use this parameter for identifying a router to its neighbors. |
 | [`routing-protocol`](#configure-authority-router-routing-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-service-admin-distance) | Administrative distance for routes generated from services. |
-| [`service-metric-use-lsa`](#configure-authority-router-routing-service-metric-use-sla) | Consider peer path SLA in metric of routes generated from services. |
+| [`service-metric-use-sla`](#configure-authority-router-routing-service-metric-use-sla) | Consider peer path SLA in metric of routes generated from services. |
 | `show` | Show configuration data for &#x27;routing&#x27; |
 | [`static-route`](#configure-authority-router-routing-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB). |
 | [`type`](#configure-authority-router-routing-type) | The type of the routing instance. |
@@ -23907,7 +24581,7 @@ configure authority router routing igmp interface <node> <interface>
 | [`node`](#configure-authority-router-routing-igmp-interface-node) | Interface node name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;interface&#x27; |
-| [`source-address-prefix-list`](#configure-authority-router-routing-igmp-interface-source-address-prefix-list) | Configure a prefix list of source-addresses from which IGMP messages will be blocked. |
+| [`source-address-prefix-list`](#configure-authority-router-routing-igmp-interface-source-address-prefix-list) | Policy to restrict source addresses from IGMP messages |
 | [`version`](#configure-authority-router-routing-igmp-interface-version) | IGMP Version |
 
 ## `configure authority router routing igmp interface interface`
@@ -24030,17 +24704,24 @@ A reference to an existing value in the instance data.
 
 ## `configure authority router routing igmp interface source-address-prefix-list`
 
-Prefix list of source-addresses from which IGMP messages will be permitted. All other addresses will be blocked.
+Policy to restrict source addresses from IGMP messages
 
 #### Usage
 
 ```
-configure authority router routing igmp interface source-address-prefix-list <list name>
+configure authority router routing igmp interface source-address-prefix-list [<filter-ref>]
 ```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| filter-ref | The value to set for this field |
 
 #### Description
 
 Configure a prefix list of source-addresses from which IGMP messages will be permitted. The prefix list is then added to the IGMP configuration. If no `source-address-prefix-list` is provided, then IGMP messages are accepted from all addresses.
+
 
 ## `configure authority router routing igmp interface version`
 
@@ -24245,6 +24926,194 @@ Default: false
 A true or false value.
 
 Options: true or false
+
+## `configure authority router routing mld`
+
+MLD configuration
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`interface`](#configure-authority-router-routing-mld-interface) | List of MLD interfaces |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;mld&#x27; |
+
+## `configure authority router routing mld interface`
+
+List of MLD interfaces
+
+#### Usage
+
+```
+configure authority router routing mld interface <node> <interface>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Interface node name |
+| interface | Network interface name |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`interface`](#configure-authority-router-routing-mld-interface-interface) | Network interface name |
+| [`join`](#configure-authority-router-routing-mld-interface-join) | List of Groups to join |
+| [`node`](#configure-authority-router-routing-mld-interface-node) | Interface node name |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;interface&#x27; |
+| [`version`](#configure-authority-router-routing-mld-interface-version) | MLD Version |
+
+## `configure authority router routing mld interface interface`
+
+Network interface name
+
+#### Usage
+
+```
+configure authority router routing mld interface interface [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing mld interface join`
+
+List of Groups to join
+
+#### Usage
+
+```
+configure authority router routing mld interface join <group>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| group | IPv6 address of the Group to Join |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`group`](#configure-authority-router-routing-mld-interface-join-group) | IPv6 address of the Group to Join |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;join&#x27; |
+| [`source`](#configure-authority-router-routing-mld-interface-join-source) | IPv6 address of the Source to Join |
+
+## `configure authority router routing mld interface join group`
+
+IPv6 address of the Group to Join
+
+#### Usage
+
+```
+configure authority router routing mld interface join group [<multicast-ipv6-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| multicast-ipv6-address | The value to set for this field |
+
+#### Description
+
+##### multicast-ipv6-address (string)
+
+A multicast IPv6 address
+
+Must be a valid IPv6 address.
+
+## `configure authority router routing mld interface join source`
+
+IPv6 address of the Source to Join
+
+#### Usage
+
+```
+configure authority router routing mld interface join source [<unicast-ipv6-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| unicast-ipv6-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv6-address (string)
+
+A unicast IPv6 address
+
+Must be a valid IPv6 address.
+
+## `configure authority router routing mld interface node`
+
+Interface node name
+
+#### Usage
+
+```
+configure authority router routing mld interface node [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing mld interface version`
+
+MLD Version
+
+#### Usage
+
+```
+configure authority router routing mld interface version [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Default: 2
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-2
 
 ## `configure authority router routing msdp`
 
@@ -25690,8 +26559,6 @@ Options: true or false
 - Units: seconds
 - Range: 10-1800
 - Default: 120
-
-
 ## `configure authority router routing ospf graceful-restart restart-time`
 
 OSPF graceful restart duration
@@ -26255,6 +27122,220 @@ configure authority router routing pim rp group-range [<multicast-ipv4-prefix>]
 
 A multicast IPv4 prefix
 
+## `configure authority router routing pimv6`
+
+PIMv6 configuration
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`interface`](#configure-authority-router-routing-pimv6-interface) | List of PIMv6 interfaces |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`rp`](#configure-authority-router-routing-pimv6-rp) | PIMv6 RP Configuration |
+| `show` | Show configuration data for &#x27;pimv6&#x27; |
+
+## `configure authority router routing pimv6 interface`
+
+List of PIMv6 interfaces
+
+#### Usage
+
+```
+configure authority router routing pimv6 interface <node> <interface>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Interface node name |
+| interface | Network interface name |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dr-priority`](#configure-authority-router-routing-pimv6-interface-dr-priority) | Preference of a particular device in the DR election process. The lowest priority is 1. |
+| [`hello-interval`](#configure-authority-router-routing-pimv6-interface-hello-interval) | Configure Hello Interval |
+| [`interface`](#configure-authority-router-routing-pimv6-interface-interface) | Network interface name |
+| [`node`](#configure-authority-router-routing-pimv6-interface-node) | Interface node name |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;interface&#x27; |
+
+## `configure authority router routing pimv6 interface dr-priority`
+
+Preference of a particular device in the DR election process. The lowest priority is 1.
+
+#### Usage
+
+```
+configure authority router routing pimv6 interface dr-priority [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-4294967295
+
+## `configure authority router routing pimv6 interface hello-interval`
+
+Configure Hello Interval
+
+#### Usage
+
+```
+configure authority router routing pimv6 interface hello-interval [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 30
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
+## `configure authority router routing pimv6 interface interface`
+
+Network interface name
+
+#### Usage
+
+```
+configure authority router routing pimv6 interface interface [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing pimv6 interface node`
+
+Interface node name
+
+#### Usage
+
+```
+configure authority router routing pimv6 interface node [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing pimv6 rp`
+
+PIMv6 RP Configuration
+
+#### Usage
+
+```
+configure authority router routing pimv6 rp <group-range>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| group-range | IPv6 Multicast Group address range for this RP |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`address`](#configure-authority-router-routing-pimv6-rp-address) | IPv6 address of the RP |
+| `delete` | Delete configuration data |
+| [`group-range`](#configure-authority-router-routing-pimv6-rp-group-range) | IPv6 Multicast Group address range for this RP |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;rp&#x27; |
+
+## `configure authority router routing pimv6 rp address`
+
+IPv6 address of the RP
+
+#### Usage
+
+```
+configure authority router routing pimv6 rp address [<unicast-ipv6-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| unicast-ipv6-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv6-address (string) (required)
+
+A unicast IPv6 address
+
+Must be a valid IPv6 address.
+
+## `configure authority router routing pimv6 rp group-range`
+
+IPv6 Multicast Group address range for this RP
+
+#### Usage
+
+```
+configure authority router routing pimv6 rp group-range [<multicast-ipv6-prefix>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| multicast-ipv6-prefix | The value to set for this field |
+
+#### Description
+
+##### multicast-ipv6-prefix (string)
+
+A multicast IPv6 prefix
+
 ## `configure authority router routing rib-policy`
 
 List of protocol specific RIB policies
@@ -26362,6 +27443,28 @@ Options:
 - ospf:         OSPF routes
 - service:      Service routes
 - static:       Static routes
+
+## `configure authority router routing router-id`
+
+Router ID - 32-bit number in the form of a dotted quad. Some protocols use this parameter for identifying a router to its neighbors.
+
+#### Usage
+
+```
+configure authority router routing router-id [<dotted-quad>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| dotted-quad | The value to set for this field |
+
+#### Description
+
+##### dotted-quad (string)
+
+An unsigned 32-bit number expressed in the dotted-quad notation, i.e., four octets written as decimal numbers and separated with the &#x27;.&#x27; (full stop) character.
 
 ## `configure authority router routing routing-protocol`
 
@@ -26488,7 +27591,7 @@ configure authority router routing routing-protocol address-family aggregate-add
 | [`as-set`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-as-set) | Generate as-set information for the resultant aggregate |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`policy`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-policy) |Policy to apply to the aggregate route |
+| [`policy`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-policy) | Policy to apply to the aggregate route |
 | [`prefix`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-prefix) | The prefix to aggregate from |
 | `show` | Show configuration data for &#x27;aggregate-address&#x27; |
 | [`summary-only`](#configure-authority-router-routing-routing-protocol-address-family-aggregate-address-summary-only) | Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised |
@@ -29319,7 +30422,6 @@ A true or false value.
 
 Options: true or false
 
-
 ## `configure authority router routing static-route`
 
 A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR's Routing Information Base (RIB).
@@ -29597,12 +30699,15 @@ configure authority router routing vrf <name>
 | [`description`](#configure-authority-router-routing-vrf-description) | Textual description of the VRF instance. |
 | [`igmp`](#configure-authority-router-routing-vrf-igmp) | IGMP VRF configuration |
 | [`interface`](#configure-authority-router-routing-vrf-interface) | Internal loopback interface used for routing protocols |
+| [`mld`](#configure-authority-router-routing-vrf-mld) | MLD VRF configuration |
 | [`msdp`](#configure-authority-router-routing-vrf-msdp) | MSDP configuration |
 | [`name`](#configure-authority-router-routing-vrf-name) | The name of the VRF. |
 | [`ospf`](#configure-authority-router-routing-vrf-ospf) | OSPF instance configuration |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`pim`](#configure-authority-router-routing-vrf-pim) | PIM VRF configuration |
+| [`pimv6`](#configure-authority-router-routing-vrf-pimv6) | PIMv6 VRF configuration |
 | [`rib-policy`](#configure-authority-router-routing-vrf-rib-policy) | List of protocol specific RIB policies |
+| [`router-id`](#configure-authority-router-routing-vrf-router-id) | Router ID - 32-bit number in the form of a dotted quad. Some protocols use this parameter for identifying a router to its neighbors. |
 | [`routing-protocol`](#configure-authority-router-routing-vrf-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-vrf-service-admin-distance) | Administrative distance for routes generated from services. |
 | `show` | Show configuration data for &#x27;vrf&#x27; |
@@ -29673,6 +30778,7 @@ configure authority router routing vrf igmp interface <node> <interface>
 | [`node`](#configure-authority-router-routing-vrf-igmp-interface-node) | Interface node name |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;interface&#x27; |
+| [`source-address-prefix-list`](#configure-authority-router-routing-vrf-igmp-interface-source-address-prefix-list) | Policy to restrict source addresses from IGMP messages |
 | [`version`](#configure-authority-router-routing-vrf-igmp-interface-version) | IGMP Version |
 
 ## `configure authority router routing vrf igmp interface interface`
@@ -29790,6 +30896,28 @@ configure authority router routing vrf igmp interface node [<leafref>]
 #### Description
 
 ##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing vrf igmp interface source-address-prefix-list`
+
+Policy to restrict source addresses from IGMP messages
+
+#### Usage
+
+```
+configure authority router routing vrf igmp interface source-address-prefix-list [<filter-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| filter-ref | The value to set for this field |
+
+#### Description
+
+##### filter-ref (leafref)
 
 A reference to an existing value in the instance data.
 
@@ -29944,6 +31072,194 @@ A string identifier for bridge-name which only uses alphanumerics, underscores, 
 Must contain only alphanumeric characters, start with a alphabet and can contain any of the following: _ -
 The name &#x27;lo&#x27; is reserved.
 Length: 0-15
+
+## `configure authority router routing vrf mld`
+
+MLD VRF configuration
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`interface`](#configure-authority-router-routing-vrf-mld-interface) | List of MLD interfaces |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;mld&#x27; |
+
+## `configure authority router routing vrf mld interface`
+
+List of MLD interfaces
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface <node> <interface>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Interface node name |
+| interface | Network interface name |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`interface`](#configure-authority-router-routing-vrf-mld-interface-interface) | Network interface name |
+| [`join`](#configure-authority-router-routing-vrf-mld-interface-join) | List of Groups to join |
+| [`node`](#configure-authority-router-routing-vrf-mld-interface-node) | Interface node name |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;interface&#x27; |
+| [`version`](#configure-authority-router-routing-vrf-mld-interface-version) | MLD Version |
+
+## `configure authority router routing vrf mld interface interface`
+
+Network interface name
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface interface [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing vrf mld interface join`
+
+List of Groups to join
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface join <group>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| group | IPv6 address of the Group to Join |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`group`](#configure-authority-router-routing-vrf-mld-interface-join-group) | IPv6 address of the Group to Join |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;join&#x27; |
+| [`source`](#configure-authority-router-routing-vrf-mld-interface-join-source) | IPv6 address of the Source to Join |
+
+## `configure authority router routing vrf mld interface join group`
+
+IPv6 address of the Group to Join
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface join group [<multicast-ipv6-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| multicast-ipv6-address | The value to set for this field |
+
+#### Description
+
+##### multicast-ipv6-address (string)
+
+A multicast IPv6 address
+
+Must be a valid IPv6 address.
+
+## `configure authority router routing vrf mld interface join source`
+
+IPv6 address of the Source to Join
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface join source [<unicast-ipv6-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| unicast-ipv6-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv6-address (string)
+
+A unicast IPv6 address
+
+Must be a valid IPv6 address.
+
+## `configure authority router routing vrf mld interface node`
+
+Interface node name
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface node [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing vrf mld interface version`
+
+MLD Version
+
+#### Usage
+
+```
+configure authority router routing vrf mld interface version [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Default: 2
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-2
 
 ## `configure authority router routing vrf msdp`
 
@@ -31973,6 +33289,220 @@ configure authority router routing vrf pim rp group-range [<multicast-ipv4-prefi
 
 A multicast IPv4 prefix
 
+## `configure authority router routing vrf pimv6`
+
+PIMv6 VRF configuration
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`interface`](#configure-authority-router-routing-vrf-pimv6-interface) | List of PIMv6 interfaces in the VRF |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`rp`](#configure-authority-router-routing-vrf-pimv6-rp) | PIMv6 RP Configuration |
+| `show` | Show configuration data for &#x27;pimv6&#x27; |
+
+## `configure authority router routing vrf pimv6 interface`
+
+List of PIMv6 interfaces in the VRF
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 interface <node> <interface>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Interface node name |
+| interface | Network interface name |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dr-priority`](#configure-authority-router-routing-vrf-pimv6-interface-dr-priority) | Preference of a particular device in the DR election process. The lowest priority is 1. |
+| [`hello-interval`](#configure-authority-router-routing-vrf-pimv6-interface-hello-interval) | Configure Hello Interval |
+| [`interface`](#configure-authority-router-routing-vrf-pimv6-interface-interface) | Network interface name |
+| [`node`](#configure-authority-router-routing-vrf-pimv6-interface-node) | Interface node name |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;interface&#x27; |
+
+## `configure authority router routing vrf pimv6 interface dr-priority`
+
+Preference of a particular device in the DR election process. The lowest priority is 1.
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 interface dr-priority [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Default: 1
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-4294967295
+
+## `configure authority router routing vrf pimv6 interface hello-interval`
+
+Configure Hello Interval
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 interface hello-interval [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 30
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-255
+
+## `configure authority router routing vrf pimv6 interface interface`
+
+Network interface name
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 interface interface [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing vrf pimv6 interface node`
+
+Interface node name
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 interface node [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
+
+## `configure authority router routing vrf pimv6 rp`
+
+PIMv6 RP Configuration
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 rp <group-range>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| group-range | IPv6 Multicast Group address range for this RP |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`address`](#configure-authority-router-routing-vrf-pimv6-rp-address) | IPv6 address of the RP |
+| `delete` | Delete configuration data |
+| [`group-range`](#configure-authority-router-routing-vrf-pimv6-rp-group-range) | IPv6 Multicast Group address range for this RP |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;rp&#x27; |
+
+## `configure authority router routing vrf pimv6 rp address`
+
+IPv6 address of the RP
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 rp address [<unicast-ipv6-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| unicast-ipv6-address | The value to set for this field |
+
+#### Description
+
+##### unicast-ipv6-address (string) (required)
+
+A unicast IPv6 address
+
+Must be a valid IPv6 address.
+
+## `configure authority router routing vrf pimv6 rp group-range`
+
+IPv6 Multicast Group address range for this RP
+
+#### Usage
+
+```
+configure authority router routing vrf pimv6 rp group-range [<multicast-ipv6-prefix>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| multicast-ipv6-prefix | The value to set for this field |
+
+#### Description
+
+##### multicast-ipv6-prefix (string)
+
+A multicast IPv6 prefix
+
 ## `configure authority router routing vrf rib-policy`
 
 List of protocol specific RIB policies
@@ -32080,6 +33610,28 @@ Options:
 - ospf:         OSPF routes
 - service:      Service routes
 - static:       Static routes
+
+## `configure authority router routing vrf router-id`
+
+Router ID - 32-bit number in the form of a dotted quad. Some protocols use this parameter for identifying a router to its neighbors.
+
+#### Usage
+
+```
+configure authority router routing vrf router-id [<dotted-quad>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| dotted-quad | The value to set for this field |
+
+#### Description
+
+##### dotted-quad (string)
+
+An unsigned 32-bit number expressed in the dotted-quad notation, i.e., four octets written as decimal numbers and separated with the &#x27;.&#x27; (full stop) character.
 
 ## `configure authority router routing vrf routing-protocol`
 
@@ -32206,7 +33758,7 @@ configure authority router routing vrf routing-protocol address-family aggregate
 | [`as-set`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-as-set) | Generate as-set information for the resultant aggregate |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`policy`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-policy) |Policy to apply to the aggregate route |
+| [`policy`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-policy) | Policy to apply to the aggregate route |
 | [`prefix`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-prefix) | The prefix to aggregate from |
 | `show` | Show configuration data for &#x27;aggregate-address&#x27; |
 | [`summary-only`](#configure-authority-router-routing-vrf-routing-protocol-address-family-aggregate-address-summary-only) | Specifies that the prefixes aggregated by this aggregation are not to be advertised: only the aggregate itself will be advertised |
@@ -35544,12 +37096,6 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -35781,12 +37327,6 @@ The order of elements matters.
 ##### host (union)
 
 The host type represents either an IP address or a DNS domain name.
-
-Must be one of the following types:
-
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
 Must be one of the following types:
 
@@ -36796,7 +38336,7 @@ System group configuration. Lets administrators configure system-wide properties
 | [`metrics`](#configure-authority-router-system-metrics) | Parameters controlling metric configuration and collection. Governs various aspects of the SSR&#x27;s data sampling for analytics purposes. |
 | [`ntp`](#configure-authority-router-system-ntp) | NTP configuration lets administrators configure information about the NTP servers within their management network. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`radius`](#configure-authority-router-system-radius) | Configure RADIUS |
+| [`radius`](#configure-authority-router-system-radius) | Configure Radius |
 | [`remote-login`](#configure-authority-router-system-remote-login) | Configure Remote Login |
 | [`services`](#configure-authority-router-system-services) | Address information for internal services |
 | `show` | Show configuration data for &#x27;system&#x27; |
@@ -37019,12 +38559,6 @@ configure authority router system audit remote-logging-server address [<host>]
 ##### host (union)
 
 The host type represents either an IP address or a DNS domain name.
-
-Must be one of the following types:
-
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
 
 Must be one of the following types:
 
@@ -37436,6 +38970,7 @@ configure authority router system client-certificate validation-mode [<certifica
 Sets the mode of certificate validation
 
 Options:
+
 - strict:    Reject insecure certificates during import.
 - warn:      Warn when importing insecure certificates
 
@@ -37487,7 +39022,7 @@ Default: 900
 
 An unsigned 32-bit integer.
 
-Range: 300-86400
+Range: 30-86400
 
 ## `configure authority router system local-login`
 
@@ -37722,6 +39257,7 @@ Parameters controlling metric configuration and collection. Governs various aspe
 
 | command | description |
 | ------- | ----------- |
+| [`application-policy-hit-count-tracking`](#configure-authority-router-system-metrics-application-policy-hit-count-tracking) | Enable/disable tracking of policy hit counts for applications |
 | [`application-stats-interval`](#configure-authority-router-system-metrics-application-stats-interval) | Interval at which the delta of identified application stats will be computed |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
@@ -37730,6 +39266,36 @@ Parameters controlling metric configuration and collection. Governs various aspe
 | [`retention`](#configure-authority-router-system-metrics-retention) | The durations to be used for internal metric storage |
 | [`sample-period`](#configure-authority-router-system-metrics-sample-period) | The period on which metrics are sampled |
 | `show` | Show configuration data for &#x27;metrics&#x27; |
+
+## `configure authority router system metrics application-policy-hit-count-tracking`
+
+Enable/disable tracking of policy hit counts for applications
+
+#### Usage
+
+```
+configure authority router system metrics application-policy-hit-count-tracking [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: auto
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- enabled:     Enable tracking of application policy hit counts.
+- disabled:    Disable tracking of application policy hit counts.
+- auto:        Use the value configured at the authority level.
 
 ## `configure authority router system metrics application-stats-interval`
 
@@ -38343,12 +39909,6 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -38513,13 +40073,13 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-###### (0) ipv4-address (string) (required)
+##### (0) ipv4-address (string) (required)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
 
-###### (1) ipv6-address (string) (required)
+##### (1) ipv6-address (string) (required)
 
 The ipv6-address type represents an IPv6 address in full,
 mixed, shortened, and shortened-mixed notation.
@@ -38536,7 +40096,7 @@ not allowed.
 
 Must be a valid IPv6 address.
 
-###### (2) domain-name (string) (required)
+##### (2) domain-name (string) (required)
 
 The domain-name type represents a DNS domain name.  The
 name SHOULD be fully qualified whenever possible.
@@ -38715,7 +40275,7 @@ configure authority router system radius radius-server secret [<string>]
 
 A text value.
 
-Length: 1-16
+Length: 1-255
 
 ## `configure authority router system radius radius-server server-name`
 
@@ -38957,13 +40517,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-address (string):
+##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -39335,7 +40889,7 @@ The address to which the SNMP servers send notifications.
 #### Usage
 
 ```
-configure authority router system services snmp-server notification-receiver ip-address [<ipv4-address>]
+configure authority router system services snmp-server notification-receiver ip-address [<ip-address>]
 ```
 
 ##### Positional Arguments
@@ -39346,11 +40900,34 @@ configure authority router system services snmp-server notification-receiver ip-
 
 #### Description
 
-##### ipv4-address (string)
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
 Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
 
 ## `configure authority router system services snmp-server notification-receiver port`
 
@@ -39868,6 +41445,7 @@ Default: use-authority-channel
 The router software access channel.
 
 Options:
+
 - use-authority-channel:    Use the configured authority channel.
 - prealpha:                 Override the authority channel with the prealpha channel.
 - alpha:                    Override the authority channel with the alpha channel.
@@ -39961,6 +41539,7 @@ Default: use-software-access-channel
 The router software access channel overrides.
 
 Options:
+
 - use-authority-channel:          Use the configured authority channel.
 - use-software-access-channel:    Use the configured router channel.
 - prealpha:                       Override the configured channel with the prealpha channel.
@@ -39993,6 +41572,7 @@ Default: use-software-access-channel
 The router software access channel overrides.
 
 Options:
+
 - use-authority-channel:          Use the configured authority channel.
 - use-software-access-channel:    Use the configured router channel.
 - prealpha:                       Override the configured channel with the prealpha channel.
@@ -40121,12 +41701,6 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types
-:
 ##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
@@ -40254,9 +41828,11 @@ Syslog configuration lets administrators configure the SSR&#x27;s interaction wi
 
 | command | description |
 | ------- | ----------- |
+| [`auth`](#configure-authority-router-system-syslog-auth) | Configure Auth |
 | [`client-certificate-name`](#configure-authority-router-system-syslog-client-certificate-name) | A client certificate to be used to communicate with syslog server. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
+| [`dropped-packets-cache`](#configure-authority-router-system-syslog-dropped-packets-cache) | Configure Dropped Packets Cache |
 | [`facility`](#configure-authority-router-system-syslog-facility) | The facility under which syslog messages will be recorded. |
 | [`ocsp`](#configure-authority-router-system-syslog-ocsp) | Whether to check the revocation status of the Syslog server&#x27;s certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
@@ -40265,6 +41841,48 @@ Syslog configuration lets administrators configure the SSR&#x27;s interaction wi
 | [`server`](#configure-authority-router-system-syslog-server) | The list of syslog servers configured for this device. |
 | [`severity`](#configure-authority-router-system-syslog-severity) | Sets the level at which messages will be sent to the syslog server. |
 | `show` | Show configuration data for &#x27;syslog&#x27; |
+
+## `configure authority router system syslog auth`
+
+Configure Auth
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`include`](#configure-authority-router-system-syslog-auth-include) | The list of syslog messages to include in the syslog server. Default is &#x27;all&#x27;. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;auth&#x27; |
+
+## `configure authority router system syslog auth include`
+
+The list of syslog messages to include in the syslog server. Default is &#x27;all&#x27;.
+
+#### Usage
+
+```
+configure authority router system syslog auth include [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | Value to add to this list |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- all:              Include all syslog messages.
+- login:            Include system access syslog messages.
+- session:          Include traffic related syslog messages.
+- config-change:    Include configuration related syslog messages.
 
 ## `configure authority router system syslog client-certificate-name`
 
@@ -40288,6 +41906,72 @@ configure authority router system syslog client-certificate-name [<client-certif
 
 This type is used by other entities that need to reference configured client certificate.
 
+## `configure authority router system syslog dropped-packets-cache`
+
+Configure Dropped Packets Cache
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;dropped-packets-cache&#x27; |
+| [`size`](#configure-authority-router-system-syslog-dropped-packets-cache-size) | The size of the dropped packets cache for each worker core. The cache is used to store dropped packet counts per 5-tuple to avoid packet by packet syslog messages. |
+| [`timeout`](#configure-authority-router-system-syslog-dropped-packets-cache-timeout) | The timeout in seconds for the dropped packets cache. Entries will be kept in the cache until they are evicted for space constraints or this timeout is reached. On those conditions, the syslog message will be produced for this entry with its count. |
+
+## `configure authority router system syslog dropped-packets-cache size`
+
+The size of the dropped packets cache for each worker core. The cache is used to store dropped packet counts per 5-tuple to avoid packet by packet syslog messages.
+
+#### Usage
+
+```
+configure authority router system syslog dropped-packets-cache size [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Default: 512
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-100000
+
+## `configure authority router system syslog dropped-packets-cache timeout`
+
+The timeout in seconds for the dropped packets cache. Entries will be kept in the cache until they are evicted for space constraints or this timeout is reached. On those conditions, the syslog message will be produced for this entry with its count.
+
+#### Usage
+
+```
+configure authority router system syslog dropped-packets-cache timeout [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Default: 10
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-600
+
 ## `configure authority router system syslog facility`
 
 The facility under which syslog messages will be recorded.
@@ -40295,22 +41979,22 @@ The facility under which syslog messages will be recorded.
 #### Usage
 
 ```
-configure authority router system syslog facility [<enumeration>]
+configure authority router system syslog facility [<syslog-facility>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| enumeration | The value to set for this field |
+| syslog-facility | The value to set for this field |
 
 #### Description
 
 Default: local0
 
-##### enumeration
+##### syslog-facility (enumeration)
 
-A value from a set of predefined names.
+The facility under which syslog messages will be recorded.
 
 Options:
 
@@ -40358,6 +42042,7 @@ configure authority router system syslog ocsp [<ocsp>]
 Whether to check the revocation status of a server&#x27;s certificate.
 
 Options:
+
 - strict:    Require a successful OCSP check in order to establish a connection.
 - off:       Do not check revocation status of the server certificate.
 
@@ -40368,22 +42053,22 @@ Use TCP or UDP protocol to communicate with syslog server.
 #### Usage
 
 ```
-configure authority router system syslog protocol [<enumeration>]
+configure authority router system syslog protocol [<syslog-protocol>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| enumeration | The value to set for this field |
+| syslog-protocol | The value to set for this field |
 
 #### Description
 
 Default: udp
 
-##### enumeration
+##### syslog-protocol (enumeration)
 
-A value from a set of predefined names.
+Use TCP or UDP protocol to communicate with syslog server.
 
 Options:
 
@@ -40434,10 +42119,168 @@ configure authority router system syslog server <ip-address> <port>
 
 | command | description |
 | ------- | ----------- |
+| [`client-certificate-name`](#configure-authority-router-system-syslog-server-client-certificate-name) | A client certificate to be used to communicate with syslog server. |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`filter`](#configure-authority-router-system-syslog-server-filter) | The list of facilities and severity to sent to the remote syslog server |
 | [`ip-address`](#configure-authority-router-system-syslog-server-ip-address) | The address of remote syslog server. |
+| [`ocsp`](#configure-authority-router-system-syslog-server-ocsp) | Whether to check the revocation status of the Syslog server&#x27;s certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`port`](#configure-authority-router-system-syslog-server-port) | The port on which remote syslog server listens |
+| [`protocol`](#configure-authority-router-system-syslog-server-protocol) | Use TCP or UDP protocol to communicate with syslog server. |
+| [`router-client-certificate-name`](#configure-authority-router-system-syslog-server-router-client-certificate-name) | A client certificate to be used to communicate with syslog server. |
 | `show` | Show configuration data for &#x27;server&#x27; |
+
+## `configure authority router system syslog server client-certificate-name`
+
+A client certificate to be used to communicate with syslog server.
+
+#### Usage
+
+```
+configure authority router system syslog server client-certificate-name [<client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate.
+
+## `configure authority router system syslog server filter`
+
+The list of facilities and severity to sent to the remote syslog server
+
+#### Usage
+
+```
+configure authority router system syslog server filter <facility>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| facility | The facility under which syslog messages will be recorded. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`facility`](#configure-authority-router-system-syslog-server-filter-facility) | The facility under which syslog messages will be recorded. |
+| [`match`](#configure-authority-router-system-syslog-server-filter-match) | Regex match that will be applied to the raw syslog message to filter specific messages for the configured facility and severity. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`severity`](#configure-authority-router-system-syslog-server-filter-severity) | Sets the level at which messages will be sent to the syslog server. |
+| `show` | Show configuration data for &#x27;filter&#x27; |
+
+## `configure authority router system syslog server filter facility`
+
+The facility under which syslog messages will be recorded.
+
+#### Usage
+
+```
+configure authority router system syslog server filter facility [<syslog-facility>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| syslog-facility | The value to set for this field |
+
+#### Description
+
+##### syslog-facility (enumeration)
+
+The facility under which syslog messages will be recorded.
+
+Options:
+
+- auth:        security and authorization messages
+- authpriv:    security and authorization messages (private)
+- cron:        cron daemon messages
+- daemon:      system daemons without separate facility
+- kern:        kernel messages
+- lpr:         line printer subsystem messages
+- mail:        mail subsystem messages
+- news:        USENET news subsystem messages
+- syslog:      messages generated internally by syslog
+- user:        generic user-level messages
+- uucp:        UUCP messages
+- local0:      syslog local use 0 facility reserved for local use
+- local1:      syslog local use 1 facility reserved for local use
+- local2:      syslog local use 2 facility reserved for local use
+- local3:      syslog local use 3 facility reserved for local use
+- local4:      syslog local use 4 facility reserved for local use
+- local5:      syslog local use 5 facility reserved for local use
+- local6:      syslog local use 6 facility reserved for local use
+- local7:      syslog local use 7 facility reserved for local use
+- any:         match any syslog facility
+
+## `configure authority router system syslog server filter match`
+
+Regex match that will be applied to the raw syslog message to filter specific messages for the configured facility and severity.
+
+#### Usage
+
+```
+configure authority router system syslog server filter match [<regex>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| regex | The value to set for this field |
+
+#### Description
+
+##### regex (string)
+
+A regular expression (regex) type.
+
+## `configure authority router system syslog server filter severity`
+
+Sets the level at which messages will be sent to the syslog server.
+
+#### Usage
+
+```
+configure authority router system syslog server filter severity [<syslog-severity>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| syslog-severity | The value to set for this field |
+
+#### Description
+
+Default: error
+
+##### syslog-severity (enumeration)
+
+Sets the level at which messages will be sent to the syslog server.
+
+Options:
+
+- emergency:    Only record log messages with level &quot;emergency&quot; or higher
+- alert:        Only record log messages with level &quot;alert&quot; or higher
+- critical:     Only record log messages with level &quot;critical&quot; or higher
+- error:        Only record log messages with level &quot;error&quot; or higher
+- warning:      Only record log messages with level &quot;warning&quot; or higher
+- notice:       Only record log messages with level &quot;notice&quot; or higher
+- info:         Only record log messages with level &quot;info&quot; or higher
+- debug:        Only record log messages with level &quot;debug&quot; or higher
 
 ## `configure authority router system syslog server ip-address`
 
@@ -40463,13 +42306,7 @@ The host type represents either an IP address or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-address (string):
+##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -40532,6 +42369,33 @@ domain names MUST be encoded in punycode as described in RFC
 
 Length: 1-253
 
+## `configure authority router system syslog server ocsp`
+
+Whether to check the revocation status of the Syslog server&#x27;s certificate.
+
+#### Usage
+
+```
+configure authority router system syslog server ocsp [<ocsp>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ocsp | The value to set for this field |
+
+#### Description
+
+##### ocsp (enumeration)
+
+Whether to check the revocation status of a server&#x27;s certificate.
+
+Options:
+
+- strict:    Require a successful OCSP check in order to establish a connection.
+- off:       Do not check revocation status of the server certificate.
+
 ## `configure authority router system syslog server port`
 
 The port on which remote syslog server listens
@@ -40556,6 +42420,58 @@ Transport (layer 4) port number.
 
 Range: 0-65535
 
+## `configure authority router system syslog server protocol`
+
+Use TCP or UDP protocol to communicate with syslog server.
+
+#### Usage
+
+```
+configure authority router system syslog server protocol [<syslog-protocol>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| syslog-protocol | The value to set for this field |
+
+#### Description
+
+Default: udp
+
+##### syslog-protocol (enumeration)
+
+Use TCP or UDP protocol to communicate with syslog server.
+
+Options:
+
+- udp:    Use UDP protocol to communicate with syslog server.
+- tcp:    Use TCP protocol to communicate with syslog server.
+- tls:    Use TLS over TCP protocol to communicate with syslog server.
+
+## `configure authority router system syslog server router-client-certificate-name`
+
+A client certificate to be used to communicate with syslog server.
+
+#### Usage
+
+```
+configure authority router system syslog server router-client-certificate-name [<router-client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| router-client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### router-client-certificate-ref (leafref)
+
+This type is used by other entities that need to reference configured client certificate for a specific router.
+
 ## `configure authority router system syslog severity`
 
 Sets the level at which messages will be sent to the syslog server.
@@ -40563,22 +42479,22 @@ Sets the level at which messages will be sent to the syslog server.
 #### Usage
 
 ```
-configure authority router system syslog severity [<enumeration>]
+configure authority router system syslog severity [<syslog-severity>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| enumeration | The value to set for this field |
+| syslog-severity | The value to set for this field |
 
 #### Description
 
 Default: error
 
-##### enumeration
+##### syslog-severity (enumeration)
 
-A value from a set of predefined names.
+Sets the level at which messages will be sent to the syslog server.
 
 Options:
 
@@ -42740,6 +44656,334 @@ configure authority security resource-group [<resource-group-ref>]
 
 This type is used by other entities that need to reference configured resource groups.
 
+## `configure authority security-key-management`
+
+Configure Security Key Management
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`ca-profile`](#configure-authority-security-key-management-ca-profile) | Configure Ca Profile |
+| `clone` | Clone a list item |
+| `delete` | Delete configuration data |
+| [`invalid-certificate-behavior`](#configure-authority-security-key-management-invalid-certificate-behavior) | Behavior when a certificate is revoked, expired, or invalid. |
+| [`key-exchange-algorithm`](#configure-authority-security-key-management-key-exchange-algorithm) | Configure Key Exchange Algorithm |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`payload-key-rekey-interval`](#configure-authority-security-key-management-payload-key-rekey-interval) | Hours between payload security key regeneration. |
+| [`peer-key-rekey-interval`](#configure-authority-security-key-management-peer-key-rekey-interval) | Hours between security key regeneration for peer routers. |
+| [`peer-key-retransmit-interval`](#configure-authority-security-key-management-peer-key-retransmit-interval) | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. |
+| [`peer-key-timeout`](#configure-authority-security-key-management-peer-key-timeout) | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. |
+| `show` | Show configuration data for &#x27;security-key-management&#x27; |
+
+## `configure authority security-key-management ca-profile`
+
+Configure CA Profile
+
+#### Usage
+
+```
+configure authority security-key-management ca-profile <url>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| url | Location of the CA. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`revocation-check-interval`](#configure-authority-security-key-management-ca-profile-revocation-check-interval) | Hours between security key revocation check. |
+| `show` | Show configuration data for &#x27;ca-profile&#x27; |
+| [`url`](#configure-authority-security-key-management-ca-profile-url) | Location of the CA. |
+
+## `configure authority security-key-management ca-profile revocation-check-interval`
+
+Hours between security key revocation check.
+
+#### Usage
+
+```
+configure authority security-key-management ca-profile revocation-check-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: hours
+
+Default: 48
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-720
+
+## `configure authority security-key-management ca-profile url`
+
+Location of the CA.
+
+#### Usage
+
+```
+configure authority security-key-management ca-profile url [<uri>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uri | The value to set for this field |
+
+#### Description
+
+##### uri (string)
+
+The uri type represents a Uniform Resource Identifier
+(URI) as defined by STD 66.
+
+Objects using the uri type MUST be in US-ASCII encoding,
+and MUST be normalized as described by RFC 3986 Sections
+6.2.1, 6.2.2.1, and 6.2.2.2.  All unnecessary
+percent-encoding is removed, and all case-insensitive
+characters are set to lowercase except for hexadecimal
+digits, which are normalized to uppercase as described in
+Section 6.2.2.1.
+
+The purpose of this normalization is to help provide
+unique URIs.  Note that this normalization is not
+sufficient to provide uniqueness.  Two URIs that are
+textually distinct after this normalization may still be
+equivalent.
+
+Objects using the uri type may restrict the schemes that
+they permit.  For example, &#x27;data:&#x27; and &#x27;urn:&#x27; schemes
+might not be appropriate.
+
+A zero-length URI is not a valid URI.  This can be used to
+express &#x27;URI absent&#x27; where required.
+
+In the value set and its semantics, this type is equivalent
+to the Uri SMIv2 textual convention defined in RFC 5017.
+
+## `configure authority security-key-management invalid-certificate-behavior`
+
+Behavior when a certificate is revoked, expired, or invalid.
+
+#### Usage
+
+```
+configure authority security-key-management invalid-certificate-behavior [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: fail-soft
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- fail-soft:    An indication will be presented that appropriate action needs to be taken.
+- fail-hard:    Remove all peering relationships and do not participate in SVR.
+
+## `configure authority security-key-management key-exchange-algorithm`
+
+Configure Key Exchange Algorithm
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`diffie-hellman`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman) | Configure Diffie Hellman |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;key-exchange-algorithm&#x27; |
+
+## `configure authority security-key-management key-exchange-algorithm diffie-hellman`
+
+Configure Diffie Hellman
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dh-key-size`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman-dh-key-size) | Configure Dh Key Size |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;diffie-hellman&#x27; |
+
+## `configure authority security-key-management key-exchange-algorithm diffie-hellman dh-key-size`
+
+Configure DH Key Size
+
+#### Usage
+
+```
+configure authority security-key-management key-exchange-algorithm diffie-hellman dh-key-size [<diffie-hellman-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| diffie-hellman-key-size | The value to set for this field |
+
+#### Description
+
+##### diffie-hellman-key-size (enumeration)
+
+The key size to use in the Diffie-Hellman key exchange
+
+Options:
+
+- 1024:    1024 bit key size
+- 2048:    2048 bit key size
+- 4096:    4096 bit key size
+
+## `configure authority security-key-management payload-key-rekey-interval`
+
+Hours between payload security key regeneration.
+
+#### Usage
+
+```
+configure authority security-key-management payload-key-rekey-interval [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Units: hours
+
+Default: 24
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-720
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- never:    never regenerate payload security keys
+
+## `configure authority security-key-management peer-key-rekey-interval`
+
+Hours between security key regeneration for peer routers.
+
+#### Usage
+
+```
+configure authority security-key-management peer-key-rekey-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: hours
+
+Default: 24
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-720
+
+## `configure authority security-key-management peer-key-retransmit-interval`
+
+Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged.
+
+#### Usage
+
+```
+configure authority security-key-management peer-key-retransmit-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 30
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 5-3600
+
+## `configure authority security-key-management peer-key-timeout`
+
+Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged.
+
+#### Usage
+
+```
+configure authority security-key-management peer-key-timeout [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 3600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority service`
 
 The service configuration is where you define the services that reside within the authority&#x27;s tenants as well as the policies to apply to those services.
@@ -42824,6 +45068,7 @@ configure authority service access-policy <source>
 | [`permission`](#configure-authority-service-access-policy-permission) | Whether or not to allow access to the service. |
 | `show` | Show configuration data for &#x27;access-policy&#x27; |
 | [`source`](#configure-authority-service-access-policy-source) | The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service |
+| [`syslog`](#configure-authority-service-access-policy-syslog) | Configure Syslog |
 
 ## `configure authority service access-policy anti-virus-policy`
 
@@ -42981,13 +45226,7 @@ A source address prefix, QSN, service-group or combination of tenant-name and pr
 
 Must be one of the following types:
 
-##### (0) ip-prefix (union)
-
-The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-prefix (string):
+##### (0) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -43049,6 +45288,44 @@ A string identifier for a tenant prefix. Consists of a valid tenant name, follow
 Must contain a valid tenant name, followed by @  and a valid IP Address.
 Length: 0-280
 
+## `configure authority service access-policy syslog`
+
+Configure Syslog
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;syslog&#x27; |
+| [`syslog-policy`](#configure-authority-service-access-policy-syslog-syslog-policy) | Syslog policy to be applied to the access policy. |
+
+## `configure authority service access-policy syslog syslog-policy`
+
+Syslog policy to be applied to the access policy.
+
+#### Usage
+
+```
+configure authority service access-policy syslog syslog-policy [<syslog-policy-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| syslog-policy-name | The value to set for this field |
+
+#### Description
+
+##### syslog-policy-name (string)
+
+This type is used by other entities that need to reference configured syslog profiles.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-15
+
 ## `configure authority service access-policy-generated`
 
 Indicates whether or not the access-policy configuration was automatically created during conductor service generation.
@@ -43097,13 +45374,7 @@ The host type represents either an IP prefix or a DNS domain name.
 
 Must be one of the following types:
 
-##### (0) ip-prefix (union)
-
-The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-prefix (string):
+##### (0) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -43749,13 +46020,7 @@ A source address prefix, QSN, service-group or combination of tenant-name and pr
 
 Must be one of the following types:
 
-##### (0) ip-prefix (union)
-
-The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-prefix (string):
+##### (0) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -45107,7 +47372,6 @@ Types of packet resiliency govern how the SSR provides resilience for packets in
 :::note
 The `packet-resiliency`, `packet-retransmission` and `packet-retransmission-with-dpi` modes are intended to be used on non-reliable transports, such as UDP, only. It is not recommend to use these settings unless thorough testing has been performed against the application to determine its efficacy.
 ::: 
-
 #### Usage
 
 ```
@@ -45415,13 +47679,13 @@ A type for defining priorities for vector use.
 
 Must be one of the following types:
 
-###### (0) uint32
+##### (0) uint32
 
 An unsigned 32-bit integer.
 
 Range: 1-999999
 
-###### (1) enumeration
+##### (1) enumeration
 
 A value from a set of predefined names.
 
@@ -46237,6 +48501,7 @@ Default: release
 The software access channels.
 
 Options:
+
 - prealpha:    Enable access to software in the prealpha channel.
 - alpha:       Enable access to software in the alpha channel.
 - beta:        Enable access to software in the beta channel.
@@ -46267,6 +48532,7 @@ Default: use-software-access-channel
 The software access channel overrides.
 
 Options:
+
 - use-software-access-channel:    Use the configured channel.
 - prealpha:                       Override the configured channel with the prealpha channel.
 - alpha:                          Override the configured channel with the alpha channel.
@@ -46298,163 +48564,7 @@ Default: use-software-access-channel
 The software access channel overrides.
 
 Options:
-- use-software-access-channel    Use the configured channel.
-- prealpha                       Override the configured channel with the prealpha channel.
-- alpha                          Override the configured channel with the alpha channel.
-- beta                           Override the configured channel with the beta channel.
-- release                        Override the configured channel with the release channel.
 
-## `configure authority software-access token`
-
-The authority software access token.
-
-#### Usage
-
-```
-configure authority software-access token [<software-access-token>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| software-access-token | The value to set for this field |
-
-#### Description
-
-##### software-access-token (string)
-
-The software access token.
-
-Must not contain whitespace in the software access token.
-
-## `configure authority software-access username`
-
-The authority software access username.
-
-#### Usage
-
-```
-configure authority software-access username [<software-access-username>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| software-access-username | The value to set for this field |
-
-#### Description
-
-##### software-access-username (string)
-
-The software access username.
-
-Must not contain a colon or whitespace in the software access username.
-
-## `configure authority software-access`
-
-Configuration for SSR software access for the authority. Supported on managed assets only.
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| [`channel`](#configure-authority-software-access-channel) | The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token. |
-| `delete` | Delete configuration data |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`rpm-channel`](#configure-authority-software-access-rpm-channel) | The software access RPM channel to use. The RPM channel will override the authority channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token. |
-| `show` | Show configuration data for &#x27;software-access&#x27; |
-| [`ssr-image-channel`](#configure-authority-software-access-ssr-image-channel) | The software access SSR image channel to use. The SSR image channel will override the authority channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token. |
-| [`token`](#configure-authority-software-access-token) | The authority software access token. |
-| [`username`](#configure-authority-software-access-username) | The authority software access username. |
-
-## `configure authority software-access channel`
-
-The software access channel to use. The channel will only grant access to software which is permitted for the given software access username and token.
-
-#### Usage
-
-```
-configure authority software-access channel [<software-access-channel>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| software-access-channel | The value to set for this field |
-
-#### Description
-
-Default: release
-
-##### software-access-channel (enumeration)
-
-The software access channels.
-
-Options:
-- prealpha    Enable access to software in the prealpha channel.
-- alpha       Enable access to software in the alpha channel.
-- beta        Enable access to software in the beta channel.
-- release     Enable access to software in the release channel.
-
-## `configure authority software-access rpm-channel`
-
-The software access RPM channel to use. The RPM channel will override the authority channel for repositories providing RPMs. The channel will only grant access to software which is permitted for the given software access username and token.
-
-#### Usage
-
-```
-configure authority software-access rpm-channel [<software-access-channel-override>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| software-access-channel-override | The value to set for this field |
-
-#### Description
-
-Default: use-software-access-channel
-
-##### software-access-channel-override (enumeration)
-
-The software access channel overrides.
-
-Options:
-- use-software-access-channel:    Use the configured channel.
-- prealpha:                       Override the configured channel with the prealpha channel.
-- alpha:                          Override the configured channel with the alpha channel.
-- beta:                           Override the configured channel with the beta channel.
-- release:                        Override the configured channel with the release channel.
-
-## `configure authority software-access ssr-image-channel`
-
-The software access SSR image channel to use. The SSR image channel will override the authority channel for repositories providing SSR images. The channel will only grant access to software which is permitted for the given software access username and token.
-
-#### Usage
-
-```
-configure authority software-access ssr-image-channel [<software-access-channel-override>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| software-access-channel-override | The value to set for this field |
-
-#### Description
-
-Default: use-software-access-channel
-
-##### software-access-channel-override (enumeration)
-
-The software access channel overrides.
-
-Options:
 - use-software-access-channel:    Use the configured channel.
 - prealpha:                       Override the configured channel with the prealpha channel.
 - alpha:                          Override the configured channel with the alpha channel.
@@ -46571,13 +48681,7 @@ An IP address or prefix.
 
 Must be one of the following types:
 
-##### (0) ip-address (union)
-
-The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-address (string):
+##### (0) ipv4-address (string)
 
 The ipv4-address type represents an IPv4 address in dotted-quad notation.
 
@@ -46600,13 +48704,7 @@ not allowed.
 
 Must be a valid IPv6 address.
 
-##### (1) ip-prefix (union)
-
-The ip-prefix type represents an IP prefix and is IP version neutral. The format of the textual representations implies the IP version.
-
-Must be one of the following types:
-
-##### (0) ipv4-prefix (string):
+##### (2) ipv4-prefix (string)
 
 The ipv4-prefix type represents an IPv4 address prefix.
 The prefix length is given by the number following the
@@ -46853,6 +48951,217 @@ configure authority step-repo resource-group [<resource-group-ref>]
 ##### resource-group-ref (leafref)
 
 This type is used by other entities that need to reference configured resource groups.
+
+## `configure authority syslog-policy`
+
+Configuration for syslog message generation.
+
+#### Usage
+
+```
+configure authority syslog-policy <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | A unique name for the syslog profile. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`close`](#configure-authority-syslog-policy-close) | Whether to send a syslog message on session deletion |
+| [`create`](#configure-authority-syslog-policy-create) | Whether to send a syslog message on session creation |
+| `delete` | Delete configuration data |
+| [`enabled`](#configure-authority-syslog-policy-enabled) | Controls whether syslog messages should be generated for this profile. |
+| [`error`](#configure-authority-syslog-policy-error) | Whether to send a syslog message on failure to create a session |
+| [`name`](#configure-authority-syslog-policy-name) | A unique name for the syslog profile. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`security`](#configure-authority-syslog-policy-security) | Whether to send a syslog message for any access-policy deny or block triggered by L7 security feature such as URL filtering, IDP or antivirus on this service. |
+| `show` | Show configuration data for &#x27;syslog-policy&#x27; |
+
+## `configure authority syslog-policy close`
+
+Whether to send a syslog message on session deletion
+
+#### Usage
+
+```
+configure authority syslog-policy close [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority syslog-policy create`
+
+Whether to send a syslog message on session creation
+
+#### Usage
+
+```
+configure authority syslog-policy create [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority syslog-policy enabled`
+
+Controls whether syslog messages should be generated for this profile.
+
+#### Usage
+
+```
+configure authority syslog-policy enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority syslog-policy error`
+
+Whether to send a syslog message on failure to create a session
+
+#### Usage
+
+```
+configure authority syslog-policy error [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+<!---
+## `configure authority syslog-policy modify`
+
+Whether to send a syslog message on session modify
+
+#### Usage
+
+```
+configure authority syslog-policy modify [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+--->
+## `configure authority syslog-policy name`
+
+A unique name for the syslog profile.
+
+#### Usage
+
+```
+configure authority syslog-policy name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
+## `configure authority syslog-policy security`
+
+Whether to send a syslog message for any access-policy deny or block triggered by L7 security feature such as URL filtering, IDP or antivirus on this service.
+
+#### Usage
+
+```
+configure authority syslog-policy security [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority tenant`
 
@@ -47448,6 +49757,7 @@ configure authority trusted-ca-certificate validation-mode [<certificate-validat
 Sets the mode of certificate validation
 
 Options:
+
 - strict:    Reject insecure certificates during import.
 - warn:      Warn when importing insecure certificates
 
