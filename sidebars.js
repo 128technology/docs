@@ -371,7 +371,7 @@ module.exports = {
           "sec_security_policy",
           "sec_adaptive_encrypt",
           "sec_firewall_filtering",  
-          "concept-tpm.md",        
+          "concept-tpm",        
           "sec-config-seim-syslog",          
           "sec-ddos-resilience",          
           "sec-usb-security",
