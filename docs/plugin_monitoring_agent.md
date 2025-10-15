@@ -842,6 +842,19 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ## Monitoring Agent Plugin Release Notes
 
+### Release 5.0.0
+
+#### New Features and Improvements
+
+Support for install and upgrade of Oracle Linux 9 based SSR OS distribution for 7.0 and above.
+
+:::note
+On conductor, the plugin will auto upgrade to this version when upgrading from 6.x to 7.x version of SSR software. In addition, all routers will also be auto upgraded to their respective Oracle Linux 7 or Oracle Linux 9 plugin version depending on the SSR version running on the device.
+:::
+
+
+**Release Date:** Oct 13, 2025
+
 ### Release 4.1.1
 
 **Release Date:** Jun 11, 2025

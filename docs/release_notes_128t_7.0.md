@@ -20,7 +20,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 :::
 
 :::warning
-An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
 ::: 
 
 **System Disk Considerations**
@@ -39,12 +39,12 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.0-69r1
+## Release 7.0.1-1r1
 
-**Release Date:** October 7, 2025
+**Release Date:** October 14, 2025
 
 :::warning
-An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
 ::: 
 
 ### New Features
@@ -229,13 +229,11 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-62291 Conductor minion watchdog may incorrectly restart the minion:** Updated the `128T-minion-watchdog` package to version 2.0 which does not restart the salt-minion if it has an active connection to 1/2 conductor nodes in an HA conductor.
 
+### Caveats
 
-
-
-
-
-
-
-
-
+- **I95-62830 Asset may not synchronize on both conductor nodes:** Due to a change in the Salt watchdog process, an asset may not sync automatically to both conductor nodes in an HA conductor configuration after upgrading to 7.0.1. If you encounter this behavior, restarting the salt minion will resolve this issue. This a display issue and the asset has been properly provisioned by the conductor if the state is Synchronized on one of the conductors. 
+------
+- **I95-62836 IDP Engine failed to start up on the SSR1500 after upgrade to 7.0.1:** In 7.0.1, the default allocations used by the SSR are not sufficient to launch the security engine on the SSR1500 preventing IDP, AV, and other security features from functioning. If you are using these features on an SSR1500, it is not recommended to upgrade to 7.0.1 at this time.
+------
+- **WAN-4457 Incorrect VPN Peer path state reported in `oc-stats`:** Peer path stats are not reported correctly from the device. This issue has been identified and resolved in a separate WAN Assurance plugin release, 3.100.1. This plugin will be generally available after the SSR 7.0.1 release, and should be manually installed to resolve the peer path stats issue. 
 
