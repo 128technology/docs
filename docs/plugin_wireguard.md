@@ -669,6 +669,20 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 :::warning
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
+
+### Release 4.0.0
+
+#### New Features and Improvements
+
+Support for install and upgrade of Oracle Linux 9 based SSR OS distribution for 7.0 and above.
+
+:::note
+On conductor, the plugin will auto upgrade to this version when upgrading from 6.x to 7.x version of SSR software. In addition, all routers will also be auto upgraded to their respective Oracle Linux 7 or Oracle Linux 9 plugin version depending on the SSR version running on the device.
+:::
+
+
+**Release Date:** Oct 13, 2025
+
 ### Release 3.0.2
 
 **Release Date:** Apr 30, 2025

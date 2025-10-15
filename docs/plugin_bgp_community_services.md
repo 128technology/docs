@@ -228,6 +228,18 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 ## Release Notes
 
+### Release 4.0.0
+
+#### New Features and Improvements
+
+Support for install and upgrade of Oracle Linux 9 based SSR OS distribution for 7.0 and above.
+
+:::note
+On conductor, the plugin will auto upgrade to this version when upgrading from 6.x to 7.x version of SSR software. In addition, all routers will also be auto upgraded to their respective Oracle Linux 7 or Oracle Linux 9 plugin version depending on the SSR version running on the device.
+:::
+
+**Release Date:** Oct 13, 2025
+
 ### Release 3.0.2
 
 **Release Date:** Apr 30, 2025
@@ -245,6 +257,8 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 - **PLUGIN-2721** Resolve on plugin downgrade config removal
 
 ### Release 3.0.0
+
+#### New Features and Improvements
 
 Image based install and upgrade (IBU) support for SSR 6.3.0.
 
