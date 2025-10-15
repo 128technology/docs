@@ -91,7 +91,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-60041 `initialize conductor` command sets password for all system accounts:** The system accounts `admin`, `t128` and `root` are simultaneously set to the provided password hash, ensuring default passwords are not used.
 ------
-- **I95-60220 SSR OS Upgrade:** SSR OS distribution has been upgraded to Oracle Linux 9.
+- **I95-60220 SSR OS Upgrade:** SSR OS distribution has been upgraded to a newer kernel.
 ------
 - **WAN-2284 Critical IDP Profile:** A new **Critical** attack list profile that is more lightweight has been added to reduce the commit/policy change times. 
 
