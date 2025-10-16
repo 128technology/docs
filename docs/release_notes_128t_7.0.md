@@ -16,9 +16,7 @@ Offline mode conductor and router upgrades to image-based installations are deta
 ### Upgrade Considerations
 
 :::important
-Before upgrading a conductor to 7.0.1, the conductor must have at minimum version 6.3.5 installed. 
-
-If you are upgrading first to 6.3.5, you must wait for all your conductor-managed routers to get to the `synchronized` state before proceeding with the upgrade to 7.0.1. 
+The minimum starting version for a conductor upgrade to 7.0.1 is 6.3.5. If the conductor is not currently running at least 6.3.5, first upgrade to this version and wait for all managed routers to reach the synchronized state prior to upgrading to 7.0.1. There are new keying requirements enforced by the conductor in 7.0.1, and if the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
 :::
 
 :::important
@@ -48,9 +46,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ## Release 7.0.1-1r1
 
 :::important
-Before upgrading a conductor to 7.0.1, the conductor must have at minimum version 6.3.5 installed. 
-
-If you are upgrading first to 6.3.5, you must wait for all your conductor-managed routers to get to the `synchronized` state before proceeding with the upgrade to 7.0.1. 
+The minimum starting version for a conductor upgrade to 7.0.1 is 6.3.5. If the conductor is not currently running at least 6.3.5, first upgrade to this version and wait for all managed routers to reach the synchronized state prior to upgrading to 7.0.1. There are new keying requirements enforced by the conductor in 7.0.1, and if the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
 :::
 
 **Release Date:** October 14, 2025
