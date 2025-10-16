@@ -16,6 +16,12 @@ Offline mode conductor and router upgrades to image-based installations are deta
 ### Upgrade Considerations
 
 :::important
+Before upgrading a conductor to 7.0.1, the conductor must have at minimum version 6.3.5 installed. 
+
+If you are upgrading first to 6.3.5, you must wait for all your conductor-managed routers to get to the `synchronized` state before proceeding with the upgrade to 7.0.1. 
+:::
+
+:::important
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
@@ -40,6 +46,12 @@ An issue has been identified that may be observed in conductor deployments runni
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
 ## Release 7.0.1-1r1
+
+:::important
+Before upgrading a conductor to 7.0.1, the conductor must have at minimum version 6.3.5 installed. 
+
+If you are upgrading first to 6.3.5, you must wait for all your conductor-managed routers to get to the `synchronized` state before proceeding with the upgrade to 7.0.1. 
+:::
 
 **Release Date:** October 14, 2025
 
