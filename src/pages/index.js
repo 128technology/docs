@@ -63,7 +63,7 @@ const features = [
   },
   {
     title: <>Release Notes</>,
-    link: 'docs/release_notes_128t_6.3', 
+    link: 'docs/release_notes_128t_7.0', 
     description: (
       <>
        Release information for SSR Software and components.
