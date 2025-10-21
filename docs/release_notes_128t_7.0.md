@@ -49,6 +49,13 @@ An issue has been identified when onboarding SSR routers installed with older ve
 The minimum starting version for a conductor upgrade to 7.0.1 is 6.3.5. If the conductor is not currently running at least 6.3.5, first upgrade to this version and wait for all managed routers to reach the synchronized state prior to upgrading to 7.0.1. There are new keying requirements enforced by the conductor in 7.0.1, and if the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
 :::
 
+:::note
+SSR-OS support for the team interface has been removed in 7.0.1. There are two significant impacts with this change:
+
+- If you have a conductor deployed with an L3 hop on the HA interface, update your static route to point to the parent interface. The exception to this is if the interface is configured as `non-forwarding shared`. 
+- The HA Sync Redundancy Plugin is not supported on 7.0.
+:::
+
 **Release Date:** October 14, 2025
 
 :::warning
