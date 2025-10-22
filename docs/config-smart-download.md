@@ -15,9 +15,9 @@ Downloads that have been stopped either by a manual pause or due to connection i
 
 ## Download Failover Resiliency
 
-SSR images can be downloaded from a variety of sources, depending on software access mode (eg. internet-only, prefer-conductor, conductor-only, offline-mode): the HA peer, both conductor nodes, artifactory, and the mist proxy to artifactory (cloud deployments only).
+SSR images can be downloaded from a variety of sources, depending on software access mode (eg. internet-only, prefer-conductor, conductor-only, offline-mode): the HA peer, both conductor nodes, artifactory, and the Mist proxy to artifactory (cloud deployments only).
 
-To improve resiliency to network connectivity issues, the SSR queries available versions from all sources before beginning the download. It compiles a list of sources where the requested version is available and begins the download. If more than 50% of requests to a source fail within a window of 10 requests, the SSR marks that source unavailable and moves on to the next source. The following priority order is used for sources: 
+To improve resiliency against network connectivity issues, the SSR queries available versions from all sources before beginning the download. It compiles a list of sources where the requested version is available and begins the download. If more than 50% of requests to a source fail, the SSR marks that source unavailable and moves on to the next source. The following priority order is used for sources: 
 
 1. Peer 
 2. Conductor node 1
@@ -43,7 +43,7 @@ The GUI also supports pausing and resuming downloads.
 
 ### Auto-resume Download on WAN Failures
 
-In the event that all sources have reached the threshold of consecutive failures and a download attempt has returned an error, the SSR can be configured to wait for a specified amount of time and then retry the download. If a connection is successfully made, the download will resume where it left off.  
+In the event that all sources have reached the threshold of consecutive failures and a download attempt has failed, the SSR can be configured to wait for a specified amount of time and then retry the download. If a connection is successfully made, the download will resume where it left off.  
 
 When the timeout is enabled, the SSR waits for a configurable amount of time (default is 10800s) for the download to complete. When the timeout value is reached, the download is marked as **Failed** and the retry delay begins.  
 
