@@ -9,7 +9,7 @@ sidebar_label: Configuring DSCP Steering
 | ------- | --------------------------- | 
 | 5.4.4   | DSCP Steering Introduced    |
 | 6.1.4   | Enabled DSCP steering for BGP over SVR tunnels | 
-| 7.1.0   | Support added for steering Non-IPSEC tunnels (GTP) | 
+| 7.1.0   | [Support added for steering Non-IPSEC tunnels](#dscp-steering-using-gtp) (GTP) | 
 
 
 When traffic is traversing an IPSec encrypted tunnel, every flow within that tunnel shares the same layer 3 headers, making them difficult to identify. 
@@ -167,7 +167,7 @@ exit
 
 ```
 
-#### DSCP Steering Using GTP
+### DSCP Steering Using GTP
 
 While the configuration for DSCP steering using a GTP tunnel is nearly identical to the IPSec configuration, there are some restrictions.
 
@@ -229,7 +229,7 @@ If the destination port is not found, the source-port of the packet is checked a
 
 ![gtp config](/img/dscp-steering-gtp.png)
 
-On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. But because it does match the source-port of 2152, it is treated as a reverse tunnel packet.
+On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. Because it does match the source-port of `2152`, it is treated as a reverse tunnel packet.
 
 ### Service Route Configuration
 
