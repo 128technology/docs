@@ -18,7 +18,7 @@ To provide identification and aid in load balancing and traffic engineering, DSC
 
 Beginning with SSR version 6.1.4, DSCP Steering is enabled for BGP over SVR tunnels. Using the configuration below, and [configuring BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr), the child service configured for DSCP steering is now recognized and steered appropriately. 
 
-With SSR version 7.1.0, the restriction for matching ports has been lifted. The match criteria for incoming packets only requires the destination port to match the given configuration. IPSec tunnels continue to be supported as previously. Steering for new tunnels such as GPRS Tunnel Protocol (GTP), which uses a well-defined destination port and optionally randomized source ports, is supported.
+With SSR version 7.1.0, the restriction for matching ports has been lifted. The match criteria for incoming packets only requires the destination port to match the given configuration. IPSec tunnels continue to be supported. Steering for new tunnels such as GPRS Tunnel Protocol (GTP), which uses a well-defined destination port and optionally randomized source ports, is supported.
 
 ## Basic Configuration
 
@@ -167,13 +167,20 @@ exit
 
 ```
 
-For configuring DSCP steering using a GTP tunnel, the configuration is nearly identical to the IPSec tunnel, except for the port definitions.
+#### DSCP Steering Using GTP
 
-In the following example, the receiver endpoint is at IP 2.2.2.2, at UDP port 2123 or UDP port 2152. The initial packet entering the SSR will match against this service via the SSR’s FIB.
+While the configuration for DSCP steering using a GTP tunnel is nearly identical to the IPSec configuration, there are some restrictions.
+
+- Configuring `dscp-steering` at the network-interface level supports several port ranges, but only a single protocol. For example, it is not currently possible to perform steering for both TCP and UDP at the same time.
+-  The tunneled packets must either be an ESP packet or have a valid L4 header that accurately describes the tunnel endpoint. 
+-  The listed protocol on the SSR session/flow keys will report ESP, even when not within an IPSec tunnel.
+-   The egress LAN must also have a DSCP Steering configuration enabled to support proper classification of reverse traffic.
+
+In the following example, the receiver endpoint is at IP 2.2.2.2 at UDP port 2152. The initial packet entering the SSR will match against this service via the SSR’s FIB.
 
 The tunnel is then further broken down into three DSCP ranges and assigned to child services. The SSR refines down to the appropriate child service based on the DSCP marking of the incoming packet. As with hierarchical services in general, a different service-policy may be defined on the child services, otherwise the parent policy will be inherited.
 
- ```
+```
 authority
 
    service tunnel
@@ -182,9 +189,6 @@ authority
 
       transport udp
          protocol udp
-         port-range 2123
-            start-port 2123
-         exit
          port-range 2152
             start-port 2152
          exit
@@ -223,8 +227,9 @@ exit
 
 If the destination port is not found, the source-port of the packet is checked against the configured element. If the source-port is identified, then it is treated as a reverse dscp-steering packet.
 
-**add diagram here
+![gtp config](/img/dscp-steering-gtp.png)
 
+On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. But because it does match the source-port of 2152, it is treated as a reverse tunnel packet.
 
 ### Service Route Configuration
 
