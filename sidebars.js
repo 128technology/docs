@@ -275,6 +275,7 @@ module.exports = {
         "type": "category",
         "label": "Network Features",
         "items": [
+          "config-proxy-server",
           "config_dhcp",
           "config_session_recovery",
           "config_forward_error_correction",
