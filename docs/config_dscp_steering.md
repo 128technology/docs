@@ -229,7 +229,7 @@ If the destination port is not found, the source-port of the packet is checked a
 
 ![gtp config](/img/dscp-steering-gtp.png)
 
-On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. Because it does match the source-port of `2152`, it is treated as a reverse tunnel packet.
+On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. Because it does match the source-port of `2152`, it is treated as a reverse tunnel packet. 
 
 ### Service Route Configuration
 
