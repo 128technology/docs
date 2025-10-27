@@ -15,6 +15,7 @@ Please refer to the [Juniper Multicast Overview](https://www.juniper.net/documen
 | ------- | ----------------------------|
 | 6.1.0   | This feature was introduced |
 | 6.2.0   | Added support for MSDP, SSR as RP |
+| 6.2.10  | Added `routing default-instance pim restart-time` |
 
 ## Multicast on the SSR 
 
@@ -313,6 +314,12 @@ exit
 #### Other Considerations
 
 While this configuration example uses one RP for the multicast range, you can use different RPs for different multicast addresses or ranges. The same can be done for the service; smaller services for more specific ranges of multicast with different senders and receivers as needed.
+
+### PIM Graceful Restart Timer
+
+The `routing default-instance pim restart-time` command has been added to allow users to define the number of seconds that the PIM protocol will perform `graceful-restart` after a node failure. The restart time range is 0-1800, with a default of 120 seconds. 
+
+During the graceful restart period, the PIM join states are created, but no updates of multicast routes are sent to the forwarding plane. Once the graceful restart period is over, all new multicast routes are programmed, and old multicast routes are removed.
 
 ## Multicast Source Discovery Protocol (MSDP) 
 
