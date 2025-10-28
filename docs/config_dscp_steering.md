@@ -231,6 +231,10 @@ If the destination port is not found, the source-port of the packet is checked a
 
 On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. Because it does match the source-port of `2152`, it is treated as a reverse tunnel packet. 
 
+:::note
+The diagram above shows a DSCP value of 10 on both the forward and reverse flows. This assigns steering to the `service low.tunnel` configured above.
+:::
+
 ### Service Route Configuration
 
 DSCP steering follows the SSR's [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services) model. As such, service-route configurations from the parent tunnel service are available to the child DSCP services. Flows may be steered via DSCP value by defining a service-route configuration for the child DSCP services. 
