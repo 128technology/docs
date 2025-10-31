@@ -5,9 +5,7 @@ sidebar_label: Initialize Your Device - Web Workflow
 
 This is the part where configuring your device gets really easy!
 
-<!-- markdown-link-check-disable -->
-As a first step, connect your laptop or other device to any of the designated LAN ports and connect to https://192.168.128.1 to access the SSR onboarding UI.
-<!-- markdown-link-check-enable -->
+As a first step, connect your laptop or other device to any of the designated LAN ports and connect to `https://192.168.128.1` to access the SSR onboarding UI.
 
 :::note
 The laptop or other client device must be assigned a static IP address within the range of `192.168.128.2` to `192.168.128.254` along with a subnet mask of `/24` or `255.255.255.0`.
