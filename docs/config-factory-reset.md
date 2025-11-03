@@ -3,6 +3,10 @@ title: Factory Reset
 sidebars_label: Factory Reset
 ---
 
+Both the SSR software and SSR4x0 series provide the ability to reset to factory defaults. With the SSR400 and SSR440, you have the option of a user designated rescue configuration, or a secure zeroization and factory configuration. The SSR software resets to the original factory defaults, and removes any customer configurations.
+
+Use the information below to determine the best option for your deployment.  
+
 ## SSR400 and SSR440 Factory Reset
 
 The SSR400 and SSR440 devices are equipped with a reset switch to perform the following actions:
@@ -21,9 +25,7 @@ This action is the standard system reboot, often performed as part of troublesho
 
 Pressing and hold the **Reset** button for more than 5 seconds but less than 15 loads and commits the rescue configuration.
 
-The rescue configuration is a previously committed, valid configuration. One must have previously set the rescue configuration through the CLI, or the Conductor, or Mist Cloud. 
-
-(NEED INFO ON RESCUE CONFIGURATION - WHERE IS THIS COVERED?)
+The rescue, or "golden" configuration is a previously committed, valid configuration that has been designated as the fall-back configuration when performing a reset. This configuration was designated by the user or administrator as the rescue configuration through the CLI, the Conductor, or the Mist Cloud. 
 
 ### Factory Reset
 
@@ -62,28 +64,67 @@ DO NOT reboot during this process. The factory reset will not complete.
 
 8. When the LED has stopped the slow white to black fade, it has returned to the factory settings and will shut down. You can then power up the system. 
 
-**********************
 ## Software Factory Reset
 
 SSR Software Factory reset removes system files and zero-writes unallocated data for increased security.
 
-The following  security enhancements and platform cleanup have been added to the factory reset operation.
+The `reset factory-default` command performs the following steps: **there is no reset factory-default command in the cli 
 
-* SSR running configs - Remove user/t128-running JSON files
-* Environment configs - Remove local/global init files
-* Factory defaults - Remove rotated XML files, leaving the most recent
-* Config exports - Remove exported configuration directory
-* PKI - Remove all 128T keys and certificates
-* InfluxDB data - Remove database storage
-* Tank storage - Remove tank state data
-* User accounts - Delete created users (UID ≥ 1000)
-* Inactive IBU partition - Zero out non-active partition and remove boot metadata for that partition
-* Free space - FIPS-compliant disk zeroization of all free space on the active partition
-* Log files - Remove all system logs
+- Reset the device configuration to the factory defaults found on the device hard drive.
 
-A log file of the platform cleanup operation is written out to /tmp while it is being run, and once everything is cleaned, it is migrated to /var/log for inspection afterwards.
+- Commit the configuration.
 
-The root/admin accounts have been reverted back to the default passwords according to which account it is (root/t128 share the same, admin uses its own)
+- Check the root-only directory for any executables and run any that are found.
 
+- Reboot the device.
+
+The following security enhancements and platform cleanup operations take place during the factory reset operation.
+
+- All JSON files run by `user/t128` are removed. 
+- All local/global init files are removed from the environment configurations.
+- Rotated XML files are removed, leaving only the most recent.
+- The exported configuration directory is removed.
+- All 128T keys and certificates are removed
+- Database storage is removed.
+- Tank state data is removed.
+- Created users (UID ≥ 1000) are removed.
+- Non-active partitions are zeroed and boot metadata is removed for that partition
+- Perform FIPS-compliant disk zeroization of all free space on the active partition
+- All system logs are removed.
+- The root/admin accounts are reverted to the default passwords for the respective account: `root` and `t128` share the same password, `admin` has a separate default password.
+
+A log file of the platform cleanup operation is written out to `/tmp` while the `reset factory-default` command is being run. After the device is scrubbed, the log file is migrated to `/var/log` for inspection.
+
+
+### Zeroization Process
+
+Use the following process to ensure there is no unauthorized access possible to sensitive residual information (e.g. cryptographic keys, keying material, PINs, passwords, etc.) on SSR network equipment when that equipment is discarded or removed from its operational environment. 
+
+For the certified SSR platforms, all software and configuration reside on the SSD hard drive `/dev/sda`. Use the following procedure to zeroize/erase the SSD hard drive. 
+
+1. Log in to the local serial console as the root user 
+
+2. Enter the following to gracefully shut down SSR service: 
+ 
+ `systemctl stop 128T` 
+
+3. Enter the following command to enter single-user mode: 
+ 
+ `systemctl emergency` 
+
+4. Re-enter the root password when prompted 
+
+5. Enter the following command to zeroize the SSD hard drive: 
+ 
+ `dd if=/dev/zero of=/dev/sda bs=1M conv=fsync status=progress `
+ 
+ This process may take 30 minutes or more and will report **No space left on device** when complete. 
+
+ ![Uninstall and wipe SSD](/img/cc_fips_uninstall.png)
+ 
+6. Power off the system, or use the following command for soft power-off: 
+ `echo o > /proc/sysrq-trigger` 
+
+The system is wiped of all information, and is no longer operational as an SSR. If the system is to be reused in future, perform the ISO installation process. 
 
 

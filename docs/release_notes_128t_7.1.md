@@ -42,11 +42,11 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.1.0-xxr1
 
-**Release Date:** November 13, 2025
+**Release Date:** November 20, 2025
 
 ### New Features
 
-- **I95-34739 SSR400 and SSR440 Factory reset:**
+- **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 series provides the ability to reset the device to either a user designated rescue configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config-factory-reset.md).
 ------
 - **I95-53402 SSR400/SSR440 Chassis Manager:**
 ------
@@ -59,8 +59,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-54244 Secure Boot:** The SSR400 and SSR440 are factory configured with a cryptographic public key that only allows an authenticated firmware image to run on the device. This ensures that only trusted (Juniper-signed) code will run from power-on through to linux OS boot. For additional information, see [Secure Boot](sec-secure-boot.md).
 ------
 - **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the secure ztp process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
-------
-- **I95-55936 Alarm and Events when service area hits threshold:**
 ------
 - **I95-57174 DCSP Steering - UDP/TCP destination port:** With SSR version 7.1.0, the restriction for matching ports has been lifted, and support has been added for DCSP steering over non-IPSEC tunnels. For more information, see [DSCP Steering Using GTP](config_dscp_steering.md#dscp-steering-using-gtp). 
 ------
