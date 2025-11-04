@@ -46,7 +46,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### New Features
 
-- **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 series provides the ability to reset the device to either a user designated rescue configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config-factory-reset.md).
+- **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 devices provide the ability to reset the device to either a pre-defined rescue (or **Golden**) configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config-factory-reset.md).
 ------
 - **I95-53402 SSR400/SSR440 Chassis Manager:**
 ------
