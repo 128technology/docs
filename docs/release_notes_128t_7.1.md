@@ -60,6 +60,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the secure ztp process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
 ------
+- **I95-55936 Alarm and Events when service area hits threshold:** Support has been added to allow users to configure alarms thresholds to monitor session processing capacity, and provide visibility into the system’s capacity to establish new sessions. For more information, see [Session Processing Alarms](ts_session_processing.md#session-processing-alarms).
+------
 - **I95-57174 DCSP Steering - UDP/TCP destination port:** With SSR version 7.1.0, the restriction for matching ports has been lifted, and support has been added for DCSP steering over non-IPSEC tunnels. For more information, see [DSCP Steering Using GTP](config_dscp_steering.md#dscp-steering-using-gtp). 
 ------
 - **I95-58446 EoSVR Active/Standby Loop prevention:**

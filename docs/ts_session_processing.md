@@ -83,7 +83,90 @@ admin@test1.combo1# show stats process thread process-name highway | grep Sessio
  7537 root      20   0  266.9g   8.8g 120940 S 20.0  3.5  22:51.79 SessionProc-05
 ```
 
-### Understanding CLI Output
+## Session Processing Alarms
+
+The exhaustion of the system’s ability to create new sessions can occur silently, without immediate or obvious symptoms, posing a critical but often unnoticed risk. By collecting and monitoring session processing thread CPU usage and triggering alarms when usage exceeds defined thresholds, the SSR provides you visibility into the system’s capacity to establish new sessions. 
+
+Version History
+| Release | Modification |
+| --- | --- |
+| 7.1.0-r1 | Session processing alarm configurations added |
+
+### Configuring Alarms
+
+The following commands allow you to configure trigger and clear thresholds to monitor session processing capacity, and view the results. 
+
+The `service-area-alarm-threshold-profile` provides the following alarm parameters and defaults. 
+
+| command | description |
+| ------- | ----------- |
+| [`alarm-clear-threshold`](config_command_guide.md#configure-authority-router-service-area-alarm-threshold-profile-alarm-clear-threshold) | Alarm clear threshold, configurable between 0-100%, default is 70%. |
+| [`alarm-clear-waiting-window`](config_command_guide.md#configure-authority-router-service-area-alarm-threshold-profile-alarm-clear-waiting-window) | Alarm clear waiting window, in seconds. Must be a multiple of 5 (e.g., 5, 10, ..., 300). Default is 180 seconds. |
+| [`alarm-trigger-threshold`](config_command_guide.md#configure-authority-router-service-area-alarm-threshold-profile-alarm-trigger-threshold) | Alarm trigger threshold, configurable between 0-100%, default is 85%. |
+| [`alarm-trigger-waiting-window`](config_command_guide.md#configure-authority-router-service-area-alarm-threshold-profile-alarm-trigger-waiting-window) | Alarm trigger waiting window, in seconds. Must be a multiple of 5 (e.g., 5, 10, ..., 300). Default is 180 seconds. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;service-area-alarm-threshold-profile&#x27; |
+
+### Show Commands
+
+Use `show system utilization session-processors` to display the average session processing thread CPU value as well as the per-thread cpu usage.
+
+```
+[admin@test2.RTR_EAST_COMBO](mailto:admin@test2.RTR_EAST_COMBO)# show system utilization session-processors
+Mon 2025-08-04 18:07:06 UTC
+Retrieving session processor utilization...
+show system utilization session-processors" every 2 seconds
+
+Thu 2025-08-07 16:07:23 UTC
+Retrieving session processor utilization...
+
+Target: test1.combo1
+
+============== ================ ============= ===========
+Node            Thread           Utilization   peakUsage
+============== ================ ============= ===========
+test1.combo1 SessionProc-00     10.00000        78.000000
+test1.combo1 SessionProc-01     20.000000       66.900002
+Average - 15.00 -
+```
+
+When an alarm is triggered, use the `detail` parameter to view additional information. 
+
+```
+[admin@test2.RTR_EAST_COMBO](mailto:admin@test2.RTR_EAST_COMBO)# show system utilization session-processors detail
+====================
+ Node: test1.combo1
+====================
+  State:                            alarmTriggered
+  Time In State:                    30
+  Time Remaining Until Transition:  10
+  Average CPU:                      3.00%
+  Session Processors CPU usage :
+    SessionProc-00:    3.000000%
+    SessionProc-01:    3.000000%
+
+```
+
+When there is no active alarm, the `show system utilization detail` command output displays the current status.
+
+```
+[admin@test2.RTR_EAST_COMBO](mailto:admin@test2.RTR_EAST_COMBO)# show system utilization session-processors detail
+Target: test1.combo1
+
+====================
+ Node: test1.combo1
+====================
+  State:                            Normal
+  Time In State:                    --
+  Time Remaining Until Transition:  --
+  Average CPU:                      0.00%
+  Session Processors CPU usage :
+    SessionProc-00:    0.000000%
+    SessionProc-01:    0.000000%
+```
+
+## Understanding CLI Output
 
 The **Service Area** is the informal name given to the business logic responsible for session processing. The set of stats related to `internal-application` of Service Area processing are valuable to understand system behavior. These stats are monotonically increasing scalar values; you will need to compare deltas over two periods of time to get an accurate view of rate. In particular, `schedule-failure` and `sent-timeout` are signs that the session processing is unable to keep up with load or unable to handle bursty traffic patterns.
 
