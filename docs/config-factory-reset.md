@@ -37,23 +37,6 @@ Press and hold the **Reset** button for up to 30 seconds to initiate a reset to 
 
 This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including all plain-text passwords, secrets, and private keys for SSH, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
 
-#### What Happens
-
-The following security steps and platform cleanup operations take place during the factory reset operation.
-
-- All JSON files run by `user/t128` are removed. 
-- All local/global init files are removed from the environment configurations.
-- Rotated XML files are removed, leaving only the most recent.
-- The exported configuration directory is removed.
-- All 128T keys and certificates are removed
-- Database storage is removed.
-- Tank state data is removed.
-- Created users (UID ≥ 1000) are removed.
-- Non-active partitions are zeroed and boot metadata is removed for that partition
-- Perform FIPS-compliant disk zeroization of all free space on the active partition
-- All system logs are removed.
-- The root/admin accounts are reverted to the default passwords for the respective account: `root` and `t128` share the same password, `admin` has a separate default password.
-
 A log file of the platform cleanup operation is written out to `/tmp` while the `reset factory-default` command is being run. After the device is scrubbed, the log file is migrated to `/var/log` for inspection.
 
 ### SSR4x0 Fail-Safe Restore Process
@@ -96,7 +79,7 @@ The `restore system factory-default` command performs the following steps:
 
 - Commit the configuration.
 
-- Check the root-only directory for any executables and run any that are found.
+- Check the root directory for any executables and run any that are found.
 
 - Reboot the device.
 
@@ -104,23 +87,9 @@ The `restore system factory-default` command performs the following steps:
 restore system factory-default [force] [router <router>] [node <node>] [<mode>]
 ```
 
-The following security steps and platform cleanup operations take place during the factory reset operation.
-
-- All JSON files run by `user/t128` are removed. 
-- All local/global init files are removed from the environment configurations.
-- Rotated XML files are removed, leaving only the most recent.
-- The exported configuration directory is removed.
-- All 128T keys and certificates are removed
-- Database storage is removed.
-- Tank state data is removed.
-- Created users (UID ≥ 1000) are removed.
-- Non-active partitions are zeroed and boot metadata is removed for that partition
-- Perform FIPS-compliant disk zeroization of all free space on the active partition
-- All system logs are removed.
-- The root/admin accounts are reverted to the default passwords for the respective account: `root` and `t128` share the same password, `admin` has a separate default password.
+This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including all plain-text passwords, secrets, and private keys for SSH, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
 
 A log file of the platform cleanup operation is written out to `/tmp` while the `reset factory-default` command is being run. After the device is scrubbed, the log file is migrated to `/var/log` for inspection.
-
 
 ### Additional Security - Zeroization Process
 
