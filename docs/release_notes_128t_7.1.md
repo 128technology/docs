@@ -64,8 +64,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-57174 DCSP Steering - UDP/TCP destination port:** With SSR version 7.1.0, the restriction for matching ports has been lifted, and support has been added for DCSP steering over non-IPSEC tunnels. For more information, see [DSCP Steering Using GTP](config_dscp_steering.md#dscp-steering-using-gtp). 
 ------
-- **I95-58446 EoSVR Active/Standby Loop prevention:**
-------
 - **I95-58502 Disable on box management ports:** Configuration fields have been added to node configuration on the SSR400 and SSR440 devices, allowing you to control physical security features. For more information, see [Disable SSR400 and SSR440 Management Interfaces](sec-disable-ports.md).
 ------
 - **I95-59235 HTTP/S proxy server for all public URLs:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. This process can also be used to support the [Mist secure ZTP onboarding](sec-ztp-web-proxy.md) process.

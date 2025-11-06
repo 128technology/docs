@@ -5,6 +5,12 @@ sidebar_label: Session Processing
 
 Session Smart Routers behave as both a firewall and a router. It is in its name – to be session smart – where the platform can apply a surgical amount of policy, treatment, and offer a rich amount of application data for use in understanding network performance.
 
+#### Version History
+
+| Release | Modification |
+| --- | --- |
+| 7.1.0-r1 | [Session processing alarm configurations added](#session-processing-alarms) |
+
 ## Session Processing on the Session Smart Router
 
 When it comes to determining proper performance and utilization of an SSR, you must look at three characteristics:
@@ -85,12 +91,7 @@ admin@test1.combo1# show stats process thread process-name highway | grep Sessio
 
 ## Session Processing Alarms
 
-The exhaustion of the system’s ability to create new sessions can occur silently, without immediate or obvious symptoms, posing a critical but often unnoticed risk. By collecting and monitoring session processing thread CPU usage and triggering alarms when usage exceeds defined thresholds, the SSR provides you visibility into the system’s capacity to establish new sessions. 
-
-Version History
-| Release | Modification |
-| --- | --- |
-| 7.1.0-r1 | Session processing alarm configurations added |
+The exhaustion of the system’s ability to create new sessions can occur silently, without immediate or obvious symptoms, posing a critical but often unnoticed risk. By collecting and monitoring session processing thread CPU usage and triggering alarms when usage exceeds defined thresholds, the SSR provides you visibility into the system’s capacity to establish new sessions.
 
 ### Configuring Alarms
 
