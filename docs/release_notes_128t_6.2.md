@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.10-7-lts
 
-**Release Date:** October 30, 2025
+**Release Date:** November 18, 2025
 
 ### Resoved Issues
 
