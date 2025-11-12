@@ -78,12 +78,13 @@ module.exports = {
         ]
       },
     ],
-    "Supported Hardware Platforms":[
+    "Hardware Support":[
       "supported-devices-overview",
       "intro_system_reqs",
       "config_firewall_ports",
       "about_supported_platforms",
       "about_certified_platforms",
+      "ssr-chassis-manager",
       "rma_wan_assurance",
     ],
     "Concepts": [
