@@ -125,14 +125,18 @@ The system is wiped of all information, and is no longer operational as an SSR. 
 
 ## Create a Golden Reset Configuration
 
-The following API allows an administrator a way to create a configuration snapshot that can be used as a golden configuration for routers in a network. This configuration is generated at the router level, and then imported by the Chassis Manager during a reset to a golden, configuration.
+The following API allows an administrator the ability to create a configuration snapshot to be used as a golden configuration for routers should they experience a catastrophic failure or become corrupt. This configuration is generated at the router level, and then imported by the Chassis Manager during a reset operation.
 
-Endpoint: 
+#### Endpoint: 
+
 `POST /api/v1/config/export-golden-config`
 
-Purpose: Exports the current configuration (running or candidate) to a predefined golden config file that can be later imported.
+#### Purpose: 
 
-Authentication & Authorization:
+Exports the current configuration (running or candidate) to a predefined golden config file that can be later imported.
+
+#### Authentication & Authorization:
+
 - Requires authentication
 - Requires WRITE permission on the entire config resource
 - Can be handled by inactive nodes (will be redirected to active node)
@@ -143,19 +147,21 @@ Request Body (JSON):
   "datastore": "running" | "candidate"
 }
 ```
-Parameters:
+#### Parameters:
 
 - datastore (required, string): Specifies which configuration datastore to export
    - `running`: Export the currently active running configuration
    - `candidate`: Export the current candidate configuration
 
-Behavior:
+#### Behavior:
+
 - Automatically uses the filename `_golden-config` (predefined, not user-specified)
 - Always overwrites any existing golden config file
 - The export is directed to the active node
 - Creates a configuration export file to be imported later
 
-Response:
+#### Response:
+
 - Success (200 OK):
 ```
 {
@@ -165,7 +171,8 @@ Response:
 ```
 Note: Both export-path (kebab-case) and exportPath (camelCase) are provided for backward compatibility.
 
-Error Responses:
+#### Error Responses:
+
 - 400 Bad Request: Invalid datastore value; must be `running` or `candidate`
 - 401 Unauthorized: Authentication required
 - 403 Forbidden: Insufficient permissions (requires WRITE access to entire config)
