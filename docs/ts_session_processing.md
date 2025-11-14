@@ -117,10 +117,6 @@ Use `show system utilization session-processors` to display the average session 
 [admin@test2.RTR_EAST_COMBO](mailto:admin@test2.RTR_EAST_COMBO)# show system utilization session-processors
 Mon 2025-08-04 18:07:06 UTC
 Retrieving session processor utilization...
-show system utilization session-processors" every 2 seconds
-
-Thu 2025-08-07 16:07:23 UTC
-Retrieving session processor utilization...
 
 Target: test1.combo1
 

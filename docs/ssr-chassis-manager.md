@@ -32,15 +32,10 @@ Port LEDs have the following behavior to identify port status.
 
 #### Right LED - Port Speed
 
-Port speed is dependent on the type of port, SFP, or RJ-45.
+Port speed is indicated with the following behavior.
 
-**SFP Ports**
-- Blinking Green: 1000 Mbps (1 blink per second)
-- Green On Steadily: 10 Mbps
-
-**RJ-45 Ports**
-- Unlit—10 Mbps
-- Blinking Green: 100 Mbps
+- Unlit: Below 100 Mbps
+- Blinking Green: 100 Mbps (1 blink per second)
 - Green On Steadily: 1000 Mbps
 
 ### Temperature Manager
