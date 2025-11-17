@@ -7,7 +7,7 @@ The SSR400 and SSR440 support an integrated Chassis Manager to help monitor conn
 
 ## Chassis Manager
 
-The Chassis Manager requires administrator privileges to use. Components include the LED Manager and Temperature Manager. 
+Interaction with the Chassis Manager is performed through CLI commands and button presses on the front of the SSR400/SSR440 chassis. Components include the LED Manager and Temperature Manager. 
 
 ### LED Manager
 
@@ -46,7 +46,7 @@ There are three temperature thresholds specified for each sensor:
 - **Red**: A CRITICAL alarm is generated, warning of impending `critical temperature reached` shutdown The CPU is slowed and monitored to reduce heat generation.
 - **Shutdown**: When the critical temperature threshold is reached, the system generates a fatal error and immediately shuts down the SSR to prevent any damage to the device. 
 
-Use `show chassis temperature-thresholds` to see the default thresholds for each alarm level.
+Use `show chassis temperature-thresholds` to see the thresholds for each alarm level.
 
 ```
 admin@node.router# show chassis temperature-thresholds 
@@ -82,14 +82,5 @@ The following `show` commands allow you to see the chassis status from the CLI.
 | `show chassis power component <id>`	| Shows current PSU voltages and amperage levels for the specified PSU id. |
 | `show chassis hardware`	| Reports the hardware SKU, CLEI, revision (rev), and serial numbers from `/sys/kernel/leopard_idprom`. |
 | `show chassis firmware`	| Shows CPLD and boot firmware versions from `/sys/kernel/leopard_cpld/version` and `/sys/devices/virtual/dmi/id/bios_version`, respectively. |
-
-
-## Chassis Monitor
-
-The Chassis Monitor will gather the temperature readings, temperature thresholds, fan speed, LED pattern, etc available through the software and provide this information in the SSR Web Interface (?) 
-
-How is this information made visible to the user?
-
-
 
 

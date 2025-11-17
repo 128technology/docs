@@ -21,7 +21,7 @@ Holding the reset button for longer than 30 seconds cancels any of the button pr
 
 ### Reboot
 
-This action is the standard system reboot, often performed as part of troubleshooting. Hold the **Reset** button for 4 seconds to reboot.
+This action is the standard system reboot, often performed as part of troubleshooting. Hold the **Reset** button for up to 4 seconds to reboot.
 
 ### Reset to the Rescue Configuration
 
@@ -87,7 +87,7 @@ The `restore system factory-default` command performs the following steps:
 restore system factory-default [force] [router <router>] [node <node>] [<mode>]
 ```
 
-This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including all plain-text passwords, secrets, and private keys for SSH, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
+This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including passwords, secrets, and private keys for SSH, certificates, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
 
 A log file of the platform cleanup operation is written out to `/tmp` while the `reset factory-default` command is being run. After the device is scrubbed, the log file is migrated to `/var/log` for inspection.
 
