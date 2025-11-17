@@ -8,8 +8,7 @@ sidebar_label: '4.0'
 
 #### New Features and Improvements
 
-- **Azure SSR image support for vTPM**
-JIRA: I95-54267
+- **I95-54267 Azure SSR image support for vTPM**
 
 On first boot of the SSR volume, the instance the vTPM (if detected) will be automatically initialized with RSA encryption key pair. The BYOL image contains a script which can be used to validate the vTPM operations based on the initialization.
 
@@ -18,15 +17,13 @@ Decrypt: /home/t128/t128_tpm_crypto.sh decrypt -i secret.txt.enc -o output.txt
 
 NOTE: SSR version 7.1.3-r2 or higher is required to leverage the vTPM capabilities in software.
 
-- **Enhancements to onboarding-config via cloud-init**
-JIRA: WAN-4033, I95-60406
+- **WAN-4033, I95-60406 Enhancements to onboarding-config via cloud-init**
 
 New options were added to the onboarding-config (typically installed via cloud-init) to enable additional use cases. Some examples of new additions:
  * Support custom NTP server
  * Support static HTTPS Proxy for MIST connection
 
-- **Support for HA sync and fabric links**
-JIRA: I95-62888
+- **I95-62888 Support for HA sync and fabric links**
 
 Support for HA fabric and HA sync to establish a dual-node HA in public cloud.
 
