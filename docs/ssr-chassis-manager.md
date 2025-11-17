@@ -3,7 +3,7 @@ title: SSR Chassis Manager
 sidebar_label: SSR Chassis Manager
 ---
 
-The SSR400 and SSR440 support an integrated Chassis Manager to help identify operations, connectivity, temperature, and provide insight into other vital operating data. 
+The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. 
 
 ## Chassis Manager
 
