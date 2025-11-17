@@ -35,7 +35,7 @@ The rescue, or golden configuration is set via API at onboarding. For informatio
 
 Press and hold the **Reset** button for up to 30 seconds to initiate a reset to the factory default configuration.
 
-This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including all plain-text passwords, secrets, and private keys for SSH, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
+This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including passwords, secrets, and private keys for SSH, certificates, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
 
 A log file of the platform cleanup operation is written out to `/tmp` while the `reset factory-default` command is being run. After the device is scrubbed, the log file is migrated to `/var/log` for inspection.
 
