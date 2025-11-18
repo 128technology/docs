@@ -1,7 +1,9 @@
 --- 
-title: SSR400/440 Software Installation 
-sidebar_label: SSR400/440 Software Installation
+title: SSR400 and SSR440 Software Installation 
+sidebar_label: SSR400 and SSR440 Software Installation
 ---
+
+Use the following process to manually install software on an SSR400 or SSR440.
 
 1. Connect a VT terminal emulator to the front USB-C serial console, at a baud rate of 115200.
 2. Power on the device.
@@ -151,13 +153,13 @@ System LED will be Amber, to indicate SSR OS boot in progress.
 After OS boot has completed, the hardware bootstrapper will run. System LED will briefly change to Teal during this activity.
 
 Once the SSR 128T software application is up and running, System LED will show:
-•	Red for out-of-service.
+•	Red for out-of-service
 •	Amber for degraded service
 •	Green for in-service
 
 ### USB Install Boot
 
-1. Burn SSR-7.1.0*.aarch64*.iso to a USB flash drive and insert into the rear USB-C
+1. Burn SSR-7.1.0*.aarch64*.iso to a [USB flash drive](intro_creating_bootable_usb.md) and insert into the rear USB-C.
 2. Power on, at the prompt Press Esc to boot from USB. 
 
 The USB installer will boot:
@@ -298,12 +300,3 @@ Press [Esc] to reboot or [Enter] to shutdown:
 System will shutdown in 30 seconds...
 
 ```
-
-
-
-
-
-
-
-
-

@@ -9,8 +9,7 @@ The following support is provided for proxy server configuration:
 
 - Proxy IP per WAN interface
  - Configuration override of proxy IP per WAN link
-- Proxy IP for public URLs accessed by SSR. For example;
- - Artifactory
+- Proxy IP for public URLs accessed by SSR. For example:
  - Websense
  - Sophos Server
  - Juniper Software download
