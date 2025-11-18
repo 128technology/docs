@@ -80,11 +80,7 @@ SSR Software Factory reset removes system files and zero-writes unallocated data
 The `restore system factory-default` command performs the following steps: 
 
 - Reset the device configuration to the factory defaults found on the device hard drive.
-
 - Commit the configuration.
-
-- Check the root directory for any executables and run any that are found.
-
 - Reboot the device.
 
 ```
