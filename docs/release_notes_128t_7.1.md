@@ -42,13 +42,13 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.1.0-xxr1
 
-**Release Date:** November 20, 2025
+**Release Date:** November 25, 2025
 
 ### New Features
 
 - **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 devices provide the ability to reset the device to either a pre-defined rescue (or **Golden**) configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config-factory-reset.md).
 ------
-- **I95-53402 SSR400/SSR440 Chassis Manager:** The SSR400 and SSR440 support an integrated Chassis Manager to help identify operations, connectivity, temperature, and provide insight into other vital operating data. For more information, see the [SSR Chassis Manager](ssr-chassis-manager.md).
+- **I95-53402 SSR400/SSR440 Chassis Manager:** The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. For more information, see the [SSR Chassis Manager](ssr-chassis-manager.md).
 ------
 - **I95-53405 5G modem support:** Support for 5G modems as provided in the SSR400 and SSR440 devices has been added. 
 ------
