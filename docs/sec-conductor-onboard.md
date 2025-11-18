@@ -9,7 +9,7 @@ When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505
 
 ## Configuration
 
-Three components: Onboarding conductor, router, Operational conductor. 
+Configuration components: Onboarding conductor, router, Operational conductor. 
 
 On the onboarding conductor create the minimum router configuration necessary for secure onboarding;
 
@@ -168,16 +168,7 @@ The CA certificate is read from disk at the location given in `authority > secur
 
 The next step in the process is to generate an onboarding token from conductor Web interface, command line, or using APIs. The generated tokens are signed by the conductor’s private key so that they cannot be altered once generated. The SSR supports two modes; Authority Wide and Router Specific tokens. These are mutually exclusive and are defined in the configuration.
 
-#### Authority-Wide Tokens
-
-When using a single authority level PSK, the token can be generated once and used for any router within that authority. The authority wide token contains the following information:
-
-- conductor-public-cert: a base64 encoded public cert
-- conductor-ca-cert: a base64 encoded ca cert
-- secret: a base64 encoded 48 byte string
-- expiration: 1234567
-
-#### Router-Specific Tokens
+### Router-Specific Tokens
 
 For better control over distribution and re-use of tokens the user can request unique tokens per router. In this mode it is required that an asset-id be assigned to each of the node(s) within the router before generating a token. 
 
