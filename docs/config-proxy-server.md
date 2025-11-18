@@ -27,7 +27,7 @@ By default the SSR uses DHCP to identify the SSR web proxy addresses. To leverag
 
 ### Static 
 
-If you prefer to set the proxy IP addresses manually, configure the `management-proxy mode` to `static`, and enter the IP address and port to be accessed by the SSR.
+To set the proxy IP addresses manually, configure the `management-proxy mode` to `static`, and enter the IP address and port to be accessed by the SSR.
 
 ```
 config authority router router management-proxy mode   static
