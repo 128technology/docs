@@ -16,6 +16,10 @@ Offline mode conductor and router upgrades to image-based installations are deta
 ### Upgrade Considerations
 
 :::important
+The minimum starting version for a conductor upgrade to 7.0.1 is 6.3.5. If the conductor is not currently running at least 6.3.5, first upgrade to this version and wait for all managed routers to reach the synchronized state prior to upgrading to 7.0.1. There are new keying requirements enforced by the conductor in 7.0.1, and if the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
+:::
+
+:::important
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
@@ -40,6 +44,17 @@ An issue has been identified that may be observed in conductor deployments runni
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
 ## Release 7.0.1-1r1
+
+:::important
+The minimum starting version for a conductor upgrade to 7.0.1 is 6.3.5. If the conductor is not currently running at least 6.3.5, first upgrade to this version and wait for all managed routers to reach the synchronized state prior to upgrading to 7.0.1. There are new keying requirements enforced by the conductor in 7.0.1, and if the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
+:::
+
+:::note
+SSR-OS support for the team interface has been removed in 7.0.1. There are two significant impacts with this change:
+
+- If you have a conductor deployed with an L3 hop on the HA interface, update your static route to point to the parent interface. The exception to this is if the interface is configured as `non-forwarding shared`. 
+- The HA Sync Redundancy Plugin is not supported on 7.0.
+:::
 
 **Release Date:** October 14, 2025
 
@@ -91,7 +106,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-60041 `initialize conductor` command sets password for all system accounts:** The system accounts `admin`, `t128` and `root` are simultaneously set to the provided password hash, ensuring default passwords are not used.
 ------
-- **I95-60220 SSR OS Upgrade:** SSR OS distribution has been upgraded to Oracle Linux 9.
+- **I95-60220 SSR OS Upgrade:** SSR OS distribution has been upgraded to a customized upstream Linux distribution.
 ------
 - **WAN-2284 Critical IDP Profile:** A new **Critical** attack list profile that is more lightweight has been added to reduce the commit/policy change times. 
 

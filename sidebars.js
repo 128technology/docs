@@ -78,12 +78,13 @@ module.exports = {
         ]
       },
     ],
-    "Supported Hardware Platforms":[
+    "Hardware Support":[
       "supported-devices-overview",
       "intro_system_reqs",
       "config_firewall_ports",
       "about_supported_platforms",
       "about_certified_platforms",
+      "ssr-chassis-manager",
       "rma_wan_assurance",
     ],
     "Concepts": [
@@ -276,6 +277,7 @@ module.exports = {
         "type": "category",
         "label": "Network Features",
         "items": [
+          "config-proxy-server",
           "config_dhcp",
           "config_session_recovery",
           "config_forward_error_correction",
@@ -380,7 +382,8 @@ module.exports = {
           "sec-disable-ports",
           "config-custom-certs",
           "sec-cert-based-encrypt",
-          "enhanced-sec-key-mgmt",          
+          "enhanced-sec-key-mgmt", 
+          "config-factory-reset",         
         ],
       },
       {
