@@ -39,9 +39,13 @@ This process deletes all configurations on the device, including the backup conf
 
 A log file of the platform cleanup operation is written out to `/tmp` while the `reset factory-default` command is being run. After the device is scrubbed, the log file is migrated to `/var/log` for inspection.
 
+:::note
+Factory reset does not revert the device to the software version installed during manufacture. The device remains at the current software version. 
+:::
+
 ### SSR4x0 Fail-Safe Restore Process
 
-The following procedure is to be used as a recovery method when **both** the Serial Console Port and Firmware Recovery have been set as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible). 
+The following procedure is to be used as a recovery method when **both** the [Serial Console Port](sec-disable-ports.md#disable-serial-console-port) and [Firmware Recovery](sec-disable-ports.md#disable-firmware-recovery) have been set as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible). 
 
 If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the Fail-Safe Restore process for recovery.
 
@@ -76,11 +80,7 @@ SSR Software Factory reset removes system files and zero-writes unallocated data
 The `restore system factory-default` command performs the following steps: 
 
 - Reset the device configuration to the factory defaults found on the device hard drive.
-
 - Commit the configuration.
-
-- Check the root directory for any executables and run any that are found.
-
 - Reboot the device.
 
 ```
@@ -177,5 +177,3 @@ Note: Both export-path (kebab-case) and exportPath (camelCase) are provided for 
 - 401 Unauthorized: Authentication required
 - 403 Forbidden: Insufficient permissions (requires WRITE access to entire config)
 - 404 Not Found: Configuration not found or other export errors
-
-

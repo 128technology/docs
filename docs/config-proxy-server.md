@@ -9,8 +9,7 @@ The following support is provided for proxy server configuration:
 
 - Proxy IP per WAN interface
  - Configuration override of proxy IP per WAN link
-- Proxy IP for public URLs accessed by SSR. For example;
- - Artifactory
+- Proxy IP for public URLs accessed by SSR. For example:
  - Websense
  - Sophos Server
  - Juniper Software download
@@ -28,7 +27,7 @@ By default the SSR uses DHCP to identify the SSR web proxy addresses. To leverag
 
 ### Static 
 
-If you prefer to set the proxy IP addresses manually, configure the `management-proxy mode` to `static`, and enter the IP address and port to be accessed by the SSR.
+To set the proxy IP addresses manually, configure the `management-proxy mode` to `static`, and enter the IP address and port to be accessed by the SSR.
 
 ```
 config authority router router management-proxy mode   static
@@ -38,7 +37,7 @@ config authority router router management-proxy proxy 10.0.0.1 port     5000
 
 This same address will be used for both nodes in an HA pair, and across all WAN interfaces.
 
-Optionally, you can use the Hardware Bootstrapper onboarding.json to set the static IP address and port number until the router is onboarded to the conductor. 
+Optionally, you can use the `onboarding-config.json` to set the static IP address and port number until the router is onboarded to the conductor. For additional information about using the `onboarding-config.json` see [Onboarding Configuration](initialize_u-iso_adv_workflow.md#onboarding-configuration-file).
 
 ### Learned 
 

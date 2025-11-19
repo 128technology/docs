@@ -86,7 +86,6 @@ configure authority router router1
 By default, `peer-validation` is false. 
 
 ## Provisioning Process
-**can we modify the custom certs prov process for use here? Is it similar?**
 
 Use this procedure to provision a certificate for use with Enhanced Security Key Management.
 
@@ -304,6 +303,3 @@ Audit events and logs are generated for the following events:
 `show stats security peer certificate expired` 
 `show stats security peer certificate invalid` 
 `show stats security peer certificate revoked` 
-
-
-
