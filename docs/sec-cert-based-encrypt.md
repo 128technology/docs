@@ -8,7 +8,7 @@ sidebar_label: Certificate-based Security Encryption
 | ------- | --------------------------- | 
 | 7.1.0   | Certificate-based Security Encryption support added. | 
 
-In addition to Enhanced Security Key Management, the SSR offers certificate based security encryption to encrypt, validate, and exchange certificates between devices within the network. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+In addition to Enhanced Security Key Management, the SSR offers certificate based security encryption to encrypt, validate, and exchange certificates between devices within the network. 
 
 ## Certificate Management 
 
@@ -32,27 +32,15 @@ Before the certificate is accepted, the following three validity checks take pla
 
 If the above three checks pass, then the certificate is accepted and imported. 
 
-**
-Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
-
-Certificates are issued to every Juniper manufactured router by the Juniper Networks Certificate Authority. Use of the **Rekey** feature requires that a certificate be provided during installation. The base certificate can be replaced during initial software installation, however all routers in a single authority MUST have certificates issued by the same certificate hierarchy. Otherwise, replacing a certificate may be done during a maintenance window.
-**
-
 ### Certificate Security
 
 The Certificate Revocation List (CRL) Manager handles the discovery, fetching, and periodic updates to CRLs. From this process a list of all known revoked certificates from all CRL sources is created, and the master list is published to disk.
 
 The following are some details of certificate security.
 
-- The Trusted Platform Module (TPM) stores the private key of the base certificate. The certificate and any keys are not included in any configuration.
-
 - Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines. 
 
-- When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create an elliptic-curve public/private key pair (see [RFC8422]). 
-
-- Contained within the SVR certificate is a router identifier, which must match the identifier of the router in the peer configuration. This router identifier is a UUID and guaranteed to be unique per node, even across RMAs.
-
-- The public key is used to create an X.509 certificate signing request (CSR) with the common name field set to the router's UUID. A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
+- When a certificate is configured to link to a certificate on disk that does not exist, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before secure communication can take place.  
 
 ## Certificate Revocation List
 
@@ -75,16 +63,6 @@ configure authority
 - `polling-interval`: Frequency in hours at which to fetch CRLs. Default is 24.
 - `backoff-interval`: Delay in seconds to apply to the polling-interval. Default is 60.
 
-### Peer Certificate 
-
-Peer certificate validation can be configured on a per-router basis as needed. This allows individual routers to check the validity of a peer certificate against the conductor provided CRL, as well as the local in-memory cache of revoked or expired certificates.
-
-```
-configure authority router router1
-	peer-validation true
-```
-By default, `peer-validation` is false. 
-
 ## Provisioning Process
 
 Use this procedure to provision a certificate for use with Enhanced Security Key Management.
@@ -94,6 +72,8 @@ Use this procedure to provision a certificate for use with Enhanced Security Key
 A configured, functioning Certificate Authority (CA) is required.
 
 ### Install the Trusted CA Certificate
+
+Installing a trusted CA certificate on the SSR uses the existing functionality as described in [Adding a Trusted Certificate](howto_trusted_ca_certificate.md).
 
 In order to provision a certificate on the system, install the public certificate of the Certificate Authority, as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file. For example:
 
@@ -195,15 +175,132 @@ xueOlHpcNYuZlygk_-VuLPJ_gWRADyj4HjlTibt_TzMvrvv_b7V37uFHgdiR_sfaj2DOGj4T4sRz6dZH
 
 Store the value of the token in a file called `token.txt` for use later.
 
-#### Installing Certificates
+### Issue a Private-key Creation Request
 
-Installing a trusted CA certificate on the SSR uses the existing functionality as described in [Adding a Trusted Certificate](howto_trusted_ca_certificate.md).
+The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, we need to instruct the SSR to create a private key. To accomplish this, we provide the SSR some details, including:
 
-**COMMENT: I believe the above paragraph is unnecessary if we are using the Provisioning Process, but for this iteration of the feature I need to know which is used** 
+- what algorithm it should use, 
+- how big the key size should be, and 
+- what the key should be named. 
+
+:::note
+The name must be the same across key request, the certificate signing request, and certificate ingestion.
+:::
+
+Create the following file (updated to the customers algorithm/key size preference):
+
+**key_request.json**
+
+```
+{
+    "name": "custom_ssr_peering", 
+    "algorithm": "RSA",
+    "rsa_key_size": "2048"
+}
+```
+
+Now that we have the key request details ironed out, we can issue the request:
+
+```
+curl -k -X POST https://10.27.35.89/api/v1/private-key
+  -H "Content-Type: application/json"
+  -H "Authorization: Bearer $(cat token.txt)"
+  -d @key_request.json
+```
+
+Upon success, you can verify that the key was created by logging on to the SSR, `ssh` into a linux shell, and ensuring that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
+
+### Issue a `certificate-signing-request`
+
+In order to create a signed certificate by the CA for the SSR, the CA needs a `certificate-signing-request`. Instruct the SSR to create the request using the values provided; at a minimum the `name` and `common-name`. The SSR must sign the request with its private-key.
+
+1. Create a file that contains the body of the CSR-request. At a minimum this must include the name `custom_ssr_peering`, and the common name:
+
+**csr_request.json**
+
+```
+{
+    "name": "custom_ssr_peering",
+    "common_name": "SSR_12345679"
+}
+```
+
+This example represents the minimum requirements. Any of the following additional details may be added to the request:
+
+- country_name (string, optional): The country name.
+- state_province_name (string, optional): The state or province name.
+- locality_name (string, optional): The locality name.
+- organization_name (string, optional): The organization name.
+- organizational_unit_name (string, optional): The organizational unit name.
+- email_address (string, optional): The email address.
+- algorithm (string): The cryptographic algorithm family to use when generating the private key. Acceptable options are: (RSA, ECC)
+- rsa_key_size (integer, optional): The RSA key size. Only valid when algorithm is set to “RSA”. Valid key sizes are any multiple of 256 between 2048 and 4096.
+- ecc_curve (string, optional): The ECC curve to use. Only valid when algorithm is set to “ECC”.Valid curves are: (SECP256R, SECP384R1, SECP521R1)
+- validity_period (integer, optional): The validity period in days.
+
+2. Issue the CSR request to the SSR:
+
+```
+curl -k -X GET https://10.27.35.89/api/v1/certificate-request     
+  -H "Content-Type: application/json"    
+  -H "Authorization: Bearer $(cat token.txt)"    
+  -d @csr_request.json
+```
+
+The SSR returns the following certificate request:
+
+```
+{
+  "csr": "-----BEGIN CERTIFICATE REQUEST-----
+MIICgTCCAWkCAQAwFzEVMBMGA1UEAwwMMTkyLjE2OC4xLjI1MIIBIjANBgkqhkiG
+
+<edited for security>
+
+0mAvmOoyY3Tmzf4ydMin57/7Cmgt4wpJMHUxJCSx/7c3YwDNHlsQPkMi4y4WPerl
+PaH00Oujf4Jj+8EZgzYAACPQUJRW
+-----END CERTIFICATE REQUEST-----"
+}
+```
+
+Provide the certificate signing request to the CA. 
+
+### Ingest the Certificate
+
+When the signed certificate is returned, instruct the SSR to ingest the certificate. The certificate must be associated with the name used in the two earlier API calls. Create the following json file:
+
+**certificate.json**
+
+```
+{
+    "name": "custom_ssr_peering",
+    "certificate": "-----BEGIN CERTIFICATE-----
+MIIF3DCCBESgAwIBAgIKAf9HQjJKSQd1lTANBgkqhkiG9w0BAQsFADBaMQswCQYD
+VQQGEwJERTERMA8GA1UECgwIT3BlblhQS0kxDDAKBgNVBAsMA1BLSTEqMCgGA1UE
+
+<edited for security>
+
+NL9HxKRhLXhOFLKgAzXA+PmWEdLbqY19QMLVkPERHk9P90o1lZVqajf8iLMj8jbf
+aEJN1Q20LWTsBk4vZDp4QtdgPimnp/dR8ZNV2aPmyelIx29cnkALu5/i7WhfRDN7
+nN+SyOi2yA4nuorapmprew==
+-----END CERTIFICATE-----"
+}
+```
+
+Once the certificate is successfully ingested, verify that the certificate was accepted.
+
+1. `ssh` to the SSR. 
+2. Log in as the root user: `sudo su`.
+3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
+  `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
+
+### Configure the Certificate
+
+**need pcli output from Mike
 
 ## Certificate Replacement or Revocation
 
 When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
+**restate what this means for just the certificates
 
 - `fail-soft` results in a notification that the certificate is no longer valid and that appropriate action must be taken.
 
@@ -215,15 +312,12 @@ Expiring certificates will generate the following alarms.
 
 - Within a month; Minor alarm. 
 - Within a week; Major alarm. 
-- Currently expired or otherwise invalid; Critical alarm. 
+- Currently expired, revoked, or otherwise invalid; Critical alarm. 
 
 When a router's certificate is about to expire or needs to be replaced, a new certificate can be added to the system using the [installation procedure](howto_trusted_ca_certificate.md). Once the new certificate file has been loaded into the system, an event is triggered to restart the peer authentication procedure.
 
-## High Availability
+**existing cert about to expire, how to get a new one
 
-Each node of an HA pair manages its own unique certificate - certificates are not shared between nodes. Each node manages its own unique connection to its peers.
-
-When two nodes are configured as a redundant pair, each of the keys are exchanged between nodes. This will avoid rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
 
 ## Troubleshooting
 
@@ -278,8 +372,9 @@ Audit events and logs are generated for the following events:
  GMT","crl_url":"http://10.27.39.143/testCrl.pem","size":14162,"total_entries":279,"added_entries":0,"removed_entries":0,"success":true,"certificate_authority":"/C=US/O=Google Trust Services/CN=WR2"}
  Permitted:          True
 ```
+**Mike will verify this - probably not in the software
 
-### Show Stats Commands 
+<!---### Show Stats Commands 
 
 #### Event Counters
 
@@ -303,3 +398,4 @@ Audit events and logs are generated for the following events:
 `show stats security peer certificate expired` 
 `show stats security peer certificate invalid` 
 `show stats security peer certificate revoked` 
+--->
