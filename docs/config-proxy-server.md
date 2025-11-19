@@ -37,7 +37,7 @@ config authority router router management-proxy proxy 10.0.0.1 port     5000
 
 This same address will be used for both nodes in an HA pair, and across all WAN interfaces.
 
-Optionally, you can use the Hardware Bootstrapper onboarding.json to set the static IP address and port number until the router is onboarded to the conductor. 
+Optionally, you can use the `onboarding-config.json` to set the static IP address and port number until the router is onboarded to the conductor. For additional information about using the `onboarding-config.json` see [Onboarding Configuration](initialize_u-iso_adv_workflow.md#onboarding-configuration-file).
 
 ### Learned 
 
