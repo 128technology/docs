@@ -98,7 +98,7 @@ Press a number/letter to change current selections,
 Installation will begin in 30 seconds...
 ```
 
-5. The default install options for the SSR400/440 are **FIPS enabled** and **cloud-init disabled**. Press 1 or 2 to toggle the options if required. Press **Enter**, or wait for the countdown timer to expire. The System LED flashes Teal, indicating the installation is in progress.
+5. The default install options for the SSR400/440 are **FIPS enabled** and **cloud-init disabled**. Press 1 or 2 to toggle the options if required. Press **Enter**, or wait for the countdown timer to expire. The System LED changes to Teal, indicating the installation is in progress.
 
 ``` 
 Install device selections total 2 GB for boot and 81 GB for root
@@ -141,13 +141,13 @@ System will shutdown in 30 seconds...
 
 6. Press **Esc** to reboot the system. Optionally, you can choose to power down and power up the system. 
 
-7. After the OS boot has completed, the hardware bootstrapper runs. The System LED will briefly change to Teal during this activity. Once the SSR software application is up and running, the system LED will show:
+7. After the OS boot has completed, the hardware bootstrapper runs. The System LED will change to Teal twice during this activity. Once the SSR software application is up and running, the system LED will show:
 
  - Red for out-of-service
  - Amber for degraded service
  - Green for in-service
 
-After the device has booted into the SSR software, you must initialize your device as either a Conductor, conductor-managed Router, or a Mist-managed Router. The recommended method is using the Web Interface. 
+After the device has booted into the SSR software, you must initialize your device as either a conductor-managed Router or a Mist-managed Router. The recommended method is using the Web Interface. 
 
 As a first step, connect your laptop or other device to any of the designated LAN ports and connect to 192.168.128.1 to access the [SSR initialization Web Workflow](initialize_u-iso_device.md). 
 
