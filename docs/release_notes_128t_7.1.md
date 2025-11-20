@@ -94,10 +94,23 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-61999 ATT SIM card MNC code update:** Resolved an issue with the ATT SIM card using an unexpected MNC code.
 ------
+- **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
+------
 - **I95-62071 Multicast Traffic contributing to service area resource contention:** The resource contention issue has been resolved.
 ------
 - **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
 ------
+- **I95-62258 Packet steered to egress non-existent interface causes highway crash:** Added logic to capture the errant packet and prevent the crash. An exception is logged so that the issue can be more easily rectified.
+------
 - **I95-62369 Session error record shows 0s for session-id:** Resolved an issue where the session record information was incomplete. The SSR now also uses the redundancy session data to gather records.
 ------
 - **I95-62449 HA conductor fails to initialize secondary node:** Resolved an issue with password validation that was preventing the secondary node from accessing the primary node to download files needed for initialization. The user is now prompted to enter the new password for the primary node when setting up the secondary node. 
+------
+- **I95-62703 Highway process crashed when BGP over SVR is activated:** Resolved an issue where the unicast code path was incorrectly calling the multicast variant of getBestMultiHomedPathIndex() and causing a highway crash.
+------
+- **I95-62742 Cannot see sync errors for nodes that are stuck synchronizing:** Resolved an issue where errors in `show assets` disappeared when the synchronizing state retries. 
+------
+
+
+
+

@@ -295,39 +295,69 @@ Once the certificate is successfully ingested, verify that the certificate was a
 
 ### Configure the Certificate
 
-**need pcli output from Mike
+The certificate can be configured as a file on disk, or the content pasted into the configuration. This example describes storing the certificate as a file on disk, which is the more secure operation. 
+
+The certificate name and file name must match each other, and match the name used in the API. Configuring `certificate-validation-mode` defines the behavior when validating the certificate, either `warn` which generates a warning and allows the importing of non-secure certificates, or `strict` which rejects any non-secure certificates. 
+
+```
+configure 
+    authority 
+        router    red-router 
+            name  red-router
+            node  red-node 
+                name  red-node
+
+        client-certificate   test_certificate
+            name             test_certificate
+            validation-mode  warn
+            file             test_certificate
+        exit
+    exit
+exit
+```
 
 ## Certificate Replacement or Revocation
 
-When a certificate is revoked, expired, or invalid, the SSR generates an alarm. Based upon the SSR configuration, it will either `fail-soft` (the default behavior) or `fail-hard`.
-**restate what this means for just the certificates
-
-- `fail-soft` results in a notification that the certificate is no longer valid and that appropriate action must be taken.
-
-- `fail-hard` sends a notification that the certificate is no longer valid, and removes all peering relationships. The peer connection is severed and the device is prevented from participating in SVR.
-
-### Expiring Certificate
-
-Expiring certificates will generate the following alarms.
+When a certificate is revoked, expired, or invalid, the SSR generates the following alarms:
 
 - Within a month; Minor alarm. 
 - Within a week; Major alarm. 
 - Currently expired, revoked, or otherwise invalid; Critical alarm. 
 
-When a router's certificate is about to expire or needs to be replaced, a new certificate can be added to the system using the [installation procedure](howto_trusted_ca_certificate.md). Once the new certificate file has been loaded into the system, an event is triggered to restart the peer authentication procedure.
+In this situation, a new certificate can be added to the system. The method to add the certificate should be consistent with earlier additions; If you used the [installation procedure](howto_trusted_ca_certificate.md), it is recommended to use that method. If you used the API workflow, it is recommended to use the PUT API shown below to update the certificate.
 
-**existing cert about to expire, how to get a new one
+`PUT /api/v1/certificate`
 
+```
+  Request body (JSON):
+  {
+    "name": string,         // Required: Name of the certificate to update
+    "certificate": string   // Required: Certificate data
+  }
+``` 
+
+When used in conjunction with Enhanced Security Key Management, if the peer's certificate is revoked, expired, or invalid, the behavior (response) can be defined in the configuration, and the SSR will either `fail-soft` (the default behavior) or `fail-hard`.
+
+- `fail-soft` results in a notification that the certificate is no longer valid and that appropriate action must be taken.
+
+- `fail-hard` sends a notification that the certificate is no longer valid, and removes all peering relationships. The peer connection is severed and the device is prevented from participating in SVR.
+
+See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for additional information. 
 
 ## Troubleshooting
 
 Use the following information to help troublshoot certificate events or issues.
 
-### PCLI commands
+### From the Command Line
 
-- `show certificate` - Show basic certificate information
-- `show certificate detail` - Show all OpenSSL details about the certificate
-- `show certificate crl` - Show basic information about the CRL (including source)
+- `show certificate ca [name <name>] [node <node>] [<verbosity>]` - Display certificate authority certificate data. This command shows all certificates with the CA:TRUE flag set.
+  ```
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+  ```
+- `show certificate webserver` - Display webserver certificates.
+- `certificate-revocation [node <node>] [<verbosity>]` - Shows the certificate revocations on a system. 
 
 ### Audit Events/Logging
 
@@ -372,30 +402,3 @@ Audit events and logs are generated for the following events:
  GMT","crl_url":"http://10.27.39.143/testCrl.pem","size":14162,"total_entries":279,"added_entries":0,"removed_entries":0,"success":true,"certificate_authority":"/C=US/O=Google Trust Services/CN=WR2"}
  Permitted:          True
 ```
-**Mike will verify this - probably not in the software
-
-<!---### Show Stats Commands 
-
-#### Event Counters
-
-`show stats security CSR success` 
-`show stats security CSR failure` 
-`show stats security certificate import success` 
-`show stats security certificate import failure` 
-`show stats security CRL fetch success` 
-`show stats security CRL fetch failure` 
-`show stats security CRL ingestion success` 
-`show stats security CRL ingestion failure `
-
-#### Certificate Event Counters
-
-`show stats security certificate expired` 
-`show stats security certificate invalid` 
-`show stats security certificate revoked` 
-
-#### Peer Certificate Event Counters - SVRv2
-
-`show stats security peer certificate expired` 
-`show stats security peer certificate invalid` 
-`show stats security peer certificate revoked` 
---->
