@@ -9,108 +9,89 @@ When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505
 
 ## Configuration
 
-Configuration components: Onboarding conductor, router, Operational conductor. 
+Configure the Conductor where the router will onboard.
+- Configure the conductor to accept the router.
+- Run the `create token` command on the conductor to create the token for the router.
 
-On the onboarding conductor create the minimum router configuration necessary for secure onboarding;
+### Prerequisites
 
-- thing one
-- thing two
-- thing three
-Run the `create token` command for the router to create the token. 
+- The `secure-conductor-onboarding mode` must be enabled
+- The `secure-conductor-onboarding public-key` field must be configured
+- The `secure-conductor-onboarding ca-certificate` field must be configured
 
-The SSR4x0 is flashed with an image that tells it upon boot to reach out to Mist to get the onboarding conductor connection information. 
-
-The router then connects to the Onboarding Conductor, and receives the the SCO token, the certificates, and the IP address of the Operational Conductor.
-
-It redirects to the Operational Conductor to complete the secure conductor onboarding process which includes downloading the SVR configs, certificates, and necessary pre-shared secrets to operate in a secure manner/environment.
-
-Use the information in this guide to configure the SCO process. 
-
-**Prerequisites**
-
-1.  The secure conductor onboarding mode must be enabled
-2.  The secure-conductor-onboarding > public-key field must be configured
-3.  The secure-conductor-onboarding > ca-certificate field must be configured
-
-To provide a secure and mutually authenticated onboarding mechanism, the following information must be configured and in place:
+To provide a secure and mutually authenticated onboarding mechanism, the following information must be configured.
 
 - Pre-shared key: The onboarding pre-shared key is a 48-character alpha-numeric string, configured at the authority or the router level. This key is mandatory for the SCO process.
-- Conductor Public certificate: A public-private key certificate
+- Conductor Public certificate: A public-private key certificate.
 - Conductor CA certificate: Optionally, you can configure a public certificate signed by a preferred CA signing authority. 
 
-The public certificate and CA certificate are configured on the conductor.
-
-- must be configured at ALL(?) the Authority, Conductor, and router level
-    - what has to be configured at each level?
+The public certificate and CA certificate are configured on the conductor at the Authority, Conductor, and Router level.
 
 ### Authority Level Configuration Parameters
 
 The following parameters are required, and are configured at the Authority level.
 
-#### `configure authority secure-conductor-onboarding`
+#### `configure authority secure-conductor-onboarding public-certificate` 
 
-From the GUI, **authority > router > node > secure-conductor-onboarding**
+This configures the public certificate which the conductor will present on port 933 to prove that it is the correct conductor. This references the `client-certificate` list.
 
-**`mode`**
+#### `configure authority secure-conductor-onboarding ca-certificate`
 
-- `disabled` (default)
-- `psk-only`: Configured on devices with no TPM, but which require the Sceure Conductor Onboarding workflow.
-- `weak`: This setting enables, SCO but allows the router to use a self-signed certificate. This conductor will skip the CA certificate validation for this router.
-- `strong`: On SSR devices manufactured with a device ID (SSR400/440), `strong` mode ensures that the asset-id matches the serialNumber field in the subject line of the router’s public certificate. For vTPM workflows, the router’s endorsement key must match the configuration at **authority > router > node > secure-conductor-onboarding > endorsement-key**.
+This identifies the certificate to be included in the token, referencing the  `trusted-ca-certificate` list. This must be the CA certificate used to sign the public certificate, and is verified at commit time.
 
-- **authority > secure-conductor-onboarding > pre-shared-secret**: 48-character alpha-numeric string  
-- **authority > secure-conductor-onboarding > public-certificate** This configures the public certificate which the conductor will present on port 933 to prove that it is the correct conductor. This references the **authority > client-certificate** list.
-- **authority > secure-conductor-onboarding > ca-certificate**: This identifies the certificate to be included in the token. This references the **authority > trusted-ca-certificate** list. This must be the ca certificate used to sign the public certificate, and is verified at commit time.
+### Router Level Configuration Parameters
 
+The following parameters are required, and are configured at the Router level.
 
-### Per Router Configuration
+#### `configure authority router secure-conductor-onboarding mode`
 
-The following parameters are required, and are configured at the router level.
+- `disabled`: Default is true, must be false to enable.
+- `psk-only`: Configured on devices with no TPM, but which require the Secure Conductor Onboarding workflow.
+- `weak`: This setting enables SCO but allows the router to use a self-signed certificate. This conductor will skip the CA certificate validation for this router.
+- `strong`: On SSR devices manufactured with a device ID (SSR400/SSR440), `strong` mode ensures that the asset-id matches the serial number field in the subject line of the router’s public certificate. For vTPM workflows, the router’s endorsement key must match the `endorsement-key` configuration. 
 
-•   authority > router > secure-conductor-onboarding > pre-shared-secret
-o   When SCO is enabled, any empty PSK will auto generate random 32-byte alphanumeric string using FIPS approved highly secure DRBG function from OpenSSL library on the conductor. Once generated, the key will not automatically change and can be updated by the user if necessary.
-•   authority > router > secure-conductor-onboarding > mode
-o   auto (default) – defer to the authority level setting
-o   disabled – means use legacy onboarding model
-o   psk-only – same as above
-o   weak – same as above 
-o   strong – same as above 
-o   strict – same as above
+#### `configure authority router secure-conductor-onboarding pre-shared-secret` 
+
+The pre-shared secret is a 48-character alpha-numeric string. When enabled, any empty PSK will auto generate a random 48-byte alphanumeric string using the FIPS-approved, highly secure DRBG function from OpenSSL. Once generated, the key does not automatically change. It can be updated by the user if necessary.
 
 ### Conductor Configuration
 
-To enable this feature on the conductor, a few prerequisites must be met.
-1.  The secure conductor onboarding mode should not be disabled
-2.  The secure-conductor-onboarding > public-key field must be configured
-3.  The secure-conductor-onboarding > ca-certificate field must be configured
-When all routers have SCO enabled, the legacy asset-id based onboarding will be disabled and thus port 4505 and 4506 will be disabled on the conductor to disable any devices not using this feature will fail to onboard to the conductor. In addition, if a SCO enabled device onboards using the legacy method or vice versa, the onboarding will be rejected.
+To enable this feature on the conductor, verify the following:
 
-To provide a secure and mutually authenticated onboarding mechanism, the following additional pieces of information are required during the process
-1.  Pre-shared key
-2.  Conductor Public cert
-3.  Conductor CA cert
+- The `secure conductor onboarding mode` should not be disabled (see above).
+- The `secure-conductor-onboarding public-key` field must be configured.
+- The `secure-conductor-onboarding ca-certificate` field must be configured.
+
+When all routers have SCO enabled, the legacy asset-id based onboarding is disabled. Ports 4505 and 4506 are disabled on the conductor to prevent any devices not using this feature from onboarding. In addition, if a SCO enabled device attempts to onboard using the legacy method, the attempt will be rejected.
+
+To provide secure and mutually authenticated onboarding, the following additional information is required.
+
+- Pre-shared key
+- Conductor Public certificate
+- Conductor CA certificate
+
 The onboarding pre-shared key will be 48-character alpha-numeric string which can configured at the authority or the router level. This key is mandatory for SCO process to work successfully.
-The conductor is expected to contain a public-private key certificate with the additional option to sign the public cert by the organization’s preferred CA signing authority. The public cert and CA cert will be configured in the conductor data model.
+The conductor is expected to contain a public-private key certificate with the additional option to sign the public certificate by the organization’s preferred CA signing authority. The public certificate and CA certificate will be configured in the conductor data model.
 
-## Tokens
+## Token Creation
 
-Use the following command to create an authority level token:
+Create an authority level token:
 
 `create secure-conductor-onboarding token global [expiration-timeout <1d>]`
 
-Use the following command to create a router level token:
+Create a router level token:
 
 `create secure-conductor-onboarding token router <router> [expiration-timeout <1d>]`
 
 `expiration-timeout` is optionaL. Default is 1 day. 1 year (1y) is the maximum value.
 
-Token creation requires the following settings be in place:
+Token creation requires the following:
 
-1. The fields `authority > secure-conductor-onboarding > ca-certificate` and `secure-conductor-onboarding > public-certificate` must be configured, valid, and signed by the root CA of the conductor. 
+- The fields `authority > secure-conductor-onboarding > ca-certificate` and `secure-conductor-onboarding > public-certificate` must be configured, valid, and signed by the root CA of the conductor. 
 
-2. SCO must be enabled on the conductor at the Authority or per router level (can be both).
+- SCO must be enabled on the conductor at the Authority or per router level (can be both).
 
-3. The router and node must be configured with at least the minimum valid configuration. For example, a minimum configuration for a standalone node: 
+- The router and node must be configured with at least the minimum valid configuration. For example, a minimum configuration for a standalone node: 
 
 ```
 router min-router
@@ -126,7 +107,7 @@ exit
 
 If any checks fail, the `create system connectivity` command returns an error explaining why. This command can be run as many times as needed for each node. All information to form the token is present in the configuration.
 
-The CA certificate is read from disk at the location given in `authority > secure-conductor-onboarding > ca-certificate`. 
+The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`. 
 
 ## Token Management
 
@@ -140,13 +121,13 @@ Use the following command to create a router level token:
 
 `expiration-timeout` is optionaL. Default is 1 day. 1 year (1y) is the maximum value.
 
-Token Management requires the following settings be in place:
+Token Management requires the following settings:
 
-1. The fields `authority > secure-conductor-onboarding > ca-certificate` and `secure-conductor-onboarding > public-certificate` must be configured, valid, and signed by the root CA of the conductor. 
+- The fields `secure-conductor-onboarding ca-certificate` and `secure-conductor-onboarding public-certificate` must be configured, valid, and signed by the root CA of the conductor. 
 
-2. SCO must be enabled on the conductor at authority or per router level (can be both).
+- SCO must be enabled on the conductor at authority or per router level (can be both).
 
-3. The router and node must be configured with at least the minimum valid configuration. For example, a minimum configuration for a standalone node: 
+- The router and node must be configured with at least the minimum valid configuration. For example, a minimum configuration for a standalone node: 
 
 ```
 router min-router
@@ -162,15 +143,15 @@ exit
 
 If any checks fail, the `create system connectivity` command returns an error explaining why. This command can be run as many times as needed for each node. All information to form the token is present in the configuration.
 
-The CA certificate is read from disk at the location given in `authority > secure-conductor-onboarding > ca-certificate`. 
+The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`. 
 
 ### Token Contents
 
-The next step in the process is to generate an onboarding token from conductor Web interface, command line, or using APIs. The generated tokens are signed by the conductor’s private key so that they cannot be altered once generated. The SSR supports two modes; Authority Wide and Router Specific tokens. These are mutually exclusive and are defined in the configuration.
+The next step in the process is to generate an onboarding token from the conductor Web interface, command line, or using APIs. The generated tokens are signed by the conductor’s private key so that they cannot be altered once generated. The SSR supports two modes; Authority-wide and Router-specific tokens. These are mutually exclusive and are defined in the configuration.
 
 ### Router-Specific Tokens
 
-For better control over distribution and re-use of tokens the user can request unique tokens per router. In this mode it is required that an asset-id be assigned to each of the node(s) within the router before generating a token. 
+For better control over distribution and re-use of tokens the user can request unique tokens per router. In this mode it is required that an `asset-id` be assigned to each node within the router before generating a token. 
 
 - conductor-public-cert: a base64 encoded public cert
 - conductor-ca-cert: a base64 encoded ca cert
@@ -178,20 +159,46 @@ For better control over distribution and re-use of tokens the user can request u
 - asset-id: `[node0-asset-id, node1-asset-id]`
 - expiration: 1234567
 
-The onboarding-token will use the JSON Web Token format and the above represents the payload section. Additional information about the router configuration necessary for initialization can also be included in the token.
+The onboarding-token uses the JSON Web Token format, and the above represents the payload section. Additional information about the router configuration necessary for initialization can also be included in the token.
 
 ### Token Invalidation
 
-The onboarding tokens are stateless and self-contained. As a result, there needs to be a mechanism where the tokens can be invalidated if they are compromised or are not necessary anymore. There are a few different methods to perform invalidation:
+The onboarding tokens are stateless and self-contained. If a token is compromised or no longer necessary, they can be labeled invalid, and removed. Thefoloowing methods can be used to perform invalidation:
 
-1. Expiration: Token is automatically invalid past its expiration date. Since the token is signed by the conductor, the expiration time cannot be modified by the end user. 
+- Expiration: Token automatically becomes invalid after the expiration date. Since the token is signed by the conductor, the expiration time cannot be modified by the end user. 
 
 :::note 
-The conductor’s current date/time is used to validate the expiration. If the conductor undergoes any significant time skew that could result in accidental invalidation of user tokens. It’s imperative that conductor clocks towards an external NTP source.
+The conductor’s current date/time is used to validate the expiration. If the conductor undergoes any significant time skew, it could result in accidental invalidation of user tokens. It is imperative that conductors use an external NTP source.
 :::
 
-2. Change pre-shared key: To invalidate unexpired tokens, the user can change the pre-shared key in the conductor config. This would be done at the authority or router level depending on the mode of operation
-3. Update conductor certificate: When the conductor certificate expires and a new certificate is installed instead, all existing tokens signed by the old certificate will no longer be valid. The details of how to update the conductor cert should follow existing supported procedures and are outside the scope of this document.
+- Change pre-shared key: To invalidate unexpired tokens, the user can change the pre-shared key in the conductor configuration. This is done at the authority or router level, based on the mode of operation.
+
+- Update conductor certificate: When the conductor certificate expires and a new certificate is installed, all existing tokens signed by the old certificate are no longer valid. The details of how to update the conductor certificate follow existing supported procedures.
+
+## Secure Conductor Onboarding Workflow
+
+After the user generates an onboarding token, enter the token and other onboarding details in the onboarding UI or using CLI commands. Two main methods are supported to onboard a router:
+
+- UISO via `onboarding-config.json` suing the `secure-conductor-onboarding-token` command.
+- Mist Conductor Redirect – using a field alongside the conductor IP address. This information is sent to the router once SZTP has been complete and then passed to the router client to perform secure conductor onboarding.
+
+Once the process is initiated, the conductor CA certificate is loaded on the system as a trusted CA. This allows the device to trust the conductor in subsequent workflows. If empty, the CA cert validation is skipped.
+
+### Onboarding Workflow
+
+Once the Secure Conductor Onboarding workflow is initiated, the router performs the following:
+
+1. Establish a TLS connection to the conductor on port 933.
+2. Perform mutual authentication over TLS socket to ensure the client and server can trust one another.
+3. Once the connection is validated by both parties, exchange the persistent SSH keys for establish SSH tunnels between router and conductor.
+4. Router connects to conductor over port 930 using the SSH keys exchanged in previous steps.
+5. The router is prepped and initialized by the conductor. During this process, the system goes through the reboot cycle.
+
+Once the secure SSH tunnels are established, the SCO workflow concludes. All future communication between the router and conductor will occur on standard SSR to conductor ports such as 930, 4505, 4506, etc.
+
+
+
+
 
 
 
