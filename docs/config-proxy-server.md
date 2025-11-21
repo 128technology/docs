@@ -8,11 +8,11 @@ With only MPLS or private connectivity available, it is possible to leverage a c
 The following support is provided for proxy server configuration:
 
 - Proxy IP per WAN interface
- - Configuration override of proxy IP per WAN link
+	- Configuration override of proxy IP per WAN link
 - Proxy IP for public URLs accessed by SSR. For example:
- - Websense
- - Sophos Server
- - Juniper Software download
+	- Websense
+	- Sophos Server
+	- Juniper Software download
 - Proxy IP for an SSR to Mist connection (Secure ZTP Onboarding) 
 
 This document provides information to configure the SSR to identify and use the non-transparent proxy. That information can also be used to perform the [Mist secure ZTP onboarding process](sec-ztp-web-proxy.md).

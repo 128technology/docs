@@ -36,11 +36,7 @@ If the above three checks pass, then the certificate is accepted and imported.
 
 The Certificate Revocation List (CRL) Manager handles the discovery, fetching, and periodic updates to CRLs. From this process a list of all known revoked certificates from all CRL sources is created, and the master list is published to disk.
 
-The following are some details of certificate security.
-
-- Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines. 
-
-- When a certificate is configured to link to a certificate on disk that does not exist, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before secure communication can take place.  
+Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines. 
 
 ## Certificate Revocation List
 

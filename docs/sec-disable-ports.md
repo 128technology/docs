@@ -11,7 +11,7 @@ serial-console-enabled true
 recovery-mode-enabled true 
 reset-button-enabled true
 ```
-Use the following configuration commands to disable out of band management ports on the SSR 400/440 (Models 1 and 2) - the USB and Serial ports, and block the local admin access.
+Use the following configuration commands to disable out of band management ports on the SSR400 and SSR440 - the USB and Serial ports, and block the local admin access.
 
 #### Setting via PCLI:
 
@@ -48,7 +48,7 @@ When disabled (set to **false**), the pushbutton interrupt is disabled, and no a
 
 ### Disable Serial Console Port
 
-When disabled (set to **false**), the serial console is excluded from the kernel cmdline, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
+When disabled (set to **false**), the serial console is excluded from the kernel command line, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
 
 See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
 
@@ -60,7 +60,7 @@ See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for impo
 
 ### Uninterruptable Boot Process
 
-This feature is configured on the SSR4x0 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
+This feature is configured on the SSR400 and SSR440 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
 
 If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the Fail-Safe Restore process for recovery.
 
