@@ -119,3 +119,15 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-63206 `Get Dhcp Address` failed after retrying for 15 minutes:** Resolved an issue where the PCI address was being fetched from the wrong location. The PCI address is now retrieved from the resource file rather than the configuration. 
 ------
 - **I95-63334 HA node failover causing mismatched node IDs:** Resolved an issue where where Enhanced Security Key Management security exchange state may get stuck on HA node failover.
+
+### Caveats
+
+- **I95-63422 Unable to establish peering:** An issue has been identified where the factory reset process or bringing an online a new router results in the device getting stuck in a `cert-exchange-init` state when establishing peering using Enhanced Security Key Management. 
+
+	_**Workaround**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
+	
+	For factory reset of an existing router, remove the router from the neighborhood before re-onboarding the router. Ensure that the desired certificate is installed before adding the neighborhood back to the router and re-onboarding to the conductor.
+
+
+
+
