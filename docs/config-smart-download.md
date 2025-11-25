@@ -3,6 +3,12 @@ title: Smart Download
 sidebar_label: Smart Download
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.1.3-r2   | Smart OS Download support added. |
+
 Sometimes network connections can become unreliable, slow, or just plain break. To mitigate these disruptions, the SSR download process provides the following features for better recovery and control over software downloads.
 
 * [Failover Resiliency](#download-failover-resiliency)
@@ -15,14 +21,14 @@ Downloads that have been stopped either by a manual pause or due to connection i
 
 ## Download Failover Resiliency
 
-SSR images can be downloaded from a variety of sources, depending on software access mode (e.g., internet-only, prefer-conductor, conductor-only, offline-mode): the HA peer, both conductor nodes, artifactory, and the Mist proxy to artifactory (cloud deployments only).
+SSR images can be downloaded from a variety of sources, depending on software access mode (e.g., internet-only, prefer-conductor, conductor-only, offline-mode): the HA peer, the conductor, the Juniper repository, and the Mist proxy (cloud deployments only).
 
 To improve resiliency against network connectivity issues, the SSR queries available versions from all sources before beginning the download. It compiles a list of sources where the requested version is available and begins the download. If a request to a source fails, the SSR moves on to the next source. The following priority order is used for sources: 
 
-1. Peer 
+1. HA Peer 
 2. Conductor node 1
 3. Conductor node 2
-4. Artifactory
+4. Juniper repository
 5. Mist proxy
 
 Only when the SSR has tried all available sources and reached the consecutive failure threshold on each is the download considered **failed due to connectivity issues**. In that case, an error is reported and the download stopped. 
@@ -39,7 +45,6 @@ Example:
 request system software download pause version SSR-7.0.1-1
 request system software download pause router Router1 node Node1 version 6.3.6-1
 ```
-The GUI also supports pausing and resuming downloads.
 
 ### Auto-resume Download on WAN Failures
 
@@ -119,7 +124,7 @@ exit
 
 ### Sequenced HA Download
 
-The SSR can be configured to perform sequenced downloading; one node of an HA pair downloads an image from the remote repository, and the other node waits for it to complete. Once that download is complete, the second node will download it from the first. For HA routers, the download is NOT sequenced by default. To enable sequencing, use `request system software download router RouterName version SSR-X.Y.Z sequenced`.
+The SSR can be configured to perform sequenced downloading; one node of an HA pair downloads an image from the remote repository, and the other node waits for it to complete. Once that download is complete, the second node will download it from the first. This feature is not enabled by default. To enable sequencing, use `request system software download router RouterName version SSR-X.Y.Z sequenced`.
 
 :::note
 The second node will download the software from the first node, unless it encounters a connectivity issue. In that case, the router would move on to the next source as described in [Failover Resiliency](#download-failover-resiliency).
@@ -133,4 +138,4 @@ Use the `configure-authority-router-system-software-update-max-bandwidth` comman
 
 ## Show Download Progress
 
-To display the progress of a software download on the command line, use the `show system software download [{router <router> | resource-group <resource-group>}] [version <version>] [force] [node <node>]` command. 
+To display the progress of a software download on the command line, use the `show system software download [{router <router> | resource-group <resource-group>}] [version <version>] [node <node>]` command. 

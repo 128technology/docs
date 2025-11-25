@@ -3,6 +3,12 @@ title: Factory Reset
 sidebars_label: Factory Reset
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.1.3-r2   | SSR 4x0 Factory Reset support added. |
+
 The SSR software, SSR1x0, SSR1x00, and SSR4x0 series provide the ability to reset to factory defaults. The SSR software and SSR1x0/1x00 devices use a software reset to return to the original factory defaults, and remove customer configurations.
 
 The SSR400 and SSR440 provides software-activated reset as well as a reset button on the device. With the reset button, you have the option of resetting to a previously defined golden configuration, or reset to the factory configuration and perform a secure zeroization.
@@ -11,11 +17,11 @@ Use the information below to determine the best option for your deployment.
 
 ## SSR400 and SSR440 Factory Reset
 
-The SSR400 and SSR440 devices are equipped with a reset switch to perform the following actions:
+The SSR400 and SSR440 devices are equipped with a reset button to perform the following actions:
 
-1.	Press and hold for up to 4 seconds to **reboot** the device.
-2.	Press and hold for up to 15 seconds initiates a reset to a **rescue, or golden**, configuration.
-3.	Press and hold for up to 30 seconds initiates a reset to the **factory default** configuration.
+1.	Press and hold for 1 to 4 seconds to **reboot** the device.
+2.	Press and hold for 5 to 15 seconds initiates a reset to a **rescue, or golden**, configuration.
+3.	Press and hold for 16 to 30 seconds initiates a reset to the **factory default** configuration.
 
 Holding the reset button for longer than 30 seconds cancels any of the button press actions described above.  
 
@@ -25,7 +31,7 @@ This action is the standard system reboot, often performed as part of troublesho
 
 ### Reset to the Rescue Configuration
 
-Press and hold the **Reset** button for more than 5 seconds but less than 15 to load and commit the rescue configuration. The rescue, or golden configuration is a router-only configuration, and is used as a manual fall back if the device configuration becomes corrupt or is unable to establish communications with the network. 
+Press and hold the **Reset** button for more than 5 seconds but less than 15 to load and commit the rescue configuration. The rescue, or golden configuration is used as a manual fall back if the device configuration becomes corrupt or is unable to establish communications with the network. 
 
 Note that if a golden configuration has not been set, holding the reset button for 5-15 seconds does nothing.
 
@@ -33,7 +39,7 @@ The rescue, or golden configuration is set via API at onboarding. For informatio
 
 ### Factory Reset
 
-Press and hold the **Reset** button for up to 30 seconds to initiate a reset to the factory default configuration.
+Press and hold the **Reset** button for 16 to 30 seconds to initiate a reset to the factory default configuration.
 
 This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including passwords, secrets, and private keys for SSH, certificates, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
 
@@ -43,7 +49,7 @@ A log file of the platform cleanup operation is written out to `/tmp` while the 
 Factory reset does not revert the device to the software version installed during manufacture. The device remains at the current software version. 
 :::
 
-### SSR4x0 Fail-Safe Restore Process
+### SSR400/SSR440 Fail-Safe Restore Process
 
 The following procedure is to be used as a recovery method when **both** the [Serial Console Port](sec-disable-ports.md#disable-serial-console-port) and [Firmware Recovery](sec-disable-ports.md#disable-firmware-recovery) have been set as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible). 
 
