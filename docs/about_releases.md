@@ -35,7 +35,7 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 | Version | Initial GA Version | First Release Shipping Date | Latest GA Version | End of Engineering support | End of Support |
 | -- | -- | -- | -- | -- | -- |
-| Release 7.1 | [7.1.0](release_notes_128t_7.1.md#release-710-48r1) | November 25, 2025 | [7.1.0](release_notes_128t_7.1.md#release-710-48r1) | August 25, 2026 | February 25, 2027 |
+| Release 7.1 | [7.1.0](release_notes_128t_7.1.md#release-710-48r1) | December 4, 2025 | [7.1.0](release_notes_128t_7.1.md#release-710-48r1) | September 4, 2026 | March 4, 2027 |
 | Release 7.0 | [7.0.1](release_notes_128t_7.0.md#release-701-1r1) | October 14, 2025 | [7.0.1](release_notes_128t_7.0.md#release-701-1r1) | July 14, 2026 | January 14, 2027 |
 | Release 6.3 | [6.3.0](release_notes_128t_6.3.md#release-630-107r1) | September 30, 2024 | [6.3.6-6-sts](release_notes_128t_6.3.md#release-636-6-sts) | May 6, 2026 | November 6, 2026 |
 | Release 6.2 | [6.2.0](release_notes_128t_6.2.md#release-620-39r1) | November 16, 2023 | [6.2.9-lts](release_notes_128t_6.2.md#release-629-5-lts) | September 6, 2026 | March 6, 2027 |

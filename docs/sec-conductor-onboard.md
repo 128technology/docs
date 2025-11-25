@@ -82,7 +82,7 @@ In the current beta delivery (7.1.3-1r2) this step must be performed to disable 
 
     After the user generates an onboarding token, enter the token and other onboarding details in the onboarding UI or using CLI commands. There are two methods to onboard a router:
 
-    - Using the Command line: `create secure-conductor-onboarding-token` command and `onboarding-config.json`.
+    - Using the Command line: `create secure-conductor-onboarding token` command and `onboarding-config.json`.
     - Mist Conductor Redirect: In the Mist interface, token information is entered with the conductor IP address. This information is sent to the router once SZTP has been completed and then passed to the router client to perform secure conductor onboarding.
 
 Once the process is initiated, the conductor CA certificate is loaded on the system as a trusted CA, allowing the device to trust the conductor in subsequent workflows.
@@ -127,7 +127,6 @@ The following parameters are required, and are configured at the Router level.
 
 To enable this feature on the conductor, verify the following:
 
-- The `secure conductor onboarding mode` should not be disabled (see above).
 - The `secure-conductor-onboarding public-key` field must be configured.
 - The `secure-conductor-onboarding ca-certificate` field must be configured.
 
@@ -172,33 +171,7 @@ exit
 
 If any checks fail, the `create system connectivity` command returns an error explaining why. This command can be run as many times as needed for each node. All information to form the token is present in the configuration.
 
-The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`. 
-
-## Token Management
-
-Token Management requires the following settings:
-
-- The fields `secure-conductor-onboarding ca-certificate` and `secure-conductor-onboarding public-certificate` must be configured, valid, and signed by the root CA of the conductor. 
-
-- SCO must be enabled on the conductor at authority or per router level (can be both).
-
-- The router and node must be configured with at least the minimum valid configuration. For example, a minimum configuration for a standalone node: 
-
-```
-router min-router
-    name min-router 
-    inter-node-security internal
-    node min-node 
-        name min-node 
-        asset-id test-id 
-        role combo 
-    exit
-exit
-```
-
-If any checks fail, the `create system connectivity` command returns an error explaining why. This command can be run as many times as needed for each node. All information to form the token is present in the configuration.
-
-The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`. 
+The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`.  
 
 ### Token Contents
 

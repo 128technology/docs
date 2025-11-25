@@ -44,6 +44,10 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 **Release Date:** November 25, 2025
 
+:::important
+These release notes are Beta only and are in progress. They are furnished to help provide information about updated and new features for controlled beta deliveries. They do not represent a full feature set.
+:::
+
 ### New Features
 <!---
 - **I95-48934 Configuration Integrity
@@ -58,13 +62,20 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-58959 Secure Conductor Onboarding:** Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. For more information, see [Secure Conductor Onboarding](sec-conductor-onboard.md).
 ------
 - **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
-------
 
+
+### Resolved Issues
+
+
+
+### Caveats
+
+- **I95-63368 Leopard PMTU cannot exceed 8978:** This issue has been resolved in other versions of SSR software, but is still a known issue in 7.1.3-r2. This will be resolved in an upcoming Beta release. 
 
 
 ## Release 7.1.0-48r1
 
-**Release Date:** November 25, 2025
+**Release Date:** December 4, 2025
 
 ### New Features
 
