@@ -7,7 +7,7 @@ sidebar_label: Secure Boot
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.1.3-r2   | Secure Boot support added. |
+| 7.1.0   | Secure Boot support added. |
 
 The SSR400 and SSR440 are factory configured with a cryptographic public key that only allows an authenticated firmware image to run on the device. 
 

@@ -7,7 +7,7 @@ sidebars_label: Factory Reset
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.1.3-r2   | SSR 4x0 Factory Reset support added. |
+| 7.1.0   | SSR 4x0 Factory Reset support added. |
 
 The SSR software, SSR1x0, SSR1x00, and SSR4x0 series provide the ability to reset to factory defaults. The SSR software and SSR1x0/1x00 devices use a software reset to return to the original factory defaults, and remove customer configurations.
 
