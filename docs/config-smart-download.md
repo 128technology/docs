@@ -15,7 +15,7 @@ Downloads that have been stopped either by a manual pause or due to connection i
 
 ## Download Failover Resiliency
 
-SSR images can be downloaded from a variety of sources, depending on software access mode (eg. internet-only, prefer-conductor, conductor-only, offline-mode): the HA peer, both conductor nodes, artifactory, and the Mist proxy to artifactory (cloud deployments only).
+SSR images can be downloaded from a variety of sources, depending on software access mode (e.g., internet-only, prefer-conductor, conductor-only, offline-mode): the HA peer, both conductor nodes, artifactory, and the Mist proxy to artifactory (cloud deployments only).
 
 To improve resiliency against network connectivity issues, the SSR queries available versions from all sources before beginning the download. It compiles a list of sources where the requested version is available and begins the download. If a request to a source fails, the SSR moves on to the next source. The following priority order is used for sources: 
 
@@ -43,13 +43,11 @@ The GUI also supports pausing and resuming downloads.
 
 ### Auto-resume Download on WAN Failures
 
-In the event that all sources have reached the threshold of consecutive failures and a download attempt has returned an error, the SSR can be configured to wait for a specified amount of time and then retry the download. If a connection is successfully made, the download will resume where it left off.  Use the `software-update download enable-timeout` command to enable the retry feature.
+In the event that all sources have reached the threshold of consecutive failures and a download attempt has returned an error, the SSR can be configured to wait for a specified amount of time and then retry the download. If a connection is successfully made, the download will resume where it left off.
 
-When the timeout is enabled (software-update download enable-timeout true) the SSR will wait for a configurable amount of time (default is 10800s) for the download to complete. If the timeout value is reached without successfully downloading the software, the download is marked as "Failed".  
+The timeout is enabled by default (`software-update download enable-timeout true`). The SSR waits for a configurable amount of time (default is 10800s) for the download to complete. If the timeout value is reached without successfully downloading the software, the download is marked as "Failed".  
 
 The retry delay time is the longest time to wait between retry attempts. For example, the initial retry delay starts at 30 seconds. With each failure the delay is increased exponentially. However, when that calculated value reaches the maximum retry delay time, successive wait times for additional attempts do not exceed the maximium retry delay time. The default is 3600 seconds. A maximum number of times to retry can also be configured.
-
-If the retry timeout is disabled, the download will retry indefinitely
 
 Use the command `configure authority router system software-update download enable-timeout [enabled]` to enable auto-resume. The command parameters are listed below:
 
@@ -121,7 +119,7 @@ exit
 
 ### Sequenced HA Download
 
-The SSR supports sequenced downloading; one node of an HA pair downloads an image from the remote repository, and the other node waits for it to complete. Once that download is complete, the second node downloads it from the first. When targeting an HA router, the download is sequenced by default. To disable this sequencing, use `request system software download simultaneous disable`.
+The SSR can be configured to perform sequenced downloading; one node of an HA pair downloads an image from the remote repository, and the other node waits for it to complete. Once that download is complete, the second node will download it from the first. For HA routers, the download is NOT sequenced by default. To enable sequencing, use `request system software download router RouterName version SSR-X.Y.Z sequenced`.
 
 :::note
 The second node will download the software from the first node, unless it encounters a connectivity issue. In that case, the router would move on to the next source as described in [Failover Resiliency](#download-failover-resiliency).

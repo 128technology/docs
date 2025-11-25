@@ -40,7 +40,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.1.3-1r2
+## Beta Release 7.1.3-1r2
 
 **Release Date:** November 25, 2025
 
@@ -55,9 +55,10 @@ An issue has been identified when onboarding SSR routers installed with older ve
 --->
 - **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers. It should be noted that there are scaling limitations, such as a reasonable configuration complexity. Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
 ------
-- **I95-58959 Secure Conductor Onboarding:** 
+- **I95-58959 Secure Conductor Onboarding:** Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. For more information, see [Secure Conductor Onboarding](sec-conductor-onboard.md).
 ------
-- **I95-54248 
+- **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
+------
 
 
 
