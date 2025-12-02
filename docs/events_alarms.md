@@ -87,13 +87,31 @@ sidebar_label: Alarms
 
 ------
 
+| Field     | Data                                                         |
+| --------- | ------------------------------------------------------------ |
+| Category  | giid                                                         |
+| Severity  | minor                                                        |
+| Message   | DHCP address for interface [`<interface name>`] has changed to `<ipaddress>` |
+| Threshold | Issued when DHCP address for interface is changed.        |
+
+------
+
+| Field     | Data                                                         |
+| --------- | ------------------------------------------------------------ |
+| Category  | giid                                                         |
+| Severity  | info                                                         |
+| Message   | DHCP address for [`<interface name>`] has successfully been resolved/renewed to `<ipaddress>`  |
+| Threshold | Issued when DHCP address for interface is resolved.        |
+
+------
+
 ## Interface
 
 | Field     | Data                       |
 | --------- | -------------------------- |
 | Category  | interface                  |
 | Severity  | critical                   |
-| Message   | interface operational down |
+| Message   | interface operationally down |
 | Threshold | up/down                    |
 
 | Cause                                            | Troubleshooting Step                                         |
@@ -101,6 +119,30 @@ sidebar_label: Alarms
 | Interface is down for an Ethernet WAN connection | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
 | Interface is down for an HA or LAN connection    | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
 | The down interface is an LTE interface           | Check that strength and status of the LTE connection by using the `show device-interface router <router name> id <interface id>` command.<br/>• If the signal strength is marginal, poor, or 0 the LTE interface is malfunctioning.<br/>• If the system mode is not listed as LTE the signal is malfunctioning.<br/>• If the Operation Status is down, the LTE interface is malfunctioning.<br/><br/>In the event of the conditions above, contact Juniper. |
+
+------
+
+| Field     | Data                       |
+| --------- | -------------------------- |
+| Category  | interface                  |
+| Severity  | critical                   |
+| Message   | interface provisionally down |
+| Threshold | up/down                    |
+
+| Cause                                            | Troubleshooting Step                                         |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+
+------
+
+| Field     | Data                       |
+| --------- | -------------------------- |
+| Category  | interface                  |
+| Severity  | minor                   |
+| Message   | VRRP backup into interface taken over as primary |
+| Threshold | up/down                    |
+
+| Cause                                            | Troubleshooting Step                                         |
+| ------------------------------------------------ | ------------------------------------------------------------ |
 
 ------
 
@@ -117,12 +159,27 @@ sidebar_label: Alarms
 
 ------
 
+## MSDP Neighbor
+
+| Field     | Data                                                         |
+| --------- | ------------------------------------------------------------ |
+| Category  | msdp_neighbor                                                     |
+| Severity  | major                                                        |
+| Message   | Neighbor `<ipaddress>` failed to reach the ESTABLISHED state. |
+| Threshold | Issued when the MSDP neighbor is not in the ESTABLISHED state. Clears when the MSDP neighbor returns to the ESTABLISHED state. |
+
+| Cause                                                        | Troubleshooting Step                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 1. The remote IP address is not reachable due to some network connectivity problem. <br />2. The remote router is not configured to accept an MSDP connection. <br />3. The OPEN message exchange fails. | Use the command `show msdp neighbors` and review the content for misconfiguration, state machine connection status, and disconnect failures. |
+
+------
+
 ## Peer
 
 | Field     | Data                                             |
 | --------- | ------------------------------------------------ |
-| Category  | peer                                             |
-| Severity  | critical                                         |
+| Category  | Peer                                             |
+| Severity  | Critical                                         |
 | Message   | Peer `<name>` is not reachable. |
 | Threshold | When all paths to a peer are marked down by BFD. |
 
@@ -134,8 +191,8 @@ sidebar_label: Alarms
 
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
-| Category  | peer                                                         |
-| Severity  | major                                                        |
+| Category  | Peer                                                         |
+| Severity  | Major                                                        |
 | Message   | Peer `<name>` path is down                                   |
 | Threshold | When a single path is marked down by BFD. The source of the alarm includes the Node/interface/IP/VLAN. |
 
@@ -147,10 +204,64 @@ sidebar_label: Alarms
 
 ------
 
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | Peer                                             |
+| Severity  | Critical                                         |
+| Message   | Peer certificate is invalid                      |
+| Threshold | When a peer certificate is identified as invalid. |
+
+------
+
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | Peer                                             |
+| Severity  | Critical                                         |
+| Message   | The following certificates have been revoked:    |
+| Threshold | When a peer certificate is identified as having been revoked. |
+
+------
+
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | Peer                                             |
+| Severity  | Critical                                         |
+| Message   | Peer certificate has expired                     |
+| Threshold | When a peer certificate is identified as having expired. |
+
+------
+
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | Peer                                             |
+| Severity  | Critical                                         |
+| Message   | Peer metadata-key is invalid                     |
+| Threshold | When a peer metadata-key is identified as invalid. |
+
+------
+
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | Peer                                             |
+| Severity  | Major                                            |
+| Message   | The following certificates are expiring in less than 7 days: |
+| Threshold | When a peer certificate is identified as expiring in less than 7 days. |
+
+------
+
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | Peer                                             |
+| Severity  | Minor                                            |
+| Message   | The following certificates are expiring in less than 30 days: |
+| Threshold | When a peer certificate is identified as expiring in less than 30 days. |
+
+------
+
 | Field    | Data                                    |
 | -------- | --------------------------------------- |
-| Category | peer                                    |
-| Severity | major                                   |
+| Category | Peer                                    |
+| Severity | Major                                   |
 | Message  | Peer `<name>` path MTU is unresolvable. |
 
 | Cause                                                        | Troubleshooting Step                             |
@@ -163,8 +274,8 @@ sidebar_label: Alarms
 
 | Field    | Data                                        |
 | -------- | ------------------------------------------- |
-| Category | platform                                    |
-| Severity | critical                                    |
+| Category | Platform                                    |
+| Severity | Critical                                    |
 | Message  | Security Rekey failed for: `<node-name(s)>` |
 
 | Cause                                                        | Troubleshooting Step                                         |
@@ -175,20 +286,20 @@ sidebar_label: Alarms
 
 | Field    | Data                                        |
 | -------- | ------------------------------------------- |
-| Category | platform                                    |
-| Severity | critical                                    |
-| Message  | Security Rekey failed for: `<node-name(s)>` |
+| Category | Platform                                    |
+| Severity | Critical                                    |
+| Message  | Config security Key distribution failed for: `<configKeyError>` |
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
+| Issued when newly created security keys fail validation during key configuration distribution process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
 
 ------
 
 | Field     | Data                                     |
 | --------- | ---------------------------------------- |
-| Category  | platform                                 |
-| Severity  | major                                    |
+| Category  | Platform                                 |
+| Severity  | Major                                    |
 | Message   | flow table limit exceeded                |
 | Threshold | greater than 90% of the total flow table |
 
@@ -200,7 +311,7 @@ sidebar_label: Alarms
 
 | Field     | Data                                    |
 | --------- | --------------------------------------- |
-| Category  | platform                                |
+| Category  | Platform                                |
 | Severity  | major                                   |
 | Message   | fib table limit exceeded                |
 | Threshold | greater than 90% of the total FIB table |
@@ -213,7 +324,7 @@ sidebar_label: Alarms
 
 | Field     | Data                                       |
 | --------- | ------------------------------------------ |
-| Category  | platform                                   |
+| Category  | Platform                                   |
 | Severity  | major                                      |
 | Message   | action table limit exceeded                |
 | Threshold | greater than 90% of the total action table |
@@ -226,7 +337,7 @@ sidebar_label: Alarms
 
 | Field     | Data                                    |
 | --------- | --------------------------------------- |
-| Category  | platform                                |
+| Category  | Platform                                |
 | Severity  | major                                   |
 | Message   | arp table limit exceeded                |
 | Threshold | greater than 90% of the total arp table |

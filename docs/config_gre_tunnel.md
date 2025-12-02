@@ -23,6 +23,10 @@ On the receiving end, a static flow is created to receive all traffic coming fro
 
 Use the following information to configure a GRE tunnel. 
 
+:::note
+GRE Tunnel configuration is limited to 15 tunnels.
+::: 
+
 ### Interface Configuration
 
 Network-interfaces can be configured as gre-tunnels. These interfaces are virtual interfaces, which must share a VLAN tag with a non-virtual interface. The shared VLAN tag indicates which non-virtual interface the tunnel is associated with.
