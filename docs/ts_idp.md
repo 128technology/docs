@@ -25,7 +25,12 @@ Thu 2022-05-19 04:45:49 UTC
 
 IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
 
-FIPS is disabled by default. However, if FIPS mode is required for your deployment and was enabled but you now require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Use the following information to disable FIPS Mode.
+SSR400 and SSR440 devices are FIPS 140-3 compliant from the factory; FIPS mode is enabled by default. 
+
+On all other SSR instances (SSR1x0/1x00 devices, software installations, VMs, and Whitebox installations) FIPS is disabled by default. If FIPS mode is required for your deployment *and was enabled* but you now require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Use the following information to disable FIPS Mode.
+
+- `--set-fips 0` disables FIPS mode. 
+- `--set-fips 1` enables FIPS mode.
 
 Open a linux shell on the SSR and execute the following command as a root user:
 
@@ -35,6 +40,11 @@ Open a linux shell on the SSR and execute the following command as a root user:
 [root@localhost t128]# /usr/libexec/unpacker.sh --set-fips 0
 Setting FIPS mode to 0
 [root@localhost t128]# reboot
+```
+
+Log back into the linux shell after the reboot and run the following to verify the change:
+
+```
 [root@localhost ~]# cat /proc/sys/crypto/fips_enabled
 0
 ```
