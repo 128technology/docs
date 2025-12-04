@@ -116,8 +116,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-62742 Cannot see sync errors for nodes that are stuck synchronizing:** Resolved an issue where errors in `show assets` disappeared when the synchronizing state retries. 
 ------
-- **I95-63206 DHCP fails to get the PCI address:** Resolved an issue where the PCI address was being fetched from the wrong location. The PCI address is now retrieved from the resource file rather than the configuration. 
-------
 - **I95-63334 HA node failover causing mismatched node IDs:** Resolved an issue where where Enhanced Security Key Management security exchange state may get stuck on HA node failover.
 
 ### Caveats
