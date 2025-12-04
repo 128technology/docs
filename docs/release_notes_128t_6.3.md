@@ -46,6 +46,20 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 - Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
 - Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
 
+## Release 6.3.7-4-sts
+
+**Release Date:** January 15, 2026
+
+**Before installing, please see the note above on Conductor/Router compatibility**
+
+### Resolved Issues:
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-56326, CVE-2023-26604, CVE-2025-47273, CVE-2025-6965, CVE-2025-6020, CVE-2025-4802, CVE-2025-30749, CVE-2025-30754, CVE-2025-30761, CVE-2025-50106, CVE-2025-32414, CVE-2025-49794, CVE-2025-49796, CVE-2025-6021, CVE-2025-7425, CVE-2025-32415, CVE-2025-49844, CVE-2025-58060, CVE-2025-54389, CVE-2025-8194, CVE-2025-32462, CVE-2018-10906, CVE-2018-14468, CVE-2021-42574, CVE-2022-24407, CVE-2019-12749, CVE-2021-20277, CVE-2021-4034, CVE-2021-3621, CVE-2024-28956. 
+------
+- I95-58007 Add ability to set PIM graceful restart-time: The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer).
+------
+- **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where 
+
 ## Release 6.3.6-6-sts
 
 **Release Date:** September 4, 2025
