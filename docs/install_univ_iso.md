@@ -29,10 +29,12 @@ For users with SSR devices shipped with 6.3.0 installed, simply power up your de
   ![Install Type](/img/u-iso3_choose_install_type.png)
 
 11. If you are installing a FIPS enabled system, select Install Option 1, and select **Enter**. 
+  
+  :::note
+  IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
 
-:::note
-IDP is not available on software instances where FIPS mode has been enabled during install. If after installation you require IDP, please see [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
-:::
+  If after installation you require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
+  :::
 
 	If you are installting a virtual device, select option 2 (Cloud-init), and select **Enter**.
 

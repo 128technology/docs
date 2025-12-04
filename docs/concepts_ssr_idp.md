@@ -6,7 +6,9 @@ sidebar_label: Intrusion Detection and Prevention
 Intrusion Detection and Prevention (IDP) leverages the Juniper IDP Signature Database, providing state of the art protection against the most up-to-date vulnerabilities. The database contains definitions of attack objects and application signatures defined in the form of an IDP policy ruleset that is updated regularly. By automatically downloading the latest definitions and application signatures, the SSR is able to provide cutting edge security solutions for your network. 
 
 :::note
-IDP is not available on software instances where FIPS mode has been enabled during install. FIPS is disabled by default, so unless FIPS mode is required for your deployment, IDP is not impacted. If you require IDP and have enabled FIPS, please see [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
+IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
+
+If FIPS mode is required for your deployment and was enabled but you now require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
 :::
 
 ## How It Works

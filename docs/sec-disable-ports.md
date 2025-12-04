@@ -3,7 +3,7 @@ title: Disable SSR4x0 Management Interfaces
 sidebar_label: Disable SSR4x0 Management Interfaces
 ---
 
-The following configuration fields have been added to node configuration, allowing you to control physical security features on the SSR-400 series. A `true` setting enables the feature, `false` disables the feature. 
+The following configuration fields have been added to node configuration, allowing you to control physical security features on the SSR4x0 series. A `true` setting enables the feature, `false` disables the feature. 
 
 ```
 usb-mass-storage-enabled true 
@@ -66,7 +66,8 @@ If **both** the Serial Console Port and Firmware Recovery are disabled, and an i
 
 **It is strongly recommended that recovery not be disabled on production units until post-deployment boot has been successfully validated.**
 
-### Fail-Safe Restore Process
+
+<!---### Fail-Safe Restore Process
 
 :::important
 This process has not been implemented at this time. It will be provided in a future Beta release.
@@ -94,6 +95,6 @@ If you release the Reset switch during the 10 seconds of red to black fade, the 
 DO NOT reboot during this process. The factory reset will not complete.
 :::
 
-8. When the LED has stopped the slow white to black fade, it has returned to the factory settings and will shut down. You can then power up the system. 
+8. When the LED has stopped the slow white to black fade, it has returned to the factory settings and will shut down. You can then power up the system. --->
 
 

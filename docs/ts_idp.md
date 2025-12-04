@@ -23,29 +23,21 @@ Thu 2022-05-19 04:45:49 UTC
 
 ## FIPS Mode and IDP
 
-IDP is not available on software instances where FIPS mode has been enabled during install. FIPS is disabled by default. However, if FIPS mode is required for your deployment and was enabled but you now require IDP, use the following information to disable FIPS Mode.
+IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
 
-Open a linux shell on the SSR and execute the following command:
+FIPS is disabled by default. However, if FIPS mode is required for your deployment and was enabled but you now require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Use the following information to disable FIPS Mode.
+
+Open a linux shell on the SSR and execute the following command as a root user:
 
 `/usr/libexec/unpacker.sh --set-fips 0`
 
 ```
-[root@localhost t128]# ./unpacker.sh --set-fips 0
+[root@localhost t128]# /usr/libexec/unpacker.sh --set-fips 0
 Setting FIPS mode to 0
 [root@localhost t128]# reboot
-
-  Booting `Boot image A: 128T-7.0.1-1'
-
-[    0.328558] debugfs: File ':ap807:config-space@f0000000:gicp@3f0040' in directory 'domains' already present!
-[   10.860286] leopard_cpld: No registered handler for AP12PHY_CPLD_INTR interrupt
-[   11.459268] mhi: exports duplicate symbol mhi_sync_power_up (owned by mhictrl)
-
-[root@localhost ~]# fips-mode-setup --check
-Installation of FIPS modules is not completed.
-FIPS mode is disabled.
-
+[root@localhost ~]# cat /proc/sys/crypto/fips_enabled
+0
 ```
-
 
 ## IDP Start-up
 

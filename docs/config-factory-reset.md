@@ -43,11 +43,9 @@ A log file of the platform cleanup operation is written out to `/tmp` while the 
 Factory reset does not revert the device to the software version installed during manufacture. The device remains at the current software version. 
 :::
 
-### SSR4x0 Fail-Safe Restore Process
+### SSR400 and SSR 440 Zeroization
 
-The following procedure is to be used as a recovery method when **both** the [Serial Console Port](sec-disable-ports.md#disable-serial-console-port) and [Firmware Recovery](sec-disable-ports.md#disable-firmware-recovery) have been set as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible). 
-
-If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the Fail-Safe Restore process for recovery.
+The following procedure may be used as a last resort recovery method when **both** the [Serial Console Port](sec-disable-ports.md#disable-serial-console-port) and [Firmware Recovery](sec-disable-ports.md#disable-firmware-recovery) have been set as **disabled**. This process zeroizes the device, and requires a new software installation. 
 
 1. Power off the system. 
 
@@ -58,20 +56,24 @@ If **both** the Serial Console Port and Firmware Recovery are disabled, and an i
 4. Continue to hold the Reset switch for 10 seconds. The LED will slowly fade from red to black. 
 
 :::important
-If you release the Reset switch during the 10 seconds of red to black fade, the system will simply reboot without resetting.
+If you release the Reset switch during the 10 seconds of red to black fade, the system will simply reboot without zeroization.
 :::
 
 5. The LED will turn white, and fade to black. 
 
 6. Release the Reset switch.
 
-7. The LED will slowly fade white to black every two seconds until the reset is complete. 
+7. The LED will slowly fade white to black every two seconds until the zeroization is complete. 
 
 :::important
-DO NOT reboot during this process. The factory reset will not complete.
+DO NOT reboot during this process. The zeroization will not complete.
 :::
 
-8. When the LED has stopped the slow white to black fade, it has returned to the factory settings and will shut down. You can then power up the system. 
+8. When the LED has stopped the slow white to black fade, all software, data and configuration have been erased and will shut down. You can then power up the system. 
+
+:::note
+The device has now been zeroized, and has no configuration. The SSR OS must be reinstalled from a USB. See [SSR Installation](intro_installation_univ-iso.md) to begin this process.
+:::
 
 ## Software Factory Reset
 
@@ -95,6 +97,8 @@ A log file of the platform cleanup operation is written out to `/tmp` while the 
 
 When equipment is discarded or removed from its operational environment, the following process can be used to ensure there is no unauthorized access possible to sensitive residual information (e.g. cryptographic keys, keying material, PINs, passwords, etc.) on SSR network equipment. 
 
+This process is to be used with SSR Software and SSR1x0 and SSR1x00 devices.
+
 For the certified SSR platforms, all software and configuration reside on the SSD hard drive `/dev/sda`. Use the following procedure to zeroize/erase the SSD hard drive. 
 
 1. Log in to the local serial console as the root user 
@@ -117,11 +121,9 @@ For the certified SSR platforms, all software and configuration reside on the SS
 
  ![Uninstall and wipe SSD](/img/cc_fips_uninstall.png)
  
-6. Power off the system, or use the following command for soft power-off: 
- `echo o > /proc/sysrq-trigger` 
+6. Power off the system. 
 
 The system is wiped of all information, and is no longer operational as an SSR. If the system is to be reused in future, perform the ISO installation process. 
-
 
 ## Create a Golden Reset Configuration
 
