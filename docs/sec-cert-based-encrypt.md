@@ -1,19 +1,14 @@
 ---
-title: Configure Certificate Management
-sidebar_label: Configure Certificate Management
+title: Certificate-based Security Encryption
+sidebar_label: Certificate-based Security Encryption
 ---
-
 #### Version History
 
-| Release | Modification                |
-| ------- | --------------------------- |
-| 7.0.0   | Certificate Management support added. | 
+| Release | Modification                | 
+| ------- | --------------------------- | 
+| 7.1.0   | Certificate-based Security Encryption support added. | 
 
-Security is a critical component of SD-WAN products. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
-
-The SSR uses a Public Key Infrastructure (PKI) to validate the installed certificates and the authenticity of devices within the network. The result is a design that creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
-
-If you are implementing a complete, zero-trust network architecture, that will be impervious to Man-in-the-Middle attacks, you must configure a trusted certificate-authority signed certificate. 
+In addition to Enhanced Security Key Management, the SSR offers certificate based security encryption to encrypt, validate, and exchange certificates between devices within the network. 
 
 ## Certificate Management 
 
@@ -37,23 +32,34 @@ Before the certificate is accepted, the following three validity checks take pla
 
 If the above three checks pass, then the certificate is accepted and imported. 
 
-Use of the rekey feature requires that a separate certificate, specific to the peering relationship, be used. The peering certificate should be loaded prior to Enhanced Security Key Management being enabled in configuration. 
-
 ### Certificate Security
 
 The Certificate Revocation List (CRL) Manager handles the discovery, fetching, and periodic updates to CRLs. From this process a list of all known revoked certificates from all CRL sources is created, and the master list is published to disk.
 
-The following are some details of certificate security.
+Periodic revocation checks of the base certificate are performed based on the configuration defaults or user configured timelines. 
 
-- Periodic revocation checks of the router's certificate are performed based on the configuration defaults or user configured timelines. 
+## Certificate Revocation List
 
-- The public key is used to create an X.509 certificate signing request (CSR) with the common name field referencing the `peering-common-name`. When creating the CSR, ensure that the common-name matches the [configured `peering-common-name`](enhanced-sec-key-mgmt.md#configuration). A certificate signing request is initiated through a secure connection to a configured Certificate Authority (CA). The CA digitally signs the CSR and returns it to the requesting router. Certificates and Public Keys are stored locally on each router in PEM format defined by RFC7468. 
+Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs. The SSR can be configured to either dynamically learn revoked and expired certificates and add them to the local CRL, or have the location or locations of the CRL assigned and poll that location at set intervals. The lists of known valid and revoked certificates are gathered and saved locally. The list is then shared with the configured routers.
+
+If the CRL cannot be retrieved, an alarm will fire and persist until such time as that CRL can be retrieved. 
+
+### Configuration
+
+There are two configuration parameters, an optional list of CRL URLs to fetch updates, and the polling interval for those CRL URLs. 
+
+```
+configure authority
+	certificate-revocation-list <url> 
+		polling-interval 24hrs
+		backoff-interval 60sec
+```
+
+- URL: Enter one or more URLs where CRLs are hosted.
+- `polling-interval`: Frequency in hours at which to fetch CRLs. Default is 24.
+- `backoff-interval`: Delay in seconds to apply to the polling-interval. Default is 60.
 
 ## Provisioning Process
-
-:::important
-It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Management in 7.0. This is a reserved name specifically used by the Enhanced Security Key Management feature.
-:::
 
 Use this procedure to provision a certificate for use with Enhanced Security Key Management.
 
@@ -62,6 +68,8 @@ Use this procedure to provision a certificate for use with Enhanced Security Key
 A configured, functioning Certificate Authority (CA) is required.
 
 ### Install the Trusted CA Certificate
+
+Installing a trusted CA certificate on the SSR uses the existing functionality as described in [Adding a Trusted Certificate](howto_trusted_ca_certificate.md).
 
 In order to provision a certificate on the system, install the public certificate of the Certificate Authority, as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file. For example:
 
@@ -165,15 +173,15 @@ Store the value of the token in a file called `token.txt` for use later.
 
 ### Issue a Private-key Creation Request
 
-:::important
-It is necessary for all of the following REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Managementin 7.0. This is a reserved name specifically used by Enhanced Security Key Management.
-:::
-
 The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, we need to instruct the SSR to create a private key. To accomplish this, we provide the SSR some details, including:
 
 - what algorithm it should use, 
 - how big the key size should be, and 
 - what the key should be named. 
+
+:::note
+The name must be the same across key request, the certificate signing request, and certificate ingestion.
+:::
 
 Create the following file (updated to the customers algorithm/key size preference):
 
@@ -181,7 +189,7 @@ Create the following file (updated to the customers algorithm/key size preferenc
 
 ```
 {
-    "name": "custom_ssr_peering",
+    "name": "custom_ssr_peering", 
     "algorithm": "RSA",
     "rsa_key_size": "2048"
 }
@@ -281,4 +289,112 @@ Once the certificate is successfully ingested, verify that the certificate was a
 3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
   `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
 
-Enhanced Security Key Management can now use the private key and certificate.
+### Configure the Certificate
+
+The certificate can be configured as a file on disk, or the content pasted into the configuration. This example describes storing the certificate as a file on disk, which is the more secure operation. 
+
+The certificate name and file name must match each other, and match the name used in the API. Configuring `certificate-validation-mode` defines the behavior when validating the certificate, either `warn` which generates a warning and allows the importing of non-secure certificates, or `strict` which rejects any non-secure certificates. 
+
+```
+configure 
+    authority 
+        router    red-router 
+            name  red-router
+            node  red-node 
+                name  red-node
+
+        client-certificate   test_certificate
+            name             test_certificate
+            validation-mode  warn
+            file             test_certificate
+        exit
+    exit
+exit
+```
+
+## Certificate Replacement or Revocation
+
+When a certificate is revoked, expired, or invalid, the SSR generates the following alarms:
+
+- Within a month; Minor alarm. 
+- Within a week; Major alarm. 
+- Currently expired, revoked, or otherwise invalid; Critical alarm. 
+
+In this situation, a new certificate can be added to the system. The method to add the certificate should be consistent with earlier additions; If you used the [installation procedure](howto_trusted_ca_certificate.md), it is recommended to use that method. If you used the API workflow, it is recommended to use the PUT API shown below to update the certificate.
+
+`PUT /api/v1/certificate`
+
+```
+  Request body (JSON):
+  {
+    "name": string,         // Required: Name of the certificate to update
+    "certificate": string   // Required: Certificate data
+  }
+``` 
+
+When used in conjunction with Enhanced Security Key Management, if the peer's certificate is revoked, expired, or invalid, the behavior (response) can be defined in the configuration, and the SSR will either `fail-soft` (the default behavior) or `fail-hard`.
+
+- `fail-soft` results in a notification that the certificate is no longer valid and that appropriate action must be taken.
+
+- `fail-hard` sends a notification that the certificate is no longer valid, and removes all peering relationships. The peer connection is severed and the device is prevented from participating in SVR.
+
+See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for additional information. 
+
+## Troubleshooting
+
+Use the following information to help troublshoot certificate events or issues.
+
+### From the Command Line
+
+- `show certificate ca [name <name>] [node <node>] [<verbosity>]` - Display certificate authority certificate data. This command shows all certificates with the CA:TRUE flag set.
+  ```
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+  ```
+- `show certificate webserver` - Display webserver certificates.
+- `certificate-revocation [node <node>] [<verbosity>]` - Shows the certificate revocations on a system. 
+
+### Audit Events/Logging
+
+Audit events and logs are generated for the following events:
+
+- Generate CSR
+
+```
+=======================================================================================================================================================
+ 2025-03-19T20:50:35.173Z Generated certificate signing request.
+=======================================================================================================================================================
+ Type:               system.generate_csr
+ Node:               test-1
+ Description:        Generated CSR for: TestCertificate
+ Json Event Detail:  {"name":"TestCertificate","common_name":"example.com","country_name":"US","state_province_name":"California","locality_name":"San
+ Francisco","organization_name":"ExampleOrg","organizational_unit_name":"IT","email_address":"admin@example.com","validity_period_days":365}
+ Permitted:          True
+```
+
+- Import Certificate
+```
+======================================================================================================================================================================================================
+ 2025-03-26T21:22:43.108Z Ingested a certificate.
+======================================================================================================================================================================================================
+ Type:               system.ingest_certificate
+ Node:               test-1
+ Description:        Ingested certificate: TestCertificate
+ Json Event Detail:  {"purpose":"TLS Web Client
+ Authentication","common_name":"example.com","crl_urls":["http://10.27.34.42/crlfile.crl"],"certificate_authority":"N/A","fingerprint":"6D:C7:8E:48:4F:55:63:D9:AB:70:66:CD:29:4E:1C:37:CF:89:17:B0"}
+ Permitted:          True
+```
+
+- CRL Update
+```
+========================================================================================================================================================================================================
+ 2025-03-07T20:59:50.736Z Updated certificate revocation list files.
+========================================================================================================================================================================================================
+ Type:               system.crl_update
+ Node:               t158-dut1.CONDUCTOR
+ Description:        Updated CRL for issuer: endpoint
+ Json Event Detail:  {"forced":false,"last_updated":"Oct 17 16:33:11 2024 GMT","next_update":"Oct 27 15:33:10 2024
+ GMT","crl_url":"http://10.27.39.143/testCrl.pem","size":14162,"total_entries":279,"added_entries":0,"removed_entries":0,"success":true,"certificate_authority":"/C=US/O=Google Trust Services/CN=WR2"}
+ Permitted:          True
+```
