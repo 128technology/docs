@@ -34,6 +34,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-58007 Add ability to set PIM graceful restart-time:** The `routing default-instance pim restart-time` command has been added to allow users to define the number of seconds that the PIM protocol will perform `graceful-restart` after a node failure. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer).
 ------
+- **I95-59621 Extended outage for node 1 failure:** Introduced improvements to HA failover through a simplified redundancy mechanism resulting in faster failover recovery times.
+------
 - **I95-60321 DHCP relay service not honoring configuration change for the addition of a new subtenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
 ------
  - **I95-60730 Mulitcast stream is not recovering after failover:** Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.
