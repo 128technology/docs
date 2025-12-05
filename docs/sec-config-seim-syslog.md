@@ -1,9 +1,9 @@
 ---
-title: SEIM Syslog Integration
-sidebar_label: SEIM Syslog Integration
+title: SIEM Syslog Integration
+sidebar_label: SIEM Syslog Integration
 ---
 
-Many customers operate independent (third party) Security Event and Incident Management (SEIM) platforms, for aggregating and analyzing security events across vendors and devices in their network. SEIM tools support the needs of attack detection, investigation, response, and compliance solutions by:
+Many customers operate independent (third party) Security Information and Event Management (SIEM) platforms, for aggregating and analyzing security events across vendors and devices in their network. SIEM tools support the needs of attack detection, investigation, response, and compliance solutions by:
 
 - Collecting security event logs and telemetry in real-time for threat detection and compliance use cases
 - Analyzing telemetry in real-time and over time to detect attacks and other activities of interest
@@ -19,7 +19,7 @@ SSR supports a structured, standardized syslog format to export the information 
 - Sites blocked by URL filtering
 - Vulnerabilities reported by IDP, AV, and other L7 Security solutions
 
-SEIM integration on the SSR allows you to:
+SIEM integration on the SSR allows you to:
 
 - Configure multiple syslog servers
 - Support UDP, TCP, and TLS as available transports per server
@@ -30,7 +30,7 @@ SEIM integration on the SSR allows you to:
 
 ## How Does It Work?
 
-There are three steps for SEIM integration:
+There are three steps for SIEM integration:
 - Configure a syslog policy
 - Associate the policy with an access-policy
 - Configure the syslog server to receive the exported data
@@ -86,7 +86,7 @@ config
 
 ## Configuration Parameters
 
-This section covers the parameters associated with SEIM syslog configuration.
+This section covers the parameters associated with SIEM syslog configuration.
 
 ### Syslog Server Configuration Parameters
 
