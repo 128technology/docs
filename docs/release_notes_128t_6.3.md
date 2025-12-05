@@ -94,6 +94,8 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
+- **I95-63241 Prevent GUI resource exhaustion:** Resolved an issue where a single client consumed all resources by improving the internal API requests and preventing resource exhaustion.
+------
 - **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
 ------
 - **I95-63353 Invalid assert causing crash in multi-threaded service-area:** Resolved an issue where reverse-metadata is being processed while a session is being removed, causing a crash in the service-area.
