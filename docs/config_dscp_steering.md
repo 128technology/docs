@@ -3,11 +3,22 @@ title: Configuring DSCP Steering
 sidebar_label: Configuring DSCP Steering
 ---
 
+#### Version History
+
+| Release | Modification                | 
+| ------- | --------------------------- | 
+| 5.4.4   | DSCP Steering Introduced    |
+| 6.1.4   | Enabled DSCP steering for BGP over SVR tunnels | 
+| 7.1.0   | [Support added for steering Non-IPSEC tunnels](#dscp-steering-using-gtp) (GTP) | 
+
+
 When traffic is traversing an IPSec encrypted tunnel, every flow within that tunnel shares the same layer 3 headers, making them difficult to identify. 
 
 To provide identification and aid in load balancing and traffic engineering, DSCP values can be set at the tunnel endpoint. When the traffic reaches the SSR, the DSCP value is used for both traffic engineering priority and path priority for DSCP traffic steering.
 
 Beginning with SSR version 6.1.4, DSCP Steering is enabled for BGP over SVR tunnels. Using the configuration below, and [configuring BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr), the child service configured for DSCP steering is now recognized and steered appropriately. 
+
+With SSR version 7.1.0, the restriction for matching ports has been lifted. The match criteria for incoming packets only requires the destination port to match the given configuration. IPSec tunnels continue to be supported. Steering for new tunnels such as GPRS Tunnel Protocol (GTP), which uses a well-defined destination port and optionally randomized source ports, is supported.
 
 ## Basic Configuration
 
@@ -114,10 +125,6 @@ network-interface foo
 exit   
 ```
 
-:::info
-DSCP steering was designed with IPSec use cases in mind. Traditionally IPSec uses ESP or UDP (for NAT-T) as transport, and the examples provided are the recommended configuration.
-:::
-
 ### Service Configuration
 
 A DSCP value and range is configured for a child service; this identifies the priority and handling of the traffic at the router. DSCP aware services are configured in a hierarchy; DSCP values are not configured on the parent service.
@@ -159,6 +166,74 @@ service          low-priority.tunnel
 exit
 
 ```
+
+### DSCP Steering Using GTP
+
+While the configuration for DSCP steering using a GTP tunnel is nearly identical to the IPSec configuration, there are some restrictions.
+
+- Configuring `dscp-steering` at the network-interface level supports several port ranges, but only a single protocol. For example, it is not currently possible to perform steering for both TCP and UDP at the same time.
+-  The tunneled packets must either be an ESP packet or have a valid L4 header that accurately describes the tunnel endpoint. 
+-  The listed protocol on the SSR session/flow keys will report ESP, even when not within an IPSec tunnel.
+-   The egress LAN must also have a DSCP Steering configuration enabled to support proper classification of reverse traffic.
+
+In the following example, the receiver endpoint is at IP 2.2.2.2 at UDP port 2152. The initial packet entering the SSR will match against this service via the SSR’s FIB.
+
+The tunnel is then further broken down into three DSCP ranges and assigned to child services. The SSR refines down to the appropriate child service based on the DSCP marking of the incoming packet. As with hierarchical services in general, a different service-policy may be defined on the child services, otherwise the parent policy will be inherited.
+
+```
+authority
+
+   service tunnel
+      description “Describes the properties of the tunnel endpoint receiver”
+      address 2.2.2.2
+
+      transport udp
+         protocol udp
+         port-range 2152
+            start-port 2152
+         exit
+      exit
+
+      access-policy lan
+         source lan
+         permission allow
+      exit
+   exit
+
+   service low.tunnel
+      dscp-range 0
+         start-value 0
+         end-value 15
+      exit
+   exit
+
+   service med.tunnel
+      dscp-range 16
+         start-value 16
+         end-value 40
+      exit
+   exit
+
+   service high.tunnel
+      dscp-range 41
+         start-value 41
+         end-value 63
+      exit
+   exit
+
+exit
+
+```
+
+If the destination port is not found, the source-port of the packet is checked against the configured element. If the source-port is identified, then it is treated as a reverse dscp-steering packet.
+
+![gtp config](/img/dscp-steering-gtp.png)
+
+On the reverse flow, the packet will not match any configuration for the randomly generated port `12345`. Because it does match the source-port of `2152`, it is treated as a reverse tunnel packet. 
+
+:::note
+The diagram above shows a DSCP value of 10 on both the forward and reverse flows. This assigns steering to the `service low.tunnel` configured above.
+:::
 
 ### Service Route Configuration
 
