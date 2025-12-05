@@ -1491,6 +1491,7 @@ configure authority client-certificate <name>
 | ------- | ----------- |
 | [`content`](#configure-authority-client-certificate-content) | Client certificate content. |
 | `delete` | Delete configuration data |
+| [`file`](#configure-authority-client-certificate-file) | Name of file that contains certificate content. |
 | [`name`](#configure-authority-client-certificate-name) | An identifier for the client certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;client-certificate&#x27; |
@@ -1514,9 +1515,33 @@ configure authority client-certificate content [<string>]
 
 #### Description
 
-##### string (required)
+##### string
 
 A text value.
+
+## `configure authority client-certificate file`
+
+Name of file that contains certificate content.
+
+#### Usage
+
+```
+configure authority client-certificate file [<filepointer>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| filepointer | The value to set for this field |
+
+#### Description
+
+##### filepointer (string)
+
+A string representing an allowable security related file name.
+
+Must contain only alphanumeric characters or any of the following: _ - .
 
 ## `configure authority client-certificate name`
 
@@ -5035,7 +5060,7 @@ configure authority router <name>
 | [`node`](#configure-authority-router-node) | List of one or two SSR software instances, comprising an SSR. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`path-mtu-discovery`](#configure-authority-router-path-mtu-discovery) | Automatic path MTU discovery between nodes within the router. |
-| [`peer`](#configure-authority-router-peer) | Defines the properties associated with peer SSR routers. The peer may be another router in the same authority or a router in a different authority |
+| [`peer`](#configure-authority-router-peer) | Defines the properties associated with peer SSRs. The peer may be another router in the same authority or a router in a different authority |
 | [`peering-common-name`](#configure-authority-router-peering-common-name) | The identifier to use with enhanced-security-key-management. |
 | [`rate-limit-policy`](#configure-authority-router-rate-limit-policy) | Configuration for rate limiting policy for all associated service traffic across all interfaces on a given node, when configured within a service-class. |
 | [`reachability-profile`](#configure-authority-router-reachability-profile) | Defines a traffic profile for reachability-detection enforcement |
@@ -5045,6 +5070,7 @@ configure authority router <name>
 | [`reverse-packet-session-resiliency`](#configure-authority-router-reverse-packet-session-resiliency) | Parameters for setting session failover behavior without presence of forward traffic. |
 | [`router-group`](#configure-authority-router-router-group) | Logical group of routers for filtering services. |
 | [`routing`](#configure-authority-router-routing) | A router-level container for all of the routing policies associated with a given SSR deployment. Each routing element may have one and only one routing-instance. |
+| [`service-area-alarm-threshold-profile`](#configure-authority-router-service-area-alarm-threshold-profile) | Service Area Alarm Threshold Profile configuration |
 | [`service-route`](#configure-authority-router-service-route) | Defines a route for a service or an instance of a service (server or service agent). |
 | [`service-route-policy`](#configure-authority-router-service-route-policy) | Used to define the properties of service routes. These capabilities influence route selection when determining the optimal path for establishing new sessions. |
 | [`session-records`](#configure-authority-router-session-records) | Configure Session Records |
@@ -7556,11 +7582,15 @@ configure authority router node <name>
 | [`loopback-address`](#configure-authority-router-node-loopback-address) | The loopback IP address to use for management traffic originating on this node when routed via SVR. |
 | [`name`](#configure-authority-router-node-name) | An arbitrary, unique name for the node, used to reference it in other configuration sections. This MUST match the name in the local initialization file. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`platform-type`](#configure-authority-router-node-platform-type) | The platform type of the SSR node. |
 | [`port-forwarding`](#configure-authority-router-node-port-forwarding) | Configuration for establishing local port-forwarding to remote server. |
 | [`power-saver`](#configure-authority-router-node-power-saver) | Allow the traffic forwarding cores to sleep when there is no traffic to process |
 | [`radius`](#configure-authority-router-node-radius) | Radius authentication parameters for this node. |
 | [`reachability-detection`](#configure-authority-router-node-reachability-detection) | Layer 2 reachability detection |
+| [`recovery-mode-enabled`](#configure-authority-router-node-recovery-mode-enabled) | Allow booting from USB storage devices. |
+| [`reset-button-enabled`](#configure-authority-router-node-reset-button-enabled) | Enable the reset button for restarting or factory resetting. |
 | [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the SSR system. |
+| [`serial-console-enabled`](#configure-authority-router-node-serial-console-enabled) | Enable serial console. |
 | [`session-processor-count`](#configure-authority-router-node-session-processor-count) | The number of threads to use for session processing when using &#x27;manual&#x27; session-processor mode. |
 | [`session-processor-mode`](#configure-authority-router-node-session-processor-mode) | The method by which the number of threads used for session processing should be determined. |
 | [`session-setup-scaling`](#configure-authority-router-node-session-setup-scaling) | Whether or not to enable session setup scaling. |
@@ -7568,6 +7598,7 @@ configure authority router node <name>
 | [`ssh-keepalive`](#configure-authority-router-node-ssh-keepalive) | Configure Ssh Keepalive |
 | [`ssh-settings`](#configure-authority-router-node-ssh-settings) | Configure Ssh Settings |
 | [`top-sessions`](#configure-authority-router-node-top-sessions) | Views of top sessions by an ordering criteria. |
+| [`usb-mass-storage-enabled`](#configure-authority-router-node-usb-mass-storage-enabled) | Allow mounting of USB mass-storage devices. |
 
 ## `configure authority router node anti-virus`
 
@@ -8569,6 +8600,7 @@ configure authority router node device-interface network-interface address <ip-a
 | [`prefix-length`](#configure-authority-router-node-device-interface-network-interface-address-prefix-length) | The length of the subnet prefix. |
 | `show` | Show configuration data for &#x27;address&#x27; |
 | [`utility-ip-address`](#configure-authority-router-node-device-interface-network-interface-address-utility-ip-address) | Utility IP address used for purposes other than forwarding traffic. |
+| [`valid-waypoint`](#configure-authority-router-node-device-interface-network-interface-address-valid-waypoint) | Whether peer paths should be created from this local address |
 
 ## `configure authority router node device-interface network-interface address gateway`
 
@@ -10785,7 +10817,7 @@ Options:
 - boolean
 - ipv4-address
 - int32
-- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+- binary: A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information enterprise-number`
 
@@ -12643,6 +12675,32 @@ format uses lowercase characters and leading zeros are
 not allowed.
 
 Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address valid-waypoint`
+
+Whether peer paths should be created from this local address
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address valid-waypoint [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node device-interface network-interface adjacency`
 
@@ -20096,6 +20154,7 @@ Options:
 - lte:         An interface using LTE.
 - t1:          An interface using a T1 card.
 - bond:        An aggregated group of ethernet interfaces.
+- conduit:     An interface which is used as a connection to a switch device.
 
 ## `configure authority router node device-interface vmbus-uuid`
 
@@ -20581,6 +20640,30 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
+
+## `configure authority router node platform-type`
+
+The platform type of the SSR node.
+
+#### Usage
+
+```
+configure authority router node platform-type [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+Default: unknown
+
+##### string
+
+A text value.
 
 ## `configure authority router node port-forwarding`
 
@@ -21331,6 +21414,66 @@ An unsigned 32-bit integer.
 
 Range: 1-86400
 
+## `configure authority router node recovery-mode-enabled`
+
+Allow booting from USB storage devices.
+
+#### Usage
+
+```
+configure authority router node recovery-mode-enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+:::warning
+a restart is required if recovery-mode-enabled is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router node reset-button-enabled`
+
+Enable the reset button for restarting or factory resetting.
+
+#### Usage
+
+```
+configure authority router node reset-button-enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+:::warning
+a restart is required if reset-button-enabled is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 ## `configure authority router node role`
 
 The node&#x27;s role in the SSR system.
@@ -21363,6 +21506,36 @@ Options:
 - slice:        A Software Line-Card Engine node.
 - combo:        A combined Control and Slice.
 - conductor:    A remote management system.
+
+## `configure authority router node serial-console-enabled`
+
+Enable serial console.
+
+#### Usage
+
+```
+configure authority router node serial-console-enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+:::warning
+a restart is required if serial-console-enabled is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router node session-processor-count`
 
@@ -22314,6 +22487,36 @@ configure authority router node top-sessions bandwidth tstamp [<timestamp>]
 
 Number of seconds since UNIX epoch.
 
+## `configure authority router node usb-mass-storage-enabled`
+
+Allow mounting of USB mass-storage devices.
+
+#### Usage
+
+```
+configure authority router node usb-mass-storage-enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+:::warning
+a restart is required if usb-mass-storage-enabled is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 ## `configure authority router path-mtu-discovery`
 
 Automatic path MTU discovery between nodes within the router.
@@ -22384,7 +22587,7 @@ Range: 1-86400
 
 ## `configure authority router peer`
 
-Defines the properties associated with peer SSR routers. The peer may be another router in the same authority or a router in a different authority
+Defines the properties associated with peer SSRs. The peer may be another router in the same authority or a router in a different authority
 
 #### Usage
 
@@ -36811,6 +37014,134 @@ configure authority router routing vrf tenant-name [<tenant-ref>]
 
 This type is used by other entities that need to reference configured tenants.
 
+## `configure authority router service-area-alarm-threshold-profile`
+
+Service Area Alarm Threshold Profile configuration
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`alarm-clear-threshold`](#configure-authority-router-service-area-alarm-threshold-profile-alarm-clear-threshold) | Alarm clear threshold, configurable between 0-100%, default is 70%. |
+| [`alarm-clear-waiting-window`](#configure-authority-router-service-area-alarm-threshold-profile-alarm-clear-waiting-window) | Alarm clear waiting window, in seconds. Must be a multiple of 5 (e.g., 5, 10, ..., 300). Default is 180 seconds. |
+| [`alarm-trigger-threshold`](#configure-authority-router-service-area-alarm-threshold-profile-alarm-trigger-threshold) | Alarm trigger threshold, configurable between 0-100%, default is 85%. |
+| [`alarm-trigger-waiting-window`](#configure-authority-router-service-area-alarm-threshold-profile-alarm-trigger-waiting-window) | Alarm trigger waiting window, in seconds. Must be a multiple of 5 (e.g., 5, 10, ..., 300). Default is 180 seconds. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;service-area-alarm-threshold-profile&#x27; |
+
+## `configure authority router service-area-alarm-threshold-profile alarm-clear-threshold`
+
+Alarm clear threshold, configurable between 0-100%, default is 70%.
+
+#### Usage
+
+```
+configure authority router service-area-alarm-threshold-profile alarm-clear-threshold [<percentage>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| percentage | The value to set for this field |
+
+#### Description
+
+Units: percent
+
+Default: 70
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
+## `configure authority router service-area-alarm-threshold-profile alarm-clear-waiting-window`
+
+Alarm clear waiting window, in seconds. Must be a multiple of 5 (e.g., 5, 10, ..., 300). Default is 180 seconds.
+
+#### Usage
+
+```
+configure authority router service-area-alarm-threshold-profile alarm-clear-waiting-window [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 180
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 5-300
+
+## `configure authority router service-area-alarm-threshold-profile alarm-trigger-threshold`
+
+Alarm trigger threshold, configurable between 0-100%, default is 85%.
+
+#### Usage
+
+```
+configure authority router service-area-alarm-threshold-profile alarm-trigger-threshold [<percentage>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| percentage | The value to set for this field |
+
+#### Description
+
+Units: percent
+
+Default: 85
+
+##### percentage (uint8)
+
+Integer indicating a percentage value
+
+Range: 0-100
+
+## `configure authority router service-area-alarm-threshold-profile alarm-trigger-waiting-window`
+
+Alarm trigger waiting window, in seconds. Must be a multiple of 5 (e.g., 5, 10, ..., 300). Default is 180 seconds.
+
+#### Usage
+
+```
+configure authority router service-area-alarm-threshold-profile alarm-trigger-waiting-window [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 180
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 5-300
+
 ## `configure authority router service-route`
 
 Defines a route for a service or an instance of a service (server or service agent).
@@ -38895,6 +39226,7 @@ configure authority router system client-certificate <name>
 | ------- | ----------- |
 | [`content`](#configure-authority-router-system-client-certificate-content) | Client certificate content. |
 | `delete` | Delete configuration data |
+| [`file`](#configure-authority-router-system-client-certificate-file) | Name of file that contains certificate content. |
 | [`name`](#configure-authority-router-system-client-certificate-name) | An identifier for the client certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;client-certificate&#x27; |
@@ -38921,6 +39253,30 @@ configure authority router system client-certificate content [<string>]
 ##### string (required)
 
 A text value.
+
+## `configure authority router system client-certificate file`
+
+Name of file that contains certificate content.
+
+#### Usage
+
+```
+configure authority router system client-certificate file [<filepointer>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| filepointer | The value to set for this field |
+
+#### Description
+
+##### filepointer (string)
+
+A string representing an allowable security related file name.
+
+Must contain only alphanumeric characters or any of the following: _ - .
 
 ## `configure authority router system client-certificate name`
 
@@ -40896,7 +41252,7 @@ configure authority router system services snmp-server notification-receiver ip-
 
 | name | description |
 | ---- | ----------- |
-| ipv4-address | The value to set for this field |
+| ip-address | The value to set for this field |
 
 #### Description
 
@@ -42127,7 +42483,7 @@ configure authority router system syslog server <ip-address> <port>
 | [`ocsp`](#configure-authority-router-system-syslog-server-ocsp) | Whether to check the revocation status of the Syslog server&#x27;s certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`port`](#configure-authority-router-system-syslog-server-port) | The port on which remote syslog server listens |
-| [`protocol`](#configure-authority-router-system-syslog-server-protocol) | Use TCP or UDP protocol to communicate with syslog server. |
+| [`protocol`](#configure-authority-router-system-syslog-server-protocol) | Use TCP UDP or TLS protocol to communicate with syslog server. |
 | [`router-client-certificate-name`](#configure-authority-router-system-syslog-server-router-client-certificate-name) | A client certificate to be used to communicate with syslog server. |
 | `show` | Show configuration data for &#x27;server&#x27; |
 
@@ -42422,7 +42778,7 @@ Range: 0-65535
 
 ## `configure authority router system syslog server protocol`
 
-Use TCP or UDP protocol to communicate with syslog server.
+Use TCP UDP or TLS protocol to communicate with syslog server.
 
 #### Usage
 
@@ -42438,7 +42794,7 @@ configure authority router system syslog server protocol [<syslog-protocol>]
 
 #### Description
 
-Default: udp
+Default: automatic
 
 ##### syslog-protocol (enumeration)
 
@@ -42446,9 +42802,10 @@ Use TCP or UDP protocol to communicate with syslog server.
 
 Options:
 
-- udp:    Use UDP protocol to communicate with syslog server.
-- tcp:    Use TCP protocol to communicate with syslog server.
-- tls:    Use TLS over TCP protocol to communicate with syslog server.
+- automatic:    Automatically inherit the protocol from syslog config.
+- udp:          Use UDP protocol to communicate with syslog server.
+- tcp:          Use TCP protocol to communicate with syslog server.
+- tls:          Use TLS over TCP protocol to communicate with syslog server.
 
 ## `configure authority router system syslog server router-client-certificate-name`
 
@@ -49117,33 +49474,7 @@ Default: true
 A true or false value.
 
 Options: true or false
-<!---
-## `configure authority syslog-policy modify`
 
-Whether to send a syslog message on session modify
-
-#### Usage
-
-```
-configure authority syslog-policy modify [<boolean>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| boolean | The value to set for this field |
-
-#### Description
-
-Default: false
-
-##### boolean
-
-A true or false value.
-
-Options: true or false
---->
 ## `configure authority syslog-policy name`
 
 A unique name for the syslog profile.
@@ -49714,6 +50045,7 @@ configure authority trusted-ca-certificate <name>
 | ------- | ----------- |
 | [`content`](#configure-authority-trusted-ca-certificate-content) | Trusted CA certificate content. |
 | `delete` | Delete configuration data |
+| [`file`](#configure-authority-trusted-ca-certificate-file) | Name of file that contains certificate content. |
 | [`name`](#configure-authority-trusted-ca-certificate-name) | An identifier for the trusted CA certificate. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;trusted-ca-certificate&#x27; |
@@ -49737,9 +50069,33 @@ configure authority trusted-ca-certificate content [<string>]
 
 #### Description
 
-##### string (required)
+##### string
 
 A text value.
+
+## `configure authority trusted-ca-certificate file`
+
+Name of file that contains certificate content.
+
+#### Usage
+
+```
+configure authority trusted-ca-certificate file [<filepointer>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| filepointer | The value to set for this field |
+
+#### Description
+
+##### filepointer (string)
+
+A string representing an allowable security related file name.
+
+Must contain only alphanumeric characters or any of the following: _ - .
 
 ## `configure authority trusted-ca-certificate name`
 
