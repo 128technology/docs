@@ -76,7 +76,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-62668 Routers disconnected following conductor upgrade:** Resolved an issue where SSH keys were erroneously written to the authorized-keys file. 
 ------
-- **I95-62703 Highway process crashed when BGP over SVR is activated:** Resolved an issue where the unicast code path was incorrectly calling the multicast variant of getBestMultiHomedPathIndex() and causing a highway crash.
+- **I95-62703 Highway process crashes when BGP over SVR is activated:** Resolved an issue where the unicast code path was incorrectly invoking multicast variant of a function call.
 ------
 - **I95-62742 Cannot see sync errors for nodes that are stuck synchronizing:** Resolved an issue where errors in show assets disappeared when the synchronizing state retries.
 ------
@@ -88,6 +88,8 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-62956 Configuration failure due to invalid name:** The CSRX does not allow policynames using a dot (.). This has been resolved - CSRX configurations will use an underscore for policyname creation.
 ------
+- **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 2x the current capacity.
+------
 - **I95-63036 Web interface auto-refresh:** Auto Refresh in the GUI is now a user setting and is persisted across user sessions. It is disabled by default.
 ------
 - **I95-63084 Web interface refreshes alarms status too often:** Resolved an issue where the web interface would repeatedly request all alarms when alarm flapping occurred. This placed an unnecessarily high load on the GUI refresh process. 
@@ -98,7 +100,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
 ------
-- **I95-63353 Invalid assert causing crash in multi-threaded service-area:** Resolved an issue where reverse-metadata is being processed while a session is being removed, causing a crash in the service-area.
+- **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash.
 
 ## Release 6.3.6-6-sts
 
