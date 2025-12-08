@@ -40,7 +40,7 @@ The following infrastructure must exist in your Azure subscription:
 * The existing VNet is segmented with at least the following three subnets:
   - **Public Subnet**: This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure if no management subnet is provided.
   - **Private Subnet**: This subnet must provide connectivity to internal workloads within the cloud.
-  - **[OPTIONAL] Management Subnet**: This subnet must provide connectivity to the Mist cloud and is rachable for SSH administration purposes.
+  - **[OPTIONAL] Management Subnet**: This subnet must provide connectivity to the Mist cloud and is reachable for SSH administration purposes.
 * A Managed Identity with the minimum read permissions.
 ```
 Microsoft.Compute/virtualMachines/read

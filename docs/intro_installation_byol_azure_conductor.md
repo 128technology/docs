@@ -82,7 +82,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 6. Answer the following questions to launch the deployment of a Conductor. For a description of the parameters of the template, please refer to [Launch the Conductor Template](#launch-the-conductor-template).
 
 - Where do you want to deploy it?
-  - Provide the location where the VNet exists in the **Location** field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
+  - Provide the location where the VNet exists in the Location field (for example: eastus). Please refer to the following [list of locations](https://azure.microsoft.com/en-us/global-infrastructure/locations) and note that the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia.
 - What name do you want to give it?
   - Provide it in the **Instance Name** field (for example: Conductor).
 - What version of SSR software do you want to install?
