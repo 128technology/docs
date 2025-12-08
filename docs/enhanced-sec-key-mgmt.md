@@ -8,6 +8,7 @@ sidebars-label: Enhanced Security Key Management
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.0.1   | Enhanced Security Key Management support added. |
+| 7.1.3   | Support for ML-KEM added. |
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
@@ -231,6 +232,14 @@ config
             location             usa
             inter-node-security  internal
 ```
+
+## Post Quantum Cryptography Support
+
+ML-KEM (Multi-Layer Key Encapsulation Mechanism) is a cryptographic protocol often used in post-quantum cryptography to securely exchange keys. ML-KEM encapsulates a single symmetric key in multiple layers, each protected by a different public key. This level of protection offers security against quantum and classical adversaries.
+
+For the SSR, ML-KEM is used to exchange the Peer key in addition to Diffie-Hellman providing a hybrid approach to key exchange and encryption.
+
+
 
 ## Troubleshooting
 
