@@ -180,7 +180,7 @@ The peer list of the router must also have the `peering-common-name` of that pee
 
 | Configuration Attributes | Description | 
 | --- | --- |
-| key-exchange-algorithm  | Configure Key Exchange Algorithm |
+| key-exchange-algorithm  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
 | payload-key-rekey-interval | Hours between payload security key regeneration. Range is 1-720, or never. Default is 24 hours.  |
 | peer-key-rekey-interval | Hours between security key regeneration for peer routers. Range is 1-720, or never. Default is 24 hours. |
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
@@ -235,11 +235,123 @@ config
 
 ## Post Quantum Cryptography Support
 
-ML-KEM (Multi-Layer Key Encapsulation Mechanism) is a cryptographic protocol often used in post-quantum cryptography to securely exchange keys. ML-KEM encapsulates a single symmetric key in multiple layers, each protected by a different public key. This level of protection offers security against quantum and classical adversaries.
+ML-KEM (Multi-Layer Key Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. ML-KEM encapsulates a single symmetric key in multiple layers, each protected by a different public key. This level of protection offers security against both quantum and classical adversaries.
 
-For the SSR, ML-KEM is used to exchange the Peer key in addition to Diffie-Hellman providing a hybrid approach to key exchange and encryption.
+For the SSR, ML-KEM can be used in conjuction with Diffe-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
+
+In order to take advantage of ML-KEM Cryptography, all devices must be running SSR software that provides support for this feature. 
+
+### How It Works
+
+Each participant has a public-private key pair for encryption and decryption. These keys are generated upon system startup and are stored securely and are encrypted with onboard TPM. **I don't know if the TPM aspect of this statement is valid for the beta or the overall software delivery. Need confirmation on this - Robert or Mike.
 
 
+A Symmetric Key is generated using the ML-KEM algorithm and is the shared, secret key use for encryption after the key exchange.
+
+The encapsulation process wraps the symmetric key in layers of encryption, and the decapsulation process removes the layers using the private key associated with the device. 
+
+### Encapsulation / Decapsulation Process
+
+1. Key Generation: Each device generates a set of public-private key pairs.
+
+2. Encapsulation: The initiating device encrypts a randomly generated symmetric key `K` using multiple public keys (PK1, PK2...).
+    - C1=Encapsulate(K, PK1)
+    - C2=Encapsulate(C1, PK2) 
+
+3. Transmission: The initiating device sends each encapsulated ciphertext to the receiver. After the final encapsulated ciphertext `Cn` is sent, decapsulation on the receiver can begin.  
+
+4. Decapsulation: The receiver uses their private keys (SK1,SK2, etc.) in reverse order to decrypt each layer:
+    - Cn−1 = Decapsulate(Cn, SKn). This is repeated until the original symmetric key `K` is retrieved. 
+
+### Certificate Considerations
+
+In conjunction with ML-KEM, an X.509 certificate must be selected to align with the cryptographic requirements of the protocol. The most suitable certificate type is a public key certificate that contains the following: 
+
+- Public Key Algorithm: The certificate must support the post-quantum key encapsulation mechanism, Kyber, the algorithm used for encapsulation. 
+- Certificate Extensions: Extensions must indicate the specific algorithms and purposes of the certificate. 
+- Key Usage: Should include `keyEncipherment` or `keyAgreement` to indicate the certificate is valid for key encapsulation or exchange.
+- Enhanced Security Key Management requires a hybrid certificate, RSA/ECDSA with post-quantum algorithms. This ensures backward compatibility while introducing quantum resistance. 
+- The issuing Certificate Authority (CA) should also support post-quantum cryptography or hybrid cryptographic methods, ensuring the entire certificate chain is quantum-resistant.
+
+#### Example Certificate Contents
+
+The following is an example of the contents of an X.509 certificate for Enhanced Security Key Management supporting ML-KEM:
+-  Subject Public Key Info (hybrid format):
+    - Algorithm: RSA 2048, Kyber-768
+    - Key Parameters: Defined by the chosen algorithm.
+- Key Usage:
+    - digitalSignature (if signatures are needed).
+    - keyEncipherment (for encryption).
+    - keyAgreement (for key exchange).
+- Critical Extensions:
+    - Indicate post-quantum compliance, if required.
+
+### Configuration
+
+ML-KEM cryptography is configured under `key-exchange-algorithm` and has the following attributes.
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| `key-exchange-algorithm`  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
+| `ml-kem` | Use the `ml-kem-key-size` parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 512, 768 or 1024. |
+| `diffie-hellman` | Use the diffie-hellman-key-size parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 1024, 2048 or 4096. |
+| `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptograhy. This employs both methods of encryption for greater security. Be aware that there is a performance impact with this selection. The above values are used and set individually in the configuration. |
+
+
+**ML-KEM Example**
+
+The ML-KEM key size values are as follows:
+
+- 512: Smallest footprint, highest performance
+- 768: Balanced for most applications - **Default value**
+- 1024: Maximum security for long-lived systems
+
+```
+configure
+    authority
+        security-key-management
+            key-exchange-algorithm
+                ml-kem
+                    ml-kem-key-size 1024
+                exit
+            exit
+        exit
+```
+
+**Diffie-Hellman Example**
+
+The Diffie-Hellman key size values are as follows: 1024, 2048 or 4096
+
+- 1024: Smallest footprint, highest performance
+- 2048: Balanced for most applications - **Default value**
+- 4096: Maximum security
+
+```
+configure
+    authority
+        security-key-management
+            key-exchange-algorithm
+                diffie-hellman
+                    dh-key-size 2048
+                exit
+            exit
+        exit
+```
+
+**Diffie-Hellman ML-KEM Example**
+
+```
+configure
+    authority
+        security-key-management
+            key-exchange-algorithm
+                diffie-hellman-ml-kem
+                    dh-key-size 2048
+                    ml-kem-key-size 1024
+                exit
+            exit
+        exit
+```
 
 ## Troubleshooting
 
