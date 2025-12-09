@@ -378,6 +378,7 @@ module.exports = {
           "sec-ddos-resilience",          
           "sec-usb-security",
           "sec-secure-boot",
+          "concepts-config-integrity",
           "sec-disable-console-output",
           "sec-disable-ports",
           "config-custom-certs",
