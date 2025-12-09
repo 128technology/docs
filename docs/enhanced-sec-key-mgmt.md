@@ -235,7 +235,7 @@ config
 
 ## Post Quantum Cryptography Support
 
-ML-KEM (Multi-Layer Key Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. ML-KEM encapsulates a single symmetric key in multiple layers, each protected by a different public key. This level of protection offers security against both quantum and classical adversaries.
+ML-KEM (Multi-Layer Key Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
 
 For the SSR, ML-KEM can be used in conjuction with Diffe-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
 
@@ -243,8 +243,7 @@ In order to take advantage of ML-KEM Cryptography, all devices must be running S
 
 ### How It Works
 
-Each participant has a public-private key pair for encryption and decryption. These keys are generated upon system startup and are stored securely and are encrypted with onboard TPM. **I don't know if the TPM aspect of this statement is valid for the beta or the overall software delivery. Need confirmation on this - Robert or Mike.
-
+Each participant has a public-private key pair for encryption and decryption. These keys are generated upon system startup and are stored securely and are encrypted with onboard TPM. 
 
 A Symmetric Key is generated using the ML-KEM algorithm and is the shared, secret key use for encryption after the key exchange.
 

@@ -15,7 +15,7 @@ SSR devices are frequently deployed in environments where physical security cann
 
 Modern compliance requirements and regulatory frameworks mandate encryption-at-rest for sensitive data, particularly in industries handling financial transactions, healthcare records, or government communications. High-security customers in financial services, government, and healthcare sectors require robust protection against data exfiltration to maintain their security posture and meet regulatory obligations. These requirements have evolved beyond simple access controls to demand cryptographic protection of stored credentials, configuration data, and private key material that could be exploited to compromise broader network infrastructure.
 
-SSR Configuration Integrity prevents unauthorized access to SSR configuration files when the system is powered off and physically compromised, ensuring that sensitive routing configurations, authentication credentials, and network topology information cannot be extracted through direct storage access. The system protects private keys and certificates from extraction via physical storage access, preventing attackers from impersonating network nodes or intercepting encrypted communications. Additionally, tamper-evident security triggers a full factory reset on integrity violations, ensuring that any compromise attempt results in a clean slate rather than a potentially backdoored system. Most importantly, it meets compliance requirements for encryption-at-rest without impacting runtime performance, allowing organizations to satisfy regulatory mandates while maintaining the high-performance networking capabilities that SSR devices are designed to provide.
+SSR Configuration Integrity prevents unauthorized access to SSR configuration files when the system is powered off and physically compromised, ensuring that sensitive routing configurations, authentication credentials, and network topology information cannot be extracted through direct storage access. The system protects private keys and certificates from extraction via physical storage access, preventing attackers from impersonating network nodes or intercepting encrypted communications. Most importantly, it meets compliance requirements for encryption-at-rest without impacting runtime performance, allowing organizations to satisfy regulatory mandates while maintaining the high-performance networking capabilities that SSR devices are designed to provide.
 
 Configuration Integrity does not address any runtime access-policy or permissions concerns. Proper file and directory permissions are still required, as well as proper login and authentication controls. Configuration Integrity augments the existing SSR security functionality to provide encryption-at-rest guarantees. 
 
@@ -60,24 +60,7 @@ This systemd service handles the subsequent boots of the SSR after Configuration
 3.	Pass unencrypted FEMK to fscrypt.
 4.	fscrypt uses the FEMK to automatically unlock the necessary encrypted directories.
 
-If any of these steps fail, it is interpreted as an integrity event, and the factory reset service is started.
-
-### Factory Reset Systemd Service
-
-The Factory Reset service cleans the system of any prior state, reboots the system, and initializes it with the Hardware Bootstrapper.
-
-## Factory Reset Workflow
-
-For users that require the highest security levels, we recommend that an existing system is factory reset after upgrading to software that supports Configuration Integrity, or that the system be reprovisioned from scratch. This ensures that any keys or sensitive data that may have been exfiltrated prior to the enablement of Configuration Integrity will cease to be used.  The system will automatically enable Configuration Integrity through the New System workflow described above.  
-
-Benefits include:
-
-- New FEMK
-- New encrypted directories
-- New PDC SSH keys
-- New SVRv2 Private key (requires provisioning post factory reset)
-
-This is an extreme workflow that is highly disruptive, so it should be reserved only for situations that require it.
+If any of these steps fail, it is interpreted as an integrity event, an emergency log is generated (which is also broadcast to all consoles on the system) that the system has had its integrity compromised and it must be reprovisioned. The SSR will repeatedly try to start the integrity service to unlock the encrypted directories and fail, each time writing the emergency log.
 
 ## Troubleshooting
 
@@ -88,14 +71,3 @@ Use the information below to investigate issues and understand the Configuration
 Logging is handled through existing system components rather than a dedicated log category. During initial system provisioning, the Hardware Bootstrapper handles all Configuration Integrity initialization logging as part of its standard provisioning process. On subsequent boots, the systemd service that is responsible for unlocking encrypted directories logs all unlock operations and service status information through the systemd journal. This provides comprehensive visibility into the operational state of the encryption system during the boot sequence.
 
 Key operational messages include TPM provisioning status and error conditions, filesystem encryption capability detection results, and detailed logging of FEMK generation, storage, and retrieval operations. The system also logs all directory encryption and decryption operations along with integrity violation events that may trigger protective responses. 
-
-However, a logging limitation exists where factory reset procedures triggered by integrity violations completely wipe all system logs, preventing post-incident forensic analysis of the underlying failure that necessitated the protective reset action.
-
-### CLI
-
-Configuration Integrity status is found in the `show system version detail` command output. 
-
-### REST API
-
-A REST API is available to check on the status of Configuration Integrity. 
-
