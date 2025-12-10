@@ -23,7 +23,7 @@ Configuration Integrity is enabled by default on new installations of, and upgra
 
 ## How It Works
 
-Configuration Integrity utilizes a hybrid approach combining TPM2 hardware security with Linux userspace fscrypt filesystem encryption. Fscrypt utilizes an AES-256 key generated and protected by the TPM to perform encryption and decryption operations. Once the encrypted directories are unlocked, they operate as a normal directory; the encryption is transparent to the user.
+Configuration Integrity utilizes a hybrid approach combining TPM2 hardware security with Linux native filesystem encryption, administered by the userspace tool fscrypt. fscrypt utilizes an AES-256 key generated and protected by the TPM to perform encryption and decryption operations. Once the encrypted directories are unlocked, they operate as a normal directory; the encryption is transparent to the user.
 
 ### Major Components
 
