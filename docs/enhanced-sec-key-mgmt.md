@@ -262,16 +262,6 @@ The encapsulation process wraps the symmetric key in layers of encryption, and t
 4. Decapsulation: The receiver uses their private keys (SK1,SK2, etc.) in reverse order to decrypt each layer:
     - Cn−1 = Decapsulate(Cn, SKn). This is repeated until the original symmetric key `K` is retrieved. 
 
-### Certificate Considerations
-
-In conjunction with ML-KEM, an X.509 certificate must be selected to align with the cryptographic requirements of the protocol. The most suitable certificate type is a public key certificate that contains the following: 
-
-- Public Key Algorithm: The certificate must support the post-quantum key encapsulation mechanism, Kyber, the algorithm used for encapsulation. 
-- Certificate Extensions: Extensions must indicate the specific algorithms and purposes of the certificate. 
-- Key Usage: Should include `keyEncipherment` or `keyAgreement` to indicate the certificate is valid for key encapsulation or exchange.
-- Enhanced Security Key Management requires a hybrid certificate, RSA/ECDSA with post-quantum algorithms. This ensures backward compatibility while introducing quantum resistance. 
-- The issuing Certificate Authority (CA) should also support post-quantum cryptography or hybrid cryptographic methods, ensuring the entire certificate chain is quantum-resistant.
-
 #### Example Certificate Contents
 
 The following is an example of the contents of an X.509 certificate for Enhanced Security Key Management supporting ML-KEM:
