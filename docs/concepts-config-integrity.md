@@ -68,7 +68,7 @@ Broadcast message from systemd-journald@TESTsystem1 (Mon 2025-12-01 17:15:20 UTC
 integrity-handler: Integrity event detected. A clean installation is required.
 ```
 
-Recovery steps require physical access to the device to reimage the system with a fresh ISO.
+Recovery steps require physical access to the device to [reimage the system with a fresh ISO](intro_installation_univ-iso.md).
 
 ## Troubleshooting
 
@@ -82,5 +82,5 @@ Key operational messages include TPM provisioning status and error conditions, f
 
 ### Compromised System
 
-In the event your system has been compromised, the device must be reprovisioned with a clean install. If that is not viable, refer to the RMA procedure. 
+In the event your system has been compromised, the device must be reprovisioned with a [clean install from a bootable USB](intro_installation_univ-iso.md). If that is not viable, contact your sales team or Juniper technical support to begin the RMA process. 
 

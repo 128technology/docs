@@ -237,43 +237,19 @@ config
 
 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
 
-For the SSR, ML-KEM can be used in conjuction with Diffe-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
+For the SSR, ML-KEM can be used in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
 
 In order to take advantage of ML-KEM Cryptography, all devices must be running SSR software that provides support for this feature. 
 
 ### How It Works
 
-Each participant has a public-private key pair for encryption and decryption. These keys are generated upon system startup and are stored securely and are encrypted with onboard TPM. 
+Each participant generates a public-private key pair for encryption and decryption. These keys are generated upon system startup, are stored securely, and are encrypted with the onboard TPM. 
 
-A Symmetric Key is generated using the ML-KEM algorithm and is the shared, secret key use for encryption after the key exchange.
+A Symmetric Key is generated using the [Nist-approved FIPS 203 ML-KEM algorithm](https://csrc.nist.gov/pubs/fips/203/final) and exchanged between the sender and the reciever. This is the shared, secret key used for encryption and decryption.
 
 The encapsulation process wraps the symmetric key in layers of encryption, and the decapsulation process removes the layers using the private key associated with the device. 
 
-### Encapsulation / Decapsulation Process
-
-1. Key Generation: Each device generates a set of public-private key pairs.
-
-2. Encapsulation: The initiating device encrypts a randomly generated symmetric key `K` using multiple public keys (PK1, PK2...).
-    - C1=Encapsulate(K, PK1)
-    - C2=Encapsulate(C1, PK2) 
-
-3. Transmission: The initiating device sends each encapsulated ciphertext to the receiver. After the final encapsulated ciphertext `Cn` is sent, decapsulation on the receiver can begin.  
-
-4. Decapsulation: The receiver uses their private keys (SK1,SK2, etc.) in reverse order to decrypt each layer:
-    - Cn−1 = Decapsulate(Cn, SKn). This is repeated until the original symmetric key `K` is retrieved. 
-
-#### Example Certificate Contents
-
-The following is an example of the contents of an X.509 certificate for Enhanced Security Key Management supporting ML-KEM:
--  Subject Public Key Info (hybrid format):
-    - Algorithm: RSA 2048, Kyber-768
-    - Key Parameters: Defined by the chosen algorithm.
-- Key Usage:
-    - digitalSignature (if signatures are needed).
-    - keyEncipherment (for encryption).
-    - keyAgreement (for key exchange).
-- Critical Extensions:
-    - Indicate post-quantum compliance, if required.
+Information can then be securely transmitted between devices. 
 
 ### Configuration
 

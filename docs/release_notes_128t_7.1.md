@@ -50,19 +50,21 @@ These release notes are Beta only and are in progress. They are furnished to hel
 
 ### New Features
 <!---
-- **I95-48934 Configuration Integrity
-------
+
 - **I95-54247 IMA - SSR Signed packages only execution:**
 ------
 - **I95- vTPM**
 ------
 --->
+- **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
+------
 - **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers. It should be noted that there are scaling limitations, such as a reasonable configuration complexity. Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
 ------
 - **I95-58959 Secure Conductor Onboarding:** Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. For more information, see [Secure Conductor Onboarding](sec-conductor-onboard.md).
 ------
 - **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
-
+------
+- **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhance-sec-key-mgmt.md#post-quantum-cryptography-support).
 
 ### Resolved Issues
 
