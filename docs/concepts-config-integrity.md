@@ -53,7 +53,9 @@ The hardware bootstrapper is an existing component of the SSR, responsible for t
 
 ### Configuration Integrity Systemd Service
 
-This systemd service handles the subsequent boots of the SSR after Configuration Integrity has been enabled.  It runs a series of integrity checks, and identifies when the system is ready to continue operation after successful unlocking of the encrypted directories. When it is run, it performs the following sequence:
+The Integrity Handler is the systemd service responsible for Configuration Integrity on the system. If it detects that a system has not been configured for Configuration Integrity, it will perform a series of checks to see if it can support the feature. If the system can support the feature, it will onboard the system into Configuration Integrity.
+
+Once a system is onboarded, the Integrity Handler is responsible for unlocking the encrypted directories so they can be transparently used by the system. It does so with the following sequence:
 
 1.	Locate encrypted FEK on disk.
 2.	Unseal FEK with the TPM.
