@@ -13,7 +13,7 @@ SSR Configuration Integrity addresses security requirements for protecting sensi
 
 SSR devices are frequently deployed in environments where physical security cannot be guaranteed, ranging from remote branch offices and retail locations to temporary installations and field deployments. In these environments, configuration files, private keys, and operational data stored on the device require protection from unauthorized access. 
 
-Modern compliance requirements and regulatory frameworks mandate encryption-at-rest for sensitive data, particularly in industries handling financial transactions, healthcare records, or government communications. High-security customers in financial services, government, and healthcare sectors require robust protection against data exfiltration to maintain their security posture and meet regulatory obligations. These requirements have evolved beyond simple access controls to demand cryptographic protection of stored credentials, configuration data, and private key material that could be exploited to compromise broader network infrastructure.
+Modern compliance requirements and regulatory frameworks mandate encryption-at-rest for sensitive data, particularly in the financial services, healthcare, and government sectors. High-security customers require robust protection against data exfiltration to maintain their security posture and meet regulatory obligations. These requirements have evolved beyond simple access controls to demand cryptographic protection of stored credentials, configuration data, and private key material that could be exploited to compromise broader network infrastructure.
 
 SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off.
 
@@ -25,7 +25,7 @@ Configuration Integrity is enabled by default on new installations of, and upgra
 
 ## How It Works
 
-Configuration Integrity utilizes a hybrid approach combining TPM2 hardware security with Linux userspace fscrypt filesystem encryption. Fscrypt utilizes an AES-256 key generated and protected by the TPM to perform encryption and decryption operations. Once the encrypted directories are unlocked, they operate as a normal directory; the encryption is transparent to the user.
+Configuration Integrity utilizes a hybrid approach combining TPM2 hardware security with Linux native filesystem encryption, administered by the userspace tool fscrypt. fscrypt utilizes an AES-256 key generated and protected by the TPM to perform encryption and decryption operations. Once the encrypted directories are unlocked, they operate as a normal directory; the encryption is transparent to the user.
 
 ### Major Components
 
@@ -35,7 +35,7 @@ The following are the major components of Configuration Integrity.
 
 The TPM is the trust anchor of the system. It creates and unseals the Filesystem Encryption Key (FEK), and is the only component of the system that can perform this task. If the storage of the SSR is somehow separated from the TPM, the FEK can no longer be unsealed, and the filesystem cannot be unlocked, ensuring that sensitive data remains protected.  
 
-All SSR TPMs are provisioned with an appropriate RSA-2048 key, which is used to perform the encryption and decryption of the FEK.
+All SSR TPMs are provisioned with an RSA-2048 key, which is used to perform the encryption and decryption of the FEK.
 
 ### Filesystem Encryption Key (FEK)
 
