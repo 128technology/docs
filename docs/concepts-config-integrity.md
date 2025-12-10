@@ -55,10 +55,10 @@ The hardware bootstrapper is an existing component of the SSR, responsible for t
 
 This systemd service handles the subsequent boots of the SSR after Configuration Integrity has been enabled.  It runs a series of integrity checks, and identifies when the system is ready to continue operation after successful unlocking of the encrypted directories. When it is run, it performs the following sequence:
 
-1.	Locate encrypted FEMK on disk.
-2.	Unseal FEMK with the TPM.
-3.	Pass unencrypted FEMK to fscrypt.
-4.	fscrypt uses the FEMK to automatically unlock the necessary encrypted directories.
+1.	Locate encrypted FEK on disk.
+2.	Unseal FEK with the TPM.
+3.	Pass unencrypted FEK to fscrypt.
+4.	fscrypt uses the FEK to automatically unlock the necessary encrypted directories.
 
 If any of these steps fail, it is interpreted as an integrity event, an emergency log is generated (which is also broadcast to all consoles on the system) that the system has had its integrity compromised and it must be reprovisioned. The SSR will repeatedly try to start the integrity service to unlock the encrypted directories and fail, each time writing the emergency log.
 
