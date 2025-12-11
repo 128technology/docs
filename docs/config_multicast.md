@@ -321,6 +321,8 @@ The `routing default-instance pim restart-time` command has been added to allow 
 
 During the graceful restart period, the PIM join states are created, but no updates of multicast routes are sent to the forwarding plane. Once the graceful restart period is over, all new multicast routes are programmed, and old multicast routes are removed.
 
+For more information about the graceful restart timer, see [graceful-restart](config_command_guide.md/#configure-authority-router-routing-routing-protocol-graceful-restart).
+
 ## Multicast Source Discovery Protocol (MSDP) 
 
 MSDP is used to allow RPs to share the active Multicast Sources. Messages are sent as Source-Active (SA) messages between MSDP peers. In normal MSDP operation, an MSDP peer is received from one peer and forwarded to the other MSDP peers. To ensure there are no loops, RPF checks have been put in place.
