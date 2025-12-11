@@ -60,7 +60,7 @@ Once a system is onboarded, the Integrity Handler is responsible for unlocking t
 3.	Pass unencrypted FEK to fscrypt.
 4.	fscrypt uses the FEK to automatically unlock the necessary encrypted directories.
 
-If any of these steps fail, it is interpreted as an integrity event. Network activities are blocked. An emergency log is generated and broadcast to all consoles on the system that the system  integrity is compromised and it must be reprovisioned. The SSR will repeatedly try to start the integrity service to unlock the encrypted directories and fail, each time writing the emergency log. 
+If any of these steps fail, it is interpreted as an integrity event. Network activities are blocked. An emergency log is generated and broadcast to all consoles on the system that the system integrity is compromised and it must be reprovisioned. The SSR will repeatedly try to start the integrity service to unlock the encrypted directories and fail, each time writing the emergency log. 
 
 ```
 Broadcast message from systemd-journald@TESTsystem1 (Mon 2025-12-01 17:15:20 UTC):
