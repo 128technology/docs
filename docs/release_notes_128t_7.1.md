@@ -40,6 +40,41 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Beta Release 7.1.3-3r2
+
+**Release Date:** December 11, 2025
+
+:::important
+These release notes are Beta only and are in progress. They are furnished to help provide information about updated and new features for controlled beta deliveries. They do not represent a full feature set.
+:::
+
+### New Features
+<!---
+
+- **I95-54247 IMA - SSR Signed packages only execution:**
+------
+- **I95- vTPM**
+------
+--->
+- **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
+------
+- **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers. It should be noted that there are scaling limitations, such as a reasonable configuration complexity. Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
+------
+- **I95-58959 Secure Conductor Onboarding:** Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. For more information, see [Secure Conductor Onboarding](sec-conductor-onboard.md).
+------
+- **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
+
+<!--- - **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).--->
+
+### Resolved Issues
+
+
+
+### Caveats
+
+- **I95-63368 Leopard PMTU cannot exceed 8978:** This issue has been resolved in other versions of SSR software, but is still a known issue in 7.1.3-r2. This will be resolved in an upcoming Beta release. 
+
+
 ## Release 7.1.0-50r1
 
 **Release Date:** December 4, 2025
