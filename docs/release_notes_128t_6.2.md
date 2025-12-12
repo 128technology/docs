@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.2.10-7-lts
+## Release 6.2.10-9-lts
 
-**Release Date:** December 16, 2025
+**Release Date:** December 18, 2025
 
 ### Resoved Issues
 
@@ -71,6 +71,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
 ------
 - **I95-62877 SSR continues to forward traffic to external MAC after failover:** Resolved an issue where the SSR was continuing to forward traffic for an existing session to the original next-hop after failover. A new configuration field has been added to the service policy configuration; `reverse-gateway-change-detection`. When enabled, this feature will identify a failover/MAC change, trigger a flow-move, and update the reverse next-hop accordingly. For additional details see [`reverse-gateway-change-detection`](config_command_guide.md#configure-authority-service-policy-reverse-gateway-change-detection).
+------
+- **I95-63018 Memory corruption after reading VSA:** Resolved a rare issue where during remote authentication through the Radius server, `pam_radius` was causing memory corruption after VSA is read. 
 ------
 - **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash. 
 ------
