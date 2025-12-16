@@ -28851,7 +28851,7 @@ Range: 1-4095
 
 After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard-coded to 360 seconds.
 
-The `select-delay-time` is an optional BGP graceful restart timer that ensures BGP graceful restart will end only after this timeout. The `select-delay-timer` was added to ensure that BGP does not send the End-of-RIB before learning the OSPF routes that are being redistributed into BGP.
+The `select-delay-time` is an optional BGP graceful restart timer that ensures BGP graceful restart will end only after the configured timer value. The `select-delay-timer` was added to ensure that BGP does not send the End-of-RIB before learning the OSPF routes that are being redistributed into BGP.
 
 When the `select-delay-timer` is configured, it ensures that the timer has expired before sending the End-of-RIB to the peers. The `select-delay-timer` starts when BGP first connects to a GR-enabled peer after restart. 
 

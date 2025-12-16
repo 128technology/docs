@@ -76,7 +76,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash. 
 ------
-- **I95-63412 Session Builder throwing an exception while another exception is active:** Resolved an issue where weak checks around exceptions allowed another exception to be thrown whiles one was still active, causing the Highway process to exit.  
+- **I95-63412 Session Builder throwing an exception while another exception is active:** Resolved an issue where weak checks around exceptions allowed another exception to be thrown while one was still active, causing the Highway process to exit.  
 
 ## Release 6.2.9-5-lts
 
