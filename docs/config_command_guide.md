@@ -47907,7 +47907,9 @@ Options:
 - enable: Compare the forward packet source-mac against the reverse next-hop arp entry, and trigger a flow-move for the session to pick up the reverse next-hop update.
 - disable (default): No comparison made.
 
-With this feature enabled, the forward packet `source-mac` is compared against the `reverse next-hop arp` entry. If a change is identified, a flow-move is triggered for the session, the reverse next-hop update is made, and the change is picked up.
+With this feature enabled, the forward packet `source-mac` is compared against the `reverse-flow next-hop arp-entry`. If a change is identified, a flow-move is triggered for the session, a refreshed reverse next-hop is chosen by routing, and the `reverse-flow next-hop arp-entry` is updated to begin forwarding reverse traffic to that gateway resolution.
+
+The reverse next-hop gateway update can be determined by routing, or `off-subnet-reverse-arp-mac-learning` can be configured on the ingress-interface to update the reverse next-hop arp-entry resolution to be equal to the next forward packet `source-mac`.
 
 ## `configure authority service-policy service-class`
 
