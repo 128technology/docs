@@ -62,7 +62,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 We have identified an issue when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-**Use of the [Import ISO](#import-iso) and [Import RPM](#import-rpm) Commands** 
+**Use of the [Import ISO](#import-iso) and [Import RPM](#import-plugin-rpms) Commands** 
 
 When using the `import iso` and `import rpm` commands to install plugins necessary for your deployment, it is important to create a bootable USB that contains both the specific image (ISO) as well as the individual plugin RPMs and all associated dependencies for the plugins. All of these files are imported to the conductor for and available for router installation. 
 
