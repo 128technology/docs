@@ -100,8 +100,6 @@ The Power Supply Adapter LEDs are not managed by the Chassis Manager, but the LE
 - Steady Green: Receiving power
 - Off: Power failure or no power
 
-![Power Supply LEDs](/img/ssr-4x0-power-supply-LEDs.png)
-
 ### HA Port Status LEDs
 
 The HA Port Status LEDs are located on the HA ports on the rear of the device, and are not managed by the Chassis Manager. However, the LEDs are used to indicate the Link Activity and Speed.
