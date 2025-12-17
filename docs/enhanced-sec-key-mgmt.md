@@ -369,35 +369,3 @@ Mon 2025-07-21 20:28:18 UTC
 Completed in 0.10 seconds
 admin@test1.headend#
 ```
-
-`show security security-associations`
-
-```
-admin@node0# show security security-associations
-Fri 2024-03-01 14:28:03 UTC Retrieving security associations...
-============== =========== ======= =================== ================ ======== 
- Peer           Peer Name   Node    Network Interface   Destination      Status
-============== =========== ======= =================== ================ ======== 
- 0200019a8f31   Hub1        node0   ge-0-0              192.168.10.101   up
- 0200019a8f31   Hub1        node0   ge-0-1              172.25.22.2      up
- 0200019a8f31   Hub1        node1   ge-0-0              192.168.10.101   up
- 0200019a8f31   Hub1        node1   ge-0-1              172.25.22.2      up
-```
-
-`show security security-associations [peer-name] detail`
-
-```
-admin@node0# show security security-associations Hub1 detail
-Fri 2024-03-01 14:28:03 UTC Retrieving security associations...
-Peer Name: Hub1
-State: UP
-Peer Certificate: Valid
-Public Key: Valid
-Local salt: b869b3424513340a, Remote salt: 4cb3488cb19397c3
-Peer Key Rekey In: 20 hrs 2 min 56 sec
-Peer Rekey Count: 5
-Metadata Key Rekey In: 2 hrs 13 min 12 sec
-Local Metadata Key Index: 12 (2), Remote Metadata Key Index: 13 (1)
-```
-
-
