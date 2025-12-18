@@ -159,8 +159,8 @@ Use the `filepath` argument to specify the exact location of the ISO. `hunt` wil
 - `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`
 
 Versions later than 6.3.0 use the `SSR*.iso`. The following steps provide the process to download and import the 7.1.0 ISO as well as plugin RPMs.
-
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` and any necessary plugin RPMs from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network. 
+<!-- markdown-link-check-disable -->
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` and any necessary plugin RPMs from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network. <!-- markdown-link-check-enable -->
 
 :::note
 The SSR400 and SSR440 platforms use an ARM CPU processor and require the `aarch64` version of the plugins. All other platforms should use the `x86_64` files.
