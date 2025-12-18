@@ -13,6 +13,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.1",
           "release_notes_128t_7.0",
           "release_notes_128t_6.3",
           "release_notes_128t_6.2",
@@ -78,12 +79,13 @@ module.exports = {
         ]
       },
     ],
-    "Supported Hardware Platforms":[
+    "Hardware Support":[
       "supported-devices-overview",
       "intro_system_reqs",
       "config_firewall_ports",
       "about_supported_platforms",
       "about_certified_platforms",
+      "ssr-chassis-manager",
       "rma_wan_assurance",
     ],
     "Concepts": [
@@ -122,7 +124,7 @@ module.exports = {
       "install_univ_iso",
       "initialize_u-iso_device",
       "initialize_u-iso_adv_workflow",
-      "intro_installation_image",
+      "sec-ztp-web-proxy",
     ],
     "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
@@ -154,6 +156,7 @@ module.exports = {
       "intro_installation_legacy",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
+      "intro_installation_image",
       {
        "type": "category",
           "label": "Conductor Installation",
@@ -206,6 +209,7 @@ module.exports = {
       "upgrade_ibu_conductor",
       "upgrade_router",
       "upgrade_restricted_access",
+      "upgrade-ssr-4x0-manual",
       "upgrade_legacy",
       "intro_rollback",
     ],
@@ -272,6 +276,7 @@ module.exports = {
         "type": "category",
         "label": "Network Features",
         "items": [
+          "config-proxy-server",
           "config_dhcp",
           "config_session_recovery",
           "config_forward_error_correction",
@@ -340,7 +345,7 @@ module.exports = {
           ],
         },
     ],
-    "Security":[
+    "Software and Hardware Security":[
       "security-overview",
       {
         "type": "category",
@@ -363,16 +368,20 @@ module.exports = {
         "type": "category",
         "label": "Security",
         "items": [
-          "sec_adaptive_encrypt",
-          "sec_firewall_filtering",
-          "sec_security_policy",
-          "sec-config-seim-syslog",
           "sec_hardening_guidelines",
-          "sec-ddos-resilience",
+          "sec_security_policy",
+          "sec_adaptive_encrypt",
+          "sec_firewall_filtering",          
+          "sec-config-seim-syslog",          
+          "sec-ddos-resilience",          
           "sec-usb-security",
+          "sec-secure-boot",
           "sec-disable-console-output",
+          "sec-disable-ports",
           "config-custom-certs",
-          "enhanced-sec-key-mgmt",
+          "sec-cert-based-encrypt",
+          "enhanced-sec-key-mgmt", 
+          "config-factory-reset",         
         ],
       },
       {
