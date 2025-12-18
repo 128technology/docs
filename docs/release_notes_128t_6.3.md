@@ -46,6 +46,62 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 - Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
 - Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
 
+## Release 6.3.7-4-sts
+
+**Release Date:** January 15, 2026
+
+**Before installing, please see the note above on Conductor/Router compatibility**
+
+### Resolved Issues:
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-56326, CVE-2023-26604, CVE-2025-47273, CVE-2025-6965, CVE-2025-6020, CVE-2025-4802, CVE-2025-30749, CVE-2025-30754, CVE-2025-30761, CVE-2025-50106, CVE-2025-32414, CVE-2025-49794, CVE-2025-49796, CVE-2025-6021, CVE-2025-7425, CVE-2025-32415, CVE-2025-49844, CVE-2025-58060, CVE-2025-54389, CVE-2025-8194, CVE-2025-32462, CVE-2018-10906, CVE-2018-14468, CVE-2021-42574, CVE-2022-24407, CVE-2019-12749, CVE-2021-20277, CVE-2021-4034, CVE-2021-3621, CVE-2024-28956. 
+------
+- **I95-58007 Add ability to set PIM graceful restart-time:** The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer).
+------
+- **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
+------
+- **I95-60799 Tenant prefix use within a VRF:** The SSR allows the configuration of tenant-prefixes without giving an error, and correctly handles interfaces with tenant-prefixes within the protocol code.
+------
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
+------
+- **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
+------
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
+------
+- **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
+------
+- **I95-62258 Packet steered to egress non-existent interface causes highway crash:** Added logic to capture the errant packet and prevent the crash. An exception is logged so that the issue can be more easily rectified.
+------
+- **I95-62580 Conflicting network interface names slowing application traffic:** Resolved an issue in the app summary tracking logic related to conflicting network interface names for non-redundant ports of an HA router.
+------
+- **I95-62668 Routers disconnected following conductor upgrade:** Resolved an issue where SSH keys were erroneously written to the authorized-keys file. 
+------
+- **I95-62703 Highway process crashes when BGP over SVR is activated:** Resolved an issue where the unicast code path was incorrectly invoking multicast variant of a function call.
+------
+- **I95-62742 Cannot see sync errors for nodes that are stuck synchronizing:** Resolved an issue where errors in show assets disappeared when the synchronizing state retries.
+------
+- **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
+------
+- **I95-62860 250 max connection limit not respected by the web interface:** Resolved an issue where requesting too much data over graphql with a large config led to missing data.
+------
+- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the CSRX configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
+------
+- **I95-62956 Configuration failure due to invalid name:** The CSRX does not allow policynames using a dot (.). This has been resolved - CSRX configurations will use an underscore for policyname creation.
+------
+- **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 2x the current capacity.
+------
+- **I95-63036 Web interface auto-refresh:** Auto Refresh in the GUI is now a user setting and is persisted across user sessions. It is disabled by default.
+------
+- **I95-63084 Web interface refreshes alarms status too often:** Resolved an issue where the web interface would repeatedly request all alarms when alarm flapping occurred. This placed an unnecessarily high load on the GUI refresh process. 
+------
+- **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
+------
+- **I95-63241 Prevent GUI resource exhaustion:** Resolved an issue where a single client consumed all resources by improving the internal API requests and preventing resource exhaustion.
+------
+- **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
+------
+- **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash.
+
 ## Release 6.3.6-6-sts
 
 **Release Date:** September 4, 2025
