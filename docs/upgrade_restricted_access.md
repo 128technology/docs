@@ -64,7 +64,7 @@ We have identified an issue when onboarding SSR routers installed with older ver
 
 **Use of the [Import ISO](#import-iso) and [Import RPM](#import-plugin-rpms) Commands** 
 
-When using the `import iso` and `import rpm` commands to install plugins necessary for your deployment, it is important to create a bootable USB that contains both the specific image (ISO) as well as the individual plugin RPMs and all associated dependencies for the plugins. All of these files are imported to the conductor for and available for router installation. 
+When using the `import iso` and `import rpm` commands to install plugins necessary for your deployment, it is important to copy both the specific image (ISO) as well as the individual plugin RPMs and all associated dependencies for the plugins. All of these files are imported to the conductor for and available for router installation. 
 
 ### Single-Version 6.3.0 Upgrade
 
@@ -160,11 +160,14 @@ Use the `filepath` argument to specify the exact location of the ISO. `hunt` wil
 
 Versions later than 6.3.0 use the `SSR*.iso`. The following steps provide the process to download and import the 7.1.0 ISO as well as plugin RPMs.
 
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network. 
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` and any necessary plugin RPMs from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network. 
+
+:::note
+The SSR400 and SSR440 platforms use an ARM CPU processor and require the `aarch64` version of the plugins. All other platforms should use the `x86_64` files.
+:::
 
 2. If you are using a USB, plug the USB into your device. 
-
-3. Copy the SSR-7.1.0 ISO and necessary plugin RPMs to the conductor.
+3. Copy the ISO (and plugin RPMs if required) to a directory on the Conductor, for example `/home/t128`. 
 
 ```
 [root@conductor-t285 t128]# ll /home/t128/.iso
@@ -197,7 +200,7 @@ Wed 2025-12-10 00:12:48 UTC
      7.1  SSR-7.1.0-50   downloads   downloads
 ```
 
-If you are only ugrading the SSR ISO, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Router Upgrade](upgrade_router.md) procedure. If you are also upgrading plugins, continue below. 
+If you are **only ugrading the SSR ISO**, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.md) and [Router Upgrade](upgrade_router.md) procedures. If you are also upgrading plugins, continue below. 
 
 ### Import Plugin RPMs
 
@@ -228,7 +231,7 @@ This command is resource intensive and can take a while. Please ensure that the 
 Import success
 ```
 
-To provide support for SSR400 and SSR440 hardware platforms (SSR software versions 7.1.0 and higher), the following import commands are used: 
+The SSR400 and SSR440 platforms use an ARM CPU processor and require the `aarch64` version of the plugins. All other platforms should use the `x86_64` files. 
 
 ```
 admin@node0.conductor-t285# import rpm distribution el9 architecture aarch64 filepath /home/t128/128T-cloud-intel-agent-5.2.9458-1.el9.aarch64.rpm
@@ -274,4 +277,4 @@ MIST WAN ASSURANCE
 Completed in 0.06 seconds
 ```
 
-3. After the local software repository has been updated with the ISO and plugin RPMs the upgrade can proceed using the [Router Upgrade](upgrade_router.md) procedure.
+3. After the local software repository has been updated with the ISO and plugin RPMs, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.md) and [Router Upgrade](upgrade_router.md) procedures.
