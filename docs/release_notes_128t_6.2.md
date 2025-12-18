@@ -24,6 +24,60 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.10-10-lts
+
+**Release Date:** December 18, 2025
+
+### Resoved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-3651, CVE-2024-6232, CVE-2024-56326, CVE-2023-48161, CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2022-1304, CVE-2023-26604, CVE-2025-27363, CVE-2025-0624, CVE-2024-55549, CVE-2025-24855, CVE-2024-7347, CVE-2025-23419, CVE-2022-49011, CVE-2024-40906, CVE-2024-43842, CVE-2024-44970, CVE-2024-53141, CVE-2025-21756, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2023-5678, CVE-2024-0727, CVE-2024-13176, CVE-2024-5535, CVE-2024-9143, CVE-2016-9840, CVE-2025-6020, CVE-2025-6965, CVE-2025-4802, CVE-2025-30749, CVE-2025-30754, CVE-2025-30761, CVE-2025-50106, CVE-2025-32414, CVE-2025-49794, CVE-2025-49796, CVE-2025-6021, CVE-2025-7425, CVE-2025-49844, CVE-2024-56326.
+------
+- **I95-58007 Add ability to set PIM graceful restart-time:** The `routing default-instance pim restart-time` command has been added to allow users to define the number of seconds that the PIM protocol will perform `graceful-restart` after a node failure. This resolution addresses all the listed issues. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer). This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.
+------
+- **I95-59621 Extended outage for node 1 failure:** Introduced improvements to HA failover through a simplified redundancy mechanism resulting in faster failover recovery times.
+------
+- **I95-60321 DHCP relay service not honoring configuration change for the addition of a new subtenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
+------
+ - **I95-60730 Mulitcast stream is not recovering after failover:** Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.
+ ------
+- **I95-60767 `service-route > next-hop` validation rejects configuration:** Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.
+------
+- **I95-60768 Rare race condition between packet processing and configuration update:** Resolved a rare race condition where invalid memory was accessed during packet processing if the configuration was being loaded at the same time.
+------
+- **I95-60799 Tenant prefix use within a VRF:** The SSR allows the configuration of tenant-prefixes without giving an error, and correctly handles interfaces with tenant-prefixes within the protocol code.
+------
+- **I95-60960 The PIM RP moved from the base instance to a VRF after a reboot:** When PIM RPs are configured in different VRF, upon reboot the PIM RP could appear in the wrong VRF. This issue has been resolved by generating the VRF explicitly when configuring Multicast routing.  
+------
+- **I95-61075 BGP does not re-establish after intermediate hop device restarts (e.g., a firewall):** Resolved an issue where when initiating a BFD for BGP session, the cached MAC to IP mapping was being used. If the MAC address had changed, stale information was used and the BFD session would not be established. We now issue an ARP request to get the latest MAC Address.
+------
+- **I95-61176 Multicast Failover Optimization:** Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM.
+------
+- **I95-61579 Highway crashes when executing command show device-interface name `<name>` registers on an i40e network port:** Resolved an issue with the registers sub option that caused the crash on the i40e network port. The sub option has been removed.
+------
+- **I95-61580 CLI does not prompt for required router restart:** Resolved an issue where making a configuration change requiring a restart only generates a warning for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.
+------
+- **I95-61869 Peer paths not coming back up after manual reboot:** Resolved an issue with the control message capacity. In configurations with more than 1000 VLANs, the aggregate size of all the control messages grew larger than the space allocated for the messages, and messages failed to send and some packet processing threads were left with incomplete interface tables. The capacity to handle these messages has been increased and can now handle up to 12,000 VLANs.
+------
+- **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
+------
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
+------
+- **I95-62258 Packet steered to egress non-existent interface causes highway crash:** Added logic to capture the errant packet and prevent the crash. An exception is logged so that the issue can be more easily rectified.
+------
+- **I95-62580 Conflicting network interface names slowing application traffic:** Resolved an issue in the app summary tracking logic related to conflicting network interface names for non-redundant ports of an HA router.
+------
+- **I95-62703 Highway process crashes when BGP over SVR is activated:** Resolved an issue where the unicast code path was incorrectly invoking multicast variant of a function call.
+------
+- **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
+------
+- **I95-62877 SSR continues to forward traffic to external MAC after failover:** Resolved an issue where the SSR was continuing to forward traffic for an existing session to the original next-hop after failover. A new configuration field has been added to the service policy configuration; `reverse-gateway-change-detection`. When enabled, this feature will identify a failover/MAC change, trigger a flow-move, and update the reverse next-hop accordingly. For additional details see [`reverse-gateway-change-detection`](config_command_guide.md#configure-authority-service-policy-reverse-gateway-change-detection).
+------
+- **I95-63018 Memory corruption after reading VSA:** Resolved a rare issue where during remote authentication through the Radius server, `pam_radius` was causing memory corruption after VSA is read. 
+------
+- **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash. 
+------
+- **I95-63412 Session Builder throwing an exception while another exception is active:** Resolved an issue where weak checks around exceptions allowed another exception to be thrown while one was still active, causing the Highway process to exit.  
+
 ## Release 6.2.9-5-lts
 
 **Release Date:** June 10, 2025
