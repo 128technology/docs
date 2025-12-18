@@ -9,13 +9,28 @@ This guide describes the process for deploying a Mist-managed instance through A
 
 Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
-### Selecting the AMI
+## Selecting the AMI
 
 **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
 For the latest information about SSR BYOL offereings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
+
+## Selecting the Instance Size
+The following instance sizes are supported for virtual SSR in AWS. Choose the size that best meets your requirements. More information can be found in the [AWS Documentation](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html)
+
+| Recommended AWS VM Size | Max vNICs Supported | vCPU Cores | Memory |
+| ----------------------- | ------------------- | ---------- | ------ |
+| c5.xlarge     |  4  |  4    |   8  |
+| c5.2xlarge    |  4  |  8    |   16  |
+| c5.4xlarge    |  8  |  16   |   32  |
+| c5.9xlarge    |  8  |  36   |   72  |
+| c5n.xlarge    |  4  |  4    |   10.5  |
+| c5n.2xlarge   |  4  |  8    |   21  |
+| c5n.4xlarge   |  8  |  16   |   42  |
+| c5n.9xlarge   |  8  |  36   |   96  |
+
 
 ## Session Smart Router Deployment
 
@@ -26,8 +41,9 @@ Use the following steps to deploy a Mist-managed Session Smart Router in AWS.
 The following infrastructure must exist in your AWS account:
 * A VPC where the Session Smart Router will be deployed.
 * The existing VPC is segmented with the following subnets. The role of each subnet is described below.
-  - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure.
+  - Public Subnet: This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure if no management subnet is provided.
   - Private Subnet: This subnet must provide connectivity to internal workloads within the cloud.
+  - Management Subnet [Optional]: This subnet must provide connectivity to the Mist cloud and is reachable for SSH administration purposes.
 * [Enable enhanced network](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html#enabling_enhanced_networking) with ENA for maximum throughput performance. For SSR routers, execute the following command from your local computer
 
 ```
@@ -125,7 +141,7 @@ If a user does not supply the onboarding configuration before launching the inst
 
 ### Mist-Managed Setup
 
-Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete.
+Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete. Once complete the `Version` will be populated in the Mist inventory.
 
 If the device does not show up in the Mist organization or the desired SSR version was not installed after 15 minutes, SSH into the instance. If the instance was created using the BYOL template, the default username will be `t128`. If not, the username will be `ec2-user`.
 
@@ -136,13 +152,22 @@ If the device does not show up in the Mist organization or the desired SSR versi
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces and an optional third network interface. The template attaches the network interfaces to the EC2 instance in the following order: Public, Private, and Management. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces and an optional third management interface. The template attaches the network interfaces to the EC2 instance in the following order: Management (Optional), Public, Private. 
 
-| Network Interface Name | Subnet           | Mist Config Name     |
-| ---------------------- | ---------------- | ----------------|
+If a management network interface is provided, the names to be used in the Mist configuration are as follows:
+
+| Network Interface Name | Subnet           | Mist Config Name       |
+| ---------------------- | ---------------- | ----------------       |
+| ge-0-0                 | Management       | Out Of Band Management |
+| ge-0-1                 | Public           | ge-0/0/1    |
+| ge-0-2                 | Private          | ge-0/0/2    |
+
+If no management network interface is provided, the names to be used in the Mist configuration are as follows:
+
+| Network Interface Name | Subnet           | Mist Config Name |
+| ---------------------- | ---------------- | ---------------- |
 | ge-0-0                 | Public           | ge-0/0/0    |
 | ge-0-1                 | Private          | ge-0/0/1    |
-| ge-0-2                 | Management       | Out Of Band Management    |
 
 #### Interface Tagging
 
@@ -152,7 +177,7 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | --------- | ------- |
 | WAN       | Interface is marked as WAN for onboarding purposes. Without a MGMT interface, it is assumed to have connectivity to Mist cloud infrastructure. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
-| MGMT       | Interface is marked as MGMT and is assumed to have connectivity to Mist cloud infrastructure. |
+| MGMT       | Interface is marked as MGMT and is assumed to have connectivity to Mist cloud infrastructure and SSH access prior to site assignment. |
 
 :::note
 The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging. This is automatically done when using the provided templates.
@@ -183,10 +208,10 @@ A description of the parameters of the template are listed in the following tabl
 | Parameter            | Description |
 | -------------------- | ----------- |
 | Router Name          | Name of the VM for the Mist-managed router.|
-| Version | SSR software version installed on the instance. |
-| Registration Code   | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
+| Version              | SSR software version installed on the instance. |
+| Registration Code    | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
 | Instance size        | Size of the EC2 instance.|
-| SSH IAM Key             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+| SSH IAM Key          | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 | VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
 | Public Inteface Subnet     | ID of the public subnet within the VPC. |
 | Public Interface Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
@@ -232,7 +257,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
   "Name": "<instance name>",
   "Version": "<ssr-version>",
   "RegistrationCode": "<Registration-code>",
-  "InstanceType": "c5.xlarge",
+  "InstanceType": "c5n.xlarge",
   "KeyName": "<ssh-key-name>"
   "VpcId": "<ID of the VPC>",
   "PublicSubnet": "<ID of the public subnet within the VPC>",
