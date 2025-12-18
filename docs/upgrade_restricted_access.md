@@ -158,14 +158,15 @@ Use the `filepath` argument to specify the exact location of the ISO. `hunt` wil
 
 - `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`
 
-
 Versions later than 6.3.0 use the `SSR*.iso`. The following steps provide the process to download and import the 7.1.0 ISO as well as plugin RPMs.
 
-1. Copy the SSR-7.1.0 ISO and necessary plugin RPMs to the conductor.
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network. 
+
+2. If you are using a USB, plug the USB into your device. 
+
+3. Copy the SSR-7.1.0 ISO and necessary plugin RPMs to the conductor.
 
 ```
-admin@node0.conductor-t285#
-
 [root@conductor-t285 t128]# ll /home/t128/.iso
 -rw-r----- 1 root root 4346347520 Nov 25 03:13 /home/t128/SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso
 [root@conductor-t285 t128]# ll /home/t128/.rpm
@@ -177,7 +178,7 @@ admin@node0.conductor-t285#
 -rw-r----- 1 root root  4402674 Nov 14 17:09 /home/t128/128T-mist-wan-assurance-3.101.0-302.el9.x86_64.rpm
 ```
 
-2. Import the ISO.
+4. Import the ISO.
 
 ```
 [root@conductor-t285 t128]# su - admin
@@ -196,7 +197,7 @@ Wed 2025-12-10 00:12:48 UTC
      7.1  SSR-7.1.0-50   downloads   downloads
 ```
 
-If you are only ugrading the SSR ISO, once the local software repository has been updated with the ISO, the upgrade can proceed. If you are also upgrading plugins, continue below. 
+If you are only ugrading the SSR ISO, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Router Upgrade](upgrade_router.md) procedure. If you are also upgrading plugins, continue below. 
 
 ### Import Plugin RPMs
 
