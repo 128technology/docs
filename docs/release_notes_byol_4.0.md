@@ -12,8 +12,8 @@ sidebar_label: '4.0'
 
 On first boot of the SSR volume, the instance of the vTPM (if detected) is automatically initialized with the RSA encryption key pair. The BYOL image contains a script which is used to validate the vTPM operations based on the initialization.
 
-Encrypt: /usr/libexec/128technology/t128_tpm_crypto.sh encrypt -i secret.txt -o secret.txt.enc
-Decrypt: /usr/libexec/128technology/t128_tpm_crypto.sh decrypt -i secret.txt.enc -o output.txt
+Encrypt: /usr/libexec/128technology/t128_tpm_crypto encrypt -i secret.txt -o secret.txt.enc
+Decrypt: /usr/libexec/128technology/t128_tpm_crypto decrypt -i secret.txt.enc -o output.txt
 
 :::important
 SSR version 7.1.3-r2 or higher is required to leverage the vTPM capabilities in software.
