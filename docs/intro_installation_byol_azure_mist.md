@@ -19,7 +19,7 @@ Once you have selected the plan that best suits the needs of your deployment, pr
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in Azure. Chose the size that best meets your requirements. More information can be found in the [Azure Documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes).
+The following instance types are supported for virtual SSR in Azure. Choose the size that best meets your requirements. More information can be found in the [Azure Documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes).
 
 | Recommended Azure VM Size | Max vNICs Supported | vCPU Cores | Memory |
 | ---| --- |
@@ -177,10 +177,12 @@ The network interfaces to be used in Mist configuration are as follows:
 
 If no management network interface is provided, the names to be used in the Mist configuration are as follows:
 
-| Network Interface Name | Subnet           | Mist Config Name |
-| ---------------------- | ---------------- | ---------------- |
-| ge-0-0                 | Public           | ge-0/0/0    |
-| ge-0-1                 | Private          | ge-0/0/1    |
+| Network Interface Name  | Subnet          | Mist Config Name |
+| ----------------------- | --------------- | ---------------- |
+| ge-0-0                  | Public          | ge-0/0/0    |
+| ge-0-1                  | Private         | ge-0/0/1    |
+| ge-0-2 (If Applicable)  | HASync          | ge-0/0/2    |
+| ge-0-3 (If Applicable)  | HAFabric        | ge-0/0/3    |
 
 #### Interface Tagging
 
@@ -330,7 +332,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
       "value": "<location of the VNet>"
     },
     "availabilitySetName": {
-      "value": "<name of the Availability Set>"
+      "value": "<Name of the Availability Set>"
     },
     "instanceSize": {
       "value": "Standard_F8s_v2"

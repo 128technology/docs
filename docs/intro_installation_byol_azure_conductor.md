@@ -23,7 +23,7 @@ Once you have selected the BYOL plan for your deployment, proceed to [Session Sm
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in Azure. Chose the size that best meets your requirements. More information can be found in the [Azure Documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes).
+The following instance types are supported for virtual SSR in Azure. Choose the size that best meets your requirements. More information can be found in the [Azure Documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes).
 
 | Recommended Azure VM Size | Max vNICs Supported | vCPU Cores | Memory |
 | ---| --- |
@@ -239,7 +239,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
       "value": "<Location of the VNet>"
     },
     "availabilitySetName": {
-      "value": "<N of the Availability Set>"
+      "value": "<Name of the Availability Set>"
     },
     "instanceSize": {
       "value": "Standard_F8s_v2"
@@ -610,6 +610,25 @@ When logging to the Linux instance via SSH use the default username of `t128` an
 4. Under the Advanced tab, you can add cloud-init custom data to automatically install and onboard the router. Use the steps in the [Cloud-init Onboarding](#cloud-init-onboarding-1) section.
 5. Click **Review and Create**
 6. If an onboarding configuration was not provided in step 4, follow the steps in the [Manual Onboarding](#manual-onboarding-1) section.
+
+## Network Interface Layout
+The _Session Smart Router Template_ deploys an instance for the SSR with two network interfaces and an optional third. The template attaches the network interfaces to the instance in the following order: Management (optional), Public, and Private.
+
+If a management interface is provided, the interfaces to be used are as follows
+
+| Network Interface name | Subnet           |
+| ---------------------- | ---------------- |
+| ge-0-0                 | Management     |
+| ge-0-1                 | Public         |
+| ge-0-2                 | Private        |
+
+If no management interface is provided, the interfaces to be used are as follows
+| Network Interface name  | Subnet          |
+| ----------------------- | --------------- |
+| ge-0-0                  | Public          |
+| ge-0-1                  | Private         |
+| ge-0-2 (If Applicable)  | HASync          |
+| ge-0-3 (If Applicable)  | HAFabric        |
 
 ## Interface Tagging
 
