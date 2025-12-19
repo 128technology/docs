@@ -3,6 +3,12 @@ title: Disable SSR4x0 Management Interfaces
 sidebar_label: Disable SSR4x0 Management Interfaces
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.1.0   | Support for disabling SSR4x0 Managment interfaces added. |
+
 The following configuration fields have been added to node configuration, allowing you to control physical security features on the SSR4x0 series. A `true` setting enables the feature, `false` disables the feature. 
 
 ```
