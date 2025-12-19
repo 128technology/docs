@@ -285,21 +285,28 @@ Completed in 0.02 seconds
 - `metadata next rekey` - Number of seconds until the next rekey occurs.
 - `metadata manager status` - Indicates whether the current node is Active-Leader or Redundant-Peer, or displays inactive when the feature is not enabled.
 
+Note that the `Key Manager State` provides the state info for the existing dynamic rekey model and will always show `inactive` for nodes managed by the conductor, while the `Metadata Key Manager State` refers to the key management state for the Enhanced Security Key Management feature. 
+
 ```
-                ================================================
-                 N1
-                ================================================
-                  Key Manager State:        Active Leader
-                  Rekey Index:              189000
-                  Last Rekey:               0 hrs 20 min 24 sec
-                  Next Rekey:               1 hrs 2 min 56 sec
-                  Key Change Count:         5
-                  Config Key Change Count:  2
-                  Key Change Error:         key error
-                  Config Key Change Error:  config error
-                  Metadata Rekey Index:     199000
-                  Metadata Last Rekey:      0 hrs 20 min 25 sec
-                  Metadata Next Rekey:      1 hrs 2 min 57 sec
+admin@node0.Conductor# show security key-status router SSR_701_hub1
+Fri 2025-12-19 05:12:19 UTC
+✔ Retrieving key state...
+====================================================
+ node0.SSR_701_hub1
+====================================================
+  Key Manager State:           Inactive
+  Rekey Index:                 1
+  Last Rekey:                  N/A
+  Next Rekey:                  N/A
+  Key Change Count:            1
+  Config Key Change Count:     6
+  Key Change Error:            N/A
+  Config Key Change Error:     N/A
+  Metadata Rekey Index:        61
+  Metadata Last Rekey:         0 hrs 17 min 29 sec
+  Metadata Next Rekey:         23 hrs 42 min 31 sec
+  Metadata Key Manager State:  Active Leader
+Completed in 0.02 seconds
 ```
 
 `show peers security` includes the following information:
@@ -368,4 +375,46 @@ Mon 2025-07-21 20:28:18 UTC
 
 Completed in 0.10 seconds
 admin@test1.headend#
+```
+
+`show peers certificate` provides peer certificate information.
+
+```
+admin@node0.Conductor# show peers certificate router SSR_701_spoke1
+Fri 2025-12-19 05:12:09 UTC
+✔ Retrieving peer paths...
+======================================
+ Peer: SSR_701_spoke1 -> SSR_701_hub1
+======================================
+  Peer:               SSR_701_spoke1 -> SSR_701_hub1
+  Node:               node0
+  Network Interface:  WAN_250
+  Destination:        30.100.1.2
+  Status:             up
+  Hostname:           unavailable
+  Path Mtu:           1500
+  Local Cert:         -----BEGIN CERTIFICATE-----
+ MIICMTCCAdegAwIBAgIQEjFpHpHNP731vpBGU3mfyTAKBggqhkjOPQQDAjAVMRMw
+ EQYDVQQDDApTU1ItTEFCLUNBMB4XDTI1MTIxOTA0MzkxMVoXDTI4MDMyMzA0Mzkx
+ MVowITEfMB0GA1UEAwwWU1NSXzcwMV9zcG9rZTFfcGVlcmluZzCBmzAQBgcqhkjO
+ PQIBBgUrgQQAIwOBhgAEAJRKn1&h#$hooz@yNees9xfUK3U+2Iy3p7TqCNphRui
+.
+.
+.
+ CwYDVR0PBAQDAgWgMCEGA1UdEQQaMBiCFlNTUl83MDFfc3Bva2UxX3BlZXJpbmcw
+ CgYIKoZIzj0EAwIDSAAwRQIhAMtA2bwG4Oz5qL5epbFqzZYdJygonCajB8gupyk6
+ Mw9yAiBPur1txROTK7FTyFZ2cXAWSOszEiiwbc1lqNGtSgsPhQ==
+ -----END CERTIFICATE-----
+
+  Peer Cert:          -----BEGIN CERTIFICATE-----
+ MIICKjCCAdGgAwIBAgIQfWKMXKIOR3RRA5wI+VXnBjAKBggqhkjOPQQDAjAVMRMw
+ EQYDVQQDDApTU1ItTEFCLUNBMB4XDTI1MTIxOTA0NDc0N1oXDTI4MDMyMzA0NDc0
+ N1owHjEcMBoGA1wTU1NSbr!n&u$@SHRubberyGVlcmluZzCBmzAQBgcqhkjOPQIB
+.
+.
+.
+ VR0PBAQDAgWgMB4GA1UdEQQXMBWCE1NTUl83MDFfaHViX3BlZXJpbmcwCgYIKoZI
+ zj0EAwIDRwAwRAIgHEB93SRCeCp9fH4PhsQqWl0mCCvT2St4okZscBIWc5kCIHMN
+ KHkH19zCivm6Apwd5IyMaiSeMRBaRPpLlDOcY89H
+ -----END CERTIFICATE-----
 ```
