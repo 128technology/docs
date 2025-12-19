@@ -405,10 +405,12 @@ If a management interface is provided, the interfaces to be used are as follows
 | ge-0-2                 | Private        | 0000:00:07.0    |
 
 If no management interface is provided, the interfaces to be used are as follows
-| Network Interface name | Subnet           | PCI Address     |
-| ---------------------- | ---------------- | ----------------|
-| ge-0-0                 | Public          | 0000:00:05.0    |
-| ge-0-1                 | Private         | 0000:00:06.0    |
+| Network Interface name  | Subnet          | PCI Address     |
+| ----------------------- | --------------- | ----------------|
+| ge-0-0                  | Public          | 0000:00:05.0    |
+| ge-0-1                  | Private         | 0000:00:06.0    |
+| ge-0-2 (If Applicable)  | HASync          | 0000:00:07.0    |
+| ge-0-3 (If Applicable)  | HAFabric        | 0000:00:08.0    |
 
 ### Launch the Conductor Managed Template
 

@@ -164,10 +164,12 @@ If a management network interface is provided, the names to be used in the Mist 
 
 If no management network interface is provided, the names to be used in the Mist configuration are as follows:
 
-| Network Interface Name | Subnet           | Mist Config Name |
-| ---------------------- | ---------------- | ---------------- |
-| ge-0-0                 | Public           | ge-0/0/0    |
-| ge-0-1                 | Private          | ge-0/0/1    |
+| Network Interface Name  | Subnet          | Mist Config Name |
+| ----------------------- | --------------- | ---------------- |
+| ge-0-0                  | Public          | ge-0/0/0    |
+| ge-0-1                  | Private         | ge-0/0/1    |
+| ge-0-2 (If Applicable)  | HASync          | ge-0/0/2    |
+| ge-0-3 (If Applicable)  | HAFabric        | ge-0/0/3    |
 
 #### Interface Tagging
 
