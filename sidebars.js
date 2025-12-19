@@ -421,6 +421,7 @@ module.exports = {
       },
     ],
     "High Availability": [
+      "concepts-ha-options",
       "config_ha",
       "config_dual_router_ha",
       "config_ha_vrrp",

@@ -28849,7 +28849,13 @@ Range: 1-4095
 
 ## `configure authority router routing routing-protocol graceful-restart select-delay-time`
 
-After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard- coded to 360 seconds.
+After GR restart and reconnect with a GR helper peer, this is the minimum time to delay the best route selection process and sending the initial End-of-RIB to all BGP neighbors. This is the minimum of the currently unexposed selection deferral timer (RFC-4724) where that timer is a maximum and currently hard-coded to 360 seconds.
+
+The `select-delay-time` is an optional BGP graceful restart timer that ensures BGP graceful restart will end only after the configured timer value. The `select-delay-timer` was added to ensure that BGP does not send the End-of-RIB before learning the OSPF routes that are being redistributed into BGP.
+
+When the `select-delay-timer` is configured, it ensures that the timer has expired before sending the End-of-RIB to the peers. The `select-delay-timer` starts when BGP first connects to a GR-enabled peer after restart. 
+
+When the `select-delay-timer` is not configured, BGP processes graceful restart normally, ensuring all peers send End-of-RIB messages and perform the best route calculation.
 
 #### Usage
 
@@ -47264,6 +47270,7 @@ configure authority service-policy <name>
 | [`peer-path-resiliency`](#configure-authority-service-policy-peer-path-resiliency) | Whether or not session resiliency failover occurs among multiple peers. |
 | [`qp-preference`](#configure-authority-service-policy-qp-preference) | Preference for ordering interfaces by QP values. |
 | [`required-qp`](#configure-authority-service-policy-required-qp) | Minimum quality points required on network interface. |
+| [`reverse-gateway-change-detection`](#configure-authority-service-policy-reverse-gateway-change-detection) | Compare the forward packet source-mac against the reverse next-hop arp entry, and trigger a flow-move for the session to pick up the reverse next-hop update. |
 | [`service-class`](#configure-authority-service-policy-service-class) | A reference to the name of the service class to use. |
 | [`session-resiliency`](#configure-authority-service-policy-session-resiliency) | Types of session resiliency govern how the SSR provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing. |
 | `show` | Show configuration data for &#x27;service-policy&#x27; |
@@ -47870,6 +47877,39 @@ Default: 0
 ##### uint32
 
 An unsigned 32-bit integer.
+
+## `configure authority service-policy reverse-gateway-change-detection`
+
+Compare the forward packet `source-mac` against the `reverse next-hop arp` entry, and trigger a flow-move for the session to pick up the reverse next-hop update.
+
+#### Usage
+
+```
+configure authority service-policy reverse-gateway-change-detection enabled
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: disabled
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- enable: Compare the forward packet source-mac against the reverse next-hop arp entry, and trigger a flow-move for the session to pick up the reverse next-hop update.
+- disable (default): No comparison made.
+
+With this feature enabled, the forward packet `source-mac` is compared against the `reverse-flow next-hop arp-entry`. If a change is identified, a flow-move is triggered for the session, a refreshed reverse next-hop is chosen by routing, and the `reverse-flow next-hop arp-entry` is updated to begin forwarding reverse traffic to that gateway resolution.
+
+The reverse next-hop gateway update can be determined by routing, or `off-subnet-reverse-arp-mac-learning` can be configured on the ingress-interface to update the reverse next-hop arp-entry resolution to be equal to the next forward packet `source-mac`.
 
 ## `configure authority service-policy service-class`
 
