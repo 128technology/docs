@@ -283,9 +283,7 @@ Completed in 0.02 seconds
 - `metadata rekey index` - Index of the current rekey interval.
 - `metadata last rekey` - Number of seconds since the last rekey occurred.
 - `metadata next rekey` - Number of seconds until the next rekey occurs.
-- `metadata manager status` - Indicates whether the current node is Active-Leader or Redundant-Peer, or displays inactive when the feature is not enabled.
-
-Note that the `Key Manager State` provides the state info for the existing dynamic rekey model and will always show `inactive` for nodes managed by the conductor, while the `Metadata Key Manager State` refers to the key management state for the Enhanced Security Key Management feature. 
+- `metadata manager status` - Indicates whether the current node is Active Leader or Redundant Peer, or displays Inactive when the feature is not enabled.
 
 ```
 admin@node0.Conductor# show security key-status router SSR_701_hub1
@@ -308,6 +306,11 @@ Fri 2025-12-19 05:12:19 UTC
   Metadata Key Manager State:  Active Leader
 Completed in 0.02 seconds
 ```
+
+`Key Manager State` shows the state for Security Dynamic Rekey without Enhanced Security Key Management. Nodes managed by the Conductor will always show `inactive` as the rekey control process runs on the Conductor.
+
+The `Metadata Key Manager State` refers to the key management state for the Enhanced Security Key Management feature. It indicates whether the current node is Active Leader or Redundant Peer, or displays Inactive when the feature is not enabled.
+
 
 `show peers security` includes the following information:
 
