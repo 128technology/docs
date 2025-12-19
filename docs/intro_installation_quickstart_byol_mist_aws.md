@@ -178,6 +178,8 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | WAN       | Interface is marked as WAN for onboarding purposes. Without a MGMT interface, it is assumed to have connectivity to Mist cloud infrastructure. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
 | MGMT       | Interface is marked as MGMT and is assumed to have connectivity to Mist cloud infrastructure and SSH access prior to site assignment. |
+| HAFabric    | Interface is marked as HAFabric and is used as the fabric link in an HA deployment. |
+| HASync      | Interface is marked as HASync and is used as the redundancy link in an HA deployment. |
 
 :::note
 The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging. This is automatically done when using the provided templates.
