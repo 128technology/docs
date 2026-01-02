@@ -8,6 +8,10 @@ Use the following procedures to upgrade a Router.
 The Router software version cannot be higher than the software version installed on the Conductor.
 :::
 
+:::important
+**The minimum starting version for upgrading a conductor or a router to 7.0.1 or higher is 6.3.5.** If the conductor is not currently running at least 6.3.5, first upgrade to this version. Then upgrade each router to 6.3.5, and wait for all managed routers to reach the synchronized state prior to upgrading to 7.0.1. There are new keying requirements enforced by the conductor in 7.0.1, and if the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
+:::
+
 ### Upgrade using the Conductor's GUI
 
 1. Navigate to the Routers page.
