@@ -262,7 +262,6 @@ ML-KEM cryptography is configured under `key-exchange-algorithm` and has the fol
 | `diffie-hellman` | Use the diffie-hellman-key-size parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 1024, 2048 or 4096. |
 | `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptograhy. This employs both methods of encryption for greater security. Be aware that there is a performance impact with this selection. The above values are used and set individually in the configuration. |
 
-
 **ML-KEM Example**
 
 The ML-KEM key size values are as follows:

@@ -7,7 +7,7 @@ The SSR400 and SSR440 support an integrated Chassis Manager to help monitor conn
 
 ## Chassis Manager
 
-Interaction with the Chassis Manager is performed through CLI commands and button presses on the front of the SSR400/SSR440 chassis. Components include the LED Manager and Temperature Manager. 
+Interaction with the Chassis Manager is performed through CLI commands and button presses on the front of the SSR400 and SSR440 chassis. Components include the LED Manager and Temperature Manager. 
 
 ### LED Manager
 
