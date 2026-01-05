@@ -7,15 +7,24 @@ SSR software version 6.3.0 and newer allows a Conductor to manage routers runnin
 
 Image-based installations provide many benefits over the earlier RPM package-based installation/upgrade process, including upgrade speed, stability, efficiency, and ease of use. This section describes the process for upgrading a Conductor, allowing it to manage both package-based and image-based routers.
 
-:::important
-**The minimum starting version for upgrading a conductor or a router to 7.0.1 is 6.3.5.** If the conductor is not currently running at least 6.3.5, first upgrade to this version. After the upgrade is complete, all the managed routers must connect to the 6.3.5+ conductor and reach the synchronized state. There are new keying requirements with 6.3.5 which are loaded onto the routers during synchronization, and are required to commumicate with a 7.0.1+ conductor. If the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor and upgrade.
-:::
-
 :::note
 Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md#importexport).
 
 For systems with both primary and secondary conductors, it is a best practice to upgrade only one conductor at a time. 
 :::
+
+**7.0.1 Conductor Upgrades**
+
+If you are upgrading a conductor that is currently installed with version 6.3.4 or lower, and you wish to upgrade to version 7.0.1, you must first upgrade the conductor to version 6.3.5. 
+
+Routers running SSR software versions earlier than 6.3.5 cannot connect to conductors running SSR software version 7.0.1 or higher. A transitional step is required to enable routers running versions earlier than 6.3.5 (6.0.x, 6.1.x, 6.2.x, 6.3.4 and lower) to communicate with a conductor running 7.0.1. 
+
+1. Upgrade the conductor to 6.3.5+ (but not higher than the latest version of 6.3.x).
+2. Upon completion of the install, allow all managed routers to connect and reach the **Synchronized** state. 
+  The new keying requirements that are part of 6.3.5+ are loaded onto the routers during synchronization. These are required for routers to communicate with a 7.0.1+ conductor. If the routers do not reach the synchronized state before upgrading to 7.0.1, those routers will not be able to communicate with the conductor.
+3. Once the routers are synchronized, you may upgrade the conductor to 7.0.1. All synchronized routers, regardless of version, will be able to communicate with the upgraded conductor. The routers are not required to upgrade to 7.0.1 or to 6.3.5.
+
+If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.0.1 normally.
 
 ## Upgrade using the GUI
 
