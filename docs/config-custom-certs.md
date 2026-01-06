@@ -166,7 +166,7 @@ Store the value of the token in a file called `token.txt` for use later.
 ### Issue a Private-key Creation Request
 
 :::important
-It is necessary for all of the following REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Managementin 7.0. This is a reserved name specifically used by Enhanced Security Key Management.
+It is necessary for all of the following REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Management in 7.0. This is a reserved name specifically used by Enhanced Security Key Management.
 :::
 
 The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, we need to instruct the SSR to create a private key. To accomplish this, we provide the SSR some details, including:

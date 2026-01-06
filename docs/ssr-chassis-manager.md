@@ -93,9 +93,9 @@ The following `show` commands allow you to see the chassis status from the CLI.
 | `show chassis hardware`	| Reports the hardware SKU, CLEI, revision (rev), and serial numbers from `/sys/kernel/leopard_idprom`. |
 | `show chassis firmware`	| Shows CPLD and boot firmware versions from `/sys/kernel/leopard_cpld/version` and `/sys/devices/virtual/dmi/id/bios_version`, respectively. |
 
-### Power Supply Adapter LEDs
+### DC Power LEDs
 
-The Power Supply Adapter LEDs are not managed by the Chassis Manager, but the LEDs are used to indicate status.
+The DC Power LEDs are not managed by the Chassis Manager, but the LEDs are used to indicate status.
 
 - Steady Green: Receiving power
 - Off: Power failure or no power

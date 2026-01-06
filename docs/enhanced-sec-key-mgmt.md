@@ -12,7 +12,7 @@ sidebars-label: Enhanced Security Key Management
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
-As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the institution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
 The following diagrams show simple examples of how Enhanced Security Key Management can be deployed. 
 
@@ -260,7 +260,7 @@ ML-KEM cryptography is configured under `key-exchange-algorithm` and has the fol
 | `key-exchange-algorithm`  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
 | `ml-kem` | Use the `ml-kem-key-size` parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 512, 768 or 1024. |
 | `diffie-hellman` | Use the diffie-hellman-key-size parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 1024, 2048 or 4096. |
-| `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptograhy. This employs both methods of encryption for greater security. Be aware that there is a performance impact with this selection. The above values are used and set individually in the configuration. |
+| `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptography. This employs both methods of encryption for greater security. Be aware that there is a performance impact with this selection. The above values are used and set individually in the configuration. |
 
 **ML-KEM Example**
 
