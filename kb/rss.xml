@@ -8,7 +8,7 @@
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
-        <copyright>Copyright © 2025 Juniper Networks, Inc.</copyright>
+        <copyright>Copyright © 2026 Juniper Networks, Inc.</copyright>
         <item>
             <title><![CDATA[IPSec algorithms dh2 (modp1024) and dh22 are being deprecated]]></title>
             <link>https://docs.128technology.com/kb/2024/12/12/PLUGIN-2835</link>
