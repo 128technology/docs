@@ -106,6 +106,12 @@ exit
 
 ![JumpCloud Config on SSR GUI](/img/ldap_jumpcloud_user_setup7.png)
 
+Setting `Auto generate user and group search filter` to `true` generates `user-search-base` and `group-search-base` LDAP filters. When enabled and the server type is `Global Catalog` (for Active Directory), SSR generates `user-search-base` and `group-search-base` using the `search-base` field and RBAC roles configured on the system.
+
+For example, if `search-base` is configured as `DC=mydomain,DC=com` and the system has RBAC roles called `admin` and `user`, these are represented by groups prefixed with `128t-` on the LDAP/AD server. They appear in these search bases as `128t-admin` and `128t-user`, respectively.
+
+Disabling (setting to `false`) allows you to specify your own filters.
+
 ### User Verification
 
 :::important
@@ -235,6 +241,10 @@ password            (removed)
 
 ## LDAP User Account Requirements
 It is important to ensure that administrative users are configured on the LDAP server as being a member of a group called `128t-user` for read-only access to the configuration, or `128t-admin` for read-write access to configuration. These group names are case sensitive.
+
+:::important
+Do **NOT** manually create local user accounts for LDAP users. They are automatically added based on the details for each user returned from the LDAP server. Manually creating local users prevents the use of the LDAP server for authentication.
+:::
 
 ## Implementation Notes
 - `show user` within the PCLI (and GUI's User management page) allows viewing LDAP users that have connected to SSR

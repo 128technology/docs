@@ -104,7 +104,7 @@ The default Administrator role (`admin`) has access to all configuration options
 	![Access Management Roles](/img/config_RBAC_AMRstep2.2.png)
 
 4. Click ADD.
-5. Create a name for the new role. Use a name that identifies the role in some way. 
+5. Create a name for the new role. Use a name that identifies the role in some way. Role names should not contain numbers. 
 	![Name the Role](/img/config_RBAC_AMRstep3.png)
 
 6. Assign the capabilities for each Access Management Role. In the **Capabilities** panel, click ADD and select the capability from the drop down. For example, user roles may only have read access to the resource, where an admin might have read and write access. Options are config-read, config-write, provisioning. 
