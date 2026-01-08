@@ -106,9 +106,9 @@ exit
 
 ![JumpCloud Config on SSR GUI](/img/ldap_jumpcloud_user_setup7.png)
 
-Setting `Auto generate user and group search filter` to `true` generates `user-search-base` and `group-search-base` LDAP filters. When enabled and the server type is `Global Catalog` (for Active Directory), SSR generates `user-search-base` and `group-search-base` using the `search-base` field and RBAC roles configured on the system.
+Setting `Auto generate user and group search filter` to `true` generates `user-search-base` and `group-search-base` LDAP filters. When enabled and the server type is `Global Catalog` (for Active Directory), `user-search-base` and `group-search-base` LDAP filters are generated using the `search-base` field and the RBAC roles configured on the system.
 
-For example, if `search-base` is configured as `DC=mydomain,DC=com` and the system has RBAC roles called `admin` and `user`, these are represented by groups prefixed with `128t-` on the LDAP/AD server. They appear in these search bases as `128t-admin` and `128t-user`, respectively.
+For example, if `search-base` is configured as `DC=mydomain,DC=com` and the system has RBAC roles called `admin` and `user`, these appear as `128t-admin` and `128t-user` in the filters.
 
 Disabling (setting to `false`) allows you to specify your own filters.
 
