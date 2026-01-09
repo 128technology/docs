@@ -12,6 +12,7 @@ When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505
 - The `secure-conductor-onboarding` must be enabled
 - The `secure-conductor-onboarding public-key` field must be configured
 - The `secure-conductor-onboarding ca-certificate` field must be configured
+- The conductor nodes must have asset-id's configured
 
 To provide a secure and mutually authenticated onboarding mechanism, the following information must be configured.
 
@@ -23,7 +24,7 @@ The public certificate and CA certificate are configured on the conductor at the
 
 ## Basic Configuration 
 
-The following information are the required steps to configure and use Secure Conductor Onboarding. For details about any of the commands and steps, see [How It Works](#how-it-works)
+The following information are the steps to configure and use Secure Conductor Onboarding. For details about any of the commands and steps, see [How It Works](#how-it-works)
 
 - Configure the Conductor where the router will onboard.
     - Configure the conductor to accept the router.
@@ -47,7 +48,7 @@ Only RSA keys are supported at this time.
 - Enable ssh-only for asset resiliency. 
     `configure authority asset-connection-resiliency ssh-only true `
 
-- Enable SCO for each router. 
+- On the conductor, enable SCO for each router. 
     - For devices with a built-in dev-id certificate 
     ```
     config authority router router1 system secure-conductor-onboarding mode strong 
@@ -60,17 +61,14 @@ Only RSA keys are supported at this time.
     config authority router router1 node node0 secure-conductor-onboarding endorsement-key  (text/plain) 
     ```
 
+Configuring a pre-shared-secret is an optional parameter. If one is not specifically configured, it will be automatically generated.
+
 :::note
 To read the EK from the public cloud instance, run `tpm2_readpublic -c 0x81010001 -f DER -o /dev/stdout -Q | base64 -w0` and configure the contents in the endorsement-key field above. 
 :::
 
-- Disable salt state on conductor.  
-    ```
-    /usr/bin/firewall-cmd --permanent --remove-port=4505-4506/tcp 
-    ```
-
 :::note
-In the current beta delivery (7.1.3-1r2) this step must be performed to disable ports 4505 and 4506 so any devices not using this feature will fail to onboard to the conductor.
+Ports 4505 and 4506 are automatically closed after SCO is enabled on the conductor and the conductor is restarted.
 :::
 
 - Create the SCO token on the conductor. 
@@ -101,10 +99,9 @@ Once the secure SSH tunnels are established, the SCO workflow concludes. All fut
 
 ### Known Caveats 
 
-- During SCO onboarding of the router in an HA deployment, both the conductor nodes should be online and able to talk to each other.
 - Once SCO is enabled on the HA conductor, both conductor nodes must be restarted. 
 
-- Only RSA key-based certs are supported on the conductor at this time. 
+- Only RSA key-based certificates are supported on the conductor at this time. 
 
 ## How It Works
 
@@ -118,10 +115,8 @@ The following parameters are required, and are configured at the Router level.
 
 - `disabled`: Default is true, must be false to enable.
 - `psk-only`: Configured on devices with no TPM, but which require the Secure Conductor Onboarding workflow.
-- `weak`: This setting enables SCO but allows the router to use a self-signed certificate. This conductor will skip the CA certificate validation for this router.
+- `weak`: This setting enables SCO but allows the router to use a self-signed certificate, and can be used on devices with no TPM. Generates a self signed certificate per authentication attempt for non-TPM devices. For TPM devices, the certificate from the TPM is used. The conductor does not verify that these certificates are signed by a CA.
 - `strong`: On SSR devices manufactured with a device ID (SSR400/SSR440), `strong` mode ensures that the asset-id matches the serial number field in the subject line of the router’s public certificate. For vTPM workflows, the router’s endorsement key must match the `endorsement-key` configuration. 
-
-`configure authority router system secure-conductor-onboarding pre-shared-secret` 
 
 ### Conductor Configuration
 
@@ -169,7 +164,7 @@ router min-router
 exit
 ```
 
-If any checks fail, the `create system connectivity` command returns an error explaining why. This command can be run as many times as needed for each node. All information to form the token is present in the configuration.
+If any checks fail, the `create secure-conductor-onboarding token` command returns an error with an explanation. This command can be run as many times as needed for each router. All information to form the token is present in the configuration.
 
 The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`.  
 
