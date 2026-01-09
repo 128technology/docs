@@ -68,7 +68,7 @@ To read the EK from the public cloud instance, run `tpm2_readpublic -c 0x8101000
 :::
 
 :::note
-Ports 4505 and 4506 are automatically closed after SCO is enabled on the conductor and the conductor is restarted.
+After SCO is enabled on the conductor and the conductor is restarted, ports 4505 and 4506 are automatically closed. 
 :::
 
 - Create the SCO token on the conductor. 
@@ -114,7 +114,6 @@ The following parameters are required, and are configured at the Router level.
 `configure authority router system secure-conductor-onboarding mode`
 
 - `disabled`: Default is true, must be false to enable.
-- `psk-only`: Configured on devices with no TPM, but which require the Secure Conductor Onboarding workflow.
 - `weak`: This setting enables SCO but allows the router to use a self-signed certificate, and can be used on devices with no TPM. Generates a self signed certificate per authentication attempt for non-TPM devices. For TPM devices, the certificate from the TPM is used. The conductor does not verify that these certificates are signed by a CA.
 - `strong`: On SSR devices manufactured with a device ID (SSR400/SSR440), `strong` mode ensures that the asset-id matches the serial number field in the subject line of the router’s public certificate. For vTPM workflows, the router’s endorsement key must match the `endorsement-key` configuration. 
 
@@ -201,11 +200,4 @@ The conductor’s current date/time is used to validate the expiration. If the c
 - Change pre-shared key: To invalidate unexpired tokens, the user can change the pre-shared key in the conductor configuration. This is done at the authority or router level, based on the mode of operation.
 
 - Update conductor certificate: When the conductor certificate expires and a new certificate is installed, all existing tokens signed by the old certificate are no longer valid. The details of how to update the conductor certificate follow existing supported procedures.
-
-
-
-
-
-
-
 
