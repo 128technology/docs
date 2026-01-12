@@ -33,6 +33,12 @@ To improve resiliency against network connectivity issues, the SSR queries avail
 
 Only when the SSR has tried all available sources and reached the consecutive failure threshold on each is the download considered **failed due to connectivity issues**. In that case, an error is reported and the download stopped. 
 
+### HA Download Resiliency
+
+If the HA Conductor acting as the repository fails during the download, the download automatically switches over to the second conductor node. The process continues downloading from there, even if the first conductor node comes back online. 
+
+If an HA Router fails during download and another download is requested after failover to the second node, a new download is begun. If the router returns to the original node and then resumes the original download, it will resume from where it left off. However, if the original node experienced a catastrophic failure where the shutdown was not clean, a new download is initiated.
+
 ## Resumable SSR Download
 
 Downloads can be paused manually using a CLI command, or automatically paused if the connection fails. When manually paused, the process can be continued by manually restarting the download. In the case of a failed connection, the SSR will automatically resume the download when the connection is restored. In both instances, the download resumes from the point where the download was stopped. 

@@ -210,7 +210,7 @@ config
 
     authority
         enhanced-security-key-management  true
-		
+        
         router                  RTR_EAST_CONDUCTOR
             name                RTR_EAST_CONDUCTOR
 
@@ -232,6 +232,64 @@ config
             location             usa
             inter-node-security  internal
 ```
+
+#### Key Exchange Algorithm Router Override
+
+The key exchange algorithm is set at the Authority level, and all existing sessions and keys remain in use until the next key exchange cycle. Any change to the selected algorithm, such as the key-size, will impact the existing environment.
+
+If an administrator selects a new algorithm, you must be certain that all routers/peers in the authority are on the correct version, otherwise new session creation will fail.
+
+To address this use case, a router/peer-path override has been added to enable the transition to a new algorithm within authority. At the router level, configure `key-exchange-algorithm-override`:
+
+**ML-KEM Example**
+
+```
+configure
+    authority
+        router
+            key-exchange-algorithm-override
+                ml-kem
+                    ml-kem-key-size  1024
+                    exit
+                exit
+            exit
+        peer   
+            key-exchange-algorithm-override
+                ml-kem
+                    ml-kem-key-size  1024
+                    exit
+                exit
+            exit          
+        exit 
+    exit
+exit                   
+```
+
+**Hybrid Example**
+
+```
+configure
+    authority
+        router
+            key-exchange-algorithm-override
+                diffie-hellman-ml-kem
+                    ml-kem-key-size  1024
+                    exit
+                exit
+            exit    
+        peer
+            key-exchange-algorithm-override
+                diffie-hellman-ml-kem
+                    ml-kem-key-size  1024
+                    exit
+                exit
+            exit   
+        exit    
+    exit
+exit                
+```
+
+The `diffie-hellman-key-size` can also be specified, or it will use the default value of `2048`.
 
 ## Post Quantum Cryptography Support
 
