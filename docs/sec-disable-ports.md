@@ -50,7 +50,7 @@ When disabled (set to **false**), the USB host controller is excluded from the `
 
 ### Disable Reset Pushbutton
 
-When disabled (set to **false**), the pushbutton interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push. However, with the pushbutton disabled, device reboot is possible from either the command line or through Mist. 
+When disabled (set to **false**), the push button interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push. However, with the push button disabled, device reboot is possible from either the command line or through Mist. 
 
 ### Disable Serial Console Port
 
@@ -70,7 +70,7 @@ This feature is configured on the SSR400 and SSR440 by setting **both** the Seri
 
 If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the push button to [Reset to the Rescue configuration](config-factory-reset.md#reset-to-the-rescue-configuration).
 
-If the Reset Pushbutton is also disabled, the [Zeroization process](config-factory-reset.md#ssr400-and-ssr-440-zeroization) or RMA to Juniper are the only methods available for recovery.
+If the Reset push button is also disabled, the [Zeroization process](config-factory-reset.md#ssr400-and-ssr-440-zeroization) or RMA to Juniper are the only methods available for recovery.
 
 **It is strongly recommended that recovery not be disabled on production units until post-deployment boot has been successfully validated.**
 

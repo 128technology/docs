@@ -81,7 +81,7 @@ These release notes are Beta only and are in progress. They are furnished to hel
 ------
 - **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).
 ------
-- **I95-61176 Multicast Failover Optimization:** Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM.
+- **I95-61176 Multicast Failover Optimization:** Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM, as well as failover times in general.
 ------
 - **I95-63476 Router/Peer path override for `key-exchange-algorithm`:** A router/peer-path override has been added to enable the transition to a new algorithm within authority. For more information, see [Key Exchange Algorithm Router Override](enhanced-sec-key-mgmt.md#key-exchange-algorithm-router-override). 
 
