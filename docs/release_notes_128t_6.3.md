@@ -46,11 +46,17 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 - Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
 - Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
 
-## Release 6.3.7-4-sts
+## Release 6.3.7-7-sts
 
 **Release Date:** January 15, 2026
 
 **Before installing, please see the note above on Conductor/Router compatibility**
+
+### New Features:
+
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-ntervals) for more information. 
+------
+- **I95-58446 EoSVR Loop Prevention:** EoSVR A/S Loop Prevention has been added, allowing EoSVR traffic to pass Broadcast, unknown-unicast, and multicast traffic through a switch without causing the port to be shut down. 
 
 ### Resolved Issues:
 
@@ -88,11 +94,15 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-62956 Configuration failure due to invalid name:** The CSRX does not allow policynames using a dot (.). This has been resolved - CSRX configurations will use an underscore for policyname creation.
 ------
-- **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 2x the current capacity.
+- **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
+------
+- **I95-63018 memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.
 ------
 - **I95-63036 Web interface auto-refresh:** Auto Refresh in the GUI is now a user setting and is persisted across user sessions. It is disabled by default.
 ------
 - **I95-63084 Web interface refreshes alarms status too often:** Resolved an issue where the web interface would repeatedly request all alarms when alarm flapping occurred. This placed an unnecessarily high load on the GUI refresh process. 
+------
+- **I95-63190 SSC process errors causing node disconnections from Conductor:** Resolved an issue where SSC process errors were filling the buffer queue, dropping messages, and causing node disconnections. 
 ------
 - **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
