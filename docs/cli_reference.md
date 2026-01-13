@@ -1954,6 +1954,12 @@ import rpm [check-rpm-signature <check-rpm-signature>] [force] [verbose] filepat
 | force | Skip confirmation prompt |
 | verbose | Increase log level verbosity |
 
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 7.0.1   | This feature was introduced |
+
 ## `initialize conductor`
 
 Initializes the current device as a conductor.

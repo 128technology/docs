@@ -283,24 +283,34 @@ Completed in 0.02 seconds
 - `metadata rekey index` - Index of the current rekey interval.
 - `metadata last rekey` - Number of seconds since the last rekey occurred.
 - `metadata next rekey` - Number of seconds until the next rekey occurs.
-- `metadata manager status` - Indicates whether the current node is Active-Leader or Redundant-Peer, or displays inactive when the feature is not enabled.
+- `metadata manager status` - Indicates whether the current node is Active Leader or Redundant Peer, or displays Inactive when the feature is not enabled.
 
 ```
-                ================================================
-                 N1
-                ================================================
-                  Key Manager State:        Active Leader
-                  Rekey Index:              189000
-                  Last Rekey:               0 hrs 20 min 24 sec
-                  Next Rekey:               1 hrs 2 min 56 sec
-                  Key Change Count:         5
-                  Config Key Change Count:  2
-                  Key Change Error:         key error
-                  Config Key Change Error:  config error
-                  Metadata Rekey Index:     199000
-                  Metadata Last Rekey:      0 hrs 20 min 25 sec
-                  Metadata Next Rekey:      1 hrs 2 min 57 sec
+admin@node0.Conductor# show security key-status router SSR_701_hub1
+Fri 2025-12-19 05:12:19 UTC
+✔ Retrieving key state...
+====================================================
+ node0.SSR_701_hub1
+====================================================
+  Key Manager State:           Inactive
+  Rekey Index:                 1
+  Last Rekey:                  N/A
+  Next Rekey:                  N/A
+  Key Change Count:            1
+  Config Key Change Count:     6
+  Key Change Error:            N/A
+  Config Key Change Error:     N/A
+  Metadata Rekey Index:        61
+  Metadata Last Rekey:         0 hrs 17 min 29 sec
+  Metadata Next Rekey:         23 hrs 42 min 31 sec
+  Metadata Key Manager State:  Active Leader
+Completed in 0.02 seconds
 ```
+
+`Key Manager State` shows the state for Security Dynamic Rekey without Enhanced Security Key Management. Nodes managed by the Conductor will always show `inactive` as the rekey control process runs on the Conductor.
+
+The `Metadata Key Manager State` refers to the key management state for the Enhanced Security Key Management feature. It indicates whether the current node is Active Leader or Redundant Peer, or displays Inactive when the feature is not enabled.
+
 
 `show peers security` includes the following information:
 
@@ -370,34 +380,44 @@ Completed in 0.10 seconds
 admin@test1.headend#
 ```
 
-`show security security-associations`
+`show peers certificate` provides peer certificate information.
 
 ```
-admin@node0# show security security-associations
-Fri 2024-03-01 14:28:03 UTC Retrieving security associations...
-============== =========== ======= =================== ================ ======== 
- Peer           Peer Name   Node    Network Interface   Destination      Status
-============== =========== ======= =================== ================ ======== 
- 0200019a8f31   Hub1        node0   ge-0-0              192.168.10.101   up
- 0200019a8f31   Hub1        node0   ge-0-1              172.25.22.2      up
- 0200019a8f31   Hub1        node1   ge-0-0              192.168.10.101   up
- 0200019a8f31   Hub1        node1   ge-0-1              172.25.22.2      up
+admin@node0.Conductor# show peers certificate router SSR_701_spoke1
+Fri 2025-12-19 05:12:09 UTC
+✔ Retrieving peer paths...
+======================================
+ Peer: SSR_701_spoke1 -> SSR_701_hub1
+======================================
+  Peer:               SSR_701_spoke1 -> SSR_701_hub1
+  Node:               node0
+  Network Interface:  WAN_250
+  Destination:        30.100.1.2
+  Status:             up
+  Hostname:           unavailable
+  Path Mtu:           1500
+  Local Cert:         -----BEGIN CERTIFICATE-----
+ MIICMTCCAdegAwIBAgIQEjFpHpHNP731vpBGU3mfyTAKBggqhkjOPQQDAjAVMRMw
+ EQYDVQQDDApTU1ItTEFCLUNBMB4XDTI1MTIxOTA0MzkxMVoXDTI4MDMyMzA0Mzkx
+ MVowITEfMB0GA1UEAwwWU1NSXzcwMV9zcG9rZTFfcGVlcmluZzCBmzAQBgcqhkjO
+ PQIBBgUrgQQAIwOBhgAEAJRKn1&h#$hooz@yNees9xfUK3U+2Iy3p7TqCNphRui
+.
+.
+.
+ CwYDVR0PBAQDAgWgMCEGA1UdEQQaMBiCFlNTUl83MDFfc3Bva2UxX3BlZXJpbmcw
+ CgYIKoZIzj0EAwIDSAAwRQIhAMtA2bwG4Oz5qL5epbFqzZYdJygonCajB8gupyk6
+ Mw9yAiBPur1txROTK7FTyFZ2cXAWSOszEiiwbc1lqNGtSgsPhQ==
+ -----END CERTIFICATE-----
+
+  Peer Cert:          -----BEGIN CERTIFICATE-----
+ MIICKjCCAdGgAwIBAgIQfWKMXKIOR3RRA5wI+VXnBjAKBggqhkjOPQQDAjAVMRMw
+ EQYDVQQDDApTU1ItTEFCLUNBMB4XDTI1MTIxOTA0NDc0N1oXDTI4MDMyMzA0NDc0
+ N1owHjEcMBoGA1wTU1NSbr!n&u$@SHRubberyGVlcmluZzCBmzAQBgcqhkjOPQIB
+.
+.
+.
+ VR0PBAQDAgWgMB4GA1UdEQQXMBWCE1NTUl83MDFfaHViX3BlZXJpbmcwCgYIKoZI
+ zj0EAwIDRwAwRAIgHEB93SRCeCp9fH4PhsQqWl0mCCvT2St4okZscBIWc5kCIHMN
+ KHkH19zCivm6Apwd5IyMaiSeMRBaRPpLlDOcY89H
+ -----END CERTIFICATE-----
 ```
-
-`show security security-associations [peer-name] detail`
-
-```
-admin@node0# show security security-associations Hub1 detail
-Fri 2024-03-01 14:28:03 UTC Retrieving security associations...
-Peer Name: Hub1
-State: UP
-Peer Certificate: Valid
-Public Key: Valid
-Local salt: b869b3424513340a, Remote salt: 4cb3488cb19397c3
-Peer Key Rekey In: 20 hrs 2 min 56 sec
-Peer Rekey Count: 5
-Metadata Key Rekey In: 2 hrs 13 min 12 sec
-Local Metadata Key Index: 12 (2), Remote Metadata Key Index: 13 (1)
-```
-
-
