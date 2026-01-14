@@ -552,7 +552,7 @@ aws ec2 create-launch-template \
 
 ### Deploying a HA Router
 To deploy an HA Conductor Managed Router, you must deploy the CloudFormation template directly.
-1. Launch a web browser and navigate to https://console.aws.aamazon.com/cloudformation
+1. Launch a web browser and navigate to https://console.aws.amazon.com/cloudformation
 2. Click **Create stack** and **With new resources (standard)**
 3. Paste the following S3 URL into the **Amazon S3 URL** dialog
 
