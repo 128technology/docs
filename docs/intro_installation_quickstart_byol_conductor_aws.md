@@ -550,7 +550,7 @@ aws ec2 create-launch-template \
 21. Check the acknowledgment check box and click **Launch Instances**.
 22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding-1) section.
 
-## HA Session Smart Conductor Managed Router Deployment
+### Deploying a HA Router
 To deploy an HA Conductor Managed Router, you must deploy the CloudFormation template directly.
 1. Launch a web browser and navigate to https://console.aws.aamazon.com/cloudformation
 2. Click **Create stack** and **With new resources (standard)**
@@ -586,7 +586,7 @@ A description of the parameters of the template are listed in the following tabl
 | HA Sync Interface Subnet    | Optional ID of the management subnet within the VPC. |
 | HA Sync Interface Allowed CIDR  | The IP CIDR range of the endpoints allowed to originate traffic to the Router's HA Sync interface. |
 
-5. An HA Mist Managed router will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
+5. An Conductor Managed route node capable of forming HA will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
 
 ## Interface Tagging
 
