@@ -4,11 +4,11 @@ sidebar_label: '4.0'
 ---
 ## Release 4.0.0
 
-**Release Date:** TBD
+**Release Date:** Jan 14, 2025
 
 #### New Features and Improvements
 
-- **I95-54267 Azure SSR image support for vTPM**
+- **I95-54266 AWS SSR image support for vTPM**
 
 On first boot of the SSR volume, the instance of the vTPM (if detected) is automatically initialized with the RSA encryption key pair. The BYOL image contains a script which is used to validate the vTPM operations based on the initialization.
 
