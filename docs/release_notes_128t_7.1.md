@@ -53,9 +53,9 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Beta Release 7.1.3-3r2
+## Beta Release 7.1.3-8r2
 
-**Release Date:** December 11, 2025
+**Release Date:** January 15, 2026
 
 :::important
 These release notes are Beta only and are in progress. They are furnished to help provide information about updated and new features for controlled beta deliveries. They do not represent a full feature set.
@@ -87,8 +87,37 @@ These release notes are Beta only and are in progress. They are furnished to hel
 
 ### Resolved Issues
 
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291.
+------
+- **I95-57605 BFD link-test-interval not accurate:** Resolved as part of I95-59720. Several modifications have been made to the BFD timers to improve accuracy. 
+------
+- **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
+------
+- **I95-61856 Add `reload local certificates` command for ESKM:** The `reload local certificates` command has been added to allow the updating of local certificates. See [`reload local certificates`](cli_reference.md#reload-local-certificates) for more information. 
+------
+- **I95-62074 Highway requests metadata key from SKM when feature is disabled:** Resolved an issue where even when `enhanced-security-key-management` was disabled, it continued to attempt to get the key information. 
+------
+- **I95-62772 Add details to `show peers certificate` output:** The `show peers certificate` output no longer just shows PEM file output; the data has been rendered in a more friendly format.
+------
+- **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
+------
+- **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR secuirty using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
+------
+- **I95-63190 SSC process errors causing node disconnections from Conductor:** Resolved an issue where SSC process errors were filling the buffer queue, dropping messages, and causing node disconnections.
+------
+- **I95-63202 Unable to bind interfaces in Azure F8 flavor in West Europe region:** Resolved an issue where driver optimization on lower core count systems required more more memory usage, causing initialization failures.
+------
+- **I95-63292 Add upgrade timeout and rpm operation timeout:** Added the ability to configure the timeout for upgrades and for rpm download/install operations under `config authority router RouterName system software-update`. The defaults are 1 hour for SSR upgrade and 10 minutes for rpm operations.
+------
+- **I95-63356 Do not allow new sessions after peer's certificate expired/revoked:** Resolved an issue where sessions were one peer continued to send new sessions after the other peers' certificate was revoked. When the peer's certificate expires, the peer is now forced to re-initiate the key exchange. 
+------
 - **I95-63368 SSR400/SSR440 PMTU cannot exceed 8978:** Resolved an issue where SSR400/SSR440 PMTU discovery was lower than other platforms. The issue has been resolved, and SSR400/SSR440 PMTU now discovers at 9198.
-
+------
+- **I95-63422 Factory reset routers not re-onboarding when ESKM enabled:** Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.
+------
+- **I95-63675 Node page in the GUI appears to load indefinitely:** Resolved an issue where the GUI Node page would load infinitely.
+------
+- **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
 
 ## Release 7.1.0-50r1
 
