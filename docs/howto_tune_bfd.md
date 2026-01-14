@@ -87,7 +87,7 @@ Every BFD interval and multiplier is negotiated between two peers. In cases wher
 
 - Rx Timer: Local router expects to receive an async packet from the peer before the end of each timer. Set based on max value of local `required-min-rx-interval` and peer’s `desired-tx-interval`. Updated after first received BFD packet. 
 
-- Tx Timer: Configured value under d`esired-tx-interval`, no negotiation involved. One async packet is sent at the end of each Tx Timer. 
+- Tx Timer: Configured value under `desired-tx-interval`, no negotiation involved. One async packet is sent at the end of each Tx Timer. 
 
 - Multiplier: Peer’s configured multiplier. The number of missed async packets until the local router deems its peer down.
 

@@ -54,7 +54,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 
 ### New Features:
 
-- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-ntervals) for more information. 
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information. 
 ------
 - **I95-58446 EoSVR Loop Prevention:** EoSVR A/S Loop Prevention has been added, allowing EoSVR traffic to pass Broadcast, unknown-unicast, and multicast traffic through a switch without causing the port to be shut down. 
 
@@ -112,13 +112,13 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
 ------
-- **I95-63295 Highway crash notices due to recursive mutex lock:** Resolved an issue with recursive mutex lock. The listFibEntries block is now processed in multiple batches instead of all at once, preventing a recursive mutex lock for large entries.
+- **I95-63295 Highway crash when show fib is executed on very large FIB:** Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.
 ------
-- **I95-63330 2nd node of HA dual node cluster suffered a core-dump:** Added validation for injection-ring packets - invalid packets are dropped.
+- **I95-63330 Repeated interface flaps on vSSR led to crash in highway process:** Truncated packets are validated prior to processing, preventing crash.
 ------
 - **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash.
 ------
-- **I95-63412 Session Builder throwing an exception while another exception is active:** Resolved an issue where weak checks around exceptions allowed another exception to be thrown while one was still active, causing the Highway process to exit.
+- **I95-63412 Glare condition leading to highway crash when session terminates prematurely:** Resolved an issue where session exception processing was not handled properly.
 ------
 - **I95-63604 GUI import/export config only shows uncompressed size:** Resolved an issue where the GUI import and export operations were only showing the uncompressed side of the configuration. Both the compressed and uncompressed size are now shown in the UI.
 ------
@@ -128,7 +128,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-63976 Waypoints fail to allocate when service-path peer next-hop gateway is off the subnet:** Resolved an issue with waypoint allocation failures when using BGP over SVR with multiple IP addresses on the egress SVR interface.
 ------
-- **I95-63729 Prevent nodes from being deleted when ephemeral nodes are cleared:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
+- **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
 
 ## Release 6.3.6-6-sts
 
