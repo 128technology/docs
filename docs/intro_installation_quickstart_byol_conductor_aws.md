@@ -550,6 +550,18 @@ aws ec2 create-launch-template \
 21. Check the acknowledgment check box and click **Launch Instances**.
 22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding-1) section.
 
+## HA Session Smart Conductor Managed Router Deployment
+To deploy an HA Conductor Managed Router, you must deploy the CloudFormation template directly.
+1. Launch a web browser and navigate to https://console.aws.aamazon.com/cloudformation
+2. Click **Create stack** and **With new resources (standard)**
+3. Paste the following S3 URL into the **Amazon S3 URL** dialog
+
+```
+https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
+```
+4. Click **next** and complete the form. See [Launch the Conductor Managed Template](#launch-the-conductor-managed-template) for a description of the various parameters.
+5. An HA Mist Managed router will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
+
 ## Interface Tagging
 
 In addition to using the cloud formation template, the admin can tag the interface with the key `SSR-ROLE`. The possible values are as follows:

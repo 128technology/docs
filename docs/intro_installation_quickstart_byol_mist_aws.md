@@ -348,3 +348,16 @@ If the EC2 instance deployed for the Session Smart software does not have access
 9. Click **Add Another Route**.
 10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option.
 11. Select it and click **Save**.
+
+
+## Deploying an HA Mist Managed Session Smart Router
+To deploy an HA Mist Managed Router, you must deploy the CloudFormation template directly.
+1. Launch a web browser and navigate to https://console.aws.aamazon.com/cloudformation
+2. Click **Create stack** and **With new resources (standard)**
+3. Paste the following S3 URL into the **Amazon S3 URL** dialog
+
+```
+https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-mist-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
+```
+4. Click **next** and complete the form. See [Launch the Template](#launch-the-template) for a description of the various parameters.
+5. An HA Mist Managed router will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
