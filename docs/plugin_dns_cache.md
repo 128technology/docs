@@ -217,6 +217,16 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 5.0.1
+
+**Release Date:** Jan 14, 2025
+
+#### Issues Fixed
+
+- **PLUGIN-3144** DNS cache services in restart loop
+
+  _**Resolution:**_ Gracefully handle and log peer syncronization issues to avoid impacting core DNS services
+
 ### Release 5.0.0
 
 #### New Features and Improvements
