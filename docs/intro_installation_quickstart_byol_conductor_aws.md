@@ -559,7 +559,33 @@ To deploy an HA Conductor Managed Router, you must deploy the CloudFormation tem
 ```
 https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
 ```
-4. Click **next** and complete the form. See [Launch the Conductor Managed Template](#launch-the-conductor-managed-template) for a description of the various parameters.
+4. Click **next** and complete the form.
+
+![CloudFormation Template](/img/aws-byol-ha-conductor-managed-template.png)
+
+A description of the parameters of the template are listed in the following table:
+
+| Parameter            | Description |
+| -------------------- | ----------- |
+| Name                 | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
+| Version              | SSR software version installed on the instance. |
+| Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
+| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
+| Primary Control IP   | The primary IP address of the Conductor |
+| Secondary Control IP | The secondary IP address of the Conductor |
+| Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+| Instance size        | Size of the EC2 instance.|
+| VPC ID               | ID of the existing VPC where the conductor-managed router is going to be deployed. |
+| Public Subnet ID     | ID of the public subnet within the VPC. |
+| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
+| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
+| Private Subnet ID    | ID of the private subnet within the VPC. |
+| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
+| HA Fabric Interface Subnet  | Optional ID of the management subnet within the VPC. |
+| HA Fabric Interface Allowed CIDR  | The IP CIDR range of the endpoints allowed to originate traffic to the Router's HA Fabric interface. |
+| HA Sync Interface Subnet    | Optional ID of the management subnet within the VPC. |
+| HA Sync Interface Allowed CIDR  | The IP CIDR range of the endpoints allowed to originate traffic to the Router's HA Sync interface. |
+
 5. An HA Mist Managed router will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
 
 ## Interface Tagging
