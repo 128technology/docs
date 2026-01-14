@@ -2393,6 +2393,29 @@ release dhcp lease [force] [node <node>] {router <router> | resource-group <reso
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
 
+## `reload local certificates`
+
+Message to highway to reload local certificates for SVRv2 enhanced-security-key-management.
+
+#### Usage
+
+```
+reload local certificates [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node on which to reload local certificates (default: all) |
+| resource-group | The name of the resource group |
+| router | The router on which to reload local certificates |
+
+#### Description
+
+Signal to highway that the local certificate contents have been updated and we should reload them from disk.
+
 ## `repeat`
 
 Repeat any command multiple times.
@@ -6243,8 +6266,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for `authority` |
+| `generated` | Show configuration data for `generated` |
 
 ## `show config disk-cache`
 
@@ -6509,8 +6532,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for `authority` |
+| `generated` | Show configuration data for `generated` |
 
 ## `show config version`
 
@@ -11326,7 +11349,6 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`resource-allocation`](#show-system-resource-allocation) | Display information for reserved hugepages and CPU core masks. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
 | [`software`](#show-system-software) | &lt;available&gt; \| &lt;downgrade&gt; \| &lt;download&gt; \| &lt;health-check&gt; \| &lt;revert&gt; \| &lt;sources&gt; \| &lt;upgrade&gt; |
-| [`utilization`](#show-system-utilization) | &lt;session-processors&gt; |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
