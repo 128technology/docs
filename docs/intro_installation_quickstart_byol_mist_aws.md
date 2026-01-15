@@ -359,7 +359,7 @@ To deploy an HA Mist Managed Router, you must deploy the CloudFormation template
 ```
 https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-mist-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
 ```
-4. Click **next** and complete the form
+4. Click **next** and complete the form.
 
 ![CloudFormation Template](/img/aws-byol-ha-mist-managed-template.png)
 
