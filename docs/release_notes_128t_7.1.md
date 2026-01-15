@@ -87,8 +87,8 @@ These release notes are Beta only and are in progress. They are furnished to hel
 
 ### Resolved Issues
 
-- **The following CVEs have been identified and resolved in this release:** CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291.
-------
+<!---- **The following CVEs have been identified and resolved in this release:** CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291.
+------ --->
 - **I95-57605 BFD link-test-interval not accurate:** Resolved as part of I95-59720. Several modifications have been made to the BFD timers to improve accuracy. 
 ------
 - **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
