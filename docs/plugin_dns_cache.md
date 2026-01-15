@@ -225,7 +225,7 @@ The plugin must be updated to version 3.2.1 or later prior to [upgrading the con
 
 - **PLUGIN-3144** DNS cache services in restart loop
 
-  _**Resolution:**_ Gracefully handle and log peer syncronization issues to avoid impacting core DNS services
+  _**Resolution:**_ Gracefully handle and log peer synchronization issues to avoid impacting core DNS services
 
 ### Release 5.0.0
 
