@@ -586,7 +586,7 @@ A description of the parameters of the template are listed in the following tabl
 | HA Sync Interface Subnet    | Optional ID of the management subnet within the VPC. |
 | HA Sync Interface Allowed CIDR  | The IP CIDR range of the endpoints allowed to originate traffic to the Router's HA Sync interface. |
 
-5. An Conductor Managed route node capable of forming HA will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
+5. A Conductor Managed router node capable of performing HA will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
 
 ## Interface Tagging
 
