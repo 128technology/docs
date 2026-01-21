@@ -77,7 +77,7 @@ These release notes are Beta only and are in progress. They are furnished to hel
 ------
 - **I95-58959 Secure Conductor Onboarding:** Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. For more information, see [Secure Conductor Onboarding](sec-conductor-onboard.md).
 ------
-- **I95-59948 SHA-384 and SHA-512 Support:** Added support for CNSA 2.0 algorithms SHA-384 and SHA-512 to support US Federal government deployments.
+- **I95-59948 SHA-384 and SHA-512 Support:** Added support for CNSA 2.0 algorithms SHA-384 and SHA-512 to support US Federal government deployments. For additional information, see [`configure-authority-security-hmac-cipher`](config_command_guide.md#configure-authority-security-hmac-cipher).
 ------
 - **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).
 ------

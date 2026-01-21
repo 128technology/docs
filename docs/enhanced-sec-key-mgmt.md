@@ -42,9 +42,9 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Encrypt Original IP SA/DA	| ESP | Encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
 | Secure Channel to exchange keys | IKEv2 | Diffie-Hellman. DH provides 4096-bit Peer key used to encrypt BFD Metadata. | 
 | Confidentiality | Payload is encrypted with the IPSec Tunnel key; however, all individual sessions with the same IPSec tunnel share the same key. There is no confidentiality between sessions sharing the same source and destination address. | Payload encrypted with Per-Flow Payload key; SVR Metadata (containing the Per-Flow Payload key) is encrypted with the SVR Metadata Key. Because each session has a separate key, each session has confidentiality, even between the same source and destination address. | 
-| Integrity	| ESP Authentication Header | HMAC SHA-384 signature signs all SVR Metadata and/or Payload in SVR packet. | 
+| Integrity	| ESP Authentication Header | HMAC SHA-384 nd HMAC-SHA-512 signature signs all SVR Metadata and/or Payload in SVR packet. | 
 | Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR| 
-| Data Origin Authentication | HMAC-SHA-384 | HMAC SHA-384 signature| 
+| Data Origin Authentication | HMAC-SHA-384 and HMAC-SHA-512 | HMAC SHA-384 and HMAC-SHA-512 signature | 
 | Replay Protection | Yes | Nonce added for Replay Protection.| 
 | Perfect Forward Secrecy | Yes	| Keys in DH are seeded by Salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
