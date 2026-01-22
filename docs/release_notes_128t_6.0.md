@@ -228,8 +228,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
-------
+<!--- - **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+------ --->
 - **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
 ------
 - **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
@@ -342,10 +342,10 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
-------
+<!--- - **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
+------ --->
 - **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
-------
+------ 
 - **I95-43302 Rename Third-Party menu text:** The menu text has been changed to **External** to more accurately reflect the links to other Juniper platforms.
 ------
 - **I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:** The Azure ID has been modified to a value that can be processed by Azure.

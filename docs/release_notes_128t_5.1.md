@@ -29,8 +29,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Resolved Issues
 
-- **The following CVE issues have been addressed and resolved with this release:** I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206, I95-44618
-------
+<!--- - **The following CVE issues have been addressed and resolved with this release:** I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206, I95-44618
+------ --->
 - **I95-40348 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
 ------
 - **I95-41931 Peers show the IP address not the router name in the GUI:** This issue has been resolved, and both the IP address and router name are displayed. 
