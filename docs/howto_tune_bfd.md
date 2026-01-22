@@ -81,6 +81,22 @@ In other words, "*if I don't receive a message in the amount of time that is my 
 
 If both router peers use the default settings above, you should expect to see them transmit async control mode messages every 1000ms, or 1s. If one or both peers do not receive an async control mode packet in 3x1000ms (3s), it will consider the peer path to be "down."
 
+### Negotiated BFD Intervals
+
+Every BFD interval and multiplier is negotiated between two peers. In cases where you need to fine tune the intervals to adjust for bad bandwidth or flapping peers, use the `show peers bfd-interval` to display the negotiated bfd interval. The columns Rx Timer, Tx Timer, and Multiplier provide the following information.
+
+- Rx Timer: Local router expects to receive an async packet from the peer before the end of each timer. Set based on max value of local `required-min-rx-interval` and peer’s `desired-tx-interval`. Updated after first received BFD packet. 
+
+- Tx Timer: Configured value under `desired-tx-interval`, no negotiation involved. One async packet is sent at the end of each Tx Timer. 
+
+- Multiplier: Peer’s configured multiplier. The number of missed async packets until the local router deems its peer down.
+
+========= ======== =================== ============= ======== ============= ============= ========== ========== ============
+Peer      Node     Network Interface   Destination   Status   Hostname      Path MTU      Rx Timer   Tx Timer   Multiplier
+========= ======== =================== ============= ======== ============= ============= ========== ========== ============
+Berkley   slice1   intf1               192.168.1.1   up       jira.com      unavailable   0.50s      0.50s               5
+Berkley   slice2   intf2               192.168.2.1   up       unavailable   unavailable   1.50s      0.50s               3
+
 ## Damping
 
 BFD is used to detect path failures between routers. BFD notifies the load-balancer and other peer-path observers when there is packet loss between peering routers, or if the link fails. In many cases it becomes critical to minimize session failovers to prevent the session from oscillating between paths, to reduce unnecessary changes to routing tables, prevent consumption of valuable system resources, and avert needless convergence impact. SSR routers have a hold down timer that can be configured to prevent BFD from making immediate updates until the timer has expired. This method works well when the characteristic of the link is well known and a predetermined value can be assigned to the timer.
