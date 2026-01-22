@@ -9755,13 +9755,14 @@ Display peer information.
 #### Usage
 
 ```
-show peers [name <name>] [dynamic-damping] [security] [certificate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show peers [name <name>] [bfd-interval] [dynamic-damping] [security] [certificate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| bfd-interval | Display current BFD intervals |
 | certificate | display BFD certificate info |
 | dynamic-damping | display BFD dynamic-damping stats |
 | force | Skip confirmation prompt. Only required when targeting all routers |
