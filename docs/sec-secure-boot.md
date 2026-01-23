@@ -22,4 +22,4 @@ IMA is Linux’s Integrity Measurement Architecture. The SSR supports IMA valida
 
 During the SSR IBU build process, every executable file (binaries, libraries, scripts, etc.) is signed. The signature is embedded into the root file system extended attributes of the file.
 
-IMA validation is enabled by default, allowing the kernel to check the signature of each file before loading it for execution. If the check fails, execution is denied with an error.
+IMA validation is enabled by default, allowing the kernel to check the signature of each file before loading it for execution. If the check fails, execution is denied with a **Permission denied** (EACCES) error code.
