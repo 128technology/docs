@@ -255,6 +255,7 @@ module.exports = {
         "items": [
           "events_overview",
           "events_alarms",
+          "events-alarm-descriptions",
           "events_events",
           "config_alarm_suppression",
           "howto_maintenance_mode",
