@@ -261,6 +261,3 @@ vector wan1_standby name  wan1_standby
 session-resiliency    revertible-failover
 peer-path-resiliency  true
 ```
-
-
-
