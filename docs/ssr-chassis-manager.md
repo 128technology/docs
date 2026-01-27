@@ -3,7 +3,7 @@ title: SSR Chassis Manager
 sidebar_label: SSR Chassis Manager
 ---
 
-The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. 
+The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. This feature is only supported on the SSR400 and SSR440 platforms.
 
 ## Chassis Manager
 
@@ -67,20 +67,20 @@ Completed in 0.01 seconds
 
 The following `show` commands allow you to see the chassis status from the CLI.
 
+:::note
+The following commands are only available on the SSR400 and SSR440 platforms. While they are visible on other platforms, they do not provide data. When executed, they return an error and state they are intended for the SSR400 and SSR440 platforms.
+:::
+
 | CLI Command | Function |
-| --- | --- |
-| `show chassis led` | Shows the current LED states on the chassis. This will include the color, pattern, and description. |
-| `show chassis led system` | Status of the system LED |
-| `show chassis led port <number>` | Status of a specific port number |
-| `show chassis environment` | Shows the current temperatures, fan speeds, and temperature thresholds. |
-| `show chassis environment fans`	| Shows the current fan speeds, along with their settings. |
-| `show chassis environment temperature` | Shows all current ambient and CPU temperatures using lm_sensors and sysfs, respectively. |
-| `show chassis environment temperature sensor <id>` | Shows current temperatures for the specified sensor. |
-| `show chassis environment temperature-threshold` | Lists the thresholds to trigger the Yellow alarm, Red alarm, and Fire Shutdown. |
-| `show chassis environment temperature-threshold sensor <id>` | Lists the thresholds to trigger the Yellow alarm, Red alarm, and Fire Shutdown for the specified sensor. |
-| `show chassis power` | Shows current PSU voltages and amperage levels. |
-| `show chassis power component <id>`	| Shows current PSU voltages and amperage levels for the specified PSU id. |
-| `show chassis hardware`	| Reports the hardware SKU, CLEI, revision (rev), and serial numbers from `/sys/kernel/leopard_idprom`. |
-| `show chassis firmware`	| Shows CPLD and boot firmware versions from `/sys/kernel/leopard_cpld/version` and `/sys/devices/virtual/dmi/id/bios_version`, respectively. |
+| ------- | ----------- |
+| [`show chassis`](cli_reference.md#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](cli_reference.md#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](cli_reference.md#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](cli_reference.md#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](cli_reference.md#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](cli_reference.md#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](cli_reference.md#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](cli_reference.md#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#cli_reference.mdshow-chassis-temperature-thresholds) | Show chassis temperature thresholds |
 
 
