@@ -13,9 +13,20 @@ This guide describes the process for deploying a Mist-managed Session Smart Rout
 
 **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an Azure VM. The device registration code is used to authenticate access to the Mist installation repositories.
 
-For the latest information about SSR BYOL offereings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
+For the latest information about SSR BYOL offerings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
 
 Once you have selected the plan that best suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router) to deploy a Session Smart Router.
+
+## Selecting the Instance Size
+
+The following instance types are supported for virtual SSR in Azure. Choose the size that best meets your requirements. More information can be found in the [Azure Documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes).
+
+| Recommended Azure VM Size | Max vNICs Supported | vCPU Cores | Memory |
+| ---| --- |
+| Standard_F8s_v2     |  4   |  8   | 16 GB |
+| Standard_F16s_v2    |  4   |  16  | 32 GB |
+| Standard_F32s_v2    |  8   |  32  | 64 GB |
+| Standard_D8s_v5     |  4   |  8   | 32 GB |
 
 ## Session Smart Router
 
@@ -26,20 +37,20 @@ Use the following process to deploy a Mist-managed Session Smart Router in Azure
 The following infrastructure must exist in your Azure subscription:
 * A VNet where the Session Smart Router (SSR) will be deployed.
 * An Availability Set where the SSR will be deployed.
-* The existing VNet is segmented with the following subnets. The role of each subnet is described below.
-
-#### Public Subnet
-This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure if no management subnet is provided.
-
-#### Private Subnet
-This subnet must provide connectivity to internal workloads within the cloud.
+* The existing VNet is segmented with at least the following three subnets:
+  - **Public Subnet**: This subnet must provide connectivity to enable communication with external/remote SSR peers as well as access to the Mist cloud infrastructure if no management subnet is provided.
+  - **Private Subnet**: This subnet must provide connectivity to internal workloads within the cloud.
+  - **[OPTIONAL] Management Subnet**: This subnet must provide connectivity to the Mist cloud and is reachable for SSH administration purposes.
+* A Managed Identity with the minimum read permissions.
+```
+Microsoft.Compute/virtualMachines/read
+Microsoft.Network/virtualNetworks/read
+Microsoft.Network/networkInterfaces/read
+```
 
 :::important
 Please note that deploying Session Smart Routers without a valid token is limited to deployments within the cloud. If your use case also requires the deployment of an on-premises SSR, please contact your Juniper sales representative.
 :::
-
-#### [Optional] Management Subnet
-This subnet must provide connectivity to the Mist cloud
 
 
 ## Deployment
@@ -73,16 +84,15 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 Answer the following questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template). 
 
-* Where do you want to deploy it?
+* Where do you want to deploy the SSR?
   * Provide the location where the VNet exists in the **Location** field (for example: eastus). All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations). Note the name of the Location field is one word and all lowercase like eastus, westus, westeurope, eastasia, etc.
-  * Provide the name of the availability set in the **Availability Set Name** field (for example: `128TRouterSet`).
-
-* What name do you want to give it?
+  * Provide the name of the availability set in the **Availability Set Name** field
+* What name do you want to give the SSR?
 * What version of SSR software do you want to install?
-* Which Mist organization is going to manage it?
+* Which Mist organization is going to manage the SSR?
   Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the Mist organization.
 * Provide the name of the Managed Identity in the resource group
-* Provide the name of the VNet in the **Virtual Network Name** field (for example: `128T-VNet`).
+* Provide the name of the VNet in the **Virtual Network Name** field.
   * Provide the name of the **Public Subnet Name**
   * Provide the name of the **Private Subnet Name**
   * [Optional] Provide the name of the **Management Subnet**
@@ -98,7 +108,7 @@ Answer the following questions to launch the deployment of an SSR. For additiona
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side.
 
-The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration. It will then take an additional 5-10 minutes for the desired SSR version to be installed.
+The non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, it will take an additional 2-3 minutes for the ZTP process to complete. When the ZTP process concludes, there will be an asset in the Mist inventory to be associated with the router configuration. It will then take an additional 5-10 minutes for the desired SSR version to be installed. Once complete the `Version` will be populated in the Mist inventory.
 
 ### Azure CLI or PowerShell
 
@@ -150,18 +160,29 @@ If a user does not supply the onboarding configuration before launching the inst
 
 ### Mist-Managed Setup
 
-Once the instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist organization once onboarding is complete.
+Once the instance is launched with the correct registration-code, the device will self-onboard to the appropriate Mist organization. The process can take up to 10 minutes. The device is visible as Unassigned in the Mist organization once onboarding is complete.
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys a VM for the SSR with two network interfaces and an optional third network interface. The template attaches the network interfaces to the VM in the following order: Public, Private, and Management. The network interfaces to be used in Mist configuration are as follows:
+The _Session Smart Router Template_ deploys a VM for the SSR with two network interfaces and an optional third management network interface. The template attaches the network interfaces to the VM in the following order: Management (Optional), Public, Private. 
 
-| Network Interface Name | Subnet           | Mist Config Name     |
-| ---------------------- | ---------------- | ----------------|
-| ge-0-0                   | Public           | ge-0/0/0    |
-| ge-0-1                   | Private          | ge-0/0/1    |
-| ge-0-2                   | Management          | Out Of Band Management   |
+If a management network interface is provided, the names to be used in the Mist configuration are as follows:
+The network interfaces to be used in Mist configuration are as follows:
 
+| Network Interface Name | Subnet           | Mist Config Name       |
+| ---------------------- | ---------------- | ----------------       |
+| ge-0-0                 | Management       | Out Of Band Management |
+| ge-0-1                 | Public           | ge-0/0/1    |
+| ge-0-2                 | Private          | ge-0/0/2    |
+
+If no management network interface is provided, the names to be used in the Mist configuration are as follows:
+
+| Network Interface Name  | Subnet          | Mist Config Name |
+| ----------------------- | --------------- | ---------------- |
+| ge-0-0                  | Public          | ge-0/0/0    |
+| ge-0-1                  | Private         | ge-0/0/1    |
+| ge-0-2 (If Applicable)  | HASync          | ge-0/0/2    |
+| ge-0-3 (If Applicable)  | HAFabric        | ge-0/0/3    |
 
 #### Interface Tagging
 
@@ -171,7 +192,19 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | --------- | ------- |
 | WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to Mist cloud infrastructure. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
-| MGMT       | Interface is marked as MGMT and is assumed to have connectivity to Mist cloud infrastructure. |
+| MGMT      | Interface is marked as MGMT and is assumed to have connectivity to Mist cloud infrastructure and SSH access prior to to site assignment. |
+| HAFabric    | Interface is marked as HAFabric and is used as the fabric link in an HA deployment. |
+| HASync      | Interface is marked as HASync and is used as the redundancy link in an HA deployment. |
+
+:::note
+The following role permissions are required on the resource's managed identity for tagging to be enabled
+```
+Microsoft.Compute/virtualMachines/read
+Microsoft.Network/virtualNetworks/read
+Microsoft.Network/networkInterfaces/read
+```
+:::
+
 
 ## Troubleshooting
 
@@ -238,11 +271,11 @@ A description of the parameters of the template are listed in the following tabl
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
 | Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase). Example: eastus, westus, westeurope, eastasia...     |
 | Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
-| Instance size        | Select the size of the VM in the field Instance Size. |
+| Instance size           | Select the size of the VM in the field Instance Size. |
 | Instance Name           | Provide a name to the VM for the Session Smart Router. |
-| SSR Version | SSR software version installed on the instance. |
-| Registration Code   | The Mist registration used for adoption of the instance to a Mist organization. |
-| Managed Identity | The Azure Managed identity used to manage permissions for the router instance. |
+| SSR Version             | SSR software version installed on the instance. |
+| Registration Code       | The Mist registration used for adoption of the instance to a Mist organization. |
+| Managed Identity        | The Azure Managed identity used to manage permissions for the router instance. |
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to. |
 | Public Subnet Name      | The name of the public subnet within the VNet. |
 | Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
@@ -299,28 +332,28 @@ Paste the following JSON content. Please adjust the values to your specific envi
       "value": "<location of the VNet>"
     },
     "availabilitySetName": {
-      "value": "<name of the Availability Set>"
+      "value": "<Name of the Availability Set>"
     },
     "instanceSize": {
-      "value": "Standard_DS3_v2"
+      "value": "Standard_F8s_v2"
     },
     "instanceName": {
-      "value": "<instance name>"
+      "value": "<Instance Name>"
     },
     "SSR Version": {
-      "value": "<ssr version to be installed>"
+      "value": "<SSR Version to be Installed>"
     },
     "registrationCode": {
-      "value": "The registration code from the Mist UI."
+      "value": "<Registration code from the Mist UI>"
     },
     "managedIdentity": {
-      "value": "<name of the managed identity>"
+      "value": "<Name of the Managed Identity>"
     },
     "virtualNetworkName": {
-      "value": "<name of the VNet>"
+      "value": "<Name of the VNet>"
     },
     "publicSubnetName": {
-      "value": "<name of the public subnet>"
+      "value": "<Name of the Public Subnet>"
     },
     "publicSubnetAllowedCidr": {
       "value": "0.0.0.0/0"
@@ -329,16 +362,16 @@ Paste the following JSON content. Please adjust the values to your specific envi
       "value": "0.0.0.0/0"
     },
     "privateSubnetName": {
-      "value": "<name of the private subnet>"
+      "value": "<Name of the Private Subnet>"
     },
     "privateSubnetAllowedCidr": {
       "value": "0.0.0.0/0"
     },
     "managementSubnetName": {
-      "value": "<name of the management subnet>"
+      "value": "<Name of the Management Subnet>"
     },
     "adminPublicKeyData": {
-      "value": "<content of ssh-rsa key>"
+      "value": "<Content of the SSH RSA Key>"
     }
   }
 }
