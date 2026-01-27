@@ -81,6 +81,6 @@ The following commands are only available on the SSR400 and SSR440 platforms. Wh
 | [`show chassis led system`](cli_reference.md#show-chassis-led-system) | Show the status of the System LED |
 | [`show chassis power`](cli_reference.md#show-chassis-power) | Show chassis power |
 | [`show chassis temperature`](cli_reference.md#show-chassis-temperature) | Show chassis temperature sensor readings |
-| [`show chassis temperature-thresholds`](#cli_reference.mdshow-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+| [`show chassis temperature-thresholds`](cli_reference.md#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
 
 
