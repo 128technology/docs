@@ -20,6 +20,10 @@ If authentication fails due to corruption or tampering, the boot processes termi
 
 IMA is Linux’s Integrity Measurement Architecture. The SSR400 and SSR440 support IMA validation using GPG Signatures. IMA is not available on virtual machines or on the SSR1x0 and SSR1x00 series devices. 
 
-During the SSR software build process, every executable file (binaries, libraries, scripts, etc.) is signed. The signature is embedded into the root file system extended attributes of the file.
+During the SSR software build process, every executable file (binaries, libraries, scripts, etc.) is signed. The signature is embedded into the root file system extended attributes of the file. 
 
-IMA validation is enabled by default, allowing the kernel to check the signature of each file before loading it for execution. If the check fails, execution is denied with a **Permission denied** (EACCES) error code.
+IMA validation is enabled by default for the root user, allowing the kernel to check the signature of each file before loading it for execution. Secondary kernels, and kernel loadable modules, are also validated before execution. If these checks fail, execution is denied with a **Permission denied** (EACCES) error code.
+
+:::important
+IDP is excluded from IMA.
+::: 
