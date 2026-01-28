@@ -5703,6 +5703,357 @@ show certificate webserver
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`import certificate`](#import-certificate) | Import a certificate. |
 
+## `show chassis`
+
+Display information about the chassis
+
+#### Usage
+
+```
+show chassis [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`power`](#show-chassis-power) | Show chassis power |
+| [`temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis firmware`
+
+Show information about the chassis firmware
+
+#### Usage
+
+```
+show chassis firmware [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node to show firmware information for |
+| router | The router to show firmware information for (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis hardware`
+
+Show information about the chassis hardware
+
+#### Usage
+
+```
+show chassis hardware [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis led`
+
+Show the status of the chassis LEDs
+
+#### Usage
+
+```
+show chassis led [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`system`](#show-chassis-led-system) | Show the status of the System LED |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis led phy`
+
+Show the status of the port LEDs
+
+#### Usage
+
+```
+show chassis led phy [port <port>] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| port | The port number for an ethernet port [type: port] |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis led system`
+
+Show the status of the System LED
+
+#### Usage
+
+```
+show chassis led system [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis power`
+
+Show chassis power
+
+#### Usage
+
+```
+show chassis power [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis temperature`
+
+Show chassis temperature sensor readings
+
+#### Usage
+
+```
+show chassis temperature [sensor <sensor>] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+| sensor | The name of the target temperature sensor |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
+## `show chassis temperature-thresholds`
+
+Show chassis temperature thresholds
+
+#### Usage
+
+```
+show chassis temperature-thresholds [region <region>] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| region | The target region for temperature thresholds |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400 or an SSR440.
+:::
+
 ## `show config candidate`
 
 Display candidate configuration data
