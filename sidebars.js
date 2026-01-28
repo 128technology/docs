@@ -6,7 +6,6 @@ module.exports = {
       "about_svr_savings",
       "about_releases",
       "about_support_policy",
-      "about_security_policy",
     ],
     "Release Notes": [
       {
