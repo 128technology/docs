@@ -63,7 +63,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Beta Release 7.1.3-10r2
 
-**Release Date:** January 29, 2026
+**Release Date:** January 30, 2026
 
 :::important
 These release notes are Beta only and are in progress. They are furnished to help provide information about updated and new features for controlled beta deliveries. They do not represent a full feature set.
@@ -73,7 +73,7 @@ These release notes are Beta only and are in progress. They are furnished to hel
 
 - **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
 ------
-- **I95-54247 IMA - SSR Signed packages only execution:** IMA is Linux’s Integrity Measurement Architecture. The SSR supports IMA validation using GPG Signatures. IMA validation is enabled by default, allowing the kernel to check the signature of each file before loading it for execution. If the check fails, execution is denied with an error. for more information, see [Secure Boot - IMA](sec-secure-boot.md#ima).
+- **I95-54247 IMA - SSR Signed packages only execution:** IMA is Linux’s Integrity Measurement Architecture. The SSR400 and SSR440 support IMA validation using GPG Signatures. IMA validation is enabled by default for the root user, allowing the kernel to check the signature of each file before loading it for execution. If these checks fail, execution is denied with a Permission denied (EACCES) error code. For more information, see [Secure Boot - IMA](sec-secure-boot.md#ima).
 ------
 - **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
 ------
