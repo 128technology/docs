@@ -7,20 +7,20 @@ sidebar_label: SSR Alarms
 ## Alarm Severity Level: Critical
 
 | Category | Description | Cause | Troubleshooting |
-|----------|-------------------|-------------|-----|
+| --- | --- | --- | --- |
 | System | System memory exceeded: `{threshold}%`. | System memory is above 90% memory usage. The alarm clears when memory usage drops below 80%.<br /><br />**Threshold:** 90%. | A process is consuming excessive memory. If the alarm is constantly active this could indicate an under-provisioned system. Check the current memory utilization of all processes in the system by using the linux command `top`. Additionally the PCLI command `show stats process memory rss` may be helpful.|
 | System | ZooKeeper jute buffer utilization is `{utilization}`%, which exceeds the alarm threshold. | **Threshold:** 75%. | System environment configuration should be updated. Contact technical support for assistance. |
-| System | Node `{node}` with version `{nodeVersion}` does not match the HA peer with version `{peerVersion}`. |||
+| System | Node `{node}` with version `{nodeVersion}` does not match the HA peer with version `{peerVersion}`. | HA peer node software version mismatch. Issued if any HA peer nodes have mismatched versions. Cleared when they are all equal. | Upgrade the node that has the lower version. Upgrade the router from the PCLI by issuing the `send command upgrade router <router> <version>` or the upgrade button on the router page on the Conductor's GUI. |
 | System | Unable to communicate with Chassis Manager. | SSR4x0 series only. ||
 | System | The following chassis sensor(s) are approaching critical temperatures: `{sensors}`. | SSR4x0 series only. | System performance has been throttled to mitigate heat. The system will shut down if the temperature continues to rise. |
 | System | Node `{node}` went offline. | The HA peer node has shut down or stopped running.<br /><br />**Threshold:** Issued when an HA node goes offline. | Verify that the HA peer node is powered on and running. If the node is running verify that the SSR service is running without error by issuing the command `systemctl status 128T`. If the system appears to be running correctly, check connectivity between the systems by issuing the PCLI command `show system connectivity` on both nodes. |
 | System | Node `{node}` went offline. | Connectivity between HA nodes is down.<br /><br />**Threshold:** Issued when an HA node goes offline. | HA node connectivity can be evaluated with the PCLI command `show system connectivity`. If the state to the peer node is not `connected` check the inter node tunnel status by running the PCLI command `show system connectivity internal`. All tunnels to the peer node should report “connected”. If connectivity is down, verify links between the systems. If they are up, please contact technical support. |
 | System | `{node}`: Internal Synchronization database is disconnected. | | Verify connectivity between HA nodes is healthy. Check for additional related alarms. If connectivity is present, please contact technical support for additional assistance.|
 | Peer | Peer `{peer}` is not reachable. | When all paths to a peer are marked down by BFD, all peer path alarms to that peer are triggered. | Review the statistics for `show stats bfd by-peer-path` to investigate for anomolies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
-| Peer | Peer `{peer}` certificate is invalid: `{state}` - `{detail}`. ||
-| Peer | Peer `{peer}` metadata-key is invalid: `{state}` - `{detail}`. ||
-| Peer | The following certificates are expired: `{value}`. ||
-| Peer | The following certificates are revoked: `{value}`. ||
+| Peer | Peer `{peer}` certificate is invalid: `{state}` - `{detail}`. | A peer’s certificate has been revoked. Any new connections are denied. | No new connections will be established until it is replaced. See [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) for more information. |
+| Peer | Peer `{peer}` metadata-key is invalid: `{state}` - `{detail}`. || To force key rotation on the routers, use the `security metadata-key regenerate` command to regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node. |
+| Peer | The following certificates are expired: `{value}`. | The certificate(s) has expired. Connections using the expired certificate are not denied. | The certificate must be replaced. See [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) for more information. |
+| Peer | The following certificates are revoked: `{value}`. | Certificate has been revoked, New connections using the revoked certificate are not denied. | The certificate must be replaced. See [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) for more information. |
 | Platform | Security Rekey failed for: `<node-name(s)>`. | Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem persists, please contact technical support. |
 | Platform | Configure security key distribution failed for: `{configKeyError}`. | | |
 | Interface | Intf `{name}` (`{interface}`) operationally down. | Interface is down for an Ethernet WAN connection. | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
@@ -34,7 +34,7 @@ sidebar_label: SSR Alarms
 ## Alarm Severity Level: Major
 
 | Category | Description | Cause | Troubleshooting |
-|----------|-------------------|-------------|-----|
+| --- | --- | --- | --- |
 | System | Host CPU utilization exceeded. | **Intermittent process consuming large amount of CPU.** <br/>**Threshold:** Greater than 85% for 30 seconds. The alarm clears when the CPU usage drops below 70%. | If the alarm triggers and clears intermittently this could indicate a periodic spike or intermittent process overload. Check the current CPU utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. |
 | System | Host CPU utilization exceeded. | **Process consistently consuming large amount of CPU.** <br/>**Threshold:** Greater than 85% for 30 seconds. The alarm clears when the CPU usage drops below 70%. | If the alarm is constantly active this could indicate an under-provisioned system. Check the current CPU utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. Contact technical support for guidance on provisioning the system. | 
 | System | No active NTP server. | Issued when the system is not connected to any active NTP servers. The router is having connectivity problems to the NTP server that was selected. | Use `show ntp` to verify the NTP server(s) has been configured. If not, use `configure authority router <router name> system ntp server <ntp server address>` to configure the NTP server.<br/>Make this more resilient by specifying more NTP servers. A common practice is to specify 4 servers. |
@@ -48,7 +48,8 @@ sidebar_label: SSR Alarms
 | System | (SSR4xx-series only). The following chassis sensor(s) have exceeded their recommended temperature thresholds: `{sensors}`. | System performance will degrade if the temperature continues to rise. | Investigate environment, check system thresholds. |
 | System | No connectivity to `<router>`.`<node>`.  | **The node is not reachable by the conductor.**<br/>**The node is not reachable by its HA peer.** <br/>Raised when a connection to a node present in the configuration fails or is not active.  | Enter the commands:<br/> `show system connectivity router all node all grep \<router\>`<br/>`show system connectivity internal node all grep \<router\>` to check connectivity status. If any entry is listed as not connected, there is a communication issue between the node and the conductor. Some probable causes are outage, degradation, or improperly configured public keys. |
 | System | SNMP server failure. | Unable to communicate with the SNMP server. Network connectivity failure or misconfiguration. | Ensure that the SNMP server defined in the configuration is reachable; issue a `ping` to the server address. If the server does not respond, run a packet capture on the interface used for SNMP to observe if traffic is being generated from the SSR upon event generation. |
-| System | Configuration synchronization state unknown. | |  |
+| System | Received config sync info state for node `<node-name>` with syncVersion=`<version>`, error=`<error>`, message=`<message>` and resulting action=`<action>`. | The router is unable to receive the configuration from the Conductor. <br/>Configuration synchronization error. | Run the command `show asset <asset-id>` of the system exhibiting the problem to show the status of the asset and provide more detailed information. |
+| System | Configuration synchronization state unknown. | | Check connectivity to conductor; `show system connectivity`. |
 | System | Not synchronizing with a Conductor. | | Check connectivity to conductor; `show system connectivity`. |
 | System | Configured as Conductor.	| | |
 | System | Successfully committed configuration update from conductor. | | |
@@ -63,6 +64,7 @@ sidebar_label: SSR Alarms
 | System | Awaiting configuration from Conductor. |||
 | System | Configuration is out of sync with conductor. |||
 | System | Hostname [`{hostname}`] is unresolved. | The router was unable to resolve the hostname given in the configuration. <br/>**Threshold:** Raised when a configured hostname is unresolved. | Verify that the hostname is resolvable from linux (using a utility such as `dig`). Verify that the hostname has a corresponding `/etc/hosts` entry. |
+| System | Restart required | Non-dynamically reconfiguable filed has been edited. Restart is required for configuration to take effect. | Some fields within the SSR configuration are not dynamic and require a restart of the SSR process to take effect (e.g. forwarding-cores). From the Conductor Router page, click on the gear icon to issue a restart of the SSR process. Alternatively, from within the linux shell of the SSR Router, issue `systemctl restart 128T`. |
 | Peer | Peer `{peer}` path is down. | **Router Interface is down.** <br/>A single path is marked down by BFD. The source of the alarm includes the Node/interface/IP/VLAN.  | Enter the show device-interface router `<router>` node `<node>` `<interface>` command to verify the router's interface status. If the interface is down, the next hop equipment is likely down. Troubleshoot the adjacent device(s). |
 | Peer | Peer `{peer}` path is down. | **Adjacency router's interface is down.** <br/>A single path is marked down by BFD. The source of the alarm includes the Node/interface/IP/VLAN.  | Enter the show device-interface router `<router>` command to verify the adjacency router's interface status. If the interface is down, the troubleshoot the adjacent device’s interface. |
 | Peer | Peer `{peer}` path is down. | **Path health has degraded sufficiently and is impacting performance.**  <br/>A single path is marked down by BFD. The source of the alarm includes the Node/interface/IP/VLAN. | Using the GUI, click the Home icon and select the appropriate view for the current environment. Examine the graph for any anomalies at the time of the alarm. If the loss is 5% or higher the path has degraded. |
@@ -89,13 +91,13 @@ sidebar_label: SSR Alarms
 ## Alarm Severity Level: Minor
 
 | Category | Description | Cause | Troubleshooting | 
-|----------|-------------------|-------------|-----|
+| --- | --- | --- | --- |
 | System | The following CRL endpoints are unreachable: `{endpoints}`. |||
-| Peer | The following certificates are expiring in less than 30 days: `{value}`. |||
+| System | Application Identification cache utilization is approaching maximum capacity. | Capacity of the cache exceeds 95% of the max-capacity configured value. **Threshold:** 95% of max-capacity value (default is 10,000). | The alarm is cleared once the capacity of the cache goes below 85% of the configured value, and as sessions using those stats expire. The alarm can be addressed by adjusting the max-capacity value under application-identification. App-id stats are tracked per application, per client, and per next-hop. The granularity of per-application, per-client traffic stats will be reduced while the alarm is active on the system. |
+| Peer | The following certificates are expiring in less than 30 days: `{value}`. | A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. **Threshold:** 30 days. | Verify certificate key exchange values. |
 | Interface | VRRP backup into `{interface}` taken over as primary. |||
 | Interface | Backup into `{interface}` taken over as primary. |||
 | Giid | DHCP address for interface [`{name}`] has changed to `{ipAddress}`. |||
-
 
 ## Alarm Severity Level: Info
 
@@ -107,6 +109,6 @@ sidebar_label: SSR Alarms
 | System | WayPoint ports reserve has been depleted for `{key}`, ports will be exhausted soon.
 | System | WayPoint ports reserve has reached 10% level for `{key}`.
 | System | Alarm shelving status changed.
-| Interface | Intf `{name}` (`{interface}`) administratively down.
+| Interface | Intf `{name}` (`{interface}`) administratively down. | The interface is down due to being disabled in the configuration. <br/>**Threshold:** Down. | Re-enable the interface in the configuration. |
 | Giid | DHCP address for interface [`{name}`] has successfully been resolved/renewed to `{ipAddress}`.
 | Service | Service path on node `{node}` with key `{key}` is taken out of service.
