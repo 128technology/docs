@@ -12,7 +12,7 @@ These are the minimum platform specifications for running the SSR Networking Pla
 
 - 4 Core x86_64-v2 processor, single socket
 - 8GB Memory, ECC required
-- 120GB Storage
+- 60GB Storage
 - 1 DPDK-enabled NIC port for standalone systems (two recommended)
 - 2 DPDK-enabled NIC ports for HA systems (three recommended)
 - 1 dedicated NIC port for HA synchronization
