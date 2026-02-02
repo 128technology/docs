@@ -13,7 +13,7 @@ A Trusted Platform Module (TPM) is a secure cryptoprocessor that stores cryptogr
 
 ## TPM-Based Certificates
 
-The SSR400 and SSR440 use the TPM-based certificate to ensure secure identification of the device. The device has a burnt-in idev-id certificate on the TPM. The idev-id certificate provides the device's JNPR serial number and model, proving that the device was manufactured in a Juniper facility. Hence, TPM certificate is a secure way for a Juniper device to prove its identity.
+The SSR400 and SSR440 use the TPM-based certificate to ensure secure identification of the device. The device has a burnt-in idev-id certificate on the TPM. The idev-id certificate provides the device's Juniper serial number and model, proving that the device was manufactured in a Juniper facility. The TPM certificate is the most secure way for a Juniper device to prove its identity.
 
 ### Benefits of TPM-Based Certificates
 
