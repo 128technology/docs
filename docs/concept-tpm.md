@@ -39,5 +39,10 @@ In unsecured HTTP connections, hackers can easily intercept messages between cli
 
 When a signed SSL certificate secures a website, it proves that the organization has verified and authenticated its identity with the trusted third party. When the browser trusts the CA, the browser now trusts that organization’s identity too.
 
+### Support for vTPM on Conductor-managed Deployments
+
+If a vTPM is present on a platform, the SSR will first check to see if a trusted certificate and private key already exists. For Azure, AWS, and GCP it is expected that these platforms generate their own keys and certificates. On other platforms, if no certificate and private key is present, a single `DevID` certificate and `master` private key are created and stored in the vTPM.
+
+Each certificate installed on the system is signed with a uniquely created private key pair and stored on disk, encrypted with the master key stored in the vTPM.
 
 

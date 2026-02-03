@@ -37,7 +37,7 @@ Routers running SSR software versions earlier than 6.3.5 cannot connect to condu
 
 If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.0.1 normally.
 
-**Conductor Upgrades 6.2.x to 7.x**
+**VM Upgrades 6.2.x to 7.x**
 
 Users upgrading a virtual machine, including those on AWS or Azure, previously installed with package-based SSR releases (6.2 and prior on Conductor-managed deployments only) should be aware of the following:
 
@@ -61,12 +61,12 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Beta Release 7.1.3-10r2
+## Beta Release 7.1.3-11r2
 
-**Release Date:** January 30, 2026
+**Release Date:** February 5, 2026
 
 :::important
-These release notes are Beta only and are in progress. They are furnished to help provide information about updated and new features for controlled beta deliveries. They do not represent a full feature set.
+These release notes are Beta only, and are in progress. They are furnished to help provide information about updated and new features for controlled beta deliveries. They do not represent a full feature set.
 :::
 
 ### New Features
