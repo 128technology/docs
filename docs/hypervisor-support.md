@@ -13,7 +13,7 @@ Hypervisor is supported with the following minimum requirements:
 
 	- 4 cores 
 	- 8GB RAM 
-	- 120GB disk space 
+	- 60GB disk space 
 
 Performance is based on these resources, and increasing each of these may enhance performance. 
 

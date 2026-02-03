@@ -37,7 +37,7 @@ Routers running SSR software versions earlier than 6.3.5 cannot connect to condu
 
 If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.0.1 normally.
 
-**Conductor Upgrades 6.2.x to 7.x**
+**VM Upgrades 6.2.x to 7.x**
 
 Users upgrading a virtual machine, including those on AWS or Azure, previously installed with package-based SSR releases (6.2 and prior on Conductor-managed deployments only) should be aware of the following:
 
