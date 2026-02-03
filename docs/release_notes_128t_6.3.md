@@ -394,6 +394,11 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ### Caveats
 
 - **I95-58622 IDP Engine Intermittent Start-up:** 6.3.3-R2 introduces the support of multi-core capabilities for IDP for image-based routers. For legacy package-based routers, multi-core IDP capability is not supported, and those systems will continue to operate in the single-core mode. For customers running IDP on older image-based firmware versions (6.3.0-R1 and under) on the SSR1300, SSR1400, and SSR1500, IDP multicore will be automatically enabled when upgrading to 6.3.3-R2. In some cases, after an upgrade the IDP engine can fail to start as it transitions from single-core to multi-core mode. When the IDP engine fails to start, the following alarm will be generated on the system:  `IDP engine unable to start; reboot-required`. In this situation, it is recommended to reboot the system post-upgrade to ensure future reliable reboots with IDP multi-core enabled.
+
+:::note
+Multi-core IDP is not supported on the following SSR devices: SSR120, SSR130, and SSR1200.
+:::
+
 ------
 - **I95-58782 `node.js` process may crash on SSR120, SSR130, and other branch router devices while generating Swagger documentation:** The `node.js` process may crash on SSR120, SSR130, and other branch router devices during SSR application startup while generating Swagger documentation. This is due to an internal error, and will generate a `node.js` coredump, but has **no impact** on the SSR. Swagger documentation is generated on a subsequent restart of the SSR. This is not service impacting.
 ------

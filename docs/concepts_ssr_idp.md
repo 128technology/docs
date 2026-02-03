@@ -99,6 +99,14 @@ When the router is configured with `forwarding-core-mode` as manual, the adminis
 The system requires a reboot for the IDP core allocation; after upgrading to SSR 6.x for the first time, an additional reboot is required to enable the IDP engine.
 :::
 
+Software version 6.3.3-R2 introduces the support of multi-core capabilities for IDP for image-based routers. For customers running IDP on older image-based firmware versions (6.3.0-R1 and under) on the SSR1300, SSR1400, and SSR1500, IDP multicore will be automatically enabled when upgrading to 6.3.3-R2. In some cases, after an upgrade the IDP engine can fail to start as it transitions from single-core to multi-core mode. When the IDP engine fails to start, the following alarm will be generated on the system:  `IDP engine unable to start; reboot-required`. In this situation, it is recommended to reboot the system post-upgrade to ensure future reliable reboots with IDP multi-core enabled.
+
+For legacy package-based routers, multi-core IDP capability is not supported, and those systems will continue to operate in the single-core mode.
+
+:::note
+Multi-core IDP is not supported on the following SSR devices: SSR120, SSR130, and SSR1200.
+:::
+
 ## Limitations
 
 The following is a list of the current limitations of the IDP solution. 
