@@ -201,7 +201,7 @@ config
             invalid-certificate-behavior  fail-soft
 ```
 
-In cases where you want to manually force key rotation on the routers, use the `security metadata-key regenerate` command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
+In cases where you want to manually force key rotation on the routers, use the `rotate security metadata-key` command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
 
 #### Sample Default Configuration: 
 
