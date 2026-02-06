@@ -133,6 +133,8 @@ These release notes are Beta only, and are in progress. They are furnished to he
 
 - **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 devices provide the ability to reset the device to either a pre-defined rescue (or **Golden**) configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config-factory-reset.md).
 ------
+- **I95-44742 SFP Optical interface transceiver stats:** Support has been added to display optical interface transceiver stats in the CLI. Issuing the `show device-interface node all name <interface> optics-statistics` will display information for debugging and diagnostic information from network transceiver modules (SFP, SFP+, QSFP, etc.). It displays optical power levels, vendor information, and hardware thresholds for monitoring physical layer connectivity.
+------
 - **I95-53402 SSR400/SSR440 Chassis Manager:** The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. For more information, see the [SSR Chassis Manager](ssr-chassis-manager.md).
 ------
 - **I95-53405 5G modem support:** Support for 5G modems as provided in the SSR400 and SSR440 devices has been added. 
