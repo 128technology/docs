@@ -691,6 +691,7 @@ create certificate request <type> [<name>]
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`import certificate`](#import-certificate) | Import a certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
+| [`show certificate-revocation`](#show-certificate-revocation) | Shows the config revocations on a given system. |
 
 #### Description
 
@@ -716,6 +717,7 @@ create certificate self-signed webserver
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`import certificate`](#import-certificate) | Import a certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
+| [`show certificate-revocation`](#show-certificate-revocation) | Shows the config revocations on a given system. |
 
 #### Description
 
@@ -773,6 +775,70 @@ Forces re-generation of all automatically generated configuration items, and sta
 Force re-generation of all automatically generated configuration items. Both internal and plugin configuration generation is run when. Changes are staged into the candidate configuration.
 
 Configuration generation is done automatically as part of a `commit`. This command serves only to aid in debugging.
+
+## `create secure-conductor-onboarding`
+
+Parent command group for Secure Conductor Onboarding commands.
+
+#### Usage
+
+```
+create secure-conductor-onboarding [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`token`](#create-secure-conductor-onboarding-token) | Create a Secure Conductor Onboarding (SCO) token for router onboarding. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show secure-conductor-onboarding`](#show-secure-conductor-onboarding) | Show Secure Conductor Onboarding (SCO) state of all assets. |
+
+#### Description
+
+Usage:     create secure-conductor-onboarding token ...
+
+## `create secure-conductor-onboarding token`
+
+Create a Secure Conductor Onboarding (SCO) token for router onboarding.
+
+#### Usage
+
+```
+create secure-conductor-onboarding token [{router <router> | resource-group <resource-group>}] [expiration-timeout <expiration-timeout>] [force] [node <node>] router-name <router-name>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| expiration-timeout | Optional expiration (default: 1d). Supports durations such as 1h, 2d, 1w, 1M, 2y. (default: 1d) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+| router-name | Router for which to generate the onboarding token. |
+
+#### Description
+
+Example:     create secure-conductor-onboarding token router-name RTR_EAST_COMBO     [expiration-timeout 1h]
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `create session-capture`
 
@@ -1056,7 +1122,8 @@ delete certificate webserver [force]
 | [`create certificate request`](#create-certificate-request) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
 | [`import certificate`](#import-certificate) | Import a certificate. |
-| [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
+| [`show certificate webserver`](#show-certificate-webserver) | Display webserver certificates |
+| [`show certificate-revocation`](#show-certificate-revocation) | Shows the config revocations on a given system. |
 
 #### Description
 
@@ -1837,7 +1904,7 @@ import certificate <type> [<name>]
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
-#### Description
+| [`show certificate-revocation`](#show-certificate-revocation) | Shows the config revocations on a given system. |
 
 This command allows administrators to load certificates into their SSR by pasting them into their active PCLI session. By issuing the `import certificate` command, the PCLI prompts the user for the name of the certificate they plan to import, then asks whether it is a CA (certificate authority) certificate or not. Once these questions are answered, administrators can paste the certificate, and is reminded to press CTRL-D once the pasting is complete. Pressing CTRL-D causes the SSR to validate the configuration to ensure it is a valid X.509 certificate before loading it into persistent storage. If the X.509 validation fails, the user is informed as follows:
 
@@ -2005,7 +2072,7 @@ Initializes the current device as a conductor-managed router.
 #### Usage
 
 ```
-initialize conductor-managed [password-hash <password-hash>] [management-proxy <management-proxy>] router-name <router-name> conductor-ip <address> [<address>]
+initialize conductor-managed [password-hash <password-hash>] [management-proxy <management-proxy>] [onboarding-token <onboarding-token>] router-name <router-name> conductor-ip <address> [<address>]
 ```
 
 ##### Keyword Arguments
@@ -2014,6 +2081,7 @@ initialize conductor-managed [password-hash <password-hash>] [management-proxy <
 | ---- | ----------- |
 | conductor-ip | The address(es) of the conductor node(s) |
 | management-proxy | A proxy server(s) including port (x.x.x.x:port). |
+| onboarding-token | Onboarding token provided by the conductor. This will force the device to use Secure Conductor Onboarding. |
 | password-hash | A salted SHA-512 hash of the password to set for the &#x27;admin&#x27;, &#x27;t128&#x27; and &#x27;root&#x27; users. |
 | router-name | Assign a name to the router |
 
@@ -2324,6 +2392,29 @@ release dhcp lease [force] [node <node>] {router <router> | resource-group <reso
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
+
+## `reload local certificates`
+
+Message to highway to reload local certificates for SVRv2 enhanced-security-key-management.
+
+#### Usage
+
+```
+reload local certificates [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node on which to reload local certificates (default: all) |
+| resource-group | The name of the resource group |
+| router | The router on which to reload local certificates |
+
+#### Description
+
+Signal to highway that the local certificate contents have been updated and we should reload them from disk.
 
 ## `repeat`
 
@@ -5702,6 +5793,393 @@ show certificate webserver
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
 | [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`import certificate`](#import-certificate) | Import a certificate. |
+| [`show certificate-revocation`](#show-certificate-revocation) | Shows the config revocations on a given system. |
+
+## `show certificate-revocation`
+
+Shows the config revocations on a given system.
+
+#### Usage
+
+```
+show certificate-revocation [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create certificate request`](#create-certificate-request) | Create a certificate signing request. |
+| [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
+| [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
+| [`import certificate`](#import-certificate) | Import a certificate. |
+| [`show certificate webserver`](#show-certificate-webserver) | Display webserver certificates |
+
+## `show chassis`
+
+Display information about the chassis
+
+#### Usage
+
+```
+show chassis [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`power`](#show-chassis-power) | Show chassis power |
+| [`temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis firmware`
+
+Show information about the chassis firmware
+
+#### Usage
+
+```
+show chassis firmware [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node to show firmware information for |
+| router | The router to show firmware information for (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis hardware`
+
+Show information about the chassis hardware
+
+#### Usage
+
+```
+show chassis hardware [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis led`
+
+Show the status of the chassis LEDs
+
+#### Usage
+
+```
+show chassis led [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`system`](#show-chassis-led-system) | Show the status of the System LED |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis led phy`
+
+Show the status of the port LEDs
+
+#### Usage
+
+```
+show chassis led phy [port <port>] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| port | The port number for an ethernet port [type: port] |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis led system`
+
+Show the status of the System LED
+
+#### Usage
+
+```
+show chassis led system [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis power`
+
+Show chassis power
+
+#### Usage
+
+```
+show chassis power [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis temperature`
+
+Show chassis temperature sensor readings
+
+#### Usage
+
+```
+show chassis temperature [sensor <sensor>] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+| sensor | The name of the target temperature sensor |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis temperature-thresholds`
+
+Show chassis temperature thresholds
+
+#### Usage
+
+```
+show chassis temperature-thresholds [region <region>] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| region | The target region for temperature thresholds |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
 
 ## `show chassis`
 
@@ -6139,8 +6617,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| `authority` | Show configuration data for &#x27;authority&#x27; |
-| `generated` | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for `authority` |
+| `generated` | Show configuration data for `generated` |
 
 ## `show config disk-cache`
 
@@ -6405,8 +6883,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| `authority` | Show configuration data for &#x27;authority&#x27; |
-| `generated` | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for `authority` |
+| `generated` | Show configuration data for `generated` |
 
 ## `show config version`
 
@@ -7955,6 +8433,29 @@ This command queries the LTE devices and displays the following state info:
 - registration-status
 - connection-status (show IP if connected, otherwise, show previous error)
 - signal-strength (rating, RSSI, and SNR)
+
+## `show management-proxy`
+
+Show management-proxy state data
+
+#### Usage
+
+```
+show management-proxy [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display status |
+| resource-group | The name of the resource group |
+| router | The router for which to display status |
+
+#### Description
+
+Query the management-proxy to check state details.
 ## `show mist`
 
 Display information about the link between the SSR and the Mist Cloud
@@ -10596,6 +11097,34 @@ show roles [name <name>] [rows <rows>]
 | [`show user`](#show-user) | Display information for user accounts. |
 | [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
+## `show secure-conductor-onboarding`
+
+Show Secure Conductor Onboarding (SCO) state of all assets.
+
+#### Usage
+
+```
+show secure-conductor-onboarding [<asset_id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| asset_id | Show detailed state for a specific asset |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create secure-conductor-onboarding`](#create-secure-conductor-onboarding) | Parent command group for Secure Conductor Onboarding commands. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show security key-status`
 
 Display detailed security key status.
@@ -11989,6 +12518,31 @@ show system software upgrade [{router <router> | resource-group <resource-group>
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
 | [`show system version`](#show-system-version) | Show system version information. |
 
+## `show system utilization session-processors`
+
+Display system utilization session processor thread CPU usage
+
+#### Usage
+
+```
+show system utilization session-processors [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
 ## `show system version`
 
 Show system version information.
@@ -12576,6 +13130,9 @@ traceroute to 172.16.1.201, 64 hops max
 | --- | --- |
 | 6.1.0 | Introduced | 
 | 6.2.3-R2 | Updates and improvements made to the keyword arguments |
+
+The only mandatory parameter is the destination IP.
+
 
 ## `validate`
 

@@ -3,6 +3,12 @@ title: Disable SSR4x0 Management Interfaces
 sidebar_label: Disable SSR4x0 Management Interfaces
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.1.0   | Support for disabling SSR4x0 Managment interfaces added. |
+
 The following configuration fields have been added to node configuration, allowing you to control physical security features on the SSR4x0 series. A `true` setting enables the feature, `false` disables the feature. 
 
 ```
@@ -31,7 +37,7 @@ config authority router router1 node node1 reset-button-enabled true
 ![Disable ports from the GUI](/img/sec-disable-ports-gui.png)
 
 :::note
-Changes made and committed require a reboot to enable or disable.
+Changes made and committed require a reboot to take effect.
 :::
 
 ## How It Works
@@ -44,7 +50,7 @@ When disabled (set to **false**), the USB host controller is excluded from the `
 
 ### Disable Reset Pushbutton
 
-When disabled (set to **false**), the pushbutton interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push. However, with the pushbutton disabled, device reboot is possible from either the command line or through Mist. 
+When disabled (set to **false**), the push button interrupt is disabled, and no action will be taken by the operating system or applications in response to a button push. However, with the push button disabled, device reboot is possible from either the command line or through Mist. 
 
 ### Disable Serial Console Port
 
@@ -54,7 +60,7 @@ See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for impo
 
 ### Disable Firmware Recovery
 
-When disabled (set to **false**), the boot firmware `Press Esc to boot from USB` option and the image boot menu are prevented. The configured active boot image will be auto loaded; no recovery paths are available in the event of a boot failure.
+When disabled (set to **false**), the boot firmware `Press Esc to boot from USB` option and the image boot menu are prevented. The configured active boot image will be auto loaded; no recovery paths except system zeroization are available in the event of a boot failure.
 
 See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
 
@@ -62,7 +68,9 @@ See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for impo
 
 This feature is configured on the SSR400 and SSR440 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
 
-If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the Fail-Safe Restore process for recovery.
+If **both** the Serial Console Port and Firmware Recovery are disabled, and an incorrect or empty IP address is configured for one of the Ethernet ports (or system boot repeatedly fails for any other reason), use the push button to [Reset to the Rescue configuration](config-factory-reset.md#reset-to-the-rescue-configuration).
+
+If the Reset push button is also disabled, the [Zeroization process](config-factory-reset.md#ssr400-and-ssr-440-zeroization) or RMA to Juniper are the only methods available for recovery.
 
 **It is strongly recommended that recovery not be disabled on production units until post-deployment boot has been successfully validated.**
 
