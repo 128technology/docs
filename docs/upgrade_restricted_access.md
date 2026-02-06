@@ -84,21 +84,17 @@ When using the `import iso` and `import rpm` commands to install plugins necessa
 The following process is used to upgrade a Conductor and Conductor-managed Routers to **version 6.3.0** of the SSR software. Beginning with SSR software version 6.3.0, a conductor can manage routers running image-based software installations. 
 
 <!-- markdown-link-check-disable -->
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [6.3 Package Based ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/6.3/) page. 
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [6.3 Package Based ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/6.3/) page to your device. 
 
-2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the downloaded ISO.
+2. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` ISO onto the conductor using the [`import iso`](#import-iso) command. 
 
-3. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` ISO onto the conductor using the [`import iso`](#import-iso) command. 
+3. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 
-4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
+4. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page to your device. <!-- markdown-link-check-enable --> 
 
-5. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page. <!-- markdown-link-check-enable --> 
+5. Import the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
 
-6. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
-
-7. Import the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
-
-8. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
+6. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
 
 :::note
 The process to upgrade a **conductor from a version less than 6.3.0 to 6.3.0 or greater** requires the use of the `128T-6.3.X-XX.r1.el7.OTP.v1.x86_64.iso` package based 128T ISO. After the initial upgrade to 6.3.X, all future upgrades will only require the import of the image-based SSR ISO; for example, `SSR-6.3.3-1.r1.el7.x86_64.ibu-v1.iso`. 
@@ -115,25 +111,21 @@ The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.
 :::
 
 <!-- markdown-link-check-disable -->
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page. 
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page to your device. 
 
-2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
+2. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` ISO onto the conductor using the [`import iso`](#import-iso) command. 
 
-3. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` ISO onto the conductor using the [`import iso`](#import-iso) command. 
+3. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 
-4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
-
-5. Navigate to the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page, identify the software image version you will use to upgrade the target router or routers, and download it. <!-- markdown-link-check-enable -->
+5. Navigate to the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local) page, identify the software image version you will use to upgrade the target router or routers, and download it to your device. <!-- markdown-link-check-enable -->
 
  For example, if you are upgrading a router to SSR Version 6.1.10, you will need to download the following files:
 
  - `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.iso`
 
-6. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
+6. Import the `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
 
-7. Import the `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
-
-8. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure. 
+7. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure. 
 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.
@@ -145,9 +137,7 @@ For upgrades of Conductor and Conductor-managed routers to software versions pri
 
 In this example workflow, the conductor will be upgraded to 6.2.6, and the routers to 6.1.10. 
 <!-- markdown-link-check-disable -->
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.2.6-15.sts.el7.OTP.v1.x86_64.iso` software package from the [128T package-based ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page. 
-
-2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.2.6-15.sts.el7.OTP.v1.x86_64.iso` software package from the [128T package-based ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page to your device. 
 
 3. Plug the USB into your device.
 
@@ -155,7 +145,7 @@ In this example workflow, the conductor will be upgraded to 6.2.6, and the route
 
 5. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 
-6. Download the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page. <!-- markdown-link-check-enable -->
+6. Download the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local) page to your device. <!-- markdown-link-check-enable -->
 
 7. Import the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](#import-iso) command. The conductor will act as the software repository for the subsequent router upgrades. You do **not** install this package onto the conductor, only import it. 
 
