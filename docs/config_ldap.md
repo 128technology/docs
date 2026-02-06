@@ -8,6 +8,7 @@ Lightweight Directory Access Protocol (LDAP) is an open, vendor-neutral, industr
 [^1]: https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol
 
 ## Basic Configuration
+
 Configuring LDAP on the SSR is done globally, and is done within the `authority > ldap-server` configuration element. The SSR authority configuration may only have one `ldap-server` configured at a time.
 
 The `ldap-server` configuration has the following attributes:
@@ -20,10 +21,10 @@ If using an FQDN/hostname, this name must be resolvable by the SSR.
 - **search-base**: The search base defines the starting point for the search in the directory tree. For example, SSR might need to query the entire directory, in which case the search base must specify the root of the directory service. Or, SSR might need to query a specific organizational unit (OU) in the directory. Generally this is configured as a series of _Domain Components_, which are abbreviated "dc."
 - **server-type**: An enumeration, which can be _global-catalog_, _ldaps_, or _starttls_. For Active Directory LDAP servers, use `global-catalog`. LDAPS is LDAP wrapped in SSL, and is a non-standard (yet popular) implementation. StartTLS is instead built into the LDAP protocol itself. Consult your LDAP server's documentation to determine the server-type most appropriate for your deployment.
 :::note
-The default type is ldaps, which requires TLS/SSL for the entire duration of the connection
+The default type is `ldaps`, which requires TLS/SSL for the entire duration of the connection.
 :::
 :::info
-The "starttls" type will not send user passwords in the process of being validated in the clear (it requires that STARTTLS be performed, and uses that channel for sending the password), but all other LDAP traffic (including the bind request and credentials used for binding) _are_ sent in the clear.
+The `starttls` type will not send user passwords in the process of being validated in the clear (it requires that STARTTLS be performed, and uses that channel for sending the password), but all other LDAP traffic (including the bind request and credentials used for binding) _are_ sent in the clear.
 :::
 - **port**: the listening port on your LDAP server. Using `server-type-default` will select the default port based on the server-type configured (3269 for global-catalog, 636 for LDAPS, 389 for StartTLS)
 - **bind-type**: an enumeration of _anonymous_, _unauthenticated_, or _password_. This is how your SSR will authenticate to your LDAP server.
@@ -43,6 +44,7 @@ The following `ldap-server` configuration options have been added with SSR Versi
 - **group-search-base**: Allows users to set group-search-base filters when auto-generate-filter is false for server-type global-catalog.  See the configuration examples below for usage.
 
 ## LDAP Server Configuration
+
 The following section provides example configuration steps for an LDAP server.
 
 ## LDAP Server on JumpCloud
@@ -76,6 +78,7 @@ JumpCloud is not affiliated with Juniper, and Juniper does not endorse the use o
 ![JumpCloud Directories](/img/ldap_jumpcloud_user_setup4.png)
 
 #### Add users to groups in the JumpCloud portal
+
 Select users and assign them to either the `128t-user` or `128t-admin` groups.
 
 ![JumpCloud User Groups](/img/ldap_jumpcloud_user_setup5.png)
@@ -105,6 +108,12 @@ exit
 **Example - GUI**
 
 ![JumpCloud Config on SSR GUI](/img/ldap_jumpcloud_user_setup7.png)
+
+Setting `Auto generate user and group search filter` to `true` generates `user-search-base` and `group-search-base` LDAP filters. When enabled and the server type is `Global Catalog` (for Active Directory), `user-search-base` and `group-search-base` LDAP filters are generated using the `search-base` field and the RBAC roles configured on the system.
+
+For example, if `search-base` is configured as `DC=mydomain,DC=com` and the system has RBAC roles called `admin` and `user`, these appear as `128t-admin` and `128t-user` in the filters. See the [`auto-generate-filter`](#auto-generate-filter-configuration-example), [`user-search-base` , and `group-search-base` examples](#user-search-base-and-group-search-base-configuration-examples) below for configuration information. 
+
+Disabling (setting to `false`) allows you to specify your own filters.
 
 ### User Verification
 
@@ -161,13 +170,14 @@ Additionally, to verify the status of your configured users and the LDAP server,
 
 #### Important Clarification
 
-As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS or local users and is **not** to be configured for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
+The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS or local users and is **not** to be configured for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
 
 ![Not for LDAP](/img/ldap_jumpcloud_user_setup8.png)
 
 In the case of LDAP, both the user and the authentication are administered remotely.
 
 ## Microsoft Active Directory Sample Configurations
+
 The following sample configuration interfaces with Microsoft Active Directory.
 ```
 ldap-server ActiveDirectory
@@ -234,9 +244,19 @@ password            (removed)
 ```
 
 ## LDAP User Account Requirements
-It is important to ensure that administrative users are configured on the LDAP server as being a member of a group called `128t-user` for read-only access to the configuration, or `128t-admin` for read-write access to configuration. These group names are case sensitive.
+
+Ensure that administrative users are configured on the LDAP server as being a member of the `128t-admin` group for read-write access to configuration, or the `128t-user` group, providing read-only access to the configuration. These group names are case sensitive.
+
+The SSR supports using RBAC roles in the `128t-admin` and `128t-user` groups as part of LDAP. The SSR assumes a `128t-<role>` group for LDAP, so for instance `128t-admin` members will be members of the admin role in SSR. 
+
+If you create a role `nocc`, you can add users in LDAP as members of `128t-nocc`. When those users login to the SSR they will inherit privileges of the `nocc` role. This is similar to [using RADIUS with the VSA option](config_radius.md#configure-the-radius-server).
+
+:::important
+Do **NOT** manually create local user accounts for LDAP users. They are automatically added based on the details for each user returned from the LDAP server. Manually creating local users prevents the use of the LDAP server for authentication.
+:::
 
 ## Implementation Notes
+
 - `show user` within the PCLI (and GUI's User management page) allows viewing LDAP users that have connected to SSR
 - `edit user` within the PCLI (and GUI's User management page) allows editing LDAP users, (changing password, display name, enabled/disabled). While saving these changes may report back that it has completed successfully, these changes _are not_ saved in the LDAP server.
 - Having local SSR users with the same name as LDAP users is not supported.
@@ -245,6 +265,7 @@ It is important to ensure that administrative users are configured on the LDAP s
 - When the system is configured to use LDAP for user authentication, the status of the LDAP connection can be seen on the Users page of the GUI. This is a high level status of connectivity to retrieve user and group information based on the LDAP configuration.
 
 ### Logging
+
 The LDAP log category allows you to change the LDAP log level.
 
 ```
@@ -256,6 +277,7 @@ Log level successfully set
 ```
 
 ## Debugging Issues Using LDAP
+
 For diagnosing connection status from linux
 ```
 sssctl domain-status <name-of-configured-ldap-server-in-128t-config>
