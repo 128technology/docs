@@ -60,7 +60,94 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.0.4-4r2
+
+**Release Date:** February 12, 2026
+
+### New Features
+
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
+------
+- **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the secure ztp process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
+------
+- **I95-58446 EoSVR Loop Prevention:** EoSVR A/S Loop Prevention has been added, allowing EoSVR traffic to pass Broadcast, unknown-unicast, and multicast traffic through a switch without causing the port to be shut down.
+------
+- **I95-59235 HTTP/S proxy server for all public URLs:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. This process can also be used to support the [Mist secure ZTP onboarding](sec-ztp-web-proxy.md) process.
+
+### Resolved Issues
+
+- **I95-58007 Add ability to set PIM graceful restart-time:** The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer).
+------
+- **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
+------
+- **I95-60799 Tenant prefix use within a VRF:** The SSR allows the configuration of tenant-prefixes without giving an error, and correctly handles interfaces with tenant-prefixes within the protocol code.
+------
+
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
+------
+- **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
+------
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
+------
+- **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
+------
+- **I95-62258 Packet steered to egress non-existent interface causes highway crash:** Added logic to capture the errant packet and prevent the crash. An exception is logged so that the issue can be more easily rectified.
+------
+- **I95-62369 Session error record shows 0s for session-id:** Resolved an issue where the session record information was incomplete. The SSR now also uses the redundancy session data to gather records.
+------
+- **I95-62580 Conflicting network interface names slowing application traffic:** Resolved an issue in the app summary tracking logic related to conflicting network interface names for non-redundant ports of an HA router.
+------
+- **I95-62668 Routers disconnected following conductor upgrade:** Resolved an issue where SSH keys were erroneously written to the authorized-keys file. 
+------
+- **I95-62703 Highway process crashes when BGP over SVR is activated:** Resolved an issue where the unicast code path was incorrectly invoking multicast variant of a function call.
+------
+- **I95-62742 Cannot see sync errors for nodes that are stuck synchronizing:** Resolved an issue where errors in show assets disappeared when the synchronizing state retries.
+------
+- **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
+------
+- **I95-62860 250 max connection limit not respected by the web interface:** Resolved an issue where requesting too much data over graphql with a large config led to missing data.
+------
+- **I95-62956, I95-62957 Configuration failure due to invalid name:** The CSRX does not allow policynames using a dot (.). This has been resolved - CSRX configurations will use an underscore for policyname creation.
+------
+- **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
+------
+- **I95-63018 memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.
+------
+- **I95-63190 SSC process errors causing node disconnections from Conductor:** Resolved an issue where SSC process errors were filling the buffer queue, dropping messages, and causing node disconnections. 
+------
+- **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
+------
+- **I95-63295 Highway crash when show fib is executed on very large FIB:** Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.
+------
+- **I95-63299 Keys signed with ECDSA do not work with Enhanced Security Key Management:** Resolved an issue where ECC-based keys fail during the validation process, because the SSR was using hardcoded SHA256 for its signature validation checking. This issue has been resolved.
+------
+- **I95-63306 Allow RSA keys with ECC signatures on certificates:** Resolved an unnecessary restriction between the allowed PKI private key algorithm and the CA signature algorithm. The `key` is now validated independently from the `signature` on the certificate.
+------
+- **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
+------
+- **I95-63422 Unable to establish peering:** Resolved an issue with starting the SSR with ESKM enabled using invalid certificate on one node, and a valid certificate on the other. ESKM was not able to advance the `security-state-machine` after correcting the certificate until the remote peering relationship was restarted. This has been resolved. 
+------
+- **I95-63462 When one node is down, monitoring is failing:** Resolved an issue that was preventing router-level API requests from succeeding when one node is down.
+------
+- **I95-63528 `Failed to initiate Factory restoration` message during factory reset procedure:** A delay has been added to the State Monitor factory reset API to resolve the error message being output when running the `restore system factory-default` command from the PCLI.
+------
+- **I95-63590 Interfaces flapping on Node A of the HA cluster:** Resolved a race condition in reachability detection causing the interface flapping.
+------ 
+- **I95-63664 Salt packages incorrectly downgraded:** Resolved an issue where salt downgraded a package if the highest available version of a package was lower than the currently installed version of that package.
+------
+- **I95-63675 Node page in the GUI appears to load indefinitely:** Resolved an issue where the GUI Node page would load infinitely.
+------
+- **I95-63976 Waypoints fail to allocate when service-path peer next-hop gateway is off the subnet:** Resolved an issue with waypoint allocation failures when using BGP over SVR with multiple IP addresses on the egress SVR interface.
+------
+- **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
+------
+- **I95-63817 Default peering certificates are unable to used configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
+------
+
+
 ## Release 7.0.1-1r1
+
+**Release Date:** October 14, 2025
 
 :::important
 **7.0.1 Conductor Upgrades**
@@ -83,8 +170,6 @@ SSR-OS support for the team interface has been removed in 7.0.1. There are two s
 - If you have a conductor deployed with an L3 hop on the HA interface, update your static route to point to the parent interface. The exception to this is if the interface is configured as `non-forwarding shared`. 
 - The HA Sync Redundancy Plugin is not supported on 7.0.
 :::
-
-**Release Date:** October 14, 2025
 
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
