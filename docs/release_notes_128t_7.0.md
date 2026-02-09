@@ -82,12 +82,11 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-60799 Tenant prefix use within a VRF:** The SSR allows the configuration of tenant-prefixes without giving an error, and correctly handles interfaces with tenant-prefixes within the protocol code.
 ------
-
 - **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
 ------
 - **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
 ------
-- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when an mroute is configured with no outgoing interfaces. A Detour Path is used instead of `NoServicePaths` to prevent resource contention.
 ------
 - **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
 ------
@@ -117,7 +116,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
-- **I95-63295 Highway crash when show fib is executed on very large FIB:** Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.
+- **I95-63295 Highway crash when `show fib` is executed on very large FIB:** Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.
 ------
 - **I95-63299 Keys signed with ECDSA do not work with Enhanced Security Key Management:** Resolved an issue where ECC-based keys fail during the validation process, because the SSR was using hardcoded SHA256 for its signature validation checking. This issue has been resolved.
 ------
