@@ -71,6 +71,8 @@ These release notes are Beta only, and are in progress. They are furnished to he
 
 ### New Features
 
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
+------
 - **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
 ------
 - **I95-54247 IMA - SSR Signed packages only execution:** IMA is Linux’s Integrity Measurement Architecture. The SSR400 and SSR440 support IMA validation using GPG Signatures. IMA validation is enabled by default for the root user, allowing the kernel to check the signature of each file before loading it for execution. If these checks fail, execution is denied with a Permission denied (EACCES) error code. For more information, see [Secure Boot - IMA](sec-secure-boot.md#ima).
@@ -96,6 +98,8 @@ These release notes are Beta only, and are in progress. They are furnished to he
 <!---- **The following CVEs have been identified and resolved in this release:** CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291.
 ------ --->
 - **I95-57605 BFD link-test-interval not accurate:** Resolved as part of I95-59720. Several modifications have been made to the BFD timers to improve accuracy. 
+------
+- **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
 ------
 - **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
 ------
