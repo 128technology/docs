@@ -143,7 +143,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63817 Default peering certificates are unable to used configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
 ------
-
+- **I95-63923 Redundant conductor fails to upgrade:** Resolved an issue where a minion disconnects from the conductor node and never attempts to reconnect. The minion watchdog process now restarts the salt minion if it is not connected to all conductor nodes.
 
 ## Release 7.0.1-1r1
 
