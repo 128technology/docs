@@ -2659,7 +2659,7 @@ Download a new version of the SSR.
 #### Usage
 
 ```
-request system software download [{router <router> | resource-group <resource-group>}] [cohort-id <cohort-id>] [force] [node <node>] version <version>
+request system software download [{router <router> | resource-group <resource-group>}] [cohort-id <cohort-id>] [sequenced] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
@@ -2671,7 +2671,14 @@ request system software download [{router <router> | resource-group <resource-gr
 | node | The node on which to download SSR software |
 | resource-group | The name of the resource group |
 | router | The router on which to download SSR software (default: &lt;current router&gt;) |
+| sequenced | Download software on only one node of an HA router at a time to allow the second node to download the software from the first to minimize bandwidth usage. Only valid when targeting a router. |
 | version | The version to download. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`pause`](#request-system-software-download-pause) | Pause the software download. |
 
 ##### See Also
 
@@ -2691,6 +2698,30 @@ request system software download [{router <router> | resource-group <resource-gr
 | [`show system software sources`](#show-system-software-sources) | Display information about software sources. |
 | [`show system software upgrade`](#show-system-software-upgrade) | Display in-progress and completed upgrades to higher SSR versions. |
 | [`show system version`](#show-system-version) | Show system version information. |
+
+## `request system software download pause`
+
+Pause the software download.
+
+#### Usage
+
+```
+request system software download pause [{router <router> | resource-group <resource-group>}] [force] [node <node>] version <version>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to pause the software download |
+| resource-group | The name of the resource group |
+| router | The router on which to pause the software download (default: &lt;current router&gt;) |
+| version | The version to pause the software download |
+
+#### Description
+
+Pause an SSR download on a router or node. When targeting a router, both nodes will issue the download pause request at the same time. The command can also be addressed to all routers or a particular resource-group.
 
 ## `request system software health-check`
 
@@ -5774,6 +5805,29 @@ Completed in 0.01 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.4.0   | This feature was introduced |
+## `show certificate ca`
+
+Display certificate authority certificate data
+
+#### Usage
+
+```
+show certificate ca [name <name>] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | An identifier for a certificate |
+| node | The node for which to display certificates |
+| router | The router for which to display certificates (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `show certificate webserver`
 
@@ -6617,8 +6671,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| `authority` | Show configuration data for `authority` |
-| `generated` | Show configuration data for `generated` |
+| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
+| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config disk-cache`
 
@@ -6883,8 +6937,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| `authority` | Show configuration data for `authority` |
-| `generated` | Show configuration data for `generated` |
+| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
+| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config version`
 
@@ -11701,6 +11755,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`resource-allocation`](#show-system-resource-allocation) | Display information for reserved hugepages and CPU core masks. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
 | [`software`](#show-system-software) | &lt;available&gt; \| &lt;downgrade&gt; \| &lt;download&gt; \| &lt;health-check&gt; \| &lt;revert&gt; \| &lt;sources&gt; \| &lt;upgrade&gt; |
+| [`utilization`](#show-system-utilization) | &lt;session-processors&gt; |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also

@@ -41,16 +41,32 @@ If an HA Router fails during download and another download is requested after fa
 
 ## Resumable SSR Download
 
-Downloads can be paused manually using a CLI command, or automatically paused if the connection fails. When manually paused, the process can be continued by manually restarting the download. In the case of a failed connection, the SSR will automatically resume the download when the connection is restored. In both instances, the download resumes from the point where the download was stopped. 
+Downloads are automatically paused if the connection fails. When the connection is restored, the SSR automatically resumes the download from the point where it stopped. 
 
-To manually pause a download from the CLI, use the `request system software download pause` command. 
+Downloads can also be manually paused, resumed, or deleted from either the CLI or the GUI. 
 
-Example:
+#### Command Line
+
+To pause a download from the CLI, use the `request system software download pause` command. 
 
 ```
-request system software download pause version SSR-7.0.1-1
-request system software download pause router Router1 node Node1 version 6.3.6-1
+request system software download pause version SSR-7.1.3-4
+request system software download pause router Router1 node Node1 version 7.1.0-1
 ```
+
+The download process can be continued by restarting the download; `request system software download`. The download resumes from the point where the download was paused. 
+
+As a system cleanup operation, you can delete stale versions of the software using the `delete system software` command.
+
+#### GUI
+
+On the Software Lifecycle page, an in-progress download can be paused by selecting the download, and clicking the Pause button in the Details view. 
+
+
+
+Using the same window, you can also resume or delete a download.
+
+
 
 ### Auto-resume Download on WAN Failures
 
