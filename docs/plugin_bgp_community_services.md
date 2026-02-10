@@ -228,6 +228,14 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 ## Release Notes
 
+### Release 4.0.1
+
+**Release Date:** Feb 11, 2026
+
+#### Issues Fixed
+
+- **PLUGIN-3177** Handle BGP incompatability with SSR >= 6.2.8
+
 ### Release 4.0.0
 
 #### New Features and Improvements

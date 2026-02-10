@@ -341,6 +341,14 @@ exit
 The plugin must be updated to version 3.1.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-configuration-generation-changes)
 :::
 
+### Release 5.0.1
+
+**Release Date:** Feb 11, 2026
+
+#### Issues Fixed
+
+- **PLUGIN-3144** Update DNS cache dependency for associated bugfix
+
 ### Release 5.0.0
 
 #### New Features and Improvements
