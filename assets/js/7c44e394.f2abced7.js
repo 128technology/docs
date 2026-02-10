@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[5358],{51677:s=>{s.exports=JSON.parse('{"label":"saltstack, sip-alg","permalink":"/kb/tags/saltstack-sip-alg","allTagsPath":"/kb/tags","count":1,"unlisted":false}')}}]);

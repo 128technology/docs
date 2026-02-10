@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[3078],{96550:s=>{s.exports=JSON.parse('{"label":"ipsec-client-3.6.1","permalink":"/kb/tags/ipsec-client-3-6-1","allTagsPath":"/kb/tags","count":1,"unlisted":false}')}}]);
