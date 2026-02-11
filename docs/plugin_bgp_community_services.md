@@ -234,7 +234,7 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 #### Issues Fixed
 
-- **PLUGIN-3177** Handle BGP incompatability with SSR >= 6.2.8
+- **PLUGIN-3177** Handle BGP incompatability with SSR >= 6.2.8 that resulted in missing FIB entries.
 
 ### Release 4.0.0
 

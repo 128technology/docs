@@ -347,7 +347,7 @@ The plugin must be updated to version 3.1.3 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-3144** Update DNS cache dependency for associated bugfix
+- **PLUGIN-3144** Resolve issue with DNS cache restart error loop that could impact DNS App ID plugin
 
 ### Release 5.0.0
 
