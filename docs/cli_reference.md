@@ -6671,8 +6671,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for &#x27;authority&#x27; |
+| `generated` | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config disk-cache`
 
@@ -6937,8 +6937,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for &#x27;authority&#x27; |
+| `generated` | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config version`
 
