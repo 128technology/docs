@@ -126,6 +126,8 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-63675 Node page in the GUI appears to load indefinitely:** Resolved an issue where the GUI Node page would load infinitely.
 ------
+- **I95-63676 Waypoints fail to allocate when the `service-path peer next-hop gateway` is off the subnet:** Resolved an issue where the first network-interface IP was selected as the local IP for waypoint allocation, even if that IP was not a valid waypoint. 
+------
 - **I95-63976 Waypoints fail to allocate when service-path peer next-hop gateway is off the subnet:** Resolved an issue with waypoint allocation failures when using BGP over SVR with multiple IP addresses on the egress SVR interface.
 ------
 - **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
