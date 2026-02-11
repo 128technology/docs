@@ -5393,6 +5393,32 @@ A true or false value.
 
 Options: true or false
 
+## `configure authority router application-identification summary-corruption-upload-interval`
+
+A corruption event will be reported at most once every interval. Zero disables all uploads.
+
+#### Usage
+
+```
+configure authority router application-identification summary-corruption-upload-interval [<duration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| duration | The value to set for this field |
+
+#### Description
+
+Default: 15m
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
+
 ## `configure authority router application-identification summary-retention`
 
 Configure Summary Retention
@@ -42069,6 +42095,8 @@ Web server &amp; REST API.
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-system-services-webserver-enabled) | Enable Web server &amp; REST API on all control nodes in this router. |
+| [`max-sockets-per-request`](#configure-authority-router-system-services-webserver-max-sockets-per-request) | The maximum number of sockets the webserver will use per outbound request. Zero means no per-request limit but the max-total-sockets still applies. |
+| [`max-total-sockets`](#configure-authority-router-system-services-webserver-max-total-sockets) | The maximum number of total sockets the webserver will use when making outbound requests. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`port`](#configure-authority-router-system-services-webserver-port) | The port on which the Web servers listen. |
 | [`server`](#configure-authority-router-system-services-webserver-server) | List of control node server addresses. When present, they override the defaults from global configuration. |
@@ -42100,6 +42128,58 @@ Default: true
 A true or false value.
 
 Options: true or false
+
+## `configure authority router system services webserver max-sockets-per-request`
+
+The maximum number of sockets the webserver will use per outbound request. Zero means no per-request limit but the max-total-sockets still applies.
+
+#### Usage
+
+```
+configure authority router system services webserver max-sockets-per-request [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 50
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
+## `configure authority router system services webserver max-total-sockets`
+
+The maximum number of total sockets the webserver will use when making outbound requests.
+
+#### Usage
+
+```
+configure authority router system services webserver max-total-sockets [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 250
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
 
 ## `configure authority router system services webserver port`
 

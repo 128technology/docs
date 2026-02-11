@@ -62,11 +62,11 @@ As a system cleanup operation, you can delete stale versions of the software usi
 
 On the Software Lifecycle page, an in-progress download can be paused by selecting the download, and clicking the Pause button in the Details view. 
 
-
+![Pause button](/img/config-smartdwnld-pause.png)
 
 Using the same window, you can also resume or delete a download.
 
-
+![Resume or Delete buttons](/img/config-smartdwnld-resume-delete.png)
 
 ### Auto-resume Download on WAN Failures
 
