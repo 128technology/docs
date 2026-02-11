@@ -11755,7 +11755,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`resource-allocation`](#show-system-resource-allocation) | Display information for reserved hugepages and CPU core masks. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
 | [`software`](#show-system-software) | &lt;available&gt; \| &lt;downgrade&gt; \| &lt;download&gt; \| &lt;health-check&gt; \| &lt;revert&gt; \| &lt;sources&gt; \| &lt;upgrade&gt; |
-| [`utilization`](#show-system-utilization) | &lt;session-processors&gt; |
+| [`utilization`](#show-system-utilization-session-processors) | Display system utilization session processor thread CPU usage. |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
