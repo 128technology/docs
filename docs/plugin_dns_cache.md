@@ -219,7 +219,7 @@ The plugin must be updated to version 3.2.1 or later prior to [upgrading the con
 
 ### Release 5.0.1
 
-**Release Date:** Jan 14, 2025
+**Release Date:** Jan 14, 2026
 
 #### Issues Fixed
 
