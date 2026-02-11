@@ -842,6 +842,14 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ## Monitoring Agent Plugin Release Notes
 
+### Release 5.0.1
+
+**Release Date:** Feb 11, 2026
+
+#### Issues Fixed
+
+- **I95-62311** Resolve tank indexing corruption issues with telegraf
+
 ### Release 5.0.0
 
 #### New Features and Improvements
