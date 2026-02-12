@@ -97,11 +97,15 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
 ------
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
+------
 - **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
 ------
 - **I95-61856 Add `reload local certificates` command for ESKM:** The `reload local certificates` command has been added to allow the updating of local certificates. See [`reload local certificates`](cli_reference.md#reload-local-certificates) for more information. 
 ------
 - **I95-62074 Highway requests metadata key from SKM when feature is disabled:** Resolved an issue where even when `enhanced-security-key-management` was disabled, it continued to attempt to get the key information. 
+------
+- **I95-62343 Routers disconnecting from the Conductor while still successfully routing traffic:** Resolved an issue where Salt gets stuck with a bad network connection. Added new functionality to the `minion-watchdog` service which will restart the `salt-minion` if there is a salt job stuck for over an hour.
 ------
 - **I95-62772 Add details to `show peers certificate` output:** The `show peers certificate` output no longer just shows PEM file output; the data has been rendered in a more friendly format.
 ------
