@@ -7,7 +7,7 @@ sidebar_label: Smart Download
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.1.3-r2   | Smart OS Download support added. |
+| 7.1.3   | Smart OS Download support added. |
 
 Sometimes network connections can become unreliable, slow, or just plain break. To mitigate these disruptions, the SSR download process provides the following features for better recovery and control over software downloads.
 

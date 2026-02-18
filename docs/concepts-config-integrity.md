@@ -23,6 +23,12 @@ Configuration Integrity does not address any runtime access-policy or permission
 
 Configuration Integrity is enabled by default on new installations of, and upgrades to, SSR 7.1.3-r2. 
 
+:::important
+After installing / upgrading to SSR 7.1.3-r2, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+
+Rollback to the previously installed version of software *is* supported.  
+:::
+
 ## How It Works
 
 Configuration Integrity utilizes a hybrid approach combining TPM2 hardware security with Linux native filesystem encryption, administered by the userspace tool fscrypt. fscrypt utilizes an AES-256 key generated and protected by the TPM to perform encryption and decryption operations. Once the encrypted directories are unlocked, they operate as a normal directory; the encryption is transparent to the user.

@@ -15,6 +15,12 @@ With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed
 
 Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
 
+#### SSR Version 7.1.3 Rollback and Downgrades
+
+SSR Version 7.1.3 includes many important security features, including Configuration Integrity. After installing / upgrading to SSR 7.1.3-r2, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+
+**Rollback** to the previously installed version of software *is* supported.
+
 ## Reinstallation
 
 In some cases, you may have already qualified a version of firmware to run on your network. Due to network expansion or an RMA, you may need to add or replace a device that is preinstalled with firmware newer than what is currently running on your network. The SSR provides a process for an image-based reinstall to an SSR firmware version which is less than the firmware version on the target device.
