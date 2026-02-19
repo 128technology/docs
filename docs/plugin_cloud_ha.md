@@ -15,7 +15,6 @@ The instructions for installing and managing the plugin can be found [here](plug
 | ------------------ | --------------- | -------------------- |
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
-| Alicloud VPC       | `alicloud-vpc`  | 3.0.0                |
 
 
 ## Version Restrictions
@@ -51,12 +50,12 @@ The internal state machines wait for the `peer-reachability-timeout` after every
 
 When the HA Agent determines that a node must become active, the first active redundant interface's MAC address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**.
 
-### API Agents
+## API Agents
 
 The job of the API Agent is to perform failover actions specific to the cloud provider and the chosen solution.
 
 
-#### Azure Loadbalancer
+### Azure Loadbalancer
 
 A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces.
 
@@ -73,7 +72,9 @@ The Azure Loadbalancer sends a health probe to the redundant SSR's redundant int
 
 The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the SSR when the redundant interfaces are set provisionally down.
 
-#### Azure VNET
+### Azure VNET
+
+![Azure VNET Architecture](/img/cloud_ha_azure_vnet_architecture.png)
 
 A `solution-type` of `azure-vnet` can be used to enable the Azure VNET API agent. It requires an Azure Route Table setup on the same VNET as the redundant interfaces. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
 
@@ -92,20 +93,20 @@ The agent finds all of the route tables within the VNET using the Azure REST API
 To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's _network interface_.
 :::
 
-#### Alicloud VPC
+##### Extra Route Tables
 
-A `solution-type` of `alicloud-vpc` can be used to enable the Alicloud VPC API agent. It requires an Alicloud Route Table setup on the same VNET as the redundant interfaces.
+By default, the Azure VNET solution automatically discovers all route tables within the VNET where the redundant interfaces are located. However, you can also explicitly specify additional Azure Route Tables (User Defined Routes or UDRs) that should be managed by the plugin using the `extra-route-table` configuration.
 
-Since the deployment of Juniper SDWAN HA requires granting RAM role permissions, you need to add a RAM username for this under your current Alicloud account and grant the following permissions. The Virtual Machines where these members are running must be granted with the RAM role with following permissions in order for the route updates to work correctly:
+Each `extra-route-table` entry requires:
+* `subscription-id`: The unique identifier of the Azure subscription containing the UDR
+* `resource-group`: The name of the Azure resource group where the route table is hosted
+* `route-table-name`: The specific name of the Azure Route Table resource
 
-* AliyunECSFullAccess
-* AliyunVPCFullAccess
+This is particularly useful when you need to manage route tables in different subscriptions or resource groups that are not automatically discovered.
 
-The agent finds all of the route tables within the Alicloud VPC using the Alicloud REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
+##### Route Table Discovery
 
-:::warning
-To prevent routing loops, the solution will not update the Alicloud Route Tables assigned to a subnet that has an activating node's _network interface_.
-:::
+The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system will scan for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries will be managed.
 
 ## Scenarios
 
@@ -185,7 +186,7 @@ A group is a collection of nodes which all share the same settings such as the s
 
 ```
 authority
-    cloud-redundandy-group group1
+    cloud-redundancy-group group1
         name group1
         enabled true
         solution-type azure-lb
@@ -196,26 +197,49 @@ authority
         remote-health-network 169.254.180.0/24
         health-interval 2
     exit
-    cloud-redundandy-group group2
+    cloud-redundancy-group group2
         name group2
         solution-type azure-vnet
+        extra-route-table a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+            subscription-id a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+            resource-group azure-resource-group
+            route-table-name azure-route-table
+        exit
+        auto-discover-route-table false
         include-peer-vnets false
     exit
 exit
 ```
 
-| Element                   | Type            | Properties                                     | Description                                                                                                                          |     |
-| ------------------------- | --------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --- |
-| name                      | string          | key                                            | The name of the group to be referenced in other places.                                                                              |     |
-| enabled                   | boolean         | default: true                                  | Whether the group is enabled.                                                                                                        |     |
-| solution-type             | enum            | required                                       | The solution to use on member nodes.  Value can be one of the values in #Supported Solutions.                                        |     |
-| additional-branch-prefix  | list: ip-prefix |                                                | Additional ip prefixes that the member routers will control.                                                                         |     |
-| up-holddown-timeout       | int             | default: 2                                     | The number of seconds to wait before declaring a member up.                                                                          |     |
-| peer-reachability-timeout | int             | default: 10                                    | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |     |
-| health-interval           | int             | default: 2                                     | The interval in seconds for health reports to be collected.                                                                          |     |
-| remote-health-network     | ip-prefix       | default: 169.254.180.0/24                      | The ip prefix to use for inter-member health status messages.                                                                        |     |
-| include-peer-vnets        | boolean         | if: solution-type = azure-vnet, default: false | Whether to include peer VNETs as part of the route table discovery algorithm.                                                        |     |
-| probe-port                | port            | if: solution-type = azure-lb, default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.                                                             |     |
+#### Common Configuration
+
+| Element                   | Type            | Properties            | Description                                                                                                                          |
+| ------------------------- | --------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| name                      | string          | key                   | The name of the group to be referenced in other places.                                                                              |
+| enabled                   | boolean         | default: true         | Whether the group is enabled.                                                                                                        |
+| solution-type             | enum            | required              | The solution to use on member nodes.  Value can be one of the values in #Supported Solutions.                                        |
+| additional-branch-prefix  | list: ip-prefix |                       | Additional ip prefixes that the member routers will control.                                                                         |
+| up-holddown-timeout       | int             | default: 2            | The number of seconds to wait before declaring a member up.                                                                          |
+| peer-reachability-timeout | int             | default: 10           | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |
+| health-interval           | int             | default: 2            | The interval in seconds for health reports to be collected.                                                                          |
+| remote-health-network     | ip-prefix       | default: 169.254.180.0/24 | The ip prefix to use for inter-member health status messages.                                                                    |
+
+#### Azure VNET Specific Configuration
+
+| Element                   | Type    | Properties                     | Description                                                                                                             |
+| ------------------------- | ------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| include-peer-vnets        | boolean | default: false                 | Whether to include peer VNETs as part of the route table discovery algorithm.                                           |
+| auto-discover-route-table | boolean | default: true                  | Enables automatic discovery of Azure Route Tables within the specified VNET.                                             |
+| extra-route-table         | list    |                                | A list of Azure User Defined Route (UDR) tables where custom routing entries will be injected or modified.             |
+| subscription-id           | string  | key (within extra-route-table) | The unique identifier of the Azure subscription containing the UDR.                                                      |
+| resource-group            | string  | required (within extra-route-table) | The name of the Azure resource group where the route table is hosted.                                              |
+| route-table-name          | string  | required (within extra-route-table) | The specific name of the Azure Route Table resource.                                                               |
+
+#### Azure Loadbalancer Specific Configuration
+
+| Element    | Type | Properties       | Description                                                               |
+| ---------- | ---- | ---------------- | ------------------------------------------------------------------------- |
+| probe-port | port | default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.  |
 
 ### Membership
 
@@ -279,6 +303,170 @@ exit
 ```
 
 Any additional prefixes that should be included in the controlled prefix list can be configured as `additional-branch-prefix`s under the group.
+
+## Complete Azure VNET Configuration Example
+
+Below is a complete working example of an Azure VNET High Availability deployment. This configuration demonstrates the use of explicit route table configuration using `extra-route-table` with `auto-discover-route-table` set to `false`.
+
+:::info
+This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
+:::
+
+```config {3-18,62-67,108-113}
+config
+    authority
+        cloud-redundancy-group  group1
+            enabled                    true
+            name                       group1
+            solution-type              azure-vnet
+
+            extra-route-table          a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+                subscription-id   a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+                resource-group    azure-resource-group
+                route-table-name  azure-route-table
+            exit
+            auto-discover-route-table  false
+            health-interval            6
+            additional-branch-prefix   1.1.1.1/32
+            up-holddown-timeout        2
+            peer-reachability-timeout  13
+        exit
+
+        router                  azure-ha
+            name                 azure-ha
+            inter-node-security  internal
+
+            node                 node0
+                name                         node0
+                asset-id                     node0-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.4
+                            ip-address     172.16.10.4
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.132
+                            ip-address     192.168.10.132
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              168.63.129.16
+                    priority                1
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            node                 node1
+                name                         node1
+                asset-id                     node1-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.6
+                            ip-address     172.16.10.6
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.134
+                            ip-address     192.168.10.134
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              168.63.129.16
+                    priority                2
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            service-route        internet-from-lan-route
+                name             internet-from-lan-route
+                service-name     internet-from-lan
+                enable-failover  true
+
+                next-hop         node1 ge-0-0-intf
+                    node-name  node1
+                    interface  ge-0-0-intf
+                exit
+
+                next-hop         node0 ge-0-0-intf
+                    node-name  node0
+                    interface  ge-0-0-intf
+                exit
+            exit
+        exit
+
+        tenant                  lan
+            name  lan
+        exit
+
+        service                 internet-from-lan
+            name     internet-from-lan
+            enabled  true
+            tenant   lan
+            address  0.0.0.0/0
+        exit
+    exit
+exit
+```
+
+### Key Configuration Points
+
+1. **Extra Route Table**: Explicitly specifies the Azure Route Table to manage with subscription ID, resource group, and table name.
+2. **Auto-discovery Disabled**: With `auto-discover-route-table` set to `false`, only the explicitly configured route table is managed.
+3. **Redundant Interfaces**: Each node specifies `ge-0-1` as the redundant interface that will be monitored for failover.
+4. **Priority**: Node0 has priority 1 (primary), Node1 has priority 2 (secondary).
+5. **DNS Servers**: Azure's internal DNS server (168.63.129.16) is configured for the cloud HA membership.
+6. **Fabric Interface**: A dedicated fabric interface (ge-0-2) is used for inter-node communication.
 
 ## Generated SSR Configuration
 
@@ -420,48 +608,6 @@ Example output for the `azure-lb` solution:
      remote-status:   healthy
 
 Completed in 1.72 seconds
-```
-
-Example output for the `alicloud-vpc` solution:
-```
-# show device-interface name cloud-ha
-Wed 2022-09-21 10:31:57 CST
-✔ Retrieving device interface information...
-
-======================================================
- AlicloudSDWAN-HA-Router01:cloud-ha
-======================================================
- Type:                host
- Forwarding:          true
- Mode:                host
- MAC Address:         ca:4d:38:ac:9b:5c
-
- Admin Status:        up
- Operational Status:  up
- Provisional Status:  up
- Redundancy Status:   non-redundant
- Speed:               1 Gb/s
- Duplex:              full
-
- in-octets:                  1059977756
- in-unicast-pkts:              10915259
- in-errors:                           0
- out-octets:                 1053204137
- out-unicast-pkts:             10915347
- out-errors:                          0
-
- Cloud HA:
-     is-active:       True
-     last-activity-change:Fri 2022-09-09 10:31:15 CST
-     first-active-interface:LAN
-     first-active-mac-address:00:16:3e:10:a9:34
-     prefixes:
-       10.0.0.0/8
-       172.16.0.0/12
-     local-status:    healthy
-     remote-status:   healthy
-
-Completed in 0.04 seconds
 ```
 
 ### Systemd Services
@@ -964,137 +1110,17 @@ config
 exit
 ```
 
-
-### Part of Example Configuration #2 for alicloud-vpc after auto generation.
-
-Below is a sample running configuration for a node and a service.
-
-:::info
-The following configuration is an example only - It is not for use on a system.
-:::
-
-
-            node                                AlicloudSDWAN-HA-Router01
-                name              AlicloudSDWAN-HA-Router01
-                asset-id          iZwz96to20bbnnb
-
-                device-interface  WAN
-                    name               WAN
-                    pci-address        0000:00:04.0
-
-                    network-interface  WAN
-                        name                   WAN
-                        global-id              17
-
-                        neighborhood           ChinaUnicom
-                            name                  ChinaUnicom
-                            external-nat-address  119.23.200.200
-                            vector                wan1
-
-                            path-mtu-discovery
-                                enabled  true
-                            exit
-                        exit
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  LAN
-                    name               LAN
-                    pci-address        0000:00:05.0
-                    enabled            true
-
-                    network-interface  LAN
-                        name                   LAN
-                        global-id              18
-
-                        neighborhood           ALICLOUD
-                            name  ALICLOUD
-                        exit
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  farbic
-                    name               farbic
-                    pci-address        0000:00:06.0
-
-                    network-interface  fabric
-                        name                   fabric
-                        global-id              19
-
-                        neighborhood           intracloud
-                            name                intracloud
-                            topology            mesh
-
-                            path-mtu-discovery
-                                enabled  true
-                            exit
-                        exit
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  cloud-ha
-                    name               cloud-ha
-                    description        "Auto generated device interface cloud-ha"
-                    type               host
-
-                    network-interface  cloud-ha-intf
-                        name        cloud-ha-intf
-                        global-id   27
-                        type        external
-                        tenant      cloud-ha
-                        source-nat  true
-
-                        address     169.254.137.1
-                            ip-address     169.254.137.1
-                            prefix-length  30
-                            gateway        169.254.137.2
-                        exit
-                    exit
-                exit
-            exit
-
-            service-route                       Alicloud-HA-test
-                name          Alicloud-HA-test
-                service-name  Alicloud-HA-test
-                vector        peer1
-
-                next-hop      AlicloudSDWAN-HA-Router01 LAN
-                    node-name  AlicloudSDWAN-HA-Router01
-                    interface  LAN
-                    vector     peer1
-                exit
-            exit
-
-            service-route                       AliCloud-HA-test2
-                name          AliCloud-HA-test2
-                service-name  Alicloud-HA-test
-                vector        peer2
-                peer          AlicloudSDWAN-HA-Router02
-            exit
-
-            service-route                       cloud-ha-service-route-alicloud-1
-                name          cloud-ha-service-route-alicloud-1
-                service-name  cloud-ha-service-alicloud-1
-                nat-target    169.254.137.2
-            exit
-
-            service-route                       cloud-ha-peer-service-route-alicloud-2
-                name          cloud-ha-peer-service-route-alicloud-2
-                service-name  cloud-ha-service-alicloud-2
-                peer          AlicloudSDWAN-HA-Router02
-            exit
-        exit
-
-
-
-
 ## Release Notes
+
+### Release 5.1.0
+
+#### New Features and Improvements
+
+Add support for dual node HA which allows the plugin to manage redundancy across two nodes of the same router.
+
+Azure VNET mode was extended to support updates to additional route tables including those in a different subscription-id.
+
+- See [config example](#complete-azure-vnet-configuration-example) for more details
 
 ### Release 5.0.0
 
