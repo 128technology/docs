@@ -167,6 +167,12 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64066 Race condition when syncing SSH keys to the peer node:** Resolved an issue where SSH keys were not synced between peer nodes automatically by the Conductor.
 
+### Caveats
+
+- **I95-64167 After offline upgrade (air gap upgrade) the Hub remains in `Synchronizing` state:** During an offline upgrade on an air-gap network, the hub remains in the `synchronizing` state, which prevents the upgrade from completing. This occurs during an upgrade from SSR 7.0.1 to SSR 7.1.x. 
+
+ The issue is an outdated version of the `128T-plugin-support-files`. This will be resolved in the final release of the 7.1.3 software. The temporary workaround is to run `dnf reinstall 128T-plugin-support-files`. 
+
 ## Release 7.1.0-50r1
 
 **Release Date:** December 4, 2025
