@@ -21,10 +21,10 @@ Furthermore, Configuration Integrity prevents network and SSR operations from ex
 
 Configuration Integrity does not address any runtime access-policy or permissions concerns. Proper file and directory permissions are still required, as well as proper login and authentication controls. Configuration Integrity augments the existing SSR security functionality to provide encryption-at-rest guarantees. 
 
-Configuration Integrity is enabled by default on new installations of, and upgrades to, SSR 7.1.3-r2. 
+Configuration Integrity is enabled by default on new installations of, and upgrades to, SSR 7.1.3. 
 
 :::important
-After installing / upgrading to SSR 7.1.3-r2, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
 
 Rollback to the previously installed version of software *is* supported.  
 :::

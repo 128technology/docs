@@ -17,7 +17,7 @@ Beginning with SSR v6.3.0, the use of the interactive installer is not supported
 
 #### SSR Version 7.1.3 Rollback and Downgrades
 
-SSR Version 7.1.3 includes many important security features, including Configuration Integrity. After installing / upgrading to SSR 7.1.3-r2, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+SSR Version 7.1.3 includes many important security features, including Configuration Integrity. After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
 
 **Rollback** to the previously installed version of software *is* supported.
 

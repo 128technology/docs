@@ -7,7 +7,7 @@ sidebar_label: Trusted Platform Module
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.1.3-r2   | Trusted Platform Module support added. |
+| 7.1.3   | Trusted Platform Module support added. |
 
 A Trusted Platform Module (TPM) is a secure cryptoprocessor that stores cryptographic keys. It serves as a secure storage mechanism for essential security artifacts such as digital certificates.
 

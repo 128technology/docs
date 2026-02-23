@@ -61,13 +61,13 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.1.3-18r2
+## Release 7.1.3-23r2
 
 **Release Date:** February 25, 2026
 
 ### New Features
 
-- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
 ------
 - **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
 ------
@@ -171,7 +171,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 - **I95-64167 After offline upgrade (air gap upgrade) the Hub remains in `Synchronizing` state:** During an offline upgrade on an air-gap network, the hub remains in the `synchronizing` state, which prevents the upgrade from completing. This occurs during an upgrade from SSR 7.0.1 to SSR 7.1.x. 
 
- The issue is an outdated version of the `128T-plugin-support-files`. This will be resolved in the final release of the 7.1.3 software. The temporary workaround is to run `dnf reinstall 128T-plugin-support-files`. 
+  The issue is caused by an outdated version of `128T-plugin-support-files`. This will be resolved in the final release of the 7.1.3 software. The temporary workaround is to run `dnf reinstall 128T-plugin-support-files`. 
 
 ## Release 7.1.0-50r1
 
@@ -257,6 +257,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 - **I95-63422 Unable to establish peering:** An issue has been identified where the factory reset process or bringing online a new router results in the device getting stuck in a `cert-exchange-init` state when establishing peering using Enhanced Security Key Management. 
 
-	_**Workaround**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
+	_**Workaround:**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
 	
 	For factory reset of an existing router, remove the router from the neighborhood before re-onboarding the router. Ensure that the desired certificate is installed before adding the neighborhood back to the router and re-onboarding to the conductor.
