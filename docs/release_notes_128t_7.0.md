@@ -66,9 +66,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### New Features
 
-- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display  the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
 ------
-- **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the secure ztp process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
+- **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the Secure ZTP process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
 ------
 - **I95-58446 EoSVR Loop Prevention:** EoSVR A/S Loop Prevention has been added, allowing EoSVR traffic to pass Broadcast, unknown-unicast, and multicast traffic through a switch without causing the port to be shut down.
 ------
