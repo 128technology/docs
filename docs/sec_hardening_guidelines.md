@@ -6,7 +6,6 @@ sidebar_label: Security Hardening Guidelines
 This section provides a list of security hardening actions and guidelines to provide additional security to your SSR and your network overall. Many of the guidelines below are covered in the [SSR Common Critieria Install and Configuration](cc_fips_titlepage.md) documentation. 
 
 ## Administrative
-- Review SSR security polices for CVE tracking and notifications: [Juniper SSR Security Policies](about_security_policy.md#release).
 - Install the latest supported/recommended version of SSR software.
 - Always verify cryptographic (MD5) checksums prior to software installation.
 

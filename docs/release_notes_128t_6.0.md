@@ -72,8 +72,8 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues 
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.
-------
+<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.
+------ --->
 - **The following issues have been identified during penetration testing and addressed in this release:** I95-48445, I95-48448. 
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
@@ -228,8 +228,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
-------
+<!--- - **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+------ --->
 - **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
 ------
 - **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
@@ -342,10 +342,10 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
-------
+<!--- - **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
+------ --->
 - **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
-------
+------ 
 - **I95-43302 Rename Third-Party menu text:** The menu text has been changed to **External** to more accurately reflect the links to other Juniper platforms.
 ------
 - **I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:** The Azure ID has been modified to a value that can be processed by Azure.
@@ -459,8 +459,8 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.
-------
+<!--- - **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.
+------ --->
 - **I95-39454 Newly created user cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
 ------
 - **I95-42320 BGP aggregate-address not working:** Add support for BGP address summarization.
@@ -549,8 +549,8 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-45054, I95-45060, I95-45165, I95-47485.
-------
+<!--- - **The following CVE's have been addressed and resolved:** I95-45054, I95-45060, I95-45165, I95-47485.
+------ --->
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.

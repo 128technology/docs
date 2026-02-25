@@ -10,7 +10,8 @@ SSR Software is supported on the following Cloud Platforms.
 | Juniper Marketplace Offering | Yes | Yes | In Progress |
 | Deployment Templates | Yes | Yes | Yes |
 | High Network Throughput | Yes | Yes | Yes |
-| Router High Availability | Yes | Yes | Yes |
+| Router High Availability | In Progress | In Progress | In Progress |
+| vTPM Support | Yes | In Progress | In Progress |
 | Routing | BGP with TGW Connect | BGP with Azure Router Server | BGP with Google Cloud Router |
 
 Additional platforms are being certified for support and will be added here as they become available.

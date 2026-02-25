@@ -30,8 +30,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resoved Issues
 
-- **The following CVEs have been identified and resolved in this release:** CVE-2024-3651, CVE-2024-6232, CVE-2024-56326, CVE-2023-48161, CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2022-1304, CVE-2023-26604, CVE-2025-27363, CVE-2025-0624, CVE-2024-55549, CVE-2025-24855, CVE-2024-7347, CVE-2025-23419, CVE-2022-49011, CVE-2024-40906, CVE-2024-43842, CVE-2024-44970, CVE-2024-53141, CVE-2025-21756, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2023-5678, CVE-2024-0727, CVE-2024-13176, CVE-2024-5535, CVE-2024-9143, CVE-2016-9840, CVE-2025-6020, CVE-2025-6965, CVE-2025-4802, CVE-2025-30749, CVE-2025-30754, CVE-2025-30761, CVE-2025-50106, CVE-2025-32414, CVE-2025-49794, CVE-2025-49796, CVE-2025-6021, CVE-2025-7425, CVE-2025-49844, CVE-2024-56326.
-------
+<!--- - **The following CVEs have been identified and resolved in this release:** CVE-2024-3651, CVE-2024-6232, CVE-2024-56326, CVE-2023-48161, CVE-2024-21208, CVE-2024-21210, CVE-2024-21217, CVE-2024-21235, CVE-2022-1304, CVE-2023-26604, CVE-2025-27363, CVE-2025-0624, CVE-2024-55549, CVE-2025-24855, CVE-2024-7347, CVE-2025-23419, CVE-2022-49011, CVE-2024-40906, CVE-2024-43842, CVE-2024-44970, CVE-2024-53141, CVE-2025-21756, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2023-5678, CVE-2024-0727, CVE-2024-13176, CVE-2024-5535, CVE-2024-9143, CVE-2016-9840, CVE-2025-6020, CVE-2025-6965, CVE-2025-4802, CVE-2025-30749, CVE-2025-30754, CVE-2025-30761, CVE-2025-50106, CVE-2025-32414, CVE-2025-49794, CVE-2025-49796, CVE-2025-6021, CVE-2025-7425, CVE-2025-49844, CVE-2024-56326.
+------ --->
 - **I95-58007 Add ability to set PIM graceful restart-time:** The `routing default-instance pim restart-time` command has been added to allow users to define the number of seconds that the PIM protocol will perform `graceful-restart` after a node failure. This resolution addresses all the listed issues. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer). This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.
 ------
 - **I95-59621 Extended outage for node 1 failure:** Introduced improvements to HA failover through a simplified redundancy mechanism resulting in faster failover recovery times.
@@ -82,8 +82,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resoved Issues
 
-- **The following CVEs have been identified and resolved in this release:** CVE-2024-24806, CVE-2023-26916, CVE-2024-56171, CVE-2025-24928, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2025-27363.
-------
+<!--- - **The following CVEs have been identified and resolved in this release:** CVE-2024-24806, CVE-2023-26916, CVE-2024-56171, CVE-2025-24928, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2025-27363.
+------ --->
 - **I95-56557 `show service` command not displaying URL:** Resolved an issue where even after adding a URL to the service, the URL was not showing in the output of the `show service` command. This has been resolved. 
 ------
 - **I95-57265 Highway crash when generating TSI on Azure instance:** An Azure instance can crash while accessing an uninitialized RX queue. This invalid access has been prevented and the issue resolved.
@@ -142,8 +142,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resoved Issues
 
-- **The following CVEs have been identified and resolved in this release:** CVE-2021-27290, CVE-2022-24999.
-------
+<!--- - **The following CVEs have been identified and resolved in this release:** CVE-2021-27290, CVE-2022-24999.
+------ --->
 - **I95-54366 Unable to assign an SNMP view name via the GUI:** Resolved an issue that prevented configuring SNMP (v3) Access Policy View in the GUI.
 ------
 - **I95-56259, I95-56260, I95-57029 Failed to bring up KNI and management interfaces after upgrade:** The dynamic allocation of packet processing resources per interface is based on number of packet forwarding cores and the number of interfaces; the algorithm has been refined to adapt to both the largest and smallest platforms supported by SSR software. 
@@ -227,8 +227,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resoved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
-------
+<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
+------ --->
 - **I95-53274 PIM scaling above 1500 multicast routes:** Resolved an issue where the SSR could not maintain more than 1400 active sessions.  
 ------
 - **I95-57538 WayPoint exception - failing to allocate waypoint ports on mesh peer re-establishment:** Resolved an issue where a configuration change may cause existing waypoint ports to become invalidated, creating an exhaustion scenario.
@@ -249,8 +249,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resoved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-2705, CVE-2024-27056, CVE-2024-27059, CVE-2024-2961, CVE-2024-33599, CVE-2024-33600, CVE-2024-33601, CVE-2024-33602, CVE-2024-32487, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2024-3596.
-------
+<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-2705, CVE-2024-27056, CVE-2024-27059, CVE-2024-2961, CVE-2024-33599, CVE-2024-33600, CVE-2024-33601, CVE-2024-33602, CVE-2024-32487, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2024-3596.
+------ --->
 - **I95-47195, I95-47196, I95-49015, I95-49018, I95-49599, I95-56682 Forwarding plane crash, causing stranded network namespaces when LTE/PPPoE network-interface name is changed:** Implemented reinit script to reiniatilize namespace, KNI and target-interface after a configuration change in the network-interface.
 ------
 - **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide addtional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
@@ -347,8 +347,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resoved Issues
 
-- **The following CVEs have been resolved in this release:** CVE-2024-2973, CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
-------
+<!--- - **The following CVEs have been resolved in this release:** CVE-2024-2973, CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
+------ --->
 - **I95-52251 Router's conductor-address did not update the salt created services with the new addresses:** The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.
 ------
 - **I95-53619 Anomaly in Maintenance Mode reporting:** Resolved an issue where BGP alarms were not automatically shelved when routers are put into maintenance mode. `BGP peer path is down` alarms are now shelved properly on routers in maintenance mode.
@@ -427,8 +427,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **The following CVEs have been resolved in this release:**  CVE-2021-43975, CVE-2022-3594, CVE-2022-3640, CVE-2022-4744, CVE-2022-28388, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-2513, CVE-2023-3141, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732, CVE-2023-23455, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-31436, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2022-45884, CVE-2022-45886, CVE-2022-45919, CVE-2023-1192, CVE-2023-2163, CVE-2023-3812, CVE-2023-5178, CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2022-43552.
-------
+<!--- - **The following CVEs have been resolved in this release:**  CVE-2021-43975, CVE-2022-3594, CVE-2022-3640, CVE-2022-4744, CVE-2022-28388, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-2513, CVE-2023-3141, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732, CVE-2023-23455, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-31436, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2022-45884, CVE-2022-45886, CVE-2022-45919, CVE-2023-1192, CVE-2023-2163, CVE-2023-3812, CVE-2023-5178, CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2022-43552.
+------ --->
 - **I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:** When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.
 ------
 - **I95-51663 TCP port reuse causing session issues in session timeout management:** Resolved an issue where TCP client port reused caused backwards state transitions in TCP state tracking.
@@ -582,8 +582,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **The following CVEs have been resolved in this release:** CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2022-41741, CVE-2022-41742, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847.
-------
+<!--- - **The following CVEs have been resolved in this release:** CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2022-41741, CVE-2022-41742, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847.
+------ --->
 - **I95-38188 Repurposing an HA conductor to a standalone conductor left services for the second conductor:** Resolved an issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor. The salt states now stop services to a second conductor when it is removed from the HA configuration. 
 ------
 - **I95-48783 Conductor process logs are unbounded, risking storage exhaustion:** auditd logs consuming the disk space when the node monitor is in a disconnected state and the audit logs are left unconsumed. There was a limit to the log file size, but not the number of files. The number of files is now limited.
@@ -718,8 +718,8 @@ Valid values for `remove-as-path`:
 
 ### Resolved Issues 
 
-- **The following CVEs have been resolved in this release:** CVE-2023-2828, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049.
-------
+<!--- - **The following CVEs have been resolved in this release:** CVE-2023-2828, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049.
+------ --->
 - **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
 ------
 - **I95-47838 SSR does not remove networks on stop:** Resolved an issue where the SSR does not remove networks on stop. This has been corrected and the SSR now will cleanup networks on container stop and create them on restart to optimize start/restart process. 

@@ -6,7 +6,6 @@ module.exports = {
       "about_svr_savings",
       "about_releases",
       "about_support_policy",
-      "about_security_policy",
     ],
     "Release Notes": [
       {
@@ -72,6 +71,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_4.0",
           "release_notes_byol_3.0",
           "release_notes_byol_2.0",
           "release_notes_byol"

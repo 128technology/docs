@@ -121,6 +121,18 @@ export const certifiedPlatforms = {
       "LTE (AT&T, Verizon)"
     ]
   },
+  hpedl345gen11 : {
+    application : "Large Datacenter, 100G hub",
+    cpu : "64C (AMD EPYC 9575F)",
+    mem : "768GB DDR5 ECC",
+    hdrive : "2x 1.92T U.3 SSDs in RAID1",
+    interfaces : [
+      "12 ports total", 
+      "4 x 100GbE", 
+      "4 x 10/25GbE", 
+      "4 x 1GBase-T"
+    ]
+  }
 }
 
 export const Platform = ({id}) => (
@@ -231,6 +243,42 @@ Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for i
 
 The following devices are Certified Platforms for Hub deployments. Only the SKUs listed are Certified. The platform model alone does not guarantee conformance to software requirements.
 
+### HPE DL345 Gen11
+
+![HPE DL345 Gen11](/img/about_certified_platforms_hpedl345-rear.png)
+
+See the HPE DL345 Gen11 [data sheet](https://www.hpe.com/psnow/doc/PSN1014689145USEN.pdf?jumpid=in_pdp-psnow-dds).
+
+<Platform id="hpedl345gen11"></Platform>
+
+#### Bill of Materials
+A detailed Bill of Materials (BOM) for the HPE DL345 Gen11 device certified for SSR:
+
+| Qty | Product | Description |
+|-----|---------|-------------|
+| 1 | 5141741348-03 | 1x JNPR Gen11 DL345 with 9575F |
+| 1 | P64255-B21 | HPE OEM DL345 Gen11 8SFF CTO Svr |
+| 1 | P72758-B21 | AMD EPYC 9575F CPU for HPE |
+| 12 | P64986-B21 | HPE 64GB 2Rx4 PC5-6400B-R Smart Kit |
+| 1 | P55082-B21 | HPE DL385 Gen11 8SFF TM U.3 x1 BC BP Kit |
+| 2 | P64844-B21 | HPE 1.92T NVMeRI SFF BC U.3ST V2 MV SSD |
+| 1 | P57117-B21 | HPE DL345 G11 6PCIE Enablement Kit |
+| 1 | P47785-B21 | HPE MR216i-p Gen11 SPDM Storage Cntlr |
+| 2 | P42044-B21 | MLX MCX631102 10/25GbE 2p SFP28 Adptr |
+| 2 | P25960-B21 | MLX MCX623106AS 100GbE 2p QSFP56 Adptr |
+| 1 | P08449-B21 | INT I350 1GbE 4p BASE-T OCP3 Adptr |
+| 1 | 339778-B21 | HPE Raid 1 Drive 1 FIO Setting |
+| 2 | P44712-B21 | HPE 1800W-2200W FS Ti Ht Plg PS Kit |
+| 1 | BD505A | HPE iLO Adv 1-svr Lic 3yr Support |
+| 1 | P57123-B21 | HPE DL345 G11 8SFF x1 Box2/3 TM Cbl Kit |
+| 6 | P58465-B21 | HPE DL3X5 Gen11 2U Perf Fan Kit |
+| 1 | P50400-B21 | HPE DL3XX Gen11 2U Com Bezel Kit |
+| 1 | P52351-B21 | HPE DL3XX Gen11 Easy Install Rail 2 Kit |
+| 1 | P58459-B21 | HPE DL3X5 Gen11 Perf 2U Heat Sink Kit |
+| 1 | H40TDE | HPE 5Y TC Bas OEM DL345 Gen11 HW SVC |
+| 2 | P21112-B21 | INT E810 100GbE 2p QSFP28 Adptr |
+| 2 | P08443-B21 | INT E810 10/25GbE 2p SFP28 Adptr |
+
 ### Lenovo SR650v2
 
 ![Lenovo SR650v2](/img/lenovo-SR650ports.png)
@@ -244,5 +292,4 @@ Please reach out to one of the following organizations for sales and quote infor
 
 #### Lenovo SR650v2 7Z73VWQ100
 <Platform id="lenovosr650r2"></Platform>
-
 

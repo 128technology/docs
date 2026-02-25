@@ -22,6 +22,21 @@ The **Bring Your Own License (BYOL)** AMI allows you to install your own license
 
 Once you have selected the AMI for your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Conductor Managed Router.
 
+## Selecting the Instance Size
+The following instance sizes are supported for virtual SSR in AWS. Choose the size that best meets your requirements. More information can be found in the [AWS Documentation](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html)
+
+| Recommended AWS VM Size | Max vNICs Supported | vCPU Cores | Memory |
+| ----------------------- | ------------------- | ---------- | ------ |
+| c5.xlarge     |  4  |  4    |   8  |
+| c5.2xlarge    |  4  |  8    |   16  |
+| c5.4xlarge    |  8  |  16   |   32  |
+| c5.9xlarge    |  8  |  36   |   72  |
+| c5n.xlarge    |  4  |  4    |   10.5  |
+| c5n.2xlarge   |  4  |  8    |   21  |
+| c5n.4xlarge   |  8  |  16   |   42  |
+| c5n.9xlarge   |  8  |  36   |   96  |
+
+
 ## Session Smart Conductor Deployment
 
 Use the following information to deploy a BYOL Session Smart Conductor in AWS.
@@ -144,15 +159,15 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Name           | The Instance Name field provides a name to the VM for the device.|
+| Name                 | The Instance Name field provides a name to the VM for the device.|
 | Instance Type        | Size of the EC2 instance.|
-| SSR Version | SSR software version installed on the instance. |
+| SSR Version          | SSR software version installed on the instance. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
+| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
 | VPC ID               | ID of the existing VPC where the device is going to be deployed. |
-| Control Subnet ID     | ID of the control subnet within the VPC. |
+| Control Subnet ID    | ID of the control subnet within the VPC. |
 | Control Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet. |
-| Admin Allowed CIDR | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Conductor's GUI. |
+| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Conductor's GUI. |
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 
 
@@ -192,7 +207,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
 {
   "Name": "<instance name>",
   "Version": "<ssr-version>",
-  "InstanceType": "c5.xlarge",
+  "InstanceType": "c5n.xlarge",
   "ArtifactoryUsername": "<username>",
   "ArtifactoryUsername": "<password>",
   "VpcId": "<ID of the VPC>",
@@ -363,11 +378,11 @@ write_files:
 ```
 | Option | Meaning |
 | ------ | ------- |
-| name | The name of the Router. |
-| ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
-| artifactory-user | User portion of the artifactory credentials. |
+| name                 | The name of the Router. |
+| ssr-version          | The SSR software version to be installed on the instance. |
+| artifactory-user     | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
-| conductor-hosts | The list of Conductor control IPs used to manage the router. |
+| conductor-hosts      | The list of Conductor control IPs used to manage the router. |
 
 
 ### Manual Onboarding
@@ -379,13 +394,23 @@ If a user does not supply the onboarding configuration before launching the inst
 
 ### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used are as follows:
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Management (optional), Public, and Private.
+
+If a management interface is provided, the interfaces to be used are as follows
 
 | Network Interface name | Subnet           | PCI Address     |
 | ---------------------- | ---------------- | ----------------|
-| ge-0-0                 | Public           | 0000:00:05.0    |
-| ge-0-1                 | Private          | 0000:00:06.0    |
-| ge-0-2                 | Management       | 0000:00:07.0    |
+| ge-0-0                 | Management     | 0000:00:05.0    |
+| ge-0-1                 | Public         | 0000:00:06.0    |
+| ge-0-2                 | Private        | 0000:00:07.0    |
+
+If no management interface is provided, the interfaces to be used are as follows
+| Network Interface name  | Subnet          | PCI Address     |
+| ----------------------- | --------------- | ----------------|
+| ge-0-0                  | Public          | 0000:00:05.0    |
+| ge-0-1                  | Private         | 0000:00:06.0    |
+| ge-0-2 (If Applicable)  | HASync          | 0000:00:07.0    |
+| ge-0-3 (If Applicable)  | HAFabric        | 0000:00:08.0    |
 
 ### Launch the Conductor Managed Template
 
@@ -397,11 +422,11 @@ A description of the parameters of the template are listed in the following tabl
 
 | Parameter            | Description |
 | -------------------- | ----------- |
-| Name           | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
-| Version | SSR software version installed on the instance. |
+| Name                 | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
+| Version              | SSR software version installed on the instance. |
 | Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token | Token for the artifactory credentials used to install the SSR software. |
-| Primary Control IP | The primary IP address of the Conductor |
+| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
+| Primary Control IP   | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 | Instance size        | Size of the EC2 instance.|
@@ -454,7 +479,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
   "ArtifactoryToken": "<password>",
   "conductorPrimaryControlIP": "<control-ip>",
   "conductorSecondaryControlIP": "<control-ip>",
-  "InstanceType": "c5.xlarge",
+  "InstanceType": "c5n.xlarge",
   "KeyName": "<username>"
   "VpcId": "<ID of the VPC>",
   "PublicSubnet": "<ID of the public subnet within the VPC>",
@@ -525,6 +550,44 @@ aws ec2 create-launch-template \
 21. Check the acknowledgment check box and click **Launch Instances**.
 22. If an onboarding configuration was not provided in step 16, follow the steps in the [Manual Onboarding](#manual-onboarding-1) section.
 
+### Deploying an HA Router
+To deploy an HA Conductor Managed Router, you must deploy the CloudFormation template directly.
+1. Launch a web browser and navigate to https://console.aws.amazon.com/cloudformation.
+2. Click **Create stack** and **With new resources (standard)**.
+3. Paste the following S3 URL into the **Amazon S3 URL** dialog.
+
+```
+https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
+```
+4. Click **next** and complete the form.
+
+![CloudFormation Template](/img/aws-byol-ha-conductor-managed-template.png)
+
+A description of the parameters of the template are listed in the following table:
+
+| Parameter            | Description |
+| -------------------- | ----------- |
+| Name                 | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
+| Version              | SSR software version installed on the instance. |
+| Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
+| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
+| Primary Control IP   | The primary IP address of the Conductor |
+| Secondary Control IP | The secondary IP address of the Conductor |
+| Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+| Instance size        | Size of the EC2 instance.|
+| VPC ID               | ID of the existing VPC where the conductor-managed router is going to be deployed. |
+| Public Subnet ID     | ID of the public subnet within the VPC. |
+| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
+| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
+| Private Subnet ID    | ID of the private subnet within the VPC. |
+| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
+| HA Fabric Interface Subnet  | Optional ID of the management subnet within the VPC. |
+| HA Fabric Interface Allowed CIDR  | The IP CIDR range of the endpoints allowed to originate traffic to the Router's HA Fabric interface. |
+| HA Sync Interface Subnet    | Optional ID of the management subnet within the VPC. |
+| HA Sync Interface Allowed CIDR  | The IP CIDR range of the endpoints allowed to originate traffic to the Router's HA Sync interface. |
+
+5. A Conductor Managed router node capable of performing HA will be deployed with network interfaces according to [Network Interfaces Layout](#network-interfaces-layout).
+
 ## Interface Tagging
 
 In addition to using the cloud formation template, the admin can tag the interface with the key `SSR-ROLE`. The possible values are as follows:
@@ -533,7 +596,9 @@ In addition to using the cloud formation template, the admin can tag the interfa
 | --------- | ------- |
 | WAN       | Interface is marked as WAN for onboarding purposes. |
 | LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
-| MGMT       | Interface is marked as MGMT and is assumed to have SSH connectivity. |
+| MGMT      | Interface is marked as MGMT and is assumed to have SSH connectivity. |
+| HAFabric    | Interface is marked as HAFabric and is used as the fabric link in an HA deployment. |
+| HASync      | Interface is marked as HASync and is used as the redundancy link in an HA deployment. |
 
 :::note
 The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
