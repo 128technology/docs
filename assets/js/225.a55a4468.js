@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[225],{225(e,c,s){s.d(c,{createArchitectureServices:()=>t.S});var t=s(77713);s(78427)}}]);
