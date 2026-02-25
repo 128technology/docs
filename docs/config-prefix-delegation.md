@@ -58,39 +58,30 @@ The following show commands can be used for debugging configuration issues.
 - `show network-interface`: Display network-interface data for network-interface.
 
 ```
-admin@gouda.novigrad# show network-interface
-Tue 2020-04-21 15:19:25 UTC
+admin@test1.Fabric128# show network-interface
+Tue 2026-02-24 21:51:34 UTC
+✔ Retrieving network interfaces...
 
-========== ======= ======== ================ ============ ====== ============= ========== ========== =================== ============== ========================= ======== ======== ======
- Router     Node    Device   Name             Forwarding   VLAN   Device Type   Type       DHCP       Address             Gateway        Hostname                  Admin    Oper     GIID
-                                                                                                                                                                   Status   Status
-========== ======= ======== ================ ============ ====== ============= ========== ========== =================== ============== ========================= ======== ======== ======
- novigrad   gouda   wan      wan-interface    true            0   ethernet      external   v4         1.2.3.4/24          2.3.4.5        my.host.name              up       up          1
- novigrad   gouda   lan      lan-interface    true            0   ethernet      external   disabled   192.168.0.1/24      --             --                        up       up          2
- novigrad   gouda   lan      lan-untrusted    true         3000   ethernet      external   disabled   172.16.0.1/24       --             --                        up       up          4
- novigrad   gouda   mgmt     mgmt-interface   false           0   ethernet      external   disabled   192.168.0.2/24      --             --                        n/a      n/a         3
-
-Completed in 0.33 seconds
+=========== ======= ========== =========== ============ ====== ============= ========== ========== ======================================== =================== ========== ======== ======
+ Router      Node    Device     Name        Forwarding   VLAN   Device Type   Type       DHCP       Address                                  Gateway             Hostname   Status   GIID
+=========== ======= ========== =========== ============ ====== ============= ========== ========== ======================================== =================== ========== ======== ======
+ Fabric128   test1   wan-dev    wan-intf    true            0   ethernet      external   disabled   2001:db1:1:1::102/64                     2001:db1:1:1::101   --         up          1
+ Fabric128   test1   lan-dev1   lan-intf1   true            0   ethernet      external   v6-pd      2001:db1:1:2002:f816:3eff:fed4:9fe2/64   --                  --         up          2
+ Fabric128   test1   lan-dev2   lan-intf2   true            0   ethernet      external   v6-pd      2001:db1:1:2003:f816:3eff:fe25:53ea/64   --                  --         up          3
 ```
-
-- `show dhcp learned-proxies`: Display dhcp proxy info for network-interfaces.
 
 - `show dhcp mappings`: Show each DHCP mapping from an interface to mapping/IP family/config types.
 
 ```
-admin@gouda.novigrad# show dhcp mappings
-Wed 2020-04-22 15:05:25 UTC
+admin@test1.Fabric128# show dhcp mappings
+Tue 2026-02-24 21:54:27 UTC
 
-Node: gouda
-
-================= ================== ====== ============== ================ =============
+================= ================== ====== ============== ================ ==========================
  Src Device Port   Dest Device Port   VLAN   Mapping Type   IP Family Type   Config Type
-================= ================== ====== ============== ================ =============
-               1                252      0   originating    ipv4             server
-               2                  0      0   originating    ipv4             client
-             252                  1      0   derived        ipv4             server
-
-Completed in 0.05 seconds
+================= ================== ====== ============== ================ ==========================
+               1                  0      0   originating    ipv6             client
+               2                  0      0   originating    ipv6             prefix_delegation_server
+               3                  0      0   originating    ipv6             prefix_delegation_server
 ```
 
 - `show dhcp prefix-delegation`: Show the prefix learned for prefix-delegation.
