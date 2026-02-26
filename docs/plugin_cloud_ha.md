@@ -6,7 +6,7 @@ sidebar_label: Cloud HA
 The SSR-cloud-ha plugin provides High Availability (HA) functionality for the SSR Networking Platform deployed in the cloud. HA for SSR routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
+For instructions to install and manage the plugin, see [Installation and Management](plugin_intro.md#installation-and-management).
 :::
 
 ## Supported Solutions
@@ -16,12 +16,11 @@ The instructions for installing and managing the plugin can be found [here](plug
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
 
-
 ## Version Restrictions
 
- The router component can only be installed on versions of SSR which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
- The versions of SSR that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of SSR that satisfy this requirement.
+The router component can only be installed on versions of SSR which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
 
+The versions of SSR that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of SSR that satisfy this requirement.
 
 ## Plugin Behavior
 
@@ -54,7 +53,6 @@ When the HA Agent determines that a node must become active, the first active re
 
 The job of the API Agent is to perform failover actions specific to the cloud provider and the chosen solution.
 
-
 ### Azure Loadbalancer
 
 A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces.
@@ -67,7 +65,6 @@ Backend Pool example:
 
 ![Azure Loadblancer Backend Pool Configuration](/img/cloud-ha-azure-lb-backend-pool-config.png)
 
-
 The Azure Loadbalancer sends a health probe to the redundant SSR's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent.
 
 The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the SSR when the redundant interfaces are set provisionally down.
@@ -78,12 +75,12 @@ The Azure Loadbalancer API Agent responds to the probes with a `200` status code
 
 A `solution-type` of `azure-vnet` can be used to enable the Azure VNET API agent. It requires an Azure Route Table setup on the same VNET as the redundant interfaces. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
 
-* Microsoft.Network/routeTables/read
-* Microsoft.Network/networkInterfaces/read
-* Microsoft.Network/routeTables/routes/*/write
-* Microsoft.Network/routeTables/routes/read
-* Microsoft.Compute/virtualMachines/read
-* Microsoft.Network/virtualNetworks/read
+- Microsoft.Network/routeTables/read
+- Microsoft.Network/networkInterfaces/read
+- Microsoft.Network/routeTables/routes/*/write
+- Microsoft.Network/routeTables/routes/read
+- Microsoft.Compute/virtualMachines/read
+- Microsoft.Network/virtualNetworks/read
 
 The agent finds all of the route tables within the VNET using the Azure REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
 
@@ -93,9 +90,9 @@ The agent finds all of the route tables within the VNET using the Azure REST API
 To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's _network interface_.
 :::
 
-##### Extra Route Tables
+#### Extra Route Tables
 
-By default, the Azure VNET solution automatically discovers all route tables within the VNET where the redundant interfaces are located. However, you can also explicitly specify additional Azure Route Tables (User Defined Routes or UDRs) that should be managed by the plugin using the `extra-route-table` configuration.
+By default, the Azure VNET solution automatically discovers all route tables within the VNET where the redundant interfaces are located. However, you can also explicitly specify additional Azure Route Tables (User Defined Routes or UDRs) to be managed by the plugin using the `extra-route-table` configuration.
 
 Each `extra-route-table` entry requires:
 * `subscription-id`: The unique identifier of the Azure subscription containing the UDR
@@ -104,7 +101,7 @@ Each `extra-route-table` entry requires:
 
 This is particularly useful when you need to manage route tables in different subscriptions or resource groups that are not automatically discovered.
 
-##### Route Table Discovery
+#### Route Table Discovery
 
 The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system will scan for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries will be managed.
 
@@ -213,33 +210,33 @@ exit
 
 #### Common Configuration
 
-| Element                   | Type            | Properties            | Description                                                                                                                          |
-| ------------------------- | --------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| name                      | string          | key                   | The name of the group to be referenced in other places.                                                                              |
-| enabled                   | boolean         | default: true         | Whether the group is enabled.                                                                                                        |
-| solution-type             | enum            | required              | The solution to use on member nodes.  Value can be one of the values in #Supported Solutions.                                        |
-| additional-branch-prefix  | list: ip-prefix |                       | Additional ip prefixes that the member routers will control.                                                                         |
-| up-holddown-timeout       | int             | default: 2            | The number of seconds to wait before declaring a member up.                                                                          |
+| Element | Type | Properties | Description |
+| ---- | --- | --- | --- |
+| name                      | string          | key                   | The name of the group to be referenced. |
+| enabled                   | boolean         | default: true         | Whether the group is enabled. |
+| solution-type             | enum            | required              | The solution to use on member nodes. Value can be one of the values in [Supported Solutions](#supported-solutions. |
+| additional-branch-prefix  | list: ip-prefix |                       | Additional IP prefixes that the member routers will control. |
+| up-holddown-timeout       | int             | default: 2            | The number of seconds to wait before declaring a member up. |
 | peer-reachability-timeout | int             | default: 10           | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |
-| health-interval           | int             | default: 2            | The interval in seconds for health reports to be collected.                                                                          |
-| remote-health-network     | ip-prefix       | default: 169.254.180.0/24 | The ip prefix to use for inter-member health status messages.                                                                    |
+| health-interval           | int             | default: 2            | The interval in seconds for health reports to be collected. |
+| remote-health-network     | ip-prefix       | default: 169.254.180.0/24 | The ip-prefix to use for inter-member health status messages. |
 
 #### Azure VNET Specific Configuration
 
-| Element                   | Type    | Properties                     | Description                                                                                                             |
-| ------------------------- | ------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| include-peer-vnets        | boolean | default: false                 | Whether to include peer VNETs as part of the route table discovery algorithm.                                           |
-| auto-discover-route-table | boolean | default: true                  | Enables automatic discovery of Azure Route Tables within the specified VNET.                                             |
-| extra-route-table         | list    |                                | A list of Azure User Defined Route (UDR) tables where custom routing entries will be injected or modified.             |
-| subscription-id           | string  | key (within extra-route-table) | The unique identifier of the Azure subscription containing the UDR.                                                      |
-| resource-group            | string  | required (within extra-route-table) | The name of the Azure resource group where the route table is hosted.                                              |
-| route-table-name          | string  | required (within extra-route-table) | The specific name of the Azure Route Table resource.                                                               |
+| Element | Type | Properties | Description |
+| --- | --- | --- | --- |
+| include-peer-vnets | boolean | default: false | Whether to include peer VNETs as part of the route table discovery algorithm. |
+| auto-discover-route-table | boolean | default: true | Enables automatic discovery of Azure Route Tables within the specified VNET. |
+| extra-route-table         | list    | | A list of Azure User Defined Route (UDR) tables where custom routing entries will be injected or modified. |
+| subscription-id           | string  | key (within extra-route-table) | The unique identifier of the Azure subscription containing the UDR. |
+| resource-group            | string  | required (within extra-route-table) | The name of the Azure resource group where the route table is hosted. |
+| route-table-name          | string  | required (within extra-route-table) | The specific name of the Azure Route Table resource. |
 
 #### Azure Loadbalancer Specific Configuration
 
-| Element    | Type | Properties       | Description                                                               |
-| ---------- | ---- | ---------------- | ------------------------------------------------------------------------- |
-| probe-port | port | default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.  |
+| Element    | Type | Properties       | Description |
+| ---------- | ---- | ---------------- | --- |
+| probe-port | port | default: 12801   | The port where the Azure Loadbalancer sends HTTP probes. |
 
 ### Membership
 
@@ -274,16 +271,15 @@ node
 exit
 ```
 
-| Element                         | Type            | Properties                | Description                                                                                                                                                   |
-| ------------------------------- | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Element | Type | Properties | Description |
+| --- | --- | --- | --- |
 | cloud-redundancy-plugin-network | ip-network      | default: 169.254.137.0/30 | The ip network to use for internal networking. This should only be configured when the default value conflicts with a different service in the configuration. |
-| cloud-redundancy-group          | reference       | required                  | The group that this member belongs to.                                                                                                                        |
-| priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference.                                                                                        |
-| redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members.                                                           |
-| additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations.                                                 |
-| log-level/ha-agent              | log-level       | default: info             | The log level for the HA Agent.                                                                                                                               |
-| log-level/api-agent             | log-level       | default: info             | The log level for the active API Agent.                                                                                                                       |
-
+| cloud-redundancy-group          | reference       | required                  | The group that this member belongs to. |
+| priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference. |
+| redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members. |
+| additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations. |
+| log-level/ha-agent              | log-level       | default: info             | The log level for the HA Agent. |
+| log-level/api-agent             | log-level       | default: info             | The log level for the active API Agent. |
 
 :::note
 Nodes can only be members of one group.
@@ -312,7 +308,8 @@ Below is a complete working example of an Azure VNET High Availability deploymen
 This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
 :::
 
-```config {3-18,62-67,108-113}
+```
+config {3-18,62-67,108-113}
 config
     authority
         cloud-redundancy-group  group1
@@ -463,14 +460,14 @@ exit
 
 1. **Extra Route Table**: Explicitly specifies the Azure Route Table to manage with subscription ID, resource group, and table name.
 2. **Auto-discovery Disabled**: With `auto-discover-route-table` set to `false`, only the explicitly configured route table is managed.
-3. **Redundant Interfaces**: Each node specifies `ge-0-1` as the redundant interface that will be monitored for failover.
+3. **Redundant Interfaces**: Each node specifies `ge-0-1` as the redundant interface to be monitored for failover.
 4. **Priority**: Node0 has priority 1 (primary), Node1 has priority 2 (secondary).
 5. **DNS Servers**: Azure's internal DNS server (168.63.129.16) is configured for the cloud HA membership.
 6. **Fabric Interface**: A dedicated fabric interface (ge-0-2) is used for inter-node communication.
 
 ## Generated SSR Configuration
 
-To see a full blown configuration and the configuration it generates, look at `Complete Example Configuration` in the `Appendix`.
+To see a full configuration and the configuration it generates, refer to the [Complete Example Configuration](#complete-example-configuration) in the **Appendix**.
 
 ### Validation
 
@@ -627,7 +624,8 @@ If the Cloud HA Agent does not come up cleanly or fails for a prolonged period o
 
 Example output when the agent did not come up cleanly:
 
-```admin@combo-west.RTR_WEST_COMBO# show alarms
+```
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Tue 2020-10-09 16:42:50 UTC
 
 ============== ===================== ========== ============= =========== ======================================
@@ -650,7 +648,6 @@ Error:
 ```
 
 The router will need to be upgraded to a compatible version. Compatible versions can be listed with  `dnf list --whatprovides 128T-device-interface-api(1.0)`.
-
 
 ## Appendix
 
@@ -1120,7 +1117,7 @@ Add support for dual node HA which allows the plugin to manage redundancy across
 
 Azure VNET mode was extended to support updates to additional route tables including those in a different subscription-id.
 
-- See [config example](#complete-azure-vnet-configuration-example) for more details
+- See the [Azure VNET Configuration Example](#complete-azure-vnet-configuration-example) for more details.
 
 ### Release 5.0.0
 
@@ -1131,7 +1128,6 @@ Support for install and upgrade of a customized upstream Linux-based SSR OS dist
 :::note
 On conductor, the plugin will auto upgrade to this version when upgrading from 6.x to 7.x version of SSR software. In addition, all routers will also be auto upgraded to their respective Oracle Linux 7 or Oracle Linux 9 plugin version depending on the SSR version running on the device.
 :::
-
 
 **Release Date:** Oct 13, 2025
 
