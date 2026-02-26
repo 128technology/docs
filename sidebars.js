@@ -279,6 +279,7 @@ module.exports = {
         "items": [
           "config-proxy-server",
           "config_dhcp",
+          "config-prefix-delegation",
           "config_session_recovery",
           "config_forward_error_correction",
           "config_management_over_forwarding",
