@@ -178,154 +178,6 @@ config
 
 The peer list of the router must also have the `peering-common-name` of that peer. If the peer list is not manually configured, it is auto-generated from the neighborhoods.
 
-### Rekeying (Key Rotation) Atttributes and Default Values
-
-The `key-exchange-algorithm` is configurable at both the Authority and Router/Peer level (using `key-exchange-algorithm-override`). The peer path override allows the migration from an existing algorithm to a different algorithm within authority. This makes it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
-
-If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for addtitional details. 
-
-When the `key-exchange-algorithm` is changed, the SSR returns to the shared-secret exchange (since certificate exchange is not impacted) and opertation proceeds until the peer metadata-keys are re-exchanged. Existing sessions continue using the established payload keys until the next payload key rekey-time. Payload key updates are encrypted using the latest exchanged peer metadata-keys.
-
-#### Configuration Example
-
-```
-config 
-    authority 
-        enhanced-security-key-management  true
-
-        security-key-management 
-            payload-key-rekey-interval    24
-            peer-key-rekey-interval       24
-            peer-key-retransmit-interval  30
-            peer-key-timeout              3600
-            invalid-certificate-behavior  fail-soft
-
-            key-exchange-algorithm
-                diffie-hellman-ml-kem
-                    dh-key-size      4096
-                    ml-kem-key-size  1024
-                exit
-            exit
-        exit
-```
-
-| Configuration Attributes | Description | 
-| --- | --- |
-| key-exchange-algorithm  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
-| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
-| ml-kem-key-size | Key size to use when key-exchange-algorithm is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
-| payload-key-rekey-interval | Hours between payload security key regeneration. Range is 1-720, or never. Default is 24 hours.  |
-| peer-key-rekey-interval | Hours between security key regeneration for peer routers. Range is 1-720, or never. Default is 24 hours. |
-| peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
-| peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
-
-When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for addtional information). 
-
-In cases where it is necessary to manually force key rotation on the routers, use the [`rotate security metadata-key`](cli_reference.md#rotate-security-metadata-key) command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
-
-### Sample Default Configuration: 
-
-```
-config
-
-    authority
-        enhanced-security-key-management  true
-        
-        router                  RTR_EAST_CONDUCTOR
-            name                RTR_EAST_CONDUCTOR
-
-            node                conductor-east-1
-                name            conductor-east-1
-            exit
-        exit
-
-        router                   combo-east
-            name                 combo-east
-            peering-common-name  second-fake-alias-2
-            location             usa
-            description          "router 1"
-            inter-node-security  internal
-
-        router                   combo-west
-            name                 combo-west
-            peering-common-name  second-fake-alias-3
-            location             usa
-            inter-node-security  internal
-```
-
-### Key Exchange Algorithm Router Override
-
-When the `key-exchange-algorithm` is set at the Authority level, all existing sessions and keys remain in use until the next key exchange cycle. Any change to the selected algorithm, such as the key-size, impact the existing environment. If an administrator selects a new algorithm or onboards new routers with a different key-exchange-algorithm, they are then required to update all routers and peers in the authority to the same version, otherwise new session creation will fail.
-
-To address this use case, a router and router peer `key-exchange-algorithm-override` is configured at the router level. This allows the migration from an existing algorithm to a different algorithm within authority, making it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
-
-The `key-exchange-algorithm-override` follows this precedence:
-
-- If no override is specified at router and peer level, the authority key-exchange-algorithm setting will be used.
-- If router/peer `key-exchange-algorithm-override` is set, use this algorithm settings for the peering security with the peer.
-- If the router/peer has no override specified, and the local router has `key-exchange-algorithm-override` set, use this algorithm settings.
-
-The router level `key-exchange-algorithm-override` is automatically populated with the router/peer configuration under the router with which it is peered. However, if the router/peer configuration is set to manual override - by explicitly setting `generated` to `false` - or the router is in standalone mode, the `key-exchange-algorithm-override` and `ml-kem-kegen-priority` should be updated to reflect the remote router’s configuration.
-
-`ml-kem-keygen-priority` is used to determine which router in the peering is the key generator for the ML-KEM related algorithm. The higher value is given priority as the key generator. Once the ML-KEM algorithm (`ml-kem` or `diffie-hellman-ml-kem`) is selected as the active `key-exchange-algorithm`, the highest `ml-kem-keygen-priority` is enforced. 
-
-#### Authority > Router > key-exchange-algorithm-override
-
-| Configuration Attributes | Description | 
-| --- | --- |
-| diffie-hellman | Router level override of algorithm to use for exchange keys between peers. This is the default value. |
-| ml-kem | Router level override of algorithm to use for exchange keys between peers. |
-| diffie-hellman-ml-kem | Router level override of algorithm to use for exchange keys between peers. |
-| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm-override` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
-| ml-kem-key-size | Key size to use when key-exchange-algorithm-override is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
-| ml-kem-keygen-priority | The router's ML-KEM key generation priority with peers. Higher values indicate higher priority. |
-
-#### Authority > Router > Peer > key-exchange-algorithm-override
-
-| Configuration Attributes | Description | 
-| --- | --- |
-| diffie-hellman | Peer level override of algorithm to use for exchange keys between peers. This is the default value. |
-| ml-kem | Peer level override of algorithm to use for exchange keys between peers. |
-| diffie-hellman-ml-kem | Peer level override of algorithm to use for exchange keys between peers. |
-| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm-override` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
-| ml-kem-key-size | Key size to use when key-exchange-algorithm-override is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
-| ml-kem-keygen-priority | The router's ML-KEM key generation priority with peers. Higher values indicate higher priority. |
-
-At the router level, configure `key-exchange-algorithm-override`:
-
-#### Configuration Example
-
-```
-configure
-    authority
-        router                                  combo-east
-            name                                combo-east
-            peering-common-name                 my-fake-alias-2
-            ml-kem-keygen-priority              10
-
-            key-exchange-algorithm-override
-
-                diffie-hellman-ml-kem
-                    dh-key-size      4096
-                    ml-kem-key-size  1024
-                exit
-            exit
-
-            peer                                combo-east
-                name                            combo-east
-                peering-common-name             my-fake-alias-2
-                ml-kem-keygen-priority          10
-
-                key-exchange-algorithm-override
-
-                    diffie-hellman-ml-kem
-                        dh-key-size      4096
-                        ml-kem-key-size  1024
-                    exit
-                exit
-            exit
-```
-
 ## Post Quantum Cryptography Support
 
 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
@@ -408,6 +260,152 @@ configure
                 exit
             exit
         exit
+```
+
+## Rekeying (Key Rotation) Atttributes and Default Values
+
+The `key-exchange-algorithm` is configurable at both the Authority and Router/Peer level (using `key-exchange-algorithm-override`). The peer path override allows the migration from an existing algorithm to a different algorithm within authority. This makes it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
+
+If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for addtitional details. 
+
+When the `key-exchange-algorithm` is changed, the SSR returns to the shared-secret exchange state (since certificate exchange is not impacted) and opertation proceeds until the peer metadata-keys are re-exchanged. Existing sessions continue using the established payload keys until the next payload key rekey-time. Payload key updates are encrypted using the latest exchanged peer metadata-keys.
+
+### Configuration Example
+
+```
+config 
+    authority 
+        enhanced-security-key-management  true
+
+        security-key-management 
+            payload-key-rekey-interval    24
+            peer-key-rekey-interval       24
+            peer-key-retransmit-interval  30
+            peer-key-timeout              3600
+            invalid-certificate-behavior  fail-soft
+
+            key-exchange-algorithm
+                diffie-hellman-ml-kem
+                    dh-key-size      4096
+                    ml-kem-key-size  1024
+                exit
+            exit
+        exit
+```
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| key-exchange-algorithm  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
+| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
+| ml-kem-key-size | Key size to use when key-exchange-algorithm is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
+| payload-key-rekey-interval | Hours between payload security key regeneration. Range is 1-720, or never. Default is 24 hours.  |
+| peer-key-rekey-interval | Hours between security key regeneration for peer routers. Range is 1-720, or never. Default is 24 hours. |
+| peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
+| peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
+
+When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for addtional information). 
+
+In cases where it is necessary to manually force key rotation on the routers, use the [`rotate security metadata-key`](cli_reference.md#rotate-security-metadata-key) command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
+
+### Sample Default Configuration: 
+
+```
+config
+
+    authority
+        enhanced-security-key-management  true
+        
+        router                  RTR_EAST_CONDUCTOR
+            name                RTR_EAST_CONDUCTOR
+
+            node                conductor-east-1
+                name            conductor-east-1
+            exit
+        exit
+
+        router                   combo-east
+            name                 combo-east
+            peering-common-name  second-fake-alias-2
+            location             usa
+            description          "router 1"
+            inter-node-security  internal
+
+        router                   combo-west
+            name                 combo-west
+            peering-common-name  second-fake-alias-3
+            location             usa
+            inter-node-security  internal
+```
+
+### Key Exchange Algorithm Router Override
+
+When the `key-exchange-algorithm` is set at the Authority level, all existing sessions and keys remain in use until the next key exchange cycle. Any change to the selected algorithm, such as the key-size, impact the existing environment. If an administrator selects a new algorithm or onboards new routers with a different key-exchange-algorithm, they are then required to update all routers and peers in the authority to the same version, otherwise new session creation will fail.
+
+To address this use case, a router and router peer `key-exchange-algorithm-override` is configured at the router level. This allows the migration from an existing algorithm to a different algorithm within authority, making it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
+
+The `key-exchange-algorithm-override` follows this precedence:
+
+- If no override is specified at router and peer level, the authority key-exchange-algorithm setting will be used.
+- If router/peer `key-exchange-algorithm-override` is set, use this algorithm settings for the peering security with the peer.
+- If the router/peer has no override specified, and the local router has `key-exchange-algorithm-override` set, use this algorithm settings.
+
+The router level `key-exchange-algorithm-override` is automatically populated with the router/peer configuration under the router with which it is peered. However, if the router/peer configuration is set to manual override - by explicitly setting `generated` to `false` - or the router is in standalone mode, the `key-exchange-algorithm-override` and `ml-kem-kegen-priority` should be updated to reflect the remote router’s configuration.
+
+`ml-kem-keygen-priority` is configured at the router or peer level, and is used to determine which router in the peering is the key generator for the ML-KEM related algorithm. The higher value is given priority as the key generator. Once the ML-KEM algorithm (`ml-kem` or `diffie-hellman-ml-kem`) is selected as the active `key-exchange-algorithm`, the highest `ml-kem-keygen-priority` is enforced. 
+
+#### Authority > Router > key-exchange-algorithm-override
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| diffie-hellman | Router level override of algorithm to use for exchange keys between peers. This is the default value. |
+| ml-kem | Router level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-ml-kem | Router level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm-override` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
+| ml-kem-key-size | Key size to use when key-exchange-algorithm-override is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
+
+#### Authority > Router > Peer > key-exchange-algorithm-override
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| diffie-hellman | Peer level override of algorithm to use for exchange keys between peers. This is the default value. |
+| ml-kem | Peer level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-ml-kem | Peer level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm-override` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
+| ml-kem-key-size | Key size to use when key-exchange-algorithm-override is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
+
+At the router level, configure `key-exchange-algorithm-override`:
+
+#### Configuration Example
+
+```
+configure
+    authority
+        router                                  combo-east
+            name                                combo-east
+            peering-common-name                 my-fake-alias-2
+            ml-kem-keygen-priority              10
+
+            key-exchange-algorithm-override
+
+                diffie-hellman-ml-kem
+                    dh-key-size      4096
+                    ml-kem-key-size  1024
+                exit
+            exit
+
+            peer                                combo-east
+                name                            combo-east
+                peering-common-name             my-fake-alias-2
+                ml-kem-keygen-priority          10
+
+                key-exchange-algorithm-override
+
+                    diffie-hellman-ml-kem
+                        dh-key-size      4096
+                        ml-kem-key-size  1024
+                    exit
+                exit
+            exit
 ```
 
 ## Troubleshooting
