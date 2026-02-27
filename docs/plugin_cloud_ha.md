@@ -467,7 +467,7 @@ exit
 
 ## Generated SSR Configuration
 
-To see a full configuration and the configuration it generates, refer to the [Complete Example Configuration](#complete-example-configuration) in the **Appendix**.
+To see a full configuration and the configuration it generates, refer to the [Complete Example Configuration #1 for azure-lb](#complete-example-configuration-1-for-azure-lb) in the [Appendix](#appendix).
 
 ### Validation
 
