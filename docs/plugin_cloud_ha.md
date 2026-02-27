@@ -15,6 +15,7 @@ For instructions to install and manage the plugin, see [Installation and Managem
 | ------------------ | --------------- | -------------------- |
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
+| AWS TGW            | `aws-tgw`       | 5.1.0                |
 
 ## Version Restrictions
 
@@ -104,6 +105,21 @@ This is particularly useful when you need to manage route tables in different su
 #### Route Table Discovery
 
 The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system will scan for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries will be managed.
+
+### AWS TGW
+
+A `solution-type` of `aws-tgw` can be used to enable the AWS TGW API agent. This solution requires a TGW to be created with attachments which are connected to the VPCs that the SSR resides in. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
+
+- ec2:DescribeInstances
+- ec2:CreateTransitGatewayRoute
+- ec2:DescribeTransitGatewayRouteTables
+- ec2:ReplaceTransitGatewayRoute
+
+If you want the state output to report the current routes in the TGW Route Rable, the VMs will also need:
+- ec2:SearchTransitGatewayRoutes
+
+The TGW Route Table is the object which is updated by the plugin, pointing to one of the node's TGW Attachments. Each SSR node must know the TGW Route Table as well as the corresponding attachment that points to itself. How this is configured is explained in the [AWS TGW Config Section](#aws-tgw-specific-configuration)
+
 
 ## Scenarios
 
@@ -238,6 +254,12 @@ exit
 | ---------- | ---- | ---------------- | --- |
 | probe-port | port | default: 12801   | The port where the Azure Loadbalancer sends HTTP probes. |
 
+#### AWS TGW Specific Configuration
+
+| Element    | Type | Properties       | Description |
+| ---------- | ---- | ---------------- | --- |
+| tgw-route-table-id | AWS ID | | The TGW Route Table ID that should be updated. Ex. `tgw-rtb-00000000000000001`. Must be paired with the `tgw-attachment-id` on each member. |
+
 ### Membership
 
 Membership is how a node declares that it is part of a group. The configuration for a membership exists under the node and is where the node-specific configuration exists.
@@ -284,6 +306,12 @@ exit
 :::note
 Nodes can only be members of one group.
 :::
+
+#### AWS TGW Specific Configuration
+
+| Element    | Type | Properties       | Description |
+| ---------- | ---- | ---------------- | --- |
+| tgw-attachment-id | AWS ID | | The TGW Attachment ID that should be used for this node when updating the route table entry. Ex. `tgw-attach-00000000000000001` |
 
 ### Address Prefixes
 
@@ -456,13 +484,165 @@ config
 exit
 ```
 
-### Key Configuration Points
+## Complete AWS TGW Configuration Example
 
-1. **Extra Route Table**: Explicitly specifies the Azure Route Table to manage with subscription ID, resource group, and table name.
-2. **Auto-discovery Disabled**: With `auto-discover-route-table` set to `false`, only the explicitly configured route table is managed.
+Below is a complete working example of an AWS TGW High Availability deployment. This configuration demonstrates the use of explicit route table configuration using `tgw-route-table-id` and `tgw-attachment-id`.
+
+:::info
+This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
+:::
+
+```
+config {3-18,62-67,108-113}
+config
+    authority
+        cloud-redundancy-group  group1
+            enabled                    true
+            name                       group1
+            solution-type              aws-tgw
+
+            tgw-route-table-id         tgw-rtb-00000000000000001
+            health-interval            6
+            additional-branch-prefix   1.1.1.1/32
+            up-holddown-timeout        2
+            peer-reachability-timeout  13
+        exit
+
+        router                  aws-ha
+            name                 aws-ha
+            inter-node-security  internal
+
+            node                 node0
+                name                         node0
+                asset-id                     node0-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.4
+                            ip-address     172.16.10.4
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.132
+                            ip-address     192.168.10.132
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              168.63.129.16
+                    priority                1
+                    redundant-interface     ge-0-1
+                    tgw-attachment-id       tgw-attach-00000000000000001
+                exit
+            exit
+
+            node                 node1
+                name                         node1
+                asset-id                     node1-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.6
+                            ip-address     172.16.10.6
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.134
+                            ip-address     192.168.10.134
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              168.63.129.16
+                    priority                2
+                    redundant-interface     ge-0-1
+                    tgw-attachment-id       tgw-attach-00000000000000002
+                exit
+            exit
+
+            service-route        internet-from-lan-route
+                name             internet-from-lan-route
+                service-name     internet-from-lan
+                enable-failover  true
+
+                next-hop         node1 ge-0-0-intf
+                    node-name  node1
+                    interface  ge-0-0-intf
+                exit
+
+                next-hop         node0 ge-0-0-intf
+                    node-name  node0
+                    interface  ge-0-0-intf
+                exit
+            exit
+        exit
+
+        tenant                  lan
+            name  lan
+        exit
+
+        service                 internet-from-lan
+            name     internet-from-lan
+            enabled  true
+            tenant   lan
+            address  0.0.0.0/0
+        exit
+    exit
+exit
+```
+
+### Key Configuration Points
+1. **AWS TGW Route Table ID**: On the group, specifies which TGW Route Table to update.
+2. **AWS TGW Attachment ID**: On each member, specifies the attachment which corresponds to the VPC that the SSR node lives in. This setting needs to be different across nodes.
 3. **Redundant Interfaces**: Each node specifies `ge-0-1` as the redundant interface to be monitored for failover.
 4. **Priority**: Node0 has priority 1 (primary), Node1 has priority 2 (secondary).
-5. **DNS Servers**: Azure's internal DNS server (168.63.129.16) is configured for the cloud HA membership.
+5. **DNS Servers**: AWS's internal DNS server (168.63.129.16) is configured for the cloud HA membership.
 6. **Fabric Interface**: A dedicated fabric interface (ge-0-2) is used for inter-node communication.
 
 ## Generated SSR Configuration
@@ -1118,6 +1298,10 @@ Add support for dual node HA which allows the plugin to manage redundancy across
 Azure VNET mode was extended to support updates to additional route tables including those in a different subscription-id.
 
 - See the [Azure VNET Configuration Example](#complete-azure-vnet-configuration-example) for more details.
+
+AWS TGW mode was added.
+
+- See the [AWS TGW Configuration Example](#complete-aws-tgw-configuration-example) for more details.
 
 ### Release 5.0.0
 
