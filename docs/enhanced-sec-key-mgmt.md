@@ -42,10 +42,10 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Encrypt Original IP SA/DA	| ESP | Encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
 | Secure Channel to exchange keys | IKEv2 | Diffie-Hellman. DH provides 4096-bit Peer key used to encrypt BFD Metadata. | 
 | Confidentiality | Payload is encrypted with the IPSec Tunnel key; however, all individual sessions with the same IPSec tunnel share the same key. There is no confidentiality between sessions sharing the same source and destination address. | Payload encrypted with Per-Flow Payload key; SVR Metadata (containing the Per-Flow Payload key) is encrypted with the SVR Metadata Key. Because each session has a separate key, each session has confidentiality, even between the same source and destination address. | 
-| Integrity	| ESP Authentication Header | HMAC SHA-384 nd HMAC-SHA-512 signature signs all SVR Metadata and Payload in SVR packet. | 
-| Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR| 
-| Data Origin Authentication | HMAC-SHA-384 and HMAC-SHA-512 | HMAC SHA-384 and HMAC-SHA-512 signature | 
-| Replay Protection | Yes | Nonce added for Replay Protection.| 
+| Integrity	| ESP Authentication Header | HMAC SHA-384 and HMAC-SHA-512 signatures sign all SVR Metadata and Payloads in SVR packets. | 
+| Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR. | 
+| Data Origin Authentication | HMAC-SHA-384 and HMAC-SHA-512 | HMAC SHA-384 and HMAC-SHA-512 signature. | 
+| Replay Protection | Yes | Nonce added for Replay Protection. | 
 | Perfect Forward Secrecy | Yes	| Keys in DH are seeded by Salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
@@ -55,12 +55,12 @@ Enhanced Security Key Management provides a more secure, more flexible, and more
 
 The foundation of Enhanced Security Key Management is the ability to define peer-to-peer certificate-based security and key rotation within your SVR peer network. There are two ways you can provision this level of security. 
 
-When configured to used Enhanced Security Key Management, the SSR will automatically create a self-signed certificate. This allows you to configure peering between SSRs quickly, however because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
+When configured to used Enhanced Security Key Management, the SSR automatically creates a self-signed certificate. This allows you to configure peering between SSRs quickly. However because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
-To provide thorough, end-to-end security the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+To provide thorough, end-to-end security, the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
-The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
+The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service must be restarted in order to pick up the changes.
 :::
 
 The following diagram provides a look at a typical SSR/SVR deployment.
