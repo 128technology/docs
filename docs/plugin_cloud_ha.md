@@ -336,8 +336,7 @@ Below is a complete working example of an Azure VNET High Availability deploymen
 This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
 :::
 
-```
-config {3-18,62-67,108-113}
+```config {3-18,62-67,108-113}
 config
     authority
         cloud-redundancy-group  group1
@@ -492,8 +491,7 @@ Below is a complete working example of an AWS TGW High Availability deployment. 
 This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
 :::
 
-```
-config {3-18,62-67,108-113}
+```config {3-13,57-63,104-110}
 config
     authority
         cloud-redundancy-group  group1
