@@ -66,15 +66,17 @@ Use DNS-based services when your destination uses a small set of non-volatile IP
 
 ### AppID based on TLS
 
-The SSR can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the client hello TLS message sent by a client during the TLS handshake process. Importantly: *this presupposes that the SSR can route packets to that destination for the  purposes of retrieving the clients's message*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
+The SSR can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the client hello TLS message sent by a client during the TLS handshake process. Importantly: *this presupposes that the SSR can route packets to that destination for the  purposes of retrieving the clients' message*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
+
+Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [**Configuring Web Filtering using the PCLI**](config_domain-based_web_filter.md#configuring-web-filtering-using-the-pcli) for detailed configuration steps.
 
 :::note
-Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [**Configuring Web Filtering using the PCLI**](config_domain-based_web_filter.md#configuring-web-filtering-using-the-pcli) for detailed configuration steps.
+AppID based on TLS is supported on TLS 1.0, 1.1, 1.2, and *1.3 with ECH (Encrypted Client Hello) disabled*. Browsers using TLS 1.3 have ECH enabled by default, so it must be manually disabled on the device for AppID based TLS to function.
 :::
 
 The `Client Hello` message typically includes a `server_name` extension, which represents the domain-name being accessed by the client. For example:
 
-``` console {15-18}
+```
 TLSv1.3 Record Layer: Handshake Protocol: Client Hello
     Content Type: Handshake (22)
     Version: TLS 1.0 (0x0301)
