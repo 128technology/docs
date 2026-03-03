@@ -61,7 +61,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.1.3-24r2
+## Release 7.1.3-25r2
 
 **Release Date:** March 5, 2026
 
@@ -172,6 +172,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-64167 After offline upgrade (air gap upgrade) the Hub remains in `Synchronizing` state:** During an offline upgrade on an air-gap network, the hub remains in the `synchronizing` state, which prevents the upgrade from completing. This occurs during an upgrade from SSR 7.0.1 to SSR 7.1.x. 
 
   The issue is caused by an outdated version of `128T-plugin-support-files`. This will be resolved in the final release of the 7.1.3 software. The temporary workaround is to run `dnf reinstall 128T-plugin-support-files`. 
+------
+- **I95-64317 Dropped Packets Capture continues to run:** If you have initiated a packet Capture from any page in the GUI, it will continue to run on the web server even after the request is terminated, resulting in expensive per packet export overhead. The web server must be restarted to terminate the packet capture. This issue is under investigation and will be resolved in an upcoming release. 
 
 ## Release 7.1.0-50r1
 

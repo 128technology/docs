@@ -5127,6 +5127,7 @@ Configure Application Identification
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`per-app-metrics`](#configure-authority-router-application-identification-per-app-metrics) | Enable per app classification metrics |
 | `show` | Show configuration data for &#x27;application-identification&#x27; |
+| [`summary-corruption-upload-interval`](#configure-authority-router-application-identification-summary-corruption-upload-interval) | A corruption event will be reported at most once every interval. Zero disables all uploads. |
 | [`summary-retention`](#configure-authority-router-application-identification-summary-retention) | Configure Summary Retention |
 | [`summary-tracking`](#configure-authority-router-application-identification-summary-tracking) | Enable session stats tracking by applications |
 | [`use-application-director-in-memory-db`](#configure-authority-router-application-identification-use-application-director-in-memory-db) | Use in-memory db |
@@ -48322,7 +48323,7 @@ configure authority service-policy <name>
 | [`peer-path-resiliency`](#configure-authority-service-policy-peer-path-resiliency) | Whether or not session resiliency failover occurs among multiple peers. |
 | [`qp-preference`](#configure-authority-service-policy-qp-preference) | Preference for ordering interfaces by QP values. |
 | [`required-qp`](#configure-authority-service-policy-required-qp) | Minimum quality points required on network interface. |
-| [`reverse-gateway-change-detection`](#configure-authority-service-policy-reverse-gateway-change-detection) | Compare the forward packet source-mac against the reverse next-hop arp entry, and trigger a flow-move for the session to pick up the reverse next-hop update. |
+| [`reverse-gateway-change-detection`](#configure-authority-service-policy-reverse-gateway-change-detection) | Trigger a session-modify when the packet source-mac does not match the reverse next-hop ARP resolution for sessions that are not from inter-router or inter-node. |
 | [`service-class`](#configure-authority-service-policy-service-class) | A reference to the name of the service class to use. |
 | [`session-resiliency`](#configure-authority-service-policy-session-resiliency) | Types of session resiliency govern how the SSR provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing. |
 | `show` | Show configuration data for &#x27;service-policy&#x27; |

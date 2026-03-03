@@ -10160,21 +10160,22 @@ Display peer information.
 #### Usage
 
 ```
-show peers [name <name>] [bfd-interval] [dynamic-damping] [security] [certificate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show peers [name <name>] [bfd-interval] [certificate] [dynamic-damping] [security] [key-exchange-algorithm] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| bfd-interval | Display current BFD intervals |
-| certificate | display BFD certificate info |
-| dynamic-damping | display BFD dynamic-damping stats |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| name | Peer to display (default: all) |
-| resource-group | The name of the resource group |
-| router | The router on which to display peers |
-| security | display BFD security stats |
+| bfd-interval | Display current BFD intervals. |
+| certificate | Display BFD certificate info. |
+| dynamic-damping | Display BFD dynamic-damping stats. |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| key-exchange-algorithm | Display BFD key exchange algorithm info. |
+| name | Peer to display (default: all). |
+| resource-group | The name of the resource group. |
+| router | The router on which to display peers. |
+| security | Display BFD security stats. |
 
 ##### Positional Arguments
 
