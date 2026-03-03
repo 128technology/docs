@@ -61,9 +61,9 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.1.3-25r2
+## Release 7.1.3-26r2
 
-**Release Date:** March 5, 2026
+**Release Date:** March 6, 2026
 
 ### New Features
 
@@ -75,7 +75,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
 ------
-- **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information to the GUI and PCLI, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers. It should be noted that there are scaling limitations, such as a reasonable configuration complexity. Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
+- **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information to the GUI and PCLI, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers (on appropriately resourced hardware platforms). Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
 ------
 - **I95-58446 EoSVR Loop Prevention:** EoSVR A/S Loop Prevention has been added, allowing EoSVR traffic to pass Broadcast, unknown-unicast, and multicast traffic through a switch without causing the port to be shut down. 
 ------
@@ -103,7 +103,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-61856 Add `reload local certificates` command for ESKM:** The `reload local certificates` command has been added to allow the updating of local certificates. See [`reload local certificates`](cli_reference.md#reload-local-certificates) for more information. 
 ------
-- **I95-62074 Highway requests metadata key from SKM when feature is disabled:** Resolved an issue where even when `enhanced-security-key-management` was disabled, it continued to attempt to get the key information. 
+- **I95-62074 Highway requests metadata key when `enhanced-security-key-management` feature is disabled:** Resolved an issue where even when `enhanced-security-key-management` was disabled, it continued to attempt to get the key information. 
 ------
 - **I95-62343 Routers disconnecting from the Conductor while still successfully routing traffic:** Resolved an issue where Salt gets stuck with a bad network connection. Added new functionality to the `minion-watchdog` service which will restart the `salt-minion` if there is a salt job stuck for over an hour.
 ------
@@ -115,9 +115,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
 ------
-- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the CSRX configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
+- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the Anti-Virus and IDP configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
 ------
-- **I95-62957 Configuration failure due to invalid name:** The CSRX does not allow policynames using a dot (.). This has been resolved - CSRX configurations will use an underscore for policyname creation.
+- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.
 ------
 - **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
 ------
@@ -125,13 +125,13 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR secuirty using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
 ------
-- **I95-63190 SSC process errors causing node disconnections from Conductor:** Resolved an issue where SSC process errors were filling the buffer queue, dropping messages, and causing node disconnections.
+- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.
 ------
 - **I95-63202 Unable to bind interfaces in Azure F8 flavor in West Europe region:** Resolved an issue where driver optimization on lower core count systems required more more memory usage, causing initialization failures.
 ------
 - **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
-- **I95-63292 Add upgrade timeout and rpm operation timeout:** Added the ability to configure the timeout for upgrades and for rpm download/install operations under `config authority router RouterName system software-update`. The defaults are 1 hour for SSR upgrade and 10 minutes for rpm operations.
+- **I95-63292 Add upgrade timeout and rpm operation timeout:** Added the ability to configure the timeout for upgrades and for rpm download/install operations under `config authority router <RouterName> system software-update`. The defaults are 1 hour for SSR upgrade and 10 minutes for rpm operations.
 ------
 - **I95-63295 Highway crash when show fib is executed on very large FIB:** Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.
 ------
@@ -159,7 +159,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------ 
 - **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
 ------
-- **I95-63817 Default peering certificates are unable to used configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
+- **I95-63817 Default peering certificates are unable to use the configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
 ------
 - **I95-63923 Redundant conductor fails to upgrade:** Resolved an issue where a minion disconnects from the conductor node and never attempts to reconnect. The minion watchdog process now restarts the salt minion if it is not connected to all conductor nodes.
 ------
@@ -169,10 +169,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### Caveats
 
-- **I95-64167 After offline upgrade (air gap upgrade) the Hub remains in `Synchronizing` state:** During an offline upgrade on an air-gap network, the hub remains in the `synchronizing` state, which prevents the upgrade from completing. This occurs during an upgrade from SSR 7.0.1 to SSR 7.1.x. 
-
-  The issue is caused by an outdated version of `128T-plugin-support-files`. This will be resolved in the final release of the 7.1.3 software. The temporary workaround is to run `dnf reinstall 128T-plugin-support-files`. 
-------
 - **I95-64317 Dropped Packets Capture continues to run:** If you have initiated a packet Capture from any page in the GUI, it will continue to run on the web server even after the request is terminated, resulting in expensive per packet export overhead. The web server must be restarted to terminate the packet capture. This issue is under investigation and will be resolved in an upcoming release. 
 
 ## Release 7.1.0-50r1

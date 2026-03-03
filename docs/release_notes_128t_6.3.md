@@ -92,9 +92,9 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-62877 SSR continues to forward traffic to external MAC after failover:** Resolved an issue where the SSR was continuing to forward traffic for an existing session to the original next-hop after failover. A new configuration field has been added to the service policy configuration; `reverse-gateway-change-detection`. When enabled, this feature will identify a failover/MAC change, trigger a flow-move, and update the reverse next-hop accordingly. For additional details see [`reverse-gateway-change-detection`](config_command_guide.md#configure-authority-service-policy-reverse-gateway-change-detection).
 ------
-- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the CSRX configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
+- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the Anti-Virus and IDP configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
 ------
-- **I95-62957 Configuration failure due to invalid name:** The CSRX does not allow policynames using a dot (.). This has been resolved - CSRX configurations will use an underscore for policyname creation.
+- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.
 ------
 - **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
 ------
@@ -104,7 +104,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-63084 Web interface refreshes alarms status too often:** Resolved an issue where the web interface would repeatedly request all alarms when alarm flapping occurred. This placed an unnecessarily high load on the GUI refresh process. 
 ------
-- **I95-63190 SSC process errors causing node disconnections from Conductor:** Resolved an issue where SSC process errors were filling the buffer queue, dropping messages, and causing node disconnections. 
+- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections. 
 ------
 - **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------

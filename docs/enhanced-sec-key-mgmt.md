@@ -8,7 +8,7 @@ sidebars-label: Enhanced Security Key Management
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.0.1   | Enhanced Security Key Management support added. |
-| 7.1.3   | Support for ML-KEM, and router/peer `key-exchange-algorithm-override` added. |
+| 7.1.3   | Support for ML-KEM added. |
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 

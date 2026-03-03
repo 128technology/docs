@@ -5805,6 +5805,7 @@ Completed in 0.01 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.4.0   | This feature was introduced |
+
 ## `show certificate ca`
 
 Display certificate authority certificate data
