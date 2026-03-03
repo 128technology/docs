@@ -44,6 +44,8 @@ Managing the Certificate Revocation List (CRL) includes the discovery, fetching,
 
 If the CRL cannot be retrieved, an alarm will fire and persist until such time as that CRL can be retrieved. 
 
+In cases where a new CRL is not updated by the time the previous CRL expires, no additional alarm will be generated indicating that the CRL can not be used. 
+
 ### Configuration
 
 There are two configuration parameters, an optional list of CRL URLs to fetch updates, and the polling interval for those CRL URLs. 
