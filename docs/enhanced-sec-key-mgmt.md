@@ -205,7 +205,7 @@ ML-KEM cryptography is configured under `key-exchange-algorithm` and has the fol
 | `key-exchange-algorithm`  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
 | `ml-kem` | Use the `ml-kem-key-size` parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 512, 768 or 1024. |
 | `diffie-hellman` | Use the diffie-hellman-key-size parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 1024, 2048 or 4096. |
-| `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptography. This employs both methods of encryption for greater security. Be aware that there is a performance impact with this selection. The above values are used and set individually in the configuration. |
+| `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptography. This employs both methods of encryption for greater security. However, as with the individual settings above, be aware that values with increasing security strength result in decreasing performance. The above values are used and set individually in the configuration. |
 
 **ML-KEM Example**
 
