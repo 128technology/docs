@@ -21,7 +21,7 @@ Furthermore, Configuration Integrity prevents network and SSR operations from ex
 
 Configuration Integrity does not address any runtime access-policy or permissions concerns. Proper file and directory permissions are still required, as well as proper login and authentication controls. Configuration Integrity augments the existing SSR security functionality to provide encryption-at-rest guarantees. 
 
-Configuration Integrity is enabled by default on new installations of, and upgrades to, SSR 7.1.3. 
+Configuration Integrity is enabled automatically on new installations of and upgrades to SSR 7.1.3 on platforms (hardware or VM) with TPM 2.0.
 
 :::important
 After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
@@ -37,11 +37,15 @@ Configuration Integrity utilizes a hybrid approach combining TPM2 hardware secur
 
 The following are the major components of Configuration Integrity. 
 
-### TPM2 Hardware Security Module
+### TPM 2.0 Hardware Security Module
 
 The TPM is the trust anchor of the system. It creates and unseals the Filesystem Encryption Key (FEK), and is the only component of the system that can perform this task. If the storage of the SSR is somehow separated from the TPM, the FEK can no longer be unsealed, and the filesystem cannot be unlocked, ensuring that sensitive data remains protected.  
 
 All SSR TPMs are provisioned with an RSA-2048 key, which is used to perform the encryption and decryption of the FEK.
+
+:::note
+Configuration Integrity encryption is enabled automatically on platforms (hardware or VM) with TPM 2.0. Platforms without TPM 2.0 will remain unencrypted.
+:::  
 
 ### Filesystem Encryption Key (FEK)
 
