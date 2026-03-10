@@ -8,10 +8,11 @@ sidebars-label: Enhanced Security Key Management
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.0.1   | Enhanced Security Key Management support added. |
+| 7.1.3   | Support for ML-KEM added. |
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
-As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the instution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
+As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the institution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
 The following diagrams show simple examples of how Enhanced Security Key Management can be deployed. 
 
@@ -41,10 +42,10 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Encrypt Original IP SA/DA	| ESP | Encrypted with AES-CBC-256 encrypted Metadata sent within first Payload packet using metadata key. | 
 | Secure Channel to exchange keys | IKEv2 | Diffie-Hellman. DH provides 4096-bit Peer key used to encrypt BFD Metadata. | 
 | Confidentiality | Payload is encrypted with the IPSec Tunnel key; however, all individual sessions with the same IPSec tunnel share the same key. There is no confidentiality between sessions sharing the same source and destination address. | Payload encrypted with Per-Flow Payload key; SVR Metadata (containing the Per-Flow Payload key) is encrypted with the SVR Metadata Key. Because each session has a separate key, each session has confidentiality, even between the same source and destination address. | 
-| Integrity	| ESP Authentication Header | HMAC SHA-384 signature signs all SVR Metadata and/or Payload in SVR packet. | 
-| Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR| 
-| Data Origin Authentication | HMAC-SHA-384 | HMAC SHA-384 signature| 
-| Replay Protection | Yes | Nonce added for Replay Protection.| 
+| Integrity	| ESP Authentication Header | HMAC SHA-384 and HMAC-SHA-512 signatures sign all SVR Metadata and Payloads in SVR packets. | 
+| Authentication | IKEv2 PSK or x.509v3 certificates | SSR-signed x.509v3 certificate through root of trust to Intermediate CA installed on SSR. | 
+| Data Origin Authentication | HMAC-SHA-384 and HMAC-SHA-512 | HMAC SHA-384 and HMAC-SHA-512 signature. | 
+| Replay Protection | Yes | Nonce added for Replay Protection. | 
 | Perfect Forward Secrecy | Yes	| Keys in DH are seeded by Salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
@@ -54,12 +55,12 @@ Enhanced Security Key Management provides a more secure, more flexible, and more
 
 The foundation of Enhanced Security Key Management is the ability to define peer-to-peer certificate-based security and key rotation within your SVR peer network. There are two ways you can provision this level of security. 
 
-When configured to used Enhanced Security Key Management, the SSR will automatically create a self-signed certificate. This allows you to configure peering between SSRs quickly, however because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
+When configured to used Enhanced Security Key Management, the SSR automatically creates a self-signed certificate. This allows you to configure peering between SSRs quickly. However because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
-To provide thorough, end-to-end security the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+To provide thorough, end-to-end security, the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
-The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service will need to be restarted in order to pick up the changes.
+The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service must be restarted in order to pick up the changes.
 :::
 
 The following diagram provides a look at a typical SSR/SVR deployment.
@@ -152,7 +153,9 @@ SSR 7.0.1 is required on all devices participating in Enhanced Security Key Mana
 
 ## Configuration
 
-Configuration is performed on the conductor, at the Authority level, on a per router basis. To accept the default values for enhanced security key management: 
+Configuration is performed on the conductor, at the Authority level, on a per router basis. 
+
+To enable ESKM and accept the default rekey values: 
 
 1. Set `enhanced-security-key-management` to `true`; 
 
@@ -175,11 +178,126 @@ config
 
 The peer list of the router must also have the `peering-common-name` of that peer. If the peer list is not manually configured, it is auto-generated from the neighborhoods.
 
-#### Rekeying (Key Rotation) Atttributes and Default Values
+## Post Quantum Cryptography Support
+
+ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
+
+For the SSR, ML-KEM can be used in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
+
+In order to take advantage of ML-KEM Cryptography, all devices must be running SSR software that provides support for this feature. 
+
+### How It Works
+
+Each participant generates a public-private key pair for encryption and decryption. These keys are generated upon system startup, are stored securely, and are encrypted with the onboard TPM. 
+
+A Symmetric Key is generated using the [Nist-approved FIPS 203 ML-KEM algorithm](https://csrc.nist.gov/pubs/fips/203/final) and exchanged between the sender and the reciever. This is the shared, secret key used for encryption and decryption.
+
+The encapsulation process wraps the symmetric key in layers of encryption, and the decapsulation process removes the layers using the private key associated with the device. 
+
+Information can then be securely transmitted between devices. 
+
+### Configuration
+
+ML-KEM cryptography is configured under `key-exchange-algorithm` and has the following attributes.
 
 | Configuration Attributes | Description | 
 | --- | --- |
-| key-exchange-algorithm  | Configure Key Exchange Algorithm |
+| `key-exchange-algorithm`  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
+| `ml-kem` | Use the `ml-kem-key-size` parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 512, 768 or 1024. |
+| `diffie-hellman` | Use the diffie-hellman-key-size parameter to define the key size to use. Possible values in order of increasing security strength and decreasing performance are 1024, 2048 or 4096. |
+| `diffie-hellman-ml-kem` | Use this parameter if you require hybrid mode cryptography. This employs both methods of encryption for greater security. However, as with the individual settings above, be aware that values with increasing security strength result in decreasing performance. The above values are used and set individually in the configuration. |
+
+**ML-KEM Example**
+
+The ML-KEM key size values are as follows:
+
+- 512: Smallest footprint, highest performance
+- 768: Balanced for most applications - **Default value**
+- 1024: Maximum security for long-lived systems
+
+```
+configure
+    authority
+        security-key-management
+            key-exchange-algorithm
+                ml-kem
+                    ml-kem-key-size 1024
+                exit
+            exit
+        exit
+```
+
+**Diffie-Hellman Example**
+
+The Diffie-Hellman key size values are as follows: 1024, 2048 or 4096
+
+- 1024: Smallest footprint, highest performance
+- 2048: Balanced for most applications - **Default value**
+- 4096: Maximum security
+
+```
+configure
+    authority
+        security-key-management
+            key-exchange-algorithm
+                diffie-hellman
+                    dh-key-size 2048
+                exit
+            exit
+        exit
+```
+
+**Diffie-Hellman ML-KEM Example**
+
+```
+configure
+    authority
+        security-key-management
+            key-exchange-algorithm
+                diffie-hellman-ml-kem
+                    dh-key-size 2048
+                    ml-kem-key-size 1024
+                exit
+            exit
+        exit
+```
+
+## Rekeying (Key Rotation) Atttributes and Default Values
+
+The `key-exchange-algorithm` is configurable at both the Authority and Router/Peer level (using `key-exchange-algorithm-override`). The peer path override allows the migration from an existing algorithm to a different algorithm within authority. This makes it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
+
+If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for addtitional details. 
+
+When the `key-exchange-algorithm` is changed, the SSR returns to the shared-secret exchange state (since certificate exchange is not impacted) and opertation proceeds until the peer metadata-keys are re-exchanged. Existing sessions continue using the established payload keys until the next payload key rekey-time. Payload key updates are encrypted using the latest exchanged peer metadata-keys.
+
+### Configuration Example
+
+```
+config 
+    authority 
+        enhanced-security-key-management  true
+
+        security-key-management 
+            payload-key-rekey-interval    24
+            peer-key-rekey-interval       24
+            peer-key-retransmit-interval  30
+            peer-key-timeout              3600
+            invalid-certificate-behavior  fail-soft
+
+            key-exchange-algorithm
+                diffie-hellman-ml-kem
+                    dh-key-size      4096
+                    ml-kem-key-size  1024
+                exit
+            exit
+        exit
+```
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| key-exchange-algorithm  | The algorithm to use for exchanging keys between peers. Algorithm types include: `diffie-hellman`, `ml-kem`, or `diffie-hellman-ml-kem`. |
+| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
+| ml-kem-key-size | Key size to use when key-exchange-algorithm is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
 | payload-key-rekey-interval | Hours between payload security key regeneration. Range is 1-720, or never. Default is 24 hours.  |
 | peer-key-rekey-interval | Hours between security key regeneration for peer routers. Range is 1-720, or never. Default is 24 hours. |
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
@@ -187,29 +305,16 @@ The peer list of the router must also have the `peering-common-name` of that pee
 
 When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for addtional information). 
 
-#### Default Configuration Example
+In cases where it is necessary to manually force key rotation on the routers, use the [`rotate security metadata-key`](cli_reference.md#rotate-security-metadata-key) command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
 
-```
-config 
-    authority 
-        security-key-management 
-            payload-key-rekey-interval    24
-            peer-key-rekey-interval       24
-            peer-key-retransmit-interval  30
-            peer-key-timeout              3600
-            invalid-certificate-behavior  fail-soft
-```
-
-In cases where you want to manually force key rotation on the routers, use the [`rotate security metadata-key`](cli_reference.md#rotate-security-metadata-key) command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
-
-#### Sample Default Configuration: 
+### Sample Default Configuration: 
 
 ```
 config
 
     authority
         enhanced-security-key-management  true
-		
+        
         router                  RTR_EAST_CONDUCTOR
             name                RTR_EAST_CONDUCTOR
 
@@ -230,6 +335,77 @@ config
             peering-common-name  second-fake-alias-3
             location             usa
             inter-node-security  internal
+```
+
+### Key Exchange Algorithm Router Override
+
+When the `key-exchange-algorithm` is set at the Authority level, all existing sessions and keys remain in use until the next key exchange cycle. Any change to the selected algorithm, such as the key-size, impact the existing environment. If an administrator selects a new algorithm or onboards new routers with a different key-exchange-algorithm, they are then required to update all routers and peers in the authority to the same version, otherwise new session creation will fail.
+
+To address this use case, a router and router peer `key-exchange-algorithm-override` is configured at the router level. This allows the migration from an existing algorithm to a different algorithm within authority, making it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
+
+The `key-exchange-algorithm-override` follows this precedence:
+
+- If no override is specified at router and peer level, the authority key-exchange-algorithm setting will be used.
+- If router/peer `key-exchange-algorithm-override` is set, use this algorithm settings for the peering security with the peer.
+- If the router/peer has no override specified, and the local router has `key-exchange-algorithm-override` set, use this algorithm settings.
+
+The router level `key-exchange-algorithm-override` is automatically populated with the router/peer configuration under the router with which it is peered. However, if the router/peer configuration is set to manual override - by explicitly setting `generated` to `false` - or the router is in standalone mode, the `key-exchange-algorithm-override` and `ml-kem-kegen-priority` should be updated to reflect the remote router’s configuration.
+
+`ml-kem-keygen-priority` is configured at the router or peer level, and is used to determine which router in the peering is the key generator for the ML-KEM related algorithm. The higher value is given priority as the key generator. Once the ML-KEM algorithm (`ml-kem` or `diffie-hellman-ml-kem`) is selected as the active `key-exchange-algorithm`, the highest `ml-kem-keygen-priority` is enforced. 
+
+#### Authority > Router > key-exchange-algorithm-override
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| diffie-hellman | Router level override of algorithm to use for exchange keys between peers. This is the default value. |
+| ml-kem | Router level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-ml-kem | Router level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm-override` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
+| ml-kem-key-size | Key size to use when key-exchange-algorithm-override is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
+
+#### Authority > Router > Peer > key-exchange-algorithm-override
+
+| Configuration Attributes | Description | 
+| --- | --- |
+| diffie-hellman | Peer level override of algorithm to use for exchange keys between peers. This is the default value. |
+| ml-kem | Peer level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-ml-kem | Peer level override of algorithm to use for exchange keys between peers. |
+| diffie-hellman-key-size | Key size to use when `key-exchange-algorithm-override` is set to `ml-kem` or `diffie-hellman-ml-kem`. Values can be 1024, 2048 or 4096. Default is 2048.  |
+| ml-kem-key-size | Key size to use when key-exchange-algorithm-override is set to ml-kem or diffie-hellman-ml-kem. Values can be 512, 768 or 1024. Default is 768. |
+
+At the router level, configure `key-exchange-algorithm-override`:
+
+#### Configuration Example
+
+```
+configure
+    authority
+        router                                  combo-east
+            name                                combo-east
+            peering-common-name                 my-fake-alias-2
+            ml-kem-keygen-priority              10
+
+            key-exchange-algorithm-override
+
+                diffie-hellman-ml-kem
+                    dh-key-size      4096
+                    ml-kem-key-size  1024
+                exit
+            exit
+
+            peer                                combo-east
+                name                            combo-east
+                peering-common-name             my-fake-alias-2
+                ml-kem-keygen-priority          10
+
+                key-exchange-algorithm-override
+
+                    diffie-hellman-ml-kem
+                        dh-key-size      4096
+                        ml-kem-key-size  1024
+                    exit
+                exit
+            exit
 ```
 
 ## Troubleshooting

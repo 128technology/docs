@@ -3,9 +3,27 @@ title: Secure Boot
 sidebar_label: Secure Boot
 ---
 
-SSR-400/SSR-440 are factory configured with a cryptographic public key that only allows an authenticated firmware image to run on the device. 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.1.0   | Secure Boot support added. |
+| 7.1.3   | IMA support added. |
+
+The SSR400 and SSR440 are factory configured with a cryptographic public key that only allows an authenticated firmware image to run on the device. 
 
 Secure boot ensures that only trusted (Juniper-signed) code will run from power-on through to linux OS boot. Kernel IMA ensures that only trusted (Juniper or Oracle signed) code will run in the Linux OS, kernel loadable driver modules, and the SSR application.
 
 If authentication fails due to corruption or tampering, the boot processes terminates and the system will reset.
 
+### IMA
+
+IMA is Linux’s Integrity Measurement Architecture. The SSR400 and SSR440 support IMA validation using GPG Signatures. IMA is not available on virtual machines or on the SSR1x0 and SSR1x00 series devices. 
+
+During the SSR software build process, every executable file (binaries, libraries, scripts, etc.) is signed. The signature is embedded into the root file system extended attributes of the file. 
+
+IMA validation is enabled by default for the root user, allowing the kernel to check the signature of each file before loading it for execution. Secondary kernels, and kernel loadable modules, are also validated before execution. If these checks fail, execution is denied with a **Permission denied** (EACCES) error code.
+
+:::important
+IDP is excluded from IMA.
+::: 
