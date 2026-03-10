@@ -13,7 +13,7 @@ sidebar_label: '3.100'
 
   _**Resolution**_ Fixed a memory leak in `mist-agent` during prolonged disconnect/reconnect cycles by optimizing memory usage and cleanup.
 
-- **WAN-4457 Incorrect VPN Peer Path State reported in oc-stats**
+- **WAN-4457 Incorrect VPN Peer Path State reported in MIST stats**
 
   _**Resolution**_ Fixed the VPN peer path state reporting mechanism to ensure accurate status information is fetched for each sample.
 
@@ -21,9 +21,9 @@ sidebar_label: '3.100'
 
   _**Resolution**_ Enhanced async API operation handling during speed test execution preparation to improve reliability and test initiation.
 
-- **WAN-4582 Add peer details for ARV events**
+- **WAN-4582 Add peer details for Application Path Insights events**
 
-  _**Resolution**_ Enhanced ARV (Application Route Verification) events to include comprehensive peer details for improved troubleshooting and monitoring.
+  _**Resolution**_ Enhanced Application Path Insights events to include comprehensive peer details for improved troubleshooting and monitoring.
 
 - **WAN-4606 Clean up cached IPs on factory reset**
 
