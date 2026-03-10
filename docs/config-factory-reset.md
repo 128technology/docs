@@ -3,19 +3,25 @@ title: Factory Reset
 sidebars_label: Factory Reset
 ---
 
+#### Version History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 7.1.0   | SSR 4x0 Factory Reset support added. |
+
 The SSR software, SSR1x0, SSR1x00, and SSR4x0 series provide the ability to reset to factory defaults. The SSR software and SSR1x0/1x00 devices use a software reset to return to the original factory defaults, and remove customer configurations.
 
-The SSR400 and SSR440 provides software-activated reset as well as a reset button on the device. With the reset button, you have the option of resetting to a previously defined golden configuration, or reset to the factory configuration and perform a secure zeroization.
+The SSR400 and SSR440 provides software-activated reset as well as a reset button on the device. With the reset button, you have the option of resetting to a previously defined rescue configuration, or reset to the factory configuration and perform a secure zeroization.
 
 Use the information below to determine the best option for your deployment.    
 
 ## SSR400 and SSR440 Factory Reset
 
-The SSR400 and SSR440 devices are equipped with a reset switch to perform the following actions:
+The SSR400 and SSR440 devices are equipped with a reset button to perform the following actions:
 
-1.	Press and hold for up to 4 seconds to **reboot** the device.
-2.	Press and hold for up to 15 seconds initiates a reset to a **rescue, or golden**, configuration.
-3.	Press and hold for up to 30 seconds initiates a reset to the **factory default** configuration.
+1.	Press and hold for 1 to 4 seconds to **reboot** the device.
+2.	Press and hold for 5 to 15 seconds initiates a reset to a **rescue** configuration.
+3.	Press and hold for 16 to 30 seconds initiates a reset to the **factory default** configuration.
 
 Holding the reset button for longer than 30 seconds cancels any of the button press actions described above.  
 
@@ -25,15 +31,15 @@ This action is the standard system reboot, often performed as part of troublesho
 
 ### Reset to the Rescue Configuration
 
-Press and hold the **Reset** button for more than 5 seconds but less than 15 to load and commit the rescue configuration. The rescue, or golden configuration is a router-only configuration, and is used as a manual fall back if the device configuration becomes corrupt or is unable to establish communications with the network. 
+Press and hold the **Reset** button for more than 5 seconds but less than 15 to load and commit the rescue configuration. The rescue, configuration is used as a manual fall back if the device configuration becomes corrupt or is unable to establish communications with the network. 
 
-Note that if a golden configuration has not been set, holding the reset button for 5-15 seconds does nothing.
+Note that if a rescue configuration has not been set, holding the reset button for 5-15 seconds does nothing.
 
-The rescue, or golden configuration is set via API at onboarding. For information about using the API to generate a golden configuration, see [Create a Golden Reset Configuration](#create-a-golden-reset-configuration). It should be noted that in an HA configuration, if one node is reset to the golden config, the other node (standby node) will receive the same golden config from it's HA peer. 
+The rescue configuration is set via API at onboarding. For information about using the API to generate a rescue configuration, see [Create a Rescue Reset Configuration](#create-a-rescue-configuration). It should be noted that in an HA configuration, if one node is reset to the rescue config, the other node (standby node) will receive the same rescue configuration from it's HA peer. 
 
 ### Factory Reset
 
-Press and hold the **Reset** button for up to 30 seconds to initiate a reset to the factory default configuration.
+Press and hold the **Reset** button for 16 to 30 seconds to initiate a reset to the factory default configuration.
 
 This process deletes all configurations on the device, including the backup configurations and rescue configuration, and loads and commits the original factory configuration. It also removes all data files, including customized configuration and log files, by unlinking the files from their directories. The command removes all user-created files from the system, including passwords, secrets, and private keys for SSH, certificates, local encryption, local authentication, IPsec, RADIUS, TACACS+, and others.
 
@@ -95,9 +101,9 @@ A log file of the platform cleanup operation is written out to `/tmp` while the 
 
 ### Additional Security - Zeroization Process
 
-When equipment is discarded or removed from its operational environment, the following process can be used to ensure there is no unauthorized access possible to sensitive residual information (e.g. cryptographic keys, keying material, PINs, passwords, etc.) on SSR network equipment. 
+This process is for use with SSR Software and SSR1x0 and SSR1x00 devices.
 
-This process is to be used with SSR Software and SSR1x0 and SSR1x00 devices.
+When equipment is discarded or removed from its operational environment, the following process can be used to ensure there is no unauthorized access possible to sensitive residual information (e.g. cryptographic keys, keying material, PINs, passwords, etc.) on SSR network equipment. 
 
 For the certified SSR platforms, all software and configuration reside on the SSD hard drive `/dev/sda`. Use the following procedure to zeroize/erase the SSD hard drive. 
 
@@ -125,9 +131,9 @@ For the certified SSR platforms, all software and configuration reside on the SS
 
 The system is wiped of all information, and is no longer operational as an SSR. If the system is to be reused in future, perform the ISO installation process. 
 
-## Create a Golden Reset Configuration
+## Create a Rescue Configuration
 
-The following API allows an administrator the ability to create a configuration snapshot to be used as a golden configuration for routers should they experience a catastrophic failure or become corrupt. This configuration is generated at the router level, and then imported by the Chassis Manager during a reset operation.
+The following API allows an administrator the ability to create a configuration snapshot to be used as a rescue configuration for routers should they experience a catastrophic failure or become corrupt. This configuration is generated at the router level, and then imported by the Chassis Manager during a reset operation.
 
 #### Endpoint: 
 
@@ -135,7 +141,7 @@ The following API allows an administrator the ability to create a configuration 
 
 #### Purpose: 
 
-Exports the current configuration (running or candidate) to a predefined golden config file that can be later imported.
+Exports the current configuration (running or candidate) to a predefined rescue config file that can be later imported.
 
 #### Authentication & Authorization:
 
@@ -158,7 +164,7 @@ Request Body (JSON):
 #### Behavior:
 
 - Automatically uses the filename `_golden-config` (predefined, not user-specified)
-- Always overwrites any existing golden config file
+- Always overwrites any existing rescue config file
 - The export is directed to the active node
 - Creates a configuration export file to be imported later
 
