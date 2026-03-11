@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 7.1 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.1 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.1"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.cd795c15.css">
-<script src="/assets/js/runtime~main.6cf21647.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.2ecae7c9.js" defer="defer"></script>
 <script src="/assets/js/main.00110c2a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -121,6 +121,10 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 <hr>
 <ul>
 <li><strong>I95-62631 Race condition for multiple dhcp servers startup:</strong> Resolved and issue where the multiple DHCP server config change from single DHCP server to multiple DHCP server under the same device interface would stop working. Updates have been made to the monitoring script to identify the changes and prevent the issue.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-62662 SSR4x0 Time not synchronized after reboot:</strong> Resolved an issue with the SSR400 and SSR440 where the hardware real time clock (RTC) was not updated after synchronizing with the NTP server. This has been resolved and the time is now fully synchronized. Note that this is an SSR4x0-only issue.</li>
 </ul>
 <hr>
 <ul>
