@@ -453,6 +453,10 @@ configure authority alarm-shelving shelf <name>
 | [`severity`](#configure-authority-alarm-shelving-shelf-severity) | Shelve alarms for this severity. |
 | `show` | Show configuration data for &#x27;shelf&#x27; |
 
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.3.0   | Alarm suppression feature introduced |
+
 ## `configure authority alarm-shelving shelf applies-to`
 
 Logical group to which a configuration element applies
