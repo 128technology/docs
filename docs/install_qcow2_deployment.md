@@ -7,10 +7,17 @@ The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage form
 
 For successful SSR qcow2 deployment, a cloud-init (or nocloud) configuration **must** provide persistent network interface bindings on first boot of the VM; otherwise the SSR will not correlate virtual machine NICs to router interfaces, and they may change across VM reboots. Operation of SSR qcow2 without persistent NIC bindings is not supported at this time.
 
-Download the qcow2 image using the link below:
+Download the 128T package-based qcow2 image using the link below:
 
 <!-- markdown-link-check-disable-next-line -->
-https://software.128technology.com/artifactory/list/generic-128t-images-release-local
+https://software.128technology.com/artifactory/list/generic-128t-images-release-local/
+
+Beginning with version 6.0, an image-based ISO installation process has been implemented. This installation and upgrade process is only available for SSR version 6.0 and higher. Conductors with version 6.3.0 installed are able to manage routers installed with image-based and package-based software versions. For more information, see [Image-Based Installation](intro_installation_image.md).
+
+Download the SSR image-based install qcow2 using the link below:
+
+<!-- markdown-link-check-disable-next-line -->
+https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 ## Using cloud-init to bootstrap SSR connection to Conductor
 
