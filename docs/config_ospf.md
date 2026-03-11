@@ -135,6 +135,7 @@ use-learned-routes
 ![OSPF Topology](/img/config_ospf.png)
 
 ## Configuration Verification
+
 Several `show` commands are available in the PCLI to display information about the state of the OSP protocol. In addition to the `show ospf` branch of output, you will also see contributions to the RIB from OSPF in the output of `show rib`.
 ```
 admin@labsystem1.fiedler# show ospf
@@ -167,11 +168,13 @@ When a router peered with another router via OSPF restarts, the peered router wi
 
 By enabling OSPF GR on all peered routers, timers can be set to prevent the peered router from withdrawing routes. Additionally, enabling the `helper-restart timer` and `strict-lsa-checking` will configure whether or not to terminate OSPF graceful restart in a situation where there is a change to an LSA that would be flooded to the restarting router, or when there is a changed LSA on the restarting router's retransmission list. 
 
+OSPF Graceful Restart (RFC 3623) describes mechanisms for both planned and unplanned outages. The Session Smart Router (SSR) implements the mechanism for unplanned outages, however the planned outage mechanism is not supported. As such, initiating a router restart with OSPF graceful restart enabled will not trigger the OSPF GR mechanisms available on the SSR, whereas unplanned outages will trigger these mechanisms.
+
 #### Interaction with BGP Graceful Restart
 
-For situations where OSPF is redistributed into BGP, an additional timer has been added which will allow OSPF graceful restart to complete before a BGP graceful restart completes. 
+For situations where OSPF is redistributed into BGP, an additional timer has been added which allows OSPF graceful restart to complete before a BGP graceful restart completes. 
 
-For situations where OSPF is redistributed into BGP, the `select-delay-time` timer has been added to BGP Graceful Restart. It is important that the OSPF graceful restart complete before the BGP graceful restart completes, due to the impact on the routing table. This should be set to a value greater than the time for OSPF graceful restart to complete. To determine the OSPF graceful restart length, examine the logging messages seen via `debug ospf graceful-restart`. 
+The `select-delay-time` timer has been added to BGP Graceful Restart. Due to the impact on the routing table,it is important that the OSPF graceful restart complete before the BGP graceful restart completes. This should be set to a value greater than the time for OSPF graceful restart to complete. To determine the OSPF graceful restart length, examine the logging messages seen via `debug ospf graceful-restart`. 
 
 ### Simple Configuration
 
