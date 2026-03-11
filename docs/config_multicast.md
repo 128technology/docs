@@ -321,6 +321,8 @@ The `routing default-instance pim restart-time` command has been added to allow 
 
 During the graceful restart period, the PIM join states are created, but no updates of multicast routes are sent to the forwarding plane. Once the graceful restart period is over, all new multicast routes are programmed, and old multicast routes are removed.
 
+The Session Smart Router (SSR) implements PIM Graceful Restart as defined by RFC 7761. The GR protocol defines the mechanisms for populating the `mroute` table after a node failure. The SSR also implements a configuration parameter that controls a timer related to the overall PIM Graceful Restart behavior which expects the protocol to have fully populated its `mroute` table after a restart. The configuration parameter controls system behavior above and beyond the protocol graceful restart, hence it is outside of the GR protocol and is not a violation of the GR RFC.
+
 For more information about the graceful restart timer, see [graceful-restart](config_command_guide.md#configure-authority-router-routing-routing-protocol-graceful-restart).
 
 ## Multicast Source Discovery Protocol (MSDP) 
