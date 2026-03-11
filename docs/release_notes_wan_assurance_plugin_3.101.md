@@ -1,9 +1,9 @@
 ---
-title: WAN Assurance Plugin 3.100 Release Notes
-sidebar_label: '3.100'
+title: WAN Assurance Plugin 3.101 Release Notes
+sidebar_label: '3.101'
 ---
 
-## Release 3.100.1
+## Release 3.101.1
 
 **Release Date:** March 10, 2026
 
