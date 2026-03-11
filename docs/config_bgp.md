@@ -960,7 +960,10 @@ Graceful restart ensures that even if BGP flaps during failover, the recovery is
 For graceful restart to work as intended, it must be configured on both the SSR and its external BGP peer router.
 :::
 
+The Session Smart Router (SSR) implements PIM Graceful Restart as defined by RFC 7761. The GR protocol defines the mechanisms for populating the `mroute` table after a node failure. The SSR also implements a configuration parameter that controls a timer related to the overall PIM Graceful Restart behavior which expects the protocol to have fully populated its `mroute` table after a restart. The configuration parameter controls system behavior above and beyond the protocol graceful restart, hence it is outside of the GR protocol and is not a violation of the GR RFC. 
+
 ### Configuring BGP `graceful-restart`
+
 Users can configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. Additionally, the graceful restart mode on BGP neighbors can be configured differently than on the BGP instance. Historically there was no separate neighbor configuration. The graceful restart mode must be explicitly enabled, otherwise the default mode is **helper**. 
 
 Example New Data Model Objects
