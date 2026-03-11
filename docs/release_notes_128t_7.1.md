@@ -111,6 +111,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-62631 Race condition for multiple dhcp servers startup:** Resolved and issue where the multiple DHCP server config change from single DHCP server to multiple DHCP server under the same device interface would stop working. Updates have been made to the monitoring script to identify the changes and prevent the issue.
 ------
+- **I95-62662 SSR4x0 Time not synchronized after reboot:** Resolved an issue with the SSR400 and SSR440 where the hardware real time clock (RTC) was not updated after synchronizing with the NTP server. This has been resolved and the time is now fully synchronized. Note that this is an SSR4x0-only issue. 
+------
 - **I95-62772 Add details to `show peers certificate` output:** The `show peers certificate` output no longer just shows PEM file output; the data has been rendered in a more friendly format.
 ------
 - **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
