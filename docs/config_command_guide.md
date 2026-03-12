@@ -49,6 +49,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`resource-group`](#configure-authority-resource-group) | Collect objects into a management group. |
 | [`router`](#configure-authority-router) | The router configuration element serves as a container for holding the nodes of a single deployed router, along with their policies. |
 | [`routing`](#configure-authority-routing) | authority level routing configuration |
+| [`secure-conductor-onboarding`](#configure-authority-secure-conductor-onboarding) | Configure Secure Conductor Onboarding |
 | [`security`](#configure-authority-security) | The security elements represent security policies for governing how and when the SSR encrypts and/or authenticates packets. |
 | [`security-key-management`](#configure-authority-security-key-management) | Configure Security Key Management |
 | [`service`](#configure-authority-service) | The service configuration is where you define the services that reside within the authority&#x27;s tenants as well as the policies to apply to those services. |
@@ -451,6 +452,10 @@ configure authority alarm-shelving shelf <name>
 | [`router-name-regex`](#configure-authority-alarm-shelving-shelf-router-name-regex) | Shelve alarms from routers that match this regex. |
 | [`severity`](#configure-authority-alarm-shelving-shelf-severity) | Shelve alarms for this severity. |
 | `show` | Show configuration data for &#x27;shelf&#x27; |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.3.0   | Alarm suppression feature introduced |
 
 ## `configure authority alarm-shelving shelf applies-to`
 
@@ -5049,12 +5054,14 @@ configure authority router <name>
 | [`icmp-probe-profile`](#configure-authority-router-icmp-probe-profile) | Profile for active ICMP probes for reachability-detection enforcement |
 | [`idp`](#configure-authority-router-idp) | Advanced IDP configuration. |
 | [`inter-node-security`](#configure-authority-router-inter-node-security) | The name of the security policy used for inter node communication between router interfaces |
+| [`key-exchange-algorithm-override`](#configure-authority-router-key-exchange-algorithm-override) | Key exchange algorithm selection for security key management for the router. |
 | [`location`](#configure-authority-router-location) | A descriptive location for this SSR. |
 | [`location-coordinates`](#configure-authority-router-location-coordinates) | The geolocation of this router in ISO 6709 format. Some examples: (1) Degrees only: +50.20361-074.00417/ (2) Degrees and minutes: +5012.22-07400.25/ or (3) Degrees, minutes, and seconds: +501213.1-0740015.1/ |
 | [`maintenance-mode`](#configure-authority-router-maintenance-mode) | When enabled, the router will be in maintenance mode and alarms related to this router will be shelved. |
 | [`management-proxy`](#configure-authority-router-management-proxy) | Settings to enable forwarding of SSR management traffic to a proxy |
 | [`management-service-generation`](#configure-authority-router-management-service-generation) | Configure Management Service Generation |
 | [`max-inter-node-way-points`](#configure-authority-router-max-inter-node-way-points) | Maximum number of way points to be allocated on inter-node path. |
+| [`ml-kem-keygen-priority`](#configure-authority-router-ml-kem-keygen-priority) | Priority for ML-KEM key generation with peers. Higher values indicate higher priority. |
 | [`name`](#configure-authority-router-name) | An identifier for the router. |
 | [`nat-pool`](#configure-authority-router-nat-pool) | A pool of shared NAT ports. |
 | [`node`](#configure-authority-router-node) | List of one or two SSR software instances, comprising an SSR. |
@@ -5124,6 +5131,7 @@ Configure Application Identification
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`per-app-metrics`](#configure-authority-router-application-identification-per-app-metrics) | Enable per app classification metrics |
 | `show` | Show configuration data for &#x27;application-identification&#x27; |
+| [`summary-corruption-upload-interval`](#configure-authority-router-application-identification-summary-corruption-upload-interval) | A corruption event will be reported at most once every interval. Zero disables all uploads. |
 | [`summary-retention`](#configure-authority-router-application-identification-summary-retention) | Configure Summary Retention |
 | [`summary-tracking`](#configure-authority-router-application-identification-summary-tracking) | Enable session stats tracking by applications |
 | [`use-application-director-in-memory-db`](#configure-authority-router-application-identification-use-application-director-in-memory-db) | Use in-memory db |
@@ -5389,6 +5397,32 @@ Default: true
 A true or false value.
 
 Options: true or false
+
+## `configure authority router application-identification summary-corruption-upload-interval`
+
+A corruption event will be reported at most once every interval. Zero disables all uploads.
+
+#### Usage
+
+```
+configure authority router application-identification summary-corruption-upload-interval [<duration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| duration | The value to set for this field |
+
+#### Description
+
+Default: 15m
+
+##### duration (string)
+
+A simple time duration. Valid units are s - seconds, m - minutes, h - hours, and d - days: 5s, 10m, 24h, 15d
+
+Must be a duration with units of seconds, minutes, hours, or days. e.g. 5s, 10m, 23h, 5d
 
 ## `configure authority router application-identification summary-retention`
 
@@ -6981,6 +7015,173 @@ configure authority router inter-node-security [<security-ref>]
 
 This type is used by other entities that need to reference configured security policies.
 
+## `configure authority router key-exchange-algorithm-override`
+
+Key exchange algorithm selection for security key management for the router.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`diffie-hellman`](#configure-authority-router-key-exchange-algorithm-override-diffie-hellman) | Diffie-Hellman algorithm. |
+| [`diffie-hellman-ml-kem`](#configure-authority-router-key-exchange-algorithm-override-diffie-hellman-ml-kem) | Diffie-Hellman and ML-KEM hybrid algorithm. |
+| [`ml-kem`](#configure-authority-router-key-exchange-algorithm-override-ml-kem) | ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;key-exchange-algorithm-override&#x27; |
+
+## `configure authority router key-exchange-algorithm-override diffie-hellman`
+
+Diffie-Hellman algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dh-key-size`](#configure-authority-router-key-exchange-algorithm-override-diffie-hellman-dh-key-size) | The key size used for Diffie-Hellman algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;diffie-hellman&#x27; |
+
+## `configure authority router key-exchange-algorithm-override diffie-hellman dh-key-size`
+
+The key size used for Diffie-Hellman algorithm.
+
+#### Usage
+
+```
+configure authority router key-exchange-algorithm-override diffie-hellman dh-key-size [<diffie-hellman-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| diffie-hellman-key-size | The value to set for this field |
+
+#### Description
+
+##### diffie-hellman-key-size (enumeration)
+
+The key size to use in the Diffie-Hellman key exchange
+
+Options:
+
+- 1024:    1024 bit key size
+- 2048:    2048 bit key size
+- 4096:    4096 bit key size
+
+## `configure authority router key-exchange-algorithm-override diffie-hellman-ml-kem`
+
+Diffie-Hellman and ML-KEM hybrid algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dh-key-size`](#configure-authority-router-key-exchange-algorithm-override-diffie-hellman-ml-kem-dh-key-size) | The key size used for Diffie-Hellman algorithm. |
+| [`ml-kem-key-size`](#configure-authority-router-key-exchange-algorithm-override-diffie-hellman-ml-kem-ml-kem-key-size) | The key size used for ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;diffie-hellman-ml-kem&#x27; |
+
+## `configure authority router key-exchange-algorithm-override diffie-hellman-ml-kem dh-key-size`
+
+The key size used for Diffie-Hellman algorithm.
+
+#### Usage
+
+```
+configure authority router key-exchange-algorithm-override diffie-hellman-ml-kem dh-key-size [<diffie-hellman-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| diffie-hellman-key-size | The value to set for this field |
+
+#### Description
+
+##### diffie-hellman-key-size (enumeration)
+
+The key size to use in the Diffie-Hellman key exchange
+
+Options:
+
+- 1024:    1024 bit key size
+- 2048:    2048 bit key size
+- 4096:    4096 bit key size
+
+## `configure authority router key-exchange-algorithm-override diffie-hellman-ml-kem ml-kem-key-size`
+
+The key size used for ML-KEM algorithm.
+
+#### Usage
+
+```
+configure authority router key-exchange-algorithm-override diffie-hellman-ml-kem ml-kem-key-size [<ml-kem-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ml-kem-key-size | The value to set for this field |
+
+#### Description
+
+##### ml-kem-key-size (enumeration)
+
+The key size to use in the ML-KEM key exchange
+
+Options:
+
+- 512:     512 bit key size
+- 768:     768 bit key size
+- 1024:    1024 bit key size
+
+## `configure authority router key-exchange-algorithm-override ml-kem`
+
+ML-KEM algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`ml-kem-key-size`](#configure-authority-router-key-exchange-algorithm-override-ml-kem-ml-kem-key-size) | The key size used for ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;ml-kem&#x27; |
+
+## `configure authority router key-exchange-algorithm-override ml-kem ml-kem-key-size`
+
+The key size used for ML-KEM algorithm.
+
+#### Usage
+
+```
+configure authority router key-exchange-algorithm-override ml-kem ml-kem-key-size [<ml-kem-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ml-kem-key-size | The value to set for this field |
+
+#### Description
+
+##### ml-kem-key-size (enumeration)
+
+The key size to use in the ML-KEM key exchange
+
+Options:
+
+- 512:     512 bit key size
+- 768:     768 bit key size
+- 1024:    1024 bit key size
+
 ## `configure authority router location`
 
 A descriptive location for this SSR.
@@ -7292,6 +7493,28 @@ An unsigned 32-bit integer.
 
 Range: 50000-1000000
 
+## `configure authority router ml-kem-keygen-priority`
+
+Priority for ML-KEM key generation with peers. Higher values indicate higher priority.
+
+#### Usage
+
+```
+configure authority router ml-kem-keygen-priority [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32
+
+An unsigned 32-bit integer.
+
 ## `configure authority router name`
 
 An identifier for the router.
@@ -7590,6 +7813,7 @@ configure authority router node <name>
 | [`recovery-mode-enabled`](#configure-authority-router-node-recovery-mode-enabled) | Allow booting from USB storage devices. |
 | [`reset-button-enabled`](#configure-authority-router-node-reset-button-enabled) | Enable the reset button for restarting or factory resetting. |
 | [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the SSR system. |
+| [`secure-conductor-onboarding`](#configure-authority-router-node-secure-conductor-onboarding) | Configure Secure Conductor Onboarding |
 | [`serial-console-enabled`](#configure-authority-router-node-serial-console-enabled) | Enable serial console. |
 | [`session-processor-count`](#configure-authority-router-node-session-processor-count) | The number of threads to use for session processing when using &#x27;manual&#x27; session-processor mode. |
 | [`session-processor-mode`](#configure-authority-router-node-session-processor-mode) | The method by which the number of threads used for session processing should be determined. |
@@ -21507,6 +21731,43 @@ Options:
 - combo:        A combined Control and Slice.
 - conductor:    A remote management system.
 
+## `configure authority router node secure-conductor-onboarding`
+
+Configure Secure Conductor Onboarding
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`endorsement-key`](#configure-authority-router-node-secure-conductor-onboarding-endorsement-key) | The public endorsement key of the router&#x27;s TPM in base64 encoded DER format. Required for strong mode onboarding on devices with vTPM. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;secure-conductor-onboarding&#x27; |
+
+## `configure authority router node secure-conductor-onboarding endorsement-key`
+
+The public endorsement key of the router&#x27;s TPM in base64 encoded DER format. Required for strong mode onboarding on devices with vTPM.
+
+#### Usage
+
+```
+configure authority router node secure-conductor-onboarding endorsement-key [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must be a base64 encoded string.
+
 ## `configure authority router node serial-console-enabled`
 
 Enable serial console.
@@ -22611,6 +22872,8 @@ configure authority router peer <name>
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-peer-description) | A description of the peer router. |
 | [`generated`](#configure-authority-router-peer-generated) | Indicates whether or not the Peer was automatically generated as a result of routers existing in the same neighborhood. |
+| [`key-exchange-algorithm-override`](#configure-authority-router-peer-key-exchange-algorithm-override) | Key exchange algorithm selection for security key management for the peer router. |
+| [`ml-kem-keygen-priority`](#configure-authority-router-peer-ml-kem-keygen-priority) | Priority for ML-KEM key generation with peers. Higher values indicate higher priority. |
 | [`name`](#configure-authority-router-peer-name) | An arbitrary name that represents the properties associated with the peer router. Typically this will be the name of the authority or the value of the name field in the peer&#x27;s router configuration. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`peering-common-name`](#configure-authority-router-peer-peering-common-name) | The identifier to use with enhanced-security-key-management. |
@@ -23088,6 +23351,197 @@ configure authority router peer generated [<boolean>]
 A true or false value.
 
 Options: true or false
+
+## `configure authority router peer key-exchange-algorithm-override`
+
+Key exchange algorithm selection for security key management for the peer router.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`diffie-hellman`](#configure-authority-router-peer-key-exchange-algorithm-override-diffie-hellman) | Diffie-Hellman algorithm. |
+| [`diffie-hellman-ml-kem`](#configure-authority-router-peer-key-exchange-algorithm-override-diffie-hellman-ml-kem) | Diffie-Hellman and ML-KEM hybrid algorithm. |
+| [`ml-kem`](#configure-authority-router-peer-key-exchange-algorithm-override-ml-kem) | ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;key-exchange-algorithm-override&#x27; |
+
+## `configure authority router peer key-exchange-algorithm-override diffie-hellman`
+
+Diffie-Hellman algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dh-key-size`](#configure-authority-router-peer-key-exchange-algorithm-override-diffie-hellman-dh-key-size) | The key size used for Diffie-Hellman algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;diffie-hellman&#x27; |
+
+## `configure authority router peer key-exchange-algorithm-override diffie-hellman dh-key-size`
+
+The key size used for Diffie-Hellman algorithm.
+
+#### Usage
+
+```
+configure authority router peer key-exchange-algorithm-override diffie-hellman dh-key-size [<diffie-hellman-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| diffie-hellman-key-size | The value to set for this field |
+
+#### Description
+
+##### diffie-hellman-key-size (enumeration)
+
+The key size to use in the Diffie-Hellman key exchange
+
+Options:
+
+- 1024:    1024 bit key size
+- 2048:    2048 bit key size
+- 4096:    4096 bit key size
+
+## `configure authority router peer key-exchange-algorithm-override diffie-hellman-ml-kem`
+
+Diffie-Hellman and ML-KEM hybrid algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dh-key-size`](#configure-authority-router-peer-key-exchange-algorithm-override-diffie-hellman-ml-kem-dh-key-size) | The key size used for Diffie-Hellman algorithm. |
+| [`ml-kem-key-size`](#configure-authority-router-peer-key-exchange-algorithm-override-diffie-hellman-ml-kem-ml-kem-key-size) | The key size used for ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;diffie-hellman-ml-kem&#x27; |
+
+## `configure authority router peer key-exchange-algorithm-override diffie-hellman-ml-kem dh-key-size`
+
+The key size used for Diffie-Hellman algorithm.
+
+#### Usage
+
+```
+configure authority router peer key-exchange-algorithm-override diffie-hellman-ml-kem dh-key-size [<diffie-hellman-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| diffie-hellman-key-size | The value to set for this field |
+
+#### Description
+
+##### diffie-hellman-key-size (enumeration)
+
+The key size to use in the Diffie-Hellman key exchange
+
+Options:
+
+- 1024:    1024 bit key size
+- 2048:    2048 bit key size
+- 4096:    4096 bit key size
+
+## `configure authority router peer key-exchange-algorithm-override diffie-hellman-ml-kem ml-kem-key-size`
+
+The key size used for ML-KEM algorithm.
+
+#### Usage
+
+```
+configure authority router peer key-exchange-algorithm-override diffie-hellman-ml-kem ml-kem-key-size [<ml-kem-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ml-kem-key-size | The value to set for this field |
+
+#### Description
+
+##### ml-kem-key-size (enumeration)
+
+The key size to use in the ML-KEM key exchange
+
+Options:
+
+- 512:     512 bit key size
+- 768:     768 bit key size
+- 1024:    1024 bit key size
+
+## `configure authority router peer key-exchange-algorithm-override ml-kem`
+
+ML-KEM algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`ml-kem-key-size`](#configure-authority-router-peer-key-exchange-algorithm-override-ml-kem-ml-kem-key-size) | The key size used for ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;ml-kem&#x27; |
+
+## `configure authority router peer key-exchange-algorithm-override ml-kem ml-kem-key-size`
+
+The key size used for ML-KEM algorithm.
+
+#### Usage
+
+```
+configure authority router peer key-exchange-algorithm-override ml-kem ml-kem-key-size [<ml-kem-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ml-kem-key-size | The value to set for this field |
+
+#### Description
+
+##### ml-kem-key-size (enumeration)
+
+The key size to use in the ML-KEM key exchange
+
+Options:
+
+- 512:     512 bit key size
+- 768:     768 bit key size
+- 1024:    1024 bit key size
+
+## `configure authority router peer ml-kem-keygen-priority`
+
+Priority for ML-KEM key generation with peers. Higher values indicate higher priority.
+
+#### Usage
+
+```
+configure authority router peer ml-kem-keygen-priority [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Default: 0
+
+##### uint32
+
+An unsigned 32-bit integer.
 
 ## `configure authority router peer name`
 
@@ -27123,6 +27577,7 @@ PIM configuration
 | `delete` | Delete configuration data |
 | [`interface`](#configure-authority-router-routing-pim-interface) | List of PIM interfaces |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`restart-time`](#configure-authority-router-routing-pim-restart-time) | PIM graceful restart duration |
 | [`rp`](#configure-authority-router-routing-pim-rp) | PIM RP Configuration |
 | `show` | Show configuration data for &#x27;pim&#x27; |
 
@@ -27252,6 +27707,34 @@ configure authority router routing pim interface node [<leafref>]
 ##### leafref
 
 A reference to an existing value in the instance data.
+
+## `configure authority router routing pim restart-time`
+
+PIM graceful restart duration
+
+#### Usage
+
+```
+configure authority router routing pim restart-time [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 120
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-1800
 
 ## `configure authority router routing pim rp`
 
@@ -38675,6 +39158,7 @@ System group configuration. Lets administrators configure system-wide properties
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`radius`](#configure-authority-router-system-radius) | Configure Radius |
 | [`remote-login`](#configure-authority-router-system-remote-login) | Configure Remote Login |
+| [`secure-conductor-onboarding`](#configure-authority-router-system-secure-conductor-onboarding) | Configure Secure Conductor Onboarding |
 | [`services`](#configure-authority-router-system-services) | Address information for internal services |
 | `show` | Show configuration data for &#x27;system&#x27; |
 | [`software-access`](#configure-authority-router-system-software-access) | Configuration for SSR software access for this router. Supported on managed assets only. Any settings configured here will override the authority software access settings. |
@@ -40742,6 +41226,73 @@ Options:
 
 - use-authority-setting:    Use the authority wide remote-login state.
 
+## `configure authority router system secure-conductor-onboarding`
+
+Configure Secure Conductor Onboarding
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`mode`](#configure-authority-router-system-secure-conductor-onboarding-mode) | The secure conductor onboarding mode. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`pre-shared-secret`](#configure-authority-router-system-secure-conductor-onboarding-pre-shared-secret) | A 48-byte base64 encoded string used for conductor and router onboarding verification. |
+| `show` | Show configuration data for &#x27;secure-conductor-onboarding&#x27; |
+
+## `configure authority router system secure-conductor-onboarding mode`
+
+The secure conductor onboarding mode.
+
+#### Usage
+
+```
+configure authority router system secure-conductor-onboarding mode [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- disabled:    The secure conductor onboarding process is disabled.
+- weak:        Allows routers with a TPM to use pre-loaded self-signed certificates when onboarding.
+- strong:      For devices with DevID. Ensures the asset-id matches the serialNumber field in the router&#x27;s public certificate. For public cloud instances with a vTPM, the router&#x27;s endorsement key must match the configured endorsement key on the node.
+
+## `configure authority router system secure-conductor-onboarding pre-shared-secret`
+
+A 48-byte base64 encoded string used for conductor and router onboarding verification.
+
+#### Usage
+
+```
+configure authority router system secure-conductor-onboarding pre-shared-secret [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+Must be a 48 byte, base64 encoded string (64 characters).
+Length: 64
+
 ## `configure authority router system services`
 
 Address information for internal services
@@ -41549,6 +42100,8 @@ Web server &amp; REST API.
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-system-services-webserver-enabled) | Enable Web server &amp; REST API on all control nodes in this router. |
+| [`max-sockets-per-request`](#configure-authority-router-system-services-webserver-max-sockets-per-request) | The maximum number of sockets the webserver will use per outbound request. Zero means no per-request limit but the max-total-sockets still applies. |
+| [`max-total-sockets`](#configure-authority-router-system-services-webserver-max-total-sockets) | The maximum number of total sockets the webserver will use when making outbound requests. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`port`](#configure-authority-router-system-services-webserver-port) | The port on which the Web servers listen. |
 | [`server`](#configure-authority-router-system-services-webserver-server) | List of control node server addresses. When present, they override the defaults from global configuration. |
@@ -41580,6 +42133,58 @@ Default: true
 A true or false value.
 
 Options: true or false
+
+## `configure authority router system services webserver max-sockets-per-request`
+
+The maximum number of sockets the webserver will use per outbound request. Zero means no per-request limit but the max-total-sockets still applies.
+
+#### Usage
+
+```
+configure authority router system services webserver max-sockets-per-request [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 50
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
+## `configure authority router system services webserver max-total-sockets`
+
+The maximum number of total sockets the webserver will use when making outbound requests.
+
+#### Usage
+
+```
+configure authority router system services webserver max-total-sockets [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 250
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-65535
 
 ## `configure authority router system services webserver port`
 
@@ -41710,15 +42315,42 @@ Configure SSL encryption for HTTPS.
 
 | command | description |
 | ------- | ----------- |
-| [`ciphers`](#configure-authority-router-system-services-webserver-ssl-ciphers) | Configure the allowed ciphers. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings. |
+| [`cipher-suites`](#configure-authority-router-system-services-webserver-ssl-cipher-suites) | Configure the allowed ciphers for TLSv1.3. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers -s -tls1_3&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings. |
+| [`ciphers`](#configure-authority-router-system-services-webserver-ssl-ciphers) | Configure the allowed ciphers for TLSv1.2. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings. |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`protocol`](#configure-authority-router-system-services-webserver-ssl-protocol) | Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used. |
+| [`protocol`](#configure-authority-router-system-services-webserver-ssl-protocol) | Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used. If compatibility with older browsers is not required then only TLSv1.3 should be used. |
 | `show` | Show configuration data for &#x27;ssl&#x27; |
+
+## `configure authority router system services webserver ssl cipher-suites`
+
+Configure the allowed ciphers for TLSv1.3. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers -s -tls1_3&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings.
+
+#### Usage
+
+```
+configure authority router system services webserver ssl cipher-suites [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+Default: TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+
+##### string
+
+A text value.
+
+Must contain only alphanumeric characters or any of the following: . - _ :
 
 ## `configure authority router system services webserver ssl ciphers`
 
-Configure the allowed ciphers. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings.
+Configure the allowed ciphers for TLSv1.2. The full list of available ciphers can be viewed by running the &#x27;openssl ciphers&#x27; shell command. See &#x27;CIPHER LIST FORMAT&#x27; and &#x27;CIPHER STRINGS&#x27; in the OpenSSL documentation https://www.openssl.org/docs/man1.1.1/man1/ciphers.html for the permitted values and their meanings.
 
 #### Usage
 
@@ -41734,15 +42366,17 @@ configure authority router system services webserver ssl ciphers [<string>]
 
 #### Description
 
-Default: HIGH:!aNULL:!MD5
+Default: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384
 
 ##### string
 
 A text value.
 
+Must contain only alphanumeric characters or any of the following: . - _ :
+
 ## `configure authority router system services webserver ssl protocol`
 
-Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used.
+Configure the allowed protocols. By default both &#x27;TLSv1.2&#x27; and &#x27;TLSv1.3&#x27; are used. If compatibility with older browsers is not required then only TLSv1.3 should be used.
 
 #### Usage
 
@@ -41977,10 +42611,137 @@ Configuration for SSR software updates. Supported on managed assets only.
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
+| [`download`](#configure-authority-router-system-software-update-download) | Configuration for software downloads. Supported on managed assets only. |
 | [`max-bandwidth`](#configure-authority-router-system-software-update-max-bandwidth) | Bandwidth limit for downloads of software updates. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`repository`](#configure-authority-router-system-software-update-repository) | Configuration for how to retrieve software updates. |
+| [`rpm-operation-timeout`](#configure-authority-router-system-software-update-rpm-operation-timeout) | The timeout in seconds for rpm downloads and installs. Once the timeout is reached, the rpm operation will fail. |
 | `show` | Show configuration data for &#x27;software-update&#x27; |
+| [`timeout`](#configure-authority-router-system-software-update-timeout) | The timeout in seconds for the upgrade. Once the timeout is reached, the upgrade will fail. The timeout is reset when the device reboots during the upgrade. |
+
+## `configure authority router system software-update download`
+
+Configuration for software downloads. Supported on managed assets only.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`attempts`](#configure-authority-router-system-software-update-download-attempts) | The maximum number of attempts to try the download before considering it failed. If set to 0, the download will retry until the timeout is hit. |
+| `delete` | Delete configuration data |
+| [`enable-timeout`](#configure-authority-router-system-software-update-download-enable-timeout) | Whether to set a timeout on the overall length of the download. |
+| [`maximum-retry-delay`](#configure-authority-router-system-software-update-download-maximum-retry-delay) | The maximum amount of time in seconds to wait in between download attempts. The retry delay will start off small and back off exponentially up to this duration. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;download&#x27; |
+| [`timeout`](#configure-authority-router-system-software-update-download-timeout) | The timeout in seconds for the download. Once the timeout is reached, the download will fail. |
+
+## `configure authority router system software-update download attempts`
+
+The maximum number of attempts to try the download before considering it failed. If set to 0, the download will retry until the timeout is hit.
+
+#### Usage
+
+```
+configure authority router system software-update download attempts [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Default: 10
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-255
+
+## `configure authority router system software-update download enable-timeout`
+
+Whether to set a timeout on the overall length of the download.
+
+#### Usage
+
+```
+configure authority router system software-update download enable-timeout [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router system software-update download maximum-retry-delay`
+
+The maximum amount of time in seconds to wait in between download attempts. The retry delay will start off small and back off exponentially up to this duration.
+
+#### Usage
+
+```
+configure authority router system software-update download maximum-retry-delay [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 3600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 0-86400
+
+## `configure authority router system software-update download timeout`
+
+The timeout in seconds for the download. Once the timeout is reached, the download will fail.
+
+#### Usage
+
+```
+configure authority router system software-update download timeout [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 10800
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1800-604800
 
 ## `configure authority router system software-update max-bandwidth`
 
@@ -42181,6 +42942,62 @@ Options:
 - conductor-only:      Download software from the Conductor, using it as a proxy to the Internet if it has not already downloaded the requested software.
 - prefer-conductor:    Download software from the Conductor, using the Internet if the Conductor has not already downloaded the requested software.
 - internet-only:       Download software from publicly available sources via the Internet.
+
+## `configure authority router system software-update rpm-operation-timeout`
+
+The timeout in seconds for rpm downloads and installs. Once the timeout is reached, the rpm operation will fail.
+
+#### Usage
+
+```
+configure authority router system software-update rpm-operation-timeout [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 300-86400
+
+## `configure authority router system software-update timeout`
+
+The timeout in seconds for the upgrade. Once the timeout is reached, the upgrade will fail. The timeout is reset when the device reboots during the upgrade.
+
+#### Usage
+
+```
+configure authority router system software-update timeout [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 3600
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1800-604800
 
 ## `configure authority router system syslog`
 
@@ -44632,6 +45449,131 @@ configure authority routing resource-group [<resource-group-ref>]
 
 This type is used by other entities that need to reference configured resource groups.
 
+## `configure authority secure-conductor-onboarding`
+
+Configure Secure Conductor Onboarding
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`ca-certificate`](#configure-authority-secure-conductor-onboarding-ca-certificate) | The CA certificate used to sign the public certificate. |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`public-certificate`](#configure-authority-secure-conductor-onboarding-public-certificate) | The public certificate the conductor will use to prove it is the correct conductor. |
+| [`rate-limits`](#configure-authority-secure-conductor-onboarding-rate-limits) | Rate limits for secure conductor onboarding requests. |
+| `show` | Show configuration data for &#x27;secure-conductor-onboarding&#x27; |
+
+## `configure authority secure-conductor-onboarding ca-certificate`
+
+The CA certificate used to sign the public certificate.
+
+#### Usage
+
+```
+configure authority secure-conductor-onboarding ca-certificate [<ca-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ca-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### ca-certificate-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured CA certificate.
+
+## `configure authority secure-conductor-onboarding public-certificate`
+
+The public certificate the conductor will use to prove it is the correct conductor.
+
+#### Usage
+
+```
+configure authority secure-conductor-onboarding public-certificate [<client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### client-certificate-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured client certificate.
+
+## `configure authority secure-conductor-onboarding rate-limits`
+
+Rate limits for secure conductor onboarding requests.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`global`](#configure-authority-secure-conductor-onboarding-rate-limits-global) | The maximum number of SCO requests per second allowed from all clients. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`per-client`](#configure-authority-secure-conductor-onboarding-rate-limits-per-client) | The maximum number of SCO requests per second allowed from a single client IP. |
+| `show` | Show configuration data for &#x27;rate-limits&#x27; |
+
+## `configure authority secure-conductor-onboarding rate-limits global`
+
+The maximum number of SCO requests per second allowed from all clients.
+
+#### Usage
+
+```
+configure authority secure-conductor-onboarding rate-limits global [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 100
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1000
+
+## `configure authority secure-conductor-onboarding rate-limits per-client`
+
+The maximum number of SCO requests per second allowed from a single client IP.
+
+#### Usage
+
+```
+configure authority secure-conductor-onboarding rate-limits per-client [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 1
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-100
+
 ## `configure authority security`
 
 The security elements represent security policies for governing how and when the SSR encrypts and/or authenticates packets.
@@ -44904,6 +45846,8 @@ Options:
 - sha1:          SHA1 160-bit Key Hashed Message Authentication Code Mode.
 - sha256:        SHA256 256-bit Key Hashed Message Authentication Code Mode.
 - sha256-128:    SHA256 128-bit Key Hashed Message Authentication Code Mode.
+- sha384:        SHA384 384-bit Key Hashed Message Authentication Code Mode.
+- sha512:        SHA512 512-bit Key Hashed Message Authentication Code Mode.
 
 ## `configure authority security hmac-key`
 
@@ -45031,7 +45975,7 @@ Configure Security Key Management
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`invalid-certificate-behavior`](#configure-authority-security-key-management-invalid-certificate-behavior) | Behavior when a certificate is revoked, expired, or invalid. |
-| [`key-exchange-algorithm`](#configure-authority-security-key-management-key-exchange-algorithm) | Configure Key Exchange Algorithm |
+| [`key-exchange-algorithm`](#configure-authority-security-key-management-key-exchange-algorithm) | Key exchange algorithm selection for security key management for authority. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`payload-key-rekey-interval`](#configure-authority-security-key-management-payload-key-rekey-interval) | Hours between payload security key regeneration. |
 | [`peer-key-rekey-interval`](#configure-authority-security-key-management-peer-key-rekey-interval) | Hours between security key regeneration for peer routers. |
@@ -45171,33 +46115,35 @@ Options:
 
 ## `configure authority security-key-management key-exchange-algorithm`
 
-Configure Key Exchange Algorithm
+Key exchange algorithm selection for security key management for authority.
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`diffie-hellman`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman) | Configure Diffie Hellman |
+| [`diffie-hellman`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman) | Diffie-Hellman algorithm. |
+| [`diffie-hellman-ml-kem`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman-ml-kem) | Diffie-Hellman and ML-KEM hybrid algorithm. |
+| [`ml-kem`](#configure-authority-security-key-management-key-exchange-algorithm-ml-kem) | ML-KEM algorithm. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;key-exchange-algorithm&#x27; |
 
 ## `configure authority security-key-management key-exchange-algorithm diffie-hellman`
 
-Configure Diffie Hellman
+Configure the Diffie-Hellman algorithm.
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`dh-key-size`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman-dh-key-size) | Configure Dh Key Size |
+| [`dh-key-size`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman-dh-key-size) | The key size used for Diffie-Hellman algorithm. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;diffie-hellman&#x27; |
 
 ## `configure authority security-key-management key-exchange-algorithm diffie-hellman dh-key-size`
 
-Configure DH Key Size
+The key size used for Diffie-Hellman algorithm.
 
 #### Usage
 
@@ -45222,6 +46168,117 @@ Options:
 - 1024:    1024 bit key size
 - 2048:    2048 bit key size
 - 4096:    4096 bit key size
+
+## `configure authority security-key-management key-exchange-algorithm diffie-hellman-ml-kem`
+
+Diffie-Hellman and ML-KEM hybrid algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`dh-key-size`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman-ml-kem-dh-key-size) | The key size used for Diffie-Hellman algorithm. |
+| [`ml-kem-key-size`](#configure-authority-security-key-management-key-exchange-algorithm-diffie-hellman-ml-kem-ml-kem-key-size) | The key size used for ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;diffie-hellman-ml-kem&#x27; |
+
+## `configure authority security-key-management key-exchange-algorithm diffie-hellman-ml-kem dh-key-size`
+
+The key size used for Diffie-Hellman algorithm.
+
+#### Usage
+
+```
+configure authority security-key-management key-exchange-algorithm diffie-hellman-ml-kem dh-key-size [<diffie-hellman-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| diffie-hellman-key-size | The value to set for this field |
+
+#### Description
+
+##### diffie-hellman-key-size (enumeration)
+
+The key size to use in the Diffie-Hellman key exchange
+
+Options:
+
+- 1024:    1024 bit key size
+- 2048:    2048 bit key size
+- 4096:    4096 bit key size
+
+## `configure authority security-key-management key-exchange-algorithm diffie-hellman-ml-kem ml-kem-key-size`
+
+The key size used for ML-KEM algorithm.
+
+#### Usage
+
+```
+configure authority security-key-management key-exchange-algorithm diffie-hellman-ml-kem ml-kem-key-size [<ml-kem-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ml-kem-key-size | The value to set for this field |
+
+#### Description
+
+##### ml-kem-key-size (enumeration)
+
+The key size to use in the ML-KEM key exchange
+
+Options:
+
+- 512:     512 bit key size
+- 768:     768 bit key size
+- 1024:    1024 bit key size
+
+## `configure authority security-key-management key-exchange-algorithm ml-kem`
+
+ML-KEM algorithm.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`ml-kem-key-size`](#configure-authority-security-key-management-key-exchange-algorithm-ml-kem-ml-kem-key-size) | The key size used for ML-KEM algorithm. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;ml-kem&#x27; |
+
+## `configure authority security-key-management key-exchange-algorithm ml-kem ml-kem-key-size`
+
+The key size used for ML-KEM algorithm.
+
+#### Usage
+
+```
+configure authority security-key-management key-exchange-algorithm ml-kem ml-kem-key-size [<ml-kem-key-size>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ml-kem-key-size | The value to set for this field |
+
+#### Description
+
+##### ml-kem-key-size (enumeration)
+
+The key size to use in the ML-KEM key exchange
+
+Options:
+
+- 512:     512 bit key size
+- 768:     768 bit key size
+- 1024:    1024 bit key size
 
 ## `configure authority security-key-management payload-key-rekey-interval`
 
@@ -47270,7 +48327,7 @@ configure authority service-policy <name>
 | [`peer-path-resiliency`](#configure-authority-service-policy-peer-path-resiliency) | Whether or not session resiliency failover occurs among multiple peers. |
 | [`qp-preference`](#configure-authority-service-policy-qp-preference) | Preference for ordering interfaces by QP values. |
 | [`required-qp`](#configure-authority-service-policy-required-qp) | Minimum quality points required on network interface. |
-| [`reverse-gateway-change-detection`](#configure-authority-service-policy-reverse-gateway-change-detection) | Compare the forward packet source-mac against the reverse next-hop arp entry, and trigger a flow-move for the session to pick up the reverse next-hop update. |
+| [`reverse-gateway-change-detection`](#configure-authority-service-policy-reverse-gateway-change-detection) | Trigger a session-modify when the packet source-mac does not match the reverse next-hop ARP resolution for sessions that are not from inter-router or inter-node. |
 | [`service-class`](#configure-authority-service-policy-service-class) | A reference to the name of the service class to use. |
 | [`session-resiliency`](#configure-authority-service-policy-session-resiliency) | Types of session resiliency govern how the SSR provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing. |
 | `show` | Show configuration data for &#x27;service-policy&#x27; |
@@ -47880,27 +48937,27 @@ An unsigned 32-bit integer.
 
 ## `configure authority service-policy reverse-gateway-change-detection`
 
-Compare the forward packet `source-mac` against the `reverse next-hop arp` entry, and trigger a flow-move for the session to pick up the reverse next-hop update.
+Trigger a session-modify when the packet source-mac does not match the reverse next-hop ARP resolution for sessions that are not from inter-router or inter-node.
 
 #### Usage
 
 ```
-configure authority service-policy reverse-gateway-change-detection enabled
+configure authority service-policy reverse-gateway-change-detection [<boolean>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| enumeration | The value to set for this field |
+| boolean | The value to set for this field |
 
 #### Description
 
-Default: disabled
+Default: false
 
-##### enumeration
+##### boolean
 
-A value from a set of predefined names.
+A true or false value.
 
 Options:
 

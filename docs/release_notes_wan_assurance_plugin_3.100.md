@@ -1,8 +1,8 @@
 ---
 title: WAN Assurance Plugin 3.100 Release Notes
 sidebar_label: '3.100'
-
 ---
+
 ## Release 3.100.0
 
 #### New Features and Improvements

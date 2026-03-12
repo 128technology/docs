@@ -61,6 +61,118 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.1.3-29r2
+
+**Release Date:** March 10, 2026
+
+### New Features
+
+- **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
+------
+- **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
+------
+- **I95-54247 IMA - SSR Signed packages only execution:** IMA is Linux’s Integrity Measurement Architecture. The SSR400 and SSR440 support IMA validation using GPG Signatures. IMA validation is enabled by default for the root user, allowing the kernel to check the signature of each file before loading it for execution. If these checks fail, execution is denied with a Permission denied (EACCES) error code. For more information, see [Secure Boot - IMA](sec-secure-boot.md#ima).
+------
+- **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
+------
+- **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information to the GUI and PCLI, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers (on appropriately resourced hardware platforms). Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
+------
+- **I95-58446 EoSVR Loop Prevention:** EoSVR A/S Loop Prevention has been added, allowing EoSVR traffic to pass Broadcast, unknown-unicast, and multicast traffic through a switch without causing the port to be shut down. 
+------
+- **I95-58959 Secure Conductor Onboarding:** Secure Conductor Onboarding (SCO) provides the ability to onboard a router to a conductor ensuring that each device proves possession of a private key, and that the connection is trusted and authenticated. For more information, see [Secure Conductor Onboarding](sec-conductor-onboard.md).
+------
+- **I95-59948 SHA-384 and SHA-512 Support:** Added support for CNSA 2.0 algorithms SHA-384 and SHA-512 to support US Federal government deployments. For additional information, see [`configure-authority-security-hmac-cipher`](config_command_guide.md#configure-authority-security-hmac-cipher).
+------
+- **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).
+------
+- **I95-61176 Multicast Failover Optimization:** Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM, as well as failover times in general.
+------
+- **I95-63476 Router/Peer path override for `key-exchange-algorithm`:** A router/peer-path override has been added to enable the transition to a new algorithm within authority. For more information, see [Key Exchange Algorithm Router Override](enhanced-sec-key-mgmt.md#key-exchange-algorithm-router-override). 
+
+### Resolved Issues
+
+<!---- **The following CVEs have been identified and resolved in this release:** CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291.
+------ --->
+- **I95-57605 BFD link-test-interval not accurate:** Resolved as part of I95-59720. Several modifications have been made to the BFD timers to improve accuracy. 
+------
+- **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
+------
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
+------
+- **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
+------
+- **I95-61856 Add `reload local certificates` command for ESKM:** The `reload local certificates` command has been added to allow the updating of local certificates. See [`reload local certificates`](cli_reference.md#reload-local-certificates) for more information. 
+------
+- **I95-62074 Highway requests metadata key when `enhanced-security-key-management` feature is disabled:** Resolved an issue where even when `enhanced-security-key-management` was disabled, it continued to attempt to get the key information. 
+------
+- **I95-62343 Routers disconnecting from the Conductor while still successfully routing traffic:** Resolved an issue where Salt gets stuck with a bad network connection. Added new functionality to the `minion-watchdog` service which will restart the `salt-minion` if there is a salt job stuck for over an hour.
+------
+- **I95-62580 Conflicting network interface names slowing application traffic:** Resolved an issue in the app summary tracking logic related to conflicting network interface names for non-redundant ports of an HA router.
+------
+- **I95-62631 Race condition for multiple dhcp servers startup:** Resolved and issue where the multiple DHCP server config change from single DHCP server to multiple DHCP server under the same device interface would stop working. Updates have been made to the monitoring script to identify the changes and prevent the issue.
+------
+- **I95-62662 SSR4x0 Time not synchronized after reboot:** Resolved an issue with the SSR400 and SSR440 where the hardware real time clock (RTC) was not updated after synchronizing with the NTP server. This has been resolved and the time is now fully synchronized. Note that this is an SSR4x0-only issue. 
+------
+- **I95-62772 Add details to `show peers certificate` output:** The `show peers certificate` output no longer just shows PEM file output; the data has been rendered in a more friendly format.
+------
+- **I95-62859 Duplicate alarms created for duplicate asset IDs:** Resolved an issue where the Conductor created a duplicate asset ID alarm each time an asset with a duplicate ID tried to authenticate.
+------
+- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the Anti-Virus and IDP configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
+------
+- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.
+------
+- **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
+------
+- **I95-63018 memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.
+------
+- **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR secuirty using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
+------
+- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.
+------
+- **I95-63202 Unable to bind interfaces in Azure F8 flavor in West Europe region:** Resolved an issue where driver optimization on lower core count systems required more more memory usage, causing initialization failures.
+------
+- **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
+------
+- **I95-63292 Add upgrade timeout and rpm operation timeout:** Added the ability to configure the timeout for upgrades and for rpm download/install operations under `config authority router <RouterName> system software-update`. The defaults are 1 hour for SSR upgrade and 10 minutes for rpm operations.
+------
+- **I95-63295 Highway crash when show fib is executed on very large FIB:** Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.
+------
+- **I95-63299 Keys signed with ECDSA do not work with Enhanced Security Key Management:** Resolved an issue where ECC-based keys fail during the validation process, because the SSR was using hardcoded SHA256 for its signature validation checking. This issue has been resolved.
+------
+- **I95-63306 Allow RSA keys with ECC signatures on certificates:** Resolved an unnecessary restriction between the allowed PKI private key algorithm and the CA signature algorithm. The key is now validated independently from the signature on the certificate.
+------
+- **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
+------
+- **I95-63330 Repeated interface flaps on vSSR led to crash in highway process:** Truncated packets are validated prior to processing, preventing crash.
+------
+- **I95-63353 Invalid assert that leads to a crash:** Resolved an issue where an incorrect assertion led to a crash. Protections have been added to prevent the race condition leading to the crash.
+------
+- **I95-63356 Do not allow new sessions after peer's certificate expired/revoked:** Resolved an issue where sessions were one peer continued to send new sessions after the other peers' certificate was revoked. When the peer's certificate expires, the peer is now forced to re-initiate the key exchange. 
+------
+- **I95-63368 SSR400/SSR440 PMTU cannot exceed 8978:** Resolved an issue where SSR400/SSR440 PMTU discovery was lower than other platforms. The issue has been resolved, and SSR400/SSR440 PMTU now discovers at 9198.
+------
+- **I95-63412 Glare condition leading to highway crash when session terminates prematurely:** Resolved an issue where session exception processing was not handled properly.
+------
+- **I95-63422 Factory reset routers not re-onboarding when ESKM enabled:** Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.
+------
+- **I95-63675 Node page in the GUI appears to load indefinitely:** Resolved an issue where the GUI Node page would load infinitely.
+------
+- **I95-63676 Waypoints fail to allocate when the `service-path peer next-hop gateway` is off the subnet:** Resolved an issue where the first network-interface IP was selected as the local IP for waypoint allocation, even if that IP is not a valid waypoint. 
+------ 
+- **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
+------
+- **I95-63817 Default peering certificates are unable to use the configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
+------
+- **I95-63923 Redundant conductor fails to upgrade:** Resolved an issue where a minion disconnects from the conductor node and never attempts to reconnect. The minion watchdog process now restarts the salt minion if it is not connected to all conductor nodes.
+------
+- **I95-63943 Edge-case crash when changing from regular services to app-id:** Resolved an issue where a system that never had app-id services or had app-id services, reverted them and restarted the highway process; and then modified an existing service to use app-id caused a crash. Protections have been added to safeguard against this edge case. 
+------
+- **I95-64066 Race condition when syncing SSH keys to the peer node:** Resolved an issue where SSH keys were not synced between peer nodes automatically by the Conductor.
+
+### Caveats
+
+- **I95-64317 Dropped Packets Capture continues to run:** If you have initiated a packet Capture from any page in the GUI, it will continue to run on the web server even after the request is terminated, resulting in expensive per packet export overhead. The web server must be restarted to terminate the packet capture. This issue is under investigation and will be resolved in an upcoming release. 
+
 ## Release 7.1.0-50r1
 
 **Release Date:** December 4, 2025
@@ -145,6 +257,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 - **I95-63422 Unable to establish peering:** An issue has been identified where the factory reset process or bringing online a new router results in the device getting stuck in a `cert-exchange-init` state when establishing peering using Enhanced Security Key Management. 
 
-	_**Workaround**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
+	_**Workaround:**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
 	
 	For factory reset of an existing router, remove the router from the neighborhood before re-onboarding the router. Ensure that the desired certificate is installed before adding the neighborhood back to the router and re-onboarding to the conductor.

@@ -40,12 +40,13 @@ The SSR Software packages are available from our public servers using the userna
 The image-based SSR ISOs are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
-- https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local
+- https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
+
 
 The package-based 128T ISOs are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
-- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
+- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page.
 
