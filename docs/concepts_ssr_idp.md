@@ -105,7 +105,7 @@ Software version 6.3.3-R2 introduces the support of multi-core capabilities for 
 For legacy package-based routers, multi-core IDP capability is not supported, and those systems will continue to operate in the single-core mode.
 
 :::note 
-Multi-core IDP is not available on the following SSR devices: SSR120, SSR130, SSR1200, SSR400, and SSR440. 
+IDP is not available on the following SSR devices: SSR120, SSR130, SSR1200, SSR400, and SSR440. 
 :::
 
 ## Limitations
