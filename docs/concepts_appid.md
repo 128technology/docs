@@ -71,7 +71,7 @@ The SSR can also *learn about named destinations* by inspecting the traffic that
 Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [**Configuring Web Filtering using the PCLI**](config_domain-based_web_filter.md#configuring-web-filtering-using-the-pcli) for detailed configuration steps.
 
 :::note
-AppID based on TLS is supported on TLS 1.0, 1.1, 1.2, and *1.3 with ECH (Encrypted Client Hello) disabled*. Browsers using TLS 1.3 have ECH enabled by default, so it must be manually disabled on the device for AppID based TLS to function.
+AppID based on TLS is supported on TLS 1.0, 1.1, 1.2, and *1.3 with ECH (Encrypted Client Hello) disabled*. Browsers using TLS 1.3 have ECH enabled by default, so it must be disabled on the device for AppID based TLS to function.
 :::
 
 The `Client Hello` message typically includes a `server_name` extension, which represents the domain-name being accessed by the client. For example:
