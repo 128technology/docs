@@ -4,9 +4,15 @@ sidebar_label: Upgrade Considerations
 ---
 Before upgrading please review the following information.
 
+:::important
+After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+
+Rollback to the previously installed version of software *is* supported.  
+:::
+
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
-::: 
+:::
 
 ### Upgrade Installer
 For software versions prior to 6.3.0, before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
