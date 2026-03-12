@@ -63,7 +63,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.1.4-2r2
 
-**Release Date:** March 12, 2026
+**Release Date:** March 13, 2026
 
 ### Resolved Issues
 
