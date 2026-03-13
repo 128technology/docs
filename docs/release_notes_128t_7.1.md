@@ -20,6 +20,12 @@ Offline mode conductor and router upgrades to image-based installations are deta
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
+:::important
+After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+
+Rollback to the previously installed version of software *is* supported.  
+:::
+
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
 ::: 
@@ -61,9 +67,23 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.1.4-3r2
+
+**Release Date:** March 13, 2026
+
+### Resolved Issues
+
+- **I95-64521 Upgrade from 7.1.0-r1 to 7.1.3-r2 failed on SSR440:** Resoved an issue where an upgrade to 7.1.3-r2 on an SSR440 HA router would fail because the system health check failed. The `ha-0-0` interface did not come up during boot (`eth1` comes up instead), causing the system health check to fail. The `ha-0-0` interface is now correctly initialized during upgrades on all SSR4x0 HA configurations.
+------
+- **I95-64543 Onboarding an SSR440 router running 7.1.0 to a conductor running 7.1.3 fails:** Resolved an issue where an older default cipher-string operator had been disallowed and caused the onboarding to fail. All of the following characters are now treated as valid: `. - _ : + @ = , !`.
+
 ## Release 7.1.3-29r2
 
 **Release Date:** March 10, 2026
+
+:::important
+If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 7.1.4-2r2, and not use 7.1.3-29r2, due to the above mentioned HA interface upgrade issue.
+:::
 
 ### New Features
 
