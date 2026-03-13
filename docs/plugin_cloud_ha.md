@@ -104,7 +104,28 @@ This is particularly useful when you need to manage route tables in different su
 
 #### Route Table Discovery
 
-The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system will scan for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries will be managed.
+The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system will first scan for tags (see the Tagging section for more information). If none are found, then it will scan for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries will be managed.
+
+#### Tagging
+
+If `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent will look for the Route Table by looking at the tags assigned to the VM.
+
+To utilize this feature, the tags must follow the following form:
+* `SSR-CLOUD-HA-<TAG_IDX>-SUBSCRIPTION-ID` : `<subscription-id>`
+* `SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP` : `<resource-group-name>`
+* `SSR-CLOUD-HA-<TAG_IDX>-ROUTE-TABLE-NAME` : `<route-table-name>`
+
+:::note The Subscription ID, Resource Group, and Route Table Name must be the same for both nodes in a redundancy group.
+:::
+
+For example, the tags would look like:
+* `SSR-CLOUD-HA-0-SUBSCRIPTION-ID` : `88888888-bbbb-4444-aaaa-ffffffffffff`
+* `SSR-CLOUD-HA-0-RESOURCE-GROUP` : `myResourceGroup`
+* `SSR-CLOUD-HA-0-ROUTE-TABLE-NAME` : `myRouteTable`
+
+If `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will fall back to using existing UDRs.
+
+These tags are queried every time the API Agent tries to grab state or become-active, so modifying these tags during runtime is allowed.
 
 ### AWS TGW
 
@@ -120,6 +141,24 @@ If you want the state output to report the current routes in the TGW Route Rable
 
 The TGW Route Table is the object which is updated by the plugin, pointing to one of the node's TGW Attachments. Each SSR node must know the TGW Route Table as well as the corresponding attachment that points to itself. How this is configured is explained in the [AWS TGW Config Section](#aws-tgw-specific-configuration)
 
+#### Tagging
+
+If `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent will look for the TGW Route Table and Attachment by looking at the tags assigned to the EC2 instance.
+
+To utilize this feature, the tags must follow the following form:
+* `SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID` : `<tgw-rtb-id>`
+* `SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID` : `<tgw-attach-id>`
+
+:::note The Route Table ID must be the same for both nodes in a redundancy group. The Attachment ID must be unique across nodes in a redundancy group.
+:::
+
+For example, the tags would look like:
+* `SSR-CLOUD-HA-0-TGW-ROUTE-TABLE-ID` : `tgw-rtb-000000000000`
+* `SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID` : `tgw-attach-000000000000`
+
+If `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will not function and errors will be found in the journal.
+
+These tags are queried every time the API Agent tries to grab state or become-active, so modifying these tags during runtime is allowed.
 
 ## Scenarios
 
@@ -297,6 +336,7 @@ exit
 | --- | --- | --- | --- |
 | cloud-redundancy-plugin-network | ip-network      | default: 169.254.137.0/30 | The ip network to use for internal networking. This should only be configured when the default value conflicts with a different service in the configuration. |
 | cloud-redundancy-group          | reference       | required                  | The group that this member belongs to. |
+| enabled                         | bool            | default: true             | Whether to enable the HA Agent from becoming active/inactive for the member. |
 | priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference. |
 | redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members. |
 | additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations. |
@@ -697,9 +737,17 @@ The different services on the router all log to the files captured by the glob `
 
 
 ### PCLI Enhancements
+
+#### Become Active
+
+The command `request cloud-ha become-active router <router> node <node>` will try to force the given node to become active and try to tell the other node to become inactive. If the peer node is not accessible at the time of the command, the command will not fail.
+
+This command can be useful if the routes have been modified outside of the plugin and they need to be fixed.
+
+#### State
 To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
-#### State Fields
+##### State Fields
 
 | Field                    | Description                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
