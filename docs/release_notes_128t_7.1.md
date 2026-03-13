@@ -75,7 +75,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 - **I95-64521 Upgrade from 7.1.0-r1 to 7.1.3-r2 failed on SSR440:** Resoved an issue where an upgrade to 7.1.3-r2 on an SSR440 HA router would fail because the system health check failed. The `ha-0-0` interface did not come up during boot (`eth1` comes up instead), causing the system health check to fail. The `ha-0-0` interface is now correctly initialized during upgrades on all SSR4x0 HA configurations.
 ------
-- **I95-64543 Onboarding an SSR440 router running 7.1.0 to a conductor running 7.1.3 fails:** Resolved an issue where an older default cipher-string operator had been disallowed and was causeing the onboarding to fail. All of the following characters are now treated as valid: `. - _ : + @ = , !`.
+- **I95-64543 Onboarding an SSR440 router running 7.1.0 to a conductor running 7.1.3 fails:** Resolved an issue where an older default cipher-string operator had been disallowed and caused the onboarding to fail. All of the following characters are now treated as valid: `. - _ : + @ = , !`.
 
 ## Release 7.1.3-29r2
 
