@@ -104,28 +104,29 @@ This is particularly useful when you need to manage route tables in different su
 
 #### Route Table Discovery
 
-The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system will first scan for tags (see the Tagging section for more information). If none are found, then it will scan for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries will be managed.
+The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system first scans for tags (see [Tagging](#tagging) below). If none are found, then the system scans for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries are managed.
 
 #### Tagging
 
-If `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent will look for the Route Table by looking at the tags assigned to the VM.
+When `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent looks for the Route Table by looking at the tags assigned to the VM.
 
 To utilize this feature, the tags must follow the following form:
 * `SSR-CLOUD-HA-<TAG_IDX>-SUBSCRIPTION-ID` : `<subscription-id>`
 * `SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP` : `<resource-group-name>`
 * `SSR-CLOUD-HA-<TAG_IDX>-ROUTE-TABLE-NAME` : `<route-table-name>`
 
-:::note The Subscription ID, Resource Group, and Route Table Name must be the same for both nodes in a redundancy group.
+:::note 
+The Subscription ID, Resource Group, and Route Table Name must be the same for both nodes in a redundancy group.
 :::
 
-For example, the tags would look like:
+The following are some example tags:
 * `SSR-CLOUD-HA-0-SUBSCRIPTION-ID` : `88888888-bbbb-4444-aaaa-ffffffffffff`
 * `SSR-CLOUD-HA-0-RESOURCE-GROUP` : `myResourceGroup`
 * `SSR-CLOUD-HA-0-ROUTE-TABLE-NAME` : `myRouteTable`
 
-If `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will fall back to using existing UDRs.
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent uses the existing UDRs.
 
-These tags are queried every time the API Agent tries to grab state or become-active, so modifying these tags during runtime is allowed.
+These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
 
 ### AWS TGW
 
@@ -143,22 +144,23 @@ The TGW Route Table is the object which is updated by the plugin, pointing to on
 
 #### Tagging
 
-If `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent will look for the TGW Route Table and Attachment by looking at the tags assigned to the EC2 instance.
+When `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent looks for the TGW Route Table and Attachment by looking at the tags assigned to the EC2 instance.
 
 To utilize this feature, the tags must follow the following form:
 * `SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID` : `<tgw-rtb-id>`
 * `SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID` : `<tgw-attach-id>`
 
-:::note The Route Table ID must be the same for both nodes in a redundancy group. The Attachment ID must be unique across nodes in a redundancy group.
+:::note 
+The Route Table ID must be the same for both nodes in a redundancy group. The Attachment ID must be unique across nodes in a redundancy group.
 :::
 
-For example, the tags would look like:
+The following are some example tags:
 * `SSR-CLOUD-HA-0-TGW-ROUTE-TABLE-ID` : `tgw-rtb-000000000000`
 * `SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID` : `tgw-attach-000000000000`
 
-If `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will not function and errors will be found in the journal.
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent does not function and errors can be found in the journal.
 
-These tags are queried every time the API Agent tries to grab state or become-active, so modifying these tags during runtime is allowed.
+These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
 
 ## Scenarios
 
