@@ -140,6 +140,10 @@ A `solution-type` of `aws-tgw` can be used to enable the AWS TGW API agent. This
 If you want the state output to report the current routes in the TGW Route Rable, the VMs will also need:
 - ec2:SearchTransitGatewayRoutes
 
+:::note
+The [AWS metadata configuration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) for the SSR instances must set the Hop Limit to at least 2 for the plugin to be able to make the correct API calls. The BYOL AMI has this setting defaulted to 2, but that value is only used if the instance or account settings are not specified.
+:::
+
 The TGW Route Table is the object which is updated by the plugin, pointing to one of the node's TGW Attachments. Each SSR node must know the TGW Route Table as well as the corresponding attachment that points to itself. How this is configured is explained in the [AWS TGW Config Section](#aws-tgw-specific-configuration)
 
 #### Tagging
