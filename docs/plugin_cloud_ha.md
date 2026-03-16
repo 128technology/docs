@@ -115,7 +115,7 @@ To utilize this feature, the tags must follow the following form:
 * `SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP` : `<resource-group-name>`
 * `SSR-CLOUD-HA-<TAG_IDX>-ROUTE-TABLE-NAME` : `<route-table-name>`
 
-:::note 
+:::note
 The Subscription ID, Resource Group, and Route Table Name must be the same for both nodes in a redundancy group.
 :::
 
@@ -150,7 +150,7 @@ To utilize this feature, the tags must follow the following form:
 * `SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID` : `<tgw-rtb-id>`
 * `SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID` : `<tgw-attach-id>`
 
-:::note 
+:::note
 The Route Table ID must be the same for both nodes in a redundancy group. The Attachment ID must be unique across nodes in a redundancy group.
 :::
 
@@ -688,6 +688,23 @@ exit
 ## Generated SSR Configuration
 
 To see a full configuration and the configuration it generates, refer to the [Complete Example Configuration #1 for azure-lb](#complete-example-configuration-1-for-azure-lb) in the [Appendix](#appendix).
+
+### Management Traffic Config Generation
+
+When the plugin is configured on a router which is consisting of two nodes, the plugin will try to generate a service and service route for each node to get the DNS and API calls from the network namespace to the cloud providers.
+
+This config generation is dependent on if the node has an interface marked `management true`.
+
+If there are no `management true` interfaces, then the user must configure them manually. The key configuration to include is:
+* The higher priority member's tenant is `cloud-ha-0`
+* The lower priority member's tenant is `cloud-ha-1`
+* The service must allow:
+    * TCP 80 - for metadata service interactions
+    * TCP 443 - for API interactions
+    * UDP 53 - for DNS to resolve the API hostnames
+* Each service route must have at least one service route with a next hop which allows it out an external interface
+
+The service and service-route will be named either `cloud-ha-management-0` or `cloud-ha-management-1` depending on whether it is node0 or node1.
 
 ### Validation
 
