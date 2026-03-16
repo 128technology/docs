@@ -182,6 +182,7 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
   - Contain at least 1 uppercase letter 
     - At least 1 lowercase letter 
     - At least 1 number 
+    - At least one special character
   - Cannot contain the username in any form 
   - Cannot repeat characters more than 3 times 
   This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_config_password_policies.md).
