@@ -1003,7 +1003,7 @@ create user [<username>]
 The `create user` command allows administrators to create user accounts for user and/or administrative access to the SSR's management port. Issuing the `create user <username>` launches an interactive session that prompts for the new user's full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
 
 :::note
-The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, one special character, and cannot contain any characters that repeat more than three times. Please see [Password Policies](config_password_policies.md) for additional information.
+The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, one special character (` ! @ # $ % ^ & * ( ) _ + ? ~ " -), and cannot contain any characters that repeat more than three times. Please see [Password Policies](config_password_policies.md) for additional information.
 :::
 #### Example
 
@@ -1718,7 +1718,7 @@ edit user [<username>]
 #### Description
 
 :::note
-The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, one special character, and cannot contain any characters that repeat more than three times.
+The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, one special character (` ! @ # $ % ^ & * ( ) _ + ? ~ " -), and cannot contain any characters that repeat more than three times.
 :::
 
 The _edit user_ command enters a configuration subtree specific to administering user accounts. From within this subtree, administrators can change any of the attributes associated with a user account (full name, password, role, and enabled state). This is done in a "configuration-like" way, where commands are issued as _attribute value_.

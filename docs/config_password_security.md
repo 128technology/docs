@@ -9,7 +9,7 @@ Password security is one of the first lines of defense for every organization, a
 
 Setting the password for the system accounts (`admin`, `root`, and `t128`) is performed during initialization from either the web interface, the conductor command line, or the interactive intializer. All system account passwords are set to the same value, preventing any of the account passwords from being overlooked. 
 
-Create a password for the SSR system accounts. The password must be at least nine (9) characters long, contain at least one uppercase letter, at least one lowercase letter, at least one number, at least one special character, cannot contain the username in any form, and cannot repeat characters more than three (3) times. 
+Create a password for the SSR system accounts. The password must be at least nine (9) characters long, contain at least one uppercase letter, at least one lowercase letter, at least one number, at least one special character (` ! @ # $ % ^ & * ( ) _ + ? ~ " -), cannot contain the username in any form, and cannot repeat characters more than three (3) times. 
 
 ### From the Web Interface
 
