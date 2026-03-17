@@ -75,7 +75,7 @@ If you release the Reset switch during the 10 seconds of red to black fade, the 
 DO NOT reboot during this process. The zeroization will not complete.
 :::
 
-8. When the LED has stopped the slow white to black fade, all software, data and configuration have been erased and will shut down. You can then power up the system. 
+8. When the LED has stopped the slow white to black fade, all software, data and configuration have been erased and the OS will shut down. Power cycle the device to reboot the system. 
 
 :::note
 The device has now been zeroized, and has no configuration. The SSR OS must be reinstalled from a USB. See [SSR Installation](intro_installation_univ-iso.md) to begin this process.
