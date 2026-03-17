@@ -6,7 +6,7 @@
 <title data-rh="true">Conductor Installation | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/cc_fips_conductor_install"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Conductor Installation | SSN Docs"><meta data-rh="true" name="description" content="After downloading the ISO, use the procedure in Creating a Bootable USB to create a bootable USB."><meta data-rh="true" property="og:description" content="After downloading the ISO, use the procedure in Creating a Bootable USB to create a bootable USB."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/cc_fips_conductor_install"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_conductor_install" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_conductor_install" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.cd795c15.css">
-<script src="/assets/js/runtime~main.be06a147.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.8414aaa4.js" defer="defer"></script>
 <script src="/assets/js/main.00110c2a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -167,10 +167,11 @@
 </ol>
 <ul>
 <li>At least 9 characters long</li>
-<li>Contain at least 1 uppercase letter<!-- -->
+<li>Contain at least one uppercase letter<!-- -->
 <ul>
-<li>At least 1 lowercase letter</li>
-<li>At least 1 number</li>
+<li>At least one lowercase letter</li>
+<li>At least one number</li>
+<li>At least one special character (` ! @ # $ % ^ &amp; * ( ) _ + ? ~ &quot; -)</li>
 </ul>
 </li>
 <li>Cannot contain the username in any form</li>
@@ -206,7 +207,7 @@ During an upgrade, if the existing version allows SSH Root login, it will be dis
 <li>Save the file and exit from <code>visudo</code>.</li>
 <li>Type <code>exit</code> to leave the <code>su</code> prompt.</li>
 </ol>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="change-the-default-passwords">Change the Default Passwords<a href="#change-the-default-passwords" class="hash-link" aria-label="Direct link to Change the Default Passwords" title="Direct link to Change the Default Passwords">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="change-the-default-passwords">Change the Default Passwords<a href="#change-the-default-passwords" class="hash-link" aria-label="Direct link to Change the Default Passwords" title="Direct link to Change the Default Passwords">  ​</a></h3>
 <p>The following user accounts and passwords are created during the ISO installation process:</p>
 <table><thead><tr><th>Username</th><th>Password</th></tr></thead><tbody><tr><td>root</td><td>128tRoutes</td></tr><tr><td>t128</td><td>128tRoutes</td></tr></tbody></table>
 <p>Change these passwords immediately. Use the <code>passwd</code> command from the Linux shell to individually set the password for each username.</p>
