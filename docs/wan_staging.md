@@ -30,12 +30,12 @@ Prepare your system for installation - appliance installation and power up - per
 The image-based ISO's are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
-- https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local
+- https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 The package-based ISOs for Conductor-managed deployments are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
-- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
+- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page. For the detailed download process, see [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso). 
 

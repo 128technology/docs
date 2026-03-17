@@ -7,7 +7,7 @@ The SSR400 and SSR440 support an integrated Chassis Manager to help monitor conn
 
 ## Chassis Manager
 
-Interaction with the Chassis Manager is performed through CLI commands and button presses on the front of the SSR400/SSR440 chassis. Components include the LED Manager and Temperature Manager. 
+Interaction with the Chassis Manager is performed through CLI commands and button presses on the front of the SSR400 and SSR440 chassis. Components include the LED Manager and Temperature Manager. 
 
 ### LED Manager
 
@@ -22,15 +22,25 @@ The System LED displays the following colors to report system state:
 
 The presence of any major or critical alarms will cause degraded service, resulting in the system LED showing purple. If a Purple or Red LED is seen, use `show alarms` to view the details of the error or alarm. 
 
-Port LEDs have the following behavior to identify port status.
+### Port Status LEDs
 
-#### Left LED - Link Activity
+Port LEDs have the following behavior to identify port status. The following diagrams identify the port status LEDs for SFP and RJ-45 ports.
+
+**SFP Network Port Status LED Orientation**
+
+![SFP Port Status LEDs](/img/ssr-4x0-ports-g103129.png)
+
+**RJ-45 Network Port Status LED Orientation**
+
+![RJ-45 Port Status LEDs](/img/ssr-4x0-ports-g103131.png)
+
+#### Left LED (1) - Link Activity
 
 - Blinking Green: The port and the link are active, and there is link activity.
 - Green On Steadily: The port and the link are active, but there is no link activity.
 - Off: The port is not active.
 
-#### Right LED - Port Speed
+#### Right LED (2) - Port Speed
 
 Port speed is indicated with the following behavior.
 
@@ -82,5 +92,38 @@ The following commands are only available on the SSR400 and SSR440 platforms. Wh
 | [`show chassis power`](cli_reference.md#show-chassis-power) | Show chassis power |
 | [`show chassis temperature`](cli_reference.md#show-chassis-temperature) | Show chassis temperature sensor readings |
 | [`show chassis temperature-thresholds`](cli_reference.md#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+### DC Power LEDs
+
+The DC Power LEDs are not managed by the Chassis Manager, but the LEDs are used to indicate status.
+
+- Steady Green: Receiving power
+- Off: Power failure or no power
+
+### HA Port Status LEDs
+
+The HA Port Status LEDs are located on the HA ports on the rear of the device, and are not managed by the Chassis Manager. However, the LEDs are used to indicate the Link Activity and Speed.
+
+![HA Port LEDs](/img/ssr-4x0-ports-g103130.png)
+
+**Left LED (1) - Port Activity**
+
+Port activity is indicated with the following behavior:
+
+- Blinking Green: The port and the link are active, and there is link activity.
+
+- Steady Green: The port and the link are active, but there is no link activity.
+
+- Off: The port is not active.
+
+**Right LED (2) - Port Speed**
+
+Port speed is indicated with the following behavior.
+
+- Blinking Green: 1000 Mbps (1 blink per second)
+
+- Steady Green: 100 Mbps
+
+- Unlit: 10 Mbps
 
 
