@@ -179,9 +179,10 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
 
 4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be: 
   - At least 9 characters long 
-  - Contain at least 1 uppercase letter 
-    - At least 1 lowercase letter 
-    - At least 1 number 
+  - Contain at least one uppercase letter 
+    - At least one lowercase letter 
+    - At least one number 
+    - At least one special character (` ! @ # $ % ^ & * ( ) _ + ? ~ " -)
   - Cannot contain the username in any form 
   - Cannot repeat characters more than 3 times 
   This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_config_password_policies.md).
