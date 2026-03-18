@@ -29579,22 +29579,18 @@ Specify the number of occurrences of the local BGP speaker&#x27;s AS that can oc
 #### Usage
 
 ```
-configure authority router routing routing-protocol neighbor address-family as-path-options allow-own-as [<uint8>]
+configure authority router routing routing-protocol neighbor address-family as-path-options allow-own-as <value>
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| uint8 | The value to set for this field |
+| value | as-path occurrences before rejection: Range 1-10. |
 
 #### Description
 
-##### uint8
-
-An unsigned 8-bit integer.
-
-Range: 0-255
+Specify the number of occurrences of the local BGP speaker&#x27;s AS that can occur within the AS_PATH before it is rejected for this address family. Enter a value within the range of 1-10.
 
 ## `configure authority router routing routing-protocol neighbor address-family conditional-advertisement`
 
@@ -35746,22 +35742,18 @@ Specify the number of occurrences of the local BGP speaker&#x27;s AS that can oc
 #### Usage
 
 ```
-configure authority router routing vrf routing-protocol neighbor address-family as-path-options allow-own-as [<uint8>]
+configure authority router routing vrf routing-protocol neighbor address-family as-path-options allow-own-as <value>
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| uint8 | The value to set for this field |
+| value | as-path occurrences before rejection: Range 1-10. |
 
 #### Description
 
-##### uint8
-
-An unsigned 8-bit integer.
-
-Range: 0-255
+Specify the number of occurrences of the local BGP speaker&#x27;s AS that can occur within the AS_PATH before it is rejected for this address family. Enter a value within the range of 1-10.
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family conditional-advertisement`
 
