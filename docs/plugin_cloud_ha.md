@@ -596,7 +596,7 @@ config
 
                 cloud-redundancy-membership  group1
                     cloud-redundancy-group  group1
-                    dns-server              168.63.129.16
+                    dns-server              8.8.8.8
                     priority                1
                     redundant-interface     ge-0-1
                     tgw-attachment-id       tgw-attach-00000000000000001
@@ -643,7 +643,7 @@ config
 
                 cloud-redundancy-membership  group1
                     cloud-redundancy-group  group1
-                    dns-server              168.63.129.16
+                    dns-server              8.8.8.8
                     priority                2
                     redundant-interface     ge-0-1
                     tgw-attachment-id       tgw-attach-00000000000000002
