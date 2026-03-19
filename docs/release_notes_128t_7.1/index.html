@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 7.1 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.1 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.1"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.cd795c15.css">
-<script src="/assets/js/runtime~main.2c4f561c.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b4277fa3.js" defer="defer"></script>
 <script src="/assets/js/main.00110c2a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -213,6 +213,10 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 <hr>
 <ul>
 <li><strong>I95-63368 SSR400/SSR440 PMTU cannot exceed 8978:</strong> Resolved an issue where SSR400/SSR440 PMTU discovery was lower than other platforms. The issue has been resolved, and SSR400/SSR440 PMTU now discovers at 9198.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>I95-63377 HA LEDs not working correctly:</strong> On early versions of the SS400 and SSR440 hardware with pre-release builds of the SSR 7.1.3 software, the HA network interface LEDs (on the rear panel) did not function correctly. This issue has been resolved with the general release of the SSR 7.1.3-29-r2 and subsequent release of SSR 7.1.4-3r2 (recommended version). These HA port LEDs now function as documented.</li>
 </ul>
 <hr>
 <ul>
