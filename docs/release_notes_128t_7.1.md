@@ -171,6 +171,8 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-63368 SSR400/SSR440 PMTU cannot exceed 8978:** Resolved an issue where SSR400/SSR440 PMTU discovery was lower than other platforms. The issue has been resolved, and SSR400/SSR440 PMTU now discovers at 9198.
 ------
+- **I95-63377 HA LEDs not working correctly:** On early versions of the SS400 and SSR440 hardware with pre-release builds of the SSR 7.1.3 software, the HA network interface LEDs (on the rear panel) did not function correctly. This issue has been resolved with the general release of the SSR 7.1.3-29-r2 and subsequent release of SSR 7.1.4-3r2 (recommended version). These HA port LEDs now function as documented.
+------
 - **I95-63412 Glare condition leading to highway crash when session terminates prematurely:** Resolved an issue where session exception processing was not handled properly.
 ------
 - **I95-63422 Factory reset routers not re-onboarding when ESKM enabled:** Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.
