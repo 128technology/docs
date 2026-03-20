@@ -16,6 +16,7 @@ For instructions to install and manage the plugin, see [Installation and Managem
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
 | AWS TGW            | `aws-tgw`       | 5.1.0                |
+| GCP VPC            | `gcp-vpc`       | 5.1.0                |
 
 ## Version Restrictions
 
@@ -163,6 +164,36 @@ The following are some example tags:
 * `SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID` : `tgw-attach-000000000000`
 
 When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent does not function and errors can be found in the journal.
+
+These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
+
+### GCP VPC
+
+A `solution-type` of `gcp-vpc` can be used to enable the GCP VPC API agent. This solution requires an instance to be created with VPCs which are peered to the VPCs that the SSR resides in. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
+
+- compute.routes.list
+- compute.routes.get
+- compute.routes.create
+- compute.routes.delete
+- compute.instances.get
+
+The VPC's Route Table is the object which is updated by the plugin. Each SSR node must know which VPC to manage routes for. How this is configured is explained in the [GCP VPC Tagging section](#tagging-2)
+
+#### Tagging
+
+When `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent looks for the VPC Route Table by looking at the tags assigned to the instance.
+
+To utilize this feature, the tags must follow the following form:
+* `ssr-cloud-ha-<TAG_IDX>-target-vpc` : `<gcp-vpc-name>`
+
+:::note
+The VPC Name must be the same for both nodes in a redundancy group.
+:::
+
+The following is an example tag:
+* `ssr-cloud-ha-0-target-vpc` : `ssr-private`
+
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will update the VPC route table associated with the `redundant-interface` configured in the `cloud-redundancy-membership`.
 
 These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
 
@@ -647,6 +678,153 @@ config
                     priority                2
                     redundant-interface     ge-0-1
                     tgw-attachment-id       tgw-attach-00000000000000002
+                exit
+            exit
+
+            service-route        internet-from-lan-route
+                name             internet-from-lan-route
+                service-name     internet-from-lan
+                enable-failover  true
+
+                next-hop         node1 ge-0-0-intf
+                    node-name  node1
+                    interface  ge-0-0-intf
+                exit
+
+                next-hop         node0 ge-0-0-intf
+                    node-name  node0
+                    interface  ge-0-0-intf
+                exit
+            exit
+        exit
+
+        tenant                  lan
+            name  lan
+        exit
+
+        service                 internet-from-lan
+            name     internet-from-lan
+            enabled  true
+            tenant   lan
+            address  0.0.0.0/0
+        exit
+    exit
+exit
+```
+## Complete GCP VPC Configuration Example
+
+Below is a complete working example of an GCP VPC High Availability deployment.
+
+:::info
+This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
+:::
+
+```config {3-11,58-63,107-112}
+config
+    authority
+        cloud-redundancy-group  group1
+            enabled                    true
+            name                       group1
+            solution-type              gcp-vpc
+            health-interval            6
+            additional-branch-prefix   1.1.1.1/32
+            up-holddown-timeout        2
+            peer-reachability-timeout  13
+        exit
+
+        router                  gcp-ha
+            name                 gcp-ha
+            inter-node-security  internal
+
+            node                 node0
+                name                         node0
+                asset-id                     node0-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.4
+                            ip-address     172.16.10.4
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.132
+                            ip-address     192.168.10.132
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              8.8.8.8
+                    priority                1
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            node                 node1
+                name                         node1
+                asset-id                     node1-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.6
+                            ip-address     172.16.10.6
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.134
+                            ip-address     192.168.10.134
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              8.8.8.8
+                    priority                2
+                    redundant-interface     ge-0-1
                 exit
             exit
 
@@ -1372,6 +1550,9 @@ AWS TGW mode was added.
 
 - See the [AWS TGW Configuration Example](#complete-aws-tgw-configuration-example) for more details.
 
+GCP VPC mode was added.
+
+- See the [GCP VPC Configuration Example](#complete-gcp-vpc-configuration-example) for more details.
 ### Release 5.0.0
 
 #### New Features and Improvements
