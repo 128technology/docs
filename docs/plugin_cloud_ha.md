@@ -11,12 +11,12 @@ For instructions to install and manage the plugin, see [Installation and Managem
 
 ## Supported Solutions
 
-| Solution Name      | `solution-type` | Available In Version |
-| ------------------ | --------------- | -------------------- |
-| Azure VNET         | `azure-vnet`    | 2.0.0                |
-| Azure Loadbalancer | `azure-lb`      | 2.0.0                |
-| AWS TGW            | `aws-tgw`       | 5.1.0                |
-| GCP VPC            | `gcp-vpc`       | 5.1.0                |
+| Solution Name      | `solution-type` | Available In Version | Supported SSR Versions |
+| ------------------ | --------------- | -------------------- | ---------------------- |
+| Azure VNET         | `azure-vnet`    | 2.0.0                | 6.2+                   |
+| Azure Loadbalancer | `azure-lb`      | 2.0.0                | 6.2+                   |
+| AWS TGW            | `aws-tgw`       | 5.1.0                | 7.0+                   |
+| GCP VPC            | `gcp-vpc`       | 5.1.0                | 7.0+                   |
 
 ## Version Restrictions
 
