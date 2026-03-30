@@ -9,7 +9,7 @@ Starting with version `5.4.0` the `-build` will reflect the number of iterations
 
 ## SSR Software Release Model
 
-Beginning with version `6.1.0`, SSR introduces a release model that includes milestone suffixes which indicate milestones of the release lifecycle.
+Beginning with version `6.1.0`, SSR introduces a release model including suffixes which indicate milestones of the release lifecycle.
 
 ### Release Lifecycle
 A new software release stream is released every 6 months. Each stream (e.g., `major.minor`) progresses through three build milestones:
