@@ -7,7 +7,27 @@ The SSR software follows a semantic versioning scheme. Semantic versioning is a 
 
 Starting with version `5.4.0` the `-build` will reflect the number of iterations the release candidate went through prior to release. The build number will never increment once the software has been released. The build number will be included in the release notes for the respective version.
 
-Version `6.1.0` introduces the milestone suffix to the SSR software release model. Every **six months**, a new SSR software stream (i.e., bump in Major or Minor) will be released. Each software stream (major.minor) will have three phases of release - R1, followed by R2, followed by a final release. Initial feature content for a stream will be known as R1 (Release candidate 1). R1 will be followed by additional feature content **three months** later in an R2 (Release candidate 2). Between R1 and R2, there may be patch releases. Once R2 is released, a customer must upgrade to R2 to remain on the same stream and address any defects identified in R1. **Three months** following R2, the release will be designated as either Standard Term Support (STS) or Long Term Support (LTS). Release streams will alternate as Standard Term Support (STS) and Long Term Support (LTS). The EoE dates for STS or LTS start once the software is initially labeled with the `sts` (9 months from initial designation) or `lts` (24 months from initial designation) suffix, respectively; not based on the FRS date.
+## SSR Software Release Model
+
+Beginning with version `6.1.0`, SSR introduces a release model including suffixes which indicate milestones of the release lifecycle.
+
+### Release Lifecycle
+A new software release stream is released every 6 months. Each stream (e.g., `major.minor`) progresses through three build milestones:
+1. **R1 (Release Candidate 1)** – Initial feature release
+2. **R2 (Release Candidate 2)** – Additional features, released 3 months after R1
+3. **STS or LTS Support Designation** – Assigned 3 months after R2
+
+### Patch Releases
+Patch releases may occur between R1 and R2 to address issues. Once R2 is released, customers should upgrade to R2 to stay on the same release stream, and receive fixes for issues found in R1. Additional patch releases will occur beyond R2 up to end of engineering support.
+
+### Support Designation
+3 months after R2, the release is designated as either **STS (Standard Term Support)**, or **LTS (Long Term Support)**. These designations alternate between release streams. STS or LTS designations indicate the expected support lifecycles. Support timelines begin when the release is officially labeled with its suffix:
+* **STS**: Supported for 9 months
+* **LTS**: Supported for 24 months
+
+:::note
+Important: The support timelines start from the STS/LTS designation date, not the initial release date.
+:::
 
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
@@ -42,7 +62,7 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 ## Out of Support
 
-| Version     | FRS Date          | End of Engineering support | End of Support     |
+| Version     | Release          | End of Engineering support | End of Support     |
 | ----------- | ----------------- | -------------------------- | ------------------ |
 | Release 6.0 | July 18, 2022     | November 30, 2023          | November 30, 2023  |
 | Release 5.6 | March 16, 2023    | June 16, 2024              | December 16, 2024  |
