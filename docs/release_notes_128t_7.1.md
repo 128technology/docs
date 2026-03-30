@@ -67,6 +67,46 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.1.5-4r2
+
+**Release Date:** April 15, 2026
+
+### New Features
+
+- **I95-63393 SSR400/SSR440 power supply status visibility:** Added CLI support to display the status of power supplies on dual-AC SSR400/SSR440 platforms (for example, via a `show chassis power`–style command). This improves operational visibility into power redundancy and health on SSR400/SSR440 systems.
+------
+- **I95-64568 TPM details in platform information:** Enhanced the `show platform` output to include TPM-related information (such as TPM presence and other relevant attributes), simplifying verification of TPM availability and configuration for security and compliance workflows.
+------
+- **I95-64623 Plugin packaging improvements:** Updated packaging so that required plugin support files are included in the “extra packages” set. This ensures that plugin dependencies are available on systems that rely on the extra packages bundle.
+
+### Resolved Issues
+
+- **I95-62421 DHCP relay failures causing clients to miss IP assignment:** Resolved an issue that could prevent some clients from obtaining an IP address when using DHCP relay. Affected deployments could observe DHCP-related sessions stuck in an `INCOMPLETE` state. DHCP relay behavior has been corrected so clients reliably receive leases.
+------
+- **I95-62710 Unnecessary web server processing for `router all` in the PCLI:** Addressed a problem where the web server performed unnecessary work when PCLI commands referenced `router all`. This optimization reduces overhead and improves responsiveness when issuing broad-scope PCLI commands.
+------
+- **I95-63174 IDP `Critical` profile not applied on engine:** Resolved an issue where setting the IDP policy/profile to `Critical` was not properly applied on the IDP engine. With this fix, profile changes to `Critical` now take effect as expected.
+------
+- **I95-63196 Encrypted HTTP failures in multi-hop ESKM deployments:** Resolved an issue where encrypted HTTP sessions could fail in multi-hop ESKM scenarios when encryption was enabled without adaptive encryption. Encrypted HTTP traffic now operates correctly in these topologies.
+------
+- **I95-63355 Node-level security controls for serial console and USB:** Restored support for configuring node-level security features that disable serial console output and USB boot/mass storage (for example, settings such as `serial-console-enabled` and `usb-mass-storage-enabled`). This allows operators to reapply hardened platform settings where supported.
+------
+- **I95-63839 SNMP walk failures on Conductors onboarding to NMS:** Resolved an issue where SNMP walks on Conductors could fail with a `genError`, preventing successful onboarding into some network management systems (such as EMC SMARTS). System MIB walks on Conductors now complete successfully; IF-MIB is no longer exposed on Conductors where it is not supported.
+------
+- **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
+------
+- **I95-64187 Improved handling of TPM Dictionary Attack (DA) lockout:** Improved detection and handling when the TPM is in Dictionary Attack (DA) lockout mode. The integrity handler now detects this condition earlier and fails in a more predictable manner, simplifying troubleshooting of TPM-related integrity issues.
+------
+- **I95-64412 Factory reset / cleanup leaves Salt cache and sync hashes:** Updated `platform-cleanup.sh` to clean up the Salt cache directory and remove “smart sync hashes” during cleanup or factory reset operations. This reduces the risk of stale cached state persisting after a reset.
+------
+- **I95-64463 App Summary Statistics failures on SSR400/SSR440 after upgrade:** Resolved an issue observed after upgrades on SSR400/SSR440 platforms where App Summary Statistics tests could fail. Statistics collection now operates as expected on affected platforms.
+------
+- **I95-64595 Excessive audit log severity:** Adjusted the log severity for the audit log event collector to better match expected operational conditions and reduce unnecessary log noise.
+------
+- **I95-64641 `show peer` output format compatibility:** Resolved an issue where `show peer` output formatting changed in a way that could break existing automation or test validation. The output format has been made consistent to preserve compatibility with scripts and tools that consume this command.
+------
+- **I95-64687 Recursive cleanup of Salt cache directory** Resolved an issue where cleanup of `/var/cache/salt/` was not performed recursively, which could leave behind cached data. The cleanup process now removes this directory recursively to ensure a more complete reset.
+
 ## Release 7.1.4-3r2
 
 **Release Date:** March 17, 2026
