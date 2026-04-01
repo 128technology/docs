@@ -14,7 +14,7 @@ For customers or partners who can access Mist and are not in an "air-gap" networ
 The image shipped on the SSR devices is designed to connect with Mist and Mist WAN Assurance. To use these devices in a conductor-managed environment that does not have access to Mist, re-image the SSR device with a generally available, package-based, OTP-compatible SSR software release. The minimum requirement for this re-imaging process is SSR Version 5.4.9. OTP software images are located at the following link:
 
 <!-- markdown-link-check-disable-next-line -->
-- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
+- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page.
 

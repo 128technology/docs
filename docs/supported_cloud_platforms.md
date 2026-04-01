@@ -11,8 +11,12 @@ SSR Software is supported on the following Cloud Platforms.
 | Deployment Templates | Yes | Yes | Yes |
 | High Network Throughput | Yes | Yes | Yes |
 | Router High Availability | In Progress | In Progress | In Progress |
-| vTPM Support | Yes | In Progress | In Progress |
+| vTPM Support | Yes | Yes | In Progress |
 | Routing | BGP with TGW Connect | BGP with Azure Router Server | BGP with Google Cloud Router |
+
+### Other Supported Vendors
+
+-  Megaport Cloud has certified SSR integration. For more information, see [Juniper with Megaport Virtual Edge](https://docs.megaport.com/mve/juniper/).
 
 Additional platforms are being certified for support and will be added here as they become available.
 

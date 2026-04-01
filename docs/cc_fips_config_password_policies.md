@@ -9,7 +9,7 @@ Username and password requirements are listed below. For a list of the commands 
 
 The SSR password policies have been updated to provide a more secure experience. When creating passwords and password policies for users, the following parameters are enforced.
 
-1. Password must contain 1 capital, 1 lower case, 1 number and 1 special character.
+1. Password must contain one capital letter, one lower case letter, one number, and one special character (` ! @ # $ % ^ & * ( ) _ + ? ~ " -).
 2. Password must be at least 9 characters.
 3. Minimum password length is configurable (greater than 9).
 4. When a password is changed, characters must be changed in at least eight of the positions within the password.

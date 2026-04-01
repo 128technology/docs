@@ -16,7 +16,7 @@ Encrypt: /usr/libexec/128technology/t128_tpm_crypto encrypt -i secret.txt -o sec
 Decrypt: /usr/libexec/128technology/t128_tpm_crypto decrypt -i secret.txt.enc -o output.txt
 
 :::important
-SSR version 7.1.3-r2 or higher is required to leverage the vTPM capabilities in software.
+SSR version 7.1.3 or higher is required to leverage the vTPM capabilities in software.
 :::
 
 - **WAN-4033, I95-60406 Enhancements to onboarding-config via cloud-init**
