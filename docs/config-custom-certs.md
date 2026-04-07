@@ -55,6 +55,16 @@ The following are some details of certificate security.
 It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Management in 7.0. This is a reserved name specifically used by the Enhanced Security Key Management feature.
 :::
 
+:::tip Swagger API Reference
+Before issuing API calls, review the full parameter options and per-router/per-node endpoint variants in the Swagger documentation available at:
+
+`https://<conductor-ip>/api/v1/swagger`
+
+Search for `/api/v1/private-key`, `/api/v1/certificate-request`, and `/api/v1/certificate` to see all supported parameters, algorithm options, key sizes, and the router-scoped and node-scoped path variations.
+:::
+
+This procedure must be completed **for each router** that participates in Enhanced Security Key Management and **for each node** in any HA pair. Use the per-router and per-node endpoint paths shown in the examples below.
+
 Use this procedure to provision a certificate for use with Enhanced Security Key Management.
 
 ### Prerequisites
@@ -165,13 +175,18 @@ Store the value of the token in a file called `token.txt` for use later.
 
 ### Issue a Private-key Creation Request
 
-The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, we need to instruct the SSR to create a private key. To accomplish this, we provide the SSR some details, including:
+The goal of this workflow is to ensure that the private key of the SSR never leaves the SSR. To do so, instruct the SSR to create a private key by providing the algorithm, key size, and key name.
 
-- what algorithm it should use, 
-- how big the key size should be, and 
-- what the key should be named. 
+:::important Per-Router / Per-Node Execution
+This API call must be made **separately for every router** participating in ESKM and **separately for every node** in an HA pair. Use the endpoint appropriate to your target:
 
-Create the following file (updated to the customers algorithm/key size preference):
+- **Router-scoped:** `POST https://<conductor-ip>/api/v1/router/<router-name>/private-key`
+- **Node-scoped (HA):** `POST https://<conductor-ip>/api/v1/router/<router-name>/node/<node-name>/private-key`
+
+The request body — including the `name` field — is identical for every router and node.
+:::
+
+Create the following file (update algorithm and key size to your preference):
 
 **key_request.json**
 
@@ -183,16 +198,32 @@ Create the following file (updated to the customers algorithm/key size preferenc
 }
 ```
 
-Now that we have the key request details ironed out, we can issue the request:
+**Router-scoped example** (single-node router or non-HA):
 
 ```
-curl -k -X POST https://10.27.35.89/api/v1/private-key
-  -H "Content-Type: application/json"
-  -H "Authorization: Bearer $(cat token.txt)"
+curl -k -X POST https://10.27.35.89/api/v1/router/combo-east/private-key \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $(cat token.txt)" \
   -d @key_request.json
 ```
 
-Upon success, you can verify that the key was created by logging on to the SSR, `ssh` into a linux shell, and ensuring that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
+**Node-scoped examples** (HA pair — run once per node):
+
+```
+curl -k -X POST https://10.27.35.89/api/v1/router/combo-east/node/node1/private-key \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $(cat token.txt)" \
+  -d @key_request.json
+```
+
+```
+curl -k -X POST https://10.27.35.89/api/v1/router/combo-east/node/node2/private-key \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $(cat token.txt)" \
+  -d @key_request.json
+```
+
+Upon success, `ssh` to the target SSR and verify that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
 
 ### Issue a `certificate-signing-request`
 
@@ -205,14 +236,26 @@ This requirement is lifted starting with SSR 7.1.0.
 :::
 <!---remove this note when 7.0.4 is released and the restriction is lifted for 7.0.x --->
 
-1. Create a file that contains the body of the CSR-request. At a minimum this must include the name `custom_ssr_peering`, and the common name:
+1. Create a file containing the CSR request body. At a minimum provide `name` and a `common_name` that is unique to this router or node:
+
+:::important Naming Rules
+- **`name`** must be **the same value across all routers and nodes** — `custom_ssr_peering` in SSR 7.0.x (reserved). This is the authority-wide identifier required for ESKM visibility.
+- **`common_name`** must be **unique per router/node** and must **exactly match** that router's configured `peering-common-name`. Using the wrong `common_name` will cause ESKM peer authentication to fail.
+
+Example mapping for a two-router deployment:
+
+| Router | `peering-common-name` in config | `common_name` in this CSR |
+|---|---|---|
+| combo-east | `east-alias` | `east-alias` |
+| combo-west | `west-alias` | `west-alias` |
+:::
 
 **csr_request.json**
 
 ```
 {
     "name": "custom_ssr_peering",
-    "common_name": "SSR_12345679"
+    "common_name": "east-alias"
 }
 ```
 
@@ -284,4 +327,26 @@ Once the certificate is successfully ingested, verify that the certificate was a
 3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
   `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
 
-Enhanced Security Key Management can now use the private key and certificate.
+### Activate the Certificate in Configuration
+
+Having the certificate file on disk is **not sufficient**. Enhanced Security Key Management will not load or use the certificate until it is registered in the SSR authority configuration.
+
+On the Conductor, configure `client-certificate` using the same `name` value used in all API requests above:
+
+```
+config authority
+    client-certificate  custom_ssr_peering
+        name             custom_ssr_peering
+        file             custom_ssr_peering
+        validation-mode  strict
+    exit
+exit
+```
+
+| Parameter | Value | Note |
+|---|---|---|
+| `name` | Same as the API `name` field | Identifier for this certificate entry. |
+| `file` | Same as the API `name` field | Filename at `/etc/128technology/pki/` without the `.pem` extension. |
+| `validation-mode` | `strict` (production) or `warn` (initial rollout) | `warn` allows proceeding with certificate issues; use `strict` in production. |
+
+After committing this configuration, Enhanced Security Key Management will load and use the private key and certificate.
