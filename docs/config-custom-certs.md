@@ -60,7 +60,7 @@ Before issuing API calls, review the full parameter options and per-router/per-n
 
 `https://<conductor-ip>/api/v1/swagger`
 
-Search for `/api/v1/private-key`, `/api/v1/certificate-request`, and `/api/v1/certificate` to see all supported parameters, algorithm options, key sizes, and the router-scoped and node-scoped path variations.
+Search for `/api/v1/private-key`, `/api/v1/certificate-request`, and `/api/v1/certificate` to see all supported parameters, algorithm options, key sizes, and the node-scoped path variations.
 :::
 
 This procedure must be completed **for each router** that participates in Enhanced Security Key Management and **for each node** in any HA pair. Use the per-router and per-node endpoint paths shown in the examples below.
@@ -180,7 +180,6 @@ The goal of this workflow is to ensure that the private key of the SSR never lea
 :::important Per-Router / Per-Node Execution
 This API call must be made **separately for every router** participating in ESKM and **separately for every node** in an HA pair. Use the endpoint appropriate to your target:
 
-- **Router-scoped:** `POST https://<conductor-ip>/api/v1/router/<router-name>/private-key`
 - **Node-scoped (HA):** `POST https://<conductor-ip>/api/v1/router/<router-name>/node/<node-name>/private-key`
 
 The request body — including the `name` field — is identical for every router and node.
@@ -196,15 +195,6 @@ Create the following file (update algorithm and key size to your preference):
     "algorithm": "RSA",
     "rsa_key_size": "2048"
 }
-```
-
-**Router-scoped example** (single-node router or non-HA):
-
-```
-curl -k -X POST https://10.27.35.89/api/v1/router/combo-east/private-key \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $(cat token.txt)" \
-  -d @key_request.json
 ```
 
 **Node-scoped examples** (HA pair — run once per node):
@@ -274,8 +264,9 @@ This example represents the minimum requirements. Any of the following additiona
 
 2. Issue the CSR request to the SSR:
 
+The API needs to be executed directly against the router's API and not through the conductor.
 ```
-curl -k -X GET https://10.27.35.89/api/v1/certificate-request     
+curl -k -X GET https://10.27.35.89/api/v1//router/{router_name}/node/{node_name}/certificate-request     
   -H "Content-Type: application/json"    
   -H "Authorization: Bearer $(cat token.txt)"    
   -d @csr_request.json
@@ -305,6 +296,7 @@ When the signed certificate is returned, instruct the SSR to ingest the certific
 **certificate.json**
 
 ```
+POST /api/v1/router/{router_name}/node/{node_name}/certificate
 {
     "name": "custom_ssr_peering",
     "certificate": "-----BEGIN CERTIFICATE-----

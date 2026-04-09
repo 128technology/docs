@@ -68,10 +68,10 @@ The user provided certificates and signing authority must be in place before con
 When using CA-signed certificates, the end-to-end provisioning sequence must be completed for **every router** that participates in ESKM and **for every node** in any HA pair:
 
 1. Authenticate to the Conductor REST API (`POST /api/v1/login`) and store the bearer token.
-2. Generate a private key on the target router or node (`POST /api/v1/router/<router>/private-key` or `POST /api/v1/router/<router>/node/<node>/private-key`) — the key never leaves the SSR.
-3. Generate a CSR on the same target (`GET /api/v1/router/<router>/certificate-request` or with `/node/<node>/`) using a `common_name` that matches that router's `peering-common-name`.
+2. Generate a private key on the target router's node (`POST /api/v1/router/<router>/node/<node>/private-key`) — the key never leaves the SSR.
+3. Generate a CSR on the same target (`GET /api/v1/router/<router>/node/<node>/certificate-request`) using a `common_name` that matches that router's `peering-common-name`.
 4. Submit the CSR to your Certificate Authority and obtain a signed certificate.
-5. Ingest the signed certificate back into the SSR (`POST /api/v1/router/<router>/certificate` or with `/node/<node>/`).
+5. Ingest the signed certificate back into the SSR (`POST /api/v1/router/<router>/node/<node>/certificate`).
 6. **Activate the certificate in configuration** — having the file on disk is not sufficient. Configure `authority client-certificate` with a `name` and `file` matching the API artifact name. See [Activating the Certificate in Configuration](#activating-the-certificate-in-configuration).
 
 :::warning
@@ -97,15 +97,17 @@ Consistent naming across all API calls and configuration is critical:
 
 #### Activating the Certificate in Configuration
 
-After the certificate file is present on disk at `/etc/128technology/pki/custom_ssr_peering.pem`, you must register it in the SSR authority configuration. **The certificate will not be loaded by Enhanced Security Key Management until this step is complete, even if the `.pem` file exists on disk.**
+The private-key, CSR, and certificate will be written to disk using the `name` from the API with the appropriate file extension added (.key, .csr, and .pem respectively).
+
+After the certificate file is present on disk at `/etc/128technology/pki/<certificate_name>.pem`, you must register it in the SSR authority configuration.  **The certificate will not be loaded by Enhanced Security Key Management until this step is complete, even if the `.pem` file exists on disk.**
 
 On the Conductor:
 
 ```
 config authority
-    client-certificate  custom_ssr_peering
-        name             custom_ssr_peering
-        file             custom_ssr_peering
+    client-certificate  <certificate_name>
+        name             <certificate_name>
+        file             <certificate_name>
         validation-mode  strict
     exit
 exit
