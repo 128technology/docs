@@ -265,8 +265,11 @@ This example represents the minimum requirements. Any of the following additiona
 2. Issue the CSR request to the SSR:
 
 The API needs to be executed directly against the router's API and not through the conductor.
+:::note
+The API request `/api/v1/router/{router_name}/node/{node_name}` can be issued to either the conductor or the node. If it was targeted directly to the node, the router name/node name are validated by the device and allowed to be proxied locally. The best practice is for all API requests to be routed through the conductor and use the full context API.
+:::
 ```
-curl -k -X GET https://10.27.35.89/api/v1//router/{router_name}/node/{node_name}/certificate-request     
+curl -k -X GET https://10.27.35.89/api/v1/router/{router_name}/node/{node_name}/certificate-request     
   -H "Content-Type: application/json"    
   -H "Authorization: Bearer $(cat token.txt)"    
   -d @csr_request.json
