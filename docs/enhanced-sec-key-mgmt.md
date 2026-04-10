@@ -63,6 +63,62 @@ To provide thorough, end-to-end security, the use of a trusted and provisioned c
 The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service must be restarted in order to pick up the changes.
 :::
 
+### Certificate Provisioning Workflow
+
+When using CA-signed certificates, the end-to-end provisioning sequence must be completed for **every router** that participates in ESKM and **for every node** in any HA pair:
+
+1. Authenticate to the Conductor REST API (`POST /api/v1/login`) and store the bearer token.
+2. Generate a private key on the target router's node (`POST /api/v1/router/<router>/node/<node>/private-key`) — the key never leaves the SSR.
+3. Generate a CSR on the same target (`GET /api/v1/router/<router>/node/<node>/certificate-request`) using a `common_name` that matches that router's `peering-common-name`.
+4. Submit the CSR to your Certificate Authority and obtain a signed certificate.
+5. Ingest the signed certificate back into the SSR (`POST /api/v1/router/<router>/node/<node>/certificate`).
+6. **Activate the certificate in configuration** — having the file on disk is not sufficient. Configure `authority client-certificate` with a `name` and `file` matching the API artifact name. See [Activating the Certificate in Configuration](#activating-the-certificate-in-configuration).
+
+:::warning
+Steps 2–5 must be repeated **for every router** participating in ESKM and **for every node** in any HA pair. Certificates are not shared between HA nodes; each node manages its own unique private key and certificate lifecycle.
+:::
+
+#### API Naming Rules
+
+Consistent naming across all API calls and configuration is critical:
+
+| Field | Scope | Rule |
+|---|---|---|
+| `name` (in all API requests) | Authority-wide | **Must be identical across all routers and nodes.** Use `custom_ssr_peering` in SSR 7.0.x (reserved name). In SSR 7.1+, any consistent name may be used. |
+| `common_name` (in CSR request) | Per-router / per-node | **Must be unique per router or HA node**, and must **exactly match** that router's configured `peering-common-name`. |
+| `peering-common-name` (in config) | Per-router | Unique alias per router. Must match the `common_name` used in that router's CSR. |
+
+**Example mapping for a two-router deployment:**
+
+| Router | `peering-common-name` in config | `common_name` in CSR | `name` in all API requests |
+|---|---|---|---|
+| combo-east | `east-alias` | `east-alias` | `custom_ssr_peering` |
+| combo-west | `west-alias` | `west-alias` | `custom_ssr_peering` |
+
+#### Activating the Certificate in Configuration
+
+The private-key, CSR, and certificate will be written to disk using the `name` from the API with the appropriate file extension added (.key, .csr, and .pem respectively).
+
+After the certificate file is present on disk at `/etc/128technology/pki/<certificate_name>.pem`, you must register it in the SSR authority configuration.  **The certificate will not be loaded by Enhanced Security Key Management until this step is complete, even if the `.pem` file exists on disk.**
+
+On the Conductor:
+
+```
+config authority
+    client-certificate  <certificate_name>
+        name             <certificate_name>
+        file             <certificate_name>
+        validation-mode  strict
+    exit
+exit
+```
+
+| Parameter | Value | Note |
+|---|---|---|
+| `name` | Same as the API `name` field | Identifier for this certificate entry. |
+| `file` | Same as the API `name` field | Filename at `/etc/128technology/pki/` without the `.pem` extension. Must match the API `name`. |
+| `validation-mode` | `strict` (recommended) or `warn` | Use `warn` only during initial rollout. Use `strict` in production environments. |
+
 The following diagram provides a look at a typical SSR/SVR deployment.
 
 ![sample topology](/img/ztna-sample-topo.png)
@@ -129,9 +185,18 @@ The peer continues to resend requests at periodic intervals as defined in the co
 
 ### High Availability
 
-Each node of an HA pair manages its own unique certificate - certificates are not shared between nodes. Each node manages its own unique connection to its peers.
+Each node of an HA pair manages its own unique certificate — certificates are not shared between nodes. Each node manages its own unique connection to its peers.
 
-When two nodes are configured as a redundant pair, each of the keys are exchanged between nodes. This will avoid rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
+:::important
+When provisioning certificates for an HA router, you must execute the private-key creation, CSR generation, and certificate ingest API requests **separately for each node**, targeting that node's specific endpoint:
+
+- **Node 1:** `POST https://<conductor-ip>/api/v1/router/<router-name>/node/<node1-name>/private-key`
+- **Node 2:** `POST https://<conductor-ip>/api/v1/router/<router-name>/node/<node2-name>/private-key`
+
+The same node-scoped pattern applies to the `/certificate-request` and `/certificate` endpoints. The request body — including the `name` field — is identical for both nodes. Consult the Swagger documentation at `https://<conductor-ip>/api/v1/swagger` for the full per-node endpoint schema.
+:::
+
+When two nodes are configured as a redundant pair, the keys are exchanged between nodes. This avoids rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
 
 ### Certificate Replacement or Revocation
 
@@ -165,7 +230,11 @@ config
     authority
         enhanced-security-key-management  true
 ```
-2. Configure a `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is an alias that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the peering-common-name from the ceritficate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
+2. Configure a unique `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is a **unique alias per router** that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the `peering-common-name` from the certificate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
+
+:::note
+The `peering-common-name` must exactly match the `common_name` field used in the certificate signing request (CSR) generated for that router. See [API Naming Rules](#api-naming-rules) for the full field mapping.
+:::
 
 ```
         router                            combo-east
