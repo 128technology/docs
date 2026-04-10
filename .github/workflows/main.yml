@@ -46,11 +46,11 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run build:offline
 
-      - name: Broken Link Checker Action
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
+      - name: Check Links
+        uses: JustinBeckwith/linkinator-action@v2
         with:
-          use-verbose-mode: 'yes'
-          folder-path: 'docs'
+          paths: ./build
+          config: ./linkinator.config.json
 
       - name: Deploy
         if: github.event_name != 'pull_request'

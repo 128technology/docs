@@ -14,12 +14,12 @@
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
     "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
-    "check-links": "blcl -rog ./build/"
+    "check-links": "linkinator ./build --config linkinator.config.json"
   },
   "dependencies": {
-    "@docusaurus/core": "3.1.1",
-    "@docusaurus/preset-classic": "3.1.1",
-    "broken-link-checker-local": "^0.2.1",
+    "@docusaurus/core": "3.10.0",
+    "@docusaurus/preset-classic": "3.10.0",
+    "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
     "mermaid": "^11.12.3",
@@ -31,8 +31,8 @@
     "react-table": "^7.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.1.1",
-    "@docusaurus/types": "3.1.1",
+    "@docusaurus/module-type-aliases": "3.10.0",
+    "@docusaurus/types": "3.10.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
