@@ -83,7 +83,6 @@ When using the `import iso` and `import rpm` commands to install plugins necessa
 
 The following process is used to upgrade a Conductor and Conductor-managed Routers to **version 6.3.0** of the SSR software. Beginning with SSR software version 6.3.0, a conductor can manage routers running image-based software installations. 
 
-<!-- markdown-link-check-disable -->
 1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [6.3 Package Based ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/6.3/) page. 
 
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the downloaded ISO.
@@ -92,7 +91,7 @@ The following process is used to upgrade a Conductor and Conductor-managed Route
 
 4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 
-5. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/) page. <!-- markdown-link-check-enable --> 
+5. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/) page.
 
 6. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
 
@@ -114,7 +113,6 @@ The following workflow demonstrates upgrading a conductor to version 6.3.0, and 
 The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`. After the initial upgrade to 6.3.0, all future upgrades will only require the import of the `SSR-6.3.X-XX.r1.el7.x86_64.ibu-v1.iso`. 
 :::
 
-<!-- markdown-link-check-disable -->
 1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [SSR ISO Download]https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page. 
 
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
@@ -123,7 +121,7 @@ The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.
 
 4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 
-5. Navigate to the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/) page, identify the software image version you will use to upgrade the target router or routers, and download it. <!-- markdown-link-check-enable -->
+5. Navigate to the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/) page, identify the software image version you will use to upgrade the target router or routers, and download it.
 
  For example, if you are upgrading a router to SSR Version 6.1.10, you will need to download the following files:
 
@@ -144,7 +142,6 @@ In an HA setup, when using offline-mode for routers to access the software from 
 For upgrades of Conductor and Conductor-managed routers to software versions prior to 6.3.0, the package-based ISO's are used. 
 
 In this example workflow, the conductor will be upgraded to 6.2.6, and the routers to 6.1.10. 
-<!-- markdown-link-check-disable -->
 1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.2.6-15.sts.el7.OTP.v1.x86_64.iso` software package from the [128T package-based ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page. 
 
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
@@ -155,7 +152,7 @@ In this example workflow, the conductor will be upgraded to 6.2.6, and the route
 
 5. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
 
-6. Download the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page. <!-- markdown-link-check-enable -->
+6. Download the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page.
 
 7. Import the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](#import-iso) command. The conductor will act as the software repository for the subsequent router upgrades. You do **not** install this package onto the conductor, only import it. 
 
@@ -172,8 +169,7 @@ Use the `filepath` argument to specify the exact location of the ISO. `hunt` wil
 - `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso`
 
 Versions later than 6.3.0 use the `SSR*.iso`. The following steps provide the process to download and import the 7.1.0 ISO as well as plugin RPMs.
-<!-- markdown-link-check-disable -->
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` and any necessary plugin RPMs from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network. <!-- markdown-link-check-enable -->
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `SSR-7.1.0-50.r1.el9.x86_64.ibu-v1.iso` and any necessary plugin RPMs from the [Download page](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/). The image and RPMs can be downloaded onto a USB, or some other media that allows you to copy the files to the conductor in the air-gap network.
 
 :::note
 The SSR400 and SSR440 platforms use an ARM CPU processor and require the `aarch64` version of the plugins. All other platforms should use the `x86_64` files.

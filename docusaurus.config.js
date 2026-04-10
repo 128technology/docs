@@ -7,8 +7,12 @@ module.exports = {
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   onBrokenAnchors: 'throw',
-  onBrokenAnchors: 'throw',
-  onBrokenMarkdownLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+      onBrokenMarkdownImages: 'throw',
+    },
+  },
   themeConfig: {
     colorMode: {
       // "light" | "dark"
