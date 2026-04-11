@@ -9,7 +9,9 @@
     "^https://software\\.128technology\\.com",
     "^https://regexr\\.com",
     "^https://mosh\\.org",
-    "^https://www\\.mist\\.com"
+    "^https://www\\.mist\\.com",
+    "^https://portal\\.azure\\.com",
+    "^https://azuremarketplace\\.microsoft\\.com"
   ],
   "retry": true,
   "retryErrors": true,
