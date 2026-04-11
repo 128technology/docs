@@ -113,7 +113,7 @@ The following workflow demonstrates upgrading a conductor to version 6.3.0, and 
 The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso`. After the initial upgrade to 6.3.0, all future upgrades will only require the import of the `SSR-6.3.X-XX.r1.el7.x86_64.ibu-v1.iso`. 
 :::
 
-1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [SSR ISO Download]https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page. 
+1. On a system that has internet access, use the [ISO Download procedure](intro_downloading_iso.md#downloading-an-iso) to download the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page. 
 
 2. [Create a bootable USB](intro_creating_bootable_usb.md) drive from the SSR ISO.
 
