@@ -11,9 +11,13 @@
     "^https://mosh\\.org",
     "^https://www\\.mist\\.com",
     "^https://portal\\.azure\\.com",
-    "^https://azuremarketplace\\.microsoft\\.com"
+    "^https://azuremarketplace\\.microsoft\\.com",
+    "^https://learn\\.microsoft\\.com",
+    "^https://json-schema\\.org",
+    "^https://aws\\.amazon\\.com",
+    "^https://docs\\.aws\\.amazon\\.com"
   ],
   "retry": true,
   "retryErrors": true,
-  "retryErrorsCount": 6
+  "retryErrorsCount": 5
 }
