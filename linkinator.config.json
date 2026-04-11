@@ -15,5 +15,5 @@
   ],
   "retry": true,
   "retryErrors": true,
-  "retryErrorsCount": 5
+  "retryErrorsCount": 6
 }
