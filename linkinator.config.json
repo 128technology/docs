@@ -15,7 +15,8 @@
     "^https://learn\\.microsoft\\.com",
     "^https://json-schema\\.org",
     "^https://aws\\.amazon\\.com",
-    "^https://docs\\.aws\\.amazon\\.com"
+    "^https://docs\\.aws\\.amazon\\.com",
+    "^https://thekelleys\\.org\\.uk"
   ],
   "retry": true,
   "retryErrors": true,
