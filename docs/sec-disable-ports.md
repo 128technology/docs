@@ -56,13 +56,9 @@ When disabled (set to **false**), the push button interrupt is disabled, and no 
 
 When disabled (set to **false**), the serial console is excluded from the kernel command line, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
 
-See [Uninterruptible Boot Process](#uninterruptable-boot-process) below for important information.
-
 ### Disable Firmware Recovery
 
 When disabled (set to **false**), the boot firmware `Press Esc to boot from USB` option and the image boot menu are prevented. The configured active boot image will be auto loaded; no recovery paths except system zeroization are available in the event of a boot failure.
-
-See [Uninterruptible Boot Process](#uninterruptable-boot-process) below for important information.
 
 ### Uninterruptible Boot Process
 

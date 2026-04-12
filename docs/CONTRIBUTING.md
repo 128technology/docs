@@ -7,13 +7,13 @@ sidebar_label: Contributing
 
 You can help improve our guides or the API reference by making them more coherent, consistent, or readable, adding missing information, correcting factual errors, fixing typos, or bringing them up to date with the latest 128T software.
 
-The 128 Technology documentation website is built using Docusaurus 2 to generate its static content from markdown documents. When editing existing content, or authoring new content, it is best to learn from what already exists - these are the best examples. If you are looking to learn markdown or expand on your knowledge, [GitHub-flavored Markdown syntax](https://daringfireball.net/projects/markdown/syntax) is a great resource.
+The 128 Technology documentation website is built using Docusaurus 3 to generate its static content from markdown documents. When editing existing content, or authoring new content, it is best to learn from what already exists - these are the best examples. If you are looking to learn markdown or expand on your knowledge, the [GitHub-flavored Markdown syntax reference](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) is a great resource.
 
 Technical writing is different from other styles of writing.  Markus Kazmierczak offers some great tips for how to write copy that is easy to follow where you learn as you go in his [blog](https://mkaz.blog/misc/notes-on-technical-writing/). We do our best to follow these principles throughout our documentation.
 
 ### Testing
 
-Before posting a PR for submitting changes, it is best to first test your changes locally to ensure that all links, references and formatting appear the way you expect.  Have a look at the [README](https://github.com/128technology/docs) for instructions on how to test locally.
+Before posting a PR for submitting changes, it is best to first test your changes locally to ensure that all links, references and formatting appear the way you expect.  Have a look at the [README](https://github.com/128technology/docs/blob/master/README.md) for instructions on how to test locally.
 
 ### Submitting Changes
 
@@ -25,7 +25,7 @@ Before posting a PR for submitting changes, it is best to first test your change
     ```
 3. Checkout the branch you just created
     ```
-    git co <branch>
+    git checkout <branch>
     ```
 4. Make your changes.
 5. Commit your changes.
@@ -63,7 +63,7 @@ Did you find a typo or something that was incorrect and do not have the time to 
 
 Docusaurus is particular about how links are defined within markdown in order to provide support for most browsers. While multiple formats are allowed, in practice only one approach has proven to provide the best results.
 * External links require a full URL, including the scheme. `[External Link](https://github.com/128technology/docs/pulls)`
-* Links to images, or other static content start with a exclamation point `!` and require a relative path within the static directory. `![Image Description](/img/some_image.png)`
+* Links to images, or other static content start with an exclamation point `!` and require a relative path within the static directory. `![Image Description](/img/some_image.png)`
 * Links to resources within the site must contain the markdown file's extension (most often this is .md, but sometimes can be .mdx). `[link to another file](another_file.md)`
 * Links to headers within the same file should contain a reference to the header only. `[header link](#internal-header)`
   :::tip
@@ -106,9 +106,9 @@ A consistent tone and style makes your content easier to read, reducing your use
 
 ### Callouts/admonitions
 
-In addition to the basic Markdown syntax, we use [remark-admonitions](https://github.com/elviswolcott/remark-admonitions) alongside MDX to add support for admonitions. Admonitions are wrapped by a set of 3 colons.
+In addition to the basic Markdown syntax, Docusaurus 3 includes built-in support for admonitions (no third-party plugins required). See the official [Docusaurus admonitions documentation](https://docusaurus.io/docs/markdown-features/admonitions) for the full reference. Admonitions are wrapped by a set of 3 colons.
 
-The default keywords are `important`, `tip`, `note`, `warning`, and `danger`. Aliases for `info` => `important`, `success` => `tip`, `secondary` => `note` and `danger` =>`warning` also exist.
+The built-in types are `note`, `tip`, `info`, `warning`, and `danger`. `caution` is also accepted as an alias for `warning`.
 
 Example:
 ```
@@ -154,4 +154,96 @@ Danger danger, mayday!
 
 ### Sidebar
 
-The content listed in the left-hand table of contents is _not_ automatically generated and is govered by the file `sidebars.js`. If you are adding new files, be sure to add it to this file as well. Release notes should always be ordered from newest to oldest.
+The content listed in the left-hand table of contents is _not_ automatically generated and is governed by the file `sidebars.js`. If you are adding new files, be sure to add it to this file as well. Release notes should always be ordered from newest to oldest.
+
+### File Naming Conventions
+
+New files should follow the established prefix convention so they are easy to locate and categorize:
+
+| Prefix | Content type |
+| -------------- | ------------------------------------------- |
+| `config_` | Configuration how-to guides |
+| `concepts_` | Conceptual and reference topics |
+| `bcp_` | Best practices |
+| `ts_` | Troubleshooting |
+| `howto_` | Step-by-step procedural guides |
+| `intro_` | Installation and getting-started topics |
+| `cc_fips_` | Common Criteria / FIPS compliance content |
+| `sec_` / `sec-` | Security feature guides |
+| `release_notes_` | Release notes |
+| `_filename` | Partial files (leading underscore = shared include, not a standalone page — do **not** add to `sidebars.js`) |
+
+### Front Matter
+
+Every `.md` / `.mdx` file should begin with a YAML front matter block. The most commonly used fields are:
+
+```yaml
+---
+title: Full display title (shown as H1 and in the browser tab)
+sidebar_label: Shorter label used in the sidebar (optional — defaults to title)
+---
+```
+
+Avoiding a custom `id:` field is preferred; Docusaurus derives the slug automatically from the filename.
+
+### Partial / Include Files
+
+Files whose names begin with an underscore (e.g., `_install_prereqs.md`) are shared partials. They are imported into one or more pages using MDX `import` syntax and are never rendered as standalone pages. Do **not** add partial files to `sidebars.js`.
+
+Example of importing a partial:
+
+```mdx
+import InstallPrereqs from './_install_prereqs.md';
+
+<InstallPrereqs />
+```
+
+### Code Blocks
+
+Always specify a language identifier on fenced code blocks to enable syntax highlighting:
+
+````text
+```bash
+systemctl restart 128T
+```
+````
+
+Common language identifiers used in this repo: `bash`, `json`, `yaml`, `text`, `jsx`.
+
+### Mermaid Diagrams
+
+Mermaid is supported natively. Use it for network topology diagrams, flowcharts, and sequence diagrams directly in markdown:
+
+````text
+```mermaid
+graph LR
+  A[Conductor] --> B[Router]
+```
+````
+
+See the [Mermaid syntax reference](https://mermaid.js.org/intro/syntax-reference.html) for available diagram types.
+
+### MDX Components (Tabs)
+
+Docusaurus ships a `<Tabs>` component that is useful for presenting platform-specific or alternative instructions side by side. Import it at the top of any `.mdx` file:
+
+```mdx
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="conductor" label="Conductor-managed">Content for Conductor-managed deployments.</TabItem>
+  <TabItem value="mist" label="Mist-managed">Content for Mist-managed deployments.</TabItem>
+</Tabs>
+```
+
+### Pre-PR Checklist
+
+Before opening a pull request, verify the following:
+
+- [ ] The local Docusaurus dev server renders your page without errors (`docker-compose up`)
+- [ ] No broken links (`npm run check-links`)
+- [ ] No spelling errors (`codespell docs/your_file.md`)
+- [ ] New files are added to `sidebars.js` (unless they are partials)
+- [ ] All images referenced in the file exist under `static/img/`
+- [ ] Sensitive data (customer IPs, hostnames, credentials) has been scrubbed
