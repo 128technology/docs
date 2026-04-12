@@ -7,7 +7,7 @@ SSR software can run on Juniper branded appliances, whitebox hardware (certified
 
 For conductor-managed SSR devices running software versions 5.4.x and greater, [WAN Assurance Cloud Telemetry](config_wan_assurance.md) is available through Mist.
 
-![SSR Managment Models](/img/wan_ssr_mgmt_models.png)
+![SSR Management Models](/img/wan_ssr_mgmt_models.png)
 
 The onboarding process for each deployment is similar - connect your device to the Mist Cloud, claim the device into your organization's inventory, create the topology, and add the device to the site. The process is simplified using zero-touch-provisioning (ZTP) beginning with either scanning the QR code, or entering the claim code into your Mist Organization. 
 

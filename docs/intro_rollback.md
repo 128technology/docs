@@ -11,9 +11,9 @@ As with upgrading, rolling back software using Automated Provisioner is only pos
 
 ## Rollback Considerations
 
-With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. The `show system software revert` command to view the progress of a revert operation. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
+With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. Use the `show system software revert` command to view the progress of a revert operation. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported or necessary. Software installation and upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
 
 #### SSR Version 7.1.3 Rollback and Downgrades
 
@@ -44,7 +44,7 @@ Use the `request system software reinstall` command to identify the image-based 
 The reinstallation status is visible under **Install Type** in the PCLI using `show assets`.
 
 :::note
-The states displayed in the `status` column under `show assests` have changed. The old and new states are mapped below. 
+The states displayed in the `status` column under `show assets` have changed. The old and new states are mapped below. 
 
 | Old | New |
 | --- | ---|

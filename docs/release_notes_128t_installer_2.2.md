@@ -9,7 +9,7 @@ sidebar_label: 2.2
 - **IN-55** Installer upgrades SSR-OS for 128T Software 
 
 ### Caveats
-- **IN-106** - Installer fails due to presense of .repodata
+- **IN-106** - Installer fails due to presence of .repodata
   _**Symptom:**_ Installer fails with
   ```
 Failed creating repo database in directory /var/lib/install128t/repos/saved: 

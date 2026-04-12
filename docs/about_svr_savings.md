@@ -8,7 +8,7 @@ Traditional SD-WAN solves the issues of WAN connectivity by creating virtual net
 
 [^1]: https://www.128technology.com/blog/tunnel-based-versus-tunnel-free-sd-wan-with-acg-research/
 
-Overlay-based SD-WAN creates a network transport that is heavyweight and less optimized; fragmentation is introduced; and scalability and security are negatively impacted. Session Smart Routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
+Overlay-based SD-WAN creates a heavyweight, less-optimized network transport that introduces fragmentation and degrades scalability and security. Session Smart Routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
 
 A tunnel, as defined according to [RFC 1853](https://tools.ietf.org/html/rfc1853), encapsulates original IP payload with a new IP header. The original IP header is maintained while a new one is added.
 
@@ -38,13 +38,13 @@ For the impact of tunnel on VoIP, consider the case of a GRE tunnel:
 
 This means 40% additional bytes are required to carry IP packets that are otherwise not needed if the packet is sent natively. This kind of calculation can be repeated for IPsec (with GRE) and VXLAN. The impact of the additional bytes can be clearly seen. The worse case scenario is IPsec with GRE.  That is nearly 123% overhead.
 
-SD-WAN is commonly deployed on internet links, and if it is a low bandwidth link or if the link suffers from congestion, which if often the case, this will lead to performance degradation of the application.
+SD-WAN is commonly deployed on internet links. On low-bandwidth or congested links — which is often the case — application performance degrades.
 
 Packet size increase has a negative impact not only on bandwidth usage but also affects the transmission and queuing delay, thus affecting jitter and overall packet delay and the customer’s experience.
 
 The problem of tunnels is only exaggerated in cloud deployments. The [economic benefits of SVR in the cloud](https://www.128technology.com/wp-content/uploads/2018/08/economic-benefits-of-session-smart-routing-in-sd-wan-and-cloud-networks-by-acg-research.pdf) are realized even more.
 
-One of the biggest downsides to tunnels is that of the bandwidth overhead, but there are also security, quality of service, and scaling issues as well.  You can read about other issues with tunnels and overhead [here](https://www.128technology.com/blog/13-debts-of-tunnel-networks/).
+One of the biggest downsides to tunnels is that of the bandwidth overhead, but there are also security, quality of service, and scaling issues.  You can read about other issues with tunnels and overhead [here](https://www.128technology.com/blog/13-debts-of-tunnel-networks/).
 
 
 Session Smart tunnel-free SD-WAN makes the network more scalable, bandwidth efficient, eliminating fragmentation and delivering better security when compared to the traditional tunnel-based SD-WAN. When tunnel-free SD-WAN is combined with session awareness, the network becomes dynamic and stateful. This results in an intelligent distributed fabric that goes beyond the stateless L2 and L3 connectivity provided by other SD-WAN solutions. By removing the overhead burden from transport and the need to process such overheads from CPE, the SD-WAN network becomes simple. SD-WAN CPE becomes more scalable and less costly, resulting in potential capex savings.

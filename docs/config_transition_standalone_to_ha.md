@@ -37,7 +37,7 @@ exit
 ```
 
 
-The first step is to configure the second Conductor node. If you start with the same basic configuration for the second node then you will see warnings below when you attempt to validate. The first warning states that a non-forwarding interfaces between the Conductor nodes needs to be configured to establish connectivity. For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces.md). The second warning states that SSR needs to be restarted after creating a new node.  This will be addressed later.
+The first step is to configure the second Conductor node. If you start with the same basic configuration for the second node then you will see warnings below when you attempt to validate. The first warning states that a non-forwarding interface between the Conductor nodes needs to be configured to establish connectivity. For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces.md). The second warning states that SSR needs to be restarted after creating a new node.  This will be addressed later.
 
 ```
 admin@T104_DUT1.Conductor# configure authority router Conductor
@@ -154,7 +154,7 @@ Candidate configuration is valid
 
 Commit the configuration, then stop SSR on the standalone Conductor node by dropping into the Linux shell and executing `systemctl stop 128T`. Wait for SSR to completely stop. The user can monitor the status of the service with `systemctl status 128T`.
 
-Once the SSR is fully stopped, the user needs to make changes to the salt minion configuration file. Since the Conductor was installed as a Standalone Conductor, the salt minion config is initialized with the loopback address. The user need to fix it manually to be the IP address of our management interface because when the second Conductor node is installed, it uses the IP address in these files to learn the management IP address of its peer node. Here is what the salt minion config look like before any modification:
+Once the SSR is fully stopped, the user needs to make changes to the salt minion configuration file. Since the Conductor was installed as a Standalone Conductor, the salt minion config is initialized with the loopback address. You must update this value to the management interface IP address. When the second Conductor node is installed, it reads this file to learn its peer's management IP address. Here is what the salt minion config look like before any modification:
 
 ```
 [root@t104-dut1 ~]# cat /etc/salt/minion

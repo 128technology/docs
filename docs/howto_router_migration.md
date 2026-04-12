@@ -3,7 +3,7 @@ title: Router Migration
 sidebar_label: Router Migration
 ---
 
-This process is used to migrate an existing conductor-managed router to a new conductor and infrastructure. From the PCLI, the command can be run from the existing conductor to automatically migrate the router to the new conductor, or it can be run from the router itself. Before perfoming the procedure below, the new conductor must be installed and configured, and both the old and the new conductors must be reachable. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
+This process is used to migrate an existing conductor-managed router to a new conductor and infrastructure. From the PCLI, the command can be run from the existing conductor to automatically migrate the router to the new conductor, or it can be run from the router itself. Before performing the procedure below, the new conductor must be installed and configured, and both the old and the new conductors must be reachable. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
 
 ### PCLI
 

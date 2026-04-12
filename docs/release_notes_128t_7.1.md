@@ -53,7 +53,7 @@ This issue is currently being addressed by engineering. However, if your deploym
 
 **System Disk Considerations**
 
-As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is succesful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
+As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
 
 In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_quickstart_byol_conductor_aws.md) or [Azure](intro_installation_byol_azure_conductor.md).
 
@@ -73,7 +73,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### Resolved Issues
 
-- **I95-64521 Upgrade from 7.1.0-r1 to 7.1.3-r2 failed on SSR440:** Resoved an issue where an upgrade to 7.1.3-r2 on an SSR440 HA router would fail because the system health check failed. The `ha-0-0` interface did not come up during boot (`eth1` comes up instead), causing the system health check to fail. The `ha-0-0` interface is now correctly initialized during upgrades on all SSR4x0 HA configurations.
+- **I95-64521 Upgrade from 7.1.0-r1 to 7.1.3-r2 failed on SSR440:** Resolved an issue where an upgrade to 7.1.3-r2 on an SSR440 HA router would fail because the system health check failed. The `ha-0-0` interface did not come up during boot (`eth1` comes up instead), causing the system health check to fail. The `ha-0-0` interface is now correctly initialized during upgrades on all SSR4x0 HA configurations.
 ------
 - **I95-64543 Onboarding an SSR440 router running 7.1.0 to a conductor running 7.1.3 fails:** Resolved an issue where an older default cipher-string operator had been disallowed and caused the onboarding to fail. All of the following characters are now treated as valid: `. - _ : + @ = , !`.
 
@@ -103,7 +103,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-59948 SHA-384 and SHA-512 Support:** Added support for CNSA 2.0 algorithms SHA-384 and SHA-512 to support US Federal government deployments. For additional information, see [`configure-authority-security-hmac-cipher`](config_command_guide.md#configure-authority-security-hmac-cipher).
 ------
-- **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).
+- **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjunction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).
 ------
 - **I95-61176 Multicast Failover Optimization:** Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM, as well as failover times in general.
 ------
@@ -145,7 +145,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-63018 memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.
 ------
-- **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR secuirty using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
+- **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR security using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
 ------
 - **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.
 ------
@@ -209,7 +209,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-53405 5G modem support:** Support for 5G modems as provided in the SSR400 and SSR440 devices has been added. 
 ------
-- **I95-54238 Uninterruptable Boot Process:** When the uninterruptable boot process is configured, a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible). For more information, see the [Uniterruptable Boot Process](sec-disable-ports.md#uninterruptable-boot-process).
+- **I95-54238 Uninterruptible Boot Process:** When the uninterruptible boot process is configured, a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible). For more information, see the [Uniterruptable Boot Process](sec-disable-ports.md#uninterruptible-boot-process).
 ------
 - **I95-54244 Secure Boot:** The SSR400 and SSR440 are factory configured with a cryptographic public key that only allows an authenticated firmware image to run on the device. This ensures that only trusted (Juniper-signed) code will run from power-on through to linux OS boot. For additional information, see [Secure Boot](sec-secure-boot.md).
 ------

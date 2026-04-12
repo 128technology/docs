@@ -72,7 +72,7 @@ Upgrade SSR to a newer version.
 
 Roll back to the previous installation of SSR. This is only possible if SSR was installed or upgraded with the Installer.
 
-Before perfroming a rollback, please refer to [Rolling Back Software](intro_rollback.md) for important details about the rollback operation.
+Before performing a rollback, please refer to [Rolling Back Software](intro_rollback.md) for important details about the rollback operation.
 
 `rollback`
 

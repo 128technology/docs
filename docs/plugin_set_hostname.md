@@ -18,7 +18,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Configuration
 
-The plugin confiugration is managed at the node level. If `enabled`, the plugin will auto-generate a hostname of `node.router` unless the `hostname` field is configured to a value besides `auto`. If `disabled` the hostname will remain as currently set.
+The plugin configuration is managed at the node level. If `enabled`, the plugin will auto-generate a hostname of `node.router` unless the `hostname` field is configured to a value besides `auto`. If `disabled` the hostname will remain as currently set.
 
 ### Enabled
 

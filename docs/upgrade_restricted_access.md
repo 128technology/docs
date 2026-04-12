@@ -77,7 +77,7 @@ We have identified an issue when onboarding SSR routers installed with older ver
 
 **Use of the [Import ISO](#import-iso) and [Import RPM](#import-plugin-rpms) Commands** 
 
-When using the `import iso` and `import rpm` commands to install plugins necessary for your deployment, it is important to copy both the specific image (ISO) as well as the individual plugin RPMs and all associated dependencies for the plugins. All of these files are imported to the conductor for and available for router installation. 
+When using the `import iso` and `import rpm` commands to install plugins necessary for your deployment, it is important to copy both the specific image (ISO) as well as the individual plugin RPMs and all associated dependencies for the plugins. All of these files are imported to the conductor and available for router installation. 
 
 ### Single-Version 6.3.0 Upgrade
 
@@ -213,7 +213,7 @@ Wed 2025-12-10 00:12:48 UTC
      7.1  SSR-7.1.0-50   downloads   downloads
 ```
 
-If you are **only ugrading the SSR ISO**, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.md) and [Router Upgrade](upgrade_router.md) procedures. If you are also upgrading plugins, continue below. 
+If you are **only upgrading the SSR ISO**, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.md) and [Router Upgrade](upgrade_router.md) procedures. If you are also upgrading plugins, continue below. 
 
 ### Import Plugin RPMs
 

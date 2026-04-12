@@ -70,7 +70,7 @@ address 169.254.50.5 prefix-length  24
 
 ## How It Works
 
-EoSVR A/S relies on the SSR to send broadcast traffic using only one of the defined services (either the active or the backup), regardless of the fact that the traffic is being received from both of them. 
+EoSVR A/S relies on the SSR to send broadcast traffic using only one of the defined services (either the active or the backup), even though traffic is received from both. 
 
 ![ARP Traffic](/img/ethosvr_activestandby_ARP.png)
 

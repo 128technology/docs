@@ -98,7 +98,7 @@ You have devices that are remote from your SSR fabric, but you want to give them
 
 ![Wireguard remote endpoints](/img/plugin_wireguard_2.png)
 
-Each peer is assigned an address out of a `10.10.10.0/24` private network, which they can use when sending sessions on to the fabric. Also every peer will end up having a public/private wirguard keypair. For this use case example, each peers have the following info assigned to them:
+Each peer is assigned an address out of a `10.10.10.0/24` private network, which they can use when sending sessions on to the fabric. Also every peer will end up having a public/private wireguard keypair. For this use case example, each peer has the following info assigned to them:
 
 | peer | private address | public key |
 | --- | --- | --- |
@@ -483,7 +483,7 @@ A profile describing an instance of wireguard on the router.
 | `name`               | string        | A string identifier for wireguard profile. This identifier is used as a device interface name in the host, therefore it can only use alphanumerics, underscores, or dashes, and cannot exceed 12 characters. |
 | `description`        | string        | A description about the wireguard profile. |
 | `loopback-address`   | ipv4-prefix   | An internal address prefix for KNI connectivity between wireguard and the data plane. |
-| `port`               | l4-port       | The UDP port for the wireguard instance to recieve connections on. |
+| `port`               | l4-port       | The UDP port for the wireguard instance to receive connections on. |
 | `inactivity-timeout` | milliseconds  | Inactivity timeout for wireguard sessions. By default this uses 180000 ms UDP timeout value. If customized to a non-default value, a new session-type will be automatically generated. |
 | `service-class`      | string        | The service-class to associate with the generated session-type for this wireguard profile. Wireguard sessions arriving at the router will be given this service-class. |
 | `access-policy`      | access-policy | List of access policies for the wireguard service. Packets allowed by this access policy will additionally be subject to wireguard security validation. See [service access policy](config_reference_guide.md#access-policy-service). |
@@ -689,7 +689,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 3.0.1
 
@@ -784,7 +784,7 @@ By using Saltstack data files, the time to apply high states across all assets i
 #### Issues Fixed
 
 - **PLUGIN-1072** Allow wireguard to start when the required version of `kmod-wireguard` is installed along with versions not used by the active kernel.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summary}] 128T-wireguard`
 - **PLUGIN-768** Support the Wireguard plugin on conductors running SSR versions `5.1.0` and greater.
 
 ### Caveat

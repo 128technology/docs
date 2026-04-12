@@ -5,13 +5,13 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-Juniper Networks distributes the SSR software in a number of forms for different environments. Of those asset types, the ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as an SSR system. The goal of this guide is produce a bootable USB drive from an SSR ISO.
+Juniper Networks distributes the SSR software in a number of forms for different environments. Of those asset types, the ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as an SSR system. The goal of this guide is to produce a bootable USB drive from an SSR ISO.
 
 For small deployments or a proof of concept, each ISO image can be loaded on to a bootable USB to install the operating system and SSR software.
 
 ### Creating a Bootable ISO: Linux, MacOS and Windows
 
-Creating a bootable ISO from Linux, Windows or MacOS is straightforward. The best way to get started is with a tool that makes creating bootable USBs easy for any platform. 
+Creating a bootable ISO from Linux, Windows, or macOS is straightforward. The best way to get started is with a tool that makes creating bootable USBs easy for any platform. 
 
 1. [Download and install Etcher](https://www.balena.io/etcher/) for your platform.
 

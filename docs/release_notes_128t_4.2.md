@@ -33,7 +33,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35694 A `service-route` of type `host` results in an invalid service path during session establishment.** This issue has been resolved by adding a missing gateway-ip address to the process.  
 ------
-- **I95-35701 Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route.** Configration validation no longer rejects the valid configuration. 
+- **I95-35701 Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route.** Configuration validation no longer rejects the valid configuration. 
 ------
 - **I95-35781 Rare race condition during `rotate logs` PCLI command may cause applications to fault.** The `rotate logs` PCLI command no longer causes the race condition. 
 ------
@@ -76,7 +76,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues causing LDAP authentication failures have been resolved. 
 ------
-- **I95-37588 Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.** Resolved the issue where a managed router had the incorrect IP address.
+- **I95-37588 Value for `configure > authority > router > system > software-update > repository > address` uses the first lexicographically sorted router for all other routers in authority instead of using a unique value per router.** Resolved the issue where a managed router had the incorrect IP address.
 ------
 - **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
 ------
@@ -276,7 +276,7 @@ The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections i
 
   Until the system is upgraded to 4.2.5, this issue can be mitigated by removing the invalid configuration.
 ------
-- **I95-33535** Interface name incorrectly allows for prefixed whitepace in configuration, resulting in failure to create interface.
+- **I95-33535** Interface name incorrectly allows for prefixed whitespace in configuration, resulting in failure to create interface.
 ------
 - **I95-33556** 128T may drop inbound SVR traffic when destination service address and port overlaps with interface (waypoint) address and wayport. 
 
@@ -855,7 +855,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-31570** Changing the order of custom charts can sometimes render the dashboard page inoperable
 ------
-- **I95-31672** New version of Chrome does not consider our self signed web certifiate valid
+- **I95-31672** New version of Chrome does not consider our self signed web certificate valid
 ------
 - **I95-31742** routingManager application can fault when a device interface is removed
 ------

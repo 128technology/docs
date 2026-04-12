@@ -23,7 +23,7 @@ sidebar_label: Alarms
 | Category  | asset                                                        |
 | Severity  | critical                                                     |
 | Message   | A duplicate asset with id `<id>` has been detected. Ensure all assets have a unique id and restart salt-minion on asset `<id>`, which is configured as `<node>`.`<router>`. |
-| Threshold | Issued if any node being manged by a conductor has the same asset id as another node in the authority. |
+| Threshold | Issued if any node being managed by a conductor has the same asset id as another node in the authority. |
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -128,7 +128,7 @@ sidebar_label: Alarms
 
 | Cause                                                 | Troubleshooting Step                                         |
 | ----------------------------------------------------- | ------------------------------------------------------------ |
-| All “Peer path” alarms to a given peer are triggered. | Review the statistics for `show stats bfd by-peer-path` to investigate for anomolies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
+| All “Peer path” alarms to a given peer are triggered. | Review the statistics for `show stats bfd by-peer-path` to investigate for anomalies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
 
 ------
 
@@ -386,7 +386,7 @@ sidebar_label: Alarms
 
 | Cause                                            | Troubleshooting Step                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| Network connectivity failure or misconfiguration | Ensure that the SNMP server defined in the configuration is reachable.  Usually this can be determined by issueing a `ping` to the server address.  If the server does not respond, run a packet capture on the interface used for SNMP to observe if traffic is being generated from the SSR upon event generation. |
+| Network connectivity failure or misconfiguration | Ensure that the SNMP server defined in the configuration is reachable.  Usually this can be determined by issuing a `ping` to the server address.  If the server does not respond, run a packet capture on the interface used for SNMP to observe if traffic is being generated from the SSR upon event generation. |
 
 ------
 

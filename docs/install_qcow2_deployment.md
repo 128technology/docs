@@ -3,9 +3,9 @@ title: Deployment Using QCOW2
 sidebar_label: Deployment Using QCOW2
 ---
 
-The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages which can be used to automate instance deployment. Cloud-init can be used for linux network provisioning and for disk volume dynamic expansion on first boot.
+The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages which can be used to automate instance deployment. Cloud-init can be used for Linux network provisioning and for disk volume dynamic expansion on first boot.
 
-For successful SSR qcow2 deployment, a cloud-init (or nocloud) configuration **must** provide persistent network interface bindings on first boot of the VM; otherwise the SSR will not correlate virtual machine NICs to router interfaces, and they may change across VM reboots. Operation of SSR qcow2 without persistent NIC bindings is not supported at this time.
+For successful SSR qcow2 deployment, a cloud-init (or nocloud) configuration **must** provide persistent network interface bindings on first boot of the VM; otherwise the SSR will not correlate virtual machine NICs to router interfaces, and the NIC assignments may change across VM reboots. Operation of SSR qcow2 without persistent NIC bindings is not supported at this time.
 
 Download the 128T package-based qcow2 image using the link below:
 
@@ -34,7 +34,7 @@ runcmd:
 - initialize128t -p /root/initializer-preferences.json
 ```
 
-This causes this device's salt-minion to attempt to connect to the Conductor at IP address `10.10.10.10`. The device, by default, will set its `asset-id` to match the hostname provided by the hypervisor's cloud-init metadata. If this unique asset-id is associated with a node in the Conductor's configuration, the Conductor's Automated Provisioner process will reinitialize this device with the appropriate router and node name, allowing the system to pull a full configuration.
+This causes the device's salt-minion to attempt to connect to the Conductor at IP address `10.10.10.10`. The device, by default, will set its `asset-id` to match the hostname provided by the hypervisor's cloud-init metadata. If this unique asset-id is associated with a node in the Conductor's configuration, the Conductor's Automated Provisioner process will reinitialize this device with the appropriate router and node name, allowing the system to pull a full configuration.
 
 :::note
 The example above assumes that the system will be able obtain an IP address via DHCP on the first network interface, which provides connectivity to the Conductor. If this is not the case, additional configuration can be provided to cloud-init to assist in provisioning network interfaces. However, these details are beyond the scope of this document. Please consult the official cloud-init documentation and the documentation for your particular hypervisor for further guidance.
@@ -51,7 +51,7 @@ There are three specific configuration files that may be supplied for different 
 
 ### `meta-data`
 
-Instance meta-data must be provided to sets the system hostname. By default it is used as the SSR's asset-id. An example of this data is shown below.
+Instance meta-data must be provided to set the system hostname. By default, it is used as the SSR's asset-id. An example of this data is shown below.
 
 ```
 instance-id: ssr1

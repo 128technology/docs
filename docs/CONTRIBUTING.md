@@ -67,15 +67,15 @@ Docusaurus is particular about how links are defined within markdown in order to
 * Links to resources within the site must contain the markdown file's extension (most often this is .md, but sometimes can be .mdx). `[link to another file](another_file.md)`
 * Links to headers within the same file should contain a reference to the header only. `[header link](#internal-header)`
   :::tip
-  Header links can be tricky to determine as Docusaurus removes case and adds hypens instead of special characters. Click on the header you are interested in linking. Go to the browser URL and copy the value and paste it into your markdown file.
+  Header links can be tricky to determine as Docusaurus removes case and adds hyphens instead of special characters. Click on the header you are interested in linking. Go to the browser URL and copy the value and paste it into your markdown file.
   :::
 * Links to headers within another file require both the file name and extension, plus the header. `[Link to a header within another file](another_file.md#header)`
 
 ### Datamodel References
 
-When referring to paths in datamodel hierarcies, it is preferable to use a single right angle bracket to separate levels in the path.  For example: `authority > router > system > ntp`.  Even though `router` is a multi-instance leaf node in YANG and technically requires a key to refer to a specific instance, the instance ID is left out for brevity.
+When referring to paths in datamodel hierarchies, it is preferable to use a single right angle bracket to separate levels in the path.  For example: `authority > router > system > ntp`.  Even though `router` is a multi-instance leaf node in YANG and technically requires a key to refer to a specific instance, the instance ID is left out for brevity.
 
-* When referring to specific instances of a configuration value, the object in discussion should be called out as code by using backtics (e.g. `service-policy`)
+* When referring to specific instances of a configuration value, the object in discussion should be called out as code by using backticks (e.g. `service-policy`)
 * When referring to a data model concept, it should be called in italicized format (e.g. _service-policy_)
 
 ### Markdown Headers

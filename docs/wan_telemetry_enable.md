@@ -27,7 +27,7 @@ Create an account on the [Mist portal](https://manage.mist.com/).
 
 Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
 <!-- markdown-link-check-disable
-For detailed information about the fields used to create a site, please refer to the Mist [Site Configuration documenation](https://www.mist.com/documentation/mist-edge-getting-started-guide-2/#Create_a_Site_for_Campus_Branches).
+For detailed information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.mist.com/documentation/mist-edge-getting-started-guide-2/#Create_a_Site_for_Campus_Branches).
 markdown-link-check-enable -->
 
 1. From the Mist menu on the left, select **Organization** and select **Site Configuration** from the menu.

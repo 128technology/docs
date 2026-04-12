@@ -109,7 +109,7 @@ Management interfaces can be configured for redundancy between nodes of a HA pai
 
 ### Sample Configuration
 
-**To configure IPv6 addresses, just enter the addresss as you would an IPv4 addresss.
+**To configure IPv6 addresses, just enter the address as you would an IPv4 address.
 
 ```
 config
