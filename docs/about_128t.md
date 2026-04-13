@@ -19,7 +19,7 @@ Session directionality forms the foundation of SVR’s secure routing and segmen
 
 SVR architecture defines a location independent and segmented approach to routing and addressing based on waypoints. Waypoint addresses (or simply “waypoints”) are IP addresses configured on secure vector routers that are used to govern sessions across network paths.
 
-Waypoints are distinct from the IP addresses and named services that identify end-to-end network sessions between devices and services. Secure vector routes define the path (e.g., set of routers) each session must follow within an SVR topology. Every SVR-based router can be reached by one or more waypoints, and Bi-directional Forwarding Detection (BFD) and inline flow monitorint are used to test connection and path attributes between the waypoints.
+Waypoints are distinct from the IP addresses and named services that identify end-to-end network sessions between devices and services. Secure vector routes define the path (e.g., set of routers) each session must follow within an SVR topology. Every SVR-based router can be reached by one or more waypoints, and Bi-directional Forwarding Detection (BFD) and inline flow monitoring are used to test connection and path attributes between the waypoints.
 
 The waypoint-based routing with SVR is inherently segment based, meaning that end-to-end route vectors can be created based on multiple router (or waypoint) hops. Since each SVR router maintains an overall view of the topology and service-based policies, dynamic multi-segment paths can be established. Ephemeral session state in each router along the path guarantees symmetric communications.
 
