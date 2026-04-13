@@ -5,12 +5,12 @@ sidebar_label: WAN Edge Templates
 
 Configuring your SSR device is made simple through the use of the SSR WAN Edge Templates. 
 
-The WAN Edge Templates provide you with the basic network configuration in a single step, and allow for re-usable and consistent configuration for every SSR device you deploy. The template provides device specific, preconfigured WAN interfaces, LAN interfaces, a traffic steering policy, and an application policy. You simply name the template and select the device type.  
+The WAN Edge Templates provide you with the basic network configuration in a single step, and allow for reusable and consistent configuration for every SSR device you deploy. The template provides device specific, preconfigured WAN interfaces, LAN interfaces, a traffic steering policy, and an application policy. You simply name the template and select the device type.  
 
 
 ![Add template](/img/intro_wa_quickstart_5.gif)
 
-1. From the the organization sidebar menu, select **WAN Edge Templates**.
+1. From the organization sidebar menu, select **WAN Edge Templates**.
 2. Select **Create Template** in the upper right.
 3. Name the template.
 4. Place a checkmark in the **`Create from Device Model`** box.

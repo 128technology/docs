@@ -3,9 +3,9 @@ title: Configuring Dual Node High Availability
 sidebar_label: Dual Node High Availability
 ---
 
-The SSR provides significant flexibility for high availability configurations. The SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes. And like traditional routers, the SSR software can also be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration.  
+The SSR provides significant flexibility for high availability configurations. The SSR can deploy multiple software instances (referred to as nodes) within the same installation, providing high availability across router nodes. Like traditional routers, the SSR can also be deployed as a single router instance on multiple platforms, with high availability configured in a dual-router configuration.  
 
-This document contains the steps for configuring support for configuration of dual-node high availability. In addition to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
+This document describes how to configure dual-node high availability. In addition to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
 
 A new service route parameter introduced in version 5.4, [`enable-failover`](#service-route-redundancy), provides stateful failover on the dual node HA configuration.
 
@@ -37,7 +37,7 @@ Configuration changes are always made to a candidate configuration. In earlier r
 
 Additionally, the candidate configuration is no longer synchronized between HA nodes. Beginning with 5.3, only the running configuration is synchronized between nodes. 
 
-It is recommended that you use the [`export config`](cli_reference.md#export-config) command to save your configuration changes while working, especially if you are performing multiple changes. Changes to the running configuration are only be made when the configuration is committed.  
+Use the [`export config`](cli_reference.md#export-config) command to save your configuration changes while working, especially if you are performing multiple changes. Changes to the running configuration are only be made when the configuration is committed.  
 
 ### Clock Synchronization
 Because highly available nodes synchronize time-series data, it is critical that the two nodes that comprise an HA pair have synchronized clocks. It is sufficient to manually synchronize the clocks until SSR software is installed, after which point NTP (Network Time Protocol) can be used to automatically synchronize the clocks.
@@ -91,7 +91,7 @@ Converting an existing router from standalone to HA will require downtime, and i
 
 Adding a second node requires configuring another *node* container within the router. This node will contain one or more *shared interfaces*, which will protect the router from failure modes when interfaces, links, or a node fails. Configuring shared interfaces is covered later in this document.
 
-Follow the steps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer SSR nodes.
+Follow the steps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) to provision an interface to connect between peer SSR nodes.
 
 ## Configuring the Shared Interface(s)
 For systems configured prior to release 5.4, Dual Node High Availability can be configured using a shared MAC interface, and is described below. For systems configured on release 5.4 and later, High Availability can be configured using VRRP. See [High Availability Using VRRP](#high-availability-using-vrrp) for information about using VRRP for dual-node failover.

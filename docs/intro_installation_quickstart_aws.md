@@ -145,7 +145,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 Adding a token to your deployment enables on-premises upgrades and deployments. Use the following steps to add the token credentials.
 
-1. SSH to the EC2 intance of Conductor (Linux).
+1. SSH to the EC2 instance of Conductor (Linux).
 2. Run in Linux the following command to add a token credential:
 
 ```

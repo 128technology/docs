@@ -300,7 +300,7 @@ If the credentials cannot be checked (e.g. no Internet connection is available),
 It is strongly recommended that you update the token during a maintenance window. Performing these operations on a large deployment may take an extended amount of time to complete.
 :::
 
-If the SSR conductors are ugpraded to 4.5.7, 5.0.1, 5.1.1, or greater, and have the 3.0.0 (or greater) Installer, use the following procedure to either add or update the username/token:
+If the SSR conductors are upgraded to 4.5.7, 5.0.1, 5.1.1, or greater, and have the 3.0.0 (or greater) Installer, use the following procedure to either add or update the username/token:
 
 1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on BOTH conductors.
 

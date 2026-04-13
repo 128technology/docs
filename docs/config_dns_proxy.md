@@ -2,7 +2,7 @@
 title: DNS Proxy
 sidebar_label: DNS Proxy
 ---
-In a typical hub/spoke deployment, its very common for the WAN interfaces to have some sort of dynamic interface such as DHCP, PPPoE, LTE, etc. The SSR can dynamically learn the DNS server address for these interfaces and can load balance DNS requests across the learned servers. The dns-proxy feature aims to provide a simple way to proxy all DNS requests originating on the LAN side to the learned server address(es) on the WAN side without having to re-configure or update client endpoints. This allows the network to better adapt to failures on the WAN interfaces while minimizing loss of connectivity from client side applications as clients can utilize the LAN address of the SSR to resolve DNS requests.
+In a typical hub/spoke deployment, it's very common for WAN interfaces to have some sort of dynamic interface such as DHCP, PPPoE, LTE, etc. The SSR can dynamically learn the DNS server address for these interfaces and can load balance DNS requests across the learned servers. The dns-proxy feature aims to provide a simple way to proxy all DNS requests originating on the LAN side to the learned server address(es) on the WAN side without having to re-configure or update client endpoints. This allows the network to better adapt to failures on the WAN interfaces while minimizing loss of connectivity from client side applications as clients can utilize the LAN address of the SSR to resolve DNS requests.
 
 ## Overview
 The common workflow for using this feature is as follows:
@@ -96,7 +96,7 @@ The `/etc/resolv.conf` file can also be configured to point to the LAN interface
 
 
 ## Configuring Service Route(s)
-When the service route's next hop for the dns-proxy service points to a dynamic interface such as DHCP based interface, any learned DNS address(es) will be automatically used as destination nat target for sessions for that service. This is accomplished by populating the `next-hop` > `target-address` configuration internally upon address resolution. An example of the service-route configuration is as follows:
+When the service route's next hop for the dns-proxy service points to a dynamic interface such as DHCP based interface, any learned DNS address(es) will be automatically used as a destination NAT target for sessions for that service. This is accomplished by populating the `next-hop` > `target-address` configuration internally upon address resolution. An example of the service-route configuration is as follows:
 
 ```
 admin@node1.conductor# show config running authority router router1 node node1 device-interface inband-mgmt

@@ -3,7 +3,7 @@ title: Maintenance Mode
 sidebar_label: Maintenance Mode
 ---
 
-Maintenance mode is used when staging equipment in a production network prior to its go-live date, or to isolate a router/device from the network in order to perform debugging or an upgrade. The primary function of maintenance mode is to suppress alarms from systems that are incomplete, or undergoing maintenance activities that would cause alarms. When the device maintenance is complete, you can set the router out of maintenance mode.
+Maintenance mode is used when staging equipment in a production network prior to its go-live date, or to isolate a router/device from the network to perform debugging or an upgrade. The primary function of maintenance mode is to suppress alarms from systems that are incomplete, or undergoing maintenance activities that would cause alarms. When device maintenance is complete, you can take the router out of maintenance mode.
 
 ## Alarms during Maintenance mode
 

@@ -9,7 +9,7 @@ Common Criteria for information technology is an international agreement signed 
 
 For more information on Common Criteria, see https://www.commoncriteriaportal.org/.
 
-## Introduction to Session Smart Networking Common Critieria Compliance
+## Introduction to Session Smart Networking Common Criteria Compliance
 
 The Session Smart Networking Platform is the first 100% software-defined, session-based distributed IP routing and network services platform designed from the ground-up with an application and service-centric context. The platform consists of two primary components: the Session Smart Router (SSR) and the Conductor. Together, they form a single logical control plane that is highly distributed, and a data plane that is truly session-aware.
 

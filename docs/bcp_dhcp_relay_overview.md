@@ -3,7 +3,7 @@ title: DHCP Relay Best Practices
 sidebar_label: DHCP Relay Best Practices
 ---
 
-The purpose of a DHCP relay is to forward incoming requests from DHCP clients to a DHCP server. Normally, a client can talk directly to a DHCP server; especially on a single subnet. However, in the case where the server and clients are not on the same subnet, a DCHP relay agent can be deployed to mediate these requests. The SSR can accommodate this type of DHCP relay services.
+The purpose of a DHCP relay is to forward incoming requests from DHCP clients to a DHCP server. Normally, a client can talk directly to a DHCP server; especially on a single subnet. However, in the case where the server and clients are not on the same subnet, a DHCP relay agent can be deployed to mediate these requests. The SSR can accommodate this type of DHCP relay services.
 
 ### Requirements
 

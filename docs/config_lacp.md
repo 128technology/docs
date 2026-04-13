@@ -3,7 +3,7 @@ title: Link Aggregation and LACP
 sidebar_label: Link Aggregation and LACP
 ---
 
-A Link Aggregation Group (LAG) enables the grouping Ethernet interfaces to form a single link layer interface. LAGs are formed by connecting multiple ports in parallel between two devices. As more links are added between the two devices, bandwidth expands. Traffic is automatically load-balanced, and in a network failure scenario, there is link-level redundancy. 
+A Link Aggregation Group (LAG) enables the grouping of Ethernet interfaces to form a single link layer interface. LAGs are formed by connecting multiple ports in parallel between two devices. As more links are added between the two devices, bandwidth expands. Traffic is automatically load-balanced, and in a network failure scenario, there is link-level redundancy. 
 
 LACP is the protocol that defines how the group of interfaces operates. LACP enables dynamic LAG, allowing the exchange of information between the members of the LAG network, monitoring bundle endpoints, and adding or removing new or unused individual links.  
 
@@ -33,7 +33,7 @@ All SSR hardware platforms (SSR100 Series and SSR1000 Series) are supported.
 LACP is enabled by default on the `bond` device interface, and must be configured on each end of the link. The following device interface configuration shows a `bond` interface and `lacp-enabled` as true (default). The interfaces that are part of the LAG are configured as ethernet interfaces and the `parent-bond` is identified as the name of the `bond` interface. 
 
 :::important
-Please note that after any changes to the LAG configuration, you must restart the 128T service. 
+After any changes to the LAG configuration, you must restart the 128T service. 
 :::
 
 ### Configuration Using the PCLI 
@@ -173,7 +173,7 @@ bond_members:
 
 ## Configuring LLDP
 
-LLDP allows other devices in the network to discover the SSR. It is not required for LAG, but when enabled it provides information about the LAG interface in the network. It should be noted that when enabled as part of LAG, it is configured for the entirety of the `bond`, not on the individual interfaces within the group. For additional information about using the LLDP command, see [`lldp`](config_reference_guide.md#lldp)
+LLDP allows other devices in the network to discover the SSR. It is not required for LAG, but when enabled it provides information about the LAG interface in the network. When LLDP is enabled as part of LAG, it is configured on the `bond` interface as a whole, not on the individual member interfaces. For additional information about using the LLDP command, see [`lldp`](config_reference_guide.md#lldp)
 
 ```
               device-interface  bond0

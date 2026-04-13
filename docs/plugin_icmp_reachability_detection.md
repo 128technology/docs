@@ -438,7 +438,7 @@ Additional debugging can be turned on for the `ping-monitor` instance by setting
 
 #### Status of the Path Selection Algorithm
 
-The `icmp-probe-agent` takes its inputs from the `ping-monitor` services by watching on path updates for those instances. In addition it determines the current path selection and udpates the `application-id` modules accordingly. The following service status can be used for troubleshooting:
+The `icmp-probe-agent` takes its inputs from the `ping-monitor` services by watching on path updates for those instances. In addition it determines the current path selection and updates the `application-id` modules accordingly. The following service status can be used for troubleshooting:
 
 ```bash
 # systemctl status 128T-icmp-path-change-notifier@internet-broadband.path
@@ -911,4 +911,4 @@ The release with the version number 3.0.4 was skipped due to internal issues.
 #### Issues Fixed
 
 - **PLUGIN-768** Support the ICMP Reachability Detection plugin in SSR versions `5.1.0` and greater.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-icmp-reachability-detection`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summary}] 128T-icmp-reachability-detection`

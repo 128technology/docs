@@ -30,7 +30,7 @@ This example shows a multi-hop hub and spoke deployment. Red represents customer
 
 In a newly deployed network, Enhanced Security Key Management is more secure than the default security implementation of SVR, and far more secure than IPSec. Enhanced Security Key Management affords you the best security strength not only because of the encryption key exchange, and its unique per-session encryption keys, but through its ability to perform key rotations for any network topology.
 
-Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
+Additionally, the flexibility of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
 ## Enhanced Security Key Management and IPSec 
 
@@ -49,7 +49,7 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Perfect Forward Secrecy | Yes	| Keys in DH are seeded by Salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
-Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
+Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want security across your network, this is the best option.
 
 ## How It Works
 
@@ -251,7 +251,7 @@ The peer list of the router must also have the `peering-common-name` of that pee
 
 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
 
-For the SSR, ML-KEM can be used in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
+For the SSR, ML-KEM can be used in conjunction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
 
 In order to take advantage of ML-KEM Cryptography, all devices must be running SSR software that provides support for this feature. 
 
@@ -259,7 +259,7 @@ In order to take advantage of ML-KEM Cryptography, all devices must be running S
 
 Each participant generates a public-private key pair for encryption and decryption. These keys are generated upon system startup, are stored securely, and are encrypted with the onboard TPM. 
 
-A Symmetric Key is generated using the [Nist-approved FIPS 203 ML-KEM algorithm](https://csrc.nist.gov/pubs/fips/203/final) and exchanged between the sender and the reciever. This is the shared, secret key used for encryption and decryption.
+A Symmetric Key is generated using the [Nist-approved FIPS 203 ML-KEM algorithm](https://csrc.nist.gov/pubs/fips/203/final) and exchanged between the sender and the receiver. This is the shared, secret key used for encryption and decryption.
 
 The encapsulation process wraps the symmetric key in layers of encryption, and the decapsulation process removes the layers using the private key associated with the device. 
 
@@ -335,11 +335,11 @@ configure
         exit
 ```
 
-## Rekeying (Key Rotation) Atttributes and Default Values
+## Rekeying (Key Rotation) Attributes and Default Values
 
 The `key-exchange-algorithm` is configurable at both the Authority and Router/Peer level (using `key-exchange-algorithm-override`). The peer path override allows the migration from an existing algorithm to a different algorithm within authority. This makes it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
 
-If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for addtitional details. 
+If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for additional details. 
 
 When the `key-exchange-algorithm` is changed, the SSR returns to the shared-secret exchange state (since certificate exchange is not impacted) and opertation proceeds until the peer metadata-keys are re-exchanged. Existing sessions continue using the established payload keys until the next payload key rekey-time. Payload key updates are encrypted using the latest exchanged peer metadata-keys.
 
@@ -376,7 +376,7 @@ config
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
 | peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
 
-When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for addtional information). 
+When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for additional information). 
 
 In cases where it is necessary to manually force key rotation on the routers, use the [`rotate security metadata-key`](cli_reference.md#rotate-security-metadata-key) command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
 

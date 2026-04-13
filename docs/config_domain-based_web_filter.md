@@ -18,7 +18,7 @@ Web filtering allows administrators to prevent access to dangerous, malicious, o
 - subcategory
 - category
 
-Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
+Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering uses third-party data sources to classify domains and URLs against a comprehensive, real-time, worldwide database.
 
 :::note
 Web Filtering is a separate, optional feature, available through the purchase of a Web-Filtering license. For information about activating this powerful feature, please contact Customer Support or your Sales Engineer.
@@ -77,7 +77,7 @@ exit
 
 ## How it Works
 
-The SSR maintains a cache of the most frequently used domains and URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
+The SSR maintains a cache of the most frequently used domains and URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the SSR applies the configured Category action — allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
 
 - While waiting for a response to the categorization query, the SSR will drop packets for the request. Clients are expected to retransmit the request. If a configurable threshold of retransmissions is hit, the SSR will give up on categorization and allow the session.
 - When a response is received, the cache is updated, and the category information in the service policy is applied.
@@ -194,7 +194,7 @@ Listed below are the default set of SSR domain categories, which apply to all da
 - Travel
 - Weapon
 
-Active categories and domains are displayed in the GUI on the Applications Seen page. Use the link on the top right corner of the Routers page to view the applications available on the Routers page. 
+The GUI displays active categories and domains on the Applications Seen page. Use the link on the top right corner of the Routers page to view the applications available on the Routers page. 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
