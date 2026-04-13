@@ -2,7 +2,6 @@
   "recurse": true,
   "cleanUrls": true,
   "checkFragments": true,
-  "markdown": true,
   "skip": [
     "^mailto:",
     "^https://tools\\.ietf\\.org",
@@ -22,7 +21,7 @@
   "retry": true,
   "retryErrors": true,
   "retryErrorsCount": 3,
-  "retryErrorsJitter": 5,
+  "retryErrorsJitter": 50,
   "statusCodes": {
     "403": "skip",
     "404": "error",
