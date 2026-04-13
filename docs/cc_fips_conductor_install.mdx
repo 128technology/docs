@@ -1,7 +1,10 @@
 ---
 title: Conductor Installation
-sidebar_label: Conductor Installation 
+sidebar_label: Conductor Installation
 ---
+import ConnectConsole from './_install_connect_console.md';
+import BootUSBSSR100 from './_install_boot_usb_ssr100.md';
+import BootUSBSSR1000 from './_install_boot_usb_ssr1000.md';
 
 After downloading the ISO, use the procedure in [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb) to create a bootable USB. 
 
@@ -18,48 +21,15 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Installation
 
-### Connect the SSR to a Management Console
-
-Ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The baud rate of the console port is 115200 bps.
-
-1. Connect the RJ45 rollover cable to the console port on the SSR device.
-2. Connect the other end of the cable to your computer.
-3. Insert your bootable USB with the new ISO image into the USB port of the SSR device.
-4. Connect the power input to the SSR device.
-5. Power on the SSR. 
+<ConnectConsole/>
 
 ### Boot from the USB
 
-Use the steps appropriate for your device to direct the device to boot from the USB. 
+Use the steps appropriate for your device to direct the device to boot from the USB.
 
-#### SSR100 Series Devices
+<BootUSBSSR100/>
 
-1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
-
-    ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
-
-2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
-
-    ![Select Boot Device](/img/onboard_otp_boot_device.png)
-
-3. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
-
-#### SSR1000 Series Devices
-
-1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
-
-    ![Setup Menu Prompt](/img/1x00_setup_menu.png)
-
-2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
-
-    ![Setup Utility](/img/setup-menu-prompt.png)
-
-3. Use the up and down arrow keys to highlight the USB device in the Boot Override list.
-
-    ![Boot Override list](/img/1x00_boot-override.png)
-
-4. Press Enter to confirm boot from the USB device.
-5. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
+<BootUSBSSR1000/>
 
 ### Conductor Installation
 
@@ -379,5 +349,5 @@ If you will be using the OTP Quickstart router installation process, proceed to 
 
 When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
-If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_router_install.md).
+If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_router_install.mdx).
 

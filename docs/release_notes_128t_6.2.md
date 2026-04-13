@@ -691,7 +691,7 @@ Valid values for `remove-as-path`:
 ------
 - **I95-46671 VRF Route Leaking:** VRF Route Leaking allows the intentinoal sharing of route information across VRF instances. For a more detailed explanation and configuration information please refer to [VRF Route Leaking](config_vrf_route_leaking.md).
 ------
-- **I95-47133 Local Configuration Override:** Administrators can now make configuration changes to a local router without access to the conductor, and prevent the conductor from overriding those changes. For more information about using this feature, see [Local Configuration Override](how_to_local_config_override.md).
+- **I95-47133 Local Configuration Override:** Administrators can now make configuration changes to a local router without access to the conductor, and prevent the conductor from overriding those changes. For more information about using this feature, see [Local Configuration Override](howto_local_config_override.md).
 ------
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------

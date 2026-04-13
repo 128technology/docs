@@ -37,4 +37,4 @@ Additionally, configuring `application-identification` to `mode all` populates t
 
 ![Application Summary](/img/app_summary.png)
 
-For more information, see [Using Application Summary.](how_to_use_app_summary.md)
+For more information, see [Using Application Summary.](howto_use_app_summary.md)

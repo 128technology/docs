@@ -94,7 +94,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 
 - **I95-22432 Conductor Management over IPv6:** All router to conductor communication along with management protocols (ssh, radius, syslog, snmp, web gui/api) now support IPv6. However in an IPv6 managed node, devices must be running the same IP version. For example, in an IPv6 HA configuration, both Conductors must be running IPv6. 
 ------
-- **I95-29382 Enhanced Security Key Management:** Introduces a new peer-to-peer, certificate-based key exchange mechanism to the SVR protocol. This key exchange avoids mid-network re-encryption and provides the ability to rotate keys as required. The security rekeying mechanism is configured at the Authority, and requires that all routers and conductors be running the same version of software that supports this capability. The existing security key exchange mechanisms continue to exist and will be supported during the transition to the new model. The two security approaches cannot coexist at the same time within an authority. See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for more information.
+- **I95-29382 Enhanced Security Key Management:** Introduces a new peer-to-peer, certificate-based key exchange mechanism to the SVR protocol. This key exchange avoids mid-network re-encryption and provides the ability to rotate keys as required. The security rekeying mechanism is configured at the Authority, and requires that all routers and conductors be running the same version of software that supports this capability. The existing security key exchange mechanisms continue to exist and will be supported during the transition to the new model. The two security approaches cannot coexist at the same time within an authority. See [Enhanced Security Key Management](sec_enhanced_key_mgmt.md) for more information.
 ------
 - **I95-52924 NIC Driver FEC Support:** Support has been added to configure optical FEC for SFPs.
 ------
@@ -104,7 +104,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused. 
 ------
-- **I95-57454 Management traffic over SVR (in-band management):** Router to Conductor communication is supported over SVR with the use of [rekey](enhanced-sec-key-mgmt.md#peer-key-and-key-rotation).
+- **I95-57454 Management traffic over SVR (in-band management):** Router to Conductor communication is supported over SVR with the use of [rekey](sec_enhanced_key_mgmt.md#peer-key-and-key-rotation).
 ------
 - **I95-58635 Source Peer added to output of `show session by-id`:** Added information to the output of `show session by-id`, making it easier to troubleshoot sessions.
 ------
@@ -176,7 +176,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 ------
 - **I95-59478 Recover PPPoE after highway crash:** Updated the PPPoE re-init script to resolve an issue where, after a highway crash, the PPPoE NSID becomes invalid and causes the device status to stay `down` even if the monitoring script reports `up`.
 ------
-- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](how_to_local_config_override.md#using-the-gui).
+- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](howto_local_config_override.md#using-the-gui).
 ------
 - **I95-59676 Alarm when default passwords are not changed:** An alarm has been added to detect when default password hashes are detected for standard system users. It is highly recommended that all system user passwords be updated to a secure password as soon as possible.
 ------

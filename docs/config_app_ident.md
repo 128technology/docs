@@ -18,7 +18,7 @@ By default, the SSR automatically downloads domain and application datasets week
 
 ## Application Summary
 
-The Application Summary is available for routers where both Application Identification and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`. Refer to [Application Summary](how_to_use_app_summary.md) to learn more about using the Application Summary. 
+The Application Summary is available for routers where both Application Identification and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`. Refer to [Application Summary](howto_use_app_summary.md) to learn more about using the Application Summary. 
 
 ### Configuring Learning Mode and Application Summary
 
