@@ -14,7 +14,6 @@ Use this information if you are upgrading to a newer software version **after ha
 
 The SSR Software packages are available from the Juniper Networks public servers using the **username and token provided to you.** During the upgrade process, your SSR uses this information to securely access the download location. Depending on your upgrade selection, the following location is accessed by the upgrade process:
 
-<!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
 Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. 

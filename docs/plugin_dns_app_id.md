@@ -62,7 +62,7 @@ The plugin contains built in application patterns for Gmail, Google Drive, YouTu
 | -------------- | --- |
 | Gmail        | [link](https://support.google.com/a/answer/9497877?hl=en) |
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
-| Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-fWindows Updateiles) |
+| Windows Update | [link 1](https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/windows-update-issues-troubleshooting?toc=/windows/deployment/toc.json&bc=/windows/deployment/breadcrumb/toc.json#device-cannot-access-update-fWindows) |
 | YouTube   | [link](https://www.netify.ai/resources/applications/youtube) |
 
 By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, `youtube` and `windows-update`.

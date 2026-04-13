@@ -287,8 +287,7 @@ These counters are available per-bond-member.
 ------
 - **I95-54440 / I95-50787 Rebooting the OS from the conductor throws error code 400:** Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display **Error: EOF**.
 ------
-<!-- markdown-link-check-disable -->
-- **I95-54541 Device interfaces on Azure VMs with a 2K or greater MTU fail to initialize:** Resolved an issue where device-interfaces configured in an Azure VM fail during initialization, and the port remains operationally down. For additional details, refer to the Knowledge Base article [Unable to bind accelerated networking interfaces in Azure when using vmbus-id](../kb/2024/04/25/I95-54541).<!-- markdown-link-check-enable -->
+- **I95-54541 Device interfaces on Azure VMs with a 2K or greater MTU fail to initialize:** Resolved an issue where device-interfaces configured in an Azure VM fail during initialization, and the port remains operationally down. For additional details, refer to the Knowledge Base article [Unable to bind accelerated networking interfaces in Azure when using vmbus-id](../kb/2024/04/25/I95-54541).
 ------
 - **I95-54750 Load Balancer API Calls not working:** The original API and Swagger documentation used `Load Balancer`, which was misleading. The `Reachability Detection` REST APIs have been updated to use `Reachability Detection` as reference, instead of `Load Balancer`.
 ------
@@ -330,8 +329,7 @@ These counters are available per-bond-member.
 ------
 - **I95-55850 Changing the name of a `bond-interface` fails:** Resolved an issue where changing the name of a `bond-interface` required a restart to take effect.
 ------ 
-<!-- markdown-link-check-disable -->
-- **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article [Upgrade from 5.6 to 6.1 may result in missing FIB entries](../kb/2024/04/24/I95-55904). <!-- markdown-link-check-enable -->
+- **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article [Upgrade from 5.6 to 6.1 may result in missing FIB entries](../kb/2024/04/24/I95-55904).
 ------
 - **I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:** Resolved an issue where the `cpuinfo` parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the `cpuinfo` contains the word ‘processor’. 
 ------
