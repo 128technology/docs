@@ -26,7 +26,6 @@ The Image-based install consists of the following steps:
 
 The image-based ISO's are available to download at the following location:
 
-<!-- markdown-link-check-disable-next-line -->
 https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 Files available for download are:
