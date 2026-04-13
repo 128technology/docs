@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 5.6 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_5.6"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 5.6 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_5.6"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_5.6" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_5.6" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"5.6","item":"https://docs.128technology.com/docs/release_notes_128t_5.6"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.fd19d5c2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.02faf06b.js" defer="defer"></script>
 <script src="/assets/js/main.4cf4b635.js" defer="defer"></script>
 </head>
 <body>
@@ -47,7 +47,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49218 Filter OSPF routes using RIB Policy routes:</strong> Use the <code>configure authority router routing rib-policy</code> command from either the routing default-instance (<code>configure authority router routing</code>) or inside <code>configure authority router routing vrf</code> to provide addtional filtering for OSPF routes. For more information see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-rib-policy"><code>configure authority router routing rib-policy</code></a> and <a class="" href="/docs/config_command_guide#configure-authority-router-routing-vrf-rib-policy"><code>configure authority router routing vrf rib-policy</code></a>.</li>
+<li class=""><strong>I95-49218 Filter OSPF routes using RIB Policy routes:</strong> Use the <code>configure authority router routing rib-policy</code> command from either the routing default-instance (<code>configure authority router routing</code>) or inside <code>configure authority router routing vrf</code> to provide additional filtering for OSPF routes. For more information see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-rib-policy"><code>configure authority router routing rib-policy</code></a> and <a class="" href="/docs/config_command_guide#configure-authority-router-routing-vrf-rib-policy"><code>configure authority router routing vrf rib-policy</code></a>.</li>
 </ul>
 <hr>
 <ul>
@@ -83,7 +83,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56715 Address validation in migrate feature in conductor UI is not working correctly:</strong> Resolved an isssue between the client and the server during the use of the GUI <code>migrate</code> operation, where the conductor address was not read correctly, and returning an irrelevant error message.</li>
+<li class=""><strong>I95-56715 Address validation in migrate feature in conductor UI is not working correctly:</strong> Resolved an issue between the client and the server during the use of the GUI <code>migrate</code> operation, where the conductor address was not read correctly, and returning an irrelevant error message.</li>
 </ul>
 <hr>
 <ul>
@@ -115,7 +115,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56879 PPPoE stopped working:</strong> Resolved an issue where the system configuration for the PPPoE interface was missing LCP_FAILURE and LCP_INTERVAL fileds. These fields are now set correctly.</li>
+<li class=""><strong>I95-56879 PPPoE stopped working:</strong> Resolved an issue where the system configuration for the PPPoE interface was missing LCP_FAILURE and LCP_INTERVAL fields. These fields are now set correctly.</li>
 </ul>
 <hr>
 <ul>
@@ -163,7 +163,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58682 Adjust the inactivity timer range to allow for Azure policy limits:</strong> Updated the <code>inactivity-timer</code> range to allow for values as low as 30 seconds. Resoved an issue that would have used an incorrect default setting of 3600 instead of 900 seconds in certain scenarios.</li>
+<li class=""><strong>I95-58682 Adjust the inactivity timer range to allow for Azure policy limits:</strong> Updated the <code>inactivity-timer</code> range to allow for values as low as 30 seconds. Resolved an issue that would have used an incorrect default setting of 3600 instead of 900 seconds in certain scenarios.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-5615-1">Release 5.6.15-1<a href="#release-5615-1" class="hash-link" aria-label="Direct link to Release 5.6.15-1" title="Direct link to Release 5.6.15-1" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> June 27, 2024</p>
@@ -329,7 +329,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51492 Password expiration not working:</strong> This issue has been resolved. Adminstrators must use the global setting <code>configure authority password-policy lifetime N </code> to indicate that all user passwords must be changed every <code>N</code> days.</li>
+<li class=""><strong>I95-51492 Password expiration not working:</strong> This issue has been resolved. Administrators must use the global setting <code>configure authority password-policy lifetime N </code> to indicate that all user passwords must be changed every <code>N</code> days.</li>
 </ul>
 <hr>
 <ul>
@@ -349,7 +349,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:</strong> Add a &quot;Lock Status&quot; column to the User table as well as the User Details pane, with more details availble on hover. The <code>show user</code> command now includes two new rows, &quot;Lock Status&quot; and &quot;Last Failed Login&quot;. For command details, please see <a class="" href="/docs/cli_reference#show-user-lock-status"><code>show user lock-status</code></a>.</li>
+<li class=""><strong>I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:</strong> Add a &quot;Lock Status&quot; column to the User table as well as the User Details pane, with more details available on hover. The <code>show user</code> command now includes two new rows, &quot;Lock Status&quot; and &quot;Last Failed Login&quot;. For command details, please see <a class="" href="/docs/cli_reference#show-user-lock-status"><code>show user lock-status</code></a>.</li>
 </ul>
 <hr>
 <ul>
@@ -742,7 +742,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95 52105 Permissions error when attempting to <code>delete certificate webserver</code>:</strong> Resolved an issue where <code>delete certificate webserver</code> and <code>create cerificate webserver</code> with an existing certificate were failing. On older versions of software this can be worked around by running <code>sudo rm -rf /etc/128technology/pki/webserver.pem</code>.</li>
+<li class=""><strong>I95 52105 Permissions error when attempting to <code>delete certificate webserver</code>:</strong> Resolved an issue where <code>delete certificate webserver</code> and <code>create certificate webserver</code> with an existing certificate were failing. On older versions of software this can be worked around by running <code>sudo rm -rf /etc/128technology/pki/webserver.pem</code>.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-568-9">Release 5.6.8-9<a href="#release-568-9" class="hash-link" aria-label="Direct link to Release 5.6.8-9" title="Direct link to Release 5.6.8-9" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> May 25, 2023</p>
@@ -823,7 +823,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49754 Waypoint re-use causing duplicate reverse flows:</strong> Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.</li>
+<li class=""><strong>I95-49754 Waypoint reuse causing duplicate reverse flows:</strong> Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.</li>
 </ul>
 <hr>
 <ul>
@@ -907,7 +907,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50736 SSH key change not propogated to secondary conductor:</strong> Resolved an issue where an SSH key change to <code>/etc/128technology/ssh/pdc_ssh_key</code> was not automatically detected and resynced between peer node and conductor nodes.</li>
+<li class=""><strong>I95-50736 SSH key change not propagated to secondary conductor:</strong> Resolved an issue where an SSH key change to <code>/etc/128technology/ssh/pdc_ssh_key</code> was not automatically detected and resynced between peer node and conductor nodes.</li>
 </ul>
 <hr>
 <ul>
@@ -1164,7 +1164,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:</strong> Resolved an issue where BGP update suppress was not removing any pending withdrawls.</li>
+<li class=""><strong>I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:</strong> Resolved an issue where BGP update suppress was not removing any pending withdrawals.</li>
 </ul>
 <hr>
 <ul>
@@ -1294,7 +1294,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48600 Compare Session ID&#x27;s to prevent flow collisions:</strong> Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.</li>
+<li class=""><strong>I95-48600 Compare Session ID&#x27;s to prevent flow collisions:</strong> Reuse of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.</li>
 </ul>
 <hr>
 <ul>
@@ -1328,7 +1328,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-44957 Azure is not able to identify the asset-id of the depolyed conductor and router:</strong> The Azure ID has been modified to a value that can be processed by Azure.</li>
+<li class=""><strong>I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:</strong> The Azure ID has been modified to a value that can be processed by Azure.</li>
 </ul>
 <hr>
 <ul>
@@ -1530,7 +1530,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47414 Skip the AD lookup in highway for ICMP:</strong> ICMP is now skipped during AD lookup to keep the App stats reults relevant.</li>
+<li class=""><strong>I95-47414 Skip the AD lookup in highway for ICMP:</strong> ICMP is now skipped during AD lookup to keep the App stats results relevant.</li>
 </ul>
 <hr>
 <ul>
@@ -1542,7 +1542,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47551 Keep-alives are not generated for unidirectional outbound-only sessions:</strong> Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.</li>
+<li class=""><strong>I95-47551 Keep-alive are not generated for unidirectional outbound-only sessions:</strong> Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.</li>
 </ul>
 <hr>
 <ul>
@@ -1603,7 +1603,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-43785 DSCP Tag Preservation:</strong> When set to <code>true</code> the <code>preserve-dscp</code> command allows you to preserve DSCP values that have been set in a service class or received on a LAN-Interface, over an SVR path. See <a class="" href="/docs/config_dscp_preservation">DSCP Preservation</a> for more inforamation.</li>
+<li class=""><strong>I95-43785 DSCP Tag Preservation:</strong> When set to <code>true</code> the <code>preserve-dscp</code> command allows you to preserve DSCP values that have been set in a service class or received on a LAN-Interface, over an SVR path. See <a class="" href="/docs/config_dscp_preservation">DSCP Preservation</a> for more information.</li>
 </ul>
 <hr>
 <ul>
@@ -1748,11 +1748,11 @@ PCLI: The PCLI command <code>save tech-support-info</code> can now collect logs 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46411 PPPoE over VLAN interface status missing in <code>show</code> commands:</strong> Added atttribute to show the missing information.</li>
+<li class=""><strong>I95-46411 PPPoE over VLAN interface status missing in <code>show</code> commands:</strong> Added attribute to show the missing information.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:</strong> Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.</li>
+<li class=""><strong>I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:</strong> Resolved an issue where FEC actions are not installed properly after the modification to resolve the outbound only path.</li>
 </ul>
 <hr>
 <ul>

@@ -6,7 +6,7 @@
 <title data-rh="true">Conductor Installation | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/cc_fips_conductor_install"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Conductor Installation | SSN Docs"><meta data-rh="true" name="description" content="After downloading the ISO, use the procedure in Creating a Bootable USB to create a bootable USB."><meta data-rh="true" property="og:description" content="After downloading the ISO, use the procedure in Creating a Bootable USB to create a bootable USB."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/cc_fips_conductor_install"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_conductor_install" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/cc_fips_conductor_install" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Conductor Installation","item":"https://docs.128technology.com/docs/cc_fips_conductor_install"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.fd19d5c2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.02faf06b.js" defer="defer"></script>
 <script src="/assets/js/main.4cf4b635.js" defer="defer"></script>
 </head>
 <body>
@@ -235,7 +235,7 @@ During an upgrade, if the existing version allows SSH Root login, it will be dis
 <ul>
 <li class="">Execute the self-test scan <code>sudo systemctl start 128T-rpm-verify</code></li>
 </ul>
-<p>The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run:</p>
+<p>The self-test scan is initiated and takes approximately two minutes to complete. Upon completion, run:</p>
 <p><code>systemctl status 128T-rpm-verify</code></p>
 <p>The scan validates all executable files on the system against the <code>sha256</code> digest hash recorded in the signed RPMs from which they were installed. This ensures that no files have been replaced or tampered with.</p>
 <ul>
@@ -254,7 +254,7 @@ During an upgrade, if the existing version allows SSH Root login, it will be dis
 <p>The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.</p>
 <ol start="6">
 <li class="">
-<p>Perform the following steps to verify that FIPS security enforcment mode is enabled in the OS:
+<p>Perform the following steps to verify that FIPS security enforcement mode is enabled in the OS:
 <code>openssl md5 /dev/null</code>
 Expected result:  <code>digital envelope routines … Disabled for fips</code></p>
 </li>

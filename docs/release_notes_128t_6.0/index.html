@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.0 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.0"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.0 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.0"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.0" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.0" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.0","item":"https://docs.128technology.com/docs/release_notes_128t_6.0"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.fd19d5c2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.02faf06b.js" defer="defer"></script>
 <script src="/assets/js/main.4cf4b635.js" defer="defer"></script>
 </head>
 <body>
@@ -141,7 +141,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49754 Waypoint re-use causing duplicate reverse flows:</strong> Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.</li>
+<li class=""><strong>I95-49754 Waypoint reuse causing duplicate reverse flows:</strong> Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.</li>
 </ul>
 <hr>
 <ul>
@@ -249,7 +249,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50736 SSH key change not propogated to secondary conductor:</strong> Resolved an issue where an SSH key change to <code>/etc/128technology/ssh/pdc_ssh_key</code> was not automatically detected and resynced between peer node and conductor nodes.</li>
+<li class=""><strong>I95-50736 SSH key change not propagated to secondary conductor:</strong> Resolved an issue where an SSH key change to <code>/etc/128technology/ssh/pdc_ssh_key</code> was not automatically detected and resynced between peer node and conductor nodes.</li>
 </ul>
 <hr>
 <ul>
@@ -522,7 +522,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47409 Enhance tracking around Application ID expirations:</strong> The following enhancements have been made to provide additonal insight to Application Identification:<!-- -->
+<li class=""><strong>I95-47409 Enhance tracking around Application ID expirations:</strong> The following enhancements have been made to provide additional insight to Application Identification:<!-- -->
 <ul>
 <li class="">Track next hop additions and removals separately for more insight</li>
 <li class="">Track the number of times an expiration timer is set (globally and per next hop)</li>
@@ -597,7 +597,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:</strong> Resolved an issue where BGP update suppress was not removing any pending withdrawls.</li>
+<li class=""><strong>I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:</strong> Resolved an issue where BGP update suppress was not removing any pending withdrawals.</li>
 </ul>
 <hr>
 <ul>
@@ -685,7 +685,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48600 Compare Session ID&#x27;s to prevent flow collisions:</strong> Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.</li>
+<li class=""><strong>I95-48600 Compare Session ID&#x27;s to prevent flow collisions:</strong> Reuse of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.</li>
 </ul>
 <hr>
 <ul>
@@ -811,7 +811,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47551 Keep-alives are not generated for unidirectional outbound-only sessions:</strong> Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.</li>
+<li class=""><strong>I95-47551 Keep-alive are not generated for unidirectional outbound-only sessions:</strong> Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.</li>
 </ul>
 <hr>
 <ul>
@@ -1061,7 +1061,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46411 PPPoE over VLAN interface status missing in <code>show</code> commands:</strong> Added atttribute to show the missing information.</li>
+<li class=""><strong>I95-46411 PPPoE over VLAN interface status missing in <code>show</code> commands:</strong> Added attribute to show the missing information.</li>
 </ul>
 <hr>
 <ul>

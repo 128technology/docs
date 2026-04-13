@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 7.0 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.0"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.0 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.0"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.0" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.0" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"7.0","item":"https://docs.128technology.com/docs/release_notes_128t_7.0"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.fd19d5c2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.02faf06b.js" defer="defer"></script>
 <script src="/assets/js/main.4cf4b635.js" defer="defer"></script>
 </head>
 <body>
@@ -36,7 +36,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 <p>Due to changes in the base SSR/Linux OS in 7.X, interface naming behavior has changed for virtual machines. Older SSR versions using earlier versions of the SSR OS may have named Linux interfaces with the <code>ethX</code> naming convention. Interfaces in 7.X and above use the Linux predictable interface naming convention as seen in SSR hardware installs. This change in interface naming could prevent existing Linux interface configurations not to apply to the <code>ethX</code>-named interface. This applies to interfaces configured directly in Linux, such as dedicated management interfaces, and <strong>not</strong> interfaces configured via SSR configuration.</p>
 <p>This issue is currently being addressed by engineering. However, if your deployment requires an upgrade to 7.X on a VM configured with interfaces using the <code>ethX</code> naming convention, please ensure that console access is available, as manual updates to the Linux interface configuration may be required.</p>
 <p><strong>System Disk Considerations</strong></p>
-<p>As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is succesful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in <code>/var/log/128technology</code>) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.</p>
+<p>As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in <code>/var/log/128technology</code>) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.</p>
 <p>In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either <a class="" href="/docs/intro_installation_quickstart_byol_conductor_aws">AWS</a> or <a class="" href="/docs/intro_installation_byol_azure_conductor">Azure</a>.</p>
 <p>When the conductor is initially upgraded to an image-based installation, it will be upgraded as a package-based system. This is because the system does not understand how to handle image-based delivery until it is running 6.3 software. Once the conductor is running 6.3 all router upgrades will be treated as image-based upgrades and any subsequent conductor upgrade will be treated as image-based. Therefore, it is possible that issues related to disk usage on conductor may not arise until a subsequent upgrade of the conductor beyond the initial step to 6.3.</p>
 <p><strong>Offline-Mode: Upgrading 6.3.x Conductor Deployments to 6.3.x+</strong></p>
@@ -164,7 +164,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:</strong> Resolved an issue when using <code>tenant-prefix</code> on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-igmp-interface-source-address-prefix-list"><code>source-address-prefix-list</code></a></li>
+<li class=""><strong>I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:</strong> Resolved an issue when using <code>tenant-prefix</code> on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specific source-addresses has been added. For more information, see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-igmp-interface-source-address-prefix-list"><code>source-address-prefix-list</code></a></li>
 </ul>
 <hr>
 <ul>
@@ -220,11 +220,11 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>log rotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers.</li>
+<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>log rotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60287 Add option to disable Kernel Metric SLA Calculation:</strong> In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting <code>routing default-instance &gt; service-metric-use-lsa &gt; false</code> will prevent the kernel flap that causes this issue. See <a class="" href="/docs/config_command_guide#configure-authority-router-routing-service-metric-use-sla"><code>service-metric-use-lsa</code></a> for addtional information.</li>
+<li class=""><strong>I95-60287 Add option to disable Kernel Metric SLA Calculation:</strong> In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting <code>routing default-instance &gt; service-metric-use-lsa &gt; false</code> will prevent the kernel flap that causes this issue. See <a class="" href="/docs/config_command_guide#configure-authority-router-routing-service-metric-use-sla"><code>service-metric-use-lsa</code></a> for additional information.</li>
 </ul>
 <hr>
 <ul>
@@ -256,7 +256,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:</strong> Resolved an issue where assets would transition to <code>Reinitializing</code> and get stuck there because the asset was unable to succesfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to <code>Reinitializing</code>.</li>
+<li class=""><strong>I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:</strong> Resolved an issue where assets would transition to <code>Reinitializing</code> and get stuck there because the asset was unable to successfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to <code>Reinitializing</code>.</li>
 </ul>
 <hr>
 <ul>
@@ -272,7 +272,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60730 Mulitcast stream is not recovering after failover:</strong> Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.</li>
+<li class=""><strong>I95-60730 Multicast stream is not recovering after failover:</strong> Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.</li>
 </ul>
 <hr>
 <ul>
@@ -324,7 +324,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:</strong> Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.</li>
+<li class=""><strong>I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:</strong> Resolved an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.</li>
 </ul>
 <hr>
 <ul>

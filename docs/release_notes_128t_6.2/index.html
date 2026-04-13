@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.2 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.2 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.2"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.2" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.2","item":"https://docs.128technology.com/docs/release_notes_128t_6.2"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.fd19d5c2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.02faf06b.js" defer="defer"></script>
 <script src="/assets/js/main.4cf4b635.js" defer="defer"></script>
 </head>
 <body>
@@ -33,7 +33,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-6210-10-lts">Release 6.2.10-10-lts<a href="#release-6210-10-lts" class="hash-link" aria-label="Direct link to Release 6.2.10-10-lts" title="Direct link to Release 6.2.10-10-lts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> December 18, 2025</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resoved-issues">Resoved Issues<a href="#resoved-issues" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-58007 Add ability to set PIM graceful restart-time:</strong> The <code>routing default-instance pim restart-time</code> command has been added to allow users to define the number of seconds that the PIM protocol will perform <code>graceful-restart</code> after a node failure. This resolution addresses all the listed issues. For more information, see <a class="" href="/docs/config_multicast#pim-graceful-restart-timer">PIM Graceful Restart Timer</a>. This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.</li>
 </ul>
@@ -47,7 +47,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60730 Mulitcast stream is not recovering after failover:</strong> Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.</li>
+<li class=""><strong>I95-60730 Multicast stream is not recovering after failover:</strong> Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.</li>
 </ul>
 <hr>
 <ul>
@@ -123,7 +123,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-629-5-lts">Release 6.2.9-5-lts<a href="#release-629-5-lts" class="hash-link" aria-label="Direct link to Release 6.2.9-5-lts" title="Direct link to Release 6.2.9-5-lts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> June 10, 2025</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resoved-issues-1">Resoved Issues<a href="#resoved-issues-1" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-56557 <code>show service</code> command not displaying URL:</strong> Resolved an issue where even after adding a URL to the service, the URL was not showing in the output of the <code>show service</code> command. This has been resolved.</li>
 </ul>
@@ -137,7 +137,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:</strong> Resolved an issue when using <code>tenant-prefix</code> on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-igmp-interface-source-address-prefix-list"><code>source-address-prefix-list</code></a></li>
+<li class=""><strong>I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:</strong> Resolved an issue when using <code>tenant-prefix</code> on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specific source-addresses has been added. For more information, see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-igmp-interface-source-address-prefix-list"><code>source-address-prefix-list</code></a></li>
 </ul>
 <hr>
 <ul>
@@ -169,11 +169,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>logrotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers.</li>
+<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>logrotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60287 Add option to disable Kernel Metric SLA Calculation:</strong> In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the <code>service-metric-use-lsa</code> (under the <code>routing default-instance</code>) to <code>false</code> will prevent the kernel flap that causes this issue. See <a class="" href="/docs/config_command_guide#configure-authority-router-routing-service-metric-use-sla"><code>service-metric-use-lsa</code></a> for addtional information.</li>
+<li class=""><strong>I95-60287 Add option to disable Kernel Metric SLA Calculation:</strong> In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the <code>service-metric-use-lsa</code> (under the <code>routing default-instance</code>) to <code>false</code> will prevent the kernel flap that causes this issue. See <a class="" href="/docs/config_command_guide#configure-authority-router-routing-service-metric-use-sla"><code>service-metric-use-lsa</code></a> for additional information.</li>
 </ul>
 <hr>
 <ul>
@@ -217,7 +217,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:</strong> Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.</li>
+<li class=""><strong>I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:</strong> Resolved an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.</li>
 </ul>
 <hr>
 <ul>
@@ -229,7 +229,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-628-10-lts">Release 6.2.8-10-lts<a href="#release-628-10-lts" class="hash-link" aria-label="Direct link to Release 6.2.8-10-lts" title="Direct link to Release 6.2.8-10-lts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> January 30, 2025</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resoved-issues-2">Resoved Issues<a href="#resoved-issues-2" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-54366 Unable to assign an SNMP view name via the GUI:</strong> Resolved an issue that prevented configuring SNMP (v3) Access Policy View in the GUI.</li>
 </ul>
@@ -291,7 +291,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58583 Bypass message-authentication in RADIUS:</strong> An option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios.</li>
+<li class=""><strong>I95-58583 Bypass message-authentication in RADIUS:</strong> An option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios.</li>
 </ul>
 <hr>
 <ul>
@@ -376,7 +376,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-627-4-sts">Release 6.2.7-4-sts<a href="#release-627-4-sts" class="hash-link" aria-label="Direct link to Release 6.2.7-4-sts" title="Direct link to Release 6.2.7-4-sts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> October 3, 2024</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resoved-issues-3">Resoved Issues<a href="#resoved-issues-3" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-53274 PIM scaling above 1500 multicast routes:</strong> Resolved an issue where the SSR could not maintain more than 1400 active sessions.</li>
 </ul>
@@ -402,13 +402,13 @@
 <ul>
 <li class=""><strong>I95-56337 / I95-56339 / I95-56341 REST API changes to better support BGP endpoints:</strong> Updated BGP REST endpoints for better functionality, by adding pagination support to summary commands and altering json schema to use arrays where necessary to preserve ordering. Added <code>show bgp family-summary</code> to condense address-family information per peer into one entry.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resoved-issues-4">Resoved Issues<a href="#resoved-issues-4" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-47195, I95-47196, I95-49015, I95-49018, I95-49599, I95-56682 Forwarding plane crash, causing stranded network namespaces when LTE/PPPoE network-interface name is changed:</strong> Implemented reinit script to reiniatilize namespace, KNI and target-interface after a configuration change in the network-interface.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49218 Filter OSPF routes using RIB Policy routes:</strong> Use the <code>configure authority router routing rib-policy</code> command from either the routing default-instance (<code>configure authority router routing</code>) or inside <code>configure authority router routing vrf</code> to provide addtional filtering for OSPF routes. For more information see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-rib-policy"><code>configure authority router routing rib-policy</code></a> and <a class="" href="/docs/config_command_guide#configure-authority-router-routing-vrf-rib-policy"><code>configure authority router routing vrf rib-policy</code></a>.</li>
+<li class=""><strong>I95-49218 Filter OSPF routes using RIB Policy routes:</strong> Use the <code>configure authority router routing rib-policy</code> command from either the routing default-instance (<code>configure authority router routing</code>) or inside <code>configure authority router routing vrf</code> to provide additional filtering for OSPF routes. For more information see <a class="" href="/docs/config_command_guide#configure-authority-router-routing-rib-policy"><code>configure authority router routing rib-policy</code></a> and <a class="" href="/docs/config_command_guide#configure-authority-router-routing-vrf-rib-policy"><code>configure authority router routing vrf rib-policy</code></a>.</li>
 </ul>
 <hr>
 <ul>
@@ -476,7 +476,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56879 PPPoE stopped working:</strong> Resolved an issue where the system configuration for the PPPoE interface was missing <code>LCP_FAILURE</code> and <code>LCP_INTERVAL</code> fileds. These fields are now set correctly.</li>
+<li class=""><strong>I95-56879 PPPoE stopped working:</strong> Resolved an issue where the system configuration for the PPPoE interface was missing <code>LCP_FAILURE</code> and <code>LCP_INTERVAL</code> fields. These fields are now set correctly.</li>
 </ul>
 <hr>
 <ul>
@@ -584,7 +584,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-625-5r2">Release 6.2.5-5r2<a href="#release-625-5r2" class="hash-link" aria-label="Direct link to Release 6.2.5-5r2" title="Direct link to Release 6.2.5-5r2" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> June 6, 2024</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resoved-issues-5">Resoved Issues<a href="#resoved-issues-5" class="hash-link" aria-label="Direct link to Resoved Issues" title="Direct link to Resoved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-52251 Router&#x27;s conductor-address did not update the salt created services with the new addresses:</strong> The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.</li>
 </ul>
@@ -670,7 +670,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56411 Remove outdated performance package:</strong> Older versions of the <code>perf</code> package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older <code>perf</code> packages during the software upgrade proces.</li>
+<li class=""><strong>I95-56411 Remove outdated performance package:</strong> Older versions of the <code>perf</code> package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older <code>perf</code> packages during the software upgrade process.</li>
 </ul>
 <hr>
 <ul>
@@ -702,7 +702,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56715 Address validation in migrate feature in conductor UI is not working correctly:</strong> Resolved an isssue between the client and the server during the use of the GUI <code>migrate</code> operation, where the conductor address was not read correctly, and returning an irrelevant error message.</li>
+<li class=""><strong>I95-56715 Address validation in migrate feature in conductor UI is not working correctly:</strong> Resolved an issue between the client and the server during the use of the GUI <code>migrate</code> operation, where the conductor address was not read correctly, and returning an irrelevant error message.</li>
 </ul>
 <hr>
 <ul>
@@ -726,7 +726,7 @@
 <ul>
 <li class=""><strong>I95-55672 MSDP Alarms for Peer State Change:</strong> MSDP Alarms have been added for peer state change. For more information, see <a class="" href="/docs/cli_reference#show-msdp-peer"><code>show msdp peer</code></a></li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-6">Resolved Issues<a href="#resolved-issues-6" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:</strong> When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.</li>
 </ul>
@@ -978,7 +978,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46120 HA Fabric Warning message supression in Azure:</strong> In Azure, it is not possible to configure a non-forwarding fabric interface on the SSR, thus this error will be present on every commit. This message is now supressed.</li>
+<li class=""><strong>I95-46120 HA Fabric Warning message suppression in Azure:</strong> In Azure, it is not possible to configure a non-forwarding fabric interface on the SSR, thus this error will be present on every commit. This message is now suppressed.</li>
 </ul>
 <hr>
 <ul>
@@ -993,7 +993,7 @@
 <li class=""><strong>I95-51614 Firewall Protection Profile:</strong> Several updates to existing functionality have been made to address firewall filtering. For additional information, see <a class="" href="/docs/sec_firewall_filtering">Customizable Firewall Rules and Filters</a>.<!-- -->
 <ul>
 <li class=""><strong>Packet Filtering:</strong> Packets can be filtered by any known packet field, and the order in which filters are applied can be set by the user. Filters are configured and applied on the receiving network-interface.</li>
-<li class=""><strong>ICMP Filtering:</strong> The SSR matches ICMP error packets with the sessions that generated them, and only accepts those ICMP packets when they match an existing session. Additionally, when configured, ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen and the ICMP Aysnc Reply is set to drop.</li>
+<li class=""><strong>ICMP Filtering:</strong> The SSR matches ICMP error packets with the sessions that generated them, and only accepts those ICMP packets when they match an existing session. Additionally, when configured, ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen and the ICMP Async Reply is set to drop.</li>
 <li class=""><strong>IPv4 Option Filtering:</strong> The SSR has the ability to go deeper than the basic IPv4 header options check and inspect the options to make necessary decisions whether the packets are allowed or dropped and logged.</li>
 <li class=""><strong>Transport State Enforcement:</strong> By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through, and increments the associated metrics. Setting the Transport State Enforcement field to Strict ensures any packets in the TCP stream that fall outside of the sequence number stream will be dropped.</li>
 <li class=""><strong>TCP Half-open Connection Limit:</strong> Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections.</li>
@@ -1006,7 +1006,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:</strong> Add a &quot;Lock Status&quot; column to the User table as well as the User Details pane, with more details availble on hover. The <code>show user</code> command now includes two new rows, &quot;Lock Status&quot; and &quot;Last Failed Login&quot;. For command details, please see <a class="" href="/docs/cli_reference#show-user-lock-status"><code>show user lock-status</code></a>.</li>
+<li class=""><strong>I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:</strong> Add a &quot;Lock Status&quot; column to the User table as well as the User Details pane, with more details available on hover. The <code>show user</code> command now includes two new rows, &quot;Lock Status&quot; and &quot;Last Failed Login&quot;. For command details, please see <a class="" href="/docs/cli_reference#show-user-lock-status"><code>show user lock-status</code></a>.</li>
 </ul>
 <hr>
 <ul>
@@ -1016,7 +1016,7 @@
 <ul>
 <li class=""><strong>I95-53820 MD5 Authentication for MSDP:</strong> An <code>auth</code> password option has been added to the <a class="" href="/docs/config_command_guide#configure-authority-router-routing-msdp-peer"><code>msdp peer</code></a> and the <a class="" href="/docs/config_command_guide#configure-authority-router-routing-msdp-mesh-group"><code>msdp mesh-group</code></a> configurations to support MD5 authentication. For more information, refer to the MSDP command documentation linked above.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-7">Resolved Issues<a href="#resolved-issues-7" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-38188 Repurposing an HA conductor to a standalone conductor left services for the second conductor:</strong> Resolved an issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor. The salt states now stop services to a second conductor when it is removed from the HA configuration.</li>
 </ul>
@@ -1193,7 +1193,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50071 Lenovo SR650 platform support as a 100G ports solution:</strong> The Lenovo SR650 has been added as a Juniper-certified platfform to provide 100G port connectivity.</li>
+<li class=""><strong>I95-50071 Lenovo SR650 platform support as a 100G ports solution:</strong> The Lenovo SR650 has been added as a Juniper-certified platform to provide 100G port connectivity.</li>
 </ul>
 <hr>
 <ul>
@@ -1228,7 +1228,7 @@
 <li class="">Support for static IP address (including VLAN)</li>
 <li class="">Failover support between the management and WAN interface</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-8">Resolved Issues<a href="#resolved-issues-8" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-42466 Changing the physical linux address of an HA interface breaks the configuration:</strong> Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.</li>
 </ul>
@@ -1254,7 +1254,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51492 Password expiration not working:</strong> This issue has been resolved. Adminstrators must use the global setting <code>configure authority password-policy lifetime N </code> to indicate that all user passwords must be changed every <code>N</code> days.</li>
+<li class=""><strong>I95-51492 Password expiration not working:</strong> This issue has been resolved. Administrators must use the global setting <code>configure authority password-policy lifetime N </code> to indicate that all user passwords must be changed every <code>N</code> days.</li>
 </ul>
 <hr>
 <ul>
@@ -1472,6 +1472,6 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 <hr>
 <ul>
 <li class=""><strong>I95-53878 Dynamic Reconfiguration Issues with LAG:</strong> Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.</li>
-</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.3"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.3</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.1"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.1</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6210-10-lts" class="table-of-contents__link toc-highlight">Release 6.2.10-10-lts</a><ul><li><a href="#resoved-issues" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-629-5-lts" class="table-of-contents__link toc-highlight">Release 6.2.9-5-lts</a><ul><li><a href="#resoved-issues-1" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-628-10-lts" class="table-of-contents__link toc-highlight">Release 6.2.8-10-lts</a><ul><li><a href="#resoved-issues-2" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-627-4-sts" class="table-of-contents__link toc-highlight">Release 6.2.7-4-sts</a><ul><li><a href="#resoved-issues-3" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-626-15-sts" class="table-of-contents__link toc-highlight">Release 6.2.6-15-sts</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resoved-issues-4" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-625-5r2" class="table-of-contents__link toc-highlight">Release 6.2.5-5r2</a><ul><li><a href="#resoved-issues-5" class="table-of-contents__link toc-highlight">Resoved Issues</a></li></ul></li><li><a href="#release-624-14r2" class="table-of-contents__link toc-highlight">Release 6.2.4-14r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-623-14r2" class="table-of-contents__link toc-highlight">Release 6.2.3-14r2</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-620-39r1" class="table-of-contents__link toc-highlight">Release 6.2.0-39r1</a><ul><li><a href="#new-features-3" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.3"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.3</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.1"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.1</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6210-10-lts" class="table-of-contents__link toc-highlight">Release 6.2.10-10-lts</a><ul><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-629-5-lts" class="table-of-contents__link toc-highlight">Release 6.2.9-5-lts</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-628-10-lts" class="table-of-contents__link toc-highlight">Release 6.2.8-10-lts</a><ul><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-627-4-sts" class="table-of-contents__link toc-highlight">Release 6.2.7-4-sts</a><ul><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-626-15-sts" class="table-of-contents__link toc-highlight">Release 6.2.6-15-sts</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-625-5r2" class="table-of-contents__link toc-highlight">Release 6.2.5-5r2</a><ul><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-624-14r2" class="table-of-contents__link toc-highlight">Release 6.2.4-14r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-623-14r2" class="table-of-contents__link toc-highlight">Release 6.2.3-14r2</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-620-39r1" class="table-of-contents__link toc-highlight">Release 6.2.0-39r1</a><ul><li><a href="#new-features-3" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>
