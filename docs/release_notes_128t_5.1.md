@@ -143,7 +143,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41005 Management over forwarding stuck in key-accepted state:** `salt minion` is restarted to handle an asset stuck in key-accepted state.
 ------
-- **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resoved.
+- **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resolved.
 ------
 - **I95-42421 Using Ctrl-c to exit PCLI works inconsistently:** This issue has been resolved. 
 ------
@@ -186,7 +186,7 @@ This release replaces the existing `5.1.6-1` release.
 
 ### Resolved Issues
 
-- **I95-42990 Upgrade may cause a kernel panic:** Package order dependancy created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
+- **I95-42990 Upgrade may cause a kernel panic:** Package order dependency created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
 
 ## Release 5.1.6
 
@@ -259,7 +259,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md#network-interface), and [`authority`](config_reference_guide.md#authority) in the Element Reference Guide.
 ------
-- **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
+- **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now displays a dialog with several steps intended to help the user diagnose issues.
 
 ### Resolved Issues
 

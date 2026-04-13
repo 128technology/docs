@@ -108,7 +108,7 @@ device-interface lte-dev-2
 exit
 ```
 
-When the SSR is not running, both LTE interfaces will be returned to linux. When this handover happens, a default-route is added to each interface in linux with an associated metric taken from the _management_vector_ priority. This is a result of the _management-vector_ configuration defined above.
+When the SSR is not running, Linux reclaims both LTE interfaces. When this handover happens, a default-route is added to each interface in linux with an associated metric taken from the _management_vector_ priority. This is a result of the _management-vector_ configuration defined above.
 
 After committing this configuration and shutting down SSR, the linux route table will look like:
 
@@ -203,11 +203,11 @@ Use the `serial-command port <usb-port> <at-command>` to run AT commands. Issue 
 ```bash
 qmicli -d /dev/cdc-wdm0 --uim-get-card-status
 ```
-To get the firmeware loaded on the adapater, issue the command:
+To get the firmware loaded on the adapter, issue the command:
 ```bash
 lte-image-preference --interface=wwp0s21u1i8 get
 ```
-To set the firmware on the adapater, issue the command:
+To set the firmware on the adapter, issue the command:
 ```bash
 lte-image-preference --interface=wwp0s21u1i8 set ATT
 ```

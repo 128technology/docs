@@ -249,7 +249,7 @@ admin@conductor.conductor#
  
 - Execute the self-test scan `sudo systemctl start 128T-rpm-verify` 
  
- The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
+ The self-test scan is initiated and takes approximately two minutes to complete. Upon completion, run: 
 
  `systemctl status 128T-rpm-verify` 
 
@@ -271,7 +271,7 @@ admin@conductor.conductor#
 
  The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.  
  
-6. Perform the following steps to verify that FIPS security enforcment mode is enabled in the OS:
+6. Perform the following steps to verify that FIPS security enforcement mode is enabled in the OS:
  `openssl md5 /dev/null` 
  Expected result:  `digital envelope routines … Disabled for fips` 
 

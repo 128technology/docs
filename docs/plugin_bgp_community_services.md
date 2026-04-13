@@ -146,7 +146,7 @@ If a BGP Community Services Profile has been assigned to the router, the 128T-bg
 /var/lib/128technology/plugins/bgp-community-services/config.json
 ```
 
-- A symlink to the `bgp-community-services` executible should exist as shown below
+- A symlink to the `bgp-community-services` executable should exist as shown below
 ```
 # cd /etc/128technology/application-modules/
 # ll
@@ -234,7 +234,7 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 #### Issues Fixed
 
-- **PLUGIN-3177** Handle BGP incompatability with SSR >= 6.2.8 that resulted in missing FIB entries.
+- **PLUGIN-3177** Handle BGP incompatibility with SSR >= 6.2.8 that resulted in missing FIB entries.
 
 ### Release 4.0.0
 
@@ -254,7 +254,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 3.0.1
 
@@ -282,7 +282,7 @@ Contains scale improvements for configuration and pillar generation.
 
 #### Issues Fixed
 
-- **PLUGIN-2519** Resolve routing engine API compatability with SSR 6.1.4 and above.
+- **PLUGIN-2519** Resolve routing engine API compatibility with SSR 6.1.4 and above.
 
 ### Release 2.0.0
 

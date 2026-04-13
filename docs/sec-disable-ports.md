@@ -7,7 +7,7 @@ sidebar_label: Disable SSR4x0 Management Interfaces
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.1.0   | Support for disabling SSR4x0 Managment interfaces added. |
+| 7.1.0   | Support for disabling SSR4x0 Management interfaces added. |
 
 The following configuration fields have been added to node configuration, allowing you to control physical security features on the SSR4x0 series. A `true` setting enables the feature, `false` disables the feature. 
 
@@ -56,15 +56,11 @@ When disabled (set to **false**), the push button interrupt is disabled, and no 
 
 When disabled (set to **false**), the serial console is excluded from the kernel command line, and no driver will be bound by the operating system or applications. Kernel error logs are only accessible via the system journal.
 
-See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
-
 ### Disable Firmware Recovery
 
 When disabled (set to **false**), the boot firmware `Press Esc to boot from USB` option and the image boot menu are prevented. The configured active boot image will be auto loaded; no recovery paths except system zeroization are available in the event of a boot failure.
 
-See [Uninterruptable Boot Process](#uninterruptable-boot-process) below for important information.
-
-### Uninterruptable Boot Process
+### Uninterruptible Boot Process
 
 This feature is configured on the SSR400 and SSR440 by setting **both** the Serial Console Port and Firmware Recovery as **disabled**. When configured, it means that a failed upgrade will not allow the user to select the image on the other volume (since the Console port is disabled, no user input is possible).  
 

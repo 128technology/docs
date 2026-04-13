@@ -3,7 +3,7 @@ title: Configuring Syslog Over TLS
 sidebar_label: Configuring Syslog Over TLS
 ---
 
-Syslog over TLS allows the secure transportation of system log messages from the syslog client to the syslog server. TLS uses certificates to authenticate and encrypt the communication.
+Syslog over TLS enables secure transport of system log messages from the syslog client to the syslog server. TLS uses certificates to authenticate and encrypt the communication.
 
 ## Syslog over TLS Configuration - Existing Certificate
 
@@ -52,7 +52,7 @@ The following configuration example will add a syslog server named `syslog` that
 *admin@t327-dut1.cond (syslog)# top
 ```
 
-To complete the process, `validate` and `commit` the changes. After the confiuration changes have been committed, the SSR will send the syslog to 192.168.1.100:6514 over TLS.
+To complete the process, `validate` and `commit` the changes. After the configuration changes have been committed, the SSR will send the syslog to 192.168.1.100:6514 over TLS.
 
 ## Syslog over TLS Configuration - Generate Certificate
 
@@ -131,7 +131,7 @@ qynFiqlV0UDGgH+e8hCp41Seva5vBGYvwMVHPU80rhoAsTh1BNpM1r9xbvDQs5ui
 
 #### 3. Import the Client Certificate
 
-After the certificate is signed and returned, it is imported into the SSR for use by the client using the `import certificate client`  command. It is validated against any trusted certificates entered using `trusted-ca-certificate`. 
+After the certificate is signed and returned, import it into the SSR using the `import certificate client` command. It is validated against any trusted certificates entered using `trusted-ca-certificate`. 
 
 The following example shows an valid self-signed certificate being imported:
 

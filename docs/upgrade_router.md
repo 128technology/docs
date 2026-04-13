@@ -27,7 +27,7 @@ If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.
 
 1. Navigate to the Routers page.
 2. At the top of the page, select Software Lifecycle.
-3. To being the upgrade process, select Initiate Upgrade.
+3. To begin the upgrade process, select Initiate Upgrade.
 4. Select Download and a version from the dropdown.
 5. Select the router or routers where the software will be downloaded from the router list. 
 6. Click start. 
@@ -40,7 +40,7 @@ To view the install history for your routers, selecting Lifecycle History displa
 
 ### Upgrade using the Conductor PCLI
 
-For routers managed by an SSR Conductor, a self-upgrade, or manual upgrade, can be initiated from the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes asociated with software version 6.3.0 and those chages are indicated below. For earlier versions of SSR software, please refer to the [Legacy Upgrades](upgrade_legacy.md) section. 
+For routers managed by an SSR Conductor, a self-upgrade, or manual upgrade, can be initiated from the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*. There are command changes associated with software version 6.3.0 and those changes are indicated below. For earlier versions of SSR software, please refer to the [Legacy Upgrades](upgrade_legacy.md) section. 
 
 As an administrator-level user, log into the conductor's PCLI. 
 
@@ -53,7 +53,7 @@ As an administrator-level user, log into the conductor's PCLI.
 
 4. Once the download is complete, use the command `request system software upgrade router <router> node <node> version <image-version>` to initiate the upgrade process. View upgrade progress using `show system software upgrade router <router> node <node>`
 
-In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, intiating an upgrade on one HA node or router will automatically upgrade the second node/router. 
+In a high availability deployment, the conductor upgrades each router node sequentially to minimize/avoid downtime. For manual upgrades, initiating an upgrade on one HA node or router will automatically upgrade the second node/router. 
 
 If you perform an upgrade from the CLI using the `request system software upgrade router <conductor-router-name>` from an HA conductor, it launches a sequenced self upgrade, one node at a time. In a situation where you prefer to upgrade each node manually, you can target each node directly using `request system software upgrade router <conductor-router-name> node <conductor-node-name>`. Use `show system software upgrade` to view the status of an in progress upgrade. When the upgrade is complete on the first node, you may run the command on the second node. 
 

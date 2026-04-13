@@ -70,7 +70,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 1. Click the **Session Smart Networking Platform BYOL** offering.
 2. Click **Continue to Subscribe** and accept the terms and conditions.
 3. Click **Continue to Configuration**.
-4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
+4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Conductor** template, and select the desired region.
 5. Click **Continue to Launch**.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
 
@@ -93,7 +93,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
 
-Once the deployment completes, information is provided in the Outputs tab, and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed.
+Once the deployment completes, information is provided in the Outputs tab, and the BYOL installation process begins. After the VM is deployed it will take an additional 10-15 minutes for the desired SSR version to be installed.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
@@ -342,7 +342,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab, and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed.
+Once the deployment completes, information is provided in the Outputs tab, and the BYOL installation process begins. After the VM is deployed it will take an additional 10-15 minutes for the desired SSR version to be installed.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
@@ -444,7 +444,7 @@ A description of the parameters of the template are listed in the following tabl
 1. Click the **Session Smart Networking Platform BYOL** offering.
 2. Click **Continue to Subscribe** and accept the terms and conditions.
 3. Click **Continue to Configuration**.
-4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
+4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Conductor** template, and select the desired region.
 5. Click **Continue to Launch**.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
 7. Click **Next**.
@@ -494,7 +494,7 @@ Paste the following JSON content. Please adjust the values to your specific envi
 1. Click the **Session Smart Networking Platform BYOL** offering.
 2. Click **Continue to Subscribe** and accept the terms and conditions.
 3. Click **Continue to Configuration**.
-4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Counductor** template, and select the desired region.
+4. In the **Fulfillment Option** drop down select the **CloudFormation Template**, then select the **Juniper Session Smart Conductor** template, and select the desired region.
 5. Click **Continue to Launch**.
 6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**. The CloudFormation Template appears.
 7. Copy the URL of the template in the **Amazon S3 URL** field.
@@ -606,7 +606,7 @@ The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwo
 
 ## Troubleshooting
 
-### Device Does Not Initalize Properly
+### Device Does Not Initialize Properly
 
 Once the instance is launched with the correct parameters, the device will begin to install the SSR software. After installing the software, the device will either initialize as a Conductor or automatically onboard to the associated conductor. This process can take up to 15 minutes to complete.
 
@@ -614,4 +614,4 @@ If the instance does not install SSR as expected, SSH into the instance using th
 
 - Try to log into the pcli, run `su admin` and then `show system`.
 
-- If the pcli is not accessable or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
+- If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.

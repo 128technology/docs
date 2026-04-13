@@ -27,7 +27,7 @@ The Mist-redirect ZTP process for Conductor-managed deployments is only supporte
 
 The SSR device must have a configuration provisioned on the managing Conductor **before** powering up and onboarding the SSR device. That can include either importing a configuration, or manually generating the configuration on the conductor. 
 
-Additionally, the conductor uses the asset ID to recognize the SSR device and associate it to a logically configured router. For the SSR to be onboarded to the conductor, this match has to be made for the appropriate router in the configuration. It is crucial to verify the Asset ID for the SSR device when provisioning the router configuration on the conductor. 
+Additionally, the conductor uses the asset ID to recognize the SSR device and associate it to a logically configured router. For the SSR to onboard to the conductor, the asset ID must match the appropriate router in the conductor's configuration. It is crucial to verify the Asset ID for the SSR device when provisioning the router configuration on the conductor. 
 
 It is strongly recommended to configure the SSR WAN and LAN interfaces to match the ports identified as the WAN and LAN ports in the documentation (see below).
 

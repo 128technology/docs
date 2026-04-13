@@ -3,7 +3,7 @@ title: Network Interface Traffic Engineering
 sidebar_label: Network Interface Traffic Engineering
 ---
 
-Network interface traffic engineering allows you to impose traffic limitations on all traffic egressing a specific network-interface. This configuration also applies to all associated adjacencies of the network-interface, but does not impact other traffic that is egressing the same device-interface but belongs to different network-interfaces.
+Network interface traffic engineering allows you to impose traffic limitations on all traffic egressing a specific network-interface. This configuration also applies to all associated adjacencies of the network-interface, but does not affect traffic egressing the same device-interface on a different network-interface.
 
 ## How It Works
 
@@ -42,7 +42,7 @@ Enabling traffic engineering will introduce a performance impact to the packet-p
 
 Given the packet performance nature of the scheduler, no logs exist at the per-packet level to monitor traffic-engineering performance. The statistics described below are the best source of information about performance. The `success-bandwidth` and `failure-bandwidth` meters are good indicators of how well the scheduler is handling packets. For `failure-bandwidth`, additional statistics can be used to determine the reason for loss. Some examples are a queue full scenario resulting from an unhandled burst, or packets being dropped due to excessive time spent within the scheduler. 
 
-Statistics for network-interface traffic engineering can be viewed from the `show stats traffic-eng network-interface` command. Use the following statistics to help analyze network-interface behavior when traffic-engineering is configured. 
+Use the `show stats traffic-eng network-interface` command to view network-interface traffic engineering statistics. Use the following statistics to help analyze network-interface behavior when traffic-engineering is configured. 
 
 The general statistics apply to the scheduler as a whole. Per-traffic-class statistics are maintained for all the available traffic-classes (high, medium, low, best-effort). 
 
@@ -96,6 +96,6 @@ To gather information about network interface traffic engineering, query the fol
 - `per-traffic-class buffer-capacity-exceeded-bytes`: The number of bytes failed to be scheduled for transmission due to exceeded buffer capacity for this interface. 
 - `per-traffic-class buffer-capacity-exceeded-packets`: The number of packets failed to be scheduled for transmission due to exceeded buffer capacity for this interface. 
 - `per-traffic-class schedule-success-bandwidth`: Traffic bandwidth in bytes per second successfully scheduled for transmission for this interface.  
-- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue managment for this interface. 
+- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue management for this interface. 
 
 

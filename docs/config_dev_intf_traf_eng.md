@@ -15,7 +15,7 @@ During the initial SSR deployment, the customer was passing approximately 80Mbps
 
 ## Configuration
 
-To match bandwidth provided by the ISP, the customer enables Traffic Engineering on the Egress device-interface that is connected to ISP, and then configures a transmit-cap of 150Mbps.
+To match bandwidth provided by the ISP, the customer enables Traffic Engineering on the Egress device-interface that is connected to the ISP, and then configures a transmit-cap of 150Mbps.
 
 Device interface traffic engineering is configured under the [`device-interface`](config_command_guide.md#configure-authority-router-node-device-interface-traffic-engineering).  
 
@@ -97,10 +97,10 @@ To gather information about device interface traffic engineering, query the foll
 - `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this interface. This statistic refers to the last time (in cycles) that a packet was enqueued into the scheduler. This value is helpful when debugging. 
 - `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this interface. This statistic refers to the last time (in cycles) that the scheduler attempted to dequeue a packet.  This value is helpful when debugging.
 - `packets-queued`: The current number of packets queued in traffic engineering for this interface. 
-- `scheduler-reset`: The number of times the scheduler was reset due to encountering an processing error. 
+- `scheduler-reset`: The number of times the scheduler was reset due to encountering a processing error. 
 - `per-traffic-class schedule-success-bytes`: The number of bytes successfully scheduled for transmission for this interface.  
 - `per-traffic-class schedule-success-packets`: The number of packets successfully scheduled for transmission for this interface.  
-- `per-traffic-class schedule-failure-bytes`: The number of bytes failed to be scheduled for transmission due to bandwidth oversubscription for this interface.
+- `per-traffic-class schedule-failure-bytes`: The number of bytes that could not be scheduled for transmission due to bandwidth oversubscription for this interface.
 - `per-traffic-class schedule-failure-packets`: The number of packets failed to be scheduled for transmission due to bandwidth oversubscription for this interface.  
 - `per-traffic-class dequeue-success-bytes`: The number of bytes successfully dequeued from the scheduler for transmission for this interface.  
 - `per-traffic-class dequeue-success-packets`: The number of packets successfully dequeued from the scheduler for transmission for this interface.  
@@ -111,4 +111,4 @@ To gather information about device interface traffic engineering, query the foll
 - `per-traffic-class buffer-capacity-exceeded-bytes`: The number of bytes failed to be scheduled for transmission due to exceeded buffer capacity for this interface. 
 - `per-traffic-class buffer-capacity-exceeded-packets`: The number of packets failed to be scheduled for transmission due to exceeded buffer capacity for this interface. 
 - `per-traffic-class schedule-success-bandwidth`: Traffic bandwidth in bytes per second successfully scheduled for transmission for this interface.  
-- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue managment for this interface. 
+- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue management for this interface. 
