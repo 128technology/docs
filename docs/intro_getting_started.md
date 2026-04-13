@@ -3,7 +3,7 @@ title: Getting Started with the SSR Networking Platform
 sidebar_label: Getting Started with the SSR Networking Platform
 ---
 ## Introduction
-The Session Smart Networking Platform is the first 100% software-defined, session-based distributed IP routing and network services platform designed from the ground-up with an application and service-centric context.  The platform consists of two primary components: the Session Smart Router (SSR) and the Conductor. Together, they form a single logical control plane that is highly distributed, and a data plane that is truly session-aware. The Session Smart Networking Platform supports a wide range of deployment models scaling from a small branch office to a high capacity edge router to a hyper-scale software-defined data center.
+The Session Smart Networking Platform is the first 100% software-defined, session-based distributed IP routing and network services platform. It was designed from the ground up with an application- and service-centric context.  The platform consists of two primary components: the Session Smart Router (SSR) and the Conductor. Together, they form a single logical control plane that is highly distributed, and a data plane that is truly session-aware. The Session Smart Networking Platform supports a wide range of deployment models scaling from a small branch office to a high capacity edge router to a hyper-scale software-defined data center.
 
 ## Conductor
 The Conductor is a centralized management and policy engine that provides orchestration, administration, provisioning, monitoring, and analytics for distributed SSRs – while maintaining a network-wide, multi-tenant service, and policy data model.
@@ -32,7 +32,7 @@ The session-aware data plane makes dynamic forwarding and policy decisions based
 
 The Session Smart Networking platform has been designed to provide High Availability to provide stateful failover in addition to load sharing. The SSR solution can utilize redundant or alternate paths between nodes in a network to reroute traffic, improve resiliency, and maximize throughput. These diverse paths can provide link and node protection.
 
-The solution operates in active/active clustering mode. Routers are grouped together as a pair of nodes, with each unit processing traffic and sharing the network load. Each router consists of two units acting as a stateful HA pair. Active/active clustering provides stateful failover in addition to load sharing. A fabric link between the routers is used to route traffic between them in case of failure. All information between the routers are shared using highly efficient in-memory databases to minimize bandwidth usage and to enable instantaneous information exchange. All processes in an SSR are self-resilient. They can regenerate themselves independently in case of process failures or exceptions.
+The solution operates in active/active clustering mode. Routers are grouped together as a pair of nodes, with each unit processing traffic and sharing the network load. Each router consists of two units acting as a stateful HA pair. Active/active clustering provides stateful failover in addition to load sharing. A fabric link between the routers is used to route traffic between them in case of failure. Routers share all information using highly efficient in-memory databases, minimizing bandwidth usage and enabling instantaneous information exchange. All processes in an SSR are self-resilient. They can regenerate themselves independently in case of process failures or exceptions.
 
 
 

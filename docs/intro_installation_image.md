@@ -11,7 +11,7 @@ If you are installing SSR Version 6.3.x, use the [Universal ISO Installation pro
 
 The [package-based installation](intro_installation_bootable_media.mdx) is still available for older installations and upgrades. 
 
-The image-based installation creates two volumes on the disk, installs the full 6.0.x image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version.
+The image-based installation creates two volumes on the disk, installs the full 6.0.x image into one of the volumes, and boots into that image. When an upgrade is initiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
 The Image-based install consists of the following steps:
 
@@ -24,7 +24,7 @@ The Image-based install consists of the following steps:
 
 ## Download
 
-The image-based ISO's are available to download at the following location:
+The image-based ISOs are available to download at the following location:
 
 https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
@@ -44,7 +44,7 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 ## Installation 
 
 1. Insert the flash drive into the appliance, and boot into the flash drive.
-2. Select the installation methods; Serial Console or VGA. If you do not make a selection, the Serial mode installation is selected by default. 
+2. Select the installation method: Serial Console or VGA. If you do not make a selection, the Serial mode installation is selected by default. 
 
 	![Select Mode](/img/install_imagebased_1.png)
 
@@ -66,15 +66,15 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 	
 	![Error Message at bottom](/img/60fips_install_3.png)
 
-7. Press the enter key to start the installation. 
+7. Press the **Enter** key to start the installation. 
 8. Once complete, you are prompted with an option to press Esc to reboot immediately, or Enter to shutdown and continue later. 
 9. Upon restart, the system initializes and is internet ready. Since each manufacturer's device port layout is different, use the following information to identify the port layout of the device to complete the onboarding process.
 
 ### Device Default Port Identification
 
 When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default.
-When the device is unrecognized, a default port layout is generated based upon PCI address order.
-This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
+When the device is unrecognized, a default port layout is generated based on PCI address order.
+This order often does not match the external bezel port order. Some trial-and-error testing of port connections may be required.
 
 The following sections provide information about port connections on Juniper certified devices and non-certified devices that are considered compatible. 
 
@@ -100,13 +100,13 @@ The steps performed in the animation are listed below.
 
 3. Log in to Mist.
 
-4. Select the organization from the drop down list.
+4. Select the organization from the drop-down list.
 
 5. If you assigned your router a name, enter it here and select ADOPT.
 
 6. If there are no errors, the router is associated with the organization and visible in the Mist UI.
 
-7. Click on the link to the Mist Cloud to see the router in the Mist inventory.
+7. Click the link to the Mist Cloud to see the router in the Mist inventory.
 
 ### Adopt the Router from the SSR PCLI
 

@@ -226,7 +226,7 @@ Configure node1 on router-b with the following interfaces:
 - wan
 - far (this is the inter-router communication link)
 
-Activate VRRP on the `lan` device interface of node1. Configuring a lower VRRP priority (97) on the `lan` interface of router-b, identifies router-b as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid.
+Activate VRRP on the `lan` device interface of node1. Configuring a lower VRRP priority (97) on the `lan` interface of router-b identifies router-b as the secondary router. On a dual router HA setup, the VRIDs must be the same on both redundant devices — the `lan` device interfaces on `router-a` and `router-b` must have the same VRID.
 
 ```
             node                  node1

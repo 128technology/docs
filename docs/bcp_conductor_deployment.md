@@ -24,7 +24,7 @@ This guide is intended to be referenced by network architects during the Design 
 ### Terminology
 
 #### Conductor Host Services
-_Conductor Host Services_ refers to the built-in feature within the SSR software that will generate configuration to simplify the connectivity between routers and their conductor(s). By configuring the `conductor-address` field within the SSR's data model, and by indicating which interface(s) on a manged router should be used to connect to conductor, the conductor will automatically generate the supporting configuration infrastructure. This includes:
+_Conductor Host Services_ refers to the built-in feature within the SSR software that will generate configuration to simplify the connectivity between routers and their conductor(s). By configuring the `conductor-address` field within the SSR's data model, and by indicating which interface(s) on a managed router should be used to connect to conductor, the conductor will automatically generate the supporting configuration infrastructure. This includes:
 
 - The `_conductor_` service (which will have a trailing sequence number; e.g., `_conductor_1`)
 - A `service-route` for each `network-interface` on each router that has `conductor` set to `true`
@@ -32,7 +32,7 @@ _Conductor Host Services_ refers to the built-in feature within the SSR software
 The Conductor Host Services feature forms the basis for the majority of the conductor design patterns described in this document, and should be leveraged whenever possible.
 
 #### In-Band Management
-The term _in-band management_ in the context of conductor connectivity refers to the use of a forwarding interface by a router node for reaching the conductor; there is no dedicated interface specifically for the conductor to "manage" the node. Because most SSR deployments separate the remote sites from the conductor over a WAN, it is exceedingly common to leverage in-band management between a remote node and a conductor. For SDWAN deployments, in-band management is _strongly recommended_, for the branch locations. For head end systems that are colocated with the conductors, out-of-band management is preferable, assuming there are sufficent free interfaces on the chosen head end hardware platform.
+The term _in-band management_ in the context of conductor connectivity refers to the use of a forwarding interface by a router node for reaching the conductor; there is no dedicated interface specifically for the conductor to "manage" the node. Because most SSR deployments separate the remote sites from the conductor over a WAN, it is exceedingly common to leverage in-band management between a remote node and a conductor. For SDWAN deployments, in-band management is _strongly recommended_, for the branch locations. For head end systems that are colocated with the conductors, out-of-band management is preferable, assuming there are sufficient free interfaces on the chosen head end hardware platform.
 
 #### Out-of-Band Management
 Routing nodes are said to leverage _out-of-band management_ when they have a dedicated interface for the traffic to reach the conductor. Out-of-band management is generally only feasible when a conductor is colocated with the routing nodes, as is typically the case only at a head end data center.
@@ -45,7 +45,7 @@ It is possible to have a dedicated out-of-band management interface on branch lo
 This section contains information pertinent to all conductor deployments.
 
 ### Platform Requirements
-It is important from the outset to choose a platform (physical or virtual) that is suitable for the demands of managing an array of SSR routers. As the deployment scales, so too do the demands on the conductor. In general, the two primary concerns are CPU and memory. The speed of a conductor's CPU (moreso than the quantity of CPU cores) will have the most impact on its performance as deployments scale up. The amount of memory will have an impact on the responsiveness of the conductor's administrative interfaces as the deployments scale up.
+It is important from the outset to choose a platform (physical or virtual) that is suitable for the demands of managing an array of SSR routers. As the deployment scales, so too do the demands on the conductor. In general, the two primary concerns are CPU and memory. The speed of a conductor's CPU (more so than the quantity of CPU cores) will have the most impact on its performance as deployments scale up. The amount of memory will have an impact on the responsiveness of the conductor's administrative interfaces as the deployments scale up.
 
 :::note
 The SSR conductor will run effectively on a virtual machine in both private and public cloud infrastructure. From a physical vs. virtual standpoint, there is no difference in the CPU and memory requirements, and thus the decision ultimately comes down to architectural preference and cost.
@@ -160,7 +160,7 @@ When using _Conductor Host Services_ to create your configuration for a router t
 You must also specify `conductor=true` on one of your network-interface configuration elements, in order for the SSR to recognize which egress path(s) to use.
 :::
 
-The KNI (named `kni254`) shuttles packets back and forth between the Linux processses (salt, secureCommunicationManager) and the SSR routing domain. Conductor Host Services will install specific, /32 routes to one or two conductor addresses, using the local KNI address (169.254.127.126) as its next-hop. Those will be sent "up" to the SSR routing domain, where they will match the generated `_conductor_` service(s), and follow the service-route out of the specified interface.
+The KNI (named `kni254`) shuttles packets back and forth between the Linux processes (salt, secureCommunicationManager) and the SSR routing domain. Conductor Host Services will install specific, /32 routes to one or two conductor addresses, using the local KNI address (169.254.127.126) as its next-hop. Those will be sent "up" to the SSR routing domain, where they will match the generated `_conductor_` service(s), and follow the service-route out of the specified interface.
 
 ------
 
@@ -689,7 +689,7 @@ exit
 
 3. In this design, the datacenter router reaches to the conductor using the `lan` interface. The global `conductor-address` is overridden by the router. (If there are two conductors configured at the authority level, any router that overrides the addresses must override both.)
 
-4. The datacenter's unique accesss create a unique service specific to it: `_conductor_datacenter_1`. It has the actual conductor's address configured and will match the requests arriving via `kni254`.
+4. The datacenter's unique access create a unique service specific to it: `_conductor_datacenter_1`. It has the actual conductor's address configured and will match the requests arriving via `kni254`.
 
 5. The generated `_conductor_1` service will require that the `access-policy-generated` toggle be set to `false`, and that the `access-policy` contain a reference to the WAN interfaces of the remote site(s). In our case, we have the WAN interface of the `datacenter` router in an "internet" neighborhood (0.0.0.0/0), such that any inbound, non-SVR request on the WAN will be treated as sourced from the `internet` tenant. We've added an `access-policy` statement for allowing inbound access to the `internet` tenant.
 

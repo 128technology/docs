@@ -149,4 +149,4 @@ For existing deployments, great care should be taken to compare existing configu
 
 ## BGP over SVR
 
-When using BGP over SVR, be careful when choosing routing interface address space. It should not conflict with useable network space in the deployment. Addresses in link local address space (169.254.0.0/16) can be used, and is recommended. 
+When using BGP over SVR, be careful when choosing routing interface address space. It should not conflict with usable network space in the deployment. Addresses in link local address space (169.254.0.0/16) can be used, and is recommended. 

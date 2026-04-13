@@ -91,7 +91,7 @@ The Initializer tunes your operating system, prepares the platform to run the SS
 
 5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your SSR routing software.
    :::info
-   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the SSR beyond the default settings for the target platform.
+   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilities of the SSR beyond the default settings for the target platform.
    
    The **Advanced** selection is only available when configuring a Router. 
    :::

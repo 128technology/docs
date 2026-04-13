@@ -16,7 +16,7 @@ Plugins enable a variety of use cases to be implemented to enhance the SSR exper
 ### Installation and management
 The conductor GUI provides a dashboard to view and manage all available plugins.
 
-![SSR Plugin Dasboard](/img/plugins_dashboard.png)
+![SSR Plugin Dashboard](/img/plugins_dashboard.png)
 
 The dashboard above shows the available and installed plugins. The [`128T-dns-cache`](plugin_dns_cache.md) plugin in the dashboard above is available and ready to be installed on the conductor. The [`128T-gre`](plugin_gre.md) plugin shows a green icon meaning it has been installed and ready to be configured. The [`128T-ipsec-client`](plugin_ipsec_client.md) plugin has an orange icon indicating that a new version of the plugin is available for installation, though the currently installed version is still actively being used by the conductor.
 
@@ -91,7 +91,7 @@ Show available plugins by category using `show plugins available [node <node>] c
 Show installed plugins using `show plugins installed [node <node>]`
 
 #### Show Plugin State
-Show the current `detail` or `summary` state of a plugin using `show plugins state [router <router>] [node <node>] [{detail | summmary}] name <plugin-name>`. Plugin state is supported in deployments with conductors and routers running SSR versions `5.1.0` and greater. Some plugins do not support state data and will not give meaningful output from this command.
+Show the current `detail` or `summary` state of a plugin using `show plugins state [router <router>] [node <node>] [{detail | summary}] name <plugin-name>`. Plugin state is supported in deployments with conductors and routers running SSR versions `5.1.0` and greater. Some plugins do not support state data and will not give meaningful output from this command.
 
 #### Install or Remove a Plugin
 Install/remove a plugin using `manage plugin {install | remove} [node <node>] name <plugin-name>`

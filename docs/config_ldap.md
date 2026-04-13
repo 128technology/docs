@@ -8,7 +8,7 @@ Lightweight Directory Access Protocol (LDAP) is an open, vendor-neutral, industr
 [^1]: https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol
 
 ## Basic Configuration
-Configuring LDAP on the SSR is done globally, and is done within the `authority > ldap-server` configuration element. The SSR authority configuration may only have one `ldap-server` configured at a time.
+LDAP is configured globally on the SSR, within the `authority > ldap-server` configuration element. The SSR authority configuration may only have one `ldap-server` configured at a time.
 
 The `ldap-server` configuration has the following attributes:
 
@@ -23,7 +23,7 @@ If using an FQDN/hostname, this name must be resolvable by the SSR.
 The default type is ldaps, which requires TLS/SSL for the entire duration of the connection
 :::
 :::info
-The "starttls" type will not send user passwords in the process of being validated in the clear (it requires that STARTTLS be performed, and uses that channel for sending the password), but all other LDAP traffic (including the bind request and credentials used for binding) _are_ sent in the clear.
+The "starttls" type will not send user passwords in the process of being validated in the clear (it requires that STARTTLS be performed, and uses that channel for sending the password), but all other LDAP traffic (including the bind request and credentials used for binding) _is_ sent in the clear.
 :::
 - **port**: the listening port on your LDAP server. Using `server-type-default` will select the default port based on the server-type configured (3269 for global-catalog, 636 for LDAPS, 389 for StartTLS)
 - **bind-type**: an enumeration of _anonymous_, _unauthenticated_, or _password_. This is how your SSR will authenticate to your LDAP server.
@@ -157,11 +157,11 @@ Connection to 172.25.128.234 closed.
 
 ```
 
-Additionally, to verify the status of your configured users and the LDAP server, click on **Users** in the **Adminstration** menu on the left side of the SSR GUI. LDAP authenticated users appear in the users list **after they have successfully logged in**. From the CLI, use the `show users` command. 
+Additionally, to verify the status of your configured users and the LDAP server, click on **Users** in the **Administration** menu on the left side of the SSR GUI. LDAP authenticated users appear in the users list **after they have successfully logged in**. From the CLI, use the `show users` command. 
 
 #### Important Clarification
 
-As a point of clarification: The *New User* button in the top right corner of the GUI is intended for use cases such as RADIUS or local users and is **not** to be configured for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
+As a point of clarification: The *New User* button in the top right corner of the GUI is for RADIUS or local users. Do **not** use it for LDAP. Using the new user button to manually create a local user prevents the use of the LDAP server for authentication.
 
 ![Not for LDAP](/img/ldap_jumpcloud_user_setup8.png)
 

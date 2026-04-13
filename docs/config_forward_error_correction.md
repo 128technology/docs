@@ -16,7 +16,7 @@ FEC has two modes, Dynamic and Static. Each mode is enabled through the FEC prof
 
 ## Dynamic Mode 
 
-Dynamic is the default mode. In Dynamic mode, the behavior of FEC is adjusted for the currently observed packet loss. When no loss is detected, no parity packets are added to the transmission. When some amount of loss is found, the ratio necessary to heal the loss is calculated, and parity packets are added to the transmission. As the loss goes up or down, the loss ratio is adjusted automatically. 
+Dynamic is the default mode. In Dynamic mode, FEC adjusts its behavior based on the currently observed packet loss. When FEC detects no loss, it adds no parity packets to the transmission. When FEC detects some loss, it calculates the ratio necessary to heal the loss and adds parity packets to the transmission. As the loss goes up or down, the loss ratio is adjusted automatically. 
 
 ### Sample Dynamic Configuration
 

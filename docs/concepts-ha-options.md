@@ -1,5 +1,5 @@
 ---
-title: Understanding High Availabilty Options
+title: Understanding High Availability Options
 sidebar_label: High Availability Options
 ---
 

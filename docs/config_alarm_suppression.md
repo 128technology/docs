@@ -6,11 +6,11 @@ sidebar_label: Alarm Suppression
 #### Version History
 | Release | Modification                |
 | ------- | --------------------------- |
-| 6.3.0 | Alarm Supression introduced |
+| 6.3.0 | Alarm Suppression introduced |
 
 While shelving alarms for a router is useful for staging and maintenance activities, there are situations where a more granular approach is useful. 
 
-By using the Alarm Suppression feature, individual alarms as well as alarm types can be filtered or hidden. This allows you to focus on alarms that are relevant to your configuration needs without creating unique rules to hide every type of alarm. You can write custom shelves, allowing you to silence alarming on interfaces that are intentionally configured as administratively down, for example.
+The Alarm Suppression feature lets you filter or hide individual alarms as well as alarm types. This allows you to focus on alarms that are relevant to your configuration needs without creating unique rules to hide every type of alarm. You can write custom shelves to suppress alarms on interfaces that are intentionally configured as administratively down, for example.
 
 ### How It Works
 
