@@ -15,13 +15,13 @@ In short:
 
 ## BFD on the SSR
 
-The SSR uses two BFD implementations.
+The SSR uses two BFD implementations:
 
-**SSR BFD** is used between SSR instances. It uses UDP destination port 1280 and source port 1281. It runs in asynchronous control mode for liveness and echo mode for link‑quality measurements (latency, jitter, loss). SSR BFD is configured under the `bfd` hierarchy at the router, peer, neighborhood, or adjacency level. For configuration details and tuning guidance, see [Tuning BFD Settings](https://docs.128technology.com/docs/howto_tune_bfd).
+**SSR BFD** is used between SSR instances. It uses UDP destination port 1280. It runs in asynchronous control mode for liveness and echo mode for link‑quality measurements (latency, jitter, loss). SSR BFD is configured under the `bfd` hierarchy at the router, neighborhood, or adjacency level. For configuration details and tuning guidance, see [Tuning BFD Settings](https://docs.128technology.com/docs/howto_tune_bfd).
 
-**FRR BFD** is used by routing protocols (OSPF and BGP). It uses the standard IETF BFD ports 3784 (single‑hop), 4784 (multi‑hop), and 3785 (echo). FRR BFD is configured under the `routing` hierarchy on OSPF interfaces and BGP neighbors, and it does not change SSR BFD behavior. For FRR configuration details, see [Bidirectional Forwarding Detection (BFD)](https://docs.128technology.com/docs/config_bfd).
+**Routing BFD** is used by OSPF and BGP, with the standard IETF BFD ports 3784 (single‑hop), 4784 (multi‑hop), and 3785 (echo). Routing BFD is configured under the `routing` hierarchy on OSPF interfaces and BGP neighbors, and it does not change SSR BFD behavior. For FRR configuration details, see [Bidirectional Forwarding Detection (BFD)](https://docs.128technology.com/docs/config_bfd).
 
-From a forwarding perspective, both SSR BFD and FRR BFD packets are classified, queued, and forwarded by the SSR data plane like any other traffic. They are not inherently protected from congestion.
+From a forwarding perspective, both SSR BFD and Routing BFD packets are classified, queued, and forwarded by the SSR data plane like any other traffic. They are not inherently protected from congestion.
 
 ### Handling BFD Packets on a Congested Interface
 
@@ -35,16 +35,16 @@ For SSR BFD:
 - Each peer expects to receive packets no more frequently than its own `required-min-rx-interval`.
 - If a number of successive packets (`multiplier`) are not received within the negotiated interval, the peer path is declared down.
 
-For FRR BFD:
+For Routing BFD:
 
 - Asynchronous BFD packets are similarly sent and expected at configured intervals.
-- If the configured `multiplier` of packets is missed, the FRR BFD session is declared down, and the associated routing adjacency (OSPF or BGP) goes down.
+- If the configured `multiplier` of packets is missed, the session is declared down, and the associated routing adjacency (OSPF or BGP) goes down.
 
 In both cases, persistent congestion that causes repeated BFD drops can bring down paths and adjacencies, even if underlying physical links remain up.
 
 ### BFD Timers and Congestion Sensitivity
 
-The following BFD parameters determine how sensitive BFD is to delayed or dropped packets on a congested interface. These parameters are configured under the `bfd` hierarchy associated with a router, peer, neighborhood, or adjacency. The main parameters are:
+The following BFD parameters determine how sensitive BFD is to delayed or dropped packets on a congested interface. These parameters are configured under the `bfd` hierarchy associated with a router, neighborhood, or adjacency. The main parameters are:
 
 - `desired-tx-interval`: Defines the interval, in milliseconds, at which the router transmits asynchronous BFD control packets.
 - `required-min-rx-interval`: Defines the minimum interval, in milliseconds, at which the router receives BFD control packets.
@@ -52,6 +52,32 @@ The following BFD parameters determine how sensitive BFD is to delayed or droppe
 - `link-test-interval`: Defines the interval, in seconds, between BFD echo mode tests.
 - `link-test-length`: Defines the number of echo packets sent in each echo mode test.
 - `required-min-echo-interval`: Defines the minimum interval between echo packets that the router is willing to accept.
+
+### BFD Negotiated Intervals
+
+BFD intervals and multipliers are negotiated between peers. When defining these values, it can be helpful to know the Tx and Rx Timer's current negotiated values as well as the current multiplier. Use the `show peers bfd-interval` to display these values.  
+
+Multiplier – Peer’s configured multiplier. It is the number of missed async packets until the local router deems its peer down. 
+
+Tx Timer – Configured value under desired-tx-interval, no negotiation involved. One async packet is sent at the end of each Tx Timer 
+
+Rx Timer – Local router expects to receive an async packet from the peer before the end of each timer. Set based on max value of local required-min-rx-interval and peer’s desired-tx-interval. Updated after first received BFD packet. 
+
+```
+show peers bfd-interval
+
+Retrieving peer paths... 
+
+========= ======== =================== ============= ======== ========== ========== ============ 
+
+ Peer      Node     Network Interface   Destination   Status   Rx Timer   Tx Timer   Multiplier 
+
+========= ======== =================== ============= ======== ========== ========== ============ 
+
+ Berkley   slice1   intf1               192.168.1.1   up       1.50s      3.00s               5 
+
+ Berkley   slice2   intf2               192.168.2.1   down     -          -                   - 
+```
 
 **Example Configuration**
 
@@ -84,11 +110,11 @@ With a non‑zero hold-down-time, BFD detects and tracks state changes internall
 
 During congestion, damping and hold‑down help shield higher‑level components from transient BFD changes. A short burst of loss that briefly forces BFD to consider a path down may never be exposed to routing or load‑balancing logic if the path recovers before the hold‑down timer expires. This reduces routing churn and avoids unnecessary failovers that would not materially improve user experience.
 
-You can configure damping parameters at the router, peer, neighborhood, or adjacency level. This allows you to tune behavior for specific paths that are known to be noisy or to traverse congested environments, without globally reducing responsiveness.
+You can configure damping parameters at the router, neighborhood, or adjacency level. This allows you to tune behavior for specific paths that are known to be noisy or to traverse congested environments, without globally reducing responsiveness.
 
-### FRR BFD Parameters and Congestion
+### Routing BFD Parameters and Congestion
 
-FRR BFD uses the same fundamental concepts:
+Routing BFD uses the same fundamental concepts:
 
 - The `enable` flag turns BFD on or off for an OSPF interface or BGP neighbor.
 - `required-min-rx-interval`: Specifies the minimum receive interval in milliseconds.
@@ -127,9 +153,9 @@ authority
 exit
 ```
 
-FRR BFD packets use standard IETF ports and are forwarded through the SSR data plane. When the SSR interface is congested, FRR BFD packets are queued and potentially dropped alongside other traffic in their class. If enough BFD packets are missed, the FRR BFD session times out. When that happens, OSPF or BGP brings down the adjacency and reconverges, potentially selecting alternate paths.
+Routing BFD packets use standard IETF ports and are forwarded through the SSR data plane. When the SSR interface is congested, the packets are queued and potentially dropped alongside other traffic in their class. If enough BFD packets are missed, the session times out. When that happens, OSPF or BGP brings down the adjacency and reconverges, potentially selecting alternate paths.
 
-You can tune FRR BFD in the same way as SSR BFD. Larger multipliers and intervals make BFD less sensitive to transient congestion at the cost of slower failure detection. Smaller values provide faster failure detection, but are more likely to trigger routing changes in response to short‑lived congestion.
+You can tune Routing BFD in the same way as SSR BFD. Larger multipliers and intervals make BFD less sensitive to transient congestion at the cost of slower failure detection. Smaller values provide faster failure detection, but are more likely to trigger routing changes in response to short‑lived congestion.
 
 ### Traffic Engineering, Queues, and BFD Priority
 
@@ -147,7 +173,7 @@ When congestion occurs on devices between SSR routers such as provider routers, 
 
 The SSR treats BFD with relatively low priority and assumes that BFD should experience the same class‑of‑service as typical traffic. This design keeps BFD’s view of path quality consistent with user experience.
 
-FRR BFD packets inherit whatever DSCP marking is applied to traffic from the relevant interface, unless you specifically re‑mark them using QoS policies.
+Routing BFD packets inherit whatever DSCP marking is applied to traffic from the relevant interface, unless you specifically re‑mark them using QoS policies.
 
 ### How Congested Transit Devices Affect BFD Sessions
 
@@ -180,7 +206,7 @@ To influence how congestion affects BFD traffic as it passes through tunnels or 
 
 First, decide what DSCP policy you want for BFD. If you want BFD to closely track best‑effort traffic, you can leave it with a default or low DSCP value. In that case, BFD packets share the same QoS class as typical traffic, and DSCP steering rules that apply to that DSCP range will apply to BFD as well. If you want BFD to have greater protection, you can mark it to a DSCP value associated with a higher‑priority class that is recognized by your provider or by your own transit routers.
 
-Next, configure classification on the SSR to mark BFD packets. For SSR BFD, match UDP port 1280. For FRR BFD, match UDP ports 3784, 4784, and 3785. Using your existing QoS framework, apply the desired DSCP marking to those flows.
+Next, configure classification on the SSR to mark BFD packets. For SSR BFD, match UDP port 1280. For Routing BFD, match UDP ports 3784, 4784, and 3785. Using your existing QoS framework, apply the desired DSCP marking to those flows.
 
 If BFD packets traverse an IPsec or GTP tunnel where DSCP steering is enabled, configure dscp-steering on the relevant network-interface and set up the parent and child services accordingly. For example:
 
@@ -245,11 +271,4 @@ If you keep BFD at a lower or default DSCP, or align its DSCP with that of the a
 
 In all designs, it is important that BFD’s DSCP markings and any DSCP steering rules are intentional and well understood. Unintended re‑marking or misaligned QoS classes can make BFD either too fragile or too insulated from the network conditions you are trying to observe.
 
-## Summary
-
-When an SSR device-interface is congested, SSR BFD and FRR BFD packets are queued and dropped according to the same rules that apply to other traffic in their service and traffic‑engineering class. Asynchronous BFD sessions remain up as long as the negotiated intervals and multiplier thresholds are not exceeded; when enough packets are missed, paths and adjacencies are declared down. Echo mode measurements show increased latency and jitter when queues build up, and may show packet loss when buffers overflow. BFD damping and hold‑down timers help prevent short‑lived congestion from causing rapid flapping.
-
-When intermediate devices are congested, BFD’s behavior is primarily determined by its DSCP marking and the QoS policies in place. With conservative DSCP values, BFD tends to experience congestion similarly to user traffic, and its measurements reliably indicate path quality from the user’s perspective. With elevated DSCP values and higher priority, BFD can remain stable through severe congestion, but its view of path quality may be more optimistic than that of lower‑priority application traffic.
-
-DSCP steering on the SSR allows you to route BFD traffic differently when it is carried inside tunnels, by matching DSCP ranges to child services and applying tailored service routes or traffic‑engineering policies. This lets you align BFD behavior with your operational goals, whether you emphasize accurate representation of user experience, maximum adjacency stability, or a balance between the two.
 
