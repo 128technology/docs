@@ -3,7 +3,7 @@ title: Forwarding Plane Resource Pools
 sidebar_label: Forwarding Plane Resource Pools
 ---
 
-Critical to "right-sizing" the SSR for a given deployment is an understanding of how the forwarding plane is configured for its resource pools.  These resource pools are used for setting up sessions, forwarding tables and packet transformations as quickly and efficiently as possible.  The resource pools are proportionately sized relative to the amount of huge pages allocated during system initialization.
+Understanding how the forwarding plane is configured for its resource pools is critical to right-sizing the SSR for a given deployment.  These resource pools are used for setting up sessions, forwarding tables and packet transformations as quickly and efficiently as possible.  The resource pools are proportionately sized relative to the amount of huge pages allocated during system initialization.
 
 ```
 admin@node2.burlma# show capacity
@@ -22,7 +22,7 @@ Node: node2
  source-tenant-table        11       2048   0.5%
 ```
 
-System configuration plays the largest role in consuming these resource pools.  In the event that these resources are at risk of being exhausted, an alarm will be generated for each of the resource pools should they reach 85% of their capacity.  Exhaustion of any of these tables will result in an inability for the system to operate properly.
+System configuration plays the largest role in consuming these resource pools.  If any resource pool reaches 85% of its capacity, an alarm is generated.  Exhaustion of any of these tables will result in an inability for the system to operate properly.
 
 If the system configuration is already optimized, meaning any services or tenants no longer in use are already removed, it may be time to explore migrating the SSR to a platform with more memory available. If the system has additional unused RAM, the amount of huge pages can be increased by running the initializer.
 

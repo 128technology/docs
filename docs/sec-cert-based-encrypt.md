@@ -344,7 +344,7 @@ See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for additional 
 
 ## Troubleshooting
 
-Use the following information to help troublshoot certificate events or issues.
+Use the following information to help troubleshoot certificate events or issues.
 
 ### From the Command Line
 

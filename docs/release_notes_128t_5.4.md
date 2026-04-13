@@ -36,7 +36,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
 ------
-- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Reuse of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
 - **I95-48723 HA sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
 ------
@@ -393,7 +393,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45641 Stuck BGPoSVR Sessions after Failover:** Made changes to provide updates to less specific FIB entries when routes are updated to resolve this issue. 
 ------
-- **I95-45783 User home directores are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting. 
+- **I95-45783 User home directories are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting. 
 ------
 - **I95-45799 Monitoring Agent Service Fix:** Updated the Monitoring Agent to include the latest updates. 
 
@@ -593,7 +593,7 @@ This release replaces the existing `5.4.0-104` release.
 
 ### Resolved Issues
 
-- **I95-42990 Upgrade may cause a kernel panic:** Package order dependancy created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
+- **I95-42990 Upgrade may cause a kernel panic:** Package order dependency created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
 
 ## Release 5.4.0-104
 
@@ -647,7 +647,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **i95-40325 Configurable Metrics Retention:** Metrics retention intervals and storage duration values are now user configurable. See [In-Memory Metrics](config_in-memory_metrics.md) for more information.
 ------
-- **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datatsets daily, weekly (default), or monthly. For more information, see [Update the Domain List](config_domain-based_web_filter.md).
+- **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datasets daily, weekly (default), or monthly. For more information, see [Update the Domain List](config_domain-based_web_filter.md).
 ------
 - **I95-40416 Google Cloud Platform Support:** The SSR now supports the Google Cloud Platform (GCP).
 ------
@@ -661,11 +661,11 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-41093 Show Commit time:** The GUI now displays the time of the last commit operation.
 ------
-- **I95-41418 User Mode accessible from the PCLI:** The `edit user mode` command is now availble in the PCLI. This command sets the configuration mode for both the PCLI and GUI. Setting this field to `advanced` allows the user to view and configure fields that are normally hidden.
+- **I95-41418 User Mode accessible from the PCLI:** The `edit user mode` command is now available in the PCLI. This command sets the configuration mode for both the PCLI and GUI. Setting this field to `advanced` allows the user to view and configure fields that are normally hidden.
 ------
 - **I95-41457 VRF Learning via OSPF:** VRF can now learn via OSPF as well as BGP. For more information, see [VRF Learning.](config_vrf_learning.md)
 ------
-- **I95-42107 User defined Help for Templates:** When defining templates, adminstrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help for a Template.](config_templates.md#adding-help-for-a-template)
+- **I95-42107 User defined Help for Templates:** When defining templates, administrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help for a Template.](config_templates.md#adding-help-for-a-template)
 ------
 - **I95-42278 Template filters for use with Subnets:** Filters have been added for use with CIDR formatting.
 ------
@@ -679,7 +679,7 @@ This release replaces the existing `5.4.0-104` release.
 
 - **I95-23613 Incorrectly logging missing xml and Json config files as an error:** The logging category has been changed to Info.
 ------
-- **I95-35068 Not getting past the Asset Starting state when a bad configuration is stored:** This issue has been resoved.
+- **I95-35068 Not getting past the Asset Starting state when a bad configuration is stored:** This issue has been resolved.
 ------
 - **I95-38729/I95-41374 Unbinding devices:** VMBus devices are now released at startup.
 ------
@@ -713,7 +713,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-42306 Shared Physical address accepts null MAC:** A null MAC (00:00:00:00:00:00) is prevented from being configured as a shared-phys-address.
 ------
-- **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resoved.
+- **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resolved.
 ------
 - **I95-42396 Highway crash after receiving a bad packet:** Resolved an issue in the DPDK internal storage space.
 ------

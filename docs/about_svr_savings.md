@@ -8,7 +8,7 @@ Traditional SD-WAN solves the issues of WAN connectivity by creating virtual net
 
 [^1]: https://www.juniper.net/content/dam/www/assets/analyst-reports/us/en/2021/acg-research-tunnel-based-versus-tunnel-free-sd-wan.pdf
 
-Overlay-based SD-WAN creates a network transport that is heavyweight and less optimized; fragmentation is introduced; and scalability and security are negatively impacted. Session Smart Routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
+Overlay-based SD-WAN creates a heavyweight, less-optimized network transport that introduces fragmentation and degrades scalability and security. Session Smart Routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
 
 A tunnel, as defined according to [RFC 1853](https://tools.ietf.org/html/rfc1853), encapsulates original IP payload with a new IP header. The original IP header is maintained while a new one is added.
 
@@ -38,7 +38,7 @@ For the impact of tunnel on VoIP, consider the case of a GRE tunnel:
 
 This means 40% additional bytes are required to carry IP packets that are otherwise not needed if the packet is sent natively. This kind of calculation can be repeated for IPsec (with GRE) and VXLAN. The impact of the additional bytes can be clearly seen. The worse case scenario is IPsec with GRE.  That is nearly 123% overhead.
 
-SD-WAN is commonly deployed on internet links, and if it is a low bandwidth link or if the link suffers from congestion, which if often the case, this will lead to performance degradation of the application.
+SD-WAN is commonly deployed on internet links. On low-bandwidth or congested links — which is often the case — application performance degrades.
 
 Packet size increase has a negative impact not only on bandwidth usage but also affects the transmission and queuing delay, thus affecting jitter and overall packet delay and the customer’s experience.
 

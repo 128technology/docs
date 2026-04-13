@@ -67,7 +67,7 @@ When the above profile is referenced by a router, the various reachability metri
 
 ### Profile References
 
-Once a profile is configured on the Authority, it is availble to the routers, and each router may reference any number of relevant profiles. With each reference to a profile, the router configuration must specify the retention for the profile. The Profile Retention value determines how long the profile’s metrics are retained.
+Once a profile is configured on the Authority, it is available to the routers, and each router may reference any number of relevant profiles. With each reference to a profile, the router configuration must specify the retention for the profile. The Profile Retention value determines how long the profile’s metrics are retained.
 
 ### Profile Retention
 

@@ -122,7 +122,7 @@ Launch the deployment with the corresponding AWS CLI commands making use of the 
 
 ### Mist-Managed Setup
 
-Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist organization once onboarding is complete.
+Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to the appropriate Mist organization. The process can take up to 5 minutes. The device is visible as Unassigned in the Mist organization once onboarding is complete.
 
 If the device does not show up in the Mist organization after 5 minutes, ssh into the instance.
 - Log into the pcli, run `su admin` and then `show mist`.

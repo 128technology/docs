@@ -6,9 +6,9 @@ This section describes the manual installation process for the SSR. For automate
 
 ## Install Using SSR-Installer
 
-The SSR software installer package part of the SSR ISO, and is hosted in the Juniper software repository, located at `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/`. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.mdx). If you are performing an upgrade, see [Upgrading the SSR Networking Platform](intro_upgrading.md) for upgrade instructions. 
+The SSR software installer package is part of the SSR ISO, and is hosted in the Juniper software repository, located at `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/`. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.mdx). If you are performing an upgrade, see [Upgrading the SSR Networking Platform](intro_upgrading.md) for upgrade instructions. 
 
-The SSR Software package is available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` using the username and token provided to you. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the SSR Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
+The SSR Software package is available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` using the username and token provided to you. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the SSR Installer, both a certificate and a username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
 
 :::note
 Do not uninstall old versions of the SSR Installer. Later versions of the SSR Installer have dependencies on the earlier versions, and uninstalling them may cause issues for rollback operations. 
@@ -57,11 +57,11 @@ The installer splash screen appears.
  
   - **For the client certificate**, copy the entire contents of the certificate, _including the Certificate and Private key information_, and paste it into the Client Certificate window of the install wizard.<br/>The content must begin with the line `-----BEGIN CERTIFICATE-----` and end with `-----END RSA PRIVATE KEY-----`.
 
-    This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, you can also store the certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
+    This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, store the certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
 
   - Press the **Tab** key after pasting the client certificate to select the **OK** button, and press **Enter**.
   
-7. From the Version Selection window, select your desired version from the list and select **OK** to continue. The installation begins, and may take several minutes to download and install.
+7. From the Version Selection window, select your desired version from the list, then click **OK** to continue. The installation begins, and may take several minutes to download and install.
 8. Press the **Enter** key to select **OK** and close the installer. 
 9. Detach from the Screen utility if used.
   ```
@@ -96,7 +96,7 @@ The Initializer is a complementary application to the Installer that tunes your 
   :::
 - **Router/Conductor Name:** The name of the Router or Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `labsystem1.boston`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-5. On the **Password Setup** screen, create a password for the Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+5. On the **Password Setup** screen, create a password for the Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat any character more than 3 times.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
@@ -115,7 +115,7 @@ If installing the SSR software for the first time, a system reboot is required.
 
 ### Verify Installation
 
-After installing the SSR Routing Software it is important to verify that the installation was completed successfully.
+After installing the SSR Routing Software, it is important to verify that the installation was completed successfully.
 
 #### To Verify the SSR Installation:
 

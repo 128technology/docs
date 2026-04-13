@@ -133,7 +133,7 @@ If it appears there are connectivity issues that are preventing AP from function
 
 ## Asset Status
 
-In versions of SSR Software prior to 6.3.0, the asset states were a combination of SALT statuses and SSR statuses. This caused ambiguity with the true state of the SSR. In order to provide a clearer picture of asset states, beginning with version 6.3.0 the SALT status and the SSR status have been decoupled. This document provides a summary of the SSR asset states seen when upgrading or installing SSR software, as well as any time `show assets asset-id` is run. 
+In versions of SSR Software prior to 6.3.0, the asset states were a combination of SALT statuses and SSR statuses. This caused ambiguity with the true state of the SSR. To provide a clearer picture of asset states, beginning with version 6.3.0 the SALT status and the SSR status have been decoupled. This document provides a summary of the SSR asset states seen when upgrading or installing SSR software, as well as any time `show assets asset-id` is run. 
 
 ### Asset States in Versions Earlier than 6.3.0
 
@@ -159,7 +159,7 @@ These asset states are a combination of SALT statuses and SSR statuses. The foll
 
 Let's assume an asset is in running. If the SALT minion disconnects (which they often do), then the asset will transition to disconnected. The SSR processes are still in running, and the SSH connectivity is still connected, but the customer sees disconnected and worries that the asset is no longer routing traffic. 
 
-In order to provide a clearer picture of asset states, the SALT status and the SSR status have been decoupled beginning with version 6.3.0. 
+To provide a clearer picture of asset states, the SALT status and the SSR status have been decoupled beginning with version 6.3.0. 
 
 ### Versions 6.3.0 and Above
 

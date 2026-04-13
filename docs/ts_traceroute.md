@@ -21,7 +21,7 @@ The following types of traceroute are available:
 
 ## How It Works
 
-Discovery packets are sent from the originating SSR to a single the destination port with varying time-to-live (TTL) values. For each iteration, the TTL is increased by 1, and a 3 packet burst is transmitted. This process is repeated until the originating SSR receives a suitable ‘terminating’ packet from the final destination, or until an upper-limit is reached for hop counts. 
+Discovery packets are sent from the originating SSR to a single destination port with varying time-to-live (TTL) values. For each iteration, the TTL is increased by 1, and a 3 packet burst is transmitted. This process is repeated until the originating SSR receives a suitable ‘terminating’ packet from the final destination, or until an upper-limit is reached for hop counts. 
 
 For service-traceroute and routed-traceroute, ICMP echo requests are the default discovery packets. Peer-traceroute uses BFD packets as the default. To support instances where ICMP replies are disabled at the destination or disallowed by firewall rules, UDP is also supported.
 

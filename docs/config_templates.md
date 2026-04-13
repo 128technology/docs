@@ -17,7 +17,7 @@ To use the default template:
 
 ![Copy Template](/img/config_templates_copy.png)
 
-2. Assign a name to the template. The name can contain alpha-numeric characters, underscore, and hyphen.
+2. Assign a name to the template. The name can contain alphanumeric characters, underscore, and hyphen.
 
 ![Name Template](/img/config_templates_nametemplate.png)
 
@@ -84,7 +84,7 @@ A wizard will appear to walk you through the generation steps and display any er
 On the **Configuration** page you will see your generated configuration: ![templates_show_generated](/img/templates_show_generated.png)
 
 ## Advanced Mode
-Advanced mode consists of two text based panes, the _template body pane_ and the _variables pane_. The template body pane contents are written in the [Liquid templating language](#templating-language). The variables pane contents are written in JSON. When you generate output from an advanced mode template, the template body is evaluated using the variables you define, and it **must produce a valid configuration in JSON format**. If the output of the generation is either not valid JSON or not valid configuration, you will be presented with information on where the failure occurred.
+Advanced mode consists of two text based panes, the _template body pane_ and the _variables pane_. Write the template body pane in the [Liquid templating language](#templating-language). Write the variables pane in JSON. When you generate output from an advanced mode template, the template body is evaluated using the variables you define, and it **must produce a valid configuration in JSON format**. If the output of the generation is either not valid JSON or not valid configuration, you will be presented with information on where the failure occurred.
 
 :::important
 Any changes made to the template body pane or variables pane must be saved by clicking the Save button in the upper right portion of the page: ![templates_advanced_mode_save](/img/templates_advanced_mode_save.png)
