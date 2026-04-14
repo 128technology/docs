@@ -9,7 +9,6 @@
 .docusaurus
 .cache-loader
 .eslintcache
-.npmrc
 
 # Misc
 .DS_Store
