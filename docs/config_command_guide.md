@@ -48317,6 +48317,7 @@ configure authority service-policy <name>
 | [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss. |
 | [`path-quality-filter`](#configure-authority-service-policy-path-quality-filter) | Enable/disable filtering out paths that exceed maximum quality limits. |
 | [`peer-path-resiliency`](#configure-authority-service-policy-peer-path-resiliency) | Whether or not session resiliency failover occurs among multiple peers. |
+| [`prefer-established-session`](#configure-authority-service-policy-prefer-established-session) | On a reverse flow collision with an incomplete session, prefer the established session. |
 | [`qp-preference`](#configure-authority-service-policy-qp-preference) | Preference for ordering interfaces by QP values. |
 | [`required-qp`](#configure-authority-service-policy-required-qp) | Minimum quality points required on network interface. |
 | [`reverse-gateway-change-detection`](#configure-authority-service-policy-reverse-gateway-change-detection) | Trigger a session-modify when the packet source-mac does not match the reverse next-hop ARP resolution for sessions that are not from inter-router or inter-node. |
@@ -48857,6 +48858,32 @@ configure authority service-policy peer-path-resiliency [<boolean>]
 #### Description
 
 Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority service-policy prefer-established-session`
+
+On a reverse flow collision with an incomplete session, prefer the established session.
+
+#### Usage
+
+```
+configure authority service-policy prefer-established-session [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
 
 ##### boolean
 
