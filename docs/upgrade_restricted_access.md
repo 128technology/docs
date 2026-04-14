@@ -89,7 +89,7 @@ The following process is used to upgrade a Conductor and Conductor-managed Route
 
 3. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` ISO onto the conductor using the [`import iso`](#import-iso) command. 
 
-4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
+4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.mdx).
 
 5. Download the `SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso` from the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/) page.
 
@@ -97,7 +97,7 @@ The following process is used to upgrade a Conductor and Conductor-managed Route
 
 7. Import the `SSR-6.3.0-xx.r1.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
 
-8. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
+8. Upgrade individual routers using the [Router Upgrade](upgrade_router.mdx) procedure.
 
 :::note
 The process to upgrade a **conductor from a version less than 6.3.0 to 6.3.0 or greater** requires the use of the `128T-6.3.X-XX.r1.el7.OTP.v1.x86_64.iso` package based 128T ISO. After the initial upgrade to 6.3.X, all future upgrades will only require the import of the image-based SSR ISO; for example, `SSR-6.3.3-1.r1.el7.x86_64.ibu-v1.iso`. 
@@ -119,7 +119,7 @@ The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.
 
 3. Import the `128T-6.3.0-107.r1.el7.OTP.v1.x86_64.iso` ISO onto the conductor using the [`import iso`](#import-iso) command. 
 
-4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
+4. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.mdx).
 
 5. Navigate to the [SSR Software Images](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/) page, identify the software image version you will use to upgrade the target router or routers, and download it.
 
@@ -131,7 +131,7 @@ The process to upgrade a **conductor to 6.3.0** requires the use of the `128T-6.
 
 7. Import the `SSR-6.1.10-8.lts.el7.x86_64.ibu-v1.iso` ISO onto the conductor. The conductor will act as the software repository for the subsequent router upgrades. Do **not** install this package onto the conductor, only import it. 
 
-8. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure. 
+8. Upgrade individual routers using the [Router Upgrade](upgrade_router.mdx) procedure. 
 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.
@@ -150,13 +150,13 @@ In this example workflow, the conductor will be upgraded to 6.2.6, and the route
 
 4. Import the `128T-6.2.6-15.sts.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](#import-iso) command. 
 
-5. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.md).
+5. Upgrade the conductor using the [Conductor Upgrade procedure](upgrade_ibu_conductor.mdx).
 
 6. Download the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` software package from the [SSR ISO Download](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) page.
 
 7. Import the `128T-6.1.10-8.lts.el7.OTP.v1.x86_64.iso` package onto the conductor using the [`import iso`](#import-iso) command. The conductor will act as the software repository for the subsequent router upgrades. You do **not** install this package onto the conductor, only import it. 
 
-8. Upgrade individual routers using the [Router Upgrade](upgrade_router.md) procedure.
+8. Upgrade individual routers using the [Router Upgrade](upgrade_router.mdx) procedure.
 
 ### Import ISO
 
@@ -209,7 +209,7 @@ Wed 2025-12-10 00:12:48 UTC
      7.1  SSR-7.1.0-50   downloads   downloads
 ```
 
-If you are **only upgrading the SSR ISO**, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.md) and [Router Upgrade](upgrade_router.md) procedures. If you are also upgrading plugins, continue below. 
+If you are **only upgrading the SSR ISO**, once the local software repository has been updated with the ISO, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.mdx) and [Router Upgrade](upgrade_router.mdx) procedures. If you are also upgrading plugins, continue below. 
 
 ### Import Plugin RPMs
 
@@ -286,4 +286,4 @@ MIST WAN ASSURANCE
 Completed in 0.06 seconds
 ```
 
-3. After the local software repository has been updated with the ISO and plugin RPMs, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.md) and [Router Upgrade](upgrade_router.md) procedures.
+3. After the local software repository has been updated with the ISO and plugin RPMs, the upgrade can proceed using the [Conductor Upgrade](upgrade_ibu_conductor.mdx) and [Router Upgrade](upgrade_router.mdx) procedures.

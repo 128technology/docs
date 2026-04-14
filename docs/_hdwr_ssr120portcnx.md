@@ -27,4 +27,4 @@ Your SSR device uses Port 0 (`ge-0-0`) as a default WAN port to contact Mist for
 
 3. **Power on the device**.
 
-4. Use the [Mist Claim Code](wan_assurance_ssr120_quickstart.md#claim-your-device) to associate the device with a Mist Organization. 
+4. Use the [Mist Claim Code](wan_assurance_ssr120_quickstart.mdx#claim-your-device) to associate the device with a Mist Organization.

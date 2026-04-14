@@ -32,7 +32,7 @@ When the SSR approaches the configured limit of half-open TCP connections, the e
 - Ensure Proxy ARP is either not configured, or is restricted to specific interfaces.
 
 ## Management Services Security
-- Consider enabling [FIPS mode](cc_fips_conductor_install.md#conductor-installation) to restrict the encryption algorithms used for management connections.
+- Consider enabling [FIPS mode](cc_fips_conductor_install.mdx#conductor-installation) to restrict the encryption algorithms used for management connections.
 - Configure known/trusted NTP servers and authentication.
 - Configure SNMP using the most secure method with more than one trusted server.
 - Community strings and USM passwords should be difficult to guess and follow password complexity policy.

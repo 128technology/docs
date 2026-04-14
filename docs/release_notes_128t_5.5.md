@@ -723,7 +723,7 @@ The active `automatedProvisioner` can be determined by running the command `show
 
 - **I95-28791 Forward Error Correction:** Forward Error Correction (FEC) adds resiliency against packet loss between two points in the network. Profiles are configured at the authority level and are not traffic-specific, which allows them to be used on any service and any router in the authority. For information about using this feature, please see [Configuring Forward Error Correction](config_forward_error_correction.md).
 ------
-- **I95-37464 WAN Assurance Application Summary:** The Application Summary displays session statistics and information by application, category, and clients. See [Using Application Summary](how_to_use_app_summary.md) for more information. 
+- **I95-37464 WAN Assurance Application Summary:** The Application Summary displays session statistics and information by application, category, and clients. See [Using Application Summary](howto_use_app_summary.md) for more information. 
 ------
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and the Cordoba platform. 
 ------

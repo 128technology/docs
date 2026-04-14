@@ -11,8 +11,8 @@ Your SSR conductor or router must have internet access to download the latest so
 
 For upgrade procedures, refer to the appropriate section:
 
-- [Upgrading the Conductor](upgrade_ibu_conductor.md)
-- [Upgrading the Router](upgrade_router.md)
+- [Upgrading the Conductor](upgrade_ibu_conductor.mdx)
+- [Upgrading the Router](upgrade_router.mdx)
 - [Upgrades with Restricted Internet Access](upgrade_restricted_access.md)
 - [Legacy Upgrades](upgrade_legacy.md) Software versions prior to SSR 6.3.0
 
