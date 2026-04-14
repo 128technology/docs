@@ -89,11 +89,11 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 
 - **I95-26081 Display negotiated BFD Interval:** The command `show peers bfd-interval` has been added to display the negotiated bfd-interval in three columns, `Rx Timer`, `Tx Timer`, and `Multiplier`. See [Negotiated BFD Intervals](howto_tune_bfd.md#negotiated-bfd-intervals) for more information.
 ------
-- **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts-config-integrity.md). 
+- **I95-48934 Configuration Integrity:** SSR Configuration Integrity protects authentication credentials, keys and certificates, network topology information, and other pieces of sensitive SSR configuration from unauthorized access when the system is powered off. It prevents network and SSR operations from executing when the system is determined to be in a compromised state. To learn more, see [Configuration Integrity](concepts_config_integrity.md). 
 ------
 - **I95-54247 IMA - SSR Signed packages only execution:** IMA is Linux’s Integrity Measurement Architecture. The SSR400 and SSR440 support IMA validation using GPG Signatures. IMA validation is enabled by default for the root user, allowing the kernel to check the signature of each file before loading it for execution. If these checks fail, execution is denied with a Permission denied (EACCES) error code. For more information, see [Secure Boot - IMA](sec-secure-boot.md#ima).
 ------
-- **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config-smart-download.md) for more information.
+- **I95-54248 Smart OS Download:** The SSR download process is now configurable, to provide better recovery and control over software downloads when a network connection fails. To improve resiliency against these network connectivity issues, the SSR queries available versions from all sources before beginning the download. If a request to a source fails, the SSR moves on to the next source. See [Smart OS Download](config_smart_download.md) for more information.
 ------
 - **I95-56719 Conductor Scaling:** Several improvements have been made to increase the scale of conductor managed router/node deployments, as well as the reporting of router information to the GUI and PCLI, and the efficiency of the device communications. The conductor can now manage up to a combination of 5000 nodes and routers (on appropriately resourced hardware platforms). Improvements to web interface responsiveness and updates to the following pages: Peer Path table, Event history, and Peering Connections panel of the Topology view.
 ------
@@ -103,11 +103,11 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-59948 SHA-384 and SHA-512 Support:** Added support for CNSA 2.0 algorithms SHA-384 and SHA-512 to support US Federal government deployments. For additional information, see [`configure-authority-security-hmac-cipher`](config_command_guide.md#configure-authority-security-hmac-cipher).
 ------
-- **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjunction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](enhanced-sec-key-mgmt.md#post-quantum-cryptography-support).
+- **I95-60209 ML-KEM support [FIPS-203]:** ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries. On the SSR, ML-KEM can be used alone, or in conjunction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. For more information, see [Post Quantum Cryptography Support](sec_enhanced_key_mgmt.md#post-quantum-cryptography-support).
 ------
 - **I95-61176 Multicast Failover Optimization:** Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM, as well as failover times in general.
 ------
-- **I95-63476 Router/Peer path override for `key-exchange-algorithm`:** A router/peer-path override has been added to enable the transition to a new algorithm within authority. For more information, see [Key Exchange Algorithm Router Override](enhanced-sec-key-mgmt.md#key-exchange-algorithm-router-override). 
+- **I95-63476 Router/Peer path override for `key-exchange-algorithm`:** A router/peer-path override has been added to enable the transition to a new algorithm within authority. For more information, see [Key Exchange Algorithm Router Override](sec_enhanced_key_mgmt.md#key-exchange-algorithm-router-override). 
 
 ### Resolved Issues
 
@@ -201,11 +201,11 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 
 ### New Features
 
-- **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 devices provide the ability to reset the device to either a pre-defined rescue (or **Golden**) configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config-factory-reset.md).
+- **I95-34739 SSR400 and SSR440 Factory reset:** The SSR4x0 devices provide the ability to reset the device to either a pre-defined rescue (or **Golden**) configuration, or a secure zeroization of the system and a return to the factory default configuration. For more information, see [Factory Reset](config_factory_reset.md).
 ------
 - **I95-44742 SFP Optical interface transceiver stats:** Support has been added to display optical interface transceiver stats in the CLI. Issuing the `show device-interface node all name <interface> optics-statistics` will display information for debugging and diagnostic information from network transceiver modules (SFP, SFP+, QSFP, etc.). It displays optical power levels, vendor information, and hardware thresholds for monitoring physical layer connectivity.
 ------
-- **I95-53402 SSR400/SSR440 Chassis Manager:** The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. For more information, see the [SSR Chassis Manager](ssr-chassis-manager.md).
+- **I95-53402 SSR400/SSR440 Chassis Manager:** The SSR400 and SSR440 support an integrated Chassis Manager to help monitor connectivity, power, temperature, as well as providing insight into other vital operational data. For more information, see the [SSR Chassis Manager](concepts_ssr_chassis_manager.md).
 ------
 - **I95-53405 5G modem support:** Support for 5G modems as provided in the SSR400 and SSR440 devices has been added. 
 ------
@@ -213,7 +213,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-54244 Secure Boot:** The SSR400 and SSR440 are factory configured with a cryptographic public key that only allows an authenticated firmware image to run on the device. This ensures that only trusted (Juniper-signed) code will run from power-on through to linux OS boot. For additional information, see [Secure Boot](sec-secure-boot.md).
 ------
-- **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the secure ztp process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
+- **I95-55746 Connection to Mist via proxy server/Support Mist Secure ZTP Onboarding:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config_proxy_server.md) for information to configure the SSR to identify and use the non-transparent proxy. For information about the secure ztp process using Mist, see [Secure ZTP Onboarding Using a Mist Proxy](sec-ztp-web-proxy.md).
 ------
 - **I95-55936 Alarm and Events when service area hits threshold:** Support has been added to allow users to configure alarms thresholds to monitor session processing capacity, and provide visibility into the system’s capacity to establish new sessions. For more information, see [Session Processing Alarms](ts_session_processing.md#session-processing-alarms).
 ------
@@ -221,7 +221,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-58502 Disable on box management ports:** Configuration fields have been added to the SSR400 and SSR440 devices, allowing you to control physical security features. For more information, see [Disable SSR400 and SSR440 Management Interfaces](sec-disable-ports.md).
 ------
-- **I95-59235 HTTP/S proxy server for all public URLs:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config-proxy-server.md) for information to configure the SSR to identify and use the non-transparent proxy. This process can also be used to support the [Mist secure ZTP onboarding](sec-ztp-web-proxy.md) process.
+- **I95-59235 HTTP/S proxy server for all public URLs:** Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See [Proxy Server Configuration](config_proxy_server.md) for information to configure the SSR to identify and use the non-transparent proxy. This process can also be used to support the [Mist secure ZTP onboarding](sec-ztp-web-proxy.md) process.
 
 ### Resolved Issues
 

@@ -11,7 +11,7 @@ This document provides information perform the secure ZTP onboarding process.
 
 - It is recommended that before configuring the web proxy and secure ZTP, you provision the Conductor. For information about onboarding a conductor-managed router through Mist, please see [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md).
 
-- After the conductor has been provisioned, [Configure the proxy server](config-proxy-server.md). 
+- After the conductor has been provisioned, [Configure the proxy server](config_proxy_server.md). 
 
 - Once those steps have been completed, continue with the [Secure ZTP Onboarding](#secure-ztp-onboarding) procedure below. 
 
@@ -19,7 +19,7 @@ This document provides information perform the secure ZTP onboarding process.
 
 The sZTP process is the following:
 
-1. SSR devices are [configured with an SSR Mist connection using a web proxy](config-proxy-server.md).
+1. SSR devices are [configured with an SSR Mist connection using a web proxy](config_proxy_server.md).
 2. Upon installation, the SSR will "phone home" to the Mist Global1 EP terminator `ep-terminator.mistsys.net`. 
 3. Based on the target claimed environment, the device is redirected to the appropriate organization.
 4. The client creates a TLS connection to Mist cloud and validates using OCRA authentication. 

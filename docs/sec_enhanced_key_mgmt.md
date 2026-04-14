@@ -57,7 +57,7 @@ The foundation of Enhanced Security Key Management is the ability to define peer
 
 When configured to used Enhanced Security Key Management, the SSR automatically creates a self-signed certificate. This allows you to configure peering between SSRs quickly. However because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
-To provide thorough, end-to-end security, the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+To provide thorough, end-to-end security, the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config_custom_certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
 The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service must be restarted in order to pick up the changes.
