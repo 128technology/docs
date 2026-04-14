@@ -39,7 +39,7 @@ In unsecured HTTP connections, hackers can easily intercept messages between cli
 
 When a signed SSL certificate secures a website, it proves that the organization has verified and authenticated its identity with the trusted third party. When the browser trusts the CA, the browser now trusts that organization’s identity too.
 
-For additional details on how SSR uses TPM, see [Configuration Integrity](concepts-config-integrity.md).
+For additional details on how SSR uses TPM, see [Configuration Integrity](concepts_config_integrity.md).
 
 ### Support for vTPM on Conductor-managed Deployments
 

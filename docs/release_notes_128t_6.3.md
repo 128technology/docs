@@ -236,7 +236,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-59478 Recover PPPoE after highway crash:** Updated the PPPoE re-init script to resolve an issue where, after a highway crash, the PPPoE NSID becomes invalid and causes the device status to stay `down` even if the monitoring script reports `up`.
 ------
-- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](how_to_local_config_override.md#using-the-gui).
+- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](howto_local_config_override.md#using-the-gui).
 ------
 - **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism.
 ```
@@ -420,7 +420,7 @@ IDP is not available on the following SSR devices: SSR120, SSR400 and SSR440.
 ------
 - **I95-47041 Selection of Mist Cloud during Adoption:** The onboarding process queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).
 ------
-- **I95-47154 Conductor-management of image-based SSR devices:** Upgrading to or installing SSR 6.3.0 now supports conductor managed deployments. See [SSR Universal ISO Installation](intro_installation_univ-iso.md) for installation information, and refer to [Upgrading the Conductor](upgrade_ibu_conductor.md) for upgrade information. 
+- **I95-47154 Conductor-management of image-based SSR devices:** Upgrading to or installing SSR 6.3.0 now supports conductor managed deployments. See [SSR Universal ISO Installation](intro_installation_univ-iso.md) for installation information, and refer to [Upgrading the Conductor](upgrade_ibu_conductor.mdx) for upgrade information. 
 ------
 - **I95-48255 BYOL SSR images for AWS and Azure marketplaces:** New streamlined instances for AWS and Azure have been introduced. For installation and deployment information, refer to [Installing a BYOL Mist-managed Router in AWS](intro_installation_quickstart_byol_mist_aws.md) and [Installing a BYOL Mist-managed Router in Azure](intro_installation_byol_azure_mist.md).
 ------

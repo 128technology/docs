@@ -2,11 +2,12 @@
   "recurse": true,
   "cleanUrls": true,
   "checkFragments": true,
+  "markdown": true,
   "skip": [
     "^mailto:",
+    "^https://docs\\.128technology\\.com",
     "^https://tools\\.ietf\\.org",
     "^https://www\\.wireguard\\.com",
-    "^https://software\\.128technology\\.com",
     "^https://regexr\\.com",
     "^https://mosh\\.org",
     "^https://www\\.mist\\.com",
@@ -20,5 +21,12 @@
   ],
   "retry": true,
   "retryErrors": true,
-  "retryErrorsCount": 5
+  "retryErrorsCount": 3,
+  "retryErrorsJitter": 50,
+  "statusCodes": {
+    "403": "skip",
+    "404": "error",
+    "4xx": "warn",
+    "5xx": "warn"
+  }
 }

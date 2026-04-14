@@ -34,5 +34,5 @@ If no IP address is present, use the SSR GUI to copy the IP address.
 	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
 Once the verification is complete, use the procedure linked below to adopt your SSR into the Mist Cloud. 
-- [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) 
-- [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md) 
+- [SSR120 Onboarding](wan_assurance_ssr120_quickstart.mdx) 
+- [SSR130 Onboarding](wan_assurance_ssr130_quickstart.mdx) 
