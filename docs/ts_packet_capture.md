@@ -71,7 +71,7 @@ The keyword `all` can be used as an argument to `device-interface` to remove all
 
 ### show capture-filter
 
-In order to display both static and dynamic capture filters, the _show capture-filters_ PCLI command will reflect the current state capture filters.
+To display both static and dynamic capture filters, the _show capture-filters_ PCLI command will reflect the current state capture filters.
 
 The syntax for displaying static and dynamic capture filters can be seen below:
 

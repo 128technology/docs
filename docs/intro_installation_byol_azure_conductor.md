@@ -99,7 +99,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed.
+Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an additional 10-15 minutes for the desired SSR version to be installed.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
@@ -123,7 +123,7 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Conductor Template](#launch-the-conductor-template).
 
-Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed.
+Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an additional 10-15 minutes for the desired SSR version to be installed.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
@@ -178,7 +178,7 @@ A description of the parameters of the template are listed in the following tabl
 | Resource Group          | Select an existing resource group or create a new one. |
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
 | Location                | As indicated in the requirements, the Session Smart Conductor is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia).     |
-| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above where the device will be deployed. |
+| Availability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above where the device will be deployed. |
 | Instance Size           | Select the size of the VM in the field Instance Size. |
 | Instance Name           | Provide a name to the VM for the Session Smart Conductor. |
 | SSR Version             | SSR software version installed on the instance. |
@@ -306,7 +306,7 @@ When logging to the Linux instance via SSH, use the default username of `t128` a
 1. Go to the **Session Smart Networking Platform BYOL** offering.
 2. Click **Create**.
 3. Complete the Basics tab then review the additional tabs for further customization.
-4. Under the Advanced tab, you can add cloud-init custom data to automatically install and initalize the conductor. Use the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
+4. Under the Advanced tab, you can add cloud-init custom data to automatically install and initialize the conductor. Use the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
 5. Click **Review and Create**
 6. If an onboarding configuration was not provided in step 4, follow the steps in the [Manual Onboarding](#manual-onboarding) section.
 
@@ -383,7 +383,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
-Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed. The Router will automatically be associated with the desired Conductor.
+Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an additional 10-15 minutes for the desired SSR version to be installed. The Router will automatically be associated with the desired Conductor.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
@@ -408,7 +408,7 @@ To deploy the Session Smart Networking software using the Azure CLI or Powershel
 8. Accept the terms of use and conditions of the image.
 9. Launch the deployment with the corresponding Azure CLI or PowerShell commands, making use of the URL of the template identified previously. For additional information see [Launch the Conductor-managed Template](#launch-the-conductor-managed-template).
 
-Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an addditional 10-15 minutes for the desired SSR version to be installed. The Router will automatically be associated with the desired Conductor.
+Once the deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed it will take an additional 10-15 minutes for the desired SSR version to be installed. The Router will automatically be associated with the desired Conductor.
 
 To login to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
 
@@ -461,7 +461,7 @@ A description of the parameters of the template are listed in the following tabl
 | Resource group          | Select an existing resource group or create a new one. |
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
 | Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase; e.g., eastus, westus, westeurope, eastasia).     |
-| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above. |
+| Availability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above. |
 | Instance size           | Select the size of the VM in the field Instance Size. |
 | Instance Name           | Provide a name to the VM for the Session Smart Router. |
 | SSR Version             | SSR software version installed on the instance. |
@@ -653,7 +653,7 @@ Microsoft.Network/networkInterfaces/read
 
 ## Troubleshooting
 
-### Device Does Not Initalize Properly
+### Device Does Not Initialize Properly
 
 Once the instance is launched with the correct parameters, the device will begin to install the SSR software. After installing the software, the device will either initialize as a Conductor or automatically onboard to the associated conductor. This process can take up to 15 minutes to complete.
 
@@ -661,4 +661,4 @@ If the instance does not install SSR as expected, SSH into the instance using th
 
 - Try to log into the pcli, run `su admin` and then `show system`.
 
-- If the pcli is not accessable or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
+- If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.

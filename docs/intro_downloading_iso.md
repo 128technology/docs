@@ -18,7 +18,7 @@ For users installing *earlier, package-based versions of the SSR software*, the 
 - **Package-based 128T ISO:** For users who do not use Mist Cloud, the package-based 128T ISO is used in the following deployments. 
 
   - When the initial installation is going to be a version prior to 6.3.0.
-  - When upgrading to a version prior to 6.3.0 on air-gap network using the `import ISO` operation. For example, upgrading an air-gap conductor or routers from 5.6.6 to 6.2.7. See [Package-based Software Upgrade in an Air-Gap Network](upgrade_restricted_access.md#package-based-software-upgrade) for the more information. 
+  - When upgrading to a version prior to 6.3.0 on an air-gap network using the `import ISO` operation. For example, upgrading an air-gap conductor or routers from 5.6.6 to 6.2.7. See [Package-based Software Upgrade in an Air-Gap Network](upgrade_restricted_access.md#package-based-software-upgrade) for more information. 
 
   This ISO also provides different local installation methods.
 
@@ -39,13 +39,11 @@ The SSR Software packages are available from our public servers using the userna
 
 The image-based SSR ISOs are available to download at the following location:
 
-<!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 
 The package-based 128T ISOs are available to download at the following location:
 
-<!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page.

@@ -237,7 +237,7 @@ This scenario is what will occur if the primary node were to be taken down for m
 
 ### Secondary Shutdown
 
-If the secondary node is shutdown while the primary is healthy, the primary HA Agent will deteremine the secondary node unreachable. Similar to the the Secondary Failure scenario, since the primary node is preferred, it will not do anything and continue to process traffic.
+If the secondary node is shutdown while the primary is healthy, the primary HA Agent will determine the secondary node unreachable. Similar to the the Secondary Failure scenario, since the primary node is preferred, it will not do anything and continue to process traffic.
 
 ![secondary-shutdown-scenario](/img/cloud-ha-secondary-shutdown-scenario.png)
 
@@ -1571,7 +1571,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 4.0.1
 

@@ -33,8 +33,8 @@ To provide insights into the application, services, and some SLE functionality, 
 16            exit
 17        exit
 ```
-Additionally, configuring `application-identification` to `mode all` populates the Application Summary in the SSR GUI. Applications are grouped by Category or Clients, and can be further refined by using the following **view by** options: Bytes Recieved, Bytes Sent, Total Bytes.
+Additionally, configuring `application-identification` to `mode all` populates the Application Summary in the SSR GUI. Applications are grouped by Category or Clients, and can be further refined by using the following **view by** options: Bytes Received, Bytes Sent, Total Bytes.
 
 ![Application Summary](/img/app_summary.png)
 
-For more information, see [Using Application Summary.](how_to_use_app_summary.md)
+For more information, see [Using Application Summary.](howto_use_app_summary.md)

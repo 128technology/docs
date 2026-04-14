@@ -46,10 +46,10 @@ Certification is tied to a specific LTE card, hardware platform, and SSR Network
 
 ## Support for SSR on Certified Platforms
 
-Juniper supports the SSR Networking Platform software running on SKUs listed under the Certified Portfolio per the [product support policy](about_support_policy.md). Juniper will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or Juiper software. This only includes platforms which have been Certified by Juniper. In order to isolate the issue, Juniper reserves the right to request that the third-party hardware be altered or removed.  If the root cause is believed to originate from a third-party vendor's product, the customer is required to open a support request with the third-party vendor's support organization independent of Juniper.
+Juniper supports the SSR Networking Platform software running on SKUs listed under the Certified Portfolio per the [product support policy](about_support_policy.md). Juniper will assist customers in problem analysis to determine whether the technical issue is related to the third-party platform or Juniper software. This only includes platforms which have been Certified by Juniper. To isolate the issue, Juniper reserves the right to request that the third-party hardware be altered or removed.  If the root cause is believed to originate from a third-party vendor's product, the customer is required to open a support request with the third-party vendor's support organization independent of Juniper.
 
 ## Support for SSR on Non-Certified Platforms
 
 Juniper provides no support, or commitments to functionality, stability, or performance of the SSR Networking Platform software on platforms that have not been certified.
 
-For a complete listing of certified plaforms, please see our [Certified Portfolio](about_certified_platforms.mdx).
+For a complete listing of certified platforms, please see our [Certified Portfolio](about_certified_platforms.mdx).

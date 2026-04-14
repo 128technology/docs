@@ -13,7 +13,7 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 **Bring Your Own License (BYOL):** This allows you to install your own licensed copy of the SSR software on an AWS VM. The device registration code is used to authenticate access to the Mist installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
-For the latest information about SSR BYOL offereings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
+For the latest information about SSR BYOL offerings, please refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
@@ -141,13 +141,13 @@ If a user does not supply the onboarding configuration before launching the inst
 
 ### Mist-Managed Setup
 
-Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete. Once complete the `Version` will be populated in the Mist inventory.
+Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to the appropriate Mist organization. The device is visible as Unassigned in the Mist organization once onboarding is complete. At this point, the SSR install process will begin. This process can take up to 15 minutes to complete. Once complete the `Version` will be populated in the Mist inventory.
 
 If the device does not show up in the Mist organization or the desired SSR version was not installed after 15 minutes, SSH into the instance. If the instance was created using the BYOL template, the default username will be `t128`. If not, the username will be `ec2-user`.
 
 - Try to log into the pcli, run `su admin` and then `show mist`.
 
-- If the pcli is not accessable or the status and necessary action is not obvious, unzip the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
+- If the pcli is not accessible or the status and necessary action is not obvious, unzip the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
 
 
 ### Network Interfaces Layout
@@ -217,12 +217,12 @@ A description of the parameters of the template are listed in the following tabl
 | Instance size        | Size of the EC2 instance.|
 | SSH IAM Key          | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 | VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
-| Public Inteface Subnet     | ID of the public subnet within the VPC. |
+| Public Interface Subnet     | ID of the public subnet within the VPC. |
 | Public Interface Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
 | Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Private Interface Subnet    | ID of the private subnet within the VPC. |
 | Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
-| Mangement Interface Subnet [OPTIONAL]    | Optional ID of the management subnet within the VPC. |
+| Management Interface Subnet [OPTIONAL]    | Optional ID of the management subnet within the VPC. |
 
 #### AWS Console
 
@@ -373,7 +373,7 @@ A description of the parameters of the template are listed in the following tabl
 | Instance size        | Size of the EC2 instance.|
 | SSH IAM Key          | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
 | VPC ID               | ID of the existing VPC where the Mist-managed router is going to be deployed. |
-| Public Inteface Subnet     | ID of the public subnet within the VPC. |
+| Public Interface Subnet     | ID of the public subnet within the VPC. |
 | Public Interface Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
 | Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Private Interface Subnet    | ID of the private subnet within the VPC. |

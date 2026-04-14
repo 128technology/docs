@@ -14,39 +14,40 @@
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
     "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
-    "check-links": "blcl -rog ./build/"
+    "check-links": "linkinator ./build --config linkinator.config.json"
   },
   "dependencies": {
-    "@docusaurus/core": "3.1.1",
-    "@docusaurus/preset-classic": "3.1.1",
-    "broken-link-checker-local": "^0.2.1",
+    "@docusaurus/core": "3.10.0",
+    "@docusaurus/preset-classic": "3.10.0",
+    "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
     "mermaid": "^11.12.3",
-    "@mdx-js/react": "^3.0.0",
-    "prism-react-renderer": "^2.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@mdx-js/react": "^3.1.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-simple-flowchart": "^1.2.4",
     "react-table": "^7.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.1.1",
-    "@docusaurus/types": "3.1.1",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-header": "^3.1.0",
-    "eslint-plugin-import": "^2.25.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.26.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "@babel/core": "^7.26.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@docusaurus/module-type-aliases": "3.10.0",
+    "@docusaurus/types": "3.10.0",
+    "@eslint/eslintrc": "^3.3.5",
+    "eslint": "^9.0.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "gray-matter": "^4.0.3",
     "prettier": "^2.4.1"
   },
   "engines": {
-    "node": ">=18.0"
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
   "browserslist": {
     "production": [

@@ -184,13 +184,13 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-40075/I95-40134 Use gateway from service route for interface ping gateway:** The `service-route next-hop gateway-ip` will be used for ICMP ping reachability probe if so configured. If no IP is configured, then the `fib-route gateway` will be used, and finally the `network-interface gateway` will be used.
 ------
-- **I95-40124 GRE Interface not inherting teneancy from parent:** The GRE Interface now inherts teneancy and neighborhood configuration from parent.
+- **I95-40124 GRE Interface not inheriting teneancy from parent:** The GRE Interface now inherits teneancy and neighborhood configuration from parent.
 ------
 - **I95-40168 `show udp-transform` not providing result details:** The `show udp-tranform` reason field now provides correct details.
 ------
 - **I95-40185 Duration type assignment values are not being set correctly:** This issue has been resolved by ensuring that fields using duration type always use default values.
 ------
-- **I95-40191 Office365 service failing on bootup:** This issue has been resolved.
+- **I95-40191 Office365 service failing on boot-up:** This issue has been resolved.
 ------
 - **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unandled errors.
 ------
@@ -210,7 +210,7 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-36657 Improve Packet throughput of KNI-based Interfaces:** KNI buffer performance has been enhanced to handle large bursts of traffic. 
 ------
-- **I95-37296 Native SSR Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better performance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
+- **I95-37296 Native SSR Support for GRE:** Native support (non-plugin) is available for GRE Tunneling, providing better performance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup) commands have been enhanced to provide more granular path-related debugging.
 ------

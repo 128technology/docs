@@ -5,7 +5,7 @@ sidebar_label: Static Bi-directional NAT
 
 SSR supports source NAT pool configurations at interface and service-route level as described in [Static NAT Bindings](config_nat_pools.md#static-nat-bindings). However, this is not always sufficient to enable simple configuration for static bidirectional NAT between two same-sized subnets.
 
-Static NAT defines a one-to-one mapping from one IP subnet to another IP subnet. The mapping includes source IP address translation in one direction and destination IP address translation in the reverse direction. In cases where IP address overlapping is found, such as when merging networks (for example, a corporate acquisition and merger) this simple configuration change is significantly less work than changing all the local IP addresses. The diagram below illustrates this example. 
+Static NAT defines a one-to-one mapping from one IP subnet to another IP subnet. The mapping includes source IP address translation in one direction and destination IP address translation in the reverse direction. When IP addresses overlap — for example, during a corporate acquisition or network merger — this simple configuration change is significantly less work than changing all the local IP addresses. The diagram below illustrates this example. 
 
 ![Static Nat Diagram](/img/static_nat_example.png)
 
@@ -48,7 +48,7 @@ exit
 
 ## Non-SVR Traffic
 
-In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat. This is done in the following locations within the configuration
+For non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to use static-NAT addressing, you must disable egress source-nat. This is done in the following locations within the configuration
 
 ### Service Level
 

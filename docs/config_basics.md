@@ -55,7 +55,7 @@ When User A commits their changes, the changes applied to their candidate config
 
 User B has one change of their own. The validation and commit process compares the **updated** running configuration to User B's candidate configuration for conflicts. If none are found, then the local changes are committed to the running configuration on the conductor. 
 
-If the validation operation encouters conflicts, an error message containing the details of the conflict is displayed, and the conflicts are deleted from the candiate config. All non-conflicting changes are preserved in the candidate configuration. 
+If the validation operation encounters conflicts, an error message containing the details of the conflict is displayed, and the conflicts are deleted from the candidate config. All non-conflicting changes are preserved in the candidate configuration. 
 
 ### Conflict Resolution
 
@@ -150,7 +150,7 @@ exit
 ```
 When User B commits their change, the peer, name, and description are verified to be added back into the configuration. The deleted authority-name and router-name are not found as part of the change, and therefore generate the commit failure message. 
 
-To resolve this type of conflict, the error message and candidate configuration should be reviewed with the adminstrator. They can work to identify the user who generated the conflicting changes and review the event logs to reconstruct the changes to the affected objects. Ultimately the users must determine the priority of the configuration changes and commit the result.
+To resolve this type of conflict, the error message and candidate configuration should be reviewed with the administrator. They can work to identify the user who generated the conflicting changes and review the event logs to reconstruct the changes to the affected objects. Ultimately the users must determine the priority of the configuration changes and commit the result.
 
 ### High Availability Configurations
 
@@ -165,7 +165,7 @@ Please refer to [Configuring Dual Node High Availability](config_ha.md#requireme
 
 Unlike many traditional routers, the Session Smart Networking Platform contains a series of interdependent pieces of configuration – referred to as our *data model* – to inform its decisions on routing, forwarding, and policy enforcement. These interdependencies mean that the method of working with the SSR may be slightly different than you are accustomed to.
 
-The basic premise is that there may two configurations on your SSR at any point in time: the *running configuration* and, as soon as you make any edits to the configuration, a *candidate configuration* is created. You stage configuration changes in the candidate, and when you have completed your configuration activity, you validate and commit them to the running configuration – bringing the candidate and running back into unison. Upon commit, the candidate configuration iFrom there, you may undertake your next set of configuration changes.
+The basic premise is that there may be two configurations on your SSR at any point in time: the *running configuration* and, as soon as you make any edits to the configuration, a *candidate configuration* is created. You stage configuration changes in the candidate, and when you have completed your configuration activity, you validate and commit them to the running configuration – bringing the candidate and running back into unison. Upon commit, the candidate configuration is reset. From there, you may undertake your next set of configuration changes.
 
 This basic workflow (configure, validate, commit) is the fundamental mechanism for effecting change in the behavior of your SSR Networking Platform. Other operations you may be familiar with from other network devices, such as backup/restore, etc., have analogues in the SSR paradigm. These backup/restore operations may operate on the candidate configuration, the running configuration, or both.
 

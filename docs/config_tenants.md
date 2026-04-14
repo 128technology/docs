@@ -10,7 +10,7 @@ A tenant represents the basic means for grouping collections of devices together
 
 Each tenant, as modeled on your SSR, has its own segment of the router's Forwarding Information Base (FIB) for making forwarding decisions for packets it receives. As services are made available to a tenant, entries are populated into the router's FIB, keyed by that tenant's name; members of that tenant will have routes to respective service, and non-members will not – all without the use of complex access controls or external firewalling.
 
-The SSR gives administrators several ways to define/describe how inbound packets are mapped to tenants: by matching the source IP address of inbound packets to configured IP prefixes within a network neighborhood, or based upon their ingress network-interface. (When both are in use on the same system, _the network-interface’s tenant will take precedence if both apply_.)
+The SSR gives administrators several ways to define/describe how inbound packets are mapped to tenants: by matching the source IP address of inbound packets to configured IP prefixes within a network neighborhood, or based on the packet's ingress network-interface. (When both are in use on the same system, _the network-interface’s tenant will take precedence if both apply_.)
 
 Each method for identifying inbound tenancy will be discussed in the sections that follow.
 
