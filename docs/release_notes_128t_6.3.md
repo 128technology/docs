@@ -5,7 +5,7 @@ sidebar_label: '6.3'
 
 SSR release 6.3.0 represents a significant change in the software delivery of the SSR. The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your "standard" procedures for installation and upgrade of SSR Software. 
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the Web Interface or the Command Line Interface. 
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade activities are supported from the Web Interface or the Command Line Interface. 
 
 ### Installation from ISO
 
@@ -22,7 +22,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **System Disk Considerations**
 
-As mentioned above, during the upgrade to 6.3, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is succesful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
+As mentioned above, during the upgrade to 6.3, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
 
 In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official [SSR BYOL](intro_installation_quickstart_byol_conductor_aws.md) image.
 
@@ -144,7 +144,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------ --->
 - **I95-39653 Negative duration in session table after applying filter:** Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration. This issue has been resolved.
 ------
-- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specifc source-addresses has been added. For more information, see [`source-address-prefix-list`](config_command_guide.md#configure-authority-router-routing-igmp-interface-source-address-prefix-list)
+- **I95-57584 IGMP ingress packets not being accepted after defining tenant prefixes on LAN subnet:** Resolved an issue when using `tenant-prefix` on the interface, all PIM/IGMP messages were blocked. This issue has been resolved. In addition, the ability to only allow igmp messages sent from specific source-addresses has been added. For more information, see [`source-address-prefix-list`](config_command_guide.md#configure-authority-router-routing-igmp-interface-source-address-prefix-list)
 ------
 - **I95-60321 DHCP relay service not honoring configuration change for the addition of a new subtenant:** Resolved an issue where new subtenants were not inheriting server mapping from the parent tenant. 
 ------
@@ -158,7 +158,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-60647 Migrate command not forcing a router re-sync:** Resolved an issue where a router is successfully migrated from one conductor to another conductor and establishes connectivity, but does not apply the configuration from the new conductor until a commit is performed.
 ------
-- **I95-60730 Mulitcast stream is not recovering after failover:** Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.
+- **I95-60730 Multicast stream is not recovering after failover:** Resolved an issue where an HA node does not recover after failover. The error handling method has been updated to use the global interface ID rather than the local interface ID when running the multicast incoming interface check.
 ------
 - **I95-60747 TANK thread failure:** Resolved a rare issue where exceptions in the TANK response handling logic resulted in data missing from the GUI and PCLI. This issue has been resolved.
 ------
@@ -178,7 +178,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-61075 BGP does not re-establish after firewall failover:** Resolved an issue where when initiating a BFD for BGP session, the cached MAC to IP mapping was being used. If the MAC address had changed, stale information was used and the BFD session would not be established. We now issue an ARP request to get the latest MAC Address.
 ------
-- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.
+- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resolved an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service.
 ------
 - **I95-61093 Router first time synchronization:** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
 ------
@@ -236,7 +236,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-59478 Recover PPPoE after highway crash:** Updated the PPPoE re-init script to resolve an issue where, after a highway crash, the PPPoE NSID becomes invalid and causes the device status to stay `down` even if the monitoring script reports `up`.
 ------
-- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](how_to_local_config_override.md#using-the-gui).
+- **I95-59521 Local Config Override not working in the GUI:** Added support for the local configuration override mode to the GUI. For more information, see [Local Configuration Override](howto_local_config_override.md#using-the-gui).
 ------
 - **I95-59634 Allow Highway lockup detection to be disabled:** Added a `local.init` override for disabling datapath lockup detector mechanism.
 ```
@@ -251,7 +251,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-59758 Prompt for password change:** The user is now prompted to change the `admin`, `t128`, and `root` passwords during installation. The password is changed to the same value for all three users. 
 ------
-- **I95-59855 The hardware bootstrapper created bridge is not removed during intialization:** During installation, the hardware bootstrapper creates a bridge in Linux and binds all of the designated LAN NICs to the bridge to allow SSH. This bridge is removed during intialization of the conductor, and Mist managed routers, but is not removed from conductor managed routers. This has been addressed and the issue resolved. 
+- **I95-59855 The hardware bootstrapper created bridge is not removed during initialization:** During installation, the hardware bootstrapper creates a bridge in Linux and binds all of the designated LAN NICs to the bridge to allow SSH. This bridge is removed during initialization of the conductor, and Mist managed routers, but is not removed from conductor managed routers. This has been addressed and the issue resolved. 
 ------
 - **I95-59860 Incorrect timestamps shown on IDP startup:** The `Engine started` and `Last Commit` timestamps have been updated to provide accurate readings when the engine has not yet started, or the values are not available.
 ------ 
@@ -263,9 +263,9 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-60180 Installation screen displays incorrect SSR OS:** After the OS rebranding to SSR OS, the option to install erroneously shows on the install screen. This has been removed. 
 ------
-- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propogated to all managed routers. 
+- **I95-60282 Disk space usage growing to more than 90%:** DNF logs were increasing in size and not being rotated, causing a significant increase in size. A `log rotate` configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers. 
 ------
-- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting `routing default-instance > service-metric-use-lsa > false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for addtional information.
+- **I95-60287 Add option to disable Kernel Metric SLA Calculation:** In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting `routing default-instance > service-metric-use-lsa > false` will prevent the kernel flap that causes this issue. See [`service-metric-use-lsa`](config_command_guide.md#configure-authority-router-routing-service-metric-use-sla) for additional information.
 ------
 - **I95-60424 Anti-Virus whitelist not implemented:** Resolved an issue where a configuration error in the cSRX generated an error that was being ignored. The error is now handled correctly and the whitelist is implemented.
 ------
@@ -279,7 +279,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-60507 URL Filter blocking networks not on Block List:** Resolved an issue where SVR traffic was treated as an AppId session. The SVR traffic is now handled correctly, preventing inadvertent TCP resets and AppId deny events.
 ------
-- **I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:** Resolved an issue where assets would transition to `Reinitializing` and get stuck there because the asset was unable to succesfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to `Reinitializing`.
+- **I95-60593, I95-60686 Unable to onboard 6.2.3 routers to 6.3.3:** Resolved an issue where assets would transition to `Reinitializing` and get stuck there because the asset was unable to successfully complete highstate. Validations have been added to ensure the asset completes highstate successfully before transitioning to `Reinitializing`.
 ------
 - **I95-60651 SSR upgrade from 6.3.0 to 6.3.3 reboots back to 6.3.0:** Resolved an issue where the Conductor was unable to upgrade router packages to the latest version even though the packages were available on the Conductor. A `dnf refresh` now runs to ensure package accessibility. 
 ------
@@ -295,7 +295,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-61024 Pagination issues when performing `show events`:** Resolved an issue where `show events` fails to produce multiple pages.
 ------
-- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resovled an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service. 
+- **I95-61085 Highway crash after incorrectly adding an IP address for a Multicast service:** Resolved an issue where a packet reached the router and matched a FIB without a service association, i.e. a FIB created for multicast traffic. The SSR will now drop a packet for a summary service if it matches a FIB without an associated service. 
 ------
 - **I95-61093 Router first time synchronization :** Resolved an issue where a minion is restarted multiple times during the first connection to the conductor, resulting an extended wait time before synchronization.
 ------
@@ -371,7 +371,7 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 ------
 - **I95-58569 OSPF Graceful Restart link missing from GUI:** Resolved an issue that prevented the link to the Graceful Restart page from displaying. 
 ------
-- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios. 
+- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios. 
 ------ 
 - **I95-58637 Relax API RBAC policies for quickstart files:** Users with config-read permissions are now able to generate quickstart files.
 ------
@@ -420,7 +420,7 @@ IDP is not available on the following SSR devices: SSR120, SSR400 and SSR440.
 ------
 - **I95-47041 Selection of Mist Cloud during Adoption:** The onboarding process queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).
 ------
-- **I95-47154 Conductor-management of image-based SSR devices:** Upgrading to or installing SSR 6.3.0 now supports conductor managed deployments. See [SSR Universal ISO Installation](intro_installation_univ-iso.md) for installation information, and refer to [Upgrading the Conductor](upgrade_ibu_conductor.md) for upgrade information. 
+- **I95-47154 Conductor-management of image-based SSR devices:** Upgrading to or installing SSR 6.3.0 now supports conductor managed deployments. See [SSR Universal ISO Installation](intro_installation_univ-iso.md) for installation information, and refer to [Upgrading the Conductor](upgrade_ibu_conductor.mdx) for upgrade information. 
 ------
 - **I95-48255 BYOL SSR images for AWS and Azure marketplaces:** New streamlined instances for AWS and Azure have been introduced. For installation and deployment information, refer to [Installing a BYOL Mist-managed Router in AWS](intro_installation_quickstart_byol_mist_aws.md) and [Installing a BYOL Mist-managed Router in Azure](intro_installation_byol_azure_mist.md).
 ------
@@ -559,7 +559,6 @@ IDP is not available on the following SSR devices: SSR120, SSR400 and SSR440.
 - **I95-58273 Web UI login banner not visible in "Dark Mode":** This issue has been resolved and the login banner is now visible in dark mode.
 
 ### Caveats
-<!-- markdown-link-check-disable -->
-- **I95-56628 Unable to upgrade second HA Conductor to 6.3.0:** After successfully upgrading the primary HA conductor, attempting to upgrade the second node using the GUI prompt fails. This is a known issue and is currently under investigation. Please see the Knowledgebase Article [Unable to upgrade second HA Conductor to 6.3.0](../kb/2024/08/30/I95-56628) for workaround information. <!-- markdown-link-check-enable -->
+- **I95-56628 Unable to upgrade second HA Conductor to 6.3.0:** After successfully upgrading the primary HA conductor, attempting to upgrade the second node using the GUI prompt fails. This is a known issue and is currently under investigation. Please see the Knowledgebase Article [Unable to upgrade second HA Conductor to 6.3.0](../kb/2024/08/30/I95-56628) for workaround information.
 ------
 - **I95-57844 Software versions not listed for download from the GUI:** In rare failure scenarios when initiating a software download via the GUI, known software versions are missing from the upgrade list but no errors are reported to the user. If such a scenario is observed, it is recommended that you initiate a second download from the PCLI. In this case any errors are better reported and can be resolved.

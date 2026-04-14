@@ -6,7 +6,7 @@ sidebar_label: 2.1
 
 ### Issues Fixed
 
-- **IN-106, IN-111** - Installer fails due to presense of .repodata 
+- **IN-106, IN-111** - Installer fails due to presence of .repodata 
 - **IN-112** - SSR not started when installer does not complete but no changes were made on the system
 - **IN-130** - New installation or upgrade may result in a failed installation or upgrade 
 

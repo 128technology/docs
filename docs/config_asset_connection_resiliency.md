@@ -16,18 +16,18 @@ One of the [connections an SSR establishes to a Conductor](concepts_machine_comm
 
 The effect this problem has on salt is that if an event is sent to an invalid next hop, the request will never make it back to the salt-master. Since the SSR load balances Conductor traffic between all possible paths, some percentage of salt events will fail to be returned to the salt-master, resulting in state inconsistencies between router and Conductor.
 
-In order to avoid these intermittent failures, the SSR can optionally create a long-lived SSH session to the salt-master utilizing FIPS OpenSSH. Long-lived SSH sessions mitigate downstream network failures by ensuring the SSH session is established on at least one of the paths before the salt events are transmitted. As network failures occur, the SSH session will be reestablished on the next available, working path. Salt transactions are instead instantiated within the long-lived SSH connection. The SSR creates SSH sessions for both the salt publish port (4505) and return port (4506).[^1]
+To avoid these intermittent failures, the SSR can optionally create a long-lived SSH session to the salt-master utilizing FIPS OpenSSH. Long-lived SSH sessions mitigate downstream network failures by ensuring the SSH session is established on at least one of the paths before the salt events are transmitted. As network failures occur, the SSH session will be reestablished on the next available, working path. Salt transactions are instead instantiated within the long-lived SSH connection. The SSR creates SSH sessions for both the salt publish port (4505) and return port (4506).[^1]
 
 [^1]: Salt does not have a way to configure different IP addresses for the publish and return ports.
 
 
 ## Configuration
 
-Asset connection resiliency is configured both at the `authority > asset-connection-resiliency` level (so as to apply to every router within an _authority_) as well as at the `router > asset-connection-resiliency` level (so as to provide an override to the value set at the _authority_). These SSH connections are unnecessary if the network topology already affords reliable salt connectivity.
+Asset connection resiliency is configured both at the `authority > asset-connection-resiliency` level (to apply to every router within an _authority_) as well as at the `router > asset-connection-resiliency` level (to provide an override to the value set at the _authority_). These SSH connections are unnecessary if the network topology already affords reliable salt connectivity.
 
 ## Troubleshooting
 
-In order to determine if the long-lived SSH sessions are established, executing `show system services` will display if the service is running properly:
+To determine whether the long-lived SSH sessions are established, executing `show system services` will display if the service is running properly:
 
 ```
 Retrieving system services...

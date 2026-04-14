@@ -8,7 +8,7 @@ Do not edit directly.
 -->
 <!-- markdownlint-disable line-length -->
 
-This document follows the conventions of [JSON Schema](https://json-schema.org). Some URLs may be used as [identifiers](https://json-schema.org/understanding-json-schema/structuring.html#the-id-property) rather than actual web resources.
+This document follows the conventions of [JSON Schema](https://json-schema.org). Some URLs may be used as [identifiers](https://json-schema.org/understanding-json-schema/structuring#the-id-property) rather than actual web resources.
 
 ## Installer Preferences File Schema
 
@@ -72,7 +72,7 @@ Upgrade SSR to a newer version.
 
 Roll back to the previous installation of SSR. This is only possible if SSR was installed or upgraded with the Installer.
 
-Before perfroming a rollback, please refer to [Rolling Back Software](intro_rollback.md) for important details about the rollback operation.
+Before performing a rollback, please refer to [Rolling Back Software](intro_rollback.md) for important details about the rollback operation.
 
 `rollback`
 
@@ -387,7 +387,6 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 ```regexp
 ^((=|[><]=?)\s+)?([^\s:]+)?([^\s\-]+)(-(\S+))?$
 ```
-<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
 #### SSR-version Examples
@@ -522,7 +521,6 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 ```regexp
 ^((=|[><]=?)\s+)?([^\s:]+)?([^\s\-]+)(-(\S+))?$
 ```
-<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
 #### SSR-version Examples
@@ -614,7 +612,6 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 ```regexp
 ^((=|[><]=?)\s+)?([^\s:]+)?([^\s\-]+)(-(\S+))?$
 ```
-<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
 #### SSR-version Examples

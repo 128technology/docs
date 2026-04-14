@@ -451,7 +451,7 @@ The following table lists the inheritable traits passed from a parent to child.
 | security | Inherited. Can be overridden. |
 | service-group | Inherited. Can be overridden. |
 | service-policy | Inherited. Can be overridden. |
-| transport | Inherted. Can be overriden. |
+| transport | Inherited. Can be overridden. |
 | applies-to | Inherited. Can be overridden. Note that a configuration is considered invalid if an orphan child exists on a router without its parent. |
 
 ### Template Services

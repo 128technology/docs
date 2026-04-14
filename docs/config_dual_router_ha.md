@@ -46,17 +46,17 @@ In this sample configuration, each of the two routers (`routerA` and `routerB`) 
 
 ### Routing Overview
 
-Routing within the dual router redundancy model must be accomplished "by hand;" i.e., discretely on each individual system. This consists of two components:
+Routing within the dual router redundancy model must be configured manually — that is, individually on each system. This consists of two components:
 
 1. Each router uses BGPoSVR to exchange routes with the other.
-2. For services that use `peer-type service-routes` to reach another SSR instance, these service-routes will need to include the complementary router as an additional `next-peer`. Meaning each router in the HA pair will point to the `next-peer` SSR as well as a `next-peer` for one another.
+2. For services that use `peer-type service-routes` to reach another SSR instance, these service-routes must include the complementary router as an additional `next-peer`. Meaning each router in the HA pair will point to the `next-peer` SSR as well as a `next-peer` for one another.
 
 ## Sample Configuration
 
 Each of the two routers that comprise the highly available pair will be configured similarly. Here is our `routerA`:
 
 ```
-admin@node1.bernstein# show config runn auth router routerA
+admin@node1.bernstein# show config run auth router routerA
 
 config
 

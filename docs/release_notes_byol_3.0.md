@@ -16,4 +16,4 @@ sidebar_label: '3.0'
 ### Resolved Issues
 - **I95-60395 AWS BYOL Mist Manual Onboarding Method Fails** An erroneous IP route to the IMDS endpoint was being created on the wrong interface causing the instance to fail onboarding.
 - **WAN-4006 Password authentication is allowed and authorized keys are not copied over** SSR default passwords were created and the configured authorized keys were not copied once SSR software was installed.
-- **I95-60102 Management interface setup is incorrect** The provided conductor-managed and mist-managed router templates created a `management` inteface, but it was not configured as out of band management.
+- **I95-60102 Management interface setup is incorrect** The provided conductor-managed and mist-managed router templates created a `management` interface, but it was not configured as out of band management.

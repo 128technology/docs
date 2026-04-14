@@ -3,7 +3,7 @@ title: Configure Intrusion Detection and Prevention
 sidebar_label: Configure IDP
 ---
 
-In a typical network deployment, there is always a mix of trusted and untrusted traffic. To prevent against security breaches, the SSR uses the IDP Signature database to identify and take action against malicious traffic. SSR services are configured to be monitored, and an IDP policy is applied to the traffic. 
+In a typical network deployment, there is always a mix of trusted and untrusted traffic. To prevent security breaches, the SSR uses the IDP Signature database to identify and take action against malicious traffic. SSR services are configured to be monitored, and an IDP policy is applied to the traffic. 
 
 The `idp-policy` has three profiles that can be applied to an `access-policy`; Alert, Standard, and Strict. This allows the same service to receive different IDP treatment for different tenants. Each profile has an associated traffic action that may include all or some of the following actions:
 

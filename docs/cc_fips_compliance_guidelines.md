@@ -32,7 +32,7 @@ The following table provides a complete list of compliant hardware.
 
 | PLATFORM | NETWORKING |
 | --- | --- |
-| SSR120 | 2 x 1GbE combo RJ45/SFP <br/>4 x 1GbE RJ4 |
+| SSR120 | 2 x 1GbE combo RJ45/SFP <br/>4 x 1GbE RJ45 |
 | SSR130 | 2 x 1GbE combo RJ45/SFP <br/>6 x 1GbE RJ45 |
 | SSR1200 | 8 x 1GBe RJ45 <br/>4 x 1/10 GbE SFP+ |
 | SSR1300 | 6 x RJ-45 <br/>4 x 10GbE SFP+ <br/>3 x 1/10GBe SFP+ <br/>4 x 1GBe Ethernet |
@@ -65,7 +65,7 @@ The SSR Hardware has no physical restrictions for Common Criteria certification,
 
 ### Additional Information Related to Common Criteria
 
-Common Criteria certification uses FIPS mode to provide cryptographic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure cyphers, and therefore **no additional cryptographic keys are used**. 
+Common Criteria certification uses FIPS mode to provide cryptographic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure ciphers, and therefore **no additional cryptographic keys are used**. 
 
 :::important
 The use of non-evaluated cryptographic engines or use without FIPS mode enabled does not conform to the Common Criteria compliance guidelines and is not certified.

@@ -5,7 +5,7 @@ sidebar_label: VRF Support
 
 The following configuration procedures can be used to provide VRF support for static routes, BGP, and OSPF. Configuration can take place at the global/default VRF level, or inside a VRF container. 
 
-With VRF, you have the ability to have multiple, independent instances of both BGP and OSPF. When managing multiple networks, VRF provides the ability learn and isolate these networks from one another, so that traffic destined for an internal private IP address does not get routed to a different network.  
+With VRF, you can run multiple independent instances of both BGP and OSPF. When managing multiple networks, VRF provides the ability to learn and isolate these networks from one another, so that traffic destined for an internal private IP address does not get routed to a different network.  
 
 ## Add VRF Objects Using BGP
 
@@ -117,7 +117,7 @@ The following information pertains to tenant to VRF mapping using static routes,
 
 SSR routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. An SSR router does not have any VRF definitions associated with a network interface. Instead, network interfaces are configured with names matching tenants in a VRF. If the network interface tenant does not match any explicitly configured VRF's, then the network interface belongs to the global/default VRF. Keep in mind that a tenant can only be mapped to one VRF.
 
-For example, an VRF can have a tenant-name `128`. This would match network-interfaces with a tenant of `engineeering.128` and a network-interface with a tenant of `finance.128`.
+For example, an VRF can have a tenant-name `128`. This would match network-interfaces with a tenant of `engineering.128` and a network-interface with a tenant of `finance.128`.
 
 In the following example, all traffic coming from the interface is classified as that tenant. Using vrf `blue` as a reference, the tenant-name `eng` must exist on lan2 and the VRF. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services.
 ```

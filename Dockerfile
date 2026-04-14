@@ -5,7 +5,9 @@ WORKDIR /app/
 
 EXPOSE 3000:3000
 COPY package*.json /app/
+COPY .npmrc /app/
 COPY docusaurus.config.js /app/
+COPY linkinator.config.json /app/
 COPY sidebars.js /app/
 COPY ./docs /app/docs
 COPY ./kb /app/kb

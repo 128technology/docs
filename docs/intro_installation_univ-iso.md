@@ -27,7 +27,6 @@ The traditional package-based ISOs are identified by the filename prefix "128T":
 
 The image-based SSR ISOs are available for download at the following location:
 
-<!-- markdown-link-check-disable-next-line -->
 https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 Files available for download are:

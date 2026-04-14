@@ -6,7 +6,7 @@ Any Linux system hosting SSR comes with public certificates of common public Cer
 
 However, many enterprises or service providers operate their own CA with no tie to public CA infrastructure. Should the SSR host need to connect to servers using certificates signed by these private CAs, the system will need to have the private CA's certificates installed as a trusted certificate authority.
 
-An example of this is an SSR host configured for LDAP over SSL, which must connect to an LDAP server that is using a host certificate signed by the private CA. If the SSR host is to trust the server when it opens a connection, it will require that it can has the private CA certificate, and any intermediate signing CA certificates.
+An example of this is an SSR host configured for LDAP over SSL, which must connect to an LDAP server that is using a host certificate signed by the private CA. If the SSR host is to trust the server when it opens a connection, it must have the private CA certificate, and any intermediate signing CA certificates.
 
 ## Example Scenario
 

@@ -41,7 +41,7 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 | ------ | ---------- |
 | EoE    | End of Engineering support. Patches will no longer be produced after this date. |
 | EoS    | End of Support. 6 months following EoE date. Release is EoL and TAC is unable to support unless software is upgraded. |
-| Major  | Introduction of signficant features or backwards incompatibility. |
+| Major  | Introduction of significant features or backwards incompatibility. |
 | Minor  | New feature content. |
 | Patch  | Bug fixes only. |
 | -build | Final build version released. |

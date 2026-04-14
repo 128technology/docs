@@ -3,7 +3,7 @@ title: Native GRE Tunnels
 sidebar_label: Native GRE Tunnels
 ---
 
-Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 traffic in an L3 and GRE header. The SSR Networking Platform now supports both a [GRE plugin](plugin_gre.md) as well as native GRE tunnels. 
+Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 traffic in an L3 and GRE header. The SSR Networking Platform now supports both a [GRE plugin](plugin_gre.md) and native GRE tunnels. 
 
 :::note
 This is not an SVR feature. GRE tunnels are not created to send packets between peered SSR routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
@@ -13,7 +13,7 @@ This is not an SVR feature. GRE tunnels are not created to send packets between 
 
 When a GRE tunnel is configured, sessions are set up to and from the endpoints. With a GRE tunnel configured as a possible path for the service, the load balancer has the option of choosing the tunnel as the packet’s next hop.
 
-When the tunnel is selcted as the next hop the session sets up normally, and the the appropriate headers are added for the tunnel. 
+When the tunnel is selected as the next hop the session sets up normally, and the appropriate headers are added for the tunnel. 
 
 ## Receiving Packets
 
@@ -35,7 +35,7 @@ The following procedure describes configuring a GRE Tunnel using the GUI.
 4. Scroll down to Network Interfaces and click ADD.
 5. Enter a name for the device interface and click SAVE.
 6. Under Type, select GRE Tunnel.
-7. Under Network Interface Tunnel Settings, choose either Inherited or Custom. The Source is the IP address of the start the tunnel. It can be inherited from the associated non-virtual network interface, or configured explicitly using Custom.
+7. Under Network Interface Tunnel Settings, choose either Inherited or Custom. The Source is the IP address of the tunnel's starting point. It can be inherited from the associated non-virtual network interface, or configured explicitly using Custom.
 8. Add the Destination IP address for the tunnel. 
 9. Click Validate and Commit.
 
@@ -78,7 +78,7 @@ router    Router128
                 type       gre-tunnel
                 tenant     red
 ```
-Please note that in this configuration, the `base` interface and the gre-tunnel interface `tunnel` share the same vlan. For this to work, they must be on a single device-interface. 
+In this configuration, the `base` interface and the gre-tunnel interface `tunnel` share the same vlan. For this to work, they must be on a single device-interface. 
 
 4. Create the tunnel container with a destination of the IP address for the destination of the tunnel. The source identifies how the local IP address is obtained. Setting it to `network-interface` acquires the address from `network-interface-base`.
 ```

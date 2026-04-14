@@ -30,7 +30,7 @@ This example shows a multi-hop hub and spoke deployment. Red represents customer
 
 In a newly deployed network, Enhanced Security Key Management is more secure than the default security implementation of SVR, and far more secure than IPSec. Enhanced Security Key Management affords you the best security strength not only because of the encryption key exchange, and its unique per-session encryption keys, but through its ability to perform key rotations for any network topology.
 
-Additionally, the flexiblity of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
+Additionally, the flexibility of SVR to choose a different physical path to satisfy SLA requirements is not found in traffic encrypted within an IPSec Tunnel. Traffic encrypted within an IPSec Tunnel always follows the same path, not allowing for different flows to have different SLA-driven physical paths.
 
 ## Enhanced Security Key Management and IPSec 
 
@@ -49,7 +49,7 @@ To understand the value of Enhanced Security Key Management, we can draw some co
 | Perfect Forward Secrecy | Yes	| Keys in DH are seeded by Salt. | 
 | IPv4 and IPv6	| Yes | Yes | 
 
-Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want securtiy across your network, this is the best option.
+Enhanced Security Key Management provides a more secure, more flexible, and more efficient transport network. If you want security across your network, this is the best option.
 
 ## How It Works
 
@@ -57,11 +57,67 @@ The foundation of Enhanced Security Key Management is the ability to define peer
 
 When configured to used Enhanced Security Key Management, the SSR automatically creates a self-signed certificate. This allows you to configure peering between SSRs quickly. However because it is a self-signed certificate, it does not offer the same protections as a CA-signed certificate. To configure Enhanced Security Key Management using the self-signed certificate, use the [Configuration](#configuration) procedure below. 
 
-To provide thorough, end-to-end security, the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config-custom-certs.md), and then return to the [Configuration](#configuration) section below. 
+To provide thorough, end-to-end security, the use of a trusted and provisioned certificate and signing authority is supported. To take advantage of this feature, begin with [Configuring Certificate Management](config_custom_certs.md), and then return to the [Configuration](#configuration) section below. 
 
 :::note
 The user provided certificates and signing authority must be in place before configuring Enhanced Security Key Management. If they are NOT in place prior to configuration and are added afterwards, then the SSR service must be restarted in order to pick up the changes.
 :::
+
+### Certificate Provisioning Workflow
+
+When using CA-signed certificates, the end-to-end provisioning sequence must be completed for **every router** that participates in ESKM and **for every node** in any HA pair:
+
+1. Authenticate to the Conductor REST API (`POST /api/v1/login`) and store the bearer token.
+2. Generate a private key on the target router's node (`POST /api/v1/router/<router>/node/<node>/private-key`) — the key never leaves the SSR.
+3. Generate a CSR on the same target (`GET /api/v1/router/<router>/node/<node>/certificate-request`) using a `common_name` that matches that router's `peering-common-name`.
+4. Submit the CSR to your Certificate Authority and obtain a signed certificate.
+5. Ingest the signed certificate back into the SSR (`POST /api/v1/router/<router>/node/<node>/certificate`).
+6. **Activate the certificate in configuration** — having the file on disk is not sufficient. Configure `authority client-certificate` with a `name` and `file` matching the API artifact name. See [Activating the Certificate in Configuration](#activating-the-certificate-in-configuration).
+
+:::warning
+Steps 2–5 must be repeated **for every router** participating in ESKM and **for every node** in any HA pair. Certificates are not shared between HA nodes; each node manages its own unique private key and certificate lifecycle.
+:::
+
+#### API Naming Rules
+
+Consistent naming across all API calls and configuration is critical:
+
+| Field | Scope | Rule |
+|---|---|---|
+| `name` (in all API requests) | Authority-wide | **Must be identical across all routers and nodes.** Use `custom_ssr_peering` in SSR 7.0.x (reserved name). In SSR 7.1+, any consistent name may be used. |
+| `common_name` (in CSR request) | Per-router / per-node | **Must be unique per router or HA node**, and must **exactly match** that router's configured `peering-common-name`. |
+| `peering-common-name` (in config) | Per-router | Unique alias per router. Must match the `common_name` used in that router's CSR. |
+
+**Example mapping for a two-router deployment:**
+
+| Router | `peering-common-name` in config | `common_name` in CSR | `name` in all API requests |
+|---|---|---|---|
+| combo-east | `east-alias` | `east-alias` | `custom_ssr_peering` |
+| combo-west | `west-alias` | `west-alias` | `custom_ssr_peering` |
+
+#### Activating the Certificate in Configuration
+
+The private-key, CSR, and certificate will be written to disk using the `name` from the API with the appropriate file extension added (.key, .csr, and .pem respectively).
+
+After the certificate file is present on disk at `/etc/128technology/pki/<certificate_name>.pem`, you must register it in the SSR authority configuration.  **The certificate will not be loaded by Enhanced Security Key Management until this step is complete, even if the `.pem` file exists on disk.**
+
+On the Conductor:
+
+```
+config authority
+    client-certificate  <certificate_name>
+        name             <certificate_name>
+        file             <certificate_name>
+        validation-mode  strict
+    exit
+exit
+```
+
+| Parameter | Value | Note |
+|---|---|---|
+| `name` | Same as the API `name` field | Identifier for this certificate entry. |
+| `file` | Same as the API `name` field | Filename at `/etc/128technology/pki/` without the `.pem` extension. Must match the API `name`. |
+| `validation-mode` | `strict` (recommended) or `warn` | Use `warn` only during initial rollout. Use `strict` in production environments. |
 
 The following diagram provides a look at a typical SSR/SVR deployment.
 
@@ -129,9 +185,18 @@ The peer continues to resend requests at periodic intervals as defined in the co
 
 ### High Availability
 
-Each node of an HA pair manages its own unique certificate - certificates are not shared between nodes. Each node manages its own unique connection to its peers.
+Each node of an HA pair manages its own unique certificate — certificates are not shared between nodes. Each node manages its own unique connection to its peers.
 
-When two nodes are configured as a redundant pair, each of the keys are exchanged between nodes. This will avoid rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
+:::important
+When provisioning certificates for an HA router, you must execute the private-key creation, CSR generation, and certificate ingest API requests **separately for each node**, targeting that node's specific endpoint:
+
+- **Node 1:** `POST https://<conductor-ip>/api/v1/router/<router-name>/node/<node1-name>/private-key`
+- **Node 2:** `POST https://<conductor-ip>/api/v1/router/<router-name>/node/<node2-name>/private-key`
+
+The same node-scoped pattern applies to the `/certificate-request` and `/certificate` endpoints. The request body — including the `name` field — is identical for both nodes. Consult the Swagger documentation at `https://<conductor-ip>/api/v1/swagger` for the full per-node endpoint schema.
+:::
+
+When two nodes are configured as a redundant pair, the keys are exchanged between nodes. This avoids rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
 
 ### Certificate Replacement or Revocation
 
@@ -165,7 +230,11 @@ config
     authority
         enhanced-security-key-management  true
 ```
-2. Configure a `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is an alias that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the peering-common-name from the ceritficate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
+2. Configure a unique `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is a **unique alias per router** that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the `peering-common-name` from the certificate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
+
+:::note
+The `peering-common-name` must exactly match the `common_name` field used in the certificate signing request (CSR) generated for that router. See [API Naming Rules](#api-naming-rules) for the full field mapping.
+:::
 
 ```
         router                            combo-east
@@ -182,7 +251,7 @@ The peer list of the router must also have the `peering-common-name` of that pee
 
 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
 
-For the SSR, ML-KEM can be used in conjuction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
+For the SSR, ML-KEM can be used in conjunction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
 
 In order to take advantage of ML-KEM Cryptography, all devices must be running SSR software that provides support for this feature. 
 
@@ -190,7 +259,7 @@ In order to take advantage of ML-KEM Cryptography, all devices must be running S
 
 Each participant generates a public-private key pair for encryption and decryption. These keys are generated upon system startup, are stored securely, and are encrypted with the onboard TPM. 
 
-A Symmetric Key is generated using the [Nist-approved FIPS 203 ML-KEM algorithm](https://csrc.nist.gov/pubs/fips/203/final) and exchanged between the sender and the reciever. This is the shared, secret key used for encryption and decryption.
+A Symmetric Key is generated using the [Nist-approved FIPS 203 ML-KEM algorithm](https://csrc.nist.gov/pubs/fips/203/final) and exchanged between the sender and the receiver. This is the shared, secret key used for encryption and decryption.
 
 The encapsulation process wraps the symmetric key in layers of encryption, and the decapsulation process removes the layers using the private key associated with the device. 
 
@@ -266,11 +335,11 @@ configure
         exit
 ```
 
-## Rekeying (Key Rotation) Atttributes and Default Values
+## Rekeying (Key Rotation) Attributes and Default Values
 
 The `key-exchange-algorithm` is configurable at both the Authority and Router/Peer level (using `key-exchange-algorithm-override`). The peer path override allows the migration from an existing algorithm to a different algorithm within authority. This makes it possible to onboard new routers to an existing authority with different key-exchange-algorithms. 
 
-If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for addtitional details. 
+If no override is specified at router and peer level, the authority `key-exchange-algorithm` setting is used. However when set, the router and peer `key-exchange-algorithm-override` settings are used. See [Key Exchange Algorithm Router Override](#key-exchange-algorithm-router-override) for additional details. 
 
 When the `key-exchange-algorithm` is changed, the SSR returns to the shared-secret exchange state (since certificate exchange is not impacted) and opertation proceeds until the peer metadata-keys are re-exchanged. Existing sessions continue using the established payload keys until the next payload key rekey-time. Payload key updates are encrypted using the latest exchanged peer metadata-keys.
 
@@ -307,7 +376,7 @@ config
 | peer-key-retransmit-interval | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. Range is 5-3600. Default is 30 seconds. |
 | peer-key-timeout | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. Default is 3600 seconds. |
 
-When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for addtional information). 
+When rekeying is enabled on a newly initialized router that does NOT have a valid, signed certificate, an alarm is generated. A valid certificate must be obtained from a Certificate Authority before valid secure communication can take place. When a valid certificate is present, the router will create a public/private key pair (see [RFC8422] for additional information). 
 
 In cases where it is necessary to manually force key rotation on the routers, use the [`rotate security metadata-key`](cli_reference.md#rotate-security-metadata-key) command to tell the active node to immediately regenerate the metadata key with an incremented rekey index. The active node will push the new metadata key to the peer node.
 

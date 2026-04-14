@@ -9,7 +9,7 @@ Before going through this process, it is beneficial to understand the [best prac
 
 ## Conductor Backup
 
-Use the following process to backup your conductor and router configurations from your existing conductor. It is a Juniper recommended best practice to perform this process (or create a script to perform the process) on a regular schedule. The files in the tarball are used to recover the network/node configuration to a new conductor. The process is also useful to mitigate disaster recovery.
+Use the following process to backup your conductor and router configurations from your existing conductor. It is a Juniper recommended best practice to perform this process (or create a script to perform the process) on a regular schedule. The files in the tarball are used to recover the network/node configuration to a new conductor. The process is also useful for disaster recovery scenarios.
 
 Copy the following files into a tarball (a `*.tar.gz` file) on the existing conductor:
 ```

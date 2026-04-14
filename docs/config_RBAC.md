@@ -3,7 +3,7 @@ title: Configuring Role-Based Access Control
 sidebar_label: Configuring Role-Based Access Control
 ---
 
-Role-Based Access Control (RBAC) provides a mechanism for an Administrator to create Access Management Roles that allow specific access to SSR resources such as routers, tenants, and services, as well as other Authority-level configuration objects. 
+Role-Based Access Control (RBAC) lets an Administrator create Access Management Roles that control access to SSR resources such as routers, tenants, and services, as well as other Authority-level configuration objects. 
 
 ## Configuring Role-Based Access Control
 
@@ -22,7 +22,7 @@ The default Administrator role (`admin`) has access to all configuration options
 	An Access Management Role identifies capabilities or actions a user can perform; config-read, config-write, and provision. Provisioning allows users to perform software lifecycle management duties, such as download software, upgrade existing installations, etc.
 
 	After the Access Management Role is created, the process is as follows:
-	- Assign Cababilities to the Access Management Role. 
+	- Assign Capabilities to the Access Management Role. 
 	- Assign Resource Groups to the Access Management Role. You can specify more than one group for a role.
 	- Identify/assign the specific resources within the Resource Group the user can access (Advanced Feature).
 	- Additionally, you can specify resources within the Resource Group the user DOES NOT have access to, and these resources will be hidden from the user's view.
