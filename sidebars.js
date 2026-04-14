@@ -127,6 +127,16 @@ module.exports = {
       "sec-ztp-web-proxy",
       "sec-conductor-onboard", 
     ],
+    "Deployment Guides": [
+      {
+        "type": "category",
+        "label": "Amazon Web Services (AWS)",
+        "items": [
+          "deploy_aws",
+          "deploy_aws_conductor",
+        ],
+      },
+    ],
     "Cloud / Hypervisor Installations": [
       "supported_cloud_platforms",
       "hypervisor-support",
