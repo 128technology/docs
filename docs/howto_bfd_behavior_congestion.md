@@ -102,7 +102,7 @@ You can make BFD more tolerant of congestion by increasing the `multiplier`, or 
 
 ### Damping and Hold‑Down: Controlling Flapping
 
-BFD damping is designed to prevent BFD state from oscillating in environments where link quality fluctuates rapidly. Without damping, repeated short bursts of congestion could repeatedly drive peer paths up and down, leading to routing flaps and unnecessary session failovers.
+BFD damping is designed to prevent BFD state from oscillating in environments where link quality fluctuates rapidly. Without damping, repeated short bursts of congestion could repeatedly drive peer paths up and down, leading to routing flaps and unnecessary session failovers. In some cases a peer path may incorrectly be reported as flapping, where in fact the cause may be due to congestion. In these situations, proper tuning is important.
 
 The SSR provides both a simple hold‑down timer and a dynamic damping mechanism. The `hold-down-time` parameter enforces a minimum interval before BFD change notifications are propagated. Dynamic damping, enabled with `dynamic-damping` and bounded by `maximum-hold-down-time`, automatically lengthens the effective hold‑down interval when frequent flapping is observed.
 
@@ -161,6 +161,15 @@ You can tune Routing BFD in the same way as SSR BFD. Larger multipliers and inte
 
 Traffic engineering (TE) and service policies determine how flows, including BFD, are placed into queues on a given interface. Out of the box, SSR BFD does not have a dedicated control‑plane queue. Instead, BFD packets are classified into services and mapped into traffic classes using the same mechanisms as user traffic.
 
+The service that BFD matches is an **internally-generated service** that the SSR creates automatically when it establishes a peering relationship with another SSR. You will not find it in the configuration; it exists only in the forwarding plane and appears with surrounding braces (for example, `{peer-name}`) in the output of `show sessions`. Because no `service-policy` is attached to these auto-generated services, BFD traffic receives the system default treatment, which is effectively best‑effort.
+
+To influence TE prioritization for BFD, create an explicit user-defined service that matches the BFD ports and associate it with a `service-policy` that references your desired TE class:
+
+- For **SSR BFD**, match UDP destination port `1280`.
+- For **Routing BFD** (OSPF/BGP), match UDP destination ports `3784` (single‑hop), `4784` (multi‑hop), and `3785` (echo).
+
+Because the SSR uses most-specific-match when selecting services, a user-defined service with a transport and port constraint will take precedence over the broader internally-generated service, allowing you to assign a `service-policy` with an explicit `service-class` and `traffic-class`. Set `generated false` on the service route if you want to ensure the conductor does not overwrite your configuration. For an example, see [Marking BFD and Using DSCP Steering](#marking-bfd-and-using-dscp-steering) later in this document.
+
 The SSR treats BFD with relatively low priority. If BFD packets are given an extremely high priority, they may not experience the same congestion as normal traffic. Echo mode tests would then under‑report latency, jitter, and loss relative to what best‑effort traffic sees. Decisions based on those measurements—for example, SLA‑based path selection—could be misleading.
 
 If you map BFD into a very high‑priority TE class, you will tend to preserve BFD sessions through significant congestion, but BFD’s metrics will become less representative of user experience. If you map BFD into a very low‑priority class, you may cause BFD to declare paths down quickly under load, sometimes before higher‑priority application traffic is severely affected.
@@ -187,6 +196,62 @@ If BFD’s DSCP maps to a high‑priority class, transit devices attempt to pres
 - If the priority is measuring effective application experience, keep BFD in or near the application’s QoS class, allowing it to see the same congestion.
 
 In either case, coordinate DSCP values with any provider networks involved, so that the chosen markings map to the intended classes.
+
+**Example: BFD DSCP and SSR traffic-class mapping**
+
+The SSR ships with factory-default `service-class` objects that map DSCP values to a `traffic-class`. The following table shows representative values and their effect on BFD queuing:
+
+| BFD `dscp` value | DSCP name | SSR factory `service-class` | SSR `traffic-class` | Typical transit queue behavior |
+| :-: | --- | --- | --- | --- |
+| `0` (default) | Best Effort (BE) | `Standard` | `best-effort` | Shares queues with bulk/default traffic; dropped first under congestion |
+| `18` | AF21 | `LowLatencyData` | `low` | Lower-priority assured forwarding; modest protection |
+| `26` | AF31 | `MultimediaStreaming` | `medium` | Medium-priority assured forwarding; better protection |
+| `46` | EF (Expedited Forwarding) | `Telephony` | `high` | Strict-priority or near-priority queue; highest protection |
+
+BFD’s DSCP value is set using the `dscp` field under the `bfd` hierarchy at the router, `neighborhood`, or `adjacency` level. For example, to mark BFD packets with AF21 (decimal 18) on a specific adjacency:
+
+```
+authority
+  router branch1
+    node node1
+      device-interface wan
+        network-interface wan0
+          adjacency
+            ip-address 203.0.113.1
+            bfd
+              dscp 18
+            exit
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
+To apply the same marking to all peers within a neighborhood (affecting all generated adjacencies on commit):
+
+```
+authority
+  router branch1
+    node node1
+      device-interface wan
+        network-interface wan0
+          neighborhood internet
+            bfd
+              dscp 18
+            exit
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
+:::note
+Changing the BFD `dscp` value controls the marking applied to outbound BFD packets, which influences how transit devices and the remote SSR peer queue them. To also change SSR‑local TE queuing for BFD, create a user‑defined service matching the BFD ports and assign a `service-policy` with the desired `service-class`, as described in [Traffic Engineering, Queues, and BFD Priority](#traffic-engineering-queues-and-bfd-priority).
+:::
 
 ## Influencing BFD Behavior with DSCP and DSCP Steering
 
