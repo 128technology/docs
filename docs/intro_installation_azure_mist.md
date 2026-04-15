@@ -5,7 +5,7 @@ sidebar_label: Installing PAYG Mist-managed Router in Azure
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide describes the process for deploying a PAYG (Pay As You Go) Mist-managed Session Smart Router (SSR) in Azure. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
+This guide describes the process for deploying a PAYG (Pay As You Go) Mist-managed Session Smart Router (SSR) in Azure. When installed as an Azure image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
 * [Selecting the Azure Plan](#selecting-the-azure-plan).
 * Deploying a [Session Smart Router](#session-smart-router).
@@ -39,7 +39,7 @@ To request access to a Private plan:
 * The Subscription ID of the Azure account that will be used for the deployment.
 * The version of the Session Smart Networking software. If necessary, your Juniper Sales representative will assist you to determine the best version for your deployment.
 
-3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
+3. Wait for your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and access has been granted.
 
 4. Once your Subscription ID has been allowlisted, validate that the Private plan has been shared with your Subscription:
 
@@ -258,7 +258,7 @@ A description of the parameters of the template are listed in the following tabl
 | Node Name               | Provide a name to the node of the Smart Router Router. Optional. |
 | Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase). Example: eastus, westus, westeurope, eastasia...     |
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed to. |
-| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
+| Availability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
 | Public Subnet Name      | The name of the public subnet within the VNet. |
 | Public Subnet Allowed CIDR     | It corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
 | Private Subnet Name     | The name of the private subnet within the VNet. |

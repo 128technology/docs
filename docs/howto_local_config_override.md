@@ -58,7 +58,7 @@ Using `set config local-override` puts the managed router's configuration in loc
 
 When local override mode is engaged, copy of the router configuration is saved as an exported configuration on the router named `at-local-override`. This is saved as a baseline for the original router config.
 
-The user can diff the router current config against either the `last-seen-conductor-config`, or the original router config `at-local-override` before changes were made. It is important to note that any changes made to the local router while in local override mode **will not** be sync'ed to the conductor.
+The user can diff the router current config against either the `last-seen-conductor-config`, or the original router config `at-local-override` before changes were made. It is important to note that any changes made to the local router while in local override mode **will not** be synced to the conductor.
 
 - To compare the running config against the config when local override mode was engaged use: `compare config at-local-override`.
 
@@ -76,9 +76,9 @@ Use the command `set config local-override disable` to disable the local overrid
 
 To disable the local override mode using the user interface: 
 
-1. Select the vertical elipse next to the Validate and Commit buttons.
+1. Select the vertical ellipse next to the Validate and Commit buttons.
 
-![Vertical Elipse](/img/local-override-gui-1.png)
+![Vertical Ellipse](/img/local-override-gui-1.png)
 
 2. Select **Disable Local Override** from the menu that appears.
 

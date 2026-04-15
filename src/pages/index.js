@@ -81,7 +81,7 @@ const features = [
   },
   {
     title: <>Security</>,
-    link: 'docs/security-overview',
+    link: 'docs/sec_security_overview',
     description: (
       <>
         Understand and configure the security features.
@@ -90,7 +90,7 @@ const features = [
   },
   {
     title: <>Supported Hardware Platforms</>,
-    link: 'docs/supported-devices-overview',
+    link: 'docs/supported_devices_overview',
     description: (
       <>
         List of SSR supported platforms.
@@ -117,7 +117,7 @@ const features = [
   },
   {
     title: <>Concepts</>,
-    link: 'docs/concepts-overview',
+    link: 'docs/concepts_overview',
     description: (
       <>
         Learn how the SSR Software does what it does so well!

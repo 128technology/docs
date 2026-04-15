@@ -12,7 +12,7 @@ sidebar_label: Configuring DSCP Steering
 | 7.1.0   | [Support added for steering Non-IPSEC tunnels](#dscp-steering-using-gtp) (GTP) | 
 
 
-When traffic is traversing an IPSec encrypted tunnel, every flow within that tunnel shares the same layer 3 headers, making them difficult to identify. 
+When traffic is traversing an IPSec encrypted tunnel, every flow within that tunnel shares the same layer 3 headers, making individual flows difficult to identify. 
 
 To provide identification and aid in load balancing and traffic engineering, DSCP values can be set at the tunnel endpoint. When the traffic reaches the SSR, the DSCP value is used for both traffic engineering priority and path priority for DSCP traffic steering.
 

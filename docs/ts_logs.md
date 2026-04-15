@@ -7,7 +7,7 @@ SSR logs are stored in 4 principal locations: `/var/log/128technology/`, `/var/l
 - `/var/log/128technology/`, as the name suggests, contains the majority of the logs related to SSR application processing.
 - The SSR utilizes [Salt Stack](https://docs.saltproject.io) for life cycle management and Dev Ops automation. Salt-related log files are contained within their default directory of `/var/log/salt/`.
 - The `128T-installer` is a separate application that is used for installing and upgrading the SSR.  Any logs related to installation, initialization, upgrade, or rollback will be contained within the `/var/log/install128t/` directory.
-- The journal contains logs from processes that are managed by systemd and not by the SSR process manager.  In order to view logs related to these processes, you can execute `journalctl -u <process>`. SSR-related processes that are managed by systemd are:
+- The journal contains logs from processes that are managed by systemd and not by the SSR process manager.  To view logs related to these processes, you can execute `journalctl -u <process>`. SSR-related processes that are managed by systemd are:
   - `128TWeb`
   - `nginx`
   - `128TWebAuth`

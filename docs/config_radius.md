@@ -45,7 +45,7 @@ To remain current with network security standards, the use of the `message-authe
 
 Please refer to your RADIUS server documentation for information on setting the `message-authenticator`. 
 
-In versions 6.1.12, 6.2.8, 6.3.3, and later, an option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses was added. **Disabling this check is NOT recommended**, but may be necessary for some backwards compatiblity scenarios. 
+In versions 6.1.12, 6.2.8, 6.3.3, and later, an option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses was added. **Disabling this check is NOT recommended**, but may be necessary for some backwards compatibility scenarios. 
 
 :::important
 Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for user authentication.

@@ -55,7 +55,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
 ------
-- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
+- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Environment) is installed.** The AIDE package is installed and is a 128T dependency. 
 ------
 - **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation. 
 ------
@@ -133,7 +133,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37577** LDAP authentication fails for users that contain a '-' in their name.
 ------
-- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
+- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexicographically sorted router for all other routers in authority instead of using a unique value per router.
 ------
 - **I95-37650** The 128T web UI incorrectly supports being embedded as an iFrame within another page.  
 ------
@@ -452,7 +452,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
   Until the system is upgraded to 4.3.2, this issue can be mitigated by removing the invalid configuration.
 ------
-- **I95-33535** Interface name incorrectly allows for prefixed whitepace in configuration, resulting in failure to create interface.
+- **I95-33535** Interface name incorrectly allows for prefixed whitespace in configuration, resulting in failure to create interface.
 ------
 - **I95-33556** 128T may drop inbound SVR traffic when destination service address and port overlaps with interface (waypoint) address and wayport.
 
@@ -783,7 +783,7 @@ systemctl restart salt-minion
 ------
 - **I95-36033** 4.3.8 does not enforce the 128T-installer-2.6.0 version that deprecates rpms for CVE corrections
 
-  _**Syptom:**_ Deprecated RPM's installed by base SSR-OS that may have CVE corrections will not be removed.
+  _**Symptom:**_ Deprecated RPM's installed by base SSR-OS that may have CVE corrections will not be removed.
 
   _**Conditions:**_ When the 128T-installer is not updated to 2.6.0.
 

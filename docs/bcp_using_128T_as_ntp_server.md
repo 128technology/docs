@@ -12,7 +12,7 @@ All of the recommendations in this document presume that the administrator has a
 
 There are two, somewhat complementary approaches to using a branch SSR as an NTP server:
 
-- Issuing the SSR's address as the NTP server in DHCP repsonses and/or configuring devices to use the SSR's LAN interface as an NTP server
+- Issuing the SSR's address as the NTP server in DHCP responses and/or configuring devices to use the SSR's LAN interface as an NTP server
 - Capturing all inbound NTP (using a service that captures 123/UDP), and handling that traffic locally
 
 ### Configuring Devices to use the SSR as an NTP Server
@@ -129,7 +129,7 @@ Do not also add the `_internal_` tenant to the `access-policy` list, as this is 
 On each router, we'll configure a `service-route` that looks like this:
 
 ```
-admin@labsystem1.fiedler# show config runn authority router branch1 service-route rte_inbound-ntp
+admin@labsystem1.fiedler# show config run authority router branch1 service-route rte_inbound-ntp
 
 config
     authority

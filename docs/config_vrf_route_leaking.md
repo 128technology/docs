@@ -11,7 +11,7 @@ The word "leak" implies a break or a breach, and in some cases, route leaking ca
 
 The exchange of routes between a VRF on one SSR and a VRF on another SSR is achieved using a single BGP session in the default VRF, where the VPN address family carries the routes for multiple VRFs via that one BGP session. This configuration allows each VRF to share and copy the designated routes.
 
-Only one instance of the BGP VPN RIB route table exists on a router within the default VRF. It can be modified to hold routes from multiple VRFs using a combination of the IP prefix and an 8-byte Route Distinguisher (RD). The RD must be configured for each VRF that is meant to export routes into the VPN table. To identify which VPN routes are imported to a VRF, a Route Target (RT) is identified. The RT is a BGP extended community attribute that identifies both the VPN RIB where the routes will be shared, and is used to identify the routes to be imported to a VRF.  
+Only one instance of the BGP VPN RIB route table exists on a router within the default VRF. It can be modified to hold routes from multiple VRFs using a combination of the IP prefix and an 8-byte Route Distinguisher (RD). The RD must be configured for each VRF that exports routes into the VPN table. To identify which VPN routes are imported to a VRF, a Route Target (RT) is identified. The RT is a BGP extended community attribute that identifies both the VPN RIB where the routes will be shared, and is used to identify the routes to be imported to a VRF.  
 
 ### Route Distinguisher
 The Route Distinguisher (RD) is an identification number, used to create a distinct route to a common IPv4 address prefix. In the example below, we use the router-ID and a vlan-id from the VRF, but any number or name can be used.  

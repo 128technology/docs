@@ -15,7 +15,7 @@ When configuring EoSVR on a STEP-enabled router, it is a best practice to clear 
 **Important Configuration Note for EoSVR Interface Redundancy**
 :::
 
-When configuring EOSVR for interface redundancy, it is crucial to set the `ethernet-over-svr encapsulate-all-traffic` field to `true`. Failure to enable this mode may result in continued traffic transmission to the old active interface from the switch during an interface or node failover. This may continue until the ARP times out on the switch side.
+When configuring EOSVR for interface redundancy, it is crucial to set the `ethernet-over-svr encapsulate-all-traffic` field to `true`. Failure to enable this mode may cause the switch to continue transmitting traffic to the old active interface during an interface or node failover. This may continue until the ARP times out on the switch side.
 
 Enabling the `encapsulate-all-traffic` mode ensures that the reverse traffic from the remote peer utilizes a separate session from the forward traffic. This mechanism allows the reverse flow to rectify the ARP entries in the switch and resume normal operation.
 Juniper recommends verifying `ethernet-over-svr encapsulate-all-traffic` is set to `true` to ensure seamless interface redundancy.
@@ -69,7 +69,7 @@ Use the following procedure to create a service on each router for layer 2 traff
 1. On the Configuration home screen, select the first router configured for EoSVR.
 2. Scroll down to the **Service Route** panel and click ADD.
 3. Name the Service Route and click SAVE.
-4. Under **Service Route Information**, select the EoSVR service you created prevoiusly.
+4. Under **Service Route Information**, select the EoSVR service you created previously.
 5. Under **Service Route Type**, select the drop down, scroll down and select **Eosvr Bridge**. 
 	![Service Route Type](/img/config_EthoSVR_ASR5.png)
 

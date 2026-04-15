@@ -168,7 +168,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 
 ### Resolved Issues Requiring Configuration Changes
 
-- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additonal insight to Application Identification:
+- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additional insight to Application Identification:
 	- Track next hop additions and removals separately for more insight
 	- Track the number of times an expiration timer is set (globally and per next hop)
 	- Track the number of times an expiration timer is cleared due to a new session (globally and per next hop)
@@ -267,7 +267,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
-- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
+- **I95-50736 SSH key change not propagated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
 ------
 - **I95-50754 Race condition between ICMP ping request and a reverse flow:** Resolved a crash due to a race condition when `service ping icmp-request` is matched against a partially installed flow.
 ------
@@ -331,7 +331,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
-- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Reuse of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
 - **I95-48689 Top Sessions not displaying source address:** Restored the **Source** column in the Top Sessions table. 
 ------
@@ -445,7 +445,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-42320 BGP aggregate-address not working:** Add support for BGP address summarization.
 ------
-- **I95-44957 Azure is not able to identify the asset-id of the depolyed conductor and router:** The Azure ID has been modified to be more easily identifiable.
+- **I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:** The Azure ID has been modified to be more easily identifiable.
 ------
 - **I95-44976 Highway issue when modifying an app-id session:** Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.
 ------
@@ -602,7 +602,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46394 Conductor missing generated GIID's:** Resolved a rare case where the GIID on generated redundant interfaces was missing.
 ------
-- **I95-46419 FEC w/ OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
+- **I95-46419 FEC w/ OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modification to resolve the outbound only path.
 ------
 - **I95-46451 Active Node not updating properly:** Resolved an issue with inter-node VRRP wherein the virtual interface could get stuck in a bad state after a flap.
 ------
@@ -723,7 +723,7 @@ The active `automatedProvisioner` can be determined by running the command `show
 
 - **I95-28791 Forward Error Correction:** Forward Error Correction (FEC) adds resiliency against packet loss between two points in the network. Profiles are configured at the authority level and are not traffic-specific, which allows them to be used on any service and any router in the authority. For information about using this feature, please see [Configuring Forward Error Correction](config_forward_error_correction.md).
 ------
-- **I95-37464 WAN Assurance Application Summary:** The Application Summary displays session statistics and information by application, category, and clients. See [Using Application Summary](how_to_use_app_summary.md) for more information. 
+- **I95-37464 WAN Assurance Application Summary:** The Application Summary displays session statistics and information by application, category, and clients. See [Using Application Summary](howto_use_app_summary.md) for more information. 
 ------
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and the Cordoba platform. 
 ------

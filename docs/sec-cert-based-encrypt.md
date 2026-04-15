@@ -340,11 +340,11 @@ When used in conjunction with Enhanced Security Key Management, if the peer's ce
 
 - `fail-hard` sends a notification that the certificate is no longer valid, and removes all peering relationships. The peer connection is severed and the device is prevented from participating in SVR.
 
-See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for additional information. 
+See [Enhanced Security Key Management](sec_enhanced_key_mgmt.md) for additional information. 
 
 ## Troubleshooting
 
-Use the following information to help troublshoot certificate events or issues.
+Use the following information to help troubleshoot certificate events or issues.
 
 ### From the Command Line
 
