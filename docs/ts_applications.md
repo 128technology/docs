@@ -33,7 +33,7 @@ Each source of traffic that arrives at an SSR is associated with a tenant; this 
 
 1. By arriving on a `network-interface` that has a `tenant` configured.
 2. By arriving on a `network-interface` that has one or more `neighborhood` elements configured, and those neighborhoods are referenced in `tenant > member` configuration.
-3. Via conveyance from an upstream SSR device that has encoded the source tenant information into SSR _metadata_. This tenancy assignment will not be discussed in this document, as the traffic routing decision is made by the first SSR encountered by a client. The focus of this document will be on items 1 and 2 exclusively.
+3. Via conveyance from an upstream SSR device that has encoded the source tenant information into SSR _metadata_. This document does not cover this tenancy assignment, as the traffic routing decision is made by the first SSR a client encounters. This document focuses on items 1 and 2 only.
 
 The configuration on an SSR – specifically, items 1 and 2 above – constructs the *source lookup table* used by the SSR to affiliate inbound requests to tenants.
 
@@ -301,7 +301,7 @@ Ping from 1.0.0.1 (1.0.0.1): icmp_seq=3 ttl=57 time=138.002ms
 
 ### WAN Link Status
 
-Verfiy whether the WAN links are up by checking the peer path information with the commands below.
+Verify whether the WAN links are up by checking the peer path information with the commands below.
 
 - Use [`show device-interface router <routerName> summary`](cli_reference.md#show-device-interface) to confirm that the target device-interface is up/up/up.
 

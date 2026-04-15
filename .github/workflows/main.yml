@@ -18,13 +18,13 @@ jobs:
     name: Build and Test
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: '18.x'
+          node-version: '20.x'
 
       - name: Cache Node.js modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
@@ -46,15 +46,12 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run build:offline
 
-      - name: Broken Link Checker Action
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-verbose-mode: 'yes'
-          folder-path: 'docs'
+      - name: Check Links
+        run: npm run check-links
 
       - name: Deploy
         if: github.event_name != 'pull_request'
-        uses: peaceiris/actions-gh-pages@v3.7.3
+        uses: peaceiris/actions-gh-pages@v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build

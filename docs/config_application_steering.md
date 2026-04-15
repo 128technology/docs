@@ -8,11 +8,11 @@ sidebar_label: Application Steering
 | ------- | --------------------------- |
 | 6.1.4-R2 | Application Steering introduced |
 
-Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. Where traditional routing is destination based, Application Steering defines a policy associated with a specific application, providing a finer granularity for routing traffic. In addition, Application Steering is available for configurations where multiple applications point to the same port and destination. 
+Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. Whereas traditional routing is destination-based, Application Steering defines a policy associated with a specific application, providing a finer granularity for routing traffic. In addition, Application Steering is available for configurations where multiple applications point to the same port and destination. 
 
 ### Define the Application in the Service
 
-During the service configuration, applications are simply identified by name, for example `Facebook`. By default, the SSR automatically downloads domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [`application-identification` in the Element Reference section.](config_reference_guide.md#application-identification)
+During the service configuration, applications are simply identified by name, for example `Facebook`. By default, the SSR automatically downloads domain and application datasets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [`application-identification` in the Element Reference section.](config_reference_guide.md#application-identification)
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
 
@@ -45,7 +45,7 @@ service facebook.internet
       source corp
       permission deny    
 ```
-For additional information about configuring heirarchical services, see [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)
+For additional information about configuring hierarchical services, see [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)
 
 4. Configure a service and an access policy for the Workday application, which will be allowed on the corporate network.
 ``` 

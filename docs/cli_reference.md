@@ -1623,7 +1623,7 @@ Conditional Variables
 =====================
 
 {top-level}  - Evaluates true if the PCLI is at the top menu
-{uncomitted} - Evaluates true if the candidate configuration differs from the running configuration
+{uncommitted} - Evaluates true if the candidate configuration differs from the running configuration
 
 Conditionals
 ============
@@ -2191,7 +2191,7 @@ manage plugin install [node <node>] <name> [<version>]
 | command | description |
 | ------- | ----------- |
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
-| [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins available`](#show-plugins-available) | Shows latest version of plugins available for install. |
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
@@ -2228,7 +2228,7 @@ manage plugin remove [node <node>] <name>
 | command | description |
 | ------- | ----------- |
 | [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
-| [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins available`](#show-plugins-available) | Shows latest version of plugins available for install. |
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
@@ -5615,7 +5615,7 @@ link
     4 Byte AS: advertised and received
     Route refresh: advertised and received(old &amp; new)
     Address family IPv4 Unicast: advertised and received
-    Graceful Restart Capabilty: advertised and received
+    Graceful Restart Capability: advertised and received
       Remote Restart timer is 120 seconds
       Address families by peer:
         none
@@ -9058,7 +9058,7 @@ Fri 2020-04-17 19:11:14 UTC
     Backbone:                            false
     No Summaries:                        false
     Shortcutting Mode:                   default
-    S-bit Concensus:                     true
+    S-bit Consensus:                     true
     Interface Total Count:               1
     Interface Active Count:              1
     Fully Adjacent Neighbor Count:       0
@@ -10707,7 +10707,7 @@ Mon 2017-02-27 16:00:20 EST
 
 ## `show plugins available`
 
-Shows latest verison of plugins available for install.
+Shows latest version of plugins available for install.
 
 #### Usage
 
@@ -10754,7 +10754,7 @@ show plugins categories
 | ------- | ----------- |
 | [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
-| [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins available`](#show-plugins-available) | Shows latest version of plugins available for install. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
 #### Description
@@ -10786,7 +10786,7 @@ show plugins installed [category <category>] [node <node>]
 | ------- | ----------- |
 | [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
-| [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins available`](#show-plugins-available) | Shows latest version of plugins available for install. |
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 
 #### Description
@@ -11971,7 +11971,7 @@ show system connectivity key-checking-mode [{router <router> | resource-group <r
 
 #### Description
 
-Displayes the StrictHostKeyCheckingMode for Inter-Node, and Inter-Router SSH tunnels.
+Displays the StrictHostKeyCheckingMode for Inter-Node, and Inter-Router SSH tunnels.
 
 ## `show system connectivity known-hosts`
 
@@ -13076,7 +13076,7 @@ time <command> [<command> ...]
 
 #### Description
 
-When `time` preceeds another command, it will provide the total amount of wall clock time it takes for the operation to complete. Natively not all PCLI commands output the duration it takes to complete the operation. The time command, much like the Linux version, provides this information.
+When `time` precedes another command, it will provide the total amount of wall clock time it takes for the operation to complete. Natively not all PCLI commands output the duration it takes to complete the operation. The time command, much like the Linux version, provides this information.
 
 #### Example
 

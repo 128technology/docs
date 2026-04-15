@@ -2,7 +2,6 @@
 title: Wireguard Plugin
 sidebar_label: Wireguard
 ---
-<!-- markdown-link-check-disable -->
 The wireguard plugin allows your SSR to peer with other endpoints using [wireguard](https://www.wireguard.com/).  With this plugin you can securely connect endpoints to your SSR fabric, extending services and network tenancy.
 
 ![Wireguard overview](/img/plugin_wireguard_1.png)
@@ -16,7 +15,6 @@ See instructions for [installing and managing](plugin_intro.md#installation-and-
 Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with an SSR service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated. Each endpoint wishing to form a peering relationship must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
 
 When an SSR is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally service prefixes that should be sent to the SSR by a wireguard peer, can be configured as allowed IPs. More information on wireguard configuration can be found [here](https://www.wireguard.com/quickstart/).
-<!-- markdown-link-check-enable-->
 ## Basic Configuration
 
 To configure your SSR for wireguard peering, you first create a wireguard profile on the router. For example, the following defines a profile called `wg-profile-1`. Each wireguard endpoint will use a unique address from the prefix `10.10.10.0/24` as defined in the profile and the router wireguard instance will use the first address of `10.10.10.1`.:
@@ -98,7 +96,7 @@ You have devices that are remote from your SSR fabric, but you want to give them
 
 ![Wireguard remote endpoints](/img/plugin_wireguard_2.png)
 
-Each peer is assigned an address out of a `10.10.10.0/24` private network, which they can use when sending sessions on to the fabric. Also every peer will end up having a public/private wirguard keypair. For this use case example, each peers have the following info assigned to them:
+Each peer is assigned an address out of a `10.10.10.0/24` private network, which they can use when sending sessions on to the fabric. Also every peer will end up having a public/private wireguard keypair. For this use case example, each peer has the following info assigned to them:
 
 | peer | private address | public key |
 | --- | --- | --- |
@@ -251,11 +249,9 @@ Completed in 0.27 seconds
 ### Remote Endpoint Configuration
 
 Now the remote peer endpoints can be configured to peer with the `dc1` and `dc2` routers at their respective interface addresses, and route the corresponding service prefixes of `172.16.1.0/24` and `172.16.2.0/24` to each. For example, a wireguard config for peer `p1` might look like the following:
-<!-- markdown-link-check-disable-->
 :::tip
 See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
-<!-- markdown-link-check-enable-->
 ```
 [Interface]
 # p1
@@ -368,11 +364,9 @@ PersistentKeepalive = 30
 :::note
 If wireguard is hosted on a DHCP enabled interface, the peer's `Endpoint` address needs to be configured with the latest IP address assigned.
 :::
-<!-- markdown-link-check-disable-->
 :::note
 The `PersistentKeepalive` in this wireguard configuration causes the peer to keep the connection to the peer alive by sending periodic traffic. This has the effect of allowing the SSR to originate sessions to the peer at any time. See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
-<!-- markdown-link-check-enable-->
 With the profile and peer configured on the SSR `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
 
 ```
@@ -483,7 +477,7 @@ A profile describing an instance of wireguard on the router.
 | `name`               | string        | A string identifier for wireguard profile. This identifier is used as a device interface name in the host, therefore it can only use alphanumerics, underscores, or dashes, and cannot exceed 12 characters. |
 | `description`        | string        | A description about the wireguard profile. |
 | `loopback-address`   | ipv4-prefix   | An internal address prefix for KNI connectivity between wireguard and the data plane. |
-| `port`               | l4-port       | The UDP port for the wireguard instance to recieve connections on. |
+| `port`               | l4-port       | The UDP port for the wireguard instance to receive connections on. |
 | `inactivity-timeout` | milliseconds  | Inactivity timeout for wireguard sessions. By default this uses 180000 ms UDP timeout value. If customized to a non-default value, a new session-type will be automatically generated. |
 | `service-class`      | string        | The service-class to associate with the generated session-type for this wireguard profile. Wireguard sessions arriving at the router will be given this service-class. |
 | `access-policy`      | access-policy | List of access policies for the wireguard service. Packets allowed by this access policy will additionally be subject to wireguard security validation. See [service access policy](config_reference_guide.md#access-policy-service). |
@@ -689,7 +683,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 3.0.1
 
@@ -784,7 +778,7 @@ By using Saltstack data files, the time to apply high states across all assets i
 #### Issues Fixed
 
 - **PLUGIN-1072** Allow wireguard to start when the required version of `kmod-wireguard` is installed along with versions not used by the active kernel.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summary}] 128T-wireguard`
 - **PLUGIN-768** Support the Wireguard plugin on conductors running SSR versions `5.1.0` and greater.
 
 ### Caveat

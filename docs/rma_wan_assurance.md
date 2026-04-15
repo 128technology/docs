@@ -68,7 +68,7 @@ Do NOT assign the new node to a site at this time.
 
  ![Claim Button](/img/rma_wan_claim_button.png)
 
-  4. In the **Claim WAN Edges and Activate Subcriptions** dialog, add the device claim code to the list of devices to claim and select **Add**.
+  4. In the **Claim WAN Edges and Activate Subscriptions** dialog, add the device claim code to the list of devices to claim and select **Add**.
 
   5. **Un-check** the **Assign claimed WAN edges to site** box. This will place the device into inventory, to be assigned to a site later.
 

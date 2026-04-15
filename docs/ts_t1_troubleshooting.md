@@ -155,7 +155,7 @@ Mon 2020-03-09 17:56:40 UTC
      Alarms: 
  ***** w1g1: T1 Rx Alarms (Framer) *****
 
- ALOS:  OFF     | LOS:  OFF
+ ALSO:  OFF     | LOS:  OFF
  RED:   OFF     | AIS:  OFF
  LOF:   OFF     | RAI:  OFF
 
@@ -220,7 +220,7 @@ Mon 2020-03-09 17:50:14 UTC
      Alarms:
 ***** w1g1: T1 Rx Alarms (Framer) *****
 
- ALOS:  OFF     | LOS:  OFF
+ ALSO:  OFF     | LOS:  OFF
  RED:   OFF     | AIS:  OFF
  LOF:   OFF     | RAI:  OFF
 
@@ -315,7 +315,7 @@ In this example, the T1 namespace is `t1-ns-5`.
 
 ```
 [t128@node1 ~]$ sudo ip netns exec t1-ns-5 wanpipemon -i w1g1 -c fpm
-DSU/CSU Perfomance Monitoring counters were flushed.
+DSU/CSU Performance Monitoring counters were flushed.
 Performance monitoring counters flushed
 ```
 

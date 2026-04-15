@@ -190,7 +190,7 @@ OR
 
 - **I95-30812 PCLI session terminated when actively running commands:** Prior to this change only the enter key would reset the PCLI activity timer. With this change, the `tab` and `?` operations will also reset the PCLI activity timer.
 ------
-- **I95-35521 Ambigious validation error:** Errors now more clearly identify the source of the error.
+- **I95-35521 Ambiguous validation error:** Errors now more clearly identify the source of the error.
 ------
 - **I95-36053 High number of System Events on 128T Config changes:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
 ------
@@ -214,7 +214,7 @@ OR
 ------
 - **I95-38393 Router Cannot Get Past Connected State:** Resolved an issue where assets could become stuck in Connected state.
 ------
-- **I95-38395 TCP Out of Order can cause Stuck Flow:** Resolved an issue where a TCP FIN received before the data that preceeded it could cause a stuck flow.
+- **I95-38395 TCP Out of Order can cause Stuck Flow:** Resolved an issue where a TCP FIN received before the data that preceded it could cause a stuck flow.
 ------
 - **I95-38458 PCLI fails to start after upgrade:** Resolved an issue where caching errors prevented 128T from starting. 
 ------
@@ -244,7 +244,7 @@ OR
 ------
 - **I95-38963 Address sudo CVE-2021-3156:** Upgraded to later version.
 ------
-- **I95-38986 Template parse error is difficult to find:** Added additonal context to the error to help identify.
+- **I95-38986 Template parse error is difficult to find:** Added additional context to the error to help identify.
 ------
 - **I95-39011 AutomatedProvisioner process consuming 300%:** Resolved by increasing the timeout for local rpm queries. 
 ------
@@ -404,7 +404,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets.
 ------
-- **I95-37806 Unable to delete sesions when a service no longer exists.** Services that no longer exist can now be deleted. 
+- **I95-37806 Unable to delete sessions when a service no longer exists.** Services that no longer exist can now be deleted. 
 ------
 - **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
 ------
@@ -412,7 +412,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
 ------
-- **I95-37825 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
+- **I95-37825 Ensure that AIDE (Advanced Intrusion Detection Environment) is installed.** The AIDE package is installed and is a 128T dependency. 
 ------
 - **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation.
 ------
@@ -488,7 +488,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37576** Waypoints that are configured for `outbound-only` may experience one way traffic in session migration scenarios if the session on the public side expires, but the session on the private side still exists.
 ------
-- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
+- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexicographically sorted router for all other routers in authority instead of using a unique value per router.
 ------
 - **I95-37597** Data structure for FIB has been redesigned to increase memory utilization by 45%.
 ------
