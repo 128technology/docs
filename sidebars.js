@@ -204,6 +204,15 @@ module.exports = {
           ],
       },
     ],
+    "Deployment Guides": [
+      {
+        "type": "category",
+        "label": "Conductor-Managed Networks",
+        "items": [
+          "deploy_guide_conductor_ssr130",
+        ],
+      },
+    ],
     "Upgrading the SSR": [
       "intro_upgrade_considerations",
       "intro_upgrading",
