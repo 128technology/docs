@@ -24,7 +24,7 @@ Server grade CPU such as Intel Xeon or AMD EPYC must be used.
 
 Hyperthreading (Intel) or Symmetric Multi-Threading (AMD) must be enabled on Conductor platforms.
 
-| Number of managed routers | Physical Cores | Threads | Memory |
+| Number of managed nodes | Physical Cores | Threads | Memory |
 | ------------------------- | -------------- | ------- | ------ |
 | 1 to 10                   | 2 Xeon         | 4       | 8 GB   |
 | 1 to 25                   | 4 Xeon         | 8       | 8 GB   |
