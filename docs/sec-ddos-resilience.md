@@ -62,7 +62,7 @@ SVR peer-to-peer signaling is implemented using a BFD-like mechanism over UDP po
 Each BFD connection includes two key identifiers that are defined at configuration time:
 
 - **BFD Discriminator:** A unique value derived from a hash of the waypoint IPs. This identifies a specific peer connection.
-- **Session Key:** A tuple consisting of the source IP, source interface, destination IP, and peer name. This key is used as additionnal layer of authentification. In certificate-based SVR encryption, the peer-name, and IP addresses are stored securely by the device configuration, this information is not made available to devices snooping on the wire. The key itself is not transmitted in the packets, only the hash and key ID are transmitted.
+- **Session Key:** A tuple consisting of the source IP, source interface, destination IP, and peer name. This key is used as additional layer of authentication. In certificate-based SVR encryption, the peer-name, and IP addresses are stored securely by the device configuration, this information is not made available to devices snooping on the wire. The key itself is not transmitted in the packets, only the hash and key ID are transmitted.
 
 Packets received on the BFD listener are only accepted if the discriminator **and** session key match an existing session. Invalid or unknown sessions are dropped, making attacks against the BFD agent particularly difficult.
 

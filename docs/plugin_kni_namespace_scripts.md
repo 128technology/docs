@@ -184,7 +184,7 @@ route-tables:
 ```
 
 The `default` keyword is used to create route entries for the default route table in Linux. In the above example, the second entry for `gre` table will create a new table with the identifier `1024`. For each route-table, the user can configure the conditions and parameters for which the table can be used. These parameters translate to the options for the `ip rules add` command. The currently supported parameters include
-* ingress-interface (iif)
+* ingress-interface (if)
 * egress-interface (off)
 * from-prefix (from)
 * to-prefix (to)

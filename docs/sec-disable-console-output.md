@@ -21,7 +21,7 @@ In some cases, you may want to disable console output to protect the information
 The router must be rebooted for the change to take effect. 
 
 :::note
-The console is disabled once the operating system starts. This means that during the initial bootup sequence, the console is fully functional regardless of the console setting.
+The console is disabled once the operating system starts. This means that during the initial boot-up sequence, the console is fully functional regardless of the console setting.
 :::
 
 ### From the CLI
@@ -48,7 +48,7 @@ exit
 4. Reboot the router. The router must be rebooted for the change to take effect.
 
 :::note
-The console is disabled once the operating system starts. This means that during the initial bootup sequence, the console is fully functional regardless of the console setting.
+The console is disabled once the operating system starts. This means that during the initial boot-up sequence, the console is fully functional regardless of the console setting.
 :::
 
 #### Upgrades

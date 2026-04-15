@@ -14,7 +14,7 @@ To allow the NTP client to synchronize with an authenticated server the followin
 
 - **Server ip-address:** This is required.
 - **Key-number:** The specific number used by the server to identify the key. Range is 1-65534. The number configured on the device must match the key number expected by the server.
-- **Authentication type:** Either `md5` or `sha1` (recomended)
+- **Authentication type:** Either `md5` or `sha1` (recommended)
 - **Shared key from the server:** 20 characters long for `md5`. 40 characters long for `sha1`.
 
 Example config:

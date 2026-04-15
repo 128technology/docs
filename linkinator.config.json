@@ -1,0 +1,32 @@
+{
+  "recurse": true,
+  "cleanUrls": true,
+  "checkFragments": true,
+  "markdown": true,
+  "skip": [
+    "^mailto:",
+    "^https://docs\\.128technology\\.com",
+    "^https://tools\\.ietf\\.org",
+    "^https://www\\.wireguard\\.com",
+    "^https://regexr\\.com",
+    "^https://mosh\\.org",
+    "^https://www\\.mist\\.com",
+    "^https://portal\\.azure\\.com",
+    "^https://azuremarketplace\\.microsoft\\.com",
+    "^https://learn\\.microsoft\\.com",
+    "^https://json-schema\\.org",
+    "^https://aws\\.amazon\\.com",
+    "^https://docs\\.aws\\.amazon\\.com",
+    "^https://thekelleys\\.org\\.uk"
+  ],
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 3,
+  "retryErrorsJitter": 50,
+  "statusCodes": {
+    "403": "skip",
+    "404": "error",
+    "4xx": "warn",
+    "5xx": "warn"
+  }
+}

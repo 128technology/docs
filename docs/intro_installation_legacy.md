@@ -9,7 +9,7 @@ This guide focuses on legacy software installations - those prior to version 6.3
 Welcome to Session Smart Routing - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the SSR Router and Conductor products into a Linux operating system environment. This product suite is collectively known as SSR Software.
 
 ## Before You Begin
-Before you begin the installation and configuration of an SSR Networking Plaform, you must:
+Before you begin the installation and configuration of an SSR Networking Platform, you must:
 - Be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - Be a system administrator to perform the installation and configuration.
 - Have an entry in `/etc/sudoers` allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
@@ -33,9 +33,9 @@ A Mist-redirect ZTP process for Conductor-managed deployments is supported on Ju
 
 ### Image-based Installation
 
-SSR Version 6.3.0 provides support for image-based installs for both Conductor- and Mist-managed deployments. Earlier installations (6.0.x - 6.2.x) using the image-based install only support Mist-managed deployments. 
+SSR Version 6.3.0 supports image-based installs for both Conductor- and Mist-managed deployments. Earlier installations (6.0.x - 6.2.x) using the image-based install only support Mist-managed deployments. 
 
-An image-based ISO installation process is available for users who manage their network using the Mist Cloud. This installation and upgrade process is available for SSR version 6.0.x - 6.2.x, and is only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process. 
+An image-based ISO installation process is available for users who manage their network using the Mist Cloud. This installation and upgrade process applies to SSR versions 6.0.x–6.2.x and supports only Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process. 
 
 :::important
 The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for versions 6.0.x - 6.2.x in a conductor-managed WAN Telemetry deployment.

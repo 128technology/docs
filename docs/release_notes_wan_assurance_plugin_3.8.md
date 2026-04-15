@@ -27,7 +27,7 @@ A new alarm will be generated when a device is unable to register with the MIST 
 
 - **WAN-2853 Same interface is reported twice under different names**
 
-  _**Resolution:**_ For conductor managed devices runnning on Juniper branded hardware, the logic now accounts for custom user defined device names for HA sync and HA fabric interfaces.
+  _**Resolution:**_ For conductor managed devices running on Juniper branded hardware, the logic now accounts for custom user defined device names for HA sync and HA fabric interfaces.
 
 - **WAN-2991 DHCP pool exhaustion event not being generated**
 
@@ -59,7 +59,7 @@ A new alarm will be generated when a device is unable to register with the MIST 
 
 - **WAN-3077 DHCP pool events are missing the pool name**
 
-  _**Resolution:**_ Add the pool name for DHCP pool events in addition to the DHCP pool udpates.
+  _**Resolution:**_ Add the pool name for DHCP pool events in addition to the DHCP pool updates.
 
 - **WAN-3104 Duplicate LTE interface with null stats being reported**
 

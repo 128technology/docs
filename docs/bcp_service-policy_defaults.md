@@ -124,7 +124,7 @@ max-latency          225
 ```
 
 :::note
-The baseline configuration recommends `session-resiliency` to be set to `failover`, which is acceptable for infrequent and/or transient use of remote desktop services such as troubleshooting exercices, or transactional applications. For enterprises that use VDI as a standard means for allowing employees to access their desktops as hosted server infrastructure, consider setting `session-resiliency` to `true`.
+The baseline configuration recommends `session-resiliency` to be set to `failover`, which is acceptable for infrequent and/or transient use of remote desktop services such as troubleshooting exercises, or transactional applications. For enterprises that use VDI as a standard means for allowing employees to access their desktops as hosted server infrastructure, consider setting `session-resiliency` to `true`.
 :::
 
 #### Gaming
@@ -299,7 +299,7 @@ Babiarz, J., et. al., "Configuration Guidelines for DiffServ Service Classes", [
 
 ## Basic Service Policy Definitions
 
-The output here is provided in `flat` format, to facilitate copy/pasting into an existing SSR conductor or router. Note that it has referencial dependencies on the various system-default `service-class` configuration, so for users that have modified or removed those `service-class` elements, adjustments will be required.
+The output here is provided in `flat` format, to facilitate copy/pasting into an existing SSR conductor or router. Note that it has referential dependencies on the various system-default `service-class` configuration, so for users that have modified or removed those `service-class` elements, adjustments will be required.
 
 ```
 config authority service-policy voip-signaling name voip-signaling

@@ -26,7 +26,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | `delete` | Delete configuration data |
 | [`district`](#configure-authority-district) | Districts in the authority. |
 | [`dscp-map`](#configure-authority-dscp-map) | Configure Dscp Map |
-| [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`. |
+| [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with substitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-\{interface-id\}.\{router-name\}.\{authority-name\}`. |
 | [`enhanced-security-key-management`](#configure-authority-enhanced-security-key-management) | Use certificate-based security key management. |
 | [`fib-service-match`](#configure-authority-fib-service-match) | When creating FIB entries by matching route updates to service addresses, consider the specified service addresses. |
 | [`forward-error-correction-profile`](#configure-authority-forward-error-correction-profile) | A profile for Forward Error Correection parameters, describing how often to send parity packets. |
@@ -1677,7 +1677,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -2143,7 +2143,7 @@ This type is used by other entities that need to reference configured resource g
 
 ## `configure authority dynamic-hostname`
 
-Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-{interface-id}.{router-name}.{authority-name}`.
+Hostname format for interfaces with dynamic addresses. It is a template with substitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: `{interface-id}` for Network Interface Global Identifier, `{router-name}` for Router Name, `{authority-name}` for Authority Name. For example, `interface-{interface-id}.{router-name}.{authority-name}`.
 
 #### Usage
 
@@ -2995,7 +2995,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -3379,7 +3379,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -4659,7 +4659,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -6159,7 +6159,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -7885,7 +7885,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -8317,7 +8317,7 @@ A value from a set of predefined names.
 
 Options:
 
-- auto:            Use auto-negotation for the Ethernet link
+- auto:            Use auto-negotiation for the Ethernet link
 - 10Mbps-half:     Force the Ethernet link to 10 Mbps half duplex
 - 10Mbps-full:     Force the Ethernet link to 10 Mbps full duplex
 - 100Mbps-half:    Force the Ethernet link to 100 Mbps half duplex
@@ -8759,7 +8759,7 @@ configure authority router node device-interface network-interface <name>
 | [`hostname`](#configure-authority-router-node-device-interface-network-interface-hostname) | Hostname for the interface. This is an optional fully-qualified domain name (FQDN). |
 | [`icmp`](#configure-authority-router-node-device-interface-network-interface-icmp) | Enable/disable ICMP Blackhole |
 | [`ifcfg-option`](#configure-authority-router-node-device-interface-network-interface-ifcfg-option) | Interface config options for non-forwarding interfaces |
-| [`ingress-source-nat-pool`](#configure-authority-router-node-device-interface-network-interface-ingress-source-nat-pool) | Indicates whether source address (and optional port) translation is performed for flows targetted towards an inter-router peer. In this case, the nat will be applied on the ingress router as opposed to the final egress router. |
+| [`ingress-source-nat-pool`](#configure-authority-router-node-device-interface-network-interface-ingress-source-nat-pool) | Indicates whether source address (and optional port) translation is performed for flows targeted towards an inter-router peer. In this case, the nat will be applied on the ingress router as opposed to the final egress router. |
 | [`inter-router-security`](#configure-authority-router-node-device-interface-network-interface-inter-router-security) | The name of the security policy used for inbound inter-router traffic. |
 | [`management`](#configure-authority-router-node-device-interface-network-interface-management) | Allow management traffic to be sent over this interface |
 | [`management-vector`](#configure-authority-router-node-device-interface-network-interface-management-vector) | Vector configuration for non-forwarding interfaces |
@@ -13433,7 +13433,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -13566,7 +13566,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -13647,7 +13647,7 @@ A value from a set of predefined names.
 
 Options:
 
-- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alive enabled.
 - disabled:    Do not send keep-alive packets to keep pinhole open on an external NAT device.
 
 ## `configure authority router node device-interface network-interface adjacency nat-keep-alive tcp-inactivity-timeout`
@@ -15919,7 +15919,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -16551,7 +16551,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -16664,7 +16664,7 @@ A text value.
 
 ## `configure authority router node device-interface network-interface ingress-source-nat-pool`
 
-Indicates whether source address (and optional port) translation is performed for flows targetted towards an inter-router peer. In this case, the nat will be applied on the ingress router as opposed to the final egress router.
+Indicates whether source address (and optional port) translation is performed for flows targeted towards an inter-router peer. In this case, the nat will be applied on the ingress router as opposed to the final egress router.
 
 #### Usage
 
@@ -17003,7 +17003,7 @@ representation uses lowercase characters.
 In the value set and its semantics, this type is equivalent
 to the PhysAddress textual convention of the SMIv2.
 
-Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexadecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
 
 ## `configure authority router node device-interface network-interface neighborhood`
 
@@ -17488,7 +17488,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -17594,7 +17594,7 @@ A value from a set of predefined names.
 
 Options:
 
-- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alive enabled.
 - disabled:    Do not send keep-alive packets to keep pinhole open on an external NAT device.
 
 ## `configure authority router node device-interface network-interface neighborhood nat-keep-alive tcp-inactivity-timeout`
@@ -19490,7 +19490,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -20162,7 +20162,7 @@ configure authority router node device-interface shared-phys-address [<unicast-p
 
 A text value.
 
-Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexadecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
 Shared physical address must not be a multicast address nor 00:00:00:00:00:00
 
 ## `configure authority router node device-interface sriov-vlan-filter`
@@ -21097,7 +21097,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -21233,7 +21233,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -24008,7 +24008,7 @@ configure authority router reachability-profile protocol traffic-class <traffic-
 | ------- | ----------- |
 | [`acceptable-error-threshold`](#configure-authority-router-reachability-profile-protocol-traffic-class-acceptable-error-threshold) | Percentage of errors acceptable on the path before taking it offline. For TCP, this will include session closed before establishment, and any ICMP error that constitutes and session timeout before establishment. For UDP, this will include the destination unreachable class of ICMP errors |
 | `delete` | Delete configuration data |
-| [`enabled`](#configure-authority-router-reachability-profile-protocol-traffic-class-enabled) | Enable reachability-detection enforcment for this protocol and traffic class |
+| [`enabled`](#configure-authority-router-reachability-profile-protocol-traffic-class-enabled) | Enable reachability-detection enforcement for this protocol and traffic class |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;traffic-class&#x27; |
 | [`time-to-establishment`](#configure-authority-router-reachability-profile-protocol-traffic-class-time-to-establishment) | Reachability-detection time-to-establishment metrics |
@@ -24044,7 +24044,7 @@ Range: 0-100
 
 ## `configure authority router reachability-profile protocol traffic-class enabled`
 
-Enable reachability-detection enforcment for this protocol and traffic class
+Enable reachability-detection enforcement for this protocol and traffic class
 
 #### Usage
 
@@ -26213,7 +26213,7 @@ Default: none
 
 ##### area-authentication-type (enumeration)
 
-OSPF area authentication. Can be overriden by interface authentication.
+OSPF area authentication. Can be overridden by interface authentication.
 
 Options:
 
@@ -29768,7 +29768,7 @@ Configure the maximum number of prefixes that will be accepted from a neighbor f
 | `delete` | Delete configuration data |
 | [`max-prefixes`](#configure-authority-router-routing-routing-protocol-neighbor-address-family-prefix-limit-max-prefixes) | Maximum number of prefixes that will be accepted from the neighbor for this address family |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`restart-timer`](#configure-authority-router-routing-routing-protocol-neighbor-address-family-prefix-limit-restart-timer) | Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this adddress family. |
+| [`restart-timer`](#configure-authority-router-routing-routing-protocol-neighbor-address-family-prefix-limit-restart-timer) | Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this address family. |
 | `show` | Show configuration data for &#x27;prefix-limit&#x27; |
 | [`shutdown-threshold-pct`](#configure-authority-router-routing-routing-protocol-neighbor-address-family-prefix-limit-shutdown-threshold-pct) | Threshold on number of prefixes that can be received from a neighbor for this address family before generation of warning messages or log entries. |
 
@@ -29798,7 +29798,7 @@ An unsigned 32-bit integer.
 
 ## `configure authority router routing routing-protocol neighbor address-family prefix-limit restart-timer`
 
-Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this adddress family.
+Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this address family.
 
 #### Usage
 
@@ -32416,7 +32416,7 @@ Default: none
 
 ##### area-authentication-type (enumeration)
 
-OSPF area authentication. Can be overriden by interface authentication.
+OSPF area authentication. Can be overridden by interface authentication.
 
 Options:
 
@@ -35931,7 +35931,7 @@ Configure the maximum number of prefixes that will be accepted from a neighbor f
 | `delete` | Delete configuration data |
 | [`max-prefixes`](#configure-authority-router-routing-vrf-routing-protocol-neighbor-address-family-prefix-limit-max-prefixes) | Maximum number of prefixes that will be accepted from the neighbor for this address family |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`restart-timer`](#configure-authority-router-routing-vrf-routing-protocol-neighbor-address-family-prefix-limit-restart-timer) | Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this adddress family. |
+| [`restart-timer`](#configure-authority-router-routing-vrf-routing-protocol-neighbor-address-family-prefix-limit-restart-timer) | Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this address family. |
 | `show` | Show configuration data for &#x27;prefix-limit&#x27; |
 | [`shutdown-threshold-pct`](#configure-authority-router-routing-vrf-routing-protocol-neighbor-address-family-prefix-limit-shutdown-threshold-pct) | Threshold on number of prefixes that can be received from a neighbor for this address family before generation of warning messages or log entries. |
 
@@ -35961,7 +35961,7 @@ An unsigned 32-bit integer.
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family prefix-limit restart-timer`
 
-Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this adddress family.
+Time interval after which the BGP session is re-established after being torn down due to exceeding the max-prefix limit for this address family.
 
 #### Usage
 
@@ -37849,7 +37849,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -37961,7 +37961,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -38195,7 +38195,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -39428,7 +39428,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -40452,7 +40452,7 @@ The shortest historical retention bucket
 | `delete` | Delete configuration data |
 | [`duration`](#configure-authority-router-system-metrics-retention-short-duration) | How long the short retention should retain metrics |
 | [`enabled`](#configure-authority-router-system-metrics-retention-short-enabled) | Whether short and subsequent retentions should be disabled |
-| [`interval`](#configure-authority-router-system-metrics-retention-short-interval) | How frequently metrics should be inserted into the short retention. This is equivallent to the deprecated &#x27;sample-period&#x27; element. |
+| [`interval`](#configure-authority-router-system-metrics-retention-short-interval) | How frequently metrics should be inserted into the short retention. This is equivalent to the deprecated &#x27;sample-period&#x27; element. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;short&#x27; |
 
@@ -40510,7 +40510,7 @@ Options: true or false
 
 ## `configure authority router system metrics retention short interval`
 
-How frequently metrics should be inserted into the short retention. This is equivallent to the deprecated &#x27;sample-period&#x27; element.
+How frequently metrics should be inserted into the short retention. This is equivalent to the deprecated &#x27;sample-period&#x27; element.
 
 #### Usage
 
@@ -40800,7 +40800,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -40964,7 +40964,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -41475,7 +41475,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -42869,7 +42869,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -43530,7 +43530,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -45362,7 +45362,7 @@ Options:
 - metric-condition:                         A metric condition
 - origin-condition:                         An origin condition
 - peer-condition:                           A peer condition
-- probability-condition:                    A probablity condition
+- probability-condition:                    A probability condition
 - tag-condition:                            A tag condition
 
 ## `configure authority routing policy statement name`
@@ -45739,7 +45739,7 @@ Length: 32
 
 A hexadecimal string with octets represented as hex digits separated by colons. The canonical representation uses lowercase characters.
 
-Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexadecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
 Length: 47
 
 ## `configure authority security encryption-key`
@@ -45776,7 +45776,7 @@ Length: 32,64
 
 A hexadecimal string with octets represented as hex digits separated by colons. The canonical representation uses lowercase characters.
 
-Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexadecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
 Length: 47,95
 
 ## `configure authority security hmac`
@@ -45875,7 +45875,7 @@ Length: 8,16,32,40,64
 
 A hexadecimal string with octets represented as hex digits separated by colons. The canonical representation uses lowercase characters.
 
-Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexidecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
+Required format: &#x27;XX:XX:XX:XX:XX:XX&#x27;, where &#x27;X&#x27; is a hexadecimal digit (e.g., 00:0a:95:9d:68:16). Length may vary from the example shown.
 Length: 11,23,47,59,95
 
 ## `configure authority security hmac-mode`
@@ -46855,7 +46855,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -49596,7 +49596,7 @@ configure authority session-type <name>
 | [`description`](#configure-authority-session-type-description) | A description of the session type. |
 | [`initial-timeout`](#configure-authority-session-type-initial-timeout) | The inactivity timeout for sessions that are not yet established. |
 | [`name`](#configure-authority-session-type-name) | The name of the session type. |
-| [`nat-keep-alive`](#configure-authority-session-type-nat-keep-alive) | Enable/disable generation of NAT keep-alives for sessions of this type if the functionality is enabled in the neighborhood |
+| [`nat-keep-alive`](#configure-authority-session-type-nat-keep-alive) | Enable/disable generation of NAT keep-alive for sessions of this type if the functionality is enabled in the neighborhood |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`resource-group`](#configure-authority-session-type-resource-group) | Associate this session type with a top-level resource-group. |
 | [`service-class`](#configure-authority-session-type-service-class) | The service class this type belongs to. |
@@ -49679,7 +49679,7 @@ Length: 0-63
 
 ## `configure authority session-type nat-keep-alive`
 
-Enable/disable generation of NAT keep-alives for sessions of this type if the functionality is enabled in the neighborhood
+Enable/disable generation of NAT keep-alive for sessions of this type if the functionality is enabled in the neighborhood
 
 #### Usage
 
@@ -50318,7 +50318,7 @@ IP addresses.  Note that the resolution of a domain-name value
 may require to query multiple DNS records (e.g., A for IPv4
 and AAAA for IPv6).  The order of the resolution process and
 which DNS record takes precedence can either be defined
-explicitely or it may depend on the configuration of the
+explicitly or it may depend on the configuration of the
 resolver.
 
 Domain-name values use the US-ASCII encoding.  Their canonical
@@ -50674,7 +50674,7 @@ configure authority tenant member <neighborhood>
 
 | name | description |
 | ---- | ----------- |
-| neighborhood | Neigborhood where tenant members are located. |
+| neighborhood | Neighborhood where tenant members are located. |
 
 ##### Subcommands
 
@@ -50682,7 +50682,7 @@ configure authority tenant member <neighborhood>
 | ------- | ----------- |
 | [`address`](#configure-authority-tenant-member-address) | The source address(es) within the neighborhood that define the tenant members. |
 | `delete` | Delete configuration data |
-| [`neighborhood`](#configure-authority-tenant-member-neighborhood) | Neigborhood where tenant members are located. |
+| [`neighborhood`](#configure-authority-tenant-member-neighborhood) | Neighborhood where tenant members are located. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;member&#x27; |
 
@@ -50751,7 +50751,7 @@ characters and leading zeros are not allowed.
 
 ## `configure authority tenant member neighborhood`
 
-Neigborhood where tenant members are located.
+Neighborhood where tenant members are located.
 
 #### Usage
 
@@ -51275,8 +51275,8 @@ Configure Web Theme
 | `delete` | Delete configuration data |
 | [`logo`](#configure-authority-web-theme-logo) | The logo used across the authority. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`primary-color`](#configure-authority-web-theme-primary-color) | The hexidecimal code of the primary color in the authority&#x27;s theme. |
-| [`secondary-color`](#configure-authority-web-theme-secondary-color) | The hexidecimal code of the secondary color in the authority&#x27;s theme. |
+| [`primary-color`](#configure-authority-web-theme-primary-color) | The hexadecimal code of the primary color in the authority&#x27;s theme. |
+| [`secondary-color`](#configure-authority-web-theme-secondary-color) | The hexadecimal code of the secondary color in the authority&#x27;s theme. |
 | `show` | Show configuration data for &#x27;web-theme&#x27; |
 | [`tab-icon`](#configure-authority-web-theme-tab-icon) | The icon displayed in the browser tab. |
 
@@ -51304,7 +51304,7 @@ A text value.
 
 ## `configure authority web-theme primary-color`
 
-The hexidecimal code of the primary color in the authority&#x27;s theme.
+The hexadecimal code of the primary color in the authority&#x27;s theme.
 
 #### Usage
 
@@ -51328,7 +51328,7 @@ Length: 6
 
 ## `configure authority web-theme secondary-color`
 
-The hexidecimal code of the secondary color in the authority&#x27;s theme.
+The hexadecimal code of the secondary color in the authority&#x27;s theme.
 
 #### Usage
 

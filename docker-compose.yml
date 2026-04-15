@@ -11,5 +11,6 @@ services:
       - ./src:/app/src
       - ./static:/app/static
       - ./docusaurus.config.js:/app/docusaurus.config.js
+      - ./linkinator.config.json:/app/linkinator.config.json
       - ./sidebars.js:/app/sidebars.js
     working_dir: /app/

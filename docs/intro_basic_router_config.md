@@ -5,7 +5,7 @@ sidebar: Basic Router Configuration
 The steps below generate a basic router configuration on the conductor. This configuration becomes part of the quickstart file that is generated and automatically pulled into the Bootstrap process after the Router installation. 
 
 ## Configure a Router from the Conductor
-Using the Conductor, the following procedures guide you through a basic router configuration. The names and IP addresses used here are for example only, to provide continutity in the sample process. 
+Using the Conductor, the following procedures guide you through a basic router configuration. The names and IP addresses used here are for example only, to provide continuity in the sample process. 
 
 ### Create the Router
 1.	Log in to the Conductor GUI.

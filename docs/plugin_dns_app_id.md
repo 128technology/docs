@@ -62,7 +62,7 @@ The plugin contains built in application patterns for Gmail, Google Drive, YouTu
 | -------------- | --- |
 | Gmail        | [link](https://support.google.com/a/answer/9497877?hl=en) |
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
-| Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-fWindows Updateiles) |
+| Windows Update | [link 1](https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/windows-update-issues-troubleshooting?toc=/windows/deployment/toc.json&bc=/windows/deployment/breadcrumb/toc.json#device-cannot-access-update-fWindows) |
 | YouTube   | [link](https://www.netify.ai/resources/applications/youtube) |
 
 By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, `youtube` and `windows-update`.
@@ -104,7 +104,7 @@ exit
 ```
 
 #### Deprecated Patterns
-The latest version is backwards compatabile with the `patterns` regex functionality for `custom-apps` however it is much more natural to use `domain-name`. In future releases, the `patterns` functionality will be obsoleted and removed.
+The latest version is backwards compatible with the `patterns` regex functionality for `custom-apps` however it is much more natural to use `domain-name`. In future releases, the `patterns` functionality will be obsoleted and removed.
 
 :::note
 The `.` character bears special meaning within regular expressions, and matches *any single character*. Because hostnames contain literal `.` characters, in order to explicitly reference a dot separator, you must prefix it with **two** backslash characters. I.e., to have a pattern match the hostname `www.128technology.com`, you would type it into the PCLI as `www.128technology.com`. The PCLI will render the double backslash characters as a single backslash when you `show` the configuration.
@@ -369,7 +369,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 #### Issues Fixed
 
 - **PLUGIN-2949** Resolve stale FIB entries on total expiration of an application's DNS entries
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 4.0.1
 
@@ -450,7 +450,7 @@ The DNS cache plugin is enhanced to synchronize the cache between HA nodes to al
 #### Issues Fixed
 
 - **PLUGIN-768** Support the DNS App ID plugin in SSR versions `5.1.0` and greater.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-dns-app-id`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summary}] 128T-dns-app-id`
 
 ### Release 2.2.1
 

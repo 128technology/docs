@@ -177,7 +177,7 @@ exit
 
 ### Broadcast and Multicast Source Addresses
 
-To prevent DoS attacks, packets with broadcast or multicast source IP and MAC addresses are now dropped by default. Otherwise the traffic is propogated across the entire network, flooding the network.
+To prevent DoS attacks, packets with broadcast or multicast source IP and MAC addresses are now dropped by default. Otherwise the traffic is propagated across the entire network, flooding the network.
 
 ## Transport State Enforcement
 

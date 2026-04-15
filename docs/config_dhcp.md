@@ -7,7 +7,7 @@ The **Dynamic Host Configuration Protocol** (**DHCP**) is a network management p
 
 The DHCP protocol provides a mechanism for unprovisioned hosts to request an IP-address and configuration via broadcast requests. Based on available address pools, a DHCP server can provide a DHCP client a time-limited IP address “lease”.
 
-When running in a HA configuration with two nodes, only one of the nodes will actively operate as a DHCP server for those intererfaces that are shared between both systems. Client lease information is sychronized between nodes to ensure that upon link or node failure, the newly active DHCP server will operate with the same information.
+When running in a HA configuration with two nodes, only one of the nodes will actively operate as a DHCP server for those interfaces that are shared between both systems. Client lease information is synchronized between nodes to ensure that upon link or node failure, the newly active DHCP server will operate with the same information.
 
 :::important
 - Configuring an interface for DHCP server while the interface’s tenant (or a parent tenant) is configured for access to a DHCP relay service is an unsupported configuration and may result in unpredictable behavior.
@@ -57,7 +57,7 @@ custom             4
 exit
 ```
 
-Static reservations are supported.  When configuring a static assignment within an address pool, the lease will inherit the attributes of the pool (typically this would be the _router_ and _domain-server_).  If you desire to override any of the attributes of the DHCP pool, these can be configured uniquely per static assignment.
+Static reservations are supported.  When configuring a static assignment within an address pool, the lease will inherit the attributes of the pool (typically this would be the _router_ and _domain-server_).  If you want to override any of the attributes of the DHCP pool, these can be configured uniquely per static assignment.
 
 ```
 address-pool       192.168.0.20
@@ -76,7 +76,7 @@ exit
 
 ### Vendor-Specific Information DHCP Options
 
-Being deployed as a router requires the SSR platform to successfully interoperate with a myriad of network elements.  These elements can change from customer to customer and use case to use case.  To ensure interoperability between these network elements it can become necessary to support Options and Vendor Extensions on top of base functional support.
+As a router, the SSR platform must interoperate with a wide variety of network elements.  These elements can change from customer to customer and use case to use case.  To ensure interoperability between these network elements it can become necessary to support Options and Vendor Extensions on top of base functional support.
 
 The two supported Vendor-Specific Information are:
 
@@ -85,7 +85,7 @@ The two supported Vendor-Specific Information are:
 
 #### Configuration
 
-Two new configuration objects have added to the `dhcp-server` object: `vendor-specific-information` and `vendor-indentifying-vendor-specific-information`.
+Two new configuration objects have been added to the `dhcp-server` object: `vendor-specific-information` and `vendor-indentifying-vendor-specific-information`.
 
 An example `vendor-specific-information` DHCP option is shown below:
 

@@ -35,7 +35,7 @@ Report the client lease information when SSR acts as a DHCP server to the MIST c
 
  - **WAN-3019 Ensure the monitoring-agent-once service runs without failures**
 
-    _**Resolution:**_ Add approproate conditions in the data collection logic to avoid unnecessary failures.
+    _**Resolution:**_ Add appropriate conditions in the data collection logic to avoid unnecessary failures.
 
  - **WAN-3027 ARV events for peers with hostnames are delayed**
 

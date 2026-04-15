@@ -112,7 +112,7 @@ At the Authority Level, scroll down to Services, and click ADD.
 
 ![Share Service Routes](/img/howto_config_snmp16-1.png)
 
-3.  Scroll down to Policies, and set the Security Policy to **internal**. *(Is there no need to configure a Service Policy?)*
+3.  Scroll down to Policies, and set the Security Policy to **internal**.
 
 ![Security Policy](/img/howto_config_snmp16-2.png)
 

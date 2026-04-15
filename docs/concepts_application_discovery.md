@@ -84,7 +84,7 @@ Try to define the service as concisely as possible, but always bear in mind that
 
 ## Tools of the Trade
 
-The SSR software has a number of built-in tools to help faciliate the application discovery workflow. In general, these are used in conjunction to provide multiple proof points.
+The SSR software has a number of built-in tools to help facilitate the application discovery workflow. In general, these are used in conjunction to provide multiple proof points.
 
 ### SSR's Session Table
 

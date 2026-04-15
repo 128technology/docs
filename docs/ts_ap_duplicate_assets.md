@@ -139,7 +139,7 @@ If the conductor is in HA configuration then the salt keys need to be deleted fr
 
 The salt-minion may reach out again automatically and get accepted by the conductor if the asset ID matches an asset ID in the SSR configuration. If the salt-minion does not reach out then it needs to be restarted manually from the Linux command line with `systemctl restart salt-minion`.
 
-If the root cause was indeed a salt-minion that regenerated new keys (situation #1 above) and not two different salt-minions with different keys and the same ID (situation #2 above), then this procedure will solve your problem. The asset will reconnect properly and no duplicate ID error will appear. If the duplicate asset ID error and the denied and accepted keys reappear, then the user knows they are dealing with multiple salt-minions with the same minion ID.
+If the root cause was a salt-minion that regenerated new keys (situation #1 above) and not two different salt-minions with different keys and the same ID (situation #2 above), this procedure will resolve the issue. The asset will reconnect properly and no duplicate ID error will appear. If the duplicate asset ID error and the denied and accepted keys reappear, then the user knows they are dealing with multiple salt-minions with the same minion ID.
 
 ### Rectifying Multiple Salt-Minions with the Same Minion ID
 

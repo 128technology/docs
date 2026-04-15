@@ -11,7 +11,7 @@ The example below shows the "Apple" and "Hello" added as external resources.
 
 For applications that are running on the same platform as the SSR, the authentication token can be used to guarantee access to the requested resource.
 
-In order to access the user token, the following code snippet can be leveraged:
+To access the user token, use the following code snippet:
 ```js
 export function getUserToken(): string | undefined {
   const userRaw = window.sessionStorage.getItem('user') || '{}';
@@ -19,9 +19,9 @@ export function getUserToken(): string | undefined {
   return user.token;
 }
 ```
-If the function `getUserToken()` returns a non-emtpy string, then the token is valid and the user is considered to be logged in. Any other return value indicates an invalid token or set of credentials.
+If the function `getUserToken()` returns a non-empty string, then the token is valid and the user is considered to be logged in. Any other return value indicates an invalid token or set of credentials.
 
-In order to extend the web UI's sidebar, create a JSON file in the directory `/etc/128technology/thirdparty/ui-links`.  The contents of the file *must* follow the format:
+To extend the web UI's sidebar, create a JSON file in the directory `/etc/128technology/third-party/ui-links`.  The contents of the file *must* follow the format:
 
 `example_link.json`
 ```json

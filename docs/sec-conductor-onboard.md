@@ -22,7 +22,7 @@ When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505
 
 To provide a secure and mutually authenticated onboarding mechanism, the following information must be configured.
 
-- Pre-shared key: The onboarding pre-shared key is a 48-character alpha-numeric string, configured at the router level. This key is mandatory for the SCO process.
+- Pre-shared key: The onboarding pre-shared key is a 48-character alphanumeric string, configured at the router level. This key is mandatory for the SCO process.
 - Conductor Public certificate: A public-private key certificate.
 - Conductor CA certificate: A public certificate signed by a preferred CA signing authority. 
 
@@ -138,7 +138,7 @@ To provide secure and mutually authenticated onboarding, the following additiona
 - Conductor Public certificate
 - Conductor CA certificate
 
-The onboarding pre-shared key will be 48-character alpha-numeric string configured at the router level. This key is mandatory for SCO process to work successfully.
+The onboarding pre-shared key will be 48-character alphanumeric string configured at the router level. This key is mandatory for SCO process to work successfully.
 The conductor is expected to contain a public-private key certificate with the additional option to sign the public certificate by the organization’s preferred CA signing authority. The public certificate and CA certificate will be configured in the conductor data model.
 
 ## Token Creation
@@ -179,7 +179,7 @@ The next step in the process is to generate an onboarding token from the conduct
 
 ### Router-Specific Tokens
 
-For better control over distribution and re-use of tokens the user can request unique tokens per router. In this mode it is required that an `asset-id` be assigned to each node within the router before generating a token. 
+For better control over distribution and reuse of tokens the user can request unique tokens per router. In this mode it is required that an `asset-id` be assigned to each node within the router before generating a token. 
 
 The onboarding-token uses the JSON Web Token format. Below is an example of the payload section. Additional information about the router configuration necessary for initialization can also be included in the token.
 

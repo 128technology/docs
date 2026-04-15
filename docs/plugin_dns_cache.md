@@ -3,7 +3,7 @@ title: DNS Cache Plugin
 sidebar_label: DNS Cache
 ---
 
-The SSR-dns-cache plugin provides a DNS caching service on your SSR router by forwarding all traffic on a configured `ingress-service` and `tenant` to [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html). By default it uses existing system configuration for nameserver resolution, but supports optionally configuring custom server addresses. The plugin is implemented as a [service function chain](plugin_intro.md#service-function-chaining) (SFC) where the DNS traffic received on an ingress interface is detoured through a [Kernel Network Interface](concepts_kni.md) (KNI) to be cached by `dnsmasq`. A typical flow of the packets for the plugin is illustrated below:
+The SSR-dns-cache plugin provides a DNS caching service on your SSR router by forwarding all traffic on a configured `ingress-service` and `tenant` to [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html). By default it uses existing system configuration for nameserver resolution, but supports optionally configuring custom server addresses. The plugin is implemented as a [service function chain](plugin_intro.md#service-function-chaining) (SFC) where the DNS traffic received on an ingress interface is detoured through a [Kernel Network Interface](concepts_kni.md) (KNI) to be cached by `dnsmasq`. A typical flow of the packets for the plugin is illustrated below:
 
 lan-intf (lan-tenant) > `ingress-service` > `dnsmasq` > dns-kni (`tenant`) > egress-service > wan-intf
 
@@ -246,7 +246,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 4.0.1
 

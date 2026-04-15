@@ -24,7 +24,7 @@ There are four types of packets that are enabled for Ethernet Over SVR:
 
 ### Non-IP, Multicast and broadcast Traffic
 
-Non-IP (ARP, CDP, LLDP, etc), multicast, and broadcast traffic are encapsulated within an IP payload and transported as an SVR packet. Once marked as EoSVR, the flow is given a high timeout, allowing the flow to be reused for all non-IP packets. 
+Non-IP (ARP, CDP, LLDP, etc.), multicast, and broadcast traffic are encapsulated within an IP payload and transported as an SVR packet. Once marked as EoSVR, the flow is given a high timeout, allowing the flow to be reused for all non-IP packets. 
 All SVR capabilities are available for non-IP encapsulated packets including failover, service policy enforcement, and multi-hop. EoSVR is backward compatible with all existing routers, and can be enabled on a per end point basis.
 
 Each router with an EoSVR bridge auto generates a new, specific service and service-route for EoSVR traffic, allowing remote routers with the same bridge name to access the EoSVR bridge. When the bridge name is manually specified, a new service-route is introduced.
@@ -67,7 +67,7 @@ Service Vxlan_To_R1
   Port 4789
   Address 2.2.2.0/24
 ```
-If more addresses are involved, they are added to the existing service. All VxLAN traffic is sent over SVR with new fields in ebedded in the metadata. 
+If more addresses are involved, they are added to the existing service. All VxLAN traffic is sent over SVR with new fields in embedded in the metadata. 
 
 ### Ethernet Over Secure Vector Routing across a NAT boundary
 

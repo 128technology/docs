@@ -9,16 +9,16 @@ Application Identification can automatically learn, identify, and classify appli
 
 - **module:** The SSR uses an external module for application classification. For more information about the external module, see [Concepts of Application Identification](concepts_appid.md).
 - **tls:** The SSR inspects the Server Name Indicaton (SNI) in the Client Hello to identify applications.  
-- **http:** The SSR will learn applications via HTTP host name parsing. 
+- **http:** The SSR learns applications via HTTP host name parsing. 
 - **all:** Includes all modes. To use [web filtering](config_domain-based_web_filter.md), `application-identification` must be set to **all**. 
 
-By default, the SSR automatically downloads domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [`application-identification` in the Element Reference section.](config_reference_guide.md#application-identification)
+By default, the SSR automatically downloads domain and application datasets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [`application-identification` in the Element Reference section.](config_reference_guide.md#application-identification)
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
 
 ## Application Summary
 
-The Application Summary is available for routers where both Application Identification and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`. Refer to [Application Summary](how_to_use_app_summary.md) to learn more about using the Application Summary. 
+The Application Summary is available for routers where both Application Identification and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`. Refer to [Application Summary](howto_use_app_summary.md) to learn more about using the Application Summary. 
 
 ### Configuring Learning Mode and Application Summary
 
