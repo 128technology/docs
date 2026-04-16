@@ -14,7 +14,7 @@
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
     "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
-    "check-links": "linkinator ./build --config linkinator.config.json"
+    "check-links": "linkinator \"documentation/us/en/software/session-smart-router/**/*.html\" --server-root build --config linkinator.config.json"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.0",
