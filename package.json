@@ -6,7 +6,7 @@
     "start": "docusaurus start --host 0.0.0.0",
     "start:offline": "OFFLINE_DOCS=1 docusaurus start --host 0.0.0.0",
     "serve": "docusaurus serve",
-    "build": "docusaurus build",
+    "build": "docusaurus build --out-dir build/documentation/us/en/software/session-smart-router",
     "build:offline": "OFFLINE_DOCS=1 docusaurus build --out-dir=offline-docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
