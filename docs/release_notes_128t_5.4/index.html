@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 5.4 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_5.4"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 5.4 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_5.4"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_5.4" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_5.4" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"5.4","item":"https://docs.128technology.com/docs/release_notes_128t_5.4"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.38839998.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.441e6026.js" defer="defer"></script>
 <script src="/assets/js/main.a54e2800.js" defer="defer"></script>
 </head>
 <body>
@@ -61,6 +61,10 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-5410-3">Release 5.4.10-3<a href="#release-5410-3" class="hash-link" aria-label="Direct link to Release 5.4.10-3" title="Direct link to Release 5.4.10-3" translate="no">​</a></h2>
 <p><strong>Release Date: November 23, 2022</strong></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVEs have been addressed in this release:</strong> I95-48644, I95-48648, I95-48650, I95-48653.</li>
+</ul>
+<hr>
 <ul>
 <li class=""><strong>I95-48529 BFD sending link notification before hold-down timer expires:</strong> Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.</li>
 </ul>
@@ -141,6 +145,10 @@
 <li class=""><strong>I95-47418 Audit Events for Plugin Install/Remove:</strong> There is a new audit event that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running <code>show events type admin.plugin</code></li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVE&#x27;s have been addressed and resolved:</strong> I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.</li>
+</ul>
+<hr>
 <ul>
 <li class=""><strong>I95-39454 Created User cannot access PCLI operations:</strong> Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.</li>
 </ul>
@@ -248,6 +256,10 @@ PCLI: The PCLI command <code>save tech-support-info</code> can now collect logs 
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
+<li class=""><strong>The following CVE&#x27;s have been addressed and resolved:</strong> I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.</li>
+</ul>
+<hr>
+<ul>
 <li class=""><strong>I95-38408 DHCP server on wrong vlan sends offer in response to discover message:</strong> Hosted DHCP servers that do not have an explicit vlan configured are now explicitly treated as vlan 0, and handle any DHCP packets that are untagged/vlan 0, in order to prevent those packets from being multicasted to multiple DHCP servers.</li>
 </ul>
 <hr>
@@ -313,6 +325,10 @@ PCLI: The PCLI command <code>save tech-support-info</code> can now collect logs 
 <li class=""><strong>I95-44769 Add Linux system logs to the Tech Support Information data:</strong> This patch allows for customizations of the systemd journal content included in the <code>tech-support-info</code> bundle, and includes additional default content.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVE&#x27;s have been addressed and resolved:</strong> I95-45054, I95-45056, I95-45059, I95-45060, I95-45123, I95-45165, I95-46020, I95-46359.</li>
+</ul>
+<hr>
 <ul>
 <li class=""><strong>I95-36758 Redistributed service route distance not configurable:</strong> Support has been added for the configuration of admin distance for kernel routes generated by services with service routes and for BGP over SVR services.</li>
 </ul>
@@ -650,6 +666,11 @@ PCLI: The PCLI command <code>save tech-support-info</code> can now collect logs 
 <li class=""><strong>I95-44224 Autocomplete for Resource Groups:</strong> Autocomplete has been added to the pcli when configuring resource groups.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-7">Resolved Issues<a href="#resolved-issues-7" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVE issues have been addressed and resolved with this release:</strong>
+I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95-43261, I95-43471, I95-43623, I95-43625, I95-44087, I95-44088, I95-44206, I95-44322</li>
+</ul>
+<hr>
 <ul>
 <li class=""><strong>I95-42942 GUI Session Capture not working:</strong> Resolved an issue with Packet Count and Session Count options. Session Capture now works as expected.</li>
 </ul>

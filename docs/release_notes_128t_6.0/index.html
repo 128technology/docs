@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.0 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.0"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.0 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.0"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.0" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.0" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.0","item":"https://docs.128technology.com/docs/release_notes_128t_6.0"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.83fcb23c.css">
-<script src="/assets/js/runtime~main.38839998.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.441e6026.js" defer="defer"></script>
 <script src="/assets/js/main.a54e2800.js" defer="defer"></script>
 </head>
 <body>
@@ -79,6 +79,10 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <li class="">Add the ability to walk packet buffer pools, count the locations, and display.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.</li>
+</ul>
+<hr>
 <ul>
 <li class=""><strong>The following issues have been identified during penetration testing and addressed in this release:</strong> I95-48445, I95-48448.</li>
 </ul>
@@ -336,6 +340,10 @@ and there are established flows for any of these services, a link flap triggerin
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
+<li class=""><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.</li>
+</ul>
+<hr>
+<ul>
 <li class=""><strong>I95-34384 Rotated datastores with different permissions:</strong> Resolved an issue where some rotated datastore files had different permissions.</li>
 </ul>
 <hr>
@@ -541,6 +549,10 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
+<li class=""><strong>The following CVE&#x27;s have been addressed and resolved:</strong> I95-48644, I95-48648, I95-48650, I95-48653.</li>
+</ul>
+<hr>
+<ul>
 <li class=""><strong>I95-32789 Peer metrics unavailable after Conflux synchronization:</strong> Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.</li>
 </ul>
 <hr>
@@ -739,6 +751,10 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
+<li class=""><strong>The following CVE&#x27;s have been addressed and resolved:</strong> I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.</li>
+</ul>
+<hr>
+<ul>
 <li class=""><strong>I95-39454 Newly created user cannot access PCLI operations:</strong> Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.</li>
 </ul>
 <hr>
@@ -899,6 +915,10 @@ and there are established flows for any of these services, a link flap triggerin
 <li class=""><strong>I95-47418 Audit Events for Plugins:</strong> A new audit event has been added that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running <code>show events type admin.plugin</code>.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVE&#x27;s have been addressed and resolved:</strong> I95-45054, I95-45060, I95-45165, I95-47485.</li>
+</ul>
+<hr>
 <ul>
 <li class=""><strong>I95-45094 Unnecessary rotation of salt minion config:</strong> Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.</li>
 </ul>
