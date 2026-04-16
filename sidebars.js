@@ -319,6 +319,7 @@ module.exports = {
           "config_bfd",
           "config_bfd_tunnel",
           "howto_tune_bfd",
+          "howto_bfd_behavior_congestion",
           "howto_config_PPPoE",
           "howto_pppoe_vlan",
           "config_multicast",
