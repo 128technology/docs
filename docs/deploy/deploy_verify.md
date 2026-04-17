@@ -1,6 +1,6 @@
 ---
-title: "Step 6 — Verify the Deployment"
-sidebar_label: "Step 6: Verify the Deployment"
+title: Verify the Deployment
+sidebar_label: Verify the Deployment
 ---
 
 This section confirms that the deployment is fully operational. Run each check in sequence to validate every layer of the stack.
