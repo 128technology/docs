@@ -2,9 +2,11 @@
 title: Conductor Installation
 sidebar_label: Conductor Installation
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import ConnectConsole from './_install_connect_console.md';
 import BootUSBSSR100 from './_install_boot_usb_ssr100.md';
 import BootUSBSSR1000 from './_install_boot_usb_ssr1000.md';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 After downloading the ISO, use the procedure in [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb) to create a bootable USB. 
 
@@ -79,7 +81,7 @@ Configure the IP address that will be used to manage the network routers.
 
 1. Select the device ethernet interface that corresponds to the management port for your Conductor and select `<Edit>`
 
-<img {useBaseUrl('/img/nmtui-linux-a.png')} alt="Configure the Ethernet port" width="192" height="243" />
+<img src={useBaseUrl('/img/nmtui-linux-a.png')} alt="Configure the Ethernet port" width="192" height="243" />
 
 2. In the Edit Connection screen, configure the following:
 - The IP address for the port
