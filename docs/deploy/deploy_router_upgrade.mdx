@@ -1,0 +1,132 @@
+---
+title: "Step 5 — Upgrade Routers to SSR 7.1.4"
+sidebar_label: "Step 5: Upgrade Routers"
+---
+import UpgradeNote701 from '../_upgrade_701_conductor_note.md';
+
+Once an SSR130 router is onboarded and synchronized with the conductor, upgrade it to SSR 7.1.4. Upgrades are initiated from the conductor and executed without requiring physical access to the router.
+
+:::note
+The conductor must be running **SSR 7.1.4 or later** before upgrading any router to 7.1.4. The router software version cannot be higher than the conductor version. If you have not already upgraded the conductor to 7.1.4, do so first using the procedure in [Upgrading the Conductor](../upgrade_ibu_conductor.mdx).
+:::
+
+<UpgradeNote701/>
+
+## Software Availability
+
+The conductor downloads the router software image from the Juniper software repository. The conductor must have:
+- Valid Artifactory credentials configured (see [Configure the Software Access Token](deploy_conductor_install.mdx#configure-the-software-access-token))
+- Internet connectivity on the management network
+
+## Upgrade Using the Conductor GUI
+
+This is the recommended method for upgrading one or more routers.
+
+### Download the Software
+
+1. In the Conductor GUI, navigate to the **Routers** page.
+2. Select **Software Lifecycle** at the top of the page.
+3. Select **Initiate Upgrade** → **Download**.
+4. Choose version `7.1.4` from the dropdown.
+5. Select the router(s) to download to from the router list (for example, `branch1`).
+6. Click **Start**.
+
+Monitor the download progress on the **Software Lifecycle** panel. Wait until the download status shows **Complete** before proceeding to the upgrade.
+
+### Run the Upgrade
+
+1. Return to **Software Lifecycle** and select **Upgrade**.
+2. Select version `7.1.4`.
+3. Select the router(s) to upgrade.
+4. Click **Start**.
+
+The upgrade runs to completion with no interaction required. The router restarts automatically at the end of the process.
+
+To view installation history, select **Lifecycle History** on the Software Lifecycle panel.
+
+## Upgrade Using the Conductor PCLI
+
+Use this method to upgrade routers from the command line.
+
+Log in to the conductor PCLI:
+
+```bash
+ssh admin@192.168.100.10
+```
+
+### Step 1 — View Assets
+
+Confirm the router is connected and show its current software version:
+
+```bash
+show assets
+```
+
+Example output:
+```
+===================== ============== ===========
+ Asset ID              Router         Status
+===================== ============== ===========
+ SSR130-ABC1234567    branch1        Synchronized
+```
+
+### Step 2 — Check Available Versions
+
+```bash
+show system software available router branch1 node node1
+```
+
+Confirm version `7.1.4` appears in the output.
+
+### Step 3 — Download the Software
+
+```bash
+request system software download router branch1 node node1 version 7.1.4
+```
+
+Monitor download progress:
+
+```bash
+show system software download router branch1 node node1
+```
+
+Wait until the status shows `completed`.
+
+### Step 4 — Upgrade the Router
+
+```bash
+request system software upgrade router branch1 node node1 version 7.1.4
+```
+
+Monitor upgrade progress:
+
+```bash
+show system software upgrade router branch1 node node1
+```
+
+The router restarts when the upgrade completes. Allow 5–10 minutes for the router to come back online and re-synchronize with the conductor.
+
+### Step 5 — Verify the Upgrade
+
+After the router restarts:
+
+```bash
+show assets
+```
+
+Confirm the router shows version `7.1.4` and a status of **Synchronized**.
+
+## Upgrading Multiple Routers
+
+To upgrade multiple routers efficiently:
+
+- From the GUI: select all target routers in the Software Lifecycle panel before clicking Start.
+- From the PCLI: run separate `request system software download` commands per router, then upgrade each router after its download completes.
+
+:::tip
+It is recommended to upgrade routers during a maintenance window. Internet traffic forwarding is briefly interrupted when the router restarts during the upgrade.
+:::
+
+## Next Step
+
+Proceed to [Step 6 — Verify the Deployment](deploy_verify.md).

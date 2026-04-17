@@ -1,0 +1,88 @@
+---
+title: "Step 2 — Configure the Conductor"
+sidebar_label: "Step 2: Configure the Conductor"
+---
+import NetworkDesign from '../_deploy_network_design.md';
+import AuthorityName from '../_set_authority_name.md';
+import SetConductorIP from '../_set_conductor_ip.md';
+import ConductorAuthority from '../_conductor_to_authority.md';
+
+This section configures the authority-level settings on the conductor: the authority name, conductor address, internet service, and corporate tenant. These objects are global to all routers in the authority.
+
+All steps are performed from the **Conductor GUI** at `https://192.168.100.10` unless otherwise noted.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## 1. Connect the Conductor to the Authority
+
+<ConductorAuthority/>
+
+## 2. Set the Authority Name
+
+<AuthorityName/>
+
+:::note
+Use your organization's name as the authority name (for example, `AcmeCorp`). The authority name cannot be changed after routers have been provisioned without re-onboarding them.
+:::
+
+## 3. Set the Conductor Address
+
+The conductor address is the IP address that managed routers use to connect to this conductor. It must be reachable from each branch router's WAN interface.
+
+<SetConductorIP/>
+
+For this guide, enter `192.168.100.10` as the conductor address.
+
+## 4. Create the Internet Service
+
+The *service* configuration element defines the IP destinations that the SSR will route. This guide creates a single service representing all internet-bound traffic.
+
+1. Log in to the Conductor GUI.
+2. Select **Configuration**.
+3. Select **Authority** from the left panel.
+4. Scroll down to **Services** and select **ADD**.
+5. Enter the name `internet` and select **SAVE**.
+6. On the Service screen, verify **Enabled** is set to `true`.
+7. Set **Scope** to `public`.
+8. Scroll down to **Security Policy** and select `internal`.
+9. Scroll down to **Service Addresses** and select **ADD**.
+10. Enter `0.0.0.0/0` and select **SAVE**.
+11. Scroll down to **Access Policy** and select **ADD**.
+    - Set **Source** to `corp` (the tenant you will create in the next step).
+    - Select **SAVE**.
+12. At the top of the screen, select **VALIDATE** and then **COMMIT**.
+
+:::tip
+The `internal` security policy allows SVR traffic between routers in the same authority without requiring additional encryption configuration. For production deployments requiring payload encryption, select an appropriate security policy. See [Security Policy](../config_reference_guide.md) for details.
+:::
+
+## 5. Create the Corporate Tenant
+
+Tenants logically partition the network. The `corp` tenant represents corporate LAN users in this deployment and is referenced by the LAN interface configuration on each branch router.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority**.
+3. Scroll to **Tenants** and select **ADD**.
+4. Enter the name `corp` and select **SAVE**.
+5. At the top of the screen, select **VALIDATE** and then **COMMIT**.
+
+:::info
+Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
+:::
+
+## What Was Configured
+
+At the end of this step your authority contains:
+
+| Object | Name | Value |
+|--------|------|-------|
+| Authority | `AcmeCorp` | |
+| Conductor Address | | `192.168.100.10` |
+| Service | `internet` | `0.0.0.0/0`, scope `public`, security `internal` |
+| Tenant | `corp` | LAN-side user population |
+
+## Next Step
+
+Proceed to [Step 3 — Configure the Router on the Conductor](deploy_router_config.mdx) to pre-stage the branch router configuration before onboarding.

@@ -7,6 +7,29 @@ module.exports = {
       "about_releases",
       "about_support_policy",
     ],
+    "Deployment Guides": [
+      {
+        "type": "category",
+        "label": "Conductor-Managed Network: SSR1200 Conductor + SSR130 Routers",
+        "items": [
+          "deploy/deploy_overview",
+          "deploy/deploy_conductor_install",
+          "deploy/deploy_conductor_config",
+          "deploy/deploy_router_config",
+          "deploy/deploy_router_onboard",
+          "deploy/deploy_router_upgrade",
+          "deploy/deploy_verify",
+          {
+            "type": "category",
+            "label": "Appendices",
+            "items": [
+              "deploy/deploy_appendix_conductor",
+              "deploy/deploy_appendix_router",
+            ],
+          },
+        ],
+      },
+    ],
     "Release Notes": [
       {
         "type": "category",

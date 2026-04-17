@@ -1,0 +1,177 @@
+---
+title: "Step 4 — Onboard SSR130 Routers"
+sidebar_label: "Step 4: Onboard SSR130 Routers"
+---
+import SSR130Ports from '../_deploy_ssr130_port_map.md';
+
+This section covers the physical setup and initialization of each SSR130 branch router. Before beginning, confirm that the router configuration has been staged on the conductor as described in [Step 3 — Configure the Router on the Conductor](deploy_router_config.mdx).
+
+Repeat this section for each SSR130 in your deployment.
+
+:::important
+The conductor **must** have a valid configuration staged for this router — including a matching asset ID — before the router is powered on. Powering on the router before the configuration is ready will result in a failed onboarding attempt.
+:::
+
+## SSR130 Port Reference
+
+<SSR130Ports/>
+
+## Onboarding Methods
+
+SSR130 routers running SSR 6.3.0 or later support two onboarding methods. Choose the method appropriate for your deployment:
+
+| Method | Best For | Requirements |
+|--------|----------|-------------|
+| [Web Workflow (Recommended)](#method-1-web-workflow) | Direct physical access at the branch | Laptop with Ethernet port |
+| [Mist ZTP](#method-2-mist-ztp-zero-touch-provisioning) | Remote/zero-touch deployment | Mist portal account; conductor IP must be internet-reachable |
+
+---
+
+## Method 1: Web Workflow
+
+Use this method when you have physical access to the SSR130 at the branch site. The device's initialization web interface guides you through the conductor association.
+
+### Physical Setup
+
+1. Connect **Port 0** (`ge-0-0`) to the ISP WAN Ethernet link.
+2. Connect a laptop to **Port 3** (`ge-0-3`) using a standard Ethernet cable.
+
+    :::note
+    Assign the laptop a static IP address in the range `192.168.128.2`–`192.168.128.254` with a subnet mask of `255.255.255.0`.
+    :::
+
+3. **Power on the device**.
+
+### Initialize the Router
+
+1. Open a web browser and navigate to:
+
+    ```
+    https://192.168.128.1
+    ```
+
+    Accept the self-signed certificate warning.
+
+2. Under **SSR Managed**, select **SSR Router Managed via Conductor**.
+
+    ![SSR Conductor-managed router](/img/u-iso10_cond-mngd_router.png)
+
+3. Enter the following information:
+
+    | Field | Value |
+    |-------|-------|
+    | Router Name | `branch1` _(must match the name configured on the conductor)_ |
+    | Conductor IP Address | `192.168.100.10` |
+    | Admin Password | _(the password set during conductor initialization)_ |
+
+    ![Conductor Managed Association](/img/u-iso11_cond-mngd-assoc-new.png)
+
+4. Click **ASSOCIATE**.
+
+5. The SSR130 reboots, contacts the conductor at `192.168.100.10`, and downloads its configuration. This process takes approximately 5–10 minutes.
+
+6. Disconnect the laptop from Port 3 and connect your LAN switch to **Port 3** (`ge-0-3`).
+
+---
+
+## Method 2: Mist ZTP (Zero Touch Provisioning)
+
+Use this method for remote or zero-touch deployments where the device must self-onboard without any physical laptop connection.
+
+### Prerequisites
+
+- A Mist portal account is required (free). WAN Assurance subscription is **not** required.
+- The conductor IP address (`192.168.100.10`) must be reachable from the branch WAN link.
+
+### Step 1 — Create a Mist Account and Organization
+
+If you do not have a Mist account, create one at [https://manage.mist.com](https://manage.mist.com).
+
+Once logged in, create an Organization:
+
+1. Select **Organization** → **Settings** from the left menu.
+2. Enter an organization name and save.
+
+### Step 2 — Create a Site with the Conductor IP
+
+Each physical location where an SSR130 will be deployed needs a Mist site. The conductor IP address is added to the site so that SSR devices can receive their conductor address via ZTP.
+
+1. Select **Organization** → **Site Configuration** from the left menu.
+2. Click **Create Site**.
+3. Enter a site name (for example, `Branch-Dallas`).
+4. Scroll to the **Session Smart Conductor Address** field and enter `192.168.100.10`.
+
+    ![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
+
+5. Save the site.
+
+### Step 3 — Physical Setup
+
+1. Connect **Port 0** (`ge-0-0`) to the ISP WAN Ethernet link providing:
+    - DHCP address assignment
+    - Internet connectivity (required to reach Mist)
+
+2. Connect your LAN devices to **Port 3** (`ge-0-3`).
+
+3. **Power on the device**.
+
+### Step 4 — Claim the Device
+
+Add the SSR130 to your Mist organization using the claim code on the device label:
+
+1. Locate the QR code / claim code label on the SSR130.
+
+    ![Claim Code](/img/intro_wa_ssr130_quickstart_2.png)
+
+2. From the Mist portal, navigate to **Organization** → **Inventory**.
+3. Click **Claim** and enter the claim code, or scan the QR code with the Mist mobile app.
+4. Assign the device to the site created in Step 2.
+
+### Step 5 — Automatic Onboarding
+
+Once claimed and assigned to the site, the SSR130:
+
+1. Connects to Mist via Port 0 using the DHCP-assigned address.
+2. Receives the conductor IP address from Mist.
+3. Contacts the conductor at `192.168.100.10`.
+4. Downloads and applies its staged configuration.
+
+No further interaction is required. Monitor onboarding progress from the Conductor GUI (see [Verify Onboarding](#verify-onboarding) below).
+
+---
+
+## Verify Onboarding
+
+After the SSR130 connects to the conductor, verify the onboarding was successful from the **Conductor GUI**:
+
+1. Navigate to the **Routers** page.
+2. The router (`branch1`) should appear with a status of **Running** or **Synchronizing**.
+3. Once fully synchronized, the status shows **Synchronized** and the router's asset ID appears under the router entry.
+
+From the conductor **PCLI**, verify using:
+
+```bash
+show assets
+```
+
+The output should show the router in a **Synchronized** or **Running** state:
+
+```
+admin@node1.conductor1# show assets
+===================== ============== ===========
+ Asset ID              Router         Status
+===================== ============== ===========
+ SSR130-ABC1234567    branch1        Synchronized
+```
+
+From the router, verify the SSR service is active:
+
+```bash
+sudo systemctl status 128T
+```
+
+The service should be listed as `Active (running)`.
+
+## Next Step
+
+Proceed to [Step 5 — Upgrade Routers to 7.1.4](deploy_router_upgrade.mdx).
