@@ -620,7 +620,16 @@ The MOS value for a given path is a composite metric, computed based on loss, la
 
 ### Transport State Enforcement
 
-Within the service-policy configuration is the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter, which governs the behavior of the SSR's TCP state machine for processing inbound TCP packets. As a stateful networking device, the SSR's default behavior is to reject any mid-flow TCP packets (i.e., packets without the SYN flag set) unless it – or its paired node in a dual node HA router – participated in the TCP three-way handshake for that session. There are deployments where this behavior may be undesirable. 
+Within the service-policy configuration is the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter, which governs the behavior of the SSR's TCP state machine for processing inbound TCP packets. As a stateful networking device, the SSR's default behavior is to reject any mid-flow TCP packets (i.e., packets without the SYN flag set) unless it – or its paired node in a dual node HA router – participated in the TCP three-way handshake for that session. There are deployments where this behavior may be undesirable.
+
+The four available values provide escalating levels of enforcement:
+
+| Value | Behavior |
+| --- | --- |
+| `allow` | Permits non-SYN first packets and packets that do not conform to the TCP state machine. Use in environments such as [dual-router HA](config_dual_router_ha.md) deployments where mid-flow packets may arrive from a router that did not participate in the original three-way handshake. |
+| `block` | Silently discards non-SYN first packets and packets that do not conform to the TCP state machine. The sender receives no notification. |
+| `reset` *(default)* | Sends a TCP RST to the sender for non-SYN first packets; drops packets that do not conform to the TCP state machine. |
+| `strict` | Provides the highest level of enforcement. Sends a TCP RST for non-SYN first packets, drops packets that do not conform to the TCP state machine, and additionally drops any packets whose sequence numbers fall outside the expected receive window. Recommended for security-sensitive deployments and required for Common Criteria compliance. Introduced in SSR 6.2. |
 
 For example, when an environment includes systems that are deployed in a [*dual router HA*](config_dual_router_ha.md) configuration, any services used to send traffic to or from the dual router HA must reference a service-policy that has `transport-state-enforcement` set to `allow`.
 
