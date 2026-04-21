@@ -71,7 +71,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.1.5-5r2
+## Release 7.1.5-7r2
 
 **Release Date:** April 23, 2026
 
@@ -85,6 +85,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### Resolved Issues
 
+- **The following CVEs have been identified and resolved in this release:** CVE-2021-47670, CVE-2022-49985, CVE-2022-50087, CVE-2022-50228, CVE-2023-53125, CVE-2023-53305, CVE-2024-56644, CVE-2025-21727, CVE-2025-21759, CVE-2025-22026, CVE-2025-22058, CVE-2025-22097, CVE-2025-37797, CVE-2025-37914, CVE-2025-38085, CVE-2025-38159, CVE-2025-38200, CVE-2025-38211, CVE-2025-38250, CVE-2025-38332, CVE-2025-38350, CVE-2025-38352, CVE-2025-38380, CVE-2025-38392, CVE-2025-38449, CVE-2025-38461, CVE-2025-38464, CVE-2025-38477, CVE-2025-38498, CVE-2025-38527, CVE-2025-38556, CVE-2025-38718, CVE-2025-39730, CVE-2022-50367, CVE-2022-50386, CVE-2022-50543, CVE-2023-53178, CVE-2023-53226, CVE-2023-53257, CVE-2023-53297, CVE-2023-53386, CVE-2023-53401, CVE-2023-53513, CVE-2023-53539, CVE-2025-38724, CVE-2025-39697, CVE-2025-39718, CVE-2025-39817, CVE-2025-39825, CVE-2025-39841, CVE-2025-39849, CVE-2025-39864, CVE-2025-39883, CVE-2025-39898, CVE-2025-39955, CVE-2025-39971, CVE-2025-40300, CVE-2025-9230, CVE-2025-13601, CVE-2025-9086, CVE-2025-66418, CVE-2025-66471, CVE-2026-21441, CVE-2025-12084, CVE-2025-14104, CVE-2025-6176, CVE-2022-25883, CVE-2025-11021, CVE-2025-4945, CVE-2026-0719, CVE-2026-1761.
+------
 - **I95-62421 DHCP relay failures causing clients to miss IP assignment:** Resolved an issue where DHCP session information is lost on the hub, causing the session reverse flow to collide with the forward flow of the session initiated originally from the spoke. This includes a new (configurable) default behavior for collision resolution. For detailed information, see [`configure authority service-policy prefer-established-session {true | false}`](config_command_guide.md#configure-authority-service-policy-prefer-established-session). 
 ------
 - **I95-62710 Unnecessary web server processing for `router all` in the PCLI:** Addressed a problem where the web server performed unnecessary work when PCLI commands referenced `router all`. This optimization reduces overhead and improves responsiveness.
