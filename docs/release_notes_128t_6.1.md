@@ -59,8 +59,8 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2021-27290, CVE-2022-24999.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2021-27290, CVE-2022-24999.
+------
 - **I95-55179 FIPS-enabled SSR Conductors not creating HA connection:** The SSH library used by the initializer was using md5 internally for key identification and logging purposes. Since md5 is not supported with FIPS, it raised an error. The SSH library has been upgraded to use a FIPS compliant key generator.
 ------
 - **I95-57305 Add flow timeout value to Associated Paths:** The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine when the session will expire following inactivity. 
@@ -73,7 +73,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-58539 The `validate` command does not check or test for router `applies-to` config:**  Resolved an issue whereby the DHCP relay inspector rule was not honoring router-based services for interfaces without DHCP relay. Errors from this rule are now warnings.
 ------
-- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatiblity scenarios. 
+- **I95-58583 Bypass message-authentication in RADIUS:** An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios. 
 ------ 
 - **I95-58637 Relax API RBAC policies for quickstart files:** Users with config-read permissions are now able to generate quickstart files.
 ------
@@ -114,8 +114,8 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2024-3596, CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2024-3596, CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
+------
 - **I95-55982 X722 interface MAC being set to 00:00:00:00:00:00 on SSR1300/SSR1400:** Identified an issue where the MAC address would change during a power cycle. Another power cycle can restore the MAC to its previous value. An upgrade to the X722 firmware addresses this issue. NOTE: A power cycle is required as part of the firmware flashing sequence. All power feeds must be manually disconnected and reconnected to cycle it correctly.
 ------
 - **I95-57128 Slow inter-vlan traffic due to i40e performance issue:** Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value.  This has been resolved and latency reduced to 32us.
@@ -132,7 +132,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-58332 Show service-path incorrectly shows the state as `up` in an unreachable next-hop:** In a config where a `service-route next-hop` is pointing to an unreachable address, the show service-path shows the state is being up. This has been resolved by adding a next-hop reachability check to `show service-path`.
 ------
-- **I95-58503 Add the ability to disable session error records:** The ability to explicilty disable session records on a conductor or a router has been added to the SSR software. For more information, see [`session-record-profile`](config_command_guide.md#configure-authority-session-record-profile).
+- **I95-58503 Add the ability to disable session error records:** The ability to explicitly disable session records on a conductor or a router has been added to the SSR software. For more information, see [`session-record-profile`](config_command_guide.md#configure-authority-session-record-profile).
 
 ## Release 6.1.10-8-lts
 
@@ -140,11 +140,11 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617, CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-27052, CVE-2024-27056, CVE-2024-27059, CVE-2024-2961, CVE-2024-33599, CVE-2024-33600, CVE-2024-33601, CVE-2024-33602, CVE-2024-32487, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2024-3596
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2023-20569, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617, CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, CVE-2019-13631, CVE-2019-15505, CVE-2019-25162, CVE-2020-25656, CVE-2020-36777, CVE-2021-3753, CVE-2021-4204, CVE-2021-46934, CVE-2021-47013, CVE-2021-47055, CVE-2021-47118, CVE-2021-47153, CVE-2021-47171, CVE-2021-47185, CVE-2022-0500, CVE-2022-23222, CVE-2022-3565, CVE-2022-45934, CVE-2022-48627, CVE-2022-48669, CVE-2023-1513, CVE-2023-24023, CVE-2023-25775, CVE-2023-28464, CVE-2023-31083, CVE-2023-3567, CVE-2023-37453, CVE-2023-38409, CVE-2023-39189, CVE-2023-39192, CVE-2023-39193, CVE-2023-39194, CVE-2023-39198, CVE-2023-4133, CVE-2023-4244, CVE-2023-42754, CVE-2023-42755, CVE-2023-45863, CVE-2023-51779, CVE-2023-51780, CVE-2023-52340, CVE-2023-52434, CVE-2023-52439, CVE-2023-52445, CVE-2023-52448, CVE-2023-52477, CVE-2023-52489, CVE-2023-52513, CVE-2023-52520, CVE-2023-52528, CVE-2023-52565, CVE-2023-52574, CVE-2023-52578, CVE-2023-52580, CVE-2023-52581, CVE-2023-52594, CVE-2023-52595, CVE-2023-52598, CVE-2023-52606, CVE-2023-52607, CVE-2023-52610, CVE-2023-52620, CVE-2023-6121, CVE-2023-6176, CVE-2023-6240, CVE-2023-6622, CVE-2023-6915, CVE-2023-6932, CVE-2024-0340, CVE-2024-0841, CVE-2024-23307, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-26593, CVE-2024-26602, CVE-2024-26603, CVE-2024-26609, CVE-2024-26610, CVE-2024-26615, CVE-2024-26642, CVE-2024-26643, CVE-2024-26659, CVE-2024-26664, CVE-2024-26671, CVE-2024-26693, CVE-2024-26694, CVE-2024-26743, CVE-2024-26744, CVE-2024-26779, CVE-2024-26872, CVE-2024-26892, CVE-2024-26897, CVE-2024-26901, CVE-2024-26919, CVE-2024-26933, CVE-2024-26934, CVE-2024-26964, CVE-2024-26973, CVE-2024-26993, CVE-2024-27014, CVE-2024-27048, CVE-2024-27052, CVE-2024-27056, CVE-2024-27059, CVE-2024-2961, CVE-2024-33599, CVE-2024-33600, CVE-2024-33601, CVE-2024-33602, CVE-2024-32487, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2023-4408, CVE-2023-50387, CVE-2023-50868, CVE-2024-3596
+------
 - **I95-47195, I95-47196, I95-49015, I95-49018, I95-49599, I95-56682 Forwarding plane crash, causing stranded network namespaces when LTE/PPPoE network-interface name is changed:** Implemented reinit script to reiniatilize namespace, KNI and target-interface after a configuration change in the network-interface.
 ------
-- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide addtional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
+- **I95-49218 Filter OSPF routes using RIB Policy routes:** Use the `configure authority router routing rib-policy` command from either the routing default-instance (`configure authority router routing`) or inside `configure authority router routing vrf` to provide additional filtering for OSPF routes. For more information see [`configure authority router routing rib-policy`](config_command_guide.md#configure-authority-router-routing-rib-policy) and [`configure authority router routing vrf rib-policy`](config_command_guide.md#configure-authority-router-routing-vrf-rib-policy).
 ------
 - **I95-49712 Config Validation Error uniformative:** Resolved an issue where paths pointing to missing keys or elements returned error messages that did not provide recognizable information. Now the error message provides key or element names.
 ------ 
@@ -182,7 +182,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-56363 Highway crash due to traffic metrics manager thread error:** A potential crash due to a race condition in per-service-route metrics has been fixed.
 ------
-- **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade proces.  
+- **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade process.  
 ------
 - **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
 ------
@@ -202,7 +202,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-56702 O365/Sharepoint application missing from the Applications list:** Resolved an issue where certain applications and protocols were excluded from automatic updates.
 ------
-- **I95-56715 Address validation in migrate feature in conductor UI is not working correctly:** Resolved an isssue between the client and the server during the use of the GUI `migrate` operation, where the conductor address was not read correctly, and returning an irrelevant error message. 
+- **I95-56715 Address validation in migrate feature in conductor UI is not working correctly:** Resolved an issue between the client and the server during the use of the GUI `migrate` operation, where the conductor address was not read correctly, and returning an irrelevant error message. 
 ------
 - **I95-56726 `No Timeout Queue` message logged in cases where a config commit fails, or a conductor fails to load a config on startup:** Resolved an issue with `ThreadPoolWithExternalPoller` that resulted in a stack trace in the logs which starts with message `No TimeoutQueue:`.
 ------
@@ -218,7 +218,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-56850 Overlap warning on router not present on conductor:** Resolved a case where a service on a router is configured with `applies-to`, and the same service is configured on the conductor (overlap) but does not have `applies-to` configured, the validation process will generate a warning on the router but not the conductor. 
 ------
-- **I95-56879 PPPoE stopped working:** Resolved an issue where the system configuration for the PPPoE interface was missing `LCP_FAILURE` and `LCP_INTERVAL` fileds. These fields are now set correctly.
+- **I95-56879 PPPoE stopped working:** Resolved an issue where the system configuration for the PPPoE interface was missing `LCP_FAILURE` and `LCP_INTERVAL` fields. These fields are now set correctly.
 ------
 - **I95-56905 Conserve memory footprint on the router:** If the SSR configuration does not have `application-identification mode all`, then do not load the database. This will save memory on the router. 
 ------
@@ -279,16 +279,15 @@ These counters are available per-bond-member.
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724, CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
+------
 - **I95-53523 Bond interface shut down generates errors:** Resolved an issue where the device interface clean up process was out of order and generated a detach failure. 
 ------
 - **I95-53565 Port state of LAG members not dynamically updated:** Resolved an issue where enabling or disabling a bond member port does not update the status until the 128T service is restarted. The adminisrative enable and disable now works as expected.
 ------
 - **I95-54440 / I95-50787 Rebooting the OS from the conductor throws error code 400:** Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display **Error: EOF**.
 ------
-<!-- markdown-link-check-disable -->
-- **I95-54541 Device interfaces on Azure VMs with a 2K or greater MTU fail to initialize:** Resolved an issue where device-interfaces configured in an Azure VM fail during initialization, and the port remains operationally down. For additional details, refer to the Knowledge Base article [Unable to bind accelerated networking interfaces in Azure when using vmbus-id](../kb/2024/04/25/I95-54541).<!-- markdown-link-check-enable -->
+- **I95-54541 Device interfaces on Azure VMs with a 2K or greater MTU fail to initialize:** Resolved an issue where device-interfaces configured in an Azure VM fail during initialization, and the port remains operationally down. For additional details, refer to the Knowledge Base article [Unable to bind accelerated networking interfaces in Azure when using vmbus-id](../kb/2024/04/25/I95-54541).
 ------
 - **I95-54750 Load Balancer API Calls not working:** The original API and Swagger documentation used `Load Balancer`, which was misleading. The `Reachability Detection` REST APIs have been updated to use `Reachability Detection` as reference, instead of `Load Balancer`.
 ------
@@ -330,8 +329,7 @@ These counters are available per-bond-member.
 ------
 - **I95-55850 Changing the name of a `bond-interface` fails:** Resolved an issue where changing the name of a `bond-interface` required a restart to take effect.
 ------ 
-<!-- markdown-link-check-disable -->
-- **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article [Upgrade from 5.6 to 6.1 may result in missing FIB entries](../kb/2024/04/24/I95-55904). <!-- markdown-link-check-enable -->
+- **I95-55904 No service-paths seen after upgrade:** Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article [Upgrade from 5.6 to 6.1 may result in missing FIB entries](../kb/2024/04/24/I95-55904).
 ------
 - **I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:** Resolved an issue where the `cpuinfo` parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the `cpuinfo` contains the word ‘processor’. 
 ------
@@ -341,7 +339,7 @@ These counters are available per-bond-member.
 ------
 - **I95-56363 Highway crash due to traffic metrics manager thread error:** A potential crash due to a race condition in per-service-route metrics has been fixed.
 ------
-- **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade proces.  
+- **I95-56411 Remove outdated performance package:** Older versions of the `perf` package were not removed after a kernel upgrade as part of the software upgrade. The SSR upgrade process now removes older `perf` packages during the software upgrade process.  
 ------
 - **WAN-2753 IDP Engine Failed to Start:** Resolved an issue that prevented IDP from starting if its configuration had changed. 
 ------
@@ -353,8 +351,8 @@ These counters are available per-bond-member.
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732.
+------
 - **I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:** Handling of RFC1918 traffic classification returned a private domain causing an undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.
 ------
 - **I95-51663 TCP port reuse causes crash during application steering:** Resolved an issue where TCP state transitions was causing an issue with the client reusing ports.
@@ -413,7 +411,7 @@ These counters are available per-bond-member.
 
 ### Resolved Issues Requiring Configuration Changes
 
-- **I95-46120 HA Fabric Warning message supression in Azure:** In Azure, it is not possible to configure a non-forwarding fabric interface on the SSR, thus this error will be present on every commit. This message is now supressed.
+- **I95-46120 HA Fabric Warning message suppression in Azure:** In Azure, it is not possible to configure a non-forwarding fabric interface on the SSR, thus this error will be present on every commit. This message is now suppressed.
 ------
 - **I95-51181 Improve `save-tech-support-info` command:** The PCLI command `save tech-support-info` now has a default collection period of one day. Additionally, a `since` argument has been added that limits log collection to only logs generated after the specified value. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
@@ -421,12 +419,12 @@ These counters are available per-bond-member.
 ------
 - **I95-52703 Tenancy consideration in Application ID lookup:** Application Identification service lookups now consider the source tenant. This allows matches to be specific to certain networks/users. See [AppID and Tenancy](concepts_appid.md#appid-and-tenancy) for more information.
 ------
-- **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details availble on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
+- **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details available on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2022-41742, CVE-2022-41741, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2022-41742, CVE-2022-41741, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847.
+------
 - **I95-38188 Re-Homing an SSR in certain circumstances leaves residual services:** If an SSR is rehomed from an HA conductor to a standalone conductor, the services pointing to the second node of the HA conductor were not removed. Resolved the issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor.
 ------
 - **I95-42466 Changing the PCI address of an HA interface breaks HA:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
@@ -565,8 +563,8 @@ These counters are available per-bond-member.
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-2196, CVE-2022-2663, CVE-2022-3028, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-4129, CVE-2022-20141, CVE-2022-25265, CVE-2022-30594, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-2196, CVE-2022-2663, CVE-2022-3028, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-4129, CVE-2022-20141, CVE-2022-25265, CVE-2022-30594, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802.
+------
 - **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
 ------
 - **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
@@ -577,7 +575,7 @@ These counters are available per-bond-member.
 ------
 - **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
 ------
-- **I95-51492 Password expiration not working:** This issue has been resolved. Adminstrators must use the global setting `configure authority password-policy lifetime N ` to indicate that all user passwords must be changed every `N` days.
+- **I95-51492 Password expiration not working:** This issue has been resolved. Administrators must use the global setting `configure authority password-policy lifetime N ` to indicate that all user passwords must be changed every `N` days.
 ------
 - **I95-51638 Traceroute does not complete over SSR, but does using linux:** The traceroute command was unable to resolve through some network elements. The default SSR traceroute UDP port number has been changed to a more common/recognized port.
 ------
@@ -591,7 +589,7 @@ These counters are available per-bond-member.
 ------
 - **I95-52104 URI escape characters handled incorrectly:** The `lookup application by-domain` and `clear app-id cache-entry url` were handling url parameters incorrectly, in lookup, creating and clearing cache entries. This has been resolved and each command now performs the correct operation.
 ------
-- **I95 52105 Permissions error when attempting to `delete certificate webserver`:** Resolved an issue where `delete certificate webserver` and `create cerificate webserver` with an existing certificate were failing. On older versions of software this can be worked around by running `sudo rm -rf /etc/128technology/pki/webserver.pem`.
+- **I95 52105 Permissions error when attempting to `delete certificate webserver`:** Resolved an issue where `delete certificate webserver` and `create certificate webserver` with an existing certificate were failing. On older versions of software this can be worked around by running `sudo rm -rf /etc/128technology/pki/webserver.pem`.
 ------
 - **I95-52113 Application Identification on the SSR runs at 100% CPU utilization:** Resolved an overrun bug that was causing the SSR to enter a loop when loading port ranges. This issue has been resolved.
 ------
@@ -805,8 +803,8 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** I95-50535, I95-50790.
------- --->
+- **The following CVE's have been identified and addressed in this release:** I95-50535, I95-50790.
+------
 - **I95-47776 Tank hostname parsing errors:** Resolved two issues in the Tank instance where the localhost could not resolve to an IP address, and Tank was not identifying non-default ports. These issues have been resolved. 
 ------
 - **I95-48518 Application Identification not recognizing Apps on HA systems:** Resolved an issue where the GUI was only pulling Application data from one node in an HA configuration. Application ID Summary display now aggregates data from both nodes.
@@ -819,7 +817,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-49603 Process Manager crash:** When a long running process was being cleaned up by the subprocess, the cleanup would fail causing a crash. Long running processes are now properly terminated, which allows the cleanup subprocess to complete correctly. 
 ------
-- **I95-49754 Waypoint re-use causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
+- **I95-49754 Waypoint reuse causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
 ------
 - **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command `create certificate self-signed webserver`.
 ------
@@ -831,7 +829,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50710 Configuration cannot be applied to router when its time is ahead of the conductor:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an `mtime` older than what is in the datastore, and the configurations were rejected.
 ------
-- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes. 
+- **I95-50736 SSH key change not propagated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes. 
 ------
 - **I95-50778 Event History filter not working:** Resolved an issue where searching on the Event History page didn't show matching results when the search string is only found in the **Details** column.
 ------
@@ -907,8 +905,8 @@ The impacted sessions will time out when all packets for the failed sessions sto
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** I95-46020, I95-48448, I95-48455, I95-48458, I95-48859, I95-49456, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523. 
------- --->
+- **The following CVE's have been identified and addressed in this release:** I95-46020, I95-48448, I95-48455, I95-48458, I95-48859, I95-49456, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523. 
+------
 - **I95-36758 Redistributed service route distance not configurable:** Support has been added for the configuration of admin distance for kernel routes generated by services with service routes and for BGP over SVR services.
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
@@ -968,7 +966,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-46230 Exceptions with invalid giid causing a highway crash:** Resolved an issue where uncaught exceptions (invalid giid of 0) were causing highway issues.
 ------
-- **I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
+- **I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modification to resolve the outbound only path.
 ------
 - **I95-47362 Internal process SSH tunnel watchdog:** Implement a watchdog for the SSH tunnels maintained by SCM. If the watchdog detects a dead connection, it will:
 A) if the connection is a critical one, restart the 128T service, or

@@ -5,11 +5,11 @@ sidebar_label: BGP
 
 The Border Gateway Protocol (BGP) is a standard exterior gateway protocol developed for exchanging routing and reachability information between Autonomous Systems, a collection of IP routing prefixes managed by a single administrative entity. BGP makes routing decisions based on paths and network policies; although historically mainly seen in service provider networks, it is now gaining acceptance in large enterprise networks. BGP can also be used for routing within an autonomous system as an interior gateway protocol; when doing so it is referred to as iBGP.
 
-Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss a SSR-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
+Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss an SSR-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
 
 ## Prerequisites
 
-This section presumes that you have a running SSR system and wants to add configuration to support BGP. The running SSR system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic SSR modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the SSR data model.
+This section presumes that you have a running SSR system and want to add configuration to support BGP. The running SSR system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic SSR modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the SSR data model.
 
 ## Peering with non-SSR Routers
 
@@ -299,7 +299,7 @@ routing-protocol bgp address-family ipv6-unicast
 routing-protocol bgp neighbor fc00::3 address-family ipv6-unicast 
 ```
 
-Any combination of address families can be configured on a BGP instance or BGP neighbor.  The neighbor IP address does not influence the neighbor address family configuration. IPv4 is the default address family; in situations where only IPv6 is or will be used for the neighbor, disable IPv4 using the following command:
+Any combination of address families can be configured on a BGP instance or BGP neighbor. The neighbor IP address does not influence the neighbor address family configuration. IPv4 is the default address family; in situations where only IPv6 is or will be used for the neighbor, disable IPv4 using the following command:
 ```
 routing-protocol bgp neighbor <> address-family ipv4-unicast activate false  
 ```
@@ -708,9 +708,9 @@ exit
 
 The `bgp-service-generation` configuration object is available in a BGP neighbor’s `transport` settings. For neighbors specified in the default routing instance or specified inside a VRF, the following choices are available:
 
-- `disabled `: Do not generate BGP service or service-routes.
-- `neighbor-vrf (<vrf-name>|default) `: Name of the neighbor’s VRF in which the peer BGP instance resides. Can be “default” to specify the default VRF.
-- `same-neighbor-vrf `: (Default) Generate the BGP service if there is a matching peer with a BGP instance within the same VRF. Explicitly specifying this is equivalent to not configuring any `bgp-service-generation` statement.
+- `disabled`: Do not generate BGP service or service-routes.
+- `neighbor-vrf (<vrf-name>|default)`: Name of the neighbor’s VRF in which the peer BGP instance resides. Can be “default” to specify the default VRF.
+- `same-neighbor-vrf`: (Default) Generate the BGP service if there is a matching peer with a BGP instance within the same VRF. Explicitly specifying this is equivalent to not configuring any `bgp-service-generation` statement.
 
 #### Routing-Stack Service-Route
 
@@ -958,9 +958,10 @@ Graceful restart ensures that even if BGP flaps during failover, the recovery is
 
 :::note
 For graceful restart to work as intended, it must be configured on both the SSR and its external BGP peer router.
-:::
+::: 
 
 ### Configuring BGP `graceful-restart`
+
 Users can configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. Additionally, the graceful restart mode on BGP neighbors can be configured differently than on the BGP instance. Historically there was no separate neighbor configuration. The graceful restart mode must be explicitly enabled, otherwise the default mode is **helper**. 
 
 Example New Data Model Objects

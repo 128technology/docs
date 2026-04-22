@@ -12,7 +12,7 @@ Each running instance of SSR software (generically termed as a _node_) can exist
 
 - Node to node connectivity within a highly available router
 - Router to router connectivity between peering routers
-- Router to conductor connectivity for management, adminstration, and orchestration
+- Router to conductor connectivity for management, administration, and orchestration
 
 ## Node to Node Connectivity (High Availability)
 The vast majority of node-to-node connections, deployed as highly available systems, are done over directly connected interfaces between collocated machines. As such, bandwidth consumption and firewall management are not applicable. However, it is possible to geographically separate highly available nodes and have them communicate over a WAN, typically in the form of a data center interconnection.
@@ -57,7 +57,7 @@ The results of the path quality testing are available in the output of the PCLI 
 The SSR will also *calculate* a Mean Opinion Score (MOS) for each peer path. This is derived from the loss, latency, and jitter values empirically determined by the Path Quality BFD packets.
 :::
 
-In many common deployment scenarios, the SSR software is deployed as "hub-and-spoke," where the traffic flows exclusively (or nearly exclusively) in one direction from branch deployments toward data centers. In these topologies, it is common and recommended to disable the asynchronous packets sent by the hub routers toward the edge routers, since the path selection critieria is not relevant.
+In many common deployment scenarios, the SSR software is deployed as "hub-and-spoke," where the traffic flows exclusively (or nearly exclusively) in one direction from branch deployments toward data centers. In these topologies, it is common and recommended to disable the asynchronous packets sent by the hub routers toward the edge routers, since the path selection criteria is not relevant.
 
 ### Firewall Detector
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
@@ -121,7 +121,7 @@ Beginning with version 6.0.0, the SSR's handling of SVR traffic can be configure
 | ttl-padding | enumeration | Valid values: 0-255, automatic, false. Default is 0. A numeric value is used to adjust the TTL of each packet destined to the next SSR. All subsequent routers continue to decrement the TTL value, but seeding at a higher value at each SSR hop minimizes the risk of TTL expiring mid-route. Automatic allows BFD traffic to help determine hops between SSR's and adjusts padding automatically. False disables the feature. |
 
 ## Router to Conductor Connectivity
-Each deployed router (and in many cases, individual nodes within that router) has multiple concurrent connections to each conductor node within its authority. The primary connection between a router and a conductor is using 930/TCP, which is an encrypted SSH connection that bears most router-to-conductor inter-process communication (IPC). The secondary connetion is that between a router's _salt-minion_ and a conductor's _salt-master_, which leverages 4505-4506/TCP.
+Each deployed router (and in many cases, individual nodes within that router) has multiple concurrent connections to each conductor node within its authority. The primary connection between a router and a conductor is using 930/TCP, which is an encrypted SSH connection that bears most router-to-conductor inter-process communication (IPC). The secondary connection is that between a router's _salt-minion_ and a conductor's _salt-master_, which leverages 4505-4506/TCP.
 
 :::important
 When deploying a firewall in front of your SSR conductor, it is important to ensure that ports 930/TCP, 4505/TCP, and 4506/TCP are forwarded to your conductor node.

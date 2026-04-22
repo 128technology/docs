@@ -26,7 +26,7 @@ To display the Application Summary, click on an application in the Applications 
 
 By default the table shows all Applications, grouped by Category. To view Applications or Clients, use the `Pivot By` dropdown. The table controls include `Search`, `View By`, and `Pivot By`. Search is typically used to locate specific applications or clients when the list is extensive. Application Summary information is displayed below the router chart when a point in the graph is selected. The selected time is shown at the top right of the chart.
 
-- View By options include: Bytes Recieved, Bytes Sent, Total Bytes.
+- View By options include: Bytes Received, Bytes Sent, Total Bytes.
 - Pivot By: Application, Category, Clients.
 
 ![Application Summary](/img/app_summary.png)

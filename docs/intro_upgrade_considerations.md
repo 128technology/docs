@@ -2,11 +2,17 @@
 title: Upgrade Considerations
 sidebar_label: Upgrade Considerations
 ---
-Before upgrading please review the following information.
+Before upgrading, please review the following information.
+
+:::important
+After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+
+Rollback to the previously installed version of software *is* supported.  
+:::
 
 :::warning
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
-::: 
+:::
 
 ### Upgrade Installer
 For software versions prior to 6.3.0, before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
@@ -14,9 +20,9 @@ For software versions prior to 6.3.0, before **upgrading or installing**, update
 ### Rollback Considerations
 With an upgrade or installation of SSR v6.3.0, conductor rollbacks are performed using the `request system software revert` command from the conductor's PCLI. On routers, it is recommended that upgrades are performed from the conductor's GUI. Router rollbacks must be performed from the PCLI. 
 
-Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the the PCLI.
+Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade activities are supported from the GUI or PCLI; rollback activities can only be performed from the PCLI.
 
-With software versions earlier than 6.3.0, upgrading or rolling back an earlier version of the SSR software on a peer condutor or router that is managed by a conductor using the interactive installer (`install128t`) may result in the system becoming unresponsive. For this reason it is highly recommended that managed router rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+With software versions earlier than 6.3.0, using the interactive installer (`install128t`) to upgrade or roll back a conductor-managed peer conductor or router may cause the system to become unresponsive. For this reason it is highly recommended that managed router rollbacks be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
 ## Configuration Validation Changes
 Several modifications have been made to the verification process for configurations. As a result, configurations that were valid in earlier versions of the SSR software may now present configuration errors. The information below provides an awareness of what to look for and address.
@@ -25,7 +31,7 @@ The following configuration validation checks may present errors in previously v
 
 #### The Candidate configuration is not synchronized between nodes and is not stored on disk.
 
-Configuration changes are always made to a candidate configuration. In releases prior to 5.3 the candidate configuration was stored on disk and would persist through product reboots. The candidate configuration is no longer saved to disk and will not persistent through reboot.
+Configuration changes are always made to a candidate configuration. In releases prior to 5.3, the candidate configuration was stored on disk and would persist through product reboots. The candidate configuration is no longer saved to disk and will not persist through reboots.
 
 Additionally, the candidate configuration is no longer synchronized between HA nodes. Only the running configuration is synchronized between nodes.
 
@@ -50,7 +56,7 @@ Committing configuration changes is not allowed when the system is in a "mixed v
 
 ## Plugin Configuration Generation Changes
 
-The configuration generation for plugins have been adapted to work with the improved configuration handling available in 5.3 and higher. When upgrading from a 4.x version of conductor, no action is required to take advantage of this new functionality.
+The configuration generation for plugins has been adapted to work with the improved configuration handling available in 5.3 and higher. When upgrading from a 4.x version of conductor, no action is required to take advantage of this new functionality.
 
 However, when upgrading from 5.1 or 5.2 to version 5.3 or higher, the following plugins must be updated **prior to upgrading** the SSR conductor. Please see [Upgrading an Existing Plugin](plugin_intro.md#upgrading-an-existing-plugin) for instructions.
 

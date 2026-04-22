@@ -121,7 +121,7 @@ When using a private ICMP address, its important to also use an in-subnet addres
 :::
 
 ### SSR services to transport over the tunnel
-Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in an SSR service and setting the next-hop as the `gre-x` interfaces. As noted in the [Tunnel ICMP Health Check Parameters](#tunnel-icmp-health-check-parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
+Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in an SSR service and setting the next-hop as the `gre-x` interfaces. As noted in the [Tunnel ICMP Health Check Parameters](#tunnel-icmp-health-check-parameters), each destination on a given node corresponds to a `gre-x` interface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
 
 ```
 admin@node1.conductor1# show config running authority service lan-svc
@@ -462,7 +462,7 @@ default dev pri-tunnel-t0 scope link
 ```
 # ip netns pri-tunnel ip rule list
 0:      from all lookup local
-32765:  from all iif pri-tunnel-t0 lookup 128
+32765:  from all if pri-tunnel-t0 lookup 128
 32766:  from all lookup main
 32767:  from all lookup default
 ```
@@ -572,7 +572,7 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 #### Issues Fixed
 
 - **PLUGIN-768** Support the GRE plugin in SSR versions `5.1.0` and greater.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-gre`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summary}] 128T-gre`
 
 ### Release 1.1.3, 2.1.3
 

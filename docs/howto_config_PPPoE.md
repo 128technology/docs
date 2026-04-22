@@ -111,7 +111,7 @@ Completed in 0.12 seconds
 
 ### Reconnection Timer
 
-In situations where there are several connection attempts (for example, consecutive authenication failures), logic is used to back off the reconnect attempts on specific failure codes. Failure codes and the intervals between reconnection attempts are configurable. Use the JSON file `/var/lib/128technology/pppoe/{ppp<giid>}.init` to specify the exit codes and adjust interval times. The defaults are shown in the example below. 
+In situations where there are several connection attempts (for example, consecutive authentication failures), logic is used to back off the reconnect attempts on specific failure codes. Failure codes and the intervals between reconnection attempts are configurable. Use the JSON file `/var/lib/128technology/pppoe/{ppp<giid>}.init` to specify the exit codes and adjust interval times. The defaults are shown in the example below. 
 
 After the first authentication failure (for pppd exit code 19), the intervals between each subsequent reconnect attempt will be 60s (1min), 300s (5min), 600s (10min), 1200s (20min), 2400s (40min), and 3600s (1hr). If the reconnect attempts continue after the sixth failure, the same interval time is used (3600s).
 

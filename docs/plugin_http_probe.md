@@ -501,7 +501,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 2.2.0
 

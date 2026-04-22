@@ -1,7 +1,11 @@
 ---
 title: Conductor Installation
-sidebar_label: Conductor Installation 
+sidebar_label: Conductor Installation
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import ConnectConsole from './_install_connect_console.md';
+import BootUSBSSR100 from './_install_boot_usb_ssr100.md';
+import BootUSBSSR1000 from './_install_boot_usb_ssr1000.md';
 
 After downloading the ISO, use the procedure in [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb) to create a bootable USB. 
 
@@ -18,48 +22,15 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Installation
 
-### Connect the SSR to a Management Console
-
-Ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The baud rate of the console port is 115200 bps.
-
-1. Connect the RJ45 rollover cable to the console port on the SSR device.
-2. Connect the other end of the cable to your computer.
-3. Insert your bootable USB with the new ISO image into the USB port of the SSR device.
-4. Connect the power input to the SSR device.
-5. Power on the SSR. 
+<ConnectConsole/>
 
 ### Boot from the USB
 
-Use the steps appropriate for your device to direct the device to boot from the USB. 
+Use the steps appropriate for your device to direct the device to boot from the USB.
 
-#### SSR100 Series Devices
+<BootUSBSSR100/>
 
-1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
-
-    ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
-
-2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
-
-    ![Select Boot Device](/img/onboard_otp_boot_device.png)
-
-3. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
-
-#### SSR1000 Series Devices
-
-1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
-
-    ![Setup Menu Prompt](/img/1x00_setup_menu.png)
-
-2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
-
-    ![Setup Utility](/img/setup-menu-prompt.png)
-
-3. Use the up and down arrow keys to highlight the USB device in the Boot Override list.
-
-    ![Boot Override list](/img/1x00_boot-override.png)
-
-4. Press Enter to confirm boot from the USB device.
-5. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
+<BootUSBSSR1000/>
 
 ### Conductor Installation
 
@@ -109,26 +80,26 @@ Configure the IP address that will be used to manage the network routers.
 
 1. Select the device ethernet interface that corresponds to the management port for your Conductor and select `<Edit>`
 
-<img src="/img/nmtui-linux-a.png" alt="Configure the Ethernet port" width="192" height="243" />
+<img src={useBaseUrl('/img/nmtui-linux-a.png')} alt="Configure the Ethernet port" width="192" height="243" />
 
 2. In the Edit Connection screen, configure the following:
 - The IP address for the port
 - the Gateway IP address
 - DNS server addresses
 
-<img src="/img/nmtui-linux-b-static-ipv4-config.png" alt="Edit Connection" width="654" height="394" />
+<img src={useBaseUrl('/img/nmtui-linux-b-static-ipv4-config.png')} alt="Edit Connection" width="654" height="394" />
 
 3. Scroll to the bottom of the screen and select `Automatically Connect` and `Available to All Users`, then select OK. 
 
-<img src="/img/nmtui-linux-c-static-ipv4-autoconx.png" alt="Edit Connection" width="654" height="394" />
+<img src={useBaseUrl('/img/nmtui-linux-c-static-ipv4-autoconx.png')} alt="Edit Connection" width="654" height="394" />
 
 4. From the NMTUI screen, select `Set system hostname`, and `<OK>`.
 
-<img src="/img/nmtui-linux-set-hostname.png" alt="Select Hostname" width="354" height="381" />
+<img src={useBaseUrl('/img/nmtui-linux-set-hostname.png')} alt="Select Hostname" width="354" height="381" />
 
 5. Enter the hostname and select `<OK>`. Note that the hostname will be used as the Asset ID.
 
-<img src="/img/nmtui-linux-set-hostname2.png" alt="Add Hostname" width="354" height="381" />
+<img src={useBaseUrl('/img/nmtui-linux-set-hostname2.png')} alt="Add Hostname" width="354" height="381" />
 
  When the port has been activated, an asterisk will appear next to the port name.
 
@@ -179,9 +150,10 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
 
 4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be: 
   - At least 9 characters long 
-  - Contain at least 1 uppercase letter 
-    - At least 1 lowercase letter 
-    - At least 1 number 
+  - Contain at least one uppercase letter 
+    - At least one lowercase letter 
+    - At least one number 
+    - At least one special character (` ! @ # $ % ^ & * ( ) _ + ? ~ " -)
   - Cannot contain the username in any form 
   - Cannot repeat characters more than 3 times 
   This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](cc_fips_config_password_policies.md).
@@ -284,7 +256,7 @@ admin@conductor.conductor#
  
 - Execute the self-test scan `sudo systemctl start 128T-rpm-verify` 
  
- The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
+ The self-test scan is initiated and takes approximately two minutes to complete. Upon completion, run: 
 
  `systemctl status 128T-rpm-verify` 
 
@@ -306,7 +278,7 @@ admin@conductor.conductor#
 
  The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.  
  
-6. Perform the following steps to verify that FIPS security enforcment mode is enabled in the OS:
+6. Perform the following steps to verify that FIPS security enforcement mode is enabled in the OS:
  `openssl md5 /dev/null` 
  Expected result:  `digital envelope routines … Disabled for fips` 
 
@@ -378,5 +350,5 @@ If you will be using the OTP Quickstart router installation process, proceed to 
 
 When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
-If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_router_install.md).
+If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_router_install.mdx).
 

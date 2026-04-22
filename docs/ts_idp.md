@@ -86,7 +86,7 @@ The following commands are visible only in the Advanced view, and should only be
 
 ## Stats
 
-The [`show stats idp`](cli_stats_reference.md#show-stats-idp) display metrics for attacks, bytes received and transmitted, and packets dropped, processed, received, and transmitted, as well as by indiviual protocol.
+The [`show stats idp`](cli_stats_reference.md#show-stats-idp) display metrics for attacks, bytes received and transmitted, and packets dropped, processed, received, and transmitted, as well as by individual protocol.
 
 - [`attacks`](cli_stats_reference.md#show-stats-idp-attacks)
 - [`bytes`](cli_stats_reference.md#show-stats-idp-bytes)

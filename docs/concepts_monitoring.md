@@ -48,7 +48,7 @@ When multiple instances of the Monitoring Agent are running, two inputs with the
 
 The `enabled` field is meant as global toggle for applying the monitoring agent functionality. When set to `disabled` the monitoring agent will remain dormant on the SSR.
 
-`lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
+`lib-directory` is the root directory for the Monitoring Agent. Other directories exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
 Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
@@ -714,7 +714,7 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API. The `T
 
   ## [inputs.t128_graphql.extract_fields]
   ##   enabled = "enabled"
-  ##   interface-count = "allRouters/nodes/nodes/nodes/deviceInterfaces/totalCount    # absolute path
+  ##   interface-count = "allRouters/nodes/nodes/nodes/deviceInterfaces/totalCount"    # absolute path
 
   ## [inputs.t128_graphql.extract_tags]
   ##   name = "name"
@@ -736,7 +736,7 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API. The `T
   The URL of the GraphQL API
 
 - **unix_socket**
-  The unix socket to use; the defualt empty string indicates no unix socket is being used
+  The unix socket to use; the default empty string indicates no unix socket is being used
 
 - **timeout**
   A limit on the amount of time taken for a given request. If the timeout is hit, no data will be produced for the sample.

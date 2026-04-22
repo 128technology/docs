@@ -40,9 +40,11 @@ Periodic revocation checks of the base certificate are performed based on the co
 
 ## Certificate Revocation List
 
-Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs. The SSR can be configured to either dynamically learn revoked and expired certificates and add them to the local CRL, or have the location or locations of the CRL assigned and poll that location at set intervals. The lists of known valid and revoked certificates are gathered and saved locally. The list is then shared with the configured routers.
+Managing the Certificate Revocation List (CRL) includes the discovery, fetching, and periodic updates to CRLs. The SSR can be configured to either dynamically learn revoked and expired certificates and add them to the local CRL, or have the location or locations of the CRL assigned and poll that location at set intervals. The lists of known valid and revoked certificates are gathered and saved locally. The list is then shared among the configured routers. In cases where a certificate has been revoked, the peer path is shut down and traffic from the peer associated with the certificate is rejected. 
 
 If the CRL cannot be retrieved, an alarm will fire and persist until such time as that CRL can be retrieved. 
+
+In cases where a new CRL is not updated by the time the previous CRL expires, no additional alarm will be generated indicating that the CRL can not be used. 
 
 ### Configuration
 
@@ -338,11 +340,11 @@ When used in conjunction with Enhanced Security Key Management, if the peer's ce
 
 - `fail-hard` sends a notification that the certificate is no longer valid, and removes all peering relationships. The peer connection is severed and the device is prevented from participating in SVR.
 
-See [Enhanced Security Key Management](enhanced-sec-key-mgmt.md) for additional information. 
+See [Enhanced Security Key Management](sec_enhanced_key_mgmt.md) for additional information. 
 
 ## Troubleshooting
 
-Use the following information to help troublshoot certificate events or issues.
+Use the following information to help troubleshoot certificate events or issues.
 
 ### From the Command Line
 
