@@ -64,9 +64,9 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.4-4r2
+## Release 7.0.5-4r2
 
-**Release Date:** February 12, 2026
+**Release Date:** May 28, 2026
 
 ### New Features
 
@@ -145,6 +145,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
 ------
 - **I95-63817 Default peering certificates are unable to used configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
+------
+- **I95-63873 DHCP leases not showing in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router running a valid KEA lease server (with an active, valid lease) resulted in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range. 
 ------
 - **I95-63923 Redundant conductor fails to upgrade:** Resolved an issue where a minion disconnects from the conductor node and never attempts to reconnect. The minion watchdog process now restarts the salt minion if it is not connected to all conductor nodes.
 
