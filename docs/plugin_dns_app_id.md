@@ -60,8 +60,8 @@ The plugin contains built in application patterns for Gmail, Google Drive, YouTu
 
 | Application    | Document |
 | -------------- | --- |
-| Gmail        | [link](https://support.google.com/a/answer/9497877?hl=en) |
-| Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
+| Gmail        | [link](https://knowledge.workspace.google.com/admin/gmail/advanced/gmail-firewall-settings?hl=en&visit_id=639125546408983273-614519267&rd=1) |
+| Google Drive   | [link](https://knowledge.workspace.google.com/admin/drive/drive-and-sites-firewall-and-proxy-settings?hl=en&visit_id=639125542350634837-3722356732&rd=1) |
 | Windows Update | [link 1](https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/windows-update-issues-troubleshooting?toc=/windows/deployment/toc.json&bc=/windows/deployment/breadcrumb/toc.json#device-cannot-access-update-fWindows) |
 | YouTube   | [link](https://www.netify.ai/resources/applications/youtube) |
 
