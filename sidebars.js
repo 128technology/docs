@@ -20,7 +20,14 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "Conductor-managed SSR130",
+        "label": "AWS Conductor",
+        "items": [ 
+          "deploy/deploy_aws_conductor",
+       ],   
+      },
+      {
+        "type": "category",
+        "label": "SSR130 Router",
         "items": [
           "deploy/deploy_router_config",
           "deploy/deploy_router_onboard",
@@ -28,6 +35,13 @@ module.exports = {
           "deploy/deploy_verify",
           "deploy/deploy_appendix_router",
         ],
+      },
+            {
+        "type": "category",
+        "label": "AWS Router",
+        "items": [  
+          "deploy/deploy_aws",
+        ],      
       },
     ],
     "Release Notes": [
