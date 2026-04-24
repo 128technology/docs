@@ -10,23 +10,23 @@ module.exports = {
     "Deployment Guides": [
       {
         "type": "category",
-        "label": "Conductor-Managed Network: SSR1200 Conductor + SSR130 Routers",
+        "label": "SSR1200 Conductor",
         "items": [
           "deploy/deploy_overview",
           "deploy/deploy_conductor_install",
           "deploy/deploy_conductor_config",
+          "deploy/deploy_appendix_conductor",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Conductor-managed SSR130",
+        "items": [
           "deploy/deploy_router_config",
           "deploy/deploy_router_onboard",
           "deploy/deploy_router_upgrade",
           "deploy/deploy_verify",
-          {
-            "type": "category",
-            "label": "Appendices",
-            "items": [
-              "deploy/deploy_appendix_conductor",
-              "deploy/deploy_appendix_router",
-            ],
-          },
+          "deploy/deploy_appendix_router",
         ],
       },
     ],
@@ -99,7 +99,7 @@ module.exports = {
           "release_notes_byol_3.0",
           "release_notes_byol_2.0",
           "release_notes_byol"
-        ]
+        ],
       },
     ],
     "Hardware Support":[
