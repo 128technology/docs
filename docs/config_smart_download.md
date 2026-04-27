@@ -45,7 +45,7 @@ Downloads can be manually paused, resumed, or deleted from either the CLI or the
 
 Downloads are automatically paused if the connection fails. When the connection is restored, the SSR automatically resumes the download from the point where it stopped. 
 
-When the router has exhausted all possibilities and all timeouts have been reached, the download process is stopped. The place in the download process is marked in memory. If the router download is then manually restarted with a viable connection, it will automatically pick up where it left off.
+When the router has exhausted all possibilities and all timeouts have been reached, the download process is stopped. The download progress is saved on disk. If the router download is then manually restarted with a viable connection, it will automatically pick up where it left off.
 
 #### Command Line
 
