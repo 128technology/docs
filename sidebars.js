@@ -20,6 +20,14 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "VMware ESXi Conductor",
+        "items": [
+          "deploy/deploy_vmware_conductor",
+          "deploy/deploy_appendix_vmware_conductor",
+        ],
+      },
+      {
+        "type": "category",
         "label": "AWS Conductor",
         "items": [ 
           "deploy/deploy_aws_conductor",
