@@ -41,9 +41,7 @@ If an HA Router fails during download and another download is requested after fa
 
 ## Download Pause and Resume
 
-Downloads can be manually paused, resumed, or deleted from either the CLI or the GUI. 
-
-Downloads are automatically paused if the connection fails. When the connection is restored, the SSR automatically resumes the download from the point where it stopped. 
+Downloads can be manually paused, resumed, or deleted from either the CLI or the GUI.  
 
 When the router has exhausted all possibilities and all timeouts have been reached, the download process is stopped. The download progress is saved on disk. If the router download is then manually restarted with a viable connection, it will automatically pick up where it left off.
 
