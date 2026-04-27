@@ -39,13 +39,13 @@ If the HA Conductor acting as the repository fails during the download, the down
 
 If an HA Router fails during download and another download is requested after failover to the second node, a new download is begun. If the router returns to the original node and then resumes the original download, it will resume from where it left off. However, if the original node experienced a catastrophic failure where the shutdown was not clean, a new download is initiated.
 
-## Resumable SSR Download
+## Download Pause and Resume
+
+Downloads can be manually paused, resumed, or deleted from either the CLI or the GUI. 
 
 Downloads are automatically paused if the connection fails. When the connection is restored, the SSR automatically resumes the download from the point where it stopped. 
 
 When the router has exhausted all possibilities and all timeouts have been reached, the download process is stopped. The place in the download process is marked in memory. If the router download is then manually restarted with a viable connection, it will automatically pick up where it left off.
-
-Downloads can also be manually paused, resumed, or deleted from either the CLI or the GUI. 
 
 #### Command Line
 
