@@ -43,6 +43,8 @@ If an HA Router fails during download and another download is requested after fa
 
 Downloads are automatically paused if the connection fails. When the connection is restored, the SSR automatically resumes the download from the point where it stopped. 
 
+When the router has exhausted all possibilities and all timeouts have been reached, the download process is stopped. The place in the download process is marked in memory. If the router download is then manually restarted with a viable connection, it will automatically pick up where it left off.
+
 Downloads can also be manually paused, resumed, or deleted from either the CLI or the GUI. 
 
 #### Command Line
@@ -79,7 +81,7 @@ The timeout is enabled by default (`software-update download enable-timeout true
 Use the command `configure authority router system software-update download` to adjust the download retry behavior. The command parameters are listed below:
 
 - `enable-timeout`: True/false, default is true. This enables a time limit for the overall download.
-- `timeout`: Amount of time in seconds that the SSR waits for the software download to complete. When the timeout value is reached the download is marked as **Failed**, and the retry delay begins. The default download wait time is 10800s. Range is 1800s - 604800s.
+- `timeout`: Amount of time in seconds that the SSR waits for the software download to complete. When the timeout value is reached the download is marked as **Failed**. The default download wait time is 10800s. Range is 1800s - 604800s.
 - `attempts`: The maximum number of attempts to download before considering the download as failed. If set to 0, the SSR will retry the download until the timeout is hit. Default is 10.
 - `maximum retry delay`: The maximum amount of time in seconds to wait in between retry attempts. The retry delay will start off low and back off exponentially up to this duration. Range is 0 to 86400s. Default is 3600s.
 
@@ -90,14 +92,16 @@ In this example, the router will retry downloads up to 10 times, or for an hour,
 ```
 configure
     authority
-        system
-            software-update
+        router <RouterName>
+            system
+                software-update
 
-                download
-                    enable-timeout       true
-                    timeout              3600
-            		attempts             10
-            		maximum-retry-delay  600
+                    download
+                        enable-timeout       true
+                        timeout              3600
+            		    attempts             10
+            		    maximum-retry-delay  600
+                    exit
             	exit
         	exit
     	exit
@@ -110,13 +114,15 @@ In this example, the router will retry downloads up to 50 times, no matter how l
 ```
 configure
     authority
-        system
-            software-update
+        router <RouterName>
+            system
+                software-update
 
-                download
-                    enable-timeout       false
-            		attempts             50
-            		maximum-retry-delay  3600
+                    download
+                        enable-timeout       false
+            		    attempts             50
+            		    maximum-retry-delay  3600
+                    exit
             	exit
         	exit
     	exit
@@ -129,14 +135,16 @@ In this example, the router will retry downloads for up to 10 hours, no matter h
 ```
 configure
     authority
-        system
-            software-update
+        router <RouterName>
+            system
+                software-update
 
-                download
-                    enable-timeout       true
-                    timeout              3600
-            		attempts             0
-            		maximum-retry-delay  1800
+                    download
+                        enable-timeout       true
+                        timeout              3600
+            		    attempts             0
+            		    maximum-retry-delay  1800
+                    exit
             	exit
         	exit
     	exit
