@@ -12,7 +12,7 @@ sidebar_label: Smart Download
 Sometimes network connections can become unreliable, slow, or just plain break. To mitigate these disruptions, the SSR download process provides the following features for better recovery and control over software downloads.
 
 * [Failover Resiliency](#download-failover-resiliency)
-* [Resumable Download](#resumable-ssr-download)
+* [Download Pause and Resume](#download-pause-and-resume)
 * [Sequenced HA Download](#sequenced-ha-download)
 * [Bandwidth Limiting](#bandwidth-limiting) 
 * [Show Download Progress](#show-download-progress)
