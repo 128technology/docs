@@ -15,7 +15,7 @@ All steps are performed from the **Conductor GUI** at `https://192.168.100.10` u
 
 <NetworkDesign/>
 
-## 1. Connect the Conductor to the Authority
+## 1. Assign the Conductor Asset ID
 
 <ConductorAuthority/>
 
@@ -45,18 +45,13 @@ The *service* configuration element defines the IP destinations that the SSR wil
 4. Scroll down to **Services** and select **ADD**.
 5. Enter the name `internet` and select **SAVE**.
 6. On the Service screen, verify **Enabled** is set to `true`.
-7. Set **Scope** to `public`.
-8. Scroll down to **Security Policy** and select `internal`.
-9. Scroll down to **Service Addresses** and select **ADD**.
-10. Enter `0.0.0.0/0` and select **SAVE**.
-11. Scroll down to **Access Policy** and select **ADD**.
+7. Scroll down to **Service Addresses** and select **ADD**.
+8. Enter `0.0.0.0/0` and select **SAVE**.
+9. Scroll down to **Access Policy** and select **ADD**.
     - Set **Source** to `corp` (the tenant you will create in the next step).
     - Select **SAVE**.
-12. At the top of the screen, select **VALIDATE** and then **COMMIT**.
+10. At the top of the screen, select **VALIDATE** and then **COMMIT**.
 
-:::tip
-The `internal` security policy allows SVR traffic between routers in the same authority without requiring additional encryption configuration. For production deployments requiring payload encryption, select an appropriate security policy. See [Security Policy](../config_reference_guide.md) for details.
-:::
 
 ## 5. Create the Corporate Tenant
 
@@ -83,6 +78,10 @@ At the end of this step your authority contains:
 | Service | `internet` | `0.0.0.0/0`, scope `public`, security `internal` |
 | Tenant | `corp` | LAN-side user population |
 
-## Next Step
+## Next Step - Configure the Router on the Conductor
 
-Proceed to [Step 3 — Configure the Router on the Conductor](deploy_router_config.mdx) to pre-stage the branch router configuration before onboarding.
+The conductor must have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
+
+:::important
+The router configuration steps for vSSR-based conductors are identical to those for hardware-based conductors. Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment platform.
+:::

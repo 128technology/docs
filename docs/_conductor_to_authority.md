@@ -1,6 +1,6 @@
 <!----Add the Conductor to the Authority---->
 
-Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
+Take this opportunity to log into the Conductor GUI to complete the following operations. This provides validation that the installation was successful, and familiarizes you with GUI operations. 
 
 #### Connecting the Conductor to the Network
 
@@ -14,7 +14,7 @@ To make sure the conductor is on a network and accessible via GUI, the IP addres
 
  ![Conductor Configuration Icon](/img/conductor_config_icon.png)
 
-3. Select the node for the conductor - in this example it is `node1`.
+3. Select the node for the conductor - in this example it is `node0`.
 
  ![Conductor Node](/img/conductor_node.png) 
 

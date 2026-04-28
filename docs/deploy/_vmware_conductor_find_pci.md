@@ -13,7 +13,7 @@ The SSR conductor configuration requires the PCI address of the VMXNet3 manageme
 2. Enter the Linux shell from the PCLI:
 
    ```
-   admin@node1.conductor1# shell
+   admin@node0.conductor1# shell
    ```
 
 3. List the network interfaces:

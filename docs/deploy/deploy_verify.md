@@ -46,7 +46,7 @@ Fri 2026-04-17 10:00:00 UTC
 From the Conductor PCLI, confirm the WAN interface has received a DHCP address:
 
 ```bash
-show network-interface router branch1 node node1 name wan1
+show network-interface router branch1 node node0 name wan1
 ```
 
 Verify that:
@@ -61,7 +61,7 @@ Alternatively, from the Conductor GUI:
 ## 4. Verify LAN Interface
 
 ```bash
-show network-interface router branch1 node node1 name lan1
+show network-interface router branch1 node node0 name lan1
 ```
 
 Verify that:
@@ -103,7 +103,7 @@ ping 8.8.8.8
 Or from the router's PCLI, trace a path for a LAN user to the internet:
 
 ```bash
-admin@node1.branch1# show fib router branch1
+admin@node0.branch1# show fib router branch1
 ```
 
 Look for an entry matching `0.0.0.0/0` (the `internet` service) with a next-hop pointing to `wan1`.

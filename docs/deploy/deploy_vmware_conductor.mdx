@@ -76,13 +76,13 @@ The following IP addressing and naming scheme is used consistently throughout th
 |-----------|--------------|-------------|
 | Authority Name | `AcmeCorp` | Organizational authority name |
 | Conductor Router Name | `conductor1` | Conductor system name |
-| Conductor Node Name | `node1` | Conductor node name |
+| Conductor Node Name | `node0` | Conductor node name |
 | Conductor Management IP | `192.168.100.10` | Static IP on the VMware management network |
 | Conductor Subnet Mask | `/24` | Management network prefix |
 | Conductor Gateway | `192.168.100.1` | Management network gateway |
 | Conductor NIC PCI Address | _(discovered at install)_ | VMXNet3 NIC PCI address; see [Step 7](#step-7-find-the-vm-nic-pci-address) |
 | Router Name | `branch1` | Branch router system name |
-| Router Node Name | `node1` | Router node name |
+| Router Node Name | `node0` | Router node name |
 | Router WAN Interface | `wan1` (`ge-0-0`) | WAN port — uses DHCP |
 | Router WAN PCI Address | `0000:04:00.3` | SSR130 Port 0 PCI address |
 | Router LAN Interface | `lan1` (`ge-0-3`) | LAN port |
@@ -187,8 +187,8 @@ After completing NMTUI and quitting back to the shell, the SSR Initializer launc
 
    | Field | Example Value | Notes |
    |-------|--------------|-------|
-   | Node Name | `node1` | The node name within the conductor system |
-   | Conductor Name | `conductor1` | The conductor system name; appears in PCLI prompt as `node1.conductor1` |
+   | Node Name | `node0` | The node name within the conductor system |
+   | Conductor Name | `conductor1` | The conductor system name; appears in PCLI prompt as `node0.conductor1` |
 
    ![Node Information](/img/initializer_Serial5a.png)
 
@@ -319,7 +319,7 @@ The SSR conductor PCLI configuration must include a `device-interface` entry tha
 1. Log in to the Conductor GUI at `https://192.168.100.10`.
 2. Select **Configuration**.
 3. Under **Authority**, scroll to **Routers** and select `conductor1`.
-4. Select the node `node1`.
+4. Select the node `node0`.
 5. Scroll to **Device Interfaces** and select **ADD**.
 6. Enter the name `mgmt-dev` and select **SAVE**.
 7. Set the following fields:
@@ -356,10 +356,10 @@ After committing, the SSR service will briefly restart to apply the interface bi
 
 ## Step 9: Configure the Router on the Conductor
 
-The conductor must have the branch router's configuration staged **before** the SSR130 is powered on. When the SSR130 comes online and contacts the conductor, it downloads this configuration automatically.
+The conductor must have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
 
 :::important
-The router configuration steps for VMware-based conductors are identical to those for hardware-based conductors. Follow [Step 3 — Configure the Router on the Conductor](deploy_router_config.mdx) for the complete SSR130 configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment type.
+The router configuration steps for VMware-based conductors are identical to those for hardware-based conductors. Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment platform.
 :::
 
 The key configuration objects created in that step are summarized below for reference:
@@ -367,7 +367,7 @@ The key configuration objects created in that step are summarized below for refe
 | Object | Name / Value | Notes |
 |--------|-------------|-------|
 | Router | `branch1` | |
-| Node | `node1`, role `combo` | Asset ID = SSR130 serial number |
+| Node | `node0`, role `combo` | Asset ID = SSR130 serial number |
 | WAN device interface | `wan-dev`, PCI `0000:04:00.3`, forwarding `true` | SSR130 Port 0 |
 | WAN network interface | `wan1`, type `external`, DHCP `v4`, conductor `true`, source-nat `true`, management `true` | Management over Forwarding enabled |
 | Management vector | `mgmt-vec-wan`, priority `10` | |
@@ -375,7 +375,7 @@ The key configuration objects created in that step are summarized below for refe
 | LAN device interface | `lan-dev`, PCI `0000:04:00.0`, forwarding `true` | SSR130 Port 3 |
 | LAN network interface | `lan1`, type `external`, tenant `corp`, IP `192.168.1.1/24` | |
 | DNS config | mode `automatic` | |
-| Service route | `internet-route`, service `internet`, type `service-agent`, next-hop `node1 wan1` | |
+| Service route | `internet-route`, service `internet`, type `service-agent`, next-hop `node0 wan1` | |
 
 ---
 

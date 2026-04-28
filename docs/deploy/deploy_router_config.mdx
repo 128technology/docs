@@ -42,7 +42,7 @@ You will enter this value when associating the router configuration with the phy
 ## 3. Create the Node
 
 1. Scroll down to **Nodes** and select **ADD**.
-2. Enter the node name `node1` and select **SAVE**.
+2. Enter the node name `node0` and select **SAVE**.
 3. Set the following fields:
 
     | Field | Value |
@@ -161,7 +161,7 @@ The service route tells the router how to forward traffic matched by the `intern
     | Service Route Type | `service-agent` |
 
 5. Scroll to **Next Hop** and select **ADD**.
-    - Node: `node1`
+    - Node: `node0`
     - Network Interface: `wan1`
     - Select **SAVE**.
 
@@ -178,7 +178,7 @@ The following objects have been created for `branch1`:
 | WAN Network Interface | `wan1` | DHCP, conductor, default-route, source-nat, management, neighborhood `internet` |
 | LAN Device Interface | `lan-dev` | PCI `0000:04:00.0`, forwarding |
 | LAN Network Interface | `lan1` | tenant `corp`, address `192.168.1.1/24` |
-| Service Route | `internet-route` | service `internet`, type `service-agent`, next-hop `node1/wan1` |
+| Service Route | `internet-route` | service `internet`, type `service-agent`, next-hop `node0/wan1` |
 
 :::tip
 To add additional SSR130 routers to this deployment, repeat this entire section with a new router name (e.g., `branch2`), a new LAN subnet (e.g., `192.168.2.1/24`), and the corresponding device asset ID.

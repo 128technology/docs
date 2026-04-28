@@ -1,6 +1,6 @@
 ---
-title: "Appendix A — VMware Conductor Configuration"
-sidebar_label: "Conductor Configuration"
+title: "Appendix - VMware Conductor Configuration"
+sidebar_label: "Appendix - VMware Conductor Configuration"
 ---
 
 This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi deployment described in this guide. This configuration reflects the state after completing all steps through [Step 9 — Configure the Router on the Conductor](deploy_vmware_conductor.mdx#step-9-configure-the-router-on-the-conductor).
@@ -13,7 +13,7 @@ The following values are used in this configuration. Substitute your own values 
 |-----------|--------------|-------------|
 | Authority Name | `AcmeCorp` | Organizational authority name |
 | Conductor Router Name | `conductor1` | |
-| Conductor Node Name | `node1` | |
+| Conductor Node Name | `node0` | |
 | Conductor Management IP | `192.168.100.10` | Static IP on VMware management network |
 | Conductor Subnet Mask | `/24` | |
 | Conductor Gateway | `192.168.100.1` | Management network gateway |
@@ -43,13 +43,13 @@ This configuration can be applied to a freshly initialized conductor using the P
 4. Enter configuration mode and import:
 
    ```
-   admin@node1.conductor1# import config /tmp/vmware-conductor.cfg
+   admin@node0.conductor1# import config /tmp/vmware-conductor.cfg
    ```
 
 5. Review any validation warnings, then commit:
 
    ```
-   admin@node1.conductor1 (config)# commit
+   admin@node0.conductor1 (config)# commit
    Are you sure you want to commit the candidate config? [y/N]: y
    ```
 
@@ -84,8 +84,8 @@ config
             name                 conductor1
             inter-node-security  internal
 
-            node  node1
-                name  node1
+            node  node0
+                name  node0
                 role  conductor
 
                 device-interface  mgmt-dev
@@ -116,8 +116,8 @@ config
                 mode  automatic
             exit
 
-            node  node1
-                name      node1
+            node  node0
+                name      node0
                 role      combo
                 asset-id  SSR130-ABC1234567
 
@@ -172,8 +172,8 @@ config
                 service-name  internet
                 type          service-agent
 
-                next-hop  node1 wan1
-                    node-name  node1
+                next-hop  node0 wan1
+                    node-name  node0
                     interface  wan1
                 exit
             exit
@@ -217,8 +217,8 @@ To add a second SSR130 router (`branch2`), copy the `router  branch1` block, cha
                 mode  automatic
             exit
 
-            node  node1
-                name      node1
+            node  node0
+                name      node0
                 role      combo
                 asset-id  SSR130-XXXXXXXXXXX
 
@@ -273,8 +273,8 @@ To add a second SSR130 router (`branch2`), copy the `router  branch1` block, cha
                 service-name  internet
                 type          service-agent
 
-                next-hop  node1 wan1
-                    node-name  node1
+                next-hop  node0 wan1
+                    node-name  node0
                     interface  wan1
                 exit
             exit

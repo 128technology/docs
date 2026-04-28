@@ -1,6 +1,6 @@
 ---
-title: "Appendix A - Conductor Configuration"
-sidebar_label: "Conductor Configuration"
+title: "Appendix - Conductor Configuration"
+sidebar_label: "Appendix - Conductor Configuration"
 ---
 import NetworkDesign from '../_deploy_network_design.md';
 
@@ -59,8 +59,8 @@ config
             name                 conductor1
             inter-node-security  internal
 
-            node  node1
-                name  node1
+            node  node0
+                name  node0
                 role  conductor
 
                 device-interface  mgmt-dev
@@ -90,8 +90,8 @@ config
                 mode  automatic
             exit
 
-            node  node1
-                name      node1
+            node  node0
+                name      node0
                 role      combo
                 asset-id  SSR130-ABC1234567
 
@@ -146,8 +146,8 @@ config
                 service-name  internet
                 type          service-agent
 
-                next-hop  node1 wan1
-                    node-name  node1
+                next-hop  node0 wan1
+                    node-name  node0
                     interface  wan1
                 exit
             exit

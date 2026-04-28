@@ -73,7 +73,7 @@ Example output:
 ### Step 2 — Check Available Versions
 
 ```bash
-show system software available router branch1 node node1
+show system software available router branch1 node node0
 ```
 
 Confirm version `7.1.4` appears in the output.
@@ -81,13 +81,13 @@ Confirm version `7.1.4` appears in the output.
 ### Step 3 — Download the Software
 
 ```bash
-request system software download router branch1 node node1 version 7.1.4
+request system software download router branch1 node node0 version 7.1.4
 ```
 
 Monitor download progress:
 
 ```bash
-show system software download router branch1 node node1
+show system software download router branch1 node node0
 ```
 
 Wait until the status shows `completed`.
@@ -95,13 +95,13 @@ Wait until the status shows `completed`.
 ### Step 4 — Upgrade the Router
 
 ```bash
-request system software upgrade router branch1 node node1 version 7.1.4
+request system software upgrade router branch1 node node0 version 7.1.4
 ```
 
 Monitor upgrade progress:
 
 ```bash
-show system software upgrade router branch1 node node1
+show system software upgrade router branch1 node node0
 ```
 
 The router restarts when the upgrade completes. Allow 5–10 minutes for the router to come back online and re-synchronize with the conductor.
