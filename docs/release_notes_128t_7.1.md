@@ -111,8 +111,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64595 Excessive audit log severity:** Adjusted the log severity for the audit log event collector to better match expected operational conditions and reduce unnecessary log noise.
 ------
-- **I95-64623 Add plugin support files to extra packages:** Added plugin support files to the extra packages to ensure proper plugin functionality.
-------
 - **I95-64687 Recursive cleanup of Salt cache directory** Resolved an issue where cleanup of `/var/cache/salt/` was not performed recursively, which could leave behind cached data. The cleanup process now removes this directory recursively to ensure a more complete reset.
 ------
 - **I95-64688 Highway coredumps causing peer path flaps:** Resolved an issue where highway process coredumps were occurring, resulting in peer path flaps.
