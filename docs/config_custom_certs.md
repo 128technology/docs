@@ -134,7 +134,7 @@ Configuration committed
 
 The name of the `trusted-ca-certificate` should be easily identifiable; `svrv2-root-of-trust` was chosen for illustration purposes.
 
-The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but warnings are generated for those issues. If the `validation-mode` is set to `strict` the certificate-chain is not committed.
+The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but warnings are generated for those issues. If the `validation-mode` is set to `strict` the certificate-chain is not committed. For a complete list of certificate requirements enforced by the SSR, including accepted algorithms, key sizes, and extension requirements, see [Certificate Requirements and Validation](cert_validation_requirements.md).
 
 ### Authenticate to Use REST
 
