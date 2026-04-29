@@ -70,7 +70,7 @@ Certificates configured as trusted certificate authorities must meet the followi
 
 | Extension | Requirement |
 | --- | --- |
-| Basic Constraints | Must be present, must have `CA:TRUE`, and **must be marked critical** |
+| Basic Constraints | Must be present, must have `CA:TRUE`, and **must be marked critical**. |
 
 A CA certificate where the Basic Constraints extension is present and has `CA:TRUE` but is **not marked as critical** will be rejected. This is enforced per [RFC 5280 §4.2.1.9](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.9), which states that the Basic Constraints extension on CA certificates **MUST** be marked critical.
 
@@ -94,8 +94,8 @@ Client certificates used for peering are validated as leaf (end-entity) certific
 
 | Property | Requirement |
 | --- | --- |
-| Signature Algorithm | Must be an [accepted algorithm](#accepted-cryptographic-algorithms) |
-| Public Key | Must be an [accepted key type and size](#key-requirements) |
+| Signature Algorithm | Must be an [accepted algorithm](#accepted-cryptographic-algorithms). |
+| Public Key | Must be an [accepted key type and size](#key-requirements). |
 
 ### Intermediate CA Certificates
 
@@ -133,12 +133,12 @@ The SSR validates certificates at two distinct points, and the checks performed 
 
 Config-time validation runs during `validate` and `commit` operations. It checks:
 
-- Certificate time validity (not expired, not not-yet-valid)
-- Signature algorithm is on the approved list
-- Public key type is accepted (RSA or ECC)
-- Basic Constraints role (CA certificates should have `CA:TRUE`; leaf certificates should not)
-- Self-signed certificate detection
-- Extended Key Usage presence
+- Certificate time validity (not expired, not not-yet-valid).
+- Signature algorithm is on the approved list.
+- Public key type is accepted (RSA or ECC).
+- Basic Constraints role (CA certificates should have `CA:TRUE`; leaf certificates should not).
+- Self-signed certificate detection.
+- Extended Key Usage presence.
 
 The results of these checks are controlled by `validation-mode`:
 - In `strict` mode, issues block the commit.
@@ -148,13 +148,13 @@ The results of these checks are controlled by `validation-mode`:
 
 Runtime validation occurs when certificates are actively used — for example, during BFD session establishment, key exchange, or peer authentication. Runtime validation **always enforces** the following, regardless of `validation-mode`:
 
-- Full certificate chain verification (signature chain from leaf to trusted root)
-- Certificate time validity
-- Signature algorithm allowlist
-- Public key type and minimum key size (RSA ≥ 2048 bits)
-- ECC curve allowlist
-- Basic Constraints criticality (via strict X.509 conformance checking)
-- Certificate Revocation List (CRL) checking, when CRLs are configured
+- Full certificate chain verification (signature chain from leaf to trusted root).
+- Certificate time validity.
+- Signature algorithm allowlist.
+- Public key type and minimum key size (RSA ≥ 2048 bits).
+- ECC curve allowlist.
+- Basic Constraints criticality (via strict X.509 conformance checking).
+- Certificate Revocation List (CRL) checking, when CRLs are configured.
 
 ### Behavioral Differences
 
@@ -226,21 +226,21 @@ X509v3 Extended Key Usage:
 
 If a certificate was accepted during config commit (especially with `validation-mode warn`) but is rejected at runtime (e.g., BFD session fails to establish):
 
-1. Inspect the certificate with `openssl x509 -in cert.pem -text -noout`
-2. Verify that Basic Constraints on CA certificates includes both `CA:TRUE` and the `critical` flag
-3. Verify the signature algorithm is on the [accepted list](#accepted-cryptographic-algorithms)
-4. Verify the key size meets the [minimum requirements](#key-requirements)
-5. Check for certificate expiration
+1. Inspect the certificate with `openssl x509 -in cert.pem -text -noout`.
+2. Verify that Basic Constraints on CA certificates includes both `CA:TRUE` and the `critical` flag.
+3. Verify the signature algorithm is on the [accepted list](#accepted-cryptographic-algorithms).
+4. Verify the key size meets the [minimum requirements](#key-requirements).
+5. Check for certificate expiration.
 
 ### Common Certificate Issues
 
 | Issue | Symptom | Resolution |
 | --- | --- | --- |
-| Basic Constraints not critical on CA cert | Config commit warns or succeeds; runtime rejects | Reissue the CA certificate with `critical` flag on Basic Constraints |
-| RSA key below 2048 bits | Rejected at both config and runtime | Regenerate the key with at least 2048 bits |
-| SHA-1 signature | Rejected at both config and runtime | Reissue the certificate with SHA-256 or stronger |
-| Missing Extended Key Usage | Warning during config commit or certificate import | Reissue the certificate with the appropriate EKU |
-| Expired certificate | Warning or error at config time; rejected at runtime | Renew the certificate |
+| Basic Constraints not critical on CA cert | Config commit warns or succeeds; runtime rejects. | Reissue the CA certificate with `critical` flag on Basic Constraints. |
+| RSA key below 2048 bits | Rejected at both config and runtime. | Regenerate the key with at least 2048 bits. |
+| SHA-1 signature | Rejected at both config and runtime. | Reissue the certificate with SHA-256 or stronger. |
+| Missing Extended Key Usage | Warning during config commit or certificate import. | Reissue the certificate with the appropriate EKU. |
+| Expired certificate | Warning or error at config time; rejected at runtime. | Renew the certificate. |
 
 ## See Also
 
