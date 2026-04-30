@@ -66,7 +66,7 @@ graph TD
 | Device | Type | Role |
 |--------|------|------|
 | `conductor1` | VMware ESXi VM | Standalone SSR Conductor — centralized management and provisioning |
-| `branch1` | SSR130 | Conductor-managed branch router — internet breakout and LAN services |
+| `branch1` | vSSR or SSR130 | Conductor-managed branch router — internet breakout and LAN services |
 
 ## Network Design Reference
 
@@ -264,23 +264,22 @@ The conductor address is the IP that managed routers use to reach this conductor
 
 For this guide, enter `192.168.100.10` as the conductor address.
 
-### Create the Internet Service
+### Create an `Internet-Traffic` Service
 
-The *service* configuration element defines the IP destinations the SSR will route. This guide creates a single service for all internet-bound traffic.
+The *service* configuration element defines the IP destinations that the SSR will route. This process creates a single service representing all internet-bound traffic.
 
 1. Log in to the Conductor GUI.
 2. Select **Configuration**.
 3. Select **Authority** from the left panel.
 4. Scroll down to **Services** and select **ADD**.
-5. Enter the name `internet` and select **SAVE**.
-6. Verify **Enabled** is set to `true`.
-7. Set **Scope** to `public`.
-8. Scroll to **Security Policy** and select `internal`.
-9. Scroll to **Service Addresses** and select **ADD**. Enter `0.0.0.0/0` and select **SAVE**.
-10. Scroll to **Access Policy** and select **ADD**.
-    - Set **Source** to `corp`.
+5. Enter the name `Internet-Traffic` and select **SAVE**.
+6. On the Service screen, verify **Enabled** is set to `true`.
+7. Scroll down to **Service Addresses** and select **ADD**.
+8. Enter `0.0.0.0/0` and select **SAVE**.
+9. Scroll down to **Access Policy** and select **ADD**.
+    - Set **Source** to `corp` (the tenant you will create in the next step).
     - Select **SAVE**.
-11. Select **VALIDATE** then **COMMIT**.
+10. At the top of the screen, select **VALIDATE** and then **COMMIT**.
 
 ### Create the Corporate Tenant
 

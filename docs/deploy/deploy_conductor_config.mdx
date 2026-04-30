@@ -35,15 +35,15 @@ The conductor address is the IP address that managed routers use to connect to t
 
 For this guide, enter `192.168.100.10` as the conductor address.
 
-## 4. Create the Internet Service
+## 4. Create an `Internet-Traffic` Service
 
-The *service* configuration element defines the IP destinations that the SSR will route. This guide creates a single service representing all internet-bound traffic.
+The *service* configuration element defines the IP destinations that the SSR will route. This process creates a single service representing all internet-bound traffic.
 
 1. Log in to the Conductor GUI.
 2. Select **Configuration**.
 3. Select **Authority** from the left panel.
 4. Scroll down to **Services** and select **ADD**.
-5. Enter the name `internet` and select **SAVE**.
+5. Enter the name `Internet-Traffic` and select **SAVE**.
 6. On the Service screen, verify **Enabled** is set to `true`.
 7. Scroll down to **Service Addresses** and select **ADD**.
 8. Enter `0.0.0.0/0` and select **SAVE**.
@@ -51,7 +51,6 @@ The *service* configuration element defines the IP destinations that the SSR wil
     - Set **Source** to `corp` (the tenant you will create in the next step).
     - Select **SAVE**.
 10. At the top of the screen, select **VALIDATE** and then **COMMIT**.
-
 
 ## 5. Create the Corporate Tenant
 
@@ -83,5 +82,5 @@ At the end of this step your authority contains:
 The conductor must have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
 
 :::important
-The router configuration steps for vSSR-based conductors are identical to those for hardware-based conductors. Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment platform.
+Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment platform.
 :::

@@ -25,10 +25,6 @@ Connect the SSR1200 before powering it on:
 
 2. **Connect a laptop** to any LAN port (Port 0/3 through Port 0/5) using a standard Ethernet cable. The laptop will be used to access the device initialization web interface at `https://192.168.128.1` during setup.
 
-    :::note
-    Assign your laptop a static IP address in the range `192.168.128.2`–`192.168.128.254` with a subnet mask of `255.255.255.0` before connecting. The initialization web interface is only accessible on the LAN-side ports prior to initialization.
-    :::
-
 3. Do **not** power on the device yet.
 
 ## Install the Software
@@ -62,11 +58,20 @@ For instructions on creating a bootable USB from the ISO, see [Creating a Bootab
 
     ![Choose Image](/img/u-iso2_choose_image.png)
 
-2. At the Install menu, select **VGA** or **Serial** depending on your console connection.
+2. At the Install menu, select **Serial**.
 
     ![Install Type](/img/u-iso3_choose_install_type.png)
 
-3. At the Install Options screen, press **Enter** to accept the default (standard physical installation, no FIPS).
+3. If you are installing a FIPS enabled system, select Install Option 1, then press **Enter**. 
+
+    If you are installing a physical device and do not require FIPS, skip the options and select **Enter**. The download and installation begins.
+
+    :::note
+    IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
+
+    If after installation you require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
+    :::
+ 
 
     ![Install Options](/img/u-iso4_install_options.png)
 
@@ -83,6 +88,10 @@ For instructions on creating a bootable USB from the ISO, see [Creating a Bootab
 The SSR1200 exposes a web-based initialization interface on its LAN ports after the first boot. Use this interface to configure the conductor role, management IP address, and admin credentials.
 
 1. Ensure your laptop is connected to a LAN port on the SSR1200 and has a static IP in the `192.168.128.0/24` subnet.
+
+    :::note
+    Assign your laptop a static IP address in the range `192.168.128.2`–`192.168.128.254` with a subnet mask of `255.255.255.0` before connecting. The initialization web interface is only accessible on the LAN-side ports prior to initialization.
+    :::
 
 2. Open a web browser and navigate to:
 
@@ -127,25 +136,19 @@ The SSR1200 exposes a web-based initialization interface on its LAN ports after 
 
 After the device restarts, connect your laptop to the management network and verify the conductor is running:
 
+:::note
+At this point, it is good practice to remove the static IP previously set from your laptop.
+:::
+
 <VerifyConductorInstall/>
 
-You can also access the conductor GUI from the management network using:
+Access the conductor GUI from the management network using:
 
 ```
 https://192.168.100.10
 ```
 
 Log in with username `admin` and the password set during initialization.
-
-## Change the Default Passwords
-
-<ChangeDefaultPasswords/>
-
-## Configure the Software Access Token
-
-If Artifactory credentials were not entered during initialization, configure them now from the conductor PCLI so that routers can download software updates.
-
-<ConfigureToken/>
 
 ## Next Step
 
