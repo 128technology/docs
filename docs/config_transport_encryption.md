@@ -3,7 +3,7 @@ title: Transport Based Encryption
 sidebar_label: Transport Based Encryption
 ---
 
-Providing a secure transport system for traffic often requires enabling encryption on all links/paths. For traffic already traversing a trusted link, this adds unnecesary processing overhead. Transport based encryption allows you to select specific links for encryption, such as public broadband or LTE. This reduces the performance hit taken when encrypting traffic over an already secure transport link. When a failover occurs from a trusted link to a public connection, payload encryption can be enabled to maintain the secure connection. 
+Providing a secure transport system for traffic often requires enabling encryption on all links/paths. For traffic already traversing a trusted link, this adds unnecessary processing overhead. Transport based encryption allows you to select specific links for encryption, such as public broadband or LTE. This reduces the performance hit taken when encrypting traffic over an already secure transport link. When a failover occurs from a trusted link to a public connection, payload encryption can be enabled to maintain the secure connection. 
  
 Transport based encryption does not change how packets are encrypted, it simply provides more control points for enabling payload encryption. This provides flexibility when expanding your network from a legacy, all-private VPN MPLS network to include more modern communication technologies, such as wireless LTE connections. By retaining the service level payload encryption setting as disabled and enabling the transport level payload encryption at the new LTE link, traffic is encrypted on the public link maintaining the necessary security. 
 
@@ -70,7 +70,7 @@ The compatibility of `payload-encryption-override` settings is checked at the co
 
 ```
 
-A packet duplication warning message is displayed when the session resiliency of a service policy is discovered with a potential peer path `payload-encryption-override` to `enable-encryption`. 
+A packet duplication warning appears when a service policy's session resiliency detects a peer path with `payload-encryption-override` set to `enable-encryption`. 
 
 ```
 All of the packet duplication paths for service 'west' that potentially go through peer 'RTR_WEST_COMBO' (service-route 'to-west') might be overridden to enable-encryption.

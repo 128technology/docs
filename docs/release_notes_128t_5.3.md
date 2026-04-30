@@ -53,13 +53,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a `management-service-generation` validation error. 
 ------
-- **I95-40124 GRE Interface not inherting teneancy from parent:** The GRE Interface now inherts teneancy and neighborhood configuration from parent.
+- **I95-40124 GRE Interface not inheriting teneancy from parent:** The GRE Interface now inherits teneancy and neighborhood configuration from parent.
 ------
 - **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when FPM is turned on, and will not contribute to FPM data.
 ------
 - **I95-40168 `show udp-transform` not providing result details:** The `show udp-tranform` reason field now provides correct details.
 ------
-- **I95-40191 Office365 service failing on bootup:** This issue has been resolved.
+- **I95-40191 Office365 service failing on boot-up:** This issue has been resolved.
 ------
 - **I95-40239 CVE-2021-26937:** This vulnerability has been resolved.
 ------
@@ -81,7 +81,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-40429 Unable to make local router changes:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
 ------
-- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resoved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
+- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resolved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
 ------
 - **I95-40460 The Download Quickstart link in Firefox does not download the file:** This issue has been resolved. 
 ------

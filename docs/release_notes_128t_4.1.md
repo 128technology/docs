@@ -301,7 +301,7 @@ Prior versions of the 128T software did not support two routers with the same WA
 ------
 - **I95-27044** System fault can occur when changing encryption keys
 ------
-- **I95-27170** Added numerous tranmission stats for DHCP clients
+- **I95-27170** Added numerous transmission stats for DHCP clients
 ------
 - **I95-27242** Attempting to upgrade a managed router to a version greater than the Conductor fails silently
 ------
@@ -621,7 +621,7 @@ The 4.1.2 release requires the 128T-installer 2.3.0 or greater. By default, the 
 ------
 - **I95-26504** Transmitting large ICMP packets over SVR can cause the system to fault
 ------
-- **I95-26582** SSH keep-alives between conductor and router are happening too frequently
+- **I95-26582** SSH keep-alive between conductor and router are happening too frequently
 ------
 - **I95-26683** Factory defaults can be inadvertently applied when bringing up a HA node
 ------
@@ -643,7 +643,7 @@ The 4.1.2 release requires the 128T-installer 2.3.0 or greater. By default, the 
 ------
 - **I95-26846** `mount` has been added to the output of `save tech-support-info`
 ------
-- **I95-26848** Commiting a configuration that contains router validation errors from Conductor is not commited
+- **I95-26848** Committing a configuration that contains router validation errors from Conductor is not committed
 ------
 - **I95-26858** 128T may start up with 0 byte length `ntpd.conf` and `global.init` files
 ------
@@ -657,7 +657,7 @@ The 4.1.2 release requires the 128T-installer 2.3.0 or greater. By default, the 
 ------
 - **I95-26875, I95-26890, I95-26901** Large configuration can cause validation to time out
 ------
-- **I95-26924** `show assets` command erronously prompts for confirmation
+- **I95-26924** `show assets` command erroneously prompts for confirmation
 ------
 - **I95-26925** Executing `save tech-support-info` can time out
 ------
@@ -721,7 +721,7 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 ------
 - **I95-25164** An invalid node name sent over NETCONF for a `service-route` can cause the system to fault.
 ------
-- **I95-25174** Eroneous journal entries appear on restart of 128T when Zscaler plugin is enabled.
+- **I95-25174** Erroneous journal entries appear on restart of 128T when Zscaler plugin is enabled.
 ------
 - **I95-25311** GUI FIB table is inconsistent with output of `show fib` on PCLI.
 ------
@@ -737,7 +737,7 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 ------
 - **I95-25536** If a more specific static route matching a kernel route is removed, the kernel route remains inactive.
 ------
-- **I95-25539** A GUI initiated upgrade of a Conductor node failes to restart the Conductor service upon completion of the upgrade.
+- **I95-25539** A GUI initiated upgrade of a Conductor node fails to restart the Conductor service upon completion of the upgrade.
 ------
 - **I95-25570** 128T process can fault on system shutdown.
 ------

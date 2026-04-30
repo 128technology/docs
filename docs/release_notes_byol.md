@@ -14,7 +14,7 @@ sidebar_label: '1.0'
 
 - **I95-58025 Azure and AWS instances can sometimes fail to successfully onboard on first boot:** On first boot after onboarding, a race condition between startup and initializing the system can sometimes result in the onboarding to fail. The condition is now better handled in the new image.
 
-- **I95-58274 Serial console does not show any output in AWS BYOL image:** The boot line for the BYOL image now contain the appopriate options to enable the console to operate correctly.
+- **I95-58274 Serial console does not show any output in AWS BYOL image:** The boot line for the BYOL image now contain the appropriate options to enable the console to operate correctly.
 
 ## Release 1.0.0
 
@@ -22,4 +22,4 @@ sidebar_label: '1.0'
 
 ### New Features
 
-- **I95-48255 BYOL Support for Mist Managed router:** Created a new BYOL offering in Azure and AWS, to provide seamless onboarding for MIST managed Session Smart Routers. The offer enables various modes of operation using templates, image based, cloud-init based and manual onboarding modes to best fit the end user workfow.
+- **I95-48255 BYOL Support for Mist Managed router:** Created a new BYOL offering in Azure and AWS, to provide seamless onboarding for MIST managed Session Smart Routers. The offer enables various modes of operation using templates, image based, cloud-init based and manual onboarding modes to best fit the end user workflow.

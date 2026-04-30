@@ -72,8 +72,8 @@ This issue will be corrected in an upcoming release.
 
 ### Resolved Issues 
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.
+------
 - **The following issues have been identified during penetration testing and addressed in this release:** I95-48445, I95-48448. 
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
@@ -107,7 +107,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49675 Incorrect path in console help message for `export config running`:** The help message now correctly identifies the export path: `Exported files are stored in /etc/128technology/config-exports/ and are stored as GZIP compressed files.`
 ------
-- **I95-49754 Waypoint re-use causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
+- **I95-49754 Waypoint reuse causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
 ------
 - **I95-49791 Add audit rules to track modification of grub config files:** Added rules to log notifications in case of changes to grub configuration files.
 ------
@@ -164,7 +164,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-50710 Configuration cannot be applied to router when its time is ahead of the conductor:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an `mtime` older than what is in the datastore, and the configurations were rejected.
 ------
-- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
+- **I95-50736 SSH key change not propagated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
 ------
 - **I95-50754 Race condition between ICMP ping request and a reverse flow:** Resolved a crash due to a race condition when `service ping icmp-request` is matched against a partially installed flow.
 ------
@@ -228,8 +228,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
------- --->
+- **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+------
 - **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
 ------
 - **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
@@ -328,7 +328,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 - **I95-47222 Add a Cleanup boot function for brownfield conversions:** Added a function that removes all kernels and unmatched `initramfs` files, as well as removing the copies of the saved files post-conversion from their original location.
 ------
-- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additonal insight to Application Identification:
+- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additional insight to Application Identification:
 	- Track next hop additions and removals separately for more insight
 	- Track the number of times an expiration timer is set (globally and per next hop)
 	- Track the number of times an expiration timer is cleared due to a new session (globally and per next hop)
@@ -342,8 +342,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
------- --->
+- **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
+------
 - **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
 ------ 
 - **I95-43302 Rename Third-Party menu text:** The menu text has been changed to **External** to more accurately reflect the links to other Juniper platforms.
@@ -372,7 +372,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the `icmp-probe probe-address` is the same as the tunnel destination, and the `internal-address` is used as the source if the `egress-interface` is `gre-overlay`.
 ------
-- **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where BGP update suppress was not removing any pending withdrawls.
+- **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where BGP update suppress was not removing any pending withdrawals.
 ------
 - **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
 ------
@@ -416,7 +416,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48581 No entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache`.
 ------
-- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Reuse of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
 - **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
 ------
@@ -459,8 +459,8 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.
------- --->
+- **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.
+------
 - **I95-39454 Newly created user cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
 ------
 - **I95-42320 BGP aggregate-address not working:** Add support for BGP address summarization.
@@ -497,7 +497,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-47529 Outbound-only sessions get stuck after NAT rebinding:** Resolved an issue that created stuck sessions when a NAT device was rebinding and failing to establish sessions from reverse packets.
 ------
-- **I95-47551 Keep-alives are not generated for unidirectional outbound-only sessions:** Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.
+- **I95-47551 Keep-alive are not generated for unidirectional outbound-only sessions:** Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.
 ------
 - **I95-47552 LTE modem not coming up after upgrade:** Resolved an issue with modem detection and port scanning for Quectel EC25.
 ------
@@ -549,8 +549,8 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been addressed and resolved:** I95-45054, I95-45060, I95-45165, I95-47485.
------- --->
+- **The following CVE's have been addressed and resolved:** I95-45054, I95-45060, I95-45165, I95-47485.
+------
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
@@ -655,7 +655,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-45890 Service paths for BGP over SVR routes are not being rebuilt:** Resolved an issue when the vector configuration is changed on a network interface, the service paths for BGP over SVR routes are not being rebuilt.
 ------
-- **I95-46411 PPPoE over VLAN interface status missing in `show` commands:** Added atttribute to show the missing information.
+- **I95-46411 PPPoE over VLAN interface status missing in `show` commands:** Added attribute to show the missing information.
 ------
 - **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
 ------

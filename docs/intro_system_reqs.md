@@ -68,11 +68,11 @@ While the SSR uses a journaled filesystem to limit the risk of data corruption d
 The SSR software has certain basic environmental requirements to ensure smooth operation. Chief among those are reliable NTP (Network Time Protocol) and DNS (Domain Name System). Please make certain you have NTP and DNS servers that are reachable by the host platform upon which the SSR application is installed.
 
 :::important
-Because the SSR application has various time-series databases that rely on precision timekeeping, the SSR application as a whole relies on precision timekeeping. It is therefore ill-advised to only use NTP servers that can be reached over SVR once the SSR application is running; this creates a circular dependency, where SSR relies on NTP and NTP relies on SSR. This can lead to clock skew and general product instability.
+Because the SSR application includes time-series databases, the entire application relies on precision timekeeping. It is therefore ill-advised to only use NTP servers that can be reached over SVR once the SSR application is running; this creates a circular dependency, where SSR relies on NTP and NTP relies on SSR. This can lead to clock skew and general product instability.
 :::
 
 ## BIOS Recommendations
-In order to configure standard, off-the-shelf hardware to perform in line with traditional routing hardware, we recommend that you configure several BIOS settings to increase performance and resiliency.
+To optimize standard, off-the-shelf hardware for routing performance and resiliency, configure the following BIOS settings.
 
 ### Boot Priority
 It may be necessary to change the target system’s BIOS settings to allow booting from removable media. Consult your hardware vendor’s documentation (or pay close attention to the messages displayed during the boot sequence) to verify that it will boot from a USB, CD, or DVD.

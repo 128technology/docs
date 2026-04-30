@@ -19,7 +19,7 @@ config
 exit
 ```
 
-It is common to define a service for every destination of traffic within a network so as to shape traffic and affect policy in a way that assures quality of experience. In deployments of dozens or even hundreds of locations, this may result in duplicate or redundant configuration if a similar service exists at every site. Given the printer example, it is likely that the service configuration would be similar at every location, except for perhaps the `address`. The overall configuration can be simplified by using a hostname as the service address instead of an IP address.
+It is common to define a service for every destination of traffic within a network to shape traffic and enforce policy in a way that assures quality of experience. In deployments of dozens or even hundreds of locations, this may result in duplicate or redundant configuration if a similar service exists at every site. Given the printer example, it is likely that the service configuration would be similar at every location, except for perhaps the `address`. The overall configuration can be simplified by using a hostname as the service address instead of an IP address.
 
 ```
 config
@@ -36,7 +36,7 @@ config
 exit
 ```
 
-This single service template of sorts can now be used for every location, however it requires a DNS server at the location to correctly resolve `local.printer.service` to the location-specific address. If it not possible to leverage a DNS server to resolve hostnames, the SSR can be used to define a static mapping to achieve the same result.
+This single service template of sorts can now be used for every location, however it requires a DNS server at the location to correctly resolve `local.printer.service` to the location-specific address. If it is not possible to use a DNS server to resolve hostnames, the SSR can be used to define a static mapping to achieve the same result.
 
 A mapping of hostname to a list of addresses can be added to the router configuration which in turn adds entries to `/etc/hosts`. SSR will use these addresses as resolutions for the hostnames as if they were directly added to `/etc/hosts` or returned by dynamic DNS lookup. The hostname/address mappings are used for all hostnames within the SSR configuration, not only on service addresses.
 

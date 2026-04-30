@@ -13,7 +13,6 @@ For customers or partners who can access Mist and are not in an "air-gap" networ
 
 The image shipped on the SSR devices is designed to connect with Mist and Mist WAN Assurance. To use these devices in a conductor-managed environment that does not have access to Mist, re-image the SSR device with a generally available, package-based, OTP-compatible SSR software release. The minimum requirement for this re-imaging process is SSR Version 5.4.9. OTP software images are located at the following link:
 
-<!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page.
@@ -30,7 +29,7 @@ See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for import
 
 - The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
 
-- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.md#general-availability), and at a minumum, version 5.4.9. 
+- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.md#general-availability), and at a minimum, version 5.4.9. 
 
 ## OTP Re-Imaging Process
 
@@ -89,7 +88,7 @@ Use the process specific to your device to complete the re-imaging process.
 2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
 
  ![Setup Utility](/img/setup-menu-prompt.png)
-3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
+3. Use the up and down arrow keys to highlight the boot device in the Boot Override list.
 
  ![Boot Override list](/img/1x00_boot-override.png)
 4. Press Enter to confirm boot from the USB device.

@@ -18,7 +18,7 @@ Web filtering allows administrators to prevent access to dangerous, malicious, o
 - subcategory
 - category
 
-Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
+Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering uses third-party data sources to classify domains and URLs against a comprehensive, real-time, worldwide database.
 
 :::note
 Web Filtering is a separate, optional feature, available through the purchase of a Web-Filtering license. For information about activating this powerful feature, please contact Customer Support or your Sales Engineer.
@@ -77,7 +77,7 @@ exit
 
 ## How it Works
 
-The SSR maintains a cache of the most frequently used domains and URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
+The SSR maintains a cache of the most frequently used domains and URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the SSR applies the configured Category action — allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
 
 - While waiting for a response to the categorization query, the SSR will drop packets for the request. Clients are expected to retransmit the request. If a configurable threshold of retransmissions is hit, the SSR will give up on categorization and allow the session.
 - When a response is received, the cache is updated, and the category information in the service policy is applied.
@@ -194,7 +194,7 @@ Listed below are the default set of SSR domain categories, which apply to all da
 - Travel
 - Weapon
 
-Active categories and domains are displayed in the GUI on the Applications Seen page. Use the link on the top right corner of the Routers page to view the applications available on the Routers page. 
+The GUI displays active categories and domains on the Applications Seen page. Use the link on the top right corner of the Routers page to view the applications available on the Routers page. 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
@@ -235,10 +235,8 @@ When matching a session to a service, the list below represents the priority ord
 - subcategory
 - category
 
-The SSR obtains the category and subcategory for the URL and domain from Websense, which is then used for the service matching algorithm described below. 
-<!-- markdown-link-check-disable -->
+The SSR obtains the category and subcategory for the URL and domain from Websense, which is then used for the service matching algorithm described below.
 For example, on the URL: http://www.google.com/doodles/doodle-champion-island-games-september-05, matching will be performed in the following order. 
-<!-- markdown-link-check-enable -->
 1.  Does any child service URL list contain a match for this URL, including any wild-card patterns for URLs? 
 - Yes, the following child service matches the URL:
 
@@ -322,13 +320,11 @@ The matching order algorithm is the same for scenarios when all the web filterin
         exit
 ```
 The `block-search.internet` child service will match the various URLs as follows:
-<!-- markdown-link-check-disable -->
 | URL | Match Type | Description |
 | --- | --- | --- |
 | http://www.google.com/doodles/doodle-champion-island-games-september-05 | By URL<br /> http://www.google.com/doodles/* | The wild-card URL is the best match in this case. |
 | http://www.google.com | By domain *google.com | The URL is not a match, but the domain is and the overall child service is a match as a result. |
 | http://www.bing.com | By subcategory Search Engines and Portals. | The URL matches neither the configured URL or domain pattern, however, it is a Search Engine and matches the child service. |
-<!-- markdown-link-check-enable -->
 ## Configuring Web Filtering using the GUI
 
 To enable Web Filtering, configure application identification, a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 

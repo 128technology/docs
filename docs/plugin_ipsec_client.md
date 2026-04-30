@@ -362,7 +362,7 @@ This mode of operation can be configured on a per router basis under `router > i
 | `redundancy-interval` | How often to check for a failover when in active-standby mode (in seconds). The default is 1 second. |
 
 
-## Thirdparty Software & Licenses
+## Third-party Software & Licenses
 
 ##### Version History
 
@@ -837,7 +837,7 @@ On conductor, the plugin will auto upgrade to this version when upgrading from 6
 
 #### Issues Fixed
 
-- **PLUGIN-2959** Resolve copying unncessary files on image-based upgrade
+- **PLUGIN-2959** Resolve copying unnecessary files on image-based upgrade
 
 ### Release 4.1.0
 
@@ -902,7 +902,7 @@ Image based install and upgrade (IBU) support for SSR 6.3.0.
 
 - **PLUGIN-2550** IPSec plugin causing monitoring script to get stuck forever
 
-  _**Resolution:**_ The DNS resolution from IPSec namespace enforces better controls and limits to avoid a startup race condition due to which the monitoring script was getting stuck forever. The graceful handling would prevent other scripts from getting stuck indefinetly.
+  _**Resolution:**_ The DNS resolution from IPSec namespace enforces better controls and limits to avoid a startup race condition due to which the monitoring script was getting stuck forever. The graceful handling would prevent other scripts from getting stuck indefinitely.
 
 
 ### Release 3.6.1
@@ -1029,7 +1029,7 @@ A bug fix release that is only compatible with SSR < 6.3.
 
 - **PLUGIN-2833** Tunnels can flap due to rekey when connecting to some servers.
 
-  _**Resolution:**_ Release ipsec client with libreswan-3.23 compatability that is known to not have rekeying issues with some servers.
+  _**Resolution:**_ Release ipsec client with libreswan-3.23 compatibility that is known to not have rekeying issues with some servers.
 
 - **WAN-3229** IPSec tunnels can restart due to unrelated config changes.
 
@@ -1169,7 +1169,7 @@ The feature adds support for configuring a custom MSS value on the remote IPSec 
 #### Issues Fixed
 
 - **PLUGIN-768** Support the IPSec client plugin in SSR versions `5.1.0` and greater.
-- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-ipsec-client`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summary}] 128T-ipsec-client`
 
 ### Release 1.0.6, 2.0.6
 

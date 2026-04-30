@@ -7,7 +7,7 @@ Juniper SSR1300 and SSR1400 incorporate Intel X722 NICs. To support the LLDP fea
 
 The Intel X722 NIC will be referred to as the X722 or X722 NIC for the remainder of this document. 
 
-In order to fully integrate the new Intel ME firmware delivered by the BIOS, the software powers down the system after the firmware upgrade, and the user MUST manually power the system back up. 
+To fully integrate the new Intel ME firmware delivered by the BIOS, the software powers down the system after the firmware upgrade, and the user MUST manually power the system back up. 
 
 Although the update procedure can be initiated remotely over ssh, personnel must be available **ON SITE** to perform the [mandatory post-update power cycle](#post-upgrade-power-cycle).
 
@@ -16,7 +16,7 @@ Although the update procedure can be initiated remotely over ssh, personnel must
 - SSR1300
 - SSR1400
 
-### Prerequsites
+### Prerequisites
 
 - BIOS update package: `afulnx-5.16.02.0111-3.el7.x86_64.rpm`.
 - SSH or console for root access to the target system.

@@ -38,8 +38,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been identified and addressed in this release:** CVE-2022-2873, CVE-2022-41222, CVE-2022-43945, CVE-2022-4269, CVE-2022-4378, CVE-2023-0266, CVE-2023-0386, CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-20141, CVE-2022-2196, CVE-2022-25265, CVE-2022-2663, CVE-2022-3028, CVE-2022-30594, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-4129, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235. 
------- --->
+- **The following CVE's have been identified and addressed in this release:** CVE-2022-2873, CVE-2022-41222, CVE-2022-43945, CVE-2022-4269, CVE-2022-4378, CVE-2023-0266, CVE-2023-0386, CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-20141, CVE-2022-2196, CVE-2022-25265, CVE-2022-2663, CVE-2022-3028, CVE-2022-30594, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-4129, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235. 
+------
 - **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address. 
 ------
 - **I95-50493 Memory calculation for alarms is confusing:** This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. Memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.
@@ -168,7 +168,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 
 ### Resolved Issues Requiring Configuration Changes
 
-- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additonal insight to Application Identification:
+- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additional insight to Application Identification:
 	- Track next hop additions and removals separately for more insight
 	- Track the number of times an expiration timer is set (globally and per next hop)
 	- Track the number of times an expiration timer is cleared due to a new session (globally and per next hop)
@@ -192,8 +192,8 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 
 ### Resolved Issues:
 
-<!--- - **The following CVE's have been addressed:** I95-47497, I95-48445, I95-48859, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748, I95-50358, I95-50359, I95-50506, I95-50508. 
------- --->
+- **The following CVE's have been addressed:** I95-47497, I95-48445, I95-48859, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748, I95-50358, I95-50359, I95-50506, I95-50508. 
+------
 - **I95-48485 Broadcom NIC (NetXtreme) fails to initialize properly:** Resolved an issue with initization errors during memzone creation.
 ------
 - **I95-48518 Application Identification not recognizing Apps on HA systems:** Resolved an issue where the GUI was only pulling Application data from one node in an HA configuration. Application ID Summary display now aggregates data from both nodes.
@@ -267,7 +267,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
-- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
+- **I95-50736 SSH key change not propagated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
 ------
 - **I95-50754 Race condition between ICMP ping request and a reverse flow:** Resolved a crash due to a race condition when `service ping icmp-request` is matched against a partially installed flow.
 ------
@@ -305,8 +305,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues:
 
-<!--- - **The following CVE's have been addressed:** I95-48464, I95-48644, I95-48648, I95-48650, I95-48653, I95-48907, I95-49039.
------- --->
+- **The following CVE's have been addressed:** I95-48464, I95-48644, I95-48648, I95-48650, I95-48653, I95-48907, I95-49039.
+------
 - **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
 ------
 - **I95-45478 Segmentation Fault in the Dynamic Peer Update process:** Resolved an issue with multi-threaded access to a data member, leading to a segmentation fault.
@@ -331,7 +331,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
-- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Reuse of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
 - **I95-48689 Top Sessions not displaying source address:** Restored the **Source** column in the Top Sessions table. 
 ------
@@ -437,15 +437,15 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 ### Resolved Issues:
 
-<!--- - **The following CVE's have been addressed and resolved:** I95-47805, I95-48048, I95-48049. 
------- --->
+- **The following CVE's have been addressed and resolved:** I95-47805, I95-48048, I95-48049. 
+------
 - **I95-39454 Created User cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
 ------
 - **I95-41992 Warning for Rate-Limit with Flow-Limit values at 0:** A warning has been added to advise users that this will cause dropped packets.
 ------
 - **I95-42320 BGP aggregate-address not working:** Add support for BGP address summarization.
 ------
-- **I95-44957 Azure is not able to identify the asset-id of the depolyed conductor and router:** The Azure ID has been modified to be more easily identifiable.
+- **I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:** The Azure ID has been modified to be more easily identifiable.
 ------
 - **I95-44976 Highway issue when modifying an app-id session:** Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.
 ------
@@ -499,8 +499,8 @@ Release 5.5.4-8 has been withdrawn from the Release Repository due to an issue i
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485.
------- --->
+- **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485.
+------
 - **I95-38408 DHCP server on wrong vlan sends offer in response to discover message:** Hosted DHCP servers that do not have an explicit vlan configured are now explicitly treated as vlan 0, and handle any DHCP packets that are untagged/vlan 0, in order to prevent those packets from being multicasted to multiple DHCP servers.
 ------
 - **I95-44976 Highway issue when modifying an `app-id` session:** Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.
@@ -584,8 +584,8 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 ### Resolved Issues
 
-<!--- - **The following CVE's have been addressed and resolved:** I95-45060, I95-45123, I95-45165, I95-46020, I95-46359.
------- --->
+- **The following CVE's have been addressed and resolved:** I95-45060, I95-45123, I95-45165, I95-46020, I95-46359.
+------
 - **I95-45126 Split-brain after the sync interface goes down:** Resolved an issue that if the SSR software experienced a crash while it owned an interface from an X553 device, other devices hosted by the same chip could be impacted.
 ------
 - **I95-45814 No Bandwidth statistics visible in GUI:** Resolved an issue when processing high numbers of services and service routes which prevented a subset of stats from being stored and displayed.
@@ -602,7 +602,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46394 Conductor missing generated GIID's:** Resolved a rare case where the GIID on generated redundant interfaces was missing.
 ------
-- **I95-46419 FEC w/ OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
+- **I95-46419 FEC w/ OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modification to resolve the outbound only path.
 ------
 - **I95-46451 Active Node not updating properly:** Resolved an issue with inter-node VRRP wherein the virtual interface could get stuck in a bad state after a flap.
 ------
@@ -630,9 +630,9 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 ### Resolved Issues
 
-<!--- - **The following CVE issues have been addressed and resolved with this release:**
+- **The following CVE issues have been addressed and resolved with this release:**
 I95-45054, I95-45056, I95-45059
------- --->
+------
 - **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
 ------
 - **I95-36758 Redistributed service route distance not configurable:** Support has been added for the configuration of admin distance for kernel routes generated by services with service routes and for BGP over SVR services.
@@ -723,7 +723,7 @@ The active `automatedProvisioner` can be determined by running the command `show
 
 - **I95-28791 Forward Error Correction:** Forward Error Correction (FEC) adds resiliency against packet loss between two points in the network. Profiles are configured at the authority level and are not traffic-specific, which allows them to be used on any service and any router in the authority. For information about using this feature, please see [Configuring Forward Error Correction](config_forward_error_correction.md).
 ------
-- **I95-37464 WAN Assurance Application Summary:** The Application Summary displays session statistics and information by application, category, and clients. See [Using Application Summary](how_to_use_app_summary.md) for more information. 
+- **I95-37464 WAN Assurance Application Summary:** The Application Summary displays session statistics and information by application, category, and clients. See [Using Application Summary](howto_use_app_summary.md) for more information. 
 ------
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and the Cordoba platform. 
 ------
@@ -739,9 +739,9 @@ The active `automatedProvisioner` can be determined by running the command `show
 
 - **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
 ------
-<!--- - **The following CVE issues have been addressed and resolved with this release:**
+- **The following CVE issues have been addressed and resolved with this release:**
 I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206
------- --->
+------
 - **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. The firewall discovery was enhanced to use an additional TCP port 1283 to the detection mechanism.
 ------
 - **I95-42339 `show stats traffic-eng internal-application` not handling spaces:** This issue has been resolved. 

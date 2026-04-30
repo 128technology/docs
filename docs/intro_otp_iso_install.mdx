@@ -77,7 +77,7 @@ This installation process is an automated workflow which does not require user i
 
 ## Bootstrapping
 
-After the initial installation and poweroff, the system is generic - it has no specific configuration. Once the platform is started again, an automated script performs bootstrapping of the platform. This script is a single run service unit that executes **once** during the first bootup, and automatically performs the following steps:
+After the initial installation and poweroff, the system is generic - it has no specific configuration. Once the platform is started again, an automated script performs bootstrapping of the platform. This script is a single run service unit that executes **once** during the first boot-up, and automatically performs the following steps:
 
 ### 1. Configure Hostname and Salt Minion Identifier
 
@@ -176,7 +176,7 @@ The scriptlets must have executable permissions to be executed properly.
 Any stdout/stderr output generated from the scriptlets is logged in `/var/log/128T-bootstrap/<scriptlet-name>-scriptlet.log`.
 
 ### Bootstrapping Flow Chart
-The diagram below shows the procedure the Bootstrap utility follows during the first bootup of the platform after the ISO installation completes. 
+The diagram below shows the procedure the Bootstrap utility follows during the first boot-up of the platform after the ISO installation completes. 
 
 <Flowchart
   chartCode={`

@@ -216,7 +216,7 @@ If the device does not show up in the Mist organization or the desired SSR versi
 
 - Try to log into the pcli, run `su admin` and then `show mist`.
 
-- If the pcli is not accessable or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
+- If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, `ember`, and `128T-mist-agent`.
 
 ## Annexes
 
@@ -270,7 +270,7 @@ A description of the parameters of the template are listed in the following tabl
 | Resource group          | Select an existing resource group or create a new one. |
 | Region                  | The first instance of the Region field is automatically populated with the region corresponding to the resource group. |
 | Location                | As indicated in the requirements, the Session Smart Router is going to be deployed into an existing VNet. The Location field is the name of the location where such VNet exists. Please refer to the following list https://azure.microsoft.com/en-us/global-infrastructure/locations (the name of the Location field is one word and all lowercase). Example: eastus, westus, westeurope, eastasia...     |
-| Avaiability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
+| Availability Set Name    | Name of the existing availability set within the same resource group and region as the VNet selected above the Session Smart  Router is going to be deployed to.          |
 | Instance size           | Select the size of the VM in the field Instance Size. |
 | Instance Name           | Provide a name to the VM for the Session Smart Router. |
 | SSR Version             | SSR software version installed on the instance. |
