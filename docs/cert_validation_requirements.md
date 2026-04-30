@@ -11,6 +11,22 @@ sidebar_label: Certificate Requirements and Validation
 
 This page describes the certificate properties that the SSR enforces, how `validation-mode` affects behavior, and the differences between config-time and runtime validation.
 
+## Scope
+
+The cryptographic requirements on this page — accepted signature algorithms, minimum key sizes, and allowed ECC curves — apply to **all** certificates validated by the SSR, including:
+
+- **Peer certificates** (`client-certificate`) used for Enhanced Security Key Management and BFD.
+- **Trusted CA certificates** (`trusted-ca-certificate`) used to establish a chain of trust.
+- **Webserver certificates** imported via `import certificate webserver`.
+- **Syslog TLS certificates** referenced via `client-certificate-name` or `router-client-certificate-name` under `syslog` configuration.
+- **RADIUS / RADSEC TLS certificates** referenced via `client-certificate-name` or `router-client-certificate-name` under `radius` configuration.
+
+The `validation-mode` setting applies specifically to `trusted-ca-certificate` and `client-certificate` objects configured at the authority or router level. The `invalid-certificate-behavior` setting applies specifically to peer certificate failures during BFD key exchange.
+
+:::note
+LDAP server certificates are **not** validated by the SSR certificate validation described here. LDAP uses the `certificate-assurance` setting and the underlying OS trust store. See [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) for managing OS-level trusted CAs.
+:::
+
 ## Accepted Cryptographic Algorithms
 
 The SSR validates the signature algorithm used to sign each certificate in the chain. Only the following algorithms are accepted:
@@ -36,15 +52,15 @@ The SSR validates the signature algorithm used to sign each certificate in the c
 RSASSA-PSS signatures (OID 1.2.840.113549.1.1.10) are accepted when the underlying hash algorithm is SHA-256, SHA-384, or SHA-512.
 
 :::note
-Certificates signed with SHA-1 or MD5 are rejected.
+Certificates signed with SHA-1 or MD5 are rejected at both config-time and runtime.
 :::
 
 ## Key Requirements
 
 ### RSA Keys
 
-- **Minimum key size:** 2048 bits
-- Accepted key types: `RSA` and `RSA-PSS`
+- **Minimum key size:** 2048 bits.
+- Accepted key types: `RSA` and `RSA-PSS`.
 
 ### Elliptic Curve (ECC) Keys
 
@@ -57,7 +73,7 @@ Only the following named curves are accepted:
 | SECP521R1 | P-521 |
 
 :::note
-Other key types (e.g., DSA, Ed25519) are not supported and will be rejected.
+Other key types (e.g., DSA, Ed25519) are not supported and will be rejected at both config-time and runtime.
 :::
 
 ## Certificate Extension Requirements
@@ -72,7 +88,7 @@ Certificates configured as trusted certificate authorities must meet the followi
 | --- | --- |
 | Basic Constraints | Must be present, must have `CA:TRUE`, and **must be marked critical**. |
 
-A CA certificate where the Basic Constraints extension is present and has `CA:TRUE` but is **not marked as critical** will be rejected. This is enforced per [RFC 5280 §4.2.1.9](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.9), which states that the Basic Constraints extension on CA certificates **MUST** be marked critical.
+A CA certificate where the Basic Constraints extension is present and has `CA:TRUE` but is **not marked as critical** will be rejected at runtime. With `validation-mode warn`, this certificate may pass config-time validation with a warning but will fail when used for BFD or key exchange. This is enforced per [RFC 5280 §4.2.1.9](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.9), which states that the Basic Constraints extension on CA certificates **MUST** be marked critical.
 
 **Example of a conforming CA certificate extension:**
 
@@ -81,7 +97,7 @@ X509v3 Basic Constraints: critical
     CA:TRUE
 ```
 
-**Example of a non-conforming CA certificate extension (will be rejected):**
+**Example of a non-conforming CA certificate extension (will be rejected at runtime):**
 
 ```
 X509v3 Basic Constraints:
@@ -197,9 +213,9 @@ The `critical` flag is required. Most well-configured CAs include this by defaul
 
 ### For Client / Leaf Certificates
 
-- Include the Extended Key Usage (EKU) extension with the appropriate purpose (`TLS Web Client Authentication` or `TLS Web Server Authentication`)
-- Do **not** set `CA:TRUE` in Basic Constraints
-- Use an RSA key of at least 2048 bits, or an ECC key on an accepted curve
+- Include the Extended Key Usage (EKU) extension with the appropriate purpose (`TLS Web Client Authentication` or `TLS Web Server Authentication`).
+- Do **not** set `CA:TRUE` in Basic Constraints.
+- Use an RSA key of at least 2048 bits, or an ECC key on an accepted curve.
 
 ### Verifying Certificate Properties
 
