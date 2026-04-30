@@ -89,7 +89,7 @@ The following commands are only available on the SSR400 and SSR440 platforms. Wh
 | [`show chassis led`](cli_reference.md#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](cli_reference.md#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](cli_reference.md#show-chassis-led-system) | Show the status of the System LED |
-| [`show chassis power`](cli_reference.md#show-chassis-power) | Show chassis power |
+| [`show chassis power`](cli_reference.md#show-chassis-power) | The `show chassis power` command displays power supply status for both single and dual power supply SSR4xx devices. |
 | [`show chassis temperature`](cli_reference.md#show-chassis-temperature) | Show chassis temperature sensor readings |
 | [`show chassis temperature-thresholds`](cli_reference.md#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
 
