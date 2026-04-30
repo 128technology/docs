@@ -3,7 +3,7 @@ title: Proxy Server Configuration
 sidebar_label: Proxy Server Configuration
 ---
 
-Many enterprise sites can only reach the public internet through a corporate web proxy — typically locations served by MPLS or other private circuits where direct outbound access is unavailable or prohibited by policy. The SSR can be configured to route its outbound management traffic through such a non-transparent (explicit) HTTP/HTTPS proxy so it can still reach the services it depends on: the [Mist cloud](sec-ztp-web-proxy.md) for ZTP and telemetry, software and signature feeds from Juniper, Sophos, Websense, and similar providers.
+Many enterprise sites can only reach the public internet through a corporate web proxy — typically locations served by MPLS or other private circuits where direct outbound access is unavailable or prohibited by policy. The SSR can be configured to route its outbound management traffic through a non-transparent (explicit) HTTP/HTTPS proxy so it can reach the services it depends on: the [Mist cloud](sec-ztp-web-proxy.md) for ZTP and telemetry, software and signature feeds from Juniper, Sophos, Websense, and similar providers.
 
 :::note
 Anti-Virus does not work through a proxy server. If a proxy is enabled, do not rely on Anti-Virus.
@@ -22,7 +22,7 @@ In an HA pair the two nodes share what they learn and apply the same selection r
 
 ## Configuration
 
-`management-proxy` lives under each router and supports three modes:
+`management-proxy` is configured under `authority` > `router` > `management-proxy` and supports three modes of operation:
 
 | Mode       | Behavior                                                                       |
 |------------|--------------------------------------------------------------------------------|
@@ -40,7 +40,7 @@ config authority router router management-proxy proxy 10.0.0.1 address  10.0.0.1
 config authority router router management-proxy proxy 10.0.0.1 port     5000
 ```
 
-Multiple `proxy` entries may be configured; the active one is chosen as described in [Active Proxy Selection](#active-proxy-selection), and the rest serve as deterministic alternates.
+Only one `proxy` entry is allowed in `static` mode. In `learned` mode, the SSR may discover multiple candidates through DHCP; the active one is chosen as described in [Active Proxy Selection](#active-proxy-selection).
 
 To put a static proxy in effect *before* the router is onboarded to a conductor (for example, during ZTP itself), supply the same address and port through `onboarding-config.json`. See [Onboarding Configuration](initialize_u-iso_adv_workflow.md#onboarding-configuration-file).
 
@@ -123,11 +123,11 @@ When the configured mode changes (for example, `learned` → `static`, or → `d
 
 Not every SSR component is proxy-aware. Rather than retrofit each one, the SSR transparently intercepts outbound HTTP and HTTPS from its in-band management plane and forwards it through the active proxy:
 
-- HTTP and HTTPS originated by management-plane components is forwarded automatically; no per-component configuration is required.
+- HTTP and HTTPS originated by management-plane components are forwarded automatically; no per-component configuration is required.
 - HTTPS sessions are inspected on-box using the SSR's local certificate authority, so a single upstream proxy can serve all management traffic regardless of destination.
 - On-box loopback traffic is left untouched.
 
-Forwarding is enabled when a proxy becomes active, refreshed when the active proxy changes, restored after a reboot, and torn down when the proxy is disabled or fails its health check. There is nothing for the operator to maintain by hand.
+Forwarding is enabled when a proxy becomes active, refreshed when the active proxy changes, restored after a reboot, and torn down when the proxy is disabled or fails its health check. Configuration does not need to be actively managed during runtime based on network or system behavior.
 
 ## Troubleshooting
 
@@ -143,13 +143,17 @@ Forwarding is enabled when a proxy becomes active, refreshed when the active pro
 
 ### Health Checking and Alarms
 
-Once a minute the SSR opens a TCP connection to the active proxy's `address:port` (with a 3-second connect timeout) and immediately closes it. This is a transport-level liveness check only — it does not issue an HTTP request, fetch a URL, or otherwise validate that the proxy can reach the internet. A proxy whose TCP listener is up will be considered healthy even if it is misconfigured for upstream connectivity; conversely, anything that prevents the SSR from completing the TCP handshake (the proxy process being down, a firewall in the path, a routing problem) is treated as a failure.
+Once a minute the SSR opens a TCP connection to the active proxy's `address:port` (with a 3-second connect timeout) and immediately closes it. This is a transport-level liveness check only — it does not issue an HTTP request, fetch a URL, or otherwise validate that the proxy can reach the internet. A proxy whose TCP listener is UP will be considered healthy even if it is misconfigured for upstream connectivity; conversely, anything that prevents the SSR from completing the TCP handshake (the proxy process being down, a firewall in the path, a routing problem) is treated as a failure.
 
 On failure:
 
 - [Transparent forwarding](#transparent-forwarding) is torn down so management traffic does not silently black-hole.
 - The proxy state moves to `unreachable`.
 - A **critical** alarm `Management Proxy is unreachable` is raised under the `service` category, sourced from `ManagementProxy`.
+
+:::note
+The SSR does **not** automatically fail over to the next proxy candidate on failure. Only one proxy is active at a time; if it becomes unreachable, the SSR falls back to operating without a proxy until health checks succeed again.
+:::
 
 When the TCP probe succeeds again the alarm clears and forwarding is re-enabled automatically, typically within one health-check interval. End-to-end reachability of public destinations through the proxy is best confirmed at the upstream proxy itself (see the *Management traffic doesn't appear at the proxy* item in [Common Issues](#common-issues)).
 
@@ -183,7 +187,7 @@ The SSR exposes its proxy state on disk for inspection. These files are managed 
 
 **Nothing is learned in `learned` mode.** Confirm the interface still has `enable-proxy-discovery` enabled, and that the DHCP server replies as described in [DHCP Discovery](#dhcp-discovery). The per-interface lease files show whether the SSR actually received the option.
 
-**The active proxy isn't the one you expected.** Review [Active Proxy Selection](#active-proxy-selection): the SSR always picks the lowest-value valid candidate across *every* source. `show dhcp learned-proxies` and `show management-proxy` together show inputs and result.
+**The active proxy isn't the one you expected.** Review [Active Proxy Selection](#active-proxy-selection): The SSR always picks the lowest-value valid candidate across *every* source. `show dhcp learned-proxies` and `show management-proxy` together show inputs and result.
 
 **`Management Proxy is unreachable` alarm.** The SSR has an active proxy but cannot reach it on its advertised port. Verify the upstream proxy is running and that nothing in between (firewall, ACL, routing) blocks the SSR. The alarm clears automatically once connectivity returns.
 
