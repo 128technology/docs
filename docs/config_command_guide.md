@@ -13647,7 +13647,7 @@ A value from a set of predefined names.
 
 Options:
 
-- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alive enabled.
 - disabled:    Do not send keep-alive packets to keep pinhole open on an external NAT device.
 
 ## `configure authority router node device-interface network-interface adjacency nat-keep-alive tcp-inactivity-timeout`
@@ -17594,7 +17594,7 @@ A value from a set of predefined names.
 
 Options:
 
-- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alives enabled.
+- auto:        Inject keep-alive packets in order to keep the pinhole open on external NAT device for sessions that match a session type with keep-alive enabled.
 - disabled:    Do not send keep-alive packets to keep pinhole open on an external NAT device.
 
 ## `configure authority router node device-interface network-interface neighborhood nat-keep-alive tcp-inactivity-timeout`
@@ -40452,7 +40452,7 @@ The shortest historical retention bucket
 | `delete` | Delete configuration data |
 | [`duration`](#configure-authority-router-system-metrics-retention-short-duration) | How long the short retention should retain metrics |
 | [`enabled`](#configure-authority-router-system-metrics-retention-short-enabled) | Whether short and subsequent retentions should be disabled |
-| [`interval`](#configure-authority-router-system-metrics-retention-short-interval) | How frequently metrics should be inserted into the short retention. This is equivallent to the deprecated &#x27;sample-period&#x27; element. |
+| [`interval`](#configure-authority-router-system-metrics-retention-short-interval) | How frequently metrics should be inserted into the short retention. This is equivalent to the deprecated &#x27;sample-period&#x27; element. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;short&#x27; |
 
@@ -40510,7 +40510,7 @@ Options: true or false
 
 ## `configure authority router system metrics retention short interval`
 
-How frequently metrics should be inserted into the short retention. This is equivallent to the deprecated &#x27;sample-period&#x27; element.
+How frequently metrics should be inserted into the short retention. This is equivalent to the deprecated &#x27;sample-period&#x27; element.
 
 #### Usage
 
@@ -45362,7 +45362,7 @@ Options:
 - metric-condition:                         A metric condition
 - origin-condition:                         An origin condition
 - peer-condition:                           A peer condition
-- probability-condition:                    A probablity condition
+- probability-condition:                    A probability condition
 - tag-condition:                            A tag condition
 
 ## `configure authority routing policy statement name`
@@ -49623,7 +49623,7 @@ configure authority session-type <name>
 | [`description`](#configure-authority-session-type-description) | A description of the session type. |
 | [`initial-timeout`](#configure-authority-session-type-initial-timeout) | The inactivity timeout for sessions that are not yet established. |
 | [`name`](#configure-authority-session-type-name) | The name of the session type. |
-| [`nat-keep-alive`](#configure-authority-session-type-nat-keep-alive) | Enable/disable generation of NAT keep-alives for sessions of this type if the functionality is enabled in the neighborhood |
+| [`nat-keep-alive`](#configure-authority-session-type-nat-keep-alive) | Enable/disable generation of NAT keep-alive for sessions of this type if the functionality is enabled in the neighborhood |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`resource-group`](#configure-authority-session-type-resource-group) | Associate this session type with a top-level resource-group. |
 | [`service-class`](#configure-authority-session-type-service-class) | The service class this type belongs to. |
@@ -49706,7 +49706,7 @@ Length: 0-63
 
 ## `configure authority session-type nat-keep-alive`
 
-Enable/disable generation of NAT keep-alives for sessions of this type if the functionality is enabled in the neighborhood
+Enable/disable generation of NAT keep-alive for sessions of this type if the functionality is enabled in the neighborhood
 
 #### Usage
 
@@ -50701,7 +50701,7 @@ configure authority tenant member <neighborhood>
 
 | name | description |
 | ---- | ----------- |
-| neighborhood | Neigborhood where tenant members are located. |
+| neighborhood | Neighborhood where tenant members are located. |
 
 ##### Subcommands
 
@@ -50709,7 +50709,7 @@ configure authority tenant member <neighborhood>
 | ------- | ----------- |
 | [`address`](#configure-authority-tenant-member-address) | The source address(es) within the neighborhood that define the tenant members. |
 | `delete` | Delete configuration data |
-| [`neighborhood`](#configure-authority-tenant-member-neighborhood) | Neigborhood where tenant members are located. |
+| [`neighborhood`](#configure-authority-tenant-member-neighborhood) | Neighborhood where tenant members are located. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;member&#x27; |
 
@@ -50778,7 +50778,7 @@ characters and leading zeros are not allowed.
 
 ## `configure authority tenant member neighborhood`
 
-Neigborhood where tenant members are located.
+Neighborhood where tenant members are located.
 
 #### Usage
 
