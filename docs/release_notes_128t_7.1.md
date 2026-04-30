@@ -71,6 +71,50 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.1.5-7r2
+
+**Release Date:** April 30, 2026
+
+### New Features
+
+- **I95-63393 SSR400/SSR440 power supply status visibility:** Added CLI support to display the status of power supplies on dual-AC SSR400/SSR440 platforms. The `show chassis power` command displays power supply status for both single and dual power supply devices. This improves operational visibility into power redundancy and health on SSR400/SSR440 systems.
+------
+- **I95-64568 TPM details in platform information:** The `show platform security` command has been added to display TPM information such as TPM family (version number), revision, firmware version, and manufacturer. This allows users to verify TPM availability and configuration for security and compliance workflows.
+------
+- **I95-64623 Plugin packaging improvements:** Updated plugin packaging to include `128T-plugin-support-files`. This ensures that plugin dependencies are available on systems that rely on the extra packages bundle.
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2021-47670, CVE-2022-25883, CVE-2022-49985, CVE-2022-50087, CVE-2022-50228, CVE-2022-50367, CVE-2022-50386, CVE-2022-50543, CVE-2023-53125, CVE-2023-53178, CVE-2023-53226, CVE-2023-53257, CVE-2023-53297, CVE-2023-53305, CVE-2023-53386, CVE-2023-53401, CVE-2023-53513, CVE-2023-53539, CVE-2024-56644, CVE-2025-4945, CVE-2025-6176, CVE-2025-9086, CVE-2025-9230, CVE-2025-11021, CVE-2025-12084, CVE-2025-13601, CVE-2025-14104, CVE-2025-21727, CVE-2025-21759, CVE-2025-22026, CVE-2025-22058, CVE-2025-22097, CVE-2025-37797, CVE-2025-37914, CVE-2025-38085, CVE-2025-38159, CVE-2025-38200, CVE-2025-38211, CVE-2025-38250, CVE-2025-38332, CVE-2025-38350, CVE-2025-38352, CVE-2025-38380, CVE-2025-38392, CVE-2025-38449, CVE-2025-38461, CVE-2025-38464, CVE-2025-38477, CVE-2025-38498, CVE-2025-38527, CVE-2025-38556, CVE-2025-38718, CVE-2025-38724, CVE-2025-39697, CVE-2025-39718, CVE-2025-39730, CVE-2025-39817, CVE-2025-39825, CVE-2025-39841, CVE-2025-39849, CVE-2025-39864, CVE-2025-39883, CVE-2025-39898, CVE-2025-39955, CVE-2025-39971, CVE-2025-40300, CVE-2025-66418, CVE-2025-66471, CVE-2026-0719, CVE-2026-1761, CVE-2026-21441.
+------
+- **I95-62421 DHCP relay failures causing clients to miss IP assignment:** Resolved an issue where DHCP session information is lost on the hub, causing the session reverse flow to collide with the forward flow of the session initiated originally from the spoke. This includes a new (configurable) default behavior for collision resolution. For detailed information, see [`configure authority service-policy prefer-established-session {true | false}`](config_command_guide.md#configure-authority-service-policy-prefer-established-session). 
+------
+- **I95-62710 Unnecessary web server processing for `router all` in the PCLI:** Addressed a problem where the web server performed unnecessary work when PCLI commands referenced `router all`. This optimization reduces overhead and improves responsiveness.
+------
+- **I95-63174 IDP `Critical` profile not applied:** Resolved an issue where setting the IDP policy/profile to `Critical` was not properly applied on IDP. With this fix, profile changes to `Critical` now take effect as expected.
+------
+- **I95-63355 Node-level security controls for serial console and USB:** Restored support for configuring node-level security features that disable serial console output and USB boot/mass storage (for example, settings such as `serial-console-enabled` and `usb-mass-storage-enabled`). This allows users to reapply hardened platform settings where supported.
+------
+- **I95-63393 Show command displaying status of power supplies in an SSR400/SSR440 (dual AC power supply):** Added a show command to display the status of power supplies in dual AC power supply models.
+------
+- **I95-63839 SNMP walk failures on Conductors onboarding to NMS:** Resolved an issue where SNMP walks on Conductors could fail with a `genError`, preventing successful onboarding into some network management systems. System MIB walks on Conductors now complete successfully; IF-MIB is no longer exposed on Conductors where it is not supported.
+------
+- **I95-63873 DHCP leases and Logs page issues in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router resulted in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
+------
+- **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
+------
+- **I95-64187 Improved handling of TPM Dictionary Attack (DA) lockout:** Improved detection and handling when the TPM is in Dictionary Attack (DA) lockout mode. The integrity handler now detects this condition earlier and fails in a more predictable manner, simplifying troubleshooting of TPM-related integrity issues.
+------
+- **I95-64568 Add TPM information to `show platform`:** Added TPM presence and relevant device information to the `show platform` command output.
+------
+- **I95-64575 Unable to login to SSR routers from conductor in Cloud deployment:** Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.
+------
+- **I95-64595 Excessive audit log severity:** Adjusted the log severity for the audit log event collector to better match expected operational conditions and reduce unnecessary log noise.
+------
+- **I95-64687 Recursive cleanup of Salt cache directory** Resolved an issue where cleanup of `/var/cache/salt/` was not performed recursively, which could leave behind cached data. The cleanup process now removes this directory recursively to ensure a more complete reset.
+------
+- **I95-64688 Highway coredumps causing peer path flaps:** Resolved an issue where highway process coredumps were occurring, resulting in peer path flaps.
+
 ## Release 7.1.4-3r2
 
 **Release Date:** March 17, 2026
