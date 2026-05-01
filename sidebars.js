@@ -387,6 +387,7 @@ module.exports = {
           "sec-disable-ports",
           "config_custom_certs",
           "sec-cert-based-encrypt",
+          "cert_validation_requirements",
           "sec_enhanced_key_mgmt", 
           "config_factory_reset",         
         ],
