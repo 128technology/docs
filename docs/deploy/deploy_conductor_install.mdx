@@ -11,6 +11,8 @@ This section covers the physical hardware setup and software installation for th
 
 SSR 7.1.4 uses the **Universal ISO** installation process. If your SSR1200 shipped with SSR 6.3.0 or later pre-installed, skip the [Install the Software](#install-the-software) section and proceed directly to [Initialize the Conductor](#initialize-the-conductor).
 
+If your device has an SSR software version lower than SSR 6.3.0, there are specific requirements for upgrading to the latest SSR version. Please use the detailed instructions in Upgrading the Conductor before proceeding. 
+
 ## SSR1200 Port Reference
 
 <SSR1200Ports/>
@@ -20,7 +22,7 @@ SSR 7.1.4 uses the **Universal ISO** installation process. If your SSR1200 shipp
 Connect the SSR1200 before powering it on:
 
 1. **Connect the MGMT port** (`mgmt-0-0`, PCI `0000:03:00.0`) to a management network switch port that provides:
-    - A static IP assignment or DHCP lease for the conductor
+    - A static IP assignment 
     - Connectivity to the internet (required for software downloads)
 
 2. **Connect a laptop** to any LAN port (Port 0/3 through Port 0/5) using a standard Ethernet cable. The laptop will be used to access the device initialization web interface at `https://192.168.128.1` during setup.
@@ -140,13 +142,13 @@ After the device restarts, connect your laptop to the management network and ver
 At this point, it is good practice to remove the static IP previously set from your laptop.
 :::
 
-<VerifyConductorInstall/>
-
 Access the conductor GUI from the management network using:
 
 ```
 https://192.168.100.10
 ```
+
+**Login screenshot to be added**
 
 Log in with username `admin` and the password set during initialization.
 

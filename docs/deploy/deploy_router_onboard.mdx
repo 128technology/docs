@@ -9,7 +9,7 @@ This section covers the physical setup and initialization of each SSR130 branch 
 Repeat this section for each SSR130 in your deployment.
 
 :::important
-The conductor **must** have a valid configuration staged for this router — including a matching asset ID — before the router is powered on. Powering on the router before the configuration is ready will result in a failed onboarding attempt.
+It is a best practice to have a valid configuration staged on the conductor for this router — including a matching asset ID — before the router is powered on.
 :::
 
 ## SSR130 Port Reference
@@ -145,7 +145,7 @@ No further interaction is required. Monitor onboarding progress from the Conduct
 After the SSR130 connects to the conductor, verify the onboarding was successful from the **Conductor GUI**:
 
 1. Navigate to the **Routers** page.
-2. The router (`branch1`) should appear with a status of **Running** or **Synchronizing**.
+2. The router (`branch1`) statuses may be **Re-Initializing**, **Synchronizing**, or **Running**.
 3. Once fully synchronized, the status shows **Synchronized** and the router's asset ID appears under the router entry.
 
 From the conductor **PCLI**, verify using:

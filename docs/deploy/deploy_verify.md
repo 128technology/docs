@@ -68,31 +68,7 @@ Verify that:
 - **Operational State** is `up`
 - **Address** shows `192.168.1.1/24`
 
-## 5. Verify Management over Forwarding
-
-Management over forwarding is active when the conductor and router maintain an uninterrupted management connection through the WAN interface. Since the conductor shows the router as **Synchronized** and the WAN interface is up, management over forwarding is working correctly.
-
-To confirm from the router's Linux shell:
-
-```bash
-ip route
-```
-
-Expected output — a default route pointing to `kni254` confirms that management traffic is flowing through the SSR forwarding engine:
-
-```
-default dev kni254 scope link metric 10
-```
-
-To SSH to the router through the conductor (using management over forwarding):
-
-```bash
-ssh admin@branch1.AcmeCorp
-```
-
-If the SSH session opens, management over forwarding is confirmed end-to-end.
-
-## 6. Verify Internet Service Forwarding
+## 5. Verify Internet Service Forwarding
 
 From a LAN device in the `192.168.1.0/24` subnet, confirm internet connectivity:
 
@@ -116,7 +92,7 @@ show sessions router branch1
 
 Traffic from LAN hosts (`192.168.1.0/24`, tenant `corp`) destined for the internet should appear as active sessions egressing `wan1`.
 
-## 7. Verify Internet Breakout with Source NAT
+## 6. Verify Internet Breakout with Source NAT
 
 From a LAN device, confirm that outbound traffic is source-NAT'd to the WAN IP:
 
