@@ -5,7 +5,7 @@ sidebar_label: Overview
 import Mermaid from '@theme/Mermaid';
 import NetworkDesign from './_deploy_network_design.md';
 
-This guide walks a network engineer through every step required to stand up a conductor-managed SSR network using an **SSR1200 as the Conductor** and one or more **SSR130 branch routers**. By the end of the guide, each branch router will be online, managed by the conductor, forwarding internet traffic for LAN users, and reachable by the conductor over the same WAN interface used for internet breakout.
+This guide walks a network engineer through the steps required to stand up a conductor-managed SSR network using an **SSR1200 as the Conductor** and ready to onboard branch routers. By the end of the guide, the conductor will have a configuration ready for each branch router to bring it online, managed by the conductor, forwarding internet traffic for LAN users, and reachable by the conductor over the same WAN interface used for internet breakout.
 
 ## Guide Sections
 
@@ -14,11 +14,7 @@ This guide walks a network engineer through every step required to stand up a co
 | 1 | [Install the Conductor](deploy_conductor_install.mdx) | Install SSR 7.1.4 on an SSR1200 and initialize it as a standalone conductor |
 | 2 | [Configure the Conductor](deploy_conductor_config.mdx) | Set the authority name, conductor address, internet service, and corporate tenant |
 | 3 | [Configure the Router on the Conductor](deploy_router_config.mdx) | Pre-stage each SSR130 router's configuration on the conductor before onboarding |
-| 4 | [Onboard SSR130 Routers](deploy_router_onboard.mdx) | Connect and initialize each SSR130 router so it joins the conductor |
-| 5 | [Upgrade Routers to 7.1.4](deploy_router_upgrade.mdx) | Upgrade each onboarded router to SSR 7.1.4 from the conductor |
-| 6 | [Verify the Deployment](deploy_verify.md) | Confirm connectivity, management, and internet forwarding |
-| — | [Appendix A — Conductor Configuration](deploy_appendix_conductor.mdx) | Complete conductor PCLI configuration |
-| — | [Appendix B — Router Configuration](deploy_appendix_router.mdx) | Complete router PCLI configuration |
+| — | [Appendix — Conductor Configuration](deploy_appendix_conductor.mdx) | Complete conductor PCLI configuration |
 
 ## Network Topology
 
