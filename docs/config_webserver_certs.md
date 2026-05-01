@@ -97,6 +97,9 @@ Which router is this certificate for? (Select all if it applies to the entire au
         authority
             client-certificate webserver
                 content
+```
+
+For details on what certificate properties the SSR requires (including Extended Key Usage), see [Certificate Requirements and Validation](cert_validation_requirements.md).
 
 2. certificate contains the following issues: does not have the extendKeyUsage extension
 

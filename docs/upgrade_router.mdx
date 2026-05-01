@@ -48,3 +48,23 @@ If you perform an upgrade from the CLI using the `request system software upgrad
 
 However, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
+### Upgrade Sequence Behavior in HA Routers
+
+In an HA (High Availability) SSR deployment, the upgrade sequence is not random; it is designed specifically to minimize traffic impact. When a sequenced upgrade is initiated against an HA router, the Conductor — not the operator — determines which node is upgraded first based on the state of the `routingManager` process, which is the process responsible for building the routing table within the SSR.
+
+#### Key Logic Used by the Conductor
+
+- At any given time, only one node in the HA pair runs the active (primary) `routingManager`. The other node operates with `routingManager` in standby.
+- The Conductor always starts the upgrade with the node whose `routingManager` is in the standby (inactive) state.
+- Once the standby node is upgraded and reports healthy, leadership roles may transition if needed, and the second node (previously active) is then upgraded.
+
+You can confirm which node currently holds the active `routingManager` before starting an upgrade by running `show system processes node all` from the router and locating the `routingManager` row marked `Y` in the `Primary` column. See [Leader Election](concepts_ha_theoryofoperation.md#leader-election) for more detail.
+
+#### Why This Approach Is Used
+
+The standby node is typically not actively forwarding traffic and is not actively maintaining BGP peering sessions, so upgrading it first minimizes service disruption. After the standby node returns to a healthy state, the Conductor proceeds with the previously active node, ensuring continuous traffic handling throughout the upgrade process.
+
+:::note
+This ordering is automatic for sequenced upgrades. If you target a specific node directly with `request system software upgrade router <router> node <node>`, the Conductor honors your selection and does not re-order based on `routingManager` state. Targeting the active node directly may cause a brief service disruption when leadership transitions.
+:::
+
