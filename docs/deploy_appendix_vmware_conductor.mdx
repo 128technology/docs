@@ -68,8 +68,8 @@ config
             name  corp
         exit
 
-        service  internet
-            name             internet
+        service  Internet-Traffic
+            name             Internet-Traffic
             scope            public
             security         internal
 
@@ -169,7 +169,7 @@ config
 
             service-route  internet-route
                 name          internet-route
-                service-name  internet
+                service-name  Internet-Traffic
                 type          service-agent
 
                 next-hop  node0 wan1
@@ -270,7 +270,7 @@ To add a second SSR130 router (`branch2`), copy the `router  branch1` block, cha
 
             service-route  internet-route
                 name          internet-route
-                service-name  internet
+                service-name  Internet-Traffic
                 type          service-agent
 
                 next-hop  node0 wan1

@@ -12,44 +12,44 @@ module.exports = {
         "type": "category",
         "label": "SSR1200 Conductor",
         "items": [
-          "deploy/deploy_overview",
-          "deploy/deploy_conductor_install",
-          "deploy/deploy_conductor_config",
-          "deploy/deploy_appendix_conductor",
+          "deploy_overview",
+          "deploy_conductor_install",
+          "deploy_conductor_config",
+          "deploy_router_config",
+          "deploy_appendix_conductor",
         ],
       },
       {
         "type": "category",
         "label": "VMware ESXi Conductor",
         "items": [
-          "deploy/deploy_vmware_conductor",
-          "deploy/deploy_appendix_vmware_conductor",
+          "deploy_vmware_conductor",
+          "deploy_appendix_vmware_conductor",
         ],
       },
       {
         "type": "category",
         "label": "AWS Conductor",
-        "items": [ 
-          "deploy/deploy_aws_conductor",
-       ],   
+        "items": [
+          "deploy_aws_conductor",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "AWS Router",
+        "items": [
+          "deploy_aws",
+        ],
       },
       {
         "type": "category",
         "label": "SSR130 Router",
         "items": [
-          "deploy/deploy_router_config",
           "deploy/deploy_router_onboard",
           "deploy/deploy_router_upgrade",
           "deploy/deploy_verify",
           "deploy/deploy_appendix_router",
         ],
-      },
-            {
-        "type": "category",
-        "label": "AWS Router",
-        "items": [  
-          "deploy/deploy_aws",
-        ],      
       },
     ],
     "Release Notes": [

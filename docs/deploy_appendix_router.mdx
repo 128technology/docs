@@ -2,7 +2,7 @@
 title: "Appendix B - Router Configuration"
 sidebar_label: "Router Configuration"
 ---
-import NetworkDesign from '../_deploy_network_design.md';
+import NetworkDesign from './_deploy_network_design.md';
 
 This appendix contains the SSR130 branch router configuration in SSR PCLI format. This is the router-scoped portion of the configuration staged on the conductor for `branch1`. It reflects the final state after completing [Step 3 — Configure the Router on the Conductor](deploy_router_config.mdx) and [Step 5 — Upgrade Routers to 7.1.4](deploy_router_upgrade.mdx).
 
@@ -81,7 +81,7 @@ config
 
             service-route  internet-route
                 name          internet-route
-                service-name  internet
+                service-name  Internet-Traffic
                 type          service-agent
 
                 next-hop  node0 wan1
@@ -106,7 +106,7 @@ exit
 
 | Service | Route | Type | Egress Interface |
 |---------|-------|------|-----------------|
-| `internet` (0.0.0.0/0) | `internet-route` | `service-agent` | `wan1` (direct breakout) |
+| `Internet-Traffic` (0.0.0.0/0) | `internet-route` | `service-agent` | `wan1` (direct breakout) |
 
 ## Configuration Notes
 

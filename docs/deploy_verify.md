@@ -22,7 +22,7 @@ Expected output for a healthy deployment:
  SSR130-ABC1234567    branch1        Synchronized
 ```
 
-If a router shows **Disconnected** or remains in **Synchronizing** for more than 15 minutes, see [Troubleshooting Conductor Connectivity](../ts_connecting_to_routers.md).
+If a router shows **Disconnected** or remains in **Synchronizing** for more than 15 minutes, see [Troubleshooting Conductor Connectivity](ts_connecting_to_routers.md).
 
 ## 2. Verify Router Software Version
 
@@ -82,7 +82,7 @@ Or from the router's PCLI, trace a path for a LAN user to the internet:
 admin@node0.branch1# show fib router branch1
 ```
 
-Look for an entry matching `0.0.0.0/0` (the `internet` service) with a next-hop pointing to `wan1`.
+Look for an entry matching `0.0.0.0/0` (the `Internet-Traffic` service) with a next-hop pointing to `wan1`.
 
 To confirm active session forwarding, from the Conductor PCLI:
 

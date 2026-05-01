@@ -2,10 +2,10 @@
 title: Configure the Conductor
 sidebar_label: Configure the Conductor
 ---
-import NetworkDesign from '../_deploy_network_design.md';
-import AuthorityName from '../_set_authority_name.md';
-import SetConductorIP from '../_set_conductor_ip.md';
-import ConductorAuthority from '../_conductor_to_authority.md';
+import NetworkDesign from './_deploy_network_design.md';
+import AuthorityName from './_set_authority_name.md';
+import SetConductorIP from './_set_conductor_ip.md';
+import ConductorAuthority from './_conductor_to_authority.md';
 
 This section configures the authority-level settings on the conductor: the authority name, conductor address, internet service, and corporate tenant. These objects are global to all routers in the authority.
 
@@ -74,7 +74,7 @@ At the end of this step your authority contains:
 |--------|------|-------|
 | Authority | `AcmeCorp` | |
 | Conductor Address | | `192.168.100.10` |
-| Service | `internet` | `0.0.0.0/0`, scope `public`, security `internal` |
+| Service | `Internet-Traffic` | `0.0.0.0/0` |
 | Tenant | `corp` | LAN-side user population |
 
 ## Next Step - Configure the Router on the Conductor

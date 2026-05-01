@@ -53,7 +53,7 @@
 
 ### Virtual Hardware
 
-5. Click **Virtual Hardware** and configure the following settings. These values meet the minimum conductor requirements; scale up for larger deployments (see [Conductor Scaling Recommendations](../intro_system_reqs.md#conductor-scaling-recommendations)).
+5. Click **Virtual Hardware** and configure the following settings. These values meet the minimum conductor requirements; scale up for larger deployments (see [Conductor Scaling Recommendations](intro_system_reqs.md#conductor-scaling-recommendations)).
 
    | Setting | Value | Notes |
    |---------|-------|-------|

@@ -2,7 +2,7 @@
 title: "Appendix - Conductor Configuration"
 sidebar_label: "Appendix - Conductor Configuration"
 ---
-import NetworkDesign from '../_deploy_network_design.md';
+import NetworkDesign from './_deploy_network_design.md';
 
 This appendix contains the complete conductor configuration in SSR PCLI format for the `conductor1` system described in this guide. This configuration reflects the state after completing [Step 2 — Configure the Conductor](deploy_conductor_config.mdx) and [Step 3 — Configure the Router on the Conductor](deploy_router_config.mdx).
 
@@ -43,8 +43,8 @@ config
             name  corp
         exit
 
-        service  internet
-            name             internet
+        service  Internet-Traffic
+            name             Internet-Traffic
             scope            public
             security         internal
 
@@ -143,7 +143,7 @@ config
 
             service-route  internet-route
                 name          internet-route
-                service-name  internet
+                service-name  Internet-Traffic
                 type          service-agent
 
                 next-hop  node0 wan1
