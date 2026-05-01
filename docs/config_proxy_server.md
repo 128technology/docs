@@ -3,31 +3,36 @@ title: Proxy Server Configuration
 sidebar_label: Proxy Server Configuration
 ---
 
-With only MPLS or private connectivity available, it is possible to leverage a connection a public URL or to MIST using an explicit proxy and a private web proxy in the network. This type of web proxy is often used to bridge the gap between private and public networks.
+Many enterprise sites can only reach the public internet through a corporate web proxy — typically locations served by MPLS or other private circuits where direct outbound access is unavailable or prohibited by policy. The SSR can be configured to route its outbound management traffic through a non-transparent (explicit) HTTP/HTTPS proxy so it can reach the services it depends on: the [Mist cloud](sec-ztp-web-proxy.md) for ZTP and telemetry, software and signature feeds from Juniper, Sophos, Websense, and similar providers.
 
-The following support is provided for proxy server configuration:
-
-- Proxy IP per WAN interface
-	- Configuration override of proxy IP per WAN link
-- Proxy IP for public URLs accessed by SSR. For example:
-	- Websense
-	- Sophos Server
-	- Juniper Software download
-- Proxy IP for an SSR to Mist connection (Secure ZTP Onboarding) 
-
-This document provides information to configure the SSR to identify and use the non-transparent proxy. That information can also be used to perform the [Mist secure ZTP onboarding process](sec-ztp-web-proxy.md).
-
-:::note 
-Anti-Virus configurations do not support the use of the proxy server. Anti-Virus will not work when a proxy server is enabled.
+:::note
+Anti-Virus does not work through a proxy server. If a proxy is enabled, do not rely on Anti-Virus.
 :::
 
-## Configure an SSR Web Proxy
+## How It Works
 
-By default the SSR uses DHCP to identify the SSR web proxy addresses. To leverage a connection using an explicit proxy and a private web proxy, you can configure the SSR to either configure a static proxy IP address and port, or dynamically learn the proxy address. 
+When `management-proxy` is enabled, the SSR:
 
-### Static 
+1. Obtains one or more candidate proxy addresses, either from configuration ([static](#static)) or from DHCP on the WAN ([learned](#learned)).
+2. Validates each candidate (valid IPv4 address, TCP port `1–65535`) and selects the active proxy by the rule described in [Active Proxy Selection](#active-proxy-selection).
+3. Health-checks the active proxy and exposes its state through [`show management-proxy`](#commands), raising an alarm if it stops responding (see [Health Checking and Alarms](#health-checking-and-alarms)).
+4. Transparently forwards the SSR's own management-plane HTTP/HTTPS traffic through the active proxy (see [Transparent Forwarding](#transparent-forwarding)).
 
-To set the proxy IP addresses manually, configure the `management-proxy mode` to `static`, and enter the IP address and port to be accessed by the SSR.
+In an HA pair the two nodes share what they learn and apply the same selection rule, so they always converge on the same active proxy without explicit coordination.
+
+## Configuration
+
+`management-proxy` is configured under `authority` > `router` > `management-proxy` and supports three modes of operation:
+
+| Mode       | Behavior                                                                       |
+|------------|--------------------------------------------------------------------------------|
+| `disabled` | No upstream proxy is used. Default.                                            |
+| `static`   | One or more proxy address/port pairs are configured explicitly.                |
+| `learned`  | Proxy addresses are discovered from DHCP on the SSR's WAN network-interfaces.  |
+
+### Static
+
+Use `static` when the proxy address is fixed and known ahead of time:
 
 ```
 config authority router router management-proxy mode   static
@@ -35,84 +40,157 @@ config authority router router management-proxy proxy 10.0.0.1 address  10.0.0.1
 config authority router router management-proxy proxy 10.0.0.1 port     5000
 ```
 
-This same address will be used for both nodes in an HA pair, and across all WAN interfaces.
+Only one `proxy` entry is allowed in `static` mode. In `learned` mode, the SSR may discover multiple candidates through DHCP; the active one is chosen as described in [Active Proxy Selection](#active-proxy-selection).
 
-Optionally, you can use the `onboarding-config.json` to set the static IP address and port number until the router is onboarded to the conductor. For additional information about using the `onboarding-config.json` see [Onboarding Configuration](initialize_u-iso_adv_workflow.md#onboarding-configuration-file).
+To put a static proxy in effect *before* the router is onboarded to a conductor (for example, during ZTP itself), supply the same address and port through `onboarding-config.json`. See [Onboarding Configuration](initialize_u-iso_adv_workflow.md#onboarding-configuration-file).
 
-### Learned 
+### Learned
 
-The SSR can be configured to dynamically learn proxy addresses from a DHCP-server on the network.
+`learned` mode is the typical choice for Mist-managed deployments where the customer's DHCP infrastructure already advertises the proxy:
 
-When the `router management-proxy` is `enabled`, the default mode is `learned`. In this case, the device will identify the web proxy addresses from a DHCP server on the network. 
- 
 ```
 config authority router router management-proxy enable
 config authority router router management-proxy mode  learned
 ```
 
-The following diagram describes the DHCP discovery process.
+The SSR then runs a vendor-specific DHCP exchange on every eligible WAN interface — see [DHCP Discovery](#dhcp-discovery) for the wire-level details and a working DHCP server snippet.
+
+By default every DHCP-enabled WAN `network-interface` is eligible. To exclude an interface — for instance, a circuit intended for direct internet breakout — disable proxy discovery on it:
+
+```
+config authority router router node node device-interface <name> network-interface <name> enable-proxy-discovery false
+```
+
+### DHCP Discovery
 
 ![DHCP Discovery Process](/img/sec-dhcp-discover-process.png)
 
-1. The SSR sends a DHCP DISCOVER message with `Option 60` and value of `JuniperSSR`. The message also includes `Option 43` as a requested parameter.
+The SSR sends `DISCOVER` with `Option 60` (vendor-class identifier) set to `JuniperSSR` and requests `Option 43`:
 
 ```
 08:34:24.685760 IP (tos 0x0, ttl 128, id 0, offset 0, flags [none], proto UDP (17), length 306)
-    0.0.0.0.bootpc > 255.255.255.255.bootps: [udp sum ok] BOOTP/DHCP, Request from fa:16:3e:14:db:05 (oui Unknown), length 278, xid 0xe5dadd09, Flags [none] (0x0000)
-	  Client-Ethernet-Address fa:16:3e:14:db:05 (oui Unknown)
+    0.0.0.0.bootpc > 255.255.255.255.bootps: [udp sum ok] BOOTP/DHCP, Request from fa:16:3e:14:db:05, length 278
 	  Vendor-rfc1048 Extensions
-	    Magic Cookie 0x63825363
 	    DHCP-Message Option 53, length 1: Discover
-	    Client-ID Option 61, length 7: ether fa:16:3e:14:db:05
 	    Parameter-Request Option 55, length 4:
 	      Subnet-Mask, Default-Gateway, Domain-Name-Server, Vendor-Option
 	    Vendor-Class Option 60, length 10: "JuniperSSR
 ```
 
-2. To enable proxy auto-discovery, the DHCP server must send DHCP option `43` with a sub-option of `128`. The sub-option should contain the proxy address and port information.
+For discovery to succeed the DHCP server must reply with `Option 43` containing sub-option `128`, and the value of that sub-option must be the proxy in `address:port` form:
 
 ```
 08:34:25.687329 IP (tos 0x10, ttl 128, id 0, offset 0, flags [none], proto UDP (17), length 337)
-    linux-router.novalocal.bootps > 10.73.3.50.bootpc: [udp sum ok] BOOTP/DHCP, Reply, length 309, xid 0xe5dadd09, Flags [none] (0x0000)
-	  Your-IP 10.73.3.50
-	  Client-Ethernet-Address fa:16:3e:14:db:05 (oui Unknown)
+    linux-router.bootps > 10.73.3.50.bootpc: [udp sum ok] BOOTP/DHCP, Reply, length 309
 	  Vendor-rfc1048 Extensions
-	    Magic Cookie 0x63825363
 	    DHCP-Message Option 53, length 1: Offer
-	    Server-ID Option 54, length 4: linux-router.novalocal
-	    Lease-Time Option 51, length 4: 6000
-	    Subnet-Mask Option 1, length 4: 255.255.255.0
-	    Default-Gateway Option 3, length 4: linux-router.novalocal
-	    Domain-Name-Server Option 6, length 8: dns.google,dns.google
 	    Vendor-Option Option 43, length 17: 10.92.53.8:3128
 ```
 
-3. The same sequence repeats for `DHCP REQUEST` and `DHCP ACK` messages. This ensures that the information is successfully obtained during lease renewals.
+The exchange repeats for `REQUEST`/`ACK`, so the proxy is refreshed on every lease renewal.
 
-By default, the SSR includes the above options in its DHCP discovery implementation. When the `router management-proxy` is `enabled`, the discovered proxy is used. 
-
-#### Network Interface Override 
-
-In a case where you do not want an SSR to learn a proxy address from a network interface, you can disable learning mode on that interface. This allows a user to define from which network-interfaces the web-proxy can be learned.
+A working DHCP server snippet that advertises a proxy to SSRs:
 
 ```
-config authority router router network-interface enable-proxy-discovery false
+option space vendor1;
+option vendor1.custom-proxy-url code 128 = string;
+option vendor-class-identifier code 60 = string;
+
+class "Juniper-001" {
+    match if option vendor-class-identifier = "JuniperSSR";
+    vendor-option-space vendor1;
+}
+
+subnet 172.16.1.0 netmask 255.255.255.0 {
+    range 172.16.1.100 172.16.1.100;
+    option vendor1.custom-proxy-url "10.92.53.8:3128";
+}
 ```
 
-### Proxy Address Selection 
+## Active Proxy Selection
 
-It is possible that multiple SSR device-interfaces may be configured to use a DHCP client, which could result in learning multiple IP addresses. This may happen in cases where a device has multiple interfaces with `dhcp` enabled, or in an HA deployment using `learned` mode.  
+The SSR routinely holds several candidate proxy addresses at once: multiple DHCP-enabled interfaces, several configured static entries, or contributions from an HA peer. The rule is the same in every case:
 
-In these situations, the SSR will use the lowest integer value from the list of proxy-addresses learned. For example, if the DHCP mode learns the following address: 
+> From all valid `address:port` candidates across every source, the SSR selects the one with the **lowest numerical IPv4 value**. Candidates that fail IP or port validation are discarded.
 
-`192.168.10.10, 192.168.10.11` 
+Given `192.168.10.10:3128` and `192.168.10.11:3128`, the SSR selects `192.168.10.10:3128`.
 
-The SSR will select `192.168.10.10` - the address with the lowest integer value. 
+Because the rule is deterministic and source-agnostic, both nodes of an HA pair — which exchange their learned addresses with each other — converge on the same active proxy. A node that loses its locally learned address (for example, when a WAN interface goes down) can keep using the address contributed by its peer.
 
-### Troubleshooting 
+When the configured mode changes (for example, `learned` → `static`, or → `disabled`), the SSR clears any in-band management sessions tied to the previous proxy so the new configuration takes effect cleanly.
 
-Use the following commands to see the learned proxy address and the selected proxy address. 
+## Transparent Forwarding
 
-- `show dhcp learned-proxies` shows all learned proxy addresses for each network-interface.
-- `show management-proxy` shows the active proxy (if applicable). 
- 
+Not every SSR component is proxy-aware. Rather than retrofit each one, the SSR transparently intercepts outbound HTTP and HTTPS from its in-band management plane and forwards it through the active proxy:
+
+- HTTP and HTTPS originated by management-plane components are forwarded automatically; no per-component configuration is required.
+- HTTPS sessions are inspected on-box using the SSR's local certificate authority, so a single upstream proxy can serve all management traffic regardless of destination.
+- On-box loopback traffic is left untouched.
+
+Forwarding is enabled when a proxy becomes active, refreshed when the active proxy changes, restored after a reboot, and torn down when the proxy is disabled or fails its health check. Configuration does not need to be actively managed during runtime based on network or system behavior.
+
+## Troubleshooting
+
+### Commands
+
+| Command                     | What it shows                                                          |
+|-----------------------------|------------------------------------------------------------------------|
+| `show management-proxy`     | The currently active upstream proxy, or `N/A` when none is in effect.  |
+| `show dhcp learned-proxies` | Every proxy address learned per WAN network-interface.                 |
+| `show alarms`               | The `Management Proxy is unreachable` alarm, when present.             |
+
+`show management-proxy` reports `N/A` whenever the mode is `disabled`, no candidate passed validation, or the active proxy was cleared because it stopped responding.
+
+### Health Checking and Alarms
+
+Once a minute the SSR opens a TCP connection to the active proxy's `address:port` (with a 3-second connect timeout) and immediately closes it. This is a transport-level liveness check only — it does not issue an HTTP request, fetch a URL, or otherwise validate that the proxy can reach the internet. A proxy whose TCP listener is UP will be considered healthy even if it is misconfigured for upstream connectivity; conversely, anything that prevents the SSR from completing the TCP handshake (the proxy process being down, a firewall in the path, a routing problem) is treated as a failure.
+
+On failure:
+
+- [Transparent forwarding](#transparent-forwarding) is torn down so management traffic does not silently black-hole.
+- The proxy state moves to `unreachable`.
+- A **critical** alarm `Management Proxy is unreachable` is raised under the `service` category, sourced from `ManagementProxy`.
+
+:::note
+The SSR does **not** automatically fail over to the next proxy candidate on failure. Only one proxy is active at a time; if it becomes unreachable, the SSR falls back to operating without a proxy until health checks succeed again.
+:::
+
+When the TCP probe succeeds again the alarm clears and forwarding is re-enabled automatically, typically within one health-check interval. End-to-end reachability of public destinations through the proxy is best confirmed at the upstream proxy itself (see the *Management traffic doesn't appear at the proxy* item in [Common Issues](#common-issues)).
+
+### State Files
+
+The SSR exposes its proxy state on disk for inspection. These files are managed automatically and should not be edited by hand.
+
+| File                                        | Contents                                                                                  |
+|---------------------------------------------|-------------------------------------------------------------------------------------------|
+| `/var/lib/128technology/proxy-address.json` | The currently active `proxy_address`. Absent when no proxy is in effect.                  |
+| `/var/lib/128technology/dhcp/<interface>`   | Per-WAN-interface DHCP client info, including the `management-proxies` array from DHCP.   |
+| `/var/run/128technology/peer-proxy.json`    | Proxy address(es) received from the HA peer.                                              |
+
+```json
+// /var/lib/128technology/proxy-address.json
+{ "proxy_address": "10.92.53.8:3128" }
+```
+
+```json
+// /var/lib/128technology/dhcp/wan1
+{
+  "dhcp-client-info": {
+    "interface-name": "wan1",
+    "resolution-state": "resolved",
+    "management-proxies": ["10.92.53.8:3128"]
+  }
+}
+```
+
+### Common Issues
+
+**Nothing is learned in `learned` mode.** Confirm the interface still has `enable-proxy-discovery` enabled, and that the DHCP server replies as described in [DHCP Discovery](#dhcp-discovery). The per-interface lease files show whether the SSR actually received the option.
+
+**The active proxy isn't the one you expected.** Review [Active Proxy Selection](#active-proxy-selection): The SSR always picks the lowest-value valid candidate across *every* source. `show dhcp learned-proxies` and `show management-proxy` together show inputs and result.
+
+**`Management Proxy is unreachable` alarm.** The SSR has an active proxy but cannot reach it on its advertised port. Verify the upstream proxy is running and that nothing in between (firewall, ACL, routing) blocks the SSR. The alarm clears automatically once connectivity returns.
+
+**Management traffic doesn't appear at the proxy.** Confirm with `show management-proxy` that an active, reachable proxy exists. If it does, the upstream proxy's own access log is the most reliable place to confirm traffic end-to-end (for Mist, look for `CONNECT` entries to the Mist endpoint). If the proxy is reachable but receives no SSR traffic, check `/var/log/128technology/management-proxy.log`.
+
+**HA nodes disagree on the active proxy.** They should converge automatically; if they don't, inspect `/var/run/128technology/peer-proxy.json` on each node. An empty or stale file points to a problem on the inter-node management channel rather than with the proxy itself.
