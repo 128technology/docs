@@ -510,6 +510,7 @@ module.exports = {
         "ts_forwarding_resource_pools",
         "ts_logs",
         "ts_mac_uniqueness",
+        "ts_midpath_firewall_nat",
         "ts_packet_capture",
         "ts_serial_console_tsing",
         "ts_session_processing",
