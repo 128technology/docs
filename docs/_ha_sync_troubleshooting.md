@@ -2,10 +2,7 @@
 
 ### Verify Link Speed and Duplex on Fabric and Sync Ports
 
-The HA fabric and HA sync ports must come up **full duplex** as the link's negotiated speed. A `duplex: half` reading in the output below — or in
-`show device-interface` for the corresponding interfaces — is almost always caused by a marginal cable, a failing SFP, or a peer switch port that has been
-administratively forced to `100Mbps-half`. Leave the SSR `link-settings` at `auto` and correct the underlying physical or peer-side cause; do not
-work around the symptom by forcing a fixed value on the SSR. For background on when forcing `link-settings` is appropriate, see [Configuring Ethernet Link Speed and Duplex](howto_config_link_settings.md).
+The HA fabric and HA sync ports must come up **full duplex** as the link's negotiated speed. A `duplex: half` reading in the output below — or in `show device-interface` for the corresponding interfaces — is almost always caused by a marginal cable, a failing SFP, or a peer switch port that has been administratively forced to `100Mbps-half`. Leave the SSR `link-settings` at `auto` and correct the underlying physical or peer-side cause; do not work around the symptom by forcing a fixed value on the SSR. For background on when forcing `link-settings` is appropriate, see [Configuring Ethernet Link Speed and Duplex](howto_config_link_settings.md).
 
 ### Config Auto-Generation
 When enabling use of the shared fabric interface, this plugin auto-generates configuration for a kni host interface named `ha-fabric`. If expected configuration is not being generated, please check the following log on the conductor for errors.

@@ -3,8 +3,7 @@ title: Configuring Ethernet Link Speed and Duplex
 sidebar_label: Link Speed and Duplex
 ---
 
-This guide explains when — and when **not** — to configure the [`link-settings`](config_reference_guide.md#device-interface) attribute on an
-SSR `device-interface`, how to apply it, how to verify the negotiated result, and how to recognize and resolve duplex-mismatch problems.
+This guide explains when — and when **not** — to configure the [`link-settings`](config_reference_guide.md#device-interface) attribute on an SSR `device-interface`, how to apply it, how to verify the negotiated result, and how to recognize and resolve duplex-mismatch problems.
 
 #### History
 
@@ -22,13 +21,11 @@ Every Ethernet link has two negotiated properties:
 - **Speed** — 10 Mbps, 100 Mbps, 1 Gbps, 2.5 Gbps, 10 Gbps, 25 Gbps, …
 - **Duplex** — *full* (simultaneous send and receive) or *half* (one direction at a time, with carrier-sense / collision detection).
 
-IEEE 802.3 clause 28 defines an **auto-negotiation** protocol that lets two attached devices advertise their capabilities and converge on the highest
-common speed and duplex. Auto-negotiation is **mandatory for 1 GbE and faster** links and is the default behavior on every modern NIC and switch port.
+IEEE 802.3 clause 28 defines an **auto-negotiation** protocol that lets two attached devices advertise their capabilities and converge on the highest common speed and duplex. Auto-negotiation is **mandatory for 1 GbE and faster** links and is the default behavior on every modern NIC and switch port.
 
-The SSR exposes only the legacy 10/100 fixed combinations through `link-settings` because those are the only speeds for which forcing values is
-ever valid. Anything faster must use `auto`.
+The SSR exposes only the legacy 10/100 fixed combinations through `link-settings` because those are the only speeds for which forcing values is ever valid. Anything faster must use `auto`.
 
-## When to leave `link-settings` at the default (`auto`)
+## When to Leave `link-settings` at the Default (`auto`)
 
 Leave `auto` in place — which is the factory default — for virtually all deployments, including:
 
@@ -40,7 +37,7 @@ Leave `auto` in place — which is the factory default — for virtually all dep
 
 For these cases, forcing speed/duplex provides no benefit and is the most common cause of duplex mismatch.
 
-## When to force speed and duplex
+## When to Force Speed and Duplex
 
 Configure a fixed `link-settings` value only when **all** of the following are true:
 
@@ -53,11 +50,10 @@ Configure a fixed `link-settings` value only when **all** of the following are t
 3. You can force the **same** value on the far-end device. Forcing one side while leaving the other on `auto` is the canonical cause of a duplex mismatch — see [Troubleshooting](#troubleshooting-duplex-mismatch) below.
 
 :::warning
-Half-duplex (`10Mbps-half`, `100Mbps-half`) is meaningful only on shared media (hubs). Do **not** select a half-duplex value on a point-to-point switch link
-or on any 1 Gb+ port — the link will either fail to come up or will operate with severely degraded throughput.
+Half-duplex (`10Mbps-half`, `100Mbps-half`) is meaningful only on shared media (hubs). Do **not** select a half-duplex value on a point-to-point switch link or on any 1 Gb+ port — the link will either fail to come up or will operate with severely degraded throughput.
 :::
 
-## How to configure
+## How to Configure
 
 `link-settings` is only valid when the device-interface `type` is `ethernet`.
 It has no effect on `pppoe`, `lte`, `t1`, `kni`, `bridged`, or `host` interfaces (refer to the [device-interface schema](config_reference_guide.md#device-interface)).
@@ -82,14 +78,13 @@ Allowed values:
 | `100Mbps-full`  | 100 Mbps | full  |
 | `100Mbps-half`  | 100 Mbps | half  |
 
-For the corresponding CLI reference, see
-[`configure authority router node device-interface link-settings`](config_command_guide.md#configure-authority-router-node-device-interface-link-settings).
+For the corresponding CLI reference, see [`configure authority router node device-interface link-settings`](config_command_guide.md#configure-authority-router-node-device-interface-link-settings).
 
-### Mist-managed routers
+### Mist-managed Routers
 
 In Mist-managed deployments (SSR 6.0 and later) the same controls are available in the WAN edge configuration UI, where auto-negotiation can be enabled, disabled, or replaced with a fixed speed/duplex selection per port.
 
-## Verifying the result
+## Verifying the Result
 
 After commit, confirm both ends agree.
 
@@ -106,7 +101,7 @@ admin@node1.router1# show device-interface name <name>
 
 If `Duplex:` shows `unknown`, the interface is one of the types for which the SSR does not report a duplex value (PPPoE, LTE, and — prior to the [WAN-Assurance plugin 3.12](release_notes_wan_assurance_plugin_3.12.md) and SSR releases that include WAN-3451 — non-forwarding interfaces). This is expected on those interface types and does not indicate a problem.
 
-### From the underlying OS
+### From the Underlying OS
 
 ```
 [root@node1 ~]# ethtool <kernel-interface>
@@ -117,11 +112,11 @@ Settings for eth1:
         Link detected: yes
 ```
 
-### From the peer device
+### From the Peer Device
 
 Run the equivalent command on the attached switch (`show interfaces <port>` on Junos / Cisco) and confirm the speed and duplex match exactly.
 
-## Troubleshooting duplex mismatch
+## Troubleshooting Duplex Mismatch
 
 A duplex mismatch occurs when one side of a link is forced (for example `100Mbps-full`) and the other side is left at `auto`. Auto-negotiation cannot detect the partner's duplex when the partner is not negotiating, so it falls back to **half-duplex** at the matching speed. The link comes up and passes small flows, but performance is catastrophic for any sustained traffic.
 
@@ -133,7 +128,7 @@ A duplex mismatch occurs when one side of a link is forced (for example `100Mbps
 - TCP retransmits and application timeouts that scale with packet size.
 - Link counters look healthy at idle but degrade under load.
 
-### Diagnosis checklist
+### Diagnosis Checklist
 
 1. Run `show device-interface name <name>` on the SSR and the equivalent `show interfaces` on the peer; compare **speed and duplex on both sides**.
 2. Inspect error counters over a one-minute interval. Late collisions on a full-duplex port are the smoking gun for a mismatch.
@@ -141,17 +136,15 @@ A duplex mismatch occurs when one side of a link is forced (for example `100Mbps
 4. Set both ends to `auto` and re-test. This is the recommended first step even when you ultimately intend to hard-code values.
 5. If the peer cannot negotiate, force **both** sides to the same fixed value in the same change window.
 
-### Special considerations for HA fabric and sync ports
+### Special Considerations for HA Fabric and Sync Ports
 
-The HA sync and fabric ports between two SSR nodes (or between an SSR and an intermediate switch) **must** come up *full duplex*. A half-duplex result on
-these ports — visible in the output shown in the [HA Sync Plugin troubleshooting topic](config_ha.md) — almost always indicates a bad cable, a failing SFP, or a switch port that has been forced to `100Mbps-half`. Correct the underlying cause; do not work around it by forcing `link-settings` on the SSR side.
+The HA sync and fabric ports between two SSR nodes (or between an SSR and an intermediate switch) **must** come up *full duplex*. A half-duplex result on these ports — visible in the output shown in the [HA Sync Plugin troubleshooting topic](config_ha.md) — almost always indicates a bad cable, a failing SFP, or a switch port that has been forced to `100Mbps-half`. Correct the underlying cause; do not work around it by forcing `link-settings` on the SSR side.
 
-## Interaction with traffic-engineering
+## Interaction with Traffic Engineering
 
 When a device-interface participates in load balancing, the SSR uses the configured `traffic-engineering transmit-cap` as the bandwidth reference for its utilization thresholds. If `transmit-cap` is **not** set, the SSR falls back to the **set or negotiated link rate** — see [load-balancing in the configuration reference](config_reference_guide.md).
 
-A consequence: if you force `link-settings` to 100 Mbps on an interface that the NIC could otherwise negotiate to 1 Gbps, every load-balancing decision
-will be made against the lower 100 Mbps figure. Either set an explicit `transmit-cap` or leave `link-settings` at `auto`.
+A consequence: if you force `link-settings` to 100 Mbps on an interface that the NIC could otherwise negotiate to 1 Gbps, every load-balancing decision will be made against the lower 100 Mbps figure. Either set an explicit `transmit-cap` or leave `link-settings` at `auto`.
 
 ## Summary
 
