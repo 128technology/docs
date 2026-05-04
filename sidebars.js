@@ -7,7 +7,7 @@ module.exports = {
       "about_releases",
       "about_support_policy",
     ],
-    "Deployment Guides": [
+    "Conductor Deployment Guides": [
       {
         "type": "category",
         "label": "SSR1200 Conductor",
@@ -34,13 +34,8 @@ module.exports = {
           "deploy_aws_conductor",
         ],
       },
-      {
-        "type": "category",
-        "label": "AWS Router",
-        "items": [
-          "deploy_aws",
-        ],
-      },
+    ],
+    "Router Deployment Guides": [
       {
         "type": "category",
         "label": "SSR130 Router",
@@ -49,6 +44,13 @@ module.exports = {
           "deploy_router_upgrade",
           "deploy_verify",
           "deploy_appendix_router",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "AWS Router",
+        "items": [
+          "deploy_aws",
         ],
       },
     ],

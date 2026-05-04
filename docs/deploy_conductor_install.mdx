@@ -7,11 +7,13 @@ import VerifyConductorInstall from './_install_verify_conductor_install.md';
 import ChangeDefaultPasswords from './_change_def_passwords.md';
 import ConfigureToken from './_configure_token.md';
 
-This section covers the physical hardware setup and software installation for the SSR1200 being used as the conductor. The SSR1200 conductor provides centralized management for all SSR130 branch routers in the network.
+This section covers the physical hardware setup and software installation for the SSR1200 being used as the conductor. The SSR1200 conductor provides centralized management for all branch routers in the network.
 
 SSR 7.1.4 uses the **Universal ISO** installation process. If your SSR1200 shipped with SSR 6.3.0 or later pre-installed, skip the [Install the Software](#install-the-software) section and proceed directly to [Initialize the Conductor](#initialize-the-conductor).
 
 If your device has an SSR software version lower than SSR 6.3.0, there are specific requirements for upgrading to the latest SSR version. Please use the detailed instructions in [Upgrading the Conductor](upgrade_ibu_conductor#upgrade-using-the-gui) before proceeding. 
+
+To help you identify the number of managed routers your SSR device can support, refer to the [Conductor Scaling Recommendations](intro_system_reqs.md#conductor-scaling-recommendations) in the System Requirements documentation. 
 
 ## SSR1200 Port Reference
 
@@ -39,9 +41,9 @@ Skip this section if your SSR1200 already has SSR 6.3.0 or later installed.
 
 Download the SSR 7.1.4 Universal ISO from the Juniper software repository:
 
-- URL: [https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/)
+- URL: [https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/)
 - You will be prompted for your Artifactory username and software access token.
-- Select the `7.1.4` ISO file.
+- Select the `SSR-7.1.4-3.r2.el9.x86_64.ibu-v1.iso` ISO file.
 
 For instructions on creating a bootable USB from the ISO, see [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
@@ -65,7 +67,7 @@ For instructions on creating a bootable USB from the ISO, see [Creating a Bootab
     ![Install Type](/img/u-iso3_choose_install_type.png)
 
     :::note
-    Select **Serial** when using a console cable (recommended for data-center installations). Select **VGA** only if you have a keyboard and monitor connected directly to the device. If no selection is made within 30 seconds, the system defaults to the **Serial Console** boot option.
+    Select **Serial** when using a console cable (recommended for data-center installations), and be sure the baud rate is set to 115200 bps. Select **VGA** only if you have a keyboard and monitor connected directly to the device. If no selection is made within 30 seconds, the system defaults to the **Serial Console** boot option.
     :::
 
 3. If you are installing a FIPS enabled system, select Install Option 1, then press **Enter**. 

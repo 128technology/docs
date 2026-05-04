@@ -8,7 +8,7 @@ The Session Smart Networking Platform runs on both bare metal servers and as a v
 
 ### Minimum Platform Specifications
 
-These are the minimum platform specifications for running the SSR Networking Platform software, on bare-metal or for the host platform when running virtualized SSR.
+These are the minimum platform specifications for running the SSR Networking Platform software, on bare-metal, or for the host platform when running virtualized SSR (vSSR).
 
 - 4 Core x86_64-v2 processor, single socket
 - 8GB Memory, ECC required
