@@ -93,7 +93,7 @@ After commit, confirm both ends agree.
 ```
 admin@node1.router1# show device-interface name <name>
 ...
- Speed:               100
+ Speed:               100 Mbps
  Duplex:              full
  Admin Status:        up
  Operational Status:  up
@@ -102,6 +102,12 @@ admin@node1.router1# show device-interface name <name>
 If `Duplex:` shows `unknown`, the interface is one of the types for which the SSR does not report a duplex value (PPPoE, LTE, and — prior to the [WAN-Assurance plugin 3.12](release_notes_wan_assurance_plugin_3.12.md) and SSR releases that include WAN-3451 — non-forwarding interfaces). This is expected on those interface types and does not indicate a problem.
 
 ### From the Underlying OS
+
+The `ethtool` command requires root access on the Linux shell.
+
+:::note
+This command is not available on Mist-managed routers. Contact Juniper TAC for OS-level diagnostics.
+:::
 
 ```
 [root@node1 ~]# ethtool <kernel-interface>
