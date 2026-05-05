@@ -372,6 +372,7 @@ module.exports = {
           "howto_pppoe_vlan",
           "config_multicast",
           "config_lacp",
+          "howto_config_link_settings",
           "howto_update_bios",
           "howto_lte",
           "bcp_lte_peering",
