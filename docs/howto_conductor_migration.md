@@ -19,6 +19,9 @@ Copy the following files into a tarball (a `*.tar.gz` file) on the existing cond
  /etc/128technology/salt/pki/master/master.pub
  /etc/128technology/global.init
  /etc/128technology/local.init
+ /etc/salt/pki/minion/minion.pem
+ /etc/salt/pki/minion/minion.pub
+ /etc/salt/pki/minion/minion_master.pub
 ```
  - If you have created custom salt states, copy the contents of `/svr/salt` along with the above files.
 
@@ -41,6 +44,9 @@ tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%m-%d')
 /etc/128technology/salt/pki/master/minions/ \ 
 /etc/128technology/global.init \ 
 /etc/128technology/local.init \ 
+/etc/salt/pki/minion/minion.pem \ 
+/etc/salt/pki/minion/minion.pub \ 
+/etc/salt/pki/minion/minion_master.pub \ 
 /svr/salt
  ```
 The tarball can then be copied from the old conductor, placed on the new conductor, and extracted there. The procedures below describe the Migration and Restoration processes.
