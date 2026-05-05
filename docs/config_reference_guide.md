@@ -649,7 +649,7 @@ A *device-interface* is what maps a physical interface (the "hardware-name") to 
 | enabled | boolean | Default value: true. Setting this to *false* will administratively disable this device interface. |
 | forwarding | boolean | Default value: true. This controls whether the SSR will consider this interface as viable for packet forwarding. |
 | lldp | sub-element | Link Layer Description Protocol settings. |
-| link-settings | enumeration | Valid values: auto, 10Mbps-half, 10Mbps-full, 100Mbps-half, 100Mbps-full. Default: auto. This lets administrators configure the speed and duplex for this interface (only configurable when *type* is *ethernet*). |
+| link-settings | enumeration | Valid values: auto, 10Mbps-half, 10Mbps-full, 100Mbps-half, 100Mbps-full. Default: auto. This lets administrators configure the speed and duplex for this interface (only configurable when *type* is *ethernet*). For guidance on when and how to override the default, see [Configuring Ethernet Link Speed and Duplex](howto_config_link_settings.md). |
 | load-balancing | sub-element | This contains parameters related to maximum link utilization before it is considered eligible/ineligible for new sessions by the SSR load balancing algorithm. |
 | lte | sub-element | Container for properties related to the SSR's support for LTE interfaces. This field is only configurable when the *type* of the interface is set to *lte*. |
 | mist-wan-assurance | enumeration | Configures the role of the device interface in the Mist WAN Assurance topology. Valid values are auto, lan, wan, control, or management. |
