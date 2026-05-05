@@ -74,7 +74,7 @@ The following IP addressing and naming scheme is used consistently throughout th
 
 | Parameter | Example Value | Description |
 |-----------|--------------|-------------|
-| Authority Name | `AcmeCorp` | Organizational authority name |
+| Authority Name | `Authority128` | Organizational authority name |
 | Conductor Router Name | `conductor1` | Conductor system name |
 | Conductor Node Name | `node0` | Conductor node name |
 | Conductor Management IP | `192.168.100.10` | Static IP on the VMware management network |
@@ -253,7 +253,7 @@ All steps in this section are performed from the **Conductor GUI** at `https://1
 <AuthorityName/>
 
 :::note
-Use your organization's name as the authority name (for example, `AcmeCorp`). The authority name cannot be changed after routers have been provisioned without re-onboarding them.
+Use your organization's name as the authority name (for example, `Authority128`). The authority name cannot be changed after routers have been provisioned without re-onboarding them.
 :::
 
 ### Set the Conductor Address
@@ -294,7 +294,7 @@ Tenants logically partition the network. The `corp` tenant represents corporate 
 
 | Object | Name | Value |
 |--------|------|-------|
-| Authority | `AcmeCorp` | |
+| Authority | `Authority128` | |
 | Conductor Address | | `192.168.100.10` |
 | Service | `Internet-Traffic` | `0.0.0.0/0` |
 | Tenant | `corp` | LAN-side user population |

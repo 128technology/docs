@@ -4,7 +4,7 @@ The following IP addressing and naming scheme is used consistently throughout th
 
 | Parameter | Example Value | Description |
 |-----------|--------------|-------------|
-| Authority Name | `AcmeCorp` | Organizational authority name |
+| Authority Name | `Authority128` | Organizational authority name |
 | Conductor Router Name | `conductor1` | Conductor system name |
 | Conductor Node Name | `node0` | Conductor node name |
 | Conductor IP Address | `192.168.100.10` | Static management IP on the conductor |
