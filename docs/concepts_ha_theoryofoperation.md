@@ -99,6 +99,14 @@ This is a list of the system processes that make up an SSR. (There is a similar,
 
 Each of the processes indicated with a `Y` or `N` undergo leader election and remain in constant communication with one another, whereas the processes that do not have any indicator will run on both systems autonomously. Failure events will oftentimes re-trigger a leader election process to ensure the fittest system is in control.
 
+#### Impact of Leader Election on Upgrade Sequencing
+
+The `routingManager` leadership state directly governs the order in which nodes are upgraded in an HA router. When the Conductor initiates a sequenced upgrade against an HA pair, it inspects which node is running the active (primary) `routingManager` and which is standby, and it always upgrades the **standby** node first.
+
+This is intentional: the standby `routingManager` is not the authoritative source for the routing table and is not actively maintaining BGP peering sessions, so upgrading that node first minimizes service disruption. After the standby node is upgraded and reports healthy, leader election may transition roles between the nodes as needed, and the Conductor then upgrades the remaining (previously active) node. This sequence preserves continuous traffic handling throughout the upgrade.
+
+For the operator-facing procedure and CLI commands, see [Upgrade Sequence Behavior in HA Routers](upgrade_router.mdx#upgrade-sequence-behavior-in-ha-routers).
+
 ### Dual Router High Availability
 The _dual router high availability_ design is where two individual SSR software instances are coupled together to provide continuity in the event of a failure. While there is no state synchronized between the two devices (since there is no redundancy link), they are redundant to one another by upstream SSR devices detecting a failure and routing around it. Note that "detecting a failure" entails routing protocol convergence and/or SVR path failure determination.
 
