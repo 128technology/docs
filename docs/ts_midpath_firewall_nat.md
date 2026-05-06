@@ -25,7 +25,7 @@ The BFD vs. BGP discrepancy is the key indicator. BFD packets are very small and
 
 The SSR uses Secure Vector Routing (SVR) to encapsulate sessions — including BGPoSVR control traffic — into UDP between peer routers. Each peer path is identified internally by a `(local-ip, remote-ip)` tuple stored in the SSR's WayPoint table. When a midpath device rewrites the source IP of returning packets to an address the SSR does not recognize as a configured peer, the SSR cannot bind the inbound packet to an existing waypoint and **drops** the packet with a `WayPointException`.
 
-If the firewall ages out only some of its NAT entries, or applies a NAT policy unevenly across an HA pair (for example, NATing AMR1's two peer addresses to the same egress address), only a subset of flows will fail — which is exactly why BFD survives while BGPoSVR does not.
+If the firewall ages out only some of its NAT entries, or applies a NAT policy unevenly across an HA pair (for example, NATing two peer addresses to the same egress address), only a subset of flows will fail — which is exactly why BFD survives while BGPoSVR does not.
 
 ## Diagnostic Workflow
 
@@ -56,7 +56,7 @@ show device-interface router <hub-router>
 
 If the destination address reported for an inbound peer **does not match** the address configured on the remote spoke's WAN interface — or if two distinct remote peer addresses collapse to the same value in the output — a midpath device is rewriting the source IP.
 
-In one known use case, the hub `AMR1` was configured with peer addresses `167.230.217.60` and `167.230.217.61`, but `show peers` reported the destination for both as `167.230.217.61`. This collapse is the signature of an upstream NAT device performing overload/PAT incorrectly. 
+In one known use case, the hub was configured with peer addresses `10.12.210.10` and `10.12.210.11`, but `show peers` reported the destination for both as `10.12.210.11`. This collapse is the signature of an upstream NAT device performing overload/PAT incorrectly. 
 
 ### 3. Search `serviceArea.log` for `WayPointException`
 
@@ -70,7 +70,7 @@ grep -E "WayPointException|WayTable not found" \
 A representative dropped packet record looks like this:
 
 ```
-Aug 04 04:24:46.328 [SESS|SA ] ERROR (SessionProc-00 ) Dropped packet with key: Packet key [src ip 167.230.217.3, dest ip 199.219.199.90, src port 0, dest port 0, proto 17, interface 13.0], is flow miss, detour reason: BFD Pinhole Setup (9), is not bfd tunneled, ... src peer: b747bb58-4a79-45e1-b036-bbb6ad5802f5, src peer path: 167.230.217.60 due to WayPointException: Unable to allocate WayPoint for intf=13.0, giid=20, local=199.219.199.90, remote=167.230.217.3 - WayTable not found { receive }
+Aug 04 04:24:46.328 [SESS|SA ] ERROR (SessionProc-00 ) Dropped packet with key: Packet key [src ip 10.4.3.12, dest ip 172.16.12.44, src port 0, dest port 0, proto 17, interface 13.0], is flow miss, detour reason: BFD Pinhole Setup (9), is not bfd tunneled, ... src peer: b747bb58-4a79-45e1-b036-bbb6ad5802f5, src peer path: 10.12.210.10 due to WayPointException: Unable to allocate WayPoint for intf=13.0, giid=20, local=172.16.12.44, remote=10.4.3.12 - WayTable not found { receive }
 ```
 
 The decisive fields are:
@@ -96,7 +96,7 @@ grep -E "Dropped packet.*AttributeNotFoundException" \
 Example:
 
 ```
-Aug 04 03:26:00.079 [SESS|SA ] ERROR (SessionProc-00 ) Dropped packet with key: Packet key [src ip 167.230.217.3, dest ip 199.219.199.98, src port 36879, dest port 16416, proto 17, interface 11.0], ... tenant: _bgp_speaker_, ... src peer path: 167.230.217.60 due to AttributeNotFoundException: SessionKey attribute not found.
+Aug 04 03:26:00.079 [SESS|SA ] ERROR (SessionProc-00 ) Dropped packet with key: Packet key [src ip 10.4.3.12, dest ip 172.16.12.52, src port 36879, dest port 16416, proto 17, interface 11.0], ... tenant: _bgp_speaker_, ... src peer path: 10.12.210.10 due to AttributeNotFoundException: SessionKey attribute not found.
 ```
 
 Any drop with `tenant: _bgp_speaker_` and a mismatched `src ip` / `src peer path` is BGPoSVR control traffic being lost to a midpath NAT change.
@@ -139,7 +139,7 @@ d8c6034d-...  fwd  _bgp_..._lo0  _bgp_speaker_  ...  TCP  10.224.8.144  38193  1
 Once the SSR-side evidence above has been collected, the fix lies on the **midpath firewall**, not on the SSR. Engage the firewall team and:
 
 1. **Clear stale sessions / NAT translations** on the firewall for the affected SSR peering subnets. In many observed cases this immediately restores the BGP peer with the correct source IP because the firewall rebuilds its NAT mappings cleanly from the next outbound packet.
-2. **Audit inbound and outbound NAT and security policies** for the SSR peering subnets. The most common defect is a policy whose inbound and outbound rules are tagged inconsistently (for example, the egress policy NATs `167.230.217.60` correctly while the ingress policy maps the return traffic onto a different address).
+2. **Audit inbound and outbound NAT and security policies** for the SSR peering subnets. The most common defect is a policy whose inbound and outbound rules are tagged inconsistently (for example, the egress policy NATs `10.12.210.10` correctly while the ingress policy maps the return traffic onto a different address).
 3. **Apply the corrected policy symmetrically** to all firewalls in the path, including peer firewalls at other sites that may have inherited the same misconfigured template.
 4. **Re-run the diagnostic steps** above and confirm:
   * `show peers` `Destination` matches the configured remote interface address.
