@@ -26,7 +26,7 @@ If a router shows **Disconnected** or remains in **Synchronizing** for more than
 
 ## 2. Verify Router Software Version
 
-Confirm each router is running SSR 7.1.4:
+Confirm each router is running SSR 7.1.5:
 
 ```bash
 show system version router branch1
@@ -38,7 +38,7 @@ Fri 2026-04-17 10:00:00 UTC
 =========== ============================== ============
  Router      Version                        Status
 =========== ============================== ============
- branch1     7.1.4-1.el7.x86_64            Running
+ branch1     7.1.5-7.el7.x86_64            Running
 ```
 
 ## 3. Verify WAN Interface
@@ -115,7 +115,7 @@ Entries for LAN source addresses (`192.168.1.x`) translated to the WAN IP confir
 | Check | Expected Result |
 |-------|----------------|
 | Router asset status | `Synchronized` |
-| Router software version | `7.1.4` |
+| Router software version | `7.1.5` |
 | WAN interface (`wan1`) | Operationally `up`, DHCP IP assigned |
 | LAN interface (`lan1`) | Operationally `up`, address `192.168.1.1/24` |
 | Management over forwarding | Default route via `kni254`; conductor SSH accessible |

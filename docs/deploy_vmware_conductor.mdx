@@ -14,14 +14,14 @@ import ConductorAuthority from './_conductor_to_authority.md';
 import AuthorityName from './_set_authority_name.md';
 import SetConductorIP from './_set_conductor_ip.md';
 
-This guide walks a network engineer through every step required to stand up a conductor-managed SSR network using a **VMware ESXi virtual machine as the Conductor** and one or more **SSR130 branch routers**. By the end of the guide, the conductor VM will be running SSR 7.1.4, each branch router will be online and managed by the conductor, and internet traffic from LAN users will be forwarded through each router with management traffic returning to the conductor over the same WAN interface.
+This guide walks a network engineer through every step required to stand up a conductor-managed SSR network using a **VMware ESXi virtual machine as the Conductor** and one or more **SSR130 branch routers**. By the end of the guide, the conductor VM will be running SSR 7.1.5, each branch router will be online and managed by the conductor, and internet traffic from LAN users will be forwarded through each router with management traffic returning to the conductor over the same WAN interface.
 
 ## Guide Sections
 
 | Step | Topic | Description |
 |------|-------|-------------|
 | 1 | [Create the VMware VM](#step-1-create-the-vmware-vm) | Create and configure a VMware ESXi VM to host the conductor |
-| 2 | [Install SSR 7.1.4](#step-2-install-ssr-714) | Boot the ISO and install the SSR software |
+| 2 | [Install SSR 7.1.5](#step-2-install-ssr-714) | Boot the ISO and install the SSR software |
 | 3 | [Configure Linux Networking](#step-3-configure-linux-networking) | Set the conductor's management IP using NMTUI |
 | 4 | [Initialize the Conductor](#step-4-initialize-the-conductor) | Run the SSR Initializer to configure the conductor role |
 | 5 | [Verify and Secure the Installation](#step-5-verify-and-secure-the-installation) | Confirm the conductor is running and change default passwords |
@@ -30,7 +30,7 @@ This guide walks a network engineer through every step required to stand up a co
 | 8 | [Configure the Management Interface on the Conductor](#step-8-configure-the-management-interface) | Bind the conductor's management NIC in the SSR PCLI config |
 | 9 | [Configure the Router on the Conductor](#step-9-configure-the-router-on-the-conductor) | Pre-stage each SSR130 router's configuration before onboarding |
 | 10 | [Onboard SSR130 Routers](deploy_router_onboard.mdx) | Connect and initialize each SSR130 router so it joins the conductor |
-| 11 | [Upgrade Routers to 7.1.4](deploy_router_upgrade.mdx) | Upgrade each onboarded router to SSR 7.1.4 from the conductor |
+| 11 | [Upgrade Routers to 7.1.5](deploy_router_upgrade.mdx) | Upgrade each onboarded router to SSR 7.1.5 from the conductor |
 | 12 | [Verify the Deployment](deploy_verify.md) | Confirm connectivity, management, and internet forwarding |
 | — | [Appendix A — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration |
 
@@ -98,7 +98,7 @@ The following IP addressing and naming scheme is used consistently throughout th
 Before beginning, ensure the following are available:
 
 - **VMware ESXi 7.0 or later** — administrative access to an ESXi host.
-- **SSR 7.1.4 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
+- **SSR 7.1.5 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
 - **Juniper software access credentials** — Artifactory username and password for software downloads and token provisioning.
 - **Management network** — a VMware portgroup providing a DHCP lease or static IP for the conductor VM's management NIC, with internet access for software downloads.
 - **Static IP assignment for the conductor** — the IP address assigned to the conductor must be reachable from each branch router's WAN interface (directly or via routing). This guide uses `192.168.100.10`.
@@ -107,10 +107,10 @@ Before beginning, ensure the following are available:
 
 ## Software Version Requirements
 
-This guide targets **SSR 7.1.4** on both conductor and routers.
+This guide targets **SSR 7.1.5** on both conductor and routers.
 
 :::note
-The router software version cannot be higher than the conductor software version. SSR130 routers that ship with an earlier software version are upgraded to 7.1.4 from the conductor after onboarding.
+The router software version cannot be higher than the conductor software version. SSR130 routers that ship with an earlier software version are upgraded to 7.1.5 from the conductor after onboarding.
 :::
 
 ---
@@ -123,7 +123,7 @@ Create an ESXi virtual machine to host the conductor. A minimum of **one VMXNet3
 
 ---
 
-## Step 2: Install SSR 7.1.4
+## Step 2: Install SSR 7.1.5
 
 Power on the VM and boot into the SSR ISO to install the software.
 
@@ -385,7 +385,7 @@ The following steps are identical for all conductor deployment types:
 | Step | Guide |
 |------|-------|
 | Onboard SSR130 Routers | [Onboard SSR130 Routers](deploy_router_onboard.mdx) |
-| Upgrade Routers to 7.1.4 | [Upgrade Routers to 7.1.4](deploy_router_upgrade.mdx) |
+| Upgrade Routers to 7.1.5 | [Upgrade Routers to 7.1.5](deploy_router_upgrade.mdx) |
 | Verify the Deployment | [Verify the Deployment](deploy_verify.md) |
 
 ---
