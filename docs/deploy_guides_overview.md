@@ -9,4 +9,4 @@ Conductor deployments currently include an SSR1200, and VMWare ESX. In each case
 
 Router deployments currently include an SSR130. 
 
-Guides are intended to be used independently of one another, allowing you to mix and match deployment platforms. 
+The deployment guides are intended to be used independently of one another, allowing you to mix and match deployment platforms. 

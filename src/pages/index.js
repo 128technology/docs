@@ -99,7 +99,7 @@ const features = [
   },
   {
     title: <>Deployment Guides</>,
-    link: 'docs/deploy_overview',
+    link: 'docs/deploy_guides_overview',
     description: (
       <>
         Deployment Guides for virtual and physical SSR devices.
