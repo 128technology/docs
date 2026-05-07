@@ -25,7 +25,7 @@ Thus, each wayport on an SSR can initiate 24,576 (even local ports) sessions to 
 
 ## Limiting the Options
 
-Sometimes, 603 million concurrent sessions is simply too many to handle – particularly for security-minded folks who want to limit the exposure of public-facing ports they let into their network. For example, when deploying an SSR behind a firewall and telling the owner of that firewall that you need to open up ports 16,385 through 65,533, you generally get an "oh really?" response.
+Sometimes, 603 million concurrent sessions is simply too many to handle – particularly for security-minded folks who want to limit the exposure of public-facing ports they let into their network. For example, when deploying an SSR behind a firewall and telling the owner of that firewall that you need to open up ports 16,384 through 65,534, you generally get an "oh really?" response.
 
 For those that want to limit the range of waypoint ports, we allow you to configure your own range rather than adopt the default. This is configured within the [port-range](config_reference_guide.md#port-range) and [max-way-points](config_reference_guide.md#max-way-points) elements within a [neighborhood](config_reference_guide.md#neighborhood). As mentioned earlier, waypoint ports are allocated by the ingress router for its peer. The port range for the session originating router does not have a configurable range, only the port-range for the destination SSR router.
 
