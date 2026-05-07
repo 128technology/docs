@@ -8317,11 +8317,13 @@ A value from a set of predefined names.
 
 Options:
 
-- auto:            Use auto-negotiation for the Ethernet link
+- auto:            Use auto-negotiation for the Ethernet link (default; recommended for all modern switch ports and for any 1 GbE or faster link)
 - 10Mbps-half:     Force the Ethernet link to 10 Mbps half duplex
 - 10Mbps-full:     Force the Ethernet link to 10 Mbps full duplex
 - 100Mbps-half:    Force the Ethernet link to 100 Mbps half duplex
 - 100Mbps-full:    Force the Ethernet link to 100 Mbps full duplex
+
+`link-settings` is only valid when the device-interface `type` is `ethernet`. For guidance on when to override the default and how to verify or troubleshoot the result, see [Configuring Ethernet Link Speed and Duplex](howto_config_link_settings.md).
 
 ## `configure authority router node device-interface lldp`
 

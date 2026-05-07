@@ -95,7 +95,7 @@ By using SVR, the SSR creates sessions to transport directional, encrypted, tunn
 
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
 | ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 16385-65,533 <br /> TCP/UDP | -- | -- | -- | Native TCP sessions use TCP for transport. UDP is used for all other session types. Use `udp-transform` to force UDP transport. |
+| bidirectional | 16,384-65,534 <br /> TCP/UDP | -- | -- | -- | Native TCP sessions use TCP for transport. UDP is used for all other session types. Use `udp-transform` to force UDP transport. |
 
 #### Protocol
 
@@ -105,7 +105,7 @@ You can manually configure traffic to use UDP for transport by modifying the [`u
 
 #### Port Ranges
 
-The default range of ports used for configuring waypoints with SVR is 16,385 through 65,533. When sending traffic to a peer, the SSR will allocate an even numbered waypoint for itself and an odd numbered waypoint for its peer.
+The default range of ports used for configuring waypoints with SVR is 16,384 through 65,534. When sending traffic to a peer, the SSR will allocate an even numbered waypoint for itself and an odd numbered waypoint for its peer.
 
 If you need to limit the ports or port range the SSR uses for receiving traffic, a `port-range` can be configured under the `neighborhood`. This tells peer SSRs to constrain the destination port range used when communicating with another router. Note that when manually specifying a port range, port numbers 1025 to 16383 can also be used. 
 

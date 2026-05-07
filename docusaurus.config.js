@@ -8,11 +8,13 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   onBrokenAnchors: 'throw',
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'throw',
       onBrokenMarkdownImages: 'throw',
     },
   },
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
     colorMode: {
       // "light" | "dark"
