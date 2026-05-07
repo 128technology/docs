@@ -3,6 +3,10 @@ title: NAT Troubleshooting
 sidebar_label: NAT Troubleshooting
 ---
 
+:::tip
+If the issue you are investigating involves a peer path that BFD reports as **up** while BGP over SVR (BGPoSVR) flaps or end-user flows experience sporadic loss, the cause is more likely an **external** firewall or NAT device in the path. See [Troubleshooting Midpath Firewall NAT Issues](ts_midpath_firewall_nat.md).
+:::
+
 Use [`show network-interface source-nat-rules`](cli_reference.md#show-network-interface-source-nat-rules) to display source NAT rules under a given network interface. A network-interface name is required and can be issued from a conductor with targeted router and node. The rules are organized in the following columns.
 
 #### Direction
