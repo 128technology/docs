@@ -11,7 +11,7 @@ This guide walks a network engineer through the steps required to stand up a con
 
 | Step | Topic | Description |
 |------|-------|-------------|
-| 1 | [Install the Conductor](deploy_conductor_install.mdx) | Install SSR 7.1.4 on an SSR1200 and initialize it as a standalone conductor |
+| 1 | [Install the Conductor](deploy_conductor_install.mdx) | Install SSR 7.1.5 on an SSR1200 and initialize it as a standalone conductor |
 | 2 | [Configure the Conductor](deploy_conductor_config.mdx) | Set the authority name, conductor address, internet service, and corporate tenant |
 | 3 | [Configure the Router on the Conductor](deploy_router_config.mdx) | Pre-stage each SSR130 router's configuration on the conductor before onboarding |
 | — | [Appendix — Conductor Configuration](deploy_appendix_conductor.mdx) | Complete conductor PCLI configuration |
@@ -52,7 +52,7 @@ graph TD
 Before beginning, ensure the following are available:
 
 - **Juniper software access credentials** — Artifactory username and password for software downloads.
-- **SSR 7.1.4 ISO image** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
+- **SSR 7.1.5 ISO image** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
 - **Bootable USB drive** — minimum 8 GB, prepared from the ISO. See [Creating a Bootable USB](intro_creating_bootable_usb.md).
 - **Console access** — RJ-45 rollover cable or VGA/keyboard access to the SSR1200 for the initial installation.
 - **Management network** — a network switch port providing DHCP or a known static IP for the SSR1200 MGMT port.
@@ -62,10 +62,10 @@ Before beginning, ensure the following are available:
 
 ## Software Version Requirements
 
-This guide targets **SSR 7.1.4** on both conductor and routers.
+This guide targets **SSR 7.1.5** on both conductor and routers.
 
 :::note
-The router software version cannot be higher than the conductor software version. SSR130 routers that ship with an earlier software version are upgraded to 7.1.4 from the conductor after onboarding. See [Upgrading the Conductor](intro_upgrading.md) for general upgrade information.
+The router software version cannot be higher than the conductor software version. SSR130 routers that ship with an earlier software version are upgraded to 7.1.5 from the conductor after onboarding. See [Upgrading the Conductor](intro_upgrading.md) for general upgrade information.
 :::
 
 ## Related Documentation
