@@ -15,11 +15,7 @@ All steps are performed from the **Conductor GUI** at `https://192.168.100.10` u
 
 <NetworkDesign/>
 
-## 1. Assign the Conductor Asset ID
-
-<ConductorAuthority/>
-
-## 2. Set the Authority Name
+## 1. Set the Authority Name
 
 <AuthorityName/>
 
@@ -27,13 +23,27 @@ All steps are performed from the **Conductor GUI** at `https://192.168.100.10` u
 Use your organization's name as the authority name (for example, `Authority128`). The authority name cannot be changed after routers have been provisioned without re-onboarding them.
 :::
 
-## 3. Set the Conductor Address
+## 2. Set the Conductor Address
 
 The conductor address is the IP address that managed routers use to connect to this conductor. It must be reachable from each branch router's WAN interface.
 
 <SetConductorIP/>
 
 For this guide, enter `192.168.100.10` as the conductor address.
+
+## 3. Create the Corporate Tenant
+
+Tenants logically partition the network. The `corp` tenant represents corporate LAN users in this deployment and is referenced by the LAN interface configuration on each branch router.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority**.
+3. Scroll to **Tenants** and select **ADD**.
+4. Enter the name `corp` and select **SAVE**.
+5. At the top of the screen, select **VALIDATE** and then **COMMIT**.
+
+:::info
+Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
+:::
 
 ## 4. Create an `Internet-Traffic` Service
 
@@ -52,19 +62,9 @@ The *service* configuration element defines the IP destinations that the SSR wil
     - Select **SAVE**.
 10. At the top of the screen, select **VALIDATE** and then **COMMIT**.
 
-## 5. Create the Corporate Tenant
+## 5. Assign the Conductor Asset ID
 
-Tenants logically partition the network. The `corp` tenant represents corporate LAN users in this deployment and is referenced by the LAN interface configuration on each branch router.
-
-1. In the Conductor GUI, select **Configuration**.
-2. Select **Authority**.
-3. Scroll to **Tenants** and select **ADD**.
-4. Enter the name `corp` and select **SAVE**.
-5. At the top of the screen, select **VALIDATE** and then **COMMIT**.
-
-:::info
-Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
-:::
+<ConductorAuthority/>
 
 ## What Was Configured
 
@@ -81,6 +81,4 @@ At the end of this step your authority contains:
 
 The conductor must have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
 
-:::important
-Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment platform.
-:::
+Proceed to [Configure the Router on the Conductor](deploy_router_config.mdx). 

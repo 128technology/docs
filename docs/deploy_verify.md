@@ -128,5 +128,5 @@ Your conductor-managed SSR network is fully operational. The SSR1200 conductor i
 
 ## Appendices
 
-- [Appendix A — Full Conductor Configuration](deploy_appendix_conductor.mdx)
-- [Appendix B — Full Router Configuration](deploy_appendix_router.mdx)
+- [Appendix Full Conductor Configuration](deploy_appendix_conductor.mdx)
+- [Appendix Full Router Configuration](deploy_appendix_router.mdx)

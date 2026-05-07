@@ -8,7 +8,7 @@ It is a best practice to have a valid configuration staged on the conductor for 
 
 This section walks through creating the router configuration for `branch1` from the Conductor GUI. Repeat these steps for each additional SSR130 router in your network, substituting the appropriate router name, node name, asset ID, and addressing values.
 
-All steps are performed from the **Conductor GUI** at `https://192.168.100.10`.
+All steps are performed from the **Conductor GUI** at `https://192.168.100.10`. It is important that all steps be completed before committing the configuration. 
 
 ## Network Design Reference
 
@@ -41,7 +41,7 @@ All steps are performed from the **Conductor GUI** at `https://192.168.100.10`.
     | Asset ID | _(SSR130 serial number, e.g., `SSR130-ABC1234567`)_ |
 
 :::important
-The asset-id must exactly match the router-name entered during the SSR130's initialization. The asset-id is how the device will be identified when it contacts the conductor.
+The asset-id must match the router-name that will be entered during the SSR130's initialization. The asset-id is how the device will be identified when it contacts the conductor.
 :::
 
 4. Select **SAVE**.
@@ -180,4 +180,4 @@ To add additional SSR130 routers to this deployment, repeat this entire section 
 
 ## Next Step
 
-Proceed to [Step 4 — Onboard SSR130 Routers](deploy_router_onboard.mdx).
+Proceed to [Onboard SSR130 Routers](deploy_router_onboard.mdx).

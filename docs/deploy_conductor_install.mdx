@@ -115,11 +115,7 @@ The SSR1200 exposes a web-based initialization interface on its LAN ports after 
 
     ![SSR Conductor Selection](/img/u-iso8a_initialize_conductor.png)
 
-4. Select **STANDALONE** for a single-conductor deployment. Select the **STATIC** address type.
-
-    ![Conductor Configuration](/img/u-iso9_define_conductor.png)
-
-5. Enter the following information:
+4. Select **STANDALONE** for a single-conductor deployment. Select the **STATIC** address type, the **Provide Artifactory Credentials** checkbox, and enter the following information:
 
     | Field | Example Value | Notes |
     |-------|--------------|-------|
@@ -132,6 +128,8 @@ The SSR1200 exposes a web-based initialization interface on its LAN ports after 
     | Artifactory Username | _(your username)_ | Juniper software access |
     | Artifactory Password | _(your token)_ | Juniper software access token |
 
+    ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
+
     :::note
     The admin, root, and t128 accounts are all set to the password you enter here.
     :::
@@ -140,9 +138,9 @@ The SSR1200 exposes a web-based initialization interface on its LAN ports after 
     Record this password securely. It cannot be recovered if lost — only reset, which requires root access.
     :::
 
-6. Click **ASSOCIATE**.
+5. Click **ASSOCIATE**.
 
-7. The SSR1200 reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
+6. The SSR1200 reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
 
 ## Verify the Installation
 
@@ -164,4 +162,4 @@ Log in with username `admin` and the password set during initialization.
 
 ## Next Step
 
-Proceed to [Step 2 — Configure the Conductor](deploy_conductor_config.mdx).
+Proceed to [Configure the Conductor](deploy_conductor_config.mdx).
