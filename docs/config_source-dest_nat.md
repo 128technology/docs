@@ -7,7 +7,7 @@ sidebar_label: Source and Destination NAT
 Source NAT can be enabled on `authority > router > node > network-interface`. When enabling `source-nat` on a network-interface, all traffic egressing the interface will be network address and port translated (NAPT) to the address on the interface.
 
 :::note
-The port range is not configurable and ranges between 16384 to 65534, allowing for 49,151 concurrent sessions per interface.
+The port range is not configurable and ranges between 16,384 to 65,534, allowing for 49,151 concurrent sessions per interface.
 :::
 
 ```

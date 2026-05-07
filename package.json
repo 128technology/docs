@@ -19,6 +19,7 @@
   "dependencies": {
     "@docusaurus/core": "3.10.0",
     "@docusaurus/preset-classic": "3.10.0",
+    "@docusaurus/theme-mermaid": "3.10.0",
     "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
@@ -33,10 +34,10 @@
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.16.3",
-    "@docusaurus/module-type-aliases": "3.10.0",
-    "@docusaurus/types": "3.10.0",
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
