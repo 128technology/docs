@@ -22,21 +22,18 @@ The diagram below shows the logical network this guide builds.
 
 <Mermaid chart={`
 graph TD
-    Internet((Internet))
     subgraph HQ["Headquarters / Data Center"]
         Conductor["SSR1200 Conductor\n(conductor1)\n192.168.100.10/24"]
     end
+    ISP(["ISP / Internet"])
     subgraph Branch["Branch Office"]
         Router["SSR130 Router\n(branch1)\nWAN: DHCP (ge-0-0)"]
         LAN["LAN Devices\n192.168.1.0/24\nTenant: corp\n(ge-0-3 — 192.168.1.1)"]
     end
-    ISP(["ISP WAN"])
 
-    Internet <-->|"Internet"| ISP
-    ISP <-->|"DHCP"| Router
-    Router <-->|"Internet Breakout\n(service: Internet-Traffic)"| Internet
+    Conductor <-->|"Management over\nForwarding (WAN)"| ISP
+    ISP <-->|"DHCP / Internet Breakout\n(service: Internet-Traffic)"| Router
     LAN <-->|"LAN"| Router
-    Router <-->|"Management over\nForwarding (WAN)"| Conductor
 `}/>
 
 ## Roles
