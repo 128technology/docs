@@ -237,7 +237,7 @@ Adjacencies are given an administrative *cost* that affects the routing plane. T
 | path-mtu-discovery | sub-element | Controls the SSR's Path MTU Discovery (PMTUD) behavior for commuicating with the peer over this peer path. |
 | peer | reference | A reference to a configured peer (from router:peer). The name of the peer router to which this waypoint address belongs. |
 | peer-connectivity | enumeration | Valid values: bidirectional, outbound-only. Set to `outbound-only` if the adjacency is behind a NAT device. |
-| port-range | reference | A reference to a port range to limit the far-end "waypoint" range to a defined set. Useful when working with peers that have strict firewall restrictions on which ports can be used for communicating between SSRs. The default range is 16384-65535. This field is only configurable when *peer* specifies another SSR element. |
+| port-range | reference | A reference to a port range to limit the far-end "waypoint" range to a defined set. Useful when working with peers that have strict firewall restrictions on which ports can be used for communicating between SSRs. The default range is 16,384-65,534. This field is only configurable when *peer* specifies another SSR element. |
 | post-encryption-padding | sub-element | Enables padding of encrypted packets, allowing SVR traffic to traverse strict firewalls that may filter certain types of traffic. |
 | qp-value | uint32 | An integer representing the quality points on the link between this node and its adjacent network element. Quality points are assigned to links from low values (representing bulk traffic links) to high values (representing managed, high-quality links). Used in conjunction with a service's *service-class* when deciding which path to use for a given service's traffic. |
 | session-optimization | sub-element | Governs whether session optimization should be enabled when communicating with the adjacency. |
@@ -1868,7 +1868,7 @@ authority > service > transport > port-range
 
 #### Description:
 
-When an SSR sends *vectored sessions* to another SSR (that is, when it uses its SSR-specific routing technique), the device transmitting the packet to its peer chooses the L4 ports for itself as well as for the far end. Occasionally, SSRs are deployed behind firewalls with only specific ranges of ports allowed through; by default, the SSR will choose ports between 16,384 and 65,535. The port-range attribute (within an adjacency) defines the start and end ports that a local SSR instead of the defaults, to account for any firewall rules that may exist between this SSR and the far end SSR (protecting the latter).
+When an SSR sends *vectored sessions* to another SSR (that is, when it uses its SSR-specific routing technique), the device transmitting the packet to its peer chooses the L4 ports for itself as well as for the far end. Occasionally, SSRs are deployed behind firewalls with only specific ranges of ports allowed through; by default, the SSR will choose ports between 16,384 and 65,534. The port-range attribute (within an adjacency) defines the start and end ports that a local SSR instead of the defaults, to account for any firewall rules that may exist between this SSR and the far end SSR (protecting the latter).
 
 | Element | Type | Description |
 | --- | --- | --- |
