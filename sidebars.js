@@ -8,7 +8,7 @@ module.exports = {
       "about_support_policy",
     ],
     "Deployment Guides": [
-      "deploy_overview",
+      "deploy_guides_overview",
       {
         "type": "category",
         "label": "Conductor Deployment Guides",
