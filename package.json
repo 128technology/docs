@@ -35,7 +35,7 @@
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.16.3",
     "@docusaurus/module-type-aliases": "3.10.1",
-    "@docusaurus/types": "3.10.0",
+    "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
     "eslint": "^10.2.1",
     "eslint-config-airbnb": "^19.0.4",
