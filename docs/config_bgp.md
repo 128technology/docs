@@ -1037,3 +1037,148 @@ admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation mem
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 2200
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit
 ```
+
+## Viewing Filtered BGP Routes
+
+When an inbound BGP policy rejects prefixes received from a neighbor, those routes do not appear in the BGP table or the FIB. The `filtered-routes` option exposes exactly which prefixes were suppressed by the inbound policy for a given neighbor, making it straightforward to troubleshoot why expected routes are absent from the routing table.
+
+:::note
+This feature is available in SSR version 7.2.0-r1 and above.
+:::
+
+### PCLI
+
+The `filtered-routes` option is available as a third choice alongside `received-routes` and `advertised-routes` in the `show bgp neighbors` command:
+
+```
+show bgp neighbors [vrf <vrf_name>] <neighbor_ip> filtered-routes [ipv4 | ipv4-vpn | ipv6 | ipv6-vpn]
+```
+
+**Examples**
+
+Display filtered routes for a neighbor in the default VRF using IPv4 unicast (the default address family):
+
+```text
+admin@router1.site1# show bgp neighbors 172.16.3.3 filtered-routes
+```
+
+Display filtered IPv6 routes for a neighbor in a named VRF:
+
+```text
+admin@router1.site1# show bgp neighbors vrf vrfA fd00:5::3 filtered-routes ipv6
+```
+
+When no routes have been filtered, the command returns an empty table. When routes are present, the output format mirrors that of `received-routes` and `advertised-routes`. If the neighbor address is unknown, the VRF does not exist, or the address family is invalid, the PCLI surfaces the underlying vty error string describing the problem.
+
+### REST API
+
+A new endpoint mirrors the PCLI functionality:
+
+```
+GET /api/v1/routing/bgp/neighbors/filtered-routes
+```
+
+**Query Parameters**
+
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `neighborAddress` | Yes | — | IP address of the BGP neighbor |
+| `vrf` | No | `default` | VRF name |
+| `addressFamily` | No | `ipv4` | Address family: `ipv4`, `ipv4-vpn`, `ipv6`, or `ipv6-vpn` |
+| `firstIndex` | No | `0` | Zero-based starting index for paginated results |
+| `elementCount` | No | all | Maximum number of routes to return (range: 1–5000) |
+
+:::note
+The REST endpoint does not support `vrf all` or `addressFamily all`. Each VRF and address family must be queried individually.
+:::
+
+**Example: IPv4, default VRF**
+
+```bash
+curl --unix-socket /var/run/128technology/speakeasy.sock -i -XGET \
+  'http://localhost/api/v1/routing/bgp/neighbors/filtered-routes?neighborAddress=172.16.3.3&firstIndex=0&elementCount=1'
+```
+
+Response:
+
+```json
+{
+  "bgpTableVersion": 14,
+  "bgpLocalRouterId": "2.1.1.1",
+  "defaultLocPrf": 100,
+  "localAS": 2,
+  "bgpStatusCodes": {
+    "suppressed": "s", "damped": "d", "history": "h",
+    "valid": "*", "best": ">", "multipath": "=",
+    "internal": "i", "ribFailure": "r", "stale": "S", "removed": "R"
+  },
+  "bgpOriginCodes": { "igp": "i", "egp": "e", "incomplete": "?" },
+  "filteredRoutes": [
+    {
+      "prefix": "10.99.1.0/24",
+      "network": "10.99.1.0/24",
+      "nextHop": "172.16.3.2",
+      "metric": 0,
+      "weight": 0,
+      "path": "3",
+      "bgpOriginCode": "?",
+      "valid": true,
+      "best": true
+    }
+  ],
+  "totalPrefixCounter": 1,
+  "filteredPrefixCounter": 0,
+  "nextEntry": 1
+}
+```
+
+**Example: IPv6, named VRF**
+
+```bash
+curl --unix-socket /var/run/128technology/speakeasy.sock -i -XGET \
+  'http://localhost/api/v1/routing/bgp/neighbors/filtered-routes?neighborAddress=fd00:5::3&firstIndex=0&elementCount=1&addressFamily=ipv6&vrf=vrfA'
+```
+
+Response:
+
+```json
+{
+  "bgpTableVersion": 1,
+  "bgpLocalRouterId": "2.1.1.1",
+  "defaultLocPrf": 100,
+  "localAS": 2,
+  "filteredRoutes": [
+    {
+      "prefix": "2001:db8:5::1/128",
+      "network": "2001:db8:5::1/128",
+      "nextHopGlobal": "fd00:5::3",
+      "metric": 0,
+      "weight": 0,
+      "path": "3",
+      "bgpOriginCode": "?",
+      "valid": true,
+      "best": true
+    }
+  ],
+  "totalPrefixCounter": 1,
+  "filteredPrefixCounter": 0,
+  "nextEntry": 1
+}
+```
+
+### Troubleshooting
+
+| Failure | PCLI behavior | REST behavior |
+|---|---|---|
+| `bgpd` not running | Surfaces vty error string | Returns standard upstream failure with informative status code |
+| Unknown neighbor IP, neighbor not in specified VRF/address family | Surfaces vty error string with neighbor details | Returns `200 OK` with a `warning` key in the JSON body |
+| Invalid `addressFamily` or `vrf` argument | Surfaces vty error string | Returns `200 OK` with a `warning` key in the JSON body |
+| vty call timeout (120 s) | Surfaces timeout error string | Returns `HTTP 400` with timeout exception message |
+
+PCLI and REST activity is logged in `routingManager.log`. FRR vty-level logs are in `routingEngine.log`.
+
+### Version History
+
+| Release | Modification |
+|---|---|
+| 7.2.0 | Feature introduced. |
