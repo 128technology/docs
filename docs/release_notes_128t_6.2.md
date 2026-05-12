@@ -56,13 +56,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-63033 `show lte detail` crash when LTE apn-name is invalid:** Resolved an issue where executing `show lte detail` when an invalid APN name is configured caused a CLI crash due to an unhandled dictionary update error.
 ------
-- **I95-63042 Nessus CVE false positives resolved:** Resolved multiple false positive CVE findings reported by Nessus scanners. Updated packages to use the correct Oracle Linux 7 versions, eliminating false positives caused by minor version differences between the CentOS 7 base packages and the OL7 vulnerability database.
-------
 - **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections from the Conductor.
 ------
 - **I95-63228 Premature route installation complete notification:** In some cases a premature internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
-- **I95-63295 Highway crash with mutex lock errors at multiple sites:** Resolved an issue where a time-intensive operation on a large entry was preventing other threads from accessing data, causing a highway crash due to mutex lock contention.
+- **I95-63295 Highway crash due to mutex lock errors:** Resolved an issue where a time-intensive operation on a large entry was preventing other threads from accessing data, causing a highway crash due to mutex lock contention.
 ------
 - **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
 ------
@@ -106,8 +104,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-64709 Premature route installation complete notification during Graceful Restart:** Resolved a documentation discrepancy and corrected the behavior of the `stale-routes-time` parameter and its relationship to RFC 4724's `Selection_Deferral_Timer`, ensuring proper Graceful Restart route handling.
 ------
-- **I95-64770 Remove axios NPM from the SSR:** Removed the axios NPM package from the SSR codebase as a precautionary measure following a supply chain compromise affecting certain versions of the library. The SSR was not vulnerable as it used an unaffected version.
-------
 - **I95-64829 Device disconnected from MIST and stopped processing sessions:** Resolved a highway crash triggered by a config change that caused the device to go offline and stop processing sessions, requiring a power cycle to recover.
 ------
 - **I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:** Removed the erroneous "Rollback on Failure" checkbox from the Conductor migration UI, as the underlying feature was never implemented. This prevents user confusion during migration operations.
@@ -118,7 +114,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-64876 Intermittent application issues due to child service:** Resolved an issue that lead to NAT pool exhaustion and intermittent application failures. When domain name–based child services had different routing paths than the parent service, it caused stale sessions on upstream firewalls.
 ------
-- **I95-64877 Changes to guard against cSRX crash:** Resolved an issue where the IDP attack database was lost on reboot. The database is now stored persistently, and additional safeguards have been added for AV engine health checks, SSL certificate staging retries, and error code accuracy.
+- **I95-64877 Changes to guard against L7 security stack crash:** Resolved an issue where the IDP attack database was lost on reboot. The database is now stored persistently, and additional safeguards have been added for AV engine health checks, SSL certificate staging retries, and error code accuracy.
 ------
 - **I95-65056 `show app-id cache-sizes` command not found:** Resolved an issue where the `show app-id cache-sizes` CLI command was not available.
 ------
