@@ -1068,7 +1068,7 @@ Display filtered IPv6 routes for a neighbor in a named VRF:
 admin@router1.site1# show bgp neighbors vrf vrfA fd00:5::3 filtered-routes ipv6
 ```
 
-When no routes have been filtered, the command returns an empty table. When routes are present, the output format mirrors that of `received-routes` and `advertised-routes`. If the neighbor address is unknown, the VRF does not exist, or the address family is invalid, the PCLI surfaces the underlying vty error string describing the problem.
+When no routes have been filtered, the command returns an empty table. When routes are present, the output format mirrors that of `received-routes` and `advertised-routes`. If the neighbor address is unknown, the VRF does not exist, or the address family is invalid, the PCLI surfaces the underlying error string describing the problem.
 
 ### REST API
 

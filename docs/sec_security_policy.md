@@ -131,3 +131,54 @@ Retrieving session information...
      Attributes:
          Metadata Security Policy:  <empty>
 ```
+
+## AES-GCM Encryption
+
+:::note
+AES-GCM encryption is available in SSR version 7.2.0 and above.
+:::
+
+### Overview
+
+The SSR supports **AES-GCM** (Advanced Encryption Standard – Galois/Counter Mode) as an additional encryption option for session traffic. AES-GCM is an Authenticated Encryption with Associated Data (AEAD) cipher, meaning it provides both **confidentiality** and **integrity** protection in a single cryptographic operation, rather than combining a separate cipher and HMAC as with AES-CBC modes.
+
+AES-GCM is applied per-packet after SSR session encapsulation. Both SSR metadata and session payload are independently protected, and authentication failures cause the packet to be silently discarded. No changes to routing, session establishment, or service policy behavior are introduced by enabling AES-GCM.
+
+### Behavior And Compatibility
+
+| Property | Behavior |
+|---|---|
+| Confidentiality | Per-packet encryption of SSR metadata and payload. |
+| Integrity | Authenticated; authentication failure causes immediate packet discard. |
+| HMAC settings | Ignored when AES-GCM is selected — authentication is inherent to GCM. |
+| Peer compatibility | If the remote peer does not support AES-GCM, the session falls back to the mutually supported cipher according to existing SSR negotiation behavior. |
+| Mixed-version fabrics | Supported, provided peers negotiate a mutually supported cipher. |
+| Platform requirement | Requires OpenSSL with GCM capability; supported on existing SSR hardware platforms. |
+
+### Configuring AES-GCM
+
+AES-GCM is selected by setting the `encryption-cipher` field of a security policy to the appropriate AES-GCM value. The security policy is then applied in the same locations as any other cipher:
+
+- `service > security-policy` — payload encryption for sessions
+- `network-interface > inter-router-security` — metadata decryption on received SVR traffic
+- `network-interface > adjacency > inter-router-security` — metadata encryption for SVR traffic sent to a peer
+- `router > inter-node-security` — encryption for HA inter-node communication
+
+```
+configure authority security <policy-name>
+    encryption-cipher    <aes-gcm-cipher-value>
+    encrypt              true
+    hmac-mode            disabled
+```
+
+:::note
+Because AES-GCM provides built-in authentication, `hmac-mode` should be set to `disabled`. Any HMAC configuration is ignored at runtime when AES-GCM is the selected cipher.
+:::
+
+:::caution
+Changing an encryption cipher is a service-impacting event. Existing sessions cannot be re-keyed in-place. Follow the guidance in [Changing A Security Policy](#changing-a-security-policy) and perform the change during a maintenance window.
+:::
+
+### Verifying AES-GCM Is In Use
+
+After applying the new policy, use `show sessions by-id` to confirm the cipher is active on new sessions. The **Payload Security Policy** and **Metadata Security Policy** fields identify which security policy is applied per flow. Confirm that the policy you configured with AES-GCM is listed for the expected flows.
