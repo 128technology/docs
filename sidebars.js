@@ -283,6 +283,7 @@ module.exports = {
           "config_prefix_delegation",
           "config_session_recovery",
           "config_forward_error_correction",
+          "config_pmtu",
           "config_management_over_forwarding",
           "config_domain-based_web_filter",
           "config_EthoSVR",
