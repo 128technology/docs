@@ -87,7 +87,9 @@ Peering SSR routers will perform path MTU discovery on each peer path between ea
 
 In order to accommodate these deployments where “ICMP Destination Unreachable - Fragmentation Needed” response messages are not generated (RFC1911 is not followed), three successive non-responses are considered equivalent to ICMP responses for the purposes of driving the algorithm with an inferred MTU.
 
-The discovered MTU is viewable in the output of `show peers`.
+The discovered MTU is viewable in the output of `show peers`. 
+
+For additional information, see [Path MTU Discovery](config_pmtu.mdx).
 
 ### Secure Vector Routing Traffic
 

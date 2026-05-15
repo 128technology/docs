@@ -1,15 +1,7 @@
 ---
-title: Path MTU Discovery Enhancements
-sidebar_label: Path MTU Discovery Enhancements
+title: Path MTU Discovery
+sidebar_label: Path MTU Discovery
 ---
-
-#### Version History
-
-| Release | Modification |
-| ------- | ------------ |
-| 7.2.0   | Feature introduced |
-
-## Overview
 
 The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. By default, this test runs every ten minutes. If a change in the underlay reduces the available path MTU between two SSRs, the new value is not discovered until the next PMTUD cycle. Additionally, existing sessions continue to use the previous MTU value until the next time those sessions are rebuilt.
 
