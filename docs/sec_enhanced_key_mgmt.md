@@ -86,7 +86,7 @@ Consistent naming across all API calls and configuration is critical:
 | Field | Scope | Rule |
 |---|---|---|
 | `name` (in all API requests) | Authority-wide | **Must be identical across all routers and nodes.** In SSR 7.1+, any consistent name may be used. |
-| `common_name` (in CSR request) | Per-router / per-node | **Must be unique per router or HA node.** Must match the router's configured `peering-common-name` — either directly in the `common_name` field, or via a `urn:ssr:peering` SAN URI (see below). |
+| `common_name` (in CSR request) | Per-router / per-node | **Must be unique per router or HA node.** Must match the router's configured `peering-common-name` — unless a `urn:ssr:peering` SAN URI is used to carry the peering identity instead (see below). |
 | `peering-common-name` (in config) | Per-router | Unique alias per router. Must match either the `common_name` or a `urn:ssr:peering` SAN URI in that router's certificate. |
 
 :::note Legacy Name
@@ -257,7 +257,7 @@ When receiving a certificate from a peer router and performing validation, the r
 
 1. **Common Name (CN) check** — if the certificate's CN matches the peer's `peering-common-name`, the certificate is accepted.
 2. **SAN URI fallback (SSR 7.2.0+)** — if the CN does not match, the SSR checks for a `urn:ssr:peering:<peering-common-name>` SAN URI in the certificate's Subject Alternative Name extension. If found, the certificate is accepted.
-3. **Rejection** — if neither the CN nor any SAN URI matches, the certificate is rejected. The behavior depends on the `invalid-certificate-behavior` setting (`fail-soft` or `fail-hard`).
+3. **Rejection** — if neither the CN nor any SAN URI matches, the certificate is rejected. How the SSR handles the certificate rejection is defined using the `invalid-certificate-behavior` setting (`fail-soft` or `fail-hard`).
 
 After successful validation, the receiving router extracts and saves the peer router's public key. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
 
