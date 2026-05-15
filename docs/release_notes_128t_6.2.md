@@ -24,6 +24,104 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.11-9-lts
+
+**Release Date:** May 14, 2026
+
+### New Features
+
+- **I95-63012 AppID Scale Optimization:** Improved application identification scaling for WAN deployments where app-id is enabled by default. Enhancements include automatic scaling of the app-id cache by platform, improved sessions-per-second rate with app-id enabled, and automatic tuning of the service area for app-id enabled functionality.
+------
+- **I95-63985 VRRP non-revertive active/active recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2018-10906, CVE-2018-14468, CVE-2021-28651, CVE-2021-47670, CVE-2022-49985, CVE-2022-50087, CVE-2022-50228, CVE-2022-50367, CVE-2022-50386, CVE-2022-50543, CVE-2023-31484, CVE-2023-53125, CVE-2023-53178, CVE-2023-53226, CVE-2023-53257, CVE-2023-53297, CVE-2023-53305, CVE-2023-53386, CVE-2023-53401, CVE-2023-53513, CVE-2023-53539, CVE-2024-12087, CVE-2024-28956, CVE-2024-56326, CVE-2024-56644, CVE-2025-8194, CVE-2025-9230, CVE-2025-11561, CVE-2025-12084, CVE-2025-13601, CVE-2025-13699, CVE-2025-21727, CVE-2025-21759, CVE-2025-22026, CVE-2025-22058, CVE-2025-22097, CVE-2025-32415, CVE-2025-32462, CVE-2025-37797, CVE-2025-37914, CVE-2025-38085, CVE-2025-38159, CVE-2025-38200, CVE-2025-38211, CVE-2025-38250, CVE-2025-38332, CVE-2025-38350, CVE-2025-38352, CVE-2025-38380, CVE-2025-38392, CVE-2025-38449, CVE-2025-38461, CVE-2025-38464, CVE-2025-38477, CVE-2025-38498, CVE-2025-38527, CVE-2025-38556, CVE-2025-38718, CVE-2025-38724, CVE-2025-39697, CVE-2025-39718, CVE-2025-39730, CVE-2025-39817, CVE-2025-39825, CVE-2025-39841, CVE-2025-39849, CVE-2025-39864, CVE-2025-39883, CVE-2025-39898, CVE-2025-39955, CVE-2025-39971, CVE-2025-40300, CVE-2025-40778, CVE-2025-47273, CVE-2025-53057, CVE-2025-53066, CVE-2025-54389, CVE-2025-54574, CVE-2025-58060, CVE-2025-62168, CVE-2025-64720, CVE-2025-68160, CVE-2025-68615, CVE-2025-68973, CVE-2025-69421, CVE-2026-22796, CVE-2026-31431, CVE-2026-41242.
+------
+- **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
+------
+- **I95-60719 BGP routes take ~70 seconds to be withdrawn:** Resolved an issue where BGP route withdrawal after a WAN interface failure took approximately 70 seconds, causing extended multicast traffic outages during failover scenarios.
+------
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console, resulting in unreadable output. The check and enforcement for the 115200 baud rate has been improved.
+------
+- **I95-62421 DHCP relay failures causing clients to miss IP assignment:** Resolved an issue where DHCP session information is lost on the hub, causing the session reverse flow to collide with the forward flow of the session initiated originally from the spoke. This includes a new (configurable) default behavior for collision resolution.
+------
+- **I95-62860 Web server connection limit not enforced:** Resolved an issue where the 250 maximum connection limit was not being properly enforced by the web server.
+------
+- **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the Anti-Virus and IDP configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
+------
+- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policy names using a dot (.). This has been resolved — configurations will use an underscore for policy name creation.
+------
+- **I95-63018 Memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through a RADIUS server, pam_radius was causing memory corruption after a Vendor Specific Attribute (VSA) is read.
+------
+- **I95-63033 `show lte detail` crash when LTE apn-name is invalid:** Resolved an issue where executing `show lte detail` when an invalid APN name is configured caused a CLI crash due to an unhandled dictionary update error.
+------
+- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections from the Conductor.
+------
+- **I95-63228 Premature route installation complete notification:** In some cases a premature internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
+------
+- **I95-63295 Highway crash due to mutex lock errors:** Resolved an issue where a time-intensive operation on a large entry was preventing other threads from accessing data, causing a highway crash due to mutex lock contention.
+------
+- **I95-63324 Duplicate static DHCP addresses cause crashes:** Added validation steps to identify and prevent duplicate MAC addresses for the static address assignment.
+------
+- **I95-63590 Repeated interface flaps leading to highway coredumps:** Truncated packets are now validated prior to processing, preventing a crash. An exception is logged so that the issue can be more easily rectified.
+------
+- **I95-63794 `show lte detail` error handling for invalid APN configuration:** Resolved an issue where executing `show lte detail` with an invalid APN configuration caused a ValueError crash. The CLI now handles unexpected response formats gracefully.
+------
+- **I95-63839 SNMP walk failures on Conductors onboarding to NMS:** Resolved an issue where SNMP walks on Conductors could fail with a `genError`, preventing successful onboarding into some network management systems. System MIB walks on Conductors now complete successfully; IF-MIB is no longer exposed on Conductors where it is not supported.
+------
+- **I95-63943 Edge-case crash when changing from regular services to app-id:** Resolved an issue where a system that never had app-id services, or had app-id services reverted and the highway process restarted, and then modified an existing service to use app-id caused a crash. Protections have been added to safeguard against this edge case.
+------
+- **I95-63965 SNMP MIB subinterfaces not reporting correct stats:** Resolved an issue where SNMP MIB counters for subinterfaces (VLANs) returned the same statistics as the parent interface instead of per-subinterface statistics.
+------
+- **I95-63970 Highway crash due to null app-id service reference:** Resolved a rare highway crash that can occur when an App-ID session is modified at the same time that a module or configuration update is occurring.
+------
+- **I95-63996 LTE is not wiped with factory reset:** Resolved an issue where performing a factory reset did not clear the LTE configuration, allowing the router to reconnect using the previous LTE connection without a configured WAN interface.
+------
+- **I95-64150 User defined SNMP metrics not working:** Resolved an issue where user-defined SNMP metrics were not functional due to a missing configuration file (`snmpMetricsConfig.json`) and missing references in the SNMP object agent.
+------
+- **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
+------
+- **I95-64218 Conductor upgrade failed with health check failure:** Resolved an issue where an upgrade of a redundant conductor could fail with a System Processes Check health check failure during the HA upgrade process.
+------
+- **I95-64250 BGP routes received but not installed in BGP table or RIB:** Resolved an issue where BGP routes from specific neighbors were received but not installed in the BGP table or RIB, requiring neighbor reconfiguration to restore route installation.
+------
+- **I95-64291 NAT keep-alive statistics not accurately reported:** Resolved an issue where NAT keep-alive packets were not being sent at the expected interval, resulting in incorrect statistics and session flow verification failures.
+------
+- **I95-64306 Optimize ICMP probe profile update on config change:** Optimized the ICMP probe profile update process during configuration changes to avoid unnecessary restarts of all probes when no actual configuration change has occurred.
+------
+- **I95-64434 IDP bypass alert policy not applied:** Resolved an issue where the IDP bypass `alert` policy was not being applied correctly, causing traffic to be incorrectly handled by the IDP engine.
+------
+- **I95-64448 Metrics retrieval failing for node1 when HA is down:** Resolved an issue where empty data was returned when HA links were down. Peer node system metrics (CPU, memory, disk) now return an error response instead of silently returning empty data.
+------
+- **I95-64479 Invalid application WEBEX not recognized:** Resolved an issue where the WEBEX application was not being recognized by the application identification module after an upgrade, resulting in `invalid application` events and missing FIB entries for the associated service.
+------
+- **I95-64542 Highway crash during service path refresh:** Resolved a highway crash that occurred during service path load-balanced route refresh operations. Protections have been added to prevent the crash.
+------
+- **I95-64567 SSR router status Disconnected on Conductor:** Resolved an issue where configuring a loopback address on a router node caused the router to become Disconnected from the Conductor due to incorrect source NAT behavior on internal sessions.
+------
+- **I95-64696 Salt connectivity issues after Conductor upgrade:** Resolved an issue where salt-minion lost connectivity to the salt-master after a Conductor upgrade, affecting approximately 20% of routers. The minion-connector service now correctly manages the salt master address.
+------
+- **I95-64709 Premature route installation complete notification during Graceful Restart:** Resolved a documentation discrepancy and corrected the behavior of the `stale-routes-time` parameter and its relationship to RFC 4724's `Selection_Deferral_Timer`, ensuring proper Graceful Restart route handling.
+------
+- **I95-64829 Device disconnected from MIST and stopped processing sessions:** Resolved a highway crash triggered by a config change that caused the device to go offline and stop processing sessions, requiring a power cycle to recover.
+------
+- **I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:** Removed the erroneous "Rollback on Failure" checkbox from the Conductor migration UI, as the underlying feature was never implemented. This prevents user confusion during migration operations.
+------
+- **I95-64836 Update TSI collection with information required to analyze conductor migration issues:** Updated the `tech-support-info` collection to include additional diagnostic data needed for analyzing conductor migration problems.
+------
+- **I95-64841 Defensive fix for checksum on chain packets:** Added defensive protections for checksum handling on chain packets to prevent potential processing errors.
+------
+- **I95-64876 Intermittent application issues due to child service:** Resolved an issue that lead to NAT pool exhaustion and intermittent application failures. When domain name–based child services had different routing paths than the parent service, it caused stale sessions on upstream firewalls.
+------
+- **I95-64877 Changes to guard against L7 security stack crash:** Resolved an issue where the IDP attack database was lost on reboot. The database is now stored persistently, and additional safeguards have been added for AV engine health checks, SSL certificate staging retries, and error code accuracy.
+------
+- **I95-65056 `show app-id cache-sizes` command not found:** Resolved an issue where the `show app-id cache-sizes` CLI command was not available.
+------
+- **WAN-4440 Config error validation for DHCP:** Added configuration error validation for DHCP at the inspector level to catch and report invalid DHCP configurations before they are applied.
+------
+- **WAN-4466 LTE interface incorrect graphing and interface behavior:** Resolved an issue where LTE interfaces with no signal were incorrectly reporting RX traffic in interface graphs, despite the WAN path being down and the SIM card not being connected to the carrier network.
+
 ## Release 6.2.10-10-lts
 
 **Release Date:** December 18, 2025
