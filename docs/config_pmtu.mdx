@@ -5,9 +5,19 @@ sidebar_label: Path MTU Discovery
 
 The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. By default, this test runs every ten minutes. If a change in the underlay reduces the available path MTU between two SSRs, the new value is not discovered until the next PMTUD cycle. Additionally, existing sessions continue to use the previous MTU value until the next time those sessions are rebuilt.
 
+| Direction | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes |
+| --- | --- | --- | --- | --- | --- |
+| bidirectional | 1280/UDP   | 2945 | 90  | 600s | Interval is configurable within `path-mtu-discovery/interval`, or disabled `path-mtu-discovery/enabled`. |
+
+Peering SSR routers will perform path MTU discovery on each peer path between each other. This test is run every ten (10) minutes by default, to adjust in the event of path changes between peering devices. During the test, SSR routers send packets of various sizes to discover the MTU of the path. However, in some government deployments the use of MTU discovery is not possible. 
+
+In order to accommodate these deployments where “ICMP Destination Unreachable - Fragmentation Needed” response messages are not generated (RFC1911 is not followed), three successive non-responses are considered equivalent to ICMP responses for the purposes of driving the algorithm with an inferred MTU.
+
+The discovered MTU is viewable in the output of `show peers`. 
+
 Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error, referred to here as a _TooBig_ packet, to indicate they could not forward a packet due to an undersized MTU. Prior to SSR 7.2.0, these messages were forwarded to the correct endpoint, but the SSR itself did not act on the MTU value contained in the message, leaving existing sessions with an incorrect PMTU.
 
-SSR 7.2.0 introduces two complementary enhancements to address these gaps:
+SSR 7.2.0 introduces two complementary enhancements to address the gaps mentioned above:
 
 1. **Underlay ICMP reaction** — When the SSR receives a TooBig packet from the underlay, it updates the affected overlay flow and generates a corrected TooBig packet toward the original packet sender, allowing the sender to adjust its segment size.
 
@@ -73,38 +83,6 @@ For TCP traffic, setting `enforced-mss automatic` on the egress `network-interfa
 :::
 
 ## Configuration
-
-### Enabling Oversize Fabric Packet Behavior
-
-#### On a `network-interface`
-
-```
-config
-    authority
-        router  <router-name>
-            node  <node-name>
-                device-interface  <device-interface-name>
-                    network-interface  <network-interface-name>
-                        oversize-fabric-packet-behavior  true
-                    exit
-                exit
-            exit
-        exit
-    exit
-exit
-```
-
-#### On a `service-policy`
-
-```
-config
-    authority
-        service-policy  <policy-name>
-            oversize-fabric-packet-behavior  true
-        exit
-    exit
-exit
-```
 
 ### Configuring `enforced-mss` (Recommended for TCP)
 
