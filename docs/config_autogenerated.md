@@ -112,6 +112,8 @@ This works for adjacencies, service-routes, and services.
 
 ### Peer Topology Builder
 
+**Purpose:** Automatically establishes the inter-router topology and distributes service reachability information across peer routers, enabling dynamic topology discovery and service mesh capabilities without manual configuration.
+
 The Peer Topology builder generates two related sets of elements: the _peer_ and _adjacency_ objects that form the inter-router topology, and the peer-type _service-route_ objects that distribute service reachability across that topology.
 
 **Peers and adjacencies**
@@ -165,6 +167,8 @@ Conditions for generation:
 
 ### Conductor/Management Services
 
+**Purpose:** Provides automatic management connectivity from managed routers back to the conductor system, enabling centralized configuration, monitoring, and software updates.
+
 | | |
 |---|---|
 | **Trigger** | `conductor-address` is configured on the authority |
@@ -183,6 +187,8 @@ Generation is unconditional when any `conductor-address` is configured. There is
 ---
 
 ### BGP Services and Service-Routes
+
+**Purpose:** Automatically establishes reachability to BGP peers, enabling dynamic routing protocol operation and network convergence without manual service definition.
 
 | | |
 |---|---|
@@ -204,6 +210,8 @@ BGP service generation is **fully disableable** per-neighbor using the `disabled
 
 ### DHCP Server KNI Device-Interfaces
 
+**Purpose:** Automatically provisions kernel network interfaces required for the DHCP server subsystem to operate, handling the internal networking plumbing transparently.
+
 | | |
 |---|---|
 | **Trigger** | `host-service` of type `dhcp-server` configured on a _network-interface_ |
@@ -221,6 +229,8 @@ There is no flag to fully disable DHCP KNI generation. Remove the `dhcp-server` 
 
 ### DHCP Relay Services and Routes
 
+**Purpose:** Automatically provisions the DHCP relay service and reachability paths to DHCP servers, enabling DHCP client support on networks without a local DHCP server.
+
 | | |
 |---|---|
 | **Trigger** | DHCP relay agent configured on a _network-interface_ |
@@ -235,6 +245,8 @@ There is no flag to fully disable DHCP KNI generation. Remove the `dhcp-server` 
 ---
 
 ### Application Identification (App-ID) Services
+
+**Purpose:** Automatically creates granular service categories for application identification, allowing fine-grained traffic classification and policy enforcement without manual service creation.
 
 | | |
 |---|---|
@@ -253,6 +265,8 @@ The default is `false` (disabled). Category services are only generated when exp
 
 ### PIM Multicast Services and Routes
 
+**Purpose:** Automatically establishes reachability for Protocol Independent Multicast (PIM) control traffic, enabling multicast routing operation across the network.
+
 | | |
 |---|---|
 | **Trigger** | PIM routing configured on a router |
@@ -264,6 +278,8 @@ No independent disable flag. Remove the PIM configuration to prevent generation.
 ---
 
 ### MSDP Services and Routes
+
+**Purpose:** Automatically provisions Multicast Source Discovery Protocol (MSDP) peering connectivity, enabling inter-domain multicast source discovery and reachability.
 
 | | |
 |---|---|
@@ -277,6 +293,8 @@ No independent disable flag. Remove the MSDP configuration to prevent generation
 
 ### Plugin-Generated Elements
 
+**Purpose:** Allows third-party plugins to extend the platform by automatically generating plugin-specific services, routes, and configuration elements as needed.
+
 | | |
 |---|---|
 | **Trigger** | Varies by plugin |
@@ -288,6 +306,8 @@ Use `override-generated true` on any plugin-generated element to take ownership.
 ---
 
 ### Software Update Proxy
+
+**Purpose:** Automatically configures internal proxy settings for software updates on managed routers, ensuring seamless update delivery without manual configuration.
 
 | | |
 |---|---|
@@ -301,6 +321,8 @@ This is a hidden, internally managed setting. It is unconditionally set when man
 
 ### Alarm Shelving
 
+**Purpose:** Automatically manages alarm suppression (shelving) based on internal platform logic, suppressing non-critical alarms during expected operational conditions.
+
 | | |
 |---|---|
 | **Trigger** | Internal alarm shelving logic |
@@ -312,6 +334,8 @@ Set `generated` to `false` per-element to take ownership.
 ---
 
 ### Internal Tenants
+
+**Purpose:** Automatically provisions internal logical containers (tenants) for platform services and features that require tenant isolation without burdening users with these internal details.
 
 | | |
 |---|---|
@@ -326,6 +350,8 @@ These tenants are required for the platform to function. Setting `generated` to 
 ---
 
 ### Auto-Generated IDs
+
+**Purpose:** Automatically assigns unique identifiers to configuration elements when not explicitly provided, ensuring all config elements have required IDs without manual assignment.
 
 | | |
 |---|---|
