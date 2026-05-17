@@ -163,9 +163,9 @@ Conditions for generation:
 
 ---
 
-### Conductor/Management Services
+### Conductor Services
 
-The Conductor/Management Services subsystem provides automatic management connectivity from managed routers back to the conductor system, enabling centralized configuration, monitoring, and software updates. Generation is unconditional when any `conductor-address` is configured. There is no way to fully disable this category, but there are customization options and per-element overrides:
+The Conductor Services subsystem provides automatic connectivity from managed routers back to the conductor system, enabling centralized configuration, monitoring, and software updates. Generation is unconditional when any `conductor-address` is configured. There is no way to fully disable this category, but there are customization options and per-element overrides:
 
 | | |
 |---|---|
@@ -429,7 +429,7 @@ This means:
 |---------|-------------------------|---------------------|
 | Peer Topology builder service-routes | `share-service-routes false` | `generated false` |
 | Peer Topology builder peers/adjacencies | Remove _neighborhood_ | `generated false` |
-| Conductor/management services | No (customization knobs only) | `generated false` |
+| Conductor services | No (customization knobs only) | `generated false` |
 | MOFI services (NTP, DNS, SNMP, etc.) | Remove `management: true` from interface | `generated false` |
 | BGP services | `bgp-service-generation > disabled` | `generated false` |
 | DHCP relay services | Remove relay config | `generated false` |
