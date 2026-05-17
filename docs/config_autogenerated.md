@@ -110,7 +110,11 @@ This works for adjacencies, service-routes, and services.
 
 ## Auto-Generated Configuration Reference
 
-### Peer Topology Builder
+### User-Facing Configuration
+
+This section covers auto-generated configuration that users typically interact with and may need to customize or override.
+
+#### Peer Topology Builder
 
 The Peer Topology builder automatically establishes the inter-router topology and distributes service reachability information across peer routers, enabling dynamic topology discovery and service mesh capabilities without manual configuration. It generates two related sets of elements: the _peer_ and _adjacency_ objects that form the inter-router topology, and the peer-type _service-route_ objects that distribute service reachability across that topology.
 
@@ -163,7 +167,7 @@ Conditions for generation:
 
 ---
 
-### Conductor Services
+#### Conductor Services
 
 The Conductor Services subsystem provides automatic connectivity from managed routers back to the conductor system, enabling centralized configuration, monitoring, and software updates. Generation is unconditional when any `conductor-address` is configured. There is no way to fully disable this category, but there are customization options and per-element overrides:
 
@@ -182,7 +186,7 @@ The Conductor Services subsystem provides automatic connectivity from managed ro
 
 ---
 
-### Management Over Forwarding Interface (MOFI) Services
+#### Management Over Forwarding Interface (MOFI) Services
 
 The MOFI builder automatically provisions management services for various network management and operational functions, enabling these services to be delivered over forwarding interfaces (data plane) when management interfaces are not available. This provides management connectivity through active data paths.
 
@@ -216,7 +220,7 @@ MOFI services are generated with the lowest priority to ensure they don't overri
 
 ---
 
-### BGP Services and Service-Routes
+#### BGP Services and Service-Routes
 
 The BGP subsystem automatically establishes reachability to BGP peers, enabling dynamic routing protocol operation and network convergence without manual service definition.
 
@@ -238,7 +242,7 @@ BGP service generation is **fully disableable** per-neighbor using the `disabled
 
 ---
 
-### DHCP Server KNI Device-Interfaces
+#### DHCP Server KNI Device-Interfaces
 
 The DHCP server subsystem automatically provisions kernel network interfaces required for DHCP server operation, handling the internal networking plumbing transparently.
 
@@ -257,7 +261,7 @@ There is no flag to fully disable DHCP KNI generation. Remove the `dhcp-server` 
 
 ---
 
-### DHCP Relay Services and Routes
+#### DHCP Relay Services and Routes
 
 The DHCP relay subsystem automatically provisions the DHCP relay service and reachability paths to DHCP servers, enabling DHCP client support on networks without a local DHCP server.
 
@@ -274,7 +278,7 @@ The DHCP relay subsystem automatically provisions the DHCP relay service and rea
 
 ---
 
-### Application Identification (App-ID) Services
+#### Application Identification (App-ID) Services
 
 The App-ID subsystem automatically creates granular service categories for application identification, allowing fine-grained traffic classification and policy enforcement without manual service creation.
 
@@ -293,7 +297,7 @@ The default is `false` (disabled). Category services are only generated when exp
 
 ---
 
-### PIM Multicast Services and Routes
+#### PIM Multicast Services and Routes
 
 The PIM subsystem automatically establishes reachability for Protocol Independent Multicast (PIM) control traffic, enabling multicast routing operation across the network.
 
@@ -307,7 +311,7 @@ No independent disable flag. Remove the PIM configuration to prevent generation.
 
 ---
 
-### MSDP Services and Routes
+#### MSDP Services and Routes
 
 The MSDP subsystem automatically provisions Multicast Source Discovery Protocol (MSDP) peering connectivity, enabling inter-domain multicast source discovery and reachability.
 
@@ -321,7 +325,7 @@ No independent disable flag. Remove the MSDP configuration to prevent generation
 
 ---
 
-### Plugin-Generated Elements
+#### Plugin-Generated Elements
 
 Plugins extend the platform by automatically generating plugin-specific services, routes, and configuration elements as needed.
 
@@ -335,13 +339,66 @@ Use `override-generated true` on any plugin-generated element to take ownership.
 
 ---
 
-### Software Update Proxy
+### Infrastructure and System Configuration
+
+This section covers auto-generated configuration managed by the platform for internal operations. Most users do not need to interact with or override these settings.
+
+#### Software Update Proxy
 
 The software update subsystem automatically configures internal proxy settings for software updates on managed routers, ensuring seamless update delivery without manual configuration. This is a hidden, internally managed setting. It is unconditionally set when managed routers exist. There is no opt-out mechanism and no override is available.
 
 ---
 
-### Alarm Shelving
+#### Secure Conductor Onboarding (SCO)
+
+The SCO subsystem automatically manages the secure onboarding mode for routers and configures pre-shared keys (PSK) required for secure conductor communication. This enables secure, automated onboarding of managed routers without manual key management.
+
+| | |
+|---|---|
+| **Trigger** | Routers with `system/secure-conductor-onboarding/mode` configured |
+| **What is generated** | SCO operating mode (EXCLUSIVE or DISABLED) and pre-shared keys for routers |
+| **Category** | Leaf-only |
+
+| Method | Scope | Effect |
+|--------|-------|--------|
+| Set `secure-conductor-onboarding > mode` to `disabled` | Per-router | Disables SCO for that router |
+| Set `secure-conductor-onboarding > mode` to `exclusive` | Per-router | Enables SCO and triggers PSK generation |
+
+:::note
+SCO operates at the system level and is automatically managed based on the configured operating mode. PSKs are only generated when SCO is enabled and are required for the conductor to authenticate the router.
+:::
+
+---
+
+#### Resource Groups
+
+The Resource Groups subsystem automatically associates configuration resources (routers, services, tenants, security profiles, etc.) with role-based access control (RBAC) resource groups. This enables policy enforcement for resource group-scoped access controls without manual resource enumeration.
+
+| | |
+|---|---|
+| **Trigger** | Configuration resources exist in the authority; roles define resource groups |
+| **What is generated** | Resource entries in roles linking to configuration objects |
+| **Category** | Leaf-only |
+
+Supported resource types include:
+- Network elements (routers, districts)
+- Services and traffic policies (services, service-classes, traffic-profiles)
+- Security and access (tenants, security profiles, LDAP servers)
+- Operational configuration (alarm shelves, performance profiles, DSCP maps, IPFIX collectors)
+- Extensibility (STEP repos, PCLI aliases, session-types)
+
+| Method | Scope | Effect |
+|--------|-------|--------|
+| Pre-provision resources with specific names | Per-resource | System detects them and skips auto-generation |
+| Set `generated` to `false` on a resource entry | Per-element | Takes ownership of that resource entry |
+
+:::note
+Resource groups are generated with lowest priority; user-provisioned resources with matching names prevent auto-generation. This enables administrators to define custom resource mappings when needed.
+:::
+
+---
+
+#### Alarm Shelving
 
 The alarm shelving subsystem automatically manages alarm suppression (shelving) based on internal platform logic, suppressing non-critical alarms during expected operational conditions.
 
@@ -355,7 +412,7 @@ Set `generated` to `false` per-element to take ownership.
 
 ---
 
-### Internal Tenants
+#### Internal Tenants
 
 The platform automatically provisions internal logical containers (tenants) for services and features that require tenant isolation without burdening users with these internal details.
 
@@ -371,7 +428,7 @@ These tenants are required for the platform to function. Setting `generated` to 
 
 ---
 
-### Auto-Generated IDs
+#### Auto-Generated IDs
 
 The platform automatically assigns unique identifiers to configuration elements when not explicitly provided, ensuring all config elements have required IDs without manual assignment. This is a fundamental platform requirement. It cannot be disabled or overridden.
 
@@ -425,6 +482,8 @@ This means:
 
 ## Quick Reference
 
+### User-Facing Configuration
+
 | Element | Dedicated Disable Option | Per-Element Override |
 |---------|-------------------------|---------------------|
 | Peer Topology builder service-routes | `share-service-routes false` | `generated false` |
@@ -437,6 +496,13 @@ This means:
 | App-ID category services | `generate-categories false` (default) | `generated false` |
 | PIM/MSDP services | Remove routing config | `generated false` |
 | Plugin-generated elements | Varies by plugin | `override-generated true` |
+
+### Infrastructure and System Configuration
+
+| Element | Dedicated Disable Option | Per-Element Override |
+|---------|-------------------------|---------------------|
+| Secure Conductor Onboarding (SCO) | Set `mode` to `disabled` | Not typically overridden |
+| Resource Groups | Pre-provision resources | `generated false` |
 | Internal tenants | No | `generated false` (not recommended) |
 | Software-update proxy | No | Not available |
 | Auto-generated IDs | No | Not available |
