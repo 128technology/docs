@@ -112,9 +112,7 @@ This works for adjacencies, service-routes, and services.
 
 ### Peer Topology Builder
 
-**Purpose:** Automatically establishes the inter-router topology and distributes service reachability information across peer routers, enabling dynamic topology discovery and service mesh capabilities without manual configuration.
-
-The Peer Topology builder generates two related sets of elements: the _peer_ and _adjacency_ objects that form the inter-router topology, and the peer-type _service-route_ objects that distribute service reachability across that topology.
+The Peer Topology builder automatically establishes the inter-router topology and distributes service reachability information across peer routers, enabling dynamic topology discovery and service mesh capabilities without manual configuration. It generates two related sets of elements: the _peer_ and _adjacency_ objects that form the inter-router topology, and the peer-type _service-route_ objects that distribute service reachability across that topology.
 
 **Peers and adjacencies**
 
@@ -167,15 +165,13 @@ Conditions for generation:
 
 ### Conductor/Management Services
 
-**Purpose:** Provides automatic management connectivity from managed routers back to the conductor system, enabling centralized configuration, monitoring, and software updates.
+The Conductor/Management Services subsystem provides automatic management connectivity from managed routers back to the conductor system, enabling centralized configuration, monitoring, and software updates. Generation is unconditional when any `conductor-address` is configured. There is no way to fully disable this category, but there are customization options and per-element overrides:
 
 | | |
 |---|---|
 | **Trigger** | `conductor-address` is configured on the authority |
 | **What is generated** | Conductor reachability _service_, _service-policy_, _service-route_, and related _tenant_ objects |
 | **Category** | Leaf-only |
-
-Generation is unconditional when any `conductor-address` is configured. There is no way to fully disable this category, but there are customization options and per-element overrides:
 
 | Method | Level | Effect |
 |--------|-------|--------|
@@ -188,7 +184,7 @@ Generation is unconditional when any `conductor-address` is configured. There is
 
 ### BGP Services and Service-Routes
 
-**Purpose:** Automatically establishes reachability to BGP peers, enabling dynamic routing protocol operation and network convergence without manual service definition.
+The BGP subsystem automatically establishes reachability to BGP peers, enabling dynamic routing protocol operation and network convergence without manual service definition.
 
 | | |
 |---|---|
@@ -210,7 +206,7 @@ BGP service generation is **fully disableable** per-neighbor using the `disabled
 
 ### DHCP Server KNI Device-Interfaces
 
-**Purpose:** Automatically provisions kernel network interfaces required for the DHCP server subsystem to operate, handling the internal networking plumbing transparently.
+The DHCP server subsystem automatically provisions kernel network interfaces required for DHCP server operation, handling the internal networking plumbing transparently.
 
 | | |
 |---|---|
@@ -229,7 +225,7 @@ There is no flag to fully disable DHCP KNI generation. Remove the `dhcp-server` 
 
 ### DHCP Relay Services and Routes
 
-**Purpose:** Automatically provisions the DHCP relay service and reachability paths to DHCP servers, enabling DHCP client support on networks without a local DHCP server.
+The DHCP relay subsystem automatically provisions the DHCP relay service and reachability paths to DHCP servers, enabling DHCP client support on networks without a local DHCP server.
 
 | | |
 |---|---|
@@ -246,7 +242,7 @@ There is no flag to fully disable DHCP KNI generation. Remove the `dhcp-server` 
 
 ### Application Identification (App-ID) Services
 
-**Purpose:** Automatically creates granular service categories for application identification, allowing fine-grained traffic classification and policy enforcement without manual service creation.
+The App-ID subsystem automatically creates granular service categories for application identification, allowing fine-grained traffic classification and policy enforcement without manual service creation.
 
 | | |
 |---|---|
@@ -265,7 +261,7 @@ The default is `false` (disabled). Category services are only generated when exp
 
 ### PIM Multicast Services and Routes
 
-**Purpose:** Automatically establishes reachability for Protocol Independent Multicast (PIM) control traffic, enabling multicast routing operation across the network.
+The PIM subsystem automatically establishes reachability for Protocol Independent Multicast (PIM) control traffic, enabling multicast routing operation across the network.
 
 | | |
 |---|---|
@@ -279,7 +275,7 @@ No independent disable flag. Remove the PIM configuration to prevent generation.
 
 ### MSDP Services and Routes
 
-**Purpose:** Automatically provisions Multicast Source Discovery Protocol (MSDP) peering connectivity, enabling inter-domain multicast source discovery and reachability.
+The MSDP subsystem automatically provisions Multicast Source Discovery Protocol (MSDP) peering connectivity, enabling inter-domain multicast source discovery and reachability.
 
 | | |
 |---|---|
@@ -293,7 +289,7 @@ No independent disable flag. Remove the MSDP configuration to prevent generation
 
 ### Plugin-Generated Elements
 
-**Purpose:** Allows third-party plugins to extend the platform by automatically generating plugin-specific services, routes, and configuration elements as needed.
+Plugins extend the platform by automatically generating plugin-specific services, routes, and configuration elements as needed.
 
 | | |
 |---|---|
@@ -307,21 +303,13 @@ Use `override-generated true` on any plugin-generated element to take ownership.
 
 ### Software Update Proxy
 
-**Purpose:** Automatically configures internal proxy settings for software updates on managed routers, ensuring seamless update delivery without manual configuration.
-
-| | |
-|---|---|
-| **Trigger** | Managed routers exist in the authority |
-| **What is generated** | Internal proxy configuration for software updates |
-| **Category** | Leaf + metadata |
-
-This is a hidden, internally managed setting. It is unconditionally set when managed routers exist. There is no opt-out mechanism and no override is available.
+The software update subsystem automatically configures internal proxy settings for software updates on managed routers, ensuring seamless update delivery without manual configuration. This is a hidden, internally managed setting. It is unconditionally set when managed routers exist. There is no opt-out mechanism and no override is available.
 
 ---
 
 ### Alarm Shelving
 
-**Purpose:** Automatically manages alarm suppression (shelving) based on internal platform logic, suppressing non-critical alarms during expected operational conditions.
+The alarm shelving subsystem automatically manages alarm suppression (shelving) based on internal platform logic, suppressing non-critical alarms during expected operational conditions.
 
 | | |
 |---|---|
@@ -335,7 +323,7 @@ Set `generated` to `false` per-element to take ownership.
 
 ### Internal Tenants
 
-**Purpose:** Automatically provisions internal logical containers (tenants) for platform services and features that require tenant isolation without burdening users with these internal details.
+The platform automatically provisions internal logical containers (tenants) for services and features that require tenant isolation without burdening users with these internal details.
 
 | | |
 |---|---|
@@ -351,14 +339,7 @@ These tenants are required for the platform to function. Setting `generated` to 
 
 ### Auto-Generated IDs
 
-**Purpose:** Automatically assigns unique identifiers to configuration elements when not explicitly provided, ensuring all config elements have required IDs without manual assignment.
-
-| | |
-|---|---|
-| **Trigger** | Any config element missing a required ID field |
-| **What is generated** | Unique IDs for config elements |
-
-This is a fundamental platform requirement. It cannot be disabled or overridden.
+The platform automatically assigns unique identifiers to configuration elements when not explicitly provided, ensuring all config elements have required IDs without manual assignment. This is a fundamental platform requirement. It cannot be disabled or overridden.
 
 ---
 
