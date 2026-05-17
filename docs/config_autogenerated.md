@@ -182,6 +182,40 @@ The Conductor/Management Services subsystem provides automatic management connec
 
 ---
 
+### Management Over Forwarding Interface (MOFI) Services
+
+The MOFI builder automatically provisions management services for various network management and operational functions, enabling these services to be delivered over forwarding interfaces (data plane) when management interfaces are not available. This provides management connectivity through active data paths.
+
+| | |
+|---|---|
+| **Trigger** | A _network-interface_ configured with `management: true` on a forwarding interface |
+| **What is generated** | Services and service-routes for NTP, DNS, SNMP, Syslog, IPFIX, HTTP-HTTPS (package updates), and Audit functions |
+| **Category** | Leaf-only |
+
+The builder generates services for the following management traffic types:
+
+| Service Type | Purpose |
+|---|---|
+| NTP | Network Time Protocol for clock synchronization |
+| DNS | Domain Name System for name resolution |
+| SNMP | Simple Network Management Protocol for device management |
+| Syslog | System logging for centralized log collection |
+| IPFIX | IP Flow Information Export for flow telemetry |
+| HTTP-HTTPS | Software package downloads for system updates |
+| Audit | Audit event forwarding for compliance logging |
+
+| Method | Scope | Effect |
+|--------|-------|--------|
+| Remove `management: true` from the interface | Per-interface | Prevents MOFI service generation for that interface |
+| Disable management services in authority config | Authority | Prevents generation globally (if supported) |
+| Set `generated` to `false` on a MOFI service or route | Per-element | Takes ownership of that element |
+
+:::note
+MOFI services are generated with the lowest priority to ensure they don't override user-configured services with the same names. Pre-provisioning a service with the same name before generation will prevent the auto-generated version from being created.
+:::
+
+---
+
 ### BGP Services and Service-Routes
 
 The BGP subsystem automatically establishes reachability to BGP peers, enabling dynamic routing protocol operation and network convergence without manual service definition.
@@ -340,40 +374,6 @@ These tenants are required for the platform to function. Setting `generated` to 
 ### Auto-Generated IDs
 
 The platform automatically assigns unique identifiers to configuration elements when not explicitly provided, ensuring all config elements have required IDs without manual assignment. This is a fundamental platform requirement. It cannot be disabled or overridden.
-
----
-
-### Management Over Forwarding Interface (MOFI) Services
-
-The MOFI builder automatically provisions management services for various network management and operational functions, enabling these services to be delivered over forwarding interfaces (data plane) when management interfaces are not available. This provides management connectivity through active data paths.
-
-| | |
-|---|---|
-| **Trigger** | A _network-interface_ configured with `management: true` on a forwarding interface |
-| **What is generated** | Services and service-routes for NTP, DNS, SNMP, Syslog, IPFIX, HTTP-HTTPS (package updates), and Audit functions |
-| **Category** | Leaf-only |
-
-The builder generates services for the following management traffic types:
-
-| Service Type | Purpose |
-|---|---|
-| NTP | Network Time Protocol for clock synchronization |
-| DNS | Domain Name System for name resolution |
-| SNMP | Simple Network Management Protocol for device management |
-| Syslog | System logging for centralized log collection |
-| IPFIX | IP Flow Information Export for flow telemetry |
-| HTTP-HTTPS | Software package downloads for system updates |
-| Audit | Audit event forwarding for compliance logging |
-
-| Method | Scope | Effect |
-|--------|-------|--------|
-| Remove `management: true` from the interface | Per-interface | Prevents MOFI service generation for that interface |
-| Disable management services in authority config | Authority | Prevents generation globally (if supported) |
-| Set `generated` to `false` on a MOFI service or route | Per-element | Takes ownership of that element |
-
-:::note
-MOFI services are generated with the lowest priority to ensure they don't override user-configured services with the same names. Pre-provisioning a service with the same name before generation will prevent the auto-generated version from being created.
-:::
 
 ---
 
