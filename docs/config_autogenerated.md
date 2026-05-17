@@ -343,6 +343,40 @@ The platform automatically assigns unique identifiers to configuration elements 
 
 ---
 
+### Management Over Forwarding Interface (MOFI) Services
+
+The MOFI builder automatically provisions management services for various network management and operational functions, enabling these services to be delivered over forwarding interfaces (data plane) when management interfaces are not available. This provides management connectivity through active data paths.
+
+| | |
+|---|---|
+| **Trigger** | A _network-interface_ configured with `management: true` on a forwarding interface |
+| **What is generated** | Services and service-routes for NTP, DNS, SNMP, Syslog, IPFIX, HTTP-HTTPS (package updates), and Audit functions |
+| **Category** | Leaf-only |
+
+The builder generates services for the following management traffic types:
+
+| Service Type | Purpose |
+|---|---|
+| NTP | Network Time Protocol for clock synchronization |
+| DNS | Domain Name System for name resolution |
+| SNMP | Simple Network Management Protocol for device management |
+| Syslog | System logging for centralized log collection |
+| IPFIX | IP Flow Information Export for flow telemetry |
+| HTTP-HTTPS | Software package downloads for system updates |
+| Audit | Audit event forwarding for compliance logging |
+
+| Method | Scope | Effect |
+|--------|-------|--------|
+| Remove `management: true` from the interface | Per-interface | Prevents MOFI service generation for that interface |
+| Disable management services in authority config | Authority | Prevents generation globally (if supported) |
+| Set `generated` to `false` on a MOFI service or route | Per-element | Takes ownership of that element |
+
+:::note
+MOFI services are generated with the lowest priority to ensure they don't override user-configured services with the same names. Pre-provisioning a service with the same name before generation will prevent the auto-generated version from being created.
+:::
+
+---
+
 ## Protection Mechanisms in Detail
 
 This section provides deeper technical detail on how the two mechanisms interact. Most users can rely on the guidance above — the PCLI shows the correct command automatically.
@@ -396,6 +430,7 @@ This means:
 | Peer Topology builder service-routes | `share-service-routes false` | `generated false` |
 | Peer Topology builder peers/adjacencies | Remove _neighborhood_ | `generated false` |
 | Conductor/management services | No (customization knobs only) | `generated false` |
+| MOFI services (NTP, DNS, SNMP, etc.) | Remove `management: true` from interface | `generated false` |
 | BGP services | `bgp-service-generation > disabled` | `generated false` |
 | DHCP relay services | Remove relay config | `generated false` |
 | DHCP server KNI interfaces | Remove `dhcp-server` host-service | `override-generated true` |
