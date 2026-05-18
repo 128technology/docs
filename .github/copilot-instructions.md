@@ -138,6 +138,16 @@ Add the doc id to the appropriate section of [sidebars.js](../sidebars.js). Do *
   - *router* — an SSR data-plane node (lowercase).
   - *authority* — the top-level config domain.
   - *PCLI* — the SSR command-line interface.
+- **Punctuation in lists and tables:**
+  - If **any** entry in a bulleted list or table column contains internal punctuation (comma, colon, semi-colon), **every** entry in that list or column must end with a period.
+  - Exception: entries that are only one or two words, or are names/categories (e.g., column headers, labels) do not require a closing period.
+  - *Good:* `| Prevents generation for that neighbor. |` (other rows have commas)
+  - *Bad:* `| Prevents generation for that neighbor |` (missing period when siblings have punctuation)
+- **Capitalization after colons:** If what follows a colon is a complete sentence, capitalize the first word. *Good:* `generates two sets: The _peer_ objects that form…`. *Bad:* `generates two sets: the _peer_ objects that form…`.
+- **No empty table headers:** Do not use tables with empty header cells (e.g., `| | |`) for visual separation. Every table must have meaningful column headers. If you need a key-value layout, use a definition list or a two-column table with headers like `Property` / `Value` or `Field` / `Description`.
+- **Horizontal rules (`---`):** Do not insert `---` between subsections within the same heading level purely for visual spacing. Use them only to separate fundamentally different major sections (e.g., between "User-Facing Configuration" and "Infrastructure Configuration"). Markdown headings already provide visual separation.
+- **Voice consistency:** Always use "you" (second person) when addressing the reader — not "users" or "the user." *Good:* `configuration that you typically interact with`. *Bad:* `configuration that users typically interact with`.
+- **Avoid exposing internals unnecessarily:** Do not describe implementation details (e.g., "hidden metadata list") unless the reader needs that information to perform a task. If an internal mechanism is relevant (e.g., for import/export behavior), introduce it where it is actionable, not in overviews.
 - **Admonitions:** use Docusaurus syntax — `:::note`, `:::tip`, `:::caution`, `:::important`, `:::danger`. Close with `:::`.
 - **Code blocks:** always specify the language hint (`text`, `bash`, `yaml`, `json`, `python`).
 - **Avoid jargon** unless defined on first use; link to a concept page if one exists.
