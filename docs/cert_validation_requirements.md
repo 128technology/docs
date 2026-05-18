@@ -8,6 +8,7 @@ sidebar_label: Certificate Requirements and Validation
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.0.0   | Certificate management and validation support added. |
+| 7.2.0   | Subject Alternative Name URI support for peering identity. |
 
 This page describes the certificate properties that the SSR enforces, how `validation-mode` affects behavior, and the differences between config-time and runtime validation.
 
@@ -112,6 +113,7 @@ Client certificates used for peering are validated as leaf (end-entity) certific
 | --- | --- |
 | Signature Algorithm | Must be an [accepted algorithm](#accepted-cryptographic-algorithms). |
 | Public Key | Must be an [accepted key type and size](#key-requirements). |
+| Subject Alternative Name (optional) | Starting in SSR 7.2.0, a `urn:ssr:peering:<alias>` SAN URI can be used to carry SVR peering identity as an alternative to the Common Name. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#api-naming-rules) for details. |
 
 ### Intermediate CA Certificates
 
