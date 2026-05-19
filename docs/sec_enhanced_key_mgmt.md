@@ -93,7 +93,7 @@ Consistent naming across all API calls and configuration is critical:
 In SSR 7.0.x, the `name` field was required to be `custom_ssr_peering` (a reserved name). This is no longer required in SSR 7.1+. If no certificate is configured, the SSR will fall back to searching for certificates named `custom_ssr_peering` on disk for backward compatibility.
 :::
 
-##### Peering Identity via Subject Alternative Name URI (SSR 7.2.0+)
+#### Peering Identity via Subject Alternative Name URI
 
 Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate.
 

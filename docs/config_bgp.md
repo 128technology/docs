@@ -1025,6 +1025,7 @@ There is one additional field which needs to be set in route reflector's BGP con
 When the route reflector sends routes to the clients, by default it doesn't modify the next-hop. An outbound policy can be used to change the next-hop in these routes to that of the route reflector, if desired. In such instances, another option, which is turned off by default, needs to be set in the route reflector's BGP config: `Route Reflector Allow Outbound Policy = TRUE`.
 
 ### BGP Confederations
+
 When configuring iBGP, the **Confederation** feature may be helpful when dealing with an enormous autonomous system. This feature allows you to break up the AS into smaller sub-autonomous systems. Confederation can be directly configured under the routing protocol element. Here, 65535 is the **confederation identifier AS number** and, 1100 and 2200 are the **member AS** numbers of that confederation AS.
 
 ```
@@ -1042,9 +1043,11 @@ admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit
 
 When an inbound BGP policy rejects prefixes received from a neighbor, those routes do not appear in the BGP table or the FIB. The `filtered-routes` option exposes exactly which prefixes were suppressed by the inbound policy for a given neighbor, making it straightforward to troubleshoot why expected routes are absent from the routing table.
 
-:::note
-This feature is available in SSR version 7.2.0-r1 and above.
-:::
+### Version History
+
+| Release | Modification |
+|---|---|
+| 7.2.0 | Feature introduced. |
 
 ### PCLI
 
@@ -1177,8 +1180,3 @@ Response:
 
 PCLI and REST activity is logged in `routingManager.log`. FRR vty-level logs are in `routingEngine.log`.
 
-### Version History
-
-| Release | Modification |
-|---|---|
-| 7.2.0 | Feature introduced. |
