@@ -176,7 +176,7 @@ module.exports = {
           "label": "Router Installation",
           "items": [
             "intro_installation_bootable_media",
-           "intro_basic_router_config",
+            "intro_basic_router_config",
             "intro_otp_iso_install",
             "intro_install_quickstart_otpiso",
             "onboard_ssr_to_conductor",
