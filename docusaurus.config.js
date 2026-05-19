@@ -7,9 +7,12 @@ module.exports = {
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   onBrokenAnchors: 'throw',
-  onBrokenMarkdownLinks: 'throw',
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+      onBrokenMarkdownImages: 'throw',
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
