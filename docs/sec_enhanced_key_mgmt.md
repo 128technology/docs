@@ -236,7 +236,7 @@ The same node-scoped pattern applies to the `/certificate-request` and `/certifi
 :::
 
 :::tip Unique Common Names in HA (SSR 7.2.0+)
-Because both HA nodes share the same `peering-common-name`, earlier releases required both nodes to use an identical `common_name` in their certificates. Starting in SSR 7.2.0, you can use a [SAN URI](#peering-identity-via-subject-alternative-name-uri-ssr-720) to carry the peering identity, allowing each node to have a unique CN — for example, `combo-east-node1` and `combo-east-node2` — while both certificates include the same `urn:ssr:peering:east-alias` SAN URI.
+Because both HA nodes share the same `peering-common-name`, earlier releases required both nodes to use an identical `common_name` in their certificates. Starting in SSR 7.2.0, you can use a [SAN URI](#peering-identity-via-subject-alternative-name-uri) to carry the peering identity, allowing each node to have a unique CN — for example, `combo-east-node1` and `combo-east-node2` — while both certificates include the same `urn:ssr:peering:east-alias` SAN URI.
 :::
 
 When two nodes are configured as a redundant pair, the keys are exchanged between nodes. This avoids rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
