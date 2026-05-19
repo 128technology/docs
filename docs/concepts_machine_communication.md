@@ -89,7 +89,7 @@ In order to accommodate these deployments where “ICMP Destination Unreachable 
 
 The discovered MTU is viewable in the output of `show peers`. 
 
-For additional information, see [Path MTU Discovery](config_pmtu.mdx).
+For additional information, see [Path MTU Discovery](config_pmtu.md).
 
 ### Secure Vector Routing Traffic
 
