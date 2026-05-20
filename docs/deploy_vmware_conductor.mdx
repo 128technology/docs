@@ -14,14 +14,14 @@ import ConductorAuthority from './_conductor_to_authority.md';
 import AuthorityName from './_set_authority_name.md';
 import SetConductorIP from './_set_conductor_ip.md';
 
-This guide walks a network engineer through every step required to stand up a conductor-managed SSR network using a **VMware ESXi virtual machine as the Conductor** and one or more **SSR130 branch routers**. By the end of the guide, the conductor VM will be running SSR 7.1.5, each branch router will be online and managed by the conductor, and internet traffic from LAN users will be forwarded through each router with management traffic returning to the conductor over the same WAN interface.
+This guide walks a network engineer through the steps required to stand up a conductor-managed SSR network using a **VMware ESXi virtual machine as the Conductor** and one or more **SSR130 branch routers**. By the end of the guide, the conductor VM will be running SSR 7.1.5, each branch router will be online and managed by the conductor, and internet traffic from LAN users will be forwarded through each router with management traffic returning to the conductor over the same WAN interface.
 
 ## Guide Sections
 
 | Step | Topic | Description |
 |------|-------|-------------|
 | 1 | [Create the VMware VM](#step-1-create-the-vmware-vm) | Create and configure a VMware ESXi VM to host the conductor |
-| 2 | [Install SSR 7.1.5](#step-2-install-ssr-714) | Boot the ISO and install the SSR software |
+| 2 | [Install SSR 7.1.5](#step-2-install-ssr-715) | Boot the ISO and install the SSR software |
 | 3 | [Configure Linux Networking](#step-3-configure-linux-networking) | Set the conductor's management IP using NMTUI |
 | 4 | [Initialize the Conductor](#step-4-initialize-the-conductor) | Run the SSR Initializer to configure the conductor role |
 | 5 | [Verify and Secure the Installation](#step-5-verify-and-secure-the-installation) | Confirm the conductor is running and change default passwords |
@@ -31,8 +31,8 @@ This guide walks a network engineer through every step required to stand up a co
 | 9 | [Configure the Router on the Conductor](#step-9-configure-the-router-on-the-conductor) | Pre-stage each SSR130 router's configuration before onboarding |
 | 10 | [Onboard SSR130 Routers](deploy_router_onboard.mdx) | Connect and initialize each SSR130 router so it joins the conductor |
 | 11 | [Upgrade Routers to 7.1.5](deploy_router_upgrade.mdx) | Upgrade each onboarded router to SSR 7.1.5 from the conductor |
-| 12 | [Verify the Deployment](deploy_verify.md) | Confirm connectivity, management, and internet forwarding |
-| — | [Appendix A — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration |
+| 12 | [Verify the Deployment](deploy_verify.md) | Confirm connectivity, management, and internet forwarding | 
+| — | [Appendix — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration |
 
 ## Network Topology
 
@@ -107,10 +107,10 @@ Before beginning, ensure the following are available:
 
 ## Software Version Requirements
 
-This guide targets **SSR 7.1.5** on both conductor and routers.
+This guide uses **SSR 7.1.5** on both conductor and routers.
 
 :::note
-The router software version cannot be higher than the conductor software version. SSR130 routers that ship with an earlier software version are upgraded to 7.1.5 from the conductor after onboarding.
+The router software version cannot be higher than the conductor software version. 
 :::
 
 ---
@@ -131,112 +131,102 @@ Power on the VM and boot into the SSR ISO to install the software.
 
    ![Power On](/img/vmware_pwr-on.png)
 
-2. The VM boots into the SSR installation menu. Click in the console window to capture focus.
+2. The VM boots into the SSR installation menu. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
 
-3. Use the arrow keys to select **`Install 128T Routing Software VGA Console`** and press **Enter**.
+    ![Choose Image](/img/u-iso2_choose_image.png)
 
-   ![VGA Boot with Interactive Install](/img/install_select_interactive_vmware.png)
+2. At the Install menu, use the arrow keys to select **VGA Console**.
 
-   :::note
-   If you do not make a selection within 30 seconds, the system defaults to the serial console boot option. For VMware, always select the **VGA Console** option.
-   :::
+    ![Install Type](/img/u-iso3_choose_install_type.png)
 
-4. At the **Install Options** screen, press **Enter** to accept the standard installation (no FIPS).
+3. If you are installing a FIPS enabled system, select Install Option 1, then press **Enter**. 
 
-5. The Linux installation runs automatically. Installation progress is displayed on screen.
+    If you do not require FIPS, skip the options and select **Enter**. The download and installation begins.
 
-   ![Installation Status](/img/vmware_install_status.png)
+    :::note
+    IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
 
-6. When the SSR software installation completes (approximately 20–30 minutes), the following screen is displayed:
+    If after installation you require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
+    :::
+ 
+    ![Install Options](/img/u-iso4_install_options.png)
 
-   ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
+4. The installation runs to completion automatically. This may take approximately 15–20 minutes.
 
-   Select **`<Yes>`** to shut down the VM.
+    ![Install Progress](/img/u-iso5_begin_install.png)
 
-7. After the VM shuts down, detach the ISO:
-   - In the ESXi console, select the VM.
-   - Click **Edit** → expand **CD/DVD Drive 1** → change from **Datastore ISO file** to **Host device** or uncheck **Connect**. This prevents re-booting from the ISO.
+5. When prompted to reboot, allow the device to restart.
 
-8. Power the VM back on using the **Play** button.
+    ![Install Complete](/img/u-iso6_unpacker_complete.png)
 
----
+## Initialize the Conductor
 
-## Step 3: Configure Linux Networking
+The device exposes a web-based initialization interface on its LAN ports after the first boot. Use this interface to configure the conductor role, management IP address, and admin credentials.
 
-When the VM boots for the first time after installation, the SSR Interactive Installation workflow prompts you to configure Linux networking before the Initializer starts.
+1. Ensure your laptop is connected to a LAN port and has a static IP in the `192.168.128.0/24` subnet.
 
-<InitialBoot/>
+    :::note
+    Assign your laptop a static IP address in the range `192.168.128.2`–`192.168.128.254` with a subnet mask of `255.255.255.0` before connecting. The initialization web interface is only accessible on the LAN-side ports prior to initialization.
+    :::
 
-<ConductorIP/>
+2. Open a web browser and navigate to:
 
----
+    ```
+    https://192.168.128.1
+    ```
 
-## Step 4: Initialize the Conductor
+    Accept the self-signed certificate warning.
 
-After completing NMTUI and quitting back to the shell, the SSR Initializer launches automatically. Follow these steps to configure the node as a standalone conductor.
+    ![Initialization UI](/img/u-iso8_launch_gui.png)
 
-1. On the **SSR Initializer** wizard screen, use the space bar to select **Conductor** as the role, then press **Enter** to select **OK**.
+3. Under **SSR Managed**, select **SSR Conductor**.
 
-   ![SSR Role](/img/initializer_Serial2.png)
+    ![SSR Conductor Selection](/img/u-iso8a_initialize_conductor.png)
 
-2. When asked _What kind of Conductor node is this?_, select **Standalone**.
+4. Select **STANDALONE** for a single-conductor deployment. Select the **STATIC** address type, the **Provide Artifactory Credentials** checkbox, and enter the following information:
 
-   ![Identify the Node](/img/initializer_standalone.png)
+    | Field | Example Value | Notes |
+    |-------|--------------|-------|
+    | Conductor Name | `conductor1` | Used as the router name in the authority |
+    | Node IP Address | `192.168.100.10` | Static management IP |
+    | Node Gateway | `192.168.100.1` | Management network gateway |
+    | Interface Name | `mgmt-0-0` | Management interface |
+    | DNS Server | `8.8.8.8` | Optional; required for software downloads |
+    | Admin Password | _(your choice)_ | Minimum 8 chars, 1 upper, 1 lower, 1 number |
+    | Artifactory Username | _(your username)_ | Juniper software access |
+    | Artifactory Password | _(your token)_ | Juniper software access token |
 
-3. On the **Node Info** screen, enter the following:
+    ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
 
-   | Field | Example Value | Notes |
-   |-------|--------------|-------|
-   | Node Name | `node0` | The node name within the conductor system |
-   | Conductor Name | `conductor1` | The conductor system name; appears in PCLI prompt as `node0.conductor1` |
+    :::note
+    The admin, root, and t128 accounts are all set to the password you enter here.
+    :::
 
-   ![Node Information](/img/initializer_Serial5a.png)
+    :::important
+    Record this password securely. It cannot be recovered if lost — only reset, which requires root access.
+    :::
 
-4. On the **Password Setup** screen, create a password for the SSR admin user. The password must be:
-   - At least 8 characters long
-   - At least 1 uppercase letter
-   - At least 1 lowercase letter
-   - At least 1 number
-   - Must not contain the username in any form
-   - Must not repeat characters more than 3 times
+5. Click **ASSOCIATE**.
 
-   ![Password Setup](/img/initializer_Serial6.png)
+6. The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
 
-   :::important
-   Record this password securely. It cannot be recovered if lost — only reset, which requires root access.
-   :::
+## Verify the Installation
 
-5. Press **Enter** to select **OK**. The Initializer performs a hardware compatibility check, then bootstraps the SSR software.
+After the device restarts, connect to the management network and verify the conductor is running:
 
-6. When prompted, select **`<Yes>`** to start the conductor.
+:::note
+At this point, it is good practice to remove the static IP previously set from your laptop.
+:::
 
-   ![Initializer Complete](/img/initializer_complete.png)
-
-The system starts the SSR conductor service. This takes approximately 3–5 minutes.
-
----
-
-## Step 5: Verify and Secure the Installation
-
-### Verify the Installation
-
-<VerifyConductorInstall/>
-
-You can also access the Conductor GUI by opening a browser and navigating to:
+Access the conductor GUI from the management network using:
 
 ```
 https://192.168.100.10
 ```
 
+![Login to the Conductor](/img/dep-1200-cond-login.png)
+
 Log in with username `admin` and the password set during initialization.
-
-### Change the Default Passwords
-
-<ChangeDefaultPasswords/>
-
-### Configure the Software Access Token
-
-<ConfigureToken/>
 
 ---
 
@@ -355,10 +345,10 @@ After committing, the SSR service will briefly restart to apply the interface bi
 
 ## Step 9: Configure the Router on the Conductor
 
-The conductor must have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
+The conductor can have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
 
 :::important
-The router configuration steps for VMware-based conductors are identical to those for hardware-based conductors. Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the **SSR130** apply unchanged regardless of the conductor deployment platform.
+The router configuration steps for VMware-based conductors are identical to those for hardware-based conductors. Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the SSR130 apply unchanged regardless of the conductor deployment platform.
 :::
 
 The key configuration objects created in that step are summarized below for reference:
