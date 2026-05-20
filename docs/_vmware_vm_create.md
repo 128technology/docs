@@ -16,7 +16,7 @@
 
    ![Datastore Browser Button](/img/vmware_datastore_browser_button.png)
 
-3. Click **Upload**, navigate to the SSR 7.1.4 Universal ISO on your local workstation, and click **Open**. The ISO appears in the datastore.
+3. Click **Upload**, navigate to the `SSR-7.1.5-7.r2.el9.x86_64.ibu-v1.iso` on your local workstation, and click **Open**. The ISO appears in the datastore.
 
    ![SSR ISO in Datastore](/img/vmware_ssr-iso.png)
 
@@ -79,7 +79,7 @@
 
 7. Expand **CD/DVD Drive 1**. In the dropdown, select **Datastore ISO file** and check **Connect**. The Datastore Browser opens.
 
-8. Select the SSR 7.1.4 ISO you uploaded earlier and click **Select**.
+8. Select the `SSR-7.1.5-7.r2.el9.x86_64.ibu-v1.iso` you uploaded earlier and click **Select**.
 
    ![CD ISO Selected](/img/vmware_cd-iso2.png)
 

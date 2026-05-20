@@ -3,7 +3,7 @@ title: "Appendix - VMware Conductor Configuration"
 sidebar_label: "Appendix - VMware Conductor Configuration"
 ---
 
-This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi deployment described in this guide. This configuration reflects the state after completing all steps through [Step 9 — Configure the Router on the Conductor](deploy_vmware_conductor.mdx#step-9-configure-the-router-on-the-conductor).
+This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi deployment described in this guide. This configuration reflects the state after completing all steps through [Step 6 — Configure the Router on the Conductor](deploy_vmware_conductor.mdx#step-6-configure-the-router-on-the-conductor).
 
 ## Network Design Reference
 
@@ -17,7 +17,7 @@ The following values are used in this configuration. Substitute your own values 
 | Conductor Management IP | `192.168.100.10` | Static IP on VMware management network |
 | Conductor Subnet Mask | `/24` | |
 | Conductor Gateway | `192.168.100.1` | Management network gateway |
-| Conductor NIC PCI Address | `0000:0b:00.0` | **Example only** — must be replaced with the actual value from [Step 7](deploy_vmware_conductor.mdx#step-7-find-the-vm-nic-pci-address) |
+| Conductor NIC PCI Address | `0000:0b:00.0` | **Example only** — must be replaced with the actual value from [Step 4](deploy_vmware_conductor.mdx#step-4-find-the-vm-nic-pci-address) |
 | Router Name | `branch1` | Branch router system name |
 | Router Asset ID | `SSR130-ABC1234567` | **Replace** with the actual SSR130 serial number |
 | Router LAN IP | `192.168.1.1/24` | LAN gateway address for the branch |
