@@ -3,7 +3,11 @@ title: "Appendix - VMware Conductor Configuration"
 sidebar_label: "Appendix - VMware Conductor Configuration"
 ---
 
-This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi deployment described in this guide. This configuration reflects the state after completing all steps through [Step 6 — Configure the Router on the Conductor](deploy_vmware_conductor.mdx#step-6-configure-the-router-on-the-conductor).
+This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi conductor described in this guide. Apply this configuration after completing [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).
+
+:::note
+Router configuration (including PCI addresses and interface definitions for branch routers) is documented in the [VMware Router Deployment Guide Appendix](deploy_appendix_vmware_router.mdx).
+:::
 
 ## Network Design Reference
 
@@ -17,10 +21,7 @@ The following values are used in this configuration. Substitute your own values 
 | Conductor Management IP | `192.168.100.10` | Static IP on VMware management network |
 | Conductor Subnet Mask | `/24` | |
 | Conductor Gateway | `192.168.100.1` | Management network gateway |
-| Conductor NIC PCI Address | `0000:0b:00.0` | **Example only** — must be replaced with the actual value from [Step 4](deploy_vmware_conductor.mdx#step-4-find-the-vm-nic-pci-address) |
-| Router Name | `branch1` | Branch router system name |
-| Router Asset ID | `SSR130-ABC1234567` | **Replace** with the actual SSR130 serial number |
-| Router LAN IP | `192.168.1.1/24` | LAN gateway address for the branch |
+| Conductor NIC PCI Address | `0000:0b:00.0` | **Example only** — discover actual value with `ethtool -i <iface> \| grep bus-info` |
 
 ## Applying This Configuration
 
@@ -107,176 +108,25 @@ config
                 exit
             exit
         exit
-
-        router  branch1
-            name                 branch1
-            inter-node-security  internal
-
-            dns-config  automatic
-                mode  automatic
-            exit
-
-            node  node0
-                name      node0
-                role      combo
-                asset-id  SSR130-ABC1234567
-
-                device-interface  wan-dev
-                    name         wan-dev
-                    type         ethernet
-                    pci-address  0000:04:00.3
-                    forwarding   true
-
-                    network-interface  wan1
-                        name           wan1
-                        type           external
-                        conductor      true
-                        default-route  true
-                        source-nat     true
-                        management     true
-                        dhcp           v4
-
-                        management-vector  mgmt-vec-wan
-                            name      mgmt-vec-wan
-                            priority  10
-                        exit
-
-                        neighborhood  internet
-                            name      internet
-                            topology  spoke
-                        exit
-                    exit
-                exit
-
-                device-interface  lan-dev
-                    name         lan-dev
-                    type         ethernet
-                    pci-address  0000:04:00.0
-                    forwarding   true
-
-                    network-interface  lan1
-                        name    lan1
-                        type    external
-                        tenant  corp
-
-                        address  192.168.1.1
-                            ip-address     192.168.1.1
-                            prefix-length  24
-                        exit
-                    exit
-                exit
-            exit
-
-            service-route  internet-route
-                name          internet-route
-                service-name  Internet-Traffic
-                type          service-agent
-
-                next-hop  node0 wan1
-                    node-name  node0
-                    interface  wan1
-                exit
-            exit
-        exit
     exit
 exit
 ```
 
 ## Configuration Notes
 
+:::important
+The `pci-address` value `0000:0b:00.0` is an example. The actual PCI address of the VMXNet3 NIC in your conductor VM must be discovered after installation. From the Linux shell on the conductor, run:
+
+```bash
+ethtool -i <interface-name> | grep bus-info
+```
+
+Substitute the discovered value in the `device-interface  mgmt-dev` block before applying this configuration.
+:::
+
 | Item | Note |
 |------|------|
-| `pci-address` (conductor) | **Must be replaced** with the actual VMXNet3 NIC PCI address discovered in [Step 4](deploy_vmware_conductor.mdx#step-4-find-the-vm-nic-pci-address). The value `0000:0b:00.0` is a common example but is not universal. |
-| `asset-id` | Replace `SSR130-ABC1234567` with the actual serial number from the SSR130 device label. |
+| `pci-address` (conductor NIC) | **Must be replaced** with the actual VMXNet3 NIC PCI address. The value `0000:0b:00.0` varies by VM slot assignment. |
 | `conductor-address` | Replace `192.168.100.10` with the actual static IP assigned to the conductor VM if different. |
 | `gateway` | Replace `192.168.100.1` with your management network gateway. |
-| LAN address | Replace `192.168.1.1/24` with the correct LAN subnet for the branch site. |
-| `forwarding` on conductor NIC | Set to `false` — the conductor management NIC is not a forwarding interface. This differs from the router WAN and LAN interfaces, which have `forwarding true`. |
-
-## Key Differences from Hardware Conductor Configuration
-
-The VMware conductor configuration is functionally identical to the SSR1200 hardware conductor configuration with two notable differences:
-
-| Field | SSR1200 Hardware | VMware VM |
-|-------|-----------------|-----------|
-| `pci-address` (conductor NIC) | Fixed (`0000:03:00.0` on SSR1200) | Discovered at install time; typically `0000:0b:00.0` but varies by VM slot assignment |
-| `forwarding` (conductor NIC) | `false` | `false` |
-
-The branch router (`branch1`) configuration is **identical** in both guides. PCI addresses in the SSR130 (`0000:04:00.3`, `0000:04:00.0`) are fixed hardware values and do not change.
-
-## Adding Additional Routers
-
-To add a second SSR130 router (`branch2`), copy the `router  branch1` block, change the router name to `branch2`, update the `asset-id` to the second device's serial number, and change the LAN IP to a different subnet (for example `192.168.2.1/24`). All authority-level objects (`tenant`, `service`) are shared across all routers.
-
-```
-        router  branch2
-            name                 branch2
-            inter-node-security  internal
-
-            dns-config  automatic
-                mode  automatic
-            exit
-
-            node  node0
-                name      node0
-                role      combo
-                asset-id  SSR130-XXXXXXXXXXX
-
-                device-interface  wan-dev
-                    name         wan-dev
-                    type         ethernet
-                    pci-address  0000:04:00.3
-                    forwarding   true
-
-                    network-interface  wan1
-                        name           wan1
-                        type           external
-                        conductor      true
-                        default-route  true
-                        source-nat     true
-                        management     true
-                        dhcp           v4
-
-                        management-vector  mgmt-vec-wan
-                            name      mgmt-vec-wan
-                            priority  10
-                        exit
-
-                        neighborhood  internet
-                            name      internet
-                            topology  spoke
-                        exit
-                    exit
-                exit
-
-                device-interface  lan-dev
-                    name         lan-dev
-                    type         ethernet
-                    pci-address  0000:04:00.0
-                    forwarding   true
-
-                    network-interface  lan1
-                        name    lan1
-                        type    external
-                        tenant  corp
-
-                        address  192.168.2.1
-                            ip-address     192.168.2.1
-                            prefix-length  24
-                        exit
-                    exit
-                exit
-            exit
-
-            service-route  internet-route
-                name          internet-route
-                service-name  Internet-Traffic
-                type          service-agent
-
-                next-hop  node0 wan1
-                    node-name  node0
-                    interface  wan1
-                exit
-            exit
-        exit
-```
+| `forwarding` on conductor NIC | Set to `false` — the conductor management NIC is not a forwarding interface. |

@@ -1,0 +1,101 @@
+---
+title: "Step 2: Install SSR 7.1.5 and Initialize the Conductor"
+sidebar_label: "Install and Initialize"
+---
+
+This step boots the conductor VM from the SSR ISO, installs the software, and uses the web-based initialization interface to configure the VM as a standalone conductor with a static management IP.
+
+## Install SSR 7.1.5
+
+1. Select the new conductor VM in the ESXi Navigator and click the **Play** (Power On) button.
+
+   ![Power On](/img/vmware_pwr-on.png)
+
+2. The VM boots into the SSR installation menu. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
+
+   ![Choose Image](/img/u-iso2_choose_image.png)
+
+3. At the Install menu, use the arrow keys to select **VGA Console**.
+
+   ![Install Type](/img/u-iso3_choose_install_type.png)
+
+4. If you require FIPS mode, select Install Option 1 and press **Enter**. If FIPS is not required, press **Enter** without selecting an option. The download and installation begins.
+
+   :::note
+   IDP is not compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. If you plan to enable IDP, do not enable FIPS mode. See [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information on disabling FIPS mode if needed.
+   :::
+
+   ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)
+
+5. The installation runs to completion automatically. This may take approximately 15–20 minutes.
+
+   ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
+
+6. When prompted to reboot, allow the VM to restart.
+
+   ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
+
+## Initialize the Conductor
+
+1. After the system boots, the SSR login screen appears. Login to the Conductor VM and run the command `su admin `to enter the PCLI. 
+
+    ![Install complete login](/img/deploy-vmware-init-login.png)
+
+    After a few seconds, the message `Device successfully initialized` is displayed. The conductor VM will reboot, and then reboot a second time. 
+
+2. After the second reboot, log in to the Conductor VM and run the command `systemctl is-active 128T` until `Active` is displayed. 
+
+3. Open a browser tab on your computer and navigate to `https://<ge-0-0 IP address>` in order to initiate a web session to the conductor GUI.
+
+4. Accept the self-signed certificate warning, and begin the intialization process. 
+
+   ![Initialization UI](/img/u-iso8_launch_gui.png)
+
+3. Under **SSR Managed**, select **SSR Conductor**.
+
+   ![SSR Conductor Selection](/img/u-iso8a_initialize_conductor.png)
+
+4. Select **STANDALONE** for a single-conductor deployment. Select the **STATIC** address type, check **Provide Artifactory Credentials**, and enter the following information:
+
+   | Field | Example Value | Notes |
+   |-------|--------------|-------|
+   | Conductor Name | `conductor1` | Used as the router name within the authority |
+   | Node IP Address | `192.168.100.10` | Static management IP |
+   | Node Gateway | `192.168.100.1` | Management network gateway |
+   | Interface Name | `mgmt-0-0` | Management interface |
+   | DNS Server | `8.8.8.8` | Required for software downloads |
+   | Admin Password | _(your choice)_ | Minimum 8 chars, 1 upper, 1 lower, 1 number |
+   | Artifactory Username | _(your username)_ | Juniper software access |
+   | Artifactory Password | _(your token)_ | Juniper software access token |
+
+   ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
+
+   :::note
+   The admin, root, and t128 accounts are all set to the password you enter here. Record this password securely — it cannot be recovered if lost, only reset with root access.
+   :::
+
+5. Click **ASSOCIATE**.
+
+6. The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
+
+## Verify the Installation
+
+After the VM restarts, confirm the conductor is accessible on the management network:
+
+1. Reconnect your laptop to the management network. Remove the static `192.168.128.x` address you assigned earlier and obtain a management network address.
+
+2. Open a web browser and navigate to:
+
+   ```
+   https://192.168.100.10
+   ```
+
+3. Log in with username `admin` and the password set during initialization.
+
+   ![Login to the Conductor](/img/dep-1200-cond-login.png)
+
+   A successful login confirms the conductor is running and reachable on the management network.
+
+## Next Step
+
+Proceed to [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).

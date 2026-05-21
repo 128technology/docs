@@ -1,35 +1,20 @@
 ---
-title: "VMware ESXi: Conductor-Managed Deployment Guide"
-sidebar_label: "VMware ESXi Conductor"
+title: "VMware ESXi Conductor Deployment Guide"
+sidebar_label: Overview
 ---
 import Mermaid from '@theme/Mermaid';
-import CreateVM from './_vmware_vm_create.md';
-import FindPCI from './_vmware_conductor_find_pci.md';
-import ConductorIP from './_install_nmtui_conductor.md';
-import InitialBoot from './_install_nmtui_router.md';
-import VerifyConductorInstall from './_install_verify_conductor_install.md';
-import ChangeDefaultPasswords from './_change_def_passwords.md';
-import ConfigureToken from './_configure_token.md';
-import ConductorAuthority from './_conductor_to_authority.md';
-import AuthorityName from './_set_authority_name.md';
-import SetConductorIP from './_set_conductor_ip.md';
+import NetworkDesign from './_deploy_vmware_conductor_network_design.md';
 
-This guide walks a network engineer through the steps required to stand up a conductor-managed SSR network using a **VMware ESXi virtual machine as the Conductor** and one or more **SSR130 branch routers**. By the end of the guide, the conductor VM will be running SSR 7.1.5, each branch router will be online and managed by the conductor, and internet traffic from LAN users will be forwarded through each router with management traffic returning to the conductor over the same WAN interface.
+This guide walks a network engineer through deploying a **VMware ESXi virtual machine as a standalone SSR Conductor**. By the end of this guide, the conductor VM will be running SSR 7.1.5, configured with an authority name, conductor address, and shared services that allow branch routers to onboard and begin forwarding traffic.
 
-## Guide Sections
+## Guide Topics
 
 | Step | Topic | Description |
 |------|-------|-------------|
-| 1 | [Create the VMware VM](#step-1-create-the-vmware-vm) | Create and configure a VMware ESXi VM to host the conductor |
-| 2 | [Install SSR 7.1.5](#step-2-install-ssr-715) | Boot the ISO and install the SSR software |
-| 3 | [Configure the Conductor](#step-3-configure-the-conductor) | Set the authority name, conductor address, internet service, and corporate tenant |
-| 4 | [Find the VM NIC PCI Address](#step-4-find-the-vm-nic-pci-address) | Identify the VMware NIC PCI address required for the conductor PCLI configuration |
-| 5 | [Configure the Management Interface on the Conductor](#step-5-configure-the-management-interface) | Bind the conductor's management NIC in the SSR PCLI config |
-| 6 | [Configure the Router on the Conductor](#step-6-configure-the-router-on-the-conductor) | Pre-stage each SSR130 router's configuration before onboarding |
-| 7 | [Onboard SSR130 Routers](deploy_router_onboard.mdx) | Connect and initialize each SSR130 router so it joins the conductor |
-| 8 | [Upgrade Routers to 7.1.5](deploy_router_upgrade.mdx) | Upgrade each onboarded router to SSR 7.1.5 from the conductor |
-| 9 | [Verify the Deployment](deploy_verify.md) | Confirm connectivity, management, and internet forwarding | 
-| — | [Appendix — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration |
+| 1 | [Create the VMware VM](deploy_vmware_conductor_vm.mdx) | Create and configure a VMware ESXi VM to host the conductor |
+| 2 | [Install SSR 7.1.5 and Initialize the Conductor](deploy_vmware_conductor_install.mdx) | Boot the ISO, install SSR, and configure the conductor role |
+| 3 | [Configure the Conductor](deploy_vmware_conductor_config.mdx) | Set the authority name, conductor address, tenant, and internet service |
+| — | [Appendix — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration reference |
 
 ## Network Topology
 
@@ -63,32 +48,10 @@ graph TD
 | Device | Type | Role |
 |--------|------|------|
 | `conductor1` | VMware ESXi VM | Standalone SSR Conductor — centralized management and provisioning |
-| `branch1` | vSSR or SSR130 | Conductor-managed branch router — internet breakout and LAN services |
 
 ## Network Design Reference
 
-The following IP addressing and naming scheme is used consistently throughout this guide. Substitute your own values when configuring your network.
-
-| Parameter | Example Value | Description |
-|-----------|--------------|-------------|
-| Authority Name | `Authority128` | Organizational authority name |
-| Conductor Router Name | `conductor1` | Conductor system name |
-| Conductor Node Name | `node0` | Conductor node name |
-| Conductor Management IP | `192.168.100.10` | Static IP on the VMware management network |
-| Conductor Subnet Mask | `/24` | Management network prefix |
-| Conductor Gateway | `192.168.100.1` | Management network gateway |
-| Conductor NIC PCI Address | _(discovered at install)_ | VMXNet3 NIC PCI address; see [Step 4](#step-4-find-the-vm-nic-pci-address) |
-| Router Name | `branch1` | Branch router system name |
-| Router Node Name | `node0` | Router node name |
-| Router WAN Interface | `wan1` (`ge-0-0`) | WAN port — uses DHCP |
-| Router WAN PCI Address | `0000:04:00.3` | SSR130 Port 0 PCI address |
-| Router LAN Interface | `lan1` (`ge-0-3`) | LAN port |
-| Router LAN PCI Address | `0000:04:00.0` | SSR130 Port 3 PCI address |
-| Router LAN IP Address | `192.168.1.1/24` | LAN gateway address |
-| Tenant Name | `corp` | LAN-side user tenant |
-| Service Name | `Internet-Traffic` | Internet breakout service |
-| Service Address | `0.0.0.0/0` | All internet-bound traffic |
-| Neighborhood | `internet` | SVR neighborhood name |
+<NetworkDesign/>
 
 ## Prerequisites
 
@@ -97,285 +60,16 @@ Before beginning, ensure the following are available:
 - **VMware ESXi 7.0 or later** — administrative access to an ESXi host.
 - **SSR 7.1.5 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
 - **Juniper software access credentials** — Artifactory username and password for software downloads and token provisioning.
-- **Management network** — a VMware portgroup providing a DHCP lease or static IP for the conductor VM's management NIC, with internet access for software downloads.
+- **Management network** — a VMware portgroup providing internet access for software downloads, with a static IP assignment available for the conductor VM.
 - **Static IP assignment for the conductor** — the IP address assigned to the conductor must be reachable from each branch router's WAN interface (directly or via routing). This guide uses `192.168.100.10`.
-- **Mist portal account** — required for SSR130 Zero Touch Provisioning (ZTP). A free account suffices; WAN Assurance subscription is **not** required.
-- **ISP WAN links** — each SSR130 branch requires an Ethernet WAN link providing DHCP.
 
 ## Software Version Requirements
 
-This guide uses **SSR 7.1.5** on both conductor and routers.
+This guide uses **SSR 7.1.5** on the conductor.
 
 :::note
-The router software version cannot be higher than the conductor software version. 
+The router software version cannot be higher than the conductor software version.
 :::
-
----
-
-## Step 1: Create the VMware VM
-
-Create an ESXi virtual machine to host the conductor. A minimum of **one VMXNet3 NIC** connected to your management network is required for a standalone conductor.
-
-<CreateVM/>
-
----
-
-## Step 2: Install SSR 7.1.5
-
-Power on the VM and boot into the SSR ISO to install the software.
-
-1. Select the new VM in the ESXi Navigator and click the **Play** (Power On) button.
-
-   ![Power On](/img/vmware_pwr-on.png)
-
-2. The VM boots into the SSR installation menu. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
-
-    ![Choose Image](/img/u-iso2_choose_image.png)
-
-2. At the Install menu, use the arrow keys to select **VGA Console**.
-
-    ![Install Type](/img/u-iso3_choose_install_type.png)
-
-3. If you are installing a FIPS enabled system, select Install Option 1, then press **Enter**. 
-
-    If you do not require FIPS, skip the options and select **Enter**. The download and installation begins.
-
-    :::note
-    IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
-
-    If after installation you require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
-    :::
- 
-    ![Install Options](/img/u-iso4_install_options.png)
-
-4. The installation runs to completion automatically. This may take approximately 15–20 minutes.
-
-    ![Install Progress](/img/u-iso5_begin_install.png)
-
-5. When prompted to reboot, allow the device to restart.
-
-    ![Install Complete](/img/u-iso6_unpacker_complete.png)
-
-## Initialize the Conductor
-
-The device exposes a web-based initialization interface on its LAN ports after the first boot. Use this interface to configure the conductor role, management IP address, and admin credentials.
-
-1. Ensure your laptop is connected to a LAN port and has a static IP in the `192.168.128.0/24` subnet.
-
-    :::note
-    Assign your laptop a static IP address in the range `192.168.128.2`–`192.168.128.254` with a subnet mask of `255.255.255.0` before connecting. The initialization web interface is only accessible on the LAN-side ports prior to initialization.
-    :::
-
-2. Open a web browser and navigate to:
-
-    ```
-    https://192.168.128.1
-    ```
-
-    Accept the self-signed certificate warning.
-
-    ![Initialization UI](/img/u-iso8_launch_gui.png)
-
-3. Under **SSR Managed**, select **SSR Conductor**.
-
-    ![SSR Conductor Selection](/img/u-iso8a_initialize_conductor.png)
-
-4. Select **STANDALONE** for a single-conductor deployment. Select the **STATIC** address type, the **Provide Artifactory Credentials** checkbox, and enter the following information:
-
-    | Field | Example Value | Notes |
-    |-------|--------------|-------|
-    | Conductor Name | `conductor1` | Used as the router name in the authority |
-    | Node IP Address | `192.168.100.10` | Static management IP |
-    | Node Gateway | `192.168.100.1` | Management network gateway |
-    | Interface Name | `mgmt-0-0` | Management interface |
-    | DNS Server | `8.8.8.8` | Optional; required for software downloads |
-    | Admin Password | _(your choice)_ | Minimum 8 chars, 1 upper, 1 lower, 1 number |
-    | Artifactory Username | _(your username)_ | Juniper software access |
-    | Artifactory Password | _(your token)_ | Juniper software access token |
-
-    ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
-
-    :::note
-    The admin, root, and t128 accounts are all set to the password you enter here.
-    :::
-
-    :::important
-    Record this password securely. It cannot be recovered if lost — only reset, which requires root access.
-    :::
-
-5. Click **ASSOCIATE**.
-
-6. The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
-
-## Verify the Installation
-
-After the device restarts, connect to the management network and verify the conductor is running:
-
-:::note
-At this point, it is good practice to remove the static IP previously set from your laptop.
-:::
-
-Access the conductor GUI from the management network using:
-
-```
-https://192.168.100.10
-```
-
-![Login to the Conductor](/img/dep-1200-cond-login.png)
-
-Log in with username `admin` and the password set during initialization.
-
----
-
-## Step 3: Configure the Conductor
-
-All steps in this section are performed from the **Conductor GUI** at `https://192.168.100.10` unless otherwise noted.
-
-### Connect the Conductor to the Authority
-
-<ConductorAuthority/>
-
-### Set the Authority Name
-
-<AuthorityName/>
-
-:::note
-Use your organization's name as the authority name (for example, `Authority128`). The authority name cannot be changed after routers have been provisioned without re-onboarding them.
-:::
-
-### Set the Conductor Address
-
-The conductor address is the IP that managed routers use to reach this conductor. It must be reachable from each branch router's WAN interface.
-
-<SetConductorIP/>
-
-For this guide, enter `192.168.100.10` as the conductor address.
-
-### Create an `Internet-Traffic` Service
-
-The *service* configuration element defines the IP destinations that the SSR will route. This process creates a single service representing all internet-bound traffic.
-
-1. Log in to the Conductor GUI.
-2. Select **Configuration**.
-3. Select **Authority** from the left panel.
-4. Scroll down to **Services** and select **ADD**.
-5. Enter the name `Internet-Traffic` and select **SAVE**.
-6. On the Service screen, verify **Enabled** is set to `true`.
-7. Scroll down to **Service Addresses** and select **ADD**.
-8. Enter `0.0.0.0/0` and select **SAVE**.
-9. Scroll down to **Access Policy** and select **ADD**.
-    - Set **Source** to `corp` (the tenant you will create in the next step).
-    - Select **SAVE**.
-10. At the top of the screen, select **VALIDATE** and then **COMMIT**.
-
-### Create the Corporate Tenant
-
-Tenants logically partition the network. The `corp` tenant represents corporate LAN users.
-
-1. Select **Configuration** → **Authority**.
-2. Scroll to **Tenants** and select **ADD**.
-3. Enter the name `corp` and select **SAVE**.
-4. Select **VALIDATE** then **COMMIT**.
-
-### What Was Configured
-
-| Object | Name | Value |
-|--------|------|-------|
-| Authority | `Authority128` | |
-| Conductor Address | | `192.168.100.10` |
-| Service | `Internet-Traffic` | `0.0.0.0/0` |
-| Tenant | `corp` | LAN-side user population |
-
----
-
-## Step 4: Find the VM NIC PCI Address
-
-Before configuring the conductor's management interface in the SSR PCLI, you must identify the PCI address of the VMXNet3 NIC in the VM.
-
-<FindPCI/>
-
-Record the PCI address (for example, `0000:0b:00.0`). You will use it in the next step.
-
----
-
-## Step 5: Configure the Management Interface
-
-The SSR conductor PCLI configuration must include a `device-interface` entry that maps the conductor's management NIC to its Linux PCI address. This binding allows the SSR software to associate the SSR management plane with the correct physical interface.
-
-1. Log in to the Conductor GUI at `https://192.168.100.10`.
-2. Select **Configuration**.
-3. Under **Authority**, scroll to **Routers** and select `conductor1`.
-4. Select the node `node0`.
-5. Scroll to **Device Interfaces** and select **ADD**.
-6. Enter the name `mgmt-dev` and select **SAVE**.
-7. Set the following fields:
-
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `ethernet` | |
-   | PCI Address | _(value from Step 7)_ | For example `0000:0b:00.0` |
-   | Forwarding | `false` | The conductor management NIC does not forward packets |
-
-8. Select **SAVE**.
-
-9. Under the `mgmt-dev` device interface, scroll to **Network Interfaces** and select **ADD**.
-10. Enter the name `mgmt-intf` and select **SAVE**.
-11. Set the following fields:
-
-    | Field | Value |
-    |-------|-------|
-    | Type | `management` |
-
-12. Scroll to **Interface Addresses** and select **ADD**.
-    - IP Address: `192.168.100.10`
-    - Prefix Length: `24`
-    - Gateway: `192.168.100.1`
-    - Select **SAVE**.
-
-13. Select **VALIDATE** then **COMMIT**.
-
-:::note
-After committing, the SSR service will briefly restart to apply the interface binding. The GUI may be temporarily unavailable for 30–60 seconds.
-:::
-
----
-
-## Step 6: Configure the Router on the Conductor
-
-The conductor can have the branch router's configuration staged **before** the router (hardware or virtual device) is powered on. When the router comes online and contacts the conductor, it downloads this configuration automatically.
-
-:::important
-The router configuration steps for VMware-based conductors are identical to those for hardware-based conductors. Use the [Configure the Router on the Conductor](deploy_router_config.mdx) process in the SSR130 Router Deployment Guide for the complete configuration procedure. All steps, field values, and PCI addresses for the SSR130 apply unchanged regardless of the conductor deployment platform.
-:::
-
-The key configuration objects created in that step are summarized below for reference:
-
-| Object | Name / Value | Notes |
-|--------|-------------|-------|
-| Router | `branch1` | |
-| Node | `node0`, role `combo` | Asset ID = SSR130 serial number |
-| WAN device interface | `wan-dev`, PCI `0000:04:00.3`, forwarding `true` | SSR130 Port 0 |
-| WAN network interface | `wan1`, type `external`, DHCP `v4`, conductor `true`, source-nat `true`, management `true` | Management over Forwarding enabled |
-| Management vector | `mgmt-vec-wan`, priority `10` | |
-| Neighborhood | `internet`, topology `spoke` | |
-| LAN device interface | `lan-dev`, PCI `0000:04:00.0`, forwarding `true` | SSR130 Port 3 |
-| LAN network interface | `lan1`, type `external`, tenant `corp`, IP `192.168.1.1/24` | |
-| DNS config | mode `automatic` | |
-| Service route | `internet-route`, service `internet`, type `service-agent`, next-hop `node0 wan1` | |
-
----
-
-## Steps 7-9: Onboard, Upgrade, and Verify
-
-The following steps are identical for all conductor deployment types:
-
-| Step | Guide |
-|------|-------|
-| Onboard SSR130 Routers | [Onboard SSR130 Routers](deploy_router_onboard.mdx) |
-| Upgrade Routers to 7.1.5 | [Upgrade Routers to 7.1.5](deploy_router_upgrade.mdx) |
-| Verify the Deployment | [Verify the Deployment](deploy_verify.md) |
-
----
 
 ## Related Documentation
 
@@ -383,3 +77,6 @@ The following steps are identical for all conductor deployment types:
 - [Conductor Deployment Best Practices](bcp_conductor_deployment)
 - [Management Traffic over Forwarding Interfaces](config_management_over_forwarding)
 - [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor)
+- [VMware Router Deployment Guide](deploy_vmware_router_overview.mdx)
+
+

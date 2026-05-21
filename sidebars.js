@@ -29,6 +29,9 @@ module.exports = {
               "label": "VMware ESXi Conductor",
               "items": [
                 "deploy_vmware_conductor",
+                "deploy_vmware_conductor_vm",
+                "deploy_vmware_conductor_install",
+                "deploy_vmware_conductor_config",
                 "deploy_appendix_vmware_conductor",
               ],
             },
@@ -53,6 +56,18 @@ module.exports = {
                 "deploy_router_upgrade",
                 "deploy_verify",
                 "deploy_appendix_router",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "VMware Router",
+              "items": [
+                "deploy_vmware_router_overview",
+                "deploy_vmware_router_vm",
+                "deploy_vmware_router_install",
+                "deploy_vmware_router_pci",
+                "deploy_vmware_router_config",
+                "deploy_appendix_vmware_router",
               ],
             },
             {

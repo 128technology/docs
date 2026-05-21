@@ -1,0 +1,103 @@
+---
+title: "Step 2: Install SSR 7.1.5 and Initialize the Router"
+sidebar_label: "Install and Initialize"
+---
+
+This step boots the router VM from the SSR ISO, installs the software, and uses the web-based initialization interface to configure the VM as a conductor-managed branch router.
+
+## Install SSR 7.1.5
+
+1. Select the new router VM in the ESXi Navigator and click the **Play** (Power On) button.
+
+   ![Power On](/img/vmware_pwr-on.png)
+
+2. The VM boots into the SSR installation menu. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
+
+   ![Choose Image](/img/u-iso2_choose_image.png)
+
+3. At the Install menu, use the arrow keys to select **VGA Console**.
+
+   ![Install Type](/img/u-iso3_choose_install_type.png)
+
+4. If you require FIPS mode, select Install Option 1 and press **Enter**. If FIPS is not required, press **Enter** without selecting an option. The download and installation begins.
+
+   :::note
+   IDP is not compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. If you plan to enable IDP, do not enable FIPS mode. See [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information on disabling FIPS mode if needed.
+   :::
+
+   ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)
+
+5. The installation runs to completion automatically. This may take approximately 15–20 minutes.
+
+   ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
+
+6. When prompted to reboot, allow the VM to restart.
+
+   ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
+
+## Initialize the Router
+
+After the first boot, the SSR software exposes a web-based initialization interface at `192.168.128.1` on all interfaces. Use this interface to configure the VM as a conductor-managed router and associate it with the conductor.
+
+1. Connect a workstation to the same VMware portgroup as the router's **LAN NIC** (NIC 2). Assign the workstation a static IP address in the `192.168.128.0/24` subnet — for example, `192.168.128.2/24`.
+
+   :::note
+   The initialization web interface is accessible at `192.168.128.1` before initialization is complete. After the router reboots with its full configuration applied, this address is no longer reachable.
+   :::
+
+2. Open a web browser and navigate to:
+
+   ```
+   https://192.168.128.1
+   ```
+
+   Accept the self-signed certificate warning.
+
+   ![Initialization UI](/img/u-iso8_launch_gui.png)
+
+3. Under **SSR Managed**, select **SSR Router Managed via Conductor**.
+
+   ![SSR Conductor-managed router](/img/u-iso10_cond-mngd_router.png)
+
+4. Enter the following information:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Router Name | `branch1` | Must match the router name you will configure on the conductor in [Step 4](deploy_vmware_router_config.mdx) |
+   | Conductor IP Address | `192.168.100.10` | IP address of the pre-existing conductor |
+   | Admin Password | _(your choice)_ | Minimum 8 characters, 1 upper, 1 lower, 1 number |
+
+   ![Conductor Managed Association](/img/deploy_u-iso11_cond-mngd-assoc-new.png)
+
+5. Click **ASSOCIATE**.
+
+6. The router reboots, contacts the conductor at `192.168.100.10`, and waits for a matching configuration. If no configuration is staged on the conductor yet, the router remains in a **Waiting for Configuration** state until you complete [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).
+
+## Find the Router Asset ID
+
+After the router contacts the conductor, it reports its **asset ID** — the identifier the conductor uses to match this device to its staged configuration.
+
+From the **Conductor PCLI**, run:
+
+```text
+show assets
+```
+
+The router appears in the output. Note the **Asset ID** value — you will need it when staging the router configuration in [Step 4](deploy_vmware_router_config.mdx#2-create-the-node).
+
+Example output:
+
+```
+===================== ============================== ===========
+ Asset ID              Router                         Status
+===================== ============================== ===========
+ branch1               (unprovisioned)                Connected
+```
+
+:::tip
+For a VMware vSSR, the asset ID is typically the router name you entered during initialization — in this example, `branch1`.
+:::
+
+## Next Step
+
+Proceed to [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx).
