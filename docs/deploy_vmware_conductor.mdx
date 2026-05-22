@@ -5,14 +5,14 @@ sidebar_label: Overview
 import Mermaid from '@theme/Mermaid';
 import NetworkDesign from './_deploy_vmware_conductor_network_design.md';
 
-This guide walks a network engineer through deploying a **VMware ESXi virtual machine as a standalone SSR Conductor**. By the end of this guide, the conductor VM will be running SSR 7.1.5, configured with an authority name, conductor address, and shared services that allow branch routers to onboard and begin forwarding traffic.
+This guide walks a network engineer through deploying a **VMware ESXi virtual machine as a standalone SSR Conductor**. When you have completed the steps in this deployment, the conductor VM will be running SSR 7.1.4-3r2, configured with an authority name, conductor address, and shared services that allow branch routers to onboard and begin forwarding traffic.
 
 ## Guide Topics
 
 | Step | Topic | Description |
 |------|-------|-------------|
 | 1 | [Create the VMware VM](deploy_vmware_conductor_vm.mdx) | Create and configure a VMware ESXi VM to host the conductor |
-| 2 | [Install SSR 7.1.5 and Initialize the Conductor](deploy_vmware_conductor_install.mdx) | Boot the ISO, install SSR, and configure the conductor role |
+| 2 | [Install SSR 7.1.4-3r2 and Initialize the Conductor](deploy_vmware_conductor_install.mdx) | Boot the ISO, install SSR, and configure the conductor role |
 | 3 | [Configure the Conductor](deploy_vmware_conductor_config.mdx) | Set the authority name, conductor address, tenant, and internet service |
 | — | [Appendix — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration reference |
 
@@ -47,7 +47,7 @@ graph TD
 
 | Device | Type | Role |
 |--------|------|------|
-| `conductor1` | VMware ESXi VM | Standalone SSR Conductor — centralized management and provisioning |
+| `Conductor` | VMware ESXi VM | Standalone SSR Conductor — centralized management and provisioning |
 
 ## Network Design Reference
 
@@ -58,14 +58,14 @@ graph TD
 Before beginning, ensure the following are available:
 
 - **VMware ESXi 7.0 or later** — administrative access to an ESXi host.
-- **SSR 7.1.5 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
+- **SSR 7.1.4-3r2 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
 - **Juniper software access credentials** — Artifactory username and password for software downloads and token provisioning.
 - **Management network** — a VMware portgroup providing internet access for software downloads, with a static IP assignment available for the conductor VM.
 - **Static IP assignment for the conductor** — the IP address assigned to the conductor must be reachable from each branch router's WAN interface (directly or via routing). This guide uses `192.168.100.10`.
 
 ## Software Version Requirements
 
-This guide uses **SSR 7.1.5** on the conductor.
+This guide uses **SSR 7.1.4-3r2** on the conductor.
 
 :::note
 The router software version cannot be higher than the conductor software version.
