@@ -73,7 +73,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.2.0-10r1 
 
-**Beta Release Date:** May 21, 2026
+**Beta Release Date:** May 28, 2026
 
 ### New Features
 
@@ -86,3 +86,170 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-64645 Certificate Management - CSR Improvements:** Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#peering-identity-via-subject-alternative-name-uri) for details.
 ------
 - **I95-64845 Add Missing Audit Events for Certificate APIs:** Addes several audit events and logs for certificate activity. See [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) for additional information.
+<!---
+
+
+## Release X.Y.Z-build
+
+**Release Date:** May 26, 2026
+
+### New Features
+
+- **I95-25150 AES-GCM Encryption:** Added support for AES-GCM as an encryption and authentication algorithm. AES-GCM provides improved performance over AES-CBC + HMAC-SHA by combining encryption and authentication into a single operation.
+------
+- **I95-34472 Waypoint Pool Exhaustion Monitoring:** Added visibility into waypoint pool utilization including a `show waypoint` command and a waypoint pool exhaustion alarm with a fixed threshold. This allows operators to monitor, be alerted, and avoid outage-inducing pool exhaustion events.
+------
+- **I95-53406 SSR400/SSR440 PoE Controller Support:** Added support for the Microchip PoE controller on SSR400/SSR440 devices, including status reporting, logging via I2C, and in-field firmware upgrade support for the active PoE controller model.
+------
+- **I95-54236 SSR400 Hot Swappable SFP/SFP+:** The SSR400 series now supports hot swappable SFP/SFP+ modules.
+------
+- **I95-55344 SSL Decrypt Using Forward Proxy:** Enabled SSL forward proxy, ATP, anti-virus, anti-malware, and DNS sinkhole capabilities on SSR, strengthening the security stack for Mist deployments.
+
+  - **I95-60459 Add support for proxy-ip in onboarding config:** Added `management-proxy` address and port fields to the onboarding configuration schema, allowing routers to specify a proxy for management connectivity during the onboarding process.
+------
+- **I95-59819 SIEM Syslog Integration:** Added support for Security Event and Incident Management (SIEM) integration via structured syslog. Session allow/close and deny records can be exported in a structured format on a per-service basis, with configurable fields and overload protection.
+------
+- **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** Improved handling of MTU changes for established flows, including adjusting ICMP MTU size to accommodate SVR overhead, fabric fragmentation between peers when clients do not honor ICMP, and handling UDP Transform scenarios.
+------
+- **I95-61066 Simplified Interface Naming for Cloud Images:** Added support for configuring forwarding device-interfaces via Linux interface-name. This simplifies conductor-based configuration for virtual machine deployments, particularly in Hyper-V and Azure environments where VMBus UUIDs are unique per instance.
+------
+- **I95-61467 Show Filtered Routes in BGP Output:** Exposed the ability to view BGP filtered routes in both CLI and REST. When an ingress filter is applied to BGP, users can now view filtered routes directly rather than indirectly examining the FIB.
+------
+- **I95-61693 DHCP INFORM Response Improvements:** Resolved an issue where DHCP INFORM packets were not correctly answered. The DHCP ACK response now includes the requested options, ensuring clients retain vital information such as DNS servers, domain name, and gateway.
+------
+- **I95-63012 AppID Scale Optimization:** Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.
+------
+- **I95-63030 HA Control Link Redundancy:** Added support for redundant HA control links in both Mist and Conductor managed deployments. This includes configurable HA control links, redundant link/port status visibility, and alerts for degraded state when some redundant links are down.
+------
+- **I95-63389 Dual AC Power Supply Status Visibility:** Added the ability to display status and raise alarms for individual power supplies on dual AC power supply SSR400/SSR440 models via CLI show commands.
+------
+- **I95-63903 IMA on x86 Platforms:** Implemented and enabled Linux Integrity Measurement Architecture (IMA) on x86 platforms, including cloud environments, ensuring that only signed packages and executables are allowed to run.
+------
+- **I95-64149 Enhanced Security Key Management Events:** Added comprehensive event and alarm support for Enhanced Security Key Management workflows, covering both successful and failed operations for private key creation/deletion, CSR generation, and certificate ingestion.
+------
+- **I95-64435 SSR4xx FIPS Compliant EEPROM:** Migrated SSR400/SSR440 devices to a FIPS-compliant EEPROM encryption scheme, replacing the previously used RSA ES cipher. Existing inventory remains forward compatible with new SSR software.
+------
+- **I95-64514 Upgrade Salt to 3007.13:** Upgraded the Salt infrastructure to version 3007.13, improving conductor-to-router communication reliability and security.
+------
+- **I95-64645 Certificate Management - CSR Improvements:** Improved the certificate signing request (CSR) workflow for Enhanced Security Key Management, including better validation and error handling.
+------
+- **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in Mist-managed deployments. This allows per-network access control for management traffic. ---->
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2023-40403, CVE-2023-43000, CVE-2025-12084, CVE-2025-13502, CVE-2025-13601, CVE-2025-13947, CVE-2025-43272, CVE-2025-43342, CVE-2025-43343, CVE-2025-43356, CVE-2025-43368, CVE-2025-43392, CVE-2025-43419, CVE-2025-43421, CVE-2025-43425, CVE-2025-43427, CVE-2025-43429, CVE-2025-43430, CVE-2025-43431, CVE-2025-43432, CVE-2025-43434, CVE-2025-43440, CVE-2025-43443, CVE-2025-43458, CVE-2025-43480, CVE-2025-43501, CVE-2025-43529, CVE-2025-43531, CVE-2025-43535, CVE-2025-43536, CVE-2025-43541, CVE-2025-53859, CVE-2025-66287, CVE-2025-67873, CVE-2025-68114, CVE-2025-68973, CVE-2025-9230, CVE-2026-1519, CVE-2026-1642, CVE-2026-25749, CVE-2026-28417, CVE-2026-28421, CVE-2026-31431, CVE-2026-32748, CVE-2026-33412, CVE-2026-33526, CVE-2026-3497, CVE-2026-35385, CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414, CVE-2026-41242, CVE-2026-43284, CVE-2026-43500, CVE-2026-4111, CVE-2026-4424, CVE-2026-4519, CVE-2026-4786, CVE-2026-5121, CVE-2026-6100.
+------
+- **I95-63033, I95-63794 `show lte detail` crash when LTE APN name is invalid:** Resolved an issue where the `show lte detail` command crashed with a `ValueError` when an invalid APN name was configured on an LTE interface.
+------
+- **I95-63035 Antivirus warning when missing tenant for AV traffic:** Resolved an issue where an antivirus alert was incorrectly raised on the passive node in an HA system, indicating AV was not active when it was expected to be inactive on that node.
+------
+- **I95-63547 Time-based HMAC peering issues due to unsynchronized peers:** Addressed an issue where peering using time-based HMAC encryption failed when the time delta between peers exceeded 2 seconds due to unsynchronized clocks.
+------
+- **I95-63673 Peer Paths "no paths" text fix:** Resolved a UI styling issue where the `no paths` text on the Peer Paths page was not displayed correctly.
+------
+- **I95-63965 SNMP MIB subinterfaces not reporting correct stats:** Resolved an issue where SNMP MIB statistics for VLAN sub-interfaces were incorrectly reporting the same values as the parent interface instead of per-sub-interface statistics.
+------
+- **I95-63966 SNMP MIB cannot retrieve description:** Resolved an issue where the SNMP interface description field was returned as empty during SNMP walks, even though the description was configured in the SSR software.
+------
+- **I95-63982 Disallow upgrades when unsigned packages are present and IMA is enabled:** Added protections to prevent upgrades to unsigned packages when IMA is enabled, avoiding scenarios where the system loses connectivity after an upgrade due to unsigned executables being denied execution.
+------
+- **I95-63983 System LED does not turn off after halt or shutdown:** Resolved an issue where the system LED on SSR400/SSR440 devices did not turn off or change state after a halt or shutdown, making it difficult to determine whether the unit was still running.
+------
+- **I95-64051 AWS inconsistent interface mapping:** Resolved an issue where interface mapping in AWS deployments was inconsistent, causing the HA fabric interface to remain in the kernel while the HA sync interface was incorrectly taken by the forwarding process, preventing HA from functioning properly.
+------
+- **I95-64150 User defined SNMP metrics not working:** Resolved an issue where user-defined SNMP metrics were not functioning correctly.
+------
+- **I95-64152 Salt-Minion fails continuously after router reboot:** Resolved an issue where the Salt minion service failed continuously after a router reboot, preventing the router from reconnecting to the conductor.
+------
+- **I95-64221 TPM firmware update capsule support:** Added TPM firmware update capsule support in the SSR400/SSR440 firmware, enabling in-field TPM firmware updates.
+------
+- **I95-64250 BGP routes received but not installed in BGP table nor RIB:** Resolved an issue where BGP routes were received from neighbors but were not being installed into the BGP table or routing information base (RIB).
+------
+- **I95-64306 Optimize ICMP probe profile update on config change:** Resolved an issue where ICMP probe profiles were unnecessarily restarted on every configuration update even when no actual changes occurred, causing excessive work and log noise.
+------
+- **I95-64341 SSR400/SSR440 front panel port LEDs not turned off on reset:** Resolved an issue where the SSR400/SSR440 front panel port LEDs were not turned off when the system was reset or halted.
+------
+- **I95-64344 Extended multicast traffic loss during HA failover:** Resolved an issue where multicast traffic experienced extended loss (37+ seconds) during HA failover. 
+------
+- **I95-64397 Cosmetic error message on SSR1500:** Resolved an issue where cosmetic error messages about `rc.local` and `telegraf` systemd unit files were displayed on the CLI of SSR1500 devices.
+------
+- **I95-64408 TCP timers for syslog connections too relaxed:** Resolved an issue where TCP connection timers for syslog were either not set or too relaxed. This resulted in excessive retransmit attempts when a syslog receiver became unavailable, delaying failover to an alternate server.
+------
+- **I95-64412 Clean up salt cache directory:** Added recursive cleanup of the salt cache directory and smart sync hashes in the platform cleanup script to ensure a more complete reset.
+------
+- **I95-64448 Metrics retrieval failing for node1 when HA is down:** Resolved an issue where system metrics (CPU, memory, disk) could not be retrieved for node1 when HA clustering was not active. Requests are now correctly routed to node0's SCC listening address.
+------
+- **I95-64479 Invalid applications: WEBEX:** Resolved an issue where the WEBEX application was not being recognized by the application identification system after an SSR upgrade, resulting in "invalid application" events and missing FIB entries.
+------
+- **I95-64517 Create an `env config` flag for salt minimum auth version:** Added an environment configuration flag to set the Salt `minimum_auth_version`, providing control over authentication compatibility during upgrades.
+------
+- **I95-64539 Evaluate salt beacon adjustment:** Evaluated and adjusted the Salt beacon configuration to improve conductor-router communication reliability.
+------
+- **I95-64541 Node disconnection during upgrade:** Resolved an issue where upgrading HA router nodes could result in one node entering a disconnected state with stale SSH control sockets, while the other node became stuck in the upgrading state, requiring a manual reboot to recover.
+------
+- **I95-64542 Highway crash during load-balanced route refresh:** Resolved an issue where the highway process crashed during a load-balanced service path refresh operation, causing a traffic outage without failover to the standby node.
+------
+- **I95-64549 Onboarding routers cannot install salt packages:** Resolved an issue where routers being onboarded to a conductor could not install the required salt packages, preventing successful onboarding.
+------
+- **I95-64566 CSR generation ignores camelCase parameters:** Resolved an issue where the certificate signing request (CSR) API silently ignored camelCase parameter names (e.g., `commonName` instead of `common_name`).
+------
+- **I95-64567 SSR router status `Disconnected` on Conductor:** Resolved an issue where SSR routers may become stuck in a `Disconnected` state on the Conductor when a loopback address was configured, preventing config pushes and hiding vital data in the Conductor GUI.
+------
+- **I95-64569 GCP template interface ordering incorrect:** Resolved an issue where the GCP deployment template had incorrect interface ordering, causing interfaces to be assigned to the wrong roles.
+
+Is this really in 7.2.0?
+------
+- **I95-64575 Unable to login to SSR routers from conductor in Cloud deployment:** Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.
+------
+- **I95-64619 Config validate rejects DHCP network-interface when VRRP is present:** Resolved an issue where configuration validation incorrectly rejected a DHCP-enabled network-interface if VRRP was present in the configuration, even when VRRP was not enabled.
+------
+- **I95-64696 Salt connectivity issues after Conductor upgrade to 6.3.7:** Resolved an issue where salt connectivity between routers and the conductor was lost after upgrading the conductor to version 6.3.7.
+------
+- **I95-64709 BGP stale-routes-time and Selection_Deferral_Timer:** Resolved an issue with the relationship between the SSR `stale-routes-time` configuration and RFC 4724's Selection Deferral Timer, ensuring proper BGP graceful restart behavior.
+------
+- **I95-64732 Update `show peers certificate` date format:** Updated the `show peers certificate` command to use a newer API for certificate date rendering, providing a more user-friendly output format.
+------
+- **I95-64829 Device disconnected from Mist and stopped processing sessions:** Resolved an issue where an SSR device disconnected from the Mist cloud and stopped processing sessions, requiring a power cycle to recover.
+------
+- **I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:** Removed the **Rollback on Failure** checkbox from the Conductor migration UI, as this feature was not implemented.
+------
+- **I95-64877 IDP/AV engine resilience improvements:** Resolved an issue where the IDP attack database was lost on reboot, causing the IDP engine to shut down and drop traffic. The attack database is now stored persistently. Additional fixes include improved AV health check alarm reporting and SSL certificate retry handling.
+------
+- **I95-64929 Peer certificate expiration timer overflow at 49 days:** Resolved an issue where the seconds-to-milliseconds conversion for peer certificate expiration timers used unsigned 32-bit arithmetic, causing silent overflow and premature timer firing for certificates with expiration periods greater than 49 days.
+------
+- **I95-64977 Certificate ingestion ignores expiry and revocation validation:** Resolved an issue where certificate ingestion did not properly enforce expiry and revocation validation results, allowing expired or revoked certificates to be ingested.
+------
+- **I95-65019 TLS client peer-verification skipped when no CA certificate is configured:** Resolved a critical issue where TLS client connections without a configured CA certificate silently skipped peer verification.
+
+<!---
+- **WAN-4340 Enable Force Up on bond interface causes bond to go down:** Resolved an issue where applying the `Enable Force Up` configuration at the VLAN sub-interface level (instead of the physical or bond level) caused an error that brought down the entire bond interface.
+------
+- **WAN-4341 Auto-generated service route name changes when modifying bond interfaces:** Resolved an issue where adding or removing an interface from a bond interface caused auto-generated service route names to change, breaking additional CLI references and causing configuration transformation errors.
+------
+- **WAN-4510 Multiple syslog server configuration failure:** Resolved an issue where defining more than one syslog server in the SSR device configuration caused a failure in the syslog service.
+------
+- **WAN-4513 Enable syslog policy for URL filtering:** Resolved an issue where the syslog policy was not being applied for URL filtering events.
+------
+- **WAN-4592 App-ID conflict with shared internet application for overlay and local breakout:** Resolved an issue where using a single internet application for both overlay and local breakout created a `HierarchicalRelationNotFound` error when application identification was used on the overlay, causing traffic drops on the hub.
+------
+- **WAN-4612 ICMPv6 probes not working for multi-hop targets:** Resolved an issue where ICMPv6 probe targets that were not directly connected (multiple hops away) failed because the gateway-ip was not being generated for the associated IPv6 service-routes.
+------
+- **WAN-4641 BGPv6 over SVR missing next-hop-self configuration:** Resolved an issue where the `next-hop-self true` configuration was not being automatically set for BGPv6 over SVR neighbors, causing advertised prefixes to use incorrect next-hop addresses and preventing proper traffic routing across the overlay.
+------
+- **WAN-4699 Per-service app rate limiting in Wheeljack:** Added support for per-service application rate limiting in Wheeljack, enabling configuration of upstream/downstream bandwidth limits at both the service and client level.
+------
+- **WAN-4709 Route reflector config not applied for IPv6 peers:** Resolved an issue where route-reflector client configuration was not automatically applied for IPv6 BGP SVR spoke peers in the IPv6 Unicast address family on hub routers.
+------
+- **WAN-4712 Update result directory with filtered and renamed files:** Updated the configuration transformation result directory to use filtered and renamed output files for improved analysis.
+------
+- **WAN-4724 Persist PapiDiff results in DB for analysis:** Added persistence of PapiDiff comparison results to a database for post-transformation analysis and debugging.
+------
+- **WAN-4731 Wheeljack changes for ext_ip6 in vpn_endpoints:** Added Wheeljack support for the `ext_ip6` field in VPN endpoints, enabling IPv6 external address configuration for overlay connections.
+------
+- **WAN-4738 Fix outdated file paths after directory restructuring:** Updated file paths that became outdated after a directory restructuring in the configuration transformation codebase.
+------
+- **WAN-4740 IPv6 overlay traffic failure between HubLAN and SpokeLAN:** Resolved an issue where wired client IPv6 traffic failed between HubLAN and SpokeLAN via overlay because the FIB entry for the overlay-v6 application policy was missing vector, next-hop, and cost information.
+------
+- **WAN-4744 Fix list-key inconsistency in diff aggregation:** Resolved an issue where inconsistent list-key handling during configuration diff aggregation could produce incorrect transformation results.
+------
+- **WAN-4747 IPv6 routing policy missing catch-all accept statement:** Resolved an issue where the `set-next-hop-self` statement was removed from IPv6 routing policies, which caused the policies to lack a catch-all accept statement, breaking IPv6 overlay traffic between hub and spoke sites.--->
