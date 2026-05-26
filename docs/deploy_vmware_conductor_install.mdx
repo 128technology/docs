@@ -27,9 +27,36 @@ This step boots the conductor VM from the SSR ISO, installs the software, and us
 
    ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
 
-5. When prompted to reboot, allow the VM to restart.
+5. When prompted to reboot, allow the VM to shutdown.
 
    ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
+
+## Configure the Conductor Management VLAN
+
+These steps configure the interface you will use to initialize the conductor via the Web GUI.
+
+1. In the VM in the ESXi Navigator, start the Conductor Virtual Machine.  
+
+
+2. Select **Console** and login using the root credentials.
+
+3. From the linux prompt run the command `ip a | more` . Make a note of the `ge-0-0` interface and MAC address association.
+
+   ![Conductor Console](/img/dep-vm-conductor-ipamore.png)
+
+   Example:
+   ```
+   ge-0-0 =00:0c:29:68:78:7c
+   ```
+4. From the Conductor VM in the ESXi Navigator, select **Actions** and then **Edit**.
+
+   ![Edit VM settings](/img/dep-edit-ge-intf.png)
+
+5. Select **Network Adapters** and verify the `ge-0-0` MAC address from step 3 is displayed.
+
+6. Set **Network Adapter 1** to `VM Network`. 
+
+   All `ge-0-0` interfaces on all routers in the network will be in the VM Network management network. 
 
 ## Initialize the Conductor
 
