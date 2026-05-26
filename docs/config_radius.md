@@ -13,6 +13,10 @@ sidebar_label: Authentication Methods
 
 Either RADIUS or LDAP remote authentication can be configured on a system. If RADIUS authentication is rejected or if the RADIUS Server is not available, then LDAP authorization is requested.
 
+:::important
+Beginning with SSR software **version 7.0** (including **7.1**), FIPS mode is enabled by default and blocks the use of non-FIPS-compliant algorithms such as **MD5**. Because the RADIUS protocol uses MD5 internally to protect the shared secret and per-attribute payloads, RADIUS authentication will not function on a 7.0 or 7.1 node while FIPS is enabled. If you need RADIUS on those releases, disable FIPS on the affected node first — see the procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). [RADIUS over TLS (RADSEC)](config_radsec.md) is unaffected and is the recommended option when FIPS must remain enabled. In a future SSR release, FIPS will be compliance-by-configuration and will no longer block these algorithms.
+:::
+
 ## Configuring RADIUS 
 
 When authenticating from a RADIUS server, the user is authenticated against the configured credentials. When `account-creation` is set to `automatic`, users are added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography.
