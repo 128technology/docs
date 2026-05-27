@@ -133,17 +133,19 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in Mist-managed deployments. This allows per-network access control for management traffic. -->
 
-### Resolved Issues
+### Resolved Issues 
 
 - **The following CVEs have been identified and resolved in this release:** CVE-2023-40403, CVE-2023-43000, CVE-2025-12084, CVE-2025-13502, CVE-2025-13601, CVE-2025-13947, CVE-2025-43272, CVE-2025-43342, CVE-2025-43343, CVE-2025-43356, CVE-2025-43368, CVE-2025-43392, CVE-2025-43419, CVE-2025-43421, CVE-2025-43425, CVE-2025-43427, CVE-2025-43429, CVE-2025-43430, CVE-2025-43431, CVE-2025-43432, CVE-2025-43434, CVE-2025-43440, CVE-2025-43443, CVE-2025-43458, CVE-2025-43480, CVE-2025-43501, CVE-2025-43529, CVE-2025-43531, CVE-2025-43535, CVE-2025-43536, CVE-2025-43541, CVE-2025-53859, CVE-2025-66287, CVE-2025-67873, CVE-2025-68114, CVE-2025-68973, CVE-2025-9230, CVE-2026-1519, CVE-2026-1642, CVE-2026-25749, CVE-2026-28417, CVE-2026-28421, CVE-2026-31431, CVE-2026-32748, CVE-2026-33412, CVE-2026-33526, CVE-2026-3497, CVE-2026-35385, CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414, CVE-2026-41242, CVE-2026-43284, CVE-2026-43500, CVE-2026-4111, CVE-2026-4424, CVE-2026-4519, CVE-2026-4786, CVE-2026-5121, CVE-2026-6100.
 ------
-- **I95-63033, I95-63794 `show lte detail` crash when LTE APN name is invalid:** Resolved an issue where the `show lte detail` command crashed with a `ValueError` when an invalid APN name was configured on an LTE interface.
+- **I95-63033 `show lte detail` crash when LTE apn-name is invalid:** Resolved an issue where executing `show lte detail` when an invalid APN name is configured caused a CLI crash due to an unhandled dictionary update error.
 ------
-- **I95-63035 Antivirus warning when missing tenant for AV traffic:** Resolved an issue where an antivirus alert was incorrectly raised on the passive node in an HA system, indicating AV was not active when it was expected to be inactive on that node.
+- **I95-63035 Antivirus warning when missing tenant for AV traffic:** Resolved an issue where an antivirus alert was incorrectly raised on the passive node in an HA system, indicating AV was not active.
 ------
 - **I95-63547 Time-based HMAC peering issues due to unsynchronized peers:** Addressed an issue where peering using time-based HMAC encryption failed when the time delta between peers exceeded 2 seconds due to unsynchronized clocks.
 ------
-- **I95-63673 Peer Paths "no paths" text fix:** Resolved a UI styling issue where the `no paths` text on the Peer Paths page was not displayed correctly.
+- **I95-63673 Peer Paths `no paths` text fix:** Resolved a styling issue on the web interface where the `no paths` text on the Peer Paths page was not displayed correctly.
+------
+- **I95-63794 `show lte detail` error handling for invalid APN configuration:** Resolved an issue where executing `show lte detail` with an invalid APN configuration caused a `ValueError` crash. The CLI now handles unexpected response formats gracefully.
 ------
 - **I95-63965 SNMP MIB subinterfaces not reporting correct stats:** Resolved an issue where SNMP MIB statistics for VLAN sub-interfaces were incorrectly reporting the same values as the parent interface instead of per-sub-interface statistics.
 ------
@@ -155,19 +157,19 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64051 AWS inconsistent interface mapping:** Resolved an issue where interface mapping in AWS deployments was inconsistent, causing the HA fabric interface to remain in the kernel while the HA sync interface was incorrectly taken by the forwarding process, preventing HA from functioning properly.
 ------
-- **I95-64150 User defined SNMP metrics not working:** Resolved an issue where user-defined SNMP metrics were not functioning correctly.
+- **I95-64150 User defined SNMP metrics not working:** Resolved an issue where user-defined SNMP metrics were not functional due to a missing configuration file (`snmpMetricsConfig.json`) and missing references in the SNMP object agent.
 ------
-- **I95-64152 Salt-Minion fails continuously after router reboot:** Resolved an issue where the Salt minion service failed continuously after a router reboot, preventing the router from reconnecting to the conductor.
+- **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
 ------
 - **I95-64221 TPM firmware update capsule support:** Added TPM firmware update capsule support in the SSR400/SSR440 firmware, enabling in-field TPM firmware updates.
 ------
-- **I95-64250 BGP routes received but not installed in BGP table nor RIB:** Resolved an issue where BGP routes were received from neighbors but were not being installed into the BGP table or routing information base (RIB).
+- **I95-64250 BGP routes received but not installed in BGP table or RIB:** Resolved an issue where BGP routes from specific neighbors were received but not installed in the BGP table or RIB, requiring neighbor reconfiguration to restore route installation.
 ------
 - **I95-64306 Optimize ICMP probe profile update on config change:** Resolved an issue where ICMP probe profiles were unnecessarily restarted on every configuration update even when no actual changes occurred, causing excessive work and log noise.
 ------
 - **I95-64341 SSR400/SSR440 front panel port LEDs not turned off on reset:** Resolved an issue where the SSR400/SSR440 front panel port LEDs were not turned off when the system was reset or halted.
 ------
-- **I95-64344 Extended multicast traffic loss during HA failover:** Resolved an issue where multicast traffic experienced extended loss (37+ seconds) during HA failover. 
+- **I95-64344 Extended multicast traffic loss during HA failover:** Resolved an issue where multicast traffic experienced extended loss (37+ seconds) during an HA failover. 
 ------
 - **I95-64397 Cosmetic error message on SSR1500:** Resolved an issue where cosmetic error messages about `rc.local` and `telegraf` systemd unit files were displayed on the CLI of SSR1500 devices.
 ------
@@ -175,9 +177,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64412 Clean up salt cache directory:** Added recursive cleanup of the salt cache directory and smart sync hashes in the platform cleanup script to ensure a more complete reset.
 ------
-- **I95-64448 Metrics retrieval failing for node1 when HA is down:** Resolved an issue where system metrics (CPU, memory, disk) could not be retrieved for node1 when HA clustering was not active. Requests are now correctly routed to node0's SCC listening address.
+- **I95-64448 Metrics retrieval failing for node1 when HA is down:** Resolved an issue where empty data was returned when HA links were down. Peer node system metrics (CPU, memory, disk) now return an error response instead of silently returning empty data.
 ------
-- **I95-64479 Invalid applications: WEBEX:** Resolved an issue where the WEBEX application was not being recognized by the application identification system after an SSR upgrade, resulting in "invalid application" events and missing FIB entries.
+- **I95-64479 Invalid application WEBEX not recognized:** Resolved an issue where the WEBEX application was not being recognized by the application identification module after an upgrade, resulting in `invalid application` events and missing FIB entries for the associated service.
 ------
 - **I95-64517 Create an `env config` flag for salt minimum auth version:** Added an environment configuration flag to set the Salt `minimum_auth_version`, providing control over authentication compatibility during upgrades.
 ------
@@ -185,33 +187,29 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64541 Node disconnection during upgrade:** Resolved an issue where upgrading HA router nodes could result in one node entering a disconnected state with stale SSH control sockets, while the other node became stuck in the upgrading state, requiring a manual reboot to recover.
 ------
-- **I95-64542 Highway crash during load-balanced route refresh:** Resolved an issue where the highway process crashed during a load-balanced service path refresh operation, causing a traffic outage without failover to the standby node.
+- **I95-64542 Highway crash during service path refresh:** Resolved a highway crash that occurred during service path load-balanced route refresh operations. Protections have been added to prevent the crash.
 ------
 - **I95-64549 Onboarding routers cannot install salt packages:** Resolved an issue where routers being onboarded to a conductor could not install the required salt packages, preventing successful onboarding.
 ------
 - **I95-64566 CSR generation ignores camelCase parameters:** Resolved an issue where the certificate signing request (CSR) API silently ignored camelCase parameter names (e.g., `commonName` instead of `common_name`).
 ------
-- **I95-64567 SSR router status `Disconnected` on Conductor:** Resolved an issue where SSR routers may become stuck in a `Disconnected` state on the Conductor when a loopback address was configured, preventing config pushes and hiding vital data in the Conductor GUI.
-------
-- **I95-64569 GCP template interface ordering incorrect:** Resolved an issue where the GCP deployment template had incorrect interface ordering, causing interfaces to be assigned to the wrong roles.
-
-Is this really in 7.2.0?
+- **I95-64567 SSR router status Disconnected on Conductor:** Resolved an issue where configuring a loopback address on a router node caused the router to become Disconnected from the Conductor due to incorrect source NAT behavior on internal sessions.
 ------
 - **I95-64575 Unable to login to SSR routers from conductor in Cloud deployment:** Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.
 ------
 - **I95-64619 Config validate rejects DHCP network-interface when VRRP is present:** Resolved an issue where configuration validation incorrectly rejected a DHCP-enabled network-interface if VRRP was present in the configuration, even when VRRP was not enabled.
 ------
-- **I95-64696 Salt connectivity issues after Conductor upgrade to 6.3.7:** Resolved an issue where salt connectivity between routers and the conductor was lost after upgrading the conductor to version 6.3.7.
+- **I95-64696 Salt connectivity issues after Conductor upgrade:** Resolved an issue where salt-minion lost connectivity to the salt-master after a Conductor upgrade, affecting approximately 20% of routers. The minion-connector service now correctly manages the salt master address.
 ------
-- **I95-64709 BGP stale-routes-time and Selection_Deferral_Timer:** Resolved an issue with the relationship between the SSR `stale-routes-time` configuration and RFC 4724's Selection Deferral Timer, ensuring proper BGP graceful restart behavior.
+- **I95-64709 Premature route installation complete notification during Graceful Restart:** Resolved a documentation discrepancy and corrected the behavior of the `stale-routes-time` parameter and its relationship to RFC 4724's `Selection_Deferral_Timer`, ensuring proper Graceful Restart route handling.
 ------
 - **I95-64732 Update `show peers certificate` date format:** Updated the `show peers certificate` command to use a newer API for certificate date rendering, providing a more user-friendly output format.
 ------
-- **I95-64829 Device disconnected from Mist and stopped processing sessions:** Resolved an issue where an SSR device disconnected from the Mist cloud and stopped processing sessions, requiring a power cycle to recover.
+- **I95-64829 Device disconnected from MIST and stopped processing sessions:** Resolved a highway crash triggered by a config change that caused the device to go offline and stop processing sessions, requiring a power cycle to recover.
 ------
-- **I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:** Removed the **Rollback on Failure** checkbox from the Conductor migration UI, as this feature was not implemented.
+- **I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:** Removed the erroneous `Rollback on Failure` checkbox from the Conductor migration UI, as the underlying feature was never implemented. This prevents user confusion during migration operations.
 ------
-- **I95-64877 IDP/AV engine resilience improvements:** Resolved an issue where the IDP attack database was lost on reboot, causing the IDP engine to shut down and drop traffic. The attack database is now stored persistently. Additional fixes include improved AV health check alarm reporting and SSL certificate retry handling.
+- **I95-64877 Changes to guard against L7 security stack crash:** Resolved an issue where the IDP attack database was lost on reboot. The database is now stored persistently, and additional safeguards have been added for AV engine health checks, SSL certificate staging retries, and error code accuracy.
 ------
 - **I95-64929 Peer certificate expiration timer overflow at 49 days:** Resolved an issue where the seconds-to-milliseconds conversion for peer certificate expiration timers used unsigned 32-bit arithmetic, causing silent overflow and premature timer firing for certificates with expiration periods greater than 49 days.
 ------
