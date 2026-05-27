@@ -86,10 +86,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-64645 Certificate Management - CSR Improvements:** Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#peering-identity-via-subject-alternative-name-uri) for details.
 ------
 - **I95-64845 Add Missing Audit Events for Certificate APIs:** Addes several audit events and logs for certificate activity. See [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) for additional information.
-<!---
 
-
-## Release X.Y.Z-build
+<!---## Release X.Y.Z-build
 
 **Release Date:** May 26, 2026
 
@@ -133,7 +131,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64645 Certificate Management - CSR Improvements:** Improved the certificate signing request (CSR) workflow for Enhanced Security Key Management, including better validation and error handling.
 ------
-- **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in Mist-managed deployments. This allows per-network access control for management traffic. ---->
+- **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in Mist-managed deployments. This allows per-network access control for management traffic. -->
 
 ### Resolved Issues
 
@@ -221,8 +219,7 @@ Is this really in 7.2.0?
 ------
 - **I95-65019 TLS client peer-verification skipped when no CA certificate is configured:** Resolved a critical issue where TLS client connections without a configured CA certificate silently skipped peer verification.
 
-<!---
-- **WAN-4340 Enable Force Up on bond interface causes bond to go down:** Resolved an issue where applying the `Enable Force Up` configuration at the VLAN sub-interface level (instead of the physical or bond level) caused an error that brought down the entire bond interface.
+<!--- **WAN-4340 Enable Force Up on bond interface causes bond to go down:** Resolved an issue where applying the `Enable Force Up` configuration at the VLAN sub-interface level (instead of the physical or bond level) caused an error that brought down the entire bond interface.
 ------
 - **WAN-4341 Auto-generated service route name changes when modifying bond interfaces:** Resolved an issue where adding or removing an interface from a bond interface caused auto-generated service route names to change, breaking additional CLI references and causing configuration transformation errors.
 ------
@@ -252,4 +249,4 @@ Is this really in 7.2.0?
 ------
 - **WAN-4744 Fix list-key inconsistency in diff aggregation:** Resolved an issue where inconsistent list-key handling during configuration diff aggregation could produce incorrect transformation results.
 ------
-- **WAN-4747 IPv6 routing policy missing catch-all accept statement:** Resolved an issue where the `set-next-hop-self` statement was removed from IPv6 routing policies, which caused the policies to lack a catch-all accept statement, breaking IPv6 overlay traffic between hub and spoke sites.--->
+- **WAN-4747 IPv6 routing policy missing catch-all accept statement:** Resolved an issue where the `set-next-hop-self` statement was removed from IPv6 routing policies, which caused the policies to lack a catch-all accept statement, breaking IPv6 overlay traffic between hub and spoke sites. -->
