@@ -1,0 +1,14 @@
+{
+  "name": "ssr-docs-pdf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates a single PDF from the built SSR documentation site.",
+  "scripts": {
+    "build": "node build-pdf.js"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^23.10.4",
+    "serve-handler": "^6.1.6"
+  }
+}
