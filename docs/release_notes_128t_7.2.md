@@ -30,10 +30,6 @@ After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* o
 Rollback to the previously installed version of software *is* supported.  
 :::
 
-:::warning
-An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
-::: 
-
 **7.0.1 Conductor Upgrades**
 
 If you are upgrading a conductor that is currently installed with version 6.3.4 or lower, and you wish to upgrade to version 7.0.1 or higher, you must first upgrade the conductor to any version of the 6.3.x software, including and higher than 6.3.5. 
@@ -79,13 +75,13 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 - **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see [Path MTU Discovery](config_pmtu.md).
 ------
-- **I95-61066  Simplified Interface Naming:** Removed the platform restriction (SSR400/SSR440 only) that prevented the ability to configure forwarding device-interfaces via Linux `interface-name`. `interface-name` can now be used as a device identifier on all physical and virtual SSR platforms for  both forwarding and non-forwarding interfaces, enabling stable, name-based NIC configuration for cloud VMs, bare-metal servers, and purpose-built hardware alike.
+- **I95-61066 Simplified Interface Naming:** Removed the platform restriction (SSR400/SSR440 only) that prevented the ability to configure forwarding device-interfaces via Linux `interface-name`. `interface-name` can now be used as a device identifier on all physical and virtual SSR platforms for both forwarding and non-forwarding interfaces, enabling stable, name-based NIC configuration for cloud VMs, bare-metal servers, and purpose-built hardware alike.
 ------
 - **I95-61467 Show filtered-routes in `show bgp` output:** When an inbound BGP policy rejects prefixes received from a neighbor, those routes do not appear in the BGP table or the FIB. The `filtered-routes` option exposes exactly which prefixes were suppressed by the inbound policy for a given neighbor, making it straightforward to troubleshoot why expected routes are absent from the routing table. For more information, see [Viewing Filtered BGP Routes](config_bgp.md#viewing-filtered-bgp-routes).
 ------
 - **I95-64645 Certificate Management - CSR Improvements:** Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#peering-identity-via-subject-alternative-name-uri) for details.
 ------
-- **I95-64845 Add Missing Audit Events for Certificate APIs:** Adds several audit events and logs for certificate activity. See [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) for additional information.
+- **I95-64845 Add Additional Audit Events for Certificate APIs:** Adds several audit events and logs for certificate activity. See [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) for additional information.
 
 <!---### New Features
 
@@ -157,15 +153,11 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64408 TCP timers for syslog connections too relaxed:** Resolved an issue where TCP connection timers for syslog were either not set or too relaxed. This resulted in excessive retransmit attempts when a syslog receiver became unavailable, delaying failover to an alternate server.
 ------
-- **I95-64412 Clean up salt cache directory:** Added recursive cleanup of the salt cache directory and smart sync hashes in the platform cleanup script to ensure a more complete reset.
+- **I95-64412 Factory reset to include removal of salt cache:** Added recursive cleanup of the salt cache directory and smart sync hashes in the platform cleanup script to ensure a more complete reset.
 ------
 - **I95-64448 Metrics retrieval failing for node1 when HA is down:** Resolved an issue where empty data was returned when HA links were down. Peer node system metrics (CPU, memory, disk) now return an error response instead of silently returning empty data.
 ------
 - **I95-64479 Invalid application WEBEX not recognized:** Resolved an issue where the WEBEX application was not being recognized by the application identification module after an upgrade, resulting in `invalid application` events and missing FIB entries for the associated service.
-------
-- **I95-64517 Create an `env config` flag for salt minimum auth version:** Added an environment configuration flag to set the Salt `minimum_auth_version`, providing control over authentication compatibility during upgrades.
-------
-- **I95-64539 Evaluate salt beacon adjustment:** Evaluated and adjusted the Salt beacon configuration to improve conductor-router communication reliability.
 ------
 - **I95-64541 Node disconnection during upgrade:** Resolved an issue where upgrading HA router nodes could result in one node entering a disconnected state with stale SSH control sockets, while the other node became stuck in the upgrading state, requiring a manual reboot to recover.
 ------
@@ -219,7 +211,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **WAN-4712 Update result directory with filtered and renamed files:** Updated the configuration transformation result directory to use filtered and renamed output files for improved analysis.
 ------
-- **WAN-4724 Persist PapiDiff results in DB for analysis:** Added persistence of PapiDiff comparison results to a database for post-transformation analysis and debugging.
+- **WAN-4724 Persist Configuration Diffs in database for analysis:** Added persistence of configuration difs to a database for post-transformation analysis and debugging.
 ------
 - **WAN-4731 Wheeljack changes for ext_ip6 in vpn_endpoints:** Added Wheeljack support for the `ext_ip6` field in VPN endpoints, enabling IPv6 external address configuration for overlay connections.
 ------
