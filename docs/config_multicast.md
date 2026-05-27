@@ -329,6 +329,10 @@ For more information about the graceful restart timer, see [graceful-restart](co
 
 MSDP is used to allow RPs to share the active Multicast Sources. Messages are sent as Source-Active (SA) messages between MSDP peers. In normal MSDP operation, an MSDP peer is received from one peer and forwarded to the other MSDP peers. To ensure there are no loops, RPF checks have been put in place.
 
+:::important
+MSDP peer and mesh-group authentication (the [`auth-password`](config_command_guide.md#configure-authority-router-routing-msdp-peer-auth-password) parameter) uses **MD5**. Beginning with SSR software **version 7.0** (including **7.1**), FIPS mode is enabled by default and blocks MD5, so MSDP peerings configured with `auth-password` will fail to establish until FIPS is disabled on the affected node. See the disable procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). In a future SSR release, FIPS will be compliance-by-configuration and will no longer block these algorithms.
+:::
+
 MSDP can also be configured as a `mesh-group`. In this mode, the SA messages received from a peer are not forwarded to the other members of the mesh-group, since all the peers are configured as part of the mesh. This is commonly used with Anycast RPs, where the same RP address is configured on multiple routers in the network. The Anycast RP routers use an MSDP mesh-group to distribute the active source information to the other anycast RPs. This provides redundancy in the network, in case an RP fails.
 
 ### Configuration

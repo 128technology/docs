@@ -7,6 +7,10 @@ The Border Gateway Protocol (BGP) is a standard exterior gateway protocol develo
 
 Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss an SSR-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
 
+:::important
+BGP neighbor authentication (the [`auth-password`](config_command_guide.md#configure-authority-router-routing-routing-protocol-neighbor-auth-password) parameter) uses **MD5**. Beginning with SSR software **version 7.0** (including **7.1**), FIPS mode is enabled by default and blocks MD5, so BGP sessions configured with `auth-password` will fail to establish until FIPS is disabled on the affected node. See the disable procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). In a future SSR release, FIPS will be compliance-by-configuration and will no longer block these algorithms.
+:::
+
 ## Prerequisites
 
 This section presumes that you have a running SSR system and want to add configuration to support BGP. The running SSR system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic SSR modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the SSR data model.

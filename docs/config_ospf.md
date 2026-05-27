@@ -14,6 +14,10 @@ Learning routes from OSPF simplifies enterprise configuration and integration wi
 | --- | --- |
 |6.2.3-R2 | Support for OSPF V3 added |
 
+:::important
+OSPF [`message-digest-key`](config_command_guide.md#configure-authority-router-routing-ospf-area-interface-message-digest-key) authentication uses **MD5 HMAC**. Beginning with SSR software **version 7.0** (including **7.1**), FIPS mode is enabled by default and blocks MD5, so OSPF interfaces configured with `authentication-type md5` will fail to form adjacencies until FIPS is disabled on the affected node. See the disable procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). In a future SSR release, FIPS will be compliance-by-configuration and will no longer block these algorithms.
+:::
+
 ## Prerequisites
 This document presumes you have a running SSR system and want to add configuration to support OSPF. The running SSR system includes configuration for basic platform functionality (e.g., router, node, device-interface, network-interface) and basic routing configuration (e.g., tenants, services, etc.).
 
