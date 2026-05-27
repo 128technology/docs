@@ -71,13 +71,13 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.0-10r1 
+## Release 7.2.0-12r1 
 
 **Beta Release Date:** May 28, 2026
 
 ### New Features
 
-- **Adaptive PMTU Change Handling for Long-Lived Sessions:** The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see [Path MTU Discovery](config_pmtu.md).
+- **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see [Path MTU Discovery](config_pmtu.md).
 ------
 - **I95-61066  Simplified Interface Naming:** Removed the platform restriction (SSR400/SSR440 only) that prevented the ability to configure forwarding device-interfaces via Linux `interface-name`. `interface-name` can now be used as a device identifier on all physical and virtual SSR platforms for  both forwarding and non-forwarding interfaces, enabling stable, name-based NIC configuration for cloud VMs, bare-metal servers, and purpose-built hardware alike.
 ------
@@ -85,13 +85,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64645 Certificate Management - CSR Improvements:** Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#peering-identity-via-subject-alternative-name-uri) for details.
 ------
-- **I95-64845 Add Missing Audit Events for Certificate APIs:** Addes several audit events and logs for certificate activity. See [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) for additional information.
+- **I95-64845 Add Missing Audit Events for Certificate APIs:** Adds several audit events and logs for certificate activity. See [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) for additional information.
 
-<!---## Release X.Y.Z-build
-
-**Release Date:** May 26, 2026
-
-### New Features
+<!---### New Features
 
 - **I95-25150 AES-GCM Encryption:** Added support for AES-GCM as an encryption and authentication algorithm. AES-GCM provides improved performance over AES-CBC + HMAC-SHA by combining encryption and authentication into a single operation.
 ------
@@ -105,23 +101,11 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
   - **I95-60459 Add support for proxy-ip in onboarding config:** Added `management-proxy` address and port fields to the onboarding configuration schema, allowing routers to specify a proxy for management connectivity during the onboarding process.
 ------
-- **I95-59819 SIEM Syslog Integration:** Added support for Security Event and Incident Management (SIEM) integration via structured syslog. Session allow/close and deny records can be exported in a structured format on a per-service basis, with configurable fields and overload protection.
-------
-- **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** Improved handling of MTU changes for established flows, including adjusting ICMP MTU size to accommodate SVR overhead, fabric fragmentation between peers when clients do not honor ICMP, and handling UDP Transform scenarios.
-------
-- **I95-61066 Simplified Interface Naming for Cloud Images:** Added support for configuring forwarding device-interfaces via Linux interface-name. This simplifies conductor-based configuration for virtual machine deployments, particularly in Hyper-V and Azure environments where VMBus UUIDs are unique per instance.
-------
-- **I95-61467 Show Filtered Routes in BGP Output:** Exposed the ability to view BGP filtered routes in both CLI and REST. When an ingress filter is applied to BGP, users can now view filtered routes directly rather than indirectly examining the FIB.
-------
 - **I95-61693 DHCP INFORM Response Improvements:** Resolved an issue where DHCP INFORM packets were not correctly answered. The DHCP ACK response now includes the requested options, ensuring clients retain vital information such as DNS servers, domain name, and gateway.
 ------
 - **I95-63012 AppID Scale Optimization:** Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.
 ------
 - **I95-63030 HA Control Link Redundancy:** Added support for redundant HA control links in both Mist and Conductor managed deployments. This includes configurable HA control links, redundant link/port status visibility, and alerts for degraded state when some redundant links are down.
-------
-- **I95-63389 Dual AC Power Supply Status Visibility:** Added the ability to display status and raise alarms for individual power supplies on dual AC power supply SSR400/SSR440 models via CLI show commands.
-------
-- **I95-63903 IMA on x86 Platforms:** Implemented and enabled Linux Integrity Measurement Architecture (IMA) on x86 platforms, including cloud environments, ensuring that only signed packages and executables are allowed to run.
 ------
 - **I95-64149 Enhanced Security Key Management Events:** Added comprehensive event and alarm support for Enhanced Security Key Management workflows, covering both successful and failed operations for private key creation/deletion, CSR generation, and certificate ingestion.
 ------
@@ -129,9 +113,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64514 Upgrade Salt to 3007.13:** Upgraded the Salt infrastructure to version 3007.13, improving conductor-to-router communication reliability and security.
 ------
-- **I95-64645 Certificate Management - CSR Improvements:** Improved the certificate signing request (CSR) workflow for Enhanced Security Key Management, including better validation and error handling.
-------
-- **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in Mist-managed deployments. This allows per-network access control for management traffic. -->
+- **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in **Mist-managed deployments**. This allows per-network access control for management traffic. -->
 
 ### Resolved Issues 
 
