@@ -14,7 +14,6 @@ const {
   PDFArray,
   PDFNumber,
   PDFString,
-  PDFRef,
   StandardFonts,
   rgb,
 } = require('pdf-lib');
