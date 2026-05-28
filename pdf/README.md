@@ -12,7 +12,7 @@ diagrams, syntax-highlighted code, tables and images.
 
 - A4 page size, 20mm margins, footer page numbers.
 - Cover page (title + build date).
-- Clickable table of contents (H1 / H2 / H3).
+- Clickable table of contents for document titles (H1).
 - PDF outline / bookmarks following the sidebar structure.
 - Single file at `pdf/out/ssr-docs.pdf` by default.
 
