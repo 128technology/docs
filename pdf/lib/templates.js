@@ -4,9 +4,10 @@
  * Both are rendered to PDF via Puppeteer in the same A4 format used
  * for the docs so the merged document is visually consistent.
  *
- * TOC links use href="#__pdf_target_<n>__" placeholders. After merge,
- * the orchestrator rewrites the matching link annotations to GoTo
- * actions pointing at absolute page numbers in the final document.
+ * TOC links use href="https://pdf.local/target/<n>" placeholders.
+ * After merge, the orchestrator rewrites the matching link annotations
+ * to GoTo actions pointing at absolute page numbers in the final
+ * document.
  */
 
 function escapeHtml(s) {
