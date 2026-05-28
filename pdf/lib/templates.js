@@ -42,7 +42,7 @@ function buildCoverHtml({ title, subtitle }) {
  * Build TOC HTML.
  *
  * @param {Array} tocEntries  Flat entry list. Each entry:
- *   { level: 1|2|3, text, targetId }
+ *   { level: 1|2|3|4, text, targetId }
  *   - level 1: part heading
  *   - level 2: chapter or doc title (depending on flattening)
  *   - level 3: H2 inside a doc
