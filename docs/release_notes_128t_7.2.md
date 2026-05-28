@@ -67,17 +67,21 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.0-12r1 
+## Release 7.2.0-13r1 
 
 **Beta Release Date:** May 28, 2026
 
 ### New Features
 
+- *** I95-25150 AES-GCM Encryption:** AES-GCM is now supported as a higher-performance encryption and authentication algorithm, replacing the previous AES-CBC + HMAC-SHA approach. AES-GCM combines encryption and authentication in a single operation, reducing per-packet processing overhead. The implementation includes frequent key rotation, per-path unique keys to reduce the cryptographic load on any single key, and a deterministic incrementing nonce scheme to prevent nonce reuse. For more information, see [AES-GCM Encryption](sec_security_policy.md#aes-gcm-encryption). 
+------
 - **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see [Path MTU Discovery](config_pmtu.md).
 ------
-- **I95-61066 Simplified Interface Naming:** Removed the platform restriction (SSR400/SSR440 only) that prevented the ability to configure forwarding device-interfaces via Linux `interface-name`. `interface-name` can now be used as a device identifier on all physical and virtual SSR platforms for both forwarding and non-forwarding interfaces, enabling stable, name-based NIC configuration for cloud VMs, bare-metal servers, and purpose-built hardware alike.
+- **I95-61066 Simplified Interface Naming:** Simplified Interface Naming for Cloud Images: Forwarding device-interfaces can now be configured using Linux interface names instead of PCI addresses or VMBus UUIDs. This simplifies deployment in Hyper-V and Azure environments, where VMBus UUIDs are randomly generated per VM instance and require manual discovery. Template-based configurations are now more portable across hardware changes and scaled deployments.
 ------
 - **I95-61467 Show filtered-routes in `show bgp` output:** When an inbound BGP policy rejects prefixes received from a neighbor, those routes do not appear in the BGP table or the FIB. The `filtered-routes` option exposes exactly which prefixes were suppressed by the inbound policy for a given neighbor, making it straightforward to troubleshoot why expected routes are absent from the routing table. For more information, see [Viewing Filtered BGP Routes](config_bgp.md#viewing-filtered-bgp-routes).
+------
+- **I95-64149 Enhanced Security Key Management Events:** Event and alarm coverage has been added for the Enhanced Security Key Management workflow. Events are now generated for both successful and failed operations across private key creation and deletion, CSR generation, and certificate ingestion. Distinct events and alarms are raised for error conditions including invalid data, missing keys, duplicate entries, and invalid certificates. See the [Troubleshooting section of Enhanced Security Key Managament](sec_enhanced_key_mgmt.md#troubleshooting) for additional information. 
 ------
 - **I95-64645 Certificate Management - CSR Improvements:** Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#peering-identity-via-subject-alternative-name-uri) for details.
 ------
@@ -133,13 +137,19 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63983 System LED does not turn off after halt or shutdown:** Resolved an issue where the system LED on SSR400/SSR440 devices did not turn off or change state after a halt or shutdown, making it difficult to determine whether the unit was still running.
 ------
+- **I95-63955 SSR Process Inactive After Conductor Onboarding but UI shows `Synchronized`:** Resolved an issue where, after completing the Secure ConductorOnboarding (SCO) workflow in Azure with vTPM enabled, the UI incorrectly showed the device as `Synchronized` while the SSR service was inactive, triggering a `No Connectivity` alarm.
+------
 - **I95-64051 AWS inconsistent interface mapping:** Resolved an issue where interface mapping in AWS deployments was inconsistent, causing the HA fabric interface to remain in the kernel while the HA sync interface was incorrectly taken by the forwarding process, preventing HA from functioning properly.
+------
+- **I95-64063 Salt Minion restarting every minute when one Conductor is Unreachable:** Resolved an issue where the Salt Minion restarted once per minute whenever one conductor in a two-conductor deployment was unreachable, causing repeated instability in the management plane connection.
 ------
 - **I95-64150 User defined SNMP metrics not working:** Resolved an issue where user-defined SNMP metrics were not functional due to a missing configuration file (`snmpMetricsConfig.json`) and missing references in the SNMP object agent.
 ------
 - **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
 ------
 - **I95-64221 TPM firmware update capsule support:** Added TPM firmware update capsule support in the SSR400/SSR440 firmware, enabling in-field TPM firmware updates.
+------
+- **I95-64238 RADIUS Authentication Non-Functional:** Resolved an issue where RADIUS authentication produced no traffic toward the configured server. The `radsec proxy` configuration file is now placed inside an encrypted directory so that RADIUS shared secrets are protected at rest. 
 ------
 - **I95-64250 BGP routes received but not installed in BGP table or RIB:** Resolved an issue where BGP routes from specific neighbors were received but not installed in the BGP table or RIB, requiring neighbor reconfiguration to restore route installation.
 ------
@@ -173,7 +183,11 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64619 Config validate rejects DHCP network-interface when VRRP is present:** Resolved an issue where configuration validation incorrectly rejected a DHCP-enabled network-interface if VRRP was present in the configuration, even when VRRP was not enabled.
 ------
+- **I95-64687 Factory Reset Does Not Recursively Clean /var/cache/salt/:** Resolved an issue where factory reset operations did not recursively remove the /var/cache/salt/ directory, leaving stale salt cache files behind. The cleanup process now removes this directory recursively.
+------
 - **I95-64696 Salt connectivity issues after Conductor upgrade:** Resolved an issue where salt-minion lost connectivity to the salt-master after a Conductor upgrade, affecting approximately 20% of routers. The minion-connector service now correctly manages the salt master address.
+------
+- **I95-64703 Swagger Documentation for Private-Key, Certificate, and Certificate Request APIs:** Updated the Swagger API documentation to include router-level and node-level paths (`/router/{router}/node/{node}/...`) for the `private-key`, `certificate`, and `certificate-request` endpoints, which were previously documented at the top level only.
 ------
 - **I95-64709 Premature route installation complete notification during Graceful Restart:** Resolved a documentation discrepancy and corrected the behavior of the `stale-routes-time` parameter and its relationship to RFC 4724's `Selection_Deferral_Timer`, ensuring proper Graceful Restart route handling.
 ------
