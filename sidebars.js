@@ -12,6 +12,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.2",
           "release_notes_128t_7.1",
           "release_notes_128t_7.0",
           "release_notes_128t_6.3",
