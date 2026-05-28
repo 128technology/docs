@@ -32,8 +32,8 @@
     "react-table": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/eslint-parser": "^7.16.3",
+    "@babel/core": "^7.29.7",
+    "@babel/eslint-parser": "^7.29.7",
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
