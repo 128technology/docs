@@ -1,23 +1,19 @@
 ---
-title: "Step 2: Install SSR 7.1.5 and Initialize the Router"
+title: "Step 2: Install SSR Software and Initialize the Router"
 sidebar_label: "Install and Initialize"
 ---
 
 This step boots the router VM from the SSR ISO, installs the software, and uses the web-based initialization interface to configure the VM as a conductor-managed branch router.
 
-## Install SSR 7.1.5
+## Install SSR Software
 
 1. Select the new router VM in the ESXi Navigator and click the **Play** (Power On) button.
 
-   ![Power On](/img/vmware_pwr-on.png)
+   ![Power On](/img/dep10-vmrouter-start.png)
 
-2. The VM boots into the SSR installation menu. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
+2. At the Install menu, use the arrow keys to select **VGA Console**.
 
-   ![Choose Image](/img/u-iso2_choose_image.png)
-
-3. At the Install menu, use the arrow keys to select **VGA Console**.
-
-   ![Install Type](/img/u-iso3_choose_install_type.png)
+   ![Install Type](/img/dep10a-vm-vga.png)
 
 4. If you require FIPS mode, select Install Option 1 and press **Enter**. If FIPS is not required, press **Enter** without selecting an option. The download and installation begins.
 
@@ -31,11 +27,49 @@ This step boots the router VM from the SSR ISO, installs the software, and uses 
 
    ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
 
-6. When prompted to reboot, allow the VM to restart.
+6. When prompted to reboot, allow the VM to shutdown.
 
    ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
 
-## Initialize the Router
+## Apply VLANs to the Spoke Router
+
+These steps configure VLANs on the router.
+
+1. In the VM in the ESXi Navigator, start the Conductor Virtual Machine.  
+
+2. Select **Console** and login using the root credentials.
+
+3. From the linux prompt run the command `ip a | more` . Make a note of the `ge-0-x` interfaces and MAC address associations.
+
+   ![Start Spoke console](/img/dep-start-spoke-console.png)
+
+   Example:
+   ```
+   ge-0-0 =00:0c:29:6c:32:c1
+   ge-0-1 =00:0c:29:6c:32:a3
+   ge-0-2 =00:0c:29:6c:32:cb
+   ge-0-3 =00:0c:29:6c:32:ad
+   ```
+
+4. From the Spoke1 VM in the ESXi Navigator, select **Actions** and then **Edit Settings**.
+
+   ![Edit VM settings](/img/dep-spoke-edit.png)
+
+5. Use the diagram below and the interface names for each MAC address, to associate the correct network VLAN with each interface. Use the following VM VLANs: VM Network, VLAN66, VLAN3 and VLAN4. The Network Adapter, MAC address and ge-0-x interface name(s) should match based on the MAC addresses previously determined. Save when complete.
+
+   ![VLAN Identification](/img/dep-vlan-ident-spoke1.png)
+
+Example:
+```
+ge-0-0 =00:0c:29:6c:32:a3 = Adapter 1 (VLAN66)
+ge-0-1 =00:0c:29:6c:32:ad = Adapter 2 (VLAN3)
+ge-0-2 =00:0c:29:6c:32:b7 = Adapter3 (VLAN4)
+ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
+```
+
+   ![VLAN NIC Names](/img/dep-vlan-nic-names.png)
+
+## Initialize the Router - PICK UP HERE ON FRIDAY
 
 After the first boot, the SSR software exposes a web-based initialization interface at `192.168.128.1` on all interfaces. Use this interface to configure the VM as a conductor-managed router and associate it with the conductor.
 

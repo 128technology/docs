@@ -2,58 +2,48 @@
 
 ## Log In to VMware ESXi
 
-1. Open a web browser and navigate to your ESXi host. Log in with administrative credentials.
+Open a web browser and navigate to your ESXi host. Log in with administrative credentials.
 
    ![VMware ESXi Login](/img/vmware_login.png)
 
-## Upload the SSR ISO to the Datastore
-
-1. From the ESXi Navigator, select **Storage**.
-
-   ![Navigator Storage](/img/vmware_storage.png)
-
-2. Click the **Datastore Browser** button.
-
-   ![Datastore Browser Button](/img/vmware_datastore_browser_button.png)
-
-3. Click **Upload**, navigate to the `SSR-7.1.5-7.r2.el9.x86_64.ibu-v1.iso` on your local workstation, and click **Open**. The ISO appears in the datastore.
-
-   ![SSR ISO in Datastore](/img/vmware_ssr-iso.png)
-
-4. Click **Close**.
-
 ## Create the Virtual Machine
 
-1. From the ESXi Navigator, select **Virtual Machines**, then click **Create / Register VM**.
+1. From the VMWare Navigator window, click on **Create/Register VM**.
 
-   ![Register VM](/img/vmware_registervm.png)
+   ![Create VM](/img/dep1-vm-create-vm.png)
 
-2. Select **Create a new virtual machine** and click **Next**.
+2. In the **Select creation type** window click **Create a new virtual machine** and then click **Next**.
+
+   ![VM Type](/img/dep2-vm-creation-type.png)
 
 ### Name and Guest OS
 
-3. Configure the following:
+Use the steps below to configure the following:
 
    | Field | Value |
    |-------|-------|
-   | Name | A descriptive name, for example `ssr-router-branch1` |
+   | Name | A descriptive name, for example `spoke1` |
    | Compatibility | `ESXi 7.0 U2 virtual machine` |
    | Guest OS family | `Linux` |
    | Guest OS version | `CentOS 7 (64-bit)` |
 
-   Click **Next**.
+3. Name the Virtual Machine **spoke1**.  
 
-   ![Name the VM](/img/vmware_name-os.png)
+4. Select **Linux** from the Guest OS family dropdown selection, and select the Guest OS version as **Centos 7**. Click **Next**.
+
+   ![Name the VM](/img/dep3-vmrouter-name-os.png)
 
 ### Storage
 
-4. Select the datastore and storage type for the VM, then click **Next**.
+5. From the Storage screen, select **datastore1** and click **Next**. 
 
-   ![Storage Type](/img/vmware_storage_type.png)
+   ![VM Storage](/img/dep4-vm-storage.png)
 
 ### Virtual Hardware
 
-5. Click **Virtual Hardware** and configure the following settings. These values meet the minimum router requirements:
+6. On the **Customize settings** screen, click **Virtual Hardware** and configure the following settings. 
+
+   TClick **Virtual Hardware** and configure the following settings. These values meet the minimum router requirements:
 
    | Setting | Value | Notes |
    |---------|-------|-------|
@@ -63,30 +53,39 @@
    | Hard Disk 1 | `60 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
 
-   ![Virtual Hardware Settings](/img/vmware_virt_hdwr.png)
+   ![Storage Parameters](/img/dep5-vm-params.png)
+
+   Click **Next** when the settings are configured.
 
 ### Network Adapters
 
-6. A VMware router requires **two VMXNet3 network adapters**: one for WAN and one for LAN. By default, one adapter is created.
+A VMware router requires at least **two VMXNet3 network adapters**: one for WAN and one for LAN. By default, one adapter is created. In this example we will create 4 network adapters for `spoke1`.
 
-   - Set the existing adapter's **Adapter Type** to **VMXNET3** and connect it to your **WAN portgroup** — the portgroup that provides your ISP WAN connection with DHCP.
-   - Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and connect it to your **LAN portgroup** — the portgroup connected to your branch LAN.
+   ![Network Adapter Type](/img/dep6-vmrouter-nics.png)
+
+7. Set the existing adapter's **Adapter Type** to **VMXNET3** and connect it to your **WAN portgroup** — the portgroup that provides your ISP WAN connection with DHCP.
+
+8. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and connect it to your **LAN portgroup** — the portgroup connected to your branch LAN.
 
    :::note
    The order of the adapters (NIC 1 = WAN, NIC 2 = LAN) corresponds to the PCI addresses you will identify in [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx). Note which portgroup each adapter is connected to.
    :::
 
-   ![Network Adapter Type](/img/vmware_net_adapter.png)
+### CD/DVD Media - Software Selection
 
-### CD/DVD Media
+9. As shown in the image above, expand **CD/DVD Drive 1**. 
 
-7. Expand **CD/DVD Drive 1**. In the dropdown, select **Datastore ISO file** and check **Connect**. The Datastore Browser opens.
+10. Place a check next to **Connect at power on**. In the dropdown to the right, select **Datastore ISO file** and then click **Browse**. The Datastore Browser opens.
 
-8. Select the `SSR-7.1.5-7.r2.el9.x86_64.ibu-v1.iso` file and click **Select**.
+11. Select the `SSR-7.1.4-3.r2.el9.x86_64.ibu-v1.iso` and click **Select**.
 
-   ![Select CD/ISO](/img/vmware_cd-iso.png)
+   ![CD ISO Selected](/img/dep7-vm-selectversion.png)
 
-### VM Options
+12. Confirm the settings, and then click **Next**.
+
+   ![Confirm Settings](/img/dep8-vm-confirm.png)
+
+<!---### VM Options
 
 9. Click **VM Options** at the top of the page.
 
@@ -99,8 +98,8 @@
 
     Click **Next**.
 
-    ![Boot Options](/img/vmware_vmoptions2.png)
+    ![Boot Options](/img/vmware_vmoptions2.png)--->
 
-11. Review the configuration summary. Click **Back** to make any corrections, then click **Finish**.
+13. Review the summary, then click **Finish**.
 
-    ![VM Complete](/img/vmware_finish.png)
+   ![VM Complete](/img/dep9-vm-summary.png)
