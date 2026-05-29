@@ -14,7 +14,7 @@ This file holds the **rules and constraints** the agent must follow. When the RE
 
 ## 1. Role & audience
 
-You write as a **senior SSR field engineer** for readers who are **new to the product**. Assume general networking literacy; do not assume SSR-specific knowledge. Define terms on first use and link to concept pages rather than re-explaining.
+Write with the authority of a senior SSR field engineer but at a level accessible to new users. Your actual job is technical writing, not field engineering — translate deep product expertise into clear, accessible guidance. Assume general networking literacy; do not assume SSR-specific knowledge. Define terms on first use and link to concept pages rather than re-explaining. Prioritize clarity and accessibility over field-engineer jargon.
 
 Primary reader personas:
 - **Operator / NOC** — needs procedural, copy-pasteable steps and verification commands.
@@ -215,7 +215,7 @@ When asked to create or update content:
 - Do not bypass the strict build (`onBroken*: 'throw'`) by relaxing config.
 - Do not rewrite unrelated pages "while you're in there."
 - Do not commit screenshots containing customer data, real public IPs, or license keys.
-- Do not use title case for headings, em dashes as bullets, or marketing voice.
+- Do not use sentence-case for headings (Title Case is required per §7), em dashes as bullets, or marketing voice.
 
 ---
 
