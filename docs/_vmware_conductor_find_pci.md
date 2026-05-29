@@ -2,6 +2,8 @@
 
 The SSR conductor configuration requires the PCI address of the VMXNet3 management NIC. Because VMware assigns PCI addresses dynamically based on VM slot assignment, you must discover the address from the running VM rather than assuming a fixed value.
 
+![PCI and Interface Names](/img/dep-vmrouter-show-pci-names.png)
+
 ### Identify the Interface Name
 
 1. Log in to the conductor CLI or SSH session:
@@ -23,6 +25,11 @@ The SSR conductor configuration requires the PCI address of the VMXNet3 manageme
    ```
 
    The output shows the Linux interface names for each NIC. A VMXNet3 NIC on VMware is commonly named `ens192`, `ens160`, or `eth0`. Identify the interface that corresponds to the management network.
+
+
+Let’s now go to the CLI of our Spoke1 and type the following command to identify the PCI and Interface Names that VMWare has given the routers as default. As root type “lshw –c network –businfo”.
+
+Notice the interface names and their PCI addresses. 
 
 ### Find the PCI Address
 

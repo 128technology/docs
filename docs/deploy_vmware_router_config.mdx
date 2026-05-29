@@ -6,7 +6,7 @@ import NetworkDesign from './_deploy_vmware_router_network_design.md';
 
 With the router VM initialized and connected to the conductor, you can now stage the full router configuration on the conductor. Once you commit the configuration, the conductor pushes it to the router and the router comes fully online.
 
-All steps are performed from the **Conductor GUI** at `https://192.168.100.10`. Complete all steps before committing.
+All steps are performed from the **Conductor GUI**. Complete all steps before committing.
 
 :::note
 Your conductor must already have the following objects configured before proceeding:
@@ -23,7 +23,7 @@ If any of these are missing, complete [Configure the Conductor](deploy_conductor
 
 <NetworkDesign/>
 
-## 1. Create the Router
+## 1. Create the Router - THIS WAS DONE DURING INSTALL AND INTIALIZE
 
 1. Log in to the Conductor GUI.
 2. Select **Configuration**.
@@ -38,7 +38,7 @@ If any of these are missing, complete [Configure the Conductor](deploy_conductor
 
 6. Select **SAVE** (do not commit yet).
 
-## 2. Create the Node
+## 2. Create the Node - THIS WAS DONE DURING INSTALL AND INTIALIZE
 
 1. Scroll down to **Nodes** and select **ADD**.
 2. Enter the node name `node0` and select **SAVE**.
@@ -47,7 +47,7 @@ If any of these are missing, complete [Configure the Conductor](deploy_conductor
    | Field | Value | Notes |
    |-------|-------|-------|
    | Role | `combo` | Router acts as both control and data plane |
-   | Asset ID | `branch1` | The asset ID reported in [Step 2](deploy_vmware_router_install.mdx#find-the-router-asset-id) |
+   | Asset ID | `spoke1` | The asset ID reported in [Asset ID](deploy_vmware_router_install.mdx#asset-id) |
 
    :::important
    The asset ID must exactly match the value shown by `show assets` on the conductor. For a VMware vSSR, this is typically the router name entered during initialization.
@@ -109,17 +109,23 @@ The LAN interface (NIC 2) connects to the branch LAN and assigns the `corp` tena
 
 ### 4a. Create the LAN Device Interface
 
-1. Return to the **Node** level and scroll to **Device Interfaces**, then select **ADD**.
-2. Enter the name `lan-dev` and select **SAVE**.
-3. Set the following fields:
+1. From the Authority level in the Conductor GUI, click on `spoke1` to begin configuration. 
+
+2. Click on `node0` and scroll to the bottom of the page.
+
+3. Select **Device Interfaces**, and **ADD**. 
+
+4. In the New Device Interface window, add the LAN device name `lan`, and click **SAVE**. This adds a physical device name for you to assign your LAN interface.
+
+Keep this table until it is deemed unnecessary:
+
+Set the following fields:
 
    | Field | Value | Notes |
    |-------|-------|-------|
    | Type | `ethernet` | |
    | PCI Address | _(LAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:13:00.0` |
    | Forwarding | `true` | |
-
-4. Select **SAVE**.
 
 ### 4b. Create the LAN Network Interface
 

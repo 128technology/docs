@@ -35,7 +35,7 @@ This step boots the router VM from the SSR ISO, installs the software, and uses 
 
 These steps configure VLANs on the router.
 
-1. In the VM in the ESXi Navigator, start the Conductor Virtual Machine.  
+1. In the VM in the ESXi Navigator, start the Spoke1 Virtual Machine.  
 
 2. Select **Console** and login using the root credentials.
 
@@ -69,68 +69,79 @@ ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
 
    ![VLAN NIC Names](/img/dep-vlan-nic-names.png)
 
-## Initialize the Router - PICK UP HERE ON FRIDAY
+6. Click **Save**.
 
-After the first boot, the SSR software exposes a web-based initialization interface at `192.168.128.1` on all interfaces. Use this interface to configure the VM as a conductor-managed router and associate it with the conductor.
+## Initialize the Router
 
-1. Connect a workstation to the same VMware portgroup as the router's **LAN NIC** (NIC 2). Assign the workstation a static IP address in the `192.168.128.0/24` subnet — for example, `192.168.128.2/24`.
+1. In the VM in the ESXi Navigator, select the Spoke1 Virtual Machine, and click **Power On**. 
 
-   :::note
-   The initialization web interface is accessible at `192.168.128.1` before initialization is complete. After the router reboots with its full configuration applied, this address is no longer reachable.
-   :::
+2. Click **Console** and login with the root credentials. 
 
-2. Open a web browser and navigate to:
+3. Run the command `su admin `to enter the PCLI. 
 
-   ```
-   https://192.168.128.1
-   ```
+   ![Initial Login](/img/dep-vmrouter-init-login.png)
 
-   Accept the self-signed certificate warning.
+4. Enter the following command to connect the Spoke1 router to the conductor:
+   
+   `initialize conductor-managed router-name Spoke1 conductor-ip <conductor-ip-address>` 
+   
+   Wait for the device to show `Device successfully initialized`. This step may take several minutes to complete.
 
-   ![Initialization UI](/img/u-iso8_launch_gui.png)
+   ![Device Successflly Initialized](/img/dep-vmrouter-init-suadmin.png)
 
-3. Under **SSR Managed**, select **SSR Router Managed via Conductor**.
+   Let’s now go to the Conductor GUI, add this router and connect it for communication to the Conductor.
 
-   ![SSR Conductor-managed router](/img/u-iso10_cond-mngd_router.png)
+5. Open a browser tab on your computer and navigate to your VMWare conductor; `https://<ge-0-0 IP address>` and initiate a web session to the conductor GUI.
 
-4. Enter the following information:
+   ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Router Name | `branch1` | Must match the router name you will configure on the conductor in [Step 4](deploy_vmware_router_config.mdx) |
-   | Conductor IP Address | `192.168.100.10` | IP address of the pre-existing conductor |
-   | Admin Password | _(your choice)_ | Minimum 8 characters, 1 upper, 1 lower, 1 number |
+6. Accept the self-signed certificate warning, and login. 
 
-   ![Conductor Managed Association](/img/deploy_u-iso11_cond-mngd-assoc-new.png)
+   ![Conductor Login](/img/dep-vmrouter-conductor-login.png)
 
-5. Click **ASSOCIATE**.
+7. In the Conductor GUI, click on Authority. 
 
-6. The router reboots, contacts the conductor at `192.168.100.10`, and waits for a matching configuration. If no configuration is staged on the conductor yet, the router remains in a **Waiting for Configuration** state until you complete [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).
+   ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
 
-## Find the Router Asset ID
+8. At the top of the list of Routers, select ADD. 
 
-After the router contacts the conductor, it reports its **asset ID** — the identifier the conductor uses to match this device to its staged configuration.
+   ![Add Router](/img/dep-vmrouter-addrouter.png)
 
-From the **Conductor PCLI**, run:
+9. Enter the router `Spoke1` and click **Save**.
 
-```text
-show assets
-```
+   ![New Router](/img/dep-vmrouter-newrouter.png)
 
-The router appears in the output. Note the **Asset ID** value — you will need it when staging the router configuration in [Step 4](deploy_vmware_router_config.mdx#2-create-the-node).
+### Add a Location for the Router
 
-Example output:
+After adding the router name, let’s add the location of this router. For this example, we'll use Los Angeles. 
 
-```
-===================== ============================== ===========
- Asset ID              Router                         Status
-===================== ============================== ===========
- branch1               (unprovisioned)                Connected
-```
+1. In the Router **Basic Information** screen, enter Los Angeles under **Location**.
 
-:::tip
-For a VMware vSSR, the asset ID is typically the router name you entered during initialization — in this example, `branch1`.
-:::
+   ![Basic Info](/img/dep-vmrouter-basicinfo.png)
+
+2. If you have the location coordinates (for this example, enter the following exactly: `+34.0536909-118.242766/`), you can enter them. 
+
+3. Under **Inter-node Security Policy**, select `Internal`.
+
+4. The **New Node** dialog is displayed - enter `node0`.
+
+   ![New Node](/img/dep-vmrouter-newnode.png)
+
+5. Click **Save**.
+
+   The New Node screen appears.
+
+### Asset ID
+
+The Asset ID allows the router and conductor to fully connect, and allows the conductor to configure and control it. 
+
+1. On the Node screen, verify the Node Name is `Node0`, set the Associated Asset ID to `Spoke1`, and set the Role to `Combo`. 
+
+   ![Node Asset ID](/img/dep-vmrouter-node-asset-id.png)
+
+2. Click Commit. 
+
+   If you see a Review Commit Warning, click **Proceed** and **Commit** . Your router is now bound to the conductor, sharing keys and trust. Connectivity will not be available for a roughly 8-10 minutes until full synchronization completes between the router and Conductor. When you see the Routers page displaying Synchronized, the router is ready to be configured from the conductor.
 
 ## Next Step
 
