@@ -20,7 +20,7 @@ Ask for the following if not provided:
 
 ### Step 1 — Fetch Issues
 
-Run the provided JQL query using the SSR JIRA MCP tools. Collect all returned issues.
+Run the provided JQL query using the SSR JIRA MCP tools. Collect all returned issues. If the JQL query returns zero issues, inform the user and ask them to verify the query or version labels before proceeding.
 
 ### Step 2 — Gather and Summarize JIRA Context Per Issue
 
@@ -44,10 +44,11 @@ For each issue returned by the JQL query:
 
 For each issue, find the linked GitHub pull request URL (in JIRA links, comments, or description):
 
-1. Navigate to the GitHub pull request using the GitHub MCP tools.
+1. If a linked PR is found, navigate to the GitHub pull request using the GitHub MCP tools.
 2. Read the PR description.
 3. **Prefer the GitHub Copilot-generated pull request summary** (often found in a collapsible section or labeled "Copilot Summary") over the manually written description when both are available.
 4. Extract the technical details of the change: what was modified, why, and any behavioral changes.
+5. If no linked PR is found for an issue, skip this step and rely solely on the JIRA context from Step 2 to produce the release note entry. Do not fabricate PR details.
 
 ### Step 4 — Synthesize Final Release Note Entry
 
@@ -55,11 +56,20 @@ For each issue, combine the JIRA summary (Step 2) and PR context (Step 3) into a
 
 - Use the JIRA context for **symptom and customer impact**.
 - Use the PR context for **technical accuracy of the fix description**.
-- Distill into one clear, concise sentence or short paragraph suitable for a customer audience.
+- Distill into one clear, concise sentence(s) or short paragraph suitable for a customer audience.
 
 ### Step 5 — Generate Release Notes Document
 
-Use the format from [docs/release_notes_128t_7.1.md](../../docs/release_notes_128t_7.1.md) as the template. Structure the output as follows:
+Use the format from [docs/release_notes_128t_7.1.md](../../docs/release_notes_128t_7.1.md) as the template. 
+
+- Issues with Type of ("Feature Request", Epic) MUST be captured under the heading "New Features".
+- If there are no issues of type "Feature Request" or Epic, do not include the heading "New Features".
+- Issue types of (Bugs, Stories, Tasks, Sub-tasks) that are NOT marked with a "Caveats" label MUST be captured under the heading "Resolved Issues".
+- Any issue (regardless of type) that is marked with a "Caveats" label MUST be captured under the heading "### Caveats" instead of "Resolved Issues". If no issues carry the "Caveats" label, do not include the "### Caveats" heading.
+- Sort issues by issue key: alphabetically by project prefix, then numerically by issue number (e.g., AAA-9 before AAA-100, AAA-* before BBB-*).
+- Any issue that contains a label in the format of "CVE-YYYY-XXXXX" should be considered as a CVE issue. All CVE-YYYY-XXXXX labels must be included in the list of fixed CVEs. Any issues that meet this criteria should not be included as a separate item under "Resolved Issues". CVEs should be grouped together into a single listing under the following heading - **The following CVEs have been identified and resolved in this release:** {list comma separated CVEs} and should always be the first item listed in the "Resolved Issues" heading.
+
+Structure the output as follows:
 
 ```markdown
 ---
@@ -70,6 +80,12 @@ sidebar_label: "<major.minor>"
 ## Release <version>
 
 **Release Date:** <date>
+
+### New Features
+
+- **<ISSUE-ID> <concise title>:** Brief feature description and details.
+------
+- **<ISSUE-ID> <concise title>:** Brief feature description and details.
 
 ### Resolved Issues
 
@@ -85,7 +101,7 @@ sidebar_label: "<major.minor>"
 - New features open with a capability statement.
 - Separate consecutive entries with `------` (six dashes, on its own line).
 - Group entries by version under `## Release <version>` headings.
-- Within each version, group under `### New Features`, `### Resolved Issues`, or `### Caveats` as appropriate.
+- Within each version, group entries under `### New Features`, `### Resolved Issues`, or `### Caveats` using the categorization rules defined above. Omit any heading that has no entries.
 
 ### Step 6 — Review and Save
 
@@ -101,6 +117,7 @@ JQL: type in (Bug) AND status in (Resolved, Closed) AND resolution in (Done) AND
 ## Important
 
 - Do NOT fabricate issue details. Every entry must be grounded in the JIRA issue and/or the linked PR description.
+- Customer names MUST be excluded from Issue titles and description.
 - Do NOT run the Docusaurus build after generating release notes.
 - Write in second person, active voice, present tense.
 - Use Title Case for headings.
