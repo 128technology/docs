@@ -9,6 +9,28 @@ The SSR-cloud-ha plugin provides High Availability (HA) functionality for the SS
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
+## Supported Modes
+
+The Cloud HA plugin supports two modes of operation: **dual-node** and **dual-router**.
+
+### Dual Node Mode
+
+In dual-node mode, two nodes belong to the same router. This mode is suitable for scenarios where redundancy is required within a single router. Both nodes share the same configuration and operate in a coordinated manner to ensure high availability. The failover process is managed internally within the router, leveraging the health status of the nodes to determine which node should be active.
+
+### Dual Router Mode
+
+In dual-router mode, two routers are configured, each with one node. This mode is designed for scenarios where redundancy is required across separate routers. Each router operates independently, and the Cloud HA plugin ensures that only one node is active at a time. The failover process involves communication between the routers to determine the health and status of the nodes, ensuring seamless traffic handling during failover events.
+
+These modes provide flexibility in deploying high availability solutions based on the specific requirements of the network architecture.
+
+:::warning
+Version 6.x supports dual-node mode only and dual-router mode is not supported. On version < 6.x, dual-node is not supported.
+:::
+
+:::note
+Dual node supported solutions are `azure-vnet`, `aws-vpc`, `aws-tgw` and `gcp-vpc`
+:::
+
 ## Supported Solutions
 
 | Solution Name      | `solution-type` | Available In Version |
@@ -16,6 +38,9 @@ The instructions for installing and managing the plugin can be found [here](plug
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
 | Alicloud VPC       | `alicloud-vpc`  | 3.0.0                |
+| AWS VPC            | `aws-vpc`       | 6.0.0                |
+| AWS TGW            | `aws-tgw`       | 6.0.0                |
+| GCP VPC            | `gcp-vpc`       | 6.0.0                |
 
 
 ## Version Restrictions
@@ -193,13 +218,19 @@ authority
         additional-branch-prefix 2.2.2.2/24
         up-holddown-timeout 2
         peer-reachability-timeout 10
-        remote-health-network 169.254.180.0/24
         health-interval 2
     exit
     cloud-redundandy-group group2
         name group2
         solution-type azure-vnet
         include-peer-vnets false
+    exit
+    cloud-redundancy-group group3
+        name group3
+        enabled true
+        solution-type aws-tgw
+        auto-discover-route-table true
+        health-interval 2
     exit
 exit
 ```
@@ -213,9 +244,12 @@ exit
 | up-holddown-timeout       | int             | default: 2                                     | The number of seconds to wait before declaring a member up.                                                                          |     |
 | peer-reachability-timeout | int             | default: 10                                    | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |     |
 | health-interval           | int             | default: 2                                     | The interval in seconds for health reports to be collected.                                                                          |     |
-| remote-health-network     | ip-prefix       | default: 169.254.180.0/24                      | The ip prefix to use for inter-member health status messages.                                                                        |     |
+| remote-health-network     | ip-prefix       |                      | The ip prefix to use for inter-member health status messages.                                                                        |     |
 | include-peer-vnets        | boolean         | if: solution-type = azure-vnet, default: false | Whether to include peer VNETs as part of the route table discovery algorithm.                                                        |     |
 | probe-port                | port            | if: solution-type = azure-lb, default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.                                                             |     |
+| extra-route-table         | list            | if: solution-type = azure-vnet AND auto-discover-route-table: false   | A list of Azure User Defined Route (UDR) tables where custom routing entries will be injected or modified. Each entry specifies the Azure subscription ID, resource group name, and route table name.                                                             |     |
+| auto-discover-route-table | boolean         | if: solution-type = azure-vnet OR aws-tgw OR gcp-vpc, default: true   | Enables automatic discovery of Route Tables within the specified VNet/VPC. When set to 'true', the system will scan for existing UDRs instead of requiring manual entry.                                                             |     |
+| tgw-route-table-id        | string          | if: solution-type = aws-tgw AND auto-discover-route-table: false   | The TGW Route Table ID to modify when becoming active. Ex. tgw-rtb-00000000000000001. If this field is not specified, then you must use the Tag approach to specify the information.                                                             |     |
 
 ### Membership
 
@@ -253,7 +287,10 @@ exit
 | Element                         | Type            | Properties                | Description                                                                                                                                                   |
 | ------------------------------- | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | cloud-redundancy-plugin-network | ip-network      | default: 169.254.137.0/30 | The ip network to use for internal networking. This should only be configured when the default value conflicts with a different service in the configuration. |
+| enabled                         | boolean         | default: true             | Enable or disable the cloud redundancy member.                                                                                        |
 | cloud-redundancy-group          | reference       | required                  | The group that this member belongs to.                                                                                                                        |
+| dns-server                      | list: ipv4      | max-value:2               | DNS servers to be used for Cloud HA specific management traffic. Defaults specific to the solution-type will be used if none are configured to.                                                                                                                        |
+| tgw-attachment-id               | string          |                           | The TGW Attachment ID to use when this member becomes active. This field is only relevant when solution-type is aws-tgw. Ex. tgw-attach-00000000000000001. If this field is not specified, then you must use the Tag approach to specify the information to.                                                                                                                        |
 | priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference.                                                                                        |
 | redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members.                                                           |
 | additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations.                                                 |
@@ -291,6 +328,16 @@ The following criteria need to be met in order for the cloud-ha plugin to take e
 * Priorities across all members in a group are unique.
 * IP Network fields such as `remote-health-network` and `cloud-redundancy-plugin-network` are validated to be an acceptable prefix size.
 * The `peer-reachability-timeout` for a group must be at least twice the amount of time as the `health-interval`.
+* Cloud Redundancy Group referenced by membership does not exist.
+* Router cannot be a member of multiple cloud redundancy groups.
+* Properties `dns-server` and `extra-route-table` can only be configured in dual-node HA mode.
+* Solution types `aws-vpc`, `aws-tgw` and `gcp-vpc` can only be configured in dual-node HA mode.
+* `tgw-attachment-id` can only be configured in AWS TGW solution type.
+* `auto-discover-route-table` must be disabled to configure `tgw-attachment-id`.
+* `shared-phys-address` cannot be configured in cloud HA mode.
+* `tgw-attachment-id` must be configured on both members when `auto-discover-route-table` is disabled for AWS TGW solution type.
+* `tgw-route-table-id` must be configured when `auto-discover-route-table` is disabled for AWS TGW solution type.
+* At least one `extra-route-table` must be configured when `auto-discover-route-table` is disabled for Azure VNET solution type.
 
 Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on the Conductor for the errors causing the config to be invalid.
 
@@ -334,9 +381,9 @@ The different services on the router all log to the files captured by the glob `
 
 
 ### PCLI Enhancements
-To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
+To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. From **version 6.x**, plugin output is available in `show plugins state detail 128T-cloud-ha` command.  This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
-#### State Fields
+#### State Fields for <6.x
 
 | Field                    | Description                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
@@ -462,6 +509,90 @@ Wed 2022-09-21 10:31:57 CST
      remote-status:   healthy
 
 Completed in 0.04 seconds
+```
+
+#### State Fields for >=6.x
+
+| Field                        | Description                                                                                               |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------- |
+| enabled                      | Whether the Cloud HA group is enabled.                                                                    |
+| is-node-active               | Whether the HA Agent considers itself active.                                                             |
+| local-status                 | The understood state of the local node.                                                                   |
+| remote-status                | The understood state of the remote node.                                                                  |
+| last-activity-change         | The timestamp of the last time the node called the became active or became inactive API on the API Agent. |
+| redundant-target-interface   | The name of the first interface from the list of `redundant-interface`s that is healthy.                  |
+| redundant-target-mac-address | The mac address of the first interface from the list of `redundant-interface`s that is healthy.           |
+| prefixes                     | The list of configured prefixes. See `Address Prefixes`.                                                  |
+| api-agent-state              | The collected state returned by the API Agent, including solution type, region, and cloud resource details (for example, TGW route tables for `aws-tgw`). |
+
+Example output for the `aws-tgw` solution:
+```
+# show  plugins state detail 128T-cloud-ha
+Thu 2026-05-14 10:02:15 UTC
+✔ Retrieving state data...
+
+
+===============================================================================
+node0.SPOKE-HA-aws-ard
+===============================================================================
+state:
+     enabled:                                  True
+     is-node-active:                           True
+     local-status:                             healthy
+     remote-status:                            healthy
+     last-activity-change:                     Thu 2026-05-14 09:56:40 UTC
+     redundant-target-interface:               LAN
+     redundant-target-mac-address:             12:23:a1:74:89:f7
+     prefixes:
+       10.0.136.0/24
+     api-agent-state:
+         collected-at:                         Thu 2026-05-14 10:02:07 UTC
+         solution:                             aws-tgw
+         info:
+           region:                             us-east-1
+           tgw-route-tables:
+             tgw-rtb-0d53b8a2a75f4df4f:
+               CreationTime:                   2026-04-01 06:39:57+00:00
+               DefaultAssociationRouteTable:   True
+               DefaultPropagationRouteTable:   True
+               Routes:
+                 10.0.136.0/24:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-031f2f9f5675f3d16
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-08782721662ea3dbf
+                   Type:                       static
+                 10.1.0.0/16:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-031f2f9f5675f3d16
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-08782721662ea3dbf
+                   Type:                       propagated
+                 10.2.0.0/16:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-070b11f2dee06d4f2
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-0f56f374ef73dae1f
+                   Type:                       propagated
+                 10.4.0.0/24:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-05e9781435887c745
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-082b38ff06e95a187
+                   Type:                       propagated
+               State:                          available
+               Tags:
+                   Key:                        Name
+                   Value:                      TGW-SSR
+               TransitGatewayId:               tgw-063a919a8653d2b54
+
+
+Retrieved state data.
+Completed in 0.24 seconds
 ```
 
 ### Systemd Services
