@@ -33,8 +33,6 @@ The conductor address is the IP address that managed routers use to reach this c
 
 <SetConductorIP/>
 
-For this guide, enter `192.168.100.10` as the conductor address.
-
 ## 4. Create the Corporate Tenant
 
 Tenants logically partition the network. The `corp` tenant represents corporate LAN users and is referenced by the LAN interface configuration on each branch router.
@@ -73,7 +71,7 @@ At the end of this step your authority contains:
 | Object | Name | Value |
 |--------|------|-------|
 | Authority | `Authority128` | |
-| Conductor Address | | `192.168.100.10` |
+| Conductor Address | | `192.168.100.10/24` |
 | Tenant | `corp` | LAN-side user population |
 | Service | `Internet-Traffic` | `0.0.0.0/0`, access from `corp` |
 
