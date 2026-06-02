@@ -41,7 +41,13 @@ These steps configure the interface you will use to initialize the conductor via
 
    ![Boot Warnings](/img/dep-vmware-boot-warnings.png)
 
-   Additionally, the message `Device Registered with Mist Cloud: Attemptoing to Connect` can also be ignored.
+   When the message `Device Registered with Mist Cloud: Attempting to Connect` , enter `systemctl stop 128T-mist-agent`.
+
+   ![Mist messages](/img/dep-vmware-mistmessages.png)
+
+   These messages appear in error due to the instance attempting to connect to the Mist Cloud. Since this instance is going to be configured as a conductor, there is no reason for the Mist service to be running. 
+
+   This issue will be resolved in a future release. 
 
 2. Select **Console** and login using the root credentials.
 
@@ -54,21 +60,21 @@ These steps configure the interface you will use to initialize the conductor via
    ge-0-0 =00:0c:29:68:78:7c
    ```
 
-3a. If you do not see the `ge-0-0` interface, use the following steps to retrieve the information from the SSR CLI:
+   3a. If you do not see the `ge-0-0` interface, use the following steps to retrieve the information from the SSR CLI:
 
-   - From the linux shell, run the command `su admin` to enter the SSR CLI.
-   - Run `show network-interface | more`.
+      - From the linux shell, run the command `su admin` to enter the SSR CLI.
+      - Run `show network-interface | more`.
 
-   ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
+      ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
 
-   - Locate the ge-0-0 interface, and make a note of the IP address.
-   - Open a web browser and point it to the IP address of the ge-0-0 interface. If the SSR login screen appears, skip to the Initialize the Conductor steps.
-   - If the SSR login screen does not appear, return to the CLI and run the following commands:
-   ```
-   admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service web service-type web
-   admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service ssh service-type ssh 
-   admin@node.router# commit
-   ```
+      - Locate the ge-0-0 interface, and make a note of the IP address.
+      - Open a web browser and point it to the IP address of the ge-0-0 interface. If the SSR login screen appears, skip to the Initialize the Conductor steps.
+      - If the SSR login screen does not appear, return to the CLI and run the following commands:
+      ```
+      admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service web service-type web
+      admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service ssh service-type ssh 
+      admin@node.router# commit
+      ```
 
 4. From the Conductor VM in the ESXi Navigator, select **Actions** and then **Edit**.
 
@@ -95,47 +101,13 @@ These steps configure the interface you will use to initialize the conductor via
    systemctl is-active mars
    systemctl is-active firewalld
    ```
-
-<!---THERE IS A STEP MISSING HERE. YOU NEED TO GET FROM THE LINUX SHELL TO EITHER THE PCLI AND REBOOT, OR  
-
----
-1. After the system boots, the SSR login screen appears. Login to the Conductor VM and run the command `su admin `to enter the PCLI. 
+3. Run the command `su admin `to enter the PCLI. 
 
     ![Install complete login](/img/deploy-vmware-init-login.png)
 
-2. From the CLI, run the command `initialize conductor router-name Conductor node-name node0 node-ip <ip-address/netmask> node-gateway <gateway-ip-address> dns-servers 8.8.8.8`, substituting your node ip address and node gateway ip address where appropriate.
+4. From the CLI, run the command: 
 
-   After a few seconds, the message `Device successfully initialized` is displayed. The conductor VM will reboot, and then reboot a second time. 
-
-3. After the second reboot, open the console and login using the root credentials.
-
-4. Run the following commands until `Active` is displayed for each.
-
-   ```
-   systemctl is-active 128T 
-   systemctl is-active mars
-   systemctl is-active firewalld
-   ```--->
-
-3. Open a browser tab on your computer and navigate to `https://<ge-0-0 IP address>` in order to initiate a web session to the conductor GUI.
-
-   ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
-
-4. Accept the self-signed certificate warning, and begin the intialization process. 
-
-   ![Initialization UI](/img/u-iso8_launch_gui.png)
-
-5. Under **SSR Managed**, select **SSR Conductor**.
-
-   ![SSR Conductor Selection](/img/u-iso8a_initialize_conductor.png)
-
-6. On the Conductor Association screen, enter the conductor name you selected. 
-
-   ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
-
-7. Select **STANDALONE** for a single-conductor deployment. 
-
-8. Select the **STATIC** address type, and enter the following information:
+   `initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8`
 
    | Field | Example Value | Notes |
    |-------|--------------|-------|
@@ -143,22 +115,46 @@ These steps configure the interface you will use to initialize the conductor via
    | Node Gateway | `192.168.100.1` | Management network gateway |
    | Interface Name | `ge-0-0` | Management interface |
    | DNS Server | `8.8.8.8` | Required for software downloads |
-   | Admin Password | _(your choice)_ | Minimum 8 chars, 1 upper, 1 lower, 1 number |
+
+   After a few seconds, the message `Device successfully initialized` is displayed. The conductor VM will reboot, and then reboot a second time. 
+
+   After the second reboot, the login screen appears.
+
+5. Log in with username `admin` and admin password.
+
+   ![Login to the Conductor](/img/dep-1200-cond-login.png)
+
+6. On the Conductor Association screen, enter the conductor name you selected. 
+
+   ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
+
+7. Select **STANDALONE** for a single-conductor deployment. 
+
+8. Select the **STATIC** address type, and verify the following information:
+
+   | Field | Example Value | Notes |
+   |-------|--------------|-------|
+   | Node IP Address | `192.168.100.10/24` | Static management IP |
+   | Node Gateway | `192.168.100.1` | Management network gateway |
+   | Interface Name | `ge-0-0` | Management interface |
+   | DNS Server | `8.8.8.8` | Required for software downloads |
+
+9. Enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: must be a minimum of 8 characters, contain 1 upper case letter, 1 lower case letter, and 1 number.
 
    :::note
    The admin, root, and t128 accounts are all set to the password you enter here. Record this password securely — it cannot be recovered if lost, only reset with root access.
    :::
 
-9. Place a check next to **Provide Artifactory Credentials** and enter the username and token used to access the Juniper/HPE SSR software download pages.  
-   
+10. Place a check next to **Provide Artifactory Credentials** and enter the username and token used to access the Juniper/HPE SSR software download pages.  
+
    | Field | Example Value | Notes |
    |-------|--------------|-------|
    | Artifactory Username | _(your username)_ | Juniper software access |
    | Artifactory Password | _(your token)_ | Juniper software access token |
 
-10. Click **ASSOCIATE**.
+11. Click **ASSOCIATE**.
 
-The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
+   The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
 
 ## Verify the Installation
 
