@@ -1,0 +1,188 @@
+---
+title: "Step 2: Install the SSR Software and Initialize the Conductor"
+sidebar_label: "Install and Initialize"
+---
+
+This step boots the conductor VM from the SSR ISO, installs the software, and configures the VM as a standalone conductor with a static management IP.
+
+## Install SSR Software
+
+1. Select the VM in the ESXi Navigator and click the **Play** (Power On) button.
+
+   ![Power On](/img/dep10-vm-start.png)
+
+2. At the Install menu, use the arrow keys to select **VGA Console**.
+
+   ![Install Type](/img/dep10a-vm-vga.png)
+
+3. If you require FIPS mode, select Install Option 1 and press **Enter**. If FIPS is not required, press **Enter** without selecting an option. The download and installation begins.
+
+   :::note
+   IDP is not compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. If you plan to enable IDP, do not enable FIPS mode. See [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information on disabling FIPS mode if needed.
+   :::
+
+   ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)
+
+4. The installation runs to completion automatically. This may take approximately 15–20 minutes.
+
+   ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
+
+5. When prompted to reboot, allow the VM to shutdown.
+
+   ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
+
+## Configure the Conductor Management VLAN
+
+These steps configure the interface you will use to initialize the conductor via the Web GUI.
+
+:::note
+During initialization, the `mist-agent` attempts to connect to the Mist Cloud. This is enabled by default, and will persist until the service is stopped. In a conductor-managed, air-gap network, connection to Mist is unnecessary. It is recommended to stop and then disable the service. The commands are provided below.
+:::
+
+1. In the VM in the ESXi Navigator, start the Conductor Virtual Machine.
+
+   During the boot process, service failure warnings appear - these are due to services that are not yet running and can be ignored. 
+
+   ![Boot Warnings](/img/dep-vmware-boot-warnings.png)
+
+   The message `Device Registered with Mist Cloud: Attempting to Connect` displays in the window. 
+
+   ![Mist messages](/img/dep-vmware-mistmessages.png)
+
+   These messages appear due to the instance attempting to connect to the Mist Cloud. The `mist-agent` is enabled by default and will continue to reach out to Mist to connect. In Conductor-managed air-gap networks where there is never any intent to connect to Mist, disabling the Mist Agent has no operational impact, and is actually desirable. Stopping the Mist Agent stops the messages, allowing you to continue the process. 
+
+2. Run the following two commands to disable the service and stop the messages. 
+
+   ```
+   systemctl disable 128T-mist-agent
+   systemctl stop 128T-mist-agent
+   ```
+
+3. Select **Console** and login using the root credentials.
+
+4. From the linux prompt run the command `ip a | more` . Make a note of the `ge-0-0` interface and MAC address association.
+
+   ![Conductor Console](/img/dep-vm-conductor-ipamore.png)
+
+   Example:
+   ```
+   ge-0-0 =00:0c:29:68:78:7c
+   ```
+
+   4a. If you do not see the `ge-0-0` interface, use the following steps to retrieve the information from the SSR CLI:
+
+      - From the linux shell, run the command `su admin` to enter the SSR CLI.
+      - Run `show network-interface | more`.
+
+      ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
+
+      - Locate the ge-0-0 interface, and make a note of the IP address.
+      - Open a web browser and point it to the IP address of the ge-0-0 interface. If the SSR login screen appears, skip to the Initialize the Conductor steps.
+      - If the SSR login screen does not appear, return to the CLI and run the following commands:
+      ```
+      admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service web service-type web
+      admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service ssh service-type ssh 
+      admin@node.router# commit
+      ```
+
+5. From the Conductor VM in the ESXi Navigator, select **Actions** and then **Edit**.
+
+   ![Edit VM settings](/img/dep-edit-ge-intf.png)
+
+6. Select **Network Adapters** and verify the `ge-0-0` MAC address from step 3 is displayed.
+
+7. Set **Network Adapter 1** to `VM Network`. 
+
+   All `ge-0-0` interfaces on all routers in the network will be in the VM Network management network. 
+
+8. Click **Save**.
+
+## Initialize the Conductor
+
+1. After the system boots, the SSR login screen appears. Login using the root credentials.
+
+   ![Conductor Login](/img/dep-vmware-conductor-login.png)
+
+2. Run the following commands until `Active` is displayed for each.
+
+   ```
+   systemctl is-active 128T 
+   systemctl is-active mars
+   systemctl is-active firewalld
+   ```
+3. Run the command `su admin `to enter the PCLI. 
+
+    ![Install complete login](/img/deploy-vmware-init-login.png)
+
+4. From the CLI, run the command: 
+
+   `initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8`
+
+   | Field | Example Value | Notes |
+   |-------|--------------|-------|
+   | Node IP Address | `192.168.100.10/24` | Static management IP |
+   | Node Gateway | `192.168.100.1` | Management network gateway |
+   | Interface Name | `ge-0-0` | Management interface |
+   | DNS Server | `8.8.8.8` | Required for software downloads |
+
+   After a few seconds, the message `Device successfully initialized` is displayed. The conductor VM will reboot, and then reboot a second time. 
+
+   After the second reboot, the login screen appears.
+
+5. Log in with username `admin` and admin password.
+
+   ![Login to the Conductor](/img/dep-1200-cond-login.png)
+
+6. On the Conductor Association screen, enter the conductor name you selected. 
+
+   ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
+
+7. Select **STANDALONE** for a single-conductor deployment. 
+
+8. Select the **STATIC** address type, and verify the following information:
+
+   | Field | Example Value | Notes |
+   |-------|--------------|-------|
+   | Node IP Address | `192.168.100.10/24` | Static management IP |
+   | Node Gateway | `192.168.100.1` | Management network gateway |
+   | Interface Name | `ge-0-0` | Management interface |
+   | DNS Server | `8.8.8.8` | Required for software downloads |
+
+9. Enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: must be a minimum of 8 characters, contain 1 upper case letter, 1 lower case letter, and 1 number.
+
+   :::note
+   The admin, root, and t128 accounts are all set to the password you enter here. Record this password securely — it cannot be recovered if lost, only reset with root access.
+   :::
+
+10. Place a check next to **Provide Artifactory Credentials** and enter the username and token used to access the Juniper/HPE SSR software download pages.  
+
+   | Field | Example Value | Notes |
+   |-------|--------------|-------|
+   | Artifactory Username | _(your username)_ | Juniper software access |
+   | Artifactory Password | _(your token)_ | Juniper software access token |
+
+11. Click **ASSOCIATE**.
+
+   The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
+
+## Verify the Installation
+
+After the VM restarts, confirm the conductor is accessible on the management network:
+
+1. Reconnect your laptop to the management network. Remove the static `192.168.128.x` address you assigned earlier.
+
+2. Open a web browser and navigate to:
+
+   ```
+   https://192.168.100.10
+   ```
+
+3. Log in with username `admin` and the password set during initialization.
+
+   ![Login to the Conductor](/img/dep-1200-cond-login.png)
+
+   A successful login confirms the conductor is running and reachable on the management network.
+
+## Next Step
+
+Proceed to [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).

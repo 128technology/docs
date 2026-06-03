@@ -1,0 +1,128 @@
+---
+title: "Appendix - VMware Conductor Configuration"
+sidebar_label: "Appendix - VMware Conductor Configuration"
+---
+
+This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi conductor described in this guide. Apply this configuration after completing [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).
+
+## Network Design Reference
+
+The following values are used in this configuration. Substitute your own values where noted.
+
+| Parameter | Example Value | Description |
+|-----------|--------------|-------------|
+| Authority Name | `Authority128` | Organizational authority name |
+| Conductor Name | `conductor` | |
+| Conductor Node Name | `node0` | |
+| Conductor Management IP | `192.168.100.10` | Static IP on VMware management network |
+| Conductor Subnet Mask | `/24` | |
+| Conductor Gateway | `192.168.100.1` | Management network gateway |
+| Conductor NIC PCI Address | `0000:0b:00.0` **Example only** | Discover actual value with `ethtool -i <iface> \| grep bus-info` |
+
+## Applying This Configuration
+
+This configuration can be applied to a freshly initialized conductor using the PCLI import function.
+
+1. Save the configuration below to a file — for example `vmware-conductor.cfg`.
+
+2. Copy the file to the conductor:
+
+   ```bash
+   scp vmware-conductor.cfg admin@192.168.100.10:/tmp/
+   ```
+
+3. Log in to the conductor PCLI:
+
+   ```bash
+   ssh admin@192.168.100.10
+   ```
+
+4. Enter configuration mode and import:
+
+   ```
+   admin@node0.conductor1# import config /tmp/vmware-conductor.cfg
+   ```
+
+5. Review any validation warnings, then commit:
+
+   ```
+   admin@node0.conductor1 (config)# commit
+   Are you sure you want to commit the candidate config? [y/N]: y
+   ```
+
+Alternatively, you may copy and paste each block into the PCLI while in `configure` → `edit` mode.
+
+## Complete Conductor Configuration
+
+```
+config
+    authority
+        name              Authority128
+
+        conductor-address  192.168.100.10
+
+        tenant  corp
+            name  corp
+        exit
+
+        service  Internet-Traffic
+            name             Internet-Traffic
+            scope            public
+            security         internal
+
+            access-policy
+                source  corp
+            exit
+
+            address  0.0.0.0/0
+        exit
+
+        router  conductor1
+            name                 conductor1
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  conductor
+
+                device-interface  mgmt-dev
+                    name         mgmt-dev
+                    type         ethernet
+                    pci-address  0000:0b:00.0
+                    forwarding   false
+
+                    network-interface  mgmt-intf
+                        name  mgmt-intf
+                        type  management
+
+                        address  192.168.100.10
+                            ip-address     192.168.100.10
+                            prefix-length  24
+                            gateway        192.168.100.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+## Configuration Notes
+
+:::important
+The `pci-address` value `0000:0b:00.0` is an example. The actual PCI address of the VMXNet3 NIC in your conductor VM must be discovered after installation. From the Linux shell on the conductor, run:
+
+```bash
+ethtool -i <interface-name> | grep bus-info
+```
+
+Substitute the discovered value in the `device-interface  mgmt-dev` block before applying this configuration.
+:::
+
+| Item | Note |
+|------|------|
+| `pci-address` (conductor NIC) | **Must be replaced** with the actual VMXNet3 NIC PCI address. The value `0000:0b:00.0` varies by VM slot assignment. |
+| `conductor-address` | Replace `192.168.100.10` with the actual static IP assigned to the conductor VM if different. |
+| `gateway` | Replace `192.168.100.1` with your management network gateway. |
+| `forwarding` on conductor NIC | Set to `false` — the conductor management NIC is not a forwarding interface. |

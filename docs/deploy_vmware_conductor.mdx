@@ -1,0 +1,79 @@
+---
+title: "VMware ESXi Conductor Deployment Guide"
+sidebar_label: Overview
+---
+import Mermaid from '@theme/Mermaid';
+import NetworkDesign from './_deploy_vmware_conductor_network_design.md';
+
+This guide walks a network engineer through deploying a **VMware ESXi virtual machine as a standalone SSR Conductor**. When you have completed the steps in this deployment, the conductor VM will be running SSR 7.1.4-3r2, configured with an authority name, conductor address, and shared services that allow branch routers to onboard and begin forwarding traffic.
+
+## Guide Topics
+
+| Step | Topic | Description |
+|------|-------|-------------|
+| 1 | [Create the VMware VM](deploy_vmware_conductor_vm.mdx) | Create and configure a VMware ESXi VM to host the conductor |
+| 2 | [Install SSR 7.1.4-3r2 and Initialize the Conductor](deploy_vmware_conductor_install.mdx) | Boot the ISO, install SSR, and configure the conductor role |
+| 3 | [Configure the Conductor](deploy_vmware_conductor_config.mdx) | Set the authority name, conductor address, tenant, and internet service |
+| — | [Appendix — Conductor Configuration](deploy_appendix_vmware_conductor.mdx) | Complete VMware conductor PCLI configuration reference |
+
+## Network Topology
+
+The diagram below shows the logical network this guide builds.
+
+<Mermaid chart={`
+graph TD
+    Internet((Internet))
+    subgraph ESXi["VMware ESXi Host"]
+        ConductorVM["SSR Conductor VM\n(conductor1)\n1x VMXNet3 NIC\n192.168.100.10/24"]
+    end
+    subgraph MgmtNet["Management Network (192.168.100.0/24)"]
+        Gateway["Management Gateway\n192.168.100.1"]
+    end
+    subgraph Branch["Branch Office"]
+        Router["SSR130 Router\n(branch1)\nWAN: DHCP (ge-0-0)"]
+        LAN["LAN Devices\n192.168.1.0/24\nTenant: corp\n(ge-0-3 — 192.168.1.1)"]
+    end
+    ISP(["ISP WAN"])
+
+    Internet <-->|"Internet"| ISP
+    ISP <-->|"DHCP"| Router
+    Router <-->|"Internet Breakout\n(service: Internet-Traffic)"| Internet
+    LAN <-->|"LAN"| Router
+    Router <-->|"Management over\nForwarding (WAN)\nPort 930 / 4505 / 4506"| Gateway
+    ConductorVM <-->|"Management"| Gateway
+`}/>
+
+## Roles
+
+| Device | Type | Role |
+|--------|------|------|
+| `Conductor` | VMware ESXi VM | Standalone SSR Conductor — centralized management and provisioning |
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Prerequisites
+
+Before beginning, ensure the following are available:
+
+- **VMware ESXi 7.0 or later** — administrative access to an ESXi host.
+- **SSR 7.1.4-3r2 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
+- **Juniper software access credentials** — Artifactory username and password for software downloads and token provisioning.
+- **Management network** — a VMware portgroup providing internet access for software downloads, with a static IP assignment available for the conductor VM.
+- **Static IP assignment for the conductor** — the IP address assigned to the conductor must be reachable from each branch router's WAN interface (directly or via routing). This guide uses `192.168.100.10`.
+
+## Software Version Requirements
+
+This guide uses **SSR 7.1.4-3r2** on the conductor.
+
+:::note
+The router software version cannot be higher than the conductor software version.
+:::
+
+## Related Documentation
+
+- [System Requirements](intro_system_reqs)
+- [Conductor Deployment Best Practices](bcp_conductor_deployment)
+- [Management Traffic over Forwarding Interfaces](config_management_over_forwarding)
+- [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor)
