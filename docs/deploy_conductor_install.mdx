@@ -1,0 +1,165 @@
+---
+title: Install the Conductor
+sidebar_label: Install the Conductor
+---
+import SSR1200Ports from './_deploy_ssr1200_port_map.md';
+import VerifyConductorInstall from './_install_verify_conductor_install.md';
+import ChangeDefaultPasswords from './_change_def_passwords.md';
+import ConfigureToken from './_configure_token.md';
+
+This section covers the physical hardware setup and software installation for the SSR1200 being used as the conductor. The SSR1200 conductor provides centralized management for all branch routers in the network.
+
+SSR 7.1.5 uses the **Universal ISO** installation process. If your SSR1200 shipped with SSR 6.3.0 or later pre-installed, skip the [Install the Software](#install-the-software) section and proceed directly to [Initialize the Conductor](#initialize-the-conductor).
+
+If your device has an SSR software version lower than SSR 6.3.0, there are specific requirements for upgrading to the latest SSR version. Please use the detailed instructions in [Upgrading the Conductor](upgrade_ibu_conductor#upgrade-using-the-gui) before proceeding. 
+
+To help you identify the number of managed routers your SSR device can support, refer to the [Conductor Scaling Recommendations](intro_system_reqs.md#conductor-scaling-recommendations) in the System Requirements documentation. 
+
+## SSR1200 Port Reference
+
+<SSR1200Ports/>
+
+## Physical Setup
+
+Connect the SSR1200 before powering it on:
+
+1. **Connect the MGMT port** (`mgmt-0-0`, PCI `0000:03:00.0`) to a management network switch port that provides:
+    - A static IP assignment 
+    - Connectivity to the internet (required for software downloads)
+
+2. **Connect a laptop** to any LAN port (Port 0/3 through Port 0/5) using a standard Ethernet cable. The laptop will be used to access the device initialization web interface at `https://192.168.128.1` during setup.
+
+3. Do **not** power on the device yet.
+
+## Install the Software
+
+:::note
+Skip this section if your SSR1200 already has SSR 6.3.0 or later installed.
+:::
+
+### Download the ISO
+
+Download the SSR 7.1.5 ISO from the Juniper software repository:
+
+- URL: [https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/](https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/)
+- You will be prompted for your Artifactory username and software access token.
+- Select the `SSR-7.1.5-7.r2.el9.x86_64.ibu-v1.iso` ISO file.
+
+For instructions on creating a bootable USB from the ISO, see [Creating a Bootable USB](intro_creating_bootable_usb.md).
+
+### Boot from USB
+
+1. Connect the bootable USB to a USB port on the SSR1200.
+2. Connect a console cable (RJ-45 rollover) to the **CONSOLE** port on the SSR1200 and to your laptop or console server. Set the baud rate to **115200 bps**.
+3. Power on the SSR1200.
+4. When the prompt `Press ESC for boot menu` appears, press **ESC**.
+5. From the boot menu, select the USB device number and press **Enter**.
+6. From the boot menu, press **TAB** or **DEL** to enter Setup if required.
+
+### Run the Installer
+
+1. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
+
+    ![Choose Image](/img/u-iso2_choose_image.png)
+
+2. At the Install menu, select **Serial Console**.
+
+    ![Install Type](/img/u-iso3_choose_install_type.png)
+
+    :::note
+    Select **Serial** when using a console cable (recommended for data-center installations), and be sure the baud rate is set to 115200 bps. Select **VGA** only if you have a keyboard and monitor connected directly to the device. If no selection is made within 30 seconds, the system defaults to the **Serial Console** boot option.
+    :::
+
+3. If you are installing a FIPS enabled system, select Install Option 1, then press **Enter**. 
+
+    If you are installing a physical device and do not require FIPS, skip the options and select **Enter**. The download and installation begins.
+
+    :::note
+    IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
+
+    If after installation you require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
+    :::
+ 
+
+    ![Install Options](/img/u-iso4_install_options.png)
+
+4. The installation runs to completion automatically. This may take approximately 15–20 minutes.
+
+    ![Install Progress](/img/u-iso5_begin_install.png)
+
+5. When prompted to reboot, allow the device to restart. Remove the USB drive before the next boot.
+
+    ![Install Complete](/img/u-iso6_unpacker_complete.png)
+
+## Initialize the Conductor
+
+The SSR1200 exposes a web-based initialization interface on its LAN ports after the first boot. Use this interface to configure the conductor role, management IP address, and admin credentials.
+
+1. Ensure your laptop is connected to a LAN port on the SSR1200 and has a static IP in the `192.168.128.0/24` subnet.
+
+    :::note
+    Assign your laptop a static IP address in the range `192.168.128.2`–`192.168.128.254` with a subnet mask of `255.255.255.0` before connecting. The initialization web interface is only accessible on the LAN-side ports prior to initialization.
+    :::
+
+2. Open a web browser and navigate to:
+
+    ```
+    https://192.168.128.1
+    ```
+
+    Accept the self-signed certificate warning.
+
+    ![Initialization UI](/img/u-iso8_launch_gui.png)
+
+3. Under **SSR Managed**, select **SSR Conductor**.
+
+    ![SSR Conductor Selection](/img/u-iso8a_initialize_conductor.png)
+
+4. Select **STANDALONE** for a single-conductor deployment. Select the **STATIC** address type, the **Provide Artifactory Credentials** checkbox, and enter the following information:
+
+    | Field | Example Value | Notes |
+    |-------|--------------|-------|
+    | Conductor Name | `conductor1` | Used as the router name in the authority |
+    | Node IP Address | `192.168.100.10` | Static management IP |
+    | Node Gateway | `192.168.100.1` | Management network gateway |
+    | Interface Name | `mgmt-0-0` | Management interface |
+    | DNS Server | `8.8.8.8` | Optional; required for software downloads |
+    | Admin Password | _(your choice)_ | Minimum 8 chars, 1 upper, 1 lower, 1 number |
+    | Artifactory Username | _(your username)_ | Juniper software access |
+    | Artifactory Password | _(your token)_ | Juniper software access token |
+
+    ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
+
+    :::note
+    The admin, root, and t128 accounts are all set to the password you enter here.
+    :::
+
+    :::important
+    Record this password securely. It cannot be recovered if lost — only reset, which requires root access.
+    :::
+
+5. Click **ASSOCIATE**.
+
+6. The SSR1200 reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
+
+## Verify the Installation
+
+After the device restarts, connect your laptop to the management network and verify the conductor is running:
+
+:::note
+At this point, it is good practice to remove the static IP previously set from your laptop.
+:::
+
+Access the conductor GUI from the management network using:
+
+```
+https://192.168.100.10
+```
+
+![Login to the Conductor](/img/dep-1200-cond-login.png)
+
+Log in with username `admin` and the password set during initialization.
+
+## Next Step
+
+Proceed to [Configure the Conductor](deploy_conductor_config.mdx).

@@ -1,0 +1,142 @@
+---
+title: "Appendix - Router Configuration"
+sidebar_label: "Appendix - Router Configuration"
+---
+import NetworkDesign from './_deploy_network_design.md';
+
+This appendix contains the SSR130 branch router configuration in SSR PCLI format. This is the router-scoped portion of the configuration staged on the conductor for `branch1`. It reflects the final state after completing [Configure the Router on the Conductor](deploy_router_config.mdx) and [Upgrade Routers to 7.1.5](deploy_router_upgrade.mdx).
+
+The complete authority-level configuration (including the service and tenant objects that the router depends on) is in [Appendix - Conductor Configuration](deploy_appendix_conductor.mdx).
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Router Configuration
+
+The following block shows the `branch1` router section in isolation, as it would appear within the authority configuration.
+
+```
+config
+    authority
+
+        router  branch1
+            name                 branch1
+            inter-node-security  internal
+
+            dns-config  automatic
+                mode  automatic
+            exit
+
+            node  node0
+                name      node0
+                role      combo
+                asset-id  SSR130-ABC1234567
+
+                device-interface  wan-dev
+                    name        wan-dev
+                    type        ethernet
+                    pci-address  0000:04:00.3
+                    forwarding   true
+
+                    network-interface  wan1
+                        name           wan1
+                        type           external
+                        conductor      true
+                        default-route  true
+                        source-nat     true
+                        management     true
+                        dhcp           v4
+
+                        management-vector  mgmt-vec-wan
+                            name      mgmt-vec-wan
+                            priority  10
+                        exit
+
+                        neighborhood  internet
+                            name      internet
+                            topology  spoke
+                        exit
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name        lan-dev
+                    type        ethernet
+                    pci-address  0000:04:00.0
+                    forwarding   true
+
+                    network-interface  lan1
+                        name    lan1
+                        type    external
+                        tenant  corp
+
+                        address  192.168.1.1
+                            ip-address     192.168.1.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route  internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+                type          service-agent
+
+                next-hop  node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+        exit
+
+    exit
+exit
+```
+
+## Interface Summary
+
+| Interface | Device | PCI Address | Type | Configuration |
+|-----------|--------|-------------|------|--------------|
+| `wan1` | `wan-dev` (`ge-0-0`, Port 0) | `0000:04:00.3` | External | DHCP; conductor=true; management over forwarding; neighborhood `internet` |
+| `lan1` | `lan-dev` (`ge-0-3`, Port 3) | `0000:04:00.0` | External | Static `192.168.1.1/24`; tenant `corp` |
+
+## Service Forwarding Summary
+
+| Service | Route | Type | Egress Interface |
+|---------|-------|------|-----------------|
+| `Internet-Traffic` (0.0.0.0/0) | `internet-route` | `service-agent` | `wan1` (direct breakout) |
+
+## Configuration Notes
+
+| Item | Note |
+|------|------|
+| `asset-id` | Replace `SSR130-ABC1234567` with the device serial number |
+| LAN address | Replace `192.168.1.1/24` with the actual LAN subnet for this branch |
+| `source-nat` | Must be `true` on the management interface; management traffic originates from `169.254.x.x` |
+| `default-route` | Must be `true`; causes Linux to forward all OS-originated traffic through the SSR engine |
+| `conductor` | Must be `true` on the WAN interface for the router to reach the conductor over the forwarding plane |
+| Neighborhood | The `internet` neighborhood on the WAN interface allows this router to peer with hub routers via SVR if added later |
+
+## Verifying the Running Configuration
+
+To view the running configuration for this router from the conductor PCLI:
+
+```bash
+show config running authority router branch1
+```
+
+To compare the running configuration against the candidate (uncommitted changes):
+
+```bash
+show config candidate authority router branch1
+```
+
+To export the entire authority configuration to a file:
+
+```bash
+export config running filename acmecorp-export.cfg
+```
+
+The exported file is saved to `/etc/128technology/config-exports/` on the conductor.

@@ -7,6 +7,79 @@ module.exports = {
       "about_releases",
       "about_support_policy",
     ],
+    "Deployment Guides": [
+      "deploy_guides_overview",
+      {
+        "type": "category",
+        "label": "Conductor Deployment Guides",
+        "items": [
+            {
+              "type": "category",
+              "label": "SSR1200 Conductor",
+              "items": [
+                "deploy_overview",
+                "deploy_conductor_install",
+                "deploy_conductor_config",
+                "deploy_router_config",
+                "deploy_appendix_conductor",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "VMware ESXi Conductor",
+              "items": [
+                "deploy_vmware_conductor",
+                "deploy_vmware_conductor_vm",
+                "deploy_vmware_conductor_install",
+                "deploy_vmware_conductor_config",
+                "deploy_appendix_vmware_conductor",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "AWS Conductor",
+              "items": [
+                "deploy_aws_conductor",
+              ],
+            },
+          ],
+        },
+        {
+          "type": "category",
+          "label": "Router Deployment Guides",
+          "items": [
+            {
+              "type": "category",
+              "label": "SSR130 Router",
+              "items": [
+                "deploy_router_onboard",
+                "deploy_router_upgrade",
+                "deploy_verify",
+                "deploy_appendix_router",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "VMware Router",
+              "items": [
+                "deploy_vmware_router_overview",
+                "deploy_vmware_router_vm",
+                "deploy_vmware_router_install",
+                "deploy_vmware_router_pci",
+                "deploy_vmware_router_config",
+                "deploy_appendix_vmware_router",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "AWS Router",
+              "items": [
+                "deploy_aws",
+              ],
+            },
+          ],
+        },
+      ],
     "Release Notes": [
       {
         "type": "category",
@@ -76,7 +149,7 @@ module.exports = {
           "release_notes_byol_3.0",
           "release_notes_byol_2.0",
           "release_notes_byol"
-        ]
+        ],
       },
     ],
     "Hardware Support":[

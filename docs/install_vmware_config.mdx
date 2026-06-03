@@ -115,42 +115,41 @@ After creating a new virtual machine, the screen returns to the VMware navigator
 
 ![VM Complete](/img/vmware_finish.png)
 
-Ensure that the new virtual machine is selected and click the “Play” icon or the “Power on” button.
+1. Select the new VM in the ESXi Navigator and click the **Play** (Power On) button.
 
-![Power On](/img/vmware_pwr-on.png)
+   ![Power On](/img/vmware_pwr-on.png)
 
-The virtual machine boots into the Juniper Install menu. Click in the Play window to expand it, and click in the window to activate the up and down arrows. Use the arrows to select **VGA: Interactive Install 128T (your version number)**. If you do not make a selection, the system will default to booting into the **Serial Console** mode.
+2. The VM boots into the SSR installation menu. At the boot image selection screen, select the SSR 7.1.5 image and press **Enter**.
 
-![VGA Boot with Interactive Install](/img/install_select_interactive_vmware.png)
+    ![Choose Image](/img/u-iso2_choose_image.png)
 
-During the install process, the status is displayed on the screen.
+2. At the Install menu, use the arrow keys to select **VGA Console**.
 
-![Status screen](/img/vmware_install_status.png)
+    ![Install Type](/img/u-iso3_choose_install_type.png)
 
-After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (approximately 20 minutes). After the installation has completed, the following screen is displayed: Select “Yes” and press enter. 
+3. If you are installing a FIPS enabled system, select Install Option 1, then press **Enter**. 
 
-![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
+    If you do not require FIPS, skip the options and select **Enter**. The download and installation begins.
 
-If the Installed Packages screen does not automatically display, select the window and press the Enter key. 
+    :::note
+    IDP is not currently compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. 
 
-### Initial Boot and Next Steps
+    If after installation you require IDP, FIPS mode must be disabled on the target system if IDP is to be enabled. Refer to [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information to disable FIPS mode.
+    :::
+ 
+    ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)
 
-From the VMware Navigator, select the new virtual machine and click the **Play** icon or the **Power on** button to launch the virtual machine. 
+4. The installation runs to completion automatically. This may take approximately 15–20 minutes.
 
-![VMWare Power On](/img/vmware_pwr-on.png)
+    ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
 
-When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
+5. When prompted to reboot, allow the device to restart.
 
-![128T NetManager TUI Start](/img/vmware_initializer1.png)
+    ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
 
-Selecting `Yes` launches the NMTUI application to perform an initial network interface setup.
+If you are installing a Conductor, please refer to [Step 3 Configure the Conductor](deploy_vmware_conductor_config.mdx) in the VMWare Conductor Deployment Guide.
 
-![128T NetManager TUI Option](/img/vmware_initializer2.png))
+To install a Conductor-managed Router, see [Initialize a Conductor-Managed Router](initialize_u-iso_device.md#initialize-a-conductor-managed-router).
 
-If you are installing a Conductor, please refer to the following documentation to complete the Linux configuration and Conductor initialization. 
-
-- [Single Conductor Interactive Install](single_conductor_install.mdx)
-- [High Availability Conductor Installation](ha_conductor_install.mdx)
-
-For Router installation information, see [Router Interactive Installation](intro_installation_bootable_media.mdx).
+To install a Mist-managed Router, see [Initialize a Mist-Managed Router](initialize_u-iso_device.md#initialize-a-mist-managed-router).
 

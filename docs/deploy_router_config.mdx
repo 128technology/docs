@@ -1,0 +1,183 @@
+---
+title: Configure the Router on the Conductor
+sidebar_label: Configure the Router
+---
+import NetworkDesign from './_deploy_network_design.md';
+
+It is a best practice to have a valid configuration staged on the conductor for this router — including a matching asset ID — before the router is powered on. When the SSR130 comes online and contacts the conductor, it downloads this configuration and applies it automatically.
+
+This section walks through creating the router configuration for `branch1` from the Conductor GUI. Repeat these steps for each additional SSR130 router in your network, substituting the appropriate router name, node name, asset ID, and addressing values.
+
+All steps are performed from the **Conductor GUI** at `https://192.168.100.10`. It is important that all steps be completed before committing the configuration. 
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## 1. Create the Router
+
+1. Log in to the Conductor GUI.
+2. Select **Configuration**.
+3. Under **Authority**, scroll to **Routers** and select **ADD**.
+4. Enter the router name `branch1` and select **SAVE**.
+5. Set the following fields on the Router screen:
+
+    | Field | Value | Notes |
+    |-------|-------|-------|
+    | Location | `+32.7767-096.7970/` | ISO 6709 coordinates; update for your site |
+    | Inter-node Security | `internal` | Required for SVR between nodes |
+
+6. Select **VALIDATE** and **COMMIT** to save.
+
+## 2. Create the Node
+
+1. Scroll down to **Nodes** and select **ADD**.
+2. Enter the node name `node0` and select **SAVE**.
+3. Set the following fields:
+
+    | Field | Value |
+    |-------|-------|
+    | Role | `combo` |
+    | Asset ID | _(SSR130 serial number, e.g., `SSR130-ABC1234567`)_ |
+
+:::important
+The asset-id must match the router-name that will be entered during the SSR130's initialization. The asset-id is how the device will be identified when it contacts the conductor.
+:::
+
+4. Select **SAVE**.
+
+## 3. Configure the WAN Interface
+
+The WAN interface (`ge-0-0`, Port 0) connects to the ISP, obtains a DHCP address, and provides both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding).
+
+### 3a. Create the WAN Device Interface
+
+1. Under the Node, scroll to **Device Interfaces** and select **ADD**.
+2. Enter the name `wan-dev` and select **SAVE**.
+3. Set the following fields:
+
+    | Field | Value |
+    |-------|-------|
+    | Type | `ethernet` |
+    | PCI Address | `0000:04:00.3` |
+    | Forwarding | `true` |
+
+4. Select **SAVE**.
+
+### 3b. Create the WAN Network Interface
+
+1. Under the Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `wan1` and select **SAVE**.
+3. Set the following fields:
+
+    | Field | Value | Notes |
+    |-------|-------|-------|
+    | Type | `external` | |
+    | DHCP | `v4` | WAN IP is assigned by ISP DHCP |
+    | Conductor | `true` | Marks this interface for conductor connectivity |
+    | Default Route | `true` | Linux uses this interface as its default route |
+    | Source NAT | `true` | Required for management over forwarding |
+    | Management | `true` | Enables management over forwarding on this interface |
+
+4. Scroll down to **Management Vector** and select **ADD**.
+    - Enter name `mgmt-vec-wan` and priority `10`.
+    - Select **SAVE**.
+
+5. Scroll down to **Neighborhoods** and select **ADD**.
+    - Select `internet` as the neighborhood name.
+    - Verify **Topology** is set to `spoke`.
+    - Select **SAVE**.
+
+6. Select **VALIDATE** and **COMMIT**.
+
+:::important
+`Source NAT` and `Default Route` must both be set to `true` on the management interface. Management traffic originates from the `169.254.x.x` range and must be source-NAT'd to a routable address before leaving the interface. The default route ensures Linux sends non-SVR traffic through the SSR forwarding engine.
+:::
+
+## 4. Configure the LAN Interface
+
+The LAN interface (`ge-0-3`, Port 3) connects to the branch LAN and assigns the `corp` tenant to traffic arriving from that direction.
+
+### 4a. Create the LAN Device Interface
+
+1. Return to the **Node** level and scroll to **Device Interfaces**, then select **ADD**.
+2. Enter the name `lan-dev` and select **SAVE**.
+3. Set the following fields:
+
+    | Field | Value |
+    |-------|-------|
+    | Type | `ethernet` |
+    | PCI Address | `0000:04:00.0` |
+    | Forwarding | `true` |
+
+4. Select **SAVE**.
+
+### 4b. Create the LAN Network Interface
+
+1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `lan1` and select **SAVE**.
+3. Set the following fields:
+
+    | Field | Value | Notes |
+    |-------|-------|-------|
+    | Type | `external` | |
+    | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
+
+4. Scroll down to **Interface Addresses** and select **ADD**.
+    - IP Address: `192.168.1.1`
+    - Prefix Length: `24`
+    - Select **SAVE**.
+
+5. Select **VALIDATE** and **COMMIT**.
+
+## 5. Configure DNS
+
+To enable the router to resolve FQDNs (for conductor connectivity and software downloads), configure DNS in automatic mode so that DNS servers are learned from the WAN DHCP lease.
+
+1. Return to the **Router** level.
+2. Scroll to **DNS Config** and select **ADD**.
+3. Set **Mode** to `manual` and enter DNS IP addresses such as `1.1.1.1` or `8.8.8.8`.
+4. Select **SAVE**.
+5. Select **VALIDATE** and **COMMIT**.
+
+## 6. Create the Internet Service Route
+
+The service route tells the router how to forward traffic matched by the `Internet-Traffic` service. In this deployment, internet-bound traffic is forwarded as a **service agent** (direct internet breakout) through the WAN interface.
+
+1. Return to the **Router** level.
+2. Scroll to **Service Routes** and select **ADD**.
+3. Enter the name `internet-route` and select **SAVE**.
+4. Set the following fields:
+
+    | Field | Value |
+    |-------|-------|
+    | Service Name | `Internet-Traffic` |
+    | Service Route Type | `service-agent` |
+
+5. Scroll to **Next Hop** and select **ADD**.
+    - Node: `node0`
+    - Network Interface: `wan1`
+    - Select **SAVE**.
+
+6. Select **VALIDATE** and **COMMIT**.
+
+## Configuration Summary
+
+The following objects have been created for `branch1`:
+
+| Object | Name | Key Settings |
+|--------|------|-------------|
+| Router | `branch1` | combo node, asset ID linked |
+| WAN Device Interface | `wan-dev` | PCI `0000:04:00.3`, forwarding |
+| WAN Network Interface | `wan1` | DHCP, conductor, default-route, source-nat, management, neighborhood `internet` |
+| LAN Device Interface | `lan-dev` | PCI `0000:04:00.0`, forwarding |
+| LAN Network Interface | `lan1` | tenant `corp`, address `192.168.1.1/24` |
+| Service Route | `internet-route` | service `Internet-Traffic`, type `service-agent`, next-hop `node0/wan1` |
+
+:::tip
+To add additional SSR130 routers to this deployment, repeat this entire section with a new router name (e.g., `branch2`), a new LAN subnet (e.g., `192.168.2.1/24`), and the corresponding device asset ID.
+:::
+
+## Next Step
+
+Proceed to [Onboard SSR130 Routers](deploy_router_onboard.mdx).
