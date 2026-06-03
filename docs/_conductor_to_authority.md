@@ -20,6 +20,6 @@ To make sure the conductor is on a network and accessible via GUI, the IP addres
 
 4. Under **Associated Asset ID** select the hostname for the conductor.
 
- ![Asset ID](/img/conductor_asset-id.png)
+ ![Asset ID](/img/dep-conductor_asset-id.png)
 
 5. Validate and Commit the changes to the configuration. 
