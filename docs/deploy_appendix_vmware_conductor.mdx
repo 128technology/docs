@@ -3,7 +3,7 @@ title: "Appendix - VMware Conductor Configuration"
 sidebar_label: "Appendix - VMware Conductor Configuration"
 ---
 
-This appendix contains the complete SSR PCLI configuration for the `conductor1` VMware ESXi conductor described in this guide. Apply this configuration after completing [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).
+This appendix contains the complete SSR PCLI configuration for the `Conductor` VMware ESXi conductor described in this guide. Apply this configuration after completing [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).
 
 ## Network Design Reference
 
@@ -12,7 +12,7 @@ The following values are used in this configuration. Substitute your own values 
 | Parameter | Example Value | Description |
 |-----------|--------------|-------------|
 | Authority Name | `Authority128` | Organizational authority name |
-| Conductor Name | `conductor` | |
+| Conductor Name | `Conductor` | |
 | Conductor Node Name | `node0` | |
 | Conductor Management IP | `192.168.100.10` | Static IP on VMware management network |
 | Conductor Subnet Mask | `/24` | |
@@ -40,13 +40,13 @@ This configuration can be applied to a freshly initialized conductor using the P
 4. Enter configuration mode and import:
 
    ```
-   admin@node0.conductor1# import config /tmp/vmware-conductor.cfg
+   admin@node0.Conductor# import config /tmp/vmware-conductor.cfg
    ```
 
 5. Review any validation warnings, then commit:
 
    ```
-   admin@node0.conductor1 (config)# commit
+   admin@node0.Conductor (config)# commit
    Are you sure you want to commit the candidate config? [y/N]: y
    ```
 
@@ -77,8 +77,8 @@ config
             address  0.0.0.0/0
         exit
 
-        router  conductor1
-            name                 conductor1
+        router  Conductor
+            name                 Conductor
             inter-node-security  internal
 
             node  node0
