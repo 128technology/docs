@@ -874,6 +874,17 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
   _**Corrective Action:**_ None, if the configuration has not changed this indicator can be ignored. A comparison can be performed with `compare config running candidate`
 ------
 - **I95-27946** Commit may fail on Conductor when node in router pair is stopped
+
+  _**Symptom:**_ When performing a commit to a router where one of the nodes is offline, the commit from the Conductor may not respond or may fail. Performing a validate operation a second time may provide the following error response:
+
+  ```
+  “✖ Validating...
+   % Error: Candidate configuration is invalid:
+   1. A request of type validate is already in progress”
+  ```
+  _**Conditions:**_ When a node in the router pair is offline.
+
+  _**Corrective Action:**_ The validate operation is sent from the conductor to the nodes to verify that the configuration is correct. The validate will timeout to the node that is offline. Bring the node back online and perform the operation a second time.
 ------
 - **I95-27944** Network error may cause upgrade to fail and not retry.
 
