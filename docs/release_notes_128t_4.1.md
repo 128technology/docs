@@ -855,6 +855,15 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
   _**Corrective Action:**_ N/A, no user corrective action is required.
 ------
 - **I95-29134** `save tech-support-info` indicates the failure `%Error: Failed to execute the 'save tech-support-info' RPC: Fatal error creating tarball` when files being archived contain spaces; even though the operation completes successfully
+
+  _**Symptom:**_ `save tech-support-info` fails with the following error message:
+  ```
+  "Error: Failed to execute the 'save-tech-support-info' RPC: Fatal error creating tarball"
+  ```
+
+  _**Conditions:**_ When configuration exports have been saved with spaces it in the name of the exported configuration file
+
+  _**Corrective Action:**_ Remove the saved configuration files with spaces in the name and avoid using spaces when exporting configuration. Note: Exporting configuration files with spaces in the name may be prevented in a future release.
 ------
 - **I95-28766** Conductor PCLI shows configuration change when no changes have been performed
 ------
