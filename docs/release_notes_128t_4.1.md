@@ -828,6 +828,12 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
   _**Corrective Action:**_ After upgrading the Conductors perform a commit operation from either the PCLI or the Conductor GUI
 ------
 - **I95-29733** Conductor UI may not provide an indication that a software version check is in progress
+
+  _**Symptom:**_ When selecting the Router to fresh the available versions to upgrade, the flashing blue indicator may not be present
+
+  _**Conditions:**_ Shortly after both HA conductors have been upgraded and the refresh button is selected for a router
+
+  _**Corrective Action:**_ N/A, no user corrective action can be performed. Waiting for a moment will result in the appearance of the solid blue dot if an upgrade is available (Note: Both conductors must be running a version greater than or equal to the target router version)
 ------
 - **I95-29592** Conductor UI and/or PCLI may not update the asset software version correctly
 
