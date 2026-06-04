@@ -77,13 +77,13 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
       ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
 
       - Locate the ge-0-0 interface, and make a note of the IP address.
-      - Open a web browser and point it to the IP address of the ge-0-0 interface. When the SSR login screen appears, skip to the Initialize the Conductor steps.
+      <!--- - Open a web browser and point it to the IP address of the ge-0-0 interface. When the SSR login screen appears, skip to the Initialize the Conductor steps.
       - If the SSR login screen does not appear, return to the CLI and run the following commands:
       ```
       admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service web service-type web
       admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service ssh service-type ssh 
       admin@node.router# commit
-      ```
+      ```--->
 
 5. From the Conductor VM in the ESXi Navigator, select **Actions** and then **Edit**.
 
@@ -114,17 +114,22 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
 
     ![Install complete login](/img/deploy-vmware-init-login.png)
 
-4. From the CLI, run the command: 
-**NEED TO KNOW HOW TO SET ARTIFACTORY USERNAME AND PASSWORD AS PART OF THE INITIALIZE COMMAND.
-
-   `initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8`
+4. From the CLI, run the `initialize conductor` command shown below. Use the folowing table to set the values indicated: 
 
    | Field | Example Value | Notes |
    |-------|--------------|-------|
-   | Node IP Address | `192.168.100.10/24` | Static management IP |
+   | Node IP Address | `192.168.100.10/24` | DHCP management IP |
    | Node Gateway | `192.168.100.1` | Management network gateway |
    | Interface Name | `ge-0-0` | Management interface |
    | DNS Server | `8.8.8.8` | Required for software downloads |
+   | Artifactory Username | _(your username)_ | Juniper software access |
+   | Artifactory Password | _(your token)_ | Juniper software access token |
+
+   `initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8 artifactory-user <your user name> artifactory-password <artifactory token>`
+
+   The Artifactory username and password are required for your device to access the Juniper software repository to download new software releases. If you are installing in an air-gap network where the Conductor does not have internet access, these values are not required but the Conductor must be set to `offline-mode` after the initialization has completed, and is shown in step X.
+
+   For additional information about `offline-mode`, see [Upgrades with Restricted Access](upgrade_restricted_access.md)
 
 5. At the password prompt, enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: A minimum of 8 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
 
@@ -134,12 +139,14 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
 
    The message `Device successfully initialized` is displayed after the process completes. The conductor VM will reboot, and then reboot a second time. 
 
-   After the second reboot, the login screen appears. The login screen requires you to point a browser to https://192.168.100.10. **Begin the VERificATION ProCESS HeRE
+   After the second reboot, the login screen appears. Open a browser window and enter the URL https://192.168.100.10. 
 
-5. Log in with username `admin` and admin password.
+5. Log in with username `admin` and the password set during initialization.
 
    ![Login to the Conductor](/img/dep-1200-cond-login.png)
 
+   A successful login confirms the conductor is running and reachable on the management network.
+<!---
 6. On the Conductor Association screen, enter the conductor name you selected. 
 
    ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
@@ -154,15 +161,6 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    | Node Gateway | `192.168.100.1` | Management network gateway |
    | Interface Name | `ge-0-0` | Management interface |
    | DNS Server | `8.8.8.8` | Required for software downloads |
-
-9. 
-
-10. Place a check next to **Provide Artifactory Credentials** and enter the username and token used to access the Juniper/HPE SSR software download pages.  
-
-   | Field | Example Value | Notes |
-   |-------|--------------|-------|
-   | Artifactory Username | _(your username)_ | Juniper software access |
-   | Artifactory Password | _(your token)_ | Juniper software access token |
 
 11. Click **ASSOCIATE**.
 
@@ -184,7 +182,7 @@ After the VM restarts, confirm the conductor is accessible on the management net
 
    ![Login to the Conductor](/img/dep-1200-cond-login.png)
 
-   A successful login confirms the conductor is running and reachable on the management network.
+   A successful login confirms the conductor is running and reachable on the management network.--->
 
 ## Next Step
 

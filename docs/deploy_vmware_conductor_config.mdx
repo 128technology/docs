@@ -33,6 +33,20 @@ The conductor address is the IP address that managed routers use to reach this c
 
 <SetConductorIP/>
 
+## 4. Air-Gap Network - Set Offline Mode
+
+For Air-Gap networks, setting Offline Mode to `true` prevents devices from attempting to access the internet for software updates. 
+
+1. From the GUI, navigate `Configuration > Authority > Router: Conductor`.
+
+2. Scroll down to the **Router System Settings tile** and click it. 
+
+3. Scroll down to **Software Update Settings**.
+
+4. Set Software Repository Offline Mode to `true`.
+
+   ![Offline Mode](/img/dep-vmware-config-offlinemode.png)
+
 ## 4. Create the Corporate Tenant
 
 Tenants logically partition the network. The `corp` tenant represents corporate LAN users and is referenced by the LAN interface configuration on each branch router.
@@ -72,6 +86,7 @@ At the end of this step your authority contains:
 |--------|------|-------|
 | Authority | `Authority128` | |
 | Conductor Address | | `192.168.100.10/24` |
+| Software Update Settings | `offline-mode` | `true` - this is only required for air-gap networks |
 | Tenant | `corp` | LAN-side user population |
 | Service | `Internet-Traffic` | `0.0.0.0/0`, access from `corp` |
 
