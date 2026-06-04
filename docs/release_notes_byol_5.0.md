@@ -19,5 +19,5 @@ Adds Management Proxy parameters to the Mist-managed templates
 
  - **I95-64660 Mist Proxy not working on BYOL without DNS**
 
-    _**Resolution:**_ Mist management proxy is now properly configured to install SSR image when DNS is unaccessable.
+    _**Resolution:**_ Mist management proxy is now properly configured to install the SSR image when DNS is inaccessible.
 
