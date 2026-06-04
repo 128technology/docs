@@ -77,6 +77,10 @@ The 4.1.8 release is a superset of the 4.1.7 release. Features and corrections i
   _**Corrective Action:**_ This condition is rare and is exacerbated by DNS responses that change for the same request.  Typically the order of the A records have changed for load balancing purposes.  This can be mitigated by ensuring the DNS responses are consistent, or removing the FQDN from the service configuration.
 ------
 - **I95-33296** Removing a redundant interface and its corresponding redundancy-group within the same commit would terminate the commit
+
+  _**Symptom:**_ Unable to commit configuration changes
+
+  _**Corrective Action:**_ Perform two commit operations.  The first commit must be to remove the redundancy-group.
 ------
 - **I95-32843** System can fault when routing loop is created with OSPF and BGP
 
