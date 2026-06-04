@@ -136,7 +136,7 @@ PR expectations:
 
 Full rules: [.github/copilot-instructions.md](copilot-instructions.md) §7.
 
-- Sentence-case headings.
+- Title-case headings.
 - Second person, active voice, present tense.
 - Canonical terms: *Session Smart Router (SSR)*, *Session Smart Networking Platform (SSN)*, *conductor*, *router*, *authority*, *PCLI*.
 - Code fences always specify a language hint (`text`, `bash`, `yaml`, `json`).

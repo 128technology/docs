@@ -114,6 +114,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-64687 Recursive cleanup of Salt cache directory** Resolved an issue where cleanup of `/var/cache/salt/` was not performed recursively, which could leave behind cached data. The cleanup process now removes this directory recursively to ensure a more complete reset.
 ------
 - **I95-64688 Highway coredumps causing peer path flaps:** Resolved an issue where highway process coredumps were occurring, resulting in peer path flaps.
+------
+- **I95-64719 Secure Conductor Onboarding (SCO) config validation incorrect:** Resolved an issue where validating SCO config checked each node for an assetID but did not verify that at least one assetID was configured, which is a requirement.
+
 
 ## Release 7.1.4-3r2
 
