@@ -808,6 +808,16 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 ## Caveats
 
 - **I95-30103** Creating tenants using output of `show config running flat` does not work (Entering flat configuration into PCLI does not always create the configuration)
+
+  _**Symptom:**_ - When performing configuration using flat (or cut and paste of the complete flat configuration line) the configuration is not applied
+
+  _**Conditions:**_ - When a configuration object does not previously exist and setting an attribute of that configuration object. For example in the following configuration line:
+  ```
+  configure authority tenant one name one
+  ```
+
+  If the "tenant one" configuration object does not exist, the tenant object will not be created. If it does exist then the command will set the attribute "name" to "one"             
+  _**Corrective Action:**_ - On initial creation, do not use flat configuration operations for creating the configuration.
 ------
 - **I95-29842** Nodes with Overlapping DHCP addresses will not be displayed when 'show peers' command is run
 
