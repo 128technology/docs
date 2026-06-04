@@ -905,6 +905,12 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
   _**Corrective Action:**_ Perform the PCLI command on the router to update the information on the conductor.
 ------
 - **I95-27722** Alarms for "Peer not reachable" may not clear and will persist after nodes are back and operational
+
+  _**Symptom:**_ Alarms for "peer not reachable" provided in on the Conductor
+
+  _**Conditions:**_ Unknown, seen after system upgrade
+
+  _**Corrective Action:**_ NA, The alarms will clear within 15 minutes.
 ------
 - **I95-25947** The upgrade to 4.1 can take upwards of 40 minutes to complete.  The increase in installation time is due to the underlying OS upgrade.
 ------
