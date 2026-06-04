@@ -47,7 +47,7 @@ For Air-Gap networks, setting Offline Mode to `true` prevents devices from attem
 
    ![Offline Mode](/img/dep-vmware-config-offlinemode.png)
 
-## 4. Create the Corporate Tenant
+## 5. Create the Corporate Tenant
 
 Tenants logically partition the network. The `corp` tenant represents corporate LAN users and is referenced by the LAN interface configuration on each branch router.
 
@@ -61,7 +61,7 @@ Tenants logically partition the network. The `corp` tenant represents corporate 
 Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
 :::
 
-## 5. Create the `Internet-Traffic` Service
+## 6. Create the `Internet-Traffic` Service
 
 The *service* configuration element defines the IP destinations that the SSR routes. This step creates a single service representing all internet-bound traffic from corporate LAN users.
 

@@ -77,13 +77,6 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
       ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
 
       - Locate the ge-0-0 interface, and make a note of the IP address.
-      <!--- - Open a web browser and point it to the IP address of the ge-0-0 interface. When the SSR login screen appears, skip to the Initialize the Conductor steps.
-      - If the SSR login screen does not appear, return to the CLI and run the following commands:
-      ```
-      admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service web service-type web
-      admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service ssh service-type ssh 
-      admin@node.router# commit
-      ```--->
 
 5. From the Conductor VM in the ESXi Navigator, select **Actions** and then **Edit**.
 
@@ -146,43 +139,6 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    ![Login to the Conductor](/img/dep-1200-cond-login.png)
 
    A successful login confirms the conductor is running and reachable on the management network.
-<!---
-6. On the Conductor Association screen, enter the conductor name you selected. 
-
-   ![Conductor Configuration](/img/deploy_u-iso9_define_conductor.png)
-
-7. Select **STANDALONE** for a single-conductor deployment. 
-
-8. Select the **STATIC** address type, and verify the following information:
-
-   | Field | Example Value | Notes |
-   |-------|--------------|-------|
-   | Node IP Address | `192.168.100.10/24` | Static management IP |
-   | Node Gateway | `192.168.100.1` | Management network gateway |
-   | Interface Name | `ge-0-0` | Management interface |
-   | DNS Server | `8.8.8.8` | Required for software downloads |
-
-11. Click **ASSOCIATE**.
-
-   The VM reboots and comes online as a conductor. This process takes approximately 5–10 minutes.
-
-## Verify the Installation
-
-After the VM restarts, confirm the conductor is accessible on the management network:
-
-1. Reconnect your laptop to the management network. Remove the static `192.168.128.x` address you assigned earlier.
-
-2. Open a web browser and navigate to:
-
-   ```
-   https://192.168.100.10
-   ```
-
-3. Log in with username `admin` and the password set during initialization.
-
-   ![Login to the Conductor](/img/dep-1200-cond-login.png)
-
-   A successful login confirms the conductor is running and reachable on the management network.--->
 
 ## Next Step
 
