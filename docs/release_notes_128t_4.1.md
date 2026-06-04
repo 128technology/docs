@@ -866,6 +866,12 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
   _**Corrective Action:**_ Remove the saved configuration files with spaces in the name and avoid using spaces when exporting configuration. Note: Exporting configuration files with spaces in the name may be prevented in a future release.
 ------
 - **I95-28766** Conductor PCLI shows configuration change when no changes have been performed
+
+  _**Symptom:**_ Conductor PCLI may incorrectly provide an * that there is a candidate configuration change
+
+  _**Conditions:**_ Unknown
+
+  _**Corrective Action:**_ None, if the configuration has not changed this indicator can be ignored. A comparison can be performed with `compare config running candidate`
 ------
 - **I95-27946** Commit may fail on Conductor when node in router pair is stopped
 ------
