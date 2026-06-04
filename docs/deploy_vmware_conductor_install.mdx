@@ -51,14 +51,14 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
 
    These messages appear due to the instance attempting to connect to the Mist Cloud. The `mist-agent` is enabled by default and will continue to reach out to Mist to connect. In Conductor-managed air-gap networks where there is never any intent to connect to Mist, disabling the Mist Agent has no operational impact, and is actually desirable. Stopping the Mist Agent stops the messages, allowing you to continue the process. 
 
-2. Run the following two commands to disable the service and stop the messages. 
+2. Select **Console** and login using the root credentials.
+
+3. Run the following two commands to disable the service and stop the messages. 
 
    ```
    systemctl disable 128T-mist-agent
    systemctl stop 128T-mist-agent
-   ```
-
-3. Select **Console** and login using the root credentials.
+   ``` 
 
 4. From the linux prompt run the command `ip a | more` . Make a note of the `ge-0-0` interface and MAC address association.
 
@@ -72,12 +72,12 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    4a. If you do not see the `ge-0-0` interface, use the following steps to retrieve the information from the SSR CLI:
 
       - From the linux shell, run the command `su admin` to enter the SSR CLI.
-      - Run `show network-interface | more`.
+      - Run `show network-interface | more`. This will display the DHCP IP address.
 
       ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
 
       - Locate the ge-0-0 interface, and make a note of the IP address.
-      - Open a web browser and point it to the IP address of the ge-0-0 interface. If the SSR login screen appears, skip to the Initialize the Conductor steps.
+      - Open a web browser and point it to the IP address of the ge-0-0 interface. When the SSR login screen appears, skip to the Initialize the Conductor steps.
       - If the SSR login screen does not appear, return to the CLI and run the following commands:
       ```
       admin@node.router# config authority router router node node device-interface ge-0-0 network-interface ge-0-0-intf host-service web service-type web
@@ -115,6 +115,7 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
     ![Install complete login](/img/deploy-vmware-init-login.png)
 
 4. From the CLI, run the command: 
+**NEED TO KNOW HOW TO SET ARTIFACTORY USERNAME AND PASSWORD AS PART OF THE INITIALIZE COMMAND.
 
    `initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8`
 
@@ -125,9 +126,15 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    | Interface Name | `ge-0-0` | Management interface |
    | DNS Server | `8.8.8.8` | Required for software downloads |
 
-   After a few seconds, the message `Device successfully initialized` is displayed. The conductor VM will reboot, and then reboot a second time. 
+5. At the password prompt, enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: A minimum of 8 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
 
-   After the second reboot, the login screen appears.
+   :::note
+   The `admin`, `root`, and `t128` accounts are all set to the password you enter here. Record this password securely — it cannot be recovered if lost, only reset with root access.
+   ::: 
+
+   The message `Device successfully initialized` is displayed after the process completes. The conductor VM will reboot, and then reboot a second time. 
+
+   After the second reboot, the login screen appears. The login screen requires you to point a browser to https://192.168.100.10. **Begin the VERificATION ProCESS HeRE
 
 5. Log in with username `admin` and admin password.
 
@@ -148,11 +155,7 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    | Interface Name | `ge-0-0` | Management interface |
    | DNS Server | `8.8.8.8` | Required for software downloads |
 
-9. Enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: must be a minimum of 8 characters, contain 1 upper case letter, 1 lower case letter, and 1 number.
-
-   :::note
-   The admin, root, and t128 accounts are all set to the password you enter here. Record this password securely — it cannot be recovered if lost, only reset with root access.
-   :::
+9. 
 
 10. Place a check next to **Provide Artifactory Credentials** and enter the username and token used to access the Juniper/HPE SSR software download pages.  
 
