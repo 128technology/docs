@@ -1,0 +1,158 @@
+/*
+ * Print stylesheet injected into every doc page before PDF capture.
+ * Hides chrome (navbar, sidebar, footer, edit links, pagination) and
+ * lets the article content flow at the full page width.
+ */
+
+html,
+body {
+  background: #fff !important;
+}
+
+/* Hide site chrome */
+.navbar,
+nav.navbar,
+.theme-doc-sidebar-container,
+.theme-doc-sidebar-menu,
+.theme-doc-toc-mobile,
+.theme-doc-toc-desktop,
+.table-of-contents,
+.theme-doc-breadcrumbs,
+.theme-doc-version-banner,
+.theme-doc-version-badge,
+.theme-edit-this-page,
+.theme-last-updated,
+.pagination-nav,
+.docusaurus-mt-lg + nav,
+.footer,
+footer.footer,
+.announcementBar_node_modules-\@docusaurus-theme-classic-lib-theme-AnnouncementBar-styles-module,
+[class*='announcementBar'],
+[class*='backToTopButton'],
+[class*='collapseSidebarButton'],
+[class*='tocCollapsible'] {
+  display: none !important;
+}
+
+/* Make the main column take the full page */
+.main-wrapper,
+main,
+.container,
+.row,
+.col,
+[class*='docMainContainer'],
+[class*='docItemContainer'],
+[class*='docItemCol'],
+[class*='docPage'] {
+  max-width: 100% !important;
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+article {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Typography tuned for print */
+body {
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: #111 !important;
+}
+
+h1 {
+  font-size: 22pt;
+  page-break-before: always;
+  page-break-after: avoid;
+  margin-top: 0;
+}
+
+/* First h1 of the document shouldn't force a page break before it */
+article > :first-child h1,
+article h1:first-of-type {
+  page-break-before: auto;
+}
+
+h2 {
+  font-size: 16pt;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 13pt;
+  page-break-after: avoid;
+}
+
+h4,
+h5,
+h6 {
+  page-break-after: avoid;
+}
+
+p,
+li,
+td {
+  orphans: 3;
+  widows: 3;
+}
+
+/* Keep tables, code blocks and figures from splitting awkwardly */
+pre,
+table,
+figure,
+.admonition,
+[class*='admonition'],
+.docusaurus-mermaid-container,
+.mermaid {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+pre,
+code {
+  font-size: 9pt;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid #ddd;
+  padding: 8px;
+  background: #f8f8f8 !important;
+}
+
+img,
+svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+a {
+  color: #0a58ca;
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 9.5pt;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+}
+
+/* Admonitions keep their box look but in muted grey for print */
+.admonition,
+[class*='admonition_'] {
+  border: 1px solid #bbb !important;
+  background: #f4f4f4 !important;
+  padding: 8px 12px !important;
+  margin: 10px 0 !important;
+}
