@@ -118,13 +118,15 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    | Artifactory Username | _(your username)_ | Juniper software access |
    | Artifactory Password | _(your token)_ | Juniper software access token |
 
-   `initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8 artifactory-user <your user name> artifactory-password <artifactory token>`
+   ```
+   initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8 artifactory-user <your user name> artifactory-password <artifactory token>
+   ```
 
    The Artifactory username and password are required for your device to access the Juniper software repository to download new software releases. If you are installing in an air-gap network where the Conductor does not have internet access, these values are not required but the Conductor must be set to `offline-mode` after the initialization has completed, and is shown in step X.
 
    For additional information about `offline-mode`, see [Upgrades with Restricted Access](upgrade_restricted_access.md)
 
-5. At the password prompt, enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: A minimum of 8 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
+5. At the password prompt, enter a new Admin Password. This **must** be changed. The new password has the following minimum requirements: A minimum of 9 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
 
    :::note
    The `admin`, `root`, and `t128` accounts are all set to the password you enter here. Record this password securely — it cannot be recovered if lost, only reset with root access.
