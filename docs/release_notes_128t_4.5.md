@@ -21,7 +21,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ## Resolved Issues
 
-- **I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%), and an alert to change the system environment configuration.
+- **I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
 ------
 - **I95-40239 CVE-2021-26937:** This vulnerability has been resolved.
 ------
@@ -76,16 +76,28 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
 ------
 - **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts.
-------- 
+------
 - **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool.
 ------
-- **I95-39852 Synchronize Hardware clock to NTP Server:** Resolved an issue where the hardware and system clocks were not synchronized.
+- **I95-39852 Sync System clock to the Hardware clock with NTP:** The hardware clock now synchronizes with the NTP server. 
 ------
 - **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
 ------
-- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.
+- **I95-39953 Spike in IPFIX records:** Resolved a race condition causing a collector to enter an infinite loop.
 ------
-- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved.
+- **I95-39985 Template save error:** When creating persistent fields on an **existing** template in Advanced Mode, a validation error appears and the template changes are not saved. 
+_**Workaround:**_ There are two workarounds. 
+
+You can either; use GraphQL to set `persistInput` on each template to `true` to resolve the issue for that template. 
+
+OR
+
+1. Copy the contents of the variables pane to your clipboard.
+2. Open the Settings dropdown.
+3. Click “Persist Input” to disable the option.
+4. Click “Proceed” in the warning modal.
+5. Open the Settings menu and click “Persist Input” again to turn it back on.
+6. Paste your variables back into the variables pane and save the template. This template should no longer encounter the issue.
 ------
 - **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors.
 ------
@@ -123,7 +135,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39788 Inconsistent services after modifying certain service configs:** The system's underlying service configurations may have been in an inconsistent state when modifying a dhcp-relay or template application-type service.
 ------
-- **I95-39798 Version update check may get stuck on GPG key access when using an access token:** The software upgrade version check has been modified to support access tokens. 
+- **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
 ------
 - **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
 ------
@@ -165,7 +177,14 @@ OR
 ------
 - **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added.
 ------
-- **I95-39793 Conductor fails to self-upgrade:** This issue affected only 4.5.6-1 systems performing Conductor self-upgrade with Installer version 2.7.0 (or later). This issue has been resolved. 
+- **I95-39793 Conductor fails to self-upgrade:** This issue affects only 4.5.6-1 systems performing conductor self-upgrade with Installer version 2.7.0 (or later). Released versions of 128T prior or after 4.5.6-1 are not affected.
+
+The following error is displayed:
+```
+/usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory
+Failed to upgrade 128T!
+```
+The recommended course of action is to perform a manual interactive upgrade of the conductor. Please refer to [Upgrading Using the Interactive Installer](upgrade_legacy.md#upgrading-using-the-interactive-installer) for that process. 
 
 ### Caveats
 
@@ -190,7 +209,9 @@ OR
 
 - **I95-30812 PCLI session terminated when actively running commands:** Prior to this change only the enter key would reset the PCLI activity timer. With this change, the `tab` and `?` operations will also reset the PCLI activity timer.
 ------
-- **I95-35521 Ambiguous validation error:** Errors now more clearly identify the source of the error.
+- **I95-35521** pcli may provide a validation error but does not provide the specific configuration in error.
+
+  _**Corrective Action:**_ If a validation error is provided, review the configuration of each sub list between the items identified in the error response provided. For example, the same vlan id cannot be used for different networks interfaces on the same device interface.
 ------
 - **I95-36053 High number of System Events on 128T Config changes:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
 ------
@@ -214,9 +235,9 @@ OR
 ------
 - **I95-38393 Router Cannot Get Past Connected State:** Resolved an issue where assets could become stuck in Connected state.
 ------
-- **I95-38395 TCP Out of Order can cause Stuck Flow:** Resolved an issue where a TCP FIN received before the data that preceded it could cause a stuck flow.
+- **I95-38395** Resolved an issue where a TCP FIN received before the data that proceeded it could cause a stuck flow.
 ------
-- **I95-38458 PCLI fails to start after upgrade:** Resolved an issue where caching errors prevented 128T from starting. 
+- **I95-38458 PCLI fails to start after upgrade:** Resolved an issue where caching errors prevented SSR from starting. 
 ------
 - **I95-38474 The `router > dns-config` does not account for the immutable bit on `/etc/resolv.conf`:** Resolved an issue with the DNS proxy not working due to the immutable bit set by ISO. 
 ------
@@ -288,7 +309,6 @@ OR
 ------
 - **I95-39543 Out of order packets when traffic-eng is enabled in multicore environments:** Fixed occasional reorder issue when `traffic-eng` is enabled in a multicore environment.
 ------
-
 ### Caveats
 
 - **I95-39793 Conductor fails to self-upgrade:** This issue affects only 4.5.6-1 systems performing conductor self-upgrade with Installer version 2.7.0 (or later). Released versions of 128T prior or after 4.5.6-1 are not affected.
@@ -349,11 +369,13 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 - **I95-37855 Configurable waypoint allocation.** The `max-way-points` value is configurable at the adjacency level for each associated inter-router path. 
 The `max-inter-node-way-points` value is configurable at the router level for all inter-node paths. Please refer to [`max-inter-node-way-points`](config_reference_guide.md#max-inter-node-way-points) and [`max-way-points`](config_reference_guide.md#max-way-points) for more details. 
 ------
-
 ### Resolved Issues
 - **I95-39044 OTP ISO bootstrap sets HA nodes with name of first node** The OTP bootstrap operation now updates the second node in an HA pair with the correct name. This correction has been applied to the v2 version of the 4.5.3 OTP ISO. This fix does not apply to the 4.5.4 nor the 4.5.5 OTP ISO at this time (03/01/2021).
 ------
-- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+- **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
+:::important
+Please refer to [Password Policies](config_password_policies.md) for updated password requirements.
+:::
 ------
 - **I95-35987 Downloading exported config files does not preserve the file name.** The download process correctly preserves the file name. 
 ------
@@ -396,7 +418,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37680 nodeMonitor process may fault on shutdown of 128T.** `nodeMonitor` no longer faults on 128T shutdown.
 ------
-- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. (Interim IPFIX record generation or HA session synchronization could also cause trigger the same fault, and is also addressed by this fix.)
+- **I95-37752** A race condition exists when a session is manually deleted through the `delete sessions` PCLI command; interim IPFIX record generation or HA session synchronization may cause the highway process to fault.
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
@@ -442,7 +464,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
   _**Symptom:**_ Show peers will show the physically disconnected peer as UP while in this state.
 ------
-- **I95-35927** When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.
+- **I95-35927 When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.** This issue has been resolved. 
 ------
 - **I95-36540** Session expiry logic algorithm was inefficient causing latency in session setup.
 ------
@@ -512,12 +534,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
 ### Resolved Issues
 
-- **I95-18807** Removed a benign error displayed in journal due to imudp module loaded by rsyslog daemon.
-
-  _**Symptoms:**_ The following message can be seen in the journal:
-  ```
-  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
-  ```
+- **I95-18807 An error displays in the journal due to imudp module loaded by rsyslog daemon.** The error condition has been resolved and the error no longer displays. 
 ------
 - **I95-32660** Log files were only rotated daily which may result in larger than expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap.
 ------
@@ -533,9 +550,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
   ```
   Until the system is upgraded to 4.5.1, this issue will resolve itself after the background tasks have completed.
 ------
-- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.
-
-  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable.
+- **I95-35111 `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.** The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.
 ------
 - **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend.
 ------
@@ -543,7 +558,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device-interface` on LTE interfaces.
 ------
-- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.
+- **I95-35933 `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.** The correct speeds are now displayed for `show device-interface`. 
 ------
 - **I95-36050** Race condition on HA Conductor may incorrectly report pending configuration changes when no changes exist.
 
@@ -594,7 +609,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-36646** SVR Savings page automatically refreshes, resetting router selector.
 ------
-- **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.
+- **I95-36672 Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.** Traffic on the device interface is handled before deleting the filters. 
 ------
 - **I95-36727** A non-forwarding, external (i.e. management) interface configured in 128T does not obtain a DHCP IP upon disconnecting and reconnecting the cable.
 ------
@@ -608,7 +623,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
 ------
-- **I95-36850, I95-36851** An asset's available and downloaded versions are incorrectly cleared when an upgrade or rollback is initiated.
+- **I95-36850, I95-36851** An asset's available and downloaded versions were incorrectly cleared when an upgrade or rollback is initiated.
 ------
 - **I95-36866** When adding an access policy in a service in the GUI, the tenant drop down list comes up empty on the first try.
 
@@ -620,7 +635,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-36891** Exception thrown in PCLI when `CMD`+`right arrow` jumping past the end of an auto complete command.
 ------
-- **I95-36927** Race condition can cause a fault in the highway process during session setup and configuration change removes BGP service route path
+- **I95-36927** A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.
 ------
 - **I95-37006** Peer path establishment may fail for waypoint interfaces that use DHCP (e.g., LTE) when upgrading from 4.4.x.
 ------
@@ -664,7 +679,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 ------
-- **I95-33174** Automatic LTE band management per carrier
+- **I95-33174** Some LTE cards do not use the correct wireless bands for the AT&T network
 ------
 - **I95-33215** [Audiocodes M800 watchdog](plugin_m800_watchdog.md)
 ------
@@ -686,9 +701,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-34112** Rename `show config events` -> `show events config`.
 ------
-- **I95-33594** Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.
-
-  Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the 128T or by removing and recreating the bgp configuration.
+- **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.** The BGP neighbor now connects correctly.
 ------
 - **I95-35193** Performing a download of software may fail.
   _**Conditions**_ 128T connection to the conductor is disconnected or restarted.
@@ -701,7 +714,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
   Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for edge-global.plcm.vc: Message too long
   ```
 ------
-- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.
+- **I95-35799 When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.** This issue has been resolved.
 ------
 - **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
@@ -711,11 +724,11 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
   rpm --rebuilddb
   ```
 ------
-- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration.
+- **I95-35935 Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration.** The router-based conductor map has been separated from the global conductor map.
 ------
 - **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces.
 ------
-- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2.)
+- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2).
 ------
 - **I95-36146** Non-PCLI commands, such as pagination responses, are incorrectly stored in command history.
 ------
@@ -726,16 +739,16 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
   ```
   Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
 ------
-- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process crash if a subsequent graceful-restart timeout occurs.
+- **I95-36356 Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.** Changes to the BGP `graceful-restart restart-time` no longer cause a process fault.
 
 ## Special Considerations
 
 - **I95-33004** RoadRunner Removed
   The RoadRunner process collected anonymous information from the router and sent it to 128 Technology for storage and analysis. This helped inform and allows 128 Technology to support and improve the 128 Networking Platform. The anonymous data collection tool RoadRunner has been removed from the product.
------
+------
 - **I95-35629** The threshold for broadcast announcement for concurrent PCLI sessions has been increased from 4 to 10 as a result of I95-28366.
 ------
-- **I95-36525** TLS 1.0 is no longer supported.
+- **I95-36525** Due to known vulnerabilities, only TLS versions 1.2 and 1.3 are supported. We do not support TLS 1.0 and 1.1.
 
 ## Caveats
 

@@ -7,7 +7,7 @@ sidebar_label: 4.1
 
 ### Issues Fixed
 
-- **I95-30610** RTP is not properly classified for subsequent 128T routers
+- **I95-30610** RTP is not properly classified for subsequent 128T routers.
 ------
 - **I95-33279** Path MTU discovery unresolvable when no ICMP is generated
 ------
@@ -35,7 +35,7 @@ sidebar_label: 4.1
 ------
 - **I95-34310** Secure fields from the 128T configuration are in the commit audit events from config diff operations.
 ------
-- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
+- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router.
 
 ## Release 4.1.9
 
@@ -76,11 +76,7 @@ The 4.1.8 release is a superset of the 4.1.7 release. Features and corrections i
 
   _**Corrective Action:**_ This condition is rare and is exacerbated by DNS responses that change for the same request.  Typically the order of the A records have changed for load balancing purposes.  This can be mitigated by ensuring the DNS responses are consistent, or removing the FQDN from the service configuration.
 ------
-- **I95-33296** Removing a redundant device-interface and its corresponding redundancy-group as part of the same commit will cause the commit operation to fail.
-
-  _**Symptom:**_ Unable to commit configuration changes
-
-  _**Corrective Action:**_ Perform two commit operations.  The first commit must be to remove the redundancy-group.
+- **I95-33296** Removing a redundant interface and its corresponding redundancy-group within the same commit would terminate the commit
 ------
 - **I95-32843** System can fault when routing loop is created with OSPF and BGP
 
@@ -96,9 +92,9 @@ The 4.1.7 release is a superset of the 4.1.6 release. Features and corrections i
 
 ### Issues Fixed
 
-- **I95-31170** NodeMonitor Application fault on shutdown.
+- **I95-29801, I95-31170, I95-31116** NodeMonitor application fault when sysLimitsOverride parameters are set
 ------
-- **I95-32449,I95-25567,I95-31060,I95-31675**  failed to reserve ports for WayPoint resulting in loss of traffic
+- **I95-32449** WayPoint allocation failures resulting in session setup failures
 
 
 ## Release 4.1.6
@@ -131,11 +127,15 @@ The 4.1.6 release is a superset of the 4.1.5 release. Features and corrections i
 ------
 - **I95-29821** Packet fragmentation for SVR paths is larger than configured MTU by the L4 packet header size
 ------
-- **I95-29990** When a KNI interface starts as operationally down, the state remains the default of unknown and never transition to down.
+- **I95-29990** When a KNI interface starts as operationally down, either due to oper status or monitoring script or a watched interface down for T1, the state remains the default of unknown and never transition to down.
 ------
 - **I95-30002** Service route generation skipped for generation set to true if another service with the same name is set to generation false
 ------
-- **I95-30078, I95-30268** Traffic does not switch to standby interface on management path communication failure 
+- **I95-30078** - HA node communication failure results in two systems both taking control of a shared (redundant) interface
+  
+  _**Symptom:**_ Traffic egressing a highly available device may get pinned to the wrong node in a highly available pair.
+  
+  _**Mitigation (pre-4.1.5):**_ Manually purge specific traffic flows that are pinned to the wrong node, to allow them to regenerate.
 ------
 - **I95-30315** DHCP Server fails to start after system power failure and power recovery
 ------
@@ -155,7 +155,7 @@ The 4.1.6 release is a superset of the 4.1.5 release. Features and corrections i
 ------
 - **I95-30742** Incorrect packet fragmentation when first packet is a jumbo packet
 ------
-- **I95-30781** Warning not provided when neighborhood does not have an end port range
+- **I95-30781** Invalid configuration accepted when adjacency or neighborhood port-range does not have end-port configured
 ------
 - **I95-30833** BGP over SVR neighbor not connecting due to missing route
 ------
@@ -167,7 +167,7 @@ The 4.1.6 release is a superset of the 4.1.5 release. Features and corrections i
 ------
 - **I95-31208** continuous configuration updates do to network anomalies lead to increased memory usage
 ------
-- **I95-31232** Highway application may fault during network port scanning of the router
+- **I95-31232** Peer router highwayManager faults when pinhole traffic originating from this peer is sent to a remote peer that is restarting.
 ------
 - **I95-31244** When a pinhole session is restored upon failover, if the routing table is not up-to-date, the packet will incorrectly be routed to the same interface from which it came from.
 ------
@@ -264,7 +264,7 @@ Prior versions of the 128T software did not support two routers with the same WA
 ------
 - **I95-30143** High state is applied to nodes when configuration has changed, causing unnecessary Conductor to router communication.  This has been changed to only apply high state when necessary. (Note: when a node is disconnected and reconnects high state is always applied)
 ------
-- **I95-30011** SVR packets dropped briefly when standby node in an HA router pair is restarted.
+- **I95-30011** System hostnames that cannot be resolved cause two HA nodes to achieve quorum after DNS lookup times out (approximately 40 seconds)
 
 
 ## Release 4.1.4
@@ -347,7 +347,7 @@ Prior versions of the 128T software did not support two routers with the same WA
 ------
 - **I95-27763** BGP neighbor local-as is ignored when set to neighbor remote-as
 ------
-- **I95-27830** System can fault when multiple "first" packets are processed simultaneously
+- **I95-27830** 2 or more ICMP packets within milliseconds resulted in a software fault
 ------
 - **I95-27878** Database process can consume large amount of CPU due to internal debugging data.  This database has been removed
 ------
@@ -450,7 +450,7 @@ The 4.1.3 release requires the 128T-installer 2.3.0 or greater. By default, the 
 
 - **I95-27792** Asset status not updated correctly
 ------
-- **I95-27339** DHCP stuck flows
+- **I95-27339** Sessions for a DHCP relay service can linger, causing subsequent DHCP request failures
 
 
 ## Release 4.1.2
@@ -471,7 +471,7 @@ The 4.1.2 release requires the 128T-installer 2.3.0 or greater. By default, the 
 ------
 - **I95-25790** Peer path statistics on PCLI may be missing for routers with multiple paths
 ------
-- **I95-26021** WEB/GUI page scrolling stops working after router AP upgrade
+- **I95-26021** Window scroll bar become inoperable requiring a complete browser page reload
 ------
 - **I95-26154** System can fault when executing `save tech-support-info`
 ------
@@ -574,7 +574,7 @@ The 4.1.2 release requires the 128T-installer 2.3.0 or greater. By default, the 
 ------
 - **I95-27604** FIB Next Hops is `<none>` when there are only service-routes with services with application-name
 ------
-- **I95-27614** The 128T would send ICMP unreachable responses for destination MACs that were not its own
+- **I95-27614** When operating in promiscuous mode, the 128T can send ICMP unreachables for dest macs that are not its own
 ------
 - **I95-27799** Per-router services fail validation when a service applies to more than one router-group
 ------
@@ -725,7 +725,7 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 ------
 - **I95-25311** GUI FIB table is inconsistent with output of `show fib` on PCLI.
 ------
-- **I95-25329** PCLI in Conductor GUI creates nested navigation bars
+- **I95-25329** Nested navigation bars are created when launching the PCLI from within the GUI
 ------
 - **I95-25425** DHCP Relay with `/32` and FIB next-hop set to none requires additional service configuration
 ------
@@ -803,18 +803,7 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 
 ## Caveats
 
-- **I95-30103** Entering flat configuration into PCLI does not always create the configuration
-
-  _**Symptom:**_ - When performing configuration using flat (or cut and paste of the complete flat configuration line) the configuration is not applied
-
-  _**Conditions:**_ - When a configuration object does not previously exist and setting an attribute of that configuration object. For example in the following configuration line:
-  ```
-  configure authority tenant one name one
-  ```
-
-  If the "tenant one" configuration object does not exist, the tenant object will not be created. If it does exist then the command will set the attribute "name" to "one"             
-
-  _**Corrective Action:**_ - On initial creation, do not use flat configuration operations for creating the configuration.
+- **I95-30103** Creating tenants using output of `show config running flat` does not work (Entering flat configuration into PCLI does not always create the configuration)
 ------
 - **I95-29842** Nodes with Overlapping DHCP addresses will not be displayed when 'show peers' command is run
 
@@ -824,13 +813,7 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 
   _**Corrective Action:**_ After upgrading the Conductors perform a commit operation from either the PCLI or the Conductor GUI
 ------
-- **I95-29733** Conductor UI may not provide an indication that a refresh is in progress (flashing blue dot)
-
-  _**Symptom:**_ When selecting the Router to fresh the available versions to upgrade, the flashing blue indicator may not be present
-
-  _**Conditions:**_ Shortly after both HA conductors have been upgraded and the refresh button is selected for a router
-
-  _**Corrective Action:**_ N/A, no user corrective action can be performed. Waiting for a moment will result in the appearance of the solid blue dot if an upgrade is available (Note: Both conductors must be running a version greater than or equal to the target router version)
+- **I95-29733** Conductor UI may not provide an indication that a software version check is in progress
 ------
 - **I95-29592** Conductor UI and/or PCLI may not update the asset software version correctly
 
@@ -851,37 +834,11 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
 
   _**Corrective Action:**_ N/A, no user corrective action is required.
 ------
-- **I95-29134** `save tech-support-info` fails to create tech support file
-
-  _**Symptom:**_ `save tech-support-info` fails with the following error message:
-  ```
-  "Error: Failed to execute the 'save-tech-support-info' RPC: Fatal error creating tarball"
-  ```
-
-  _**Conditions:**_ When configuration exports have been saved with spaces it in the name of the exported configuration file
-
-  _**Corrective Action:**_ Remove the saved configuration files with spaces in the name and avoid using spaces when exporting configuration. Note: Exporting configuration files with spaces in the name may be prevented in a future release.
+- **I95-29134** `save tech-support-info` indicates the failure `%Error: Failed to execute the 'save tech-support-info' RPC: Fatal error creating tarball` when files being archived contain spaces; even though the operation completes successfully
 ------
 - **I95-28766** Conductor PCLI shows configuration change when no changes have been performed
-
-  _**Symptom:**_ Conductor PCLI may incorrectly provide an * that there is a candidate configuration change
-
-  _**Conditions:**_ Unknown
-
-  _**Corrective Action:**_ None, if the configuration has not changed this indicator can be ignored. A comparison can be performed with `compare config running candidate`
 ------
 - **I95-27946** Commit may fail on Conductor when node in router pair is stopped
-
-  _**Symptom:**_ When performing a commit to a router where one of the nodes is offline, the commit from the Conductor may not respond or may fail. Performing a validate operation a second time may provide the following error response:
-
-  ```
-  “✖ Validating...
-   % Error: Candidate configuration is invalid:
-   1. A request of type validate is already in progress”
-  ```
-  _**Conditions:**_ When a node in the router pair is offline.
-
-  _**Corrective Action:**_ The validate operation is sent from the conductor to the nodes to verify that the configuration is correct. The validate will timeout to the node that is offline. Bring the node back online and perform the operation a second time.
 ------
 - **I95-27944** Network error may cause upgrade to fail and not retry.
 
@@ -902,13 +859,7 @@ The 4.1.0 release requires the 128T-installer 2.2.0 or greater. By default, this
   _**Corrective Action:**_ Perform the PCLI command on the router to update the information on the conductor.
 ------
 - **I95-27722** Alarms for "Peer not reachable" may not clear and will persist after nodes are back and operational
-
-  _**Symptom:**_ Alarms for "peer not reachable" provided in on the Conductor
-
-  _**Conditions:**_ Unknown, seen after system upgrade
-
-  _**Corrective Action:**_ NA, The alarms will clear within 15 minutes.
-------  
+------
 - **I95-25947** The upgrade to 4.1 can take upwards of 40 minutes to complete.  The increase in installation time is due to the underlying OS upgrade.
 ------
 - **I95-25828** Rollback to the previous version of software is not supported due to the underlying operating system upgrade.

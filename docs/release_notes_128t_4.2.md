@@ -19,17 +19,30 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.** The BGP neighbor now connects correctly.
 ------
-- **I95-33989 Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`.** Resolved conflicting validation operation messaging. 
+- **I95-33989** Terminating a "validate" command with CTRL-c returns to the PCLI prompt but does not stop the in-progress validation. This prevents subsequent validation attempts until the in-progress validation completes in the background.
+
+  _**Symptom:**_ The following can be seen in the PCLI output:
+  ```
+  ✖ Validating...
+  % Error: Candidate configuration is invalid:
+  1. A request of type validate is already in progress. The first request was started 13 seconds ago.
+  ```
+  Until the system is upgraded to 4.4.2, this issue will resolve itself after the background tasks have completed.
 ------
 - **I95-34649 `best-effort` path handling for `proportional` load balancing is not honored by service-policy.** Path handling for `best effort` load balancing is handled correctly. 
 ------
-- **I95-34650 In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path.** This has been resolved and no longer results in packet loss.
+- **I95-34650** In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path. This results in packet loss until the load-balancer learns of the loss and migrates the session.
+
+  _**Symptom:**_ `show peers` will show the physically disconnected peer as UP while in this state.
 ------
 - **I95-35111 `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.** The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.
 ------
-- **I95-35406 Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.** The shutdown race condition no longer occurs. 
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.
 ------
-- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+- **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
+:::important
+Please refer to [Password Policies](config_password_policies.md) for updated password requirements.
+:::
 ------
 - **I95-35694 A `service-route` of type `host` results in an invalid service path during session establishment.** This issue has been resolved by adding a missing gateway-ip address to the process.  
 ------
@@ -47,15 +60,17 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-36149 Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.** Updated to verify the order of operations and prevent the fault.
 ------
-- **I95-36341 A race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.** The race condition has been resolved. 
+- **I95-36341** Race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.
 ------
 - **I95-36356 Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.** Changes to the BGP `graceful-restart restart-time` no longer cause a process fault.
 ------
-- **I95-36394 Auto-generated conductor service names that include a '.' will fail to commit configuration.** This issue has been resolved.
+- **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
+
+  _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
 ------
-- **I95-36525 TLS 1.0 is no longer supported.**
+- **I95-36525** Due to known vulnerabilities, only TLS versions 1.2 and 1.3 are supported. We do not support TLS 1.0 and 1.1.
 ------
-- **I95-36632 Empty office365 metadata file results in HTTP 400 bad request error.** Office365 modules no longer generate bad requests. 
+- **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error.
 ------
 - **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
 :::note
@@ -64,19 +79,19 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-36672 Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.** Traffic on the device interface is handled before deleting the filters. 
 ------
-- **I95-36770 Salt minion log file was not being properly rotated.** The log file is now rotated correctly.
+- **I95-36770** Salt minion log file was not being properly rotated.
 ------
-- **I95-36841 TCP RST can cause the highway process to fault on a SVR path performing UDP transform.** TCP resets generate properly into SVR when UDP transform is enabled.
+- **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
 ------
-- **I95-36873 Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.** Alarms from other routers are now correctly filtered.
+- **I95-36873** Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.
 ------
-- **I95-36927 A race condition exists that can cause a fault in the highway process during session setup while applying a configuration change that removes BGP over SVR service-route(s).** This race condition has been resolved. 
+- **I95-36927** A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.
 ------
-- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.** The  routing service agent show commands no longer cache the text output when there are more lines than requested.  
+- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.** Pagination issues have been resolved for `show rib` and `show bgp`. 
 ------
-- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues causing LDAP authentication failures have been resolved. 
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues have been resolved with LDAP authentication. 
 ------
-- **I95-37588 Value for `configure > authority > router > system > software-update > repository > address` uses the first lexicographically sorted router for all other routers in authority instead of using a unique value per router.** Resolved the issue where a managed router had the incorrect IP address.
+- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexicographically sorted router for all other routers in authority instead of using a unique value per router.
 ------
 - **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
 ------
@@ -88,13 +103,13 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T Web UI does not support iFrame embedding.
+- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T UI does not support embedded iFrames.
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
 ------
-- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration.
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
 
 ## Release 4.2.8
 
@@ -102,7 +117,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
 - **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses.
 ------
-- **I95-30610** RTP is not properly classified for subsequent 128T routers
+- **I95-30610** RTP is not properly classified for subsequent 128T routers.
 ------
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
@@ -120,19 +135,19 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
   Until the system is upgraded to 4.2.8, this issue can be mitigated by attempting the commit again.
 ------
-- **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
+- **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner.
 ------
-- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
+- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router.
 ------
 - **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
 ------
-- **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist
+- **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist.
 ------
 - **I95-34961** Using a QuickStart file to provision a router fails if the ZScaler plugin is installed on the Conductor.
 ------
-- **I95-34968** Self-signed certificates created during initial installation of 128T are invalid
+- **I95-34968** Self-signed certificates created during initial installation of 128T are invalid.
 ------
-- **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
+- **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`.
 ------
 - **I95-35082** When a 128T is deployed behind a NAT firewall and has path MTU (PMTU) discovery enabled, SVR sessions established for outbound-only connections are set up with the configured interface MTU, not the discovered PMTU.
 ------
@@ -142,9 +157,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
   Until the system is upgraded to 4.2.8, this issue can be mitigated by disabling rather than deleting the user.
 ------
-- **I95-35115** Aggregate bandwidth charts may not display data accurately
+- **I95-35115** Aggregate bandwidth charts may not display data accurately.
 ------
-- **I95-35155** `show device-interface` output did not include duplex mode
+- **I95-35155** `show device-interface` output did not include duplex mode.
 ------
 - **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
 
@@ -156,14 +171,12 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
   Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
 ------
-- **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
-
-  Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
+- **I95-35323** BGP over SVR does not work when both sides are using VLAN tags.
 ------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
   _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
 ------
-- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
+- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down.
 
 
 ## Release 4.2.7
@@ -186,13 +199,14 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
 ### Resolved Issues
 
 - **I95-34068** SVR sessions fail to establish due to waypoint allocation failures after HA node failover.
+
   _**Symptom:**_ The following warning log is generated:
 
   ```
-  Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to allocate ports for WayPoint; intf=5.0; local=172.27.233.47; remote=10.61.55.109
+  Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to allocate ports for WayPoint; intf=5.0; local=192.0.2.100; remote=198.51.100.128
   ```
 
-  Until the system is upgraded to 4.2.6, this issue can be mitigated by removing the corresponding adjacency configuration and adding it back.
+  Until the system is upgraded to 4.1.10, this issue can be mitigated by removing the corresponding adjacency configuration and adding it back.
 ------
 - **I95-34164** Load balancer occasionally returns standby paths during packet duplication flow setup
 ------
@@ -206,7 +220,7 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
 ------
 - **I95-34645** Swagger API for "clone" and "move" operations are incorrect.  They are `/config/{configStore}/authority/district/{district}/clone` when they should be `/config/{configStore}/authority/district/clone`
 ------
-- **I95-34577** Interface never becomes active when `shared-physical-address` is configured to be the same as the physical MAC
+- **I95-34577** Interface never becomes active when `shared-phys-address` is configured to be the same as the physical MAC
 
 
 ## Release 4.2.5
@@ -222,33 +236,24 @@ The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections i
 - **I95-27764** `write log snapshot` does not work for process highway
 ------
 - **I95-28190** Addressed issue causing PPPoE passwords to be incorrectly changed to `(removed)`.
+
   _**Symptom:**_ `device-interface > pppoe > password` gets converted to `(removed)` upon changing `device-interface > name`.
 
   _**Conditions:**_ Changing the object's key, in this case `device-interface > name` causes secure fields to be incorrectly converted to `(removed)`.
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by deleting the existing `device-interface` object and recreate it.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by deleting the existing `device-interface` object and recreate it.
 ------
-- **I95-30011** HA router nodes may take upwards of 40 seconds to achieve quorum.
-
-  _**Symptom:**_ SVR traffic may be dropped while a redundant node is restarting.
-
-  _**Conditions:**_ The hostname of the platform cannot be resolved
-
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by setting the hostname of the node to a value that can be resolved or add an address for the system in `/etc/hosts`
+- **I95-30011** System hostnames that cannot be resolved cause two HA nodes to achieve quorum after DNS lookup times out (approximately 40 seconds)
 ------
 - **I95-31597** Configuring a static ARP entry within a `neighbor` configuration is not honored
 
   _**Symptom:**_ Dynamic ARP entries take precedence over statically configured ARP entries
 ------
-- **I95-32244** Cannot upgrade after software download completes
-
-  _**Conditions:**_ Managed router being upgraded via Conductor can intermittently fail due to transient network conditions, 4.2.5 will now perform multiple attempts to verify the download completed.
-
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by performing the Download operation again.
+- **I95-32244** Download of software upgrade may fail and not provide feedback
 ------
 - **I95-32509** Generated configuration objects are shown by default in GUI and PCLI
 ------
-- **I95-32660** `saltMaster.log` files rotate once daily with a maximum of 25 rotated files, consuming a large amount of disk space.  This has been changed to rotate hourly, with a maximum of 25 rotated files.
+- **I95-32660** Log files were only rotated daily which may result in larger than expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap.
 ------
 - **I95-33024** Specifying a `metric` value within `advertise-default` of OSPF causes advertisements to be withdrawn
 
@@ -320,11 +325,7 @@ The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections i
 ------
 - **I95-33857, I95-33643** Short OTP QuickStart DHCP server lease time results in an initial OTP QuickStart failure. 
 ------
-- **I95-34058** Session setup fails for outbound only when first packet exceeds MTU
-
-  _**Symptoms:**_ Session setup fails
-
-  _**Conditions:**_ Paths configured as `outbound-only`, and the first packet of the flow exceeds MTU (typically UDP).
+- **I95-34058** Session setup fails for paths configured as `outbound-only` when first packet of a flow exceeds MTU (typically UDP)
 ------
 - **I95-34090** A network-interface configured with multiple neighborhoods, where one of the neighborhoods defines a port range, will result in traffic being dropped on the defined range
 
@@ -392,7 +393,11 @@ The 4.2.4 release is a superset of the 4.2.3 release. Features and corrections i
 ------
 - **I95-32754** DHCP Server can flood the journal with monitoring messages
 ------
-- **I95-32843** System can fault when routing loop is created with OSPF
+- **I95-32843** System can fault when routing loop is created with OSPF and BGP
+
+  _**Symptom:**_ highwayManager process faults after configuration is loaded.
+
+  _**Corrective Action:**_ Restore existing configuration to remove routing loop created by OSPF.
 ------
 - **I95-32902** LTE APN name not displayed correctly
 ------
@@ -434,7 +439,13 @@ The 4.2.4 release is a superset of the 4.2.3 release. Features and corrections i
 ------
 - **I95-33529** Promiscuous mode on ethernet interfaces is not dynamically reconfigurable
 ------
-- **I95-33536** 128T fault on shutdown with very large number of peer paths
+- **I95-33536** Fixed highway terminate condition on shutdown with large number of peer paths
+
+  _**Symptom:**_ highwayManager process aborts on shutdown or restart
+
+  _**Conditions:**_ 128T router with greater than 2500 active peer paths restarted with `systemctl restart 128T`
+
+  _**Corrective Action:**_ None required, system will automatically recover.
 ------
 - **I95-33586** Using hostnames rather than IP addresses for nat-target or target-address in a service-route would cause config validation to fail and report an Invalid IP when inspector is enabled.
 
@@ -448,9 +459,9 @@ The 4.2.3 release is a superset of the 4.2.2 release. Features and corrections i
 
 ### Resolved Issues
 
-- **I95-33264** Secondary HA node reboot may result in traffic no longer flowing through the fabric
+- **I95-33264** Race condition exists for HA shared LAN interfaces wherein if the primary node is restarted, the primary interface may not take over after the restart, causing traffic to be blackholed
 ------
-- **I95-33278** Asset/hostname missing from syslog messages
+- **I95-33278** End of log messages were being truncated when sent to syslog
 
 
 ## Release 4.2.2
@@ -581,7 +592,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-27805** Generated configuration is now hidden by default.  A toggle exists in Config Explorer to display generated configuration
 ------
-- **I95-27886** Session Duplication support for inter-node links
+- **I95-27886 Packet Duplication for Inter-Node High Availability:** Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic. See [service-policy](config_reference_guide.md#service-policy) for usage information. 
 ------
 - **I95-28187** Packet Duplication for non-SVR packets
 ------
@@ -597,7 +608,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-28482** `device-interface/target-interface` does not have input validation, allowing for incorrect configuration
 ------
-- **I95-28744** GraphQL API added for service ping
+- **I95-28744** GraphQL API for Service Ping
 ------
 - **I95-28881, I95-31050** SIP ALG support via plugin
 ------
@@ -609,7 +620,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-29149** NIC Flow Control enable/disable support
 ------
-- **I95-29273** Node page within GUI offers link to launch PCLI session directly to device
+- **I95-29273** Quick-Connect: Button to remote login to 128T router from Conductor
 ------
 - **I95-29568** BGP withdrawal of routes if path does not meet SLA
 ------
@@ -617,7 +628,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-29933** Improved system performance for peer path state processing
 ------
-- **I95-30884** New Data process CPU Core count mode attribute
+- **I95-30884** DHCP server sends responses out multiple interfaces, with incorrect MAC
 ------
 - **I95-31331** `lte-info` now support JSON output
 ------
@@ -627,7 +638,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 
 - **I95-19549** Configuration Generation will fail to generate a peer configuration if the peer name is not the same as the router name
 ------
-- **I95-19779** Peer Path stats use Device Interface ID, in 4.2.0 the name will now be used.
+- **I95-19779** Peer Paths are now referenced by object names instead of the internal IDs. The format for a peer path is: peer-name | destination (can be an adjacency IP or a host-name | node-name | device-port | VLAN-id
 ------
 - **I95-20458** No feedback is provided to the user from the GUI in the event of an upgrade failure on the Conductor
 ------
@@ -689,7 +700,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-26634** BGP routes are not updated when VLANed interface is operationally down
 ------
-- **I95-26793** service-routes associated with services outside of router-based-services are incorrectly being applied
+- **I95-26793** Validation does not exist to prevent provisioning a service-route for a service belonging to another router-group
 ------
 - **I95-26996** When synchronizing a new node into a HA pair (RMA), if the new node is on a version older than the existing node, there will not be an option to upgrade the newly added node through the GUI
 ------
@@ -773,7 +784,11 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-30011** System hostnames that cannot be resolved cause two HA nodes to achieve quorum after DNS lookup times out (approximately 40 seconds)
 ------
-- **I95-30078, I95-30268** Traffic does not switch to standby interface on management path communication failure 
+- **I95-30078** - HA node communication failure results in two systems both taking control of a shared (redundant) interface
+  
+  _**Symptom:**_ Traffic egressing a highly available device may get pinned to the wrong node in a highly available pair.
+  
+  _**Mitigation (pre-4.1.5):**_ Manually purge specific traffic flows that are pinned to the wrong node, to allow them to regenerate.
 ------
 - **I95-30103** Creating tenants using output of `show config running flat` does not work (Entering flat configuration into PCLI does not always create the configuration)
 ------
