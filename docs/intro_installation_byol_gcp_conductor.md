@@ -25,7 +25,7 @@ After selecting the BYOL plan, continue to [Session Smart Conductor Deployment](
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in GCP. Choose the size that best meets your requirements. For additional machine type details, refer to the [GCP machine type documentation](https://docs.cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
+The following instance types are supported for virtual SSR in GCP. Choose the size that best meets your requirements. More information on GCP instance types can be found in the [GCP machine type documentation](https://docs.cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
 
 | Recommended VM Size | Max vNICs Supported | vCPU Cores | Memory |
 | --- | --- | --- | --- |
@@ -33,6 +33,8 @@ The following instance types are supported for virtual SSR in GCP. Choose the si
 | c2-standard-8  | 8  | 8  | 32 GB  |
 | c2-standard-16 | 10 | 16 | 64 GB  |
 | c2-standard-30 | 10 | 30 | 120 GB |
+
+Session Smart Router Size recommendatations can be found in [System Requirements](intro_system_reqs.md).
 
 ## Session Smart Conductor Deployment
 
@@ -82,6 +84,9 @@ Leave the Mist-managed and Conductor-managed configuration sections empty.
 
 A complete description of all parameters can be found in [Deployment Parameters](#deployment-parameters-conductor).
 
+![gcp common template deployment](/img/gcp-common-template.png)
+![gcp conductor template deployment](/img/gcp-conductor-template.png)
+
 Once deployment completes, use the output values from the deployment details to connect to the instance.
 
 The non-interactive, Zero Touch Provisioning (ZTP) method is triggered after deployment. After the VM is created, allow an additional 10 to 15 minutes for the requested SSR version to install and for initialization to complete.
@@ -94,6 +99,8 @@ A BYOL Session Smart Conductor can be deployed using Terraform.
 2. Click **Launch**.
 3. Select the **Command-Line Deployment** tab.
 4. Click **Download** to download the Terraform deployment package.
+
+![gcp cli deployment](/img/gcp-cli-deployment.png)
 
 In the downloaded package, create a Terraform variables file named `ssr-variables.tf` and provide values similar to the following. See [Deployment Parameters](#deployment-parameters-conductor) for all possible variables.
 
@@ -236,6 +243,11 @@ At deployment time:
 A complete description of all parameters can be found in [Deployment Parameters](#deployment-parameters-conductor-managed-router).
 
 
+![gcp common template deployment](/img/gcp-common-template.png)
+![gcp conductor template deployment](/img/gcp-conductor-managed-rtr-template.png)
+![gcp network template deployment](/img/gcp-networking-template.png)
+
+
 Once deployment completes, information is provided in the Outputs tab and the BYOL installation process begins. After the VM is deployed, allow an additional 10 to 15 minutes for the requested SSR version to install.
 
 To log in to the instance via SSH, use `t128` as the username and the SSH public key provided in the template.
@@ -248,6 +260,8 @@ A BYOL Conductor-managed Router can be deployed using Terraform.
 2. Click **Launch**.
 3. Select the **Command-Line Deployment** tab.
 4. Click **Download** to download the Terraform deployment package.
+
+![gcp cli deployment](/img/gcp-cli-deployment.png)
 
 In the downloaded package, create a Terraform variables file named `ssr-variables.tf` and provide values similar to the following. See [Deployment Parameters](#deployment-parameters-conductor-managed-router) for all possible variables.
 
@@ -390,7 +404,7 @@ When building templates or automation, keep the network and subnet arrays in the
 
 ### Deployment Fails in Google Cloud Marketplace
 
-If the deployment failed in the GCP Marketplace, a required parameter is likely missing. To view the error
+If the deployment failed in the GCP Marketplace, a required parameter is likely missing. To view the error:
 1. Select **View Logs** in the upper right corner
 2. In the **Build Summary** step, search for the phrase `Error: Resource precondition failed`
 

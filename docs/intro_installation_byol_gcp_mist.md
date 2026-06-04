@@ -16,7 +16,7 @@ For the latest information about SSR BYOL offerings, refer to the [Cloud Images 
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in GCP. Choose the size that best meets your requirements. More information can be found in the [GCP Documentation](https://docs.cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
+The following instance types are supported for virtual SSR in GCP. Choose the size that best meets your requirements. More information on GCP instance types can be found in the [GCP Documentation](https://docs.cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
 
 | Recommended VM Size | Max vNICs Supported | vCPU Cores | Memory |
 | --- | --- | --- | --- |
@@ -24,6 +24,8 @@ The following instance types are supported for virtual SSR in GCP. Choose the si
 | c2-standard-8     |  8    |  8   | 32 GB  |
 | c2-standard-16    |  10   |  16  | 64 GB  |
 | c2-standard-30    |  10   |  30  | 120 GB |
+
+Session Smart Router Size recommendatations can be found in [System Requirements](intro_system_reqs.md).
 
 ## Session Smart Router
 
@@ -56,23 +58,26 @@ To deploy the Session Smart Networking software via the GCP Marketplace:
 3. Provide deployment inputs for your project, region, zone, and machine type.
 4. In SSR mode, select **Mist-managed**.
 5. Provide the BYOL software inputs:
-	 * SSR software version
+    * SSR software version
 6. Specify whether the router is High Availability (HA).
 7. Provide administrative access settings:
-	 * Allowed CIDR(s) for SSH/HTTPS access
-	 * SSH public key
+    * Allowed CIDR(s) for SSH/HTTPS access
+    * SSH public key
 8. Provide the Mist registration code.
 9. Provide network interface settings.
-   * Minimum one WAN and one LAN interface are required.
-   * Configure allowed CIDR values for WAN and LAN access.
-   * Optionally configure an out-of-band management interface.
-   * Configure HA Sync and HA Fabric interfaces when HA is enabled in step 6.
+    * Minimum one WAN and one LAN interface are required.
+    * Configure allowed CIDR values for WAN and LAN access.
+    * Optionally configure an out-of-band management interface.
+    * Configure HA Sync and HA Fabric interfaces when HA is enabled in step 6.
 10. Review and deploy.
 
 
 Leave the Conductor and Conductor-managed configuration sections empty.
 
 A complete description of all parameters can be found in [Deployment Parameters](#deployment-parameters).
+
+![gcp mist template deployment](/img/gcp-mist-template.png)
+![gcp network template deployment](/img/gcp-networking-template.png)
 
 Once the deployment completes, access information is provided in the `Outputs` section of the `Details` tab.
 
@@ -86,6 +91,8 @@ Download the Session Smart Router Terraform package:
 2. Click **Launch**.
 3. Select the **Command-Line Deployment** tab.
 4. Click **Download** to download the Terraform deployment package.
+
+![gcp cli deployment](/img/gcp-cli-deployment.png)
 
 Within the downloaded package, create a Terraform variables file named `ssr-variables.tf`.
 
@@ -167,7 +174,7 @@ Attachment order:
 
 Interface names start at `ge-0-0` and increment in the same order shown above.
 
-Example: if an HA SSR is deployed with one Management interface, two WAN interfaces, and two LAN interfaces, names map as follows:
+Example: If an HA SSR is deployed with one Management interface, two WAN interfaces, and two LAN interfaces, the names map as follows:
 
 | Network Interface Name | Role | Mist Config Name |
 | --- | --- | --- |
@@ -222,7 +229,7 @@ If onboarding data is not provided at deployment time, manually onboard the rout
 ## Troubleshooting
 
 ### Failed deployment in GCP Marketplace
-If the deployment failed in the GCP Marketplace, a required parameter is likely missing. To view the error
+If the deployment failed in the GCP Marketplace, a required parameter is likely missing. To view the error:
 1. Select **View Logs** in the upper right corner
 2. In the **Build Summary** step, search for the phrase `Error: Resource precondition failed`
 
