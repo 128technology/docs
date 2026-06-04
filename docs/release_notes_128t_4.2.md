@@ -172,6 +172,8 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
 ------
 - **I95-35323** BGP over SVR does not work when both sides are using VLAN tags.
+
+  Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
 ------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
   _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
@@ -206,7 +208,7 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
   Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to allocate ports for WayPoint; intf=5.0; local=192.0.2.100; remote=198.51.100.128
   ```
 
-  Until the system is upgraded to 4.1.10, this issue can be mitigated by removing the corresponding adjacency configuration and adding it back.
+  Until the system is upgraded to 4.2.6, this issue can be mitigated by removing the corresponding adjacency configuration and adding it back.
 ------
 - **I95-34164** Load balancer occasionally returns standby paths during packet duplication flow setup
 ------
@@ -241,15 +243,25 @@ The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections i
 
   _**Conditions:**_ Changing the object's key, in this case `device-interface > name` causes secure fields to be incorrectly converted to `(removed)`.
 
-  Until the system is upgraded to 4.3.2, this issue can be mitigated by deleting the existing `device-interface` object and recreate it.
+  Until the system is upgraded to 4.2.5, this issue can be mitigated by deleting the existing `device-interface` object and recreate it.
 ------
-- **I95-30011** System hostnames that cannot be resolved cause two HA nodes to achieve quorum after DNS lookup times out (approximately 40 seconds)
+- **I95-30011** HA router nodes may take upwards of 40 seconds to achieve quorum.
+
+  _**Symptom:**_ SVR traffic may be dropped while a redundant node is restarting.
+
+  _**Conditions:**_ The hostname of the platform cannot be resolved
+
+  Until the system is upgraded to 4.2.5, this issue can be mitigated by setting the hostname of the node to a value that can be resolved or add an address for the system in `/etc/hosts`
 ------
 - **I95-31597** Configuring a static ARP entry within a `neighbor` configuration is not honored
 
   _**Symptom:**_ Dynamic ARP entries take precedence over statically configured ARP entries
 ------
 - **I95-32244** Download of software upgrade may fail and not provide feedback
+
+  _**Conditions:**_ Managed router being upgraded via Conductor can intermittently fail due to transient network conditions, 4.2.5 will now perform multiple attempts to verify the download completed.
+
+  Until the system is upgraded to 4.2.5, this issue can be mitigated by performing the Download operation again.
 ------
 - **I95-32509** Generated configuration objects are shown by default in GUI and PCLI
 ------
@@ -326,6 +338,10 @@ The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections i
 - **I95-33857, I95-33643** Short OTP QuickStart DHCP server lease time results in an initial OTP QuickStart failure. 
 ------
 - **I95-34058** Session setup fails for paths configured as `outbound-only` when first packet of a flow exceeds MTU (typically UDP)
+
+  _**Symptoms:**_ Session setup fails
+
+  _**Conditions:**_ Paths configured as `outbound-only`, and the first packet of the flow exceeds MTU (typically UDP).
 ------
 - **I95-34090** A network-interface configured with multiple neighborhoods, where one of the neighborhoods defines a port range, will result in traffic being dropped on the defined range
 
