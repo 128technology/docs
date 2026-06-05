@@ -4,7 +4,7 @@ sidebar_label: '5.0'
 ---
 ## Release 5.0.0
 
-**Release Date:** May 1, 2026
+**Release Date:** June 2, 2026
 
 #### New Features and Improvements
 
