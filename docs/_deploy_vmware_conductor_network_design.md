@@ -5,7 +5,7 @@ The following IP addressing and naming scheme is used consistently throughout th
 | Parameter | Example Value | Description |
 |-----------|--------------|-------------|
 | Authority Name | `Authority128` | Organizational authority name |
-| Conductor Name | `conductor` | Conductor system name |
+| Conductor Name | `Conductor` | Conductor system name |
 | Conductor Node Name | `node0` | Conductor node name |
 | Conductor Management IP | `192.168.100.10` | Static IP on the VMware management network |
 | Conductor Subnet Mask | `/24` | Management network prefix |

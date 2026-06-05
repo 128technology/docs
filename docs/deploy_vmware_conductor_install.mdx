@@ -19,6 +19,8 @@ This step boots the conductor VM from the SSR ISO, installs the software, and co
 
    :::note
    IDP is not compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. If you plan to enable IDP, do not enable FIPS mode. See [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information on disabling FIPS mode if needed.
+
+   Additionally, please note that FIPS mode disables BGP MD5 authentication. 
    :::
 
    ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)
@@ -35,10 +37,6 @@ This step boots the conductor VM from the SSR ISO, installs the software, and co
 
 These steps configure the interface you will use to initialize the conductor via the Web GUI.
 
-:::note
-During initialization, the `mist-agent` attempts to connect to the Mist Cloud. This is enabled by default, and will persist until the service is stopped. In a conductor-managed, air-gap network, connection to Mist is unnecessary. It is recommended to stop and then disable the service. The commands are provided below.
-:::
-
 1. In the VM in the ESXi Navigator, start the Conductor Virtual Machine.
 
    During the boot process, service failure warnings appear - these are due to services that are not yet running and can be ignored. 
@@ -52,6 +50,8 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    These messages appear due to the instance attempting to connect to the Mist Cloud. The `mist-agent` is enabled by default and will continue to reach out to Mist to connect. In Conductor-managed air-gap networks where there is never any intent to connect to Mist, disabling the Mist Agent has no operational impact, and is actually desirable. Stopping the Mist Agent stops the messages, allowing you to continue the process. 
 
 2. Select **Console** and login using the root credentials.
+   - Username: `root`
+   - Password: `128tRoutes`
 
 3. Run the following two commands to disable the service and stop the messages. 
 
@@ -93,19 +93,18 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
 ## Initialize the Conductor
 
 1. After the system boots, the SSR login screen appears. Login using the root credentials.
+   - Username: `root`
+   - Password: `128tRoutes`
 
    ![Conductor Login](/img/dep-vmware-conductor-login.png)
 
-2. Run the following commands until `Active` is displayed for each.
+   The system takes a few minutes to start up. 
 
-   ```
-   systemctl is-active 128T 
-   systemctl is-active mars
-   systemctl is-active firewalld
-   ```
-3. Run the command `su admin `to enter the PCLI. 
+2. Run the command `su admin `to enter the CLI. This may fail until the system completes the start up process.
 
     ![Install complete login](/img/deploy-vmware-init-login.png)
+
+3. Once you are able access the CLI, run the command `show system`. When the status returns as `running`, continue with the next step.
 
 4. From the CLI, run the `initialize conductor` command shown below. Use the folowing table to set the values indicated: 
 
@@ -122,7 +121,7 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
    initialize conductor router-name Conductor node-name node0 node-ip 192.168.100.10/24 node-gateway 192.168.100.1 dns-servers 8.8.8.8 artifactory-user <your user name> artifactory-password <artifactory token>
    ```
 
-   The Artifactory username and password are required for your device to access the Juniper software repository to download new software releases. If you are installing in an air-gap network where the Conductor does not have internet access, these values are not required but the Conductor must be set to `offline-mode` after the initialization has completed, and is shown in step X.
+   The Artifactory username and password are required for your device to access the Juniper software repository to download new software releases. If you are installing in an air-gap network where the Conductor does not have internet access, these values are not required but the Conductor must be set to `offline-mode` after the initialization has completed, and is shown in [Set Offline Mode](deploy_vmware_conductor_config.mdx#4-air-gap-network---set-offline-mode).
 
    For additional information about `offline-mode`, see [Upgrades with Restricted Access](upgrade_restricted_access.md)
 
@@ -134,7 +133,7 @@ During initialization, the `mist-agent` attempts to connect to the Mist Cloud. T
 
    The message `Device successfully initialized` is displayed after the process completes. The conductor VM will reboot, and then reboot a second time. 
 
-   After the second reboot, the login screen appears. Open a browser window and enter the URL https://192.168.100.10. 
+   After the second reboot, the login screen appears. Open a browser window and enter the URL `https://192.168.100.10`. 
 
 5. Log in with username `admin` and the password set during initialization.
 

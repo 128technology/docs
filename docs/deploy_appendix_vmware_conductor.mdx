@@ -1,23 +1,14 @@
 ---
-title: "Appendix - VMware Conductor Configuration"
-sidebar_label: "Appendix - VMware Conductor Configuration"
+title: Appendix - VMware Conductor Configuration
+sidebar_label: Appendix - VMware Conductor Configuration
 ---
+import NetworkDesign from './_deploy_vmware_conductor_network_design.md';
 
 This appendix contains the complete SSR PCLI configuration for the `Conductor` VMware ESXi conductor described in this guide. Apply this configuration after completing [Step 3 — Configure the Conductor](deploy_vmware_conductor_config.mdx).
 
 ## Network Design Reference
 
-The following values are used in this configuration. Substitute your own values where noted.
-
-| Parameter | Example Value | Description |
-|-----------|--------------|-------------|
-| Authority Name | `Authority128` | Organizational authority name |
-| Conductor Name | `Conductor` | |
-| Conductor Node Name | `node0` | |
-| Conductor Management IP | `192.168.100.10` | Static IP on VMware management network |
-| Conductor Subnet Mask | `/24` | |
-| Conductor Gateway | `192.168.100.1` | Management network gateway |
-| Conductor NIC PCI Address | `0000:0b:00.0` **Example only** | Discover actual value with `ethtool -i <iface> \| grep bus-info` |
+<NetworkDesign/>
 
 ## Applying This Configuration
 

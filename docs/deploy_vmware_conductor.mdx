@@ -1,5 +1,5 @@
 ---
-title: "VMware ESXi Conductor Deployment Guide"
+title: VMware ESXi Conductor Deployment Guide
 sidebar_label: Overview
 ---
 import Mermaid from '@theme/Mermaid';
@@ -58,8 +58,8 @@ graph TD
 Before beginning, ensure the following are available:
 
 - **VMware ESXi 7.0 or later** — administrative access to an ESXi host.
-- **SSR 7.1.4-3r2 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
 - **Juniper software access credentials** — Artifactory username and password for software downloads and token provisioning.
+- **SSR 7.1.4-3r2 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
 - **Management network** — a VMware portgroup providing internet access for software downloads, with a static IP assignment available for the conductor VM.
 - **Static IP assignment for the conductor** — the IP address assigned to the conductor must be reachable from each branch router's WAN interface (directly or via routing). This guide uses `192.168.100.10`.
 
@@ -68,7 +68,7 @@ Before beginning, ensure the following are available:
 This guide uses **SSR 7.1.4-3r2** on the conductor.
 
 :::note
-The router software version cannot be higher than the conductor software version.
+The router software version must be lower than or equal to the conductor software version.
 :::
 
 ## Related Documentation
