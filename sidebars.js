@@ -158,8 +158,8 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
-            "intro_installation_quickstart_byol_conductor_aws",
-            "intro_installation_quickstart_byol_mist_aws",
+            "intro_installation_byol_aws_conductor",
+            "intro_installation_byol_aws_mist",
             ],
       },
       {
@@ -170,6 +170,14 @@ module.exports = {
             "intro_installation_azure_mist",
             "intro_installation_byol_azure_conductor",
             "intro_installation_byol_azure_mist",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Installing In GCP",
+          "items": [
+            "intro_installation_byol_gcp_conductor",
+            "intro_installation_byol_gcp_mist",
           ],
       },
     ],
