@@ -7,6 +7,26 @@ module.exports = {
       "about_releases",
       "about_support_policy",
     ],
+    "Deployment Guides": [
+      "deploy_guides_overview",
+      {
+        "type": "category",
+        "label": "Conductor Deployment Guides",
+        "items": [
+            {
+              "type": "category",
+              "label": "VMware ESXi Conductor",
+              "items": [
+                "deploy_vmware_conductor",
+                "deploy_vmware_conductor_vm",
+                "deploy_vmware_conductor_install",
+                "deploy_vmware_conductor_config",
+                "deploy_appendix_vmware_conductor",
+              ],
+            },
+          ],
+        },
+      ],
     "Release Notes": [
       {
         "type": "category",
