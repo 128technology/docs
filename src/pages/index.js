@@ -97,12 +97,12 @@ const features = [
       </>
     ),
   },
-  {
-    title: <>Best Practices</>,
-    link: 'docs/bcp_sdwan_design_guide',
+    {
+    title: <>Deployment Guides</>,
+    link: 'docs/deploy_guides_overview',
     description: (
       <>
-        Recommended guides and design patterns
+        Deployment Guides for virtual and physical SSR devices.
       </>
     ),
   },
@@ -125,11 +125,11 @@ const features = [
     ),
   },
   {
-    title: <></>,
-    link: '',
+    title: <>Best Practices</>,
+    link: 'docs/bcp_sdwan_design_guide',
     description: (
       <>
-       
+        Recommended guides and design patterns
       </>
     ),
   },
