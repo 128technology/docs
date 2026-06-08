@@ -16,7 +16,7 @@ Your conductor must already have the following objects configured before proceed
 - **`corp` tenant** — the LAN-side user tenant.
 - **`Internet-Traffic` service** — with address `0.0.0.0/0` and access policy permitting `corp`.
 
-If any of these are missing, complete [Configure the Conductor](deploy_conductor_config.mdx) first.
+If any of these are missing, complete [Configure the Conductor](deploy_vmware_conductor_config.mdx) first.
 :::
 
 ## Network Design Reference
@@ -191,8 +191,6 @@ After committing, the conductor pushes the following configuration to `branch1`.
 
 ## Next Step
 
-Proceed to [Step 5 — Upgrade the Router to SSR 7.1.5](deploy_router_upgrade.mdx).
+Proceed to the next step.
 
-:::note
-If you installed from the SSR 7.1.5 ISO in [Step 2](deploy_vmware_router_install.mdx), the router is already running 7.1.5 and the upgrade step can be skipped. Run `show system version router branch1` on the conductor to confirm the installed version before proceeding.
-:::
+

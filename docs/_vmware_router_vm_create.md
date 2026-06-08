@@ -25,7 +25,7 @@ Use the steps below to configure the following:
    | Name | A descriptive name, for example `spoke1` |
    | Compatibility | `ESXi 7.0 U2 virtual machine` |
    | Guest OS family | `Linux` |
-   | Guest OS version | `CentOS 7 (64-bit)` |
+   | Guest OS version | `Oracle Linux 9 (64-bit)` or highest available Oracle Linux (64-bit) version|
 
 3. Name the Virtual Machine **spoke1**.  
 
@@ -50,7 +50,7 @@ Use the steps below to configure the following:
    | CPUs | `4` | Minimum |
    | Scheduling Affinity | `0-3` | Set under CPU → expand |
    | Memory | `8 GB` | Minimum |
-   | Hard Disk 1 | `60 GB` | Minimum |
+   | Hard Disk 1 | `62 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
 
    ![Storage Parameters](/img/dep5-vm-params.png)
@@ -83,7 +83,7 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
 12. Confirm the settings, and then click **Next**.
 
-   ![Confirm Settings](/img/dep8-vm-confirm.png)
+   ![Confirm Settings](/img/dep8-vm-all-settings.png) 
 
 <!---### VM Options
 
@@ -102,4 +102,4 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
 13. Review the summary, then click **Finish**.
 
-   ![VM Complete](/img/dep9-vm-summary.png)
+   ![VM Complete](/img/dep9-vmrouter-summary.png)

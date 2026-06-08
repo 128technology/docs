@@ -5,7 +5,7 @@ The following IP addressing and naming scheme is used consistently throughout th
 | Parameter | Example Value | Description |
 |-----------|--------------|-------------|
 | Authority Name | `Authority128` | Organizational authority name |
-| Conductor Router Name | `conductor1` | Pre-existing conductor system name |
+| Conductor Name | `Conductor` | Pre-existing conductor system name |
 | Conductor IP Address | `192.168.100.10` | Conductor IP — must be reachable from the router WAN |
 | Router Name | `branch1` | VMware router system name |
 | Router Node Name | `node0` | Router node name |
