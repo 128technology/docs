@@ -1,0 +1,198 @@
+---
+title: "Step 4: Configure the Router on the Conductor"
+sidebar_label: "Configure the Router"
+---
+import NetworkDesign from './_deploy_vmware_router_network_design.md';
+
+With the router VM initialized and connected to the conductor, you can now stage the full router configuration on the conductor. Once you commit the configuration, the conductor pushes it to the router and the router comes fully online.
+
+All steps are performed from the **Conductor GUI**. Complete all steps before committing.
+
+:::note
+Your conductor must already have the following objects configured before proceeding:
+
+- **Authority name** — set to your organization's name.
+- **Conductor address** — set to `192.168.100.10`.
+- **`corp` tenant** — the LAN-side user tenant.
+- **`Internet-Traffic` service** — with address `0.0.0.0/0` and access policy permitting `corp`.
+
+If any of these are missing, complete [Configure the Conductor](deploy_conductor_config.mdx) first.
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## 1. Create the Router - THIS WAS DONE DURING INSTALL AND INTIALIZE
+
+1. Log in to the Conductor GUI.
+2. Select **Configuration**.
+3. Under **Authority**, scroll to **Routers** and select **ADD**.
+4. Enter the router name `branch1` and select **SAVE**.
+5. Set the following fields on the Router screen:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Location | `+32.7767-096.7970/` | ISO 6709 coordinates; update for your site |
+   | Inter-node Security | `internal` | Required for SVR between nodes |
+
+6. Select **SAVE** (do not commit yet).
+
+## 2. Create the Node - THIS WAS DONE DURING INSTALL AND INTIALIZE
+
+1. Scroll down to **Nodes** and select **ADD**.
+2. Enter the node name `node0` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Role | `combo` | Router acts as both control and data plane |
+   | Asset ID | `spoke1` | The asset ID reported in [Asset ID](deploy_vmware_router_install.mdx#asset-id) |
+
+   :::important
+   The asset ID must exactly match the value shown by `show assets` on the conductor. For a VMware vSSR, this is typically the router name entered during initialization.
+   :::
+
+4. Select **SAVE**.
+
+## 3. Configure the WAN Interface
+
+The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
+
+### 3a. Create the WAN Device Interface
+
+1. Under the Node, scroll to **Device Interfaces** and select **ADD**.
+2. Enter the name `wan-dev` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | PCI Address | _(WAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:0b:00.0` |
+   | Forwarding | `true` | |
+
+4. Select **SAVE**.
+
+### 3b. Create the WAN Network Interface
+
+1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `wan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | DHCP | `v4` | WAN IP assigned by ISP DHCP |
+   | Conductor | `true` | Marks this interface for conductor connectivity |
+   | Default Route | `true` | Linux uses this interface as its default route |
+   | Source NAT | `true` | Required for management over forwarding |
+   | Management | `true` | Enables management over forwarding on this interface |
+
+4. Scroll down to **Management Vector** and select **ADD**.
+   - Enter name `mgmt-vec-wan` and priority `10`.
+   - Select **SAVE**.
+
+5. Scroll down to **Neighborhoods** and select **ADD**.
+   - Select `internet` as the neighborhood name.
+   - Verify **Topology** is set to `spoke`.
+   - Select **SAVE**.
+
+6. Select **SAVE**.
+
+:::important
+`Source NAT` and `Default Route` must both be set to `true` on the WAN management interface. Management traffic originates from the `169.254.x.x` range and must be source-NAT'd to a routable address before leaving the interface. The default route ensures Linux routes non-SVR traffic through the SSR forwarding engine.
+:::
+
+## 4. Configure the LAN Interface
+
+The LAN interface (NIC 2) connects to the branch LAN and assigns the `corp` tenant to traffic arriving from that direction.
+
+### 4a. Create the LAN Device Interface
+
+1. From the Authority level in the Conductor GUI, click on `spoke1` to begin configuration. 
+
+2. Click on `node0` and scroll to the bottom of the page.
+
+3. Select **Device Interfaces**, and **ADD**. 
+
+4. In the New Device Interface window, add the LAN device name `lan`, and click **SAVE**. This adds a physical device name for you to assign your LAN interface.
+
+Keep this table until it is deemed unnecessary:
+
+Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | PCI Address | _(LAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:13:00.0` |
+   | Forwarding | `true` | |
+
+### 4b. Create the LAN Network Interface
+
+1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `lan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
+
+4. Scroll down to **Interface Addresses** and select **ADD**.
+   - IP Address: `192.168.1.1`
+   - Prefix Length: `24`
+   - Select **SAVE**.
+
+5. Select **SAVE**.
+
+## 5. Configure DNS
+
+Configure DNS so the router can resolve FQDNs for conductor connectivity and software downloads.
+
+1. Return to the **Router** level.
+2. Scroll to **DNS Config** and select **ADD**.
+3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
+4. Select **SAVE**.
+
+## 6. Create the Internet Service Route
+
+The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
+
+1. Return to the **Router** level.
+2. Scroll to **Service Routes** and select **ADD**.
+3. Enter the name `internet-route` and select **SAVE**.
+4. Set the following fields:
+
+   | Field | Value |
+   |-------|-------|
+   | Service Name | `Internet-Traffic` |
+   | Service Route Type | `service-agent` |
+
+5. Scroll to **Next Hop** and select **ADD**.
+   - Node: `node0`
+   - Network Interface: `wan1`
+   - Select **SAVE**.
+
+6. Select **VALIDATE** and **COMMIT**.
+
+## Configuration Summary
+
+After committing, the conductor pushes the following configuration to `branch1`. The router applies the configuration and comes fully online within approximately 2–5 minutes.
+
+| Object | Name | Key Settings |
+|--------|------|-------------|
+| Router | `branch1` | combo node, asset-id `branch1` |
+| WAN Device Interface | `wan-dev` | VMware WAN NIC PCI address, forwarding enabled |
+| WAN Network Interface | `wan1` | DHCP, conductor, default-route, source-nat, management, neighborhood `internet` |
+| LAN Device Interface | `lan-dev` | VMware LAN NIC PCI address, forwarding enabled |
+| LAN Network Interface | `lan1` | tenant `corp`, address `192.168.1.1/24` |
+| DNS Config | manual | servers `1.1.1.1`, `8.8.8.8` |
+| Service Route | `internet-route` | service `Internet-Traffic`, type `service-agent`, next-hop `node0/wan1` |
+
+## Next Step
+
+Proceed to [Step 5 — Upgrade the Router to SSR 7.1.5](deploy_router_upgrade.mdx).
+
+:::note
+If you installed from the SSR 7.1.5 ISO in [Step 2](deploy_vmware_router_install.mdx), the router is already running 7.1.5 and the upgrade step can be skipped. Run `show system version router branch1` on the conductor to confirm the installed version before proceeding.
+:::

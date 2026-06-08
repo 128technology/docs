@@ -1,0 +1,148 @@
+---
+title: "Step 2: Install SSR Software and Initialize the Router"
+sidebar_label: "Install and Initialize"
+---
+
+This step boots the router VM from the SSR ISO, installs the software, and uses the web-based initialization interface to configure the VM as a conductor-managed branch router.
+
+## Install SSR Software
+
+1. Select the new router VM in the ESXi Navigator and click the **Play** (Power On) button.
+
+   ![Power On](/img/dep10-vmrouter-start.png)
+
+2. At the Install menu, use the arrow keys to select **VGA Console**.
+
+   ![Install Type](/img/dep10a-vm-vga.png)
+
+4. If you require FIPS mode, select Install Option 1 and press **Enter**. If FIPS is not required, press **Enter** without selecting an option. The download and installation begins.
+
+   :::note
+   IDP is not compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. If you plan to enable IDP, do not enable FIPS mode. See [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information on disabling FIPS mode if needed.
+   :::
+
+   ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)
+
+5. The installation runs to completion automatically. This may take approximately 15–20 minutes.
+
+   ![Install Progress](/img/deploy-vmware-cloud-init-enabled2.png)
+
+6. When prompted to reboot, allow the VM to shutdown.
+
+   ![Install Complete](/img/deploy-vmware-cloud-init-enabled3.png)
+
+## Apply VLANs to the Spoke Router
+
+These steps configure VLANs on the router.
+
+1. In the VM in the ESXi Navigator, start the Spoke1 Virtual Machine.  
+
+2. Select **Console** and login using the root credentials.
+
+3. From the linux prompt run the command `ip a | more` . Make a note of the `ge-0-x` interfaces and MAC address associations.
+
+   ![Start Spoke console](/img/dep-start-spoke-console.png)
+
+   Example:
+   ```
+   ge-0-0 =00:0c:29:6c:32:c1
+   ge-0-1 =00:0c:29:6c:32:a3
+   ge-0-2 =00:0c:29:6c:32:cb
+   ge-0-3 =00:0c:29:6c:32:ad
+   ```
+
+4. From the Spoke1 VM in the ESXi Navigator, select **Actions** and then **Edit Settings**.
+
+   ![Edit VM settings](/img/dep-spoke-edit.png)
+
+5. Use the diagram below and the interface names for each MAC address, to associate the correct network VLAN with each interface. Use the following VM VLANs: VM Network, VLAN66, VLAN3 and VLAN4. The Network Adapter, MAC address and ge-0-x interface name(s) should match based on the MAC addresses previously determined. Save when complete.
+
+   ![VLAN Identification](/img/dep-vlan-ident-spoke1.png)
+
+Example:
+```
+ge-0-0 =00:0c:29:6c:32:a3 = Adapter 1 (VLAN66)
+ge-0-1 =00:0c:29:6c:32:ad = Adapter 2 (VLAN3)
+ge-0-2 =00:0c:29:6c:32:b7 = Adapter3 (VLAN4)
+ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
+```
+
+   ![VLAN NIC Names](/img/dep-vlan-nic-names.png)
+
+6. Click **Save**.
+
+## Initialize the Router
+
+1. In the VM in the ESXi Navigator, select the Spoke1 Virtual Machine, and click **Power On**. 
+
+2. Click **Console** and login with the root credentials. 
+
+3. Run the command `su admin `to enter the PCLI. 
+
+   ![Initial Login](/img/dep-vmrouter-init-login.png)
+
+4. Enter the following command to connect the Spoke1 router to the conductor:
+   
+   `initialize conductor-managed router-name Spoke1 conductor-ip <conductor-ip-address>` 
+   
+   Wait for the device to show `Device successfully initialized`. This step may take several minutes to complete.
+
+   ![Device Successflly Initialized](/img/dep-vmrouter-init-suadmin.png)
+
+   Let’s now go to the Conductor GUI, add this router and connect it for communication to the Conductor.
+
+5. Open a browser tab on your computer and navigate to your VMWare conductor; `https://<ge-0-0 IP address>` and initiate a web session to the conductor GUI.
+
+   ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
+
+6. Accept the self-signed certificate warning, and login. 
+
+   ![Conductor Login](/img/dep-vmrouter-conductor-login.png)
+
+7. In the Conductor GUI, click on Authority. 
+
+   ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
+
+8. At the top of the list of Routers, select ADD. 
+
+   ![Add Router](/img/dep-vmrouter-addrouter.png)
+
+9. Enter the router `Spoke1` and click **Save**.
+
+   ![New Router](/img/dep-vmrouter-newrouter.png)
+
+### Add a Location for the Router
+
+After adding the router name, let’s add the location of this router. For this example, we'll use Los Angeles. 
+
+1. In the Router **Basic Information** screen, enter Los Angeles under **Location**.
+
+   ![Basic Info](/img/dep-vmrouter-basicinfo.png)
+
+2. If you have the location coordinates (for this example, enter the following exactly: `+34.0536909-118.242766/`), you can enter them. 
+
+3. Under **Inter-node Security Policy**, select `Internal`.
+
+4. The **New Node** dialog is displayed - enter `node0`.
+
+   ![New Node](/img/dep-vmrouter-newnode.png)
+
+5. Click **Save**.
+
+   The New Node screen appears.
+
+### Asset ID
+
+The Asset ID allows the router and conductor to fully connect, and allows the conductor to configure and control it. 
+
+1. On the Node screen, verify the Node Name is `Node0`, set the Associated Asset ID to `Spoke1`, and set the Role to `Combo`. 
+
+   ![Node Asset ID](/img/dep-vmrouter-node-asset-id.png)
+
+2. Click Commit. 
+
+   If you see a Review Commit Warning, click **Proceed** and **Commit** . Your router is now bound to the conductor, sharing keys and trust. Connectivity will not be available for a roughly 8-10 minutes until full synchronization completes between the router and Conductor. When you see the Routers page displaying Synchronized, the router is ready to be configured from the conductor.
+
+## Next Step
+
+Proceed to [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx).

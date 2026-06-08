@@ -1,0 +1,94 @@
+---
+title: "Deploying a VMware Router"
+sidebar_label: Overview
+---
+import Mermaid from '@theme/Mermaid';
+import NetworkDesign from './_deploy_vmware_router_network_design.md';
+
+This guide walks a network engineer through deploying a **VMware ESXi virtual machine as a conductor-managed SSR branch router**. By the end of the guide, the VMware router VM will be running SSR 7.1.4-3.r2, managed by an existing SSR conductor, and forwarding internet traffic from LAN users with management traffic returning to the conductor over the same WAN interface used for internet breakout.
+
+:::note
+This guide assumes a conductor is already installed and running SSR 7.1.4-3.r2. If you have not yet deployed a conductor, complete one of the conductor deployment guides first:
+
+- [SSR1200 Conductor Deployment Guide](deploy_overview.mdx)
+- [VMware ESXi Conductor Deployment Guide](deploy_vmware_conductor.mdx)
+:::
+
+## Guide Topics
+
+| Step | Topic | Description |
+|------|-------|-------------|
+| 1 | [Create the VMware VM](deploy_vmware_router_vm.mdx) | Create and configure a VMware ESXi VM to host the branch router |
+| 2 | [Install SSR 7.1.4-3.r2 and Initialize the Router](deploy_vmware_router_install.mdx) | Boot the ISO, install SSR software, and initialize the VM as a conductor-managed router |
+| 3 | [Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx) | Identify the WAN and LAN VMXNet3 NIC PCI addresses required for the router configuration |
+| 4 | [Configure the Router on the Conductor](deploy_vmware_router_config.mdx) | Stage the router configuration on the conductor so it can be applied after onboarding |
+| 5 | [Upgrade the Router to SSR 7.1.4-3.r2](deploy_router_upgrade.mdx) | Upgrade the onboarded router to SSR 7.1.4-3.r2 from the conductor, if the router is not already at 7.1.4-3.r2. |
+| 6 | [Verify the Deployment](deploy_verify.md) | Confirm connectivity, management, and internet forwarding |
+| — | [Appendix — Router Configuration](deploy_appendix_vmware_router.mdx) | Complete VMware router PCLI configuration example |
+
+## Network Topology
+
+The diagram below shows the logical network this guide builds.
+
+<Mermaid chart={`
+graph TD
+    Internet((Internet))
+    subgraph Conductor["Pre-existing Conductor\n(SSR1200 or VMware ESXi)"]
+        ConductorVM["SSR Conductor\n(conductor1)\n192.168.100.10"]
+    end
+    subgraph MgmtNet["Management Network (192.168.100.0/24)"]
+        Gateway["Management Gateway\n192.168.100.1"]
+    end
+    subgraph ESXi["VMware ESXi Host"]
+        RouterVM["SSR Router VM\n(branch1)\nNIC 1: WAN — DHCP\nNIC 2: LAN — 192.168.1.1/24"]
+    end
+    subgraph LAN["Branch LAN (192.168.1.0/24)"]
+        Clients["LAN Clients\nTenant: corp"]
+    end
+    ISP(["ISP WAN"])
+
+    Internet <-->|"Internet"| ISP
+    ISP <-->|"DHCP"| RouterVM
+    RouterVM <-->|"Internet Breakout\n(service: Internet-Traffic)"| Internet
+    Clients <-->|"LAN"| RouterVM
+    RouterVM <-->|"Management over Forwarding\n(WAN — Port 930 / 4505 / 4506)"| Gateway
+    ConductorVM <-->|"Management"| Gateway
+`}/>
+
+## Roles
+
+| Device | Type | Role |
+|--------|------|------|
+| `conductor1` | SSR1200 or VMware ESXi VM | Pre-existing conductor — centralized management and provisioning |
+| `branch1` | VMware ESXi VM (vSSR) | Conductor-managed branch router — internet breakout and LAN services |
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Prerequisites
+
+Before beginning, ensure the following are available:
+
+- **VMware ESXi 7.0 or later** — administrative access to an ESXi host.
+- **SSR 7.1.4-3r2 Universal ISO** — downloaded from [software.128technology.com](https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/) using your Juniper software access credentials.
+- **Juniper software access credentials** — Artifactory username and password for software downloads and token provisioning.
+- **Pre-existing conductor** — running SSR 7.1.4-3.r2 at a static IP reachable from the router WAN. This guide uses `192.168.100.10`.
+- **WAN portgroup** — a VMware portgroup with an ISP Ethernet link that provides DHCP.
+- **LAN portgroup** — a VMware portgroup connected to your branch LAN switch.
+- **Internet access on the WAN link** — required for the router to contact the conductor and download software updates.
+
+## Software Version Requirements
+
+This guide targets **SSR 7.1.4-3.r2** on the router.
+
+:::note
+The router software version cannot be higher than the conductor software version. Ensure the conductor is already running SSR 7.1.4-3.r2 before upgrading any router to that version.
+:::
+
+## Related Documentation
+
+- [VMware ESXi Conductor Deployment Guide](deploy_vmware_conductor.mdx)
+- [SSR1200 Conductor Deployment Guide](deploy_overview.mdx)
+- [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md)
+- [Conductor Deployment Best Practices](bcp_conductor_deployment.md)
