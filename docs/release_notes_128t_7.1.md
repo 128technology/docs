@@ -95,17 +95,17 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63355 Node-level security controls for serial console and USB:** Restored support for configuring node-level security features that disable serial console output and USB boot/mass storage (for example, settings such as `serial-console-enabled` and `usb-mass-storage-enabled`). This allows users to reapply hardened platform settings where supported.
 ------
-- **I95-63393 Show command displaying status of power supplies in an SSR400/SSR440 (dual AC power supply):** Added a show command to display the status of power supplies in dual AC power supply models.
+- **I95-63393 SSR400/SSR440 power supply status visibility:** Added CLI support to display the status of power supplies on dual-AC SSR400/SSR440 platforms. The `show chassis power` command displays power supply status for both single and dual power supply devices. This improves operational visibility into power redundancy and health on SSR400/SSR440 systems.
 ------
 - **I95-63839 SNMP walk failures on Conductors onboarding to NMS:** Resolved an issue where SNMP walks on Conductors could fail with a `genError`, preventing successful onboarding into some network management systems. System MIB walks on Conductors now complete successfully; IF-MIB is no longer exposed on Conductors where it is not supported.
 ------
-- **I95-63873 DHCP leases and Logs page issues in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router resulted in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
+- **I95-63873 DHCP leases not showing in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
 ------
 - **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
 ------
 - **I95-64187 Improved handling of TPM Dictionary Attack (DA) lockout:** Improved detection and handling when the TPM is in Dictionary Attack (DA) lockout mode. The integrity handler now detects this condition earlier and fails in a more predictable manner, simplifying troubleshooting of TPM-related integrity issues.
 ------
-- **I95-64568 Add TPM information to `show platform`:** Added TPM presence and relevant device information to the `show platform` command output.
+- **I95-64568 TPM details in platform information:** The `show platform security` command has been added to display TPM information such as TPM family (version number), revision, firmware version, and manufacturer. This allows users to verify TPM availability and configuration for security and compliance workflows.
 ------
 - **I95-64575 Unable to login to SSR routers from conductor in Cloud deployment:** Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.
 ------
@@ -168,7 +168,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
 ------
-- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console, resulting in unreadable output. The check and enforcement for the 115200 baud rate has been improved.
 ------
 - **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
 ------
@@ -190,19 +190,19 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the Anti-Virus and IDP configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
 ------
-- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.
+- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policy names using a dot (.). This has been resolved — configurations will use an underscore for policy name creation.
 ------
 - **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
 ------
-- **I95-63018 memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.
+- **I95-63018 Memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through a RADIUS server, pam_radius was causing memory corruption after a Vendor Specific Attribute (VSA) is read.
 ------
 - **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR security using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
 ------
-- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.
+- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections from the Conductor.
 ------
 - **I95-63202 Unable to bind interfaces in Azure F8 flavor in West Europe region:** Resolved an issue where driver optimization on lower core count systems required more more memory usage, causing initialization failures.
 ------
-- **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
+- **I95-63228 Premature route installation complete notification:** In some cases a premature internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
 - **I95-63292 Add upgrade timeout and rpm operation timeout:** Added the ability to configure the timeout for upgrades and for rpm download/install operations under `config authority router <RouterName> system software-update`. The defaults are 1 hour for SSR upgrade and 10 minutes for rpm operations.
 ------
@@ -231,7 +231,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 - **I95-63675 Node page in the GUI appears to load indefinitely:** Resolved an issue where the GUI Node page would load infinitely.
 ------
 - **I95-63676 Waypoints fail to allocate when the `service-path peer next-hop gateway` is off the subnet:** Resolved an issue where the first network-interface IP was selected as the local IP for waypoint allocation, even if that IP is not a valid waypoint. 
------- 
+------
 - **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
 ------
 - **I95-63817 Default peering certificates are unable to use the configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
@@ -284,9 +284,9 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-57019 KNI host interfaces erroneously generate LLDP:** Resolved an issue where host KNI interfaces are incrementally generating out-errors in `show device-interface`. 
 ------
-- **I95-58007 Add ability to set PIM graceful restart-time:** The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer).
+- **I95-58007 Add ability to set PIM graceful restart-time:** The `routing default-instance pim restart-time` command has been added to allow users to define the number of seconds that the PIM protocol will perform `graceful-restart` after a node failure. This resolution addresses all the listed issues. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer). This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.
 ------
-- **I95-60767 `service-route next-hop validation` rejects configuration:** Resolved an issue where the rule validator did not consider the `service application-type` as DNS proxy into consideration during the configuration rule validation. This issue has been resolved.
+- **I95-60767 `service-route > next-hop` validation rejects configuration:** Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.
 ------
 - **I95-60799 Tenant prefix use within a VRF:** The SSR allows the configuration of tenant-prefixes without giving an error, and correctly handles interfaces with tenant-prefixes within the protocol code.
 ------
@@ -310,7 +310,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
 ------
-- **I95-62071 Multicast Traffic contributing to service area resource contention:** The resource contention issue has been resolved.
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
 ------
 - **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
 ------
@@ -330,8 +330,4 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 
 ### Caveats
 
-- **I95-63422 Unable to establish peering:** An issue has been identified where the factory reset process or bringing online a new router results in the device getting stuck in a `cert-exchange-init` state when establishing peering using Enhanced Security Key Management. 
-
-	_**Workaround:**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
-	
-	For factory reset of an existing router, remove the router from the neighborhood before re-onboarding the router. Ensure that the desired certificate is installed before adding the neighborhood back to the router and re-onboarding to the conductor.
+- **I95-63422 Factory reset routers not re-onboarding when ESKM enabled:** Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.

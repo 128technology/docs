@@ -36,41 +36,43 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------ --->
 - **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
 ------
-- **I95-40904 Power save mode not working:** This issue has been resolved.
+- **I95-40904 Power save mode not working:** Add a method to read current power saver mode setting from existing config before committing the new configuration, and changing the setting.
 ------
 - **I95-43239 LTE APN on Modem not set up correctly:** The APN is now always written to the the modem using the default index of 1. 
 ------
-- **I95-43606 No communication between Routers:** In rare instances the BFD Pinhole feature experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
+- **I95-43606 No communication between Routers:** In rare instances, BFD outbound-only flows experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
 ------
-- **I95-43779 DHCP IP Address is not released:** Updated the state machine to cause DHCP-enabled interfaces to send out a DHCP Request for their current IP address.
+- **I95-43779 DHCP IP Address not releasing appropriately:** When the cable is physically disconnected and reconnected from DHCP-enabled interfaces, the interfaces are now triggered to send out a DHCP Request for their current IP address.
 ------
 - **I95-44001 Peer uptime showing "Unavailable":** Peer path uptime now displays the correct values.
 ------
-- **I95-44551 DHCP Relay not working after upgrade:** A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such asDHCP relay will no longer perform hierarchical service checks on the peer.
+- **I95-44551 DHCP Relay not working after upgrade:** A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such as DHCP relay will no longer perform hierarchical service checks on the peer.
 ------
-- **I95-44722 Time based HMAC failure after HA reboot:** Resolved a buffering issue where device interfaces are now flushed upon becoming active to avoid handling of inactive packets.
+- **I95-44722 Time series HMAC failures after rebooting node in HA router:** Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.
 ------
 - **I95-44913 kmod-i40e metapackage causing upgrade issues:** The metapackage has been removed and upgrade issues have been resolved. 
 ------
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
-- **I95-45113 SNMP override of the IfTable:** An issue with SNMP reporting has been resolved.
+- **I95-45113 SNMP override of the IfTable:** `ifAlias` and `IfDescr` have been swapped in our SNMP reporting; `ifDescr` is always the `ifName`. This change was made for consistency with other Juniper products.
 ------
 - **I95-45126 Split-brain after the sync interface goes down:** Resolved an issue that if the SSR software experienced a crash while it owned an interface from an X553 device, other devices hosted by the same chip could be impacted.
 ------
 - **I95-45162 Improve download/upgrade error message if a router name does not exist:** In situations where a router does not exist, the download and upgrade message now indicates that the router does not exist.
 ------
-- **I95-45164 `show-active-peers` missing some information:** Resolved a corner case where an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the SSR misinterprets the non-compliant device's timeouts and the MTU will be unresolvable.
+- **I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS & MOS for some transports:** Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device's timeouts are incorrectly interpreted and the MTU becomes unresolvable.
 ------
 - **I95-45211 New users run into permissions errors:** Access Control Lists are now preserved on file rotations.
 ------
-- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.
+- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA the managed routers were not automatically connecting to the newly added conductor node.
 ------
 - **I95-45489 `ifcfg` custom options issues:** Resolved an issue where  interface ifcfg option changes were not being processed.
 ------
 - **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
 ------
-- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, where a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** On SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+	
+	**_Workaround:_** A temporary workaround is to force an update of this file by either of the following methods:
 ------
 - **I95-45696 Memory leak in PAM challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
@@ -117,7 +119,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43071 Service health learning and path avoidance working intermittently for inter-node paths:** Race condition causing paths to be determined non-viable prior to service routes being created. 
 ------
-- **I95-43091 `show fib` does not display interface next hop when gateway IP address is empty:** The display has been corrected.
+- **I95-43091 `show fib` does not display interface next hop when gateway IP address is empty:** Corrected display.
 ------
 - **I95-43239 LTE APN on Modem not set up correctly:** The APN is now always written to the the modem using the default index of 1.
 ------
@@ -125,7 +127,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44142 Automated Provisioner race condition:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
 ------
-- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with a reserved bit in the header are incorrectly dropped as invalid.
+- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with reserved bit in the header are incorrectly dropped as invalid.
 ------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
 
@@ -172,11 +174,11 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-36224 Handle names in application-id JSON:** The application-module json output `common-name object` now includes a list of referenced common-names, in addition to the transport-information list.
 ------
-- **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular.
+- **I95-38244 Router Page search enhanced:** Searches on the Routers page can now be targeted to specific columns using the search selector.
 ------
 - **I95-38445 GUI Session Capture:** Added pages to the user interface that allow you to view and configure capture information.
 ------
-- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options.
+- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options. 
 
 ### Resolved Issues
 
@@ -192,9 +194,8 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-40191 Office365 service failing on boot-up:** This issue has been resolved.
 ------
-- **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unandled errors.
+- **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unhandled errors.
 ------
-
 ## Release 5.2.0
 **Release Date:** May 10, 2021
 
@@ -224,9 +225,7 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MOS values of the paths. 
 ------
-
 ### Resolved Issues
-
 ------
 - **I95-37101 PCLI Updates for `show stats since` command:** The PCLI notes inconsistencies in data between current values and historical ones to indicate when the data may not be accurate.
 ------
