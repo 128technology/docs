@@ -26,6 +26,7 @@ Run the provided JQL query using the SSR JIRA MCP tools. Collect all returned is
 
 For each issue returned by the JQL query:
 
+0. **Check for existing release-note language first.** Search the existing release notes under [docs/](../../docs/) (for example, `release_notes_128t_*.md`) for the issue key (e.g., `I95-12345`, `WAN-1234`). If a prior entry for that issue exists, reuse its title and description verbatim and **skip Steps 2.1, 3, and 4** for that issue — do not call the JIRA or GitHub MCP tools for it. Only continue with the steps below if no prior entry exists.
 1. Read the JIRA issue and collect all available context:
    - **Summary** (title)
    - **Description** (full body, often contains root cause and fix details)
