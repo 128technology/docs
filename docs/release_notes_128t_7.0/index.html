@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 7.0 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.0"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.0 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.0"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.0" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.0" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"7.0","item":"https://docs.128technology.com/docs/release_notes_128t_7.0"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -80,7 +80,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57305 Add flow timeout value to Associated Paths:</strong> The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused.</li>
+<li class=""><strong>I95-57305 Add flow timeout value to Associated Paths:</strong> The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine when the session will expire following inactivity.</li>
 </ul>
 <hr>
 <ul>
@@ -97,7 +97,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 <table><thead><tr><th>Count</th><th>Description</th></tr></thead><tbody><tr><td>Allowed</td><td>The session was allowed and created successfully.</td></tr><tr><td>Failed</td><td>The session could not be created.</td></tr><tr><td>Denied due to Access Policy</td><td>The packet was denied because an access policy explicitly disallows access.</td></tr><tr><td>Denied due to URL Filtering</td><td>The session was created was blocked once app classification was completed.</td></tr><tr><td>Denied due to Local Service Definition</td><td>The session was allowed on another ingress router, but is denied here based on the policy on this router (commonly related to hierarchical services).</td></tr></tbody></table>
 <hr>
 <ul>
-<li class=""><strong>I95-59634 Allow Highway lockup detection to be disabled:</strong> Added a <code>local.init</code> override for disabling datapath lockup detector mechanism.</li>
+<li class=""><strong>I95-59634 Allow Highway lockup detection to be disabled:</strong> Added a <code>local.init</code> override for disabling datapath lockup detector mechanism</li>
 </ul>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;datapath&quot;: {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;lockupDetectionEnabled&quot;: true/false</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
 <hr>
@@ -130,7 +130,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39653 Negative duration in session table after applying filter:</strong> Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration. This issue has been resolved.</li>
+<li class=""><strong>I95-39653 Negative duration in session table after applying filter:</strong> Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration.</li>
 </ul>
 <hr>
 <ul>
@@ -174,7 +174,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58017 FIB entries on <code>show fib</code> not available for all headends:</strong> Resolved an issue with <code>show fib</code> stalling and not returning complete data.</li>
+<li class=""><strong>I95-58017 <code>show fib</code> output incomplete on routers:</strong> Resolved an issue with <code>show fib</code> stalling and not returning complete data where the next hop entries are in excess of 200. The <code>show fib</code> output now correctly handles larger output.</li>
 </ul>
 <hr>
 <ul>
@@ -210,7 +210,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59758 Prompt for password change:</strong> The user is now prompted to change the <code>admin</code>, <code>t128</code>, and <code>root</code> passwords during installation. The password is changed to the same value for all three users.</li>
+<li class=""><strong>I95-59758 Interactive Initializer updates all system account passwords:</strong> Interactive initialization now changes the <code>admin</code>, <code>t128</code> and <code>root</code> user passwords to the same value. The initialization preference file has the fields, <code>t128-password</code>, <code>root-password</code>, and <code>admin-password</code>, to set password hashes for each user, respectively.</li>
 </ul>
 <hr>
 <ul>
@@ -226,7 +226,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>log rotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers.</li>
+<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>logrotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers.</li>
 </ul>
 <hr>
 <ul>
@@ -298,11 +298,11 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60767 ServiceRouteNextHops validation rejects configuration:</strong> Resolved an issue where the rule validator did not consider the <code>service application-type</code> as DNS proxy into consideration during the configuration rule validation. This issue has been resolved.</li>
+<li class=""><strong>I95-60767 <code>service-route &gt; next-hop</code> validation rejects configuration:</strong> Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60768 Rare race condition between packet processing and configuration update:</strong> Resolved a rare race condition where invalid memory was accessed during packet processing if config was being loaded at the same time.</li>
+<li class=""><strong>I95-60768 Rare race condition between packet processing and configuration update:</strong> Resolved a rare race condition where invalid memory was accessed during packet processing if the configuration was being loaded at the same time.</li>
 </ul>
 <hr>
 <ul>
@@ -314,7 +314,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60960 After reboot, the PIM RP IP address moves to a VRF:</strong> Resolved an issue where after reboot the PIM RP IP moves to a VRF, leaving the base instance without a PIM RP IP address. The VRF is now explicitly added to the config, preventing this issue.</li>
+<li class=""><strong>I95-60960 The PIM RP moved from the base instance to a VRF after a reboot:</strong> When PIM RPs are configured in different VRF, upon reboot the PIM RP could appear in the wrong VRF. This issue has been resolved by generating the VRF explicitly when configuring Multicast routing.</li>
 </ul>
 <hr>
 <ul>

@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.2 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.2 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.2"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.2" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.2","item":"https://docs.128technology.com/docs/release_notes_128t_6.2"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade-considerations">Upgrade Considerations<a href="#upgrade-considerations" class="hash-link" aria-label="Direct link to Upgrade Considerations" title="Direct link to Upgrade Considerations" translate="no">​</a></h3>
 <div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Before upgrading please review the <a class="" href="/docs/intro_upgrade_considerations"><strong>Upgrade Considerations</strong></a> and the <a class="" href="/docs/intro_rollback"><strong>Rolling Back Software</strong></a> pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.</p></div></div>
 <ul>
-<li class=""><strong>I95-43243/IN-460 Upgrade and Rollback:</strong> Upgrading or rolling back a system (conductor peer or router) with the interactive installer <code>install128t</code>, that is managed by a conductor may result in the system becoming unresponsive. It is recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See <a class="" href="/docs/intro_rollback">Rolling Back Software</a> for more information on these operations.</li>
+<li class=""><strong>I95-43243/IN-460 Upgrade and Rollback:</strong> Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer <code>install128t</code>, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See <a class="" href="/docs/intro_rollback">Rolling Back Software</a> for more information on these operations.</li>
 </ul>
 <hr>
 <ul>
@@ -59,7 +59,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62421 DHCP relay failures causing clients to miss IP assignment:</strong> Resolved an issue where DHCP session information is lost on the hub, causing the session reverse flow to collide with the forward flow of the session initiated originally from the spoke. This includes a new (configurable) default behavior for collision resolution.</li>
+<li class=""><strong>I95-62421 DHCP relay failures causing clients to miss IP assignment:</strong> Resolved an issue where DHCP session information is lost on the hub, causing the session reverse flow to collide with the forward flow of the session initiated originally from the spoke. This includes a new (configurable) default behavior for collision resolution. For detailed information, see <a class="" href="/docs/config_command_guide#configure-authority-service-policy-prefer-established-session"><code>configure authority service-policy prefer-established-session {true | false}</code></a>.</li>
 </ul>
 <hr>
 <ul>
@@ -91,7 +91,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63295 Highway crash due to mutex lock errors:</strong> Resolved an issue where a time-intensive operation on a large entry was preventing other threads from accessing data, causing a highway crash due to mutex lock contention.</li>
+<li class=""><strong>I95-63295 Highway crash when show fib is executed on very large FIB:</strong> Resolved an issue where a time intensive operation on a large entry was preventing other threads from accessing data and causing a crash.</li>
 </ul>
 <hr>
 <ul>
@@ -111,7 +111,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63943 Edge-case crash when changing from regular services to app-id:</strong> Resolved an issue where a system that never had app-id services, or had app-id services reverted and the highway process restarted, and then modified an existing service to use app-id caused a crash. Protections have been added to safeguard against this edge case.</li>
+<li class=""><strong>I95-63943 Edge-case crash when changing from regular services to app-id:</strong> Resolved an issue where a system that never had app-id services or had app-id services, reverted them and restarted the highway process; and then modified an existing service to use app-id caused a crash. Protections have been added to safeguard against this edge case.</li>
 </ul>
 <hr>
 <ul>
@@ -261,7 +261,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61176 Multicast Failover Optimization:</strong> Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM.</li>
+<li class=""><strong>I95-61176 Multicast Failover Optimization:</strong> Several internal improvements have been made to improve failover and convergence in both HA and non-HA scenarios for Multicast/PIM, as well as failover times in general.</li>
 </ul>
 <hr>
 <ul>
@@ -269,7 +269,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61580 CLI does not prompt for required router restart:</strong> Resolved an issue where making a configuration change requiring a restart only generates a warning for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.</li>
+<li class=""><strong>I95-61580 CLI does not prompt for required router restart:</strong> Resolved an issue where making a configuration change requiring a restart only generates a warning only for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.</li>
 </ul>
 <hr>
 <ul>
@@ -293,7 +293,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62703 Highway process crashes when BGP over SVR is activated:</strong> Resolved an issue where the unicast code path was incorrectly invoking multicast variant of a function call.</li>
+<li class=""><strong>I95-62703 Highway process crashed when BGP over SVR is activated:</strong> Resolved an issue where the unicast code path was incorrectly calling the multicast variant of getBestMultiHomedPathIndex() and causing a highway crash.</li>
 </ul>
 <hr>
 <ul>
@@ -305,7 +305,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63018 Memory corruption after reading VSA:</strong> Resolved a rare issue where during remote authentication through the Radius server, <code>pam_radius</code> was causing memory corruption after VSA is read.</li>
+<li class=""><strong>I95-63018 Memory corruption after reading VSA:</strong> Resolved a rare issue where in remote authentication through a RADIUS server, pam_radius was causing memory corruption after a Vendor Specific Attribute (VSA) is read.</li>
 </ul>
 <hr>
 <ul>
@@ -335,11 +335,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58017 FIB entries on <code>show fib</code> not available for all headends:</strong> Resolved an issue with <code>show fib</code> stalling and not returning complete data.</li>
+<li class=""><strong>I95-58017 <code>show fib</code> output incomplete on routers:</strong> Resolved an issue with <code>show fib</code> stalling and not returning complete data where the next hop entries are in excess of 200. The <code>show fib</code> output now correctly handles larger output.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58999 CPU usage for Packet Processing CPU always reads 100%:</strong> Resolved an issue where the size of the packet transmit burst was reported, rather than the actual number transmitted when <code>transmit-on-standby</code> fails. The correct information is now provided.</li>
+<li class=""><strong>I95-58999 Packet Processing CPU reads 100% when interface is operationally down:</strong> Resolved an issue where an attempt to transmit packets on an operationally down standby interface resulted in a persistent false report of packet processing activity, which led to an erroneous calculation of 100% CPU utilization.</li>
 </ul>
 <hr>
 <ul>
@@ -351,7 +351,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59758 Prompt for password change:</strong> The user is now prompted to change the <code>admin</code>, <code>t128</code>, and <code>root</code> passwords during installation. The password is changed to the same value for all three users.</li>
+<li class=""><strong>I95-59758 Interactive Initializer updates all system account passwords:</strong> Interactive initialization now changes the <code>admin</code>, <code>t128</code> and <code>root</code> user passwords to the same value. The initialization preference file has the fields, <code>t128-password</code>, <code>root-password</code>, and <code>admin-password</code>, to set password hashes for each user, respectively.</li>
 </ul>
 <hr>
 <ul>
@@ -367,7 +367,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60287 Add option to disable Kernel Metric SLA Calculation:</strong> In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting the <code>service-metric-use-lsa</code> (under the <code>routing default-instance</code>) to <code>false</code> will prevent the kernel flap that causes this issue. See <a class="" href="/docs/config_command_guide#configure-authority-router-routing-service-metric-use-sla"><code>service-metric-use-lsa</code></a> for additional information.</li>
+<li class=""><strong>I95-60287 Add option to disable Kernel Metric SLA Calculation:</strong> In rare cases on a heavily loaded system, the kernel metric calculation process can sometimes hang for a period of time, causing an internal watchdog to fire. This results in a system restart. Setting <code>routing default-instance &gt; service-metric-use-lsa &gt; false</code> will prevent the kernel flap that causes this issue. See <a class="" href="/docs/config_command_guide#configure-authority-router-routing-service-metric-use-sla"><code>service-metric-use-lsa</code></a> for additional information.</li>
 </ul>
 <hr>
 <ul>
@@ -407,7 +407,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60960 After reboot, the PIM RP IP address moves to a VRF:</strong> Resolved an issue where after reboot the PIM RP IP moves to a VRF, leaving the base instance without a PIM RP IP address. The VRF is now explicitly added to the config, preventing this issue.</li>
+<li class=""><strong>I95-60960 The PIM RP moved from the base instance to a VRF after a reboot:</strong> When PIM RPs are configured in different VRF, upon reboot the PIM RP could appear in the wrong VRF. This issue has been resolved by generating the VRF explicitly when configuring Multicast routing.</li>
 </ul>
 <hr>
 <ul>
@@ -477,7 +477,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58528 SSR OS renaming:</strong> The SSR OS version has been updated from &quot;CentOS&quot; to &quot;Oracle Linux&quot; to accurately reflect its upstream Linux distribution. All internal naming has been updated.</li>
+<li class=""><strong>I95-58528 SSR OS renaming:</strong> The SSR OS has been renamed/rebranded from &quot;CentOS7&quot; to &quot;SSR OS&quot; to more accurately reflect its customized Linux distribution. All internal naming has been updated.</li>
 </ul>
 <hr>
 <ul>
@@ -545,7 +545,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:</strong> Resolved an issue in dual node High Availability configurations, highway crashes happen when <code>node1</code> does not successfully classify during the TCP handshake, but <code>node2</code> does successfully classify. See I95-59563, I95-59618 below for additional information.</li>
+<li class=""><strong>I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:</strong> In dual node High Availability configurations, highway crashes happen when <code>node1</code> does not successfully classify during the TCP handshake, but <code>node2</code> does successfully classify. This issue is currently under investigation and will be resolved in an upcoming release. For this release, defensive code has been added to preserve the session state and avoid a crash.</li>
 </ul>
 <hr>
 <ul>
@@ -566,7 +566,7 @@
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;datapath&quot;: {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;lockupDetectionEnabled&quot;: true/false</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
 <hr>
 <ul>
-<li class=""><strong>I95-59745 Routers are stuck in the connected state:</strong> Resolved an issue where the router would unnecessarily write to <code>yum.dnf</code> and <code>dnf.conf</code>, resulting in a race condition.</li>
+<li class=""><strong>I95-59745 Routers are stuck in the connected state and not transitioning to running:</strong> Resolved an issue where the router repeatedly sent the same incorrect values to the config during startup, resulting in a race condition.</li>
 </ul>
 <hr>
 <ul>
@@ -578,7 +578,7 @@
 <ul>
 <li class=""><strong>The following CVE&#x27;s have been identified and addressed in this release:</strong> CVE-2024-21131, CVE-2024-21138, CVE-2024-21140, CVE-2024-21144, CVE-2024-21145, CVE-2024-21147, CVE-2024-5564.
 ------ ---&gt;</li>
-<li class=""><strong>I95-53274 PIM scaling above 1500 multicast routes:</strong> Resolved an issue where the SSR could not maintain more than 1400 active sessions.</li>
+<li class=""><strong>I95-53274 PIM multicast routes unable to maintain more than 1,400 concurrent (Source, Group) sessions:</strong> The SSR cannot maintain more than 1400 active (Source,Group) sessions. This scaling limitation has been addressed.</li>
 </ul>
 <hr>
 <ul>
@@ -590,7 +590,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58201 Increase AMD performance:</strong> Throughput performance on AMD processors has been improved through the tuning of some kernel parameters.</li>
+<li class=""><strong>I95-58201 Throughput Performance Improvements Across Platforms:</strong> Kernel parameter tuning has improved throughput performance on most AMD and Intel platforms (excluding Intel Atom), with the greatest gains on AMD processors. This includes Juniper-branded platforms like the SSR1200 and SSR1500, as well as cloud instances, VM hosts, and other hardware configurations.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-626-15-sts">Release 6.2.6-15-sts<a href="#release-626-15-sts" class="hash-link" aria-label="Direct link to Release 6.2.6-15-sts" title="Direct link to Release 6.2.6-15-sts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> September 6, 2024</p>
@@ -620,7 +620,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55725 Highway crashes when peer-path routers are removed:</strong> Resolved a race condition that could cause a crash in the highway worker-core packet-processor if peer routers are removed from the configuration.</li>
+<li class=""><strong>I95-55725 Highway crashes when peer-path routers are removed:</strong> Resolved a race condition that could cause a crash in the forwarding plane (highway) if peer routers are removed from the configuration.</li>
 </ul>
 <hr>
 <ul>
@@ -636,7 +636,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56236 Quick Start config validation failures not being reported:</strong> Made changes to the initialization process such that quick start errors can be reported.</li>
+<li class=""><strong>I95-56236 Routers unable to onboard after upgrading the Conductor:</strong> Resolved an issue where the automated provisioner and the Quickstart processes overlapped, preventing the device state from being reviewed for errors, which stopped the onboarding process.</li>
 </ul>
 <hr>
 <ul>
@@ -648,7 +648,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56527 Failure to validate and commit config; system incorrectly expected escape sequence:</strong> Resolved an issue where capture-filter expected an escape sequence for input when it was not necessary.</li>
+<li class=""><strong>I95-56527 <code>compare config</code> returns an <code>Invalid JSON</code> error:</strong> Resolved an issue where the use of a backslash (<code>\</code>) in a list key or a list element generates an <code>Invalid JSON</code> error when <code>compare config</code> is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a <code>\</code> in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the <code>\</code> only exists in one; Or if the list element with the <code>\</code> is renamed.</li>
 </ul>
 <hr>
 <ul>
@@ -720,7 +720,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57110 Crash seen during add and delete peers while sending traffic:</strong> A race condition has been fixed that could cause a crash in the packet-processing highway process if a peer-path is removed from configuration.</li>
+<li class=""><strong>I95-57110 Crash seen during add and delete peers while sending traffic:</strong> A race condition has been fixed that could cause a crash in the forwarding plane (highway) process if a peer-path is removed from configuration.</li>
 </ul>
 <hr>
 <ul>
@@ -794,7 +794,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-52251 Router&#x27;s conductor-address did not update the salt created services with the new addresses:</strong> The router override for conductor addresses is now used in the software update info. This causes the router override value to properly trigger highstate and the salt created services to use the new conductor addresses.</li>
+<li class=""><strong>I95-52251 Changes to the conductor address on the router result in loss of ssh connection to the router:</strong> Resolved an issue where changing the router level <code>conductor-address</code> did not update the salt-created services with the new addresses.</li>
 </ul>
 <hr>
 <ul>
@@ -810,11 +810,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55550 node0 went down and did not fail over to node1:</strong> Multiple disk errors caused corruption on the <code>128T_root</code> filesystem causing it to enter <code>read-only</code> mode and becoming non-responsive. To resolve this issue, issues in the filesystem now result in kernel panic mode, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.</li>
+<li class=""><strong>I95-55550 Abrupt power failure may result in filesystem corruption:</strong> Multiple disk errors caused corruption on the 128T_root filesystem causing it to enter read-only mode and becoming non-responsive. To resolve this issue, the filesystem triggers a kernel panic, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55603 HA router stuck in connected state due to runtime corruption issue:</strong> Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.</li>
+<li class=""><strong>I95-55603 HA router stuck in connected state due to runtime corruption issue:</strong> Resolved an issue with an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.</li>
 </ul>
 <hr>
 <ul>
@@ -862,11 +862,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56292 Increase the length of SSH keys to 4096:</strong> The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.</li>
+<li class=""><strong>I95-56292 Increase the length of SSH keys to 4096:</strong> The size of the Salt and SSH keys has been changed to 4096 bits for newly deployed systems.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56317 Journal logs missing from Conductors running 6.2.3:</strong> An issue related to a typo was creating zero byt files when downloading journal logs using the GUI.</li>
+<li class=""><strong>I95-56317 Journal logs missing from Conductors running 6.2.3:</strong> An issue related to a typo was creating zero byte files when downloading journal logs using the GUI.</li>
 </ul>
 <hr>
 <ul>
@@ -898,7 +898,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56575 Reduce polling rate of disk monitoring and add optimization:</strong> The <code>ComponentDiskUtilizationMonitor</code> checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.</li>
+<li class=""><strong>I95-56575 Reduce polling rate of disk monitoring and add optimization:</strong> The disk monitoring agent polling frequently is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.</li>
 </ul>
 <hr>
 <ul>
@@ -928,7 +928,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53821 Radius Remote Authentication:</strong> Radius Authentication supports the remote authentication of users created remotely, automatically adding them to the appropriate local user databases. This is especially helpful for large organizations that are geographically diverse. See <a class="" href="/docs/config_radius#configuring-radius">Configuring RADIUS</a> for more information.</li>
+<li class=""><strong>I95-53821 Radius Remote Authentication:</strong> Users can now be added and identified on the server, with each user account created automatically upon successful authentication on a local device. This provides a simple method for managing user accounts connected to a single authentication server with devices deployed over a wide geography. See <a class="" href="/docs/config_radius#configuring-radius">Configuring RADIUS</a> for more information.</li>
 </ul>
 <hr>
 <ul>
@@ -940,11 +940,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:</strong> When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.</li>
+<li class=""><strong>I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:</strong> Handling of RFC1918 traffic classification returned a private domain causing an undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51663 TCP port reuse causing session issues in session timeout management:</strong> Resolved an issue where TCP client port reused caused backwards state transitions in TCP state tracking.</li>
+<li class=""><strong>I95-51663 TCP port reuse causing application steering crashes:</strong> Resolved an issue where backwards state transitions was causing an issue with the TCP client reusing ports.</li>
 </ul>
 <hr>
 <ul>
@@ -1016,7 +1016,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-54803 Control packets are treated with equal priority in overload conditions, causing drops:</strong> Control packets now have preferential treatment, reducing the drop rate.</li>
+<li class=""><strong>I95-54803 Control packets are treated with equal priority in overload conditions, causing drops:</strong> Control packets now have preferential treatment under overload conditions, reducing the drop rate.</li>
 </ul>
 <hr>
 <ul>
@@ -1040,7 +1040,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-54909 Alarm not generated when Websense is down</strong> Implemented an alarm when the connection to the Websense server is down or responds with a 5xx error.</li>
+<li class=""><strong>I95-54909 Alarm when websense connection is down:</strong> An alarm has been added to indicate that the connection to the Websense URL is down or responds with a 5xx error.</li>
 </ul>
 <hr>
 <ul>
@@ -1160,7 +1160,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55850 Changing the name of a <code>bond-interface</code> fails:</strong> Resolved an issue where changing the name of a <code>bond-interface</code>required a restart to take effect.</li>
+<li class=""><strong>I95-55850 Changing the name of a <code>bond-interface</code> fails:</strong> Resolved an issue where changing the name of a <code>bond-interface</code> required a restart to take effect.</li>
 </ul>
 <hr>
 <ul>
@@ -1168,7 +1168,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55904 No service-paths seen after upgrade:</strong> Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied.</li>
+<li class=""><strong>I95-55904 No service-paths seen after upgrade:</strong> Resolved an issue where adding services with overlapping address prefixes prevented the configuration from being applied. For additional details, refer to the Knowledge Base article <a class="" href="/kb/2024/04/24/I95-55904">Upgrade from 5.6 to 6.1 may result in missing FIB entries</a>.</li>
 </ul>
 <hr>
 <ul>
@@ -1194,7 +1194,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47041 Selection of Mist Cloud instance during whitebox onboarding:</strong> The onboarding interface now silently queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).</li>
+<li class=""><strong>I95-47041 Selection of Mist Cloud during Adoption:</strong> The onboarding process queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).</li>
 </ul>
 <hr>
 <ul>
@@ -1242,7 +1242,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50493 Memory calculation for alarms is confusing:</strong> This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. The memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.</li>
+<li class=""><strong>I95-50493 Memory calculation for alarms is confusing:</strong> This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. Memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.</li>
 </ul>
 <hr>
 <ul>
@@ -1274,7 +1274,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53777 Multicast traffic not passing after an HA failover:</strong> Resolved an issue where the multicast service next hops were not reloading on a configuration change.</li>
+<li class=""><strong>I95-53777 Multicast traffic not passing after HA Failover:</strong> High Availability with Multicast is not fully supported. Drop or complete loss of traffic may be seen when the primary node resumes traffic after a node failure and failover.</li>
 </ul>
 <hr>
 <ul>
@@ -1358,7 +1358,7 @@
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats-1">Caveats<a href="#caveats-1" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>I95-54780 Forwarding Utilization stats are not retained beyond one hour:</strong> This issue is the result of the fix in place for the <code>stats default retention short</code> setting was not being honored (I95-53875). This will be resolved in the next patch release.</li>
+<li class=""><strong>I95-54780 Forwarding CPU utilization metrics missing for duration greater than 1 hour:</strong> Updated the retention policy for forwarding CPU utilization and other metrics.</li>
 </ul>
 <hr>
 <ul>
@@ -1413,7 +1413,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51181 Improve save-tech-support-info command:</strong> The PCLI command <code>save tech-support-info</code> now has a <code>since</code> argument that limits log collection to only logs generated after a specified time. The <code>since</code> argument can be a relative time delta or an absolute timestamp. The GUI&#x27;s About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.</li>
+<li class=""><strong>I95-51181 Improve <code>save-tech-support-info</code> command:</strong> The PCLI command <code>save tech-support-info</code> now has a default collection period of one day. Additionally, a <code>since</code> argument has been added that limits log collection to only logs generated after the specified value. The <code>since</code> argument can be a relative time delta or an absolute timestamp. The GUI&#x27;s About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.</li>
 </ul>
 <hr>
 <ul>
@@ -1490,7 +1490,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:</strong> When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.</li>
+<li class=""><strong>I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:</strong> When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse intermediate nodes. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.</li>
 </ul>
 <hr>
 <ul>
@@ -1498,7 +1498,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-52018 Path returned contained ip-address with no escaping:</strong> The Inspector path has been modified with the ability to escape.</li>
+<li class=""><strong>I95-52018 Overlapping IP Prefix validation may be incorrect, causing a false configuration warning:</strong> Configuration validation for IP Prefixes has been corrected.</li>
 </ul>
 <hr>
 <ul>
@@ -1519,7 +1519,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-52279 Bond interface configured with VRRP not receiving UDP traffic when LACP is enabled:</strong> An issue where VRRP Virtual MACs from being silently dropped has been resolved. Packets with VRRP virtual dest MACs are now processed by the Bond PMD when using LACP.</li>
+<li class=""><strong>I95-52279 Bond configured with VRRP not receiving UDP traffic when LACP is enabled:</strong> Resolved an issue on the SSR120/SSR130 where VRRP Virtual MACs are being silently dropped by Bond PMD in LACP mode. Packets with VRRP virtual destination MACs are now correctly processed by the Bond PMD when using LACP on the SSR120/SSR130. This issue will be resolved on the SSR1200/1300/1400/1500 in an upcoming release.</li>
 </ul>
 <hr>
 <ul>
@@ -1599,7 +1599,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53124 AppID fails to get application category information:</strong> If a service becomes refined to a child-service, sessions to an RFC1918 destination addresses now update their stats tracking under the new classified application.</li>
+<li class=""><strong>I95-53124 Sessions destined to private IP address (RFC1918) are incorrectly reported using the application name as the service name:</strong> We have identified an issue where sessions destined to private IP address (RFC1918), are incorrectly reported with the application name as the service name, even if the traffic is HTTP/HTTPS. Session traffic continues to follow the appropriate service / routing profile, but the stats reported may not accurately reflect the learned applications. This is actively being addressed and will be resolved in a future patch.</li>
 </ul>
 <hr>
 <ul>
@@ -1659,7 +1659,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53916 Stale Teams interfaces conflict with HA interfaces:</strong> In some cases a stale teams interface could conflict with a new configuration pushed down from MIST. Resolved an issue where the use of non-standard HA ports could result in non-functional HA after a factory reset.</li>
+<li class=""><strong>I95-53916 Pre-existing teams interfaces conflict with HA interfaces:</strong> In a Mist-managed HA configuration where an HA node has been configured with non-default HA interfaces, performing a release operation on a node in an HA pair leaves the pre-configured HA interfaces in place, and creates a conflict when a new configuration is pushed down from Mist. This would prevent the HA node from operating correctly and forming its HA connections again. This issue has been resolved, and the release operation now removes any pre-existing HA interfaces.</li>
 </ul>
 <hr>
 <ul>
@@ -1667,7 +1667,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-54086 Conductor memory exceeded:</strong> In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the <code>asset-connection-resiliency</code> feature. An update to the salt package has been made to resolve this issue.</li>
+<li class=""><strong>I95-54086 Conductor memory exceeded:</strong> In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.</li>
 </ul>
 <hr>
 <ul>
@@ -1683,7 +1683,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53274 PIM scaling above 1500 (Source,Group) sessions:</strong> The SSR cannot maintain more than 1400 active (Source,Group) sessions. Juniper recommends a limit of 1400 (Source,Group) sessions to prevent a loss of traffic.</li>
+<li class=""><strong>I95-53274 PIM multicast routes unable to maintain more than 1,400 concurrent (Source, Group) sessions:</strong> The SSR cannot maintain more than 1400 active (Source,Group) sessions. This scaling limitation has been addressed.</li>
 </ul>
 <hr>
 <ul>

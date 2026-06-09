@@ -6,7 +6,7 @@
 <title data-rh="true">128T 4.5 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_4.5"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="128T 4.5 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND numerically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND numerically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_4.5"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_4.5" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_4.5" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"4.5","item":"https://docs.128technology.com/docs/release_notes_128t_4.5"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -22,7 +22,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h2>
 <ul>
-<li class=""><strong>I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:</strong> Created an alarm when the zookeeper jute buffer exceeds a threshold (75%), and an alert to change the system environment configuration.</li>
+<li class=""><strong>I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:</strong> Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.</li>
 </ul>
 <hr>
 <ul>
@@ -110,7 +110,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39852 Synchronize Hardware clock to NTP Server:</strong> Resolved an issue where the hardware and system clocks were not synchronized.</li>
+<li class=""><strong>I95-39852 Sync System clock to the Hardware clock with NTP:</strong> The hardware clock now synchronizes with the NTP server.</li>
 </ul>
 <hr>
 <ul>
@@ -118,12 +118,23 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39953 IPFIX Export Loop:</strong> Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.</li>
+<li class=""><strong>I95-39953 Spike in IPFIX records:</strong> Resolved a race condition causing a collector to enter an infinite loop.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39985 Template save error:</strong> Resolved an issue where creating persistent fields on an <strong>existing</strong> template in Advanced Mode generated a validation error and the template changes were not saved.</li>
+<li class=""><strong>I95-39985 Template save error:</strong> When creating persistent fields on an <strong>existing</strong> template in Advanced Mode, a validation error appears and the template changes are not saved.
+<em><strong>Workaround:</strong></em> There are two workarounds.</li>
 </ul>
+<p>You can either; use GraphQL to set <code>persistInput</code> on each template to <code>true</code> to resolve the issue for that template.</p>
+<p>OR</p>
+<ol>
+<li class="">Copy the contents of the variables pane to your clipboard.</li>
+<li class="">Open the Settings dropdown.</li>
+<li class="">Click “Persist Input” to disable the option.</li>
+<li class="">Click “Proceed” in the warning modal.</li>
+<li class="">Open the Settings menu and click “Persist Input” again to turn it back on.</li>
+<li class="">Paste your variables back into the variables pane and save the template. This template should no longer encounter the issue.</li>
+</ol>
 <hr>
 <ul>
 <li class=""><strong>I95-39986 Mellanox driver discarding large segmented packets:</strong> Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors.</li>
@@ -184,7 +195,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39798 Version update check may get stuck on GPG key access when using an access token:</strong> The software upgrade version check has been modified to support access tokens.</li>
+<li class=""><strong>I95-39798 Token Update and Available Version Update stuck on GPG key access:</strong> In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token.</li>
 </ul>
 <hr>
 <ul>
@@ -233,8 +244,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39793 Conductor fails to self-upgrade:</strong> This issue affected only 4.5.6-1 systems performing Conductor self-upgrade with Installer version 2.7.0 (or later). This issue has been resolved.</li>
+<li class=""><strong>I95-39793 Conductor fails to self-upgrade:</strong> This issue affects only 4.5.6-1 systems performing conductor self-upgrade with Installer version 2.7.0 (or later). Released versions of 128T prior or after 4.5.6-1 are not affected.</li>
 </ul>
+<p>The following error is displayed:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">/usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Failed to upgrade 128T!</span><br></div></code></pre></div></div>
+<p>The recommended course of action is to perform a manual interactive upgrade of the conductor. Please refer to <a class="" href="/docs/upgrade_legacy#upgrading-using-the-interactive-installer">Upgrading Using the Interactive Installer</a> for that process.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats-1">Caveats<a href="#caveats-1" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-39798 Token Update and Available Version Update stuck on GPG key access:</strong> In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token.</li>
@@ -266,7 +280,10 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-35521 Ambiguous validation error:</strong> Errors now more clearly identify the source of the error.</li>
+<li class="">
+<p><strong>I95-35521</strong> pcli may provide a validation error but does not provide the specific configuration in error.</p>
+<p><em><strong>Corrective Action:</strong></em> If a validation error is provided, review the configuration of each sub list between the items identified in the error response provided. For example, the same vlan id cannot be used for different networks interfaces on the same device interface.</p>
+</li>
 </ul>
 <hr>
 <ul>
@@ -314,11 +331,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-38395 TCP Out of Order can cause Stuck Flow:</strong> Resolved an issue where a TCP FIN received before the data that preceded it could cause a stuck flow.</li>
+<li class=""><strong>I95-38395</strong> Resolved an issue where a TCP FIN received before the data that proceeded it could cause a stuck flow.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-38458 PCLI fails to start after upgrade:</strong> Resolved an issue where caching errors prevented 128T from starting.</li>
+<li class=""><strong>I95-38458 PCLI fails to start after upgrade:</strong> Resolved an issue where caching errors prevented SSR from starting.</li>
 </ul>
 <hr>
 <ul>
@@ -539,8 +556,9 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-35567, I95-37833 Weak Password Policy.</strong> New restrictions on password properties have been added to ensure strong passwords.</li>
+<li class=""><strong>I95-37833 Apply password policy more consistently:</strong> The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements.</li>
 </ul>
+<div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Please refer to <a class="" href="/docs/config_password_policies">Password Policies</a> for updated password requirements.</p></div></div>
 <hr>
 <ul>
 <li class=""><strong>I95-35987 Downloading exported config files does not preserve the file name.</strong> The download process correctly preserves the file name.</li>
@@ -620,7 +638,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-37752 A race condition exists when a session is manually deleted through the <code>delete sessions</code> PCLI command.</strong> The <code>delete sessions</code> command no longer creates a race condition. (Interim IPFIX record generation or HA session synchronization could also cause trigger the same fault, and is also addressed by this fix.)</li>
+<li class=""><strong>I95-37752</strong> A race condition exists when a session is manually deleted through the <code>delete sessions</code> PCLI command; interim IPFIX record generation or HA session synchronization may cause the highway process to fault.</li>
 </ul>
 <hr>
 <ul>
@@ -704,7 +722,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-35927</strong> When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.</li>
+<li class=""><strong>I95-35927 When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.</strong> This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -832,11 +850,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-10">Resolved Issues<a href="#resolved-issues-10" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
-<li class="">
-<p><strong>I95-18807</strong> Removed a benign error displayed in journal due to imudp module loaded by rsyslog daemon.</p>
-<p><em><strong>Symptoms:</strong></em> The following message can be seen in the journal:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]</span><br></div></code></pre></div></div>
-</li>
+<li class=""><strong>I95-18807 An error displays in the journal due to imudp module loaded by rsyslog daemon.</strong> The error condition has been resolved and the error no longer displays.</li>
 </ul>
 <hr>
 <ul>
@@ -857,10 +871,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class="">
-<p><strong>I95-35111</strong> <code>No active NTP server</code> alarm erroneously generated when 128T can successfully reach a provisioned NTP server.</p>
-<p><em><strong>Conditions:</strong></em> When multiple NTP servers are configured, at least one is reachable and at least one is not reachable.</p>
-</li>
+<li class=""><strong>I95-35111 <code>No active NTP server</code> alarm erroneously generated when 128T can successfully reach a provisioned NTP server.</strong> The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.</li>
 </ul>
 <hr>
 <ul>
@@ -876,7 +887,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-35933</strong> <code>show device-interface</code> displays incorrect values for speed and duplex for PPPoE interfaces.</li>
+<li class=""><strong>I95-35933 <code>show device-interface</code> displays incorrect values for speed and duplex for PPPoE interfaces.</strong> The correct speeds are now displayed for <code>show device-interface</code>.</li>
 </ul>
 <hr>
 <ul>
@@ -968,7 +979,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-36672</strong> Deleting all session-capture filters on a <em>device-interface</em> with active traffic can cause the highway process to restart.</li>
+<li class=""><strong>I95-36672 Deleting all session-capture filters on a <em>device-interface</em> with active traffic can cause the highway process to restart.</strong> Traffic on the device interface is handled before deleting the filters.</li>
 </ul>
 <hr>
 <ul>
@@ -996,7 +1007,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-36850, I95-36851</strong> An asset&#x27;s available and downloaded versions are incorrectly cleared when an upgrade or rollback is initiated.</li>
+<li class=""><strong>I95-36850, I95-36851</strong> An asset&#x27;s available and downloaded versions were incorrectly cleared when an upgrade or rollback is initiated.</li>
 </ul>
 <hr>
 <ul>
@@ -1019,7 +1030,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-36927</strong> Race condition can cause a fault in the highway process during session setup and configuration change removes BGP service route path</li>
+<li class=""><strong>I95-36927</strong> A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.</li>
 </ul>
 <hr>
 <ul>
@@ -1100,7 +1111,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-33174</strong> Automatic LTE band management per carrier</li>
+<li class=""><strong>I95-33174</strong> Some LTE cards do not use the correct wireless bands for the AT&amp;T network</li>
 </ul>
 <hr>
 <ul>
@@ -1140,10 +1151,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class="">
-<p><strong>I95-33594</strong> Changing the <code>neighbor-as</code> of an existing bgp neighbor prevents it from connecting.</p>
-<p>Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the 128T or by removing and recreating the bgp configuration.</p>
-</li>
+<li class=""><strong>I95-33594 Changing the <code>neighbor-as</code> of an existing bgp neighbor prevents it from connecting.</strong> The BGP neighbor now connects correctly.</li>
 </ul>
 <hr>
 <ul>
@@ -1163,7 +1171,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-35799</strong> When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.</li>
+<li class=""><strong>I95-35799 When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.</strong> This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -1175,7 +1183,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-35935</strong> Configuring the same value for <code>router &gt; conductor-address</code> on different routers will generate invalid configuration.</li>
+<li class=""><strong>I95-35935 Configuring the same value for <code>router &gt; conductor-address</code> on different routers will generate invalid configuration.</strong> The router-based conductor map has been separated from the global conductor map.</li>
 </ul>
 <hr>
 <ul>
@@ -1183,7 +1191,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-36109</strong> Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2.)</li>
+<li class=""><strong>I95-36109</strong> Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2).</li>
 </ul>
 <hr>
 <ul>
@@ -1198,7 +1206,7 @@ The <code>max-inter-node-way-points</code> value is configurable at the router l
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-36356</strong> Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process crash if a subsequent graceful-restart timeout occurs.</li>
+<li class=""><strong>I95-36356 Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.</strong> Changes to the BGP <code>graceful-restart restart-time</code> no longer cause a process fault.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="special-considerations">Special Considerations<a href="#special-considerations" class="hash-link" aria-label="Direct link to Special Considerations" title="Direct link to Special Considerations" translate="no">​</a></h2>
 <ul>
@@ -1211,7 +1219,7 @@ The RoadRunner process collected anonymous information from the router and sent 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-36525</strong> TLS 1.0 is no longer supported.</li>
+<li class=""><strong>I95-36525</strong> Due to known vulnerabilities, only TLS versions 1.2 and 1.3 are supported. We do not support TLS 1.0 and 1.1.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats-3">Caveats<a href="#caveats-3" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h2>
 <ul>

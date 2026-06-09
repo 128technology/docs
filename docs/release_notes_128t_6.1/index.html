@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.1 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.1 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.1"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.1" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.1","item":"https://docs.128technology.com/docs/release_notes_128t_6.1"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade-considerations">Upgrade Considerations<a href="#upgrade-considerations" class="hash-link" aria-label="Direct link to Upgrade Considerations" title="Direct link to Upgrade Considerations" translate="no">​</a></h3>
 <div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Before upgrading please review the <a class="" href="/docs/intro_upgrade_considerations"><strong>Upgrade Considerations</strong></a> and the <a class="" href="/docs/intro_rollback"><strong>Rolling Back Software</strong></a> pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.</p></div></div>
 <ul>
-<li class=""><strong>I95-43243/IN-460 Upgrade and Rollback:</strong> Upgrading or rolling back a system (conductor peer or router) with the interactive installer <code>install128t</code>, that is managed by a conductor may result in the system becoming unresponsive. It is recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See <a class="" href="/docs/intro_rollback">Rolling Back Software</a> for more information on these operations.</li>
+<li class=""><strong>I95-43243/IN-460 Upgrade and Rollback:</strong> Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer <code>install128t</code>, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See <a class="" href="/docs/intro_rollback">Rolling Back Software</a> for more information on these operations.</li>
 </ul>
 <hr>
 <ul>
@@ -46,7 +46,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <p><strong>Release Date:</strong> February 25, 2025</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>I95-59745 Routers are stuck in the connected state:</strong> Resolved an issue where the router would unnecessarily write to <code>yum.dnf</code> and <code>dnf.conf</code>, resulting in a race condition that prevented them from reaching the <code>running</code> state.</li>
+<li class=""><strong>I95-59745 Routers are stuck in the connected state and not transitioning to running:</strong> Resolved an issue where the router repeatedly sent the same incorrect values to the config during startup, resulting in a race condition.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-6112-12-lts">Release 6.1.12-12-lts<a href="#release-6112-12-lts" class="hash-link" aria-label="Direct link to Release 6.1.12-12-lts" title="Direct link to Release 6.1.12-12-lts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> January 16, 2025</p>
@@ -64,7 +64,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58428 DSCP Steering Collision on Flow Move:</strong> When IPSec traffic exists on a router and the DSCP steering feature is enabled, upon a flow move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly.</li>
+<li class=""><strong>I95-58428 DSCP Steering Collision on Flow Move, resulting in traffic drops:</strong> When traffic is traversing an IPSec connection and the DSCP steering feature is enabled, upon a flow-move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly.</li>
 </ul>
 <hr>
 <ul>
@@ -72,7 +72,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58528 SSR OS renaming:</strong> The SSR OS version has been updated from &quot;CentOS&quot; to &quot;Oracle Linux&quot; to accurately reflect its upstream Linux distribution. All internal naming has been updated.</li>
+<li class=""><strong>I95-58528 SSR OS renaming:</strong> The SSR OS has been renamed/rebranded from &quot;CentOS7&quot; to &quot;SSR OS&quot; to more accurately reflect its customized Linux distribution. All internal naming has been updated.</li>
 </ul>
 <hr>
 <ul>
@@ -80,7 +80,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58583 Bypass message-authentication in RADIUS:</strong> An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios.</li>
+<li class=""><strong>I95-58583 Bypass message-authentication in RADIUS:</strong> An option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios.</li>
 </ul>
 <hr>
 <ul>
@@ -124,7 +124,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:</strong> Resolved an issue in dual node High Availability configurations, highway crashes happen when <code>node1</code> does not successfully classify during the TCP handshake, but <code>node2</code> does successfully classify. See I95-59563, I95-59618 below for additional information.</li>
+<li class=""><strong>I95-59477 Race condition can lead to highway crash on HA node when application identification is enabled:</strong> In dual node High Availability configurations, highway crashes happen when <code>node1</code> does not successfully classify during the TCP handshake, but <code>node2</code> does successfully classify. This issue is currently under investigation and will be resolved in an upcoming release. For this release, defensive code has been added to preserve the session state and avoid a crash.</li>
 </ul>
 <hr>
 <ul>
@@ -151,7 +151,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57128 Slow inter-vlan traffic due to i40e performance issue:</strong> Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value.  This has been resolved and latency reduced to 32us.</li>
+<li class=""><strong>I95-57128 Inter-VLAN traffic slow:</strong> Identified an issue where devices controlled by the i40e driver (x710, x722) were incurring 8ms latency due to incorrectly setting a device throttling register to a MAX of 8ms. This has been reduced to 32us to resolve the issue.</li>
 </ul>
 <hr>
 <ul>
@@ -160,14 +160,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <hr>
 <ul>
 <li class=""><strong>I95-57712 DSCP steering issue with outbound traffic:</strong> Resolved an issue with processing reverse pinhole packets when DSCP steering is enabled.</li>
-</ul>
-<hr>
-<ul>
 <li class=""><strong>I95-57730 Peer Service Next Hops Not Reloaded After Provisional Status Change:</strong> Resolved an issue where a <code>bgp-over-svr service-route</code> does not failback to primary node on a <code>provisional-status</code> change.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58201 Increase AMD performance:</strong> Throughput performance on AMD processors has been improved through the tuning of some kernel parameters.</li>
+<li class=""><strong>I95-58201 Throughput Performance Improvements Across Platforms:</strong> Kernel parameter tuning has improved throughput performance on most AMD and Intel platforms (excluding Intel Atom), with the greatest gains on AMD processors. This includes Juniper-branded platforms like the SSR1200 and SSR1500, as well as cloud instances, VM hosts, and other hardware configurations.</li>
 </ul>
 <hr>
 <ul>
@@ -197,11 +194,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49712 Config Validation Error uniformative:</strong> Resolved an issue where paths pointing to missing keys or elements returned error messages that did not provide recognizable information. Now the error message provides key or element names.</li>
+<li class=""><strong>I95-49712 Configuration validation error uniformative:</strong> Resolved an issue that when configuring an SSR, invalid configuration parameters were returning errors that were not specific enough to allow the user to locate the invalid configuration. Now when invalid configuration elements are identified during validation, the messages include relevant information for the invalid element, such as an IP address, node name, router name, interface names, etc.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:</strong> When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.</li>
+<li class=""><strong>I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:</strong> Handling of RFC1918 traffic classification returned a private domain causing an undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.</li>
 </ul>
 <hr>
 <ul>
@@ -221,11 +218,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55603 HA router stuck in connected state due to runtime corruption issue:</strong> Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.</li>
+<li class=""><strong>I95-55603 HA router stuck in connected state due to runtime corruption issue:</strong> Resolved an issue with an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55725 Highway crashes when peer-path routers are removed:</strong> Resolved a race condition that could cause a crash in the highway worker-core packet-processor if peer routers are removed from the configuration.</li>
+<li class=""><strong>I95-55725 Highway crashes when peer-path routers are removed:</strong> Resolved a race condition that could cause a crash in the forwarding plane (highway) if peer routers are removed from the configuration.</li>
 </ul>
 <hr>
 <ul>
@@ -233,19 +230,19 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55965 IDP engine not starting due to invalid environmental conditions:</strong> In cases where a container/csrx does not shut down cleanly, the IDP engine does not start. These conditions are now detected, and a force stop/remove of the container is implemented.</li>
+<li class=""><strong>I95-55965 IDP engine not starting due to invalid environmental conditions:</strong>  In cases where the IDP engine does not shut down cleanly, the IDP engine will fail to restart. These conditions are now detected and handled correctly.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56127 Excessive CPU utilization on systems with a large number of KNI interfaces:</strong> Relaxed KNI scheduling to improve CPU utilization.</li>
+<li class=""><strong>I95-56127 Changes to KNI device driver increased CPU load per KNI device:</strong> Added KNI module tuning, and excessive CPU usage by idle KNI devices has been alleviated.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56203 FAI scan archives in <code>/var/log/128technology</code> have zero-byte length:</strong> Corrected log rotate function to prevent file truncation.</li>
+<li class=""><strong>I95-56203 The First Article Inspection (FAI) scan archive is empty:</strong> Resolved an issue with <code>logrotate</code> clearing all the FAI scan archives. This was due to each archive having a unique name using a timestamp. A different service is now used to rotate the FAI scan files.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56236 Quick Start config validation failures not being reported:</strong> Made changes to the initialization process such that quick start errors can be reported.</li>
+<li class=""><strong>I95-56236 Routers unable to onboard after upgrading the Conductor:</strong> Resolved an issue where the automated provisioner and the Quickstart processes overlapped, preventing the device state from being reviewed for errors, which stopped the onboarding process.</li>
 </ul>
 <hr>
 <ul>
@@ -253,7 +250,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56292 Increase the length of SSH keys to 4096:</strong> The size of the Salt and 128T SSH keys has been changed to 4096 bits for newly deployed systems.</li>
+<li class=""><strong>I95-56292 Increase the length of SSH keys to 4096:</strong> The size of the Salt and SSH keys has been changed to 4096 bits for newly deployed systems.</li>
 </ul>
 <hr>
 <ul>
@@ -293,7 +290,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56575 Reduce polling rate of disk monitoring and add optimization:</strong> The <code>ComponentDiskUtilizationMonitor</code> checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.</li>
+<li class=""><strong>I95-56575 Reduce polling rate of disk monitoring and add optimization:</strong> The disk monitoring agent polling frequently is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.</li>
 </ul>
 <hr>
 <ul>
@@ -373,11 +370,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57099 BFD Session timeout discovered:</strong> Resolved an issue where BFD sessions were deleted prematurely.</li>
+<li class=""><strong>I95-57099 Race condition causing crash in highway process when peer path timers expire:</strong> Resolved an issue with handling BFD timers in multi-threaded environments.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57110 Crash seen during add and delete peers while sending traffic:</strong> A race condition has been fixed that could cause a crash in the packet-processing highway process if a peer-path is removed from configuration.</li>
+<li class=""><strong>I95-57110 Crash seen during add and delete peers while sending traffic:</strong> A race condition has been fixed that could cause a crash in the forwarding plane (highway) process if a peer-path is removed from configuration.</li>
 </ul>
 <hr>
 <ul>
@@ -438,7 +435,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53523 Bond interface shut down generates errors:</strong> Resolved an issue where the device interface clean up process was out of order and generated a detach failure.</li>
+<li class=""><strong>I95-53523 LAG interface unbind errors following shutdown of the 128T service:</strong> The order in which a LAG interface is broken down and cleaned up after shutdown has been optimized and errors resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -490,7 +487,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55467 Incorrect VLAN Tagging in Azure HCI Stack with Hyper-V Hypervisor:</strong> When using VLANs on Azure HCI Stack with Hyper-V, bit shifting occurs resulting in incorrect VLAN tags. This has been resolved for <strong>non-accelerated NICs</strong> by adding handling for the VLAN tags on Azure HCI. However, this issue is still present when using accelerated mode with the Azure HCI Stack with Hyper-V. The current solution is to <strong>not</strong> use accelerated mode if configuring VLAN interfaces.</li>
+<li class=""><strong>I95-55467 Incorrect VLAN Tagging in Azure HCI Stack with Hyper-V Hypervisor:</strong> When using VLANs on Azure HCI Stack with Hyper-V, bit shifting occurs resulting in incorrect VLAN tags. This has been resolved for <strong>non-accelerated NICs</strong> by updating the DPDK and adding handling for the VLAN tags on Azure HCI. However, this issue is still present when using accelerated mode with the Azure HCI Stack with Hyper-V. The current solution is to <strong>not</strong> use accelerated mode if configuring VLAN interfaces.</li>
 </ul>
 <hr>
 <ul>
@@ -538,7 +535,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:</strong> Resolved an issue where the <code>cpuinfo</code> parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the <code>cpuinfo</code> contains the word ‘processor’.</li>
+<li class=""><strong>I95-55949 Silicom Valencia Atom C1130 CPU flags are not properly detected:</strong> Resolved an issue where the <code>cpuinfo</code> parser fails due to a collision between the processor key name and value - the Silicom Valencia model name in the <code>cpuinfo</code> contains the word <code>processor</code>.</li>
 </ul>
 <hr>
 <ul>
@@ -576,11 +573,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51663 TCP port reuse causes crash during application steering:</strong> Resolved an issue where TCP state transitions was causing an issue with the client reusing ports.</li>
+<li class=""><strong>I95-51663 TCP port reuse causing application steering crashes:</strong> Resolved an issue where backwards state transitions was causing an issue with the TCP client reusing ports.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-52250 Security Package Update:</strong> Updates have been made to Intrusion Detection and Prevention (IDP).</li>
+<li class=""><strong>I95-52250 Security Package Update:</strong>  Intrusion Detection and Prevention (IDP) signatures have been updated.</li>
 </ul>
 <hr>
 <ul>
@@ -604,7 +601,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-54340 Hub-to-spoke sessions break when failing over from outbound-only path:</strong> When a session modify occurs due to an ingress change (inter-node -&gt; inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved.</li>
+<li class=""><strong>I95-54340 Hub-to-spoke sessions fail during failover from outbound-only path:</strong> When a session modify occurs due to an ingress change (inter-node -&gt; inter-router) AND an egress change is also detected, the incorrect security was looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -632,7 +629,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-54927 Receiver can join stream without any tenant assigned to interface:</strong> This issue has been resolved. Multicast boundaries have been added to block all multicast addresses on interfaces that do not match the multicast service access-policy.</li>
+<li class=""><strong>I95-54927 Receiver can join stream without any tenant assigned to interface:</strong> This issue has been resolved by creating multicast boundaries in the routing engine to block all multicast addresses on interfaces that do not match the multicast service access-policy.</li>
 </ul>
 <hr>
 <ul>
@@ -644,7 +641,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55208 <code>state.apply</code> hangs and device does not get to the <code>running</code> state:</strong> In certain cases the <code>highstate</code> prevents <code>rpm -q</code> from running. This issue has been resolved by instituting a timeout for <code>rpm -q</code> in highstate.</li>
+<li class=""><strong>I95-55208 Asset fails to transition state:</strong> In certain cases when the RPM database is corrupted or another process holds its lock indefinitely, the highstate can block forever running rpm -q. Since other highstate attempts see an existing highstate job, they don&#x27;t try to do anything else and the asset stays stuck like that forever without manual intervention.</li>
 </ul>
 <hr>
 <ul>
@@ -652,7 +649,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-55261 Only run <code>validate</code> for plugins on the Conductor:</strong> Resolved an issue where the plugin validator was running on routers.</li>
+<li class=""><strong>I95-55261 Config validation incorrectly being run on router:</strong> Resolved an issue where the plugin validator was running on routers. Validate is now correctly run only on the conductor.</li>
 </ul>
 <hr>
 <ul>
@@ -702,7 +699,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-38188 Re-Homing an SSR in certain circumstances leaves residual services:</strong> If an SSR is rehomed from an HA conductor to a standalone conductor, the services pointing to the second node of the HA conductor were not removed. Resolved the issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor.</li>
+<li class=""><strong>I95-38188 Repurposing an HA conductor to a standalone conductor left services for the second conductor:</strong> Resolved an issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor. The salt states now stop services to a second conductor when it is removed from the HA configuration.</li>
 </ul>
 <hr>
 <ul>
@@ -714,7 +711,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50493 Memory calculation for alarms is confusing:</strong> This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. The memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.</li>
+<li class=""><strong>I95-50493 Memory calculation for alarms is confusing:</strong> This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. Memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.</li>
 </ul>
 <hr>
 <ul>
@@ -730,11 +727,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51459 Logs and exception pcaps are periodically filled with error logs and truncated packets:</strong> Resolved an issue where ICMP error respond packets for encapsulated traffic caused <code>PacketBufferDataNotFound: Could not find specified data in packet</code> error logs to be generated, or truncated packets to arrive in the FastLane exceptions pcap.</li>
+<li class=""><strong>I95-51459 Logs and exception pcaps are periodically filled with error logs and truncated packets:</strong> Resolved an issue where ICMP error response packets for encapsulated traffic caused <code>PacketBufferDataNotFound: Could not find specified data in packet error logs</code> to be generated, or truncated packets to arrive in the FastLane exceptions pcap.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:</strong> When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.</li>
+<li class=""><strong>I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:</strong> When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse intermediate nodes. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.</li>
 </ul>
 <hr>
 <ul>
@@ -747,9 +744,6 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <hr>
 <ul>
 <li class=""><strong>I95-52498 AppID allows session when it should be blocked:</strong> When utilizing the Application Identification functionality, a TCP reset is now sent to clients to correct this behavior.</li>
-</ul>
-<hr>
-<ul>
 <li class=""><strong>I95-52615 Set TTL multi-hop range correctly:</strong> The TTL multi-hop field allowed a value of 0, but had no impact. The range has been corrected to 1-255, and no longer accepts a value of 0.</li>
 </ul>
 <hr>
@@ -786,7 +780,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53015 Highway log fills with <code>INFO (divertedPackeTP) icmp response packet failed</code> messages when the BFD peer is down:</strong> This message is informational and is now logged appropriately.</li>
+<li class=""><strong>I95-53015 Highway log has large number of unnecessary INFO messages:</strong> A previous log message of icmp response packet failed was incorrectly logged at INFO level. It is neither an error nor actually informational, and has now been downgraded to DEBUG level.</li>
 </ul>
 <hr>
 <ul>
@@ -846,7 +840,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-53641 BGP routes between peers do not immediately transition to the Connected state:</strong> A change has been made to reduce the time that BGP routes learned from a BGP over SVR neighbor are withdrawn when the peer paths are lost to the neighbor.</li>
+<li class=""><strong>I95-53641 BGP between peers does not immediately transition to the Connected state:</strong> A change has been made to reduce the time that BGP routes learned from a BGP over SVR neighbor are withdrawn when we lose all peer paths to the neighbor.</li>
 </ul>
 <hr>
 <ul>
@@ -894,7 +888,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-54086 Conductor memory exceeded:</strong> In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the <code>asset-connection-resiliency</code> feature. An update to the salt package has been made to resolve this issue.</li>
+<li class=""><strong>I95-54086 Conductor memory exceeded:</strong> In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.</li>
 </ul>
 <hr>
 <ul>
@@ -981,7 +975,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51336 App-ID stats entry not getting cleaned up after expiration:</strong> In some cases, a session may not have installed correctly, preventing the expired App-ID stats from being removed. The App-ID stats entries are now cleaned up appropriately.</li>
+<li class=""><strong>I95-51336 App-ID memory leak for some uncommon cases, such as duplicate flow:</strong> Resolved an issue where the <code>app-id stats</code> entry was not added to the <code>Expiring</code> list to be cleaned up.</li>
 </ul>
 <hr>
 <ul>
@@ -1107,8 +1101,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats">Caveats<a href="#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>I95-52426 Incorrect behavior when configuring an IDP custom rule definition:</strong> In a case where a user is modifying a rule to <strong>decrease</strong> the action type to an <code>alert</code>, alerts for that vulnerability will not work. The attack will be allowed to pass through undetected. For example, if the action <code>close-tcp-connection</code> is downgraded to <code>alert</code>, the attacks will pass through undetected.
-This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend creating a custom exception rule specifying the source and destination IP address, along with the vulnerability name, rather than downgrading a vulnerability to an <code>alert</code>.</li>
+<li class=""><strong>I95-52426 Alerts not issued when decreasing the action type on an IDP custom rule definition:</strong> In a case where a user is modifying a rule to <strong>decrease</strong> the action type to an <code>alert</code>, alerts for that vulnerability will not be reported. The attack will be allowed to pass through undetected. For example, if the action <code>close-tcp-connection</code> is downgraded to <code>alert</code>, the attacks will pass through undetected.</li>
 </ul>
 <hr>
 <ul>
@@ -1191,7 +1184,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49587 ICMP session classification improvement:</strong> The application lookup for ICMP sessions now accurately identifies the correct service.</li>
+<li class=""><strong>I95-49587 ICMP session classification improvement:</strong> The application lookup for ICMP sessions has been optimized to accurately identify the correct service.</li>
 </ul>
 <hr>
 <ul>
@@ -1302,9 +1295,6 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 <hr>
 <ul>
 <li class=""><strong>I95-51792 Low MTU threshold causing metadata fragmentation:</strong> Fixed the incorrect handling of packets where metadata is fragmented due to unreasonably low MTU, causing the packet buffers to become exhausted.</li>
-</ul>
-<hr>
-<ul>
 <li class=""><strong>I95-51793 Path MTU discovery dropping very low:</strong> Fixed PMTU discovery from ever resolving to an unreasonably low MTU, which could previously occur during a link flap event.</li>
 </ul>
 <hr>
@@ -1337,11 +1327,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats-1">Caveats<a href="#caveats-1" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
-<li class="">
-<p><strong>I95-52426 Incorrect behavior when configuring an IDP custom rule definition:</strong> In a case where a user is modifying a rule to <strong>decrease</strong> the action type, for example, the action <code>close-tcp-connection</code> is downgraded to <code>alert</code>, this may impact other rules, and some attacks may pass through undetected.</p>
-<p><strong>Example:</strong> If <code>HTTP:SQL:INJ:HEADER-1</code> is excluded from the ruleset, some other <code>HTTP</code> attacks may pass through undetected. <strong>This behavior only occurs when decreasing the action type in the rule;</strong> i.e.; the action <code>close-tcp-connection</code> is downgraded to <code>alert</code>.</p>
-<p>This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the SSR 6.1.5 patch release.</p>
-</li>
+<li class=""><strong>I95-52426 Alerts not issued when decreasing the action type on an IDP custom rule definition:</strong> In a case where a user is modifying a rule to <strong>decrease</strong> the action type to an <code>alert</code>, alerts for that vulnerability will not be reported. The attack will be allowed to pass through undetected. For example, if the action <code>close-tcp-connection</code> is downgraded to <code>alert</code>, the attacks will pass through undetected.</li>
 </ul>
 <hr>
 <ul>
@@ -1351,7 +1337,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 <p><strong>Release Date:</strong> May 22, 2023</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-10">Resolved Issues<a href="#resolved-issues-10" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>I95-48931 Service area Highway crash:</strong> Now prevents crashing in SSR&#x27;s highway process in unusual race conditions when a session&#x27;s flow is removed before the session is fully established.</li>
+<li class=""><strong>I95-48931 Service area Highway crash:</strong> Now prevent crashing in SSR&#x27;s highway process in rare race conditions when a session&#x27;s flow is removed before the session is fully established.</li>
 </ul>
 <hr>
 <ul>
@@ -1426,7 +1412,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49974 Stuck flow not cleared when reverse metadata is incomplete:</strong> Resolved an issue where reverse metadata is coming through incomplete - without the source tenant. The source tenant has been added to the reverse metadata.</li>
+<li class=""><strong>I95-49974 Stuck flow is not clearing when the reverse metadata is incomplete:</strong> Added the source tenant to the reverse metadata to prevent the metadata parsing exception.</li>
 </ul>
 <hr>
 <ul>
@@ -1434,7 +1420,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50543 systemd unable to start 128T after upgrade:</strong> This issue has been resolved by ensuring that the netfilter kernel is installed.</li>
+<li class=""><strong>I95-50543 SSR may not start after upgrade:</strong> A race condition during startup may cause some services to start out of order, causing the SSR to not start. A reboot is required to start the system normally.</li>
 </ul>
 <hr>
 <ul>
@@ -1470,13 +1456,19 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51006 Nodes stuck in connected state after upgrade:</strong> On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration&#x27;s modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid upgrade is not supported.</li>
+<li class=""><strong>I95-51006 Nodes stuck in connected state after upgrade:</strong> On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration&#x27;s modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid-upgrade is not supported.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51007 Conductor is incorrectly honoring core pinning:</strong> The cpuProperties cores setting in /etc/128technology/local.init was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.</li>
+<li class=""><strong>I95-51007 Conductor only - cpuProperties-core value isolating cores:</strong> <em>In SSR software versions 6.0.0 and greater</em>, the <code>cpuProperties-cores</code> setting in <code>/etc/128technology/local.init</code> is erroneously isolating cores on conductor nodes when set. Because the conductor does not forward packets, there should be no traffic cores allocated to or isolated on the conductor for packet forwarding. This setting was previously ignored on the conductor, but while resolving an earlier issue with the installer and initializer that allocated CPU cores for traffic, that is no longer the case.</li>
 </ul>
-<hr>
+<p>It is recommended that prior to upgrading the conductor that the user modify local.init to set this setting to <code>0</code>. For example, a setting like this in <code>/etc/128technology/local.init</code>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;cpuProperties&quot; : {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;cores&quot; : 4</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
+<p>should be changed to:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;cpuProperties&quot; : {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;cores&quot; : 0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
+<p>Note that only the relevant section of <code>local.init</code> is shown for clarity. All other settings should be left the same.
+The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to <code>systemctl restart 128T</code> on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="this-issue-will-be-corrected-in-an-upcoming-release">This issue will be corrected in an upcoming release.<a href="#this-issue-will-be-corrected-in-an-upcoming-release" class="hash-link" aria-label="Direct link to This issue will be corrected in an upcoming release." title="Direct link to This issue will be corrected in an upcoming release." translate="no">​</a></h2>
 <ul>
 <li class=""><strong>I95-51021 Package to Image conversion fails on FIPS enabled SSR:</strong> Conversion of <code>package-based</code> to <code>image-based</code> is now supported for systems with FIPS 140-2 mode enabled.</li>
 </ul>
@@ -1539,7 +1531,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-42483 STEP Diagnostics in GUI:</strong> A Debug table and Replay visualization have been added to aid in STEP diagnostics.</li>
+<li class=""><strong>I95-42483 STEP Page in the GUI:</strong> <a class="" href="/docs/howto_STEP_GUI">The STEP page in the GUI</a> provides graphical representations of STEP data.</li>
 </ul>
 <hr>
 <ul>
@@ -1576,7 +1568,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 <div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Please refer to <a class="" href="/docs/config_password_policies">Password Policies</a> for updated password requirements.</p></div></div>
 <hr>
 <ul>
-<li class=""><strong>I95-40130 Factory Defaults for Conductor Communication:</strong> Added SaltStack, Conductor, and IKE default session-types. For new deployments, SIP, SIPS, and IPSEC-NAT use NAT Keep Alive by default, and the timeout for IPSEC-NAT is 125 seconds.</li>
+<li class=""><strong>I95-40130 Create factory defaults for all router-conductor communication:</strong> SaltStack, Conductor, and IKE default session-types have been added. For new deployments, SIP, SIPS, and IPSEC-NAT use NAT Keep Alive by default, and the timeout for IPSEC-NAT is now 5 seconds.</li>
 </ul>
 <hr>
 <ul>
@@ -1592,7 +1584,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-43779 DHCP IP Address is not refreshed when cable is physically removed and reinserted:</strong> Updated the state machine to cause DHCP-enabled interfaces to send out a DHCP Request for their current IP address.</li>
+<li class=""><strong>I95-43779 DHCP IP Address not releasing appropriately:</strong> When the cable is physically disconnected and reconnected from DHCP-enabled interfaces, the interfaces are now triggered to send out a DHCP Request for their current IP address.</li>
 </ul>
 <hr>
 <ul>
@@ -1636,11 +1628,11 @@ The impacted sessions will time out when all packets for the failed sessions sto
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45164 <code>show-active-peers</code> missing some information:</strong> Resolved a corner case where an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the SSR misinterprets the non-compliant device&#x27;s timeouts and the MTU will be unresolvable.</li>
+<li class=""><strong>I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS &amp; MOS for some transports:</strong> Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device&#x27;s timeouts are incorrectly interpreted and the MTU becomes unresolvable.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45220 Managed routers do not connect to newly added HA conductor:</strong> Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.</li>
+<li class=""><strong>I95-45220 Conductor local forwarding parameters not dynamic:</strong> Resolved an issue when transitioning a conductor from standalone to HA the managed routers were not automatically connecting to the newly added conductor node.</li>
 </ul>
 <hr>
 <ul>
@@ -1652,7 +1644,10 @@ The impacted sessions will time out when all packets for the failed sessions sto
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45559 Corrupted resolv.conf after ODM imaging:</strong> Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using PEERDNS=yes, where a race condition may occur that results in corrupt nameservers being added to the /etc/resolv.conf file.</li>
+<li class="">
+<p><strong>I95-45559 Corrupted <code>resolv.conf</code> after ODM imaging:</strong> On SSR systems running dns-proxy services with external interfaces configured using <code>PEERDNS=yes</code>, a race condition may occur that results in corrupt nameservers being added to the <code>/etc/resolv.conf</code> file.</p>
+<p><strong><em>Workaround:</em></strong> A temporary workaround is to force an update of this file by either of the following methods:</p>
+</li>
 </ul>
 <hr>
 <ul>
@@ -1702,11 +1697,11 @@ B) if the connection is not critical, terminate the application that owns the de
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48571 IDP topology improvements in the GUI:</strong> The SSR now includes the auto-generated IDP mode if enabled as a part of <code>show idp application status</code>. Additionally, enabling <code>hub</code> mode will not result in engine bring-up errors.</li>
+<li class=""><strong>I95-48571 IDP Topology User Experience Improvements:</strong> The SSR will include the auto-generated IDP mode when enabled as a part of <code>show idp application status</code>. Additionally, enabling <code>hub</code> mode will not result in engine bring-up errors.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49340 Crash when the unexpected input of tenant-prefixes with no source-addresses is committed:</strong> Validation has been added to restrict the tenant-prefixes&#x27;s source-addresses to a minimum of one.</li>
+<li class=""><strong>I95-49340 Crash when the unexpected input of <code>tenant-prefix</code> with no <code>source-address</code> is committed:</strong> Validation has been added to restrict the <code>tenant-prefix source-address</code> to a minimum of one.</li>
 </ul>
 <hr>
 <ul>
@@ -1734,7 +1729,7 @@ B) if the connection is not critical, terminate the application that owns the de
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50247 Duplicate peer path alarms:</strong> Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peerPath state changes can trigger peer path events has been tightened.</li>
+<li class=""><strong>I95-50247 Duplicate peer path alarms:</strong> Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peer path state changes can trigger peer path events has been tightened.</li>
 </ul>
 <hr>
 <ul>
@@ -1754,7 +1749,7 @@ B) if the connection is not critical, terminate the application that owns the de
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50331 System fails to synchronize keys on startup:</strong> The SSR now dynamically updates rsync IP host address from the non forwarding HA sync interfaces, and will fall back to the global.init host IPs if they don&#x27;t exist.</li>
+<li class=""><strong>I95-50331 System fails to synchronize keys on startup:</strong> The SSR now dynamically updates the <code>rsync IP host address</code> from the non forwarding HA sync interfaces, and will fall back to the <code>global.init</code> host IPs if they don&#x27;t exist.</li>
 </ul>
 <hr>
 <ul>
@@ -1794,7 +1789,7 @@ B) if the connection is not critical, terminate the application that owns the de
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50787 Rebooting the OS from the conductor throws error code 400:</strong> Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display &quot;Error: EOF&quot;; this has been resolved.</li>
-</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.2"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.2</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6113-7-lts" class="table-of-contents__link toc-highlight">Release 6.1.13-7-lts</a><ul><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-6112-12-lts" class="table-of-contents__link toc-highlight">Release 6.1.12-12-lts</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-6111-5-lts" class="table-of-contents__link toc-highlight">Release 6.1.11-5-lts</a><ul><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-6110-8-lts" class="table-of-contents__link toc-highlight">Release 6.1.10-8-lts</a><ul><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-619-2-lts" class="table-of-contents__link toc-highlight">Release 6.1.9-2-lts</a><ul><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-618-15-lts" class="table-of-contents__link toc-highlight">Release 6.1.8-15-lts</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-617-3-lts" class="table-of-contents__link toc-highlight">Release 6.1.7-3-lts</a><ul><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-616-7-lts" class="table-of-contents__link toc-highlight">Release 6.1.6-7-lts</a><ul><li><a href="#resolved-issues-requiring-configuration-changes" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-615-14-lts" class="table-of-contents__link toc-highlight">Release 6.1.5-14-lts</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-1" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li><li><a href="#known-issues" class="table-of-contents__link toc-highlight">Known Issues</a></li></ul></li><li><a href="#release-614-23r2" class="table-of-contents__link toc-highlight">Release 6.1.4-23.r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-9" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-613-4r1" class="table-of-contents__link toc-highlight">Release 6.1.3-4r1</a><ul><li><a href="#resolved-issues-10" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-612-7r1" class="table-of-contents__link toc-highlight">Release 6.1.2-7r1</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-2" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-11" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-2" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-611-6r1" class="table-of-contents__link toc-highlight">Release 6.1.1-6r1</a><ul><li><a href="#resolved-issues-12" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-610-55r1" class="table-of-contents__link toc-highlight">Release 6.1.0-55r1</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-13" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
+<li class=""><strong>I95-50787 Rebooting the OS from the conductor throws error code 400:</strong> Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display <strong>Error: EOF</strong>.</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.2"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.2</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_6.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">6.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6113-7-lts" class="table-of-contents__link toc-highlight">Release 6.1.13-7-lts</a><ul><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-6112-12-lts" class="table-of-contents__link toc-highlight">Release 6.1.12-12-lts</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-6111-5-lts" class="table-of-contents__link toc-highlight">Release 6.1.11-5-lts</a><ul><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-6110-8-lts" class="table-of-contents__link toc-highlight">Release 6.1.10-8-lts</a><ul><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-619-2-lts" class="table-of-contents__link toc-highlight">Release 6.1.9-2-lts</a><ul><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-618-15-lts" class="table-of-contents__link toc-highlight">Release 6.1.8-15-lts</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-617-3-lts" class="table-of-contents__link toc-highlight">Release 6.1.7-3-lts</a><ul><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-616-7-lts" class="table-of-contents__link toc-highlight">Release 6.1.6-7-lts</a><ul><li><a href="#resolved-issues-requiring-configuration-changes" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-615-14-lts" class="table-of-contents__link toc-highlight">Release 6.1.5-14-lts</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-1" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li><li><a href="#known-issues" class="table-of-contents__link toc-highlight">Known Issues</a></li></ul></li><li><a href="#release-614-23r2" class="table-of-contents__link toc-highlight">Release 6.1.4-23.r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-9" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-613-4r1" class="table-of-contents__link toc-highlight">Release 6.1.3-4r1</a><ul><li><a href="#resolved-issues-10" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-612-7r1" class="table-of-contents__link toc-highlight">Release 6.1.2-7r1</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-2" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-11" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#this-issue-will-be-corrected-in-an-upcoming-release" class="table-of-contents__link toc-highlight">This issue will be corrected in an upcoming release.</a><ul><li><a href="#caveats-2" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-611-6r1" class="table-of-contents__link toc-highlight">Release 6.1.1-6r1</a><ul><li><a href="#resolved-issues-12" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-610-55r1" class="table-of-contents__link toc-highlight">Release 6.1.0-55r1</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-13" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>

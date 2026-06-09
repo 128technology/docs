@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.0 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.0"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.0 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.0"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.0" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.0" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.0","item":"https://docs.128technology.com/docs/release_notes_128t_6.0"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade-considerations">Upgrade Considerations<a href="#upgrade-considerations" class="hash-link" aria-label="Direct link to Upgrade Considerations" title="Direct link to Upgrade Considerations" translate="no">​</a></h3>
 <div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Before upgrading please review the <a class="" href="/docs/intro_upgrade_considerations"><strong>Upgrade Considerations</strong></a> and the <a class="" href="/docs/intro_rollback"><strong>Rolling Back Software</strong></a> pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.</p></div></div>
 <ul>
-<li class=""><strong>I95-43243/IN-460 Upgrade and Rollback:</strong> Upgrading or rolling back a system (conductor peer or router) with the interactive installer <code>install128t</code>, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See <a class="" href="/docs/intro_rollback">Rolling Back Software</a> for more information on these operations.</li>
+<li class=""><strong>I95-43243/IN-460 Upgrade and Rollback:</strong> Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer <code>install128t</code>, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See <a class="" href="/docs/intro_rollback">Rolling Back Software</a> for more information on these operations.</li>
 </ul>
 <hr>
 <ul>
@@ -69,7 +69,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50510 New fields for IPFIX:</strong> The SSR IPFIX implementation was not sending the industry standard fields of flowStartMilliseconds and flowEndMilliseconds. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see <a class="" href="/docs/concepts_application_discovery#ipfix">IPFIX</a>.</li>
+<li class=""><strong>I95-50510 New fields for IPFIX:</strong> The SSR IPFIX implementation was not sending the industry standard fields of <code>flowStartMilliseconds</code> and <code>flowEndMilliseconds</code>. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see <a class="" href="/docs/concepts_application_discovery#ipfix">IPFIX</a>.</li>
 </ul>
 <hr>
 <ul>
@@ -133,7 +133,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49604 Alarm when a node is disconnected:</strong> An alarm is now raised when a node is disconnected from the internal synchronization database.</li>
+<li class=""><strong>I95-49604 No alarm raised when a node is disconnected from the internal synchronization database:</strong> When nodes are unable to connect to the internal synchronization database, a critical alarm is now raised.</li>
 </ul>
 <hr>
 <ul>
@@ -149,7 +149,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49791 Add audit rules to track modification of grub config files:</strong> Added rules to log notifications in case of changes to grub configuration files.</li>
+<li class=""><strong>I95-49791 Audit rules to track modification of config files:</strong> Added rules to track the modification of grub configuration files, to aid in troubleshooting.</li>
 </ul>
 <hr>
 <ul>
@@ -157,7 +157,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49913 Some Login/Logout events not logged in Audit Logs:</strong> All login and logout events are now logged in the audit logs.</li>
+<li class=""><strong>I95-49913 Some Login/Logout Events not logged in Audit Logs:</strong> A new function has been added to create an event to process USER_LOGOUT audit messages.</li>
 </ul>
 <hr>
 <ul>
@@ -169,7 +169,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49974 Stuck flow not cleared when reverse metadata is incomplete:</strong> Resolved an issue where reverse metadata is coming through incomplete - without the source tenant. The source tenant has been added to the reverse metadata.</li>
+<li class=""><strong>I95-49974 Stuck flow is not clearing when the reverse metadata is incomplete:</strong> Added the source tenant to the reverse metadata to prevent the metadata parsing exception.</li>
 </ul>
 <hr>
 <ul>
@@ -189,7 +189,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50247 Duplicate peer path alarms:</strong> Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peerPath state changes can trigger peer path events has been tightened.</li>
+<li class=""><strong>I95-50247 Duplicate peer path alarms:</strong> Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peer path state changes can trigger peer path events has been tightened.</li>
 </ul>
 <hr>
 <ul>
@@ -201,7 +201,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50269 Router clone operation fails:</strong> Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software.</li>
+<li class=""><strong>I95-50269 Router clone operation fails:</strong> Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (pre-4.4).</li>
 </ul>
 <hr>
 <ul>
@@ -209,7 +209,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50331 System fails to synchronize keys on startup:</strong> The SSR now dynamically updates rsync IP host address from the non forwarding HA sync interfaces, and will fall back to the global.init host IPs if they don&#x27;t exist.</li>
+<li class=""><strong>I95-50331 System fails to synchronize keys on startup:</strong> The SSR now dynamically updates the <code>rsync IP host address</code> from the non forwarding HA sync interfaces, and will fall back to the <code>global.init</code> host IPs if they don&#x27;t exist.</li>
 </ul>
 <hr>
 <ul>
@@ -237,7 +237,7 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-50543 systemd unable to start 128T after upgrade:</strong> This issue has been resolved by ensuring that the netfilter kernel is installed.</li>
+<li class=""><strong>I95-50543 SSR may not start after upgrade:</strong> A race condition during startup may cause some services to start out of order, causing the SSR to not start. A reboot is required to start the system normally.</li>
 </ul>
 <hr>
 <ul>
@@ -293,15 +293,21 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51007 Conductor is incorrectly honoring core pinning:</strong> The <code>cpuProperties</code> cores setting in <code>/etc/128technology/local.init</code> was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.</li>
+<li class=""><strong>I95-51007 Conductor only - cpuProperties-core value isolating cores:</strong> <em>In SSR software versions 6.0.0 and greater</em>, the <code>cpuProperties-cores</code> setting in <code>/etc/128technology/local.init</code> is erroneously isolating cores on conductor nodes when set. Because the conductor does not forward packets, there should be no traffic cores allocated to or isolated on the conductor for packet forwarding. This setting was previously ignored on the conductor, but while resolving an earlier issue with the installer and initializer that allocated CPU cores for traffic, that is no longer the case.</li>
 </ul>
-<hr>
+<p>It is recommended that prior to upgrading the conductor that the user modify local.init to set this setting to <code>0</code>. For example, a setting like this in <code>/etc/128technology/local.init</code>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;cpuProperties&quot; : {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;cores&quot; : 4</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
+<p>should be changed to:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;cpuProperties&quot; : {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;cores&quot; : 0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
+<p>Note that only the relevant section of <code>local.init</code> is shown for clarity. All other settings should be left the same.
+The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to <code>systemctl restart 128T</code> on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="this-issue-will-be-corrected-in-an-upcoming-release">This issue will be corrected in an upcoming release.<a href="#this-issue-will-be-corrected-in-an-upcoming-release" class="hash-link" aria-label="Direct link to This issue will be corrected in an upcoming release." title="Direct link to This issue will be corrected in an upcoming release." translate="no">​</a></h2>
 <ul>
 <li class=""><strong>I95-51021 Package to Image conversion fails on FIPS enabled SSR:</strong> Conversion of package-based to image-based is now supported for systems with FIPS 140-2 mode enabled.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-51044 Hide forwarding-core-mode on conductor:</strong> Disabled the <code>forwarding-core-mode</code> setting on conductor nodes, since this setting does not apply to a conductor.</li>
+<li class=""><strong>I95-51044 Hide <code>forwarding-core-mode</code> on conductor:</strong> Disabled the <code>forwarding-core-mode</code> setting on conductor nodes, since this setting doesn&#x27;t apply to conductor.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats">Caveats<a href="#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
@@ -314,12 +320,19 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 <p><strong>Release Date:</strong> April 3, 2023</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><ul>
-<li class=""><strong>I95-49594 Highway Crash:</strong> In a system where any of the following are configured:<!-- -->
+<li class=""><strong>I95-49594 Highway Crash:</strong> Resolved an issue for systems where any of the following are configured:<!-- -->
+<ul>
+<li class=""><code>application-identification</code> is enabled,</li>
+<li class="">a service is defined with <code>domain-name child services</code>, or</li>
+<li class="">a <code>service address</code> is configured as a <code>domain</code>
+and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 6.1.0 and 6.1.1, and is resolved in 6.1.2.<!-- -->
 <ul>
 <li class=""><code>application-identification</code> is enabled,</li>
 <li class="">a service is defined with <code>domain-name child services</code>, or</li>
 <li class="">a <code>service address</code> is configured as a <code>domain</code>
 and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 5.6.3 through 5.6.6, and is resolved in 5.6.7.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul></div></div>
@@ -384,11 +397,11 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48324 Application Identification not parsing domain names:</strong> The App-ID parsing mode has been updated to correctly parse domain names.</li>
+<li class=""><strong>I95-48324 Application Identification not parsing domain names:</strong> The Application Identification parsing mode has been updated to correctly parse domain names on hub to spoke outbound traffic.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48352 Application ID is not identifying MS-Teams correctly:</strong> Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.</li>
+<li class=""><strong>I95-48352 Application ID is not identifying MS-Teams correctly:</strong> Resolved an issue where sessions with IP addresses as their domain names were not classified correctly when the information was received via HTTP web proxy. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.</li>
 </ul>
 <hr>
 <ul>
@@ -404,7 +417,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48581 Missing entry timestamp for <code>show app-id cache</code>:</strong> Additional timing information has been added to <code>show app-id cache</code> to help identify the oldest entry.</li>
+<li class=""><strong>I95-48581 No entry timestamp for <code>show app-id cache</code>:</strong> Additional timing information has been added to <code>show app-id cache</code>.</li>
 </ul>
 <hr>
 <ul>
@@ -448,7 +461,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48927 Audit log disc failure mode:</strong> Added a Failure Notification parameter and failure mode to inform users that the <code>auditd.conf</code> log disc is nearing capacity, or has reached capacity, and that action is required.</li>
+<li class=""><strong>I95-48927 Audit log disk failure mode:</strong> Added a Failure Notification parameter and failure mode to inform users that the <code>auditd.conf</code> log disk is nearing capacity, or has reached capacity, and that action is required.</li>
 </ul>
 <hr>
 <ul>
@@ -605,7 +618,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47909 Handle GRE tunnels in ICMP reachability probe:</strong> The base interface for egress is now used if the <code>icmp-probe probe-address</code> is the same as the tunnel destination, and the <code>internal-address</code> is used as the source if the <code>egress-interface</code> is <code>gre-overlay</code>.</li>
+<li class=""><strong>I95-47909 Handle GRE tunnels in ICMP reachability probe:</strong> We now use the base interface for egress if the <code>icmp-probe probe-address</code> is the same as the tunnel destination, and use the <code>internal-address</code> as the source if the <code>egress-interface</code> is <code>gre-overlay</code>.</li>
 </ul>
 <hr>
 <ul>
@@ -641,7 +654,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48163 Only services with load-balanced paths are shown in &quot;show services&quot;:</strong> Resolved an issue where services without load-balanced paths weremissing from show services output.</li>
+<li class=""><strong>I95-48163 Only services with load-balanced paths are shown in <code>show services</code>:</strong> Resolved an issue where services without load-balanced paths were missing from show services output.</li>
 </ul>
 <hr>
 <ul>
@@ -681,7 +694,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-48529 BFD sending link notification before hold-down timer expires:</strong> Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.</li>
+<li class=""><strong>I95-48529 BFD hold-down timer does not hold-down peer service-paths:</strong> Resoled an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now reflects the peer status, and sessions will not be moved back to peers that have re-established connectivity, but are still in the hold-down period.</li>
 </ul>
 <hr>
 <ul>
@@ -763,7 +776,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-44976 Highway issue when modifying an app-id session:</strong> Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.</li>
+<li class=""><strong>I95-44976 Highway issue when modifying an app-id session:</strong> SSR software versions 5.1.5 and greater are susceptible to a crash during a flow migration when <code>application-identification</code> is enabled (modes <code>tls</code> or <code>all</code>) on spoke to hub traffic traversing over SVR. The condition occurs for sessions migrating that have timed out or that are traversing the ha-fabric link in the reverse direction.</li>
 </ul>
 <hr>
 <ul>
@@ -771,7 +784,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46056 <code>show ntp</code> has no output from PCLI, even though NTP is configured:</strong> The output of show ntp will now report IP addresses of the time servers rather than resolve hostnames.</li>
+<li class=""><strong>I95-46056 <code>show ntp</code> has no output from PCLI, even though NTP is configured:</strong> The output of <code>show ntp</code> now reports IP addresses of the time servers rather than resolve hostnames.</li>
 </ul>
 <hr>
 <ul>
@@ -795,7 +808,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46921 <code>128status.sh</code> script incorrectly checks for non-existent listening port:</strong> Removed port 830 check for software versions 5.3.0 and greater</li>
+<li class=""><strong>I95-46921 <code>128status.sh</code> script incorrectly checks for non-existent listening port:</strong> Removed port 830 check for software versions 5.3.0 and greater.</li>
 </ul>
 <hr>
 <ul>
@@ -811,7 +824,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47390 Inline BFD collision issue:</strong> Resolved an inline BFD collision issue that was preventing peering from occurring.</li>
+<li class=""><strong>I95-47390 Inline BFD Collisions:</strong> BFD peering between two router fails when one of the peer has a DHCP interface and has external NAT configured on neighborhood. This will occur in AWS deployments. This issue will be addressed in an future release.</li>
 </ul>
 <hr>
 <ul>
@@ -948,7 +961,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-47336 Running config change events are missing:</strong> Resolved an issue where running config events under a different username were filtered out.</li>
+<li class=""><strong>I95-47336 Running configuration change events are missing:</strong> Updates have been made to include <code>username</code> in the running configuration change events log.</li>
 </ul>
 <hr>
 <ul>
@@ -1011,7 +1024,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46684 Image-based Installer / Interactive Installer:</strong> <code>intialize128t</code> now runs automatically on first boot when using the image-based 6.0 installation with Interactive Install selected.</li>
+<li class=""><strong>I95-46684 Image-based Installer / Interactive Installer:</strong> When using the image-based 6.0 installation, be aware that if Interactive Install is selected, <code>intialize128t</code> does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type <code>initialize128t</code> to perform interactive initialization. This will be resolved in a future release.</li>
 </ul>
 <hr>
 <ul>
@@ -1085,7 +1098,7 @@ and there are established flows for any of these services, a link flap triggerin
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-46822 Revertible failover traffic not restored when reverse traffic is present:</strong> For a &quot;revertible-failover&quot; service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.</li>
+<li class=""><strong>I95-46822 Revertible failover traffic may not be restored when reverse traffic is present:</strong> For a &quot;revertible-failover&quot; service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it may take seconds for traffic to be restored when forward traffic is present; in situations where <strong>only</strong> reverse traffic is present, traffic may not be restored. This issue will be resolved in a future release.</li>
 </ul>
 <hr>
 <ul>
@@ -1110,6 +1123,6 @@ and there are established flows for any of these services, a link flap triggerin
 <hr>
 <ul>
 <li class=""><strong>MIST-65945 SSR does not support Second BGP neighbor (Mist-managed):</strong> More than one BGP neighbor is not currently supported via the “Add BGP Neighbors” GUI button for Mist-managed SSR&#x27;s. Multiple neighbors however can be added via the BGP configuration tab.</li>
-</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.1"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.1</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_5.6"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">5.6</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6010-5" class="table-of-contents__link toc-highlight">Release 6.0.10-5</a><ul><li><a href="#resolved-issues-requiring-configuration-changes" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-609-3" class="table-of-contents__link toc-highlight">Release 6.0.9-3</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-608-20" class="table-of-contents__link toc-highlight">Release 6.0.8-20</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-1" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-607-8" class="table-of-contents__link toc-highlight">Release 6.0.7-8</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-2" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-605-17" class="table-of-contents__link toc-highlight">Release 6.0.5-17</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-3" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-604-11" class="table-of-contents__link toc-highlight">Release 6.0.4-11</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-4" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-602-8" class="table-of-contents__link toc-highlight">Release 6.0.2-8</a><ul><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-601-12" class="table-of-contents__link toc-highlight">Release 6.0.1-12</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-5" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-2" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-600-56" class="table-of-contents__link toc-highlight">Release 6.0.0-56</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-3" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_6.1"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">6.1</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_5.6"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">5.6</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-6010-5" class="table-of-contents__link toc-highlight">Release 6.0.10-5</a><ul><li><a href="#resolved-issues-requiring-configuration-changes" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#this-issue-will-be-corrected-in-an-upcoming-release" class="table-of-contents__link toc-highlight">This issue will be corrected in an upcoming release.</a><ul><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-609-3" class="table-of-contents__link toc-highlight">Release 6.0.9-3</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-608-20" class="table-of-contents__link toc-highlight">Release 6.0.8-20</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-1" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-607-8" class="table-of-contents__link toc-highlight">Release 6.0.7-8</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-2" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-605-17" class="table-of-contents__link toc-highlight">Release 6.0.5-17</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-3" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-604-11" class="table-of-contents__link toc-highlight">Release 6.0.4-11</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-4" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-602-8" class="table-of-contents__link toc-highlight">Release 6.0.2-8</a><ul><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-601-12" class="table-of-contents__link toc-highlight">Release 6.0.1-12</a><ul><li><a href="#resolved-issues-requiring-configuration-changes-5" class="table-of-contents__link toc-highlight">Resolved Issues Requiring Configuration Changes</a></li><li><a href="#resolved-issues-7" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-2" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-600-56" class="table-of-contents__link toc-highlight">Release 6.0.0-56</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-8" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-3" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>

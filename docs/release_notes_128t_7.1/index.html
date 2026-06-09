@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 7.1 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.1 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.1"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"7.1","item":"https://docs.128technology.com/docs/release_notes_128t_7.1"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -82,7 +82,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63393 Show command displaying status of power supplies in an SSR400/SSR440 (dual AC power supply):</strong> Added a show command to display the status of power supplies in dual AC power supply models.</li>
+<li class=""><strong>I95-63393 SSR400/SSR440 power supply status visibility:</strong> Added CLI support to display the status of power supplies on dual-AC SSR400/SSR440 platforms. The <code>show chassis power</code> command displays power supply status for both single and dual power supply devices. This improves operational visibility into power redundancy and health on SSR400/SSR440 systems.</li>
 </ul>
 <hr>
 <ul>
@@ -90,7 +90,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63873 DHCP leases and Logs page issues in Conductor UI:</strong> Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router resulted in <code>no leases found</code>. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.</li>
+<li class=""><strong>I95-63873 DHCP leases not showing in Conductor UI:</strong> Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in <code>no leases found</code>. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.</li>
 </ul>
 <hr>
 <ul>
@@ -102,7 +102,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-64568 Add TPM information to <code>show platform</code>:</strong> Added TPM presence and relevant device information to the <code>show platform</code> command output.</li>
+<li class=""><strong>I95-64568 TPM details in platform information:</strong> The <code>show platform security</code> command has been added to display TPM information such as TPM family (version number), revision, firmware version, and manufacturer. This allows users to verify TPM availability and configuration for security and compliance workflows.</li>
 </ul>
 <hr>
 <ul>
@@ -195,7 +195,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61588 Console access failures post-migration:</strong> Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.</li>
+<li class=""><strong>I95-61588 Console access failures post-migration:</strong> Resolved an issue where a lower baud rate was being used by the serial console, resulting in unreadable output. The check and enforcement for the 115200 baud rate has been improved.</li>
 </ul>
 <hr>
 <ul>
@@ -239,7 +239,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62957 Configuration failure due to invalid name:</strong> Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.</li>
+<li class=""><strong>I95-62957 Configuration failure due to invalid name:</strong> Anti-Virus and IDP do not allow policy names using a dot (.). This has been resolved — configurations will use an underscore for policy name creation.</li>
 </ul>
 <hr>
 <ul>
@@ -247,7 +247,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63018 memory corruption after reading VSA:</strong> Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.</li>
+<li class=""><strong>I95-63018 Memory corruption after reading VSA:</strong> Resolved a rare issue where in remote authentication through a RADIUS server, pam_radius was causing memory corruption after a Vendor Specific Attribute (VSA) is read.</li>
 </ul>
 <hr>
 <ul>
@@ -255,7 +255,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63190 Router intermittently disconnects from conductor:</strong> Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.</li>
+<li class=""><strong>I95-63190 Router intermittently disconnects from conductor:</strong> Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections from the Conductor.</li>
 </ul>
 <hr>
 <ul>
@@ -263,7 +263,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63228 Premature route installation complete notification:</strong> In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.</li>
+<li class=""><strong>I95-63228 Premature route installation complete notification:</strong> In some cases a premature internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -409,11 +409,11 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58007 Add ability to set PIM graceful restart-time:</strong> The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see <a class="" href="/docs/config_multicast#pim-graceful-restart-timer">PIM Graceful Restart Timer</a>.</li>
+<li class=""><strong>I95-58007 Add ability to set PIM graceful restart-time:</strong> The <code>routing default-instance pim restart-time</code> command has been added to allow users to define the number of seconds that the PIM protocol will perform <code>graceful-restart</code> after a node failure. This resolution addresses all the listed issues. For more information, see <a class="" href="/docs/config_multicast#pim-graceful-restart-timer">PIM Graceful Restart Timer</a>. This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60767 <code>service-route next-hop validation</code> rejects configuration:</strong> Resolved an issue where the rule validator did not consider the <code>service application-type</code> as DNS proxy into consideration during the configuration rule validation. This issue has been resolved.</li>
+<li class=""><strong>I95-60767 <code>service-route &gt; next-hop</code> validation rejects configuration:</strong> Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -461,7 +461,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62071 Multicast Traffic contributing to service area resource contention:</strong> The resource contention issue has been resolved.</li>
+<li class=""><strong>I95-62071 Multicast Traffic contributing to service area resource contention:</strong> Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.</li>
 </ul>
 <hr>
 <ul>
@@ -497,11 +497,7 @@ The new keying requirements that are part of 6.3.5+ are loaded onto the routers 
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats-1">Caveats<a href="#caveats-1" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
-<li class="">
-<p><strong>I95-63422 Unable to establish peering:</strong> An issue has been identified where the factory reset process or bringing online a new router results in the device getting stuck in a <code>cert-exchange-init</code> state when establishing peering using Enhanced Security Key Management.</p>
-<p><em><strong>Workaround:</strong></em> When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.</p>
-<p>For factory reset of an existing router, remove the router from the neighborhood before re-onboarding the router. Ensure that the desired certificate is installed before adding the neighborhood back to the router and re-onboarding to the conductor.</p>
-</li>
+<li class=""><strong>I95-63422 Factory reset routers not re-onboarding when ESKM enabled:</strong> Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.</li>
 </ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/deploy_appendix_vmware_conductor"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Appendix - VMware Conductor Configuration</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_7.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">7.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation-from-iso" class="table-of-contents__link toc-highlight">Installation from ISO</a></li><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-715-7r2" class="table-of-contents__link toc-highlight">Release 7.1.5-7r2</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-714-3r2" class="table-of-contents__link toc-highlight">Release 7.1.4-3r2</a><ul><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-713-29r2" class="table-of-contents__link toc-highlight">Release 7.1.3-29r2</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-710-50r1" class="table-of-contents__link toc-highlight">Release 7.1.0-50r1</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>

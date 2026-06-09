@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 5.2 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_5.2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 5.2 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><meta data-rh="true" property="og:description" content="Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_5.2"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_5.2" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_5.2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"5.2","item":"https://docs.128technology.com/docs/release_notes_128t_5.2"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -39,7 +39,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-40904 Power save mode not working:</strong> This issue has been resolved.</li>
+<li class=""><strong>I95-40904 Power save mode not working:</strong> Add a method to read current power saver mode setting from existing config before committing the new configuration, and changing the setting.</li>
 </ul>
 <hr>
 <ul>
@@ -47,11 +47,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-43606 No communication between Routers:</strong> In rare instances the BFD Pinhole feature experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.</li>
+<li class=""><strong>I95-43606 No communication between Routers:</strong> In rare instances, BFD outbound-only flows experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-43779 DHCP IP Address is not released:</strong> Updated the state machine to cause DHCP-enabled interfaces to send out a DHCP Request for their current IP address.</li>
+<li class=""><strong>I95-43779 DHCP IP Address not releasing appropriately:</strong> When the cable is physically disconnected and reconnected from DHCP-enabled interfaces, the interfaces are now triggered to send out a DHCP Request for their current IP address.</li>
 </ul>
 <hr>
 <ul>
@@ -59,11 +59,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-44551 DHCP Relay not working after upgrade:</strong> A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such asDHCP relay will no longer perform hierarchical service checks on the peer.</li>
+<li class=""><strong>I95-44551 DHCP Relay not working after upgrade:</strong> A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such as DHCP relay will no longer perform hierarchical service checks on the peer.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-44722 Time based HMAC failure after HA reboot:</strong> Resolved a buffering issue where device interfaces are now flushed upon becoming active to avoid handling of inactive packets.</li>
+<li class=""><strong>I95-44722 Time series HMAC failures after rebooting node in HA router:</strong> Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.</li>
 </ul>
 <hr>
 <ul>
@@ -75,7 +75,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45113 SNMP override of the IfTable:</strong> An issue with SNMP reporting has been resolved.</li>
+<li class=""><strong>I95-45113 SNMP override of the IfTable:</strong> <code>ifAlias</code> and <code>IfDescr</code> have been swapped in our SNMP reporting; <code>ifDescr</code> is always the <code>ifName</code>. This change was made for consistency with other Juniper products.</li>
 </ul>
 <hr>
 <ul>
@@ -87,7 +87,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45164 <code>show-active-peers</code> missing some information:</strong> Resolved a corner case where an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the SSR misinterprets the non-compliant device&#x27;s timeouts and the MTU will be unresolvable.</li>
+<li class=""><strong>I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS &amp; MOS for some transports:</strong> Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device&#x27;s timeouts are incorrectly interpreted and the MTU becomes unresolvable.</li>
 </ul>
 <hr>
 <ul>
@@ -95,7 +95,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45220 Conductor local forwarding parameters not dynamic:</strong> Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.</li>
+<li class=""><strong>I95-45220 Conductor local forwarding parameters not dynamic:</strong> Resolved an issue when transitioning a conductor from standalone to HA the managed routers were not automatically connecting to the newly added conductor node.</li>
 </ul>
 <hr>
 <ul>
@@ -107,7 +107,10 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-45559 Corrupted <code>resolv.conf</code> after ODM imaging:</strong> Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using <code>PEERDNS=yes</code>, where a race condition may occur that results in corrupt nameservers being added to the <code>/etc/resolv.conf</code> file.</li>
+<li class="">
+<p><strong>I95-45559 Corrupted <code>resolv.conf</code> after ODM imaging:</strong> On SSR systems running dns-proxy services with external interfaces configured using <code>PEERDNS=yes</code>, a race condition may occur that results in corrupt nameservers being added to the <code>/etc/resolv.conf</code> file.</p>
+<p><strong><em>Workaround:</em></strong> A temporary workaround is to force an update of this file by either of the following methods:</p>
+</li>
 </ul>
 <hr>
 <ul>
@@ -174,7 +177,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-43091 <code>show fib</code> does not display interface next hop when gateway IP address is empty:</strong> The display has been corrected.</li>
+<li class=""><strong>I95-43091 <code>show fib</code> does not display interface next hop when gateway IP address is empty:</strong> Corrected display.</li>
 </ul>
 <hr>
 <ul>
@@ -190,7 +193,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-44991 SSR not passing Aruba data on GRE Tunnels:</strong> Resolved an issue where GRE packets with a reserved bit in the header are incorrectly dropped as invalid.</li>
+<li class=""><strong>I95-44991 SSR not passing Aruba data on GRE Tunnels:</strong> Resolved an issue where GRE packets with reserved bit in the header are incorrectly dropped as invalid.</li>
 </ul>
 <hr>
 <ul>
@@ -252,7 +255,7 @@ Contains fixes from: <a class="" href="/docs/release_notes_128t_5.1#release-515"
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-38244 The Routers Page is easier to Search:</strong> Added a column selector and a search matching system to make the search function more granular.</li>
+<li class=""><strong>I95-38244 Router Page search enhanced:</strong> Searches on the Routers page can now be targeted to specific columns using the search selector.</li>
 </ul>
 <hr>
 <ul>
@@ -288,7 +291,7 @@ Contains fixes from: <a class="" href="/docs/release_notes_128t_5.1#release-515"
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-40888<code>show application modules status</code> generating an unhandled error:</strong> Resolved an issue with <code>show application modules status</code> causing unandled errors.</li>
+<li class=""><strong>I95-40888<code>show application modules status</code> generating an unhandled error:</strong> Resolved an issue with <code>show application modules status</code> causing unhandled errors.</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-520">Release 5.2.0<a href="#release-520" class="hash-link" aria-label="Direct link to Release 5.2.0" title="Direct link to Release 5.2.0" translate="no">​</a></h2>

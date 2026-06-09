@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 6.3 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_6.3"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 6.3 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="SSR release 6.3.0 represents a significant change in the software delivery of the SSR. The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="SSR release 6.3.0 represents a significant change in the software delivery of the SSR. The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_6.3"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.3" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_6.3" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6.3","item":"https://docs.128technology.com/docs/release_notes_128t_6.3"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.c6d36350.css">
-<script src="/assets/js/runtime~main.9775d8a8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b930ad0.js" defer="defer"></script>
 <script src="/assets/js/main.d8aec549.js" defer="defer"></script>
 </head>
 <body>
@@ -56,7 +56,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58007 Add ability to set PIM graceful restart-time:</strong> The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see <a class="" href="/docs/config_multicast#pim-graceful-restart-timer">PIM Graceful Restart Timer</a>.</li>
+<li class=""><strong>I95-58007 Add ability to set PIM graceful restart-time:</strong> The <code>routing default-instance pim restart-time</code> command has been added to allow users to define the number of seconds that the PIM protocol will perform <code>graceful-restart</code> after a node failure. This resolution addresses all the listed issues. For more information, see <a class="" href="/docs/config_multicast#pim-graceful-restart-timer">PIM Graceful Restart Timer</a>. This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.</li>
 </ul>
 <hr>
 <ul>
@@ -68,7 +68,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61588 Console access failures post-migration:</strong> Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.</li>
+<li class=""><strong>I95-61588 Console access failures post-migration:</strong> Resolved an issue where a lower baud rate was being used by the serial console, resulting in unreadable output. The check and enforcement for the 115200 baud rate has been improved.</li>
 </ul>
 <hr>
 <ul>
@@ -96,7 +96,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62703 Highway process crashes when BGP over SVR is activated:</strong> Resolved an issue where the unicast code path was incorrectly invoking multicast variant of a function call.</li>
+<li class=""><strong>I95-62703 Highway process crashed when BGP over SVR is activated:</strong> Resolved an issue where the unicast code path was incorrectly calling the multicast variant of getBestMultiHomedPathIndex() and causing a highway crash.</li>
 </ul>
 <hr>
 <ul>
@@ -108,7 +108,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62860 250 max connection limit not respected by the web interface:</strong> Resolved an issue where requesting too much data over graphql with a large config led to missing data.</li>
+<li class=""><strong>I95-62860 Web server connection limit not enforced:</strong> Resolved an issue where the 250 maximum connection limit was not being properly enforced by the web server.</li>
 </ul>
 <hr>
 <ul>
@@ -120,7 +120,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62957 Configuration failure due to invalid name:</strong> Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.</li>
+<li class=""><strong>I95-62957 Configuration failure due to invalid name:</strong> Anti-Virus and IDP do not allow policy names using a dot (.). This has been resolved — configurations will use an underscore for policy name creation.</li>
 </ul>
 <hr>
 <ul>
@@ -128,7 +128,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63018 memory corruption after reading VSA:</strong> Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.</li>
+<li class=""><strong>I95-63018 Memory corruption after reading VSA:</strong> Resolved a rare issue where in remote authentication through a RADIUS server, pam_radius was causing memory corruption after a Vendor Specific Attribute (VSA) is read.</li>
 </ul>
 <hr>
 <ul>
@@ -140,11 +140,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63190 Router intermittently disconnects from conductor:</strong> Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.</li>
+<li class=""><strong>I95-63190 Router intermittently disconnects from conductor:</strong> Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections from the Conductor.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63228 Premature route installation complete notification:</strong> In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.</li>
+<li class=""><strong>I95-63228 Premature route installation complete notification:</strong> In some cases a premature internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.</li>
 </ul>
 <hr>
 <ul>
@@ -184,7 +184,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63676 Waypoints fail to allocate when the <code>service-path peer next-hop gateway</code> is off the subnet:</strong> Resolved an issue where the first network-interface IP was selected as the local IP for waypoint allocation, even if that IP was not a valid waypoint.</li>
+<li class=""><strong>I95-63676 Waypoints fail to allocate when the <code>service-path peer next-hop gateway</code> is off the subnet:</strong> Resolved an issue where the first network-interface IP was selected as the local IP for waypoint allocation, even if that IP is not a valid waypoint.</li>
 </ul>
 <hr>
 <ul>
@@ -203,7 +203,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-39653 Negative duration in session table after applying filter:</strong> Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration. This issue has been resolved.</li>
+<li class=""><strong>I95-39653 Negative duration in session table after applying filter:</strong> Resolved an issue where applying a filter to the session table resulted in sessions displaying a negative duration.</li>
 </ul>
 <hr>
 <ul>
@@ -255,7 +255,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60924 Adopt command error message is misleading:</strong> Resolved an issue where username/password login failures are not clear. The <code>adopt</code> PCLI command now interactively prompts for <code>mist-instance</code> if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adoption using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.</li>
+<li class=""><strong>I95-60924 Adopt command error message is misleading:</strong> Resolved an issue where username/password login failures are not clear. The <code>adopt</code> PCLI command now interactively prompts for <code>mist-instance</code> if it is not specified on the command line. This helps avoid confusion when trying to associate using username/password which fails if connecting to the wrong instance. Also resolved a related issue that prevented adopting using a Mist account with Multi Factor Authentication (MFA/2FA) enabled.</li>
 </ul>
 <hr>
 <ul>
@@ -295,7 +295,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61458 BGP-VRF Conductor in <code>Connected</code> state instead of Running state:</strong> Resolved an issue where salt modules fell out of sync, causing unexpected exceptions and preventing the system from picking up configuration changes.</li>
+<li class=""><strong>I95-61458 BGP-VRF Conductor in <code>Connected</code> state instead of <code>Running</code> state:</strong> Resolved an issue where salt modules fell out of sync, causing unexpected exceptions and preventing the system from picking up configuration changes.</li>
 </ul>
 <hr>
 <ul>
@@ -307,7 +307,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-61580 CLI does not prompt for required router restart:</strong> Resolved an issue where making a configuration change requiring a restart only generates a warning for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.</li>
+<li class=""><strong>I95-61580 CLI does not prompt for required router restart:</strong> Resolved an issue where making a configuration change requiring a restart only generates a warning only for the router that the PCLI is running on. Committing a configuration change that requires a restart now results in a warning even when the change is on a different router.</li>
 </ul>
 <hr>
 <ul>
@@ -382,7 +382,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59634 Allow Highway lockup detection to be disabled:</strong> Added a <code>local.init</code> override for disabling datapath lockup detector mechanism.</li>
+<li class=""><strong>I95-59634 Allow Highway lockup detection to be disabled:</strong> Added a <code>local.init</code> override for disabling datapath lockup detector mechanism</li>
 </ul>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">  &quot;datapath&quot;: {</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    &quot;lockupDetectionEnabled&quot;: true/false</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  },</span><br></div></code></pre></div></div>
 <hr>
@@ -395,7 +395,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59758 Prompt for password change:</strong> The user is now prompted to change the <code>admin</code>, <code>t128</code>, and <code>root</code> passwords during installation. The password is changed to the same value for all three users.</li>
+<li class=""><strong>I95-59758 Interactive Initializer updates all system account passwords:</strong> Interactive initialization now changes the <code>admin</code>, <code>t128</code> and <code>root</code> user passwords to the same value. The initialization preference file has the fields, <code>t128-password</code>, <code>root-password</code>, and <code>admin-password</code>, to set password hashes for each user, respectively.</li>
 </ul>
 <hr>
 <ul>
@@ -407,7 +407,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-59996 Force password change in GUI:</strong> Steps have been added during the initialization workflow in the GUI to require that the user change the default password.</li>
+<li class=""><strong>I95-59996 GUI Initialization sets passwords for all system accounts:</strong> GUI initialization now changes the <code>admin</code>, <code>t128</code> and <code>root</code> user passwords to the same value. See <a class="" href="/docs/config_password_security">Password Security</a> for additional information.</li>
 </ul>
 <hr>
 <ul>
@@ -415,7 +415,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60041 Force password change in the CLI:</strong> Steps have been added during the initialization workflow in the CLI to require that the user change the default password.</li>
+<li class=""><strong>I95-60041 <code>initialize conductor</code> command sets password for all system accounts:</strong> The system accounts <code>admin</code>, <code>t128</code> and <code>root</code> are simultaneously set to the provided password hash, ensuring default passwords are not used.</li>
 </ul>
 <hr>
 <ul>
@@ -423,7 +423,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>log rotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers.</li>
+<li class=""><strong>I95-60282 Disk space usage growing to more than 90%:</strong> DNF logs were increasing in size and not being rotated, causing a significant increase in size. A <code>logrotate</code> configuration file for DNF has been added to limit the size of DNF log files to prevent them from filling the hard drive. When this fix is installed on the conductor, it is automatically propagated to all managed routers.</li>
 </ul>
 <hr>
 <ul>
@@ -475,7 +475,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-60768 Rare race condition between packet processing and configuration update:</strong> Resolved a rare race condition where invalid memory was accessed during packet processing if config was being loaded at the same time.</li>
+<li class=""><strong>I95-60768 Rare race condition between packet processing and configuration update:</strong> Resolved a rare race condition where invalid memory was accessed during packet processing if the configuration was being loaded at the same time.</li>
 </ul>
 <hr>
 <ul>
@@ -539,7 +539,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57305 Add flow timeout value to Associated Paths:</strong> The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine where the session is activity is focused.</li>
+<li class=""><strong>I95-57305 Add flow timeout value to Associated Paths:</strong> The Associated Paths window accessed from the Session view of the SSR GUI now displays a Flow Timeout column, providing a way to determine when the session will expire following inactivity.</li>
 </ul>
 <hr>
 <ul>
@@ -559,7 +559,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-57128 Inter-VLAN traffic on the same x710 or x722 port has 8ms delay:</strong> Resolved an issue where devices controlled by i40e driver (x710, x722) were incurring 8ms (8000us) latency due to an incorrect MAX value. This has been resolved and latency reduced to 32us.</li>
+<li class=""><strong>I95-57128 Inter-VLAN traffic slow:</strong> Identified an issue where devices controlled by the i40e driver (x710, x722) were incurring 8ms latency due to incorrectly setting a device throttling register to a MAX of 8ms. This has been reduced to 32us to resolve the issue.</li>
 </ul>
 <hr>
 <ul>
@@ -591,11 +591,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58427 Capture SNMP configuration in TSI:</strong> The <code>/etc/snmp</code> directory is now captured in the TSI, allowing the inspection of the output.</li>
+<li class=""><strong>I95-58427 Capture SNMP configuration in TSI:</strong> SNMP logs and stats are now captured in the TSI, allowing the inspection of the output for troubleshooting.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58428 DSCP Steering Collision on Flow Move:</strong> When IPSec traffic exists on a router and the DSCP steering feature is enabled, upon a flow-move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly.</li>
+<li class=""><strong>I95-58428 DSCP Steering Collision on Flow Move, resulting in traffic drops:</strong> When traffic is traversing an IPSec connection and the DSCP steering feature is enabled, upon a flow-move DSCP 0 traffic would collide with the pre-existing tunnel session. This issue has been resolved; the DSCP 0 packet is no longer dropped, and traffic is treated correctly.</li>
 </ul>
 <hr>
 <ul>
@@ -603,7 +603,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58528 SSR OS renaming:</strong> The SSR OS version has been updated from &quot;CentOS&quot; to &quot;Oracle Linux&quot; to accurately reflect its upstream Linux distribution. All internal naming has been updated.</li>
+<li class=""><strong>I95-58528 SSR OS renaming:</strong> The SSR OS has been renamed/rebranded from &quot;CentOS7&quot; to &quot;SSR OS&quot; to more accurately reflect its customized Linux distribution. All internal naming has been updated.</li>
 </ul>
 <hr>
 <ul>
@@ -615,7 +615,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-58583 Bypass message-authentication in RADIUS:</strong> An option to to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios.</li>
+<li class=""><strong>I95-58583 Bypass message-authentication in RADIUS:</strong> An option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses has been added. Disabling this check is considered unsafe and will allow for vulnerabilities to be exploited for users authenticating. Disabling this check is NOT recommended, but may be necessary for some backwards compatibility scenarios.</li>
 </ul>
 <hr>
 <ul>
@@ -760,7 +760,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-49712 Configuration validation error uninformative:</strong> Resolved an issue where invalid configuration parameters were returning errors that were not specific enough to allow the user to locate the invalid configuration. Invalid configuration elements now generate messages that include relevant information for the invalid element, such as an IP address, node name, router name, interface names, etc.</li>
+<li class=""><strong>I95-49712 Configuration validation error uniformative:</strong> Resolved an issue that when configuring an SSR, invalid configuration parameters were returning errors that were not specific enough to allow the user to locate the invalid configuration. Now when invalid configuration elements are identified during validation, the messages include relevant information for the invalid element, such as an IP address, node name, router name, interface names, etc.</li>
 </ul>
 <hr>
 <ul>
@@ -792,7 +792,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56236 Quick Start config validation failures not being reported:</strong> Made changes to the initialization process to allow quick start errors to be reported.</li>
+<li class=""><strong>I95-56236 Routers unable to onboard after upgrading the Conductor:</strong> Resolved an issue where the automated provisioner and the Quickstart processes overlapped, preventing the device state from being reviewed for errors, which stopped the onboarding process.</li>
 </ul>
 <hr>
 <ul>
@@ -804,7 +804,7 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-56527 Failure to validate and commit config; system incorrectly expected escape sequence:</strong> Resolved an issue where capture-filter expected an escape sequence for input when it was not necessary.</li>
+<li class=""><strong>I95-56527 <code>compare config</code> returns an <code>Invalid JSON</code> error:</strong> Resolved an issue where the use of a backslash (<code>\</code>) in a list key or a list element generates an <code>Invalid JSON</code> error when <code>compare config</code> is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a <code>\</code> in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the <code>\</code> only exists in one; Or if the list element with the <code>\</code> is renamed.</li>
 </ul>
 <hr>
 <ul>
