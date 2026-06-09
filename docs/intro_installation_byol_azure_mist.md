@@ -4,7 +4,7 @@ sidebar_label: Installing a BYOL Mist-managed Router in Azure
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure using your own license. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
+This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure using your own license. When installed as an Azure image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
 * [Selecting the Azure Plan](#selecting-the-azure-plan).
 * Deploying a [Session Smart Router](#session-smart-router).

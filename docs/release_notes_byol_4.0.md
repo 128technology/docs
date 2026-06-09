@@ -4,7 +4,7 @@ sidebar_label: '4.0'
 ---
 ## Release 4.0.0
 
-**Release Date:** Jan 14, 2025
+**Release Date:** Jan 14, 2026
 
 #### New Features and Improvements
 
