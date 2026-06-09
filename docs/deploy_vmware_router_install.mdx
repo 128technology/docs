@@ -51,14 +51,14 @@ These steps configure VLANs on the router.
    ge-0-3 =00:0c:29:6c:32:ad
    ```
 
-3a. If you do not see the `ge-0-x` interfaces, use the following steps to retrieve the information from the SSR CLI:
+   3a. If you do not see the `ge-0-x` interfaces, use the following steps to retrieve the information from the SSR CLI:
 
    - From the linux shell, run the command `su admin` to enter the SSR CLI.
    - Run `show network-interface | more`. This will display the DHCP IP addresses.
 
       ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
 
-   - Locate the ge-0-0 interface, and make a note of the IP address.
+   - Locate the ge-0-x interfaces, and make a note of the IP address.
 
 4. From the Spoke1 VM in the ESXi Navigator, select **Actions** and then **Edit Settings**.
 
@@ -104,7 +104,7 @@ ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
 
    Let’s go to the Conductor GUI, add this router, and connect it for communication to the Conductor.
 
-5. Open a browser tab on your computer and navigate to your VMWare conductor; `https://<ge-0-0 IP address>` and initiate a web session to the conductor GUI.
+5. Open a browser tab on your computer and navigate to your VMWare conductor; `https://192.168.100.10` and initiate a web session to the conductor GUI.
 
    ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
 
