@@ -25,11 +25,11 @@ Use the steps below to configure the following:
    | Name | A descriptive name, for example `spoke1` |
    | Compatibility | `ESXi 7.0 U2 virtual machine` |
    | Guest OS family | `Linux` |
-   | Guest OS version | `Oracle Linux 9 (64-bit)` or highest available Oracle Linux (64-bit) version|
+   | Guest OS version | `Oracle Linux 9 (64-bit)` or highest available Oracle Linux (64-bit) version |
 
-3. Name the Virtual Machine **spoke1**.  
+3. Name the Virtual Machine **Spoke1**.  
 
-4. Select **Linux** from the Guest OS family dropdown selection, and select the Guest OS version as **Centos 7**. Click **Next**.
+4. Select **Linux** from the Guest OS family dropdown selection, and select the Guest OS version as `Oracle Linux 9 (64-bit)` or highest available Oracle Linux (64-bit) version. Click **Next**.
 
    ![Name the VM](/img/dep3-vmrouter-name-os.png)
 
@@ -43,7 +43,7 @@ Use the steps below to configure the following:
 
 6. On the **Customize settings** screen, click **Virtual Hardware** and configure the following settings. 
 
-   TClick **Virtual Hardware** and configure the following settings. These values meet the minimum router requirements:
+   Click **Virtual Hardware** and configure the following settings. These values meet the minimum router requirements:
 
    | Setting | Value | Notes |
    |---------|-------|-------|
@@ -59,7 +59,7 @@ Use the steps below to configure the following:
 
 ### Network Adapters
 
-A VMware router requires at least **two VMXNet3 network adapters**: one for WAN and one for LAN. By default, one adapter is created. In this example we will create 4 network adapters for `spoke1`.
+A VMware router requires at least **two VMXNet3 network adapters**: one for WAN and one for LAN. By default, one adapter is created.
 
    ![Network Adapter Type](/img/dep6-vmrouter-nics.png)
 
@@ -84,21 +84,6 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 12. Confirm the settings, and then click **Next**.
 
    ![Confirm Settings](/img/dep8-vm-all-settings.png) 
-
-<!---### VM Options
-
-9. Click **VM Options** at the top of the page.
-
-   ![VM Options](/img/vmware_vmoptions1.png)
-
-10. Expand **Boot Options** and configure the following:
-
-    - **Firmware**: `EFI`
-    - **Enable UEFI secure boot**: Disabled (no check mark)
-
-    Click **Next**.
-
-    ![Boot Options](/img/vmware_vmoptions2.png)--->
 
 13. Review the summary, then click **Finish**.
 

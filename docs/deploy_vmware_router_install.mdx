@@ -19,6 +19,8 @@ This step boots the router VM from the SSR ISO, installs the software, and uses 
 
    :::note
    IDP is not compatible with systems running in FIPS 140-3 mode, including Common Criteria or JITC deployments. If you plan to enable IDP, do not enable FIPS mode. See [IDP Troubleshooting](ts_idp.md#fips-mode-and-idp) for information on disabling FIPS mode if needed.
+
+   Additionally, please note that FIPS mode disables BGP MD5 authentication. 
    :::
 
    ![Install Options](/img/deploy-vmware-cloud-init-enabled1.png)

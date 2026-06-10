@@ -18,7 +18,7 @@ This guide assumes a conductor is already installed and running SSR 7.1.4-3.r2. 
 | Step | Topic | Description |
 |------|-------|-------------|
 | 1 | [Create the VMware VM](deploy_vmware_router_vm.mdx) | Create and configure a VMware ESXi VM to host the branch router |
-| 2 | [Install SSR 7.1.4-3.r2 and Initialize the Router](deploy_vmware_router_install.mdx) | Boot the ISO, install SSR software, and initialize the VM as a conductor-managed router |
+| 2 | [Install SSR Software and Initialize the Router](deploy_vmware_router_install.mdx) | Boot the ISO, install SSR software, and initialize the VM as a conductor-managed router |
 | 3 | [Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx) | Identify the WAN and LAN VMXNet3 NIC PCI addresses required for the router configuration |
 | 4 | [Configure the Router on the Conductor](deploy_vmware_router_config.mdx) | Stage the router configuration on the conductor so it can be applied after onboarding |
 | — | [Appendix — Router Configuration](deploy_appendix_vmware_router.mdx) | Complete VMware router PCLI configuration example |
@@ -31,13 +31,13 @@ The diagram below shows the logical network this guide builds.
 graph TD
     Internet((Internet))
     subgraph Conductor["Pre-existing Conductor\n(SSR1200 or VMware ESXi)"]
-        ConductorVM["SSR Conductor\n(conductor1)\n192.168.100.10"]
+        ConductorVM["SSR Conductor\n(Conductor)\n192.168.100.10"]
     end
     subgraph MgmtNet["Management Network (192.168.100.0/24)"]
         Gateway["Management Gateway\n192.168.100.1"]
     end
     subgraph ESXi["VMware ESXi Host"]
-        RouterVM["SSR Router VM\n(branch1)\nNIC 1: WAN — DHCP\nNIC 2: LAN — 192.168.1.1/24"]
+        RouterVM["SSR Router VM\n(Spoke1)\nNIC 1: WAN — DHCP\nNIC 2: LAN — 192.168.1.1/24"]
     end
     subgraph LAN["Branch LAN (192.168.1.0/24)"]
         Clients["LAN Clients\nTenant: corp"]
@@ -57,7 +57,7 @@ graph TD
 | Device | Type | Role |
 |--------|------|------|
 | `Conductor` | VMware ESXi VM | Pre-existing conductor — centralized management and provisioning |
-| `branch1` | VMware ESXi VM (vSSR) | Conductor-managed branch router — internet breakout and LAN services |
+| `Spoke1` | VMware ESXi VM (vSSR) | Conductor-managed branch router — internet breakout and LAN services |
 
 ## Network Design Reference
 

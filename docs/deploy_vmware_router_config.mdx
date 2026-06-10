@@ -23,43 +23,36 @@ If any of these are missing, complete [Configure the Conductor](deploy_vmware_co
 
 <NetworkDesign/>
 
-## 1. Create the Router - THIS WAS DONE DURING INSTALL AND INTIALIZE
+## Complete the Router Configuration on the Conductor
 
-1. Log in to the Conductor GUI.
-2. Select **Configuration**.
-3. Under **Authority**, scroll to **Routers** and select **ADD**.
-4. Enter the router name `branch1` and select **SAVE**.
-5. Set the following fields on the Router screen:
+During the Initialization process for your router, some basic information was provided, including router name (`Spoke1`), router location (Los Angeles), node name (`node0`), the inter-node security policy (`internal`), asset-id (`Spoke1`), and role (`Combo`). All of this allows the router to connect with the Conductor and onboard successfully. 
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Location | `+32.7767-096.7970/` | ISO 6709 coordinates; update for your site |
-   | Inter-node Security | `internal` | Required for SVR between nodes |
+This procedure configures network connections for the router.
 
-6. Select **SAVE** (do not commit yet).
+:::note
+If you prefer to use the CLI to perform configuration tasks, the example configuration is available in the [Appendix](deploy_appendix_vmware_router.mdx).
+:::
 
-## 2. Create the Node - THIS WAS DONE DURING INSTALL AND INTIALIZE
+1. Open a browser tab on your computer and navigate to your VMWare conductor; `https://192.168.100.10` and initiate a web session to the conductor GUI.
 
-1. Scroll down to **Nodes** and select **ADD**.
-2. Enter the node name `node0` and select **SAVE**.
-3. Set the following fields:
+   ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Role | `combo` | Router acts as both control and data plane |
-   | Asset ID | `spoke1` | The asset ID reported in [Asset ID](deploy_vmware_router_install.mdx#asset-id) |
+2. Accept the self-signed certificate warning, and login. 
 
-   :::important
-   The asset ID must exactly match the value shown by `show assets` on the conductor. For a VMware vSSR, this is typically the router name entered during initialization.
-   :::
+   ![Conductor Login](/img/dep-vmrouter-conductor-login.png)
 
-4. Select **SAVE**.
+3. In the Conductor GUI, click on Authority. 
 
-## 3. Configure the WAN Interface
+   ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
+
+4. Scroll to **Routers** and select the router `Spoke1`.
+5. Scroll down to **Nodes** and select `node0`.
+
+## 1. Configure the WAN Interface
 
 The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
 
-### 3a. Create the WAN Device Interface
+### 1a. Create the WAN Device Interface
 
 1. Under the Node, scroll to **Device Interfaces** and select **ADD**.
 2. Enter the name `wan-dev` and select **SAVE**.
@@ -73,7 +66,7 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 
 4. Select **SAVE**.
 
-### 3b. Create the WAN Network Interface
+### 1b. Create the WAN Network Interface
 
 1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
 2. Enter the name `wan1` and select **SAVE**.
@@ -103,11 +96,11 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 `Source NAT` and `Default Route` must both be set to `true` on the WAN management interface. Management traffic originates from the `169.254.x.x` range and must be source-NAT'd to a routable address before leaving the interface. The default route ensures Linux routes non-SVR traffic through the SSR forwarding engine.
 :::
 
-## 4. Configure the LAN Interface
+## 2. Configure the LAN Interface
 
 The LAN interface (NIC 2) connects to the branch LAN and assigns the `corp` tenant to traffic arriving from that direction.
 
-### 4a. Create the LAN Device Interface
+### 2a. Create the LAN Device Interface
 
 1. From the Authority level in the Conductor GUI, click on `spoke1` to begin configuration. 
 
@@ -127,7 +120,7 @@ Set the following fields:
    | PCI Address | _(LAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:13:00.0` |
    | Forwarding | `true` | |
 
-### 4b. Create the LAN Network Interface
+### 2b. Create the LAN Network Interface
 
 1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
 2. Enter the name `lan1` and select **SAVE**.
@@ -145,7 +138,7 @@ Set the following fields:
 
 5. Select **SAVE**.
 
-## 5. Configure DNS
+## 3. Configure DNS
 
 Configure DNS so the router can resolve FQDNs for conductor connectivity and software downloads.
 
@@ -154,7 +147,7 @@ Configure DNS so the router can resolve FQDNs for conductor connectivity and sof
 3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
 4. Select **SAVE**.
 
-## 6. Create the Internet Service Route
+## 4. Create the Internet Service Route
 
 The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
 
@@ -177,11 +170,11 @@ The service route directs traffic matched by the `Internet-Traffic` service out 
 
 ## Configuration Summary
 
-After committing, the conductor pushes the following configuration to `branch1`. The router applies the configuration and comes fully online within approximately 2–5 minutes.
+After committing, the conductor pushes the following configuration to `Spoke1`. The router applies the configuration and comes fully online within approximately 2–5 minutes.
 
 | Object | Name | Key Settings |
 |--------|------|-------------|
-| Router | `branch1` | combo node, asset-id `branch1` |
+| Router | `Spoke1` | combo node, asset-id `Spoke1` |
 | WAN Device Interface | `wan-dev` | VMware WAN NIC PCI address, forwarding enabled |
 | WAN Network Interface | `wan1` | DHCP, conductor, default-route, source-nat, management, neighborhood `internet` |
 | LAN Device Interface | `lan-dev` | VMware LAN NIC PCI address, forwarding enabled |

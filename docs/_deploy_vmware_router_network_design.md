@@ -7,9 +7,9 @@ The following IP addressing and naming scheme is used consistently throughout th
 | Authority Name | `Authority128` | Organizational authority name |
 | Conductor Name | `Conductor` | Pre-existing conductor system name |
 | Conductor IP Address | `192.168.100.10` | Conductor IP — must be reachable from the router WAN |
-| Router Name | `branch1` | VMware router system name |
+| Router Name | `Spoke1` | VMware router system name |
 | Router Node Name | `node0` | Router node name |
-| Router Asset ID | `branch1` | Asset ID reported after initialization; see [Step 2](deploy_vmware_router_install.mdx#asset-id) |
+| Router Asset ID | `Spoke1` | Asset ID reported after initialization; see [Step 2](deploy_vmware_router_install.mdx#asset-id) |
 | WAN Device Interface | `wan-dev` | WAN device interface name |
 | WAN Network Interface | `wan1` | WAN network interface name |
 | WAN PCI Address | _(discovered in [Step 3](deploy_vmware_router_pci.mdx))_ | VMXNet3 WAN NIC PCI address |
