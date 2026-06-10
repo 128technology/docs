@@ -6,6 +6,22 @@ Open a web browser and navigate to your ESXi host. Log in with administrative cr
 
    ![VMware ESXi Login](/img/vmware_login.png)
 
+## Upload the SSR ISO to the Datastore
+
+1. From the ESXi Navigator, select **Storage**.
+
+   ![Storage](/img/dep-vmware-router-uploadssr1.png)
+
+2. Click the **Datastore Browser** button.
+
+   ![Datastore Browser](/img/dep-vmware-router-uploadssr2.png)
+
+3. Click **Upload**, navigate to the SSR 7.1.4-3r2 ISO on your local workstation, and click **Open**. The ISO appears in the datastore.
+
+   ![Upload SSR Software](/img/dep-vmware-router-uploadssr3.png)
+
+4. Click **Close**. 
+
 ## Create the Virtual Machine
 
 1. From the VMWare Navigator window, click on **Create/Register VM**.
@@ -22,20 +38,22 @@ Use the steps below to configure the following:
 
    | Field | Value |
    |-------|-------|
-   | Name | A descriptive name, for example `spoke1` |
+   | Name | A descriptive name, for example `Spoke1` |
    | Compatibility | `ESXi 7.0 U2 virtual machine` |
    | Guest OS family | `Linux` |
-   | Guest OS version | `Oracle Linux 9 (64-bit)` or highest available Oracle Linux (64-bit) version |
+   | Guest OS version | Select the highest available Oracle Linux (64-bit) version |
 
 3. Name the Virtual Machine **Spoke1**.  
 
-4. Select **Linux** from the Guest OS family dropdown selection, and select the Guest OS version as `Oracle Linux 9 (64-bit)` or highest available Oracle Linux (64-bit) version. Click **Next**.
+4. Select **Linux** from the Guest OS family dropdown selection.
+
+5. Select the highest available Oracle Linux (64-bit) Guest OS version. Click **Next**.
 
    ![Name the VM](/img/dep3-vmrouter-name-os.png)
 
 ### Storage
 
-5. From the Storage screen, select **datastore1** and click **Next**. 
+6. From the Storage screen, select **datastore1** and click **Next**. 
 
    ![VM Storage](/img/dep4-vm-storage.png)
 
@@ -53,9 +71,9 @@ Use the steps below to configure the following:
    | Hard Disk 1 | `62 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
 
-   ![Storage Parameters](/img/dep5-vm-params.png)
+   <!---![Storage Parameters](/img/dep5-vm-params.png)
 
-   Click **Next** when the settings are configured.
+   Click **Next** when the settings are configured.--->
 
 ### Network Adapters
 
@@ -63,9 +81,9 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
    ![Network Adapter Type](/img/dep6-vmrouter-nics.png)
 
-7. Set the existing adapter's **Adapter Type** to **VMXNET3** and connect it to your **WAN portgroup** — the portgroup that provides your ISP WAN connection with DHCP.
+7. Set the existing adapter's **Adapter Type** to **VMXNET3** and connect it to your **WAN portgroup** — the portgroup that provides your ISP WAN connection with DHCP. **how do I do this?
 
-8. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and connect it to your **LAN portgroup** — the portgroup connected to your branch LAN.
+8. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and connect it to your **LAN portgroup** — the portgroup connected to your branch LAN. **how do I do this?
 
    :::note
    The order of the adapters (NIC 1 = WAN, NIC 2 = LAN) corresponds to the PCI addresses you will identify in [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx). Note which portgroup each adapter is connected to.
@@ -85,6 +103,25 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
    ![Confirm Settings](/img/dep8-vm-all-settings.png) 
 
-13. Review the summary, then click **Finish**.
+### VM Options (Boot Settings)
+
+13. Click the **VM Options** tab.
+
+   ![VM Options](/img/vmware_vmoptions1.png)
+
+14. Expand **Boot Options** and configure:
+
+    | Setting | Value |
+    |---------|-------|
+    | Firmware | `EFI` |
+    | Enable UEFI secure boot | **Disabled** (no check mark) |
+
+    :::important
+    Secure Boot **must be disabled**. The SSR kernel modules are not signed, and Secure Boot will prevent the NIC drivers from loading, causing installation to fail.
+    :::
+
+    ![Boot Options](/img/vmware_vmoptions2.png)
+
+15. Review the summary, then click **Finish**.
 
    ![VM Complete](/img/dep9-vmrouter-summary.png)
