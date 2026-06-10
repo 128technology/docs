@@ -1,7 +1,7 @@
 <!----Set the Conductor IP Address---->
 
 1. Under Conductor Addresses, select ADD.
-2. In the **New Conductor Address** window, enter the conductor public IP address.
+2. In the **New Conductor Address** window, enter the conductor public IP address, `192.168.100.10/24`.
 
 ![Conductor Address](/img/conductor_address.png)
 

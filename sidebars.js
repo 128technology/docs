@@ -7,6 +7,26 @@ module.exports = {
       "about_releases",
       "about_support_policy",
     ],
+    "Deployment Guides": [
+      "deploy_guides_overview",
+      {
+        "type": "category",
+        "label": "Conductor Deployment Guides",
+        "items": [
+            {
+              "type": "category",
+              "label": "VMware ESXi Conductor",
+              "items": [
+                "deploy_vmware_conductor",
+                "deploy_vmware_conductor_vm",
+                "deploy_vmware_conductor_install",
+                "deploy_vmware_conductor_config",
+                "deploy_appendix_vmware_conductor",
+              ],
+            },
+          ],
+        },
+      ],
     "Release Notes": [
       {
         "type": "category",
@@ -73,6 +93,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_5.0",
           "release_notes_byol_4.0",
           "release_notes_byol_3.0",
           "release_notes_byol_2.0",
@@ -139,8 +160,8 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
-            "intro_installation_quickstart_byol_conductor_aws",
-            "intro_installation_quickstart_byol_mist_aws",
+            "intro_installation_byol_aws_conductor",
+            "intro_installation_byol_aws_mist",
             ],
       },
       {
@@ -151,6 +172,14 @@ module.exports = {
             "intro_installation_azure_mist",
             "intro_installation_byol_azure_conductor",
             "intro_installation_byol_azure_mist",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Installing In GCP",
+          "items": [
+            "intro_installation_byol_gcp_conductor",
+            "intro_installation_byol_gcp_mist",
           ],
       },
     ],
