@@ -61,7 +61,7 @@ Use the steps below to configure the following:
 
 6. On the **Customize settings** screen, click **Virtual Hardware** and configure the following settings. 
 
-   Click **Virtual Hardware** and configure the following settings. These values meet the minimum router requirements:
+  These values meet the minimum router requirements:
 
    | Setting | Value | Notes |
    |---------|-------|-------|
@@ -71,9 +71,7 @@ Use the steps below to configure the following:
    | Hard Disk 1 | `62 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
 
-   <!---![Storage Parameters](/img/dep5-vm-params.png)
-
-   Click **Next** when the settings are configured.--->
+   ![Storage Parameters](/img/dep5-vmrouter-params.png)
 
 ### Network Adapters
 
@@ -81,9 +79,15 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
    ![Network Adapter Type](/img/dep6-vmrouter-nics.png)
 
-7. Set the existing adapter's **Adapter Type** to **VMXNET3** and connect it to your **WAN portgroup** — the portgroup that provides your ISP WAN connection with DHCP. **how do I do this?
+7. Set the existing adapter's **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your WAN.
 
-8. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and connect it to your **LAN portgroup** — the portgroup connected to your branch LAN. **how do I do this?
+8. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your LAN.
+
+   :::note
+   If you need help creating portgroups and connecting them to your appropriate infrastructure, please consult your VMWare documentation.
+   :::
+
+   ![Add Network Adapter](/img/dep6-vmrouter-nics2.png)
 
    :::note
    The order of the adapters (NIC 1 = WAN, NIC 2 = LAN) corresponds to the PCI addresses you will identify in [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx). Note which portgroup each adapter is connected to.
@@ -91,7 +95,9 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
 ### CD/DVD Media - Software Selection
 
-9. As shown in the image above, expand **CD/DVD Drive 1**. 
+9. Expand **CD/DVD Drive 1**. 
+
+   ![CD Drive 1](/img/dep-vmrouter-image-select.png)
 
 10. Place a check next to **Connect at power on**. In the dropdown to the right, select **Datastore ISO file** and then click **Browse**. The Datastore Browser opens.
 
@@ -103,7 +109,7 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
    ![Confirm Settings](/img/dep8-vm-all-settings.png) 
 
-### VM Options (Boot Settings)
+### Boot Settings
 
 13. Click the **VM Options** tab.
 
@@ -121,6 +127,8 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
     :::
 
     ![Boot Options](/img/vmware_vmoptions2.png)
+
+15. Click **Next**.
 
 15. Review the summary, then click **Finish**.
 
