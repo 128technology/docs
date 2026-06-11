@@ -28,7 +28,7 @@ For detailed information about different communication channels between nodes wi
 
 ### Conductor and Router to the SSR Software Repository
 
-The conductor and routers retrieve SSR software (ISOs, installer packages, RPMs, and plugins) from the Juniper software repository during installation and upgrades. If you want to lock down all other external IP addresses and ports, enable the following on your firewall so the conductor and routers can reach the software repository:
+The conductor and routers retrieve SSR software (ISOs, installer packages, RPMs, and plugins) from the Juniper software repository during installation and upgrades. If your deployment requires that external IP addresses are locked down (no internet access), enable the following on your firewall to allow the conductor and routers access to the HPE/Juniper SSR software repository:
 
 - software.128technology.com
 - Port 443/TCP
