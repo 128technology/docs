@@ -13,12 +13,12 @@ The SSR relies on certificates in several independent subsystems. Each subsystem
 
 | Use Case | Purpose | Configuration Guide |
 | --- | --- | --- |
-| Web server (HTTPS admin UI) | Secures the administrative GUI. By default the SSR generates a self-signed certificate; a CA-signed certificate can be imported through the PCLI. | [Signing and Importing Webserver Certificates](config_webserver_certs.md). |
-| Enhanced Security Key Management (ESKM) | Provides peer-to-peer, certificate-based identity between routers for Secure Vector Routing. | [Enhanced Security Key Management](sec_enhanced_key_mgmt.md), [Configure Certificate Management](config_custom_certs.md). |
-| Secure Conductor Onboarding (SCO) | Authenticates a router to a conductor during onboarding using file-based certificates. | [Secure Conductor Onboarding](sec-conductor-onboard.md). |
-| Syslog over TLS | Encrypts and authenticates the connection to a remote syslog server. | [Configure Syslog over TLS](config_syslog_tls.md). |
-| RADIUS and RADSEC | Secures RADIUS authentication traffic over TLS. | [Configure RADIUS](config_radius.md), [Configure RADSEC](config_radsec.md). |
-| LDAP over SSL (LDAPS / STARTTLS) | Validates the LDAP server certificate when connecting for authentication. Trust is established through the operating system CA bundle, not the SSR certificate framework. | [Configure LDAP](config_ldap.md), [Adding a Trusted Certificate](howto_trusted_ca_certificate.md). |
+| Web server (HTTPS admin UI) | Secures the administrative GUI. By default the SSR generates a self-signed certificate; a CA-signed certificate can be imported through the PCLI. | [Signing and Importing Webserver Certificates](config_webserver_certs.md) |
+| Enhanced Security Key Management (ESKM) | Provides peer-to-peer, certificate-based identity between routers for Secure Vector Routing. | [Enhanced Security Key Management](sec_enhanced_key_mgmt.md), [Configure Certificate Management](config_custom_certs.md) |
+| Secure Conductor Onboarding (SCO) | Authenticates a router to a conductor during onboarding using file-based certificates. | [Secure Conductor Onboarding](sec-conductor-onboard.md) |
+| Syslog over TLS | Encrypts and authenticates the connection to a remote syslog server. | [Configure Syslog over TLS](config_syslog_tls.md) |
+| RADIUS and RADSEC | Secures RADIUS authentication traffic over TLS. | [Configure RADIUS](config_radius.md), [Configure RADSEC](config_radsec.md) |
+| LDAP over SSL (LDAPS / STARTTLS) | Validates the LDAP server certificate when connecting for authentication. Trust is established through the operating system CA bundle, not the SSR certificate framework. | [Configure LDAP](config_ldap.md), [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) |
 
 :::note
 LDAP trust uses the operating system CA bundle and the `certificate-assurance` setting (`weak`, `mild`, `moderate`, or `strong`) rather than the SSR `trusted-ca-certificate` framework. See [Configure LDAP](config_ldap.md) for details.
@@ -61,14 +61,14 @@ Use the content-based model for trust anchors — such as `trusted-ca-certificat
 
 | Scenario | Recommended Model |
 | --- | --- |
-| Identity certificate whose private key was generated on the node (ESKM, SCO). | File reference. |
-| Trusted CA certificate used to establish a chain of trust. | Content-based. |
+| Identity certificate whose private key was generated on the node (ESKM, SCO). | File reference |
+| Trusted CA certificate used to establish a chain of trust. | Content-based |
 
-Mixing the two models is not harmful, but using each model for its intended purpose keeps deployments easier to reason about.
+Mixing the two models is allowed, however it is recommended to use each model only for it's intended purpose.
 
 ## Key Storage on the SSR
 
-Certificate private keys are generated locally on each node and stored at `/etc/128technology/pki/`. The private key is never transmitted through configuration and never leaves the node on which it was generated.
+Certificate private keys are generated locally on each node and stored at `/etc/128technology/pki/`. The private key is never transmitted through configuration, and does not leave the node on which it was generated.
 
 - File permissions restrict access to the key material to the SSR process.
 - [Configuration Integrity](concepts_config_integrity.md) provides data-at-rest protection for the configuration.
@@ -85,7 +85,7 @@ Follow these practices to keep certificate lifecycles manageable and to avoid th
 
 ## Inspecting Certificates with OpenSSL
 
-Before importing certificate material, you can inspect and validate it locally with OpenSSL. The following commands are useful when preparing certificates for the SSR.
+Before importing a certificate, it can be inspected and validated locally with OpenSSL. The following commands are useful when preparing certificates for the SSR.
 
 | Task | Command |
 | --- | --- |
@@ -93,7 +93,7 @@ Before importing certificate material, you can inspect and validate it locally w
 | Inspect a CSR. | `openssl req -in csr.pem -text -noout` |
 | Verify a certificate against a CA chain. | `openssl verify -CAfile ca.pem cert.pem` |
 | Convert a DER certificate to PEM. | `openssl x509 -inform DER -outform PEM -in cert.der -out cert.pem` |
-| Check a private key. | `openssl rsa -check -in key.pem` |
+| Check a private key (RSA or EC). | `openssl pkey -in key.pem -check -noout` |
 | View a DER-encoded CRL. | `openssl crl -in file.crl -inform DER -text -noout` |
 | Generate an ECC private key. | `openssl ecparam -genkey -name prime256v1 -noout -out private.pem` |
 | Derive the public key from a private key. | `openssl ec -in private.pem -pubout -out public.pem` |

@@ -178,10 +178,10 @@ Because config-time and runtime validation are separate processes, certain edge 
 
 | Scenario | Config-Time Result | Runtime Result |
 | --- | --- | --- |
-| CA cert with `CA:TRUE` but Basic Constraints **not critical** | May pass with `validation-mode warn` | **Rejected** — strict X.509 conformance is always enforced |
-| Certificate with weak signature algorithm | Warning (`warn`) or error (`strict`) | **Rejected** |
-| Expired certificate | Warning (`warn`) or error (`strict`) | **Rejected** |
-| Valid, conforming certificate | Passes | Passes |
+| CA cert with `CA:TRUE` but Basic Constraints **not critical**. | May pass with `validation-mode warn` | **Rejected** — strict X.509 conformance is always enforced. |
+| Certificate with weak signature algorithm. | Warning (`warn`) or error (`strict`) | **Rejected** |
+| Expired certificate. | Warning (`warn`) or error (`strict`) | **Rejected** |
+| Valid, conforming certificate. | Passes | Passes |
 
 :::tip
 To avoid runtime failures, ensure all certificates meet the full set of requirements documented on this page **before** importing them, even when using `validation-mode warn`. The `warn` setting is intended as a diagnostic aid, not as a way to bypass certificate requirements.

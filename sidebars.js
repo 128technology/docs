@@ -415,12 +415,18 @@ module.exports = {
           "concepts_config_integrity",
           "sec-disable-console-output",
           "sec-disable-ports",
+          "config_factory_reset",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Certificate Management",
+        "items": [
           "concepts_certificate_management",
           "config_custom_certs",
           "sec-cert-based-encrypt",
           "cert_validation_requirements",
           "sec_enhanced_key_mgmt",
-          "config_factory_reset",
         ],
       },
       {
