@@ -415,6 +415,7 @@ module.exports = {
           "concepts_config_integrity",
           "sec-disable-console-output",
           "sec-disable-ports",
+          "concepts_certificate_management",
           "config_custom_certs",
           "sec-cert-based-encrypt",
           "cert_validation_requirements",
