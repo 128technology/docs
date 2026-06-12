@@ -204,13 +204,13 @@ Once the health statuses are able to flow between the two nodes, the unreachable
 
 
 ## Tagging
-To use this tagging solution, the cloud-redundancy-group must be set to auto-discover to true (the default). 
+To use this tagging solution, the `cloud-redundancy-group` must set `auto-discover-route-table` to true (the default). 
 
-This will not be able to be used at the same time as when extra-route-tables are configured for azure-vnet solution or when tgw-route-table-id/ tgw-attachment-id are configured for aws-tgw solution.
+This will not be able to be used at the same time as when `extra-route-tables` are configured for `azure-vnet` solution or when `tgw-route-table-id`/ `tgw-attachment-id` are configured for `aws-tgw` solution.
 
 The tagging will be on the VMs themselves.
 
-On updating BOTH nodes with tags that have the necessary information for both solutions (see example of tagging in Azure below). This information would be retrieved through the cloud specific apis by the respective cloud api agent and the tagged RT’s would be updated accordingly.
+On updating BOTH nodes with tags that have the necessary information for both solutions (see example of tagging below). This information would be retrieved through the cloud specific apis by the respective cloud api agent and the tagged routing tables would be updated accordingly.
 
 ## Azure tag format:
 ```
@@ -218,7 +218,7 @@ subscription: SSR-CLOUD-HA-<TAG_IDX>-SUBSCRIPTION-ID
 resource group:SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP
 route table:SSR-CLOUD-HA-<TAG_IDX>-ROUTE-TABLE-NAME
 ```
-Here <TAG_IDX> is an integer which associates the 3 groups.
+Here `<TAG_IDX>` is an integer which associates the 3 groups.
 
 For example this is what the tagging on BOTH NODES would look like:
 ```
@@ -232,7 +232,7 @@ SSR-CLOUD-HA-0-ROUTE-TABLE-NAME: myRouteTable
 tgw-route-table-id: SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID
 tgw-attachment-id: SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID
 ```
-Here <TAG_IDX> is an integer which associates the 2 items.
+Here `<TAG_IDX>` is an integer which associates the 2 items.
 
 :::note
 The route table id will be the same, but the attachment ids will be different across nodes. They are different because that is what the “next hop” of the route will be and each attachment id must be connected to each of the VPCs to be useful.
