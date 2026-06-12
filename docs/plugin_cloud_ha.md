@@ -289,7 +289,7 @@ exit
 | cloud-redundancy-plugin-network | ip-network      | default: 169.254.137.0/30 | The ip network to use for internal networking. This should only be configured when the default value conflicts with a different service in the configuration. |
 | enabled                         | boolean         | default: true             | Enable or disable the cloud redundancy member.                                                                                        |
 | cloud-redundancy-group          | reference       | required                  | The group that this member belongs to.                                                                                                                        |
-| dns-server                      | list: ipv4      | max-value:2               | DNS servers to be used for Cloud HA specific management traffic. Defaults specific to the solution-type will be used if none are configured to.                                                                                                                        |
+| dns-server                      | list: ipv4      | max-value:2               | DNS servers to be used for Cloud HA specific management traffic. Defaults specific to the solution-type are used if none are configured. to.                                                                                                                        |
 | tgw-attachment-id               | string          |                           | The TGW Attachment ID to use when this member becomes active. This field is only relevant when solution-type is aws-tgw. Ex. tgw-attach-00000000000000001. If this field is not specified, then you must use the Tag approach to specify the information to.                                                                                                                        |
 | priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference.                                                                                        |
 | redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members.                                                           |
@@ -325,21 +325,24 @@ To see a full blown configuration and the configuration it generates, look at `C
 
 The following criteria need to be met in order for the cloud-ha plugin to take effect for a specific group:
 
-* Priorities across all members in a group are unique.
-* IP Network fields such as `remote-health-network` and `cloud-redundancy-plugin-network` are validated to be an acceptable prefix size.
+* Priorities across all members in a group must be unique.
+* `remote-health-network` and `cloud-redundancy-plugin-network` must be a valid IP address.
 * The `peer-reachability-timeout` for a group must be at least twice the amount of time as the `health-interval`.
-* Cloud Redundancy Group referenced by membership does not exist.
-* Router cannot be a member of multiple cloud redundancy groups.
-* Properties `dns-server` and `extra-route-table` can only be configured in dual-node HA mode.
-* Solution types `aws-vpc`, `aws-tgw` and `gcp-vpc` can only be configured in dual-node HA mode.
-* `tgw-attachment-id` can only be configured in AWS TGW solution type.
+* `cloud-redundancy-group` referenced by the node's `cloud-redundancy-membership` must exist.
 * `auto-discover-route-table` must be disabled to configure `tgw-attachment-id`.
-* `shared-phys-address` cannot be configured in cloud HA mode.
 * `tgw-attachment-id` must be configured on both members when `auto-discover-route-table` is disabled for AWS TGW solution type.
 * `tgw-route-table-id` must be configured when `auto-discover-route-table` is disabled for AWS TGW solution type.
 * At least one `extra-route-table` must be configured when `auto-discover-route-table` is disabled for Azure VNET solution type.
 
 Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on the Conductor for the errors causing the config to be invalid.
+
+### Limitations
+
+* Properties `dns-server` and `extra-route-table` can only be configured in dual-node HA mode.
+* Solution types `aws-vpc`, `aws-tgw` and `gcp-vpc` can only be configured in dual-node HA mode.
+* `tgw-attachment-id` can only be configured in AWS TGW solution type.
+* `shared-phys-address` cannot be configured in any cloud HA mode.
+* Router cannot be a member of multiple cloud redundancy groups.
 
 ### Configuration Assumptions
 
@@ -381,7 +384,7 @@ The different services on the router all log to the files captured by the glob `
 
 
 ### PCLI Enhancements
-To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. From **version 6.x**, plugin output is available in `show plugins state detail 128T-cloud-ha` command.  This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
+To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. Beginning with version 6.x, plugin output is available using the `show plugins state detail 128T-cloud-ha` command.  This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
 #### State Fields for <6.x
 
@@ -519,9 +522,9 @@ Completed in 0.04 seconds
 | is-node-active               | Whether the HA Agent considers itself active.                                                             |
 | local-status                 | The understood state of the local node.                                                                   |
 | remote-status                | The understood state of the remote node.                                                                  |
-| last-activity-change         | The timestamp of the last time the node called the became active or became inactive API on the API Agent. |
-| redundant-target-interface   | The name of the first interface from the list of `redundant-interface`s that is healthy.                  |
-| redundant-target-mac-address | The mac address of the first interface from the list of `redundant-interface`s that is healthy.           |
+| last-activity-change         | The timestamp of the last status change (active/inactive) of the node.                                    |
+| redundant-target-interface   | The name of the first healthy interface in the `redundant-interface` list.                                |
+| redundant-target-mac-address | The mac address of the first healthy interface in the `redundant-interface` list.                         |
 | prefixes                     | The list of configured prefixes. See `Address Prefixes`.                                                  |
 | api-agent-state              | The collected state returned by the API Agent, including solution type, region, and cloud resource details (for example, TGW route tables for `aws-tgw`). |
 
