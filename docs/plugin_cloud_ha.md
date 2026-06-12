@@ -572,7 +572,7 @@ Wed 2022-09-21 10:31:57 CST
 Completed in 0.04 seconds
 ```
 
-#### State Fields for version 6.x or greater
+#### State Fields for version 6.x and greater
 
 | Field                        | Description                                                                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
