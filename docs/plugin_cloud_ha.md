@@ -444,7 +444,7 @@ The different services on the router all log to the files captured by the glob `
 ### PCLI Enhancements
 To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. Beginning with version 6.x, plugin output is available using the `show plugins state detail 128T-cloud-ha` command.  This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
-#### State Fields for <6.x
+#### State Fields for version less than 6.x
 
 | Field                    | Description                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
@@ -572,7 +572,7 @@ Wed 2022-09-21 10:31:57 CST
 Completed in 0.04 seconds
 ```
 
-#### State Fields for >=6.x
+#### State Fields for version 6.x or greater
 
 | Field                        | Description                                                                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
