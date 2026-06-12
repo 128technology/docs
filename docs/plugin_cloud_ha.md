@@ -235,7 +235,7 @@ tgw-attachment-id: SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID
 Here `<TAG_IDX>` is an integer which associates the 2 items.
 
 :::note
-The route table id will be the same, but the attachment ids will be different across nodes. They are different because that is what the “next hop” of the route will be and each attachment id must be connected to each of the VPCs to be useful.
+The route table id will be the same, but the attachment ids will be different across nodes. They are different because that is what the "next hop" of the route will be and each attachment id must be connected to each of the VPCs to be useful.
 :::
 
 For example, this is what the tagging on node0 would look like:
@@ -250,6 +250,16 @@ SSR-CLOUD-HA-0-TGW-ROUTE-TABLE-ID : tgw-rtb-00000000000000001
 SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID: tgw-attach-00000000000000002
 ```
 
+## GCP tag format:
+To get the same behaviour as tags for Azure and AWS, use labels in GCP. The only information needed in order to updates the routes (there is no concept of a route table like Azure and AWS) for a VPC is to label the VPCs one wants the route to be associated with.
+```
+ssr-cloud-ha-<index>-target-vpc
+```
+
+For example this is what the tagging would look like:
+```
+ssr-cloud-ha-0-target-vpc : vpc1
+```
 
 ## Configuration
 
