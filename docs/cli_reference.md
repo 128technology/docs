@@ -2261,6 +2261,10 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 
 | command | description |
 | ------- | ----------- |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable an SSR node and start it on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -2538,6 +2542,7 @@ request idp restart [force] [rebuild] router <router> node <node>
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -2588,6 +2593,7 @@ Query and display the IDP signature database connectivity details.
 | [`show idp network`](#show-idp-network) | Show IDP networks |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
 #### Description
@@ -2601,7 +2607,7 @@ Downgrade to a new version of the SSR.
 #### Usage
 
 ```
-request system software downgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-health-check] [skip-post-health-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
+request system software downgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-health-check] [skip-post-health-check] [no-revert] [cohort-id <cohort-id>] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
@@ -2610,6 +2616,7 @@ request system software downgrade [{router <router> | resource-group <resource-g
 | ---- | ----------- |
 | cohort-id | Assign a cohort ID to the operation. |
 | force | Skip confirmation prompt |
+| no-revert | Disable the automatic reversion if the downgrade fails. |
 | node | The name of the node |
 | resource-group | The name of the resource group |
 | router | The router on which to downgrade SSR software (default: &lt;current router&gt;) |
@@ -2824,7 +2831,7 @@ Upgrade to a new version of the SSR.
 #### Usage
 
 ```
-request system software upgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-health-check] [skip-post-health-check] [cohort-id <cohort-id>] [force] [node <node>] version <version>
+request system software upgrade [{router <router> | resource-group <resource-group>}] [simultaneous] [skip-package-transfer] [skip-pre-health-check] [skip-post-health-check] [no-revert] [cohort-id <cohort-id>] [force] [node <node>] version <version>
 ```
 
 ##### Keyword Arguments
@@ -2833,6 +2840,7 @@ request system software upgrade [{router <router> | resource-group <resource-gro
 | ---- | ----------- |
 | cohort-id | Assign a cohort ID to the operation. |
 | force | Skip confirmation prompt |
+| no-revert | Disable the automatic reversion if the upgrade fails. |
 | node | The name of the node |
 | resource-group | The name of the resource group |
 | router | The router on which to upgrade SSR software (default: &lt;current router&gt;) |
@@ -3290,7 +3298,7 @@ save tech-support-info [force] [manifest <manifest>] [since <since>] [router <ro
 
 #### Description
 
-This command packages statistics, logs and other diagnostic data, to exchange with the Juniper support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.zip`).
+This command packages statistics, logs and other diagnostic data, to exchange with the Support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.zip`).
 
 New manifest files can be created and placed into `/etc/128technology/tech-support-manifests`. Each manifest contains a list of PCLI commands, shell commands, files, and systemd journal&#x27;s to collect.
 
@@ -3573,6 +3581,83 @@ Configuration Attributes:
   - configure authority traffic-profile name
 ```
 
+## `send command disable`
+
+Disable an SSR node and prevent it from starting on boot.
+
+#### Usage
+
+```
+send command disable [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node to disable |
+| router | The router to disable (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable-now`](#send-command-disable-now) | Disable an SSR node and stop it |
+| [`send command enable`](#send-command-enable) | Enable an SSR node such that it starts on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable an SSR node and start it |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+## `send command disable-now`
+
+Disable an SSR node and stop it
+
+#### Usage
+
+```
+send command disable-now [no-block] [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| no-block | Send the command as non blocking so it&#x27;s completed asynchronously |
+| node | The node to disable-now |
+| router | The router to disable-now (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node such that it does not start on boot |
+| [`send command enable`](#send-command-enable) | Enable an SSR node such that it starts on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable an SSR node and start it |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
 ## `send command download`
 
 This download command is now obsolete.
@@ -3601,6 +3686,83 @@ request system software ...
 set system software ...
 delete system software ...
 
+## `send command enable`
+
+Enable an SSR node such that it starts on boot
+
+#### Usage
+
+```
+send command enable [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node to enable |
+| router | The router to enable (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node such that it does not start on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable an SSR node and stop it |
+| [`send command enable-now`](#send-command-enable-now) | Enable an SSR node and start it |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+## `send command enable-now`
+
+Enable an SSR node and start it
+
+#### Usage
+
+```
+send command enable-now [no-block] [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| no-block | Send the command as non blocking so it&#x27;s completed asynchronously |
+| node | The node to enable-now |
+| router | The router to enable-now (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node such that it does not start on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable an SSR node and stop it |
+| [`send command enable`](#send-command-enable) | Enable an SSR node such that it starts on boot |
+| [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;synchronizing&#x27; and perform a sync. |
+| [`send command system-check post-operation`](#send-command-system-check-post-operation) | Post-operation an SSR node |
+| [`send command system-check pre-operation`](#send-command-system-check-pre-operation) | Pre-operation an SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
 ## `send command reboot`
 
 Reboot an SSR node
@@ -3624,6 +3786,10 @@ send command reboot [force] router <router> node <node>
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
@@ -3669,6 +3835,10 @@ send command reconnect [router <router>] [node <node>]
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
@@ -3701,6 +3871,10 @@ send command reconnect disconnected [force]
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
@@ -3725,7 +3899,7 @@ Restart an SSR node
 #### Usage
 
 ```
-send command restart [force] router <router> node <node>
+send command restart [no-block] [force] [router <router>] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3733,14 +3907,19 @@ send command restart [force] router <router> node <node>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
+| no-block | Send the command as non blocking so it&#x27;s completed asynchronously |
 | node | The node to restart |
-| router | The router to restart |
+| router | The router to restart (default: &lt;current router&gt;) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -3793,7 +3972,7 @@ Start an SSR node
 #### Usage
 
 ```
-send command start [force] router <router> node <node>
+send command start [no-block] [force] [router <router>] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3801,14 +3980,19 @@ send command start [force] router <router> node <node>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
+| no-block | Send the command as non blocking so it&#x27;s completed asynchronously |
 | node | The node to start |
-| router | The router to start |
+| router | The router to start (default: &lt;current router&gt;) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -3833,7 +4017,7 @@ Stop an SSR node
 #### Usage
 
 ```
-send command stop [force] router <router> node <node>
+send command stop [no-block] [force] [router <router>] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3841,14 +4025,19 @@ send command stop [force] router <router> node <node>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
+| no-block | Send the command as non blocking so it&#x27;s completed asynchronously |
 | node | The node to stop |
-| router | The router to stop |
+| router | The router to stop (default: &lt;current router&gt;) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -3890,6 +4079,10 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -3932,6 +4125,10 @@ send command system-check post-operation [cohort-id <cohort-id>] [force] router 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -3972,6 +4169,10 @@ send command system-check pre-operation [cohort-id <cohort-id>] [force] router <
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -4763,6 +4964,29 @@ show app-id cache [rows <rows>] [force] [node <node>] {router <router> | resourc
 | [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
 | [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
+## `show app-id cache-sizes`
+
+Show app-id cache configured and current sizes
+
+#### Usage
+
+```
+show app-id cache-sizes router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to show app-id cache sizes |
+| router | The router on which to show app-id cache sizes |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show app-id web-filtering`](#show-app-id-web-filtering) | Show web-filtering state |
+
 ## `show app-id categories`
 
 Show available top-level categories
@@ -5087,6 +5311,10 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -5299,6 +5527,10 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 | command | description |
 | ------- | ----------- |
 | [`migrate`](#migrate) | Migrate an SSR to a new conductor |
+| [`send command disable`](#send-command-disable) | Disable an SSR node and prevent it from starting on boot |
+| [`send command disable-now`](#send-command-disable-now) | Disable and stop an SSR node |
+| [`send command enable`](#send-command-enable) | Enable and start an SSR node on boot |
+| [`send command enable-now`](#send-command-enable-now) | Enable and start an SSR node |
 | [`send command reboot`](#send-command-reboot) | Reboot an SSR node |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
@@ -5594,12 +5826,12 @@ show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource
 | name | description |
 | ---- | ----------- |
 | neighbor-ip | The IP address of the neighbor [type: IP address] |
-| option | advertised-routes \| received-routes |
+| option | advertised-routes \| received-routes \| filtered-routes |
 | family | ipv4 \| ipv6 \| ipv4-vpn \| ipv6-vpn \| all |
 
 #### Description
 
-The _show bgp neighbors_ command displays detailed information about each of the SSR&#x27;s BGP peers. By specifying a specific peer (through the optional argument _&lt;neighbor-ip&gt;_), administrators can view state information about one peer at a time. When specifying a specific neighbor, the output may include the routes shared with that peer by appending _advertised-route_ or received from that peer by appending _received-routes_.
+The _show bgp neighbors_ command displays detailed information about each of the SSR&#x27;s BGP peers. By specifying a specific peer (through the optional argument _&lt;neighbor-ip&gt;_), administrators can view state information about one peer at a time. When specifying a specific neighbor, the output may include the routes shared with that peer by appending _advertised-routes_, received from that peer by appending _received-routes_, or filtered from that peer by appending _filtered-routes_.
 
 #### Example
 
@@ -5908,6 +6140,7 @@ show chassis [router <router>] [node <node>]
 | ------- | ----------- |
 | [`firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`health`](#show-chassis-health) | Show chassis health |
 | [`led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`power`](#show-chassis-power) | Show chassis power |
 | [`temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
@@ -5919,6 +6152,8 @@ show chassis [router <router>] [node <node>]
 | ------- | ----------- |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
@@ -5955,6 +6190,8 @@ show chassis firmware [router <router>] [node <node>]
 | ------- | ----------- |
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
@@ -5991,6 +6228,90 @@ show chassis hardware [router <router>] [node <node>]
 | ------- | ----------- |
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on an SSR400/SSR440.
+:::
+
+## `show chassis health`
+
+Show chassis health
+
+#### Usage
+
+```
+show chassis health [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`details`](#show-chassis-health-details) | Show the details of the System Health |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
+| [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
+| [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
+| [`show chassis power`](#show-chassis-power) | Show chassis power |
+| [`show chassis temperature`](#show-chassis-temperature) | Show chassis temperature sensor readings |
+| [`show chassis temperature-thresholds`](#show-chassis-temperature-thresholds) | Show chassis temperature thresholds |
+
+#### Description
+
+:::note
+This command can only be run on a Leopard.
+:::
+
+## `show chassis health details`
+
+Show the details of the System Health
+
+#### Usage
+
+```
+show chassis health details [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show chassis`](#show-chassis) | Display information about the chassis |
+| [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
+| [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
@@ -6035,6 +6356,8 @@ show chassis led [router <router>] [node <node>]
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
 | [`show chassis power`](#show-chassis-power) | Show chassis power |
@@ -6072,6 +6395,8 @@ show chassis led phy [port <port>] [router <router>] [node <node>]
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
 | [`show chassis power`](#show-chassis-power) | Show chassis power |
@@ -6108,6 +6433,8 @@ show chassis led system [router <router>] [node <node>]
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis power`](#show-chassis-power) | Show chassis power |
@@ -6144,6 +6471,8 @@ show chassis power [router <router>] [node <node>]
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
@@ -6187,6 +6516,8 @@ show chassis temperature [sensor <sensor>] [router <router>] [node <node>] [<ver
 | [`show chassis`](#show-chassis) | Display information about the chassis |
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
@@ -6225,6 +6556,8 @@ show chassis temperature-thresholds [region <region>] [router <router>] [node <n
 | [`show chassis firmware`](#show-chassis-firmware) | Show information about the chassis firmware |
 | [`show chassis hardware`](#show-chassis-hardware) | Show information about the chassis hardware |
 | [`show chassis led`](#show-chassis-led) | Show the status of the chassis LEDs |
+| [`show chassis health`](#show-chassis-health) | Show chassis health |
+| [`show chassis health details`](#show-chassis-health-details) | Show the details of the System Health |
 | [`show chassis led phy`](#show-chassis-led-phy) | Show the status of the port LEDs |
 | [`show chassis led system`](#show-chassis-led-system) | Show the status of the System LED |
 | [`show chassis power`](#show-chassis-power) | Show chassis power |
@@ -6672,8 +7005,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| `authority` | Show configuration data for &#x27;authority&#x27; |
-| `generated` | Show configuration data for &#x27;generated&#x27; |
+| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
+| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config disk-cache`
 
@@ -6938,8 +7271,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| `authority` | Show configuration data for &#x27;authority&#x27; |
-| `generated` | Show configuration data for &#x27;generated&#x27; |
+| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
+| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
 
 ## `show config version`
 
@@ -7020,7 +7353,7 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail \| summary \| extended-statistics \| registers (default: detail) |
+| verbosity | detail \| summary \| extended-statistics \| optics-statistics (default: detail) |
 
 #### Description
 
@@ -7732,6 +8065,7 @@ show idp application details [force] [node <node>] {router <router> | resource-g
 | [`show idp network`](#show-idp-network) | Show IDP networks |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
 #### Description
@@ -7772,6 +8106,7 @@ show idp application status [force] [node <node>] {router <router> | resource-gr
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -7817,6 +8152,7 @@ show idp details [force] [node <node>] {router <router> | resource-group <resour
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -7868,7 +8204,8 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Version History
 
@@ -7914,6 +8251,7 @@ show idp events by-application [{from <from> | since <since>}] [to <to>] [verbos
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -7958,6 +8296,7 @@ show idp events by-attack [{from <from> | since <since>}] [to <to>] [verbose] [n
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -8007,6 +8346,7 @@ show idp events by-severity [{from <from> | since <since>}] [to <to>] [verbose] 
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -8053,6 +8393,7 @@ show idp network [force] [node <node>] {router <router> | resource-group <resour
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -8098,7 +8439,8 @@ show idp platform [force] [node <node>] {router <router> | resource-group <resou
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
 
@@ -8144,6 +8486,7 @@ show idp signatures [force] [node <node>] {router <router> | resource-group <res
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
 | [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp ssl-proxy status`](#show-idp-ssl-proxy-status) | Show IDP ssl-proxy status. Query and display the IDP SSL engine details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -8155,6 +8498,43 @@ Query and display the IDP signature package details.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.4   | This feature was introduced. |
+
+## `show idp ssl-proxy status`
+
+Show IDP ssl-proxy status. Query and display the IDP SSL engine details.
+
+#### Usage
+
+```
+show idp ssl-proxy status [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which engine started |
+| resource-group | The name of the resource group |
+| router | The router for which engine started |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
+| [`show idp events`](#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](#show-idp-network) | Show IDP networks |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 ## `show igmp groups`
 
@@ -11751,6 +12131,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 
 | command | description |
 | ------- | ----------- |
+| [`config-integrity`](#show-system-config-integrity) | Display the current status of Configuration Integrity |
 | [`connectivity`](#show-system-connectivity) | Display inter-node connection statuses. |
 | [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
 | [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
@@ -11786,6 +12167,16 @@ Mon 2017-02-27 15:11:06 EST
  Alarm Count:  0
 
 Completed in 0.22 seconds
+```
+
+## `show system config-integrity`
+
+Display the current status of Configuration Integrity
+
+#### Usage
+
+```
+show system config-integrity
 ```
 
 ## `show system connectivity`
@@ -13008,6 +13399,29 @@ Completed in 0.03 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 5.1.0   | This feature was introduced |
+
+## `show waypoints`
+
+Displays waypoint table information at the specified node.
+
+#### Usage
+
+```
+show waypoints router <router> node <node> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to display waypoints information |
+| router | The router on which to display waypoints information |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `sync peer addresses`
 

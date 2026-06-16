@@ -38,6 +38,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`management-service-generation`](#configure-authority-management-service-generation) | Configure Management Service Generation |
 | [`metrics`](#configure-authority-metrics) | Configuration for metrics collection. |
 | [`metrics-profile`](#configure-authority-metrics-profile) | A collection of metrics |
+| [`minion-watchdog-settings`](#configure-authority-minion-watchdog-settings) | Settings for monitoring and remediating a wedged salt-minion. |
 | [`name`](#configure-authority-name) | The identifier for the Authority. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`password-policy`](#configure-authority-password-policy) | Password policy for user&#x27;s passwords. |
@@ -62,6 +63,7 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | `show` | Show configuration data for &#x27;authority&#x27; |
 | [`software-access`](#configure-authority-software-access) | Configuration for SSR software access for the authority. Supported on managed assets only. |
 | [`software-update`](#configure-authority-software-update) | Configure Software Update |
+| [`ssl-proxy-profile`](#configure-authority-ssl-proxy-profile) | User defined SSL proxy profiles. |
 | [`step`](#configure-authority-step) | Configure Step |
 | [`step-repo`](#configure-authority-step-repo) | List of Service and Topology Exchange Protocol repositories. |
 | [`syslog-policy`](#configure-authority-syslog-policy) | Configuration for syslog message generation. |
@@ -4028,6 +4030,245 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
 
+## `configure authority minion-watchdog-settings`
+
+Settings for monitoring and remediating a wedged salt-minion.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`check-interval`](#configure-authority-minion-watchdog-settings-check-interval) | Interval to check whether the salt-minion is wedged. |
+| [`consecutive-failures`](#configure-authority-minion-watchdog-settings-consecutive-failures) | Number of consecutive failures before salt-minion restart. |
+| `delete` | Delete configuration data |
+| [`enabled`](#configure-authority-minion-watchdog-settings-enabled) | Enable or disable the minion watchdog. |
+| [`ha-consecutive-failures`](#configure-authority-minion-watchdog-settings-ha-consecutive-failures) | The number of consecutive failures for HA conductor alarms recorded before salt-minion restart. |
+| [`job-timeout`](#configure-authority-minion-watchdog-settings-job-timeout) | Timeout before a running job is considered stuck and the minion is restarted. |
+| [`log-level`](#configure-authority-minion-watchdog-settings-log-level) | Watchdog log level. |
+| [`max-memory`](#configure-authority-minion-watchdog-settings-max-memory) | Maximum memory threshold the salt-minion is allowed to consume. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`override-master-count`](#configure-authority-minion-watchdog-settings-override-master-count) | Override expected number of salt-master connections instead of auto-detecting from the salt-minion configuration file. |
+| `show` | Show configuration data for &#x27;minion-watchdog-settings&#x27; |
+
+## `configure authority minion-watchdog-settings check-interval`
+
+Interval to check whether the salt-minion is wedged.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings check-interval [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Units: minutes
+
+Default: 3
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-10
+
+## `configure authority minion-watchdog-settings consecutive-failures`
+
+Number of consecutive failures before salt-minion restart.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings consecutive-failures [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 20
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1000
+
+## `configure authority minion-watchdog-settings enabled`
+
+Enable or disable the minion watchdog.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority minion-watchdog-settings ha-consecutive-failures`
+
+The number of consecutive failures for HA conductor alarms recorded before salt-minion restart.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings ha-consecutive-failures [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Default: 30
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1000
+
+## `configure authority minion-watchdog-settings job-timeout`
+
+Timeout before a running job is considered stuck and the minion is restarted.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings job-timeout [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: minutes
+
+Default: 60
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1440
+
+## `configure authority minion-watchdog-settings log-level`
+
+Watchdog log level.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings log-level [<log-level>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| log-level | The value to set for this field |
+
+#### Description
+
+Default: info
+
+##### log-level (enumeration)
+
+Log levels
+
+Options:
+
+- fatal:      Only record log messages with level &quot;fatal&quot; or higher.
+- error:      Only record log messages with level &quot;error&quot; or higher.
+- warning:    Only record log messages with level &quot;warning&quot; or higher.
+- info:       Only record log messages with level &quot;info&quot; or higher.
+- debug:      Only record log messages with level &quot;debug&quot; or higher.
+- trace:      Only record log messages with level &quot;trace&quot; or higher.
+
+## `configure authority minion-watchdog-settings max-memory`
+
+Maximum memory threshold the salt-minion is allowed to consume.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings max-memory [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+Units: MB
+
+Default: 1000
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 500-5000
+
+## `configure authority minion-watchdog-settings override-master-count`
+
+Override expected number of salt-master connections instead of auto-detecting from the salt-minion configuration file.
+
+#### Usage
+
+```
+configure authority minion-watchdog-settings override-master-count [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-2
+
 ## `configure authority name`
 
 The identifier for the Authority.
@@ -5123,7 +5364,7 @@ Configure Application Identification
 
 | command | description |
 | ------- | ----------- |
-| [`application-director-cache-max-capacity`](#configure-authority-router-application-identification-application-director-cache-max-capacity) | The maximum capacity for caching application-director requests |
+| [`application-director-cache-max-capacity`](#configure-authority-router-application-identification-application-director-cache-max-capacity) | The maximum capacity for caching application-director requests. Set to &#x27;auto&#x27; to scale with platform size. |
 | [`auto-update`](#configure-authority-router-application-identification-auto-update) | Automatic updating of application data |
 | `delete` | Delete configuration data |
 | [`max-capacity`](#configure-authority-router-application-identification-max-capacity) | The maximum capacity for resolved next-hops under a client |
@@ -5140,27 +5381,37 @@ Configure Application Identification
 
 ## `configure authority router application-identification application-director-cache-max-capacity`
 
-The maximum capacity for caching application-director requests
+The maximum capacity for caching application-director requests. Set to &#x27;auto&#x27; to scale with platform size.
 
 #### Usage
 
 ```
-configure authority router application-identification application-director-cache-max-capacity [<uint64>]
+configure authority router application-identification application-director-cache-max-capacity [<union>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| uint64 | The value to set for this field |
+| union | The value to set for this field |
 
 #### Description
 
-Default: 10000
+Default: auto
 
-##### uint64
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint64
 
 An unsigned 64-bit integer.
+
+##### (1) string
+
+A text value.
 
 ## `configure authority router application-identification auto-update`
 
@@ -5566,7 +5817,7 @@ Configure Classify Session
 | command | description |
 | ------- | ----------- |
 | `delete` | Delete configuration data |
-| [`max-cache-size`](#configure-authority-router-application-identification-web-filtering-classify-session-max-cache-size) | The maximum size for the in-memory cache that stores url data |
+| [`max-cache-size`](#configure-authority-router-application-identification-web-filtering-classify-session-max-cache-size) | The maximum size for the in-memory cache that stores url data. Set to `auto` to scale with platform size. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`retries`](#configure-authority-router-application-identification-web-filtering-classify-session-retries) | The maximum retries for client to request for classifying the session |
 | `show` | Show configuration data for &#x27;classify-session&#x27; |
@@ -5574,29 +5825,39 @@ Configure Classify Session
 
 ## `configure authority router application-identification web-filtering classify-session max-cache-size`
 
-The maximum size for the in-memory cache that stores url data
+The maximum size for the in-memory cache that stores url data. Set to `auto` to scale with platform size.
 
 #### Usage
 
 ```
-configure authority router application-identification web-filtering classify-session max-cache-size [<uint32>]
+configure authority router application-identification web-filtering classify-session max-cache-size [<union>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| uint32 | The value to set for this field |
+| union | The value to set for this field |
 
 #### Description
 
-Default: 1000
+Default: auto
 
-##### uint32
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint32
 
 An unsigned 32-bit integer.
 
 Range: 1-500000
+
+##### (1) string
+
+A text value.
 
 ## `configure authority router application-identification web-filtering classify-session retries`
 
@@ -8276,20 +8537,23 @@ The interface name associated with the OS network device.
 #### Usage
 
 ```
-configure authority router node device-interface interface-name [<string>]
+configure authority router node device-interface interface-name [<interface-name>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| string | The value to set for this field |
+| interface-name | The value to set for this field |
 
 #### Description
 
-##### string
+##### interface-name (string)
 
-A text value.
+A string identifier for network-interface which only uses alphanumerics, underscores, dashes, dots, or slashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ - .
+Length: 0-63
 
 ## `configure authority router node device-interface link-settings`
 
@@ -8901,6 +9165,7 @@ configure authority router node device-interface network-interface address host-
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-description) | A description about the hosted service. |
+| [`dhcp-server-debug-log`](#configure-authority-router-node-device-interface-network-interface-address-host-service-dhcp-server-debug-log) | Whether to log DHCP server debug messages. |
 | [`echo-client-id`](#configure-authority-router-node-device-interface-network-interface-address-host-service-echo-client-id) | Whether the client id should be echoed in DHCP server responses as specified in RFC 6842 or not as specified in the original RFC 2131. |
 | [`enabled`](#configure-authority-router-node-device-interface-network-interface-address-host-service-enabled) | Enable/disable for host services |
 | [`max-lease-time`](#configure-authority-router-node-device-interface-network-interface-address-host-service-max-lease-time) | Maximum lease time for leases allocated to clients. |
@@ -8909,6 +9174,7 @@ configure authority router node device-interface network-interface address host-
 | [`service-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-service-type) | The type of hosted service |
 | `show` | Show configuration data for &#x27;host-service&#x27; |
 | [`static-assignment`](#configure-authority-router-node-device-interface-network-interface-address-host-service-static-assignment) | Static assignment(s) for DHCP configuration for a specific client |
+| [`subnet-options`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options) | The DHCP server options for subnet. |
 | [`transport`](#configure-authority-router-node-device-interface-network-interface-address-host-service-transport) | The transport protocol(s) and port(s) for the service. |
 
 ## `configure authority router node device-interface network-interface address host-service access-policy`
@@ -11332,6 +11598,32 @@ configure authority router node device-interface network-interface address host-
 
 A text value.
 
+## `configure authority router node device-interface network-interface address host-service dhcp-server-debug-log`
+
+Whether to log DHCP server debug messages.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service dhcp-server-debug-log [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
 ## `configure authority router node device-interface network-interface address host-service echo-client-id`
 
 Whether the client id should be echoed in DHCP server responses as specified in RFC 6842 or not as specified in the original RFC 2131.
@@ -12567,6 +12859,976 @@ The value(s) of custom option to be provided to clients.
 
 ```
 configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information value [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### string (required)
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options`
+
+The DHCP server options for subnet.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `clone` | Clone a list item |
+| [`custom`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-custom) | Custom DHCP options to be provided to clients. |
+| `delete` | Delete configuration data |
+| [`domain-name`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-domain-name) | Domain name provided to clients. |
+| [`domain-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-domain-server) | Domain name server address(es) provided to clients in priority order. |
+| [`interface-mtu`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-interface-mtu) | Interface MTU provided to clients. |
+| `move` | Move list items |
+| [`ntp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-ntp-server) | NTP server address(es) provided to clients in priority order. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`pop-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-pop-server) | POP server address(es) provided to clients in priority order. |
+| [`router`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-router) | Gateway router address(es) provided to clients in priority order. |
+| `show` | Show configuration data for &#x27;subnet-options&#x27; |
+| [`smtp-server`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-smtp-server) | SMTP server address(es) provided to clients in priority order. |
+| [`static-route`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-static-route) | Static route(s) provided to clients. Note that for default routes the router option should be used. |
+| [`tenant`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-tenant) | Tenant to which clients will be assigned. |
+| [`vendor-identifying-vendor-specific-information`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information) | Vendor-Identifying Vendor-Specific Information Options (Option 125) to be provided to clients [RFC3925]. |
+| [`vendor-specific-information`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-specific-information) | Vendor-Specific Information Options (Option 43) to be provided to clients [RFC2132]. |
+
+## `configure authority router node device-interface network-interface address host-service subnet-options custom`
+
+Custom DHCP options to be provided to clients.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options custom <code>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| code | The code of the custom DHCP option. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`code`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-custom-code) | The code of the custom DHCP option. |
+| `delete` | Delete configuration data |
+| [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-custom-description) | A description of the custom DHCP option. |
+| [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-custom-encoded-type) | The encoded type of the custom option. |
+| `move` | Move list items |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-custom-quantity) | The allowed quantity of the custom option values. |
+| `show` | Show configuration data for &#x27;custom&#x27; |
+| [`value`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-custom-value) | The value(s) of custom option to be provided to clients. |
+
+## `configure authority router node device-interface network-interface address host-service subnet-options custom code`
+
+The code of the custom DHCP option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options custom code [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
+## `configure authority router node device-interface network-interface address host-service subnet-options custom description`
+
+A description of the custom DHCP option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options custom description [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options custom encoded-type`
+
+The encoded type of the custom option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options custom encoded-type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- string:
+- uint8:
+- uint16:
+- uint32:
+- boolean:
+- ipv4-address:
+- int32:
+- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options custom quantity`
+
+The allowed quantity of the custom option values.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options custom quantity [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- singular:
+- array:
+
+## `configure authority router node device-interface network-interface address host-service subnet-options custom value`
+
+The value(s) of custom option to be provided to clients.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options custom value [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### string (required)
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options domain-name`
+
+Domain name provided to clients.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options domain-name [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options domain-server`
+
+Domain name server address(es) provided to clients in priority order.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options domain-server [<ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options interface-mtu`
+
+Interface MTU provided to clients.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options interface-mtu [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 68-9198
+
+## `configure authority router node device-interface network-interface address host-service subnet-options ntp-server`
+
+NTP server address(es) provided to clients in priority order.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options ntp-server [<ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options pop-server`
+
+POP server address(es) provided to clients in priority order.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options pop-server [<ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options router`
+
+Gateway router address(es) provided to clients in priority order.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options router [<ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options smtp-server`
+
+SMTP server address(es) provided to clients in priority order.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options smtp-server [<ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-address | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### ip-address (union)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options static-route`
+
+Static route(s) provided to clients. Note that for default routes the router option should be used.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options static-route <destination-address>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-address | Destination address of static route. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`destination-address`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-static-route-destination-address) | Destination address of static route. |
+| [`gateway`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-static-route-gateway) | Gateway address of static route. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;static-route&#x27; |
+
+## `configure authority router node device-interface network-interface address host-service subnet-options static-route destination-address`
+
+Destination address of static route.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options static-route destination-address [<non-default-ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| non-default-ip-address | The value to set for this field |
+
+#### Description
+
+##### non-default-ip-address (union)
+
+A non-default IPv4 or IPv6 address
+
+Must be one of the following types:
+
+##### (0) non-default-ipv4-address (string)
+
+A non-default IPv4 address
+
+Must be a valid IPv4 address.
+
+##### (1) non-default-ipv6-address (string)
+
+A non-default IPv6 address
+
+Must be a valid IPv4 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options static-route gateway`
+
+Gateway address of static route.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options static-route gateway [<ip-address>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-address | The value to set for this field |
+
+#### Description
+
+##### ip-address (union) (required)
+
+The ip-address type represents an IP address and is IP version neutral. The format of the textual representations implies the IP version.
+
+Must be one of the following types:
+
+##### (0) ipv4-address (string) (required)
+
+The ipv4-address type represents an IPv4 address in dotted-quad notation.
+
+Must be a valid IPv4 address.
+
+##### (1) ipv6-address (string) (required)
+
+The ipv6-address type represents an IPv6 address in full,
+mixed, shortened, and shortened-mixed notation.
+
+The canonical format of IPv6 addresses uses the compressed
+format described in RFC 4291, Section 2.2, item 2 with the
+following additional rules: the :: substitution must be
+applied to the longest sequence of all-zero 16-bit chunks
+in an IPv6 address.  If there is a tie, the first sequence
+of all-zero 16-bit chunks is replaced by ::.  Single
+all-zero 16-bit chunks are not compressed.  The canonical
+format uses lowercase characters and leading zeros are
+not allowed.
+
+Must be a valid IPv6 address.
+Must be a valid IPv6 address.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options tenant`
+
+Tenant to which clients will be assigned.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options tenant [<tenant-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| tenant-ref | The value to set for this field |
+
+#### Description
+
+##### tenant-ref (leafref)
+
+This type is used by other entities that need to reference configured tenants.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information`
+
+Vendor-Identifying Vendor-Specific Information Options (Option 125) to be provided to clients [RFC3925].
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information <enterprise-number> <code>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enterprise-number | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
+| code | The code of the custom DHCP option. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`code`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information-code) | The code of the custom DHCP option. |
+| `delete` | Delete configuration data |
+| [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information-description) | A description of the custom DHCP option. |
+| [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
+| [`enterprise-number`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information-enterprise-number) | The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA. |
+| `move` | Move list items |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
+| `show` | Show configuration data for &#x27;vendor-identifying-vendor-specific-information&#x27; |
+| [`value`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-identifying-vendor-specific-information-value) | The value(s) of custom option to be provided to clients. |
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information code`
+
+The code of the custom DHCP option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information code [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information description`
+
+A description of the custom DHCP option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information description [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information encoded-type`
+
+The encoded type of the custom option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information encoded-type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- string:
+- uint8:
+- uint16:
+- uint32:
+- boolean:
+- ipv4-address:
+- int32:
+- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information enterprise-number`
+
+The vendor&#x27;s registered 32-bit Enterprise Number as registered with IANA.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information enterprise-number [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+##### uint32 (required)
+
+An unsigned 32-bit integer.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information quantity`
+
+The allowed quantity of the custom option values.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information quantity [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- singular:
+- array:
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information value`
+
+The value(s) of custom option to be provided to clients.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-identifying-vendor-specific-information value [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | Value to add to this list |
+
+#### Description
+
+The order of elements matters.
+
+##### string (required)
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information`
+
+Vendor-Specific Information Options (Option 43) to be provided to clients [RFC2132].
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information <code>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| code | The code of the custom DHCP option. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`code`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-specific-information-code) | The code of the custom DHCP option. |
+| `delete` | Delete configuration data |
+| [`description`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-specific-information-description) | A description of the custom DHCP option. |
+| [`encoded-type`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-specific-information-encoded-type) | The encoded type of the custom option. |
+| `move` | Move list items |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`quantity`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-specific-information-quantity) | The allowed quantity of the custom option values. |
+| `show` | Show configuration data for &#x27;vendor-specific-information&#x27; |
+| [`value`](#configure-authority-router-node-device-interface-network-interface-address-host-service-subnet-options-vendor-specific-information-value) | The value(s) of custom option to be provided to clients. |
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information code`
+
+The code of the custom DHCP option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information code [<uint16>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint16 | The value to set for this field |
+
+#### Description
+
+##### uint16
+
+An unsigned 16-bit integer.
+
+Range: 0-65535
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information description`
+
+A description of the custom DHCP option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information description [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+#### Description
+
+##### string
+
+A text value.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information encoded-type`
+
+The encoded type of the custom option.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information encoded-type [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: string
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- string:
+- uint8:
+- uint16:
+- uint32:
+- boolean:
+- ipv4-address:
+- int32:
+- binary:          A continuous string of hexadecimal digits with a &#x27;0x&#x27; prefix. Valid examples are &#x27;0xabcdef&#x27; and &#x27;0x123456&#x27;.
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information quantity`
+
+The allowed quantity of the custom option values.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information quantity [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: singular
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- singular:
+- array:
+
+## `configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information value`
+
+The value(s) of custom option to be provided to clients.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface address host-service subnet-options vendor-specific-information value [<string>]
 ```
 
 ##### Positional Arguments
@@ -21942,6 +23204,10 @@ configure authority router node ssh-keepalive asset-inter-conductor-router-serve
 
 Default: 5
 
+:::warning
+`interval` is deprecated and will be removed in a future software version
+:::
+
 ##### ssh-keepalive-interval (uint8)
 
 Timeout interval in seconds to send keepalive when an SSH connection is idle.
@@ -21967,6 +23233,10 @@ configure authority router node ssh-keepalive asset-inter-conductor-router-serve
 #### Description
 
 Default: 4
+
+:::warning
+`max-attempts` is deprecated and will be removed in a future software version
+:::
 
 ##### ssh-keepalive-max-attempts (uint8)
 
@@ -24589,8 +25859,16 @@ Routing engine debug commands.
 | [`bfd`](#configure-authority-router-routing-debug-bfd) | Debug BFD commands. |
 | [`bgp`](#configure-authority-router-routing-debug-bgp) | Debug BGP commands. |
 | `delete` | Delete configuration data |
+| [`igmp`](#configure-authority-router-routing-debug-igmp) | Debug igmp. |
+| [`igmp-events`](#configure-authority-router-routing-debug-igmp-events) | Debug igmp events. |
+| [`igmp-packets`](#configure-authority-router-routing-debug-igmp-packets) | Debug igmp packets. |
+| [`igmp-trace`](#configure-authority-router-routing-debug-igmp-trace) | Debug igmp trace. |
+| [`msdp`](#configure-authority-router-routing-debug-msdp) | Debug msdp. |
+| [`msdp-events`](#configure-authority-router-routing-debug-msdp-events) | Debug msdp events. |
+| [`msdp-packets`](#configure-authority-router-routing-debug-msdp-packets) | Debug msdp packets. |
 | [`ospf`](#configure-authority-router-routing-debug-ospf) | Debug OSPF commands. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`pim`](#configure-authority-router-routing-debug-pim) | Debug PIM commands. |
 | [`rib`](#configure-authority-router-routing-debug-rib) | Debug RIB Manager commands. |
 | `show` | Show configuration data for &#x27;debug&#x27; |
 | [`static-route`](#configure-authority-router-routing-debug-static-route) | Debug static route commands. |
@@ -24984,6 +26262,83 @@ Debug BGP leak to VRF events.
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;leak-to-vrf&#x27; |
 
+## `configure authority router routing debug igmp`
+
+Debug igmp.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;igmp&#x27; |
+
+## `configure authority router routing debug igmp-events`
+
+Debug igmp events.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;igmp-events&#x27; |
+
+## `configure authority router routing debug igmp-packets`
+
+Debug igmp packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;igmp-packets&#x27; |
+
+## `configure authority router routing debug igmp-trace`
+
+Debug igmp trace.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;igmp-trace&#x27; |
+
+## `configure authority router routing debug msdp`
+
+Debug msdp.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;msdp&#x27; |
+
+## `configure authority router routing debug msdp-events`
+
+Debug msdp events.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;msdp-events&#x27; |
+
+## `configure authority router routing debug msdp-packets`
+
+Debug msdp packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;msdp-packets&#x27; |
+
 ## `configure authority router routing debug ospf`
 
 Debug OSPF commands.
@@ -25043,6 +26398,139 @@ Debug OSPF graceful restart.
 | ------- | ----------- |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;graceful-restart&#x27; |
+
+## `configure authority router routing debug pim`
+
+Debug PIM commands.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`events`](#configure-authority-router-routing-debug-pim-events) | Debug PIM Events, Traces, Traces Detail, and Zebra |
+| [`mroute`](#configure-authority-router-routing-debug-pim-mroute) | Debug mroute, mroute detail |
+| [`nht`](#configure-authority-router-routing-debug-pim-nht) | Debug PIM Nexthop Tracker (NHT). |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`packet-dump`](#configure-authority-router-routing-debug-pim-packet-dump) | Debug PIM packet-dump. |
+| [`packets-general`](#configure-authority-router-routing-debug-pim-packets-general) | Debug PIM packets. |
+| [`packets-hello`](#configure-authority-router-routing-debug-pim-packets-hello) | Debug PIM hello packets. |
+| [`packets-joins`](#configure-authority-router-routing-debug-pim-packets-joins) | Debug PIM Join/Prune packets. |
+| [`packets-register`](#configure-authority-router-routing-debug-pim-packets-register) | Debug PIM Register/Reg-Stop packets. |
+| `show` | Show configuration data for &#x27;pim&#x27; |
+
+## `configure authority router routing debug pim events`
+
+Debug PIM Events, Traces, Traces Detail, and Zebra
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;events&#x27; |
+
+## `configure authority router routing debug pim mroute`
+
+Debug mroute, mroute detail
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;mroute&#x27; |
+
+## `configure authority router routing debug pim nht`
+
+Debug PIM Nexthop Tracker (NHT).
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;nht&#x27; |
+
+## `configure authority router routing debug pim packet-dump`
+
+Debug PIM packet-dump.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`receive`](#configure-authority-router-routing-debug-pim-packet-dump-receive) | Debug PIM received packets. |
+| [`send`](#configure-authority-router-routing-debug-pim-packet-dump-send) | Debug PIM sent packets. |
+| `show` | Show configuration data for &#x27;packet-dump&#x27; |
+
+## `configure authority router routing debug pim packet-dump receive`
+
+Debug PIM received packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;receive&#x27; |
+
+## `configure authority router routing debug pim packet-dump send`
+
+Debug PIM sent packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;send&#x27; |
+
+## `configure authority router routing debug pim packets-general`
+
+Debug PIM packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;packets-general&#x27; |
+
+## `configure authority router routing debug pim packets-hello`
+
+Debug PIM hello packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;packets-hello&#x27; |
+
+## `configure authority router routing debug pim packets-joins`
+
+Debug PIM Join/Prune packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;packets-joins&#x27; |
+
+## `configure authority router routing debug pim packets-register`
+
+Debug PIM Register/Reg-Stop packets.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;packets-register&#x27; |
 
 ## `configure authority router routing debug rib`
 
@@ -39148,6 +40636,7 @@ System group configuration. Lets administrators configure system-wide properties
 | [`log-category`](#configure-authority-router-system-log-category) | Log category configuration lets administrators configure the SSR&#x27;s log level for specific log categories, overriding the default log-level setting. |
 | [`log-level`](#configure-authority-router-system-log-level) | The log level is the degree to which the SSR writes information into its log files, by default. WARNING: using the &#x27;trace&#x27; level will significantly impact system performance and is not recommended for production environments. The &#x27;log-category&#x27; configuration should be used instead for &#x27;trace&#x27; level of specific categories. |
 | [`metrics`](#configure-authority-router-system-metrics) | Parameters controlling metric configuration and collection. Governs various aspects of the SSR&#x27;s data sampling for analytics purposes. |
+| [`minion-watchdog-settings`](#configure-authority-router-system-minion-watchdog-settings) | Per-router override for minion watchdog settings. |
 | [`ntp`](#configure-authority-router-system-ntp) | NTP configuration lets administrators configure information about the NTP servers within their management network. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`radius`](#configure-authority-router-system-radius) | Configure Radius |
@@ -40567,6 +42056,330 @@ Default: 5
 A signed 8-bit integer.
 
 Range: 1-60
+
+## `configure authority router system minion-watchdog-settings`
+
+Per-router override for minion watchdog settings.
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`check-interval`](#configure-authority-router-system-minion-watchdog-settings-check-interval) | Interval to check whether the salt-minion is wedged. |
+| [`consecutive-failures`](#configure-authority-router-system-minion-watchdog-settings-consecutive-failures) | Number of consecutive failures before salt-minion restart. |
+| `delete` | Delete configuration data |
+| [`enabled`](#configure-authority-router-system-minion-watchdog-settings-enabled) | Enable or disable the minion watchdog. When not configured, uses the authority-level setting. |
+| [`ha-consecutive-failures`](#configure-authority-router-system-minion-watchdog-settings-ha-consecutive-failures) | The number of consecutive failures for HA conductor alarms recorded before salt-minion restart. |
+| [`job-timeout`](#configure-authority-router-system-minion-watchdog-settings-job-timeout) | Timeout before a running job is considered stuck and the minion is restarted. |
+| [`log-level`](#configure-authority-router-system-minion-watchdog-settings-log-level) | Watchdog log level. |
+| [`max-memory`](#configure-authority-router-system-minion-watchdog-settings-max-memory) | Maximum memory threshold the salt-minion is allowed to consume. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`override-master-count`](#configure-authority-router-system-minion-watchdog-settings-override-master-count) | Override expected number of salt-master connections instead of auto-detecting from the salt-minion configuration file. |
+| `show` | Show configuration data for &#x27;minion-watchdog-settings&#x27; |
+
+## `configure authority router system minion-watchdog-settings check-interval`
+
+Interval to check whether the salt-minion is wedged.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings check-interval [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Units: minutes
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint8
+
+An unsigned 8-bit integer.
+
+Range: 1-10
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority-level setting.
+
+## `configure authority router system minion-watchdog-settings consecutive-failures`
+
+Number of consecutive failures before salt-minion restart.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings consecutive-failures [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1000
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority-level setting.
+
+## `configure authority router system minion-watchdog-settings enabled`
+
+Enable or disable the minion watchdog. When not configured, uses the authority-level setting.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router system minion-watchdog-settings ha-consecutive-failures`
+
+The number of consecutive failures for HA conductor alarms recorded before salt-minion restart.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings ha-consecutive-failures [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1000
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority-level setting.
+
+## `configure authority router system minion-watchdog-settings job-timeout`
+
+Timeout before a running job is considered stuck and the minion is restarted.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings job-timeout [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Units: minutes
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint16
+
+An unsigned 16-bit integer.
+
+Range: 1-1440
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority-level setting.
+
+## `configure authority router system minion-watchdog-settings log-level`
+
+Watchdog log level.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings log-level [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: use-authority-setting
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- fatal
+- error
+- warning
+- info
+- debug
+- trace
+- use-authority-setting:    Use the authority-level setting.
+
+## `configure authority router system minion-watchdog-settings max-memory`
+
+Maximum memory threshold the salt-minion is allowed to consume.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings max-memory [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Units: MB
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint16
+
+An unsigned 16-bit integer.
+
+Range: 500-5000
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority-level setting.
+
+## `configure authority router system minion-watchdog-settings override-master-count`
+
+Override expected number of salt-master connections instead of auto-detecting from the salt-minion configuration file.
+
+#### Usage
+
+```
+configure authority router system minion-watchdog-settings override-master-count [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
+
+#### Description
+
+Default: use-authority-setting
+
+##### union
+
+A value that corresponds to one of its member types.
+
+Must be one of the following types:
+
+##### (0) uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-2
+
+##### (1) enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- use-authority-setting:    Use the authority-level setting.
 
 ## `configure authority router system ntp`
 
@@ -45706,6 +47519,8 @@ Options:
 
 - aes-cbc-128:    AES Cipher Block Chaining 128-bit Encryption Mode.
 - aes-cbc-256:    AES Cipher Block Chaining 256-bit Encryption Mode.
+- aes-gcm-128:    AES Galois Counter Mode 128-bit Encryption.
+- aes-gcm-256:    AES Galois Counter Mode 256-bit Encryption.
 
 ## `configure authority security encryption-iv`
 
@@ -46482,6 +48297,7 @@ configure authority service access-policy <source>
 | [`permission`](#configure-authority-service-access-policy-permission) | Whether or not to allow access to the service. |
 | `show` | Show configuration data for &#x27;access-policy&#x27; |
 | [`source`](#configure-authority-service-access-policy-source) | The source QSN or address(es) to which the policy applies. For a QSN, this may be a tenant, service-group, or service, or a combination there of. The following forms are valid: tenant tenant/service-group/ tenant/service-group/service tenant/service /service-group/ /service-group/service /service |
+| [`ssl-proxy-profile`](#configure-authority-service-access-policy-ssl-proxy-profile) | User-defined profile for ssl-proxy. |
 | [`syslog`](#configure-authority-service-access-policy-syslog) | Configure Syslog |
 
 ## `configure authority service access-policy anti-virus-policy`
@@ -46701,6 +48517,28 @@ A string identifier for a tenant prefix. Consists of a valid tenant name, follow
 
 Must contain a valid tenant name, followed by @  and a valid IP Address.
 Length: 0-280
+
+## `configure authority service access-policy ssl-proxy-profile`
+
+User-defined profile for ssl-proxy.
+
+#### Usage
+
+```
+configure authority service access-policy ssl-proxy-profile [<leafref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| leafref | The value to set for this field |
+
+#### Description
+
+##### leafref
+
+A reference to an existing value in the instance data.
 
 ## `configure authority service access-policy syslog`
 
@@ -50217,6 +52055,184 @@ a tie, the first sequence of all-zero 16-bit chunks is
 replaced by ::.  Single all-zero 16-bit chunks are not
 compressed.  The canonical format uses lowercase
 characters and leading zeros are not allowed.
+
+## `configure authority ssl-proxy-profile`
+
+User defined SSL proxy profiles.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | unique name of the profile. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`allowed-domains`](#configure-authority-ssl-proxy-profile-allowed-domains) | allowed domains for ssl proxy. |
+| [`client-certificate`](#configure-authority-ssl-proxy-profile-client-certificate) | Client certificate for ssl proxy. |
+| `delete` | Delete configuration data |
+| [`ignore-server-authentication`](#configure-authority-ssl-proxy-profile-ignore-server-authentication) | If this option is not set, all the sessions where the server sends self-signed certificates are dropped when errors are encountered. |
+| [`name`](#configure-authority-ssl-proxy-profile-name) | unique name of the profile. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`policy`](#configure-authority-ssl-proxy-profile-policy) | policy for ssl proxy config. |
+| [`root-ca-certificate`](#configure-authority-ssl-proxy-profile-root-ca-certificate) | Root CA certificate for ssl proxy. |
+| `show` | Show configuration data for &#x27;ssl-proxy-profile&#x27; |
+
+## `configure authority ssl-proxy-profile allowed-domains`
+
+allowed domains for ssl proxy.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile allowed-domains [<domain-name-not-ipv4>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| domain-name-not-ipv4 | Value to add to this list |
+
+#### Description
+
+##### domain-name-not-ipv4 (string)
+
+A subset of domain-name that are not IPv4 addresses
+
+Length: 1-253
+
+## `configure authority ssl-proxy-profile client-certificate`
+
+Client certificate for ssl proxy.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile client-certificate [<client-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| client-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### client-certificate-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured client certificate.
+
+## `configure authority ssl-proxy-profile ignore-server-authentication`
+
+If this option is not set, all the sessions where the server sends self-signed certificates are dropped when errors are encountered.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile ignore-server-authentication [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority ssl-proxy-profile name`
+
+unique name of the profile.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
+#### Description
+
+##### name-id (string)
+
+A string identifier which only uses alphanumerics, underscores, or dashes, and cannot exceed 63 characters.
+
+Must contain only alphanumeric characters or any of the following: _ -
+Length: 0-63
+
+## `configure authority ssl-proxy-profile policy`
+
+policy for ssl proxy config.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile policy [<ssl-proxy-policy>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ssl-proxy-policy | The value to set for this field |
+
+#### Description
+
+##### ssl-proxy-policy (enumeration) (required)
+
+Predefined policies for ssl forward proxy
+
+Options:
+
+- none:      No SSL Proxy policy.
+- weak:      Weak cipher SSL Proxy policy.
+- medium:    Medium cipher SSL Proxy policy.
+- strong:    Strong cipher SSL Proxy policy.
+
+## `configure authority ssl-proxy-profile root-ca-certificate`
+
+Root CA certificate for ssl proxy.
+
+#### Usage
+
+```
+configure authority ssl-proxy-profile root-ca-certificate [<trusted-ca-certificate-ref>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| trusted-ca-certificate-ref | The value to set for this field |
+
+#### Description
+
+##### trusted-ca-certificate-ref (leafref) (required)
+
+This type is used by other entities that need to reference configured trusted ca certificate.
 
 ## `configure authority step`
 
