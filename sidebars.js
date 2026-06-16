@@ -395,6 +395,7 @@ module.exports = {
           "config_syslog_tls",
           "config_webserver_certs",
           "howto_trusted_ca_certificate",
+          "sec-ssl-fwd-proxy",
           "config_password_security",
           "config_password_policies",
           "howto_reset_user_password",

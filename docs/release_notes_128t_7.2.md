@@ -55,7 +55,7 @@ This issue is currently being addressed by engineering. However, if your deploym
 
 As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
 
-In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_quickstart_byol_conductor_aws.md) or [Azure](intro_installation_byol_azure_conductor.md).
+In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.md) or [Azure](intro_installation_byol_azure_conductor.md).
 
 When the conductor is initially upgraded to an image-based installation, it will be upgraded as a package-based system. This is because the system does not understand how to handle image-based delivery until it is running 6.3 software. Once the conductor is running 6.3 all router upgrades will be treated as image-based upgrades and any subsequent conductor upgrade will be treated as image-based. Therefore, it is possible that issues related to disk usage on conductor may not arise until a subsequent upgrade of the conductor beyond the initial step to 6.3.
 
@@ -67,13 +67,15 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.0-14r1 
+## Release 7.2.0-23r1 
 
-**Beta Release Date:** May 29, 2026
+**Release Date:** June 23, 2026
 
 ### New Features
 
 - **I95-25150 AES-GCM Encryption:** AES-GCM is now supported as a higher-performance encryption and authentication algorithm, replacing the previous AES-CBC + HMAC-SHA approach. AES-GCM combines encryption and authentication in a single operation, reducing per-packet processing overhead. The implementation includes frequent key rotation, per-path unique keys to reduce the cryptographic load on any single key, and a deterministic incrementing nonce scheme to prevent nonce reuse. For more information, see [AES-GCM Encryption](sec_security_policy.md#aes-gcm-encryption). 
+------
+- **I95-55344 SSL Forward Proxy:** SSL Forward Proxy uses signed, trusted certificates to allow the SSR to perform a man-in-the-middle (MITM) function that decrypts and re-encrypts HTTPS traffic, and supports IDP and AV scans of traffic at that time. For more information, see [Configure SSL Forward Proxy](sec-ssl-fwd-proxy.md).
 ------
 - **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see [Path MTU Discovery](config_pmtu.md).
 ------
@@ -86,32 +88,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-64645 Certificate Management - CSR Improvements:** Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#peering-identity-via-subject-alternative-name-uri) for details.
 ------
 - **I95-64845 Add Additional Audit Events for Certificate APIs:** Adds several audit events and logs for certificate activity. See the [Audit Events and Logging](sec-cert-based-encrypt.md#audit-eventslogging) section of Certificate-based Security Encryption for additional information.
-
-<!---### New Features
-
-- **I95-25150 AES-GCM Encryption:** Added support for AES-GCM as an encryption and authentication algorithm. AES-GCM provides improved performance over AES-CBC + HMAC-SHA by combining encryption and authentication into a single operation.
-------
-- **I95-34472 Waypoint Pool Exhaustion Monitoring:** Added visibility into waypoint pool utilization including a `show waypoint` command and a waypoint pool exhaustion alarm with a fixed threshold. This allows operators to monitor, be alerted, and avoid outage-inducing pool exhaustion events.
-------
-- **I95-53406 SSR400/SSR440 PoE Controller Support:** Added support for the Microchip PoE controller on SSR400/SSR440 devices, including status reporting, logging via I2C, and in-field firmware upgrade support for the active PoE controller model.
-------
-- **I95-54236 SSR400 Hot Swappable SFP/SFP+:** The SSR400 series now supports hot swappable SFP/SFP+ modules.
-------
-- **I95-55344 SSL Decrypt Using Forward Proxy:** Enabled SSL forward proxy, ATP, anti-virus, anti-malware, and DNS sinkhole capabilities on SSR, strengthening the security stack for Mist deployments.
-
-  - **I95-60459 Add support for proxy-ip in onboarding config:** Added `management-proxy` address and port fields to the onboarding configuration schema, allowing routers to specify a proxy for management connectivity during the onboarding process.
-------
-- **I95-61693 DHCP INFORM Response Improvements:** Resolved an issue where DHCP INFORM packets were not correctly answered. The DHCP ACK response now includes the requested options, ensuring clients retain vital information such as DNS servers, domain name, and gateway.
-------
-- **I95-63012 AppID Scale Optimization:** Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.
-------
-- **I95-63030 HA Control Link Redundancy:** Added support for redundant HA control links in both Mist and Conductor managed deployments. This includes configurable HA control links, redundant link/port status visibility, and alerts for degraded state when some redundant links are down.
-------
-- **I95-64149 Enhanced Security Key Management Events:** Added comprehensive event and alarm support for Enhanced Security Key Management workflows, covering both successful and failed operations for private key creation/deletion, CSR generation, and certificate ingestion.
-------
-- **I95-64435 SSR4xx FIPS Compliant EEPROM:** Migrated SSR400/SSR440 devices to a FIPS-compliant EEPROM encryption scheme, replacing the previously used RSA ES cipher. Existing inventory remains forward compatible with new SSR software.
-------
-- **WAN-3182 In-band Management Inbound Apps:** Added support for configuring inbound applications (ICMP, SNMP) to in-band management addresses from selected networks in **Mist-managed deployments**. This allows per-network access control for management traffic. -->
 
 ### Resolved Issues 
 
@@ -203,34 +179,3 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65019 TLS client peer-verification skipped when no CA certificate is configured:** Resolved a critical issue where TLS client connections without a configured CA certificate silently skipped peer verification.
 
-<!--- **WAN-4340 Enable Force Up on bond interface causes bond to go down:** Resolved an issue where applying the `Enable Force Up` configuration at the VLAN sub-interface level (instead of the physical or bond level) caused an error that brought down the entire bond interface.
-------
-- **WAN-4341 Auto-generated service route name changes when modifying bond interfaces:** Resolved an issue where adding or removing an interface from a bond interface caused auto-generated service route names to change, breaking additional CLI references and causing configuration transformation errors.
-------
-- **WAN-4510 Multiple syslog server configuration failure:** Resolved an issue where defining more than one syslog server in the SSR device configuration caused a failure in the syslog service.
-------
-- **WAN-4513 Enable syslog policy for URL filtering:** Resolved an issue where the syslog policy was not being applied for URL filtering events.
-------
-- **WAN-4592 App-ID conflict with shared internet application for overlay and local breakout:** Resolved an issue where using a single internet application for both overlay and local breakout created a `HierarchicalRelationNotFound` error when application identification was used on the overlay, causing traffic drops on the hub.
-------
-- **WAN-4612 ICMPv6 probes not working for multi-hop targets:** Resolved an issue where ICMPv6 probe targets that were not directly connected (multiple hops away) failed because the gateway-ip was not being generated for the associated IPv6 service-routes.
-------
-- **WAN-4641 BGPv6 over SVR missing next-hop-self configuration:** Resolved an issue where the `next-hop-self true` configuration was not being automatically set for BGPv6 over SVR neighbors, causing advertised prefixes to use incorrect next-hop addresses and preventing proper traffic routing across the overlay.
-------
-- **WAN-4699 Per-service app rate limiting in Wheeljack:** Added support for per-service application rate limiting in Wheeljack, enabling configuration of upstream/downstream bandwidth limits at both the service and client level.
-------
-- **WAN-4709 Route reflector config not applied for IPv6 peers:** Resolved an issue where route-reflector client configuration was not automatically applied for IPv6 BGP SVR spoke peers in the IPv6 Unicast address family on hub routers.
-------
-- **WAN-4712 Update result directory with filtered and renamed files:** Updated the configuration transformation result directory to use filtered and renamed output files for improved analysis.
-------
-- **WAN-4724 Persist Configuration Diffs in database for analysis:** Added persistence of configuration difs to a database for post-transformation analysis and debugging.
-------
-- **WAN-4731 Wheeljack changes for ext_ip6 in vpn_endpoints:** Added Wheeljack support for the `ext_ip6` field in VPN endpoints, enabling IPv6 external address configuration for overlay connections.
-------
-- **WAN-4738 Fix outdated file paths after directory restructuring:** Updated file paths that became outdated after a directory restructuring in the configuration transformation codebase.
-------
-- **WAN-4740 IPv6 overlay traffic failure between HubLAN and SpokeLAN:** Resolved an issue where wired client IPv6 traffic failed between HubLAN and SpokeLAN via overlay because the FIB entry for the overlay-v6 application policy was missing vector, next-hop, and cost information.
-------
-- **WAN-4744 Fix list-key inconsistency in diff aggregation:** Resolved an issue where inconsistent list-key handling during configuration diff aggregation could produce incorrect transformation results.
-------
-- **WAN-4747 IPv6 routing policy missing catch-all accept statement:** Resolved an issue where the `set-next-hop-self` statement was removed from IPv6 routing policies, which caused the policies to lack a catch-all accept statement, breaking IPv6 overlay traffic between hub and spoke sites. -->
