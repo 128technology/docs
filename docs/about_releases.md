@@ -59,12 +59,12 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 | Release 7.0 | [7.0.1](release_notes_128t_7.0.md#release-701-1r1) | October 14, 2025 | [7.0.1](release_notes_128t_7.0.md#release-701-1r1) | LTS | August 24, 2028 | February 24, 2029 |
 | Release 6.3 | [6.3.0](release_notes_128t_6.3.md#release-630-107r1) | September 30, 2024 | [6.3.7-6-sts](release_notes_128t_6.3.md#release-637-6-sts) | STS | May 6, 2026 | November 6, 2026 |
 | Release 6.2 | [6.2.0](release_notes_128t_6.2.md#release-620-39r1) | November 16, 2023 | [6.2.11-lts](release_notes_128t_6.2.md#release-6211-9-lts) | LTS | September 6, 2026 | March 6, 2027 |
-| Release 6.1 | [6.1.0](release_notes_128t_6.1.md#release-610-55r1) | April 14, 2023 | [6.1.13-lts](release_notes_128t_6.1.md#release-6113-7-lts) | LTS | September 22, 2025 | March 22, 2026 |
 
 ## Out of Support
 
-| Version     | Release          | End of Engineering support | End of Support     |
+| Version     | Release           | End of Engineering support | End of Support     |
 | ----------- | ----------------- | -------------------------- | ------------------ |
+| Release 6.1 | April 14, 2023    | September 22, 2025         | March 22, 2026     |
 | Release 6.0 | July 18, 2022     | November 30, 2023          | November 30, 2023  |
 | Release 5.6 | March 16, 2023    | June 16, 2024              | December 16, 2024  |
 | Release 5.5 | August 11, 2022   | November 19, 2023          | May 19, 2024       |

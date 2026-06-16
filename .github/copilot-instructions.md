@@ -139,10 +139,13 @@ Add the doc id to the appropriate section of [sidebars.js](../sidebars.js). Do *
   - *authority* — the top-level config domain.
   - *PCLI* — the SSR command-line interface.
 - **Punctuation in lists and tables:**
-  - If **any** entry in a bulleted list or table column contains internal punctuation (comma, colon, semi-colon), **every** entry in that list or column must end with a period.
-  - Exception: entries that are only one or two words, or are names/categories (e.g., column headers, labels) do not require a closing period.
-  - *Good:* `| Prevents generation for that neighbor. |` (other rows have commas)
-  - *Bad:* `| Prevents generation for that neighbor |` (missing period when siblings have punctuation)
+  - Short entries — single words, brief phrases, names, identifiers, labels, values, commands, port numbers, version strings, and similar fragments — do **not** require a closing period, even if other entries in the same list or column do.
+  - Descriptive entries — longer, sentence-like text typically found in `Description`, `Output`, `Message Displayed`, or `Notes` columns — follow this rule: if the text contains any internal punctuation (comma, colon, semicolon, em dash, or similar), it **must** end with a period.
+  - Consistency within a group: if **any** descriptive entry in a bulleted list or table column contains internal punctuation, then **every** descriptive entry in that same list or column must end with at least a closing period. Short-fragment entries (per the first bullet) are exempt and remain unpunctuated.
+  - Evaluate each table column independently. A column of short identifiers can stay period-free while a sibling `Description` column in the same table requires periods.
+  - *Good:* `| 930/TCP | Encrypted SSH connection that bears most router-to-conductor IPC. |` (short identifier needs no period; the descriptive cell has a comma-bearing sibling, so it ends with a period)
+  - *Good:* `| Prevents generation for that neighbor. |` (a sibling descriptive row contains a comma)
+  - *Bad:* `| Prevents generation for that neighbor |` (descriptive sibling has punctuation, so this is missing its closing period)
 - **Capitalization after colons:** If what follows a colon is a complete sentence, capitalize the first word. *Good:* `generates two sets: The _peer_ objects that form…`. *Bad:* `generates two sets: the _peer_ objects that form…`.
 - **No empty table headers:** Do not use tables with empty header cells (e.g., `| | |`) for visual separation. Every table must have meaningful column headers. If you need a key-value layout, use a definition list or a two-column table with headers like `Property` / `Value` or `Field` / `Description`.
 - **Horizontal rules (`---`):** Do not insert `---` between subsections within the same heading level purely for visual spacing. Use them only to separate fundamentally different major sections (e.g., between "User-Facing Configuration" and "Infrastructure Configuration"). Markdown headings already provide visual separation.
