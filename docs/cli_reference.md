@@ -7005,8 +7005,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-candidate-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-candidate-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for `authority` |
+| `generated` | Show configuration data for `generated` |
 
 ## `show config disk-cache`
 
