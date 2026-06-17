@@ -23,6 +23,10 @@ In dual-router mode, two routers are configured, each with one node. This mode i
 
 These modes provide flexibility in deploying high availability solutions based on the specific requirements of the network architecture.
 
+:::note
+Detailed explanation for both modes can be found [here](concepts_ha_theoryofoperation.md).
+:::
+
 :::warning
 Version 6.x supports dual-node mode only and dual-router mode is not supported. On version < 6.x, dual-node is not supported.
 :::
@@ -381,26 +385,20 @@ To see a full blown configuration and the configuration it generates, look at `C
 
 ### Validation
 
-The following criteria need to be met in order for the cloud-ha plugin to take effect for a specific group:
+The following requirements must be met for the cloud-ha plugin to generate configuration for a group. Configuration generation will fail for any group that does not satisfy these conditions.
 
-* Priorities across all members in a group must be unique.
-* `remote-health-network` and `cloud-redundancy-plugin-network` must be a valid IP address.
-* The `peer-reachability-timeout` for a group must be at least twice the amount of time as the `health-interval`.
-* `cloud-redundancy-group` referenced by the node's `cloud-redundancy-membership` must exist.
-* `auto-discover-route-table` must be disabled to configure `tgw-attachment-id`.
-* `tgw-attachment-id` must be configured on both members when `auto-discover-route-table` is disabled for AWS TGW solution type.
-* `tgw-route-table-id` must be configured when `auto-discover-route-table` is disabled for AWS TGW solution type.
-* At least one `extra-route-table` must be configured when `auto-discover-route-table` is disabled for Azure VNET solution type.
-
-Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on the Conductor for the errors causing the config to be invalid.
-
-### Limitations
-
-* Properties `dns-server` and `extra-route-table` can only be configured in dual-node HA mode.
-* Solution types `aws-vpc`, `aws-tgw` and `gcp-vpc` can only be configured in dual-node HA mode.
-* `tgw-attachment-id` can only be configured in AWS TGW solution type.
-* `shared-phys-address` cannot be configured in any cloud HA mode.
-* Router cannot be a member of multiple cloud redundancy groups.
+* Each member in a group must be assigned a unique priority value.
+* `remote-health-network` and `cloud-redundancy-plugin-network` must each specify a valid IP prefix.
+* `peer-reachability-timeout` must be set to at least twice the value of `health-interval` to ensure health reports can arrive before the plugin declares a peer unreachable.
+* The `cloud-redundancy-group` referenced in a node's `cloud-redundancy-membership` must exist in the authority.
+* `tgw-attachment-id` and `auto-discover-route-table` are mutually exclusive; you must set `auto-discover-route-table` to `false` before configuring `tgw-attachment-id`.
+* When `auto-discover-route-table` is disabled for the `aws-tgw` solution type, `tgw-attachment-id` must be configured on both member nodes.
+* When `auto-discover-route-table` is disabled for the `aws-tgw` solution type, `tgw-route-table-id` must also be configured.
+* When `auto-discover-route-table` is disabled for the `azure-vnet` solution type, at least one `extra-route-table` must be configured.
+* `dns-server` and `extra-route-table` can only be configured in dual-node HA mode.
+* Solution types `aws-vpc`, `aws-tgw`, and `gcp-vpc` are supported in dual-node HA mode only.
+* `tgw-attachment-id` is only applicable to the `aws-tgw` solution type and cannot be used with any other solution type.
+* `shared-phys-address` is not supported in any cloud HA deployment mode.
 
 ### Configuration Assumptions
 
@@ -684,6 +682,195 @@ Tue 2020-10-09 16:42:50 UTC
 There are 0 shelved alarms
 Completed in 0.10 seconds
 ```
+
+---
+
+If the cloud-ha namespace cannot resolve DNS names, an alarm will be created.
+
+Example:
+```
+admin@combo-west.RTR_WEST_COMBO# show alarms
+Thu 2026-04-23 01:38:56 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== ==========================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== ==========================================================================
+ node0:23   2026-04-23 01:37:23   CRITICAL   cloud-ha-azure          PLATFORM   DNS resolution is not working in the cloud-ha namespace
+
+There are no shelved alarms
+```
+
+---
+
+If the managed identity or service account is missing one or more required permissions, an alarm will be created.
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 04:45:35 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== =============================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== =============================================================================
+ node0:3094   2026-04-28 12:15:56   CRITICAL   cloud-ha-aws         PLATFORM    Missing permissions: ec2:DescribeRouteTables.
+
+There are no shelved alarms
+```
+
+---
+
+If calls to the cloud provider's API are failing, an alarm will be created.
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 02:50:29 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== =============================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== =============================================================================
+ node0:26   2026-04-23 02:50:21   MAJOR      cloud-ha-azure          PLATFORM   azure API calls are failing. Check network connectivity and service health.
+
+There are no shelved alarms
+Completed in 0.01 seconds
+```
+
+---
+
+If the instance cannot reach the cloud metadata endpoint, an alarm will be created.
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 04:27:54 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== ==========================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== ==========================================================================
+ node0:24   2026-04-23 04:27:10   CRITICAL   cloud-ha-azure          PLATFORM   azure metadata service is unreachable
+
+There are no shelved alarms
+```
+
+---
+
+If the VM is missing one or more required tags for cloud-ha to manage route tables, an alarm will be created.
+
+**Azure:** Required tags per route table entry:
+- `SSR-CLOUD-HA-<TAG_IDX>-SUBSCRIPTION-ID`
+- `SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP`
+- `SSR-CLOUD-HA-<TAG_IDX>-ROUTE-TABLE-NAME`
+
+**AWS:** Required tags per route table entry:
+- `SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID`
+- `SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID`
+
+**GCP:** Required labels per VPC:
+- `ssr-cloud-ha-<TAG_IDX>-target-vpc`
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 04:45:35 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== =============================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== =============================================================================
+ node0:26   2026-04-23 04:45:18   MAJOR      cloud-ha-azure          PLATFORM   Invalid or incomplete cloud-ha route table tags found on VM: Tag group '1':
+                                                                                Missing required tags: RESOURCE-GROUP. Found tags: ['ROUTE-TABLE-NAME',
+                                                                                'SUBSCRIPTION-ID']. Each tag must include SUBSCRIPTION-ID, RESOURCE-GROUP,
+                                                                                and ROUTE-TABLE-NAME.
+
+There are no shelved alarms
+```
+
+---
+
+If auto-discovery found no route tables to manage, an alarm will be created.
+
+This may occur due to the following reasons:
+
+**Azure:**
+- No `SSR-CLOUD-HA-<TAG_IDX>` tags exist on the VM.
+- VNET scanning found no route tables associated with the VM's network interfaces.
+
+**AWS:**
+- No `SSR-CLOUD-HA-<TAG_IDX>` tags exist on the VM.
+- TGW route table scanning found no route tables associated with the VM's TGW attachments.
+
+**GCP:**
+- No `ssr-cloud-ha-<index>-target-vpc` labels exist on the VPC.
+- VPC scanning found no routes associated with the labeled VPCs.
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 05:25:04 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== ============================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== ============================================================================
+ node0:31   2026-04-23 05:24:41   MAJOR      cloud-ha-azure          PLATFORM   VNET scanning found no route tables associated with the VM's network
+                                                                                interfaces. No route tables found in subnets connected to the VM's network
+                                                                                interfaces.
+
+There are no shelved alarms
+```
+
+---
+
+If one or more of the configured destination prefixes are not valid CIDR notation (for example, `2.2.2.2/24`), an alarm will be created.
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 05:25:04 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== ============================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== ============================================================================
+node0:47   2026-05-05 11:02:09      MAJOR      cloud-ha-azure        PLATFORM    Invalid prefixes: 2.2.2.2/24. Prefixes must be a valid CIDR notation.
+
+There are no shelved alarms
+```
+
+---
+
+If a manually created static route has the same destination CIDR as a route already managed by cloud-ha, an alarm will be created.
+
+:::note
+This is GCP only alarm
+:::
+
+Example:
+```
+admin@node0.azure-ha# show alarms
+Thu 2026-04-23 04:45:35 UTC
+✔ Retrieving alarms...
+
+========== ===================== ========== ======================= ========== =============================================================================
+ ID         Time                  Severity   Source                  Category   Message
+========== ===================== ========== ======================= ========== =============================================================================
+node1:444   2026-04-30 02:28:27   MINOR      cloud-ha-gcp            PLATFORM    Manual route 'unknown' has same destination (unknown) as cloud-ha route 'unknown'
+
+There are no shelved alarms
+```
+
+---
+
+For Azure, AWS, and GCP, ensure that both the local and remote HA nodes manage the same set of route tables to guarantee correct failover behavior. Discrepancies in route table tags between nodes will also raise an alarm.
+
+- **Azure:** Verify that the `SSR-CLOUD-HA-<TAG_IDX>` tags on both nodes are identical and point to the same subscription, resource group, and route table.
+- **AWS:** Ensure that the `SSR-CLOUD-HA-<TAG_IDX>` tags on both nodes reference the same TGW route table ID. The TGW attachment IDs should differ between nodes but must correspond to the same TGW route table.
+- **GCP:** Confirm that the `ssr-cloud-ha-<index>-target-vpc` labels on both nodes are consistent and reference the same VPCs.
+
 
 ### Router Version Incompatibility
 
