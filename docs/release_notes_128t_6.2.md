@@ -32,7 +32,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVEs have been identified and resolved in this release:** CVE-2025-61662, CVE-2026-1519, CVE-2026-4519, CVE-2026-9256, CVE-2026-25646, CVE-2026-25749, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-28417, CVE-2026-28421, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33412, CVE-2026-33526, CVE-2026-40460, CVE-2026-40701, CVE-2026-42926, CVE-2026-42934, CVE-2026-42945, CVE-2026-42946, CVE-2026-43284, CVE-2026-43500, CVE-2026-46300, CVE-2026-46333.
 ------
-- **I95-63873 DHCP leases not showing in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
+- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-65017, I95-65018, I95-65021, I95-65033, I95-65039, I95-65054, I95-65055, I95-65211, I95-65225, I95-65236, I95-65249.
+------
+- **I95-63873 DHCP leases not showing in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in `no leases found`. Also resolved an issue where viewing the router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
 ------
 - **I95-63895 SSR transmitting packets larger than the configured MTU:** Resolved an issue where the SSR transmitted 1518-byte packets, exceeding the configured MTU of 1500 bytes.
 ------
@@ -42,15 +44,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-64811 Highway crash causing session drops:** Resolved an issue where the highway process could crash with a core dump, resulting in session drops and a brief loss of connectivity until traffic failed over to the standby node.
 ------
-- **I95-64978 Highway crash on head-end router causing interface flaps:** Resolved an issue where a data race on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash with a core dump, resulting in interface flaps. Access to these fields is now properly synchronized.
+- **I95-64978 Highway crash on head-end router causing interface flaps:** Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash with a core dump, resulting in interface flaps. Access to these fields is now properly synchronized.
 ------
 - **I95-65128 nodeMonitor crash loop on hub node:** Resolved an issue where configuring a device interface with an empty interface name could cause the nodeMonitor process to enter a continuous crash loop, rendering the node unusable. Such configurations are now prevented.
 ------
 - **I95-65131 CPS performance degradation on SSR1000-series platforms:** Resolved an issue where connections-per-second (CPS) performance degraded by approximately 10% on SSR1000-series platforms, such as the SSR1300.
 ------
 - **I95-65171 TSI download from Web Interface missing file extension:** Resolved an issue where a Tech Support Info (TSI) bundle downloaded from the SSR Web Interface had no file extension and could not be extracted with standard archive tools. Downloaded TSI files now include the proper file extension.
-------
-- **I95-65017, I95-65018, I95-65021, I95-65033, I95-65039, I95-65054, I95-65055, I95-65211, I95-65225, I95-65236, I95-65249:** The following issues have been delivered to increase the overall security posture of the SSR.
 
 ## Release 6.2.11-9-lts
 
