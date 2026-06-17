@@ -3,19 +3,23 @@ title: Configure SSL Forward Proxy
 sidebar_label: Configure SSL Forward Proxy
 ---
 
-SSL Forward Proxy uses signed, trusted certificates to allow the SSR to perform a man-in-the-middle (MitM) function that decrypts and re-encrypts HTTPS traffic. This also allows IDP and AV scans of the traffic to be performed at that time. By installing CA signed certificates into the Trusted Root Certification Authorities store of all client end-users' browsers and devices, malicious servers are prevented from performing MITM impersonation attacks against the client endpoints. 
+SSL Forward Proxy uses signed, trusted certificates to allow the SSR to perform a man-in-the-middle (MitM) function that decrypts and re-encrypts HTTPS traffic. This allows IDP and AV scans of the traffic to be performed at that time. By installing CA signed certificates into the Trusted Root Certification Authorities store of all client end-users' browsers and devices, malicious servers are prevented from performing MITM impersonation attacks against the client endpoints. 
 
-To configure an SSL Forward Proxy, follow these general steps:
+SSL Forward Proxy is used in conjuction with the IDP and Anti-Virus features available with the SSR, and can be applied on the same access policy and service. Configuring an SSL forward proxy security profile (Strong, Medium, or Weak) indicates which security cipher suite is used. For more information about the available security cipher suites, see the [Supported SSL Ciper List](https://www.juniper.net/documentation/us/en/software/junos/application-identification/topics/topic-map/security-ssl-cipher-suites-for-ssl-proxy.html#id-digital-certificates-and-certificate-authorities__supported_ciphers).
 
-* CA-Signed Certificate: For use with SSL Forward Proxy, a self-signed certificate will not work. It must be signed by a public, trusted CA. 
-* Distribute Certificates: Install the proxy's CA certificate into the Trusted Root Certification Authorities store of all client end-users' browsers and devices. If this step is missed, users will receive severe certificate trust warnings.
-* Configure Security Policies: Create an SSL Proxy profile and attach it to your WAN edge. The device will begin intercepting designated HTTPS traffic.
+The following are the high level steps necessary to configure SSL Forward Proxy:
+
+- Acquire a CA-Signed Certificate: For use with SSL Forward Proxy, a self-signed certificate will not work. It must be signed by a public, trusted CA. 
+- Distribute Certificates: Install the proxy's CA certificate into the Trusted Root Certification Authorities store of all client end-users' browsers and devices. If this step is missed, users will receive severe certificate trust warnings.
+- Configure Security Policies: Create an SSL Proxy profile and attach it to your WAN edge. The device will begin intercepting designated HTTPS traffic.
 
 :::note
 Conductor-managed deplpoyments using SSL Forward Proxy are currently only supported on SSR1200, SSR1300, SSR1400, and SSR1500.
 :::
 
-## Configuration Using the Conductor GUI:
+## Configuration Using the Conductor GUI
+
+Use the following steps to configure SSL Forward Proxy using the SSR Conductor GUI.
 
 1. From the Configuration menu, select Authority, and then click on the Authority tile. 
 
@@ -92,4 +96,51 @@ Add the SSL Profile to the Access Policy of of the service.
 6. If the Access policy you want to associate with the SSL proxy profile already exists, select it, and under **SSL Proxy Profile** select the proxy profile defined earlier.
 
 7. Click **Validate**, and **Commit**.
+
+## CLI Configuration Example
+
+The following is the above configuration shown in the CLI.
+
+```
+config 
+    authority 
+        trusted-ca-certificate      ssl-proxy-cert
+            name                    ssl-proxy-cert
+            content          			
+                (text/plain)
+            validation-mode         warn
+		exit
+
+        client-certificate          ssl-client-proxy-cert
+            name                    ssl-client-proxy-cert
+            content          
+                (text/plain)
+            validation-mode         warn
+        exit
+
+        ssl-proxy-profile           ssl-fwdproxy-profile1
+            name                    ssl-fwdproxy-profile1
+            policy                  medium
+            client-certificate      ssl-client-proxy-cert
+            root-ca-certificate     ssl-proxy-cert
+            ignore-server-authentication    false
+        exit
+		
+        service                     idp-service
+            name                    idp-service
+            enabled                 true
+            scope                   private
+
+            access-policy           Branch-idp
+                ssl-proxy-profile   ssl-fwdproxy-profile1
+                source              Branch-idp
+                permission          allow
+            exit
+        exit
+
+```
+
+
+
+
 
