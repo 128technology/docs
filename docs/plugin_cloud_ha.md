@@ -707,7 +707,7 @@ If the managed identity or service account is missing one or more required permi
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 04:45:35 UTC
 ✔ Retrieving alarms...
 
@@ -725,7 +725,7 @@ If calls to the cloud provider's API are failing, an alarm will be created.
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 02:50:29 UTC
 ✔ Retrieving alarms...
 
@@ -744,7 +744,7 @@ If the instance cannot reach the cloud metadata endpoint, an alarm will be creat
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 04:27:54 UTC
 ✔ Retrieving alarms...
 
@@ -774,7 +774,7 @@ If the VM is missing one or more required tags for cloud-ha to manage route tabl
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 04:45:35 UTC
 ✔ Retrieving alarms...
 
@@ -809,7 +809,7 @@ This may occur due to the following reasons:
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 05:25:04 UTC
 ✔ Retrieving alarms...
 
@@ -829,7 +829,7 @@ If one or more of the configured destination prefixes are not valid CIDR notatio
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 05:25:04 UTC
 ✔ Retrieving alarms...
 
@@ -851,7 +851,7 @@ This is GCP only alarm
 
 Example:
 ```
-admin@node0.azure-ha# show alarms
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Thu 2026-04-23 04:45:35 UTC
 ✔ Retrieving alarms...
 
