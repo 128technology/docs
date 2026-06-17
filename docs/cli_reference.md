@@ -7271,8 +7271,8 @@ config
 
 | command | description |
 | ------- | ----------- |
-| [`authority`](#show-config-running-authority) | Show configuration data for &#x27;authority&#x27; |
-| [`generated`](#show-config-running-generated) | Show configuration data for &#x27;generated&#x27; |
+| `authority` | Show configuration data for `authority` |
+| `generated` | Show configuration data for `generated` |
 
 ## `show config version`
 

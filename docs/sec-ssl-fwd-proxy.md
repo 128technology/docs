@@ -75,7 +75,7 @@ Create SSL-Proxy Profile using the uploaded certificates and other details.
 
 ### Add the SSL Profile to the Access Policy
 
-Add the SSL Profile to the Access Policy of of the service.
+Add the SSL Profile to the Access Policy of the service.
 
 1. Return to the Authority level.
 
