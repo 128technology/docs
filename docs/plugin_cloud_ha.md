@@ -216,7 +216,7 @@ The tagging will be on the VMs themselves.
 
 On updating BOTH nodes with tags that have the necessary information for both solutions (see example of tagging below). This information would be retrieved through the cloud specific apis by the respective cloud api agent and the tagged routing tables would be updated accordingly.
 
-## Azure tag format:
+### Azure tag format:
 ```
 subscription: SSR-CLOUD-HA-<TAG_IDX>-SUBSCRIPTION-ID 
 resource group:SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP
@@ -231,7 +231,7 @@ SSR-CLOUD-HA-0-RESOURCE-GROUP : myResourceGroup
 SSR-CLOUD-HA-0-ROUTE-TABLE-NAME: myRouteTable
 ```
 
-## AWS tag format:
+### AWS tag format:
 ```
 tgw-route-table-id: SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID
 tgw-attachment-id: SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID
@@ -254,7 +254,7 @@ SSR-CLOUD-HA-0-TGW-ROUTE-TABLE-ID : tgw-rtb-00000000000000001
 SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID: tgw-attach-00000000000000002
 ```
 
-## GCP tag format:
+### GCP tag format:
 To get the same behaviour as tags for Azure and AWS, use labels in GCP. The only information needed in order to updates the routes (there is no concept of a route table like Azure and AWS) for a VPC is to label the VPCs one wants the route to be associated with.
 ```
 ssr-cloud-ha-<index>-target-vpc
@@ -311,7 +311,7 @@ exit
 | probe-port                | port            | if: solution-type = azure-lb, default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.                                                             |     |
 | extra-route-table         | list            | if: solution-type = azure-vnet AND auto-discover-route-table: false   | A list of Azure User Defined Route (UDR) tables where custom routing entries will be injected or modified. Each entry specifies the Azure subscription ID, resource group name, and route table name.                                                             |     |
 | auto-discover-route-table | boolean         | if: solution-type = azure-vnet OR aws-tgw OR gcp-vpc, default: true   | Enables automatic discovery of Route Tables within the specified VNet/VPC. When set to 'true', the system will scan for existing UDRs instead of requiring manual entry. This flag will also trigger the router to look for tagging. If route tables are found using tagging, only those route tables will be updated.                                                             |     |
-| tgw-route-table-id        | string          | if: solution-type = aws-tgw AND auto-discover-route-table: false   | The TGW Route Table ID to modify when becoming active. Ex. tgw-rtb-00000000000000001. If this field is not specified, then you must use the `Tagging` approach to specify the information.                                                             |     |
+| tgw-route-table-id        | string          | if: solution-type = aws-tgw AND auto-discover-route-table: false   | The TGW Route Table ID to modify when becoming active. Ex. tgw-rtb-00000000000000001. If this field is not specified, then you must use the [Tagging](#tagging) approach to specify the information.                                                             |     |
 
 ### Membership
 
@@ -352,7 +352,7 @@ exit
 | enabled                         | boolean         | default: true             | Enable or disable the cloud redundancy member.                                                                                        |
 | cloud-redundancy-group          | reference       | required                  | The group that this member belongs to.                                                                                                                        |
 | dns-server                      | list: ipv4      | max-value:2               | DNS servers to be used for Cloud HA specific management traffic. Defaults specific to the solution-type are used if none are configured. to.                                                                                                                        |
-| tgw-attachment-id               | string          |                           | The TGW Attachment ID to use when this member becomes active. This field is only relevant when solution-type is aws-tgw. Ex. tgw-attach-00000000000000001. If this field is not specified, then you must use the `Tagging` approach to specify the information to.                                                                                                                        |
+| tgw-attachment-id               | string          |                           | The TGW Attachment ID to use when this member becomes active. This field is only relevant when solution-type is aws-tgw. Ex. tgw-attach-00000000000000001. If this field is not specified, then you must use the [Tagging](#tagging) approach to specify the information to.                                                                                                                        |
 | priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference.                                                                                        |
 | redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members.                                                           |
 | additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations.                                                 |
