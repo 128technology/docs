@@ -67,31 +67,23 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.0-23r1 
+## Release 7.2.0-24r1 
 
-**Release Date:** June 23, 2026
+**Release Date:** June 30, 2026
 
 ### New Features
 
 - **I95-25150 AES-GCM Encryption:** AES-GCM is now supported as a higher-performance encryption and authentication algorithm, replacing the previous AES-CBC + HMAC-SHA approach. AES-GCM combines encryption and authentication in a single operation, reducing per-packet processing overhead. The implementation includes frequent key rotation, per-path unique keys to reduce the cryptographic load on any single key, and a deterministic incrementing nonce scheme to prevent nonce reuse. For more information, see [AES-GCM Encryption](sec_security_policy.md#aes-gcm-encryption). 
 ------
-- **I95-34472 Waypoint Pool Exhaustion Monitoring:** Added visibility into waypoint pool utilization including a `show waypoint` command and a waypoint pool exhaustion alarm with a fixed threshold. This allows operators to monitor, be alerted, and avoid outage-inducing pool exhaustion events.
-------
-- **I95-53406 SSR400/SSR440 PoE Controller Support:** Added support for the Microchip PoE controller on SSR400/SSR440 devices, including status reporting, logging via I2C, and in-field firmware upgrade support for the active PoE controller model.
-------
-- **I95-54236 SSR400/SSR440 Hot Swappable SFP/SFP+:** The SSR400/SSR440 now support hot swappable SFP/SFP+ modules.
+- **I95-34472 Waypoint Pool Exhaustion Monitoring:** Added visibility into waypoint pool utilization including a `show waypoint` command that allows operators to monitor,the waypoint pool. See [`show waypoints`](cli-reference.md#show-waypoints) for more information.
 ------
 - **I95-55344 SSL Forward Proxy:** SSL Forward Proxy uses signed, trusted certificates to allow the SSR to perform a man-in-the-middle (MITM) function that decrypts and re-encrypts HTTPS traffic, and supports IDP and AV scans of traffic at that time. For more information, see [Configure SSL Forward Proxy](sec-ssl-fwd-proxy.md).
 ------
 - **I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:** The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see [Path MTU Discovery](config_pmtu.md).
 ------
-- **I95-60459 Add support for proxy-ip in onboarding config:** Added `management-proxy` address and port fields to the onboarding configuration schema, allowing routers to specify a proxy for management connectivity during the onboarding process.
-------
 - **I95-61066 Simplified Interface Naming:** Simplified Interface Naming for Cloud Images: Forwarding device-interfaces can now be configured using Linux interface names instead of PCI addresses or VMBus UUIDs. This simplifies deployment in Hyper-V and Azure environments, where VMBus UUIDs are randomly generated per VM instance and require manual discovery. Template-based configurations are now more portable across hardware changes and scaled deployments.
 ------
 - **I95-63012 AppID Scale Optimization:** Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.
-------
-- **I95-63030 HA Control Link Redundancy:** Added support for redundant HA control links in both Mist and Conductor managed deployments. This includes configurable HA control links, redundant link/port status visibility, and alerts for degraded state when some redundant links are down.
 ------
 - **I95-64149 Enhanced Security Key Management Events:** Added system audit events for all success-path PKI operations in Certificate Management — including private key generation/deletion, certificate update/deletion, and CSR deletion — complementing the existing audit coverage for CSR generation and certificate ingest. See the [Troubleshooting section of Enhanced Security Key Managament](sec_enhanced_key_mgmt.md#troubleshooting) for additional information. 
 ------

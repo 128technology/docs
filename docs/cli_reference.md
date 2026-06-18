@@ -13407,7 +13407,7 @@ Displays waypoint table information at the specified node.
 #### Usage
 
 ```
-show waypoints router <router> node <node> [<verbosity>]
+show waypoints router <router> node <node> [<detail>]
 ```
 
 ##### Keyword Arguments
@@ -13421,7 +13421,34 @@ show waypoints router <router> node <node> [<verbosity>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail \| summary (default: summary) |
+| detail | summary (default: summary) |
+
+#### Examples
+
+##### `show waypoints`
+
+```
+admin@branch.spoke# show waypoints
+Thu 2026-06-18 10:31:02 UTC
+:heavy_check_mark: Retrieving waypoint information...
+============== ============== =========== ======== ========= ============
+Source         Dest           Interface   In Use   Usage     Peak Usage
+============== ============== =========== ======== ========= ============
+172.16.3.136   172.16.3.188   wan         50000    100.00%   100.00%
+```
+
+##### `show waypoints detail`
+
+```
+admin@branch.spoke# show waypoints detail
+Tue 2026-06-16 16:32:25 UTC
+✔ Retrieving waypoint table information...
+
+============== ============== =========== ============= ======== ============= ========= ============ ======= ======== ============ ========== ========= ===========
+ Source         Dest           Interface   Total Ports   In Use   Range         Usage     Peak Usage   In Db   In Mem   In Release   Max Used   State     Ring Size
+============== ============== =========== ============= ======== ============= ========= ============ ======= ======== ============ ========== ========= ===========
+ 172.16.3.136   172.16.3.188   wan               50000    50000   16385-65533   100.00%   100.00%          0        0            0      50000   Standby        1000
+``` 
 
 ## `sync peer addresses`
 
