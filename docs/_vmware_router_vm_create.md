@@ -1,4 +1,4 @@
-<!--- VMware ESXi VM Creation for SSR Router --->
+<!--- VMware ESXi VM Creation for SSR Router ---> 
 
 ## Log In to VMware ESXi
 
@@ -66,12 +66,26 @@ Use the steps below to configure the following:
    | Setting | Value | Notes |
    |---------|-------|-------|
    | CPUs | `4` | Minimum |
-   | Scheduling Affinity | `0-3` | Set under CPU → expand |
+   | Hardware virtualization | Select (chekckbox) **Expose hardware assisited virtualization to the guest OS** | Set under CPU → expand |
    | Memory | `8 GB` | Minimum |
    | Hard Disk 1 | `62 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
 
    ![Storage Parameters](/img/dep5-vmrouter-params.png)
+
+### Boot Settings
+
+13. Click the **VM Options** tab.
+
+   ![VM Options](/img/vmware_vmoptions1.png)
+
+14. Expand **Boot Options**.
+
+15.  In the Firmware field, choose **BIOS** from the drop down. 
+
+    ![Boot Options](/img/vmware_router_vmoptions2.png)
+
+15. Click **Next**.
 
 ### Network Adapters
 
@@ -108,27 +122,6 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 12. Confirm the settings, and then click **Next**.
 
    ![Confirm Settings](/img/dep8-vm-all-settings.png) 
-
-### Boot Settings
-
-13. Click the **VM Options** tab.
-
-   ![VM Options](/img/vmware_vmoptions1.png)
-
-14. Expand **Boot Options** and configure:
-
-    | Setting | Value |
-    |---------|-------|
-    | Firmware | `EFI` |
-    | Enable UEFI secure boot | **Disabled** (no check mark) |
-
-    :::important
-    Secure Boot **must be disabled**. The SSR kernel modules are not signed, and Secure Boot will prevent the NIC drivers from loading, causing installation to fail.
-    :::
-
-    ![Boot Options](/img/vmware_vmoptions2.png)
-
-15. Click **Next**.
 
 15. Review the summary, then click **Finish**.
 
