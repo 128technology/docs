@@ -59,14 +59,14 @@ Use the steps below to configure the following:
 
 ### Virtual Hardware
 
-6. On the **Customize settings** screen, click **Virtual Hardware** and configure the following settings. 
+7. On the **Customize settings** screen, click **Virtual Hardware** and configure the following settings. 
 
   These values meet the minimum router requirements:
 
    | Setting | Value | Notes |
    |---------|-------|-------|
    | CPUs | `4` | Minimum |
-   | Hardware virtualization | Select (chekckbox) **Expose hardware assisited virtualization to the guest OS** | Set under CPU → expand |
+   | Hardware virtualization | Select (checkbox) **Expose hardware assisited virtualization to the guest OS** | Set under CPU → expand |
    | Memory | `8 GB` | Minimum |
    | Hard Disk 1 | `62 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
@@ -75,17 +75,17 @@ Use the steps below to configure the following:
 
 ### Boot Settings
 
-13. Click the **VM Options** tab.
+8. Click the **VM Options** tab.
 
    ![VM Options](/img/vmware_vmoptions1.png)
 
-14. Expand **Boot Options**.
+9. Expand **Boot Options**.
 
-15.  In the Firmware field, choose **BIOS** from the drop down. 
+10.  In the Firmware field, choose **BIOS** from the drop down. 
 
     ![Boot Options](/img/vmware_router_vmoptions2.png)
 
-15. Click **Next**.
+11. Click **Next**.
 
 ### Network Adapters
 
@@ -93,9 +93,9 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
 
    ![Network Adapter Type](/img/dep6-vmrouter-nics.png)
 
-7. Set the existing adapter's **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your WAN.
+12. Set the existing adapter's **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your WAN.
 
-8. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your LAN.
+13. Click **Add network adapter** to add a second adapter. Set its **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your LAN.
 
    :::note
    If you need help creating portgroups and connecting them to your appropriate infrastructure, please consult your VMWare documentation.
@@ -104,25 +104,25 @@ A VMware router requires at least **two VMXNet3 network adapters**: one for WAN 
    ![Add Network Adapter](/img/dep6-vmrouter-nics2.png)
 
    :::note
-   The order of the adapters (NIC 1 = WAN, NIC 2 = LAN) corresponds to the PCI addresses you will identify in [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx). Note which portgroup each adapter is connected to.
+   The order of the adapters (NIC 1 = WAN, NIC 2 = LAN) corresponds to the PCI addresses you will identify in [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx). 
    :::
 
 ### CD/DVD Media - Software Selection
 
-9. Expand **CD/DVD Drive 1**. 
+14. Expand **CD/DVD Drive 1**. 
 
    ![CD Drive 1](/img/dep-vmrouter-image-select.png)
 
-10. Place a check next to **Connect at power on**. In the dropdown to the right, select **Datastore ISO file** and then click **Browse**. The Datastore Browser opens.
+15. Place a check next to **Connect at power on**. In the dropdown to the right, select **Datastore ISO file** and then click **Browse**. The Datastore Browser opens.
 
-11. Select the `SSR-7.1.4-3.r2.el9.x86_64.ibu-v1.iso` and click **Select**.
+16. Select the `SSR-7.1.4-3.r2.el9.x86_64.ibu-v1.iso` and click **Select**.
 
    ![CD ISO Selected](/img/dep7-vm-selectversion.png)
 
-12. Confirm the settings, and then click **Next**.
+17. Confirm the settings, and then click **Next**.
 
    ![Confirm Settings](/img/dep8-vm-all-settings.png) 
 
-15. Review the summary, then click **Finish**.
+18. Review the summary, then click **Finish**.
 
    ![VM Complete](/img/dep9-vmrouter-summary.png)
