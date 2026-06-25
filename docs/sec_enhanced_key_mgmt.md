@@ -236,6 +236,8 @@ config
 The `peering-common-name` must exactly match the `common_name` field used in the certificate signing request (CSR) generated for that router. See [API Naming Rules](#api-naming-rules) for the full field mapping.
 :::
 
+When the SSR generates the CSR, it embeds the `peering-common-name` into a Subject Alternative Name (SAN) of type URI, formatted as `urn:ssr:peering:<peering-common-name>`. During HA peering, each node validates its peer by matching this SAN URI. Each node still uses its own unique certificate and private key; the certificates are not shared between nodes. Because the `peering-common-name` is configured per router, every node in an HA router carries the same `urn:ssr:peering:` URI in its individual certificate, which is what allows the peer to validate either node against the expected identity.
+
 ```
         router                            combo-east
             name                 combo-east
