@@ -39,8 +39,6 @@ If you prefer to use the CLI to perform configuration tasks, the example configu
 
 2. Accept the self-signed certificate warning, and login. 
 
-   ![Conductor Login](/img/dep-vmrouter-conductor-login.png)
-
 3. In the Conductor GUI, click on Authority. 
 
    ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
@@ -55,8 +53,12 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 ### 1a. Create the WAN Device Interface
 
 1. Under the Node, scroll to **Device Interfaces** and select **ADD**.
+
 2. Enter the name `wan-dev` and select **SAVE**.
-3. Set the following fields:
+
+   ![Name the WAN Interface](/img/dep-vmrouter-wandev1.png)
+
+3. In the Device Interface window, set the following fields:
 
    | Field | Value | Notes |
    |-------|-------|-------|
@@ -64,9 +66,12 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
    | PCI Address | _(WAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:0b:00.0` |
    | Forwarding | `true` | |
 
+   ![Device Interface window](/img/dep-vmrouter-wandev2.png)
+
 4. Select **SAVE**.
 
 ### 1b. Create the WAN Network Interface
+**YOu are HeRe
 
 1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
 2. Enter the name `wan1` and select **SAVE**.

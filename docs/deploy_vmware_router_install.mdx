@@ -66,6 +66,10 @@ These steps configure VLANs on the router.
 
    ![Edit VM settings](/img/dep-spoke-edit.png)
 
+   In the Hardware Configuration window, expand each network adapter to see the MAC address associated with the Network adapter.
+
+   ![Mac Addresses](/img/dep10-vmrouter-mac-address.png)
+
 5. Use the diagram below and the interface names for each MAC address, to associate the correct network VLAN with each interface. Use the following VM VLANs: VM Network, VLAN66, VLAN3 and VLAN4. The Network Adapter, MAC address and ge-0-x interface name(s) should match based on the MAC addresses previously determined. Save when complete.
 
    ![VLAN Identification](/img/dep-vlan-ident-spoke1.png)
@@ -77,8 +81,6 @@ ge-0-1 =00:0c:29:6c:32:ad = Adapter 2 (VLAN3)
 ge-0-2 =00:0c:29:6c:32:b7 = Adapter3 (VLAN4)
 ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
 ```
-
-   ![VLAN NIC Names](/img/dep-vlan-nic-names.png)
 
 6. Click **Save**.
 
@@ -110,9 +112,7 @@ ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
 
    ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
 
-6. Accept the self-signed certificate warning, and login. 
-
-   ![Conductor Login](/img/dep-vmrouter-conductor-login.png)
+6. Accept the self-signed certificate warning, and login using the username and the password you set earlier. 
 
 7. In the Conductor GUI, click on Authority. 
 
