@@ -316,11 +316,20 @@ exit
 
 ## Certificate Replacement or Revocation
 
-When a certificate is revoked, expired, or invalid, the SSR generates the following alarms:
+The SSR periodically validates every configured and API-ingested certificate and publishes the results to the `certificate-report` alarm. The severity reflects the most urgent certificate state found, and the alarm text lists the affected certificates:
 
-- Within a month; Minor alarm. 
-- Within a week; Major alarm. 
-- Currently expired, revoked, or otherwise invalid; Critical alarm. 
+| Certificate State | Alarm Severity | Alarm Message |
+|-------------------|----------------|---------------|
+| Expiring in less than 30 days | Minor | The following certificates are expiring in less than 30 days. |
+| Expiring in less than 7 days | Major | The following certificates are expiring in less than 7 days. |
+| Expired | Critical | The following certificates are expired. |
+| Revoked | Critical | The following certificates are revoked. |
+
+View active alarms with `show alarms`. The `certificate-report` alarm clears automatically once the offending certificates are replaced or removed.
+
+:::note
+The `certificate-report` alarm reflects only the certificate lifecycle states listed above. It does not raise a separate alarm for "invalid" certificates. Invalid peer certificates encountered at connection time are handled by Enhanced Security Key Management runtime validation (`fail-soft` or `fail-hard`), described below.
+:::
 
 In this situation, a new certificate can be added to the system. The method to add the certificate should be consistent with earlier additions; If you used the [installation procedure](howto_trusted_ca_certificate.md), it is recommended to use that method. If you used the API workflow, it is recommended to use the PUT API shown below to update the certificate.
 

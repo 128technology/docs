@@ -26,6 +26,17 @@ Enable the following on your firewall for SSR to SSR connectivity:
 
 For detailed information about different communication channels between nodes within a router, between peering routers, and between routers and their conductor, see [Intra- and Inter-System Communication](concepts_machine_communication.md)
 
+### Conductor and Router to the SSR Software Repository
+
+The conductor and routers retrieve SSR software (ISOs, installer packages, RPMs, and plugins) from the Juniper software repository during installation and upgrades. If your deployment requires that external IP addresses are locked down (no internet access), enable the following on your firewall to allow the conductor and routers access to the HPE/Juniper SSR software repository:
+
+- software.128technology.com
+- Port 443/TCP
+
+:::note
+In deployments where the routers managed by a conductor do not have internet access, you can configure the conductor as a software repository (or proxy) for those routers. In this case only the conductor requires outbound access to `software.128technology.com`. For more information, see [Upgrade the SSR Conductor](conductor_upgrade.md).
+:::
+
 ### SSR to the Mist Cloud
 
 For the most up to date SSR to Mist Cloud connectivity information, see [Juniper Mist Firewall Ports and IP Addresses for Firewall Configuration](https://www.juniper.net/documentation/us/en/software/mist/mist-management/topics/ref/firewall-ports-to-open.html).
