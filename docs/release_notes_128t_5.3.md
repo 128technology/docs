@@ -27,7 +27,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------
-- **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular. 
+- **I95-38244 Router Page search enhanced:** Searches on the Routers page can now be targeted to specific columns using the search selector.
 ------
 - **I95-38445 [GUI Session Capture](ts_packet_capture.md#session-capture-in-the-gui):** Added pages to the user interface that allow you to view and configure capture information.  
 ------
@@ -87,7 +87,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-40473 API Username not being recorded:** Resolved an issue where the `modify_user` event was omitting the `fullName` modified field.
 ------
-- **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
+- **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the `128T-5.1.3-1.el7.OTP.v3.x86_64.iso` ISO.
 ------
 - **I95-40577 Import certificate webserver not copying the private key:** This issue has been resolved.
 ------

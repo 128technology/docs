@@ -6,6 +6,7 @@ module.exports = {
       "about_svr_savings",
       "about_releases",
       "about_support_policy",
+      "config_firewall_ports",
     ],
     "Deployment Guides": [
       "deploy_guides_overview",
@@ -110,6 +111,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_5.0",
           "release_notes_byol_4.0",
           "release_notes_byol_3.0",
           "release_notes_byol_2.0",
@@ -120,7 +122,6 @@ module.exports = {
     "Hardware Support":[
       "supported_devices_overview",
       "intro_system_reqs",
-      "config_firewall_ports",
       "about_supported_platforms",
       "about_certified_platforms",
       "concepts_ssr_chassis_manager",
@@ -432,11 +433,18 @@ module.exports = {
           "concepts_config_integrity",
           "sec-disable-console-output",
           "sec-disable-ports",
+          "config_factory_reset",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Certificate Management",
+        "items": [
+          "concepts_certificate_management",
           "config_custom_certs",
           "sec-cert-based-encrypt",
           "cert_validation_requirements",
           "sec_enhanced_key_mgmt",
-          "config_factory_reset",
         ],
       },
       {
