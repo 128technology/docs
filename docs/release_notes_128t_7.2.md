@@ -67,7 +67,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.0-27r1 
+## Release 7.2.0-28r1 
 
 **Release Date:** June 30, 2026
 
@@ -88,7 +88,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-63012 AppID Scale Optimization:** Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.
 ------
 - **I95-64149 Enhanced Security Key Management Events:** Added system audit events for all success-path PKI operations in Certificate Management — including private key generation/deletion, certificate update/deletion, and CSR deletion — complementing the existing audit coverage for CSR generation and certificate ingest. See the [Troubleshooting section of Enhanced Security Key Managament](sec_enhanced_key_mgmt.md#troubleshooting) for additional information. 
-
 ------
 - **I95-64435 SSR400/SSR440 FIPS Compliant EEPROM:** Migrated SSR400/SSR440 devices to a FIPS-compliant EEPROM encryption scheme, replacing the previously used RSA ES cipher. Existing inventory remains forward compatible with new SSR software.
 ------
@@ -284,5 +283,9 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-64407 Alternate SHA ciphers (256/384/512) not working properly with ESKM:** SSR 7.1.3 and 7.2.0 introduce `sha384` and `sha512` as configurable options for the `hmac-cipher` field on security policies, alongside a new internal data structure that tracks metadata keys per HMAC mode and cipher combination. 
 
   In deployments with peers running different versions of software and sharing security policies, configuring `hmac-cipher sha384` or `hmac-cipher sha512` in a fabric where any peer has not yet been upgraded to 7.2.0 or 7.1.3,  those older versions of software will not recognize `hmac-cipher sha384` or `hmac-cipher sha512`. These devices will continue to run `sha-256-128`. Currently, no alarm or warning will be generated, and there is no performance impact.
+------
+- **I95-65609 After upgrading using Secure Conductor Onboarding and reaching the Syncronized state, routers return to Waiting:** An issue has been identified for any upgrade where 128T processes start slowly relative to the SCO server could produce this symptom for all previously-onboarded routers. 
 
-
+  *Workaround:* Restart the Secure Conductor Onboarding service: `systemctl restart 128T-secure-onboarding-server`. 
+------
+- **I95-65667 Rare case of an Automated Provisioner crash:** In some cases, an Automated Provisioner crash has been encountered. The Automated Provisioner recovers on it's own, and no loss of functionality or data is experienced. This will be addressed and resolved in a future release. 
