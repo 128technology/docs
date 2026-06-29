@@ -71,10 +71,12 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 4. Select **SAVE**.
 
 ### 1b. Create the WAN Network Interface
-**YOu are HeRe
 
 1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
 2. Enter the name `wan1` and select **SAVE**.
+
+   ![New Network Interface](/img/dep-vmrouter-wandev3.png)
+
 3. Set the following fields:
 
    | Field | Value | Notes |
@@ -86,14 +88,22 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
    | Source NAT | `true` | Required for management over forwarding |
    | Management | `true` | Enables management over forwarding on this interface |
 
+   ![WAN Basic Info](/img/dep-vmrouter-wandev4.png)
+
 4. Scroll down to **Management Vector** and select **ADD**.
-   - Enter name `mgmt-vec-wan` and priority `10`.
+   - Enter name `mgmt-vec-wan` and priority `100`.
    - Select **SAVE**.
 
+   ![Management Vector](/img/dep-vmrouter-wandev5.png)
+
 5. Scroll down to **Neighborhoods** and select **ADD**.
+
+   ![Neighborhood Name](/img/dep-vmrouter-wandev6.png)
+
    - Select `internet` as the neighborhood name.
    - Verify **Topology** is set to `spoke`.
-   - Select **SAVE**.
+
+   ![Topology](/img/dep-vmrouter-wandev7.png)
 
 6. Select **SAVE**.
 
@@ -115,7 +125,7 @@ The LAN interface (NIC 2) connects to the branch LAN and assigns the `corp` tena
 
 4. In the New Device Interface window, add the LAN device name `lan`, and click **SAVE**. This adds a physical device name for you to assign your LAN interface.
 
-Keep this table until it is deemed unnecessary:
+   ![New LAN](/img/dep-vmrouter-wandev8.png)
 
 Set the following fields:
 
@@ -128,6 +138,10 @@ Set the following fields:
 ### 2b. Create the LAN Network Interface
 
 1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+
+
+![Add LAN1](/img/dep-vmrouter-wandev9.png)
+
 2. Enter the name `lan1` and select **SAVE**.
 3. Set the following fields:
 
@@ -136,10 +150,11 @@ Set the following fields:
    | Type | `external` | |
    | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
 
+   ![External Corp](/img/dep-vmrouter-wandev10.png)
+
 4. Scroll down to **Interface Addresses** and select **ADD**.
    - IP Address: `192.168.1.1`
    - Prefix Length: `24`
-   - Select **SAVE**.
 
 5. Select **SAVE**.
 
@@ -152,6 +167,8 @@ Configure DNS so the router can resolve FQDNs for conductor connectivity and sof
 3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
 4. Select **SAVE**.
 
+   ![Interface and DNS addresses](/img/dep-vmrouter-wandev11.png)
+
 ## 4. Create the Internet Service Route
 
 The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
@@ -159,6 +176,9 @@ The service route directs traffic matched by the `Internet-Traffic` service out 
 1. Return to the **Router** level.
 2. Scroll to **Service Routes** and select **ADD**.
 3. Enter the name `internet-route` and select **SAVE**.
+
+   ![Service Route Name](/img/dep-vmrouter-wandev12.png)
+
 4. Set the following fields:
 
    | Field | Value |
@@ -166,10 +186,14 @@ The service route directs traffic matched by the `Internet-Traffic` service out 
    | Service Name | `Internet-Traffic` |
    | Service Route Type | `service-agent` |
 
+   ![Service Route Details](/img/dep-vmrouter-wandev13.png)
+
 5. Scroll to **Next Hop** and select **ADD**.
    - Node: `node0`
    - Network Interface: `wan1`
    - Select **SAVE**.
+
+   ![New Next Hop](/img/dep-vmrouter-wandev14.png)
 
 6. Select **VALIDATE** and **COMMIT**.
 
@@ -189,6 +213,6 @@ After committing, the conductor pushes the following configuration to `Spoke1`. 
 
 ## Next Step
 
-Proceed to the next step.
+Congratulations! At this point your router is ready for your testing and deployment!
 
 
