@@ -18,7 +18,8 @@
     "^https://json-schema\\.org",
     "^https://aws\\.amazon\\.com",
     "^https://docs\\.aws\\.amazon\\.com",
-    "^https://thekelleys\\.org\\.uk"
+    "^https://thekelleys\\.org\\.uk",
+    "^https://www\\.hpe\\.com/psnow/doc/PSN1014689145USEN\\.pdf"
   ],
   "retry": true,
   "retryErrors": true,
