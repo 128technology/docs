@@ -67,7 +67,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.0-28r1 
+## Release 7.2.0-29r1 
 
 **Release Date:** June 30, 2026
 
@@ -103,8 +103,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65019, I95-65030, I95-65039, I95-65054, I95-65080, I95-65206, I95-65210, I95-65222, I95-65249. 
 ------
-- **I95-34473 `show waypoints` Command:** Added the `show waypoints` CLI command for displaying waypoint pool allocation and utilization per node.
-------
 - **I95-61693 DHCP INFORM Response Improvements:** Resolved an issue where DHCP INFORM packets were not correctly answered. The DHCP ACK response now includes the requested options, ensuring clients retain vital information such as DNS servers, domain name, and gateway.
 ------
 - **I95-63033 `show lte detail` crash when LTE apn-name is invalid:** Resolved an issue where executing `show lte detail` when an invalid APN name is configured caused a CLI crash due to an unhandled dictionary update error.
@@ -123,7 +121,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63951 BGP Graceful Restart Sending EOR Prematurely:** Resolved an issue where the SSR sent End-of-RIB (EOR) markers prematurely during BGP graceful restart, without waiting to receive EOR from its peers as required by RFC 4724, potentially causing route convergence issues.
 ------
-- **I95-63955 SSR Process Inactive After Conductor Onboarding but UI shows `Synchronized`:** Resolved an issue where, after completing the Secure ConductorOnboarding (SCO) workflow in Azure with vTPM enabled, the UI incorrectly showed the device as `Synchronized` while the SSR service was inactive, triggering a `No Connectivity` alarm.
+- **I95-63955 SSR Process Inactive After Conductor Onboarding but UI shows `Synchronized`:** Resolved an issue where, after completing the Secure Conductor Onboarding (SCO) workflow in Azure with vTPM enabled, the UI incorrectly showed the device as `Synchronized` while the SSR service was inactive, triggering a `No Connectivity` alarm.
 ------
 - **I95-63965 SNMP MIB subinterfaces not reporting correct stats:** Resolved an issue where SNMP MIB statistics for VLAN sub-interfaces were incorrectly reporting the same values as the parent interface instead of per-sub-interface statistics.
 ------
@@ -189,7 +187,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64684 HMAC Cipher Mode Information in Logs and Session Output:** Added HMAC mode and HMAC cipher details to session logs and `show sessions` output, improving visibility into the active encryption and authentication state of sessions.
 ------
-- **I95-64687 Factory Reset Does Not Recursively Clean /var/cache/salt/:** Resolved an issue where factory reset operations did not recursively remove the /var/cache/salt/ directory, leaving stale salt cache files behind. The cleanup process now removes this directory recursively.
+- **I95-64687 Factory Reset Does Not Recursively Clean `/var/cache/salt/`:** Resolved an issue where factory reset operations did not recursively remove the `/var/cache/salt/` directory, leaving stale salt cache files behind. The cleanup process now removes this directory recursively.
 ------
 - **I95-64696 Salt connectivity issues after Conductor upgrade:** Resolved an issue where salt-minion lost connectivity to the salt-master after a Conductor upgrade, affecting approximately 20% of routers. The minion-connector service now correctly manages the salt master address.
 ------
@@ -219,7 +217,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65056 `show app-id cache-sizes` Command Not Available:** Resolved an issue where the `show app-id cache-sizes` CLI command was not available.
 ------
-------
 - **I95-65099 Traffic Engineering Stats Incorrect Output:** Resolved an issue where `show stats traffic-eng internal-application per-traffic-class` displayed incorrect or unexpected output.
 ------
 - **I95-65128 nodeMonitor Crash Loop on Hub Node:** Resolved an issue where a Linux interface name with an empty string caused a continuous crash loop on a hub node. Users are now prevented from configuring an empty Linux interface name.
@@ -238,7 +235,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65390 Conductor Migration Deadlock:** Resolved an issue where conductor migration could deadlock when using `asset-connection-resiliency` in `SSH-only` mode, leaving routers unable to connect to the production conductor.
 ------
-- **I95-65393 ESKM Certificate Invalid Alarm After Upgrade:** Resolved an issue where a certificate invalid alarm was incorrectly raised after upgrading to a newer SSR version, causing peering to go down even though the certificate was not expired. Removing and re-adding the CRL configuration resolved the issue.
+- **I95-65393 ESKM Certificate Invalid Alarm After Upgrade:** Resolved an issue where a certificate invalid alarm was incorrectly raised after upgrading to a newer SSR version, causing peering to go down even though the certificate was not expired.
 ------
 - **I95-65403 Disallow CA Certificates for Peering:** Added validation to prevent certificates with the CA:True basic constraint from being used as peering certificates, as these are intended for signing other certificates rather than direct peering authentication.
 ------

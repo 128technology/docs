@@ -181,7 +181,7 @@ Changing an encryption cipher is a service-impacting event. Existing sessions ca
 
 ### Verifying AES-GCM Is In Use
 
-After applying the new policy, use `show sessions by-id` to confirm the cipher is active on new sessions. The **Payload Security Policy** and **Metadata Security Policy** fields identify which security policy is applied per flow. The **Action List** fields include the GCM encryption and `decryption actions: `AesGcmEncrypt`, `AesGcmDecrypt`, `AesGcmEncryptSvr2`, and `AesGcmDecryptSvr2. Confirm that the policy you configured with AES-GCM is listed for the expected flows.
+After applying the new policy, use `show sessions by-id` to confirm the cipher is active on new sessions. The **Payload Security Policy** and **Metadata Security Policy** fields identify which security policy is applied per flow. The **Action List** fields include the GCM encryption and decryption actions: `AesGcmEncrypt`, `AesGcmDecrypt`, `AesGcmEncryptSvr2`, and `AesGcmDecryptSvr2`. Confirm that the policy you configured with AES-GCM is listed for the expected flows.
 
 ```
 admin@test1.combo1# sho sessions by-id 37ed5241-d5d5-4120-b168-884c619935a4

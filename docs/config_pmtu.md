@@ -162,9 +162,7 @@ router2                   node1      wan0                 192.0.2.10       Up   
 
 A `Path MTU` value of `0` indicates PMTUD is disabled or has not yet completed a test cycle.
 
-A new stat, `stats/icmp/flow-mtu-updates`, provides a count of flows that have had their MTU updated at runtime via a TooBig packet. This counter is reset when the system resets (not persisted).
-
-**need stat example
+The [`show stats icmp flow-mtu-updates`](cli_stats_reference.md#show-stats-icmp-flow-mtu-updates) provides a count of flows that have had their MTU updated at runtime via a TooBig packet. This counter is reset when the system resets (not persisted).
 
 ## Troubleshooting
 
