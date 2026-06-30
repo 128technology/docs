@@ -53,9 +53,9 @@ The authority-level objects this router depends on (`Internet-Traffic` service, 
 
 ## Router Configuration
 
-The following block shows the `Spoke1` router section as it appears within the authority configuration. This is the router-scoped portion only.
+The following block shows the `Spoke1` router section as it appears within the authority configuration. This is the router portion only.
 
-```text
+```
 config
     authority
 
@@ -91,12 +91,13 @@ config
 
                         management-vector  mgmt-vec-wan
                             name      mgmt-vec-wan
-                            priority  10
+                            priority  100
                         exit
 
                         neighborhood  internet
                             name      internet
                             topology  spoke
+                            inter-router-security   internal
                         exit
                     exit
                 exit
@@ -111,6 +112,15 @@ config
                         name    lan1
                         type    external
                         tenant  corp
+                        source-nat      true
+                        address         192.168.1.1 
+                            ip-address      192.168.1.1
+                            prefix-length   24
+                            host-service    dhcp-server 
+                            service-type    dhcp-server
+                            address-pool    192.168.1.2 
+                                start-address  192.168.1.2
+                                end-address    192.168.1.20
 
                         address  192.168.1.1
                             ip-address     192.168.1.1
@@ -119,19 +129,23 @@ config
                     exit
                 exit
             exit
-
-            service-route  internet-route
-                name          internet-route
-                service-name  Internet-Traffic
-                type          service-agent
-
-                next-hop  node0 wan1
-                    node-name  node0
-                    interface  wan1
-                exit
-            exit
         exit
 
+        service-route internet-route 
+            name          internet-route
+            service-name  Internet-Traffic
+                name           Internet-Traffic
+                address        0.0.0.0/0
+                access-policy corp 
+                    source  corp
+        
+            next-hop node0 wan1 
+            node-name  node0
+            interface  wan1
+        
+        software-access username  (removed)
+        software-access token     (removed)
+        exit
     exit
 exit
 ```
