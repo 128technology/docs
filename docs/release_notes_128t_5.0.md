@@ -83,10 +83,9 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-38170 Updated path metrics for `show service-path`:** Latency, loss, and jitter metrics are displayed when they are available, even if performance monitor is not enabled for the path.   
 ------
-
 ### Resolved Issues
 
-- **I95-20718:** Keywords as Configuration Values - the PCLI now prevents the use of keywords as configuration values. 
+- **I95-20718** PCLI now produces a warning when creating configuration objects with the keywords ("delete", "force", "move", "clone", "all") as their name.
 ------
 - **I95-29643** Changing the name of an existing configuration object to one that already exists merges the two objects.
 ------
@@ -117,9 +116,9 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35722** PCLI warning message formatting is now consistent with error messages.
 ------
-- **I95-35892** Regex use during search and replace config negatively impacts performance. 
+- **I95-34983, I95-35892** Remove unused PCLI Commands.
 ------
-- **I95-36645** UI: Bytes converter does not handle values larger than Terabyte (TB).
+- **I95-36645** Bytes converter in the GUI does not handle values larger than Terabyte (TB), leaving value in bytes.
 ------
 - **I95-36828** Unable to acquire logs through GUI when `remote-login` is disabled.
 ------

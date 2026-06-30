@@ -7,26 +7,17 @@ sidebar_label: 4.4
 
 ### Issues Fixed
 
-- **I95-18807** Removed a benign error displayed in journal due to imudp module loaded by rsyslog daemon.
-
-  _**Symptoms:**_ The following message can be seen in the journal:
-  ```
-  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
-  ```
+- **I95-18807 An error displays in the journal due to imudp module loaded by rsyslog daemon.** The error condition has been resolved and the error no longer displays. 
 ------
-- **I95-32298** Admin down of KNI in t128-ipsec address space does not result in the interface state change to operationally down.
+- **I95-32298 KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down".** The KNI interfaces now transition smoothly. 
 ------
-- **I95-32594** Validation allows for mismatched adjacency security-policy with peer network-interface security-policy for cases where multiple network interfaces in a router have the same IP address. Only the first one is considered for matching inter-router-security policy between the network interface and peer adjacency.
-
-  Until the system is upgraded to 4.4.2, this issue can be mitigated by manually checking the inter-router-security policy between the network interface and peer adjacency match.
+- **I95-32594** Validation allows for mismatched adjacency security-policy with peer network-interface security-policy for cases where multiple network interfaces in a router have the same IP Address. Only the first one is considered for matching inter-router-security policy between the network interface and peer adjacency.
 ------
-- **I95-32660** Log files were only rotated daily which may result in larger then expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap.
+- **I95-32660** Log files were only rotated daily which may result in larger than expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap.
 ------
 - **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled.
 ------
-- **I95-33594** Changing the `neighbor-as` of an existing BGP neighbor prevents it from connecting.
-
-  Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration.
+- **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.** The BGP neighbor now connects correctly.
 ------
 - **I95-33989** Terminating a "validate" command with CTRL-c returns to the PCLI prompt but does not stop the in-progress validation. This prevents subsequent validation attempts until the in-progress validation completes in the background.
 
@@ -38,13 +29,10 @@ sidebar_label: 4.4
   ```
   Until the system is upgraded to 4.4.2, this issue will resolve itself after the background tasks have completed.
 ------
-- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.
-
-  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable.
+- **I95-35111 `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.** The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.
 ------
 - **I95-35193** Performing a download of software may fail.
-
-  _**Conditions:**_ 128T connection to the conductor is disconnected or restarted.
+  _**Conditions**_ 128T connection to the conductor is disconnected or restarted.
 ------
 - **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend.
 ------
@@ -58,26 +46,25 @@ sidebar_label: 4.4
   rpm --rebuilddb
   ```
 ------
-- **I95-35793** Large responses from a DNS server may be rejected by 128T. When this happens, provisioned FQDNs remain unresolved.
-
+- **I95-35793** Large responses from a DNS server may be rejected by 128. When this happens, FQDNs in the configuration remain unresolved.
   _**Conditions:**_ The following log message can be seen:
   ```
-  Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for some.domain.com: Message too long
+  Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for edge-global.plcm.vc: Message too long
   ```
 ------
-- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.
+- **I95-35799 When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.** This issue has been resolved.
 ------
-- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.
+- **I95-35933 `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.** The correct speeds are now displayed for `show device-interface`. 
 ------
-- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration.
+- **I95-35935 Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration.** The router-based conductor map has been separated from the global conductor map.
 ------
 - **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces.
 ------
 - **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2).
 ------
-- **I95-36146** Pagination prompts are incorrectly stored in PCLI history.
+- **I95-36146** Non-PCLI commands, such as pagination responses, are incorrectly stored in command history.
 ------
-- **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.
+- **I95-36149 Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.** Updated to verify the order of operations and prevent the fault.
 ------
 - **I95-36212** Fixed an issue where some Automated Provisioner actions would fail silently or return an error.
 
@@ -99,18 +86,17 @@ sidebar_label: 4.4
   ```
 ------
 - **I95-36283** The 128T router asset state is stuck on its current state.
-
   _**Conditions:**_ The following log message can be seen:
   ```
   TypeError: heap argument must be a list
   ```
-  Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` in the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
+  Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
 ------
 - **I95-36341** Race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.
 ------
-- **I95-36351** User without admin privileges can not change their password.
+- **I95-36351** User without admin privileges cannot change their password.
 ------
-- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.
+- **I95-36356 Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.** Changes to the BGP `graceful-restart restart-time` no longer cause a process fault.
 ------
 - **I95-36358** Currently downloading version in the asset state would persist after a download has completed.
 
@@ -140,7 +126,7 @@ sidebar_label: 4.4
 ------
 - **I95-36638** Polling SNMP OID 1.3.6.1.2.1.1.2 returns `NET-SNMP-TC::linux` instead of `T128-MIB::t128NetworkingPlatform (1.3.6.1.4.1.45956.1)`
 ------
-- **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.
+- **I95-36672 Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.** Traffic on the device interface is handled before deleting the filters. 
 ------
 - **I95-36727** A non-forwarding, external (i.e. management) interface configured in 128T does not obtain a DHCP IP upon disconnecting and reconnecting the cable.
 ------
@@ -156,7 +142,7 @@ sidebar_label: 4.4
 ------
 - **I95-36891** Exception thrown in PCLI when `CMD`+`right arrow` jumping past the end of an auto complete command.
 ------
-- **I95-37042** 128T process `prank` journal log was incorrectly excluded from output of `save tech-support-info`
+- **I95-37042** 128T process `prank` journal logs were incorrectly excluded from output of `save tech-support-info`.
 ------
 - **I95-37106** Initiating a download on an HA router may silently be ignored on one of the nodes if it was in "connected" state.
 
@@ -179,20 +165,19 @@ Upgrading to the 4.4.1 release requires version 2.6.0 or newer of the 128T insta
 ------
 - **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router.
 ------
-- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start.
-
+- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
   ```
-  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T process.
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
 
   Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
 ------
-- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy.
+- **I95-34649 `best-effort` path handling for `proportional` load balancing is not honored by service-policy.** Path handling for `best effort` load balancing is handled correctly. 
 ------
 - **I95-34751** LTE certified to run on Verizon wireless networks.
 ------
@@ -223,12 +208,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35395** Enabled BGP router reflector `cluster-id` in configuration.
 ------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
-
-  _**Conditions:**_ When the interface has an adjacency and tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`, resulting in traffic being dropped.
+  _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
 ------
 - **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.
-
-  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-35517** [Selective Packet Capture](ts_packet_capture.md#selective-packet-capture)
 ------
@@ -251,13 +233,13 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35644** Added support for `bgp route-reflector allow-outbound-policy`.
 ------
-- **I95-35655** RSRP and RSRQ values are now displayed in the output of `show device-interface` for LTE interfaces.
+- **I95-35655** New metrics - RSRP, RSRQ, Active Band and Active Channel were added to (the existing) show device-interface PCLI command and lte-state script output for LTE interface.
 ------
-- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment.
+- **I95-35694 A `service-route` of type `host` results in an invalid service path during session establishment.** This issue has been resolved by adding a missing gateway-ip address to the process.  
 ------
-- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route.
+- **I95-35701 Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route.** Configuration validation no longer rejects the valid configuration. 
 ------
-- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault.
+- **I95-35781 Rare race condition during `rotate logs` PCLI command may cause applications to fault.** The `rotate logs` PCLI command no longer causes the race condition. 
 ------
 - **I95-35866** Addressed latest CVEs.
 ------
@@ -297,7 +279,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 - **I95-32760** Selected Events remain highlighted when navigating the event page.
 
-- **I95-32783** ["show assets summary" enhancements](cli_reference.md#show-assets-summary)
+- **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 
 - **I95-33374** Address Latest Vulnerabilities 4.4.
 
@@ -349,14 +331,13 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 ------
 - **I95-33465** UI sometimes does not provide an indication that it is committing the configuration when importing from backup.
 ------
-- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start.
-
+- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
   ```
-  Until the system is upgraded to 4.4.0, this issue can be mitigated by restarting the 128T process.
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T process.
 ------
 - **I95-33983** User role can see a list of config exports by executing `show config exports`.
 ------
@@ -428,7 +409,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 ## Special Considerations
 
-- **I95-36525** TLS 1.0 is no longer supported.
+- **I95-36525** Due to known vulnerabilities, only TLS versions 1.2 and 1.3 are supported. We do not support TLS 1.0 and 1.1.
 ------
 - Python has been upgraded from version 2 to version 3.  Any custom salt states that have been written that include python code, may need to be upgraded or rewritten in advance of the upgrading to 4.4. (I95-31073)
 ------
@@ -451,13 +432,12 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
   _**Corrective Action:**_ No action required. The webserver will immediately restart.
 ------
-- **I95-33560** When upgrading a HA conductor to version 4.4.0 or later there is a compatibility issue due to an upgrade of the asset provisioning software. This results in a reported asset error that will persist until the two nodes are upgraded to the same version.
+- **I95-33560** When upgrading an HA conductor to version 4.4.0 or later there is a compatibility issue due to an upgrade of the asset provisioning software. This results in a reported asset error that will persist until the two nodes are upgraded to the same version.
 
   _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
   ```
-"128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
+  "128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
   ```
   This error can be viewed by running the following PCLI command from either node: `show assets <asset-id>`. Where asset-id is the asset-id of the node running pre 4.4.0 version that has not yet been upgraded.
 
-  _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error it will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.
-------
+  _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.

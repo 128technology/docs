@@ -6,7 +6,28 @@ module.exports = {
       "about_svr_savings",
       "about_releases",
       "about_support_policy",
+      "config_firewall_ports",
     ],
+    "Deployment Guides": [
+      "deploy_guides_overview",
+      {
+        "type": "category",
+        "label": "Conductor Deployment Guides",
+        "items": [
+            {
+              "type": "category",
+              "label": "VMware ESXi Conductor",
+              "items": [
+                "deploy_vmware_conductor",
+                "deploy_vmware_conductor_vm",
+                "deploy_vmware_conductor_install",
+                "deploy_vmware_conductor_config",
+                "deploy_appendix_vmware_conductor",
+              ],
+            },
+          ],
+        },
+      ],
     "Release Notes": [
       {
         "type": "category",
@@ -53,6 +74,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance Plugin",
         "items": [
+          "release_notes_wan_assurance_plugin_3.102",
           "release_notes_wan_assurance_plugin_3.101",
           "release_notes_wan_assurance_plugin_3.100",
           "release_notes_wan_assurance_plugin_3.13",
@@ -72,6 +94,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_5.0",
           "release_notes_byol_4.0",
           "release_notes_byol_3.0",
           "release_notes_byol_2.0",
@@ -82,7 +105,6 @@ module.exports = {
     "Hardware Support":[
       "supported_devices_overview",
       "intro_system_reqs",
-      "config_firewall_ports",
       "about_supported_platforms",
       "about_certified_platforms",
       "concepts_ssr_chassis_manager",
@@ -138,8 +160,8 @@ module.exports = {
           "items": [
             "intro_installation_quickstart_aws",
             "intro_installation_quickstart_mist_aws",
-            "intro_installation_quickstart_byol_conductor_aws",
-            "intro_installation_quickstart_byol_mist_aws",
+            "intro_installation_byol_aws_conductor",
+            "intro_installation_byol_aws_mist",
             ],
       },
       {
@@ -150,6 +172,14 @@ module.exports = {
             "intro_installation_azure_mist",
             "intro_installation_byol_azure_conductor",
             "intro_installation_byol_azure_mist",
+          ],
+      },
+      {
+       "type": "category",
+          "label": "Installing In GCP",
+          "items": [
+            "intro_installation_byol_gcp_conductor",
+            "intro_installation_byol_gcp_mist",
           ],
       },
     ],
@@ -386,11 +416,18 @@ module.exports = {
           "concepts_config_integrity",
           "sec-disable-console-output",
           "sec-disable-ports",
+          "config_factory_reset",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Certificate Management",
+        "items": [
+          "concepts_certificate_management",
           "config_custom_certs",
           "sec-cert-based-encrypt",
           "cert_validation_requirements",
           "sec_enhanced_key_mgmt",
-          "config_factory_reset",
         ],
       },
       {
