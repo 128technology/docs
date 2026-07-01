@@ -130,6 +130,8 @@ write_files:
 | name | The name of the router to use for Mist onboarding. By default, the instance name will be used. |
 | registration-code | The Mist registration used for adoption of the EC2 instance to a Mist organization. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
+| download-timeout | The timeout duration for installing BYOL (default: 6h) |
+| download-retries | The number of times to retry SSR installation (default: unlimited) |
 
 ### Manual Onboarding
 If a user does not supply the onboarding configuration before launching the instance, the onboarding steps can be manually executed.
@@ -357,7 +359,7 @@ To deploy an HA Mist Managed Router, you must deploy the CloudFormation template
 3. Paste the following S3 URL into the **Amazon S3 URL** dialog.
 
 ```
-https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-mist-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
+https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-mist-managed-router-template-ssr-byol-5.1-20260615-2349.json
 ```
 4. Click **next** and complete the form.
 
