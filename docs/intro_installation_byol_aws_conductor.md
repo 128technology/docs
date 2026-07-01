@@ -137,6 +137,8 @@ write_files:
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
 | node-name | The name of the node being provisioned. For a standalone conductor, this is `node0`. |
+| download-timeout | The timeout duration for installing BYOL (default: 6h) |
+| download-retries | The number of times to retry SSR installation (default: unlimited) |
 
 Additional Conductor configuration options can be found in [Initialize Your Device - Advanced Workflows.](initialize_u-iso_adv_workflow.md#initialize-a-conductor)
 
@@ -383,6 +385,8 @@ write_files:
 | artifactory-user     | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
 | conductor-hosts      | The list of Conductor control IPs used to manage the router. |
+| download-timeout | The timeout duration for installing BYOL (default: 6h) |
+| download-retries | The number of times to retry SSR installation (default: unlimited) |
 
 
 ### Manual Onboarding
@@ -557,7 +561,7 @@ To deploy an HA Conductor Managed Router, you must deploy the CloudFormation tem
 3. Paste the following S3 URL into the **Amazon S3 URL** dialog.
 
 ```
-https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
+https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-5.1-20260615-2349.json
 ```
 4. Click **next** and complete the form.
 
