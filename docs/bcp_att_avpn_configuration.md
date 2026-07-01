@@ -3,8 +3,6 @@ title: AT&T AVPN Configuration
 sidebar_label: AT&T AVPN Configuration
 ---
 
-import Mermaid from '@theme/Mermaid';
-
 This guide is for network engineers and architects using their Session Smart Router to connect to AT&T’s MPLS VPN (AVPN) service. It will cover:
 - Service class definitions for the various COS queues on the AT&T MPLS network
 - Strategies for mapping `service` configuration to the COS queues using `service-policy` elements
@@ -229,37 +227,37 @@ The base class `service-policy` configurations presented here are derived from t
 The SSR uses four traffic engineering queues for prioritizing egress traffic during times of congestion or link contention. The general practice of mapping the `traffic-class` assignments (high, medium, low, best-effort) into the various 6COS queues is shown below.
 
 
-<Mermaid chart={`
-  graph LR
-    voip-audio --> ATT-COS1
-    id1(BFD, BGP) -.-> ATT-control
-    voip-video --> ATT-COS2V
-    video-streaming --> ATT-COS2V
-    voip-signaling --> ATT-COS2
-    data-mission-critical --> ATT-COS2
-    remote-desktop --> ATT-COS2
-    management-interactive --> ATT-COS3
-    management-m2m --> ATT-COS3
-    data-interactive --> ATT-COS3
-    data-best-effort --> ATT-COS4
-    data-scavenger --> ATT-COS5
-    video-streaming-scavenger --> ATT-COS5
-    subgraph best-effort
+```mermaid
+graph LR
+  voip-audio --> ATT-COS1
+  id1(BFD, BGP) -.-> ATT-control
+  voip-video --> ATT-COS2V
+  video-streaming --> ATT-COS2V
+  voip-signaling --> ATT-COS2
+  data-mission-critical --> ATT-COS2
+  remote-desktop --> ATT-COS2
+  management-interactive --> ATT-COS3
+  management-m2m --> ATT-COS3
+  data-interactive --> ATT-COS3
+  data-best-effort --> ATT-COS4
+  data-scavenger --> ATT-COS5
+  video-streaming-scavenger --> ATT-COS5
+  subgraph best-effort
     ATT-COS5
-    end
-    subgraph low
+  end
+  subgraph low
     ATT-COS4
-    end
-    subgraph medium
+  end
+  subgraph medium
     ATT-COS2V
     ATT-COS2
     ATT-COS3
-    end
-    subgraph high
+  end
+  subgraph high
     ATT-COS1
     ATT-control
-    end
-`}/>
+  end
+```
 
 Each AT&T AVPN circuit has a *profile* associated with it (referred to as a "COS Package"), that maps to bandwidth allocations for the various COS queues. These in turn need to be mapped to the four egress traffic engineering queues on the SSR. The COS Package from AT&T is expressed as a set of six numbers (corresponding to the queues), where the first number is the percentage of the circuit bandwidth allocated for COS1, and the remaining five numbers (which sum to 100%) represent the amount of *bandwidth remaining* from the bandwidth not used by COS1.
 

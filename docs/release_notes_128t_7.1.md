@@ -247,6 +247,10 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ### Caveats
 
 - **I95-64317 Dropped Packets Capture continues to run:** If you have initiated a packet Capture from any page in the GUI, it will continue to run on the web server even after the request is terminated, resulting in expensive per packet export overhead. The web server must be restarted to terminate the packet capture. This issue is under investigation and will be resolved in an upcoming release. 
+------
+- **I95-64407 Alternate SHA ciphers (256/384/512) not working properly with ESKM:** SSR 7.1.3 introduces `sha384` and `sha512` as configurable options for the `hmac-cipher` field on security policies, alongside a new internal data structure that tracks metadata keys per HMAC mode and cipher combination. 
+
+  In deployments with peers running different versions of software and sharing security policies, configuring `hmac-cipher sha384` or `hmac-cipher sha512` in a fabric where any peer has not yet been upgraded to 7.1.3,  those older versions of software will not recognize `hmac-cipher sha384` or `hmac-cipher sha512`. These devices will continue to run `sha-256-128`. Currently, no alarm or warning will be generated, and there is no performance impact.
 
 ## Release 7.1.0-50r1
 
