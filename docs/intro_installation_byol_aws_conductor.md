@@ -137,6 +137,8 @@ write_files:
 | artifactory-user | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
 | node-name | The name of the node being provisioned. For a standalone conductor, this is `node0`. |
+| download-timeout | The timeout duration for installing BYOL (default: 6h) |
+| download-retries | The number of times to retry SSR installation (default: unlimited) |
 
 Additional Conductor configuration options can be found in [Initialize Your Device - Advanced Workflows.](initialize_u-iso_adv_workflow.md#initialize-a-conductor)
 
@@ -383,6 +385,8 @@ write_files:
 | artifactory-user     | User portion of the artifactory credentials. |
 | artifactory-password | Password portion of the artifactory credentials. |
 | conductor-hosts      | The list of Conductor control IPs used to manage the router. |
+| download-timeout | The timeout duration for installing BYOL (default: 6h) |
+| download-retries | The number of times to retry SSR installation (default: unlimited) |
 
 
 ### Manual Onboarding
