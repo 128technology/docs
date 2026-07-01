@@ -6,7 +6,8 @@ sidebar_label: Certificate-based Security Encryption
 
 | Release | Modification                | 
 | ------- | --------------------------- | 
-| 7.1.0   | Certificate-based Security Encryption support added. | 
+| 7.1.0   | Certificate-based Security Encryption support added. |
+| 7.2.0   | Subject Alternative Name support added to CSR generation. New audit events for certificate lifecycle. | 
 
 In addition to Enhanced Security Key Management, the SSR offers certificate based security encryption to encrypt, validate, and exchange certificates between devices within the network. 
 
@@ -191,7 +192,7 @@ Create the following file (updated to the customers algorithm/key size preferenc
 
 ```
 {
-    "name": "custom_ssr_peering", 
+    "name": "my_peering_cert", 
     "algorithm": "RSA",
     "rsa_key_size": "2048"
 }
@@ -206,19 +207,19 @@ curl -k -X POST https://10.27.35.89/api/v1/private-key
   -d @key_request.json
 ```
 
-Upon success, you can verify that the key was created by logging on to the SSR, `ssh` into a linux shell, and ensuring that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
+Upon success, you can verify that the key was created by logging on to the SSR, `ssh` into a linux shell, and ensuring that `/etc/128technology/pki/my_peering_cert.key` exists on disk.
 
 ### Issue a `certificate-signing-request`
 
 In order to create a signed certificate by the CA for the SSR, the CA needs a `certificate-signing-request`. Instruct the SSR to create the request using the values provided; at a minimum the `name` and `common-name`. The SSR must sign the request with its private-key.
 
-1. Create a file that contains the body of the CSR-request. At a minimum this must include the name `custom_ssr_peering`, and the common name:
+1. Create a file that contains the body of the CSR-request. At a minimum this must include the `name` and the `common_name`:
 
 **csr_request.json**
 
 ```
 {
-    "name": "custom_ssr_peering",
+    "name": "my_peering_cert",
     "common_name": "SSR_12345679"
 }
 ```
@@ -235,6 +236,7 @@ This example represents the minimum requirements. Any of the following additiona
 - rsa_key_size (integer, optional): The RSA key size. Only valid when algorithm is set to “RSA”. Valid key sizes are any multiple of 256 between 2048 and 4096.
 - ecc_curve (string, optional): The ECC curve to use. Only valid when algorithm is set to “ECC”.Valid curves are: (SECP256R, SECP384R1, SECP521R1)
 - validity_period (integer, optional): The validity period in days.
+- subject_alt_names (array, optional, SSR 7.2.0+): An array of Subject Alternative Name entries to include in the CSR. Each entry is an object with `type` and `value` fields. Supported types: `dns`, `ip`, `email`, `uri`, `urn_ssr_peering`. For details, see [Configure Certificate Management](config_custom_certs.md#issue-a-certificate-signing-request).
 
 2. Issue the CSR request to the SSR:
 
@@ -270,7 +272,7 @@ When the signed certificate is returned, instruct the SSR to ingest the certific
 
 ```
 {
-    "name": "custom_ssr_peering",
+    "name": "my_peering_cert",
     "certificate": "-----BEGIN CERTIFICATE-----
 MIIF3DCCBESgAwIBAgIKAf9HQjJKSQd1lTANBgkqhkiG9w0BAQsFADBaMQswCQYD
 VQQGEwJERTERMA8GA1UECgwIT3BlblhQS0kxDDAKBgNVBAsMA1BLSTEqMCgGA1UE
@@ -288,8 +290,8 @@ Once the certificate is successfully ingested, verify that the certificate was a
 
 1. `ssh` to the SSR. 
 2. Log in as the root user: `sudo su`.
-3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
-  `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
+3. Verify that `/etc/128technology/pki/my_peering_cert.pem` exists on disk.
+  `ls -l /etc/128technology/pki/my_peering_cert.pem`
 
 ### Configure the Certificate
 
@@ -380,7 +382,20 @@ Audit events and logs are generated for the following events:
  Node:               test-1
  Description:        Generated CSR for: TestCertificate
  Json Event Detail:  {"name":"TestCertificate","common_name":"example.com","country_name":"US","state_province_name":"California","locality_name":"San
- Francisco","organization_name":"ExampleOrg","organizational_unit_name":"IT","email_address":"admin@example.com","validity_period_days":365}
+ Francisco","organization_name":"ExampleOrg","organizational_unit_name":"IT","email_address":"admin@example.com","validity_period_days":365,"subject_alt_names":[]}
+ Permitted:          True
+```
+
+- Generate Private Key
+
+```
+=======================================================================================================================================================
+ 2025-03-19T20:50:35.173Z Generated private key.
+=======================================================================================================================================================
+ Type:               system.generate_private_key
+ Node:               test-1
+ Description:        Generated private key for: TestCertificate
+ Json Event Detail:  {"name":"TestCertificate","algorithm":"RSA","rsa_key_size":2048}
  Permitted:          True
 ```
 
@@ -407,5 +422,57 @@ Audit events and logs are generated for the following events:
  Description:        Updated CRL for issuer: endpoint
  Json Event Detail:  {"forced":false,"last_updated":"Oct 17 16:33:11 2024 GMT","next_update":"Oct 27 15:33:10 2024
  GMT","crl_url":"http://10.27.39.143/testCrl.pem","size":14162,"total_entries":279,"added_entries":0,"removed_entries":0,"success":true,"certificate_authority":"/C=US/O=Google Trust Services/CN=WR2"}
+ Permitted:          True
+```
+
+- Update Certificate
+
+```
+=======================================================================================================================================================
+ 2025-03-26T21:22:43.108Z Updated a certificate.
+=======================================================================================================================================================
+ Type:               system.update_certificate
+ Node:               test-1
+ Description:        Updated certificate: TestCertificate
+ Json Event Detail:  {"purpose":"TLS Web Client Authentication","common_name":"example.com","crl_urls":[],"certificate_authority":"N/A","fingerprint":"6D:C7:8E:48:4F:55:63:D9:AB:70:66:CD:29:4E:1C:37:CF:89:17:B0"}
+ Permitted:          True
+```
+
+- Delete Certificate
+
+```
+=======================================================================================================================================================
+ 2025-03-26T21:22:43.108Z Deleted a certificate.
+=======================================================================================================================================================
+ Type:               system.delete_certificate
+ Node:               test-1
+ Description:        Deleted certificate: TestCertificate
+ Json Event Detail:  {"name":"TestCertificate"}
+ Permitted:          True
+```
+
+- Delete Private Key
+
+```
+=======================================================================================================================================================
+ 2025-03-26T21:22:43.108Z Deleted a private key.
+=======================================================================================================================================================
+ Type:               system.delete_private_key
+ Node:               test-1
+ Description:        Deleted private key: TestCertificate
+ Json Event Detail:  {"name":"TestCertificate"}
+ Permitted:          True
+```
+
+- Delete CSR
+
+```
+=======================================================================================================================================================
+ 2025-03-26T21:22:43.108Z Deleted a certificate signing request.
+=======================================================================================================================================================
+ Type:               system.delete_csr
+ Node:               test-1
+ Description:        Deleted CSR: TestCertificate
+ Json Event Detail:  {"name":"TestCertificate"}
  Permitted:          True
 ```

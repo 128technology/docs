@@ -33,6 +33,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_7.2",
           "release_notes_128t_7.1",
           "release_notes_128t_7.0",
           "release_notes_128t_6.3",
@@ -206,7 +207,7 @@ module.exports = {
           "label": "Router Installation",
           "items": [
             "intro_installation_bootable_media",
-           "intro_basic_router_config",
+            "intro_basic_router_config",
             "intro_otp_iso_install",
             "intro_install_quickstart_otpiso",
             "onboard_ssr_to_conductor",
@@ -314,6 +315,7 @@ module.exports = {
           "config_prefix_delegation",
           "config_session_recovery",
           "config_forward_error_correction",
+          "config_pmtu",
           "config_management_over_forwarding",
           "config_domain-based_web_filter",
           "config_EthoSVR",
@@ -394,6 +396,7 @@ module.exports = {
           "config_syslog_tls",
           "config_webserver_certs",
           "howto_trusted_ca_certificate",
+          "sec-ssl-fwd-proxy",
           "config_password_security",
           "config_password_policies",
           "howto_reset_user_password",
