@@ -69,7 +69,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ## Release 7.2.0-29r1 
 
-**Release Date:** June 30, 2026
+**Release Date:** July 1, 2026
 
 ### New Features
 
