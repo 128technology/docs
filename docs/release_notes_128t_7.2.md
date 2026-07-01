@@ -25,7 +25,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 :::
 
 :::important
-After installing / upgrading to SSR 7.1.3, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
+After installing / upgrading to SSR 7.1.3 or later, downgrading *to an earlier version* of SSR software where Configuration Integrity (CI) is not available is NOT supported. 
 
 Rollback to the previously installed version of software *is* supported.  
 :::
