@@ -63,7 +63,7 @@ const features = [
   },
   {
     title: <>Release Notes</>,
-    link: 'docs/release_notes_128t_7.1', 
+    link: 'docs/release_notes_128t_7.2', 
     description: (
       <>
        Release information for SSR Software and components.
@@ -97,12 +97,12 @@ const features = [
       </>
     ),
   },
-  {
-    title: <>Best Practices</>,
-    link: 'docs/bcp_sdwan_design_guide',
+    {
+    title: <>Deployment Guides</>,
+    link: 'docs/deploy_guides_overview',
     description: (
       <>
-        Recommended guides and design patterns
+        Deployment Guides for virtual and physical SSR devices.
       </>
     ),
   },
@@ -125,11 +125,11 @@ const features = [
     ),
   },
   {
-    title: <></>,
-    link: '',
+    title: <>Best Practices</>,
+    link: 'docs/bcp_sdwan_design_guide',
     description: (
       <>
-       
+        Recommended guides and design patterns
       </>
     ),
   },

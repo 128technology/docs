@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   title: 'SSN Docs',
   tagline: 'The documentation source for the Session Smart Networking Platform',
   url: 'https://docs.128technology.com',
@@ -8,11 +8,13 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   onBrokenAnchors: 'throw',
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'throw',
       onBrokenMarkdownImages: 'throw',
     },
   },
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
     colorMode: {
       // "light" | "dark"
@@ -115,7 +117,7 @@ module.exports = {
 };
 
 if (process.env.OFFLINE_DOCS) {
-  module.exports.themeConfig.announcementBar = {
+  config.themeConfig.announcementBar = {
     id: 'offline_docs',
     content:
       'You are viewing a local version of this documentation. ' +
@@ -125,3 +127,5 @@ if (process.env.OFFLINE_DOCS) {
     isCloseable: true,
   };
 }
+
+module.exports = config;

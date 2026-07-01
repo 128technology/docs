@@ -97,9 +97,6 @@ Which router is this certificate for? (Select all if it applies to the entire au
         authority
             client-certificate webserver
                 content
-```
-
-For details on what certificate properties the SSR requires (including Extended Key Usage), see [Certificate Requirements and Validation](cert_validation_requirements.md).
 
 2. certificate contains the following issues: does not have the extendKeyUsage extension
 
@@ -112,6 +109,7 @@ For details on what certificate properties the SSR requires (including Extended 
 Certificate imported successfully
 Would you like to clean up the temporary certificate and key files? [Y/n]: Y
 ```
+For details on what certificate properties the SSR requires (including Extended Key Usage), see [Certificate Requirements and Validation](cert_validation_requirements.md).
 
 The following example shows an invalid self-signed certificate being imported:
 

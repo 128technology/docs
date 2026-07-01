@@ -16,11 +16,11 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
-- **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
+- **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 and above can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
-- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. The Installer typically prompts you update when a new version is available. Select **Update** when prompted.
+- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4 and above, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. The Installer typically prompts you update when a new version is available. Select **Update** when prompted.
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
@@ -54,7 +54,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **The following CVEs have been addressed in this release:** I95-48644, I95-48648, I95-48650, I95-48653. 
 ------
-- **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
+- **I95-48529 BFD hold-down timer does not hold-down peer service-paths:** Resoled an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now reflects the peer status, and sessions will not be moved back to peers that have re-established connectivity, but are still in the hold-down period.
 ------
 - **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
 ------
@@ -92,7 +92,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the Reverse Packet Session Resiliency Minimum Packet Count (default is 3) and Detection Interval (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
 ------
-- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the icmp-probe probe-address is the same as the tunnel destination, and the internal-address is used as the source if the egress-interface is gre-overlay.
+- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** We now use the base interface for egress if the `icmp-probe probe-address` is the same as the tunnel destination, and use the `internal-address` as the source if the `egress-interface` is `gre-overlay`.
 ------
 - **I95-48103 Commit triggered BGP issue:** Resolved an issue where BGP neighbors configured with a short hold time might experience a BGP session flap during a configuration commit when app-ID is enabled.
 ------
@@ -112,7 +112,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 - **I95-41072 Enhanced Web Filtering:** Web Filtering allows administrators to limit or prevent user access to internet content. These limitations may be based on company or organization policies, or because a domain may be know to contain malicious, inappropriate, or dangerous content. Individual services and service policies can be configured on the SSR to allow or deny access to an entire domain category, or specific domains within a category. For more information, see [Web Filtering.](config_domain-based_web_filter.md)
 ------
-- **I95-47418 Audit Events for Plugin Install/Remove:** There is a new audit event that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running `show events type admin.plugin`
+- **I95-47418 Audit Events for Plugins:** A new audit event has been added that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running `show events type admin.plugin`.
 
 ### Resolved Issues
 
@@ -120,11 +120,11 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-39454 Created User cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
 ------
-- **I95-44976 Highway issue when modifying an app-id session:** Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.
+- **I95-44976 Highway issue when modifying an app-id session:** SSR software versions 5.1.5 and greater are susceptible to a crash during a flow migration when `application-identification` is enabled (modes `tls` or `all`) on spoke to hub traffic traversing over SVR. The condition occurs for sessions migrating that have timed out or that are traversing the ha-fabric link in the reverse direction.
 ------
 - **I95-45847 Duplicate Alarms on Multiple Routers:** Resolved duplicate alarms by obtaining alarms from only one node in an HA pair.
 ------
-- **I95-46126 Router Status:** Resolved an issue in HA configurations when a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router are now seen on Conductor 2 - the conductor to which the router is not directly connected.
+- **I95-46126 Router Status:** In HA configurations where a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router will not be seen on Conductor 2 - the conductor to which the router is not directly connected. To see alarms on a router, the Conductor must be directly connected to the Router.
 ------
 - **I95-46281 Update Kernel to RHCK 8.6:** Updated the kernel to integrate the latest security fixes.
 ------
@@ -191,15 +191,15 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45999 Azure Router Crash:** Added support for NetVSC/VF hotswapping to resolve this issue.
 ------
-- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of show ntp will now report IP addresses of the time servers rather than resolve hostnames.
+- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of `show ntp` now reports IP addresses of the time servers rather than resolve hostnames.
 ------
-- **I95-46230 Highway Crash:** Resolved an issue where uncaught exceptions were causing highway issues.
+- **I95-46230 Exceptions with invalid giid causing a highway crash:** Resolved an issue where uncaught exceptions (invalid giid of 0) were causing highway issues.
 ------
 - **I95-46332 VRRP Does Not Work with Ethernet Controller X710 for 10GbE SFP+:** Configuring VRRP on an Intel X700 series NIC can see discard broadcast packets due to the source pruning feature which is enabled by default. This change disables source pruning when VRRP is enabled on these NICs.
 ------
 - **I95-46454 ICMP manager excessively logs ICMP echo replies with no matching context:** This issue has been resolved.
 ------
-- **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
+- **I95-46822 Revertible failover traffic may not be restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it may take seconds for traffic to be restored when forward traffic is present; in situations where **only** reverse traffic is present, traffic may not be restored. This issue will be resolved in a future release.
 ------
 - **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Updated the carrier detection logic to properly recognize the carrier when a modem is attached to a disaster recovery cell tower.
 ------
@@ -229,13 +229,13 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-38408 DHCP server on wrong vlan sends offer in response to discover message:** Hosted DHCP servers that do not have an explicit vlan configured are now explicitly treated as vlan 0, and handle any DHCP packets that are untagged/vlan 0, in order to prevent those packets from being multicasted to multiple DHCP servers.
 ------
-- **I95-40904 Power save mode not working:** This issue has been resolved.
+- **I95-40904 Power save mode not working:** Add a method to read current power saver mode setting from existing config before committing the new configuration, and changing the setting.
 ------
 - **I95-42438 `save tech-support-info` tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR service is down, trying to run `save tech-support-info` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
 ------
 - **I95-43606 No communication between Routers:** In rare instances, BFD outbound-only flows experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
 ------
-- **I95-43779 DHCP IP Address not releasing appropriately:** Reboot now triggers DHCP-enabled interfaces to send out a DHCP Request for their current IP address.
+- **I95-43779 DHCP IP Address not releasing appropriately:** When the cable is physically disconnected and reconnected from DHCP-enabled interfaces, the interfaces are now triggered to send out a DHCP Request for their current IP address.
 ------
 - **I95-44001 Peer uptime showing "Unavailable":** Peer path uptime now displays the correct values.
 ------
@@ -245,17 +245,17 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44988 SSR Stuck in Upgrade status:** Improved logging to detect when an installer session is started and there is an already an active interactive installer session; for example when an interactive installer session was left open.
 ------
-- **I95-45113 SNMP override of the IfTable:** An issue with SNMP reporting has been resolved.
+- **I95-45113 SNMP override of the IfTable:** `ifAlias` and `IfDescr` have been swapped in our SNMP reporting; `ifDescr` is always the `ifName`. This change was made for consistency with other Juniper products.
 ------
-- **I95-45124 RBAC Config Endpoints Leaking Information:** Resolved an issue where some configuration endpoints would allow users with insufficient permissions to make configuration requests.
+- **I95-45124 RBAC Config Endpoints Leaking Information:** Resolved an issue where some configuration endpoints would allow users with incorrect permissions make requests.
 ------
 - **I95-45126 Split-brain after the sync interface goes down:** Resolved an issue that if the SSR software experienced a crash while it owned an interface from an X553 device, other devices hosted by the same chip could be impacted.
 ------
 - **I95-45162 Improve download/upgrade error message if a router name does not exist:** In situations where a router does not exist, the download and upgrade message now indicates that the router does not exist.
 ------
-- **I95-45164 `show-active-peers` missing some information:** Resolved a corner case where an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the SSR misinterprets the non-compliant device's timeouts and the MTU will be unresolvable.
+- **I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS & MOS for some transports:** Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device's timeouts are incorrectly interpreted and the MTU becomes unresolvable.
 ------
-- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.
+- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA the managed routers were not automatically connecting to the newly added conductor node.
 ------
 - **I95-45271 Error while trying to change appearance or selecting custom reports:** In some cases where error messages are vague, a path to the error location is provided. 
 ------
@@ -263,7 +263,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
 ------
-- **I95-45643 User-created users are missing after upgrade:** Resolved an issue where the XML values true/false are also handled as 1/0.
+- **I95-45643 Users that were created by non-admin users were missing after upgrade:** Resolved a config type conversion issue that caused users to disappear after upgrade.
 ------
 - **I95-45696 Memory leak in PAM challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
@@ -271,7 +271,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45842 PCLI `show events` does not paginate correctly:** This issue has been resolved.
 ------
-- **I95-45882 Rare case where an invalid DHCP server configuration generated:** This issue has been resolved.
+- **I95-45882 Invalid DHCP server config causes a crash:** Resolved an issue when the DHCP server was misconfigured with duplicate interfaces and then committed, the validation would not catch this and cause a crash. The SSR code has been hardened to handle the misconfiguration.
 ------
 - **I95-46055 Add warning when transmit caps are too low:** Users now get a warning when configuring a traffic-engineering transmit-cap under 1Mbps.
 ------
@@ -287,7 +287,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46458 `set password` from PCLI hangs at "Modifying password":** This issue has been resolved. 
 ------
-- **I95-46613 Flow move may not properly happen without forward packet for outbound only sessions:** Resolved an issue where a session that has been idle for more than 10 seconds, sessions for outbound-only connections may not failover properly without a forward packet.
+- **I95-46613 Flow move may not happen without forward packet for outbound only sessions:** Resolved an issue that when a session has been idle for more than 10 seconds, sessions for outbound-only connections may not failover properly without a forward packet.
 ------
 - **I95-46641 Modem lockup after reset on dual LTE system:** Resolved an issue with dual LTE modem lockup after reset.
 
@@ -345,11 +345,11 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44568 VRRP interfaces both report "vrrp-standby" after provisional down of primary interface:** Resolved an issue when using `provisional-down` on the primary interface while reconfiguring `shared-phy` to `vrrp` causes a deadlock in the highway process.
 ------
-- **I95-44591 Paste-config does not allow small config snippets to be posted:** Resolved an issue where the list keys were not being passed in as part of the `value` in the transaction.
+- **I95-44591 Paste-config does not allow small config snippets to be pasted:** Resolved an issue where the list keys were not being passed as part of the `value` in the transaction.
 ------
 - **I95-44618 OS package update:** This package has been updated to resolve a CVE issue.
 ------
-- **I95-44722 Time based HMAC failure after HA reboot:** Resolved a buffering issue where device interfaces are now flushed upon becoming active to avoid handling of inactive packets.
+- **I95-44722 Time series HMAC failures after rebooting node in HA router:** Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.
 ------
 - **I95-44726 Invalid return code returned by T1 card firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
 ------
@@ -367,9 +367,9 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44985 Update salt-minion minimum version to resolve CVEs:** This issue has been resolved. 
 ------
-- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with a reserved bit in the header are incorrectly dropped as invalid.
+- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with reserved bit in the header are incorrectly dropped as invalid.
 ------
-- **I95-45063 SSR Azure instances unstable on large machine types:** Resolved an issue with Mellanox5 after upgrading the SSR to 5.4.
+- **I95-45063 SSR azure instances unstable on large machine types:** Resolved an unpgrade issue causing instability in Azure instances using Mellanox5. 
 ------
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
@@ -385,11 +385,13 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45489 `ifcfg` custom options issues:** Resolved an issue where  interface ifcfg option changes were not being processed.
 ------
-- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, where a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** On SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+	
+	**_Workaround:_** A temporary workaround is to force an update of this file by either of the following methods:
 ------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
 ------
-- **I95-45618 Issue with MAC address in Azure environment:** Resolved this issue by handling non-ethernet MAC addresses during MLX device discovery.
+- **I95-45618 MAC address issue in Azure environment:** Non-ethernet MAC addresses are now handled correctly during MLX device discovery.
 ------
 - **I95-45641 Stuck BGPoSVR Sessions after Failover:** Made changes to provide updates to less specific FIB entries when routes are updated to resolve this issue. 
 ------
@@ -541,7 +543,7 @@ I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95
 ------
 - **I95-43089 Cannot import custom charts:** Corrected issue that prevented custom charts with tables from being imported.
 ------
-- **I95-43066 Issue with Database Query:** Resolved an issue when the buffer queue is full, the inflight message was dropped.
+- **I95-43066 Requests for metrics are timing out:** Resolved an issue that when the buffer queue is full, the message is dropped, but the event was not handling the inflight message.
 ------
 - **I95-43091 `show fib` does not display interface next hop when gateway IP address is empty:** Corrected display.
 ------
@@ -719,7 +721,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-42441 AP downloads taking too long:** Resolved an issue where a download request would timeout if too many routers were requested at once.
 ------
-- **I95-42563 Attempting to open Help (?) for Adjacency fails:** An issue with the help traceback has been resolved.
+- **I95-42563 Attempting to get help on `adjacency` throws an exception:** Resolved an issue when entering `?` while configuring an adjacency was throwing an exception. 
 ------
 - **I95-42619 Salt-minion spontaneous restarts:** Resolved an issue where salt minions would spontaneously restart themselves and transition back into the connected state, especially when the conductor is under heavy load.
 ------
@@ -743,7 +745,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-43135 Rare Race condition in an HA configuration:** Resolved a rare race condition that may occur if an `export config` command is run during a failover.
 ------
-- **I95-43194 GraphQL Type Supports Proto Primitive:** Incorrect integer types causing an error. This issue has been resolved.
+- **I95-43194 Web graphql handling of `loadBalanceService` mos should be `float`, not `int`:** Whole number integers have been changed to be precision `float`.
 ------
 - **I95-43244 Reverse Packet injection on Affinity Mismatch:** Resolved an issue where a reverse packet was being injected into a flow with no flow affinity.
 ------
@@ -751,11 +753,11 @@ This release replaces the existing `5.4.0-104` release.
 
 ## Caveats
 
-- **I95-42973 `show config running generated` not displaying configuration:** At the time of release, the following commands were not displaying the configuration.
+- **I95-42973 `show config running generated` does not display generated configuration:** Corrected display output.
 	- `show config running generated`
 	- `show config running candidate generated`
 This is being addressed, and will be resolved in an upcoming point release.
 ------
 - **I95-43283 Not all configured device interfaces are available in charts:** After upgrading to 5.4, only the `device-interfaces`, `network-interfaces` and `services` that have observed active traffic will be available as permutations for charts and graphs.
 ------
-- **I95-43380 PCLI and UI does not allow the user to edit the [`http-probe-profile`](plugin_http_probe.md) configuration:** There is no known workaround at this time. This is being addressed in an upcoming point release.
+- **I95-43380 Validation errors created by plugins augmenting existing configuration:** Corrected plugin validation handling.

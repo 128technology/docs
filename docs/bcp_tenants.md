@@ -3,8 +3,6 @@ title: Tenancy Design
 sidebar_label: Tenancy Design
 ---
 
-import Flowchart from '../src/components/Flowchart';
-
 The *tenant* is one of the foundational data model elements within the Session Smart Router (SSR), and represents a consumer of network *services*. Tenancy is the logical partitioning of a network’s resources, done in the interest of restricting access to network services to only the users and groups for which they’re intended.
 
 This document provides an overview of tenancy in the SSR, how it is configured, and provides guidance for modeling the segmentation of a network using the SSR's data modeling language.
@@ -41,26 +39,20 @@ As new sessions arrive at an SSR, the router will attempt to classify the source
 
 Should none of these result in a definitive determination on the tenant of the source of this session request, the session is associated with the *global tenant* (see the section on "Special Tenants" for more information on the global tenant). Once the tenant has been identified – either as a specific tenant, or as the global tenant – this acts as a filter into the SSR’s FIB. Only the routes associated with that tenant are available to that user group. While this somewhat resembles the way a legacy router uses VRFs to create separate RIBs and FIBs, the segment by *tenant* is pervasive among all routers within an Authority by design, and is applied ubiquitously among all varieties of networks: public IP space, private, cloud, IPv4, IPv6, etc.
 
-<Flowchart
-  chartCode={`
-    st=>start: Packet Arrives
-      metadata=>condition: Packet has metadata?
-      int=>condition: Interface has a tenant?
-      nh=>condition: Neighborhood-based tenant?
-      tm=>operation: Tenant taken from metadata
-      ti=>operation: Tenant taken from interface
-      th=>operation: Tenant taken from neighborhood
-      global=>operation: Tenant assigned as "global"
-      e=>end: Proceed to FIB lookup
-    st->metadata
-    metadata(no)->int
-    metadata(yes,right)->tm->e
-    int(yes,right)->ti->e
-    int(no)->nh
-    nh(yes,right)->th->e
-    nh(no)->global->e
-  `}
-/>
+```mermaid
+flowchart TD
+    st([Packet Arrives]) --> metadata{Packet has metadata?}
+    metadata -->|no| int{Interface has a tenant?}
+    metadata -->|yes| tm[Tenant taken from metadata]
+    tm --> e([Proceed to FIB lookup])
+    int -->|yes| ti[Tenant taken from interface]
+    ti --> e
+    int -->|no| nh{Neighborhood-based tenant?}
+    nh -->|yes| th[Tenant taken from neighborhood]
+    th --> e
+    nh -->|no| gl["Tenant assigned as &quot;global&quot;"]
+    gl --> e
+```
 
 #### Viewing a Router's Tenancy
 

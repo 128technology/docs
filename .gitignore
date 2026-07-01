@@ -1,5 +1,8 @@
 # Dependencies
 /node_modules
+/pdf/node_modules
+/pdf/out
+/tools/atlassian-rovo-release-notes-mcp/node_modules
 
 # Production
 /build

@@ -8,6 +8,7 @@ sidebar_label: Certificate Requirements and Validation
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.0.0   | Certificate management and validation support added. |
+| 7.2.0   | Subject Alternative Name URI support for peering identity. |
 
 This page describes the certificate properties that the SSR enforces, how `validation-mode` affects behavior, and the differences between config-time and runtime validation.
 
@@ -112,6 +113,7 @@ Client certificates used for peering are validated as leaf (end-entity) certific
 | --- | --- |
 | Signature Algorithm | Must be an [accepted algorithm](#accepted-cryptographic-algorithms). |
 | Public Key | Must be an [accepted key type and size](#key-requirements). |
+| Subject Alternative Name (optional) | Starting in SSR 7.2.0, a `urn:ssr:peering:<alias>` SAN URI can be used to carry SVR peering identity as an alternative to the Common Name. See [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#api-naming-rules) for details. |
 
 ### Intermediate CA Certificates
 
@@ -178,10 +180,10 @@ Because config-time and runtime validation are separate processes, certain edge 
 
 | Scenario | Config-Time Result | Runtime Result |
 | --- | --- | --- |
-| CA cert with `CA:TRUE` but Basic Constraints **not critical** | May pass with `validation-mode warn` | **Rejected** — strict X.509 conformance is always enforced |
-| Certificate with weak signature algorithm | Warning (`warn`) or error (`strict`) | **Rejected** |
-| Expired certificate | Warning (`warn`) or error (`strict`) | **Rejected** |
-| Valid, conforming certificate | Passes | Passes |
+| CA cert with `CA:TRUE` but Basic Constraints **not critical**. | May pass with `validation-mode warn` | **Rejected** — strict X.509 conformance is always enforced. |
+| Certificate with weak signature algorithm. | Warning (`warn`) or error (`strict`) | **Rejected** |
+| Expired certificate. | Warning (`warn`) or error (`strict`) | **Rejected** |
+| Valid, conforming certificate. | Passes | Passes |
 
 :::tip
 To avoid runtime failures, ensure all certificates meet the full set of requirements documented on this page **before** importing them, even when using `validation-mode warn`. The `warn` setting is intended as a diagnostic aid, not as a way to bypass certificate requirements.
@@ -260,6 +262,7 @@ If a certificate was accepted during config commit (especially with `validation-
 
 ## See Also
 
+- [Certificate Management Overview](concepts_certificate_management.md)
 - [Configure Certificate Management](config_custom_certs.md)
 - [Certificate-based Security Encryption](sec-cert-based-encrypt.md)
 - [Enhanced Security Key Management](sec_enhanced_key_mgmt.md)

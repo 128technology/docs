@@ -37,7 +37,7 @@ sidebar_label: '4.0'
 
 - **I95-25356** Device and network Interface graphs are rendering as having no data when data is traversing links.
 
-- **I95-25425** DHCP relay service defined as /32 causes traffic to be black-holed.
+- **I95-25425** DHCP Relay with `/32` and FIB next-hop set to none requires additional service configuration
 
 - **I95-25454** Forwarding interfaces are not able to come up when deployed in AWS.
 

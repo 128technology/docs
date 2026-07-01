@@ -7,6 +7,10 @@ The Border Gateway Protocol (BGP) is a standard exterior gateway protocol develo
 
 Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss an SSR-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
 
+:::important
+BGP neighbor authentication (the [`auth-password`](config_command_guide.md#configure-authority-router-routing-routing-protocol-neighbor-auth-password) parameter) uses **MD5**. Beginning with SSR software **version 7.0** (including **7.1**), FIPS mode is enabled by default and blocks MD5, so BGP sessions configured with `auth-password` will fail to establish until FIPS is disabled on the affected node. See the disable procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). In a future SSR release, FIPS will be compliance-by-configuration and will no longer block these algorithms.
+:::
+
 ## Prerequisites
 
 This section presumes that you have a running SSR system and want to add configuration to support BGP. The running SSR system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic SSR modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the SSR data model.
@@ -1025,6 +1029,7 @@ There is one additional field which needs to be set in route reflector's BGP con
 When the route reflector sends routes to the clients, by default it doesn't modify the next-hop. An outbound policy can be used to change the next-hop in these routes to that of the route reflector, if desired. In such instances, another option, which is turned off by default, needs to be set in the route reflector's BGP config: `Route Reflector Allow Outbound Policy = TRUE`.
 
 ### BGP Confederations
+
 When configuring iBGP, the **Confederation** feature may be helpful when dealing with an enormous autonomous system. This feature allows you to break up the AS into smaller sub-autonomous systems. Confederation can be directly configured under the routing protocol element. Here, 65535 is the **confederation identifier AS number** and, 1100 and 2200 are the **member AS** numbers of that confederation AS.
 
 ```
@@ -1037,3 +1042,145 @@ admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation mem
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 2200
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit
 ```
+
+## Viewing Filtered BGP Routes
+
+When an inbound BGP policy rejects prefixes received from a neighbor, those routes do not appear in the BGP table or the FIB. The `filtered-routes` option exposes exactly which prefixes were suppressed by the inbound policy for a given neighbor, making it straightforward to troubleshoot why expected routes are absent from the routing table.
+
+### Version History
+
+| Release | Modification |
+|---|---|
+| 7.2.0 | Feature introduced. |
+
+### PCLI
+
+The `filtered-routes` option is available as a third choice alongside `received-routes` and `advertised-routes` in the `show bgp neighbors` command:
+
+```
+show bgp neighbors [vrf <vrf_name>] <neighbor_ip> filtered-routes [ipv4 | ipv4-vpn | ipv6 | ipv6-vpn]
+```
+
+**Examples**
+
+Display filtered routes for a neighbor in the default VRF using IPv4 unicast (the default address family):
+
+```text
+admin@router1.site1# show bgp neighbors 172.16.3.3 filtered-routes
+```
+
+Display filtered IPv6 routes for a neighbor in a named VRF:
+
+```text
+admin@router1.site1# show bgp neighbors vrf vrfA fd00:5::3 filtered-routes ipv6
+```
+
+When no routes have been filtered, the command returns an empty table. When routes are present, the output format mirrors that of `received-routes` and `advertised-routes`. If the neighbor address is unknown, the VRF does not exist, or the address family is invalid, the PCLI surfaces the underlying error string describing the problem.
+
+### REST API
+
+A new endpoint mirrors the PCLI functionality:
+
+```
+GET /api/v1/routing/bgp/neighbors/filtered-routes
+```
+
+**Query Parameters**
+
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `neighborAddress` | Yes | — | IP address of the BGP neighbor |
+| `vrf` | No | `default` | VRF name |
+| `addressFamily` | No | `ipv4` | Address family: `ipv4`, `ipv4-vpn`, `ipv6`, or `ipv6-vpn` |
+| `firstIndex` | No | `0` | Zero-based starting index for paginated results |
+| `elementCount` | No | all | Maximum number of routes to return (range: 1–5000) |
+
+:::note
+The REST endpoint does not support `vrf all` or `addressFamily all`. Each VRF and address family must be queried individually.
+:::
+
+**Example: IPv4, default VRF**
+
+```bash
+curl --unix-socket /var/run/128technology/speakeasy.sock -i -XGET \
+  'http://localhost/api/v1/routing/bgp/neighbors/filtered-routes?neighborAddress=172.16.3.3&firstIndex=0&elementCount=1'
+```
+
+Response:
+
+```json
+{
+  "bgpTableVersion": 14,
+  "bgpLocalRouterId": "2.1.1.1",
+  "defaultLocPrf": 100,
+  "localAS": 2,
+  "bgpStatusCodes": {
+    "suppressed": "s", "damped": "d", "history": "h",
+    "valid": "*", "best": ">", "multipath": "=",
+    "internal": "i", "ribFailure": "r", "stale": "S", "removed": "R"
+  },
+  "bgpOriginCodes": { "igp": "i", "egp": "e", "incomplete": "?" },
+  "filteredRoutes": [
+    {
+      "prefix": "10.99.1.0/24",
+      "network": "10.99.1.0/24",
+      "nextHop": "172.16.3.2",
+      "metric": 0,
+      "weight": 0,
+      "path": "3",
+      "bgpOriginCode": "?",
+      "valid": true,
+      "best": true
+    }
+  ],
+  "totalPrefixCounter": 1,
+  "filteredPrefixCounter": 0,
+  "nextEntry": 1
+}
+```
+
+**Example: IPv6, named VRF**
+
+```bash
+curl --unix-socket /var/run/128technology/speakeasy.sock -i -XGET \
+  'http://localhost/api/v1/routing/bgp/neighbors/filtered-routes?neighborAddress=fd00:5::3&firstIndex=0&elementCount=1&addressFamily=ipv6&vrf=vrfA'
+```
+
+Response:
+
+```json
+{
+  "bgpTableVersion": 1,
+  "bgpLocalRouterId": "2.1.1.1",
+  "defaultLocPrf": 100,
+  "localAS": 2,
+  "filteredRoutes": [
+    {
+      "prefix": "2001:db8:5::1/128",
+      "network": "2001:db8:5::1/128",
+      "nextHopGlobal": "fd00:5::3",
+      "metric": 0,
+      "weight": 0,
+      "path": "3",
+      "bgpOriginCode": "?",
+      "valid": true,
+      "best": true
+    }
+  ],
+  "totalPrefixCounter": 1,
+  "filteredPrefixCounter": 0,
+  "nextEntry": 1
+}
+```
+
+### Troubleshooting
+
+| Failure | PCLI behavior | REST behavior |
+|---|---|---|
+| `bgpd` not running | Surfaces vty error string | Returns standard upstream failure with informative status code |
+| Unknown neighbor IP, neighbor not in specified VRF/address family | Surfaces vty error string with neighbor details | Returns `200 OK` with a `warning` key in the JSON body |
+| Invalid `addressFamily` or `vrf` argument | Surfaces vty error string | Returns `200 OK` with a `warning` key in the JSON body |
+| vty call timeout (120 s) | Surfaces timeout error string | Returns `HTTP 400` with timeout exception message |
+
+PCLI and REST activity is logged in `routingManager.log`. FRR vty-level logs are in `routingEngine.log`.
+

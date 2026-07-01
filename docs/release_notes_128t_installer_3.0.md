@@ -14,7 +14,6 @@ sidebar_label: '3.0'
 - **IN-418 Installer 3.0 first download attempt from conductor fails on router:** 
 
 _Workaround:_ Initiate the download again. The Installer will download.
-
 ------
 - **I95-39793 Conductor fails to self-upgrade:** This issue affects only 4.5.6-1 systems performing Conductor self-upgrade with Installer version 2.7.0 (or later). Released versions of 128T prior or after 4.5.6-1 are not affected.
 
