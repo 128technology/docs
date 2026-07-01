@@ -9,6 +9,7 @@ sidebars-label: Enhanced Security Key Management
 | ------- | --------------------------- |
 | 7.0.1   | Enhanced Security Key Management support added. |
 | 7.1.3   | Support for ML-KEM added. |
+| 7.2.0   | Subject Alternative Name (SAN) URI support for peering identity. |
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
@@ -69,7 +70,7 @@ When using CA-signed certificates, the end-to-end provisioning sequence must be 
 
 1. Authenticate to the Conductor REST API (`POST /api/v1/login`) and store the bearer token.
 2. Generate a private key on the target router's node (`POST /api/v1/router/<router>/node/<node>/private-key`) — the key never leaves the SSR.
-3. Generate a CSR on the same target (`GET /api/v1/router/<router>/node/<node>/certificate-request`) using a `common_name` that matches that router's `peering-common-name`.
+3. Generate a CSR on the same target (`GET /api/v1/router/<router>/node/<node>/certificate-request`) using a `common_name` that matches that router's `peering-common-name`, or alternatively, using any unique `common_name` with a `urn:ssr:peering` SAN URI that matches the `peering-common-name`. See [API Naming Rules](#api-naming-rules) for details.
 4. Submit the CSR to your Certificate Authority and obtain a signed certificate.
 5. Ingest the signed certificate back into the SSR (`POST /api/v1/router/<router>/node/<node>/certificate`).
 6. **Activate the certificate in configuration** — having the file on disk is not sufficient. Configure `authority client-certificate` with a `name` and `file` matching the API artifact name. See [Activating the Certificate in Configuration](#activating-the-certificate-in-configuration).
@@ -84,16 +85,54 @@ Consistent naming across all API calls and configuration is critical:
 
 | Field | Scope | Rule |
 |---|---|---|
-| `name` (in all API requests) | Authority-wide | **Must be identical across all routers and nodes.** Use `custom_ssr_peering` in SSR 7.0.x (reserved name). In SSR 7.1+, any consistent name may be used. |
-| `common_name` (in CSR request) | Per-router / per-node | **Must be unique per router or HA node**, and must **exactly match** that router's configured `peering-common-name`. |
-| `peering-common-name` (in config) | Per-router | Unique alias per router. Must match the `common_name` used in that router's CSR. |
+| `name` (in all API requests) | Authority-wide | **Must be identical across all routers and nodes.** In SSR 7.1+, any consistent name may be used. |
+| `common_name` (in CSR request) | Per-router / per-node | **Must be unique per router or HA node.** Must match the router's configured `peering-common-name` — unless a `urn:ssr:peering` SAN URI is used to carry the peering identity instead (see below). |
+| `peering-common-name` (in config) | Per-router | Unique alias per router. Must match either the `common_name` or a `urn:ssr:peering` SAN URI in that router's certificate. |
 
-**Example mapping for a two-router deployment:**
+:::note Legacy Name
+In SSR 7.0.x, the `name` field was required to be `custom_ssr_peering` (a reserved name). This is no longer required in SSR 7.1+. If no certificate is configured, the SSR will fall back to searching for certificates named `custom_ssr_peering` on disk for backward compatibility.
+:::
 
-| Router | `peering-common-name` in config | `common_name` in CSR | `name` in all API requests |
-|---|---|---|---|
-| combo-east | `east-alias` | `east-alias` | `custom_ssr_peering` |
-| combo-west | `west-alias` | `west-alias` | `custom_ssr_peering` |
+#### Peering Identity via Subject Alternative Name URI
+
+Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in **HA deployments**, where both nodes in a router share the same `peering-common-name` but enterprise PKI policies require unique CNs per certificate.
+
+When verifying a peer's identity, the SSR checks the certificate CN first. If the CN does not match the configured `peering-common-name`, the SSR falls back to checking for a SAN URI of the form:
+
+```
+urn:ssr:peering:<peering-common-name>
+```
+
+If a matching SAN URI is found, the certificate is accepted. This allows each HA node to have a unique CN while sharing the same peering identity through the SAN URI.
+
+To include a SAN URI in a CSR, add a `subject_alt_names` array to the CSR request body using the `urn_ssr_peering` convenience type:
+
+```json
+{
+    "name": "my_peering_cert",
+    "common_name": "combo-east-node1",
+    "subject_alt_names": [
+        {"type": "urn_ssr_peering", "value": "east-alias"}
+    ]
+}
+```
+
+The `urn_ssr_peering` type automatically expands the value to `URI:urn:ssr:peering:<value>`. For the full list of supported SAN types, see [Configure Certificate Management](config_custom_certs.md#issue-a-certificate-signing-request).
+
+**Example: Traditional CN-based identity (single node per router)**
+
+| Router | `peering-common-name` | `common_name` in CSR | SAN URI | `name` in API |
+|---|---|---|---|---|
+| combo-east | `east-alias` | `east-alias` | *(not needed)* | `my_peering_cert` |
+| combo-west | `west-alias` | `west-alias` | *(not needed)* | `my_peering_cert` |
+
+**Example: SAN URI identity (HA — unique CN per node)**
+
+| Router | Node | `peering-common-name` | `common_name` in CSR | SAN URI | `name` in API |
+|---|---|---|---|---|---|
+| combo-east | node1 | `east-alias` | `combo-east-node1` | `urn:ssr:peering:east-alias` | `my_peering_cert` |
+| combo-east | node2 | `east-alias` | `combo-east-node2` | `urn:ssr:peering:east-alias` | `my_peering_cert` |
+| combo-west | node1 | `west-alias` | `combo-west-node1` | `urn:ssr:peering:west-alias` | `my_peering_cert` |
 
 #### Activating the Certificate in Configuration
 
@@ -196,6 +235,10 @@ When provisioning certificates for an HA router, you must execute the private-ke
 The same node-scoped pattern applies to the `/certificate-request` and `/certificate` endpoints. The request body — including the `name` field — is identical for both nodes. Consult the Swagger documentation at `https://<conductor-ip>/api/v1/swagger` for the full per-node endpoint schema.
 :::
 
+:::tip Unique Common Names in HA (SSR 7.2.0+)
+Because both HA nodes share the same `peering-common-name`, earlier releases required both nodes to use an identical `common_name` in their certificates. Starting in SSR 7.2.0, you can use a [SAN URI](#peering-identity-via-subject-alternative-name-uri) to carry the peering identity, allowing each node to have a unique CN — for example, `combo-east-node1` and `combo-east-node2` — while both certificates include the same `urn:ssr:peering:east-alias` SAN URI.
+:::
+
 When two nodes are configured as a redundant pair, the keys are exchanged between nodes. This avoids rekeying on flow migration due to node failures. Keys can be safely exchanged between nodes as the HA sync interfaces are connected point to point over an SSH connection.
 
 ### Certificate Replacement or Revocation
@@ -210,7 +253,13 @@ When a certificate is revoked, expired, or invalid, the SSR generates an alarm. 
 
 Peer validation is done whenever a new certificate is added, or peer configuration has changed. When a certificate is received, a cached validation response is used. If configured, the received certificate is validated against the `trusted-ca-certificate` list.
 
-When receiving a certificate from a peer router and performing validation, the receiving router extracts and saves the peer router's public key. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
+When receiving a certificate from a peer router and performing validation, the receiving router checks the certificate's identity against the peer's configured `peering-common-name` using the following order:
+
+1. **Common Name (CN) check** — if the certificate's CN matches the peer's `peering-common-name`, the certificate is accepted.
+2. **SAN URI fallback (SSR 7.2.0+)** — if the CN does not match, the SSR checks for a `urn:ssr:peering:<peering-common-name>` SAN URI in the certificate's Subject Alternative Name extension. If found, the certificate is accepted.
+3. **Rejection** — if neither the CN nor any SAN URI matches, the certificate is rejected. How the SSR handles the certificate rejection is defined using the `invalid-certificate-behavior` setting (`fail-soft` or `fail-hard`).
+
+After successful validation, the receiving router extracts and saves the peer router's public key. This is used for validating the authenticity of any subsequent Peer Key/Rekey requests.
 
 ### Requirements
 
@@ -233,7 +282,7 @@ config
 2. Configure a unique `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is a **unique alias per router** that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the `peering-common-name` from the certificate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
 
 :::note
-The `peering-common-name` must exactly match the `common_name` field used in the certificate signing request (CSR) generated for that router. See [API Naming Rules](#api-naming-rules) for the full field mapping.
+The `peering-common-name` must match either the `common_name` field or a `urn:ssr:peering` SAN URI in the certificate generated for that router. See [API Naming Rules](#api-naming-rules) for the full field mapping.
 :::
 
 When the SSR generates the CSR, it embeds the `peering-common-name` into a Subject Alternative Name (SAN) of type URI, formatted as `urn:ssr:peering:<peering-common-name>`. During HA peering, each node validates its peer by matching this SAN URI. Each node still uses its own unique certificate and private key; the certificates are not shared between nodes. Because the `peering-common-name` is configured per router, every node in an HA router carries the same `urn:ssr:peering:` URI in its individual certificate, which is what allows the peer to validate either node against the expected identity.
