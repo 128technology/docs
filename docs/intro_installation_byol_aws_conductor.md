@@ -557,7 +557,7 @@ To deploy an HA Conductor Managed Router, you must deploy the CloudFormation tem
 3. Paste the following S3 URL into the **Amazon S3 URL** dialog.
 
 ```
-https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-4.0-20251211-1429-2.json
+https://ssr-templates.s3.us-east-1.amazonaws.com/aws-byol-ha-conductor-managed-router-template-ssr-byol-5.1-20260615-2349.json
 ```
 4. Click **next** and complete the form.
 
