@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-release_notes_128t_7.2" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.1">
+<title data-rh="true">SSR 7.2 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.2 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.2"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.2" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"7.2","item":"https://docs.128technology.com/docs/release_notes_128t_7.2"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
+<link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.62c625f9.css">
+<script src="/assets/js/runtime~main.95c8c409.js" defer="defer"></script>
+<script src="/assets/js/main.3a68704b.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><link rel="preload" as="image" href="/img/logo_dark.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="Juniper Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo_dark.png" alt="Juniper Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link" href="/docs/intro_getting_started">Docs</a><a class="navbar__item navbar__link" href="/kb">Knowledge Base</a><a href="https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Community<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://www.juniper.net/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Company<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts="Meta+k"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle><path d="m21 21-4.3-4.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/intro_getting_started"><span title="About" class="categoryLinkLabel_W154">About</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/deploy_guides_overview"><span title="Deployment Guides" class="categoryLinkLabel_W154">Deployment Guides</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/release_notes_128t_7.2"><span title="Release Notes" class="categoryLinkLabel_W154">Release Notes</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/release_notes_128t_7.2"><span title="SSR" class="categoryLinkLabel_W154">SSR</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/release_notes_128t_7.2"><span title="7.2" class="linkLabel_WmDU">7.2</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_7.1"><span title="7.1" class="linkLabel_WmDU">7.1</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_7.0"><span title="7.0" class="linkLabel_WmDU">7.0</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_6.3"><span title="6.3" class="linkLabel_WmDU">6.3</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_6.2"><span title="6.2" class="linkLabel_WmDU">6.2</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_6.1"><span title="6.1" class="linkLabel_WmDU">6.1</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_6.0"><span title="6.0" class="linkLabel_WmDU">6.0</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.6"><span title="5.6" class="linkLabel_WmDU">5.6</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.5"><span title="5.5" class="linkLabel_WmDU">5.5</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.4"><span title="5.4" class="linkLabel_WmDU">5.4</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.3"><span title="5.3" class="linkLabel_WmDU">5.3</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.2"><span title="5.2" class="linkLabel_WmDU">5.2</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.1"><span title="5.1" class="linkLabel_WmDU">5.1</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_5.0"><span title="5.0" class="linkLabel_WmDU">5.0</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_4.5"><span title="4.5" class="linkLabel_WmDU">4.5</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_4.4"><span title="4.4" class="linkLabel_WmDU">4.4</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_4.3"><span title="4.3" class="linkLabel_WmDU">4.3</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_4.2"><span title="4.2" class="linkLabel_WmDU">4.2</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_4.1"><span title="4.1" class="linkLabel_WmDU">4.1</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/release_notes_128t_4.0"><span title="4.0" class="linkLabel_WmDU">4.0</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/release_notes_128t_installer_3.2"><span title="SSR Installer" class="categoryLinkLabel_W154">SSR Installer</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/release_notes_wan_assurance_plugin_3.102"><span title="WAN Assurance Plugin" class="categoryLinkLabel_W154">WAN Assurance Plugin</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/release_notes_byol_5.0"><span title="BYOL Cloud Images" class="categoryLinkLabel_W154">BYOL Cloud Images</span></a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/supported_devices_overview"><span title="Hardware Support" class="categoryLinkLabel_W154">Hardware Support</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/concepts_overview"><span title="Concepts" class="categoryLinkLabel_W154">Concepts</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/intro_installation"><span title="Installing Software Version 6.3.0 and Later" class="categoryLinkLabel_W154">Installing Software Version 6.3.0 and Later</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/supported_cloud_platforms"><span title="Cloud / Hypervisor Installations" class="categoryLinkLabel_W154">Cloud / Hypervisor Installations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/intro_installation_legacy"><span title="Installing Software Versions Earlier than 6.3.0" class="categoryLinkLabel_W154">Installing Software Versions Earlier than 6.3.0</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/intro_upgrade_considerations"><span title="Upgrading the SSR" class="categoryLinkLabel_W154">Upgrading the SSR</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/bcp_sdwan_design_guide"><span title="Best Practices" class="categoryLinkLabel_W154">Best Practices</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/config_basics"><span title="Administration Guide" class="categoryLinkLabel_W154">Administration Guide</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/sec_security_overview"><span title="Software and Hardware Security" class="categoryLinkLabel_W154">Software and Hardware Security</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/concepts_ha_options"><span title="High Availability" class="categoryLinkLabel_W154">High Availability</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/cli_reference"><span title="CLI and Element Reference" class="categoryLinkLabel_W154">CLI and Element Reference</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/wan_overview"><span title="WAN Assurance" class="categoryLinkLabel_W154">WAN Assurance</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/plugin_intro"><span title="Plugins" class="categoryLinkLabel_W154">Plugins</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/ts_applications"><span title="Troubleshooting" class="categoryLinkLabel_W154">Troubleshooting</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Release Notes</span></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">SSR</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">7.2</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>SSR 7.2 Release Notes</h1></header><p>The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software.</p>
+<p>Beginning with SSR v6.3.0, the use of the interactive installer is not supported, or necessary. Software installation and upgrade activities are supported from the Web Interface or the Command Line Interface.</p>
+<p>With the image-based ISO delivered beginning with version 6.3.0, the manual installation process no longer supports the <code>initialize128t</code> command.</p>
+<p>Initializing devices as a conductor or conductor-managed router is easily accomplished from the GUI using the <a class="" href="/docs/initialize_u-iso_device">Initialize Your Device - Web Workflow</a>, or from the CLI using the the <code>initialize conductor</code> and <code>initialize conductor-managed</code> commands described in the <a class="" href="/docs/initialize_u-iso_adv_workflow#initialize-a-conductor">Initialize Your Device - Advanced Workflow</a> documentation.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="installation-from-iso">Installation from ISO<a href="#installation-from-iso" class="hash-link" aria-label="Direct link to Installation from ISO" title="Direct link to Installation from ISO" translate="no">​</a></h3>
+<p>When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - identified by the filename prefix &quot;SSR&quot;: <code>SSR-6.3.0-107.r1.el7.x86_64.ibu-v1.iso</code>. Installation documentation for the image-based process can be found in the <a class="" href="/docs/intro_installation_univ-iso">Image-based ISO Installation Overview</a>.</p>
+<p>Offline mode conductor and router upgrades to image-based installations are detailed in the <a class="" href="/docs/upgrade_restricted_access#single-version-630-upgrade">Single-Version 6.3.0 Upgrade</a> instructions.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade-considerations">Upgrade Considerations<a href="#upgrade-considerations" class="hash-link" aria-label="Direct link to Upgrade Considerations" title="Direct link to Upgrade Considerations" translate="no">​</a></h3>
+<div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Before upgrading please review the <a class="" href="/docs/intro_upgrade_considerations"><strong>Upgrade Considerations</strong></a> and the <a class="" href="/docs/intro_rollback"><strong>Rolling Back Software</strong></a> pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.</p></div></div>
+<div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>After installing / upgrading to SSR 7.1.3, downgrading <em>to an earlier version</em> of SSR software where Configuration Integrity (CI) is not available is NOT supported.</p><p>Rollback to the previously installed version of software <em>is</em> supported.</p></div></div>
+<p><strong>7.0.1 Conductor Upgrades</strong></p>
+<p>If you are upgrading a conductor that is currently installed with version 6.3.4 or lower, and you wish to upgrade to version 7.0.1 or higher, you must first upgrade the conductor to any version of the 6.3.x software, including and higher than 6.3.5.</p>
+<p>Routers running SSR software versions earlier than 6.3.5 cannot connect to conductors running SSR software version 7.0.1 and higher. A transitional step is required to enable routers running versions earlier than 6.3.5 (6.0.x, 6.1.x, 6.2.x, 6.3.4 and lower) to communicate with a conductor running 7.0.1+.</p>
+<ol>
+<li class="">Upgrade the conductor to any version of the 6.3.x software, including and higher than 6.3.5.</li>
+<li class="">Upon completion of the install, allow all managed routers to connect and reach the <strong>Synchronized</strong> state.
+The new keying requirements that are part of 6.3.5+ are loaded onto the routers during synchronization. These are required for routers to communicate with a 7.0.1+ conductor. If the routers do not reach the synchronized state, those routers will not be able to communicate with the 7.0.1+ conductor.</li>
+<li class="">Once the routers are synchronized, you may upgrade the conductor to 7.0.1. All synchronized routers, regardless of version, will be able to communicate with the upgraded conductor. The routers are not required to upgrade to 7.0.1 or to 6.3.5.</li>
+</ol>
+<p>If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.0.1 normally.</p>
+<p><strong>VM Upgrades 6.2.x to 7.x</strong></p>
+<p>Users upgrading a virtual machine, including those on AWS or Azure, previously installed with package-based SSR releases (6.2 and prior on Conductor-managed deployments only) should be aware of the following:</p>
+<p>Due to changes in the base SSR/Linux OS in 7.X, interface naming behavior has changed for virtual machines. Older SSR versions using earlier versions of the SSR OS may have named Linux interfaces with the <code>ethX</code> naming convention. Interfaces in 7.X and above use the Linux predictable interface naming convention as seen in SSR hardware installs. This change in interface naming could prevent existing Linux interface configurations not to apply to the <code>ethX</code>-named interface. This applies to interfaces configured directly in Linux, such as dedicated management interfaces, and <strong>not</strong> interfaces configured via SSR configuration.</p>
+<p>This issue is currently being addressed by engineering. However, if your deployment requires an upgrade to 7.X on a VM configured with interfaces using the <code>ethX</code> naming convention, please ensure that console access is available, as manual updates to the Linux interface configuration may be required.</p>
+<p><strong>System Disk Considerations</strong></p>
+<p>As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in <code>/var/log/128technology</code>) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.</p>
+<p>In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either <a class="" href="/docs/intro_installation_byol_aws_conductor">AWS</a> or <a class="" href="/docs/intro_installation_byol_azure_conductor">Azure</a>.</p>
+<p>When the conductor is initially upgraded to an image-based installation, it will be upgraded as a package-based system. This is because the system does not understand how to handle image-based delivery until it is running 6.3 software. Once the conductor is running 6.3 all router upgrades will be treated as image-based upgrades and any subsequent conductor upgrade will be treated as image-based. Therefore, it is possible that issues related to disk usage on conductor may not arise until a subsequent upgrade of the conductor beyond the initial step to 6.3.</p>
+<p><strong>Offline-Mode: Upgrading 6.3.x Conductor Deployments to 6.3.x+</strong></p>
+<p>An issue has been identified that may be observed in conductor deployments running version 6.3.x software, when attempting to upgrade from one 6.3.x patch release to another. This results in the message, “SSR firmware upgrade failed for the local node: SSR upgrade failed after reboot”. To work around this, run <code>request system software upgrade installation-service</code> from the command line of the Conductor, after importing the image-based ISO. Once complete, perform the full system upgrade from the Web interface. This issue will be resolved in a future release.</p>
+<p><strong>Offline-Mode: Onboarding Routers Running older SSR Software to a 6.3.x Conductor</strong></p>
+<p>An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the <strong>package-based</strong> (the &quot;128T&quot; prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-720-29r1">Release 7.2.0-29r1<a href="#release-720-29r1" class="hash-link" aria-label="Direct link to Release 7.2.0-29r1" title="Direct link to Release 7.2.0-29r1" translate="no">​</a></h2>
+<p><strong>Release Date:</strong> July 1, 2026</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-features">New Features<a href="#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>I95-25150 AES-GCM Encryption:</strong> AES-GCM is now supported as a higher-performance encryption and authentication algorithm, replacing the previous AES-CBC + HMAC-SHA approach. AES-GCM combines encryption and authentication in a single operation, reducing per-packet processing overhead. The implementation includes frequent key rotation, per-path unique keys to reduce the cryptographic load on any single key, and a deterministic incrementing nonce scheme to prevent nonce reuse. For more information, see <a class="" href="/docs/sec_security_policy#aes-gcm-encryption">AES-GCM Encryption</a>.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-34472 Waypoint Pool Exhaustion Monitoring:</strong> Added visibility into waypoint pool utilization including a <code>show waypoint</code> command that allows operators to monitor,the waypoint pool. See <a class="" href="/docs/cli_reference#show-waypoints"><code>show waypoints</code></a> for more information.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-55344 SSL Forward Proxy:</strong> SSL Forward Proxy uses signed, trusted certificates to allow the SSR to perform a man-in-the-middle (MITM) function that decrypts and re-encrypts HTTPS traffic, and supports IDP and AV scans of traffic at that time. For more information, see <a class="" href="/docs/sec-ssl-fwd-proxy">Configure SSL Forward Proxy</a>.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-60371 Adaptive PMTU Change Handling for Long-Lived Sessions:</strong> The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the correct maximum transmission unit (MTU) for each peer path. Devices in the underlay may report an ICMP Destination Unreachable / Fragmentation Needed (type 3, code 4) error to indicate they could not forward a packet due to an undersized MTU. With 7.2.0, the SSR updates the affected overlay flow and generates a corrected packet toward the original packet sender, allowing the sender to adjust its segment size. The flow which was traversed to trigger the response from the underlay is now updated to use the new updated MTU. For more information, see <a class="" href="/docs/config_pmtu">Path MTU Discovery</a>.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-61066 Simplified Interface Naming:</strong> Simplified Interface Naming for Cloud Images: Forwarding device-interfaces can now be configured using Linux interface names instead of PCI addresses or VMBus UUIDs. This simplifies deployment in Hyper-V and Azure environments, where VMBus UUIDs are randomly generated per VM instance and require manual discovery. Template-based configurations are now more portable across hardware changes and scaled deployments.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-61467 Show filtered-routes in <code>show bgp</code> output:</strong> When an inbound BGP policy rejects prefixes received from a neighbor, those routes do not appear in the BGP table or the FIB. The <code>filtered-routes</code> option exposes exactly which prefixes were suppressed by the inbound policy for a given neighbor, making it straightforward to troubleshoot why expected routes are absent from the routing table. For more information, see <a class="" href="/docs/config_bgp#viewing-filtered-bgp-routes">Viewing Filtered BGP Routes</a>.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63012 AppID Scale Optimization:</strong> Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64149 Enhanced Security Key Management Events:</strong> Added system audit events for all success-path PKI operations in Certificate Management — including private key generation/deletion, certificate update/deletion, and CSR deletion — complementing the existing audit coverage for CSR generation and certificate ingest. See the <a class="" href="/docs/sec_enhanced_key_mgmt#troubleshooting">Troubleshooting section of Enhanced Security Key Managament</a> for additional information.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64435 SSR400/SSR440 FIPS Compliant EEPROM:</strong> Migrated SSR400/SSR440 devices to a FIPS-compliant EEPROM encryption scheme, replacing the previously used RSA ES cipher. Existing inventory remains forward compatible with new SSR software.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64645 Certificate Management - CSR Improvements:</strong> Starting in SSR 7.2.0, the peering identity can be carried in a Subject Alternative Name (SAN) URI extension instead of the Common Name (CN). This is especially useful in <strong>HA deployments</strong>, where both nodes in a router share the same <code>peering-common-name</code> but enterprise PKI policies require unique CNs per certificate. See <a class="" href="/docs/sec_enhanced_key_mgmt#peering-identity-via-subject-alternative-name-uri">Enhanced Security Key Management — API Naming Rules</a> for details.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64845 Add Additional Audit Events for Certificate APIs:</strong> Adds several audit events and logs for certificate activity. See the <a class="" href="/docs/sec-cert-based-encrypt#audit-eventslogging">Audit Events and Logging</a> section of Certificate-based Security Encryption for additional information.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-3182 In-band Management Inbound Apps:</strong> When a Mist-managed device uses an in-band management address, inbound services such as ICMP and SNMP can now be allowed from selected user networks, enabling network monitoring and diagnostics without a dedicated management interface.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2023-40403, CVE-2023-43000, CVE-2025-9230, CVE-2025-12084, CVE-2025-13502, CVE-2025-13601, CVE-2025-13947, CVE-2025-14087, CVE-2025-14512, CVE-2025-43272, CVE-2025-43342, CVE-2025-43343, CVE-2025-43356, CVE-2025-43368, CVE-2025-43392, CVE-2025-43419, CVE-2025-43421, CVE-2025-43425, CVE-2025-43427, CVE-2025-43429, CVE-2025-43430, CVE-2025-43431, CVE-2025-43432, CVE-2025-43434, CVE-2025-43440, CVE-2025-43443, CVE-2025-43458, CVE-2025-43480, CVE-2025-43501, CVE-2025-43529, CVE-2025-43531, CVE-2025-43535, CVE-2025-43536, CVE-2025-43541, CVE-2025-53859, CVE-2025-61662, CVE-2025-66287, CVE-2025-67873, CVE-2025-68114, CVE-2025-68973, CVE-2026-1519, CVE-2026-1642, CVE-2026-3497, CVE-2026-4111, CVE-2026-4424, CVE-2026-4519, CVE-2026-4786, CVE-2026-4878, CVE-2026-5119, CVE-2026-5121, CVE-2026-6100, CVE-2026-21710, CVE-2026-25749, CVE-2026-26996, CVE-2026-27135, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-27904, CVE-2026-28417, CVE-2026-28421, CVE-2026-29111, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33412, CVE-2026-33416, CVE-2026-33526, CVE-2026-33636, CVE-2026-34982, CVE-2026-35385, CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414, CVE-2026-35535, CVE-2026-39979, CVE-2026-40164, CVE-2026-40460, CVE-2026-40701, CVE-2026-41242, CVE-2026-42926, CVE-2026-42934, CVE-2026-42945, CVE-2026-42946, CVE-2026-43284, CVE-2026-43500, CVE-2026-46300, CVE-2026-46333.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>The following issues have been addressed and delivered to increase the overall security posture of the SSR:</strong> I95-62091, I95-65017, I95-65019, I95-65030, I95-65039, I95-65054, I95-65080, I95-65206, I95-65210, I95-65222, I95-65249.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-61693 DHCP INFORM Response Improvements:</strong> Resolved an issue where DHCP INFORM packets were not correctly answered. The DHCP ACK response now includes the requested options, ensuring clients retain vital information such as DNS servers, domain name, and gateway.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63033 <code>show lte detail</code> crash when LTE apn-name is invalid:</strong> Resolved an issue where executing <code>show lte detail</code> when an invalid APN name is configured caused a CLI crash due to an unhandled dictionary update error.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63035 Antivirus warning when missing tenant for AV traffic:</strong> Resolved an issue where an antivirus alert was incorrectly raised on the passive node in an HA system, indicating AV was not active.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63547 Time-based HMAC peering issues due to unsynchronized peers:</strong> Addressed an issue where peering using time-based HMAC encryption failed when the time delta between peers exceeded 2 seconds due to unsynchronized clocks.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63673 Peer Paths <code>no paths</code> text fix:</strong> Resolved a styling issue on the web interface where the <code>no paths</code> text on the Peer Paths page was not displayed correctly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63794 <code>show lte detail</code> error handling for invalid APN configuration:</strong> Resolved an issue where executing <code>show lte detail</code> with an invalid APN configuration caused a <code>ValueError</code> crash. The CLI now handles unexpected response formats gracefully.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63873 DHCP Leases Not Showing in Conductor UI:</strong> Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in <code>no leases found</code>. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63876 Route Flapping and Inaccessibility:</strong> Resolved an issue where routes would flap or become inaccessible in hub-and-spoke topologies with inter-hub steering preferences configured, causing intermittent connectivity failures.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63951 BGP Graceful Restart Sending EOR Prematurely:</strong> Resolved an issue where the SSR sent End-of-RIB (EOR) markers prematurely during BGP graceful restart, without waiting to receive EOR from its peers as required by RFC 4724, potentially causing route convergence issues.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63955 SSR Process Inactive After Conductor Onboarding but UI shows <code>Synchronized</code>:</strong> Resolved an issue where, after completing the Secure Conductor Onboarding (SCO) workflow in Azure with vTPM enabled, the UI incorrectly showed the device as <code>Synchronized</code> while the SSR service was inactive, triggering a <code>No Connectivity</code> alarm.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63965 SNMP MIB subinterfaces not reporting correct stats:</strong> Resolved an issue where SNMP MIB statistics for VLAN sub-interfaces were incorrectly reporting the same values as the parent interface instead of per-sub-interface statistics.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63966 SNMP MIB cannot retrieve description:</strong> Resolved an issue where the SNMP interface description field was returned as empty during SNMP walks, even though the description was configured in the SSR software.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63982 Disallow upgrades when unsigned packages are present and IMA is enabled:</strong> Added protections to prevent upgrades to unsigned packages when IMA is enabled, avoiding scenarios where the system loses connectivity after an upgrade due to unsigned executables being denied execution.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63983 System LED does not turn off after halt or shutdown:</strong> Resolved an issue where the system LED on SSR400/SSR440 devices did not turn off or change state after a halt or shutdown, making it difficult to determine whether the unit was still running.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63985 VRRP Non-revertive Active/Active Recovery:</strong> Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64051 AWS inconsistent interface mapping:</strong> Resolved an issue where interface mapping in AWS deployments was inconsistent, causing the HA fabric interface to remain in the kernel while the HA sync interface was incorrectly taken by the forwarding process, preventing HA from functioning properly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64061 Azure Kernel Hung Task After Upgrade:</strong> Resolved an issue where Azure VMs experienced kernel hung task crashes related to <code>uio_hv_generic</code> after upgrading, requiring a reboot to recover.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64063 Salt Minion restarting every minute when one Conductor is Unreachable:</strong> Resolved an issue where the Salt Minion restarted once per minute whenever one conductor in a two-conductor deployment was unreachable, causing repeated instability in the management plane connection.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64150 User defined SNMP metrics not working:</strong> Resolved an issue where user-defined SNMP metrics were not functional due to a missing configuration file (<code>snmpMetricsConfig.json</code>) and missing references in the SNMP object agent.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64152 Conductor connectivity blocked by stale SSH control sockets:</strong> Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain <strong>Disconnected</strong> in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64221 TPM firmware update capsule support:</strong> Added TPM firmware update capsule support in the SSR400/SSR440 firmware, enabling in-field TPM firmware updates.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64238 RADIUS Authentication Non-Functional:</strong> Resolved an issue where RADIUS authentication produced no traffic toward the configured server. The <code>radsec proxy</code> configuration file is now placed inside an encrypted directory so that RADIUS shared secrets are protected at rest.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64250 BGP routes received but not installed in BGP table or RIB:</strong> Resolved an issue where BGP routes from specific neighbors were received but not installed in the BGP table or RIB, requiring neighbor reconfiguration to restore route installation.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64306 Optimize ICMP probe profile update on config change:</strong> Resolved an issue where ICMP probe profiles were unnecessarily restarted on every configuration update even when no actual changes occurred, causing excessive work and log noise.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64341 SSR400/SSR440 front panel port LEDs not turned off on reset:</strong> Resolved an issue where the SSR400/SSR440 front panel port LEDs were not turned off when the system was reset or halted.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64344 Extended multicast traffic loss during HA failover:</strong> Resolved an issue where multicast traffic experienced extended loss (37+ seconds) during an HA failover.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64397 Cosmetic error message on SSR1500:</strong> Resolved an issue where cosmetic error messages about <code>rc.local</code> and <code>telegraf</code> systemd unit files were displayed on the CLI of SSR1500 devices.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64408 TCP timers for syslog connections too relaxed:</strong> Resolved an issue where TCP connection timers for syslog were either not set or too relaxed. This resulted in excessive retransmit attempts when a syslog receiver became unavailable, delaying failover to an alternate server.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64412 Factory reset to include removal of salt cache:</strong> Added recursive cleanup of the salt cache directory and smart sync hashes in the platform cleanup script to ensure a more complete reset.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64434 IDP Bypass Alert Policy Not Applied:</strong> Resolved an issue where the IDP bypass <code>alert</code> policy was not being applied correctly, causing traffic to be incorrectly handled by the IDP engine.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64448 Metrics retrieval failing for node1 when HA is down:</strong> Resolved an issue where empty data was returned when HA links were down. Peer node system metrics (CPU, memory, disk) now return an error response instead of silently returning empty data.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64479 Invalid application WEBEX not recognized:</strong> Resolved an issue where the WEBEX application was not being recognized by the application identification module after an upgrade, resulting in <code>invalid application</code> events and missing FIB entries for the associated service.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64541 Node disconnection during upgrade:</strong> Resolved an issue where upgrading HA router nodes could result in one node entering a disconnected state with stale SSH control sockets, while the other node became stuck in the upgrading state, requiring a manual reboot to recover.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64542 Highway crash during service path refresh:</strong> Resolved a highway crash that occurred during service path load-balanced route refresh operations. Protections have been added to prevent the crash.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64549 Onboarding routers cannot install salt packages:</strong> Resolved an issue where routers being onboarded to a conductor could not install the required salt packages, preventing successful onboarding.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64566 CSR generation ignores camelCase parameters:</strong> Resolved an issue where the certificate signing request (CSR) API silently ignored camelCase parameter names (e.g., <code>commonName</code> instead of <code>common_name</code>).</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64567 SSR router status Disconnected on Conductor:</strong> Resolved an issue where configuring a loopback address on a router node caused the router to become Disconnected from the Conductor due to incorrect source NAT behavior on internal sessions.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64575 Unable to login to SSR routers from conductor in Cloud deployment:</strong> Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64603 <code>Chronyd</code> Requires Manual Restart After Reboot:</strong> Resolved an issue where all NTP servers appeared as rejected after a reboot, requiring a manual restart of the <code>chronyd</code> service to restore time synchronization.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64619 Config validate rejects DHCP network-interface when VRRP is present:</strong> Resolved an issue where configuration validation incorrectly rejected a DHCP-enabled network-interface if VRRP was present in the configuration, even when VRRP was not enabled.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64627 Certificate Unavailable for Peering After Upgrade:</strong> Resolved an issue where the local certificate became unavailable for peering after an upgrade, resulting in peer paths remaining down with a &quot;No local certificate available&quot; error.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64684 HMAC Cipher Mode Information in Logs and Session Output:</strong> Added HMAC mode and HMAC cipher details to session logs and <code>show sessions</code> output, improving visibility into the active encryption and authentication state of sessions.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64687 Factory Reset Does Not Recursively Clean <code>/var/cache/salt/</code>:</strong> Resolved an issue where factory reset operations did not recursively remove the <code>/var/cache/salt/</code> directory, leaving stale salt cache files behind. The cleanup process now removes this directory recursively.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64696 Salt connectivity issues after Conductor upgrade:</strong> Resolved an issue where salt-minion lost connectivity to the salt-master after a Conductor upgrade, affecting approximately 20% of routers. The minion-connector service now correctly manages the salt master address.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64703 Swagger Documentation for Private-Key, Certificate, and Certificate Request APIs:</strong> Updated the Swagger API documentation to include router-level and node-level paths (<code>/router/{router}/node/{node}/...</code>) for the <code>private-key</code>, <code>certificate</code>, and <code>certificate-request</code> endpoints, which were previously documented at the top level only.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64709 Premature route installation complete notification during Graceful Restart:</strong> Resolved a documentation discrepancy and corrected the behavior of the <code>stale-routes-time</code> parameter and its relationship to RFC 4724&#x27;s <code>Selection_Deferral_Timer</code>, ensuring proper Graceful Restart route handling.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64732 Update <code>show peers certificate</code> date format:</strong> Updated the <code>show peers certificate</code> command to use a newer API for certificate date rendering, providing a more user-friendly output format.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64829 Device disconnected from MIST and stopped processing sessions:</strong> Resolved a highway crash triggered by a config change that caused the device to go offline and stop processing sessions, requiring a power cycle to recover.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:</strong> Removed the erroneous <code>Rollback on Failure</code> checkbox from the Conductor migration UI, as the underlying feature was never implemented. This prevents user confusion during migration operations.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64876 Intermittent Application Issues Due to Child Service:</strong> Resolved an issue that lead to NAT pool exhaustion and intermittent application failures. When domain name–based child services had different routing paths than the parent service, it caused stale sessions on upstream firewalls.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64877 Changes to guard against L7 security stack crash:</strong> Resolved an issue where the IDP attack database was lost on reboot. The database is now stored persistently, and additional safeguards have been added for AV engine health checks, SSL certificate staging retries, and error code accuracy.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64903 High CPU and Disk Usage on SSR440:</strong> Resolved an issue where SSR440 devices experienced high CPU and disk usage without corresponding syslog messages being generated, making the condition difficult to diagnose.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64929 Peer certificate expiration timer overflow at 49 days:</strong> Resolved an issue where the seconds-to-milliseconds conversion for peer certificate expiration timers used unsigned 32-bit arithmetic, causing silent overflow and premature timer firing for certificates with expiration periods greater than 49 days.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64977 Certificate ingestion ignores expiry and revocation validation:</strong> Resolved an issue where certificate ingestion did not properly enforce expiry and revocation validation results, allowing expired or revoked certificates to be ingested.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-64997 SYSLOG SEIM Integration Not Sending Failed Session Attempts:</strong> Resolved an issue where the SYSLOG SEIM integration did not send log events for ERROR/FAILED session attempts (dropped packets), limiting visibility into denied traffic.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65019 TLS client peer-verification skipped when no CA certificate is configured:</strong> Resolved a critical issue where TLS client connections without a configured CA certificate silently skipped peer verification.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65056 <code>show app-id cache-sizes</code> Command Not Available:</strong> Resolved an issue where the <code>show app-id cache-sizes</code> CLI command was not available.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65099 Traffic Engineering Stats Incorrect Output:</strong> Resolved an issue where <code>show stats traffic-eng internal-application per-traffic-class</code> displayed incorrect or unexpected output.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65128 nodeMonitor Crash Loop on Hub Node:</strong> Resolved an issue where a Linux interface name with an empty string caused a continuous crash loop on a hub node. Users are now prevented from configuring an empty Linux interface name.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65129 Peer Path Up Using Mixed Certificates:</strong> Resolved an issue where peer paths could come up using certificates from different issuers (default Juniper certificate on one side and a custom CA-signed certificate on the other), even with a custom trusted CA configured.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65131 CPS Performance Degradation:</strong> Resolved an issue that caused approximately 10% connections-per-second (CPS) performance degradation observed on SSR1300 platforms.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65171 TSI Download Missing File Extension:</strong> Resolved an issue where Tech Support Info (TSI) bundles downloaded from the SSR Web UI had no file extension, preventing extraction with standard archive tools. Tech support files downloaded from the web UI now have the correct <code>.zip</code> extension.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65296 ESKM Peering Failures with Fragmentation:</strong> Resolved an issue where ESKM peer paths failed to establish in environments where fragmentation occurs on the underlay, such as GCP with Cloud Routers.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65351 IMA and Security Stack Incompatibility:</strong> Resolved an issue where enabling IDP with IMA caused the security engine to fail to start due to an incompatibility between IMA enforcement and the security stack binaries.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65354 Missing Dependencies in Offline ISO:</strong> Resolved an issue where required software dependencies were missing from the offline ISO, preventing plugin upgrades in air-gapped environments.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65390 Conductor Migration Deadlock:</strong> Resolved an issue where conductor migration could deadlock when using <code>asset-connection-resiliency</code> in <code>SSH-only</code> mode, leaving routers unable to connect to the production conductor.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65393 ESKM Certificate Invalid Alarm After Upgrade:</strong> Resolved an issue where a certificate invalid alarm was incorrectly raised after upgrading to a newer SSR version, causing peering to go down even though the certificate was not expired.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65403 Disallow CA Certificates for Peering:</strong> Added validation to prevent certificates with the CA<!-- -->:True<!-- --> basic constraint from being used as peering certificates, as these are intended for signing other certificates rather than direct peering authentication.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65410 Incorrect RBAC for Certificate Ingestion API:</strong> Resolved an issue where the POST <code>/api/v1/certificate</code> endpoint incorrectly required READ permission for the entire configuration instead of WRITE permission.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65411 CLI Command Appending Unrelated Output:</strong> Resolved an issue where executing certain PCLI commands (such as <code>show peer router all force</code>) would append unrelated command output at the end of the expected results.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65431 SSR Failing to Sync with NTP Server After Reboot:</strong> Resolved an issue where the SSR failed to synchronize with NTP servers after a reboot, requiring manual intervention to restore time synchronization.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65439 CRL in Certificate Not Taken into Account:</strong> Resolved an issue where the Certificate Revocation List (CRL) distribution point specified within a certificate was not being honored, requiring manual CRL configuration on the conductor.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65455 Network Manager Interface Preventing HA Sync:</strong> Resolved an issue where a spurious &quot;Wired Connection 1&quot; Network Manager interface prevented the HA sync interface from obtaining an IP address after an upgrade.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65469 GUI Not Showing Network Interfaces:</strong> Resolved an issue where the SSR Web UI no longer displayed Network Interfaces under device details, showing only Device Interfaces.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65486 Highway Crash During Upgrade from Legacy Version:</strong> Resolved a highway crash that occurred during router upgrades from legacy versions (e.g., 5.5.x to 7.2.x), causing the upgrade to fail after timing out.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65512 Web Server and Nginx Crash Looping:</strong> Resolved an issue where the web server and nginx processes entered a crash loop, preventing access to the SSR Web UI.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4340 Force Up on Bond Interface Member Causes Bond Down:</strong> Resolved an issue where enabling Force Up on one interface of a bond caused the entire bond to go down due to the configuration being incorrectly applied at the VLAN sub-interface level.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4341 Auto-Generated Service Route Name Changes on Bond Modification:</strong> Resolved an issue where adding or removing an interface from a Bond Interface caused auto-generated service route names to change, disrupting traffic steering.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4510 Multiple Syslog Servers Causing Configuration Failure:</strong> Resolved an issue where defining more than one syslog server in the SSR device configuration caused the syslog configuration to fail.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4513 Enable Syslog Policy for URL Filtering:</strong> Added syslog policy support for URL filtering events, enabling URL filter matches to be forwarded to configured syslog servers.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4592 Internet Application Conflict Between Overlay and Local Breakout:</strong> Resolved an issue where using the same internet application for both overlay traffic and local breakout created routing conflicts when app-id was used on the overlay, causing incorrect traffic steering.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4612 ICMPv6 Probes Not Working for Non-Directly-Connected Targets:</strong> Resolved an issue where ICMPv6 probe packets were not generated for targets that were multiple hops away (not directly connected), causing probe-based health monitoring to fail for IPv6 WAN interfaces.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4641 Next-Hop-Self Not Applied for BGPv6 Over SVR Neighbors:</strong> Resolved an issue where the <code>next-hop-self true</code> configuration was not being applied for BGPv6 over SVR neighbors, causing prefixes learned via eBGP on the LAN to be advertised across the overlay with incorrect next-hop values.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4709 Route Reflector Config Not Applied for IPv6 Peers:</strong> Resolved an issue where route-reflector configuration was not automatically enabled on hub routers for IPv6 BGP SVR spoke peers in the IPv6 Unicast address family.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4740 IPv6 Overlay Traffic Failure Between Hub and Spoke LANs:</strong> Resolved an issue where wired client traffic between HubLAN and SpokeLAN via the IPv6 overlay failed due to FIB entries missing vector, next-hop, and cost information for the overlay-v6 application policy.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>WAN-4747 IPv6 Routing Policy Next-Hop-Self Statement:</strong> Resolved an issue where removing the <code>set-next-hop-self</code> statement from IPv6 routing policies caused the policies to lack a required catch-all accept rule, breaking IPv6 route advertisement.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats">Caveats<a href="#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p><strong>I95-64407 Alternate SHA ciphers (256/384/512) not working properly with ESKM:</strong> SSR 7.1.3 and 7.2.0 introduce <code>sha384</code> and <code>sha512</code> as configurable options for the <code>hmac-cipher</code> field on security policies, alongside a new internal data structure that tracks metadata keys per HMAC mode and cipher combination.</p>
+<p>In deployments with peers running different versions of software and sharing security policies, configuring <code>hmac-cipher sha384</code> or <code>hmac-cipher sha512</code> in a fabric where any peer has not yet been upgraded to 7.2.0 or 7.1.3,  those older versions of software will not recognize <code>hmac-cipher sha384</code> or <code>hmac-cipher sha512</code>. These devices will continue to run <code>sha-256-128</code>. Currently, no alarm or warning will be generated, and there is no performance impact.</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li class="">
+<p><strong>I95-65609 After upgrading using Secure Conductor Onboarding and reaching the Syncronized state, routers return to Waiting:</strong> An issue has been identified for any upgrade where 128T processes start slowly relative to the SCO server could produce this symptom for all previously-onboarded routers.</p>
+<p><em>Workaround:</em> Restart the Secure Conductor Onboarding service: <code>systemctl restart 128T-secure-onboarding-server</code>.</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65667 Rare case of an Automated Provisioner crash:</strong> In some cases, an Automated Provisioner crash has been encountered. The Automated Provisioner recovers on it&#x27;s own, and no loss of functionality or data is experienced. This will be addressed and resolved in a future release.</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/deploy_appendix_vmware_conductor"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Appendix - VMware Conductor Configuration</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_7.1"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">7.1</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation-from-iso" class="table-of-contents__link toc-highlight">Installation from ISO</a></li><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-720-29r1" class="table-of-contents__link toc-highlight">Release 7.2.0-29r1</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
+</body>
+</html>
