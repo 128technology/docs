@@ -11,7 +11,7 @@ For instructions to install and manage the plugin, see [Installation and Managem
 
 ## Supported Modes
 
-The Cloud HA plugin supports two modes of operation: **dual-node** and **dual-router**.
+Across supported versions, the Cloud HA plugin supports two modes of operation: **dual-node** and **dual-router**.
 
 :::important
 As of **July 1, 2026**, Cloud HA plugin **6.0** is released for **node-based HA (dual-node mode)**. Cloud HA plugin 6.0 does **not** support dual-router mode.
@@ -32,7 +32,7 @@ Version 6.x supports dual-node mode only; dual-router mode is not supported. On 
 :::
 
 :::note
-Dual node supported solutions are `azure-vnet`, `aws-vpc`, `aws-tgw` and `gcp-vpc`
+Dual-node supported solutions are `azure-vnet`, `aws-vpc`, `aws-tgw`, and `gcp-vpc`.
 :::
 
 ## Supported Solutions
@@ -340,7 +340,7 @@ exit
 | ---- | --- | --- | --- |
 | name                      | string          | key                   | The name of the group to be referenced. |
 | enabled                   | boolean         | default: true         | Whether the group is enabled. |
-| solution-type             | enum            | required              | The solution to use on member nodes. Value can be one of the values in [Supported Solutions](#supported-solutions. |
+| solution-type             | enum            | required              | The solution to use on member nodes. Value can be one of the values in [Supported Solutions](#supported-solutions). |
 | additional-branch-prefix  | list: ip-prefix |                       | Additional IP prefixes that the member routers will control. |
 | up-holddown-timeout       | int             | default: 2            | The number of seconds to wait before declaring a member up. |
 | peer-reachability-timeout | int             | default: 10           | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |
@@ -900,7 +900,7 @@ exit
 2. **AWS TGW Attachment ID**: On each member, specifies the attachment which corresponds to the VPC that the SSR node lives in. This setting needs to be different across nodes.
 3. **Redundant Interfaces**: Each node specifies `ge-0-1` as the redundant interface to be monitored for failover.
 4. **Priority**: Node0 has priority 1 (primary), Node1 has priority 2 (secondary).
-5. **DNS Servers**: AWS's internal DNS server (168.63.129.16) is configured for the cloud HA membership.
+5. **DNS Servers**: AWS's internal DNS server (`169.254.169.253`) is configured for the cloud HA membership.
 6. **Fabric Interface**: A dedicated fabric interface (ge-0-2) is used for inter-node communication.
 
 ## Generated SSR Configuration
@@ -929,7 +929,7 @@ The service and service-route will be named either `cloud-ha-management-0` or `c
 The following criteria need to be met in order for the cloud-ha plugin to take effect for a specific group:
 
 * Priorities across all members in a group must be unique.
-* `remote-health-network` and `cloud-redundancy-plugin-network` must be a valid IP address.
+* `remote-health-network` and `cloud-redundancy-plugin-network` must be valid IP prefixes.
 * The `peer-reachability-timeout` for a group must be at least twice the amount of time as the `health-interval`.
 * `cloud-redundancy-group` referenced by the node's `cloud-redundancy-membership` must exist.
 * `auto-discover-route-table` must be disabled to configure `tgw-attachment-id`.
@@ -945,7 +945,7 @@ Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on 
 * Solution types `aws-vpc`, `aws-tgw` and `gcp-vpc` can only be configured in dual-node HA mode.
 * `tgw-attachment-id` can only be configured in AWS TGW solution type.
 * `shared-phys-address` cannot be configured in any cloud HA mode.
-* Router cannot be a member of multiple cloud redundancy groups.
+* A router cannot be a member of multiple cloud redundancy groups.
 
 ### Configuration Assumptions
 
