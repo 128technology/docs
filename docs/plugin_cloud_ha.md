@@ -21,7 +21,7 @@ Across supported versions, the Cloud HA plugin supports two modes of operation: 
 
 In dual-node mode, two nodes belong to the same router. This mode is suitable for scenarios where redundancy is required within a single router. Both nodes share the same configuration and operate in a coordinated manner to ensure high availability. The failover process is managed internally within the router, leveraging the health status of the nodes to determine which node should be active.
 
-### Dual Router Mode (Legacy, 6.x and Older)
+### Dual Router Mode (Legacy, Versions Earlier Than 6.x)
 
 In dual-router mode, two routers are configured, each with one node. This mode is designed for scenarios where redundancy is required across separate routers. Each router operates independently, and the Cloud HA plugin ensures that only one node is active at a time. The failover process involves communication between the routers to determine the health and status of the nodes, ensuring seamless traffic handling during failover events.
 
@@ -285,7 +285,7 @@ The split brain scenario can be identified when the peers cannot reach each othe
 
 ```
 
-Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields) for both members.
+Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields-for-versions-6x-and-above) for both members.
 
 ![split-brain-scenario](/img/cloud-ha-split-brain-scenario.png)
 
@@ -995,7 +995,7 @@ This command can be useful if the routes have been modified outside of the plugi
 #### State
 To check the state of the Cloud HA solution running on the router, the plugin adds output to the `show device-interface` command for the `cloud-ha` interface. Beginning with version 6.x, plugin output is available using the `show plugins state detail 128T-cloud-ha` command. This state information is also accessible from the SSR public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
-#### State Fields for <6.x
+#### State Fields For Versions Earlier Than 6.x
 
 | Field                    | Description                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
@@ -1123,7 +1123,7 @@ Wed 2022-09-21 10:31:57 CST
 Completed in 0.04 seconds
 ```
 
-#### State Fields for >=6.x
+#### State Fields For Versions 6.x And Above
 
 | Field                        | Description                                                                                               |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
