@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "gray-matter": "^4.0.3",
-    "prettier": "^3.8.4"
+    "prettier": "^3.9.4"
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
