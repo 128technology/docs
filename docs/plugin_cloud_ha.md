@@ -14,14 +14,14 @@ For instructions to install and manage the plugin, see [Installation and Managem
 Across supported versions, the Cloud HA plugin supports two modes of operation: **dual-node** and **dual-router**.
 
 :::important
-As of **July 1, 2026**, Cloud HA plugin **6.0** is released for **node-based HA (dual-node mode)**. Cloud HA plugin 6.0 does **not** support dual-router mode.
+**Cloud HA Plugin 6.08** was released on July 1, 2026 to provide support for **node-based HA (Dual-Node mode)**. Cloud HA plugin 6.0 does **not** support dual-router mode.
 :::
 
 ### Dual Node Mode
 
 In dual-node mode, two nodes belong to the same router. This mode is suitable for scenarios where redundancy is required within a single router. Both nodes share the same configuration and operate in a coordinated manner to ensure high availability. The failover process is managed internally within the router, leveraging the health status of the nodes to determine which node should be active.
 
-### Dual Router Mode (Legacy, <6.x)
+### Dual Router Mode (Legacy, 6.x and Older)
 
 In dual-router mode, two routers are configured, each with one node. This mode is designed for scenarios where redundancy is required across separate routers. Each router operates independently, and the Cloud HA plugin ensures that only one node is active at a time. The failover process involves communication between the routers to determine the health and status of the nodes, ensuring seamless traffic handling during failover events.
 
@@ -155,7 +155,7 @@ The following are some example tags:
 
 When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent uses the existing UDRs.
 
-These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
+These tags are queried each time the API Agent tries to get state or `become-active`, so modifying these tags during runtime is allowed.
 
 ### AWS TGW
 
@@ -170,10 +170,10 @@ If you want the state output to report the current routes in the TGW Route Rable
 - ec2:SearchTransitGatewayRoutes
 
 :::note
-The [AWS metadata configuration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) for the SSR instances must set the Hop Limit to at least 2 for the plugin to be able to make the correct API calls. The BYOL AMI has this setting defaulted to 2, but that value is only used if the instance or account settings are not specified.
+The [AWS metadata configuration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) for the SSR instances must set the Hop Limit to a minimum of two (2) for the plugin to make the correct API calls. This is the default setting in the BYOL AMI, however that value is only used if the instance or account settings are not specified.
 :::
 
-The TGW Route Table is the object which is updated by the plugin, pointing to one of the node's TGW Attachments. Each SSR node must know the TGW Route Table as well as the corresponding attachment that points to itself. How this is configured is explained in the [AWS TGW Config Section](#aws-tgw-specific-configuration)
+The TGW Route Table is updated by the plugin, pointing to one of the node's TGW Attachments. Each SSR node must know the TGW Route Table as well as the corresponding attachment that points to itself. This configuration is explained in [AWS TGW Configuration](#aws-tgw-specific-configuration)
 
 #### Tagging
 
@@ -191,13 +191,13 @@ The following are some example tags:
 * `SSR-CLOUD-HA-0-TGW-ROUTE-TABLE-ID` : `tgw-rtb-000000000000`
 * `SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID` : `tgw-attach-000000000000`
 
-When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent does not function and errors can be found in the journal.
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent does not function. Any errors can be found in the journal.
 
-These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
+These tags are queried each time the API Agent tries to get state or `become-active`, so modifying these tags during runtime is allowed.
 
 ### GCP VPC
 
-A `solution-type` of `gcp-vpc` can be used to enable the GCP VPC API agent. This solution requires an instance to be created with VPCs which are peered to the VPCs that the SSR resides in. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
+A `solution-type` of `gcp-vpc` can be used to enable the GCP VPC API agent. This solution requires an instance to be created with VPCs which are peered to the VPCs where the SSR resides. The Virtual Machines where these members are running must be granted the following permissions for the route updates to work correctly:
 
 - compute.routes.list
 - compute.routes.get
@@ -205,7 +205,7 @@ A `solution-type` of `gcp-vpc` can be used to enable the GCP VPC API agent. This
 - compute.routes.delete
 - compute.instances.get
 
-The VPC's Route Table is the object which is updated by the plugin. Each SSR node must know which VPC to manage routes for. How this is configured is explained in the [GCP VPC Tagging section](#tagging-2)
+The VPC's Route Table is the object updated by the plugin. Each SSR node must be configured to manage routes on a VPC. This configuration process is explained in [GCP VPC Tagging](#tagging-2)
 
 #### Tagging
 
@@ -223,13 +223,13 @@ The following is an example tag:
 
 When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will update the VPC route table associated with the `redundant-interface` configured in the `cloud-redundancy-membership`.
 
-These tags are queried every time the API Agent tries to grab state or `become-active`, so modifying these tags during runtime is allowed.
+These tags are queried each time the API Agent tries to get state or `become-active`, so modifying these tags during runtime is allowed.
 
 ## Scenarios
 
 ### Both Healthy
 
-In the case where both members are healthy, the primary node is preferred and set to active. The secondary node is inactive. The redundant interface on the secondary node is set provisionally down and the API Agent steers traffic towards the primary node.
+In the case where both members are healthy, the primary node is preferred and set to `active`. The secondary node is inactive. The redundant interface on the secondary node is set provisionally down and the API Agent steers traffic towards the primary node.
 
 ![both-healthy-scenario](/img/cloud-ha-both-healthy-scenario.png)
 
@@ -271,9 +271,9 @@ If the secondary node is shutdown while the primary is healthy, the primary HA A
 
 ### Split Brain
 
-This is slightly distinct from the Primary Shutdown or Secondary Shutdown because both nodes and HA Agents are up and running, but the peer link between the nodes is down. In this case, both HA Agents determine that the other HA Agent is unreachable. This is indistinguisable from the other node being shutdown, so both HA Agents will determine they are in the position to take control of traffic, so whichever node was not already active will become active. This means that both nodes will have their `redundant-interface`s provisionally up. For the `azure-vnet` solution, there will still only be one node that the route tables are pointing their routes towards due to the nature of the solution. For the `azure-lb` solution, both nodes will respond to the probes so traffic will be split according to the Azure Loadbalancer configuration. This situation can cause asymmetrical routing where if branch traffic comes in on the node that the solution is not pointed towards, then traffic will be sent into Azure through that node and come back in through the other node.
+Split Brain is distinct from the Primary Shutdown or Secondary Shutdown because both nodes and HA Agents are up and running, but the peer link between the nodes is down. In this case, both HA Agents determine that the other HA Agent is unreachable. Because each node cannot distinguish this from the other node being shut down, both HA Agents determine they are in the position to take control of traffic. The node that was inactive becomes active, resulting in both nodes having their `redundant-interface`s provisionally up. For the `azure-vnet` solution, there is still only be one node where the route tables are pointing. For the `azure-lb` solution, both nodes respond to the probes, causing traffic to split along the Azure Loadbalancer configuration. The result is asymmetrical routing; branch traffic comes in on the node that the solution is not pointed towards, is sent into Azure through that node, and then comes back in through the other node.
 
-The split brain scenario can be identified if the peers can't reach each other which will be captured with alarms:
+The split brain scenario can be identified when the peers cannot reach each other. This is captured with following alarms:
 ```
 # show alarms
 
@@ -291,7 +291,7 @@ Another indicator of a split brain scenario is having the `remote-status` be `un
 
 ### Split Brain Resolution
 
-Once the health statuses are able to flow between the two nodes, the unreachable status that each Cloud HA Agent has for the other node will resolve to healthy or unhealthy. Even if the determination of whether the node is the same as it was before, each HA Agent will still set the provisional statuses and make the appropriate HTTP call on API Agent. This is because each node does not know what calls the other node made while the split brain was occurring, so it is safer to make calls even if it may not be necessary. Consider the scenario where the primary node is active and the secondary node is inactive before a split brain. When the split brain occurs, the secondary will then become active. If this is with a solution like `azure-vnet`, the last node to hit the API Agent will be the one that the solution point to. Thus the secondary node will be the active node from the Azure Route Table's perspective. Once the split brain is resolved, without the extra API calls, the primary would stay active without making any API calls and the secondary would become inactive. The problem with this is that the last node to trigger the API Agent was the secondary node so all branch bound traffic would be sent into interfaces that are provisionally down. The plugin solves this by reperforming API calls when it detects that the remote node goes from unreachable to not unreachable.
+Once the health status is able to flow between the two nodes, the `unreachable` status that each Cloud HA Agent has for the other node will resolve to healthy or unhealthy. Even if the determination of whether the node is the same as it was before, each HA Agent still sets the provisional statuses and makes the appropriate HTTP call on API Agent. This is because each node does not know what calls the other node made while the split brain was occurring, so it is safer to make calls even if it may not be necessary. Consider the scenario where the primary node is active and the secondary node is inactive before a split brain. When the split brain occurs, the secondary will then become active. If this is with a solution like `azure-vnet`, the last node to hit the API Agent will be the one that the solution point to. Thus the secondary node will be the active node from the Azure Route Table's perspective. Once the split brain is resolved, without the extra API calls, the primary would stay active without making any API calls and the secondary would become inactive. The problem with this is that the last node to trigger the API Agent was the secondary node so all branch bound traffic would be sent into interfaces that are provisionally down. The plugin solves this by reperforming API calls when it detects that the remote node goes from unreachable to not unreachable.
 
 ![both-healthy-scenario](/img/cloud-ha-both-healthy-scenario.png)
 
@@ -905,13 +905,13 @@ exit
 
 ## Generated SSR Configuration
 
-To see a full configuration and the configuration it generates, refer to the [Complete Example Configuration #1 for azure-lb](#complete-example-configuration-1-for-azure-lb) in the [Appendix](#appendix).
+To see a full configuration, refer to the [Complete Example Configuration #1 for azure-lb](#complete-example-configuration-1-for-azure-lb) in the [Appendix](#appendix).
 
 ### Management Traffic Config Generation
 
-When the plugin is configured on a router which is consisting of two nodes, the plugin will try to generate a service and service route for each node to get the DNS and API calls from the network namespace to the cloud providers.
+When the plugin is configured on a router consisting of two nodes, the plugin tries to generate a service and service route for each node to get the DNS and API calls from the network namespace to the cloud providers.
 
-This config generation is dependent on if the node has an interface marked `management true`.
+This automatic configuration generation is dependent on whether the node has an interface marked `management true`.
 
 If there are no `management true` interfaces, then the user must configure them manually. The key configuration to include is:
 * The higher priority member's tenant is `cloud-ha-0`
@@ -920,7 +920,7 @@ If there are no `management true` interfaces, then the user must configure them 
     * TCP 80 - for metadata service interactions
     * TCP 443 - for API interactions
     * UDP 53 - for DNS to resolve the API hostnames
-* Each service route must have at least one service route with a next hop which allows it out an external interface
+* Each service route must have at least one service route with a next hop out an external interface
 
 The service and service-route will be named either `cloud-ha-management-0` or `cloud-ha-management-1` depending on whether it is node0 or node1.
 
@@ -981,18 +981,16 @@ Additional configuration validation is done without causing a traditional valida
 Group group1 does not have unique priorities across members: {'node2 router2': '2', 'node1 router1': '2'}
 ```
 
-
 ### Logging
 The different services on the router all log to the files captured by the glob `/var/log/128technology/plugins/cloud-ha-*.log`
-
 
 ### PCLI Enhancements
 
 #### Become Active
 
-The command `request cloud-ha become-active router <router> node <node>` will try to force the given node to become active and try to tell the other node to become inactive. If the peer node is not accessible at the time of the command, the command will not fail.
+The command `request cloud-ha become-active router <router> node <node>` forces the targetted node to become active. It then attempts to force the other node to become inactive. If the peer node is not accessible (down) the command does not generate an error message for the unreachable peer. 
 
-This command can be useful if the routes have been modified outside of the plugin and they need to be fixed.
+This command can be useful if the routes have been modified outside of the plugin.
 
 #### State
 To check the state of the Cloud HA solution running on the router, the plugin adds output to the `show device-interface` command for the `cloud-ha` interface. Beginning with version 6.x, plugin output is available using the `show plugins state detail 128T-cloud-ha` command. This state information is also accessible from the SSR public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
