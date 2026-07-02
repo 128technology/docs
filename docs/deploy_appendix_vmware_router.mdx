@@ -53,101 +53,143 @@ The authority-level objects this router depends on (`Internet-Traffic` service, 
 
 ## Router Configuration
 
-The following block shows the `Spoke1` router section as it appears within the authority configuration. This is the router portion only.
+![Spoke1 Config diagram](/img/dep-vmware-router-spoke1only.png)
+
+The following block shows the `Spoke1` router configuration as it appears within the authority configuration.
 
 ```
 config
+
     authority
+        conductor-address  10.0.0.63
 
-        router  Spoke1
-            name                 Spoke1
-            inter-node-security  internal
 
-            dns-config  manual
-                mode    manual
-                server  1.1.1.1
-                server  8.8.8.8
+
+        router             Conductor
+            name                  Conductor
+            location-coordinates  +38.7127105-077.0060152/
+
+            node                  node0
+                name           node0
+                asset-id       Conductor
+                platform-type  "440BX Desktop Reference Platform"
             exit
+        exit
 
-            node  node0
-                name      node0
-                role      combo
-                asset-id  Spoke1
+        router             spoke1
+            name                  spoke1
+            location-coordinates  +40.741895-073.989308/
+            inter-node-security   internal
+
+            node                  node0
+                name              node0
+                asset-id          Spoke1
+                role              combo
+                platform-type     "440BX Desktop Reference Platform"
 
                 device-interface  wan-dev
-                    name        wan-dev
-                    type        ethernet
-                    pci-address  0000:0b:00.0
-                    forwarding   true
+                    name               wan-dev
+                    pci-address        0000:0b:00.0
 
                     network-interface  wan1
-                        name           wan1
-                        type           external
-                        conductor      true
-                        default-route  true
-                        source-nat     true
-                        management     true
-                        dhcp           v4
+                        name                   wan1
+                        global-id              1
+                        conductor              true
+                        default-route          true
 
-                        management-vector  mgmt-vec-wan
+                        neighborhood           internet
+                            name  internet
+                        exit
+                        inter-router-security  internal
+                        source-nat             true
+                        management             true
+
+                        management-vector
                             name      mgmt-vec-wan
                             priority  100
                         exit
 
-                        neighborhood  internet
-                            name      internet
-                            topology  spoke
-                            inter-router-security   internal
+                        address                10.0.128.127
+                            ip-address     10.0.128.127
+                            prefix-length  16
+                            gateway        10.0.0.128
+
+                            host-service   web
+                                service-type  web
+                            exit
                         exit
+                        dhcp                   disabled
                     exit
                 exit
 
-                device-interface  lan-dev
-                    name        lan-dev
-                    type        ethernet
-                    pci-address  0000:13:00.0
-                    forwarding   true
+                device-interface  lan
+                    name               lan
+                    pci-address        0000:13:00.0
 
-                    network-interface  lan1
-                        name    lan1
-                        type    external
-                        tenant  corp
-                        source-nat      true
-                        address         192.168.1.1 
-                            ip-address      192.168.1.1
-                            prefix-length   24
-                            host-service    dhcp-server 
-                            service-type    dhcp-server
-                            address-pool    192.168.1.2 
-                                start-address  192.168.1.2
-                                end-address    192.168.1.20
+                    network-interface  lan
+                        name        lan
+                        global-id   2
+                        tenant      corp
+                        source-nat  true
 
-                        address  192.168.1.1
+                        address     192.168.1.1
                             ip-address     192.168.1.1
                             prefix-length  24
+
+                            host-service   dhcp-server
+                                service-type  dhcp-server
+
+                                address-pool  192.168.1.2
+                                    start-address  192.168.1.2
+                                    end-address    192.168.1.20
+                                    router         192.168.1.1
+                                    domain-server  8.8.8.8
+                                exit
+                            exit
                         exit
+                        dhcp        disabled
                     exit
+                exit
+            exit
+
+            service-route         internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+
+                next-hop      node0 wan1
+                    node-name   node0
+                    interface   wan1
+                    gateway-ip  10.0.0.1
                 exit
             exit
         exit
 
-        service-route internet-route 
-            name          internet-route
-            service-name  Internet-Traffic
-                name           Internet-Traffic
-                address        0.0.0.0/0
-                access-policy corp 
-                    source  corp
-        
-            next-hop node0 wan1 
-            node-name  node0
-            interface  wan1
-        
-        software-access username  (removed)
-        software-access token     (removed)
+        tenant             corp
+            name  corp
+        exit
+
+        software-access
+            username  (removed)
+            token     (removed)
+        exit
+
+        service            internet
+            name      internet
+            security  internal
+        exit
+
+        service            Internet-Traffic
+            name           Internet-Traffic
+            address        0.0.0.0/0
+
+            access-policy  corp
+                source  corp
+            exit
         exit
     exit
 exit
+
+
 ```
 
 ## Interface Summary

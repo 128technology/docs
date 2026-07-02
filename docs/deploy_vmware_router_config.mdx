@@ -56,6 +56,10 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 
 2. Enter the name `wan-dev` and select **SAVE**.
 
+   :::note
+   To ensure successful onboarding, the `ge-0-0` interface MUST be configured as the WAN device interface. 
+   :::
+
    ![Name the WAN Interface](/img/dep-vmrouter-wandev1.png)
 
 3. In the Device Interface window, set the following fields:
@@ -82,12 +86,13 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
    | Field | Value | Notes |
    |-------|-------|-------|
    | Type | `external` | |
-   | DHCP | `v4` | WAN IP assigned by ISP DHCP |
+   | DHCP | `disabled` | |
+   | Global-ID | `1` | |
    | Conductor | `true` | Marks this interface for conductor connectivity |
+   | Management | `true` | Enables management over forwarding on this interface |
    | Default Route | `true` | Linux uses this interface as its default route |
    | Source NAT | `true` | Required for management over forwarding |
-   | Management | `true` | Enables management over forwarding on this interface |
-
+   
    ![WAN Basic Info](/img/dep-vmrouter-wandev4.png)
 
 4. Scroll down to **Management Vector** and select **ADD**.
@@ -108,6 +113,8 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 6. Select **SAVE**.
 
 :::important
+Conductor must be set to `true` or management traffic will not be able to reach the conductor.
+
 `Source NAT` and `Default Route` must both be set to `true` on the WAN management interface. Management traffic originates from the `169.254.x.x` range and must be source-NAT'd to a routable address before leaving the interface. The default route ensures Linux routes non-SVR traffic through the SSR forwarding engine.
 :::
 
@@ -148,7 +155,10 @@ Set the following fields:
    | Field | Value | Notes |
    |-------|-------|-------|
    | Type | `external` | |
+   | Global-ID | `2` | |
+   | DHCP | `disabled` | |
    | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
+   | Source-NAT | `true` | | 
 
    ![External Corp](/img/dep-vmrouter-wandev10.png)
 

@@ -27,30 +27,7 @@ This guide assumes a conductor is already installed and running SSR 7.1.4-3.r2. 
 
 The diagram below shows the logical network this guide builds.
 
-<Mermaid chart={`
-graph TD
-    Internet((Internet))
-    subgraph Conductor["Pre-existing Conductor\n(SSR1200 or VMware ESXi)"]
-        ConductorVM["SSR Conductor\n(Conductor)\n192.168.100.10"]
-    end
-    subgraph MgmtNet["Management Network (192.168.100.0/24)"]
-        Gateway["Management Gateway\n192.168.100.1"]
-    end
-    subgraph ESXi["VMware ESXi Host"]
-        RouterVM["SSR Router VM\n(Spoke1)\nNIC 1: WAN — DHCP\nNIC 2: LAN — 192.168.1.1/24"]
-    end
-    subgraph LAN["Branch LAN (192.168.1.0/24)"]
-        Clients["LAN Clients\nTenant: corp"]
-    end
-    ISP(["ISP WAN"])
-
-    Internet <-->|"Internet"| ISP
-    ISP <-->|"DHCP"| RouterVM
-    RouterVM <-->|"Internet Breakout\n(service: Internet-Traffic)"| Internet
-    Clients <-->|"LAN"| RouterVM
-    RouterVM <-->|"Management over Forwarding\n(WAN — Port 930 / 4505 / 4506)"| Gateway
-    ConductorVM <-->|"Management"| Gateway
-`}/>
+![Spoke1 Config diagram](/img/dep-vmware-router-spoke1only.png)
 
 ## Roles
 
