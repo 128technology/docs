@@ -285,7 +285,7 @@ The split brain scenario can be identified if the peers can't reach each other w
 
 ```
 
-Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields) for both members.
+Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields-for-versions-6x-and-above) for both members.
 
 ![split-brain-scenario](/img/cloud-ha-split-brain-scenario.png)
 
