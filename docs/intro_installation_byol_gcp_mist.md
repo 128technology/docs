@@ -213,6 +213,8 @@ write_files:
 | mode | Set to `mist-managed` for this workflow. |
 | registration-code | Mist registration code used to claim and onboard the device. |
 | cloud-provider | Set to `gcp`. |
+| download-timeout | The timeout duration for installing BYOL (default: 6h) |
+| download-retries | The number of times to retry SSR installation (default: unlimited) |
 
 If your deployment requires a proxy to reach Mist cloud services, include the appropriate proxy value in your deployment parameters.
 

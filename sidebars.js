@@ -113,6 +113,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_5.1",
           "release_notes_byol_5.0",
           "release_notes_byol_4.0",
           "release_notes_byol_3.0",
