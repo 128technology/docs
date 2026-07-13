@@ -23,7 +23,7 @@
     "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
-    "mermaid": "^11.15.0",
+    "mermaid": "^11.16.0",
     "@mdx-js/react": "^3.1.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.7",
@@ -37,7 +37,7 @@
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
-    "eslint": "^10.5.0",
+    "eslint": "^10.6.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "gray-matter": "^4.0.3",
-    "prettier": "^3.8.4"
+    "prettier": "^3.9.4"
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
