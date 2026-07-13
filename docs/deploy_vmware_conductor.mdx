@@ -20,7 +20,7 @@ This guide walks a network engineer through deploying a **VMware ESXi virtual ma
 
 The diagram below shows the logical network this guide builds.
 
-<Mermaid chart={`
+```mermaid
 graph TD
     Internet((Internet))
     subgraph ESXi["VMware ESXi Host"]
@@ -41,7 +41,7 @@ graph TD
     LAN <-->|"LAN"| Router
     Router <-->|"Management over\nForwarding (WAN)\nPort 930 / 4505 / 4506"| Gateway
     ConductorVM <-->|"Management"| Gateway
-`}/>
+```
 
 ## Roles
 
