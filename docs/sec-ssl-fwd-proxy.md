@@ -5,7 +5,7 @@ sidebar_label: Configure SSL Forward Proxy
 
 SSL Forward Proxy uses signed, trusted certificates to allow the SSR to perform a man-in-the-middle (MitM) function that decrypts and re-encrypts HTTPS traffic. This allows IDP and AV scans of the traffic to be performed at that time. By installing CA signed certificates into the Trusted Root Certification Authorities store of all client end-users' browsers and devices, malicious servers are prevented from performing MITM impersonation attacks against the client endpoints. 
 
-SSL Forward Proxy is used in conjuction with the IDP and Anti-Virus features available with the SSR, and can be applied on the same access policy and service. Configuring an SSL forward proxy security profile (Strong, Medium, or Weak) indicates which security cipher suite is used. For more information about the available security cipher suites, see the [Supported SSL Ciper List](https://www.juniper.net/documentation/us/en/software/junos/application-identification/topics/topic-map/security-ssl-cipher-suites-for-ssl-proxy.html#id-digital-certificates-and-certificate-authorities__supported_ciphers).
+SSL Forward Proxy is used in conjuction with the IDP and Anti-Virus features available with the SSR, and can be applied on the same access policy and service. Configuring an SSL forward proxy security profile (Strong, Medium, or Weak) indicates which security cipher suite is used. For more information about the available security cipher suites, see the [Supported SSL Ciper List](https://www.juniper.net/documentation/us/en/software/junos/application-identification/topics/topic-map/security-ssl-cipher-suites-for-ssl-proxy.html#concept_hx5_qsp_m3c).
 
 The following are the high level steps necessary to configure SSL Forward Proxy:
 
