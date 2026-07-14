@@ -1,0 +1,24 @@
+---
+title: "Step 1: Create the VMware Router VM"
+sidebar_label: "Create the VMware VM"
+---
+import CreateVM from './_vmware_router_vm_create.md';
+
+This step creates the VMware ESXi virtual machine that will host the SSR branch router. The VM requires **two VMXNet3 network adapters**: NIC 1 connected to the WAN portgroup and NIC 2 connected to the LAN portgroup.
+
+## VM Minimum Requirements
+
+| Resource | Minimum Value | Notes |
+|----------|---------------|-------|
+| vCPUs | `4` | |
+| Scheduling Affinity | `0-3` | Set under CPU → expand |
+| Memory | `8 GB` | |
+| Disk | `62 GB` | |
+| Network Adapters | 2 × VMXNet3 | NIC 1 = WAN portgroup, NIC 2 = LAN portgroup |
+| Boot Firmware | EFI | UEFI secure boot disabled |
+
+<CreateVM/>
+
+## Next Step
+
+Proceed to [Step 2 — Install SSR Software and Initialize the Router](deploy_vmware_router_install.mdx).
