@@ -27,6 +27,24 @@ module.exports = {
             },
           ],
         },
+        {
+          "type": "category",
+          "label": "Router Deployment Guides",
+          "items": [
+              {
+                "type": "category",
+                "label": "VMware Router",
+                "items": [
+                  "deploy_vmware_router_overview",
+                  "deploy_vmware_router_vm",
+                  "deploy_vmware_router_install",
+                  "deploy_vmware_router_pci",
+                  "deploy_vmware_router_config",
+                  "deploy_appendix_vmware_router",
+              ],
+            },
+          ],
+        },
       ],
     "Release Notes": [
       {
