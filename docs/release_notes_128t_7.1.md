@@ -71,6 +71,176 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.1.6-7-sts
+
+**Release Date:** July 15, 2026
+
+### New Features
+
+- **I95-62868 Multicast Failover Optimizations / PIM GR for FRR9:** Additional improvements to multicast failover and convergence times for PIM Graceful Restart in FRR9-based deployments. These optimizations reduce traffic loss during HA and non-HA failover events for multicast traffic.
+------
+- **I95-63012 AppID Scale Optimization:** Improved application identification performance and scale for WAN deployments. Optimizations reduce resource consumption on spoke routers where application identification is enabled by default, improving capacity under high traffic loads.
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2023-40403, CVE-2025-9230, CVE-2025-12084, CVE-2025-13601, CVE-2025-14087, CVE-2025-14512, CVE-2025-61662, CVE-2025-67873, CVE-2025-68114, CVE-2025-68973, CVE-2026-1519, CVE-2026-3497, CVE-2026-4111, CVE-2026-4424, CVE-2026-4519, CVE-2026-4786, CVE-2026-4878, CVE-2026-5119, CVE-2026-5121, CVE-2026-6100, CVE-2026-9256, CVE-2026-21710, CVE-2026-25646, CVE-2026-25749, CVE-2026-26996, CVE-2026-27135, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-27904, CVE-2026-28417, CVE-2026-28421, CVE-2026-29111, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33412, CVE-2026-33416, CVE-2026-33526, CVE-2026-33636, CVE-2026-34982, CVE-2026-35385, CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414, CVE-2026-35535, CVE-2026-39979, CVE-2026-40164, CVE-2026-40460, CVE-2026-40701, CVE-2026-41242, CVE-2026-42926, CVE-2026-42934, CVE-2026-42945, CVE-2026-42946, CVE-2026-43284, CVE-2026-43500, CVE-2026-46300, CVE-2026-46333.
+------
+- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65018, I95-65019, I95-65030, I95-65039, I95-65054, I95-65055, I95-65080, I95-65206, I95-65210, I95-65211, I95-65219, I95-65221, I95-65222, I95-65224, I95-65225, I95-65237, I95-65238, I95-65247, I95-65249.
+------
+- **I95-60912 PIM and PIMv6 cannot be enabled on the same interface:** Resolved an issue where enabling both PIM (IPv4) and PIMv6 on the same interface was not possible, preventing dual-stack multicast configurations.
+------
+- **I95-63033 `show lte detail` crash when LTE apn-name is invalid:** Resolved an issue where executing `show lte detail` when an invalid APN name is configured caused a CLI crash due to an unhandled dictionary update error.
+------
+- **I95-63035 Antivirus warning when missing tenant for AV traffic:** Resolved an issue where an antivirus alert was incorrectly raised on the passive node in an HA system, indicating AV was not active.
+------
+- **I95-63876 Route Flapping and Inaccessibility:** Resolved an issue where routes would flap or become inaccessible in hub-and-spoke topologies with inter-hub steering preferences configured, causing intermittent connectivity failures.
+------
+- **I95-63895 SSR sending packets larger than configured MTU:** Resolved an issue where the SSR was sending packets larger than the configured MTU (e.g., 1518 bytes instead of 1500), causing packet drops on downstream network elements.
+------
+- **I95-63913 Session-source incorrect in BFD pinhole plus flow-move case:** Resolved an issue where session-source was incorrectly set to public when a BFD pinhole also happened to be a flow-move scenario.
+------
+- **I95-63951 BGP Graceful Restart Sending EOR Prematurely:** Resolved an issue where the SSR sent End-of-RIB (EOR) markers prematurely during BGP graceful restart, without waiting to receive EOR from its peers as required by RFC 4724, potentially causing route convergence issues.
+------
+- **I95-63965 SNMP MIB subinterfaces not reporting correct stats:** Resolved an issue where SNMP MIB walks on subinterfaces were not reporting correct statistics, causing inaccurate monitoring data in network management systems.
+------
+- **I95-64061 Azure kernel hung task after upgrade:** Resolved an issue where Azure VMs could experience a kernel hung task condition related to the `uio_hv_generic` driver after upgrading to 7.1.3.
+------
+- **I95-64150 User-defined SNMP metrics not working:** Resolved an issue where custom SNMP metric MIBs were not functioning correctly after upgrading to 7.1.3, preventing SNMP-based polling systems from collecting metrics.
+------
+- **I95-64250 BGP routes received but not installed in RIB:** Resolved an issue where BGP routes were received from peers but not installed in the BGP table or the routing information base (RIB), preventing traffic from using those routes.
+------
+- **I95-64306 Optimize ICMP probe profile update on config change:** Resolved an issue where configuration changes that contained no actual ICMP probe modifications still triggered a full restart of all ICMP probes, causing unnecessary overhead and brief monitoring gaps.
+------
+- **I95-64344 Extended multicast traffic loss with PIM GR not being used:** Resolved an issue where PIM Graceful Restart was not properly engaged during HA failover, resulting in extended multicast traffic loss instead of seamless failover.
+------
+- **I95-64397 Cosmetic error message on SSR1500:** Resolved an issue where a harmless but misleading `systemd-rc-local-generator` error message was displayed on the SSR1500 console, which could cause unnecessary alarm during routine operations.
+------
+- **I95-64407 Alternate SHA ciphers (256/384/512) not working properly with ESKM:** Resolved an issue introduced in 7.1.3 where configuring `hmac-cipher sha384` or `hmac-cipher sha512` on security policies did not properly apply in deployments with peers running different software versions. These ciphers now function correctly when all peers are upgraded to a version that supports them.
+------
+- **I95-64408 TCP timers used for syslogs not set or too relaxed:** Resolved an issue where TCP keepalive timers for syslog connections were either not set or configured with excessively long intervals, resulting in stale connections not being detected and syslog failover not triggering in a timely manner.
+------
+- **I95-64411 IPv6 BGP route-map `set ipv6 next-hop peer-address` support:** Added support for the `set ipv6 next-hop peer-address` directive in route-maps, which is required for IPv6 WAN assurance deployments.
+------
+- **I95-64434 IDP bypass `alert` policy not working:** Resolved an issue where setting the IDP bypass policy to `alert` mode was not functioning correctly, preventing traffic from being properly inspected and alerts issued.
+------
+- **I95-64479 Invalid application WEBEX not recognized:** Resolved an issue where the WEBEX application was not being recognized by the application identification module after an upgrade, resulting in `invalid application` events and missing FIB entries for the associated service.
+------
+- **I95-64541 Node disconnection during upgrade:** Resolved an issue where upgrading HA router nodes could result in one node entering a disconnected state with stale SSH control sockets, while the other node became stuck in the upgrading state, requiring a manual reboot to recover.
+------
+- **I95-64549 Onboarding routers cannot install salt packages:** Resolved an issue where routers being onboarded to a conductor could not install the required salt packages, preventing successful onboarding completion.
+------
+- **I95-64566 CSR generation ignores camelCase parameters:** Resolved an issue where the certificate signing request (CSR) API silently ignored camelCase parameter names (e.g., `commonName` instead of `common_name`).
+------
+- **I95-64575 Unable to login to SSR routers from conductor in cloud deployment:** Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.
+------
+- **I95-64603 Chronyd requires manual restart after reboot:** Resolved an issue where all NTP servers appeared as rejected after a reboot, requiring a manual restart of chronyd to restore time synchronization.
+------
+- **I95-64619 Config validation rejects DHCP network-interface when VRRP is present:** Resolved an issue where configuration validation incorrectly rejected DHCP-enabled network-interfaces when VRRP was configured on the same interface, even if VRRP was not enabled.
+------
+- **I95-64627 Certificate Unavailable for Peering After Upgrade:** Resolved an issue where the local certificate became unavailable for peering after an upgrade, resulting in peer paths remaining down with a `No local certificate available` error.
+------
+- **I95-64684 HMAC cipher mode information in logs and session output:** Added HMAC mode and cipher information to session logs and `show sessions` output, improving visibility into the encryption parameters used for active sessions.
+------
+- **I95-64696 Salt connectivity issues after Conductor upgrade:** Resolved an issue where salt-minion lost connectivity to the salt-master after a Conductor upgrade, affecting approximately 20% of routers. The minion-connector service now correctly manages the salt master address.
+------
+- **I95-64709 BGP stale-routes-time and Selection Deferral Timer alignment:** Resolved an issue where the `stale-routes-time` parameter behavior did not properly align with RFC 4724's Selection_Deferral_Timer semantics, potentially causing premature route selection during graceful restart.
+------
+- **I95-64732 Update `show peers certificate` date format:** Updated the `show peers certificate` command to use a newer API for certificate date rendering, providing a more user-friendly output format.
+------
+- **I95-64811 Highway crash causing session drops:** Resolved a highway process crash that occurred under specific traffic conditions, resulting in session drops and temporary traffic disruption.
+------
+- **I95-64829 Device disconnected from Mist and stopped processing sessions:** Resolved an issue where a device could disconnect from Mist and stop processing sessions after a configuration push, requiring a power cycle to recover.
+------
+- **I95-64835 Remove UI checkbox for Rollback on Failure during Conductor migration:** Removed the erroneous `Rollback on Failure` checkbox from the Conductor migration UI, as the underlying feature was never implemented. This prevents user confusion during migration operations.
+------
+- **I95-64876 Intermittent application issues due to child service design:** Resolved an issue where hierarchical service configurations with child services could intermittently fail to match traffic correctly, causing application connectivity issues.
+------
+- **I95-64877 Changes to guard against L7 security stack crash:** Resolved an issue where the IDP attack database was lost on reboot. The database is now stored persistently, and additional safeguards have been added for AV engine health checks, SSL certificate staging retries, and error code accuracy.
+------
+- **I95-64903 High CPU and disk usage on standalone SSR440:** Resolved an issue where a standalone SSR440 could experience high CPU utilization and disk usage under certain operational conditions, impacting device performance.
+------
+- **I95-64905 401 Authorization Required error when refreshing Logs page:** Resolved an issue where refreshing the Logs page on the conductor GUI returned a 401 Authorization Required error, requiring a full page reload or re-login.
+------
+- **I95-64929 Peer certificate expiration time unit conversion error:** Resolved an issue where a seconds-to-milliseconds conversion error caused peer certificate expiration warnings to display incorrect remaining time.
+------
+- **I95-64977 Certificate ingestion ignores expiry and revocation validation:** Resolved an issue where ingesting a certificate did not properly validate its expiry date or revocation status, allowing expired or revoked certificates to be accepted.
+------
+- **I95-64997 SYSLOG SEIM Integration Not Sending Failed Session Attempts:** Resolved an issue where the SYSLOG SEIM integration did not send log events for ERROR/FAILED session attempts (dropped packets), limiting visibility into denied traffic.
+------
+- **I95-65028 XML parsing lacks hardening against XXE:** Resolved a security vulnerability where XML parsing lacked hardening against XML External Entity (XXE) injection and billion-laughs denial-of-service attacks.
+------
+- **I95-65056 `show app-id cache-sizes` command not found:** Resolved an issue where the `show app-id cache-sizes` command was missing from the CLI, preventing users from inspecting application identification cache utilization.
+------
+- **I95-65099 Traffic engineering stats displaying incorrect output:** Resolved an issue where `show stats traffic-eng internal-application per-traffic-class` displayed incorrect or unexpected output.
+------
+- **I95-65128 nodeMonitor crash loop on hub node:** Resolved an issue where the nodeMonitor process entered a continuous crash loop on hub nodes during conductor-based Hub-and-Spoke setup, preventing the hub from becoming operational.
+------
+- **I95-65131 CPS performance degradation:** Resolved a performance regression that caused approximately 10% reduction in connections-per-second (CPS) throughput.
+------
+- **I95-65171 TSI Download Missing File Extension:** Resolved an issue where Tech Support Info (TSI) bundles downloaded from the SSR Web UI had no file extension, preventing extraction with standard archive tools. Tech support files downloaded from the web UI now have the correct `.zip` extension.
+------
+- **I95-65296 SVRv2 peering failures with fragmentation:** Resolved an issue where SVRv2 peering connections failed when packet fragmentation occurred on the path between peers, preventing secure peer relationships from establishing.
+------
+- **I95-65299 SSR440 upgrade from 7.1.0 to 7.1.5 failure:** Resolved an issue where upgrading an SSR440 from 7.1.0 to 7.1.5 could fail, with the highway process not running after reboot, causing the system to roll back automatically.
+------
+- **I95-65336 Factory reset resilience to interruption:** Improved the factory reset procedure to be more resilient to interruption (e.g., unexpected reboot). The system now tracks reset progress and can resume or indicate completion status after recovery.
+------
+- **I95-65351 IMA and security incompatibility preventing engine start:** Resolved an issue where IMA (Integrity Measurement Architecture) validation conflicted with IDP security features, preventing the SSR engine from starting after upgrade.
+------
+- **I95-65354 Missing dependencies in offline ISO:** Resolved an issue where certain package dependencies were missing from the offline ISO, preventing successful package installation in air-gapped environments.
+------
+- **I95-65366 Maximum GARP interval for VRRP:** Added a configurable `maximum-garp-interval` parameter for VRRP, allowing control over how frequently gratuitous ARP messages are sent during VRRP state transitions. This prevents excessive ARP traffic in environments with many VRRP instances.
+------
+- **I95-65374 Child tenants not applied to security policies:** Resolved an issue where child tenants were not correctly applied to security policies, preventing IDP rules from being enforced on traffic matching child tenant definitions.
+------
+- **I95-65392 Hierarchical services ping traffic failure between sites:** Resolved an issue where ICMP ping traffic between specific sites failed when using hierarchical service configurations with application identification groups (AIG).
+------
+- **I95-65393 ESKM Certificate Invalid Alarm After Upgrade:** Resolved an issue where a certificate invalid alarm was incorrectly raised after upgrading to a newer SSR version, causing peering to go down even though the certificate was not expired.
+------
+- **I95-65403 Disallow CA certificates from being used for peering:** Added validation to prevent CA certificates (those with `CA:True` in basic constraints) from being used as peering certificates, which would cause unexpected trust chain behavior.
+------
+- **I95-65410 Incorrect RBAC requirements for certificate API:** Resolved an issue where the POST `/api/v1/certificate` endpoint required READ permission for the entire configuration instead of WRITE permission, allowing unintended access.
+------
+- **I95-65411 CLI Command Appending Unrelated Output:** Resolved an issue where executing certain PCLI commands (such as `show peer router all force`) would append unrelated command output at the end of the expected results.
+------
+- **I95-65414 Overlapping child tenant IP validation:** Added configuration validation to disallow overlapping IP addresses across child tenants, preventing ambiguous traffic classification.
+------
+- **I95-65431 SSR failing to sync with NTP server:** Resolved an issue where the SSR failed to synchronize with configured NTP servers after boot, requiring manual intervention to restore time synchronization.
+------
+- **I95-65432 Conflux process crash during upgrade:** Resolved an issue where the Conflux process exited unexpectedly during or after an upgrade, causing temporary loss of analytics data collection.
+------
+- **I95-65439 CRL in certificate not taken into account:** Resolved an issue where the CRL distribution point embedded in a certificate was not being used for revocation checking, requiring manual CRL configuration on the conductor.
+------
+- **I95-65455 Network Manager interface preventing HA sync:** Resolved an issue where a spurious "Wired Connection" entry in Network Manager could prevent HA sync interfaces from obtaining IP addresses after an upgrade.
+------
+- **I95-65459 IDP bypass not engaged during restart/rebuild:** Resolved an issue where IDP bypass rules were not properly engaged during engine restart or rebuild operations, causing traffic that should be bypassed to be dropped temporarily.
+------
+- **I95-65469 GUI not showing Network Interfaces:** Resolved an issue where the GUI no longer displayed Network Interfaces on the device page, while Device Interfaces remained visible.
+------
+- **I95-65470 Multicast session display count discrepancy:** Resolved an issue where `show sessions` displayed fewer multicast sessions than expected (e.g., 334 of 400), even though all multicast routes were correctly installed.
+------
+- **I95-65486 Highway crash during upgrade from older versions:** Resolved a highway crash that could occur during router upgrades from significantly older software versions (e.g., 5.5.x to 7.x).
+------
+- **I95-65529 Auto-generated syslog service incorrectly uses UDP for TLS:** Resolved an issue where the auto-generated service for TLS-based syslog was incorrectly configured with UDP as the transport protocol instead of TCP.
+------
+- **I95-65548 DSCP steering support with deferred classification in hierarchical services:** Added support for DSCP steering services when classification is deferred in hierarchical service configurations, enabling correct traffic handling in Mist-managed deployments.
+------
+- **I95-65617 Loss of syslog forwarding over TLS after upgrade to 7.1.6:** Resolved an issue where syslog forwarding over TLS stopped working after upgrading to 7.1.6, preventing log delivery to remote collectors.
+------
+- **I95-65624 KNI application scripts test failure:** Resolved an internal test failure in KNI application scripts that could affect KNI interface initialization in certain configurations.
+------
+- **I95-65656 Conductor upgrade fails on health check:** Resolved an issue where conductor upgrades could fail due to a health check timeout, preventing the upgrade from completing successfully.
+------
+- **I95-65681 Reduced signing output in build log:** Reduced verbose signing output in the build log to only display information when a signing operation fails, improving log readability.
+------
+- **I95-65691 Node disconnected after headend partial rollback:** Resolved an issue where a node could remain disconnected from the conductor after a partial rollback scenario on a headend router.
+------
+- **I95-65719 Secure Conductor Onboarding (SCO) failing:** Resolved an issue where Secure Conductor Onboarding (SCO) failed when using RSA certificates in full chain format, incorrectly reporting that only RSA certificates are supported.
+------
+- **I95-65769 Minion connector update:** Updated the minion connector to version 1.7.6, incorporating connectivity reliability improvements.
+------
+- **WAN-4774 Configuration model list key derivation:** Improved internal configuration model handling by deriving list keys from the consolidated configuration model instead of using a hardcoded path map, improving accuracy for Mist-managed deployments.
+
 ## Release 7.1.5-7r2
 
 **Release Date:** April 30, 2026
