@@ -6,7 +6,33 @@ sidebar_label: Cloud HA
 The SSR-cloud-ha plugin provides High Availability (HA) functionality for the SSR Networking Platform deployed in the cloud. HA for SSR routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
+For instructions to install and manage the plugin, see [Installation and Management](plugin_intro.md#installation-and-management).
+:::
+
+## Supported Modes
+
+Across supported versions, the Cloud HA plugin supports two modes of operation: **dual-node** and **dual-router**.
+
+:::important
+**Cloud HA Plugin 6.08** was released on July 1, 2026 to provide support for **node-based HA (Dual-Node mode)**. Cloud HA plugin 6.0 does **not** support dual-router mode.
+:::
+
+### Dual Node Mode
+
+In dual-node mode, two nodes belong to the same router. This mode is suitable for scenarios where redundancy is required within a single router. Both nodes share the same configuration and operate in a coordinated manner to ensure high availability. The failover process is managed internally within the router, leveraging the health status of the nodes to determine which node should be active.
+
+### Dual Router Mode (Legacy, Versions Earlier Than 6.x)
+
+In dual-router mode, two routers are configured, each with one node. This mode is designed for scenarios where redundancy is required across separate routers. Each router operates independently, and the Cloud HA plugin ensures that only one node is active at a time. The failover process involves communication between the routers to determine the health and status of the nodes, ensuring seamless traffic handling during failover events.
+
+These modes provide flexibility in deploying high availability solutions based on the specific requirements of the network architecture.
+
+:::warning
+Version 6.x supports dual-node mode only; dual-router mode is not supported. On versions earlier than 6.x, dual-node mode is not supported.
+:::
+
+:::note
+Dual-node supported solutions are `azure-vnet`, `aws-vpc`, `aws-tgw`, and `gcp-vpc`.
 :::
 
 ## Supported Solutions
@@ -16,13 +42,15 @@ The instructions for installing and managing the plugin can be found [here](plug
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
 | Alicloud VPC       | `alicloud-vpc`  | 3.0.0                |
-
+| AWS VPC            | `aws-vpc`       | 6.0.0                |
+| AWS TGW            | `aws-tgw`       | 6.0.0                |
+| GCP VPC            | `gcp-vpc`       | 6.0.0                |
 
 ## Version Restrictions
 
- The router component can only be installed on versions of SSR which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
- The versions of SSR that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of SSR that satisfy this requirement.
+The router component can only be installed on versions of SSR which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
 
+The versions of SSR that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of SSR that satisfy this requirement.
 
 ## Plugin Behavior
 
@@ -51,12 +79,11 @@ The internal state machines wait for the `peer-reachability-timeout` after every
 
 When the HA Agent determines that a node must become active, the first active redundant interface's MAC address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**.
 
-### API Agents
+## API Agents
 
 The job of the API Agent is to perform failover actions specific to the cloud provider and the chosen solution.
 
-
-#### Azure Loadbalancer
+### Azure Loadbalancer
 
 A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces.
 
@@ -68,21 +95,22 @@ Backend Pool example:
 
 ![Azure Loadblancer Backend Pool Configuration](/img/cloud-ha-azure-lb-backend-pool-config.png)
 
-
 The Azure Loadbalancer sends a health probe to the redundant SSR's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent.
 
 The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the SSR when the redundant interfaces are set provisionally down.
 
-#### Azure VNET
+### Azure VNET
+
+![Azure VNET Architecture](/img/cloud_ha_azure_vnet_architecture.png)
 
 A `solution-type` of `azure-vnet` can be used to enable the Azure VNET API agent. It requires an Azure Route Table setup on the same VNET as the redundant interfaces. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
 
-* Microsoft.Network/routeTables/read
-* Microsoft.Network/networkInterfaces/read
-* Microsoft.Network/routeTables/routes/*/write
-* Microsoft.Network/routeTables/routes/read
-* Microsoft.Compute/virtualMachines/read
-* Microsoft.Network/virtualNetworks/read
+- Microsoft.Network/routeTables/read
+- Microsoft.Network/networkInterfaces/read
+- Microsoft.Network/routeTables/routes/*/write
+- Microsoft.Network/routeTables/routes/read
+- Microsoft.Compute/virtualMachines/read
+- Microsoft.Network/virtualNetworks/read
 
 The agent finds all of the route tables within the VNET using the Azure REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
 
@@ -92,26 +120,116 @@ The agent finds all of the route tables within the VNET using the Azure REST API
 To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's _network interface_.
 :::
 
-#### Alicloud VPC
+#### Extra Route Tables
 
-A `solution-type` of `alicloud-vpc` can be used to enable the Alicloud VPC API agent. It requires an Alicloud Route Table setup on the same VNET as the redundant interfaces.
+By default, the Azure VNET solution automatically discovers all route tables within the VNET where the redundant interfaces are located. However, you can also explicitly specify additional Azure Route Tables (User Defined Routes or UDRs) to be managed by the plugin using the `extra-route-table` configuration.
 
-Since the deployment of Juniper SDWAN HA requires granting RAM role permissions, you need to add a RAM username for this under your current Alicloud account and grant the following permissions. The Virtual Machines where these members are running must be granted with the RAM role with following permissions in order for the route updates to work correctly:
+Each `extra-route-table` entry requires:
+* `subscription-id`: The unique identifier of the Azure subscription containing the UDR
+* `resource-group`: The name of the Azure resource group where the route table is hosted
+* `route-table-name`: The specific name of the Azure Route Table resource
 
-* AliyunECSFullAccess
-* AliyunVPCFullAccess
+This is particularly useful when you need to manage route tables in different subscriptions or resource groups that are not automatically discovered.
 
-The agent finds all of the route tables within the Alicloud VPC using the Alicloud REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
+#### Route Table Discovery
 
-:::warning
-To prevent routing loops, the solution will not update the Alicloud Route Tables assigned to a subnet that has an activating node's _network interface_.
+The `auto-discover-route-table` setting (default: `true`) enables automatic discovery of Azure Route Tables within the specified VNET. When enabled, the system first scans for tags (see [Tagging](#tagging) below). If none are found, then the system scans for existing UDRs instead of requiring manual entry via `extra-route-table`. Setting this to `false` means only explicitly configured `extra-route-table` entries are managed.
+
+#### Tagging
+
+When `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent looks for the Route Table by looking at the tags assigned to the VM.
+
+To utilize this feature, the tags must follow the following form:
+* `SSR-CLOUD-HA-<TAG_IDX>-SUBSCRIPTION-ID` : `<subscription-id>`
+* `SSR-CLOUD-HA-<TAG_IDX>-RESOURCE-GROUP` : `<resource-group-name>`
+* `SSR-CLOUD-HA-<TAG_IDX>-ROUTE-TABLE-NAME` : `<route-table-name>`
+
+:::note
+The Subscription ID, Resource Group, and Route Table Name must be the same for both nodes in a redundancy group.
 :::
+
+The following are some example tags:
+* `SSR-CLOUD-HA-0-SUBSCRIPTION-ID` : `88888888-bbbb-4444-aaaa-ffffffffffff`
+* `SSR-CLOUD-HA-0-RESOURCE-GROUP` : `myResourceGroup`
+* `SSR-CLOUD-HA-0-ROUTE-TABLE-NAME` : `myRouteTable`
+
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent uses the existing UDRs.
+
+These tags are queried each time the API Agent tries to get state or `become-active`, so modifying these tags during runtime is allowed.
+
+### AWS TGW
+
+A `solution-type` of `aws-tgw` can be used to enable the AWS TGW API agent. This solution requires a TGW to be created with attachments which are connected to the VPCs that the SSR resides in. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
+
+- ec2:DescribeInstances
+- ec2:CreateTransitGatewayRoute
+- ec2:DescribeTransitGatewayRouteTables
+- ec2:ReplaceTransitGatewayRoute
+
+If you want the state output to report the current routes in the TGW Route Rable, the VMs will also need:
+- ec2:SearchTransitGatewayRoutes
+
+:::note
+The [AWS metadata configuration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) for the SSR instances must set the Hop Limit to a minimum of two (2) for the plugin to make the correct API calls. This is the default setting in the BYOL AMI, however that value is only used if the instance or account settings are not specified.
+:::
+
+The TGW Route Table is updated by the plugin, pointing to one of the node's TGW Attachments. Each SSR node must know the TGW Route Table as well as the corresponding attachment that points to itself. This configuration is explained in [AWS TGW Configuration](#aws-tgw-specific-configuration)
+
+#### Tagging
+
+When `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent looks for the TGW Route Table and Attachment by looking at the tags assigned to the EC2 instance.
+
+To utilize this feature, the tags must follow the following form:
+* `SSR-CLOUD-HA-<TAG_IDX>-TGW-ROUTE-TABLE-ID` : `<tgw-rtb-id>`
+* `SSR-CLOUD-HA-<TAG_IDX>-TGW-ATTACHMENT-ID` : `<tgw-attach-id>`
+
+:::note
+The Route Table ID must be the same for both nodes in a redundancy group. The Attachment ID must be unique across nodes in a redundancy group.
+:::
+
+The following are some example tags:
+* `SSR-CLOUD-HA-0-TGW-ROUTE-TABLE-ID` : `tgw-rtb-000000000000`
+* `SSR-CLOUD-HA-0-TGW-ATTACHMENT-ID` : `tgw-attach-000000000000`
+
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent does not function. Any errors can be found in the journal.
+
+These tags are queried each time the API Agent tries to get state or `become-active`, so modifying these tags during runtime is allowed.
+
+### GCP VPC
+
+A `solution-type` of `gcp-vpc` can be used to enable the GCP VPC API agent. This solution requires an instance to be created with VPCs which are peered to the VPCs where the SSR resides. The Virtual Machines where these members are running must be granted the following permissions for the route updates to work correctly:
+
+- compute.routes.list
+- compute.routes.get
+- compute.routes.create
+- compute.routes.delete
+- compute.instances.get
+
+The VPC's Route Table is the object updated by the plugin. Each SSR node must be configured to manage routes on a VPC. This configuration process is explained in [GCP VPC Tagging](#tagging-2)
+
+#### Tagging
+
+When `auto-discover-route-table` is set to `true` in the `cloud-redundancy-group`, the API Agent looks for the VPC Route Table by looking at the tags assigned to the instance.
+
+To utilize this feature, the tags must follow the following form:
+* `ssr-cloud-ha-<TAG_IDX>-target-vpc` : `<gcp-vpc-name>`
+
+:::note
+The VPC Name must be the same for both nodes in a redundancy group.
+:::
+
+The following is an example tag:
+* `ssr-cloud-ha-0-target-vpc` : `ssr-private`
+
+When `auto-discover-route-table` is `true` and the tags are missing or incomplete, the API Agent will update the VPC route table associated with the `redundant-interface` configured in the `cloud-redundancy-membership`.
+
+These tags are queried each time the API Agent tries to get state or `become-active`, so modifying these tags during runtime is allowed.
 
 ## Scenarios
 
 ### Both Healthy
 
-In the case where both members are healthy, the primary node is preferred and set to active. The secondary node is inactive. The redundant interface on the secondary node is set provisionally down and the API Agent steers traffic towards the primary node.
+In the case where both members are healthy, the primary node is preferred and set to `active`. The secondary node is inactive. The redundant interface on the secondary node is set provisionally down and the API Agent steers traffic towards the primary node.
 
 ![both-healthy-scenario](/img/cloud-ha-both-healthy-scenario.png)
 
@@ -153,9 +271,9 @@ If the secondary node is shutdown while the primary is healthy, the primary HA A
 
 ### Split Brain
 
-This is slightly distinct from the Primary Shutdown or Secondary Shutdown because both nodes and HA Agents are up and running, but the peer link between the nodes is down. In this case, both HA Agents determine that the other HA Agent is unreachable. This is indistinguisable from the other node being shutdown, so both HA Agents will determine they are in the position to take control of traffic, so whichever node was not already active will become active. This means that both nodes will have their `redundant-interface`s provisionally up. For the `azure-vnet` solution, there will still only be one node that the route tables are pointing their routes towards due to the nature of the solution. For the `azure-lb` solution, both nodes will respond to the probes so traffic will be split according to the Azure Loadbalancer configuration. This situation can cause asymmetrical routing where if branch traffic comes in on the node that the solution is not pointed towards, then traffic will be sent into Azure through that node and come back in through the other node.
+Split Brain is distinct from the Primary Shutdown or Secondary Shutdown because both nodes and HA Agents are up and running, but the peer link between the nodes is down. In this case, both HA Agents determine that the other HA Agent is unreachable. Because each node cannot distinguish this from the other node being shut down, both HA Agents determine they are in the position to take control of traffic. The node that was inactive becomes active, resulting in both nodes having their `redundant-interface`s provisionally up. For the `azure-vnet` solution, there is still only be one node where the route tables are pointing. For the `azure-lb` solution, both nodes respond to the probes, causing traffic to split along the Azure Loadbalancer configuration. The result is asymmetrical routing; branch traffic comes in on the node that the solution is not pointed towards, is sent into Azure through that node, and then comes back in through the other node.
 
-The split brain scenario can be identified if the peers can't reach each other which will be captured with alarms:
+The split brain scenario can be identified when the peers cannot reach each other. This is captured with following alarms:
 ```
 # show alarms
 
@@ -167,13 +285,13 @@ The split brain scenario can be identified if the peers can't reach each other w
 
 ```
 
-Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields) for both members.
+Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields-for-versions-6x-and-above) for both members.
 
 ![split-brain-scenario](/img/cloud-ha-split-brain-scenario.png)
 
 ### Split Brain Resolution
 
-Once the health statuses are able to flow between the two nodes, the unreachable status that each Cloud HA Agent has for the other node will resolve to healthy or unhealthy. Even if the determination of whether the node is the same as it was before, each HA Agent will still set the provisional statuses and make the appropriate HTTP call on API Agent. This is because each node does not know what calls the other node made while the split brain was occurring, so it is safer to make calls even if it may not be necessary. Consider the scenario where the primary node is active and the secondary node is inactive before a split brain. When the split brain occurs, the secondary will then become active. If this is with a solution like `azure-vnet`, the last node to hit the API Agent will be the one that the solution point to. Thus the secondary node will be the active node from the Azure Route Table's perspective. Once the split brain is resolved, without the extra API calls, the primary would stay active without making any API calls and the secondary would become inactive. The problem with this is that the last node to trigger the API Agent was the secondary node so all branch bound traffic would be sent into interfaces that are provisionally down. The plugin solves this by reperforming API calls when it detects that the remote node goes from unreachable to not unreachable.
+Once the health status is able to flow between the two nodes, the `unreachable` status that each Cloud HA Agent has for the other node will resolve to healthy or unhealthy. Even if the determination of whether the node is the same as it was before, each HA Agent still sets the provisional statuses and makes the appropriate HTTP call on API Agent. This is because each node does not know what calls the other node made while the split brain was occurring, so it is safer to make calls even if it may not be necessary. Consider the scenario where the primary node is active and the secondary node is inactive before a split brain. When the split brain occurs, the secondary will then become active. If this is with a solution like `azure-vnet`, the last node to hit the API Agent will be the one that the solution point to. Thus the secondary node will be the active node from the Azure Route Table's perspective. Once the split brain is resolved, without the extra API calls, the primary would stay active without making any API calls and the secondary would become inactive. The problem with this is that the last node to trigger the API Agent was the secondary node so all branch bound traffic would be sent into interfaces that are provisionally down. The plugin solves this by reperforming API calls when it detects that the remote node goes from unreachable to not unreachable.
 
 ![both-healthy-scenario](/img/cloud-ha-both-healthy-scenario.png)
 
@@ -185,7 +303,7 @@ A group is a collection of nodes which all share the same settings such as the s
 
 ```
 authority
-    cloud-redundandy-group group1
+    cloud-redundancy-group group1
         name group1
         enabled true
         solution-type azure-lb
@@ -193,29 +311,64 @@ authority
         additional-branch-prefix 2.2.2.2/24
         up-holddown-timeout 2
         peer-reachability-timeout 10
-        remote-health-network 169.254.180.0/24
         health-interval 2
     exit
-    cloud-redundandy-group group2
+    cloud-redundancy-group group2
         name group2
         solution-type azure-vnet
+        extra-route-table a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+            subscription-id a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+            resource-group azure-resource-group
+            route-table-name azure-route-table
+        exit
+        auto-discover-route-table false
         include-peer-vnets false
+    exit
+    cloud-redundancy-group group3
+        name group3
+        enabled true
+        solution-type aws-tgw
+        auto-discover-route-table true
+        health-interval 2
     exit
 exit
 ```
 
-| Element                   | Type            | Properties                                     | Description                                                                                                                          |     |
-| ------------------------- | --------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --- |
-| name                      | string          | key                                            | The name of the group to be referenced in other places.                                                                              |     |
-| enabled                   | boolean         | default: true                                  | Whether the group is enabled.                                                                                                        |     |
-| solution-type             | enum            | required                                       | The solution to use on member nodes.  Value can be one of the values in #Supported Solutions.                                        |     |
-| additional-branch-prefix  | list: ip-prefix |                                                | Additional ip prefixes that the member routers will control.                                                                         |     |
-| up-holddown-timeout       | int             | default: 2                                     | The number of seconds to wait before declaring a member up.                                                                          |     |
-| peer-reachability-timeout | int             | default: 10                                    | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |     |
-| health-interval           | int             | default: 2                                     | The interval in seconds for health reports to be collected.                                                                          |     |
-| remote-health-network     | ip-prefix       | default: 169.254.180.0/24                      | The ip prefix to use for inter-member health status messages.                                                                        |     |
-| include-peer-vnets        | boolean         | if: solution-type = azure-vnet, default: false | Whether to include peer VNETs as part of the route table discovery algorithm.                                                        |     |
-| probe-port                | port            | if: solution-type = azure-lb, default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.                                                             |     |
+#### Common Configuration
+
+| Element | Type | Properties | Description |
+| ---- | --- | --- | --- |
+| name                      | string          | key                   | The name of the group to be referenced. |
+| enabled                   | boolean         | default: true         | Whether the group is enabled. |
+| solution-type             | enum            | required              | The solution to use on member nodes. Value can be one of the values in [Supported Solutions](#supported-solutions). |
+| additional-branch-prefix  | list: ip-prefix |                       | Additional IP prefixes that the member routers will control. |
+| up-holddown-timeout       | int             | default: 2            | The number of seconds to wait before declaring a member up. |
+| peer-reachability-timeout | int             | default: 10           | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |
+| health-interval           | int             | default: 2            | The interval in seconds for health reports to be collected. |
+| remote-health-network     | ip-prefix       | default: 169.254.180.0/24 | The ip-prefix to use for inter-member health status messages. |
+
+#### Azure VNET Specific Configuration
+
+| Element | Type | Properties | Description |
+| --- | --- | --- | --- |
+| include-peer-vnets | boolean | default: false | Whether to include peer VNETs as part of the route table discovery algorithm. |
+| auto-discover-route-table | boolean | default: true | Enables automatic discovery of Azure Route Tables within the specified VNET. |
+| extra-route-table         | list    | | A list of Azure User Defined Route (UDR) tables where custom routing entries will be injected or modified. |
+| subscription-id           | string  | key (within extra-route-table) | The unique identifier of the Azure subscription containing the UDR. |
+| resource-group            | string  | required (within extra-route-table) | The name of the Azure resource group where the route table is hosted. |
+| route-table-name          | string  | required (within extra-route-table) | The specific name of the Azure Route Table resource. |
+
+#### Azure Loadbalancer Specific Configuration
+
+| Element    | Type | Properties       | Description |
+| ---------- | ---- | ---------------- | --- |
+| probe-port | port | default: 12801   | The port where the Azure Loadbalancer sends HTTP probes. |
+
+#### AWS TGW Specific Configuration
+
+| Element    | Type | Properties       | Description |
+| ---------- | ---- | ---------------- | --- |
+| tgw-route-table-id | AWS ID | | The TGW Route Table ID that should be updated. Ex. `tgw-rtb-00000000000000001`. Must be paired with the `tgw-attachment-id` on each member. |
 
 ### Membership
 
@@ -250,20 +403,28 @@ node
 exit
 ```
 
-| Element                         | Type            | Properties                | Description                                                                                                                                                   |
-| ------------------------------- | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Element | Type | Properties | Description |
+| --- | --- | --- | --- |
 | cloud-redundancy-plugin-network | ip-network      | default: 169.254.137.0/30 | The ip network to use for internal networking. This should only be configured when the default value conflicts with a different service in the configuration. |
-| cloud-redundancy-group          | reference       | required                  | The group that this member belongs to.                                                                                                                        |
-| priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference.                                                                                        |
-| redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members.                                                           |
-| additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations.                                                 |
-| log-level/ha-agent              | log-level       | default: info             | The log level for the HA Agent.                                                                                                                               |
-| log-level/api-agent             | log-level       | default: info             | The log level for the active API Agent.                                                                                                                       |
-
+| cloud-redundancy-group          | reference       | required                  | The group that this member belongs to. |
+| enabled                         | bool            | default: true             | Whether to enable the HA Agent from becoming active/inactive for the member. |
+| dns-server                      | list: ipv4      | max-value: 2              | DNS servers to be used for Cloud HA management traffic. If omitted, solution-specific defaults are used. |
+| tgw-attachment-id               | string          |                           | The TGW Attachment ID to use when this member becomes active (for `aws-tgw`). If this is omitted, use tags for discovery. |
+| priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference. |
+| redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members. |
+| additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations. |
+| log-level/ha-agent              | log-level       | default: info             | The log level for the HA Agent. |
+| log-level/api-agent             | log-level       | default: info             | The log level for the active API Agent. |
 
 :::note
 Nodes can only be members of one group.
 :::
+
+#### AWS TGW Specific Configuration
+
+| Element    | Type | Properties       | Description |
+| ---------- | ---- | ---------------- | --- |
+| tgw-attachment-id | AWS ID | | The TGW Attachment ID that should be used for this node when updating the route table entry. Ex. `tgw-attach-00000000000000001` |
 
 ### Address Prefixes
 
@@ -280,19 +441,511 @@ exit
 
 Any additional prefixes that should be included in the controlled prefix list can be configured as `additional-branch-prefix`s under the group.
 
+## Complete Azure VNET Configuration Example
+
+Below is a complete working example of an Azure VNET High Availability deployment. This configuration demonstrates the use of explicit route table configuration using `extra-route-table` with `auto-discover-route-table` set to `false`.
+
+:::info
+This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
+:::
+
+```config {3-18,62-67,108-113}
+config
+    authority
+        cloud-redundancy-group  group1
+            enabled                    true
+            name                       group1
+            solution-type              azure-vnet
+
+            extra-route-table          a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+                subscription-id   a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7
+                resource-group    azure-resource-group
+                route-table-name  azure-route-table
+            exit
+            auto-discover-route-table  false
+            health-interval            6
+            additional-branch-prefix   1.1.1.1/32
+            up-holddown-timeout        2
+            peer-reachability-timeout  13
+        exit
+
+        router                  azure-ha
+            name                 azure-ha
+            inter-node-security  internal
+
+            node                 node0
+                name                         node0
+                asset-id                     node0-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.4
+                            ip-address     172.16.10.4
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.132
+                            ip-address     192.168.10.132
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              168.63.129.16
+                    priority                1
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            node                 node1
+                name                         node1
+                asset-id                     node1-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.6
+                            ip-address     172.16.10.6
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.134
+                            ip-address     192.168.10.134
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              168.63.129.16
+                    priority                2
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            service-route        internet-from-lan-route
+                name             internet-from-lan-route
+                service-name     internet-from-lan
+                enable-failover  true
+
+                next-hop         node1 ge-0-0-intf
+                    node-name  node1
+                    interface  ge-0-0-intf
+                exit
+
+                next-hop         node0 ge-0-0-intf
+                    node-name  node0
+                    interface  ge-0-0-intf
+                exit
+            exit
+        exit
+
+        tenant                  lan
+            name  lan
+        exit
+
+        service                 internet-from-lan
+            name     internet-from-lan
+            enabled  true
+            tenant   lan
+            address  0.0.0.0/0
+        exit
+    exit
+exit
+```
+
+## Complete AWS TGW Configuration Example
+
+Below is a complete working example of an AWS TGW High Availability deployment. This configuration demonstrates the use of explicit route table configuration using `tgw-route-table-id` and `tgw-attachment-id`.
+
+:::info
+This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
+:::
+
+```config {3-13,57-63,104-110}
+config
+    authority
+        cloud-redundancy-group  group1
+            enabled                    true
+            name                       group1
+            solution-type              aws-tgw
+
+            tgw-route-table-id         tgw-rtb-00000000000000001
+            health-interval            6
+            additional-branch-prefix   1.1.1.1/32
+            up-holddown-timeout        2
+            peer-reachability-timeout  13
+        exit
+
+        router                  aws-ha
+            name                 aws-ha
+            inter-node-security  internal
+
+            node                 node0
+                name                         node0
+                asset-id                     node0-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.4
+                            ip-address     172.16.10.4
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.132
+                            ip-address     192.168.10.132
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              8.8.8.8
+                    priority                1
+                    redundant-interface     ge-0-1
+                    tgw-attachment-id       tgw-attach-00000000000000001
+                exit
+            exit
+
+            node                 node1
+                name                         node1
+                asset-id                     node1-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.6
+                            ip-address     172.16.10.6
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.134
+                            ip-address     192.168.10.134
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              8.8.8.8
+                    priority                2
+                    redundant-interface     ge-0-1
+                    tgw-attachment-id       tgw-attach-00000000000000002
+                exit
+            exit
+
+            service-route        internet-from-lan-route
+                name             internet-from-lan-route
+                service-name     internet-from-lan
+                enable-failover  true
+
+                next-hop         node1 ge-0-0-intf
+                    node-name  node1
+                    interface  ge-0-0-intf
+                exit
+
+                next-hop         node0 ge-0-0-intf
+                    node-name  node0
+                    interface  ge-0-0-intf
+                exit
+            exit
+        exit
+
+        tenant                  lan
+            name  lan
+        exit
+
+        service                 internet-from-lan
+            name     internet-from-lan
+            enabled  true
+            tenant   lan
+            address  0.0.0.0/0
+        exit
+    exit
+exit
+```
+## Complete GCP VPC Configuration Example
+
+Below is a complete working example of an GCP VPC High Availability deployment.
+
+:::info
+This example is based on a production deployment pattern. Adjust the IP addresses, subscription IDs, and resource identifiers for your specific environment.
+:::
+
+```config {3-11,58-63,107-112}
+config
+    authority
+        cloud-redundancy-group  group1
+            enabled                    true
+            name                       group1
+            solution-type              gcp-vpc
+            health-interval            6
+            additional-branch-prefix   1.1.1.1/32
+            up-holddown-timeout        2
+            peer-reachability-timeout  13
+        exit
+
+        router                  gcp-ha
+            name                 gcp-ha
+            inter-node-security  internal
+
+            node                 node0
+                name                         node0
+                asset-id                     node0-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.4
+                            ip-address     172.16.10.4
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.132
+                            ip-address     192.168.10.132
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              8.8.8.8
+                    priority                1
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            node                 node1
+                name                         node1
+                asset-id                     node1-asset-id
+                role                         combo
+
+                device-interface             ge-0-1
+                    name               ge-0-1
+                    enabled            true
+
+                    network-interface  ge-0-1-intf
+                        name        ge-0-1-intf
+                        tenant      lan
+                        source-nat  true
+
+                        address     172.16.10.6
+                            ip-address     172.16.10.6
+                            prefix-length  24
+                            gateway        172.16.10.1
+                        exit
+                    exit
+                exit
+
+                device-interface             ge-0-2
+                    name               ge-0-2
+                    forwarding         false
+
+                    network-interface  ge-0-2-intf
+                        name       ge-0-2-intf
+                        type       fabric
+
+                        address    192.168.10.134
+                            ip-address     192.168.10.134
+                            prefix-length  29
+                            gateway        192.168.10.129
+                        exit
+                    exit
+                exit
+
+                cloud-redundancy-membership  group1
+                    cloud-redundancy-group  group1
+                    dns-server              8.8.8.8
+                    priority                2
+                    redundant-interface     ge-0-1
+                exit
+            exit
+
+            service-route        internet-from-lan-route
+                name             internet-from-lan-route
+                service-name     internet-from-lan
+                enable-failover  true
+
+                next-hop         node1 ge-0-0-intf
+                    node-name  node1
+                    interface  ge-0-0-intf
+                exit
+
+                next-hop         node0 ge-0-0-intf
+                    node-name  node0
+                    interface  ge-0-0-intf
+                exit
+            exit
+        exit
+
+        tenant                  lan
+            name  lan
+        exit
+
+        service                 internet-from-lan
+            name     internet-from-lan
+            enabled  true
+            tenant   lan
+            address  0.0.0.0/0
+        exit
+    exit
+exit
+```
+
+### Key Configuration Points
+1. **AWS TGW Route Table ID**: On the group, specifies which TGW Route Table to update.
+2. **AWS TGW Attachment ID**: On each member, specifies the attachment which corresponds to the VPC that the SSR node lives in. This setting needs to be different across nodes.
+3. **Redundant Interfaces**: Each node specifies `ge-0-1` as the redundant interface to be monitored for failover.
+4. **Priority**: Node0 has priority 1 (primary), Node1 has priority 2 (secondary).
+5. **DNS Servers**: AWS's internal DNS server (`169.254.169.253`) is configured for the cloud HA membership.
+6. **Fabric Interface**: A dedicated fabric interface (ge-0-2) is used for inter-node communication.
+
 ## Generated SSR Configuration
 
-To see a full blown configuration and the configuration it generates, look at `Complete Example Configuration` in the `Appendix`.
+To see a full configuration, refer to the [Complete Example Configuration #1 for azure-lb](#complete-example-configuration-1-for-azure-lb) in the [Appendix](#appendix).
+
+### Management Traffic Config Generation
+
+When the plugin is configured on a router consisting of two nodes, the plugin tries to generate a service and service route for each node to get the DNS and API calls from the network namespace to the cloud providers.
+
+This automatic configuration generation is dependent on whether the node has an interface marked `management true`.
+
+If there are no `management true` interfaces, then the user must configure them manually. The key configuration to include is:
+* The higher priority member's tenant is `cloud-ha-0`
+* The lower priority member's tenant is `cloud-ha-1`
+* The service must allow:
+    * TCP 80 - for metadata service interactions
+    * TCP 443 - for API interactions
+    * UDP 53 - for DNS to resolve the API hostnames
+* Each service route must have at least one service route with a next hop out an external interface
+
+The service and service-route will be named either `cloud-ha-management-0` or `cloud-ha-management-1` depending on whether it is node0 or node1.
 
 ### Validation
 
 The following criteria need to be met in order for the cloud-ha plugin to take effect for a specific group:
 
-* Priorities across all members in a group are unique.
-* IP Network fields such as `remote-health-network` and `cloud-redundancy-plugin-network` are validated to be an acceptable prefix size.
+* Priorities across all members in a group must be unique.
+* `remote-health-network` and `cloud-redundancy-plugin-network` must be valid IP prefixes.
 * The `peer-reachability-timeout` for a group must be at least twice the amount of time as the `health-interval`.
+* `cloud-redundancy-group` referenced by the node's `cloud-redundancy-membership` must exist.
+* `auto-discover-route-table` must be disabled to configure `tgw-attachment-id`.
+* `tgw-attachment-id` must be configured on both members when `auto-discover-route-table` is disabled for AWS TGW solution type.
+* `tgw-route-table-id` must be configured when `auto-discover-route-table` is disabled for AWS TGW solution type.
+* At least one `extra-route-table` must be configured when `auto-discover-route-table` is disabled for Azure VNET solution type.
 
 Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on the Conductor for the errors causing the config to be invalid.
+
+### Limitations
+
+* Properties `dns-server` and `extra-route-table` can only be configured in dual-node HA mode.
+* Solution types `aws-vpc`, `aws-tgw` and `gcp-vpc` can only be configured in dual-node HA mode.
+* `tgw-attachment-id` can only be configured in AWS TGW solution type.
+* `shared-phys-address` cannot be configured in any cloud HA mode.
+* A router cannot be a member of multiple cloud redundancy groups.
 
 ### Configuration Assumptions
 
@@ -328,15 +981,21 @@ Additional configuration validation is done without causing a traditional valida
 Group group1 does not have unique priorities across members: {'node2 router2': '2', 'node1 router1': '2'}
 ```
 
-
 ### Logging
 The different services on the router all log to the files captured by the glob `/var/log/128technology/plugins/cloud-ha-*.log`
 
-
 ### PCLI Enhancements
-To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
-#### State Fields
+#### Become Active
+
+The command `request cloud-ha become-active router <router> node <node>` forces the targetted node to become active. It then attempts to force the other node to become inactive. If the peer node is not accessible (down) the command does not generate an error message for the unreachable peer.
+
+This command can be useful if the routes have been modified outside of the plugin.
+
+#### State
+To check the state of the Cloud HA solution running on the router, the plugin adds output to the `show device-interface` command for the `cloud-ha` interface. Beginning with version 6.x, plugin output is available using the `show plugins state detail 128T-cloud-ha` command. This state information is also accessible from the SSR public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
+
+#### State Fields For Versions Earlier Than 6.x
 
 | Field                    | Description                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
@@ -464,6 +1123,89 @@ Wed 2022-09-21 10:31:57 CST
 Completed in 0.04 seconds
 ```
 
+#### State Fields For Versions 6.x And Above
+
+| Field                        | Description                                                                                               |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------- |
+| enabled                      | Whether the Cloud HA group is enabled.                                                                    |
+| is-node-active               | Whether the HA Agent considers itself active.                                                             |
+| local-status                 | The understood state of the local node.                                                                   |
+| remote-status                | The understood state of the remote node.                                                                  |
+| last-activity-change         | The timestamp of the last status change (active/inactive) of the node.                                    |
+| redundant-target-interface   | The name of the first healthy interface in the `redundant-interface` list.                                |
+| redundant-target-mac-address | The mac address of the first healthy interface in the `redundant-interface` list.                         |
+| prefixes                     | The list of configured prefixes. See `Address Prefixes`.                                                  |
+| api-agent-state              | The collected state returned by the API Agent, including solution type, region, and cloud resource details (for example, TGW route tables for `aws-tgw`). |
+
+Example output for the `aws-tgw` solution:
+```
+# show  plugins state detail 128T-cloud-ha
+Thu 2026-05-14 10:02:15 UTC
+✔ Retrieving state data...
+
+
+===============================================================================
+node0.SPOKE-HA-aws-ard
+===============================================================================
+state:
+     enabled:                                  True
+     is-node-active:                           True
+     local-status:                             healthy
+     remote-status:                            healthy
+     last-activity-change:                     Thu 2026-05-14 09:56:40 UTC
+     redundant-target-interface:               LAN
+     redundant-target-mac-address:             12:23:a1:74:89:f7
+     prefixes:
+       10.0.136.0/24
+     api-agent-state:
+         collected-at:                         Thu 2026-05-14 10:02:07 UTC
+         solution:                             aws-tgw
+         info:
+           region:                             us-east-1
+           tgw-route-tables:
+             tgw-rtb-0d53b8a2a75f4df4f:
+               CreationTime:                   2026-04-01 06:39:57+00:00
+               DefaultAssociationRouteTable:   True
+               DefaultPropagationRouteTable:   True
+               Routes:
+                 10.0.136.0/24:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-031f2f9f5675f3d16
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-08782721662ea3dbf
+                   Type:                       static
+                 10.1.0.0/16:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-031f2f9f5675f3d16
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-08782721662ea3dbf
+                   Type:                       propagated
+                 10.2.0.0/16:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-070b11f2dee06d4f2
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-0f56f374ef73dae1f
+                   Type:                       propagated
+                 10.4.0.0/24:
+                   State:                      active
+                   TransitGatewayAttachments:
+                       ResourceId:             vpc-05e9781435887c745
+                       ResourceType:           vpc
+                       TransitGatewayAttachmentId:tgw-attach-082b38ff06e95a187
+                   Type:                       propagated
+               State:                          available
+               Tags:
+                   Key:                        Name
+                   Value:                      TGW-SSR
+               TransitGatewayId:               tgw-063a919a8653d2b54
+
+
+Retrieved state data.
+Completed in 0.24 seconds
+```
 ### Systemd Services
 
 * `128T-telegraf@cloud_ha_health`: the instance of the monitoring agent that produces the health statuses
@@ -481,7 +1223,8 @@ If the Cloud HA Agent does not come up cleanly or fails for a prolonged period o
 
 Example output when the agent did not come up cleanly:
 
-```admin@combo-west.RTR_WEST_COMBO# show alarms
+```
+admin@combo-west.RTR_WEST_COMBO# show alarms
 Tue 2020-10-09 16:42:50 UTC
 
 ============== ===================== ========== ============= =========== ======================================
@@ -504,7 +1247,6 @@ Error:
 ```
 
 The router will need to be upgraded to a compatible version. Compatible versions can be listed with  `dnf list --whatprovides 128T-device-interface-api(1.0)`.
-
 
 ## Appendix
 
@@ -964,137 +1706,43 @@ config
 exit
 ```
 
-
-### Part of Example Configuration #2 for alicloud-vpc after auto generation.
-
-Below is a sample running configuration for a node and a service.
-
-:::info
-The following configuration is an example only - It is not for use on a system.
-:::
-
-
-            node                                AlicloudSDWAN-HA-Router01
-                name              AlicloudSDWAN-HA-Router01
-                asset-id          iZwz96to20bbnnb
-
-                device-interface  WAN
-                    name               WAN
-                    pci-address        0000:00:04.0
-
-                    network-interface  WAN
-                        name                   WAN
-                        global-id              17
-
-                        neighborhood           ChinaUnicom
-                            name                  ChinaUnicom
-                            external-nat-address  119.23.200.200
-                            vector                wan1
-
-                            path-mtu-discovery
-                                enabled  true
-                            exit
-                        exit
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  LAN
-                    name               LAN
-                    pci-address        0000:00:05.0
-                    enabled            true
-
-                    network-interface  LAN
-                        name                   LAN
-                        global-id              18
-
-                        neighborhood           ALICLOUD
-                            name  ALICLOUD
-                        exit
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  farbic
-                    name               farbic
-                    pci-address        0000:00:06.0
-
-                    network-interface  fabric
-                        name                   fabric
-                        global-id              19
-
-                        neighborhood           intracloud
-                            name                intracloud
-                            topology            mesh
-
-                            path-mtu-discovery
-                                enabled  true
-                            exit
-                        exit
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  cloud-ha
-                    name               cloud-ha
-                    description        "Auto generated device interface cloud-ha"
-                    type               host
-
-                    network-interface  cloud-ha-intf
-                        name        cloud-ha-intf
-                        global-id   27
-                        type        external
-                        tenant      cloud-ha
-                        source-nat  true
-
-                        address     169.254.137.1
-                            ip-address     169.254.137.1
-                            prefix-length  30
-                            gateway        169.254.137.2
-                        exit
-                    exit
-                exit
-            exit
-
-            service-route                       Alicloud-HA-test
-                name          Alicloud-HA-test
-                service-name  Alicloud-HA-test
-                vector        peer1
-
-                next-hop      AlicloudSDWAN-HA-Router01 LAN
-                    node-name  AlicloudSDWAN-HA-Router01
-                    interface  LAN
-                    vector     peer1
-                exit
-            exit
-
-            service-route                       AliCloud-HA-test2
-                name          AliCloud-HA-test2
-                service-name  Alicloud-HA-test
-                vector        peer2
-                peer          AlicloudSDWAN-HA-Router02
-            exit
-
-            service-route                       cloud-ha-service-route-alicloud-1
-                name          cloud-ha-service-route-alicloud-1
-                service-name  cloud-ha-service-alicloud-1
-                nat-target    169.254.137.2
-            exit
-
-            service-route                       cloud-ha-peer-service-route-alicloud-2
-                name          cloud-ha-peer-service-route-alicloud-2
-                service-name  cloud-ha-service-alicloud-2
-                peer          AlicloudSDWAN-HA-Router02
-            exit
-        exit
-
-
-
-
 ## Release Notes
+
+### Release 6.0.1
+
+**Release Date:** July 14, 2026
+
+#### Issues Fixed
+
+- **I95-65716** Avoid removal of Conductor installations of the Cloud HA plugin
+
+### Release 6.0.0
+
+**Release Date:** June 26, 2026
+
+#### New Features and Improvements
+
+Support traditional node-based HA support where two SSR nodes are clustered to form one highly redundant router.
+
+The cloud providers supported for this feature include Microsoft Azure, Amazon AWS, and Google GCP. Additionally this feature removes support for router-based HA.
+
+### Release 5.1.0
+
+#### New Features and Improvements
+
+Add support for dual node HA which allows the plugin to manage redundancy across two nodes of the same router.
+
+Azure VNET mode was extended to support updates to additional route tables including those in a different subscription-id.
+
+- See the [Azure VNET Configuration Example](#complete-azure-vnet-configuration-example) for more details.
+
+AWS TGW mode was added.
+
+- See the [AWS TGW Configuration Example](#complete-aws-tgw-configuration-example) for more details.
+
+GCP VPC mode was added.
+
+- See the [GCP VPC Configuration Example](#complete-gcp-vpc-configuration-example) for more details.
 
 ### Release 5.0.0
 
@@ -1105,7 +1753,6 @@ Support for install and upgrade of a customized upstream Linux-based SSR OS dist
 :::note
 On conductor, the plugin will auto upgrade to this version when upgrading from 6.x to 7.x version of SSR software. In addition, all routers will also be auto upgraded to their respective Oracle Linux 7 or Oracle Linux 9 plugin version depending on the SSR version running on the device.
 :::
-
 
 **Release Date:** Oct 13, 2025
 
