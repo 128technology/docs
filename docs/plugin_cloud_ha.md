@@ -988,7 +988,7 @@ The different services on the router all log to the files captured by the glob `
 
 #### Become Active
 
-The command `request cloud-ha become-active router <router> node <node>` forces the targetted node to become active. It then attempts to force the other node to become inactive. If the peer node is not accessible (down) the command does not generate an error message for the unreachable peer. 
+The command `request cloud-ha become-active router <router> node <node>` forces the targetted node to become active. It then attempts to force the other node to become inactive. If the peer node is not accessible (down) the command does not generate an error message for the unreachable peer.
 
 This command can be useful if the routes have been modified outside of the plugin.
 
@@ -1708,6 +1708,24 @@ exit
 
 ## Release Notes
 
+### Release 6.0.1
+
+**Release Date:** July 14, 2026
+
+#### Issues Fixed
+
+- **I95-65716** Avoid removal of Conductor installations of the Cloud HA plugin
+
+### Release 6.0.0
+
+**Release Date:** June 26, 2026
+
+#### New Features and Improvements
+
+Support traditional node-based HA support where two SSR nodes are clustered to form one highly redundant router.
+
+The cloud providers supported for this feature include Microsoft Azure, Amazon AWS, and Google GCP. Additionally this feature removes support for router-based HA.
+
 ### Release 5.1.0
 
 #### New Features and Improvements
@@ -1725,6 +1743,7 @@ AWS TGW mode was added.
 GCP VPC mode was added.
 
 - See the [GCP VPC Configuration Example](#complete-gcp-vpc-configuration-example) for more details.
+
 ### Release 5.0.0
 
 #### New Features and Improvements
