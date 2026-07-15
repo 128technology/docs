@@ -77,7 +77,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### New Features
 
-- **I95-62868 Multicast Failover Optimizations / PIM GR for FRR9:** Additional improvements to multicast failover and convergence times for PIM Graceful Restart in FRR9-based deployments. These optimizations reduce traffic loss during HA and non-HA failover events for multicast traffic.
+- **I95-62868 Multicast Failover Optimizations / PIM GR:** Additional improvements to multicast failover and convergence times for PIM Graceful Restart. These optimizations reduce traffic loss during HA and non-HA failover events for multicast traffic.
 ------
 - **I95-63012 AppID Scale Optimization:** Improved application identification performance and scale for WAN deployments. Optimizations reduce resource consumption on spoke routers where application identification is enabled by default, improving capacity under high traffic loads.
 
@@ -85,7 +85,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 - **The following CVEs have been identified and resolved in this release:** CVE-2023-40403, CVE-2025-9230, CVE-2025-12084, CVE-2025-13601, CVE-2025-14087, CVE-2025-14512, CVE-2025-61662, CVE-2025-67873, CVE-2025-68114, CVE-2025-68973, CVE-2026-1519, CVE-2026-3497, CVE-2026-4111, CVE-2026-4424, CVE-2026-4519, CVE-2026-4786, CVE-2026-4878, CVE-2026-5119, CVE-2026-5121, CVE-2026-6100, CVE-2026-9256, CVE-2026-21710, CVE-2026-25646, CVE-2026-25749, CVE-2026-26996, CVE-2026-27135, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-27904, CVE-2026-28417, CVE-2026-28421, CVE-2026-29111, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33412, CVE-2026-33416, CVE-2026-33526, CVE-2026-33636, CVE-2026-34982, CVE-2026-35385, CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414, CVE-2026-35535, CVE-2026-39979, CVE-2026-40164, CVE-2026-40460, CVE-2026-40701, CVE-2026-41242, CVE-2026-42926, CVE-2026-42934, CVE-2026-42945, CVE-2026-42946, CVE-2026-43284, CVE-2026-43500, CVE-2026-46300, CVE-2026-46333.
 ------
-- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65018, I95-65019, I95-65030, I95-65039, I95-65054, I95-65055, I95-65080, I95-65206, I95-65210, I95-65211, I95-65219, I95-65221, I95-65222, I95-65224, I95-65225, I95-65237, I95-65238, I95-65247, I95-65249.
+- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65018, I95-65019, I95-65028, I95-65030, I95-65039, I95-65054, I95-65055, I95-65080, I95-65206, I95-65210, I95-65211, I95-65219, I95-65221, I95-65222, I95-65224, I95-65225, I95-65237, I95-65238, I95-65247, I95-65249.
 ------
 - **I95-60912 PIM and PIMv6 cannot be enabled on the same interface:** Resolved an issue where enabling both PIM (IPv4) and PIMv6 on the same interface was not possible, preventing dual-stack multicast configurations.
 ------
@@ -97,7 +97,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63895 SSR sending packets larger than configured MTU:** Resolved an issue where the SSR was sending packets larger than the configured MTU (e.g., 1518 bytes instead of 1500), causing packet drops on downstream network elements.
 ------
-- **I95-63913 Session-source incorrect in BFD pinhole plus flow-move case:** Resolved an issue where session-source was incorrectly set to public when a BFD pinhole also happened to be a flow-move scenario.
+- **I95-63913 Session-source incorrect in BFD pinhole:** Resolved an issue where session-source was incorrectly set to public when a BFD pinhole also happened to be a flow-move scenario.
 ------
 - **I95-63951 BGP Graceful Restart Sending EOR Prematurely:** Resolved an issue where the SSR sent End-of-RIB (EOR) markers prematurely during BGP graceful restart, without waiting to receive EOR from its peers as required by RFC 4724, potentially causing route convergence issues.
 ------
@@ -161,13 +161,11 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64905 401 Authorization Required error when refreshing Logs page:** Resolved an issue where refreshing the Logs page on the conductor GUI returned a 401 Authorization Required error, requiring a full page reload or re-login.
 ------
-- **I95-64929 Peer certificate expiration time unit conversion error:** Resolved an issue where a seconds-to-milliseconds conversion error caused peer certificate expiration warnings to display incorrect remaining time.
+- **I95-64929 Peer certificate expiration time unit conversion error:** Resolved an issue where a seconds-to-milliseconds conversion error caused premature peer certificate expiration.
 ------
 - **I95-64977 Certificate ingestion ignores expiry and revocation validation:** Resolved an issue where ingesting a certificate did not properly validate its expiry date or revocation status, allowing expired or revoked certificates to be accepted.
 ------
 - **I95-64997 SYSLOG SEIM Integration Not Sending Failed Session Attempts:** Resolved an issue where the SYSLOG SEIM integration did not send log events for ERROR/FAILED session attempts (dropped packets), limiting visibility into denied traffic.
-------
-- **I95-65028 XML parsing lacks hardening against XXE:** Resolved a security vulnerability where XML parsing lacked hardening against XML External Entity (XXE) injection and billion-laughs denial-of-service attacks.
 ------
 - **I95-65056 `show app-id cache-sizes` command not found:** Resolved an issue where the `show app-id cache-sizes` command was missing from the CLI, preventing users from inspecting application identification cache utilization.
 ------
@@ -179,7 +177,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65171 TSI Download Missing File Extension:** Resolved an issue where Tech Support Info (TSI) bundles downloaded from the SSR Web UI had no file extension, preventing extraction with standard archive tools. Tech support files downloaded from the web UI now have the correct `.zip` extension.
 ------
-- **I95-65296 SVRv2 peering failures with fragmentation:** Resolved an issue where SVRv2 peering connections failed when packet fragmentation occurred on the path between peers, preventing secure peer relationships from establishing.
+- **I95-65296 ESKM peering failures with fragmentation:** Resolved an issue where ESKM peering connections failed when packet fragmentation occurred on the path between peers, preventing secure peer relationships from establishing.
 ------
 - **I95-65299 SSR440 upgrade from 7.1.0 to 7.1.5 failure:** Resolved an issue where upgrading an SSR440 from 7.1.0 to 7.1.5 could fail, with the highway process not running after reboot, causing the system to roll back automatically.
 ------
@@ -230,8 +228,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-65624 KNI application scripts test failure:** Resolved an internal test failure in KNI application scripts that could affect KNI interface initialization in certain configurations.
 ------
 - **I95-65656 Conductor upgrade fails on health check:** Resolved an issue where conductor upgrades could fail due to a health check timeout, preventing the upgrade from completing successfully.
-------
-- **I95-65681 Reduced signing output in build log:** Reduced verbose signing output in the build log to only display information when a signing operation fails, improving log readability.
 ------
 - **I95-65691 Node disconnected after headend partial rollback:** Resolved an issue where a node could remain disconnected from the conductor after a partial rollback scenario on a headend router.
 ------
