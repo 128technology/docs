@@ -59,7 +59,7 @@ This issue is currently being addressed by engineering. However, if your deploym
 
 As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
 
-In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_quickstart_byol_conductor_aws.md) or [Azure](intro_installation_byol_azure_conductor.md).
+In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.md) or [Azure](intro_installation_byol_azure_conductor.md).
 
 When the conductor is initially upgraded to an image-based installation, it will be upgraded as a package-based system. This is because the system does not understand how to handle image-based delivery until it is running 6.3 software. Once the conductor is running 6.3 all router upgrades will be treated as image-based upgrades and any subsequent conductor upgrade will be treated as image-based. Therefore, it is possible that issues related to disk usage on conductor may not arise until a subsequent upgrade of the conductor beyond the initial step to 6.3.
 
@@ -70,6 +70,53 @@ An issue has been identified that may be observed in conductor deployments runni
 **Offline-Mode: Onboarding Routers Running older SSR Software to a 6.3.x Conductor**
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
+
+## Release 7.1.5-7r2
+
+**Release Date:** April 30, 2026
+
+### New Features
+
+- **I95-63393 SSR400/SSR440 power supply status visibility:** Added CLI support to display the status of power supplies on dual-AC SSR400/SSR440 platforms. The `show chassis power` command displays power supply status for both single and dual power supply devices. This improves operational visibility into power redundancy and health on SSR400/SSR440 systems.
+------
+- **I95-64568 TPM details in platform information:** The `show platform security` command has been added to display TPM information such as TPM family (version number), revision, firmware version, and manufacturer. This allows users to verify TPM availability and configuration for security and compliance workflows.
+------
+- **I95-64623 Plugin packaging improvements:** Updated plugin packaging to include `128T-plugin-support-files`. This ensures that plugin dependencies are available on systems that rely on the extra packages bundle.
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2021-47670, CVE-2022-25883, CVE-2022-49985, CVE-2022-50087, CVE-2022-50228, CVE-2022-50367, CVE-2022-50386, CVE-2022-50543, CVE-2023-53125, CVE-2023-53178, CVE-2023-53226, CVE-2023-53257, CVE-2023-53297, CVE-2023-53305, CVE-2023-53386, CVE-2023-53401, CVE-2023-53513, CVE-2023-53539, CVE-2024-56644, CVE-2025-4945, CVE-2025-6176, CVE-2025-9086, CVE-2025-9230, CVE-2025-11021, CVE-2025-12084, CVE-2025-13601, CVE-2025-14104, CVE-2025-21727, CVE-2025-21759, CVE-2025-22026, CVE-2025-22058, CVE-2025-22097, CVE-2025-37797, CVE-2025-37914, CVE-2025-38085, CVE-2025-38159, CVE-2025-38200, CVE-2025-38211, CVE-2025-38250, CVE-2025-38332, CVE-2025-38350, CVE-2025-38352, CVE-2025-38380, CVE-2025-38392, CVE-2025-38449, CVE-2025-38461, CVE-2025-38464, CVE-2025-38477, CVE-2025-38498, CVE-2025-38527, CVE-2025-38556, CVE-2025-38718, CVE-2025-38724, CVE-2025-39697, CVE-2025-39718, CVE-2025-39730, CVE-2025-39817, CVE-2025-39825, CVE-2025-39841, CVE-2025-39849, CVE-2025-39864, CVE-2025-39883, CVE-2025-39898, CVE-2025-39955, CVE-2025-39971, CVE-2025-40300, CVE-2025-66418, CVE-2025-66471, CVE-2026-0719, CVE-2026-1761, CVE-2026-21441.
+------
+- **I95-62421 DHCP relay failures causing clients to miss IP assignment:** Resolved an issue where DHCP session information is lost on the hub, causing the session reverse flow to collide with the forward flow of the session initiated originally from the spoke. This includes a new (configurable) default behavior for collision resolution. For detailed information, see [`configure authority service-policy prefer-established-session {true | false}`](config_command_guide.md#configure-authority-service-policy-prefer-established-session). 
+------
+- **I95-62710 Unnecessary web server processing for `router all` in the PCLI:** Addressed a problem where the web server performed unnecessary work when PCLI commands referenced `router all`. This optimization reduces overhead and improves responsiveness.
+------
+- **I95-63174 IDP `Critical` profile not applied:** Resolved an issue where setting the IDP policy/profile to `Critical` was not properly applied on IDP. With this fix, profile changes to `Critical` now take effect as expected.
+------
+- **I95-63355 Node-level security controls for serial console and USB:** Restored support for configuring node-level security features that disable serial console output and USB boot/mass storage (for example, settings such as `serial-console-enabled` and `usb-mass-storage-enabled`). This allows users to reapply hardened platform settings where supported.
+------
+- **I95-63393 SSR400/SSR440 power supply status visibility:** Added CLI support to display the status of power supplies on dual-AC SSR400/SSR440 platforms. The `show chassis power` command displays power supply status for both single and dual power supply devices. This improves operational visibility into power redundancy and health on SSR400/SSR440 systems.
+------
+- **I95-63839 SNMP walk failures on Conductors onboarding to NMS:** Resolved an issue where SNMP walks on Conductors could fail with a `genError`, preventing successful onboarding into some network management systems. System MIB walks on Conductors now complete successfully; IF-MIB is no longer exposed on Conductors where it is not supported.
+------
+- **I95-63873 DHCP leases not showing in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
+------
+- **I95-64152 Conductor connectivity blocked by stale SSH control sockets:** Resolved a condition where, after a router reboot (particularly following an unclean shutdown), the router could remain **Disconnected** in the Conductor due to stale SSH control sockets. The SSH coordination logic now cleans up stale control sockets automatically, restoring Conductor–router connectivity.
+------
+- **I95-64187 Improved handling of TPM Dictionary Attack (DA) lockout:** Improved detection and handling when the TPM is in Dictionary Attack (DA) lockout mode. The integrity handler now detects this condition earlier and fails in a more predictable manner, simplifying troubleshooting of TPM-related integrity issues.
+------
+- **I95-64568 TPM details in platform information:** The `show platform security` command has been added to display TPM information such as TPM family (version number), revision, firmware version, and manufacturer. This allows users to verify TPM availability and configuration for security and compliance workflows.
+------
+- **I95-64575 Unable to login to SSR routers from conductor in Cloud deployment:** Resolved an issue where the SSH configuration on cloud-deployed routers disabled password authentication, preventing login from the conductor.
+------
+- **I95-64595 Excessive audit log severity:** Adjusted the log severity for the audit log event collector to better match expected operational conditions and reduce unnecessary log noise.
+------
+- **I95-64687 Recursive cleanup of Salt cache directory** Resolved an issue where cleanup of `/var/cache/salt/` was not performed recursively, which could leave behind cached data. The cleanup process now removes this directory recursively to ensure a more complete reset.
+------
+- **I95-64688 Highway coredumps causing peer path flaps:** Resolved an issue where highway process coredumps were occurring, resulting in peer path flaps.
+------
+- **I95-64719 Secure Conductor Onboarding (SCO) config validation incorrect:** Resolved an issue where validating SCO config checked each node for an assetID but did not verify that at least one assetID was configured, which is a requirement.
+
 
 ## Release 7.1.4-3r2
 
@@ -115,15 +162,13 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 
 ### Resolved Issues
 
-- **The following CVEs have been identified and resolved in this release:** CVE-2024-56326, CVE-2025-47273, CVE-2025-32415, CVE-2025-58060, CVE-2025-54389, CVE-2021-28651, CVE-2025-54574, CVE-2025-8194, CVE-2025-32462, CVE-2018-10906, CVE-2018-14468, CVE-2021-42574, CVE-2022-24407, CVE-2019-12749, CVE-2021-20277, CVE-2021-4034, CVE-2021-3621, CVE-2024-28956, CVE-2025-53057, CVE-2025-53066, CVE-2025-62168, CVE-2025-11561, CVE-2024-43876, CVE-2024-43877, CVE-2025-22058, CVE-2025-23143, CVE-2025-38678, CVE-2025-39880, CVE-2025-39883, CVE-2025-39885, CVE-2025-39911, CVE-2025-39913, CVE-2025-39923, CVE-2025-39945, CVE-2025-39949, CVE-2025-39953, CVE-2025-39955, CVE-2025-39964, CVE-2025-39967, CVE-2025-39968, CVE-2025-39969, CVE-2025-39970, CVE-2025-39971, CVE-2025-39972, CVE-2025-39973, CVE-2025-39980, CVE-2025-39993, CVE-2025-39994, CVE-2025-39996, CVE-2025-39998, CVE-2025-40001, CVE-2025-40006, CVE-2025-40011, CVE-2025-40018, CVE-2025-40019, CVE-2025-40020, CVE-2025-40021, CVE-2025-40022, CVE-2025-40026, CVE-2025-40027, CVE-2025-40030, CVE-2025-40035, CVE-2025-40042, CVE-2025-40044, CVE-2025-40048, CVE-2025-40049, CVE-2025-40053, CVE-2025-40055, CVE-2025-40070, CVE-2025-40078, CVE-2025-40081, CVE-2025-40085, CVE-2025-40087, CVE-2025-40092, CVE-2025-40094, CVE-2025-40105, CVE-2025-40109, CVE-2025-40111, CVE-2025-40115, CVE-2025-40118, CVE-2025-40120, CVE-2025-40121, CVE-2025-40125, CVE-2025-40134, CVE-2025-40140, CVE-2025-40153, CVE-2025-40154, CVE-2025-40167, CVE-2025-40171, CVE-2025-40173, CVE-2025-40178, CVE-2025-40179, CVE-2025-40183, CVE-2025-40186, CVE-2025-40187, CVE-2025-40190, CVE-2025-40194, CVE-2025-40197, CVE-2025-40200,CVE-2025-40204, CVE-2025-40205, CVE-2025-5987, CVE-2025-11083, CVE-2025-61984, CVE-2025-61985, CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291, CVE-2025-58098, CVE-2025-65082, CVE-2025-66200, CVE-2025-45582, CVE-2024-12087, CVE-2025-64720, CVE-2025-65018, CVE-2025-66293, CVE-2025-40778, 
-CVE-2025-58436, CVE-2025-61915, CVE-2025-14523, CVE-2025-68615, CVE-2025-68973, CVE-2025-61729, CVE-2025-11187
-CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, CVE-2025-69418, CVE-2025-69419, CVE-2025-69420, CVE-2025-69421, CVE-2026-22795, CVE-2026-22796.
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-56326, CVE-2025-47273, CVE-2025-32415, CVE-2025-58060, CVE-2025-54389, CVE-2021-28651, CVE-2025-54574, CVE-2025-8194, CVE-2025-32462, CVE-2018-10906, CVE-2018-14468, CVE-2021-42574, CVE-2022-24407, CVE-2019-12749, CVE-2021-20277, CVE-2021-4034, CVE-2021-3621, CVE-2024-28956, CVE-2025-53057, CVE-2025-53066, CVE-2025-62168, CVE-2025-11561, CVE-2024-43876, CVE-2024-43877, CVE-2025-22058, CVE-2025-23143, CVE-2025-38678, CVE-2025-39880, CVE-2025-39883, CVE-2025-39885, CVE-2025-39911, CVE-2025-39913, CVE-2025-39923, CVE-2025-39945, CVE-2025-39949, CVE-2025-39953, CVE-2025-39955, CVE-2025-39964, CVE-2025-39967, CVE-2025-39968, CVE-2025-39969, CVE-2025-39970, CVE-2025-39971, CVE-2025-39972, CVE-2025-39973, CVE-2025-39980, CVE-2025-39993, CVE-2025-39994, CVE-2025-39996, CVE-2025-39998, CVE-2025-40001, CVE-2025-40006, CVE-2025-40011, CVE-2025-40018, CVE-2025-40019, CVE-2025-40020, CVE-2025-40021, CVE-2025-40022, CVE-2025-40026, CVE-2025-40027, CVE-2025-40030, CVE-2025-40035, CVE-2025-40042, CVE-2025-40044, CVE-2025-40048, CVE-2025-40049, CVE-2025-40053, CVE-2025-40055, CVE-2025-40070, CVE-2025-40078, CVE-2025-40081, CVE-2025-40085, CVE-2025-40087, CVE-2025-40092, CVE-2025-40094, CVE-2025-40105, CVE-2025-40109, CVE-2025-40111, CVE-2025-40115, CVE-2025-40118, CVE-2025-40120, CVE-2025-40121, CVE-2025-40125, CVE-2025-40134, CVE-2025-40140, CVE-2025-40153, CVE-2025-40154, CVE-2025-40167, CVE-2025-40171, CVE-2025-40173, CVE-2025-40178, CVE-2025-40179, CVE-2025-40183, CVE-2025-40186, CVE-2025-40187, CVE-2025-40190, CVE-2025-40194, CVE-2025-40197, CVE-2025-40200, CVE-2025-40204, CVE-2025-40205, CVE-2025-5987, CVE-2025-11083, CVE-2025-61984, CVE-2025-61985, CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291, CVE-2025-58098, CVE-2025-65082, CVE-2025-66200, CVE-2025-45582, CVE-2024-12087, CVE-2025-64720, CVE-2025-65018, CVE-2025-66293, CVE-2025-40778, CVE-2025-58436, CVE-2025-61915, CVE-2025-14523, CVE-2025-68615, CVE-2025-68973, CVE-2025-61729, CVE-2025-11187, CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, CVE-2025-69418, CVE-2025-69419, CVE-2025-69420, CVE-2025-69421, CVE-2026-22795, CVE-2026-22796.
 ------
 - **I95-57605 BFD link-test-interval not accurate:** Resolved as part of I95-59720. Several modifications have been made to the BFD timers to improve accuracy. 
 ------
 - **I95-60545 Attempting network interface lookup with invalid ID:** Resolved an issue where errors due to an invalid ID were flooding the logs. Error logs in highway regarding a failed interface lookup for an invalid interface are now suppressed.
 ------
-- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console. The check / enforcement for the 115200 baud rate has been improved.
+- **I95-61588 Console access failures post-migration:** Resolved an issue where a lower baud rate was being used by the serial console, resulting in unreadable output. The check and enforcement for the 115200 baud rate has been improved.
 ------
 - **I95-61823 Change `ESKM_DISABLED` to `ESKM_STANDBY` for HA router in standby state:** For routers configured as part of an HA Enhanced Security Key Management (ESKM) deployment, the standby state is now correctly identified as `ESKM_STANDBY`. 
 ------
@@ -145,19 +190,19 @@ CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, 
 ------
 - **I95-62956 Configuration failure due to service definition expecting subnet mask:** Resolved an issue where the Anti-Virus and IDP configuration expected a subnet mask as part of the Service Address. The subnet mask has been added.
 ------
-- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policynames using a dot (.). This has been resolved - configurations will use an underscore for policyname creation.
+- **I95-62957 Configuration failure due to invalid name:** Anti-Virus and IDP do not allow policy names using a dot (.). This has been resolved — configurations will use an underscore for policy name creation.
 ------
 - **I95-62982 SSR limits the number of supported network-interfaces:** Resolved an issue where the limit on the number of network-interfaces was low. Improved implementation of data structure storing network-interface objects, resulting in an increase of 7x the current capacity.
 ------
-- **I95-63018 memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through Radius server, pam_radius was causing memory corruption after VSA is read.
+- **I95-63018 Memory corruption after reading VSA:** Resolved a rare issue where in remote authentication through a RADIUS server, pam_radius was causing memory corruption after a Vendor Specific Attribute (VSA) is read.
 ------
 - **I95-63124 Harden HTTPS security:** HTTPS security has been improved and hardened by following best practices. Security headers and SSL algorithms have been updated so that browsers and external clients are only using strong algorithms. Users on older Windows/IE versions can choose to extend the SSR security using `configure authority router <name> system services webserver ssl ciphers`  to allow older ciphers.
 ------
-- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections.
+- **I95-63190 Router intermittently disconnects from conductor:** Resolved an issue where process errors were filling the buffer queue, dropping messages, and causing node disconnections from the Conductor.
 ------
 - **I95-63202 Unable to bind interfaces in Azure F8 flavor in West Europe region:** Resolved an issue where driver optimization on lower core count systems required more more memory usage, causing initialization failures.
 ------
-- **I95-63228 Premature route installation complete notification:** In some cases an internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
+- **I95-63228 Premature route installation complete notification:** In some cases a premature internal notification that the route installation was complete was being transmitted, causing the Graceful Restart process to terminate early. This issue has been resolved.
 ------
 - **I95-63292 Add upgrade timeout and rpm operation timeout:** Added the ability to configure the timeout for upgrades and for rpm download/install operations under `config authority router <RouterName> system software-update`. The defaults are 1 hour for SSR upgrade and 10 minutes for rpm operations.
 ------
@@ -186,10 +231,12 @@ CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, 
 - **I95-63675 Node page in the GUI appears to load indefinitely:** Resolved an issue where the GUI Node page would load infinitely.
 ------
 - **I95-63676 Waypoints fail to allocate when the `service-path peer next-hop gateway` is off the subnet:** Resolved an issue where the first network-interface IP was selected as the local IP for waypoint allocation, even if that IP is not a valid waypoint. 
------- 
+------
 - **I95-63729 Asset state not accurately reported in conductor:** Resolved an issue where issue where the SSH authorized keys from one HA conductor node were deleted after restarting both HA conductor nodes.
 ------
 - **I95-63817 Default peering certificates are unable to use the configured peering-common-name:** Resolved an issue where the default peering certificates were generated before receiving the configuration. The default generated peering certificate now properly uses the `peering-common-name` SSR configuration element.
+------
+- **I95-63873 DHCP leases not showing in Conductor UI:** Resolved an issue where attempting to retrieve DHCP v4 leases via the Conductor UI for a specific router results in `no leases found`. Also resolved an issue where viewing a router Logs page via the Conductor UI displayed ALL logs rather than using the selected time range.
 ------
 - **I95-63923 Redundant conductor fails to upgrade:** Resolved an issue where a minion disconnects from the conductor node and never attempts to reconnect. The minion watchdog process now restarts the salt minion if it is not connected to all conductor nodes.
 ------
@@ -200,6 +247,10 @@ CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, 
 ### Caveats
 
 - **I95-64317 Dropped Packets Capture continues to run:** If you have initiated a packet Capture from any page in the GUI, it will continue to run on the web server even after the request is terminated, resulting in expensive per packet export overhead. The web server must be restarted to terminate the packet capture. This issue is under investigation and will be resolved in an upcoming release. 
+------
+- **I95-64407 Alternate SHA ciphers (256/384/512) not working properly with ESKM:** SSR 7.1.3 introduces `sha384` and `sha512` as configurable options for the `hmac-cipher` field on security policies, alongside a new internal data structure that tracks metadata keys per HMAC mode and cipher combination. 
+
+  In deployments with peers running different versions of software and sharing security policies, configuring `hmac-cipher sha384` or `hmac-cipher sha512` in a fabric where any peer has not yet been upgraded to 7.1.3,  those older versions of software will not recognize `hmac-cipher sha384` or `hmac-cipher sha512`. These devices will continue to run `sha-256-128`. Currently, no alarm or warning will be generated, and there is no performance impact.
 
 ## Release 7.1.0-50r1
 
@@ -237,9 +288,9 @@ CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, 
 ------
 - **I95-57019 KNI host interfaces erroneously generate LLDP:** Resolved an issue where host KNI interfaces are incrementally generating out-errors in `show device-interface`. 
 ------
-- **I95-58007 Add ability to set PIM graceful restart-time:** The routing default-instance pim restart-time command has been added to allow users to define the number of seconds that the PIM protocol will perform graceful-restart after a node failure. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer).
+- **I95-58007 Add ability to set PIM graceful restart-time:** The `routing default-instance pim restart-time` command has been added to allow users to define the number of seconds that the PIM protocol will perform `graceful-restart` after a node failure. This resolution addresses all the listed issues. For more information, see [PIM Graceful Restart Timer](config_multicast.md#pim-graceful-restart-timer). This also addresses I95-57702, I95-57906, I95-60637, and I95-60731.
 ------
-- **I95-60767 `service-route next-hop validation` rejects configuration:** Resolved an issue where the rule validator did not consider the `service application-type` as DNS proxy into consideration during the configuration rule validation. This issue has been resolved.
+- **I95-60767 `service-route > next-hop` validation rejects configuration:** Resolved an issue where the rule validator did not consider the service application-type as DNS proxy during the configuration rule validation. This issue has been resolved.
 ------
 - **I95-60799 Tenant prefix use within a VRF:** The SSR allows the configuration of tenant-prefixes without giving an error, and correctly handles interfaces with tenant-prefixes within the protocol code.
 ------
@@ -263,7 +314,7 @@ CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, 
 ------
 - **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
 ------
-- **I95-62071 Multicast Traffic contributing to service area resource contention:** The resource contention issue has been resolved.
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
 ------
 - **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
 ------
@@ -283,8 +334,4 @@ CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, 
 
 ### Caveats
 
-- **I95-63422 Unable to establish peering:** An issue has been identified where the factory reset process or bringing online a new router results in the device getting stuck in a `cert-exchange-init` state when establishing peering using Enhanced Security Key Management. 
-
-	_**Workaround:**_ When adding a new router, ensure that the certificate intended for use is installed before onboarding the router to the conductor, or delay adding the router to the neighborhood until after the certificate is installed.
-	
-	For factory reset of an existing router, remove the router from the neighborhood before re-onboarding the router. Ensure that the desired certificate is installed before adding the neighborhood back to the router and re-onboarding to the conductor.
+- **I95-63422 Factory reset routers not re-onboarding when ESKM enabled:** Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.

@@ -44,5 +44,5 @@ In the steps below, we provide an example tenant name, _corp_, which is used in 
 4.	Return to the top level. 
 5.	At the top of the screen, select VALIDATE and then COMMIT.
 
-For more information about Tenancy, please see [Tenancy Design](bcp_tenants.mdx).
+For more information about Tenancy, please see [Tenancy Design](bcp_tenants.md).
 For more information about configuring and deploying conductors, please see [conductor Deployment](bcp_conductor_deployment.md).

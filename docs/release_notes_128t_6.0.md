@@ -16,7 +16,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 and above can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
@@ -63,7 +63,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-50072 Support for ConnectX-6 Lx PCIe device:** Support has been added for this device.
 ------
-- **I95-50510 New fields for IPFIX:** The SSR IPFIX implementation was not sending the industry standard fields of flowStartMilliseconds and flowEndMilliseconds. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery.md#ipfix).
+- **I95-50510 New fields for IPFIX:** The SSR IPFIX implementation was not sending the industry standard fields of `flowStartMilliseconds` and `flowEndMilliseconds`. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery.md#ipfix). 
 ------
 - **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** The following features have been added to help diagnose packet buffer pool depletions in certain environments:
 - Track packet buffer locations.
@@ -101,7 +101,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49603 Process Manager crash:** When a long running process was being cleaned up by the subprocess, the cleanup would fail causing a crash. Long running processes are now properly terminated, which allows the cleanup subprocess to complete correctly.
 ------
-- **I95-49604 Alarm when a node is disconnected:** An alarm is now raised when a node is disconnected from the internal synchronization database.
+- **I95-49604 No alarm raised when a node is disconnected from the internal synchronization database:** When nodes are unable to connect to the internal synchronization database, a critical alarm is now raised.
 ------
 - **I95-49633 Validation not strict for static assignment within DHCP server configuration:** Configuration for static addresses within DHCP server exists in multiple locations per design. Cross-validation has been added to prevent the same ip-address from being configured and assigned to multiple dhcp-clients.
 ------
@@ -109,17 +109,17 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49754 Waypoint reuse causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
 ------
-- **I95-49791 Add audit rules to track modification of grub config files:** Added rules to log notifications in case of changes to grub configuration files.
+- **I95-49791 Audit rules to track modification of config files:** Added rules to track the modification of grub configuration files, to aid in troubleshooting. 
 ------
 - **I95-49912 Login banner not displayed on serial console:** The login banner is now displayed on the serial console.
 ------
-- **I95-49913 Some Login/Logout events not logged in Audit Logs:** All login and logout events are now logged in the audit logs.
+- **I95-49913 Some Login/Logout Events not logged in Audit Logs:** A new function has been added to create an event to process USER_LOGOUT audit messages. 
 ------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions.
 ------
 - **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command `create certificate self-signed webserver`.
 ------
-- **I95-49974 Stuck flow not cleared when reverse metadata is incomplete:** Resolved an issue where reverse metadata is coming through incomplete - without the source tenant. The source tenant has been added to the reverse metadata.
+- **I95-49974 Stuck flow is not clearing when the reverse metadata is incomplete:** Added the source tenant to the reverse metadata to prevent the metadata parsing exception. 
 ------
 - **I95-50014 Hitting Buffer Overflow during configuration changes:** Resolved an issue where a config change request may not make it to a managed router, and returns a buffer overflow error.
 ------
@@ -129,17 +129,17 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-50050 VRRP High Availability gets stuck in Active/Active:** The DPDK version has been updated to resolve this issue.
 ------
-- **I95-50247 Duplicate peer path alarms:** Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peerPath state changes can trigger peer path events has been tightened.
+- **I95-50247 Duplicate peer path alarms:** Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peer path state changes can trigger peer path events has been tightened.
 ------
 - **I95-50260 `show idp events` does not honor the `router` or `node` arguments:** Resolved an issue where `show idp events` did not honor the `router` and `node` arguments and always executed against the local node. The command is now executed correctly, using the specified arguments.
 ------
 - **I95-50262 Routers disconnected from their conductor may have incorrect log rotation settings:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
 ------
-- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software.
+- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (pre-4.4).
 ------
 - **I95-50286 Rebooting a node of an HA pair from Linux breaks routing:** Resolved an issue where a delay in the shutdown process caused a node to take over a VRRP interface, creating routing issues. 
 ------
-- **I95-50331 System fails to synchronize keys on startup:** The SSR now dynamically updates rsync IP host address from the non forwarding HA sync interfaces, and will fall back to the global.init host IPs if they don't exist.
+- **I95-50331 System fails to synchronize keys on startup:** The SSR now dynamically updates the `rsync IP host address` from the non forwarding HA sync interfaces, and will fall back to the `global.init` host IPs if they don't exist.
 ------
 - **I95-50363 MOS Metrics not refreshing:** Resolved an issue where the SLA and MOS values were not being updated in the stats (or PeerPathTable) when a BFD session was brought down. The SLA and MOS stats are now set to 0 when the BFD session is brought down.
 ------
@@ -156,7 +156,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-50534 Race condition between NetworkInterfaceManager and FastLane:** Resolved a race condition caused by adding and deleting the same network interface in a very short window of time, potentially causing a system crash.
 ------
-- **I95-50543 systemd unable to start 128T after upgrade:** This issue has been resolved by ensuring that the netfilter kernel is installed.
+- **I95-50543 SSR may not start after upgrade:** A race condition during startup may cause some services to start out of order, causing the SSR to not start. A reboot is required to start the system normally. 
 ------
 - **I95-50554 No dynamic synchronization of repos to the routers:** Resolved an issue where it was necessary to restart 128T on the Conductor in order for the Conductor to recognize newly added repositories and sync them down to the assets. Authenticated repos are now automatically synchronized when repos are added to the conductor.
 ------
@@ -184,11 +184,30 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-51006 Nodes stuck in connected state after upgrade:** On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration's modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid-upgrade is not supported.
 ------
-- **I95-51007 Conductor is incorrectly honoring core pinning:** The `cpuProperties` cores setting in `/etc/128technology/local.init` was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.
+- **I95-51007 Conductor only - cpuProperties-core value isolating cores:** *In SSR software versions 6.0.0 and greater*, the `cpuProperties-cores` setting in `/etc/128technology/local.init` is erroneously isolating cores on conductor nodes when set. Because the conductor does not forward packets, there should be no traffic cores allocated to or isolated on the conductor for packet forwarding. This setting was previously ignored on the conductor, but while resolving an earlier issue with the installer and initializer that allocated CPU cores for traffic, that is no longer the case. 
+
+It is recommended that prior to upgrading the conductor that the user modify local.init to set this setting to `0`. For example, a setting like this in `/etc/128technology/local.init`:
+
+```
+  "cpuProperties" : {
+    "cores" : 4
+  },
+``` 
+should be changed to:
+```
+  "cpuProperties" : {
+    "cores" : 0
+  },
+```
+
+Note that only the relevant section of `local.init` is shown for clarity. All other settings should be left the same.
+The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to `systemctl restart 128T` on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart. 
+
+This issue will be corrected in an upcoming release.
 ------
 - **I95-51021 Package to Image conversion fails on FIPS enabled SSR:** Conversion of package-based to image-based is now supported for systems with FIPS 140-2 mode enabled.
 ------
-- **I95-51044 Hide forwarding-core-mode on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting does not apply to a conductor.
+- **I95-51044 Hide `forwarding-core-mode` on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 
 ### Caveats
 - **I95-51087 SSR fails to download firmware after upgrading the conductor:** An issue has been identified where the first time a conductor is upgraded and `conductor-only` is selected in the `software-update` settings. The proxy service on the conductor does not work correctly, and downloads attempted by the router will fail. This issue will be resolved in the next release.
@@ -202,7 +221,11 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ### Resolved Issues 
 
 :::important
-- **I95-49594 Highway Crash:** In a system where any of the following are configured:
+- **I95-49594 Highway Crash:** Resolved an issue for systems where any of the following are configured:
+  - `application-identification` is enabled, 
+  - a service is defined with `domain-name child services`, or 
+  - a `service address` is configured as a `domain`
+and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 6.1.0 and 6.1.1, and is resolved in 6.1.2.
 	- `application-identification` is enabled, 
 	- a service is defined with `domain-name child services`, or 
 	- a `service address` is configured as a `domain`
@@ -225,7 +248,6 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48571 IDP Topology User Experience Improvements:** The SSR will include the auto-generated IDP mode when enabled as a part of `show idp application status`. Additionally, enabling `hub` mode will not result in engine bring-up errors.
 ------
-
 ### Resolved Issues
 
 - **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
@@ -250,9 +272,9 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48232 Ability to ping lost after failover:** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
 ------
-- **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
+- **I95-48324 Application Identification not parsing domain names:** The Application Identification parsing mode has been updated to correctly parse domain names on hub to spoke outbound traffic.
 ------
-- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
+- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly when the information was received via HTTP web proxy. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
 ------
 - **I95-48396 `show-rib` limited to 512 entries:** The `show rib` count maximum has been increased.
 ------
@@ -260,7 +282,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
-- **I95-48581 Missing entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache` to help identify the oldest entry.
+- **I95-48581 No entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache`.
 ------
 - **I95-48582 `show bfd` command ignoring parameters:** The query parameters are now passed to the REST endpoint to be used byt the `show bfd` command.
 ------
@@ -282,7 +304,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48904 Stuck pinhole session after flow invalidation:** Resolved an issue with a stuck session that was setup from hub to HA spoke after a routing change.
 ------
-- **I95-48927 Audit log disc failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disc is nearing capacity, or has reached capacity, and that action is required.
+- **I95-48927 Audit log disk failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disk is nearing capacity, or has reached capacity, and that action is required.
 ------
 - **I95-48942 Routing policy filter condition reference type not validated:** Added a check to verify that when a routing policy condition references a filter, the condition type and filter type match. 
 ------
@@ -345,7 +367,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 - **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
 ------
 - **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
------- 
+------
 - **I95-43302 Rename Third-Party menu text:** The menu text has been changed to **External** to more accurately reflect the links to other Juniper platforms.
 ------
 - **I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:** The Azure ID has been modified to a value that can be processed by Azure.
@@ -370,7 +392,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the [Reverse Packet Session Resiliency](config_reference_guide.md#reverse-packet-session-resiliency) `Minimum Packet Count` (default is 3) and `Detection Interval` (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
 ------
-- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the `icmp-probe probe-address` is the same as the tunnel destination, and the `internal-address` is used as the source if the `egress-interface` is `gre-overlay`.
+- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** We now use the base interface for egress if the `icmp-probe probe-address` is the same as the tunnel destination, and use the `internal-address` as the source if the `egress-interface` is `gre-overlay`.
 ------
 - **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where BGP update suppress was not removing any pending withdrawals.
 ------
@@ -388,7 +410,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48158 Unable to capture child services using session capture:** When a session capture is configured on a child service (e.g., `social.internet` instead of `internet`), the session is now recorded.
 ------
-- **I95-48163 Only services with load-balanced paths are shown in "show services":** Resolved an issue where services without load-balanced paths weremissing from show services output.
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths were missing from show services output.
 ------
 - **I95-48181 "Failed to send IPFIX interim record" log messages:** Changed log level from Error to appropriate logging level for the cases when ipfix records should not be generated.
 ------
@@ -408,7 +430,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48508 Keep-alive cache may cause worker core CPU spikes:** Resolved potential worker core utilization CPU spikes by utilizing aggressive keep-alive timeouts.
 ------
-- **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
+- **I95-48529 BFD hold-down timer does not hold-down peer service-paths:** Resoled an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now reflects the peer status, and sessions will not be moved back to peers that have re-established connectivity, but are still in the hold-down period.
 ------
 - **I95-48579 Application director does not handle overlapping prefixes correctly:** The radix tree has been updated and now handles overlapping prefixes correctly. 
 ------
@@ -465,11 +487,11 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-42320 BGP aggregate-address not working:** Add support for BGP address summarization.
 ------
-- **I95-44976 Highway issue when modifying an app-id session:** Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.
+- **I95-44976 Highway issue when modifying an app-id session:** SSR software versions 5.1.5 and greater are susceptible to a crash during a flow migration when `application-identification` is enabled (modes `tls` or `all`) on spoke to hub traffic traversing over SVR. The condition occurs for sessions migrating that have timed out or that are traversing the ha-fabric link in the reverse direction.
 ------
 - **I95-45847 Duplicate Alarms on Multiple Routers:** Resolved duplicate alarms by obtaining alarms from only one node in an HA pair.
 ------
-- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of show ntp will now report IP addresses of the time servers rather than resolve hostnames.
+- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of `show ntp` now reports IP addresses of the time servers rather than resolve hostnames.
 ------
 - **I95-46281 Update Kernel to RHCK 8.6:** Updated the kernel to integrate the latest security fixes.
 ------
@@ -481,7 +503,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-46919 LDAP Users Not Shown in GUI Users Display:** Updated username requirements and the ability to identify issues with usernames not meeting those requirements. See [Username and Password Policies](config_password_policies.md) for username requirements.
 ------
-- **I95-46921 `128status.sh` script incorrectly checks for non-existent listening port:** Removed port 830 check for software versions 5.3.0 and greater
+- **I95-46921 `128status.sh` script incorrectly checks for non-existent listening port:** Removed port 830 check for software versions 5.3.0 and greater.
 ------
 - **I95-46966 BGP Connection Restarts on SVR Peer Failover:** Resolved an issue with FIB entry setup that was causing BGP connection reset when the session fails over.
 ------
@@ -489,7 +511,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-47274 Service Paths not showing status:** The `state` column in the GUI now correctly reflects the Service Path state.
 ------
-- **I95-47390 Inline BFD collision issue:** Resolved an inline BFD collision issue that was preventing peering from occurring.
+- **I95-47390 Inline BFD Collisions:** BFD peering between two router fails when one of the peer has a DHCP interface and has external NAT configured on neighborhood. This will occur in AWS deployments. This issue will be addressed in an future release.
 ------
 - **I95-47437 TSI creation is leading into Network Failure - BGP BFD went down:** Refined the output for TSI to prevent failures.
 ------
@@ -565,7 +587,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-47314 Ping command has high session timeout:** The ICMP sessions for ping command will now use the correct timeout of 5 seconds.
 ------
-- **I95-47336 Running config change events are missing:** Resolved an issue where running config events under a different username were filtered out.
+- **I95-47336 Running configuration change events are missing:** Updates have been made to include `username` in the running configuration change events log. 
 ------
 - **I95-47421 Quad Zero Tenant-Prefix Doesn't Get Applied in the Router:** Resolved an issue where the source lookup from global tenant took precedence over the local tenant.
 ------
@@ -611,7 +633,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-46545 Conductor Validation passing when a URL is configured in a Parent Service:** Validation for application-identification has been updated to include URL and subcategory.
 ------
-- **I95-46684 Image-based Installer / Interactive Installer:** `intialize128t` now runs automatically on first boot when using the image-based 6.0 installation with Interactive Install selected.
+- **I95-46684 Image-based Installer / Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type `initialize128t` to perform interactive initialization. This will be resolved in a future release.
 ------
 - **I95-46931 Hardware using ConnectX6-DX fails to initialize:** Added support for this card variant.
 ------
@@ -621,7 +643,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-47129 Metadata is not disabled after flow-move for EoSVR sessions:** Added a metadata turnoff after session failover for EoSVR.
 ------
-- **I95-47336 Running configuration change events are missing:** Updates have been made to include `username` in the running configuration change events log.
+- **I95-47336 Running configuration change events are missing:** Updates have been made to include `username` in the running configuration change events log. 
 
 ### Caveats
 
@@ -657,7 +679,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-46411 PPPoE over VLAN interface status missing in `show` commands:** Added attribute to show the missing information.
 ------
-- **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
+- **I95-46822 Revertible failover traffic may not be restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it may take seconds for traffic to be restored when forward traffic is present; in situations where **only** reverse traffic is present, traffic may not be restored. This issue will be resolved in a future release.
 ------
 - **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Updated the carrier detection logic to properly recognize the carrier when a modem is attached to a disaster recovery cell tower.
 ------

@@ -7,6 +7,6 @@ The authority represents the complete set of all SSRs managed under a single org
 
  ![Authority Settings](/img/conductor_authority_name.png)
 
-3. Under Basic Information, enter the new Authority name. For example, a good name for the Authority would be the name of the business, e.g., Acme Corp. 
+3. Under Basic Information, enter the new Authority name.  
 
  ![Basic Information](/img/conductor_authority_name2.png)

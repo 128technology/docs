@@ -21,10 +21,21 @@ Enable the following on your firewall for SSR to SSR connectivity:
 - [SSR IP address]
 - Port 1280/UDP
 - Ports 1280 and 1283/TCP
-- Ports in the range 16,385-65,533 TCP/UDP
+- Ports in the range 16,384-65,534 TCP/UDP
 - rp.cloud.threatseeker.com on port 443/TCP; this is required for Web Filtering
 
 For detailed information about different communication channels between nodes within a router, between peering routers, and between routers and their conductor, see [Intra- and Inter-System Communication](concepts_machine_communication.md)
+
+### Conductor and Router to the SSR Software Repository
+
+The conductor and routers retrieve SSR software (ISOs, installer packages, RPMs, and plugins) from the Juniper software repository during installation and upgrades. If your deployment requires that external IP addresses are locked down (no internet access), enable the following on your firewall to allow the conductor and routers access to the HPE/Juniper SSR software repository:
+
+- software.128technology.com
+- Port 443/TCP
+
+:::note
+In deployments where the routers managed by a conductor do not have internet access, you can configure the conductor as a software repository (or proxy) for those routers. In this case only the conductor requires outbound access to `software.128technology.com`. For more information, see [Upgrade the SSR Conductor](conductor_upgrade.md).
+:::
 
 ### SSR to the Mist Cloud
 

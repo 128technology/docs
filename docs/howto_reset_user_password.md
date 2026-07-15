@@ -54,6 +54,10 @@ passwd: all authentication tokens updated successfully.
 ```
 After changing the password in Linux, the admin/user must log in to the SSR PCLI or the GUI and update the password. If this step is not followed, the next time the SSR is restarted the change will be lost. 
 
+:::note
+The admin password must be consistent across both nodes of an HA pair. Changing the password through the GUI/PCLI will update both nodes, but the `sudo passwd admin` linux command only updates the node where the command is executed. Repeat steps 1-3 above for each node of the HA pair before updating the password through the SSR PCLI or the GUI.
+:::
+
 1. Log into GUI/PCLI.
 2. Change the password for the admin/user again via the GUI/PCLI. This will ensure that the password change remains persistent across SSR restarts.
 

@@ -14,37 +14,38 @@
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
     "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
-    "check-links": "linkinator ./build --config linkinator.config.json"
+    "check-links": "linkinator ./build --config linkinator.config.json --format json 2>/dev/null | node -e \"const c=[];process.stdin.on('data',d=>c.push(d));process.stdin.on('end',()=>{const r=JSON.parse(c.join(''));const b=r.links.filter(l=>l.state==='BROKEN');if(!b.length){console.log('All '+r.links.length+' links OK');}else{console.log('[ERROR] BROKEN LINKS ('+b.length+' of '+r.links.length+'):\\n');b.forEach(l=>{console.log('['+l.status+'] '+l.url);if(l.failureDetails){console.log('     reason: '+l.failureDetails);}console.log('     found in: '+l.parent);});process.exit(1);}})\"" 
   },
   "dependencies": {
-    "@docusaurus/core": "3.10.0",
-    "@docusaurus/preset-classic": "3.10.0",
+    "@docusaurus/core": "3.10.1",
+    "@docusaurus/preset-classic": "3.10.1",
+    "@docusaurus/theme-mermaid": "3.10.1",
     "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
-    "mermaid": "^11.14.0",
+    "mermaid": "^11.16.0",
     "@mdx-js/react": "^3.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-simple-flowchart": "^1.2.4",
     "react-table": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/eslint-parser": "^7.16.3",
-    "@docusaurus/module-type-aliases": "3.10.0",
-    "@docusaurus/types": "3.10.0",
+    "@babel/core": "^7.29.7",
+    "@babel/eslint-parser": "^8.0.1",
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
-    "eslint": "^9.0.0",
+    "eslint": "^10.6.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "gray-matter": "^4.0.3",
-    "prettier": "^3.8.3"
+    "prettier": "^3.9.4"
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"

@@ -74,7 +74,7 @@ To read the EK from the public cloud instance, run `tpm2_readpublic -c 0x8101000
 :::
 
 :::note
-After SCO is enabled on the conductor and the conductor is restarted, ports 4505 and 4506 are automatically closed. 
+Enabling SCO does not immediately close ports 4505 and 4506. The ports close automatically only after you manually restart the SSR software on the conductor. This is a restart of the `128T` service (`systemctl restart 128T`) — a full operating-system reboot is not required. On a high-availability (HA) conductor, restart the `128T` service on both conductor nodes; see [High-Availability Conductor Workflow](#high-availability-conductor-workflow) for the recommended order.
 :::
 
 - Create the SCO token on the conductor. 
@@ -103,9 +103,35 @@ Once the Secure Conductor Onboarding workflow is initiated, the router performs 
 
 Once the secure SSH tunnels are established, the SCO workflow concludes. All future communication between the router and conductor will occur over port 930.
 
+### Verifying Onboarding Status In The Conductor UI
+
+After SCO is enabled, the conductor GUI **Routers** page displays a **Secure Conductor Onboarding** panel for each node, replacing the legacy asset-id onboarding view. Use this panel to monitor the SCO handshake as it progresses.
+
+![Conductor Routers page showing a Secure Conductor Onboarding panel for each node, with Asset ID, Auth State, Last Updated, Attempts, Last Problem, and Mode fields](/img/sec-conductor-onboarding-router-view.png)
+
+Each panel reports the following fields:
+
+| Field        | Description                                                                                                   |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| Asset ID     | The asset-id of the node being onboarded.                                                                      |
+| Auth State   | The current state of the authentication handshake, such as `waiting` while the router has not yet connected.   |
+| Last Updated | The time the onboarding status was last updated.                                                               |
+| Attempts     | The number of onboarding attempts made by the node.                                                            |
+| Last Problem | The most recent error encountered during onboarding, if any.                                                  |
+| Mode         | The configured SCO mode for the node (`weak` or `strong`).                                                     |
+
+When onboarding completes successfully, the **Auth State** transitions away from `waiting` and the node connects to the conductor over port 930.
+
+### High-Availability Conductor Workflow
+
+When onboarding a router to a high-availability (HA) conductor pair, the following additional considerations apply:
+
+- Enable SCO on both conductor nodes. After enabling SCO, restart the `128T` service (`systemctl restart 128T`) on each node so that ports 4505 and 4506 close. Restart one node at a time to keep the conductor available: restart the primary node first, wait until it is fully operational, then restart the secondary node.
+- During initialization, the router establishes the TLS connection on port 933 (see [Onboarding Workflow](#onboarding-workflow)). The conductor interface that the router targets during initialization is the interface that listens on port 933. Ensure this interface is reachable from the router and that port 933 is permitted through any intervening firewall.
+
 ### Known Caveats 
 
-- Once SCO is enabled on the HA conductor, both conductor nodes must be restarted. 
+- Once SCO is enabled on the HA conductor, both conductor nodes must be restarted. See [High-Availability Conductor Workflow](#high-availability-conductor-workflow).
 
 - Only RSA key-based certificates are supported on the conductor at this time. 
 

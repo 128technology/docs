@@ -1,0 +1,28 @@
+---
+title: "Step 1: Create the VMware Conductor VM"
+sidebar_label: "Create the VMware VM"
+---
+import CreateVM from './_vmware_vm_create.md';
+
+This step creates the VMware ESXi virtual machine that will host the SSR conductor. A standalone conductor requires a minimum of **one VMXNet3 network adapter** connected to the management network that will be reachable from all branch routers.
+
+## VM Minimum Requirements
+
+| Resource | Minimum Value | Notes |
+|----------|---------------|-------|
+| vCPUs | `4` | Expand for deployments with more than 25 managed routers |
+| Scheduling Affinity | `0-3` | Set under CPU → expand |
+| Memory | `8 GB` | |
+| Disk | `62 GB` | |
+| Network Adapters | 1 × VMXNet3 | Connected to the management network portgroup |
+| Boot Firmware | EFI | UEFI secure boot disabled |
+
+:::note
+For guidance on scaling the conductor for larger deployments, see [Conductor Scaling Recommendations](intro_system_reqs.md#conductor-scaling-recommendations).
+:::
+
+<CreateVM/>
+
+## Next Step
+
+Proceed to [Step 2 — Install SSR 7.1.4 and Initialize the Conductor](deploy_vmware_conductor_install.mdx).

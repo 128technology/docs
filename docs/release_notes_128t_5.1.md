@@ -95,13 +95,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43329 ISO imaged system missing rescue boot image:** The Rescue Boot Image was missing on systems with 5.1.6 or 5.1.7 installed. This has been corrected in the 5.1.8 release with `128T-5.1.8-1.el7.OTP.v2.x86_64.iso`.
 ------
-- **I95-43389 Salt Minion file truncation:** This issue has been resolved.
+- **I95-43389 Minion files truncated:** Corrected condition when empty SSR configuration would cause the minion file to be incorrectly created.
 ------
 - **I95-43454 Plugin highstate not sync'd:** When applying DNS cache configuration changes via PCLI or GUI, highstate is not being applied from the conductor to router. This issue was resolved by removing support of legacy pillar generation for plugins.
 ------
 - **I95-43591 When deleting a linux user, the default bash is not restored:** A protection has been added to the SSR to disallow the creation of a user that already exists on the linux system.
 ------
-- **I95-43604 NAT keepalive problem:** Resolved an issue where the keepalive cache entry was being removed when the flow was invalidated.
+- **I95-43604 NAT Keepalive Issue:** Resolved an issue where the keep-alive cache entry was being removed if the flow was invalidated. 
 ------
 - **I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
 ------
@@ -153,7 +153,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42563 Attempting to get help on `adjacency` throws an exception:** Resolved an issue when entering `?` while configuring an adjacency was throwing an exception. 
 ------
-- **I95-42619 Remove ping_interval from salt minion config:** Resolved an issue where salt minions would spontaneous restart themselves and transition back into the connected state, especially when the conductor is under heavy load.
+- **I95-42619 Salt-minion spontaneous restarts:** Resolved an issue where salt minions would spontaneously restart themselves and transition back into the connected state, especially when the conductor is under heavy load.
 ------
 - **I95-42625 Unable to add egress-source-nat-pool to interface:** This issue has been resolved.
 ------
@@ -196,7 +196,7 @@ This release replaces the existing `5.1.6-1` release.
 
 - **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
 ------
-- **I95-41457 OSPF VRF:** Multiple independent OSPF configurations are supported (zero or one per VRF), as well as on the default VRF. The `show ospf` commands accept an optional `vrf name` argument, and display the `vrf name` column appropriately. 
+- **I95-41457 VRF Learning via OSPF:** VRF can now learn via OSPF as well as BGP. For more information, see [VRF Learning.](config_vrf_learning.md)
 ------
 - **I95-41905 Download Tech Support Info to the About page:** A button has been added to the Info page in the GUI that generates and downloads a zip file containing the Tech Support information. 
 
@@ -312,7 +312,7 @@ This release replaces the existing `5.1.6-1` release.
 
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------
-- **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular. 
+- **I95-38244 Router Page search enhanced:** Searches on the Routers page can now be targeted to specific columns using the search selector.
 ------
 - **I95-38445 [GUI Session Capture](ts_packet_capture.md#session-capture-in-the-gui):** Added pages to the user interface that allow you to view and configure capture information.  
 ------
@@ -320,7 +320,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options. 
 ------
-- **I95-40532 Added Tenant prefix support on network interface:** Provides a simpler way to configure the tenant prefixes on a per branch basis.
+- **I95-40532 Added Tenant prefix support on network interface:** This provides a simpler way to configure the tenant prefixes on a per branch basis.
 
 ### Resolved Issues
 
@@ -360,7 +360,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-40473 API Username not being recorded:** Resolved an issue where the `modify_user` event was omitting the `fullName` modified field.
 ------
-- **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
+- **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the `128T-5.1.3-1.el7.OTP.v3.x86_64.iso` ISO.
 ------
 - **I95-40577 Import certificate webserver not copying the private key:** This issue has been resolved.
 ------
@@ -376,9 +376,10 @@ This release replaces the existing `5.1.6-1` release.
 
 ### Caveats
 
-- **I95-39457 ServiceSecurityCheck validator should check for next-peer in service-route:** A missing validation check on `next-peer` service routes allows the configuration to be committed without presenting an error, preventing the establishment of an SVR session. This issue has been resolved in an upcoming release (5.3.0).
+- **I95-39457 ServiceSecurityCheck validator should check for next-peer in service-route:** A missing validation check on `next-peer` service routes allows the configuration to be committed without presenting an error, preventing the establishment of an SVR session. This issue has been resolved in 5.3.0.
 
-	**_Resolution:_** Manually configure a security policy on each service with a `peer` and `next-peer` service route. 
+	**_To reconcile pre-5.3.0 configurations:_** Manually configure a security policy on each service with a `peer` and `next-peer` service route. 
+:::
 
 ## Release 5.1.3
 **Release Date:** May 14, 2021
@@ -401,7 +402,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
 ------
-- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.
+- **I95-39953 Spike in IPFIX records:** Resolved a race condition causing a collector to enter an infinite loop.
 ------
 - **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors. 
 ------
@@ -418,7 +419,7 @@ This release replaces the existing `5.1.6-1` release.
 
 ### Resolved Issues
 
-- **I95-29583 Default Language Setting:** Changes to the default language are now saved per user, not per system.
+- **I95-29583 Default Language Setting:** The default language is now saved per user, so the default language is displayed wherever the user logs into the GUI.
 ------
 - **I95-39245 Show detected domain names on the Applications Seen page:** Domain names are now displayed on the Applications Seen page in the GUI.
 ------
@@ -472,7 +473,19 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39936 Pagination for the output of `show fib` does not work correctly:** Pagination headers are now handled correctly, and pagination is supported in the `show fib` output. 
 ------
-- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved. 
+- **I95-39985 Template save error:** When creating persistent fields on an **existing** template in Advanced Mode, a validation error appears and the template changes are not saved. 
+_**Workaround:**_ There are two workarounds. 
+
+You can either; use GraphQL to set `persistInput` on each template to `true` to resolve the issue for that template. 
+
+OR
+
+1. Copy the contents of the variables pane to your clipboard.
+2. Open the Settings dropdown.
+3. Click “Persist Input” to disable the option.
+4. Click “Proceed” in the warning modal.
+5. Open the Settings menu and click “Persist Input” again to turn it back on.
+6. Paste your variables back into the variables pane and save the template. This template should no longer encounter the issue.
 ------
 - **I95-39992 AuthClient request queue fills up with concurrent requests:** Resolved an issue with using authenticated REST APIs when under heavy load. 
 
@@ -487,7 +500,7 @@ This release replaces the existing `5.1.6-1` release.
 
 - **I95-39650 Repository access tokens provisioned on the Conductor are not automatically distributed to its managed routers.** Access Tokens are now distributed to managed routers. 
 ------
-- **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added. 
+- **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added.
 
 ### Caveats
 
@@ -554,7 +567,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 
 ### Resolved Issues
 
-- **I95-30812 PCLI session terminated when actively running commands:** PCLI sessions now recognize all activity. 
+- **I95-30812 PCLI session terminated when actively running commands:** Prior to this change only the enter key would reset the PCLI activity timer. With this change, the `tab` and `?` operations will also reset the PCLI activity timer.
 ------
 - **I95-30883 Add Enumeration Description to Combo Dropdown in Edit Config Pages:** GUI drop downs now display descriptions.
 ------
@@ -568,7 +581,9 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-34443 Provisioner status in router dialog not matching the Asset status in router page:** Asset Reconciliation now takes place automatically every 1.5 minutes in the GUI to assure the states of all assets are correctly reflected in the UI.
 ------
-- **I95-35521 Ambiguous validation error:** Errors now more clearly identify the source of the error.
+- **I95-35521** pcli may provide a validation error but does not provide the specific configuration in error.
+
+  _**Corrective Action:**_ If a validation error is provided, review the configuration of each sub list between the items identified in the error response provided. For example, the same vlan id cannot be used for different networks interfaces on the same device interface.
 ------
 - **I95-35646 Wrong date for weekday in date picker:** The date-picker logic has been updated to resolve this issue. 
 ------
@@ -600,7 +615,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-37910 AWS c5.xlarge instance shows 2 cores in GUI:** Custom Report charts now persist the displayed data even if an error occurs, specifically if internet connection drops or a node becomes unavailable. A small error indicator now appears above the chart, which can be hovered and displays the error.
 ------
-- **I95-38378 Salt-minion config broken after enabling asset connection resiliency:** The minion config is now loaded on conductor migration operations at time of operation. 
+- **I95-38378 Router unable to establish connection to conductor after enabling asset connection resiliency:** The salt-minion configuration file now loads at the time of a migration operation, to ensure the latest version of the configuration is available. 
 ------
 - **I95-38389 PDM gets pegged at 100% which makes the GUI and PCLI inaccessible:** The config export process has been made more efficient to reduce the chance of a race condition. 
 ------
@@ -658,7 +673,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 
 - **I95-39023 Conductor Upgrade process forces a log out from the GUI:** An issue has been identified that when upgrading the conductor, the user is logged out of the GUI, and presented with an error message when attempting to log back in. The installation is running, and does complete. Log in is again available after the system has restarted. 
 ------
-- **I95-39406 Installer Fails to Update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
+- **I95-39406 Installer Update/software upgrade dependencies:** Upgrades from the Conductor now require an updated Installer before downloading and installing software to the Router. 
 ------
 - **I95-38622 5.1.0 Kernel Upgrade Required for Wireguard Support:** Support for the wireguard plugin is not available on a router with 5.1.0 installed. The wireguard plugin can be installed on a Conductor, provided that the Routers are running a version older than 5.1.0. 
 ------

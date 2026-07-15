@@ -7,7 +7,8 @@ sidebar_label: Configure Certificate Management
 
 | Release | Modification                |
 | ------- | --------------------------- |
-| 7.0.0   | Certificate Management support added. | 
+| 7.0.0   | Certificate Management support added. |
+| 7.2.0   | Subject Alternative Name support added to CSR generation. | 
 
 Security is a critical component of SD-WAN products. The effectiveness of any security strategy relies on the strength of the security algorithm and how related information is exchanged between participants.
 
@@ -51,8 +52,8 @@ The following are some details of certificate security.
 
 ## Provisioning Process
 
-:::important
-It is necessary for all of the REST APIs to use the name `custom_ssr_peering` in order for this private key and certificate to be visible and usable by Enhanced Security Key Management in 7.0. This is a reserved name specifically used by the Enhanced Security Key Management feature.
+:::note Legacy Name
+In SSR 7.0.x, the `name` field in all REST API calls was required to be `custom_ssr_peering` (a reserved name) for ESKM visibility. Starting with SSR 7.1.0, any consistent name may be used. The examples below use `my_peering_cert`.
 :::
 
 :::tip Swagger API Reference
@@ -134,7 +135,7 @@ Configuration committed
 
 The name of the `trusted-ca-certificate` should be easily identifiable; `svrv2-root-of-trust` was chosen for illustration purposes.
 
-The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but warnings are generated for those issues. If the `validation-mode` is set to `strict` the certificate-chain is not committed.
+The setting `validation-mode warn` is configured in cases where issues are discovered with the certificate. The certificate chain is committed, but warnings are generated for those issues. If the `validation-mode` is set to `strict` the certificate-chain is not committed. For a complete list of certificate requirements enforced by the SSR, including accepted algorithms, key sizes, and extension requirements, see [Certificate Requirements and Validation](cert_validation_requirements.md).
 
 ### Authenticate to Use REST
 
@@ -191,7 +192,7 @@ Create the following file (update algorithm and key size to your preference):
 
 ```
 {
-    "name": "custom_ssr_peering",
+    "name": "my_peering_cert",
     "algorithm": "RSA",
     "rsa_key_size": "2048"
 }
@@ -213,7 +214,7 @@ curl -k -X POST https://10.27.35.89/api/v1/router/combo-east/node/node2/private-
   -d @key_request.json
 ```
 
-Upon success, `ssh` to the target SSR and verify that `/etc/128technology/pki/custom_ssr_peering.key` exists on disk.
+Upon success, `ssh` to the target SSR and verify that `/etc/128technology/pki/my_peering_cert.key` exists on disk.
 
 ### Issue a `certificate-signing-request`
 
@@ -226,11 +227,13 @@ This requirement is lifted starting with SSR 7.1.0.
 :::
 <!---remove this note when 7.0.4 is released and the restriction is lifted for 7.0.x --->
 
-1. Create a file containing the CSR request body. At a minimum provide `name` and a `common_name` that is unique to this router or node:
+1. Create a file containing the CSR request body. At a minimum provide `name` and a `common_name`:
 
 :::important Naming Rules
-- **`name`** must be **the same value across all routers and nodes** — `custom_ssr_peering` in SSR 7.0.x (reserved). This is the authority-wide identifier required for ESKM visibility.
-- **`common_name`** must be **unique per router/node** and must **exactly match** that router's configured `peering-common-name`. Using the wrong `common_name` will cause ESKM peer authentication to fail.
+- **`name`** must be **the same value across all routers and nodes**. In SSR 7.1+, any consistent name may be used.
+- **`common_name`** must be **unique per router/node**. It must match that router's configured `peering-common-name` — either directly, or via a `urn:ssr:peering` SAN URI in the certificate (SSR 7.2.0+).
+
+For full details on SAN URI peering identity, see [Enhanced Security Key Management — API Naming Rules](sec_enhanced_key_mgmt.md#api-naming-rules).
 
 Example mapping for a two-router deployment:
 
@@ -240,12 +243,24 @@ Example mapping for a two-router deployment:
 | combo-west | `west-alias` | `west-alias` |
 :::
 
-**csr_request.json**
+**csr_request.json** (minimum):
 
 ```
 {
-    "name": "custom_ssr_peering",
+    "name": "my_peering_cert",
     "common_name": "east-alias"
+}
+```
+
+**csr_request.json** (with Subject Alternative Name URI for HA):
+
+```json
+{
+    "name": "my_peering_cert",
+    "common_name": "combo-east-node1",
+    "subject_alt_names": [
+        {"type": "urn_ssr_peering", "value": "east-alias"}
+    ]
 }
 ```
 
@@ -261,6 +276,12 @@ This example represents the minimum requirements. Any of the following additiona
 - rsa_key_size (integer, optional): The RSA key size. Only valid when algorithm is set to “RSA”. Valid key sizes are any multiple of 256 between 2048 and 4096.
 - ecc_curve (string, optional): The ECC curve to use. Only valid when algorithm is set to “ECC”.Valid curves are: (SECP256R, SECP384R1, SECP521R1)
 - validity_period (integer, optional): The validity period in days.
+- subject_alt_names (array, optional, SSR 7.2.0+): An array of Subject Alternative Name entries to include in the CSR. Each entry is an object with `type` and `value` fields. Supported types:
+  - `dns` — a DNS hostname (e.g., `"example.com"`)
+  - `ip` — an IPv4 or IPv6 address (e.g., `"192.168.1.1"`)
+  - `email` — an email address (e.g., `"admin@example.com"`)
+  - `uri` — a URI (e.g., `"https://example.com"`)
+  - `urn_ssr_peering` — a convenience alias that automatically expands the value to `URI:urn:ssr:peering:<value>`. Use this type to carry the SVRv2 peering identity in the SAN extension.
 
 2. Issue the CSR request to the SSR:
 
@@ -301,7 +322,7 @@ When the signed certificate is returned, instruct the SSR to ingest the certific
 ```
 POST /api/v1/router/{router_name}/node/{node_name}/certificate
 {
-    "name": "custom_ssr_peering",
+    "name": "my_peering_cert",
     "certificate": "-----BEGIN CERTIFICATE-----
 MIIF3DCCBESgAwIBAgIKAf9HQjJKSQd1lTANBgkqhkiG9w0BAQsFADBaMQswCQYD
 VQQGEwJERTERMA8GA1UECgwIT3BlblhQS0kxDDAKBgNVBAsMA1BLSTEqMCgGA1UE
@@ -319,8 +340,8 @@ Once the certificate is successfully ingested, verify that the certificate was a
 
 1. `ssh` to the SSR. 
 2. Log in as the root user: `sudo su`.
-3. Verify that `/etc/128technology/pki/custom_ssr_peering.pem` exists on disk.
-  `ls -l /etc/128technology/pki/custom_ssr_peering.pem`
+3. Verify that `/etc/128technology/pki/my_peering_cert.pem` exists on disk.
+  `ls -l /etc/128technology/pki/my_peering_cert.pem`
 
 ### Activate the Certificate in Configuration
 
@@ -330,9 +351,9 @@ On the Conductor, configure `client-certificate` using the same `name` value use
 
 ```
 config authority
-    client-certificate  custom_ssr_peering
-        name             custom_ssr_peering
-        file             custom_ssr_peering
+    client-certificate  my_peering_cert
+        name             my_peering_cert
+        file             my_peering_cert
         validation-mode  strict
     exit
 exit

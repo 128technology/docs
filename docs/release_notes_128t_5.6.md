@@ -16,7 +16,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 and above can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
@@ -53,11 +53,11 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-56236 Routers unable to onboard after upgrading the Conductor:** Resolved an issue where the automated provisioner and the Quickstart processes overlapped, preventing the device state from being reviewed for errors, which stopped the onboarding process. 
 ------
-- **I95-56326 / I95-57000 Potential crash while collecting TSI:** Added protection against unmapped memory access to resolve an issue where, if a TSI is collected at just the wrong time, it can cause a highway crash.
+- **I95-57000 Hub crash while generating TSI:** Protection has been added to prevent unmapped memory access during packet buffer location walk.
 ------
 - **I95-56455 Zero-byte files when updating conductor hardware using an OTP image:** A check has been added to verify that `api.key` and `router-api.key` are non-zero length and valid. If not, the keys are regenerated.
 ------
-- **I95-56527 Failure to validate and commit config; system incorrectly expected escape sequence:** Resolved an issue where capture-filter expected an escape sequence for input when it was not necessary. 
+- **I95-56527 `compare config` returns an `Invalid JSON` error:** Resolved an issue where the use of a backslash (`\`) in a list key or a list element generates an `Invalid JSON` error when `compare config` is run. This error occurred in cases where there is a difference between the configs in a child of the list element with a `\` in its key; Or when the parent list or leaf-list exists in both configs but the list or leaf-list element with the `\` only exists in one; Or if the list element with the `\` is renamed.
 ------
 - **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The disk monitoring agent polling frequently is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
 ------
@@ -87,7 +87,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-57082 Unable to delete a capture-filter that contains a forward slash (/):** This issue has been resolved. 
 ------
-- **I95-57110 Crash seen during add and delete peers while sending traffic:** A race condition has been fixed that could cause a crash in the packet-processing highway process if a peer-path is removed from configuration.
+- **I95-57110 Crash seen during add and delete peers while sending traffic:** A race condition has been fixed that could cause a crash in the forwarding plane (highway) process if a peer-path is removed from configuration.
 ------
 - **I95-57114 Unable to upgrade AWS Conductor:** Resolved an issue where an incorrect package version was installed, triggering a downgrade and preventing the upgrade.
 ------
@@ -99,7 +99,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-57593 No option to require password change on first login:** Added a Require Password Change On First Login checkbox to the Create User dialog. Previously this feature was only available in the create-user command.
 ------
-- **I95-58201 Increase AMD performance:** Throughput performance on AMD processors has been improved through the tuning of some kernel parameters.
+- **I95-58201 Throughput Performance Improvements Across Platforms:** Kernel parameter tuning has improved throughput performance on most AMD and Intel platforms (excluding Intel Atom), with the greatest gains on AMD processors. This includes Juniper-branded platforms like the SSR1200 and SSR1500, as well as cloud instances, VM hosts, and other hardware configurations.
 ------
 - **I95-58528 SSR OS renaming:** The SSR OS has been renamed/rebranded from "CentOS7" to "SSR OS" to more accurately reflect its customized Linux distribution. All internal naming has been updated. 
 ------
@@ -121,13 +121,13 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2024-20918, CVE-2024-20919, CVE-2024-20921, CVE-2024-20926, CVE-2024-20945, CVE-2024-20952, CVE-2023-40217, CVE-2023-20569, CVE-2022-43552, CVE-2023-48795, CVE-2023-2176, CVE-2023-40283, CVE-2023-4623, CVE-2024-22019, CVE-2023-46724,CVE-2023-46728, CVE-2023-49285, CVE-2023-49286, CVE-2023-50269, CVE-2024-25617.
 ------
-- **I95-50697 RFC1918 sessions (private IP addresses) are reclassified in error:** When a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will now only be reclassified if the classification data reflects a positive classification change.
+- **I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:** Handling of RFC1918 traffic classification returned a private domain causing an undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.
 ------
 - **I95-52251 Changes to the conductor address on the router result in loss of ssh connection to the router:** Resolved an issue where changing the router level `conductor-address` did not update the salt-created services with the new addresses.
 ------
-- **I95-52500 SVR multi-hop failover causes traffic to drop when using outbound-only:** Added a session ID lookup to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.
+- **I95-52500 SVR Multi Hop Failover:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.  
 ------
-- **I95-53216 Unable to change password for users managed through external user databases (such as LDAP or RADIUS):** Resolved an issue that caused a Password Change dialog to appear for remotely authenticated users.
+- **I95-53216 "Unable to change password" message showing for remote users:** Resolved an issue that caused a "Password Change" dialog to appear for remotely authenticated users.
 ------
 - **I95-54127 Users managed through external user databases (such as LDAP or RADIUS) cannot generate or view TSI:** Resolved an issue that did not provide a home directory for custom roles, which prevented LDAP users from viewing the systemd journal.
 ------
@@ -143,7 +143,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-55164 Dropping GRE encapsulated packets:** Classification support for Enhanced GRE Header, version 1, as defined by RFC 2637 Point-to-Point Tunneling Protocol (PPTP) has been added.
 ------
-- **I95-55208 Asset fails to transition state and never reaches RUNNING:** In some cases where the RPM database may be corrupt or another process holds an indefinite lock, the highstate will block other processes from starting. A timeout has been added for the `rpm -q` process in highstate to allow other processes to run. 
+- **I95-55208 Asset fails to transition state:** In certain cases when the RPM database is corrupted or another process holds its lock indefinitely, the highstate can block forever running rpm -q. Since other highstate attempts see an existing highstate job, they don't try to do anything else and the asset stays stuck like that forever without manual intervention.
 ------
 - **I95-55226 Validation incorrectly allows a network interface to be used as both DHCP relay and server:** The validation process has been updated to include several checks against DHCP relays, clients, servers, and access-policies.
 ------
@@ -151,13 +151,13 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-55389 Queries for private domains with Websense classified as Miscellaneous:** Domains categorized by Websense as Uncategorized are now classified as Uncategorized/Uncategorized, rather than Miscellaneous/Uncategorized.
 ------
-- **I95-55550 node0 went down and did not fail over to node1:** Multiple disk errors caused corruption on the `128T_root` filesystem causing it to enter `read-only` mode and becoming non-responsive. To resolve this issue, issues in the filesystem now result in kernel panic mode, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem. 
+- **I95-55550 Abrupt power failure may result in filesystem corruption:** Multiple disk errors caused corruption on the 128T_root filesystem causing it to enter read-only mode and becoming non-responsive. To resolve this issue, the filesystem triggers a kernel panic, launching a reboot and in HA systems, failover. Additionally, the filesystem check is run to check and repair the filesystem.
 ------
 - **I95-55586 GraphQL API returns `IsActive` incorrectly if the `device-interface` is `vrrp_standby`:** The `router-peer-path` setting now returns the correct value when in `vrrp-standby`.
 ------
 - **I95-55591 Some network interface stats are not updated:** Some network interface stats are not updated with the port name when a device interface is renamed. Device interface name changes are now handled correctly, and `network-interface` metrics are properly updated when `device-interface name` changes.
 ------
-- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue causing an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue.
+- **I95-55603 HA router stuck in connected state due to runtime corruption issue:** Resolved an issue with an unzip race condition with Python files. The packaging and installation process has been improved to prevent this issue. 
 ------
 - **I95-55762 Unable to view more than 50 prefixes in BGP:** Updated the routing engine to display all rows for BGP show commands if a count parameter is not specified.
 ------
@@ -177,11 +177,11 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-56475 HA-sync network interface shows warning after router upgrade:** Resolved an issue where non-forwarding interfaces would appear to be administratively down in the web UI when they were not.
 ------
-- **I95-56492 Sessions configured for outbound-only with nat-keep-alive enabled experience reverse flow packet drops after flow migration:** A flow move from a WAN path to an inter-router path causes repeated session modifies on the hub side causing reverse traffic packet drops due to NAT keepalives incorrectly testing the failed WAN path for the migrated session. This issue has been resolved.
+- **I95-56492 Sessions configured for outbound-only with nat-keep-alive enabled experience reverse flow packet drops after flow migration:** A flow move from an inter-router (WAN) peer path to an inter-node (fabric) peer path causes repeated session modifies on the hub side causing reverse traffic packet drops due to NAT keepalives incorrectly testing the failed WAN path for the migrated session. This issue has been resolved.
 ------
 - **I95-56541 Include kernel journal entries in TSI:** A separate `kernel.log` journal file is now created in the TSI output.
 ------
-- **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The `ComponentDiskUtilizationMonitor` checks the disk usage too frequently and is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
+- **I95-56575 Reduce polling rate of disk monitoring and add optimization:** The disk monitoring agent polling frequently is inefficient. Reduced the frequency that disk usage is checked, and streamlined the process.
 ------
 - **I95-56600 Add `show tenant members` to the TSI output:** `show tenant members` and additional network scripts have been added to the TSI output.
 
@@ -193,17 +193,17 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2022-41741, CVE-2022-41742, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732, CVE-2022-45884, CVE-2022-45886, CVE-2022-45919, CVE-2023-1192, CVE-2023-2163, CVE-2023-3812, CVE-2023-5178, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235.
 ------
-- **I95-38188 Re-Homing an SSR in certain circumstances leaves residual services:** If an SSR is rehomed from an HA conductor to a standalone conductor, the services pointing to the second node of the HA conductor were not removed. Resolved the issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor.
+- **I95-38188 Repurposing an HA conductor to a standalone conductor left services for the second conductor:** Resolved an issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor. The salt states now stop services to a second conductor when it is removed from the HA configuration. 
 ------
 - **I95-48783 Conductor process logs are unbounded, risking storage exhaustion:** `auditd` logs consuming the disk space when the node monitor is in a disconnected state and the audit logs are left unconsumed. There was a limit to the log file size, but not the number of files. The number of files is now limited.
 ------
-- **I95-50493 Memory calculation for alarms is confusing:** This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. The memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.
+- **I95-50493 Memory calculation for alarms is confusing:** This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. Memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.
 ------
 - **I95-50540 Denied traffic events not displaying in the GUI or PCLI:** Resolved an issue that prevented displaying denied traffic events in the `show events` PCLI command and in the GUI. Users would see `% Error: Unhandled TypeError: list indices must be integers or slices` in the PCLI, and `An unknown traffic event occurred` in the GUI. 
 ------
 - **I95-51191 BFD metrics not cleaned up properly:** The BFDAgent holds onto the stats for peer paths; If the config is changed on a router, new stats are made but the old ones were not being deleted. The old BFD by-peer-path stats are now deleted when a VLAN configuration change is made.
 ------
-- **I95-51459 Logs and exception pcaps are periodically filled with error logs and truncated packets:** Resolved an issue where ICMP error respond packets for encapsulated traffic caused `PacketBufferDataNotFound: Could not find specified data in packet` error logs to be generated, or truncated packets to arrive in the FastLane exceptions pcap. 
+- **I95-51459 Logs and exception pcaps are periodically filled with error logs and truncated packets:** Resolved an issue where ICMP error response packets for encapsulated traffic caused `PacketBufferDataNotFound: Could not find specified data in packet error logs` to be generated, or truncated packets to arrive in the FastLane exceptions pcap.
 ------
 - **I95-51492 Password expiration not working:** This issue has been resolved. Administrators must use the global setting `configure authority password-policy lifetime N ` to indicate that all user passwords must be changed every `N` days.
 ------
@@ -227,7 +227,7 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-53538 Custom audit rules not preserved on SSR upgrade:** Resolved an issue where the image-based upgrade (IBU) was not preserving audit rules or `dnf.conf`.
 ------
-- **I95-53787 Stats not present on conductor:** Running `show device-interface router all` on a conductor caused stats (in-octets, in-unicast-pkts, etc.) to be incorrectly displayed as "n/a" instead of the correct value. This issue has been resolved.
+- **I95-53787 Stats not present on conductor:** Running `show device-interface router all` on a conductor caused stats (in-octets, in-unicast-pkts, etc...) to be incorrectly displayed as "n/a" instead of the correct value. This issue has been resolved.
 ------
 - **I95-53852 `host-service snmp-server` blocks SVR pings to a `network-interface` owned address:** Ping traffic was hitting the generated (wildcarded) snmp-server service. The session could not setup due to security policy conflicts. This issue has been resolved; the generated service from an snmp-server host-service now has a UDP transport.
 ------
@@ -243,19 +243,19 @@ CVE-2024-21011, CVE-2024-21012, CVE-2024-21068, CVE-2024-21085, CVE-2024-21094, 
 ------
 - **I95-53986 `nodeMonitor` failed to get data for `show platform disk`:** Some of the dynamic access for `smartctl` objects were not protected. A check for the object existence has been added before attempting to read it.
 ------
-- **I95-54086 Conductor memory exceeded:** In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the `asset-connection-resiliency` feature. An update to the salt package has been made to resolve this issue.
+- **I95-54086 Conductor memory exceeded:** In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.
 ------
 - **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implementing a device interface type verification.
 ------
 - **I95-54180 Unable to fetch reports from Conductor GUI:** A refactor moved the connectivity check exception, which prevented a service restart. This has been resolved, and the stats now being written to the database and GUI tables.
 ------
-- **I95-54189 Application mapping does not correctly match services:** Resolved an issue where the application director was misclassifying sessions due to IP overlap; this is a valid configuration, when services use an IP address with different ports assigned to different services. The SSR now recognizes these different port configurations.
+- **I95-54189 Application classification mapping does not correctly match configured services:** Resolved an issue where DPI was misclassifying sessions due to IP overlap. When services use an IP address with different ports assigned to different services, the SSR now recognizes these different port configurations.
 ------
-- **I95-54271 Race condition after a configuration change related to the source nat:** Resolved a rare condition wherethe SharedNatPool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash. 
+- **I95-54271 Race condition during a configuration change related to source NAT leading to crash:** Resolved a rare condition where the NAT pool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash.
 ------
 - **I95-54294 Unable to delete capture-filter created with `&&` operator:** Resolved an issue that disallowed deleting capture-filters containing `&&`. Customers on older versions of software can work around this by creating capture-filters using `and` instead of `&&`.
 ------
-- **I95-54340 Hub-to-spoke sessions break when failing over from outbound-only Path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
+- **I95-54340 Hub-to-spoke sessions fail during failover from outbound-only path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH so that this is accessible for admin users.
 ------
@@ -286,9 +286,9 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
-- **I95-51181 Improve `save-tech-support-info` command:** The PCLI command `save tech-support-info` now has a default of one day. Additionally, a `since` argument has been added that limits log collection to only logs generated after the specified value. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
+- **I95-51181 Improve `save-tech-support-info` command:** The PCLI command `save tech-support-info` now has a default collection period of one day. Additionally, a `since` argument has been added that limits log collection to only logs generated after the specified value. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
-- **I95-52406 Add ability to download MIBs from GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
+- **I95-52406 Download MIBs from the GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
 
 ### Resolved Issues
 
@@ -300,7 +300,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-50708 Time series data for memory of the salt_master process periodically significantly decreases:** Incorrect method for polling application memory data; this resulted in dips in application memory being presented. This issue has been resolved.
 ------
-- **I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
+- **I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse intermediate nodes. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
 ------
 - **I95-52491 Crash in highway process due to segmented metadata:** Resolved an issue processing metadata that is segmented across two packet buffers. The segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
 ------
@@ -320,7 +320,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-53015 Highway log has large number of unnecessary INFO messages:** A previous log message of icmp response packet failed was incorrectly logged at INFO level. It is neither an error nor actually informational, and has now been downgraded to DEBUG level.
 ------
-- **I95-53017 Some files incorrectly marked as executable:** While strengthening the security posture of the platform, some files with superfluous executable bits set have been identified and correctly marked.
+- **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked.
 ------
 - **I95-53105 Conductor to router API RBAC rules not being followed:** Resolved an issue where the user is getting elevated to admin on the managed router, thus returning more data than necessary.
 ------
@@ -335,7 +335,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 - **I95-53285 User datastore issue when renaming a router:** Resolved an issue where HTTP requests would stop working to a router after the router's name was changed, but before the SSR was restarted.
 ------
 - **I95-53321 Syslog datamodel is limited:** Added the following configurable syslog facility values `auth`, `authpriv`, `cron`, `daemon`, `kern`, `lpr`, `mail`, `news`, `syslog`, `user`, and `uucp`.
-
+------
 ### Caveats
 
 - **I95-53833 Timeout prevents startup:** 5.6.11 introduced a regression in the SSR reboot startup logic. If any of the processes take longer than 30 seconds to complete, the startup sequence is abandoned and renders the platform inoperable. The system can be recovered by manually restarting the SSR software. This issue is tracked by I95-53833.
@@ -348,7 +348,9 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 
 - **I95-52198 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node, then it is automatically shared with its conductor peer node.
 ------
-- **I95-52316 Enhancements to Overlapping FIB Services:** The [`fib-service-match`](config_command_guide.md#configure-authority-fib-service-match) command allows you to configure either `best-match-only` or `any-match`. 
+- **I95-52316 Enhancements to Overlapping FIB Services:** The [`fib-service-match`](config_command_guide.md#configure-authority-fib-service-match) command has been added to provide additional control over the creation of FIB entries in combination with routing updates. 
+  - `best-match-only` This is the default value, and legacy behavior. When comparing prefixes from a route update to addresses configured in services, only addresses with the longest prefix match for a particular route are considered. In cases of transport overlap, services are visited in alphabetical order.
+  - `any-match` introduces new behavior. All service addresses that match the route update are considered when creating the FIB entries, including those with prefixes shorter than the update or those that do not have the best match service address. The transports from the service with the longest prefix are considered first. This minimizes missed entries, but may result in a higher FIB usage. 
 	- `best-match-only` considers the best matching prefix length. In cases of transport overlap, services are visited in alphabetical order.
 	- Using `any-match` will consider all services that match the route update but do not have the best match service address when creating FIB entries, minimizing missed entries. The transports from the service with the longest prefix are considered first.
 ------
@@ -398,7 +400,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-48931 Service area Highway crash:** Now prevent crashing in SSR's highway process in rare race conditions when a session's flow is removed before the session is fully established.
 ------
-- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions now accurately identifies the correct service.
+- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions has been optimized to accurately identify the correct service.
 ------
 - **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
@@ -416,7 +418,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-51359 Unable to set the OSPF MTU:** Added the ability for users to set the MTU to a non-default value.
 ------
-- **I95-51403 GUI displays download in progress even after the download is complete:** Resolved an issue where a download success event is never created even though the version shows as downloaded in the software versions.
+- **I95-51403 GUI displays "Download in Progress" even after the download is complete:** Resolved an issue where a download success event is not created after the version shows up as downloaded in the Software Versions. 
 ------
 - **I95-51427 GUI not displaying all the version information:** The GUI About page now displays additional version information previously only displayed in the PCLI `show system version detail.`
 ------
@@ -437,7 +439,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-51794 Core dump on systems with greater than 10 physical interfaces, such as Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices.
 ------
-- **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to be able to sync when the upstream server is of a lower stratum, if so desired by the user.
+- **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to sync when the upstream server is of a lower stratum, if so desired by the user.
 ------
 - **I95-51915 Report buffer allocation failures to watchdog:** `alloc-failure` stats are now gathered per device and included in the device stats, allowing the watchdog to detect a failure and respond.
 ------
@@ -453,7 +455,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 
 - **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes. 
 ------
-- **I95-50510 New fields for IPFIX:** The SSR IPFIX implementation was not sending the industry standard fields of flowStartMilliseconds and flowEndMilliseconds. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery.md#ipfix).
+- **I95-50510 New fields for IPFIX:** The SSR IPFIX implementation was not sending the industry standard fields of `flowStartMilliseconds` and `flowEndMilliseconds`. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery.md#ipfix). 
 ------
 - **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** The following features have been added to help diagnose packet buffer pool depletions in certain environments:
 	- Track packet buffer locations.
@@ -498,13 +500,13 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-49754 Waypoint reuse causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
 ------
-- **I95-49791 Add audit rules to track modification of grub config files:** Added rules to log notifications in case of changes to grub configuration files.
+- **I95-49791 Audit rules to track modification of config files:** Added rules to track the modification of grub configuration files, to aid in troubleshooting. 
 ------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions.
 ------
 - **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command `create certificate self-signed webserver`.
 ------
-- **I95-49974 Stuck flow not cleared when reverse metadata is incomplete:** Resolved an issue where reverse metadata is coming through incomplete - without the source tenant. The source tenant has been added to the reverse metadata.
+- **I95-49974 Stuck flow is not clearing when the reverse metadata is incomplete:** Added the source tenant to the reverse metadata to prevent the metadata parsing exception. 
 ------
 - **I95-50047 Conductor config unable to pass local validation on one of the routers:** Resolved an issue where a router missing the `reachability-profile` configuration may pass validation on conductor.
 ------
@@ -514,7 +516,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50262 Routers disconnected from their conductor may have incorrect log rotation settings:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
 ------
-- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software.
+- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (pre-4.4).
 ------
 - **I95-50286 Rebooting a node of an HA pair from Linux breaks routing:** Resolved an issue where a delay in the shutdown process caused a node to take over a VRRP interface, creating routing issues. 
 ------
@@ -559,11 +561,32 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-51006 Nodes stuck in connected state after upgrade:** On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration's modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid-upgrade is not supported.
 ------
-- **I95-51007 Conductor is incorrectly honoring core pinning:** The cpuProperties cores setting in /etc/128technology/local.init was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.
+- **I95-51007 Conductor only - cpuProperties-core value isolating cores:** *In SSR software versions 6.0.0 and greater*, the `cpuProperties-cores` setting in `/etc/128technology/local.init` is erroneously isolating cores on conductor nodes when set. Because the conductor does not forward packets, there should be no traffic cores allocated to or isolated on the conductor for packet forwarding. This setting was previously ignored on the conductor, but while resolving an earlier issue with the installer and initializer that allocated CPU cores for traffic, that is no longer the case. 
+
+It is recommended that prior to upgrading the conductor that the user modify local.init to set this setting to `0`. For example, a setting like this in `/etc/128technology/local.init`:
+
+```
+  "cpuProperties" : {
+    "cores" : 4
+  },
+``` 
+should be changed to:
+```
+  "cpuProperties" : {
+    "cores" : 0
+  },
+```
+
+Note that only the relevant section of `local.init` is shown for clarity. All other settings should be left the same.
+The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to `systemctl restart 128T` on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart. 
+
+This issue will be corrected in an upcoming release.
 ------
 - **I95-51044 Hide `forwarding-core-mode` on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 ------
-- **I95-51087 SSR fails to download firmware after upgrading the conductor:** Resolved an issue where the first time a conductor is upgraded and **conductor-only** is selected in the software-update settings, the proxy service on the conductor does not work correctly, and downloads fail. The downloads no longer fail. 
+- **I95-51087 SSR fails to download firmware after upgrading the conductor:** An issue has been identified where the first time a conductor is upgraded and `conductor-only` is selected in the `software-update` settings. The proxy service on the conductor does not work correctly, and downloads attempted by the router will fail. This issue will be resolved in the next release.
+
+  **_Workaround:_** Make a simple configuration change and commit the change. Any configuration change is sufficient to start the internal proxy service. Once this commit has been made this will no longer be an issue.
 ------
 - **WAN-1958 Mist agent crashes:** Increased internal file system limits which were preventing some services from starting correctly at boot. Limits were raised based on expected system usage.
 
@@ -581,12 +604,16 @@ and there are established flows for any of these services, a link flap triggerin
 	- TBW (Terabyte Written)
 	- TBW per year
 ------
-- **I95-50072 Support for ConnectX-6 Lx PCIe device:** Support has been added for this device. 
+- **I95-50072 Support for ConnectX-6 Lx PCIe device:** Support has been added for this device.
 
 ### Resolved Issues 
 
 :::important
-- **I95-49594 Highway Crash:** In a system where any of the following are configured:
+- **I95-49594 Highway Crash:** Resolved an issue for systems where any of the following are configured:
+  - `application-identification` is enabled, 
+  - a service is defined with `domain-name child services`, or 
+  - a `service address` is configured as a `domain`
+and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 6.1.0 and 6.1.1, and is resolved in 6.1.2.
 	- `application-identification` is enabled, 
 	- a service is defined with `domain-name child services`, or 
 	- a `service address` is configured as a `domain`
@@ -613,7 +640,14 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-49350 BFD echo generating latency overhead:** BFD echo tests are now staggered to minimize application latency's contribution to overall peer path latency.
 ------
-- **I95-49377 Transmit packets dropped by NIC for established sessions - packet counters are incrementing and can be seen in packet capture, but not seen by next-hop:** Added hooks for NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism. 
+- **I95-50445, I95-49377 i40e and ice devices enter malicious descriptor detection state, preventing forwarding of traffic:** Resolved an issue where fragmented packet chains larger than 8 buffers were discarded causing a malicious descriptor event. 
+  - The below `dpdk.log` snippet provides an example of the event:
+```
+[DPDK| -- ] ERROR (00007f03ec18e700) i40e_dev_alarm_handler(): ICR0: malicious programming detected
+[DPDK| -- ] WARN  (00007f03ec18e700) i40e_handle_mdd_event(): Malicious Driver Detection event 0x02 on TX queue 6 PF number 0x01 VF number 0x00 device 0000:08:00.1
+[DPDK| -- ] WARN  (00007f03ec18e700) i40e_handle_mdd_event(): TX driver issue detected on PF
+```
+  - Added hooks for the NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism.
 ------
 - **I95-49431 Unable to edit or add static route config from Conductor GUI:** When editing configuration on the stand-by node of an HA pair, creating a list item with a slash, /, such as specifying the destination-address of a static-route, caused an error. This has been resolved.
 ------
@@ -625,7 +659,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-49564 Reduce volume of logs during pending lookups:** The error logs during a pending lookup has been changed to a muted error log with a stat.
 ------
-- **I95-49604 Alarm when a node is disconnected:** An alarm is now raised when a node is disconnected from the internal synchronization database.
+- **I95-49604 No alarm raised when a node is disconnected from the internal synchronization database:** When nodes are unable to connect to the internal synchronization database, a critical alarm is now raised.
 ------
 - **I95-49633 Validation not strict for static assignment within DHCP server configuration:** Configuration for static addresses within DHCP server exists in multiple locations per design. Cross-validation has been added to prevent the same ip-address from being configured and assigned to multiple dhcp-clients.
 ------
@@ -709,13 +743,13 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48107 EoSVR sessions not stable:** Resolved an issue with loss of connectivity to STEP EoSVR peer. The STEP route is now held in place and available when STEP connectivity is restored. 
 ------
-- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths weremissing from show services output.
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths were missing from show services output.
 ------
-- **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
+- **I95-48324 Application Identification not parsing domain names:** The Application Identification parsing mode has been updated to correctly parse domain names on hub to spoke outbound traffic.
 ------
 - **I95-48396 `show-rib` limited to 512 entries:** The `show rib` count maximum has been increased.
 ------
-- **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
+- **I95-48529 BFD hold-down timer does not hold-down peer service-paths:** Resoled an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now reflects the peer status, and sessions will not be moved back to peers that have re-established connectivity, but are still in the hold-down period.
 ------
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
@@ -835,7 +869,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the [Reverse Packet Session Resiliency](config_reference_guide.md#reverse-packet-session-resiliency) `Minimum Packet Count` (default is 3) and `Detection Interval` (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
 ------
-- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the `icmp-probe probe-address` is the same as the tunnel destination, and the `internal-address` is used as the source if the `egress-interface` is `gre-overlay`.
+- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** We now use the base interface for egress if the `icmp-probe probe-address` is the same as the tunnel destination, and use the `internal-address` as the source if the `egress-interface` is `gre-overlay`.
 ------
 - **I95-47967 Cloud bootstrapper does not bootstrap the deployed Conductor:** Resolved an issue where the configuration was being rejected by the cloud bootstrapper when the device was a conductor.
 ------
@@ -887,9 +921,9 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-45847 Duplicate Alarms on Multiple Routers:** Resolved duplicate alarms by obtaining alarms from only one node in an HA pair.
 ------
-- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of show ntp will now report IP addresses of the time servers rather than resolve hostnames.
+- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of `show ntp` now reports IP addresses of the time servers rather than resolve hostnames.
 ------
-- **I95-46126 Router Status:** Resolved an issue in HA configurations when a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router are now seen on Conductor 2 - the conductor to which the router is not directly connected. 
+- **I95-46126 Router Status:** In HA configurations where a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router will not be seen on Conductor 2 - the conductor to which the router is not directly connected. To see alarms on a router, the Conductor must be directly connected to the Router.
 ------
 - **I95-46281 Update Kernel to RHCK 8.6:** Updated the kernel to integrate the latest security fixes.
 ------
@@ -901,7 +935,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-46701 Packet Loss on Headend Router:** Added device-interface rx/tx descriptor ring size to resolve this issue.
 ------
-- **I95-46807 Validation insufficient for reachability-detection:** Added validation logic to report and error when `service-route > reachability-detection` was configured, but neither `icmp-probe-profile` or `reachability-profile` exist.
+- **I95-46807 Validation not catching when a router does not have an icmp-probe-profile or reachability-profile configured:** This issue has been resolved.
 ------
 - **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Updated the carrier detection logic to properly recognize the carrier when a modem is attached to a disaster recovery cell tower.
 ------
@@ -909,7 +943,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-46919 LDAP Users Not Shown in GUI Users Display:** Updated username requirements and the ability to identify issues with usernames not meeting those requirements. See [Username and Password Policies](config_password_policies.md) for username requirements.
 ------
-- **I95-46921 `128status.sh` script incorrectly checks for non-existent listening port:** Removed port 830 check for software versions 5.3.0 and greater
+- **I95-46921 `128status.sh` script incorrectly checks for non-existent listening port:** Removed port 830 check for software versions 5.3.0 and greater.
 ------
 - **I95-46966 BGP Connection Restarts on SVR Peer Failover:** Resolved an issue with FIB entry setup that was causing BGP connection reset when the session fails over.
 ------
@@ -974,7 +1008,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 - **I95-46562 Allow targeting another router or node when saving tech-support-info:** GUI: A button has been added to the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor GUI. <br />
 PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. Using the Conductor's PCLI, a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
 ------
-- **I95-46747 Improved the Password user experience:** You now are re-propmpted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password. 
+- **I95-46747 Improved the Password user experience:** You now are re-prompted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password. 
 
 ### Resolved Issues
 
@@ -984,9 +1018,9 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-39274 DNS-based services kill asset connection resiliency:** Resolved an issue where an internal commit was bouncing the kni254 interface and causing a series of connection resets.
 ------
-- **I95-42438 Save Tech Support tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR service is down, trying to run `save tech support` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
+- **I95-42438 `save tech-support-info` tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR service is down, trying to run `save tech-support-info` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
 ------
-- **I95-43606 No communication between Routers:** In rare instances the BFD Pinhole feature experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
+- **I95-43606 No communication between Routers:** In rare instances, BFD outbound-only flows experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
 ------
 - **I95-43779 DHCP IP Address not releasing appropriately:** When the cable is physically disconnected and reconnected from DHCP-enabled interfaces, the interfaces are now triggered to send out a DHCP Request for their current IP address.
 ------
@@ -1004,7 +1038,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45126 Split-brain after the sync interface goes down:** Resolved an issue that if the SSR software experienced a crash while it owned an interface from an X553 device, other devices hosted by the same chip could be impacted.
 ------
-- **I95-45164 `show-active-peers` missing some information:** Resolved a corner case where an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the SSR misinterprets the non-compliant device's timeouts and the MTU will be unresolvable.
+- **I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS & MOS for some transports:** Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device's timeouts are incorrectly interpreted and the MTU becomes unresolvable.
 ------
 - **I95-45271 Error while trying to change appearance or selecting custom reports:** In some cases where error messages are vague, a path to the error location is provided. 
 ------
@@ -1016,7 +1050,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45842 PCLI `show events` does not paginate correctly:** This issue has been resolved.
 ------
-- **I95-45882 Rare case where an invalid DHCP server configuration generated:** This issue has been resolved.
+- **I95-45882 Invalid DHCP server config causes a crash:** Resolved an issue when the DHCP server was misconfigured with duplicate interfaces and then committed, the validation would not catch this and cause a crash. The SSR code has been hardened to handle the misconfiguration.
 ------
 - **I95-45890 Service paths for BGP over SVR routes are not being rebuilt:** Resolved an issue when the vector configuration is changed on a network interface, the service paths for BGP over SVR routes are not being rebuilt. 
 ------
@@ -1030,14 +1064,14 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46169 RIB Doesn't Update Connected Route After Changing Network Interface Address Prefix from /24 to /27:** Resolved an issue when changing the prefix length for a network interface address, the RIB was not updated and routing protocols were not aware of the change.
 ------
-- **I95-46230 Highway Crash:** Resolved an issue where uncaught exceptions were causing highway issues.
+- **I95-46230 Exceptions with invalid giid causing a highway crash:** Resolved an issue where uncaught exceptions (invalid giid of 0) were causing highway issues.
 ------
 - **I95-46314 Configuring Static Assignment with Client-Identifier Causes DHCP failure:** Updated config validation to verify that, within a single DHCP server host-service, all static assignments use unique client-identifiers.
 ------
 - **I95-46332 VRRP Does Not Work with Ethernet Controller X710 for 10GbE SFP+:** Configuring VRRP on an Intel X700 series NIC can see discard broadcast packets due to the source pruning feature which is enabled by default. This change disables source pruning when VRRP is enabled on these NICs.
 ------
 - **I95-46411 PPPoE over VLAN interface status missing in `show` commands:** Added attribute to show the missing information. 
------- 
+------
 - **I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modification to resolve the outbound only path.
 ------
 - **I95-46454 ICMP manager excessively logs ICMP echo replies with no matching context:** This issue has been resolved.
@@ -1048,11 +1082,11 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46641 Modem lockup after reset on dual LTE system:** Resolved an issue with dual LTE modem lockup after reset.
 ------
-- **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
+- **I95-46822 Revertible failover traffic may not be restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it may take seconds for traffic to be restored when forward traffic is present; in situations where **only** reverse traffic is present, traffic may not be restored. This issue will be resolved in a future release.
 ------
 - **I95-46931 Hardware using ConnectX6-DX fails to initialize:** Added support for this card variant.
 ------
-- **I95-46959 PPPoE over VLAN not working when target interface is down:** Added code to bring up parent interface before VLAN interface.
+- **I95-46959 PPPoE over VLAN not working when target interface is down:** Added code to bring up the parent interface before VLAN interface.
 ------
 - **I95-47111 Issues with redundant interfaces on startup:** Resolved an issue where the notifications for active interfaces may get lost when using VRRP for redundancy.
 
@@ -1076,7 +1110,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-39712 Hierarchical Service Inheritance For STEP Learned Routes:** Child services now inherit routes of their parent services, when the parent route is learned through STEP. For more information see [Hierarchical Services.](config_STEP.md#hierarchical-services)
 ------
-- **I95-40130 Factory Defaults for Conductor Communication:** Added SaltStack, Conductor, and IKE default session-types. For new deployments, SIP, SIPS, and IPSEC-NAT use NAT Keep Alive by default, and the timeout for IPSEC-NAT is 125 seconds.
+- **I95-40130 Create factory defaults for all router-conductor communication:** SaltStack, Conductor, and IKE default session-types have been added. For new deployments, SIP, SIPS, and IPSEC-NAT use NAT Keep Alive by default, and the timeout for IPSEC-NAT is now 5 seconds.
 ------
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and Cordoba.
 ------
@@ -1114,7 +1148,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-38408 DHCP server on wrong vlan sends offer in response to discover message:** Hosted DHCP servers that do not have an explicit vlan configured are now explicitly treated as vlan 0, and handle any DHCP packets that are untagged/vlan 0, in order to prevent those packets from being multicasted to multiple DHCP servers.
 ------
-- **I95-40904 Power save mode not working:** This issue has been resolved.
+- **I95-40904 Power save mode not working:** Add a method to read current power saver mode setting from existing config before committing the new configuration, and changing the setting.
 ------
 - **I95-41992 Warning for Rate-Limit with Flow-Limit values at 0:** A warning has been added to advise users that this will cause dropped packets.
 ------
@@ -1140,7 +1174,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45063 SSR azure instances unstable on large machine types:** Resolved an unpgrade issue causing instability in Azure instances using Mellanox5. 
 ------
-- **I95-45113 snmp override of the IfTable:** An issue with SNMP reporting has been resolved.
+- **I95-45113 SNMP override of the IfTable:** `ifAlias` and `IfDescr` have been swapped in our SNMP reporting; `ifDescr` is always the `ifName`. This change was made for consistency with other Juniper products.
 ------
 - **I95-45123 CVE Issue:** The latest Security vulnerabilities have been identified and addressed.
 ------
@@ -1163,7 +1197,9 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
 ------
-- **I95-45559 Corrupted resolv.conf after ODM imaging:** Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using PEERDNS=yes, where a race condition may occur that results in corrupt nameservers being added to the /etc/resolv.conf file.
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** On SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+	
+	**_Workaround:_** A temporary workaround is to force an update of this file by either of the following methods:
 ------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where  session was missing necessary path data information relating to the peer path.
 ------
@@ -1171,7 +1207,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45641 Stuck BGPoSVR Sessions after Failover:** Made changes to provide updates to less specific FIB entries when routes are updated to resolve this issue.
 ------
-- **I95-45643 User created users missing after upgrade:** Resolved an issue where the XML values true/false are also handled as 1/0.
+- **I95-45643 Users that were created by non-admin users were missing after upgrade:** Resolved a config type conversion issue that caused users to disappear after upgrade.
 ------
 - **I95-45696 Memory leak in pam challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
@@ -1179,7 +1215,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45761 SSH ClientAliveInterval change:** The SSH `ClientAliveInterval` has been reset to 900.
 ------
-- **I95-45783 User home directories different across the topology during upgrade:** Resolved an issue with incorrect LDAP user roles during upgrade.
+- **I95-45783 User home directories are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting. 
 ------
 - **I95-45816 "TCP State Stream Parse Error" filling up the flpp.log:** This log issue has been addressed. 
 
