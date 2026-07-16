@@ -19,7 +19,7 @@
   "dependencies": {
     "@docusaurus/core": "3.10.1",
     "@docusaurus/preset-classic": "3.10.1",
-    "@docusaurus/theme-mermaid": "3.10.1",
+    "@docusaurus/theme-mermaid": "3.10.2",
     "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
