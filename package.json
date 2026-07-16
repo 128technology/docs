@@ -14,7 +14,7 @@
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
     "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
-    "check-links": "linkinator ./build --config linkinator.config.json --format json 2>/dev/null | node -e \"const c=[];process.stdin.on('data',d=>c.push(d));process.stdin.on('end',()=>{const r=JSON.parse(c.join(''));const b=r.links.filter(l=>l.state==='BROKEN');if(!b.length){console.log('All '+r.links.length+' links OK');}else{console.log('[ERROR] BROKEN LINKS ('+b.length+' of '+r.links.length+'):\\n');b.forEach(l=>{console.log('['+l.status+'] '+l.url);if(l.failureDetails){console.log('     reason: '+l.failureDetails);}console.log('     found in: '+l.parent);});process.exit(1);}})\"" 
+    "check-links": "linkinator ./build --config linkinator.config.json --format json 2>/dev/null | node -e \"const c=[];process.stdin.on('data',d=>c.push(d));process.stdin.on('end',()=>{const raw=c.join('');if(!raw.trim()){console.error('[ERROR] linkinator produced no output');process.exit(1);}const r=JSON.parse(raw);const b=r.links.filter(l=>l.state==='BROKEN');if(!b.length){console.log('All '+r.links.length+' links OK');}else{console.log('[ERROR] BROKEN LINKS ('+b.length+' of '+r.links.length+'):\\n');b.forEach(l=>{console.log('['+l.status+'] '+l.url);if(l.failureDetails){console.log('     reason: '+l.failureDetails);}console.log('     found in: '+l.parent);});process.exit(1);}})\"" 
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
