@@ -26,6 +26,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.12-3-lts
 
+**Release Date:** July 20, 2026
+
+### Resolved Issues
+
+- **I95-65680 RoutingManager stuck in STANDBY:** Resolved an issue where a transient session loss on an HA node could leave the routing manager stuck in STANDBY, causing a loss of BGP and routing connectivity. The `show system processes` output reported the process as running, masking the failure. The routing manager no longer deactivates in response to a transient session loss.
+
+## Release 6.2.12-3-lts
+
 **Release Date:** June 25, 2026
 
 ### Resolved Issues
