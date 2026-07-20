@@ -6,6 +6,7 @@
   "skip": [
     "^mailto:",
     "^https://docs\\.128technology\\.com",
+    "^https://uat\\.juniper\\.net",
     "^https://tools\\.ietf\\.org",
     "^https://www\\.wireguard\\.com",
     "^https://regexr\\.com",
