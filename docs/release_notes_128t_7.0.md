@@ -64,7 +64,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.5-6-lts
+## Release 7.0.5-7-lts
 
 **Release Date:** July 23, 2026
 
@@ -353,6 +353,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-65754 Highway Crash on Shutdown Due to Static Sessions:** Resolved an issue where the highway process crashed during shutdown on HA nodes performing a downgrade. Static sessions were not being cleared during the shutdown sequence, causing a use-after-free condition when session destructors ran after the worker thread pool had already been destroyed. Static sessions are now properly cleared alongside the session table during shutdown, preventing the crash.
 ------
 - **I95-65797 ESKM Peering Stays Down After Late Metadata Key:** Resolved an issue where ESKM peering remained down when BFD received the local metadata key late because retransmit timers were not being restarted after their initial firing.
+------
+- **I95-65850 Redundant conductor fails upgrade:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
 ------
 - **WAN-4440 Config error validation for DHCP:** Added configuration error validation for DHCP at the inspector level to catch and report invalid DHCP configurations before they are applied.
 ------
