@@ -66,7 +66,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 **Downgrades are not supported**
 
-After the installation of SSR 7.0.x, it is not possible to downgrade to a 6.x version of the SSR software. Because of the format of the image based installation (dividing the disk into two partitions), downgrading from SSR 7.0.x to any package based installation (6.x) is not possible. A downgrade is defined as uninstalling the 7.0.x software, and attempting to install a 6.x version.
+After the installation of SSR 7.x, it is not possible to downgrade to a 6.x version of the SSR software. Because of the format of the image based installation (dividing the disk into two partitions), downgrading from SSR 7.x to any package based installation (6.x) is not possible. A downgrade is defined as uninstalling the 7.x software, and attempting to install a 6.x version.
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
