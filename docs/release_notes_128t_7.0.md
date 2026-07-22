@@ -29,7 +29,7 @@ An issue has been identified involving the use of the HA Sync Redundancy Plugin 
 
 **7.0.1 Conductor Upgrades**
 
-If you are upgrading a conductor that is currently installed with version 6.3.4 or lower, and you wish to upgrade to version 7.0.1 or higher, you must first upgrade the conductor to any version of the 6.3.x software, including and higher than 6.3.5. 
+If you are upgrading a conductor that is currently installed with version 6.3.4 or lower, and you wish to upgrade to version 7.0.1 or higher, you must first upgrade the conductor to a version of the 6.3.x software, including and higher than 6.3.5. 
 
 Routers running SSR software versions earlier than 6.3.5 cannot connect to conductors running SSR software version 7.0.1 and higher. A transitional step is required to enable routers running versions earlier than 6.3.5 (6.0.x, 6.1.x, 6.2.x, 6.3.4 and lower) to communicate with a conductor running 7.0.1+. 
 
@@ -64,9 +64,15 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.0.5-7-lts
+**Downgrades are not supported**
 
-**Release Date:** July 23, 2026
+After the installation of SSR 7.0.x, it is not possible to downgrade to a 6.x version of the SSR software. Because of the format of the image based installation (dividing the disk into two partitions), downgrading from SSR 7.0.x to any package based installation (6.x) is not possible. A downgrade is defined as uninstalling the 7.0.x software, and attempting to install a 6.x version.
+
+**[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
+
+## Release 7.0.5-9-lts
+
+**Release Date:** July 27, 2026
 
 ### New Features
 
