@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.13-1-lts
+
+**Release Date:** July 20, 2026
+
+### Resolved Issues
+
+- **I95-65680 RoutingManager stuck in STANDBY:** Resolved an issue where a transient session loss on an HA node could leave the routing manager stuck in STANDBY, causing a loss of BGP and routing connectivity. The `show system processes` output reported the process as running, masking the failure. The routing manager no longer deactivates in response to a transient session loss.
+
 ## Release 6.2.12-3-lts
 
 **Release Date:** June 25, 2026
