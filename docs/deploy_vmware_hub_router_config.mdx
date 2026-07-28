@@ -1,0 +1,228 @@
+---
+title: "Step 4: Configure the Router on the Conductor"
+sidebar_label: "Configure the Router"
+---
+import NetworkDesign from './_deploy_vmware_router_network_design.md';
+
+With the router VM initialized and connected to the conductor, you can now stage the full router configuration on the conductor. Once you commit the configuration, the conductor pushes it to the router and the router comes fully online.
+
+All steps are performed from the **Conductor GUI**. Complete all steps before committing.
+
+:::note
+Your conductor must already have the following objects configured before proceeding:
+
+- **Authority name** — set to your organization's name.
+- **Conductor address** — set to `192.168.100.10`.
+- **`corp` tenant** — the LAN-side user tenant.
+- **`Internet-Traffic` service** — with address `0.0.0.0/0` and access policy permitting `corp`.
+
+If any of these are missing, complete [Configure the Conductor](deploy_vmware_conductor_config.mdx) first.
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Complete the Router Configuration on the Conductor
+
+During the Initialization process for your router, some basic information was provided, including router name (`Spoke1`), router location (Los Angeles), node name (`node0`), the inter-node security policy (`internal`), asset-id (`Spoke1`), and role (`Combo`). All of this allows the router to connect with the Conductor and onboard successfully. 
+
+This procedure configures network connections for the router.
+
+:::note
+If you prefer to use the CLI to perform configuration tasks, the example configuration is available in the [Appendix](deploy_appendix_vmware_router.mdx).
+:::
+
+1. Open a browser tab on your computer and navigate to your VMWare conductor; `https://192.168.100.10` and initiate a web session to the conductor GUI.
+
+   ![Self signed Certificate warning](/img/dep11-vm-access-gui.png)
+
+2. Accept the self-signed certificate warning, and login. 
+
+3. In the Conductor GUI, click on Authority. 
+
+   ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
+
+4. Scroll to **Routers** and select the router `Spoke1`.
+5. Scroll down to **Nodes** and select `node0`.
+
+## 1. Configure the WAN Interface
+
+The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
+
+### 1a. Create the WAN Device Interface
+
+1. Under the Node, scroll to **Device Interfaces** and select **ADD**.
+
+2. Enter the name `wan-dev` and select **SAVE**.
+
+   :::note
+   To ensure successful onboarding, the `ge-0-0` interface MUST be configured as the WAN device interface. 
+   :::
+
+   ![Name the WAN Interface](/img/dep-vmrouter-wandev1.png)
+
+3. In the Device Interface window, set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | PCI Address | _(WAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:0b:00.0` |
+   | Forwarding | `true` | |
+
+   ![Device Interface window](/img/dep-vmrouter-wandev2.png)
+
+4. Select **SAVE**.
+
+### 1b. Create the WAN Network Interface
+
+1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `wan1` and select **SAVE**.
+
+   ![New Network Interface](/img/dep-vmrouter-wandev3.png)
+
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | DHCP | `disabled` | |
+   | Global-ID | `1` | |
+   | Conductor | `true` | Marks this interface for conductor connectivity |
+   | Management | `true` | Enables management over forwarding on this interface |
+   | Default Route | `true` | Linux uses this interface as its default route |
+   | Source NAT | `true` | Required for management over forwarding |
+   
+   ![WAN Basic Info](/img/dep-vmrouter-wandev4.png)
+
+4. Scroll down to **Management Vector** and select **ADD**.
+   - Enter name `mgmt-vec-wan` and priority `100`.
+   - Select **SAVE**.
+
+   ![Management Vector](/img/dep-vmrouter-wandev5.png)
+
+5. Scroll down to **Neighborhoods** and select **ADD**.
+
+   ![Neighborhood Name](/img/dep-vmrouter-wandev6.png)
+
+   - Select `internet` as the neighborhood name.
+   - Verify **Topology** is set to `spoke`.
+
+   ![Topology](/img/dep-vmrouter-wandev7.png)
+
+6. Select **SAVE**.
+
+:::important
+Conductor must be set to `true` or management traffic will not be able to reach the conductor.
+
+`Source NAT` and `Default Route` must both be set to `true` on the WAN management interface. Management traffic originates from the `169.254.x.x` range and must be source-NAT'd to a routable address before leaving the interface. The default route ensures Linux routes non-SVR traffic through the SSR forwarding engine.
+:::
+
+## 2. Configure the LAN Interface
+
+The LAN interface (NIC 2) connects to the branch LAN and assigns the `corp` tenant to traffic arriving from that direction.
+
+### 2a. Create the LAN Device Interface
+
+1. From the Authority level in the Conductor GUI, click on `spoke1` to begin configuration. 
+
+2. Click on `node0` and scroll to the bottom of the page.
+
+3. Select **Device Interfaces**, and **ADD**. 
+
+4. In the New Device Interface window, add the LAN device name `lan`, and click **SAVE**. This adds a physical device name for you to assign your LAN interface.
+
+   ![New LAN](/img/dep-vmrouter-wandev8.png)
+
+Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | PCI Address | _(LAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:13:00.0` |
+   | Forwarding | `true` | |
+
+### 2b. Create the LAN Network Interface
+
+1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+
+
+![Add LAN1](/img/dep-vmrouter-wandev9.png)
+
+2. Enter the name `lan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | Global-ID | `2` | |
+   | DHCP | `disabled` | |
+   | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
+   | Source-NAT | `true` | | 
+
+   ![External Corp](/img/dep-vmrouter-wandev10.png)
+
+4. Scroll down to **Interface Addresses** and select **ADD**.
+   - IP Address: `192.168.1.1`
+   - Prefix Length: `24`
+
+5. Select **SAVE**.
+
+## 3. Configure DNS
+
+Configure DNS so the router can resolve FQDNs for conductor connectivity and software downloads.
+
+1. Return to the **Router** level.
+2. Scroll to **DNS Config** and select **ADD**.
+3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
+4. Select **SAVE**.
+
+   ![Interface and DNS addresses](/img/dep-vmrouter-wandev11.png)
+
+## 4. Create the Internet Service Route
+
+The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
+
+1. Return to the **Router** level.
+2. Scroll to **Service Routes** and select **ADD**.
+3. Enter the name `internet-route` and select **SAVE**.
+
+   ![Service Route Name](/img/dep-vmrouter-wandev12.png)
+
+4. Set the following fields:
+
+   | Field | Value |
+   |-------|-------|
+   | Service Name | `Internet-Traffic` |
+   | Service Route Type | `service-agent` |
+
+   ![Service Route Details](/img/dep-vmrouter-wandev13.png)
+
+5. Scroll to **Next Hop** and select **ADD**.
+   - Node: `node0`
+   - Network Interface: `wan1`
+   - Select **SAVE**.
+
+   ![New Next Hop](/img/dep-vmrouter-wandev14.png)
+
+6. Select **VALIDATE** and **COMMIT**.
+
+## Configuration Summary
+
+After committing, the conductor pushes the following configuration to `Spoke1`. The router applies the configuration and comes fully online within approximately 2–5 minutes.
+
+| Object | Name | Key Settings |
+|--------|------|-------------|
+| Router | `Spoke1` | combo node, asset-id `Spoke1` |
+| WAN Device Interface | `wan-dev` | VMware WAN NIC PCI address, forwarding enabled |
+| WAN Network Interface | `wan1` | DHCP, conductor, default-route, source-nat, management, neighborhood `internet` |
+| LAN Device Interface | `lan-dev` | VMware LAN NIC PCI address, forwarding enabled |
+| LAN Network Interface | `lan1` | tenant `corp`, address `192.168.1.1/24` |
+| DNS Config | manual | servers `1.1.1.1`, `8.8.8.8` |
+| Service Route | `internet-route` | service `Internet-Traffic`, type `service-agent`, next-hop `node0/wan1` |
+
+## Next Step
+
+Congratulations! At this point your router is ready for your testing and deployment!
+
+

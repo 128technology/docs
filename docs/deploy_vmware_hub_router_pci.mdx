@@ -1,0 +1,22 @@
+---
+title: "Step 3: Find VM NIC PCI Addresses"
+sidebar_label: "Find NIC PCI Addresses"
+---
+import FindPCI from './_vmware_router_find_pci.md';
+
+The SSR router configuration binds each logical interface to a specific physical NIC using that NIC's PCI address. VMware assigns PCI addresses dynamically based on the VM's hardware slot configuration, so you must discover the actual values from the running router VM before configuring the device interface bindings on the conductor.
+
+<FindPCI/>
+
+## Record Your PCI Addresses
+
+Before proceeding to the next step, record the discovered PCI addresses. You will enter these values in [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).
+
+| Interface | PCI Address |
+|-----------|------------|
+| WAN (`wan-dev`) | _(your value)_ |
+| LAN (`lan-dev`) | _(your value)_ |
+
+## Next Step
+
+Proceed to [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).

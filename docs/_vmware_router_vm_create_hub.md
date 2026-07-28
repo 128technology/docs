@@ -49,7 +49,7 @@ Use the steps below to configure the following:
 
 5. Select the highest available Oracle Linux (64-bit) Guest OS version. Click **Next**.
 
-   ![Name the VM](/img/dep3-vmrouter-name-os.png)
+   ![Name the VM](/img/dep3-vmrouter-hub-name-os.png)
 
 ### Storage
 
@@ -91,7 +91,7 @@ Use the steps below to configure the following:
 
 A VMware router requires at least two VMXNet3 network adapters: one for WAN and one for LAN. By default, one adapter is already in place. For the Hub router, we will create three additional network adapters, which will allow it to connect to multiple branch/spoke routers.
 
-   ![Network Adapter Type](/img/dep6-vmrouter-nics.png)
+   ![Network Adapter Type](/img/dep6-vmrouter-hub-4nics.png)
 
 12. Set the existing adapter's **Adapter Type** to **VMXNET3** and select the appropriate **portgroup** name for the virtual network that will provide access to your WAN.
 
@@ -115,7 +115,7 @@ A VMware router requires at least two VMXNet3 network adapters: one for WAN and 
 
 14. Expand **CD/DVD Drive 1**. 
 
-   ![CD Drive 1](/img/dep-vmrouter-image-select.png)
+   ![CD Drive 1](/img/dep-vmrouter-hub-image-select.png)
 
 15. Place a check next to **Connect at power on**. In the dropdown to the right, select **Datastore ISO file** and then click **Browse**. The Datastore Browser opens.
 
@@ -125,8 +125,8 @@ A VMware router requires at least two VMXNet3 network adapters: one for WAN and 
 
 17. Confirm the settings, and then click **Next**.
 
-   ![Confirm Settings](/img/dep8-vm-all-settings.png) 
+   ![Confirm Settings](/img/dep8-vm-hub-all-settings.png) 
 
 18. Review the summary, then click **Finish**.
 
-   ![VM Complete](/img/dep9-vmrouter-summary.png)
+   ![VM Complete](/img/dep9-vmrouter-hub-summary.png)
