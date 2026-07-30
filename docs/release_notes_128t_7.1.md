@@ -233,7 +233,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65719 Secure Conductor Onboarding (SCO) failing:** Resolved an issue where Secure Conductor Onboarding (SCO) failed when using RSA certificates in full chain format, incorrectly reporting that only RSA certificates are supported.
 ------
-- **I95-65769 Minion connector update:** Updated the minion connector to version 1.7.6, incorporating connectivity reliability improvements.
+- **I95-65769 Minion connector update:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
 ------
 - **WAN-4774 Configuration model list key derivation:** Improved internal configuration model handling by deriving list keys from the consolidated configuration model instead of using a hardcoded path map, improving accuracy for Mist-managed deployments.
 

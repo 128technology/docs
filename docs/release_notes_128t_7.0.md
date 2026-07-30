@@ -360,6 +360,8 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65754 Highway Crash on Shutdown Due to Static Sessions:** Resolved an issue where the highway process crashed during shutdown on HA nodes performing a downgrade. Static sessions were not being cleared during the shutdown sequence, causing a use-after-free condition when session destructors ran after the worker thread pool had already been destroyed. Static sessions are now properly cleared alongside the session table during shutdown, preventing the crash.
 ------
+- **I95-65769 Minion connector update:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
+------
 - **I95-65797 ESKM Peering Stays Down After Late Metadata Key:** Resolved an issue where ESKM peering remained down when BFD received the local metadata key late because retransmit timers were not being restarted after their initial firing.
 ------
 - **I95-65850 Redundant conductor fails upgrade:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
