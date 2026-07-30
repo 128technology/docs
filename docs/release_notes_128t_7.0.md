@@ -334,6 +334,8 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65410 Incorrect RBAC requirements for certificate API:** Resolved an issue where the POST `/api/v1/certificate` endpoint required READ permission for the entire configuration instead of WRITE permission, allowing unintended access.
 ------
+- **I95-65411 Show commands adding erroneous output:** Resolved an issue where `show peer router all force` (and other multi-router show commands) was adding unrelated information to the output of the command. 
+------
 - **I95-65431 SSR failing to sync with NTP server:** Resolved an issue where the SSR failed to synchronize with configured NTP servers after boot, requiring manual intervention to restore time synchronization.
 ------
 - **I95-65432 Conflux process crash during upgrade:** Resolved an issue where the Conflux process exited unexpectedly during or after an upgrade, causing temporary loss of analytics data collection.
