@@ -1,6 +1,6 @@
 ---
-title: "Step 4: Configure the Router on the Conductor"
-sidebar_label: "Configure the Router"
+title: "Configure the Hub Router on the Conductor"
+sidebar_label: "Configure the Hub Router"
 ---
 import NetworkDesign from './_deploy_vmware_router_network_design.md';
 
@@ -67,7 +67,7 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
    | Field | Value | Notes |
    |-------|-------|-------|
    | Type | `ethernet` | |
-   | PCI Address | _(WAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:0b:00.0` |
+   | PCI Address | _(WAN PCI address from [Step 3](deploy_vmware_hub_router_pci.mdx))_ | For example, `0000:0b:00.0` |
    | Forwarding | `true` | |
 
    ![Device Interface window](/img/dep-vmrouter-wandev2.png)

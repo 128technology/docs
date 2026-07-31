@@ -22,5 +22,5 @@ The SSR router configuration requires the PCI address of each VMXNet3 NIC. Becau
    | LAN (`lan-dev`) | `ge-0-1` _(example)_ | `0000:13:00.0` _(example)_ |
 
    :::important
-   These are example values. Your actual PCI addresses will differ. Use the values you discover here in [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).
+   These are example values. Your actual PCI addresses will differ. Use the values you discover here in Step 4 — Configure the Router on the Conductor.
    :::
