@@ -76,14 +76,14 @@ config
             exit
         exit
 
-        router             spoke1
-            name                  spoke1
+        router             hub1
+            name                  hub1
             location-coordinates  +40.741895-073.989308/
             inter-node-security   internal
 
             node                  node0
                 name              node0
-                asset-id          Spoke1
+                asset-id          Hub1
                 role              combo
                 platform-type     "440BX Desktop Reference Platform"
 
@@ -93,12 +93,13 @@ config
 
                     network-interface  wan1
                         name                   wan1
-                        global-id              1
+                        global-id              3
                         conductor              true
                         default-route          true
 
                         neighborhood           internet
-                            name  internet
+                            name      internet
+                            topology  hub
                         exit
                         inter-router-security  internal
                         source-nat             true
@@ -109,13 +110,13 @@ config
                             priority  100
                         exit
 
-                        address                10.0.128.127
-                            ip-address     10.0.128.127
+                        address                10.0.128.128
+                            ip-address     10.0.128.128
                             prefix-length  16
-                            gateway        10.0.0.128
+                            gateway        10.0.0.127
 
                             host-service   web
-                                service-type  web
+                                service-type   web
                             exit
                         exit
                         dhcp                   disabled
@@ -128,21 +129,21 @@ config
 
                     network-interface  lan
                         name        lan
-                        global-id   2
+                        global-id   4
                         tenant      corp
                         source-nat  true
 
-                        address     192.168.1.1
-                            ip-address     192.168.1.1
+                        address     192.168.2.1
+                            ip-address     192.168.2.1
                             prefix-length  24
 
                             host-service   dhcp-server
                                 service-type  dhcp-server
 
-                                address-pool  192.168.1.2
-                                    start-address  192.168.1.2
-                                    end-address    192.168.1.20
-                                    router         192.168.1.1
+                                address-pool  192.168.2.2
+                                    start-address  192.168.2.2
+                                    end-address    192.168.2.20
+                                    router         192.168.2.1
                                     domain-server  8.8.8.8
                                 exit
                             exit
@@ -168,6 +169,8 @@ config
             name  corp
         exit
 
+
+
         software-access
             username  (removed)
             token     (removed)
@@ -188,7 +191,6 @@ config
         exit
     exit
 exit
-
 
 ```
 
