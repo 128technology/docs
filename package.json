@@ -17,17 +17,17 @@
     "check-links": "linkinator ./build --config linkinator.config.json --format json 2>/dev/null | node -e \"const c=[];process.stdin.on('data',d=>c.push(d));process.stdin.on('end',()=>{const raw=c.join('');if(!raw.trim()){console.error('[ERROR] linkinator produced no output');process.exit(1);}const r=JSON.parse(raw);const b=r.links.filter(l=>l.state==='BROKEN');if(!b.length){console.log('All '+r.links.length+' links OK');}else{console.log('[ERROR] BROKEN LINKS ('+b.length+' of '+r.links.length+'):\\n');b.forEach(l=>{console.log('['+l.status+'] '+l.url);if(l.failureDetails){console.log('     reason: '+l.failureDetails);}console.log('     found in: '+l.parent);});process.exit(1);}})\"" 
   },
   "dependencies": {
-    "@docusaurus/core": "3.10.1",
-    "@docusaurus/preset-classic": "3.10.1",
-    "@docusaurus/theme-mermaid": "3.10.1",
+    "@docusaurus/core": "3.10.2",
+    "@docusaurus/preset-classic": "3.10.2",
+    "@docusaurus/theme-mermaid": "3.10.2",
     "linkinator": "^7.6.1",
     "classnames": "^2.2.6",
     "lunr": "^2.3.9",
     "mermaid": "^11.16.0",
     "@mdx-js/react": "^3.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-simple-flowchart": "^1.2.4",
     "react-table": "^7.0.0"
   },
