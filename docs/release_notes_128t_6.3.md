@@ -50,6 +50,14 @@ Beginning with SSR-6.3.5, conductor-managed **routers** running SSR-6.3.5 must b
 - Conductor: SSR-6.3.4 / Router: SSR-6.3.5 Not Compatible
 - Conductor: SSR-6.2.9 / Router: SSR-6.3.5 Not Compatible
 
+## Release 6.3.8-7-sts
+
+**Release Date:** August 6, 2026
+
+### Resolved Issues
+
+- **I95-65868 Asset connectivity issues after upgrading Conductors:** This release includes a minion-connector upgrade to version 1.7.6, which resolves asset connectivity issues.
+
 ## Release 6.3.7-6-sts
 
 **Release Date:** January 21, 2026
