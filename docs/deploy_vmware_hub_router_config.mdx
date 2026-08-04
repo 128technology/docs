@@ -134,13 +134,15 @@ The LAN interface (NIC 2) connects to the branch LAN and assigns the `corp` tena
 
    ![New LAN](/img/dep-vmrouter-wandev8.png)
 
-Set the following fields:
+In the Device Interface window, set the following fields:
 
    | Field | Value | Notes |
    |-------|-------|-------|
    | Type | `ethernet` | |
    | PCI Address | _(LAN PCI address from [Step 3](deploy_vmware_router_pci.mdx))_ | For example, `0000:13:00.0` |
    | Forwarding | `true` | |
+
+   ![PCI Fields](/img/dep-vmrouter-wandev8a.png)
 
 ### 2b. Create the LAN Network Interface
 
@@ -155,7 +157,7 @@ Set the following fields:
    | Field | Value | Notes |
    |-------|-------|-------|
    | Type | `external` | |
-   | Global-ID | `2` | |
+   | Global-ID | `4` | |
    | DHCP | `disabled` | |
    | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
    | Source-NAT | `true` | | 

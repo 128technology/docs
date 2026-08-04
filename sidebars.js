@@ -36,7 +36,6 @@ module.exports = {
                 "type": "category",
                 "label": "VMware Spoke Router",
                 "items": [
-                  "deploy_vmware_router_overview",
                   "deploy_vmware_router_vm",
                   "deploy_vmware_router_install",
                   "deploy_vmware_router_pci",
