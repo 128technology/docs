@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.14-2-lts
+
+**Release Date:** August 6, 2026
+
+### Resolved Issues
+
+- **I95-65868 Asset connectivity issues after upgrading Conductors:** This release includes a minion-connector upgrade to version 1.7.6, which resolves asset connectivity issues.
+
 ## Release 6.2.13-1-lts
 
 **Release Date:** July 20, 2026
