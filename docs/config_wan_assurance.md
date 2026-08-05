@@ -24,7 +24,7 @@ High Level Steps:
 
 ## Enable WAN Assurance on the Conductor
 
-For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.hpe.com/us/en/networking/hpe-juniper-networking/wan-assurance.html).
+For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.juniper.net/us/en/products/cloud-services/wan-assurance.html).
 
 #### 1. Create an account on the [Mist portal](https://manage.mist.com/).
 
