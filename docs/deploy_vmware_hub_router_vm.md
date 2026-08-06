@@ -1,5 +1,5 @@
 ---
-title: "Create the Hub VMware Router VM"
+title: "Step 1: Create the Hub VMware Router VM"
 sidebar_label: "Create the Hub VMware VM"
 ---
 import CreateHubVM from './_vmware_router_vm_create_hub.md';
