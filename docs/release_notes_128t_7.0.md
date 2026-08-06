@@ -72,7 +72,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 ## Release 7.0.5-10-lts
 
-**Release Date:** July 30, 2026
+**Release Date:** August 6, 2026
 
 ### New Features
 
