@@ -39,18 +39,18 @@ jobs:
       - name: Build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
-          BUILD_OUT_DIR: build/documentation/us/en/software/session-smart-router
+          BUILD_OUT_DIR: build
         run: npm run build
 
       - name: Build Offline Bundle
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
-          BUILD_OUT_DIR: build/documentation/us/en/software/session-smart-router
+          BUILD_OUT_DIR: build
         run: npm run build:offline
 
       - name: Check Links
         env:
-          LINKINATOR_PATH: "documentation/us/en/software/session-smart-router/**/*.html"
+          LINKINATOR_PATH: "**/*.html"
         run: npm run check-links
 
       - name: Deploy
