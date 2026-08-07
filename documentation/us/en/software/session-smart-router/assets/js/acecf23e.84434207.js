@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_128t_docs=self.webpackChunk_128t_docs||[]).push([[1903],{1912(s){s.exports=JSON.parse('{"blogBasePath":"/documentation/us/en/software/session-smart-router/kb","blogTitle":"Session Smart Router Knowledge Base Articles","authorsListPath":"/documentation/us/en/software/session-smart-router/kb/authors"}')}}]);
