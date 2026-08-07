@@ -5,6 +5,10 @@ sidebar_label: Router Migration
 
 This process is used to migrate an existing conductor-managed router to a new conductor and infrastructure. From the PCLI, the command can be run from the existing conductor to automatically migrate the router to the new conductor, or it can be run from the router itself. Before performing the procedure below, the new conductor must be installed and configured, and both the old and the new conductors must be reachable. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
 
+:::note
+Migrating a router to a conductor running a lower version of software is not supported. For example, Conductor Red is running SSR software version 7.1.6 and manages Router Red. Conductor Blue is running SSR software version 7.0.1. Migrating Router Red to Conductor Blue is not supported. In order to migrate Router Red to Conductor Blue, Conductor Blue must be upgraded to software version 7.1.6. See [Upgrading the Conductor](upgrade_ibu_conductor.mdx) for upgrade procedures. 
+:::
+
 ### PCLI
 
 The `migrate` command automates the process of migrating a router to a new conductor. 
