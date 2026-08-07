@@ -1,3 +1,4 @@
+// url and baseUrl need to be set differently between master and the juniper-docs-migration branch
 const config = {
   title: 'SSN Docs',
   tagline: 'The documentation source for the Session Smart Networking Platform',
