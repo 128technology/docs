@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.14-2-lts
 
-**Release Date:** August 7, 2026
+**Release Date:** August 11, 2026
 
 ### Resolved Issues
 
