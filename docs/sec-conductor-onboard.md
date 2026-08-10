@@ -32,7 +32,7 @@ Secure Conductor Onboarding requires the use of an IP SAN (subject alternative n
 
 For an HA conductor, each node must have an separate IP SAN entry.
 
-For additional information about certificates, see [Certificate Requirements and Validation](cert_validation_requirements.md). For details on the IP SAN naming and configuration, see [Issue a `certificate-signing-request`](config_custom_certs#issue-a-certificate-signing-request.md).
+For additional information about certificates, see [Certificate Requirements and Validation](cert_validation_requirements.md). For details on the IP SAN naming and configuration, see [Issue a `certificate-signing-request`](config_custom_certs.md#issue-a-certificate-signing-request).
 
 ## Basic Configuration 
 
