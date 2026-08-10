@@ -28,9 +28,11 @@ To provide a secure and mutually authenticated onboarding mechanism, the followi
 
 The public certificate and CA certificate are configured on the conductor at the Authority level.
 
-Secure Conductor Onboarding requires the use of an IP SAN (subject alternative name) for each router that is onboarding to the conductor. This requires that the certificate issued by the CA includes includes the IP SAN, which allows the conductor to perform validation and authentication. 
+Secure Conductor Onboarding requires the use of an IP SAN (subject alternative name) for routers to securely identify the conductor's identity. This requires that the certificate issued by the CA includes the IP SAN for the conductor, allowing the router to validate the connection to the conductor and securely onboard. 
 
-For additional information about certificates, see [Certificate Requirements and Validation](cert_validation_requirements.md).
+For an HA conductor, each node must have an separate IP SAN entry.
+
+For additional information about certificates, see [Certificate Requirements and Validation](cert_validation_requirements.md). For details on the IP SAN naming and configuration, see [Issue a `certificate-signing-request`](config_custom_certs#issue-a-certificate-signing-request.md).
 
 ## Basic Configuration 
 
