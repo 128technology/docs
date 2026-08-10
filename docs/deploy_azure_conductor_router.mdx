@@ -1,0 +1,401 @@
+---
+title: "Step 4: Deploy and Configure a Router"
+sidebar_label: "Deploy and Configure a Router"
+---
+import NetworkDesign from './_deploy_azure_conductor_network_design.md';
+
+This step deploys a BYOL conductor-managed SSR in Azure and configures it on the conductor with WAN and LAN interfaces, management over forwarding, and an internet breakout service route.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Requirements
+
+The following infrastructure must exist in your Azure subscription before deploying the router:
+
+- A VNet where the router will be deployed. This guide uses the same `SSR-VNet` as the conductor.
+- An Availability Set for the router VM.
+- The VNet is segmented with at least the following two subnets:
+  - **Public subnet** (`ssr-router-wan`): provides internet connectivity and carries WAN traffic. The conductor's management interface must be reachable from this subnet.
+  - **Private subnet** (`ssr-router-lan`): provides connectivity to internal workloads.
+- A **Managed Identity** with the following minimum read permissions:
+
+  ```
+  Microsoft.Compute/virtualMachines/read
+  Microsoft.Network/virtualNetworks/read
+  Microsoft.Network/networkInterfaces/read
+  ```
+
+:::note
+A dedicated management subnet is optional for conductor-managed routers in this guide. Management traffic travels over the WAN forwarding interface instead. See [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md) for background.
+:::
+
+## Deploy the Router VM
+
+### Azure Portal
+
+1. Return to the **Session Smart Networking Platform BYOL** offering in the Azure Marketplace.
+2. Click **Get it now** and agree to the terms.
+3. Click the **Plans + Pricing** tab.
+
+   ![Plans](/img/platforms_azure_plans.png)
+
+4. Click the **Launch** link on the **Juniper Session Smart Conductor-managed Router** template.
+
+   ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
+
+5. Fill in the template parameters:
+
+   | Parameter | Example Value | Notes |
+   |-----------|--------------|-------|
+   | Subscription | _(your subscription)_ | |
+   | Resource Group | `SSR-RG` | |
+   | Location | `eastus` | One word, all lowercase |
+   | Availability Set Name | `SSR-RouterSet` | Must exist in the same resource group |
+   | Instance Size | `Standard_F8s_v2` | |
+   | Instance Name | `azure-router-1` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | |
+   | Artifactory Token | _(your token)_ | |
+   | Managed Identity | _(your managed identity)_ | |
+   | Virtual Network Name | `SSR-VNet` | |
+   | Public Subnet Name | `ssr-router-wan` | WAN subnet |
+   | Private Subnet Name | `ssr-router-lan` | LAN subnet |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Private Subnet Allowed CIDR | `0.0.0.0/0` | |
+   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor from Step 1 |
+   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
+   | Admin Public Key Data | _(contents of your SSH public key)_ | |
+
+6. Agree to the terms and conditions.
+7. Click **Purchase** to launch the deployment.
+
+   ![Deployment complete](/img/platforms_azure_deployment_complete.png)
+
+8. When the deployment completes, the BYOL bootstrapper begins installing SSR 7.1.4. Allow **10–15 minutes** for installation to finish before proceeding.
+
+### Azure CLI or PowerShell
+
+Create the parameters file `router_byol.parameters.json`:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "eastus" },
+    "availabilitySetName": { "value": "SSR-RouterSet" },
+    "instanceSize": { "value": "Standard_F8s_v2" },
+    "instanceName": { "value": "azure-router-1" },
+    "SSR Version": { "value": "7.1.4" },
+    "artifactoryUsername": { "value": "<your-artifactory-username>" },
+    "artifactoryToken": { "value": "<your-artifactory-token>" },
+    "managedIdentity": { "value": "<your-managed-identity>" },
+    "virtualNetworkName": { "value": "SSR-VNet" },
+    "publicSubnetName": { "value": "ssr-router-wan" },
+    "privateSubnetName": { "value": "ssr-router-lan" },
+    "publicSubnetAllowedCidr": { "value": "0.0.0.0/0" },
+    "privateSubnetAllowedCidr": { "value": "0.0.0.0/0" },
+    "adminAllowedCidr": { "value": "0.0.0.0/0" },
+    "conductorPrimaryControlIP": { "value": "<conductor-public-ip>" },
+    "adminPublicKeyData": { "value": "<your-ssh-public-key>" }
+  }
+}
+```
+
+Launch the deployment:
+
+```bash
+New-AzResourceGroupDeployment -ResourceGroupName SSR-RG `
+  -TemplateUri <template-URL> `
+  -TemplateParameterFile ./router_byol.parameters.json
+```
+
+### Cloud-init Onboarding
+
+When launching via CLI or automation, supply the following `user-data` block to configure the router onboarding:
+
+```yaml
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+        {
+            "name": "azure-router-1",
+            "ssr-version": "7.1.4",
+            "mode": "conductor-managed",
+            "conductor-hosts": ["<conductor-public-ip>"],
+            "artifactory-user": "<your-artifactory-username>",
+            "artifactory-password": "<your-artifactory-token>",
+            "cloud-provider": "azure"
+        }
+```
+
+| Option | Meaning |
+|--------|---------|
+| `name` | The name of the router as it will appear in the conductor. |
+| `ssr-version` | The SSR software version to install. |
+| `mode` | Set to `conductor-managed`. |
+| `conductor-hosts` | List of conductor control IP addresses. |
+| `artifactory-user` | Artifactory credentials username. |
+| `artifactory-password` | Artifactory credentials password or token. |
+| `cloud-provider` | Set to `azure`. |
+
+## Verify the Router Is Onboarded
+
+After installation completes, the router contacts the conductor and appears as a pending asset.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority** and look for a new router entry under **Routers**.
+3. The router appears with a pending association. Proceed to [Assign the Router's Asset ID](#assign-the-routers-asset-id) to associate it with the router configuration.
+
+## Network Interface Layout
+
+The BYOL conductor-managed router template deploys a VM with three network interfaces attached in the following order:
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| `eth0` | Router-mgmt | _(not used in this guide — no dedicated management subnet)_ |
+| `eth1` | Router-public | `ssr-router-wan` |
+| `eth2` | Router-private | `ssr-router-lan` |
+
+In Azure, device interfaces are identified by **VMBus UUID** rather than PCI address. You must discover the VMBus UUID for each interface before configuring the router on the conductor.
+
+## Discover VMBus UUIDs
+
+The SSR uses VMBus UUIDs to bind device interfaces to the underlying Azure virtual hardware. You must map each Azure NIC to its VMBus UUID before configuring the router.
+
+### Step 1: Identify VMBus UUIDs From the Router VM
+
+1. SSH into the router VM:
+
+   ```bash
+   ssh t128@<router-public-ip>
+   ```
+
+2. Run the following command:
+
+   ```bash
+   sudo dpdk-devbind.py --status
+   ```
+
+   In the **VMBus devices** section, the first column contains the VMBus UUID. The `if` parameter shows the associated Linux interface name.
+
+### Step 2: Map Azure NICs to VMBus UUIDs
+
+1. Log in to the [Azure Portal](https://portal.azure.com).
+2. Navigate to the router VM and select **Networking** under **Settings**.
+
+   ![Azure Networking Settings](/img/VMBusAzureUI1.png)
+
+3. The attached network interfaces are listed from left to right: **Router-mgmt**, **Router-public**, **Router-private**.
+
+   ![Azure Port UI](/img/VMBusAzureUI2.png)
+
+4. Cross-reference the Linux interface names from `dpdk-devbind.py` with the Azure portal to build the following mapping:
+
+   | Azure NIC Name | Linux Interface | Subnet | VMBus UUID |
+   |----------------|----------------|--------|-----------|
+   | Router-public | `eth1` | `ssr-router-wan` | _(discovered from dpdk-devbind.py)_ |
+   | Router-private | `eth2` | `ssr-router-lan` | _(discovered from dpdk-devbind.py)_ |
+
+   Record the WAN VMBus UUID as `<wan-vmbus-uuid>` and the LAN VMBus UUID as `<lan-vmbus-uuid>` for use in the following configuration steps.
+
+## Configure the Router on the Conductor
+
+All configuration steps below are performed in the **Conductor GUI** at `https://<conductor-public-ip>`.
+
+:::note
+Your conductor must already have the following objects configured before proceeding:
+
+- **Authority name** — set to your organization's name.
+- **Conductor address** — set to the conductor's public IP.
+- **`corp` tenant** — the LAN-side user tenant.
+- **`Internet-Traffic` service** — with address `0.0.0.0/0` and access policy permitting `corp`.
+
+If any of these are missing, complete [Step 3 — Configure the Conductor](deploy_azure_conductor_config.mdx) first.
+:::
+
+:::note
+If you prefer to apply configuration using the PCLI, the complete example configuration is available in the [Appendix](deploy_appendix_azure_conductor.mdx).
+:::
+
+### Assign the Router's Asset ID
+
+1. In the Conductor GUI, select **Configuration**.
+2. Under **Routers**, select `azure-router-1`.
+3. Select the **Configure** icon.
+4. Select node `node0`.
+5. Under **Associated Asset ID**, select the asset ID reported by the router VM.
+6. Select **VALIDATE** then **COMMIT**.
+
+### 1. Configure the WAN Interface
+
+The WAN interface (`eth1` / `ssr-router-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
+
+#### 1a. Create the WAN Device Interface
+
+1. In the Conductor GUI, navigate to the `azure-router-1` router, then to node `node0`.
+2. Scroll to **Device Interfaces** and select **ADD**.
+3. Enter the name `wan-dev` and select **SAVE**.
+4. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | VMBus UUID | `<wan-vmbus-uuid>` | Discovered in [Discover VMBus UUIDs](#discover-vmbus-uuids) |
+   | Forwarding | `true` | |
+
+5. Select **SAVE**.
+
+#### 1b. Create the WAN Network Interface
+
+1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `wan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | DHCP | `v4` | The Azure subnet assigns an IP via DHCP |
+   | Global-ID | `1` | |
+   | Conductor | `true` | Marks this interface for conductor connectivity |
+   | Management | `true` | Enables management over forwarding on this interface |
+   | Default Route | `true` | Linux uses this interface as its default route |
+   | Source NAT | `true` | Required for management over forwarding |
+
+4. Scroll to **Management Vector** and select **ADD**.
+   - Enter name `mgmt-vec-wan` and priority `100`.
+   - Select **SAVE**.
+
+5. Scroll to **Neighborhoods** and select **ADD**.
+   - Enter neighborhood name `internet`.
+   - Verify **Topology** is set to `spoke`.
+   - Select **SAVE**.
+
+:::important
+`Conductor` must be set to `true` or management traffic will not reach the conductor.
+
+`Source NAT` and `Default Route` must both be `true` on the WAN management interface. Management traffic originates from the `169.254.x.x` range and must be source-NAT'd to a routable address before leaving the interface. The default route ensures Linux routes non-SVR traffic through the SSR forwarding engine.
+:::
+
+### 2. Configure the LAN Interface
+
+The LAN interface (`eth2` / `ssr-router-lan`) connects to the private subnet and assigns the `corp` tenant to inbound traffic.
+
+#### 2a. Create the LAN Device Interface
+
+1. In the Conductor GUI, navigate to node `node0` of `azure-router-1`.
+2. Scroll to **Device Interfaces** and select **ADD**.
+3. Enter the name `lan-dev` and select **SAVE**.
+4. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | VMBus UUID | `<lan-vmbus-uuid>` | Discovered in [Discover VMBus UUIDs](#discover-vmbus-uuids) |
+   | Forwarding | `true` | |
+
+5. Select **SAVE**.
+
+#### 2b. Create the LAN Network Interface
+
+1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `lan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | Global-ID | `2` | |
+   | DHCP | `disabled` | |
+   | Tenant | `corp` | Assigns all inbound LAN traffic to the corp tenant |
+   | Source NAT | `true` | |
+
+4. Scroll to **Interface Addresses** and select **ADD**.
+   - IP Address: `10.0.2.1`
+   - Prefix Length: `24`
+5. Select **SAVE**.
+
+### 3. Configure DNS
+
+Configure DNS so the router can resolve FQDNs for conductor connectivity and software downloads.
+
+1. Return to the **Router** level for `azure-router-1`.
+2. Scroll to **DNS Config** and select **ADD**.
+3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
+4. Select **SAVE**.
+
+### 4. Create the Internet Breakout Service Route
+
+The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
+
+1. Return to the **Router** level for `azure-router-1`.
+2. Scroll to **Service Routes** and select **ADD**.
+3. Enter the name `internet-route` and select **SAVE**.
+4. Set the following fields:
+
+   | Field | Value |
+   |-------|-------|
+   | Service Name | `Internet-Traffic` |
+   | Service Route Type | `service-agent` |
+
+5. Scroll to **Next Hops** and select **ADD**.
+   - Node Name: `node0`
+   - Interface: `wan1`
+6. Select **SAVE**.
+7. Select **VALIDATE** then **COMMIT**.
+
+## Verify Connectivity
+
+After committing the configuration, verify the router is online and forwarding traffic.
+
+### Verify the Router Is Connected to the Conductor
+
+From the Conductor GUI, select **Routers**. The `azure-router-1` router should show a **Connected** status.
+
+From the conductor PCLI:
+
+```text
+admin@node0.Conductor# show peers
+```
+
+The peer entry for `azure-router-1` should show status `Up`.
+
+### Verify ARP on the WAN Interface
+
+Azure gateways do not respond to ICMP ping. Use the ARP table to verify WAN connectivity:
+
+```text
+admin@node0.azure-router-1# show arp
+```
+
+Look for **valid** ARP entries on the `wan1` interface.
+
+### Verify Internet Reachability
+
+From the router PCLI, ping an internet host to confirm internet breakout is working:
+
+```text
+admin@node0.azure-router-1# ping 8.8.8.8
+```
+
+## What Was Configured
+
+| Object | Name | Value |
+|--------|------|-------|
+| Router | `azure-router-1` | Conductor-managed, combo role |
+| WAN Device Interface | `wan-dev` | VMBus UUID — WAN, forwarding `true` |
+| WAN Network Interface | `wan1` | DHCP v4, conductor, management, source-nat, default-route |
+| WAN Neighborhood | `internet` | Spoke topology |
+| LAN Device Interface | `lan-dev` | VMBus UUID — LAN, forwarding `true` |
+| LAN Network Interface | `lan1` | Tenant `corp`, static `10.0.2.1/24`, source-nat |
+| Service Route | `internet-route` | `Internet-Traffic` → `node0/wan1` |
+
+## Related Documentation
+
+- [Appendix — Complete Configuration](deploy_appendix_azure_conductor.mdx)
+- [Management Traffic over Forwarding Interfaces](config_management_over_forwarding)
+- [Configuring a Device Interface with VMBus UUID](intro_installation_azure#configuring-a-device-interface-with-vmbus-uuid)

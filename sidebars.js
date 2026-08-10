@@ -25,6 +25,18 @@ module.exports = {
                 "deploy_appendix_vmware_conductor",
               ],
             },
+            {
+              "type": "category",
+              "label": "Azure Conductor",
+              "items": [
+                "deploy_azure_conductor",
+                "deploy_azure_conductor_vm",
+                "deploy_azure_conductor_install",
+                "deploy_azure_conductor_config",
+                "deploy_azure_conductor_router",
+                "deploy_appendix_azure_conductor",
+              ],
+            },
           ],
         },
         {

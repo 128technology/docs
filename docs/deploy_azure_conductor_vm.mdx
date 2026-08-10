@@ -1,0 +1,209 @@
+---
+title: "Step 1: Create the Azure Conductor VM"
+sidebar_label: "Create the Conductor VM"
+---
+import NetworkDesign from './_deploy_azure_conductor_network_design.md';
+
+This step deploys the BYOL Session Smart Conductor VM from the Azure Marketplace. The deployment template creates the VM, assigns a static public IP to the management interface, and configures a network security group. A cloud-init script installs SSR 7.1.4 and initializes the node as a conductor automatically.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Requirements
+
+The following infrastructure must exist in your Azure subscription before deploying the conductor:
+
+- A VNet where the Conductor will be deployed (`SSR-VNet` in this guide).
+- A subnet within that VNet reachable via SSH and HTTPS for administration (`ssr-conductor-subnet`).
+- The subnet must be reachable from the WAN interface of every SSR router this conductor will manage.
+- A **Managed Identity** assigned the following minimum read permissions:
+
+  ```
+  Microsoft.Compute/virtualMachines/read
+  Microsoft.Network/virtualNetworks/read
+  Microsoft.Network/networkInterfaces/read
+  ```
+
+## Recommended VM Sizes
+
+Select the instance size that best meets the scale of your deployment.
+
+| Recommended Azure VM Size | Max vNICs | vCPU Cores | Memory |
+|---------------------------|-----------|-----------|--------|
+| Standard_F8s_v2 | 4 | 8 | 16 GB |
+| Standard_F16s_v2 | 4 | 16 | 32 GB |
+| Standard_F32s_v2 | 8 | 32 | 64 GB |
+| Standard_D8s_v5 | 4 | 8 | 32 GB |
+
+For guidance on scaling the conductor for larger deployments, see [System Requirements](intro_system_reqs.md#conductor-scaling-recommendations).
+
+## What the Template Creates
+
+When you deploy the conductor using the BYOL template, Azure automatically creates:
+
+- A VM using the BYOL Session Smart image from the Marketplace.
+- A single network interface (`control`) connected to the management subnet.
+- A network security group (NSG) associated with the control interface.
+- A unique static public IP address assigned to the control interface.
+
+The following image shows the resulting infrastructure:
+
+![Conductor deployment](/img/platforms_azure_conductor_deployment.png)
+
+## Select the BYOL Plan
+
+1. Go to [Azure Marketplace](https://portal.azure.com) and search for **Session Smart Networking Platform**.
+2. Select the **BYOL** plan.
+3. Click **Get it now**.
+4. Agree to the terms of use and privacy policy.
+5. Click the **Plans + Pricing** tab.
+
+![Plans](/img/platforms_azure_plans.png)
+
+## Deploy via Azure Portal
+
+1. On the **Plans + Pricing** tab, click the **Launch** link on the **Juniper Session Smart Conductor** template.
+
+   ![ARM Template](/img/azure-byol-conductor-template.png)
+
+2. Fill in the template parameters using the following table. For full parameter descriptions, see [Template Parameter Reference](#template-parameter-reference).
+
+   | Parameter | Example Value | Notes |
+   |-----------|--------------|-------|
+   | Subscription | _(your subscription)_ | |
+   | Resource Group | `SSR-RG` | Select existing or create new |
+   | Location | `eastus` | One word, all lowercase |
+   | Availability Set Name | `SSR-AvailabilitySet` | Must exist in the same resource group |
+   | Instance Size | `Standard_F8s_v2` | |
+   | Instance Name | `Conductor` | VM display name |
+   | SSR Version | `7.1.4` | The BYOL version to install |
+   | Artifactory Username | _(your username)_ | Juniper software access |
+   | Artifactory Token | _(your token)_ | Juniper software access token |
+   | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
+   | Virtual Network Name | `SSR-VNet` | Must already exist |
+   | Control Subnet Name | `ssr-conductor-subnet` | The conductor management subnet |
+   | Control Allowed CIDR | `0.0.0.0/0` | Restrict to known source IPs after deployment |
+   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict to known admin IPs after deployment |
+   | Admin Public Key Data | _(contents of your SSH public key)_ | At least 2048-bit RSA |
+
+   :::caution
+   `Control Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access to known source addresses.
+   :::
+
+3. Agree to the terms and conditions.
+4. Click **Purchase** to launch the deployment.
+
+   ![Deployment complete](/img/platforms_azure_deployment_complete.png)
+
+5. When the deployment completes, open the **Outputs** tab. Note the following values — you will need them in later steps:
+
+   - **Public IP address** assigned to the conductor management interface.
+   - **SSH login command** for the Linux VM.
+
+   :::important
+   Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
+   :::
+
+## Deploy via Azure CLI or PowerShell
+
+To deploy programmatically, first enable programmatic deployment:
+
+1. On the **Plans + Pricing** tab, click **Get started** under the template.
+2. Select your subscription and click **Save**.
+
+![Programmatic deployment](/img/platforms_azure_programmatically.png)
+
+3. Copy the **URL** for the **Juniper Session Smart Conductor** template from the **Plans + Pricing** tab.
+4. Create the parameters file `conductor_byol.parameters.json`:
+
+   ```json
+   {
+     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+     "contentVersion": "1.0.0.0",
+     "parameters": {
+       "location": { "value": "eastus" },
+       "availabilitySetName": { "value": "SSR-AvailabilitySet" },
+       "instanceSize": { "value": "Standard_F8s_v2" },
+       "instanceName": { "value": "Conductor" },
+       "SSR Version": { "value": "7.1.4" },
+       "artifactoryUsername": { "value": "<your-artifactory-username>" },
+       "artifactoryToken": { "value": "<your-artifactory-token>" },
+       "managedIdentity": { "value": "<your-managed-identity>" },
+       "virtualNetworkName": { "value": "SSR-VNet" },
+       "controlSubnetName": { "value": "ssr-conductor-subnet" },
+       "controlAllowedCidr": { "value": "0.0.0.0/0" },
+       "adminAllowedCidr": { "value": "0.0.0.0/0" },
+       "adminPublicKeyData": { "value": "<your-ssh-public-key>" }
+     }
+   }
+   ```
+
+5. Launch the deployment:
+
+   ```bash
+   New-AzResourceGroupDeployment -ResourceGroupName SSR-RG `
+     -TemplateUri <template-URL> `
+     -TemplateParameterFile ./conductor_byol.parameters.json
+   ```
+
+   :::important
+   Log in to the Linux instance via SSH using `t128` as the username and the private key corresponding to the public key in the parameters file.
+   :::
+
+## Deploy with Cloud-init Custom Data
+
+When launching via the CLI, PowerShell, or automation, you can supply a cloud-init `user-data` block to control the onboarding configuration:
+
+```yaml
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+        {
+            "name": "Conductor",
+            "ssr-version": "7.1.4",
+            "mode": "conductor",
+            "artifactory-user": "<your-artifactory-username>",
+            "artifactory-password": "<your-artifactory-token>",
+            "node-name": "node0",
+            "cloud-provider": "azure"
+        }
+```
+
+| Option | Meaning |
+|--------|---------|
+| `name` | The name of the conductor. |
+| `ssr-version` | The SSR software version to install (BYOL only). |
+| `mode` | Set to `conductor` for a conductor deployment. |
+| `artifactory-user` | Username portion of the Juniper Artifactory credentials. |
+| `artifactory-password` | Password or token portion of the Juniper Artifactory credentials. |
+| `node-name` | Name of the conductor node. Use `node0` for a standalone conductor. |
+| `cloud-provider` | Set to `azure` for Azure deployments. |
+| `download-timeout` | Timeout duration for the BYOL installation (default: `6h`). |
+| `download-retries` | Number of installation retry attempts (default: unlimited). |
+
+## Template Parameter Reference
+
+| Parameter | Description |
+|-----------|-------------|
+| Subscription | Subscription for the deployment. |
+| Resource Group | Select an existing resource group or create a new one. |
+| Region | Auto-populated from the resource group. |
+| Location | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
+| Availability Set Name | Name of the existing availability set within the same resource group and region. |
+| Instance Size | The Azure VM size to use for the conductor. |
+| Instance Name | Display name for the conductor VM. |
+| SSR Version | SSR software version to install. Set to `7.1.4` for this guide. |
+| Artifactory Username | User portion of the Juniper Artifactory credentials. |
+| Artifactory Token | Token portion of the Juniper Artifactory credentials. |
+| Managed Identity | Azure Managed Identity name. Must have the read permissions listed in [Requirements](#requirements). |
+| Virtual Network Name | Name of the existing VNet where the conductor will be deployed. |
+| Control Subnet Name | Name of the management subnet within the VNet. |
+| Control Allowed CIDR | Source IP CIDR range allowed to reach the conductor control interface. |
+| Admin Allowed CIDR | Source IP CIDR range allowed to reach the conductor for administration. Restrict this after deployment. |
+| Admin Public Key Data | RSA public key (at least 2048-bit) used to authenticate SSH access to the VM. |
+
+## Next Step
+
+Proceed to [Step 2 — Initialize and Access the Conductor](deploy_azure_conductor_install.mdx).

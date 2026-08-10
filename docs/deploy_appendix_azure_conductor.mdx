@@ -1,0 +1,220 @@
+---
+title: Appendix - Azure Conductor Configuration
+sidebar_label: Appendix - Azure Conductor Configuration
+---
+import NetworkDesign from './_deploy_azure_conductor_network_design.md';
+
+This appendix contains the complete SSR PCLI configuration for the `Conductor` and `azure-router-1` deployments described in this guide. Apply this configuration after completing [Step 3 — Configure the Conductor](deploy_azure_conductor_config.mdx) and [Step 4 — Deploy and Configure a Router](deploy_azure_conductor_router.mdx).
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Applying This Configuration
+
+This configuration can be applied to a freshly initialized conductor using the PCLI import function.
+
+1. Save the configuration below to a file — for example, `azure-conductor.cfg`.
+
+2. Copy the file to the conductor:
+
+   ```bash
+   scp azure-conductor.cfg t128@<conductor-public-ip>:/tmp/
+   ```
+
+3. Log in to the conductor PCLI:
+
+   ```bash
+   ssh t128@<conductor-public-ip>
+   su admin
+   ```
+
+4. Enter configuration mode and import:
+
+   ```text
+   admin@node0.Conductor# import config /tmp/azure-conductor.cfg
+   ```
+
+5. Review any validation warnings, then commit:
+
+   ```text
+   admin@node0.Conductor (config)# commit
+   Are you sure you want to commit the candidate config? [y/N]: y
+   ```
+
+Alternatively, you may copy and paste each block into the PCLI while in `configure` → `edit` mode.
+
+## Complete Configuration
+
+Replace all placeholder values (shown in angle brackets) with values from your environment before applying.
+
+```text
+config
+    authority
+        name              Authority128
+
+        conductor-address  <conductor-public-ip>
+
+        tenant  corp
+            name  corp
+        exit
+
+        service  Internet-Traffic
+            name             Internet-Traffic
+            scope            public
+            security         internal
+
+            access-policy
+                source  corp
+            exit
+
+            address  0.0.0.0/0
+        exit
+
+        router  Conductor
+            name                 Conductor
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  conductor
+
+                device-interface  mgmt-dev
+                    name         mgmt-dev
+                    type         ethernet
+                    forwarding   false
+                    vmbus-uuid   <conductor-vmbus-uuid>
+
+                    network-interface  mgmt-intf
+                        name  mgmt-intf
+                        type  management
+
+                        address  10.0.0.10
+                            ip-address     10.0.0.10
+                            prefix-length  24
+                            gateway        10.0.0.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+
+        router  azure-router-1
+            name                 azure-router-1
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    type               ethernet
+                    forwarding         true
+                    vmbus-uuid         <wan-vmbus-uuid>
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              1
+                        conductor              true
+                        default-route          true
+                        source-nat             true
+                        management             true
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood           internet
+                            name  internet
+                        exit
+
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    type               ethernet
+                    forwarding         true
+                    vmbus-uuid         <lan-vmbus-uuid>
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+                        tenant      corp
+                        source-nat  true
+
+                        address     10.0.2.1
+                            ip-address     10.0.2.1
+                            prefix-length  24
+                        exit
+
+                        dhcp        disabled
+                    exit
+                exit
+            exit
+
+            dns-config  manual
+                mode    manual
+                address  1.1.1.1
+                address  8.8.8.8
+            exit
+
+            service-route  internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+
+                next-hop  node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+## Configuration Notes
+
+:::important
+All VMBus UUID values in this configuration are placeholders. You must discover the actual values from the deployed VM before applying this configuration. See [Discover VMBus UUIDs](deploy_azure_conductor_router.mdx#discover-vmbus-uuids) for the discovery procedure.
+:::
+
+| Item | Note |
+|------|------|
+| `conductor-public-ip` | Replace with the public IP address shown in the Azure Portal Outputs tab after the conductor VM is deployed. |
+| `conductor-vmbus-uuid` | Replace with the VMBus UUID of the conductor's management NIC, discovered by running `sudo dpdk-devbind.py --status` on the conductor VM. |
+| `wan-vmbus-uuid` | Replace with the VMBus UUID for `eth1` (the public/WAN NIC) on the router VM. |
+| `lan-vmbus-uuid` | Replace with the VMBus UUID for `eth2` (the private/LAN NIC) on the router VM. |
+| `10.0.0.10` (conductor private IP) | Replace with the actual private IP assigned to the conductor VM if different from this guide's example. |
+| `10.0.2.1/24` (router LAN IP) | Replace with the actual LAN gateway address for your private subnet. |
+| `gateway 10.0.0.1` | Replace with the actual gateway IP for the conductor subnet. |
+| `forwarding false` on conductor NIC | The conductor management NIC is not a forwarding interface. Do not change this value. |
+| `dhcp v4` on `wan1` | The router WAN interface obtains its IP via DHCP from the Azure `ssr-router-wan` subnet. This is the expected behavior for Azure-hosted routers. |
+
+## Interface Summary
+
+| Router | Interface | Device Interface | VMBus UUID | Type | Configuration |
+|--------|-----------|-----------------|-----------|------|---------------|
+| `Conductor` | `mgmt-intf` | `mgmt-dev` | `<conductor-vmbus-uuid>` | Management | Static `10.0.0.10/24`, forwarding `false` |
+| `azure-router-1` | `wan1` | `wan-dev` | `<wan-vmbus-uuid>` | External | DHCP v4, conductor, management, source-nat, default-route, neighborhood `internet` |
+| `azure-router-1` | `lan1` | `lan-dev` | `<lan-vmbus-uuid>` | External | Tenant `corp`, static `10.0.2.1/24`, source-nat |
+
+## Service Route Summary
+
+| Router | Service Route | Service | Type | Next Hop |
+|--------|--------------|---------|------|---------|
+| `azure-router-1` | `internet-route` | `Internet-Traffic` | `service-agent` | `node0 / wan1` |
+
+## Design Notes
+
+**Management over Forwarding** — The `wan1` interface on `azure-router-1` carries both internet forwarding traffic and conductor management sessions simultaneously. Management traffic originates from the `169.254.x.x` range and is source-NAT'd to the DHCP WAN address before leaving the interface. This eliminates the need for a separate management subnet or out-of-band management path.
+
+**Internet Breakout** — The `internet-route` service route directs all `corp`-tenant traffic matching the `Internet-Traffic` service (destination `0.0.0.0/0`) out through `wan1` as a service-agent. Source NAT on `wan1` translates LAN client addresses to the WAN IP before traffic reaches the Azure internet gateway.
+
+**VMBus UUID Binding** — Azure assigns VMBus UUIDs to NICs at VM creation time. Unlike VMware PCI addresses, VMBus UUIDs are stable across reboots but are unique to each VM instance. Always discover the actual values from the deployed VM rather than using the placeholders in this appendix.
+
+**Conductor Address** — The `conductor-address` is set to the conductor's Azure public IP so that routers outside the Azure VNet can also reach the conductor. If all managed routers reside in the same VNet, the private IP (`10.0.0.10`) may be used instead.
