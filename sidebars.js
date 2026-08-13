@@ -518,6 +518,7 @@ module.exports = {
           "wan_assurance_ssr1300_quickstart",
           "wan_assurance_ssr1400_quickstart",
           "wan_assurance_ssr1500_quickstart",
+          "wan_assurance_ssr400_quickstart",
           "intro_wa_quickstart_3_templates",
           "intro_wa_quickstart_4_siteassign",
           ],
