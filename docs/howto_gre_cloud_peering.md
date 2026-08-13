@@ -3,9 +3,9 @@ title: GRE Tunnel Health Checks And BGP Peering With Cloud Services
 sidebar_label: GRE Cloud Peering
 ---
 
-Cloud security and SD-WAN services — such as Akamai — commonly terminate customer traffic over Generic Routing Encapsulation (GRE) tunnels and monitor tunnel liveness by sending inbound ICMP echo requests (health checks) to the customer end of each tunnel. As described in [Native GRE Tunnels](config_gre_tunnel.md), an SSR `gre-tunnel` network-interface does not answer these inbound ICMP probes on its own, so the far-end service can mark an otherwise healthy tunnel as down.
+Cloud security and SD-WAN services — such as Akamai — commonly terminate customer traffic over Generic Routing Encapsulation (GRE) tunnels and monitor tunnel liveness by sending inbound ICMP echo requests (health checks) to the customer end of each tunnel. As described in [Native GRE Tunnels](config_gre_tunnel.md), an SSR `gre-tunnel` network-interface does not answer these inbound ICMP probes on its own, so it is possible that the far-end service may mark an otherwise healthy tunnel as down.
 
-This guide shows you how to make native GRE tunnels respond to inbound ICMP health checks and how to peer BGP passively over those same tunnels. The pattern uses a parallel `host`-type device interface (a Linux KNI) that shares the tunnel's internal address, so the Linux host stack answers the ICMP probes while the SSR forwarding plane continues to carry data traffic.
+This guide describes how to make native GRE tunnels respond to inbound ICMP health checks and how to peer BGP passively over those same tunnels. The pattern uses a parallel `host` device interface (a Linux KNI) that shares the tunnel's internal address, so the Linux host stack answers the ICMP probes while the SSR forwarding plane continues to carry data traffic.
 
 :::note
 This guide applies to SSR 6.x and later, where native GRE tunnels are supported. Akamai is used only as a representative cloud service; the configuration is vendor-neutral. Replace the placeholder IP addresses and AS numbers with the values from your deployment.
@@ -13,7 +13,7 @@ This guide applies to SSR 6.x and later, where native GRE tunnels are supported.
 
 ## Overview
 
-SSR native GRE (`type gre-tunnel`) does not pass inbound ICMP echo requests to the Linux stack, so a health-checking peer receives no reply. The workaround is to create a `host`-type device interface (KNI) with the same IP address as the GRE tunnel's `internal-address`. The Linux host stack answers the ICMP echo replies, and SSR services steer inbound GRE and ICMP traffic into that host interface.
+SSR native GRE (`type gre-tunnel`) does not pass inbound ICMP echo requests to the Linux stack, which means a peer performing a health check does not receive a reply. The workaround is to create a `host` device interface (KNI) with the same IP address as the `internal-address` of the GRE tunnel. The Linux host stack answers the ICMP echo replies, and SSR services steer inbound GRE and ICMP traffic into that host interface.
 
 The same host interface also provides a stable source address for BGP. Because cloud services typically initiate the BGP TCP connection themselves, each neighbor is configured in passive mode: the SSR listens on TCP/179 and never initiates the session.
 
@@ -27,7 +27,7 @@ The same host interface also provides a stable source address for BGP. Because c
 
 ## Topology
 
-The example uses three GRE tunnels from a single router (`Router128`) to a cloud service. Each tunnel has a matching `host`-type interface that terminates ICMP health checks and sources BGP, and each tunnel carries one passive BGP session to the far-end peer.
+The following example uses three GRE tunnels from a single router (`Router128`) to a cloud service. Each tunnel has a matching `host` interface that terminates ICMP health checks and sources BGP, and each tunnel carries one passive BGP session to the far-end peer.
 
 ```mermaid
 flowchart LR
@@ -64,7 +64,7 @@ flowchart LR
 
 | Problem | Solution |
 |---|---|
-| A native GRE interface cannot respond to inbound ICMP health checks from the far-end. | Create a `host`-type device interface (KNI) with the same IP as the tunnel `internal-address`, so the Linux kernel answers ICMP. |
+| A native GRE interface cannot respond to inbound ICMP health checks from the far-end. | Create a `host` device interface (KNI) with the same IP as the tunnel `internal-address`, so the Linux kernel answers ICMP. |
 | The BGP TCP session needs a stable source address over the GRE path. | Bind the BGP transport `local-address` to the `host` network-interface that carries the tunnel internal address. |
 | The SSR must not initiate the BGP TCP session; the far-end is always the active side. | Set `transport passive-mode true` on each BGP neighbor, and add BGP services and service-routes that steer inbound TCP/179 to the routing stack. |
 | Each tunnel needs an isolated tenant and access policy. | Assign one tenant per GRE interface: `GRE_1_TENANT`, `GRE_2_TENANT`, and `GRE_3_TENANT`. |
@@ -158,7 +158,7 @@ The MTU and MSS values account for GRE overhead on a standard 1500-byte WAN:
 
 ## Step 3: Configure Host Interfaces For ICMP And BGP Termination
 
-Each `host`-type device-interface creates a Linux KNI whose IP address matches the corresponding GRE tunnel's `internal-address`. This lets the Linux kernel answer ICMP echo requests from the far-end health checks, and lets the BGP process source its TCP session from that IP.
+Each `host` device-interface creates a Linux KNI whose IP address matches the corresponding GRE tunnel's `internal-address`. This allows the Linux kernel answer ICMP echo requests from the far-end health checks, and allows the BGP process source its TCP session from that IP.
 
 ```text
 config authority router Router128 node node1 device-interface host-intf
@@ -227,12 +227,12 @@ exit
 ```
 
 :::important
-Keep `source-nat false` on these interfaces. If source NAT is enabled, ICMP replies and BGP TCP are source-NATted before leaving, and the far-end sees the wrong source IP. Setting `valid-waypoint true` allows the SSR to use these addresses for SVR waypoint allocation if needed.
+Keep `source-nat false` on these interfaces. If source NAT is enabled, ICMP replies and BGP TCP are source-NATted before leaving, resulting in the far-end receiving the wrong source IP. Setting `valid-waypoint true` allows the SSR to use these addresses for SVR waypoint allocation as needed.
 :::
 
 ## Step 4: Configure Inbound GRE And ICMP Services
 
-Create one inbound service per tunnel. Each matches the tunnel's `internal-address` and allows both GRE and ICMP, so inbound health checks are steered to the corresponding host interface by a service-route (added in Step 7).
+Create one inbound service per tunnel. Each one matches the tunnel's `internal-address` and allows both GRE and ICMP, so inbound health checks are steered to the corresponding host interface by a service-route (added in Step 7).
 
 ```text
 config authority service gre-tunnel1-keepalive-return
@@ -832,7 +832,7 @@ show sessions router Router128 service-name gre-tunnel1-keepalive-return
 
 ## Design Notes And Caveats
 
-**Native GRE and ICMP limitation.** The `gre-tunnel` network-interface type does not pass ICMP echo requests to the Linux stack, so a pinging host receives no reply. The `host`-type KNI with the same IP is the workaround. The GRE interface still sets `icmp allow` to permit ICMP to transit the tunnel; the host interface is what terminates and answers the ICMP.
+**Native GRE and ICMP limitation.** The `gre-tunnel` network-interface type does not pass ICMP echo requests to the Linux stack, so a pinging host receives no reply. The `host` KNI with the same IP is the workaround. The GRE interface still sets `icmp allow` to permit ICMP to transit the tunnel; the host interface is what terminates and answers the ICMP.
 
 **Passive mode means the SSR listens only.** With `transport passive-mode true`, the SSR opens a listening socket on TCP/179 bound to the `local-address` interface and never sends a TCP SYN toward the neighbor. The far-end peer must always initiate the connection, and BGP does not come up until it does.
 
