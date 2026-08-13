@@ -9,6 +9,10 @@ Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that enc
 This is not an SVR feature. GRE tunnels are not created to send packets between peered SSR routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
 :::
 
+:::tip
+A native GRE tunnel does not answer inbound ICMP health checks (keepalives) sent by a far-end peer. To make tunnels respond to these probes when peering with a cloud service such as Akamai, see [GRE Tunnel Health Checks And BGP Peering With Cloud Services](howto_gre_cloud_peering.md).
+:::
+
 ## Sending Packets
 
 When a GRE tunnel is configured, sessions are set up to and from the endpoints. With a GRE tunnel configured as a possible path for the service, the load balancer has the option of choosing the tunnel as the packet’s next hop.
