@@ -18,16 +18,13 @@ Ports 3 through 9 (`ge-0-3` through `ge-0-9`) can be used for LAN network connec
 
 ![Device Connections](/img/ssr-400-frontpanel.png)
 
-1. Connect Port 2 (`ge-0-2`) to an Ethernet link that can assign a DHCP address to the SSR device and provide connectivity to the Internet and Mist.
+1. Connect an Ethernet link that can assign a DHCP address to the SSR device and provides connectivity to the Internet and Mist to any of the following ports: Port 0 (`ge-0-0`), Port 1 (`ge-0-1`), or Port 2 (`ge-0-2`). 
 
     For device management, connect to Mist using port 2 (`ge-0-2`). You can also connect to Mist from one of the WAN ports 0 (`ge-0-0`) and 1 (`ge-0-1`) **only** when port 2 (`ge-0-2`) is disconnected, or does not have a valid DHCP leased address and default route.
 
     Do not change the Mist management port once your device is powered on and connected to the Mist Cloud instance.
 
-2. Connect Port 3 (`ge-0-3`) to your LAN devices, including:
-    * Mist-managed Juniper EX switches
-    * Mist APs
-    * User devices
+2. Connect your LAN devices (Mist-managed Juniper EX switches, Mist APs, and other User devices) to any of the ports 3 through 9 (`ge-0-3` through `ge-0-9`).
 
 3. **Power on the device**.
 
