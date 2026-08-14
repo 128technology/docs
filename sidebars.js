@@ -505,7 +505,7 @@ module.exports = {
       "intro_rest_graphql_apis",
       "bcp_salt_pillars",
     ],
-    "WAN Assurance": [
+    "WAN Assurance and Onboarding": [
       "wan_overview",
       "hdwr_ssr_device_port_layout",
       {
