@@ -26,11 +26,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.2.14-2-lts
 
-**Release Date:** August 12, 2026
+**Release Date:** August 14, 2026
 
 ### Resolved Issues
 
 - **I95-65826 Assets enter a `Disconnected` state after upgrading the Conductor:** After a Conductor upgrade, assets entered a `Disconnected` state while the SSH connections were restored. In some cases this took an hour or more. The Minion connector has been upgraded to version 1.7.6 to resolve this issue. 
+------
+- **I95-66070 Highway Crash in High-Scale Peer Scenarios:** Resolved an issue where the Highway process would crash (segmentation fault) with a large number of SSR peers, due to a race condition. The fix adds thread-safe locking mechanisms to protect all read and write operations, ensuring stable operation at scale.
 
 ## Release 6.2.13-1-lts
 
