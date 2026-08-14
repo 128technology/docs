@@ -341,6 +341,7 @@ module.exports = {
           "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
           "config_gre_tunnel",
+          "howto_gre_cloud_peering",
           "config_service_health",
           "config_static_hostname_mapping",
           "config_transport_encryption",
