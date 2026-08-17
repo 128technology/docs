@@ -8,55 +8,7 @@ module.exports = {
       "about_support_policy",
       "config_firewall_ports",
     ],
-    "Deployment Guides": [
-      "deploy_guides_overview",
-      {
-        "type": "category",
-        "label": "Conductor Deployment Guides",
-        "items": [
-            {
-              "type": "category",
-              "label": "VMware ESXi Conductor",
-              "items": [
-                "deploy_vmware_conductor",
-                "deploy_vmware_conductor_vm",
-                "deploy_vmware_conductor_install",
-                "deploy_vmware_conductor_config",
-                "deploy_appendix_vmware_conductor",
-              ],
-            },
-          ],
-        },
-        {
-          "type": "category",
-          "label": "Router Deployment Guides",
-          "items": [
-            "deploy_vmware_router_overview",
-              {
-                "type": "category",
-                "label": "VMware Spoke Router",
-                "items": [
-                  "deploy_vmware_router_vm",
-                  "deploy_vmware_router_install",
-                  "deploy_vmware_router_pci",
-                  "deploy_vmware_router_config",
-                  "deploy_appendix_vmware_router",
-                ],
-              },
-              {
-                "type": "category",
-                "label": "VMware Hub Router",
-                "items": [
-                  "deploy_vmware_hub_router_vm",
-                  "deploy_vmware_hub_router_install",
-                  "deploy_vmware_hub_router_pci",
-                  "deploy_vmware_hub_router_config",
-                  "deploy_appendix_vmware_hub_router",
-              ],
-            },
-          ],
-        },
-      ],
+
     "Release Notes": [
       {
         "type": "category",
@@ -131,44 +83,6 @@ module.exports = {
           "release_notes_byol_2.0",
           "release_notes_byol"
         ]
-      },
-    ],
-    "Hardware Support":[
-      "supported_devices_overview",
-      "intro_system_reqs",
-      "about_supported_platforms",
-      "about_certified_platforms",
-      "concepts_ssr_chassis_manager",
-      "rma_wan_assurance",
-    ],
-    "Concepts": [
-      "concepts_overview",
-      "concepts_application_discovery",
-      "concepts_EthOverSVR",
-      "concepts_ha_theoryofoperation",
-      "concepts_interface_types",
-      "concepts_kni",
-      "concepts_linux_host_networking",
-      "concepts_learning_VRF_routes",
-      "concepts_network_planes",
-      "concepts_metadata",
-      "concepts_metrics",
-      "concepts_machine_communication",
-      "concepts_pcli",
-      "concepts_session_timer",
-      "concepts_waypoint_ports",
-      "concepts_monitoring",
-      "concepts_glossary",
-      {
-        "type": "category",
-        "label": "Understanding the Forwarding Information Base",
-        "items": [
-          "concepts_fib",
-          "concepts_fib_construction",
-          "concepts_fib_design",
-          "bcp_fib_design",
-          "ts_fib",
-        ],
       },
     ],
     "Installing Software Version 6.3.0 and Later": [
@@ -276,16 +190,131 @@ module.exports = {
       "upgrade_legacy",
       "intro_rollback",
     ],
-    "Best Practices": [
-      "bcp_sdwan_design_guide",
-      "bcp_per-adjacency_traffic_engineering",
-      "bcp_att_avpn_configuration",
-      "bcp_using_128T_as_ntp_server",
-      "bcp_dhcp_relay_overview",
-      "bcp_qos_msft_expressroute",
-      "bcp_monitoring_headends",
-      "bcp_service_and_service_policy_design",
-      "bcp_service-policy_defaults",
+    "Deployment Guides": [
+      "deploy_guides_overview",
+      {
+        "type": "category",
+        "label": "Conductor Deployment Guides",
+        "items": [
+            {
+              "type": "category",
+              "label": "VMware ESXi Conductor",
+              "items": [
+                "deploy_vmware_conductor",
+                "deploy_vmware_conductor_vm",
+                "deploy_vmware_conductor_install",
+                "deploy_vmware_conductor_config",
+                "deploy_appendix_vmware_conductor",
+              ],
+            },
+          ],
+        },
+                {
+          "type": "category",
+          "label": "Router Deployment Guides",
+          "items": [
+            "deploy_vmware_router_overview",
+              {
+                "type": "category",
+                "label": "VMware Spoke Router",
+                "items": [
+                  "deploy_vmware_router_vm",
+                  "deploy_vmware_router_install",
+                  "deploy_vmware_router_pci",
+                  "deploy_vmware_router_config",
+                  "deploy_appendix_vmware_router",
+                ],
+              },
+              {
+                "type": "category",
+                "label": "VMware Hub Router",
+                "items": [
+                  "deploy_vmware_hub_router_vm",
+                  "deploy_vmware_hub_router_install",
+                  "deploy_vmware_hub_router_pci",
+                  "deploy_vmware_hub_router_config",
+                  "deploy_appendix_vmware_hub_router",
+              ],
+            },
+          ],
+        },
+      ],
+    "WAN Assurance and Onboarding": [
+      "wan_overview",
+      "hdwr_ssr_device_port_layout",
+      {
+        "type": "category",
+        "label": "WAN Assurance Quick Start",
+        "items": [
+          "wan_assurance_ssr120_quickstart",
+          "wan_assurance_ssr130_quickstart",
+          "wan_assurance_ssr1200_quickstart",
+          "wan_assurance_ssr1300_quickstart",
+          "wan_assurance_ssr1400_quickstart",
+          "wan_assurance_ssr1500_quickstart",
+          "wan_assurance_ssr400_onboard",
+          "wan_assurance_ssr440_onboard",
+          "intro_wa_quickstart_3_templates",
+          "intro_wa_quickstart_4_siteassign",
+          ],
+      },
+      {
+        "type": "category",
+        "label": "Cloud Telemetry for a Conductor-Managed SSR",
+        "items": [
+          "config_wan_assurance",
+          "wan_telemetry_features",
+          "wan_telemetry_troubleshooting",
+          ],
+      },
+      {
+        "type": "category",
+        "label": "Whitebox Adoption",
+        "items": [
+          "wan_staging",
+          "hdwr_whitebox_port_layout",
+          "wan_onboarding_whitebox",
+          "wan_telemetry_site_assign",
+          ]
+      },
+    ],
+    "Hardware Support":[
+      "supported_devices_overview",
+      "intro_system_reqs",
+      "about_supported_platforms",
+      "about_certified_platforms",
+      "concepts_ssr_chassis_manager",
+      "rma_wan_assurance",
+    ],
+    "Concepts": [
+      "concepts_overview",
+      "concepts_application_discovery",
+      "concepts_EthOverSVR",
+      "concepts_ha_theoryofoperation",
+      "concepts_interface_types",
+      "concepts_kni",
+      "concepts_linux_host_networking",
+      "concepts_learning_VRF_routes",
+      "concepts_network_planes",
+      "concepts_metadata",
+      "concepts_metrics",
+      "concepts_machine_communication",
+      "concepts_pcli",
+      "concepts_session_timer",
+      "concepts_waypoint_ports",
+      "concepts_monitoring",
+      "concepts_glossary",
+      {
+        "type": "category",
+        "label": "Understanding the Forwarding Information Base",
+        "items": [
+          "concepts_fib",
+          "concepts_fib_construction",
+          "concepts_fib_design",
+          "bcp_fib_design",
+          "ts_fib",
+        ],
+      },
     ],
     "Administration Guide": [
       {
@@ -352,6 +381,7 @@ module.exports = {
           "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
           "config_gre_tunnel",
+          "howto_gre_cloud_peering",
           "config_service_health",
           "config_static_hostname_mapping",
           "config_transport_encryption",
@@ -516,42 +546,16 @@ module.exports = {
       "intro_rest_graphql_apis",
       "bcp_salt_pillars",
     ],
-    "WAN Assurance": [
-      "wan_overview",
-      "hdwr_ssr_device_port_layout",
-      {
-        "type": "category",
-        "label": "WAN Assurance Quick Start",
-        "items": [
-          "wan_assurance_ssr120_quickstart",
-          "wan_assurance_ssr130_quickstart",
-          "wan_assurance_ssr1200_quickstart",
-          "wan_assurance_ssr1300_quickstart",
-          "wan_assurance_ssr1400_quickstart",
-          "wan_assurance_ssr1500_quickstart",
-          "intro_wa_quickstart_3_templates",
-          "intro_wa_quickstart_4_siteassign",
-          ],
-      },
-      {
-        "type": "category",
-        "label": "Cloud Telemetry for a Conductor-Managed SSR",
-        "items": [
-          "config_wan_assurance",
-          "wan_telemetry_features",
-          "wan_telemetry_troubleshooting",
-          ],
-      },
-      {
-        "type": "category",
-        "label": "Whitebox Adoption",
-        "items": [
-          "wan_staging",
-          "hdwr_whitebox_port_layout",
-          "wan_onboarding_whitebox",
-          "wan_telemetry_site_assign",
-          ]
-      },
+    "Best Practices": [
+      "bcp_sdwan_design_guide",
+      "bcp_per-adjacency_traffic_engineering",
+      "bcp_att_avpn_configuration",
+      "bcp_using_128T_as_ntp_server",
+      "bcp_dhcp_relay_overview",
+      "bcp_qos_msft_expressroute",
+      "bcp_monitoring_headends",
+      "bcp_service_and_service_policy_design",
+      "bcp_service-policy_defaults",
     ],
     "Plugins": [
       "plugin_intro",
