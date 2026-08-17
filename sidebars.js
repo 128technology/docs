@@ -209,7 +209,7 @@ module.exports = {
             },
           ],
         },
-                {
+        {
           "type": "category",
           "label": "Router Deployment Guides",
           "items": [

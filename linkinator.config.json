@@ -6,6 +6,7 @@
   "skip": [
     "^mailto:",
     "^https://docs\\.128technology\\.com",
+    "^https://uat\\.juniper\\.net",
     "^https://tools\\.ietf\\.org",
     "^https://www\\.wireguard\\.com",
     "^https://regexr\\.com",
@@ -19,6 +20,7 @@
     "^https://docs\\.aws\\.amazon\\.com",
     "^https://thekelleys\\.org\\.uk",
     "^https://www\\.hpe\\.com/psnow/doc/PSN1014689145USEN\\.pdf"
+    ,"^https://www\\.juniper\\.net/us/en/products/cloud-services/wan-assurance\\.html$"
   ],
   "retry": true,
   "retryErrors": true,
