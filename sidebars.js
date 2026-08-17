@@ -341,6 +341,7 @@ module.exports = {
           "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
           "config_gre_tunnel",
+          "howto_gre_cloud_peering",
           "config_service_health",
           "config_static_hostname_mapping",
           "config_transport_encryption",
@@ -505,7 +506,7 @@ module.exports = {
       "intro_rest_graphql_apis",
       "bcp_salt_pillars",
     ],
-    "WAN Assurance": [
+    "WAN Assurance and Onboarding": [
       "wan_overview",
       "hdwr_ssr_device_port_layout",
       {
@@ -518,6 +519,8 @@ module.exports = {
           "wan_assurance_ssr1300_quickstart",
           "wan_assurance_ssr1400_quickstart",
           "wan_assurance_ssr1500_quickstart",
+          "wan_assurance_ssr400_onboard",
+          "wan_assurance_ssr440_onboard",
           "intro_wa_quickstart_3_templates",
           "intro_wa_quickstart_4_siteassign",
           ],
