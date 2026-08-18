@@ -67,6 +67,7 @@ Dynamic Source NAT is configured from the network-interface using the following 
 
 - [`local-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-local-ip): For packets ingressing this interface, the IP that is source NAT'ed to the `remote-ip`. 
 - [`remote-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-remote-ip): For packets ingressing this interface, the IP where the `local-ip` will be source NAT'ed. `remote-ip` must use the /32 prefix.
+- [`applies-to-local-breakout`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-applies-to-local-breakout): Whether the dynamic source NAT applies to local breakout sessions. Default is `false`. Set to `true` when IDP is enabled on traffic that also requires Dynamic Source NAT — IDP processes traffic as local breakout sessions, so without this flag the NAT rules are not applied to that traffic.
 
 ## Show Commands
  
