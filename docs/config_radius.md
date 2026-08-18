@@ -6,9 +6,9 @@ sidebar_label: Authentication Methods
 | Release | Modification |
 | ------- | ------------ |
 | 5.6.0   | Feature introduced |
+| 6.1.11  | Require the configuration of `Message-Authenticator` |
 | 6.2.4   | Enabled automatic account creation for authorized RADIUS users |
 | 6.3.0   | RADIUS servers configurable per router |
-| 6.1.11  | Require the configuration of `message-authenticator` |
 
 ## Overview
 
@@ -46,9 +46,11 @@ Using the RADIUS Vendor Specific Attribute (VSA) allows the administrator to ide
 
 #### Message Authenticator
 
-To remain current with network security standards, the use of the `message-authenticator` VSA on `access-accept` and `access-reject` messages is now required. If your radius server is not configured to provide this VSA, RADIUS authentication will not function.
+To remain current with network security standards, the use of the Message-Authenticator attribute on `access-accept` and `access-reject` messages is now required. If your RADIUS server is not configured to provide this attribute, RADIUS authentication will not function.
 
-Please refer to your RADIUS server documentation for information on setting the `message-authenticator`. 
+Message-Authenticator is a standard RADIUS attribute (type 80, defined in RFC 3579). It is not a Vendor Specific Attribute, and is unrelated to the Juniper VSA described above.
+
+Please refer to your RADIUS server documentation for information on setting the Message-Authenticator. 
 
 In versions 6.1.12, 6.2.8, 6.3.3, and later, an option to bypass the requirement for the Message-Authenticator check in RADIUS requests and responses was added. **Disabling this check is NOT recommended**, but may be necessary for some backwards compatibility scenarios. 
 
@@ -81,6 +83,10 @@ config
   exit
 exit
 ```
+
+:::note
+The `timeout` value is not currently applied to RADIUS server selection, retry timing, or failover. Retry and failover intervals are fixed and are not configurable. See [Server Selection](#server-selection).
+:::
 
 The first successful login to the SSR triggers the account creation, and after initial account creation the user session is terminated and the user will need to login again. Once a local account has been created on an SSR subsequent logins will function as normal.
 
@@ -126,6 +132,12 @@ j1@conductor-node-1.Conductor#
 
 ```
 
+:::note
+Whether a RADIUS request is sent depends on how the account is defined on the SSR, not on whether it exists there. An account whose `authentication-type` is `local` is authenticated locally, and no RADIUS request is sent. Accounts whose `authentication-type` is `remote`, and accounts created automatically on first login, are authenticated against the RADIUS server on every login.
+
+When verifying RADIUS connectivity, confirm that the test account is not a local account — a local account generates no RADIUS traffic at all.
+:::
+
 #### Manual User Configuration
 
 The manual operation is still available by default, and requires the previous configuration process where `create user` must be run with `authentication-type` set to `remote`. 
@@ -152,6 +164,8 @@ The SSR uses a proxy layer (radsecproxy) to manage RADIUS server selection. Sele
 - When all servers are healthy, the **first server in configuration order** handles all requests. The secondary server receives no traffic.
 - If the active server becomes unreachable (no response), the proxy marks it as failed after approximately 15 seconds and directs subsequent requests to the next server.
 - Server ordering within each scope follows the order in which the servers appear in configuration. Router-scope servers are ordered before authority-scope servers.
+- The proxy does not proactively probe servers to determine whether they have recovered. Server health is inferred only from responses to live authentication requests, so a server that is not receiving requests is never re-evaluated.
+- Retry and failover intervals are fixed and are not configurable. The `timeout` value configured on a `radius-server` is not applied to server selection or retry timing.
 
 ### Failover Behavior
 
@@ -162,8 +176,24 @@ RADIUS server failover is **best-effort and non-revertive**. It does not provide
 Be aware of the following failover characteristics:
 
 - **Failover does not rescue the current login attempt.** The authentication layer (PAM) times out the request in approximately 3 seconds — before the proxy has determined whether the server is reachable. For interactive SSH, this results in the first one or two password prompts being denied before failover takes effect on a subsequent attempt. Single-attempt authenticators (the web UI, REST API, and automation scripts) experience a hard failure.
-- **Failover is non-revertive.** Once traffic moves to a secondary server, it does not automatically return to the primary when the primary recovers. A configuration commit that changes the RADIUS configuration restarts the proxy and resets server selection.
+- **Failover is non-revertive.** Once traffic moves to a secondary server, it does not automatically return to the primary when the primary recovers.
+- **Failback to a recovered server is delayed.** A server that has failed retains its failure count in the proxy indefinitely; nothing clears it while that server is receiving no requests. If the server currently in use subsequently fails, selection does not move immediately — the newly failed server must first accumulate a comparable number of failures. During that period authentication attempts are denied even though a healthy server is available, and the delay grows with the length of the previous outage.
+- **Server selection can be reset by a configuration commit.** A commit that changes a RADIUS server's address, port, protocol, or shared secret regenerates the proxy configuration, restarts the proxy, and resets server selection, returning it to the first server in configuration order. Commits that change other RADIUS settings do not.
 - **A server that replies but denies all users is never failed over.** The proxy considers any valid RADIUS response — including an Access-Reject — as proof the server is healthy. If a server responds but denies every user (for example, due to a stale user database or a misconfigured backend), traffic remains directed at that server indefinitely while the healthy server is never contacted.
+
+### Determining Which Server Is In Use
+
+There is no CLI command that reports which RADIUS server is currently selected, or which has been marked as failed. This information is available only from the proxy's log:
+
+```
+journalctl -u radsecproxy
+```
+
+Failures are reported in the form `clientwr: no server response, udp-server0 dead?`. The proxy identifies servers positionally rather than by their configured names: `udp-server0` is the first server in configuration order, `udp-server1` the second, and so on, with router-scope servers ordered before authority-scope servers.
+
+:::note
+The proxy configuration is generated and managed by the SSR. It is regenerated automatically and should not be edited directly.
+:::
 
 ### NAS Identity
 
@@ -182,7 +212,8 @@ The `nas-ip-address` setting controls the RADIUS attribute value only — it doe
 
 - **Always maintain a local admin account** that does not depend on RADIUS. If all configured RADIUS servers are unreachable or malfunctioning, only a local account can restore access.
 - **Keep all configured servers' user databases synchronized.** A backup server that responds but denies users is worse than an unreachable server — it holds selection permanently with no path to recovery other than a service restart.
-- **Plan for account lockouts after a RADIUS outage.** Failed authentication attempts during an outage count against the local `faillock` threshold. Once the RADIUS server recovers, previously locked accounts remain locked for the configured `unlock_time`. Include `faillock` reset in your recovery runbook.
+- **Plan for account lockouts after a RADIUS outage.** Failed authentication attempts during an outage count against the local `faillock` threshold. Once the RADIUS server recovers, previously locked accounts remain locked for the configured `unlock_time`, so restoring the RADIUS server does not by itself restore user access. Include `faillock` reset in your recovery runbook.
+- **Allow for one authentication attempt per connection.** Each SSH connection generates one authentication attempt before the user is prompted for a password. This attempt is presented to the RADIUS server and counts against both the server's lockout counter and the local `faillock` threshold, so the number of password attempts actually available to a user is one fewer per connection than the configured `deny` value. Where the RADIUS server enforces an account lockout policy, allow for this additional attempt when setting that threshold.
 - **Use RADSEC when possible.** [RADIUS over TLS](config_radsec.md) provides transport security and is unaffected by FIPS mode restrictions on MD5.
 
 ## LDAP User Authentication 
