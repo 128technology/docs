@@ -59,6 +59,18 @@ Beginning with SSR version 6.1.4-R2, traffic destined for IDP will temporarily b
 
 Additionally, services configured for IDP and their status (passing through IDP or not, and why), and when the IDP will be operational are reported in the `show idp application status` command.
 
+## IDP and Dynamic Source NAT
+
+When IDP is enabled on a service that also uses [`dynamic-source-nat`](config_dnat.md), traffic processed by IDP may not be source-NATed as expected. IDP processes traffic as local breakout sessions, and by default `dynamic-source-nat` does not apply to local breakout sessions (`applies-to-local-breakout` defaults to `false`).
+
+To apply source NAT in scenarios where IDP is also required, set `applies-to-local-breakout true` on the `dynamic-source-nat` configuration for each node:
+
+```text
+config authority router <router> node <node> device-interface <intf> network-interface <net-intf> dynamic-source-nat 0.0.0.0/0 local-ip                   0.0.0.0/0
+config authority router <router> node <node> device-interface <intf> network-interface <net-intf> dynamic-source-nat 0.0.0.0/0 remote-ip                  <nat-ip>/32
+config authority router <router> node <node> device-interface <intf> network-interface <net-intf> dynamic-source-nat 0.0.0.0/0 applies-to-local-breakout  true
+```
+
 ## Show Commands
 
 Each of the commands listed below, and the subcommands for each, provide additional details for IDP visibility. Use the links to learn more about each command.
