@@ -1,0 +1,186 @@
+---
+title: "Step 1: Create the Hub Router VM"
+sidebar_label: "Create the Hub Router VM"
+---
+import NetworkDesign from './_deploy_azure_hub_spoke_network_design.md';
+
+This step deploys the BYOL Hub Router VM from the Azure Marketplace. The deployment template creates the VM, attaches it to the hub WAN and LAN subnets, and runs a cloud-init bootstrapper that installs SSR 7.1.4 and configures the node as a conductor-managed router automatically.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Requirements
+
+The following infrastructure must exist in your Azure subscription before deploying the hub router:
+
+- The `SSR-VNet` VNet with the `ssr-hub-wan` and `ssr-hub-lan` subnets already created.
+- An Availability Set named `SSR-HubSet` in the same resource group and region.
+- A **Managed Identity** assigned the following minimum read permissions:
+
+  ```
+  Microsoft.Compute/virtualMachines/read
+  Microsoft.Network/virtualNetworks/read
+  Microsoft.Network/networkInterfaces/read
+  ```
+
+- The conductor's public IP address from the [Azure Conductor Deployment Guide](deploy_azure_conductor.mdx).
+
+:::note
+A dedicated management subnet is not required. Management traffic travels over the WAN forwarding interface using [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md).
+:::
+
+## Recommended VM Sizes
+
+| Azure VM Size | Max vNICs | vCPU Cores | Memory |
+|---------------|-----------|-----------|--------|
+| Standard_F8s_v2 | 4 | 8 | 16 GB |
+| Standard_F16s_v2 | 4 | 16 | 32 GB |
+| Standard_F32s_v2 | 8 | 32 | 64 GB |
+| Standard_D8s_v5 | 4 | 8 | 32 GB |
+
+For guidance on sizing for larger deployments, see [System Requirements](intro_system_reqs.md).
+
+## What the Template Creates
+
+When you deploy the hub router using the BYOL conductor-managed router template, Azure automatically creates:
+
+- A VM using the BYOL Session Smart image from the Marketplace.
+- Three network interfaces: management (`eth0`), WAN/public (`eth1`), and LAN/private (`eth2`).
+- A network security group associated with each interface.
+- A unique public IP address assigned to the WAN interface.
+
+The management interface (`eth0`) is not used in this guide. Management traffic travels over the WAN forwarding interface instead.
+
+## Deploy via Azure Portal
+
+1. Go to [Azure Marketplace](https://portal.azure.com) and search for **Session Smart Networking Platform**.
+2. Select the **BYOL** plan.
+3. Click **Get it now** and agree to the terms of use and privacy policy.
+4. Click the **Plans + Pricing** tab.
+
+   ![Plans](/img/platforms_azure_plans.png)
+
+5. Click the **Launch** link on the **Juniper Session Smart Conductor-managed Router** template.
+
+   ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
+
+6. Fill in the template parameters using the following table:
+
+   | Parameter | Example Value | Notes |
+   |-----------|--------------|-------|
+   | Subscription | _(your subscription)_ | |
+   | Resource Group | `SSR-RG` | |
+   | Location | `eastus` | One word, all lowercase |
+   | Availability Set Name | `SSR-HubSet` | Must exist in the same resource group |
+   | Instance Size | `Standard_F8s_v2` | |
+   | Instance Name | `azure-hub-router` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | |
+   | Artifactory Token | _(your token)_ | |
+   | Managed Identity | _(your managed identity)_ | |
+   | Virtual Network Name | `SSR-VNet` | |
+   | Public Subnet Name | `ssr-hub-wan` | Hub WAN subnet |
+   | Private Subnet Name | `ssr-hub-lan` | Hub LAN subnet |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Private Subnet Allowed CIDR | `0.0.0.0/0` | |
+   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor |
+   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
+   | Admin Public Key Data | _(contents of your SSH public key)_ | |
+
+   :::caution
+   `Public Subnet Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the environment is stable, update the associated NSG rules to restrict access to known source addresses.
+   :::
+
+7. Agree to the terms and conditions.
+8. Click **Purchase** to launch the deployment.
+
+   ![Deployment complete](/img/platforms_azure_deployment_complete.png)
+
+9. When the deployment completes, open the **Outputs** tab and note the **public IP address** assigned to the hub WAN interface. You will need this value in later steps.
+
+## Deploy via Azure CLI or PowerShell
+
+To deploy programmatically, first enable programmatic deployment for the BYOL plan, then create the parameters file `hub_router_byol.parameters.json`:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "eastus" },
+    "availabilitySetName": { "value": "SSR-HubSet" },
+    "instanceSize": { "value": "Standard_F8s_v2" },
+    "instanceName": { "value": "azure-hub-router" },
+    "SSR Version": { "value": "7.1.4" },
+    "artifactoryUsername": { "value": "<your-artifactory-username>" },
+    "artifactoryToken": { "value": "<your-artifactory-token>" },
+    "managedIdentity": { "value": "<your-managed-identity>" },
+    "virtualNetworkName": { "value": "SSR-VNet" },
+    "publicSubnetName": { "value": "ssr-hub-wan" },
+    "privateSubnetName": { "value": "ssr-hub-lan" },
+    "publicSubnetAllowedCidr": { "value": "0.0.0.0/0" },
+    "privateSubnetAllowedCidr": { "value": "0.0.0.0/0" },
+    "adminAllowedCidr": { "value": "0.0.0.0/0" },
+    "conductorPrimaryControlIP": { "value": "<conductor-public-ip>" },
+    "adminPublicKeyData": { "value": "<your-ssh-public-key>" }
+  }
+}
+```
+
+Launch the deployment:
+
+```bash
+New-AzResourceGroupDeployment -ResourceGroupName SSR-RG `
+  -TemplateUri <template-URL> `
+  -TemplateParameterFile ./hub_router_byol.parameters.json
+```
+
+## Cloud-init Onboarding
+
+When launching via CLI or automation, you can supply the following `user-data` block to configure onboarding:
+
+```yaml
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+        {
+            "name": "azure-hub-router",
+            "ssr-version": "7.1.4",
+            "mode": "conductor-managed",
+            "conductor-hosts": ["<conductor-public-ip>"],
+            "artifactory-user": "<your-artifactory-username>",
+            "artifactory-password": "<your-artifactory-token>",
+            "cloud-provider": "azure"
+        }
+```
+
+| Option | Meaning |
+|--------|---------|
+| `name` | The name of the router as it will appear on the conductor. |
+| `ssr-version` | The SSR software version to install. |
+| `mode` | Set to `conductor-managed`. |
+| `conductor-hosts` | List of conductor control IP addresses. |
+| `artifactory-user` | Artifactory credentials username. |
+| `artifactory-password` | Artifactory credentials password or token. |
+| `cloud-provider` | Set to `azure`. |
+
+## Network Interface Layout
+
+The BYOL conductor-managed router template deploys a VM with three network interfaces attached in the following order:
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| `eth0` | Router-mgmt | _(not used in this guide)_ |
+| `eth1` | Router-public | `ssr-hub-wan` |
+| `eth2` | Router-private | `ssr-hub-lan` |
+
+:::note
+Record the hub router's public WAN IP from the Azure Portal Outputs tab. You will need it when deploying the spoke router and when configuring the conductor to reach this router for management purposes.
+:::
+
+## Next Step
+
+Proceed to [Step 2 — Create the Spoke Router VM](deploy_azure_hub_spoke_spoke_vm.mdx).

@@ -1,0 +1,133 @@
+---
+title: "Step 2: Create the Spoke Router VM"
+sidebar_label: "Create the Spoke Router VM"
+---
+import NetworkDesign from './_deploy_azure_hub_spoke_network_design.md';
+
+This step deploys the BYOL Spoke Router VM from the Azure Marketplace using the same conductor-managed router template used for the hub router. The bootstrapper installs SSR 7.1.4 and connects the spoke to the conductor automatically.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Requirements
+
+The following infrastructure must exist in your Azure subscription before deploying the spoke router:
+
+- The `SSR-VNet` VNet with the `ssr-spoke-wan` and `ssr-spoke-lan` subnets already created.
+- An Availability Set named `SSR-SpokeSet` in the same resource group and region.
+- The same **Managed Identity** used for the hub router, or a separate identity with the same minimum read permissions.
+
+:::note
+You can deploy the spoke VM while the hub VM bootstrapper is still running. Both installations proceed in parallel; you verify both in [Step 3](deploy_azure_hub_spoke_vmbus.mdx).
+:::
+
+## Deploy via Azure Portal
+
+1. Return to the **Session Smart Networking Platform BYOL** offering in the Azure Marketplace.
+2. Click **Get it now** and agree to the terms.
+3. Click the **Plans + Pricing** tab.
+
+   ![Plans](/img/platforms_azure_plans.png)
+
+4. Click the **Launch** link on the **Juniper Session Smart Conductor-managed Router** template.
+
+   ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
+
+5. Fill in the template parameters using the following table:
+
+   | Parameter | Example Value | Notes |
+   |-----------|--------------|-------|
+   | Subscription | _(your subscription)_ | |
+   | Resource Group | `SSR-RG` | |
+   | Location | `eastus` | One word, all lowercase |
+   | Availability Set Name | `SSR-SpokeSet` | Must exist in the same resource group |
+   | Instance Size | `Standard_F8s_v2` | |
+   | Instance Name | `azure-spoke-router` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | |
+   | Artifactory Token | _(your token)_ | |
+   | Managed Identity | _(your managed identity)_ | |
+   | Virtual Network Name | `SSR-VNet` | |
+   | Public Subnet Name | `ssr-spoke-wan` | Spoke WAN subnet |
+   | Private Subnet Name | `ssr-spoke-lan` | Spoke LAN subnet |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Private Subnet Allowed CIDR | `0.0.0.0/0` | |
+   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor |
+   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
+   | Admin Public Key Data | _(contents of your SSH public key)_ | |
+
+6. Agree to the terms and conditions.
+7. Click **Purchase** to launch the deployment.
+
+   ![Deployment complete](/img/platforms_azure_deployment_complete.png)
+
+8. When the deployment completes, open the **Outputs** tab and note the **public IP address** assigned to the spoke WAN interface.
+
+## Deploy via Azure CLI or PowerShell
+
+Create the parameters file `spoke_router_byol.parameters.json`:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "eastus" },
+    "availabilitySetName": { "value": "SSR-SpokeSet" },
+    "instanceSize": { "value": "Standard_F8s_v2" },
+    "instanceName": { "value": "azure-spoke-router" },
+    "SSR Version": { "value": "7.1.4" },
+    "artifactoryUsername": { "value": "<your-artifactory-username>" },
+    "artifactoryToken": { "value": "<your-artifactory-token>" },
+    "managedIdentity": { "value": "<your-managed-identity>" },
+    "virtualNetworkName": { "value": "SSR-VNet" },
+    "publicSubnetName": { "value": "ssr-spoke-wan" },
+    "privateSubnetName": { "value": "ssr-spoke-lan" },
+    "publicSubnetAllowedCidr": { "value": "0.0.0.0/0" },
+    "privateSubnetAllowedCidr": { "value": "0.0.0.0/0" },
+    "adminAllowedCidr": { "value": "0.0.0.0/0" },
+    "conductorPrimaryControlIP": { "value": "<conductor-public-ip>" },
+    "adminPublicKeyData": { "value": "<your-ssh-public-key>" }
+  }
+}
+```
+
+Launch the deployment:
+
+```bash
+New-AzResourceGroupDeployment -ResourceGroupName SSR-RG `
+  -TemplateUri <template-URL> `
+  -TemplateParameterFile ./spoke_router_byol.parameters.json
+```
+
+## Cloud-init Onboarding
+
+```yaml
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+        {
+            "name": "azure-spoke-router",
+            "ssr-version": "7.1.4",
+            "mode": "conductor-managed",
+            "conductor-hosts": ["<conductor-public-ip>"],
+            "artifactory-user": "<your-artifactory-username>",
+            "artifactory-password": "<your-artifactory-token>",
+            "cloud-provider": "azure"
+        }
+```
+
+## Network Interface Layout
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| `eth0` | Router-mgmt | _(not used in this guide)_ |
+| `eth1` | Router-public | `ssr-spoke-wan` |
+| `eth2` | Router-private | `ssr-spoke-lan` |
+
+## Next Step
+
+After both VMs are deployed, proceed to [Step 3 — Verify Installation and Discover VMBus UUIDs](deploy_azure_hub_spoke_vmbus.mdx).
