@@ -70,9 +70,9 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
-## Release 7.0.5-13-lts
+## Release 7.0.5-14-lts
 
-**Release Date:** August 18, 2026
+**Release Date:** August 20, 2026
 
 ### New Features
 
@@ -365,6 +365,8 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 - **I95-65797 ESKM Peering Stays Down After Late Metadata Key:** Resolved an issue where ESKM peering remained down when BFD received the local metadata key late because retransmit timers were not being restarted after their initial firing.
 ------
 - **I95-65850 Redundant conductor fails upgrade:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
+------
+- **I95-66067 Offline upgrade failure:** Resolved an issue during upgrade that was being reported as an `Unpacker Failure`. The service startup order has been adjusted to prevent the issue in future upgrades/installations.
 ------
 - **I95-66070 Highway Crash in High-Scale Peer Scenarios:** Resolved an issue where the Highway process would crash (segmentation fault) with a large number of SSR peers, due to a race condition. The fix adds thread-safe locking mechanisms to protect all read and write operations, ensuring stable operation at scale.
 ------
