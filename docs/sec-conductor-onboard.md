@@ -149,7 +149,27 @@ Mon 2026-08-10 18:29:06 UTC
 
 ```
 
-3. Restore the original asset ID.
+3. Ensure all authorized keys are removed for the original asset ID.
+
+`delete system connectivity authorized-keys entry comment <asset-id> node all`
+
+This operation may indicate keys were removed.
+
+```
+admin@node0.Conductor# delete system connectivity authorized-keys entry comment Spoke1Node0 node all
+✔ Updating SSH Configuration...
+Deleted 2 entries on node0.Conductor
+```
+
+Alternatively, the keys may have been missing or removed by the temporary asset rename. It is **not an issue** if no entries are removed.
+
+```
+admin@node0.Conductor# delete system connectivity authorized-keys entry comment Spoke1Node0 node all
+✔ Updating SSH Configuration...
+Deleted 0 entries on node0.Conductor
+```
+
+4. Restore the original asset ID.
 
     `config authority router <router> node <node> asset-id <asset-id>`
 
