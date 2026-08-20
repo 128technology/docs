@@ -1,0 +1,204 @@
+---
+title: "Appendix: AWS Configuration"
+sidebar_label: "Appendix: AWS Configuration"
+---
+import NetworkDesign from './_deploy_aws_conductor_network_design.md';
+
+This appendix contains the complete SSR PCLI configuration for the `Conductor` and `aws-branch1` described in this guide. This configuration reflects the final state after completing all steps through [Step 5 — Configure the Router on the Conductor](deploy_aws_router_config.mdx).
+
+:::important
+- Replace `203.0.113.10` with your actual conductor Elastic IP.
+- Replace `203.0.113.20` with your actual router WAN Elastic IP.
+- The PCI addresses `0000:00:06.0` (WAN) and `0000:00:07.0` (LAN) are the defaults for EC2 instances deployed with the BYOL CloudFormation template when a management subnet is provided. Verify these against your specific instance using `sudo dpdk-devbind.py --status` before applying the router configuration.
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Applying This Configuration
+
+This configuration can be applied to a freshly initialized conductor using the PCLI import function.
+
+1. Save the configuration below to a file — for example, `aws-conductor.cfg`.
+
+2. Copy the file to the conductor:
+
+   ```bash
+   scp aws-conductor.cfg admin@203.0.113.10:/tmp/
+   ```
+
+3. Log in to the conductor PCLI:
+
+   ```bash
+   ssh admin@203.0.113.10
+   ```
+
+4. Enter configuration mode and import:
+
+   ```text
+   admin@node0.Conductor# import config /tmp/aws-conductor.cfg
+   ```
+
+5. Review any validation warnings, then commit:
+
+   ```text
+   admin@node0.Conductor (config)# commit
+   Are you sure you want to commit the candidate config? [y/N]: y
+   ```
+
+Alternatively, copy and paste each block into the PCLI while in `configure` → `edit` mode.
+
+## Complete Configuration
+
+```text
+config
+    authority
+        name              Authority128
+
+        conductor-address  203.0.113.10
+
+        tenant  corp
+            name  corp
+        exit
+
+        service  Internet-Traffic
+            name           Internet-Traffic
+            scope          public
+            security       internal
+
+            access-policy  corp
+                source  corp
+            exit
+
+            address  0.0.0.0/0
+        exit
+
+        router  Conductor
+            name                 Conductor
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  conductor
+
+                device-interface  mgmt-dev
+                    name         mgmt-dev
+                    type         ethernet
+                    pci-address  0000:00:05.0
+                    forwarding   false
+
+                    network-interface  mgmt-intf
+                        name  mgmt-intf
+                        type  management
+
+                        address  10.0.1.10
+                            ip-address     10.0.1.10
+                            prefix-length  24
+                            gateway        10.0.1.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+
+        router  aws-branch1
+            name                 aws-branch1
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    type               ethernet
+                    pci-address        0000:00:06.0
+                    forwarding         true
+
+                    network-interface  wan1
+                        name                  wan1
+                        global-id             1
+                        type                  external
+                        conductor             true
+                        management            true
+                        default-route         true
+                        source-nat            true
+                        dhcp                  v4
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood          internet
+                            name                 internet
+                            topology             spoke
+                            external-nat-address 203.0.113.20
+                        exit
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    type               ethernet
+                    pci-address        0000:00:07.0
+                    forwarding         true
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+                        type        external
+                        tenant      corp
+                        source-nat  true
+                        dhcp        disabled
+
+                        address  10.1.2.1
+                            ip-address     10.1.2.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route  internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+
+                next-hop  node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+
+            dns-config  static
+                address  1.1.1.1
+                address  8.8.8.8
+            exit
+        exit
+    exit
+exit
+```
+
+## Interface Summary
+
+| Interface | Device Interface | PCI Address | Type | Configuration |
+|-----------|-----------------|-------------|------|---------------|
+| `wan1` | `wan-dev` | `0000:00:06.0` | External | DHCP v4, conductor, management, default-route, source-nat, neighborhood `internet` with external-nat-address `203.0.113.20` |
+| `lan1` | `lan-dev` | `0000:00:07.0` | External | tenant `corp`, static `10.1.2.1/24`, source-nat |
+
+## Service Route Summary
+
+| Service Route | Service | Type | Next Hop |
+|--------------|---------|------|---------|
+| `internet-route` | `Internet-Traffic` | `service-agent` | `node0 / wan1` |
+
+## Design Notes
+
+**AWS NAT and External NAT Address** — AWS performs 1:1 NAT between each Elastic IP and the private IP assigned to the corresponding ENI. The `external-nat-address` setting in the `internet` neighborhood tells the SSR to advertise the Elastic IP (`203.0.113.20`) to peers rather than the private DHCP address. Without this, SVR peer connections cannot be established because the private IP is not routable from outside the VPC.
+
+**Management over Forwarding** — The `wan1` interface carries both internet traffic and conductor management sessions simultaneously. Management traffic originating from the host OS at `169.254.x.x` link-local addresses is source-NAT'd to the WAN DHCP address before leaving the interface. The `default-route: true` setting ensures Linux routes all outbound OS traffic through the SSR forwarding engine so the auto-generated `management-conductor` service route applies.
+
+**Management Interface (eth0)** — The first ENI (`eth0` / `ge-0-0`) is not configured in SSR. Linux manages it for out-of-band SSH access. This is the recommended pattern for AWS deployments, as it preserves SSH reachability when the SSR service is offline for maintenance or upgrades.
+
+**Source / Destination Check** — The WAN and LAN ENIs on the router EC2 instance must have source/destination checking disabled. This is an AWS-specific requirement that allows the SSR to forward packets where it is not the source or destination.
