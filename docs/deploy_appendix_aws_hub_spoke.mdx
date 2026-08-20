@@ -1,0 +1,261 @@
+---
+title: "Appendix: AWS Hub and Spoke Configuration"
+sidebar_label: "Appendix: Hub and Spoke Config"
+---
+import NetworkDesign from './_deploy_aws_hub_spoke_network_design.md';
+
+This appendix contains the complete SSR PCLI configuration for the `aws-hub1` and `aws-spoke1` routers described in this guide. This configuration reflects the final state after completing all steps through [Step 4 — Configure the Spoke Router on the Conductor](deploy_aws_spoke_router_config.mdx).
+
+:::important
+Before applying this configuration:
+
+- Replace `203.0.113.10` with your actual conductor Elastic IP.
+- Replace `203.0.113.30` with your actual hub WAN Elastic IP.
+- Replace `203.0.113.20` with your actual spoke WAN Elastic IP.
+- The PCI addresses `0000:00:06.0` (WAN) and `0000:00:07.0` (LAN) are the defaults for EC2 instances deployed with the BYOL CloudFormation template when a management subnet is provided. Verify these against your specific instances using `sudo dpdk-devbind.py --status` before applying the configuration.
+- The authority-level objects (`Internet-Traffic` service, `corp` tenant, conductor address) must already exist in the running configuration. For the complete authority-level configuration, see the [AWS Conductor Deployment Guide appendix](deploy_appendix_aws_conductor.mdx).
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Applying This Configuration
+
+This configuration can be applied to a conductor that already has the authority-level objects in place (authority name, conductor address, `corp` tenant, `Internet-Traffic` service).
+
+1. Save the hub configuration block to a file — for example, `aws-hub1.cfg`.
+2. Save the spoke configuration block to a file — for example, `aws-spoke1.cfg`.
+3. Copy both files to the conductor:
+
+   ```bash
+   scp aws-hub1.cfg aws-spoke1.cfg admin@203.0.113.10:/tmp/
+   ```
+
+4. Log in to the conductor PCLI:
+
+   ```bash
+   ssh admin@203.0.113.10
+   ```
+
+5. Import the hub configuration:
+
+   ```text
+   admin@node0.Conductor# import config /tmp/aws-hub1.cfg
+   ```
+
+6. Review any validation warnings, then import the spoke configuration:
+
+   ```text
+   admin@node0.Conductor# import config /tmp/aws-spoke1.cfg
+   ```
+
+7. Commit both configurations:
+
+   ```text
+   admin@node0.Conductor (config)# commit
+   Are you sure you want to commit the candidate config? [y/N]: y
+   ```
+
+Alternatively, copy and paste each block into the PCLI while in `configure` → `edit` mode.
+
+## Hub Router Configuration — `aws-hub1`
+
+```text
+config
+    authority
+        router  aws-hub1
+            name                 aws-hub1
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    type               ethernet
+                    pci-address        0000:00:06.0
+                    forwarding         true
+
+                    network-interface  wan1
+                        name                  wan1
+                        global-id             1
+                        type                  external
+                        conductor             true
+                        management            true
+                        default-route         true
+                        source-nat            true
+                        dhcp                  v4
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood          internet
+                            name                 internet
+                            topology             hub
+                            external-nat-address 203.0.113.30
+                        exit
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    type               ethernet
+                    pci-address        0000:00:07.0
+                    forwarding         true
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+                        type        external
+                        tenant      corp
+                        source-nat  true
+                        dhcp        disabled
+
+                        address  10.2.2.1
+                            ip-address     10.2.2.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route  internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+
+                next-hop  node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+
+            dns-config  static
+                address  1.1.1.1
+                address  8.8.8.8
+            exit
+        exit
+    exit
+exit
+```
+
+## Spoke Router Configuration — `aws-spoke1`
+
+```text
+config
+    authority
+        router  aws-spoke1
+            name                 aws-spoke1
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    type               ethernet
+                    pci-address        0000:00:06.0
+                    forwarding         true
+
+                    network-interface  wan1
+                        name                  wan1
+                        global-id             1
+                        type                  external
+                        conductor             true
+                        management            true
+                        default-route         true
+                        source-nat            true
+                        dhcp                  v4
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood          internet
+                            name                 internet
+                            topology             spoke
+                            external-nat-address 203.0.113.20
+                        exit
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    type               ethernet
+                    pci-address        0000:00:07.0
+                    forwarding         true
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+                        type        external
+                        tenant      corp
+                        source-nat  true
+                        dhcp        disabled
+
+                        address  10.1.2.1
+                            ip-address     10.1.2.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route  internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+
+                next-hop  node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+
+            dns-config  static
+                address  1.1.1.1
+                address  8.8.8.8
+            exit
+        exit
+    exit
+exit
+```
+
+## Interface Summary
+
+### Hub Router — `aws-hub1`
+
+| Interface | Device Interface | PCI Address | Type | Configuration |
+|-----------|-----------------|-------------|------|---------------|
+| `wan1` | `wan-dev` | `0000:00:06.0` | External | DHCP v4, conductor, management, default-route, source-nat, neighborhood `internet` / topology `hub` / external-nat-address `203.0.113.30` |
+| `lan1` | `lan-dev` | `0000:00:07.0` | External | tenant `corp`, static `10.2.2.1/24`, source-nat |
+
+### Spoke Router — `aws-spoke1`
+
+| Interface | Device Interface | PCI Address | Type | Configuration |
+|-----------|-----------------|-------------|------|---------------|
+| `wan1` | `wan-dev` | `0000:00:06.0` | External | DHCP v4, conductor, management, default-route, source-nat, neighborhood `internet` / topology `spoke` / external-nat-address `203.0.113.20` |
+| `lan1` | `lan-dev` | `0000:00:07.0` | External | tenant `corp`, static `10.1.2.1/24`, source-nat |
+
+## Service Route Summary
+
+Both routers perform local internet breakout. Each has an identical service route configuration:
+
+| Router | Service Route | Service | Type | Next Hop |
+|--------|--------------|---------|------|---------|
+| `aws-hub1` | `internet-route` | `Internet-Traffic` | `service-agent` | `node0 / wan1` |
+| `aws-spoke1` | `internet-route` | `Internet-Traffic` | `service-agent` | `node0 / wan1` |
+
+## Design Notes
+
+**Hub-Spoke SVR Peering** — The conductor automatically generates the SVR peer relationship between hub and spoke when both routers are committed with matching neighborhood names (`internet`) and complementary topology roles (`hub` and `spoke`). No manual `peer` stanzas are required. The conductor distributes the hub's `external-nat-address` (`203.0.113.30`) to the spoke so the spoke can initiate SVR sessions toward the hub.
+
+**AWS NAT and External NAT Address** — AWS performs 1:1 NAT between each Elastic IP and the private IP assigned to the corresponding ENI. The `external-nat-address` setting in the `internet` neighborhood tells the SSR to advertise the Elastic IP to peers rather than the private DHCP address. Without this, SVR peer connections cannot be established because the private IP is not routable from outside the VPC.
+
+**Distributed Internet Breakout** — Both the hub and spoke perform local internet breakout from their own WAN interfaces. Internet-bound traffic from LAN hosts on the hub (`10.2.2.0/24`) exits through the hub WAN (`203.0.113.30`), and internet-bound traffic from LAN hosts on the spoke (`10.1.2.0/24`) exits through the spoke WAN (`203.0.113.20`). This design minimizes latency and avoids hairpinning internet traffic through a central hub.
+
+**Management over Forwarding** — Both routers carry conductor management sessions on the same WAN interface used for internet traffic. Management traffic originating from the host OS at `169.254.x.x` link-local addresses is source-NAT'd to the WAN DHCP address before leaving the interface. The `default-route: true` setting ensures Linux routes all outbound OS traffic through the SSR forwarding engine so the auto-generated `management-conductor` service route applies.

@@ -1,0 +1,107 @@
+---
+title: "Step 3: Deploy the Spoke Router Instance"
+sidebar_label: "Deploy the Spoke Instance"
+---
+import NetworkDesign from './_deploy_aws_hub_spoke_network_design.md';
+import PostDeploySteps from './_deploy_aws_router_instance_steps.md';
+
+This step launches the AWS EC2 instance for the spoke router (`aws-spoke1`). The process mirrors [Step 1 — Deploy the Hub Router Instance](deploy_aws_hub_router_instance.mdx), using the same BYOL CloudFormation template with spoke-specific parameter values.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Spoke Router Instance Requirements
+
+| Resource | Minimum Value | Notes |
+|----------|---------------|-------|
+| Instance Type | `c5.xlarge` | |
+| vCPUs | 8 | |
+| Memory | 64 GB | |
+| Storage | 256 GB | |
+| Network Interfaces | 3 × ENI | Management (OOB), WAN (public), LAN (private) |
+| Enhanced Networking | ENA required | Provides maximum throughput performance |
+
+## Infrastructure Requirements
+
+The following infrastructure must exist in your AWS account before deploying the spoke router:
+
+- A **VPC** in your target region (`10.1.0.0/16` in this guide). This can be the same VPC as the hub or a separate one.
+- Three **subnets** within the VPC:
+
+  | Subnet | CIDR | Purpose |
+  |--------|------|---------|
+  | Management | _(any)_ | OOB SSH to the EC2 instance. Managed by Linux only — not configured in SSR. |
+  | WAN (public) | `10.1.1.0/24` | Internet-facing, carries both internet forwarding and conductor management over forwarding. SVR sessions to the hub originate from this interface. |
+  | LAN (private) | `10.1.2.0/24` | Internal workloads. |
+
+- An **Elastic IP** allocated in the same region — this is associated with the WAN ENI. Record it as `203.0.113.20` (your `<spoke-eip>`).
+
+:::important
+The spoke WAN subnet must have a route to the internet, be able to reach the conductor Elastic IP (`203.0.113.10`) on ports 930, 4505, and 4506, and be able to reach the hub WAN Elastic IP (`203.0.113.30`) on UDP/TCP ports 12800–12900 for SVR sessions.
+:::
+
+## Deploy the Spoke Router Using CloudFormation
+
+### AWS Console
+
+1. Navigate to the [Session Smart Networking Platform BYOL](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c) offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop-down, select **CloudFormation Template**, then select the **Juniper Session Smart Conductor Managed Router** template.
+5. Select your target AWS region and click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+7. Fill in the template parameters using the following table as a guide:
+
+   | Parameter | Example Value | Notes |
+   |-----------|---------------|-------|
+   | Name | `aws-spoke1` | EC2 instance name |
+   | Instance Type | `c5.xlarge` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | |
+   | Artifactory Token | _(your token)_ | |
+   | Primary Control IP | `203.0.113.10` | Conductor Elastic IP |
+   | VPC ID | ID of the spoke VPC | |
+   | Management Subnet ID | ID of the management subnet | |
+   | Public Subnet ID | ID of the WAN subnet (`10.1.1.0/24`) | |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Private Subnet ID | ID of the LAN subnet (`10.1.2.0/24`) | |
+   | Private Subnet Allowed CIDR | `10.1.2.0/24` | |
+   | Admin Allowed CIDR | `<your-admin-ip>/32` | |
+   | Key Name | Your EC2 key pair name | |
+
+   ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
+
+8. Click **Next**, review the stack settings, then click **Create Stack**.
+
+   ![Deployment Complete](/img/platforms_aws_deployment_complete.png)
+
+After the stack reaches **CREATE_COMPLETE**, the BYOL software installation begins. Allow **10–15 minutes** for SSR 7.1.4 to install. The router then automatically contacts the conductor at `203.0.113.10` and appears as a second pending asset in the conductor GUI.
+
+## Network Interface Layout
+
+| Network Interface | Subnet | PCI Address | Managed By |
+|-------------------|--------|-------------|------------|
+| `eth0` / `ge-0-0` | Management | `0000:00:05.0` | Linux only — OOB SSH, not configured in SSR |
+| `eth1` / `ge-0-1` | WAN (public) | `0000:00:06.0` | SSR — WAN forwarding with management over forwarding |
+| `eth2` / `ge-0-2` | LAN (private) | `0000:00:07.0` | SSR — LAN forwarding |
+
+<PostDeploySteps/>
+
+:::note
+Record the spoke WAN Elastic IP (`203.0.113.20`). You will enter it as the `external-nat-address` in the spoke neighborhood configuration in [Step 4](deploy_aws_spoke_router_config.mdx).
+:::
+
+## What Was Deployed
+
+After the CloudFormation stack completes and SSR installs, the following resources exist in your AWS account:
+
+| Resource | Description |
+|----------|-------------|
+| EC2 instance | `aws-spoke1` — `c5.xlarge`, running the BYOL SSR image |
+| Security group | Allows inbound SSH (22), router management ports (930, 4505, 4506), and SVR traffic from the hub WAN CIDR |
+| Elastic IP | Assigned to the spoke WAN ENI — `203.0.113.20` |
+
+## Next Step
+
+Proceed to [Step 4 — Configure the Spoke Router on the Conductor](deploy_aws_spoke_router_config.mdx).

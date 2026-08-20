@@ -1,0 +1,183 @@
+---
+title: "Step 5: Configure the Router on the Conductor"
+sidebar_label: "Configure the Router"
+---
+import NetworkDesign from './_deploy_aws_conductor_network_design.md';
+
+With the router EC2 instance deployed and ZTP-connected to the conductor, you can now configure the full router profile. All steps are performed from the **Conductor GUI** at `https://203.0.113.10`.
+
+:::note
+Your conductor must already have the following objects configured before proceeding:
+
+- **Authority name** — set to your organization's name.
+- **Conductor address** — set to `203.0.113.10`.
+- **`corp` tenant** — the LAN-side user tenant.
+- **`Internet-Traffic` service** — with address `0.0.0.0/0` and access policy permitting `corp`.
+
+If any of these are missing, complete [Step 3 — Configure the Conductor](deploy_aws_conductor_config.mdx) first.
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Create the Router and Associate the Pending Asset
+
+After the router EC2 finishes the BYOL installation and ZTPs to the conductor, a pending asset appears in the conductor GUI. Create the router configuration and associate the asset with it before configuring the interfaces.
+
+1. Log in to the Conductor GUI.
+2. Select **Configuration → Authority**.
+3. Scroll to **Routers** and select **ADD**.
+4. Enter the name `aws-branch1` and select **SAVE**.
+5. Set **Inter-node Security** to `internal`.
+6. Under the new router, scroll to **Nodes** and select **ADD**.
+7. Enter node name `node0` and select **SAVE**.
+8. Set **Role** to `combo`.
+9. Under **Associated Asset ID**, select the pending asset that appeared after the router ZTPed.
+10. Select **SAVE**.
+
+:::note
+The pending asset appears in the conductor GUI within 2–3 minutes of the ZTP connection being established. If no asset appears after 20 minutes, SSH into the router instance and examine the hardware bootstrapper logs for diagnostic information. See [Troubleshooting BYOL Installations](intro_installation_byol_aws_conductor.md#troubleshooting) for guidance.
+:::
+
+## 1. Configure the WAN Interface
+
+The WAN interface (`eth1` / PCI `0000:00:06.0`) connects to the public subnet, obtains an IP address via DHCP from AWS, and carries both internet forwarding traffic and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
+
+### 1a. Create the WAN Device Interface
+
+1. Under the node (`node0`), scroll to **Device Interfaces** and select **ADD**.
+2. Enter the name `wan-dev` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | PCI Address | `0000:00:06.0` | WAN ENI (`eth1`) |
+   | Forwarding | `true` | |
+
+4. Select **SAVE**.
+
+### 1b. Create the WAN Network Interface
+
+1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `wan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | DHCP | `v4` | AWS assigns private IPs via DHCP |
+   | Global-ID | `1` | |
+   | Conductor | `true` | Enables conductor connectivity over this interface |
+   | Management | `true` | Enables management over forwarding |
+   | Default Route | `true` | Routes Linux outbound traffic through the SSR forwarding engine |
+   | Source NAT | `true` | Required for management over forwarding |
+
+4. Scroll down to **Management Vector** and select **ADD**.
+   - Enter name `mgmt-vec-wan` and priority `100`.
+   - Select **SAVE**.
+
+5. Scroll down to **Neighborhoods** and select **ADD**.
+   - Enter the neighborhood name `internet`.
+   - Set **Topology** to `spoke`.
+   - Scroll to **External NAT Address** and enter `203.0.113.20` (the Elastic IP of the router WAN ENI).
+   - Select **SAVE**.
+
+:::important
+**Why `external-nat-address` is required:** AWS maps the Elastic IP (`203.0.113.20`) to the private DHCP address on the WAN ENI via 1:1 NAT. Without the `external-nat-address` setting, the SSR advertises its private IP to peers — which is unreachable from the internet. Setting this field tells the SSR to advertise the Elastic IP instead.
+
+**Why `Conductor`, `Source NAT`, and `Default Route` must all be `true`:** Management traffic to the conductor originates from the host OS at `169.254.x.x` link-local addresses. Source NAT translates this to the WAN DHCP address before the packet leaves the interface. The default route ensures Linux routes all outbound traffic through the SSR forwarding engine so the management-conductor service routes apply.
+:::
+
+## 2. Configure the LAN Interface
+
+The LAN interface (`eth2` / PCI `0000:00:07.0`) connects to the private subnet and assigns the `corp` tenant to all inbound traffic.
+
+### 2a. Create the LAN Device Interface
+
+1. Under the node (`node0`), scroll to **Device Interfaces** and select **ADD**.
+2. Enter the name `lan-dev` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `ethernet` | |
+   | PCI Address | `0000:00:07.0` | LAN ENI (`eth2`) |
+   | Forwarding | `true` | |
+
+4. Select **SAVE**.
+
+### 2b. Create the LAN Network Interface
+
+1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+2. Enter the name `lan1` and select **SAVE**.
+3. Set the following fields:
+
+   | Field | Value | Notes |
+   |-------|-------|-------|
+   | Type | `external` | |
+   | DHCP | `disabled` | Use a static gateway address on the LAN |
+   | Global-ID | `2` | |
+   | Tenant | `corp` | Assigns all LAN traffic to the corp tenant |
+   | Source NAT | `true` | |
+
+4. Scroll down to **Interface Addresses** and select **ADD**.
+   - IP Address: `10.1.2.1`
+   - Prefix Length: `24`
+5. Select **SAVE**.
+
+:::note
+The LAN interface is configured with a static IP (`10.1.2.1`) so it can act as the default gateway for hosts on the `10.1.2.0/24` subnet. If the router is not acting as the LAN gateway and instead connects to an existing subnet, configure DHCP `v4` on the LAN interface and remove the static address.
+:::
+
+## 3. Configure DNS
+
+Configure DNS so the router can resolve FQDNs for conductor connectivity and software downloads.
+
+1. Return to the **Router** level (`aws-branch1`).
+2. Scroll to **DNS Config** and select **ADD**.
+3. Set **Mode** to `static` and enter the following DNS server addresses: `1.1.1.1` and `8.8.8.8`.
+4. Select **SAVE**.
+
+## 4. Create the Internet Service Route
+
+The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
+
+1. Return to the **Router** level.
+2. Scroll to **Service Routes** and select **ADD**.
+3. Enter the name `internet-route` and select **SAVE**.
+4. Set the following fields:
+
+   | Field | Value |
+   |-------|-------|
+   | Service Name | `Internet-Traffic` |
+   | Service Route Type | `service-agent` |
+
+5. Scroll to **Next Hop** and select **ADD**.
+   - Node: `node0`
+   - Network Interface: `wan1`
+   - Select **SAVE**.
+
+6. Select **VALIDATE** and **COMMIT**.
+
+## Configuration Summary
+
+After committing, the conductor pushes the configuration to `aws-branch1`. The router applies the configuration and comes fully online within approximately 2–5 minutes.
+
+| Object | Name | Key Settings |
+|--------|------|-------------|
+| Router | `aws-branch1` | combo node, associated pending asset |
+| WAN Device Interface | `wan-dev` | PCI `0000:00:06.0`, forwarding enabled |
+| WAN Network Interface | `wan1` | DHCP v4, conductor, management, default-route, source-nat, neighborhood `internet` with external-nat-address `203.0.113.20` |
+| LAN Device Interface | `lan-dev` | PCI `0000:00:07.0`, forwarding enabled |
+| LAN Network Interface | `lan1` | tenant `corp`, static `10.1.2.1/24` |
+| DNS Config | | mode `static`, servers `1.1.1.1`, `8.8.8.8` |
+| Service Route | `internet-route` | service `Internet-Traffic`, type `service-agent`, next-hop `node0 / wan1` |
+
+## Related Topics
+
+- [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md)
+- [Appendix — AWS Configuration](deploy_appendix_aws_conductor.mdx)
+- [Troubleshooting BYOL Installations](intro_installation_byol_aws_conductor.md#troubleshooting)
+- [Deploying AWS Hub and Spoke Routers](deploy_aws_hub_spoke_overview.mdx) — add a hub and spoke topology to this conductor

@@ -1,0 +1,130 @@
+---
+title: "Step 4: Launch the Router EC2 Instance"
+sidebar_label: "Launch the Router Instance"
+---
+import NetworkDesign from './_deploy_aws_conductor_network_design.md';
+
+This step deploys the AWS EC2 instance for the SSR router. The BYOL CloudFormation template creates the instance with three network interfaces, installs SSR 7.1.4, and automatically onboards the router to the conductor via Zero Touch Provisioning (ZTP).
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Router Instance Requirements
+
+| Resource | Minimum Value | Notes |
+|----------|---------------|-------|
+| Instance Type | `c5.xlarge` | |
+| vCPUs | 4 | |
+| Memory | 8 GB | |
+| Storage | 128 GB | |
+| Network Interfaces | 3 × ENI | Management (OOB), WAN (public), LAN (private) |
+| Enhanced Networking | ENA required | Provides maximum throughput performance |
+
+## Infrastructure Requirements
+
+The following infrastructure must exist in your AWS account before deploying the router:
+
+- A **VPC** in your target region (`10.1.0.0/16` in this guide).
+- Three **subnets** within the VPC:
+
+  | Subnet | CIDR | Purpose |
+  |--------|------|---------|
+  | Management | _(any)_ | OOB SSH to the EC2 instance. Managed by Linux only — not configured in SSR. |
+  | WAN (public) | `10.1.1.0/24` | Internet-facing, carries both internet forwarding and conductor management over forwarding. |
+  | LAN (private) | `10.1.2.0/24` | Internal workloads. |
+
+- An **Elastic IP** allocated in the same region — this will be associated with the WAN ENI. Record it as `203.0.113.20` (your `<router-eip>`).
+- **Enhanced networking** enabled on the instance. If deploying without the CloudFormation template, enable ENA support from your local machine:
+
+  ```bash
+  aws ec2 modify-instance-attribute --instance-id <instance-id> --ena-support
+  ```
+
+:::important
+The WAN subnet must have a route to the internet and be able to reach the conductor Elastic IP (`203.0.113.10`) on ports 930, 4505, and 4506.
+:::
+
+## Deploy the Router Using CloudFormation
+
+### AWS Console
+
+1. Navigate to the [Session Smart Networking Platform BYOL](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c) offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop-down, select **CloudFormation Template**, then select the **Juniper Session Smart Conductor Managed Router** template.
+5. Select your target AWS region and click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+7. Fill in the template parameters:
+
+   | Parameter | Example Value | Notes |
+   |-----------|---------------|-------|
+   | Name | `aws-branch1` | EC2 instance name |
+   | Instance Type | `c5.xlarge` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | |
+   | Artifactory Token | _(your token)_ | |
+   | Primary Control IP | `203.0.113.10` | Conductor Elastic IP |
+   | VPC ID | ID of the router VPC | |
+   | Management Subnet ID | ID of the management subnet | |
+   | Public Subnet ID | ID of the WAN subnet (`10.1.1.0/24`) | |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Private Subnet ID | ID of the LAN subnet (`10.1.2.0/24`) | |
+   | Private Subnet Allowed CIDR | `10.1.2.0/24` | |
+   | Admin Allowed CIDR | `<your-admin-ip>/32` | |
+   | Key Name | Your EC2 key pair name | |
+
+   For a full description of all template parameters, see [BYOL Router Template Parameters](intro_installation_byol_aws_conductor.md#launch-the-conductor-managed-template).
+
+   ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
+
+8. Click **Next**, review the stack settings, then click **Create Stack**.
+
+   ![Deployment Complete](/img/platforms_aws_deployment_complete.png)
+
+After the stack reaches **CREATE_COMPLETE**, the BYOL software installation begins. Allow **10–15 minutes** for SSR 7.1.4 to install. The router then automatically contacts the conductor at `203.0.113.10` and appears as a pending asset in the conductor GUI.
+
+## Network Interface Layout
+
+The CloudFormation template attaches the ENIs to the EC2 instance in the following order when a management subnet is provided:
+
+| Network Interface | Subnet | PCI Address | Managed By |
+|-------------------|--------|-------------|-----------|
+| `eth0` / `ge-0-0` | Management | `0000:00:05.0` | Linux only — OOB SSH, not configured in SSR |
+| `eth1` / `ge-0-1` | WAN (public) | `0000:00:06.0` | SSR — WAN forwarding with management over forwarding |
+| `eth2` / `ge-0-2` | LAN (private) | `0000:00:07.0` | SSR — LAN forwarding |
+
+:::note
+These PCI addresses are the default values for EC2 instances deployed with this template. Verify the actual addresses on your instance after SSR is installed by running `sudo dpdk-devbind.py --status` via SSH. See [Determining the Device Interface Layout](intro_installation_quickstart_aws.md#determine-the-device-interface-layout) for instructions.
+:::
+
+## Disable Source / Destination Check
+
+AWS enables source/destination checking on all ENIs by default. This check drops packets where the EC2 instance is not the packet source or destination, which prevents the SSR from forwarding any transit traffic. You must disable this check on the **WAN and LAN ENIs**.
+
+1. In the EC2 console, navigate to **Instances** and select the `aws-branch1` instance.
+2. Select the **Networking** tab.
+3. Under **Network interfaces**, click on the WAN ENI (second interface, `eth1`).
+4. Select **Actions → Change source/destination check**.
+5. Select **Stop** and click **Save**.
+
+   ![Source/Destination Check](/img/AWS-bootstrap2.png)
+
+6. Repeat steps 3–5 for the LAN ENI (`eth2`).
+
+:::important
+Failing to disable source/destination checking prevents the SSR from forwarding any transit traffic. Complete this step before committing the router configuration in [Step 5](deploy_aws_router_config.mdx).
+:::
+
+## Associate the Elastic IP with the WAN Interface
+
+1. In the EC2 console, navigate to **Elastic IPs**.
+2. If you have not already done so, allocate a new Elastic IP.
+3. Select the address and click **Actions → Associate Elastic IP Address**.
+4. Select the router instance's WAN ENI (`eth1`) and click **Associate**.
+
+Record this Elastic IP as `203.0.113.20`. You will reference it when configuring the WAN interface neighborhood in [Step 5](deploy_aws_router_config.mdx).
+
+## Next Step
+
+Proceed to [Step 5 — Configure the Router on the Conductor](deploy_aws_router_config.mdx).

@@ -1,0 +1,102 @@
+---
+title: "Step 2: Install SSR 7.1.4 and Initialize the Conductor"
+sidebar_label: "Install and Initialize"
+---
+
+This step confirms that the BYOL SSR software installation has completed successfully and verifies access to the conductor GUI. If you deployed using the CloudFormation template with all required parameters (SSR version and Artifactory credentials), the software is installed and the conductor role is initialized automatically — no manual commands are required.
+
+## Wait for Software Installation
+
+After the CloudFormation stack reaches **CREATE_COMPLETE**, the EC2 instance downloads and installs SSR 7.1.4 via the BYOL process. This takes approximately **10–15 minutes**.
+
+You can monitor progress by connecting to the instance over SSH:
+
+1. SSH to the EC2 instance using the SSH command from the CloudFormation Outputs tab:
+
+   ```bash
+   ssh -i <your-key.pem> t128@203.0.113.10
+   ```
+
+2. Follow the hardware bootstrapper log to observe installation progress:
+
+   ```bash
+   sudo journalctl -u 128T-hardware-bootstrapper -f
+   ```
+
+3. When you see output indicating that SSR installation is complete and the system is initializing, the instance will reboot automatically. Wait for it to come back online before proceeding.
+
+:::note
+If the device does not initialize as expected within 20 minutes, SSH into the instance and examine `/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip` for diagnostic information.
+:::
+
+## Verify the Conductor Is Running
+
+After the reboot, confirm that SSR is running:
+
+1. SSH back to the instance:
+
+   ```bash
+   ssh -i <your-key.pem> t128@203.0.113.10
+   ```
+
+2. Enter the SSR CLI:
+
+   ```bash
+   su admin
+   ```
+
+3. Run `show system`. When **Status** returns `running`, the conductor is ready:
+
+   ```text
+   admin@node0.Conductor# show system
+   ...
+   Status:    running
+   ```
+
+## Access the Conductor GUI
+
+1. Open a web browser and navigate to the HTTPS URL from the CloudFormation Outputs tab:
+
+   ```
+   https://203.0.113.10
+   ```
+
+   Accept the self-signed certificate warning to proceed.
+
+2. Log in with the default credentials:
+   - **Username:** `admin`
+   - **Password:** `128Tadmin`
+
+   :::important
+   Change the default password immediately after first login. Navigate to the account icon in the top-right corner and select **Change Password**. The new password must be at least 9 characters and include one uppercase letter, one lowercase letter, and one number.
+   :::
+
+3. A successful login confirms the conductor is running and reachable on the network.
+
+## Manual Onboarding (Without CloudFormation)
+
+If you launched the EC2 instance without using the CloudFormation template, or without providing Artifactory credentials in the template, complete onboarding manually:
+
+1. SSH to the instance using `ec2-user` and your IAM key:
+
+   ```bash
+   ssh -i <your-key.pem> ec2-user@203.0.113.10
+   ```
+
+2. Run the hardware bootstrapper configuration generator:
+
+   ```bash
+   sudo /usr/libexec/hardwareBootstrapper128t config-generator
+   ```
+
+3. Follow the interactive prompts. When asked, provide:
+   - Conductor name: `Conductor`
+   - SSR version: `7.1.4`
+   - Artifactory username and token
+   - Mode: `conductor`
+
+4. The instance reboots automatically after onboarding completes.
+
+## Next Step
+
+Proceed to [Step 3 — Configure the Conductor](deploy_aws_conductor_config.mdx).
