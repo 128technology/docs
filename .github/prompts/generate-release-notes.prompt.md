@@ -18,11 +18,46 @@ Ask for the following if not provided:
 4. **Mode** — `generate` (create a new release notes file or section) or `update` (add new issues to an existing release notes section). If the output file already exists and contains the target version heading, infer `update` mode unless the user explicitly requests `generate`.
 5. **Target release section** *(update mode only)* — the specific `## Release <version>` heading to update (e.g., `## Release 7.1.6-r2`). Required when mode is `update`.
 
+## Helper Scripts
+
+Reusable Node.js scripts live in `scripts/release-notes/`. These handle mechanical data transformations so the agent can focus on AI-dependent synthesis. All scripts accept `--help` for usage details.
+
+| Script | Purpose | Invoked In |
+|--------|---------|------------|
+| `categorize.js` | Categorize JQL results into CVE / Feature / Caveat / Resolved | Step 1 |
+| `find-existing-entries.js` | Search existing release notes for reusable entry text | Step 2.0 |
+| `collect-cves.js` | Extract and sort all unique CVE identifiers | Step 5 |
+| `assemble-section.js` | Combine entries + CVEs into a complete markdown section | Step 5 |
+| `insert-section.js` | Insert the assembled section into the target file | Step 6 |
+
+All scripts use file-based I/O. Save intermediate data to `/tmp/rn-*` files.
+
 ## Workflow
+
+### Step 0 — Verify MCP Servers Are Running
+
+Before starting any work, confirm that both required MCP servers are available:
+
+1. **JIRA MCP** — Call `mcp_ssr-jira-mcp_get_issue` with a known issue key (e.g., `I95-1`) or any lightweight JIRA MCP tool. If the call fails or times out, stop.
+2. **GitHub MCP** — Call `mcp_github_mcp_se_get_me` to verify the GitHub MCP server is reachable. If the call fails or times out, stop.
+
+If **either** server is not running, halt immediately and inform the user:
+
+> "The release notes workflow requires both the **SSR JIRA MCP** and **GitHub MCP** servers to be running. Please start the missing server(s) and re-run this prompt."
+
+Do NOT proceed to Step 1 until both checks pass.
 
 ### Step 1 — Fetch Issues
 
 Run the provided JQL query using the SSR JIRA MCP tools. Collect all returned issues. If the JQL query returns zero issues, inform the user and ask them to verify the query or version labels before proceeding.
+
+After fetching, save the raw JQL results JSON to `/tmp/rn-jql-results.json`, then run:
+
+```bash
+node scripts/release-notes/categorize.js --input /tmp/rn-jql-results.json --output /tmp/rn-categorized.json
+```
+
+This produces a categorized breakdown. Use the output to identify which issues are CVEs (grouped automatically), features, caveats, and resolved issues.
 
 ### Step 1.5 — Diff Against Existing Notes (Update Mode Only)
 
@@ -43,7 +78,13 @@ For each issue identified as needing processing:
 - In **generate** mode: all issues returned by the JQL query.
 - In **update** mode: only the **new issues** identified in Step 1.5.
 
-0. **Check for existing release-note language first.** Search the existing release notes under [docs/](../../docs/) (for example, `release_notes_128t_*.md`) for the issue key (e.g., `I95-12345`, `WAN-1234`). If a prior entry for that issue exists in a *different* release section or file, reuse its title and description verbatim and **skip Steps 2.1, 3, and 4** for that issue — do not call the JIRA or GitHub MCP tools for it. Only continue with the steps below if no prior entry exists anywhere.
+0. **Check for existing release-note language first.** Write the non-CVE issue keys (features + caveats + resolved from `/tmp/rn-categorized.json`) to `/tmp/rn-non-cve-keys.txt` (one per line), then run:
+
+```bash
+node scripts/release-notes/find-existing-entries.js --keys /tmp/rn-non-cve-keys.txt --found /tmp/rn-found-entries.json --not-found /tmp/rn-needs-entries.txt
+```
+
+Issues listed in `/tmp/rn-found-entries.json` already have reusable entry text — skip Steps 2.1, 3, and 4 for those. Only process issues listed in `/tmp/rn-needs-entries.txt` through the steps below.
 1. Read the JIRA issue and collect all available context:
    - **Summary** (title)
    - **Description** (full body, often contains root cause and fix details)
@@ -87,6 +128,27 @@ Do not copy any single source verbatim. Synthesize all inputs into one clear, co
 ### Step 5 — Generate or Update Release Notes Document
 
 Use the format from [docs/release_notes_128t_7.1.md](../../docs/release_notes_128t_7.1.md) as the template.
+
+#### Using helper scripts for assembly
+
+After synthesizing new entries (Step 4), save them as a JSON mapping to `/tmp/rn-new-entries.json` (format: `{ "KEY": "- **KEY title:** description" }`). Then run:
+
+```bash
+# Collect CVEs
+node scripts/release-notes/collect-cves.js --input /tmp/rn-jql-results.json --output /tmp/rn-cves.txt
+
+# Assemble the section
+node scripts/release-notes/assemble-section.js \
+  --found /tmp/rn-found-entries.json \
+  --new /tmp/rn-new-entries.json \
+  --cves /tmp/rn-cves.txt \
+  --version "<VERSION>" \
+  --date "<DATE>" \
+  --features "<comma-separated feature keys>" \
+  --output /tmp/rn-section.md
+```
+
+Review the output in `/tmp/rn-section.md` before inserting.
 
 #### Update mode — merge new entries into the existing section
 
@@ -158,6 +220,16 @@ If Step 1.5 identified any **stale issues** (entries in the existing section tha
 2. Do NOT remove the stale entries from the rendered content. They remain in place until the user manually confirms removal.
 
 ### Step 6 — Review and Save
+
+To insert the assembled section into the target file, run:
+
+```bash
+# Insert before an existing section (newer versions go first)
+node scripts/release-notes/insert-section.js --file <output-file> --section /tmp/rn-section.md --before "## Release <older-version>"
+
+# Or append to end of file if no later section exists
+node scripts/release-notes/insert-section.js --file <output-file> --section /tmp/rn-section.md --append
+```
 
 **Generate mode:** Present the complete draft for review. After approval, save to the specified output file.
 

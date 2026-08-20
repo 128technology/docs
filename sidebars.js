@@ -213,27 +213,16 @@ module.exports = {
           "type": "category",
           "label": "Router Deployment Guides",
           "items": [
-            "deploy_vmware_router_overview",
               {
                 "type": "category",
-                "label": "VMware Spoke Router",
+                "label": "VMware Router",
                 "items": [
+                  "deploy_vmware_router_overview",
                   "deploy_vmware_router_vm",
                   "deploy_vmware_router_install",
                   "deploy_vmware_router_pci",
                   "deploy_vmware_router_config",
                   "deploy_appendix_vmware_router",
-                ],
-              },
-              {
-                "type": "category",
-                "label": "VMware Hub Router",
-                "items": [
-                  "deploy_vmware_hub_router_vm",
-                  "deploy_vmware_hub_router_install",
-                  "deploy_vmware_hub_router_pci",
-                  "deploy_vmware_hub_router_config",
-                  "deploy_appendix_vmware_hub_router",
               ],
             },
           ],
