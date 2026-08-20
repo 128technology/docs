@@ -1,0 +1,113 @@
+---
+title: "Step 1: Deploy the Hub Router Instance"
+sidebar_label: "Deploy the Hub Instance"
+---
+import NetworkDesign from './_deploy_aws_hub_spoke_network_design.md';
+import PostDeploySteps from './_deploy_aws_router_instance_steps.md';
+
+This step launches the AWS EC2 instance for the hub router (`aws-hub1`). The BYOL CloudFormation template creates the instance with three network interfaces, installs SSR 7.1.4, and automatically onboards the router to the conductor via Zero Touch Provisioning (ZTP).
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Hub Router Instance Requirements
+
+| Resource | Minimum Value | Notes |
+|----------|---------------|-------|
+| Instance Type | `c5.xlarge` | Scale up for high-throughput hub deployments |
+| vCPUs | 4 | |
+| Memory | 8 GB | |
+| Storage | 128 GB | |
+| Network Interfaces | 3 × ENI | Management (OOB), WAN (public), LAN (private) |
+| Enhanced Networking | ENA required | Provides maximum throughput performance |
+
+## Infrastructure Requirements
+
+The following infrastructure must exist in your AWS account before deploying the hub router:
+
+- A **VPC** in your target region (`10.2.0.0/16` in this guide).
+- Three **subnets** within the VPC:
+
+  | Subnet | CIDR | Purpose |
+  |--------|------|---------|
+  | Management | _(any)_ | OOB SSH to the EC2 instance. Managed by Linux only — not configured in SSR. |
+  | WAN (public) | `10.2.1.0/24` | Internet-facing, carries both internet forwarding and conductor management over forwarding. |
+  | LAN (private) | `10.2.2.0/24` | Internal LAN workloads and SVR transit to spoke routers. |
+
+- An **Elastic IP** allocated in the same region — this is associated with the WAN ENI. Record it as `203.0.113.30` (your `<hub-eip>`).
+
+:::important
+The WAN subnet must have a route to the internet and be able to reach the conductor Elastic IP (`203.0.113.10`) on ports 930, 4505, and 4506. The WAN Elastic IP must also be reachable by spoke routers, since they initiate SVR sessions to the hub's external IP.
+:::
+
+## Deploy the Hub Router Using CloudFormation
+
+### AWS Console
+
+1. Navigate to the [Session Smart Networking Platform BYOL](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c) offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop-down, select **CloudFormation Template**, then select the **Juniper Session Smart Conductor Managed Router** template.
+5. Select your target AWS region and click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+7. Fill in the template parameters using the following table as a guide:
+
+   | Parameter | Example Value | Notes |
+   |-----------|---------------|-------|
+   | Name | `aws-hub1` | EC2 instance name |
+   | Instance Type | `c5.xlarge` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | |
+   | Artifactory Token | _(your token)_ | |
+   | Primary Control IP | `203.0.113.10` | Conductor Elastic IP |
+   | VPC ID | ID of the hub VPC | |
+   | Management Subnet ID | ID of the management subnet | |
+   | Public Subnet ID | ID of the WAN subnet (`10.2.1.0/24`) | |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict to known spoke WAN CIDRs after deployment |
+   | Private Subnet ID | ID of the LAN subnet (`10.2.2.0/24`) | |
+   | Private Subnet Allowed CIDR | `10.2.2.0/24` | |
+   | Admin Allowed CIDR | `<your-admin-ip>/32` | |
+   | Key Name | Your EC2 key pair name | |
+
+   ![CloudFormation Template](/img/aws-byol-conductor-managed-template.png)
+
+8. Click **Next**, review the stack settings, then click **Create Stack**.
+
+   ![Deployment Complete](/img/platforms_aws_deployment_complete.png)
+
+After the stack reaches **CREATE_COMPLETE**, the BYOL software installation begins. Allow **10–15 minutes** for SSR 7.1.4 to install. The router then automatically contacts the conductor at `203.0.113.10` and appears as a pending asset in the conductor GUI.
+
+## Network Interface Layout
+
+The CloudFormation template attaches the ENIs to the EC2 instance in the following order when a management subnet is provided:
+
+| Network Interface | Subnet | PCI Address | Managed By |
+|-------------------|--------|-------------|------------|
+| `eth0` / `ge-0-0` | Management | `0000:00:05.0` | Linux only — OOB SSH, not configured in SSR |
+| `eth1` / `ge-0-1` | WAN (public) | `0000:00:06.0` | SSR — WAN forwarding with management over forwarding |
+| `eth2` / `ge-0-2` | LAN (private) | `0000:00:07.0` | SSR — LAN forwarding |
+
+:::note
+These PCI addresses are the default values for EC2 instances deployed with this template. Verify the actual addresses on your instance after SSR is installed by running `sudo dpdk-devbind.py --status` via SSH.
+:::
+
+<PostDeploySteps/>
+
+:::note
+Record the hub WAN Elastic IP (`203.0.113.30`). You will enter it as the `external-nat-address` in the hub neighborhood configuration in [Step 2](deploy_aws_hub_router_config.mdx).
+:::
+
+## What Was Deployed
+
+After the CloudFormation stack completes and SSR installs, the following resources exist in your AWS account:
+
+| Resource | Description |
+|----------|-------------|
+| EC2 instance | `aws-hub1` — `c5.xlarge`, running the BYOL SSR image |
+| Security group | Allows inbound SSH (22), router management ports (930, 4505, 4506), and SVR UDP/TCP (12800–12900) from spoke WAN CIDRs |
+| Elastic IP | Assigned to the hub WAN ENI — `203.0.113.30` |
+
+## Next Step
+
+Proceed to [Step 2 — Configure the Hub Router on the Conductor](deploy_aws_hub_router_config.mdx).

@@ -238,6 +238,18 @@ module.exports = {
                   "deploy_appendix_vmware_router",
               ],
             },
+              {
+                "type": "category",
+                "label": "AWS Hub and Spoke Routers",
+                "items": [
+                  "deploy_aws_hub_spoke_overview",
+                  "deploy_aws_hub_router_instance",
+                  "deploy_aws_hub_router_config",
+                  "deploy_aws_spoke_router_instance",
+                  "deploy_aws_spoke_router_config",
+                  "deploy_appendix_aws_hub_spoke",
+              ],
+            },
           ],
         },
       ],

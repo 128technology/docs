@@ -1,48 +1,39 @@
 ---
-title: "Step 5: Configure the Router on the Conductor"
-sidebar_label: "Configure the Router"
+title: "Step 4: Configure the Spoke Router on the Conductor"
+sidebar_label: "Configure the Spoke Router"
 ---
-import NetworkDesign from './_deploy_aws_conductor_network_design.md';
+import NetworkDesign from './_deploy_aws_hub_spoke_network_design.md';
 
-With the router EC2 instance deployed and ZTP-connected to the conductor, you can now configure the full router profile. All steps are performed from the **Conductor GUI** at `https://203.0.113.10`.
+With the spoke router EC2 instance deployed and ZTP-connected to the conductor, you can now configure the full spoke router profile. All steps are performed from the **Conductor GUI** at `https://203.0.113.10`.
 
 :::note
-Your conductor must already have the following objects configured before proceeding:
-
-- **Authority name** — set to your organization's name.
-- **Conductor address** — set to `203.0.113.10`.
-- **`corp` tenant** — the LAN-side user tenant.
-- **`Internet-Traffic` service** — with address `0.0.0.0/0` and access policy permitting `corp`.
-
-If any of these are missing, complete [Step 3 — Configure the Conductor](deploy_aws_conductor_config.mdx) first.
+The hub router (`aws-hub1`) must already be configured and committed before you commit the spoke configuration. The conductor uses the hub's `external-nat-address` (`203.0.113.30`) to generate the SVR peer relationship and distribute it to the spoke after commit.
 :::
 
 ## Network Design Reference
 
 <NetworkDesign/>
 
-## Create the Router and Associate the Pending Asset
-
-After the router EC2 finishes the BYOL installation and ZTPs to the conductor, a pending asset appears in the conductor GUI. Create the router configuration and associate the asset with it before configuring the interfaces.
+## Create the Spoke Router and Associate the Pending Asset
 
 1. Log in to the Conductor GUI.
 2. Select **Configuration → Authority**.
 3. Scroll to **Routers** and select **ADD**.
-4. Enter the name `aws-branch1` and select **SAVE**.
+4. Enter the name `aws-spoke1` and select **SAVE**.
 5. Set **Inter-node Security** to `internal`.
 6. Under the new router, scroll to **Nodes** and select **ADD**.
 7. Enter node name `node0` and select **SAVE**.
 8. Set **Role** to `combo`.
-9. Under **Associated Asset ID**, select the pending asset that appeared after the router ZTPed.
+9. Under **Associated Asset ID**, select the pending asset for `aws-spoke1`.
 10. Select **SAVE**.
 
 :::note
-The pending asset appears in the conductor GUI within 2–3 minutes of the ZTP connection being established. If no asset appears after 20 minutes, SSH into the router instance and examine the hardware bootstrapper logs for diagnostic information. See [Troubleshooting BYOL Installations](intro_installation_byol_aws_conductor.md#troubleshooting) for guidance.
+Two pending assets should be visible in the conductor GUI — one for `aws-hub1` (which you associated in Step 2) and one for `aws-spoke1`. Select the asset that appeared after deploying the spoke instance. If you are unsure which is which, check the asset's reported IP address against the spoke WAN Elastic IP (`203.0.113.20`).
 :::
 
 ## 1. Configure the WAN Interface
 
-The WAN interface (`eth1` / PCI `0000:00:06.0`) connects to the public subnet, obtains an IP address via DHCP from AWS, and carries both internet forwarding traffic and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
+The WAN interface (`eth1` / PCI `0000:00:06.0`) connects to the public subnet, obtains an IP address via DHCP from AWS, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md). The spoke declares `topology: spoke` in the `internet` neighborhood, causing the conductor to generate an SVR peer relationship toward the hub.
 
 ### 1a. Create the WAN Device Interface
 
@@ -81,13 +72,13 @@ The WAN interface (`eth1` / PCI `0000:00:06.0`) connects to the public subnet, o
 5. Scroll down to **Neighborhoods** and select **ADD**.
    - Enter the neighborhood name `internet`.
    - Set **Topology** to `spoke`.
-   - Scroll to **External NAT Address** and enter `203.0.113.20` (the Elastic IP of the router WAN ENI).
+   - Scroll to **External NAT Address** and enter `203.0.113.20` (the spoke WAN Elastic IP).
    - Select **SAVE**.
 
 :::important
-**Why `external-nat-address` is required:** AWS maps the Elastic IP (`203.0.113.20`) to the private DHCP address on the WAN ENI via 1:1 NAT. Without the `external-nat-address` setting, the SSR advertises its private IP to peers — which is unreachable from the internet. Setting this field tells the SSR to advertise the Elastic IP instead.
+**Topology must be set to `spoke`** and the neighborhood name must be `internet` — the same name used on the hub router. The conductor matches routers by neighborhood name to build the SVR peer relationship. When you commit this configuration, the conductor automatically generates the peer entry pointing the spoke at the hub's external IP (`203.0.113.30`).
 
-**Why `Conductor`, `Source NAT`, and `Default Route` must all be `true`:** Management traffic to the conductor originates from the host OS at `169.254.x.x` link-local addresses. Source NAT translates this to the WAN DHCP address before the packet leaves the interface. The default route ensures Linux routes all outbound traffic through the SSR forwarding engine so the management-conductor service routes apply.
+**`external-nat-address` is required** — AWS maps the spoke Elastic IP (`203.0.113.20`) to the private DHCP address on the WAN ENI via 1:1 NAT. Without this setting, the SSR advertises its private IP to the hub, which cannot reach it from outside the spoke VPC.
 :::
 
 ## 2. Configure the LAN Interface
@@ -127,22 +118,18 @@ The LAN interface (`eth2` / PCI `0000:00:07.0`) connects to the private subnet a
    - Prefix Length: `24`
 5. Select **SAVE**.
 
-:::note
-The LAN interface is configured with a static IP (`10.1.2.1`) so it can act as the default gateway for hosts on the `10.1.2.0/24` subnet. If the router is not acting as the LAN gateway and instead connects to an existing subnet, configure DHCP `v4` on the LAN interface and remove the static address.
-:::
-
 ## 3. Configure DNS
 
-Configure DNS so the router can resolve FQDNs for conductor connectivity and software downloads.
+Configure DNS so the spoke can resolve FQDNs for conductor connectivity and software downloads.
 
-1. Return to the **Router** level (`aws-branch1`).
+1. Return to the **Router** level (`aws-spoke1`).
 2. Scroll to **DNS Config** and select **ADD**.
 3. Set **Mode** to `static` and enter the following DNS server addresses: `1.1.1.1` and `8.8.8.8`.
 4. Select **SAVE**.
 
 ## 4. Create the Internet Service Route
 
-The service route directs traffic matched by the `Internet-Traffic` service out through the WAN interface as a direct internet breakout.
+The service route directs traffic matched by the `Internet-Traffic` service out through the spoke's own WAN interface as a direct local internet breakout.
 
 1. Return to the **Router** level.
 2. Scroll to **Service Routes** and select **ADD**.
@@ -163,21 +150,59 @@ The service route directs traffic matched by the `Internet-Traffic` service out 
 
 ## Configuration Summary
 
-After committing, the conductor pushes the configuration to `aws-branch1`. The router applies the configuration and comes fully online within approximately 2–5 minutes.
+After committing, the conductor pushes the configuration to `aws-spoke1` and generates the SVR peer relationship between `aws-hub1` and `aws-spoke1`. Both routers apply the updated configuration within approximately 2–5 minutes.
 
 | Object | Name | Key Settings |
 |--------|------|-------------|
-| Router | `aws-branch1` | combo node, associated pending asset |
+| Router | `aws-spoke1` | combo node, associated pending asset |
 | WAN Device Interface | `wan-dev` | PCI `0000:00:06.0`, forwarding enabled |
-| WAN Network Interface | `wan1` | DHCP v4, conductor, management, default-route, source-nat, neighborhood `internet` with external-nat-address `203.0.113.20` |
+| WAN Network Interface | `wan1` | DHCP v4, conductor, management, default-route, source-nat, neighborhood `internet` / topology `spoke` / external-nat-address `203.0.113.20` |
 | LAN Device Interface | `lan-dev` | PCI `0000:00:07.0`, forwarding enabled |
-| LAN Network Interface | `lan1` | tenant `corp`, static `10.1.2.1/24` |
+| LAN Network Interface | `lan1` | tenant `corp`, static `10.1.2.1/24`, source-nat |
 | DNS Config | | mode `static`, servers `1.1.1.1`, `8.8.8.8` |
 | Service Route | `internet-route` | service `Internet-Traffic`, type `service-agent`, next-hop `node0 / wan1` |
+
+## Verify SVR Peering Between Hub and Spoke
+
+After committing, confirm that the spoke has established an SVR session with the hub.
+
+1. SSH to the spoke instance:
+
+   ```bash
+   ssh -i <your-key.pem> t128@203.0.113.20
+   ```
+
+2. Enter the SSR CLI:
+
+   ```bash
+   su admin
+   ```
+
+3. Verify the hub peer is reachable:
+
+   ```text
+   admin@node0.aws-spoke1# show peers
+   ```
+
+   The `aws-hub1` peer should appear with state `Up`.
+
+4. Verify the BFD session is active:
+
+   ```text
+   admin@node0.aws-spoke1# show bfd
+   ```
+
+   The `aws-hub1` entry should show state `Up` with an active BFD session.
+
+5. Optionally, generate test traffic from a host in the spoke LAN (`10.1.2.0/24`) and confirm internet connectivity:
+
+   ```bash
+   ping 8.8.8.8
+   ```
+
+   A successful reply confirms internet breakout through the spoke WAN is working.
 
 ## Related Topics
 
 - [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md)
-- [Appendix — AWS Configuration](deploy_appendix_aws_conductor.mdx)
-- [Troubleshooting BYOL Installations](intro_installation_byol_aws_conductor.md#troubleshooting)
-- [Deploying AWS Hub and Spoke Routers](deploy_aws_hub_spoke_overview.mdx) — add a hub and spoke topology to this conductor
+- [Appendix — Hub and Spoke Configuration](deploy_appendix_aws_hub_spoke.mdx)
