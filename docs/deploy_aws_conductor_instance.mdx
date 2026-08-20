@@ -15,9 +15,9 @@ This step launches the AWS EC2 instance that will host the SSR Conductor. The BY
 | Resource | Minimum Value | Notes |
 |----------|---------------|-------|
 | Instance Type | `c5.xlarge` | Scale up for deployments with more than 25 managed routers |
-| vCPUs | 4 | |
-| Memory | 8 GB | |
-| Storage | 128 GB | Default EBS volume provided by the CloudFormation template |
+| vCPUs | 8 | |
+| Memory | 64 GB | |
+| Storage | 256 GB | Default EBS volume provided by the CloudFormation template |
 | Network Interfaces | 1 × ENI | Connected to the control subnet |
 
 :::note

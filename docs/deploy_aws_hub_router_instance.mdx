@@ -16,11 +16,15 @@ This step launches the AWS EC2 instance for the hub router (`aws-hub1`). The BYO
 | Resource | Minimum Value | Notes |
 |----------|---------------|-------|
 | Instance Type | `c5.xlarge` | Scale up for high-throughput hub deployments |
-| vCPUs | 4 | |
-| Memory | 8 GB | |
-| Storage | 128 GB | |
+| vCPUs | 8 | |
+| Memory | 64 GB | |
+| Storage | 256 GB | |
 | Network Interfaces | 3 × ENI | Management (OOB), WAN (public), LAN (private) |
 | Enhanced Networking | ENA required | Provides maximum throughput performance |
+
+:::note
+Memory requirements should be adjusted based on your network scaling requirements. For guidance on scaling for larger deployments, see [Conductor Scaling Recommendations](intro_system_reqs.md#conductor-scaling-recommendations).
+:::
 
 ## Infrastructure Requirements
 
