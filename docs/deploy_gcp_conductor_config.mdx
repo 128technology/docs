@@ -1,0 +1,85 @@
+---
+title: "Step 3: Configure the SSR Conductor"
+sidebar_label: "Configure the SSR Conductor"
+---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
+
+This step accesses the conductor web GUI and configures the authority name, conductor address, and asset ID. All steps are performed from a browser unless otherwise noted.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## 1. Access the Conductor GUI
+
+1. In the GCP console, search for **Compute Engine** in the search bar and click the top result.
+
+2. Navigate to **VM instances** and copy the **External IP** of the conductor VM.
+
+3. In a browser, navigate to:
+
+   ```text
+   https://<conductor-external-ip>
+   ```
+
+4. On the conductor login page, enter the default credentials:
+
+   | Field | Value |
+   |-------|-------|
+   | Username | `admin` |
+   | Password | `128Tadmin` |
+
+   :::important
+   Change the default password immediately after your first login. The default credentials are well known and must not remain in production.
+   :::
+
+## 2. Set the Authority Name
+
+The authority name identifies your organization within the SSR configuration model. It applies globally to all routers managed by this conductor and cannot be changed after routers have been provisioned without re-onboarding them.
+
+1. In the left menu, click **Authority** under **Configuration**.
+
+2. Click **Authority**.
+
+3. In the **Basic Information** section, update the **Name** field to your organization's name. This guide uses the default value `Authority128`.
+
+## 3. Add the Conductor Address
+
+The conductor address is the IP address that managed routers use to reach this conductor. Use the conductor VM's external IP address.
+
+1. In the **Conductor Addresses** section, click **Add**.
+
+2. In the **New Conductor Address** window, enter the conductor VM's external IP address and click **Save**.
+
+3. In the top-right corner, click **Validate and Commit**. In the confirmation window, click **Proceed Commit**.
+
+## 4. Assign the Asset ID and Confirm the Role
+
+1. In the left menu, click **Authority** under **Configuration**, then click your conductor VM name under **Routers**.
+
+2. In the **Nodes** section, click **node0**.
+
+3. In the **Basic Information** section:
+   - In the **Associated Asset ID** field, select the conductor VM name.
+   - Verify that the **Role** field shows `conductor`.
+
+4. In the top-right corner, click **Validate and Commit**. In the confirmation window, click **Proceed Commit**.
+
+## What Was Configured
+
+At the end of this step your authority contains:
+
+| Object | Name | Value |
+|--------|------|-------|
+| Authority | `Authority128` | |
+| Conductor Address | | `35.X.X.X` (external IP) |
+| Node Asset ID | `node0` | Linked to conductor VM |
+| Node Role | `node0` | `conductor` |
+
+The conductor is now fully deployed and ready to onboard SSR routers.
+
+## Related Topics
+
+- [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md)
+- [Conductor Deployment Best Practices](bcp_conductor_deployment.md)
+- [Appendix — Deployment Parameters](deploy_appendix_gcp_conductor.mdx)

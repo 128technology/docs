@@ -1,0 +1,86 @@
+---
+title: "Step 1: Before You Deploy"
+sidebar_label: "Before You Deploy"
+---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
+
+Before deploying the SSR conductor through the GCP Marketplace, you must create a VPC with a subnet for the conductor VM and an SSH key pair for VM authentication.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## 1. Create a VPC and Subnet
+
+The conductor VM requires a single network interface (`nic0`) that will be automatically created during deployment. This interface receives an internal IP address within the subnet you specify and an external (public) IP address for management access — including SSH, HTTPS (web console), and SSR router onboarding.
+
+Create the VPC and subnet in your GCP project before beginning the Marketplace deployment.
+
+1. In the GCP console, search for **VPC networks** in the search bar and click on **VPC Networks**.
+
+![VPC Networks](/img/deploy-gcp-create-vpc1.png)
+
+2. On the Google Cloud dashboard under VPC networks, click **Create VPC Network**.
+
+![Create VPC Network](/img/deploy-gcp-create-vpc2.png)
+
+3. Under **Create a VPC network**, enter the following information:
+   - VPC Name: `conductor-vpc`
+   - Subnet Name: `conductor-subnet`
+   - Subnet Region
+   - An IPv4 range for the subnet (for example, `192.168.1.0/24`)
+
+![Define the VPC Network](/img/deploy-gcp-create-vpc3.png)
+
+4. Scroll to the bottom and click **Create**.
+
+   After the VPC is created it appears on the VPC networks page.
+
+![VPC Networks Page](/img/deploy-gcp-create-vpc4.png)
+
+:::note
+An existing VPC and subnet can be used instead of creating a new one. In that case, skip this section and use your existing VPC and subnet names during the Marketplace deployment.
+:::
+
+## 2. Create an SSH Key Pair
+
+An SSH key pair is required to authenticate to the conductor VM after deployment. The public key is provided to the Marketplace deployment form; the private key stays on your local machine.
+
+The following example uses a macOS terminal.
+
+1. Open a terminal on your local machine and run:
+
+   ```
+   ssh-keygen -t rsa -b 4096
+   ```
+
+2. When prompted, enter a name for the key pair and a passphrase. The key files are saved to your home directory.
+
+3. Display the public key by running the following command, replacing `<your-key-pair-name>` with the filename you chose:
+
+   ```
+   cat <your-key-pair-name>.pub
+   ```
+
+4. Copy the key output for use later. You will paste this value into the **SSH Public Key** field during the Marketplace deployment.
+
+:::note
+An existing SSH key pair can be used instead of creating a new one. In that case, skip this section and use your existing public key during deployment.
+:::
+
+## GCP Service Account
+
+The deployment requires a GCP service account with the following IAM roles:
+
+| Role | Purpose |
+|------|---------|
+| `roles/config.agent` | Required for GCP deployment manager operations |
+| `roles/compute.admin` | Required to create and manage compute resources |
+| `roles/iam.serviceAccountUser` | Required to act as the service account |
+| `roles/storage.objectViewer` | Required to read deployment objects from storage |
+
+You can create the service account directly within the Marketplace deployment form during [Step 2 — Deploy via GCP Marketplace](deploy_gcp_conductor_install.mdx). A separate pre-creation step in the GCP console is not required.
+
+## Next Step
+
+Proceed to [Step 2 — Deploy via GCP Marketplace](deploy_gcp_conductor_install.mdx).
