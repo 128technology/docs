@@ -220,7 +220,7 @@ module.exports = {
                   "deploy_vmware_router_overview",
                   "deploy_vmware_hub_router_vm",
                   "deploy_vmware_hub_router_install",
-                  "deploy_vmware_rhub_outer_pci",
+                  "deploy_vmware_hub_router_pci",
                   "deploy_vmware_hub_router_config",
                   "deploy_appendix_vmware_hub_router",
               ],
