@@ -9,13 +9,13 @@ The following IP addressing and naming scheme is used consistently throughout th
 | Conductor IP Address | `192.168.100.10` | Conductor IP — must be reachable from the router WAN |
 | Router Name | `Hub1` | VMware router system name |
 | Router Node Name | `node0` | Router node name |
-| Router Asset ID | `Hub1` | Asset ID reported after initialization; see [Step 2](deploy_vmware_router_install.mdx#asset-id) |
+| Router Asset ID | `Hub1` | Asset ID reported after initialization; see [Step 2](deploy_vmware_hub_router_install.mdx#asset-id) |
 | WAN Device Interface | `wan-dev` | WAN device interface name |
 | WAN Network Interface | `wan1` | WAN network interface name |
-| WAN PCI Address | _(discovered in [Step 3](deploy_vmware_router_pci.mdx))_ | VMXNet3 WAN NIC PCI address |
+| WAN PCI Address | _(discovered in [Step 3](deploy_vmware_hub_router_pci.mdx))_ | VMXNet3 WAN NIC PCI address |
 | LAN Device Interface | `lan-dev` | LAN device interface name |
 | LAN Network Interface | `lan1` | LAN network interface name |
-| LAN PCI Address | _(discovered in [Step 3](deploy_vmware_router_pci.mdx))_ | VMXNet3 LAN NIC PCI address |
+| LAN PCI Address | _(discovered in [Step 3](deploy_vmware_hub_router_pci.mdx))_ | VMXNet3 LAN NIC PCI address |
 | Router LAN IP Address | `192.168.1.1/24` | LAN gateway address |
 | Tenant Name | `corp` | LAN-side user tenant |
 | Service Name | `Internet-Traffic` | Internet breakout service |
