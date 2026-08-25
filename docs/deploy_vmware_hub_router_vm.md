@@ -10,10 +10,10 @@ This step creates the VMware ESXi virtual machine that will host the SSR hub rou
 
 | Resource | Minimum Value | Notes |
 |----------|---------------|-------|
-| vCPUs | `4` | |
+| vCPUs | `8` | |
 | Scheduling Affinity | `0-3` | Set under CPU → expand |
-| Memory | `8 GB` | |
-| Disk | `62 GB` | |
+| Memory | `64 GB` | |
+| Disk | `256 GB` | |
 | Network Adapters | 4 × VMXNet3 | NICs 1 and 2 = WAN portgroup, NICs 3 and 4 = LAN portgroup |
 | Boot Firmware | BIOS | Secure boot disabled |
 

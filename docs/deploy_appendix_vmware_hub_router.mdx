@@ -1,10 +1,10 @@
 ---
-title: "Appendix: VMware Router Configuration"
-sidebar_label: "Appendix: VMware Router Configuration"
+title: "Appendix: VMware Hub Router Configuration"
+sidebar_label: "Appendix: VMware Hub Router Configuration"
 ---
-import NetworkDesign from './_deploy_vmware_router_network_design.md';
+import NetworkDesign from './_deploy_vmware_hub_router_network_design.md';
 
-This appendix contains the complete SSR PCLI configuration for the `Spoke1` VMware router described in this guide. This configuration reflects the final state after completing all steps through [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).
+This appendix contains the complete SSR PCLI configuration for the `Hub1` VMware router described in this guide. This configuration reflects the final state after completing all steps through [Step 4 — Configure the Router on the Conductor](deploy_vmware_router_config.mdx).
 
 :::important
 This appendix uses **example** PCI addresses (`0000:0b:00.0` for WAN, `0000:13:00.0` for LAN). Replace these with the actual values discovered in [Step 3 — Find VM NIC PCI Addresses](deploy_vmware_router_pci.mdx).
@@ -18,29 +18,29 @@ This appendix uses **example** PCI addresses (`0000:0b:00.0` for WAN, `0000:13:0
 
 This configuration can be applied to the conductor using the PCLI import function.
 
-1. Save the router configuration block below to a file — for example, `vmware-router-Spoke1.cfg`.
+1. Save the router configuration block below to a file — for example, `vmware-router-Hub1.cfg`.
 
 2. Copy the file to the conductor:
 
-   ```bash
-   scp vmware-router-Spoke1.cfg admin@192.168.100.10:/tmp/
+   ```
+   scp vmware-router-Hub1.cfg admin@192.168.100.10:/tmp/
    ```
 
 3. Log in to the conductor PCLI:
 
-   ```bash
+   ```
    ssh admin@192.168.100.10
    ```
 
 4. Enter configuration mode and import:
 
-   ```text
-   admin@node0.conductor1# import config /tmp/vmware-router-Spoke1.cfg
+   ```
+   admin@node0.conductor1# import config /tmp/vmware-router-Hub1.cfg
    ```
 
 5. Review any validation warnings, then commit:
 
-   ```text
+   ```
    admin@node0.conductor1 (config)# commit
    Are you sure you want to commit the candidate config? [y/N]: y
    ```
@@ -53,9 +53,9 @@ The authority-level objects this router depends on (`Internet-Traffic` service, 
 
 ## Router Configuration
 
-![Spoke1 Config diagram](/img/dep-vmware-router-spoke1only.png)
+![Hub and Spoke Config diagram](/img/dep-vmware-router-hub-spoke.png))
 
-The following block shows the `Spoke1` router configuration as it appears within the authority configuration.
+The following block shows the `Hub1` router configuration as it appears within the authority configuration.
 
 ```
 config

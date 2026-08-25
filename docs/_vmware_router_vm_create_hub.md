@@ -65,10 +65,10 @@ Use the steps below to configure the following:
 
    | Setting | Value | Notes |
    |---------|-------|-------|
-   | CPUs | `4` | Minimum |
+   | CPUs | `8` | Minimum |
    | Hardware virtualization | Select (checkbox) **Expose hardware assisited virtualization to the guest OS** | Set under CPU → expand |
-   | Memory | `8 GB` | Minimum |
-   | Hard Disk 1 | `62 GB` | Minimum |
+   | Memory | `64 GB` | Minimum |
+   | Hard Disk 1 | `256 GB` | Minimum |
    | SCSI Controller 0 | `VMware Paravirtual` | |
 
    ![Storage Parameters](/img/dep5-vmrouter-params.png)
