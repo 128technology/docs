@@ -217,7 +217,7 @@ module.exports = {
                 "type": "category",
                 "label": "VMware Hub Router",
                 "items": [
-                  "deploy_vmware_router_overview",
+                  "deploy_vmware_hub_router_overview",
                   "deploy_vmware_hub_router_vm",
                   "deploy_vmware_hub_router_install",
                   "deploy_vmware_hub_router_pci",
