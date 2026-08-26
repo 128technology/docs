@@ -17,6 +17,10 @@ Download the SSR image-based install qcow2 using the link below:
 
 https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
+:::note
+Access to the URLs above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+:::
+
 ## Using cloud-init to bootstrap SSR connection to Conductor
 
 The simplest method for onboarding a new SSR to an existing conductor is to initialize the system as a router node and provide the addresses for any conductor nodes. The manual initialization process can be automated by providing an [initializer preferences](initializer_preferences.md) file. This can be automated through `cloud-init cloud-config` by providing a user-data to a cloud-init capable hypervisor similar to what is shown below.
