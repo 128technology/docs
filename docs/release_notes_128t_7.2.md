@@ -71,6 +71,30 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
+## Release 7.2.3-1r2 
+
+**Beta Release Date:** August 27, 2026
+
+### New Features
+
+- **I95-65332 Allow BGP/MSDP to use TCP MD5 even when kernel is in FIPS mode:** The use of BGP and MSDP protocols with TCP MD5 authentication has been enabled when kernel is in FIPS mode. 
+
+**IMPORTANT:** The use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140 because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests. 
+
+------
+- **I95-64862 Waypoint Pool Exhaustion Monitoring - Stats (Phase 2):** Added visibility into waypoint pool utilization including the historical maximum number of ports used, and added a peer name column to help identify the peer-related usage in the waypoint table. See [`show waypoints`](cli_reference.md#show-waypoints) for more information.
+------
+- **I95-64184 Static Route State Tracking:** 
+------
+- **I95-63985 VRRP Non-revertive Active/Active Recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
+------
+- **I95-63281 Configurable serial console baud rate:** Added the ability to configure the serial baud rate to either 9600, 38400 or 115200 (default). This can be done from the command line `config authority router <router> node <node> serial-console-baud-rate`, or the web interface at `Router -> Node -> Serial Console Baud Rate` using the dropdown.
+------
+- **I95-62790 ML-DSA for SVR Certificates:** 
+
+### Resolved Issues 
+
+
 ## Release 7.2.1-1r1 
 
 **Release Date:** July 14, 2026
