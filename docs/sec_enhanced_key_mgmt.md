@@ -10,6 +10,7 @@ sidebars-label: Enhanced Security Key Management
 | 7.0.1   | Enhanced Security Key Management support added. |
 | 7.1.3   | Support for ML-KEM added. |
 | 7.2.0   | Subject Alternative Name (SAN) URI support for peering identity. |
+| 7.2.3   | Support for ML-DSA added. | 
 
 Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
@@ -300,13 +301,116 @@ The peer list of the router must also have the `peering-common-name` of that pee
 
 ## Post Quantum Cryptography Support
 
+Beginning with Software version 7.2.3, SSR now offers two methods of Post Quantum Cryptography Support, ML-DSA and ML-KEM.
+
+### ML-DSA
+YOu ArE HeRe
+ML-DSA (Module-Lattice Digital Signature Algorithm) is the NIST-standardized post-quantum digital signature scheme defined in FIPS 204. It replaces classical signature algorithms (RSA, ECDSA) with a lattice-based construction resistant to both classical and quantum attacks. ML-DSA support allows customers to begin transitioning their certificate infrastructure to quantum-resistant algorithms ahead of the threat timeline.
+--- 
+
+ML-DSA is the signature counterpart to ML-KEM - where ML-KEM protects key agreement, ML-DSA protects digital signatures. The ML-DSA implementation follows the same integration patterns established by ML-KEM.
+
+#### How It Works
+
+In order to configure an ML-DSA certificate on a router, you must first enable post-quantum cryptography. After modifying this setting, the 128T service must be restarted for the change to take effect. Once the service has been restarted, you will be able to provision ML-DSA certificates.
+
+```
+configure
+  authority
+    router RouterName
+      system
+        enable-pqc true
+      exit
+    exit
+  exit
+exit
+```
+
+##### Limitations
+
+- ML-DSA certificates are currently only supported for ESKM peering. Once provisioned and configured, they can be used for peering the same way as any other certificate.
+
+- ML-DSA is not supported on devices that are in FIPS-mode. In order to configure ML-DSA certificates, you must disable FIPS.
+
+- ML-DSA is only supported for ESKM peering certificates.
+
+- ML-DSA certificates must be created and provisioned using the SSR’s REST APIs and configured as file references They cannot be configured as content directly in the configuration.
+
+- Any certificate with an ML-DSA public key must be signed with an ML-DSA signature. The reverse is also true: any certificate with a classical public key (eg. RSA, ECC) must be signed with a classical signature algorithm. This also applies to intermediate CA certificates.
+
+### Configuration - Certificates
+
+After PQC has been enabled, you can provision ML-DSA certificates using the [Certificate Provisioning Process](config_custom_certs.md#provisioning-process).
+
+For ML-DSA private-key generation, the body of the request must contain "algorithm": "ML-DSA" and "ml_dsa_level": 65. The supported ML-DSA levels are 44, 65, and 87.
+
+### Configuration - Trusted CA Certificates
+
+ML-DSA Trusted CA certificates are configured and provisioned using the SSR’s REST API. Note that this procedure is different from the currently documented procedure for [installing a trusted CA certificate](config_custom_certs.md#install-the-trusted-ca-certificate). ML-DSA certificates cannot be configured as `content`; they must be ingested via the REST API.
+
+##### Ingest the Certificate
+
+When the signed certificate is returned, instruct the SSR to ingest the certificate. The certificate must be associated with the name used in the two earlier API calls. Create the following json file:
+
+**certificate.json**
+
+```
+POST /api/v1/router/{router_name}/node/{node_name}/trusted-ca-certificate
+{
+    "name": "my_peering_cert",
+    "certificate": "-----BEGIN CERTIFICATE-----
+MIIF3DCCBESgAwIBAgIKAf9HQjJKSQd1lTANBgkqhkiG9w0BAQsFADBaMQswCQYD
+VQQGEwJERTERMA8GA1UECgwIT3BlblhQS0kxDDAKBgNVBAsMA1BLSTEqMCgGA1UE
+
+<edited for security>
+
+NL9HxKRhLXhOFLKgAzXA+PmWEdLbqY19QMLVkPERHk9P90o1lZVqajf8iLMj8jbf
+aEJN1Q20LWTsBk4vZDp4QtdgPimnp/dR8ZNV2aPmyelIx29cnkALu5/i7WhfRDN7
+nN+SyOi2yA4nuorapmprew==
+-----END CERTIFICATE-----"
+}
+```
+
+Once the certificate is successfully ingested, verify that the certificate was accepted.
+
+1. `ssh` to the SSR. 
+2. Log in as the root user: `sudo su`.
+3. Verify that `/etc/128technology/pki/my_peering_cert.pem` exists on disk.
+  `ls -l /etc/128technology/pki/my_peering_cert.pem`
+
+##### Activate the Certificate in Configuration
+
+After ingesting the CA certificate, it must be added to configuration - having the certificate file on disk is **not sufficient**. Enhanced Security Key Management will not load or use the ML-DSA certificate until it is registered in the SSR authority configuration.
+
+On the Conductor, configure `trusted-ca-certificate` using the same `name` value used in the API requests above:
+
+```
+config authority
+    trusted-ca-certificate  my_peering_cert
+        name                my_peering_cert
+        file                my_peering_cert
+        validation-mode     strict
+    exit
+exit
+```
+
+| Parameter | Value | Note |
+|---|---|---|
+| `name` | Same as the API `name` field | Identifier for this certificate entry. |
+| `file` | Same as the API `name` field | Filename at `/etc/128technology/pki/` without the `.pem` extension. |
+| `validation-mode` | `strict` (production) or `warn` (initial rollout) | `warn` allows proceeding with certificate issues; use `strict` in production. |
+
+After committing this configuration, Enhanced Security Key Management will load and use the private key and certificate.
+
+### ML-KEM
+
 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is a cryptographic protocol used in post-quantum cryptography to securely exchange keys over public channels. This level of protection offers security against both quantum and classical adversaries.
 
 For the SSR, ML-KEM can be used in conjunction with Diffie-Hellman as a hybrid approach to peer-key exchange and encryption. In this configuration, two peer keys are generated after key exchange. BFD metadata is the first encrypted by the DH key, followed by the ML-KEM key. The receiving SSR peer decrypts in reverse order as described below.
 
 In order to take advantage of ML-KEM Cryptography, all devices must be running SSR software that provides support for this feature. 
 
-### How It Works
+#### How It Works
 
 Each participant generates a public-private key pair for encryption and decryption. These keys are generated upon system startup, are stored securely, and are encrypted with the onboard TPM. 
 
@@ -316,7 +420,7 @@ The encapsulation process wraps the symmetric key in layers of encryption, and t
 
 Information can then be securely transmitted between devices. 
 
-### Configuration
+#### Configuration
 
 ML-KEM cryptography is configured under `key-exchange-algorithm` and has the following attributes.
 

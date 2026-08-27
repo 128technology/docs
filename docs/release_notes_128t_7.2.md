@@ -71,7 +71,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.2.3-1r2 
+## Release 7.2.3-2r2 
 
 **Beta Release Date:** August 27, 2026
 
@@ -84,16 +84,43 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-64862 Waypoint Pool Exhaustion Monitoring - Stats (Phase 2):** Added visibility into waypoint pool utilization including the historical maximum number of ports used, and added a peer name column to help identify the peer-related usage in the waypoint table. See [`show waypoints`](cli_reference.md#show-waypoints) for more information.
 ------
-- **I95-64184 Static Route State Tracking:** 
+- **I95-64184 Static Route State Tracking:** Added the monitoring of service path reachability state to prevent traffic to be forwarded to an unreachable destination if an intermediate network fails even when the next hop or destination remains operational. ICMP probes monitor network connectivity; when a failure is detected and exceeds the configured threshold, the system now automatically removes the kernel route from the RIB. When the ICMP probes recover and the destination is reachable again, the kernel routes are automatically added back to the RIB. For more information about reachability profiles, see [Configuring a Reachability Detection Profile](config_service_health.md#creating-a-reachability-detection-profile).  
 ------
 - **I95-63985 VRRP Non-revertive Active/Active Recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
 ------
 - **I95-63281 Configurable serial console baud rate:** Added the ability to configure the serial baud rate to either 9600, 38400 or 115200 (default). This can be done from the command line `config authority router <router> node <node> serial-console-baud-rate`, or the web interface at `Router -> Node -> Serial Console Baud Rate` using the dropdown.
 ------
-- **I95-62790 ML-DSA for SVR Certificates:** 
+- **I95-62790 ML-DSA for SVR Certificates:** ML-DSA has been added as a new algorithm option to the existing customer-facing certificate lifecycle. ML-DSA support applies exclusively to SVR peering certificates managed by the customer through the REST API. For more information, see [ML-DSA](sec_enhanced_key_mgmt.md#ml-dsa).
 
-### Resolved Issues 
+### Resolved Issues
 
+- **I95-62536 SVRv2 Peer Path Teardown on Certificate Validation Failure:** Resolved an issue where an SVRv2 router continued to accept traffic from a peer even when peer paths back to it were down, or when certificate validation was set to `fail-hard` mode. Stale peer metadata keys are now removed upon validation failure or certificate expiration to terminate invalid traffic.
+------
+- **I95-64407 Alternate SHA Ciphers with SVRv2 and ESKM:** Resolved an issue where configuring alternate SHA ciphers (`sha384` and `sha512`) on security policies in SVRv2 did not properly allocate metadata keys or verify HMAC digests on metadata headers.
+------
+- **I95-65190 Node Deletion Cleanup in High Availability Configurations:** Resolved an issue where transitioning a router from a dual-node High Availability (HA) configuration to a single-node configuration failed to remove the deleted node from `global.init`, leaving residual fabric interfaces and causing synchronization failures on the remaining node.
+------
+- **I95-65297 Sensitive Information in PCLI History:** Resolved an issue where sensitive configuration values (such as encryption keys, initialization vectors, and passwords) were stored in clear text in the PCLI command history (`~/.pcli_history`). Sensitive values are now recorded as `(removed)`, and existing history files are sanitized automatically.
+------
+- **I95-65390 Conductor Migration Deadlock in SSH-Only Mode:** Resolved an issue where conductor migration could deadlock when using `asset-connection-resiliency` in `SSH-only` mode because the router switched to the unauthenticated tunnel before the new conductor completed SSH key exchange.
+------
+- **I95-65469 GUI Network Interface Display:** Resolved an issue where the SSR Web UI displayed "No Data" in the Network Interfaces table on the Router page due to overly strict GraphQL filter and pagination validation.
+------
+- **I95-65526 Stale Onboarding State During Node Redeployment:** Resolved an issue where redeploying a node or reusing a node name after deletion caused Secure Conductor Onboarding (SCO) to fail due to stale onboarding state and residual keys persisting on the conductor, resulting in onboarding rejections and expired tokens.
+------
+- **I95-65544 Host Service Exposure on WAN Interface During Startup:** Resolved an issue where host services (such as SSH) were exposed on external WAN interfaces during system boot because `firewalld` flushed interface-to-zone associations during startup reloads before security rules were fully established.
+------
+- **I95-65583 InfluxDB HTTP Log Growth and Disk Space Exhaustion:** Resolved an issue on Enterprise Linux 9 systems where `logrotate` executed only once daily instead of hourly, allowing `influxdb_http.log` files to grow rapidly and exhaust available disk space on `/var/log`.
+------
+- **I95-65603 Peer Path UP with Mixed Certificates in Fail-Hard Mode:** Resolved an issue where peer paths remained UP between nodes using mismatched certificate trust anchors (default factory-signed and custom CA-signed certificates) even when `invalid-certificate-behavior` was configured to `fail-hard`.
+------
+- **I95-65609 Routers Reverting to Waiting State After Conductor Upgrade:** Resolved an issue where previously onboarded routers incorrectly reverted to a "waiting" state in `show secure-conductor-onboarding` following a conductor upgrade due to improper handling of startup HTTP responses during authorized key retrieval.
+------
+- **I95-65669 Configuration Synchronization Following Conductor Migration:** Resolved an issue where a router appeared synchronized after conductor migration but retained stale configuration because a temporary `NONE_AVAILABLE` response from the conductor was treated as terminal, halting configuration retrieval until a manual commit was executed.
+------
+- **I95-65855 IPv6 Link-Local Resolver Nginx Failures:** Resolved an issue where Nginx failed to start or entered a crash loop when no external DNS was configured because IPv6 link-local addresses were selected as resolvers. The resolver logic now filters link-local addresses, properly formats IPv6 addresses, and prioritizes `/etc/hosts` and `dnsmasq` overrides.
+------
+- **I95-65893 Display SVRv2 Payload Key Indices in Session Details:** Resolved an issue where operators could not verify active SVRv2 encryption key indices on live sessions. The `show session detail` and `show sessions by-id` command outputs now include SVRv2 payload key indices (`currentEncryptionIndex` and `currentDecryptionIndex`) for active encrypted flows.
 
 ## Release 7.2.1-1r1 
 
