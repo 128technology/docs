@@ -304,9 +304,8 @@ The peer list of the router must also have the `peering-common-name` of that pee
 Beginning with Software version 7.2.3, SSR now offers two methods of Post Quantum Cryptography Support, ML-DSA and ML-KEM.
 
 ### ML-DSA
-YOu ArE HeRe
+
 ML-DSA (Module-Lattice Digital Signature Algorithm) is the NIST-standardized post-quantum digital signature scheme defined in FIPS 204. It replaces classical signature algorithms (RSA, ECDSA) with a lattice-based construction resistant to both classical and quantum attacks. ML-DSA support allows customers to begin transitioning their certificate infrastructure to quantum-resistant algorithms ahead of the threat timeline.
---- 
 
 ML-DSA is the signature counterpart to ML-KEM - where ML-KEM protects key agreement, ML-DSA protects digital signatures. The ML-DSA implementation follows the same integration patterns established by ML-KEM.
 
