@@ -6,10 +6,6 @@ import NetworkDesign from './_deploy_azure_conductor_network_design.md';
 
 This step deploys the BYOL Session Smart Conductor VM from the Azure Marketplace, using either the Azure Marketplace Web Interface, or the Command Line Interface. You do not need to do both. The deployment template creates the VM, assigns a static public IP to the management interface, and configures a network security group. A cloud-init script installs SSR 7.1.4 and initializes the node as a conductor automatically.
 
-## Network Design Reference
-
-<NetworkDesign/>
-
 ## Requirements
 
 The following infrastructure must exist in your Azure subscription before deploying the conductor:
@@ -76,27 +72,27 @@ The following image shows the resulting infrastructure:
    | Parameter | Example Value | Notes |
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | |
-   | Resource Group | `SSR-RG` | Select existing or create new |
+   | Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group |
    | Location | `eastus` | One word, all lowercase |
-   **| Availability Set Name | `SSR-AvailabilitySet` | Must exist in the same resource group |** WHAT THE HECK IS THIS??
+   | Availability Set Name | `SSR-AvailabilitySet` | This is an optional parameter; accept the default name.  |
    | Instance Size | `Standard_F8s_v2` | |
    | Instance Name | `Conductor` | VM display name |
    | SSR Version | `7.1.4` | The BYOL version to install |
    | SSN Cloud Software Repository Username | _(your username)_ | Juniper software access |
    | SSN Cloud Software Repository Token | _(your token)_ | Juniper software access token |
    | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
-   | Virtual Network Name | `SSR-VNet` | Must already exist |
+   | Virtual Network Name | `SSR-VNet` | Accept the default. This value is automatically generated as part of the Resource Group. |
    | Control Subnet Name | `ssr-conductor-subnet` | The conductor management subnet |
    | Control Allowed CIDR | `0.0.0.0/0` | Restrict to known source IPs after deployment |
-   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict to known admin IPs after deployment |
+   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTP | Source IP CIDR range allowed for SSH/HTTP 22/443 to reach the conductor for administration. Restrict this after deployment. |
    | Admin Public Key Data | _(contents of your SSH public key)_ | At least 2048-bit RSA |
 
    :::caution
    `Control Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access to known source addresses.
    :::
 
-3. Agree to the terms and conditions.
-4. Click **Purchase** to launch the deployment.
+3. Click Next. Azure will validate the input.
+4. Click **Create**.
 
    ![Deployment complete](/img/platforms_azure_deployment_complete.png)
 
@@ -109,7 +105,7 @@ The following image shows the resulting infrastructure:
    Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
    :::
 
-## Deploy via Azure CLI or PowerShell
+<!---## Deploy via Azure CLI or PowerShell
 
 To deploy programmatically, first enable programmatic deployment:
 
@@ -186,6 +182,7 @@ write_files:
 | `cloud-provider` | Set to `azure` for Azure deployments. |
 | `download-timeout` | Timeout duration for the BYOL installation (default: `6h`). |
 | `download-retries` | Number of installation retry attempts (default: unlimited). |
+--->
 
 ## Template Parameter Reference
 
@@ -205,8 +202,36 @@ write_files:
 | Virtual Network Name | Name of the existing VNet where the conductor will be deployed. |
 | Control Subnet Name | Name of the management subnet within the VNet. |
 | Control Allowed CIDR | Source IP CIDR range allowed to reach the conductor control interface. |
-| Admin Allowed CIDR | Source IP CIDR range allowed to reach the conductor for administration. Restrict this after deployment. |
+| Admin Allowed CIDR | Source IP CIDR range allowed for SSH/HTTP 22/443 to reach the conductor for administration. Restrict this after deployment. |
 | Admin Public Key Data | RSA public key (at least 2048-bit) used to authenticate SSH access to the VM. |
+
+---
+## Manual Onboarding
+
+If you did not supply cloud-init onboarding configuration during deployment, you can complete onboarding manually:
+
+  - Order as
+    - Deploy a template as deployment stack
+    - Deploy via Azure cli/powershell
+    - Template Parameter Reference
+    - Deploy with Cloud Init Custom Data
+    - Manual Onboarding
+
+1. Log in to the conductor VM via SSH:
+
+   ```
+   ssh t128@<conductor-public-ip>
+   ```
+
+2. Run the configuration generator:
+
+   ```
+   /usr/libexec/hardwareBootstrapper128t config-generator
+   ```
+
+3. Follow the prompts to supply the conductor name, SSR version, artifactory credentials, and node name. The bootstrapper installs the software and initializes the conductor.
+
+---
 
 ## Next Step
 

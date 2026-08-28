@@ -6,43 +6,23 @@ import NetworkDesign from './_deploy_azure_conductor_network_design.md';
 
 This step verifies that the BYOL installation has completed successfully, confirms the conductor is running, and walks you through logging in to the conductor GUI for the first time.
 
-## Network Design Reference
-
-<NetworkDesign/>
-
 ## Wait for Installation to Complete
 
 The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts.
 
-You can monitor installation progress by connecting to the VM via SSH:
-
-```bash
-ssh t128@<conductor-public-ip>
-```
-
-Once logged in, check the bootstrapper journal for progress:
-
-```bash
-journalctl -u 128T-hardware-bootstrapper -f
-```
-
-The installation is complete when you see output similar to:
-
-```
-Device successfully initialized
-```
+The installation is complete when the SSR PCLI launches.
 
 ## Verify the Conductor Is Running
 
 1. From an SSH session on the conductor VM, enter the SSR PCLI:
 
-   ```bash
+   ```
    su admin
    ```
 
 2. Run `show system` and wait until the status returns as `running`:
 
-   ```text
+   ```
    admin@node0.Conductor# show system
    ```
 
@@ -68,24 +48,6 @@ Device successfully initialized
    :::
 
 3. A successful login confirms the conductor is running and reachable on the public IP.
-
-## Manual Onboarding
-
-If you did not supply cloud-init onboarding configuration during deployment, you can complete onboarding manually:
-
-1. Log in to the conductor VM via SSH:
-
-   ```bash
-   ssh t128@<conductor-public-ip>
-   ```
-
-2. Run the configuration generator:
-
-   ```bash
-   /usr/libexec/hardwareBootstrapper128t config-generator
-   ```
-
-3. Follow the prompts to supply the conductor name, SSR version, artifactory credentials, and node name. The bootstrapper installs the software and initializes the conductor.
 
 ## Next Step
 
