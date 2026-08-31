@@ -12,10 +12,6 @@ This appendix contains the complete SSR PCLI configuration for the `Conductor` a
 - The PCI addresses `0000:00:06.0` (WAN) and `0000:00:07.0` (LAN) are the defaults for EC2 instances deployed with the BYOL CloudFormation template when a management subnet is provided. Verify these against your specific instance using `sudo dpdk-devbind.py --status` before applying the router configuration.
 :::
 
-## Network Design Reference
-
-<NetworkDesign/>
-
 ## Applying This Configuration
 
 This configuration can be applied to a freshly initialized conductor using the PCLI import function.
