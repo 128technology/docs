@@ -31,8 +31,6 @@ The following infrastructure must exist in your Azure subscription before deploy
 A dedicated management interface is optional for conductor-managed routers. In this guide, management traffic travels over the WAN forwarding interface. See [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md) for background.
 :::
 
-## Deploy the Router VM
-
 ## Select the BYOL Plan
 
 1. In the [Azure Marketplace](https://portal.azure.com) search for **Session Smart Networking Platform**.
@@ -58,7 +56,7 @@ A dedicated management interface is optional for conductor-managed routers. In t
    | Parameter | Example Value | Notes |
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | |
-| Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group |
+   | Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group |
    | Location | `eastus` | One word, all lowercase |
    | Availability Set Name | `SSR-RouterSet` | This is an optional parameter; accept the default name. |
    | Instance Size | `Standard_F8s_v2` | |
@@ -202,14 +200,14 @@ In the **VMBus devices** section, the first column contains the VMBus UUID. The 
 
    | Azure NIC Name | Linux Interface | Subnet | VMBus UUID |
    |----------------|----------------|--------|-----------|
-   | Router-public | `ge-0-1` | `ssr-router-wan` | _(discovered from dpdk-devbind.py)_ |
-   | Router-private | `ge-0-2` | `ssr-router-lan` | _(discovered from dpdk-devbind.py)_ |
+   | Router-public | `ge-0-1` | `ssr-router-wan` | _(identified in the devicemap.json)_ |
+   | Router-private | `ge-0-2` | `ssr-router-lan` | _(identified in the devicemap.json)_ |
 
    Record the WAN VMBus UUID as `<wan-vmbus-uuid>` and the LAN VMBus UUID as `<lan-vmbus-uuid>` for use in the following configuration steps.
 
 ## Configure the Router on the Conductor
 
-All configuration steps below are performed in the **Conductor GUI** at `https://<conductor-public-ip>`.
+All configuration steps below are performed on the **Conductor GUI** at `https://<conductor-public-ip>`.
 
 :::note
 Your conductor must already have the following objects configured before proceeding:
@@ -237,7 +235,7 @@ If you prefer to apply configuration using the PCLI, the complete example config
 
 ### 1. Configure the WAN Interface
 
-The WAN interface (`eth1` / `ssr-router-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
+The WAN interface (`ge-0-1` / `ssr-router-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic via [Management over Forwarding](config_management_over_forwarding.md).
 
 #### 1a. Create the WAN Device Interface
 
@@ -287,7 +285,7 @@ The WAN interface (`eth1` / `ssr-router-wan`) connects to the internet, obtains 
 
 ### 2. Configure the LAN Interface
 
-The LAN interface (`eth2` / `ssr-router-lan`) connects to the private subnet and assigns the `corp` tenant to inbound traffic.
+The LAN interface (`ge-0-2` / `ssr-router-lan`) connects to the private subnet and assigns the `corp` tenant to inbound traffic.
 
 #### 2a. Create the LAN Device Interface
 
