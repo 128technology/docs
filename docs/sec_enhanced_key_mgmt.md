@@ -301,7 +301,7 @@ The peer list of the router must also have the `peering-common-name` of that pee
 
 ## Post Quantum Cryptography Support
 
-Beginning with Software version 7.2.3, SSR now offers two methods of Post Quantum Cryptography Support, ML-DSA and ML-KEM.
+SSR offers two methods of Post Quantum Cryptography Support, ML-DSA and ML-KEM.
 
 ### ML-DSA
 
@@ -309,9 +309,20 @@ ML-DSA (Module-Lattice Digital Signature Algorithm) is the NIST-standardized pos
 
 ML-DSA is the signature counterpart to ML-KEM - where ML-KEM protects key agreement, ML-DSA protects digital signatures. The ML-DSA implementation follows the same integration patterns established by ML-KEM.
 
-#### How It Works
+#### Limitations
 
-In order to configure an ML-DSA certificate on a router, you must first enable post-quantum cryptography. After modifying this setting, the 128T service must be restarted for the change to take effect. Once the service has been restarted, you will be able to provision ML-DSA certificates.
+- ML-DSA certificates are currently only supported for ESKM peering. Once provisioned and configured, they can be used for peering the same way as any other certificate.
+
+- ML-DSA is **not supported on devices that are in FIPS-mode**. In order to configure ML-DSA certificates, you must disable FIPS.
+
+- ML-DSA certificates must be created and provisioned using the SSR’s REST APIs and configured as file references They cannot be configured as content directly in the configuration.
+
+- Any certificate with an ML-DSA public key must be signed with an ML-DSA signature. The reverse is also true: any certificate with a classical public key (eg. RSA, ECC) must be signed with a classical signature algorithm. This also applies to intermediate CA certificates.
+
+
+#### Prerequisites
+
+In order to configure an ML-DSA certificate on a router, you must first enable post-quantum cryptography on each peer. After modifying this setting, the 128T service must be restarted for the change to take effect. Once the service has been restarted, you will be able to provision ML-DSA certificates.
 
 ```
 configure
@@ -325,25 +336,8 @@ configure
 exit
 ```
 
-##### Limitations
 
-- ML-DSA certificates are currently only supported for ESKM peering. Once provisioned and configured, they can be used for peering the same way as any other certificate.
-
-- ML-DSA is not supported on devices that are in FIPS-mode. In order to configure ML-DSA certificates, you must disable FIPS.
-
-- ML-DSA is only supported for ESKM peering certificates.
-
-- ML-DSA certificates must be created and provisioned using the SSR’s REST APIs and configured as file references They cannot be configured as content directly in the configuration.
-
-- Any certificate with an ML-DSA public key must be signed with an ML-DSA signature. The reverse is also true: any certificate with a classical public key (eg. RSA, ECC) must be signed with a classical signature algorithm. This also applies to intermediate CA certificates.
-
-### Configuration - Certificates
-
-After PQC has been enabled, you can provision ML-DSA certificates using the [Certificate Provisioning Process](config_custom_certs.md#provisioning-process).
-
-For ML-DSA private-key generation, the body of the request must contain "algorithm": "ML-DSA" and "ml_dsa_level": 65. The supported ML-DSA levels are 44, 65, and 87.
-
-### Configuration - Trusted CA Certificates
+#### Configuration - Trusted CA Certificates
 
 ML-DSA Trusted CA certificates are configured and provisioned using the SSR’s REST API. Note that this procedure is different from the currently documented procedure for [installing a trusted CA certificate](config_custom_certs.md#install-the-trusted-ca-certificate). ML-DSA certificates cannot be configured as `content`; they must be ingested via the REST API.
 
@@ -400,6 +394,12 @@ exit
 | `validation-mode` | `strict` (production) or `warn` (initial rollout) | `warn` allows proceeding with certificate issues; use `strict` in production. |
 
 After committing this configuration, Enhanced Security Key Management will load and use the private key and certificate.
+
+#### Configuration - Certificates
+
+After PQC has been enabled, you can provision ML-DSA certificates using the [Certificate Provisioning Process](config_custom_certs.md#provisioning-process).
+
+For ML-DSA private-key generation, the body of the request must contain "algorithm": "ML-DSA" and "ml_dsa_level": 65. The supported ML-DSA levels are 44, 65, and 87.
 
 ### ML-KEM
 
