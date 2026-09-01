@@ -77,6 +77,8 @@ An issue has been identified when onboarding SSR routers installed with older ve
 
 ### New Features
 
+- **I95-62790 ML-DSA for SVR Certificates:** ML-DSA has been added as a new algorithm option to the existing customer-facing certificate lifecycle. ML-DSA support applies exclusively to SVR peering certificates managed by the customer through the REST API. For more information, see [ML-DSA](sec_enhanced_key_mgmt.md#ml-dsa).
+------
 - **I95-65332 Allow BGP/MSDP to use TCP MD5 even when kernel is in FIPS mode:** The use of BGP and MSDP protocols with TCP MD5 authentication has been enabled when kernel is in FIPS mode. 
 
   **IMPORTANT:** The use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140 because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests. 
@@ -89,8 +91,6 @@ An issue has been identified when onboarding SSR routers installed with older ve
 - **I95-63985 VRRP Non-revertive Active/Active Recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
 ------
 - **I95-63281 Configurable serial console baud rate:** Added the ability to configure the serial baud rate to either 9600, 38400 or 115200 (default). This can be done from the command line `config authority router <router> node <node> serial-console-baud-rate`, or the web interface at `Router -> Node -> Serial Console Baud Rate` using the dropdown.
-------
-- **I95-62790 ML-DSA for SVR Certificates:** ML-DSA has been added as a new algorithm option to the existing customer-facing certificate lifecycle. ML-DSA support applies exclusively to SVR peering certificates managed by the customer through the REST API. For more information, see [ML-DSA](sec_enhanced_key_mgmt.md#ml-dsa).
 
 ### Resolved Issues
 
