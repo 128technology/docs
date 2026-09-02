@@ -315,14 +315,14 @@ ML-DSA is the signature counterpart to ML-KEM - where ML-KEM protects key agreem
 
 - ML-DSA is **not supported on devices that are in FIPS-mode**. In order to configure ML-DSA certificates, you must disable FIPS.
 
-- ML-DSA certificates must be created and provisioned using the SSR’s REST APIs and configured as file references They cannot be configured as content directly in the configuration.
+- ML-DSA certificates must be created and provisioned using the SSR’s REST APIs and configured as file references. They cannot be configured as content directly in the configuration.
 
 - Any certificate with an ML-DSA public key must be signed with an ML-DSA signature. The reverse is also true: any certificate with a classical public key (eg. RSA, ECC) must be signed with a classical signature algorithm. This also applies to intermediate CA certificates.
 
 
 #### Prerequisites
 
-In order to configure an ML-DSA certificate on a router, you must first enable post-quantum cryptography on each peer. After modifying this setting, the 128T service must be restarted for the change to take effect. Once the service has been restarted, you will be able to provision ML-DSA certificates.
+In order to use an ML-DSA certificate on a router, post-quantum cryptography must be enabled on each peer. After setting post-quantum cryptography to `true`, the 128T service must be restarted to implement the change. Once the service has  restarted, you will be able to provision ML-DSA certificates.
 
 ```
 configure
@@ -335,7 +335,6 @@ configure
   exit
 exit
 ```
-
 
 #### Configuration - Trusted CA Certificates
 
