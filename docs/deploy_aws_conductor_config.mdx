@@ -1,0 +1,83 @@
+---
+title: "Step 3: Configure the Conductor"
+sidebar_label: "Configure the Conductor"
+---
+import NetworkDesign from './_deploy_aws_conductor_network_design.md';
+import AuthorityName from './_set_authority_name.md';
+import ConductorAuthority from './_conductor_to_authority.md';
+
+This step configures the authority-level settings on the conductor: the authority name, conductor address, corporate tenant, and internet service. These objects are shared across all routers managed by this conductor.
+
+All steps are performed from the **Conductor GUI** at `https://203.0.113.10` unless otherwise noted.
+
+## 1. Assign the Conductor's Asset ID
+
+<ConductorAuthority/>
+
+## 2. Set the Authority Name
+
+<AuthorityName/>
+
+:::note
+Use your organization's name as the authority name (for example, `Authority128`). The authority name cannot be changed after routers have been provisioned without re-onboarding them.
+:::
+
+## 3. Set the Conductor Address
+
+The conductor address is the IP address that managed routers use to reach this conductor. For an AWS deployment, this must be the **Elastic IP** assigned to the conductor's control ENI — not the private IP — because routers connecting from outside the conductor VPC reach the conductor through the internet.
+
+1. From the **Authority Settings** page, scroll to **Conductor Addresses** and select **ADD**.
+2. In the **New Conductor Address** window, enter `203.0.113.10`.
+3. Click **SAVE**.
+4. Select **VALIDATE** then **COMMIT**.
+
+:::important
+You must use the Elastic IP (`203.0.113.10`) as the conductor address, not the private IP (`10.0.1.10`). Routers outside the conductor VPC connect to the conductor over the internet using the Elastic IP.
+:::
+
+## 4. Create the Corporate Tenant
+
+Tenants logically partition the network. The `corp` tenant represents corporate LAN users and is referenced by the LAN interface configuration on each managed router.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority**.
+3. Scroll to **Tenants** and select **ADD**.
+4. Enter the name `corp` and select **SAVE**.
+5. Select **VALIDATE** then **COMMIT**.
+
+:::info
+Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
+:::
+
+## 5. Create the `Internet-Traffic` Service
+
+The service configuration element defines the IP destinations that the SSR routes. This step creates a service representing all internet-bound traffic from corporate LAN users.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority** from the left panel.
+3. Scroll down to **Services** and select **ADD**.
+4. Enter the name `Internet-Traffic` and select **SAVE**.
+5. On the Service screen, verify **Enabled** is set to `true`.
+6. Scroll down to **Service Addresses** and select **ADD**.
+7. Enter `0.0.0.0/0` and select **SAVE**.
+8. Scroll down to **Access Policy** and select **ADD**.
+   - Set **Source** to `corp`.
+   - Select **SAVE**.
+9. Select **VALIDATE** then **COMMIT**.
+
+## What Was Configured
+
+At the end of this step, your authority contains:
+
+| Object | Name | Value |
+|--------|------|-------|
+| Authority | `Authority128` | |
+| Conductor Address | | `203.0.113.10` (Elastic IP) |
+| Tenant | `corp` | LAN-side user population |
+| Service | `Internet-Traffic` | `0.0.0.0/0`, access from `corp` |
+
+The conductor is now ready to accept router onboarding.
+
+## Next Step
+
+Proceed to [Step 4 — Launch the Router EC2 Instance](deploy_aws_router_instance.mdx).
