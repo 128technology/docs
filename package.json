@@ -24,7 +24,7 @@
     "classnames": "^2.2.6",
     "linkinator": "^8.0.4",
     "lunr": "^2.3.9",
-    "mermaid": "^11.17.0",
+    "mermaid": "^11.17.2",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
