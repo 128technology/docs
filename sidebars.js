@@ -207,6 +207,19 @@ module.exports = {
                 "deploy_appendix_vmware_conductor",
               ],
             },
+            {
+              "type": "category",
+              "label": "AWS Conductor",
+              "items": [
+                "deploy_aws_conductor",
+                "deploy_aws_conductor_instance",
+                "deploy_aws_conductor_install",
+                "deploy_aws_conductor_config",
+                "deploy_aws_router_instance",
+                "deploy_aws_router_config",
+                "deploy_appendix_aws_conductor",
+              ],
+            },
           ],
         },
         {
@@ -235,6 +248,18 @@ module.exports = {
                   "deploy_vmware_router_pci",
                   "deploy_vmware_router_config",
                   "deploy_appendix_vmware_router",
+              ],
+            },
+              {
+                "type": "category",
+                "label": "AWS Hub and Spoke Routers",
+                "items": [
+                  "deploy_aws_hub_spoke_overview",
+                  "deploy_aws_hub_router_instance",
+                  "deploy_aws_hub_router_config",
+                  "deploy_aws_spoke_router_instance",
+                  "deploy_aws_spoke_router_config",
+                  "deploy_appendix_aws_hub_spoke",
               ],
             },
           ],
