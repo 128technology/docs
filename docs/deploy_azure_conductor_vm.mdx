@@ -51,50 +51,64 @@ The following image shows the resulting infrastructure:
 
 1. In the [Azure Marketplace](https://portal.azure.com) search for **Session Smart Networking Platform**.
 
-2. Select the top result, the **Session Smart Networking Platform BYOL** plan.
+2. Select the **Session Smart Networking Platform**.
 
-3. Click the **Plans + Pricing** tab.
+    ![Azure Search Results](/img/dep-azure-search-azure.png)
 
-    ![Plans](/img/platforms_azure_plans.png)
+3. Select **Bring Your Own License (BYOL)** from the **Plan** drop down menu.
 
-4. Scroll down to the bottom of the **BYOL** section.
+    ![Select a Plan](/img/dep-azure-byol.png)
+
+4. Click **Create**.
+
+    ![Create the BYOL Instance](/img/dep-azure-create-byol.png)
+
+5. Scroll down to the bottom of the **BYOL** section.
 
 5. Next to **Juniper Session Smart Conductor**, click **Launch**.
 
+    ![Launch the Conductor Template](/img/dep-azure-conductor-launch.png)
+
 ## Deploy via Azure Portal
 
-1. On the **Plans + Pricing** tab, click the **Launch** link on the **Juniper Session Smart Conductor** template.
-
-2. Fill in the template parameters using the following table. For full parameter descriptions, see [Template Parameter Reference](#template-parameter-reference).
+1. Fill in the template parameters using the following table. 
 
    | Parameter | Example Value | Notes |
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | |
-   | Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group |
+   | Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group (NO DEFAULT VALUE SHOWN NO ABILITY TO CREATE ONE)|
    | Location | `eastus` | One word, all lowercase |
-   | Availability Set Name | `SSR-AvailabilitySet` | This is an optional parameter; accept the default name. |
+   | Availability Set Name | `SSR-AvailabilitySet` | This is an optional parameter; accept the default name. (NO DEFAULT VALUE SHOWN ) |
    | Instance Size | `Standard_F8s_v2` | |
    | Instance Name | `Conductor` | VM display name |
    | SSR Version | `7.1.4` | The BYOL version to install |
    | SSN Cloud Software Repository Username | _(your username)_ | Juniper software access |
    | SSN Cloud Software Repository Token | _(your token)_ | Juniper software access token |
    | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
-   | Virtual Network Name | `SSR-VNet` | Accept the default. This value is automatically generated as part of the Resource Group. |
+   | Virtual Network Name | `SSR-VNet` | Accept the default. This value is automatically generated as part of the Resource Group.(NO DEFAULT VALUE SHOWN )|
    | Control Subnet Name | `ssr-conductor-subnet` | The conductor management subnet |
    | Control Allowed CIDR | `0.0.0.0/0` | Restrict to known source IPs after deployment |
    | Admin Allowed CIDR | CIDR range allowed for SSH/HTTP | Source IP CIDR range allowed for SSH/HTTP 22/443 to reach the conductor for administration. Restrict this after deployment. |
    | Admin Public Key Data | _(contents of your SSH public key)_ | At least 2048-bit RSA |
+   | SSH public key source | 3 choices - generate new key pair, use existing key stored in Azure, Use existing public key | Pick one? |
+   | SSH Key Type | Default is RSA SSH Format | Select this one? |
+   | Key Pair Name | I will name him George | shout out to bugs bunny | 
 
    :::caution
    `Control Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access to known source addresses.
    :::
 
 3. Click Next. Azure will validate the input.
+
+    ![Next button](/img/dep-azure-portal-step3.png)
+
 4. Click **Create**.
+
+5. When the deployment completes, open the **Outputs** tab. 
 
    ![Deployment complete](/img/platforms_azure_deployment_complete.png)
 
-5. When the deployment completes, open the **Outputs** tab. Note the following values — you will need them in later steps:
+    Make a note of the following values — you will need them in later steps:
 
    - **Public IP address** assigned to the conductor management interface.
    - **SSH login command** for the Linux VM.
@@ -206,7 +220,7 @@ write_files:
 ---
 ## Manual Onboarding
 
-If you did not supply cloud-init onboarding configuration during deployment, you can complete onboarding manually:
+If you did not supply cloud-init onboarding configuration during deployment, you can complete onboarding manually.
 
   - Order as
     - Deploy a template as deployment stack
