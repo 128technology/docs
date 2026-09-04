@@ -35,30 +35,30 @@ A dedicated management interface is optional for conductor-managed routers. In t
 
 1. In the [Azure Marketplace](https://portal.azure.com) search for **Session Smart Networking Platform**.
 
-2. Select the top result, the **Session Smart Networking Platform BYOL** plan.
+2. Select the **Session Smart Networking Platform**.
 
-3. Click the **Plans + Pricing** tab.
+    ![Azure Search Results](/img/dep-azure-search-azure.png)
 
-    ![Plans](/img/platforms_azure_plans.png)
+3. Select the **Plans + Pricing** tab.
+
+    ![Select a Plan](/img/dep-azure-plan-pricing.png)
 
 4. Scroll down to the bottom of the **BYOL** section.
 
 5. Next to **Juniper Session Smart Conductor-managed Router**, click **Launch**.
 
+   ![Launch the Router Template](/img/dep-azure-router-launch.png)
+
 ## Deploy via Azure Portal
 
-1. On the **Plans + Pricing** tab, click the **Launch** link on the **Juniper Session Smart Conductor-managed Router** template.
-
-   ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
-
-2. Fill in the template parameters using the following table. For full parameter descriptions, see [Template Parameter Reference](#template-parameter-reference).
+1. Fill in the template parameters using the following table. For full parameter descriptions, see [Template Parameter Reference](#template-parameter-reference).
 
    | Parameter | Example Value | Notes |
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | |
    | Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group |
    | Location | `eastus` | One word, all lowercase |
-   | Availability Set Name | `SSR-RouterSet` | This is an optional parameter; accept the default name. |
+   | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
    | Instance Size | `Standard_F8s_v2` | |
    | Instance Name | `azure-router-1` | VM display name |
    | SSR Version | `7.1.4` | The BYOL version to install |
@@ -80,7 +80,10 @@ A dedicated management interface is optional for conductor-managed routers. In t
    :::
 
 3. Click Next. Azure will validate the input.
-4. Click **Create**.
+
+    ![Next button](/img/dep-azure-portal-step3.png)
+
+4. After reviewing the Terms, click **Create**.
 
    ![Deployment complete](/img/platforms_azure_deployment_complete.png)
 

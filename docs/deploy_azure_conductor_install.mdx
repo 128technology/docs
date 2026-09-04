@@ -8,7 +8,9 @@ This step verifies that the BYOL installation has completed successfully, confir
 
 ## Wait for Installation to Complete
 
-The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts.
+The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. The SSR Install screens do not open - this process takes place behind the scenes. You must open an SSH window to confirm the installation. 
+
+Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
 
 The installation is complete when the SSR PCLI launches.
 

@@ -55,15 +55,11 @@ The following image shows the resulting infrastructure:
 
     ![Azure Search Results](/img/dep-azure-search-azure.png)
 
-3. Select **Bring Your Own License (BYOL)** from the **Plan** drop down menu.
+3. Select the **Plans + Pricing** tab.
 
-    ![Select a Plan](/img/dep-azure-byol.png)
+    ![Select a Plan](/img/dep-azure-plan-pricing.png)
 
-4. Click **Create**.
-
-    ![Create the BYOL Instance](/img/dep-azure-create-byol.png)
-
-5. Scroll down to the bottom of the **BYOL** section.
+4. Scroll down to the bottom of the **BYOL** section.
 
 5. Next to **Juniper Session Smart Conductor**, click **Launch**.
 
@@ -76,23 +72,23 @@ The following image shows the resulting infrastructure:
    | Parameter | Example Value | Notes |
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | |
-   | Resource Group | `SSR-RG` | Use the pre-filled (existing) Resource Group (NO DEFAULT VALUE SHOWN NO ABILITY TO CREATE ONE)|
+   | Resource Group | `SSR-RG` | Select an existing Resource Group |
    | Location | `eastus` | One word, all lowercase |
-   | Availability Set Name | `SSR-AvailabilitySet` | This is an optional parameter; accept the default name. (NO DEFAULT VALUE SHOWN ) |
+   | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
    | Instance Size | `Standard_F8s_v2` | |
    | Instance Name | `Conductor` | VM display name |
    | SSR Version | `7.1.4` | The BYOL version to install |
    | SSN Cloud Software Repository Username | _(your username)_ | Juniper software access |
    | SSN Cloud Software Repository Token | _(your token)_ | Juniper software access token |
    | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
-   | Virtual Network Name | `SSR-VNet` | Accept the default. This value is automatically generated as part of the Resource Group.(NO DEFAULT VALUE SHOWN )|
+   | Virtual Network Name | `SSR-VNet` | Select an existing VNet name, or create one. |
    | Control Subnet Name | `ssr-conductor-subnet` | The conductor management subnet |
    | Control Allowed CIDR | `0.0.0.0/0` | Restrict to known source IPs after deployment |
    | Admin Allowed CIDR | CIDR range allowed for SSH/HTTP | Source IP CIDR range allowed for SSH/HTTP 22/443 to reach the conductor for administration. Restrict this after deployment. |
    | Admin Public Key Data | _(contents of your SSH public key)_ | At least 2048-bit RSA |
-   | SSH public key source | 3 choices - generate new key pair, use existing key stored in Azure, Use existing public key | Pick one? |
-   | SSH Key Type | Default is RSA SSH Format | Select this one? |
-   | Key Pair Name | I will name him George | shout out to bugs bunny | 
+   | SSH public key source | Select Generate new key pair. You will be able to reuse the same key subsequent times.|
+   | SSH Key Type | Default is RSA SSH Format |  |
+   | Key Pair Name | _(identifiable key pair name)_ | Easily identifiable name for the key pair | 
 
    :::caution
    `Control Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access to known source addresses.
@@ -102,7 +98,7 @@ The following image shows the resulting infrastructure:
 
     ![Next button](/img/dep-azure-portal-step3.png)
 
-4. Click **Create**.
+4. After reviewing the Terms, click **Create**.
 
 5. When the deployment completes, open the **Outputs** tab. 
 
@@ -117,7 +113,10 @@ The following image shows the resulting infrastructure:
    Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
    :::
 
-<!---## Deploy via Azure CLI or PowerShell
+   When the deployment completes, the SSR 7.1.4 installation begins. This will take  10-15 minutes. 
+
+
+## Deploy via Azure CLI or PowerShell
 
 To deploy programmatically, first enable programmatic deployment:
 
@@ -194,7 +193,6 @@ write_files:
 | `cloud-provider` | Set to `azure` for Azure deployments. |
 | `download-timeout` | Timeout duration for the BYOL installation (default: `6h`). |
 | `download-retries` | Number of installation retry attempts (default: unlimited). |
---->
 
 ## Template Parameter Reference
 
@@ -211,13 +209,14 @@ write_files:
 | SSN Cloud Software Repository Username | User portion of the Juniper access credentials. |
 | SSN Cloud Software Repository Token | Token portion of the Juniper access credentials. |
 | Managed Identity | Azure Managed Identity name. Must have the read permissions listed in [Requirements](#requirements). |
-| Virtual Network Name | Name of the existing VNet where the conductor will be deployed. |
+| Virtual Network Name | Name of the existing VNet where the conductor will be deployed. If one does not exist, you must create one. This will require some information that Sam mentioned that needs to be specified.|
 | Control Subnet Name | Name of the management subnet within the VNet. |
 | Control Allowed CIDR | Source IP CIDR range allowed to reach the conductor control interface. |
 | Admin Allowed CIDR | Source IP CIDR range allowed for SSH/HTTP 22/443 to reach the conductor for administration. Restrict this after deployment. |
 | Admin Public Key Data | RSA public key (at least 2048-bit) used to authenticate SSH access to the VM. |
+| SSH public key source | Select one: Generate new key pair, Use existing key stored in Azure, Use existing public key. | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times.|
 
----
+<!---
 ## Manual Onboarding
 
 If you did not supply cloud-init onboarding configuration during deployment, you can complete onboarding manually.
@@ -243,7 +242,7 @@ If you did not supply cloud-init onboarding configuration during deployment, you
 
 3. Follow the prompts to supply the conductor name, SSR version, artifactory credentials, and node name. The bootstrapper installs the software and initializes the conductor.
 
----
+--->
 
 ## Next Step
 
