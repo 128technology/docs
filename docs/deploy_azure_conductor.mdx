@@ -4,7 +4,7 @@ sidebar_label: Overview
 ---
 import NetworkDesign from './_deploy_azure_conductor_network_design.md';
 
-This guide walks you through deploying a **Juniper Session Smart Conductor on Azure** using the Bring Your Own License (BYOL) plan, and then using that conductor to provision and manage a Session Smart Router (SSR) running in the same Azure VNet. When you complete this guide, the conductor VM will be running SSR 7.1.4, configured with an authority name, conductor address, and shared services that allow branch routers to onboard and begin forwarding traffic.
+This guide walks you through deploying a **Juniper Session Smart Conductor on Azure** using the Bring Your Own License (BYOL) plan. When you complete this guide, the conductor VM will be running SSR 7.1.4, configured with an authority name, conductor address, and shared services that allow branch routers to onboard and begin forwarding traffic.
 
 ## Guide Topics
 
@@ -64,7 +64,7 @@ Before beginning, ensure the following are available:
 
 ## Software Version Requirements
 
-This guide installs **SSR 7.1.4** on both the conductor and the router.
+This guide installs **SSR 7.1.4** on the conductor.
 
 :::note
 The router software version must be lower than or equal to the conductor software version.

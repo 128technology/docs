@@ -216,34 +216,6 @@ write_files:
 | Admin Public Key Data | RSA public key (at least 2048-bit) used to authenticate SSH access to the VM. |
 | SSH public key source | Select one: Generate new key pair, Use existing key stored in Azure, Use existing public key. | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times.|
 
-<!---
-## Manual Onboarding
-
-If you did not supply cloud-init onboarding configuration during deployment, you can complete onboarding manually.
-
-  - Order as
-    - Deploy a template as deployment stack
-    - Deploy via Azure cli/powershell
-    - Template Parameter Reference
-    - Deploy with Cloud Init Custom Data
-    - Manual Onboarding
-
-1. Log in to the conductor VM via SSH:
-
-   ```
-   ssh t128@<conductor-public-ip>
-   ```
-
-2. Run the configuration generator:
-
-   ```
-   /usr/libexec/hardwareBootstrapper128t config-generator
-   ```
-
-3. Follow the prompts to supply the conductor name, SSR version, artifactory credentials, and node name. The bootstrapper installs the software and initializes the conductor.
-
---->
-
 ## Next Step
 
 Proceed to [Step 2 — Initialize and Access the Conductor](deploy_azure_conductor_install.mdx).
