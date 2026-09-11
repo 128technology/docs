@@ -1,0 +1,133 @@
+---
+title: "Step 1: Launch the Conductor EC2 Instance"
+sidebar_label: "Launch the Conductor Instance"
+---
+import NetworkDesign from './_deploy_aws_conductor_network_design.md';
+
+This step launches the AWS EC2 instance that will host the SSR Conductor. The BYOL CloudFormation template creates the EC2 instance, its security group, and an Elastic IP association in a single stack. Once the stack reaches **CREATE_COMPLETE**, the BYOL software installation begins automatically.
+
+## Conductor Instance Requirements
+
+| Resource | Minimum Value | Notes |
+|----------|---------------|-------|
+| Instance Type | `c5.xlarge` | Scale up for deployments with more than 25 managed routers |
+| vCPUs | 4 | |
+| Memory | 8 GB | |
+| Storage | 128 GB | Default EBS volume provided by the CloudFormation template |
+| Network Interfaces | 1 × ENI | Connected to the control subnet |
+
+:::note
+Memory requirements should be adjusted based on your network scaling requirements. For guidance on scaling the conductor for larger deployments, see [Conductor Scaling Recommendations](intro_system_reqs.md#conductor-scaling-recommendations).
+:::
+
+## Infrastructure Requirements
+
+The following AWS infrastructure must exist before deploying the conductor:
+
+- A **VPC** in your target region (`10.0.0.0/16` in this guide).
+- A **subnet** within the VPC (`10.0.1.0/24`) that is reachable via SSH and HTTPS from your administrative workstation and reachable from the WAN interfaces of the routers this conductor will manage.
+- An **Elastic IP** allocated in the same region.
+
+## Deploy the Conductor Using CloudFormation
+
+The BYOL CloudFormation template is the recommended deployment method. It creates the EC2 instance, attaches the security group, and installs SSR automatically.
+
+### AWS Console
+
+1. Navigate to the [Session Smart Networking Platform BYOL](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c) offering.
+2. Click **Continue to Subscribe** and accept the terms and conditions.
+3. Click **Continue to Configuration**.
+4. In the **Fulfillment Option** drop-down, select **CloudFormation Template**, then select the **Juniper Session Smart Conductor** template.
+5. Select your target AWS region and click **Continue to Launch**.
+6. In the **Choose Action** box, select **Launch CloudFormation** and click **Launch**.
+7. Fill in the template parameters using the following table as a guide:
+
+   | Parameter | Example Value | Notes |
+   |-----------|---------------|-------|
+   | Name | `Conductor` | EC2 instance name |
+   | Instance Type | `c5.xlarge` | |
+   | SSR Version | `7.1.4` | |
+   | Artifactory Username | _(your username)_ | Juniper repository access |
+   | Artifactory Token | _(your token)_ | Juniper repository access token |
+   | VPC ID | ID of the conductor VPC | |
+   | Control Subnet ID | ID of the `10.0.1.0/24` subnet | |
+   | Control Subnet Allowed CIDR | `0.0.0.0/0` | Restrict to known router WAN CIDRs after deployment |
+   | Admin Allowed CIDR | `<your-admin-ip>/32` | Source IP(s) allowed for SSH and HTTPS |
+   | Key Name | Your EC2 key pair name | |
+
+   For a full description of all template parameters, see [BYOL Conductor Template Parameters](intro_installation_byol_aws_conductor.md#launch-the-conductor-template).
+
+   ![CloudFormation Template](/img/aws-byol-conductor-template.png)
+
+8. Click **Next**, review the stack settings, then click **Create Stack**.
+
+   ![Deployment Complete](/img/platforms_aws_deployment_complete.png)
+
+9. After the stack reaches **CREATE_COMPLETE**, open the **Outputs** tab and record:
+   - The **public IP address** of the control interface — this is the conductor Elastic IP (`203.0.113.10` in the network design example).
+   - The **HTTPS URL** for the conductor GUI.
+   - The **SSH command** to log in to the Linux instance.
+
+   :::important
+   After deployment is complete, update the **Control Subnet Allowed CIDR** and **Admin Allowed CIDR** security group rules to restrict access to known source IP addresses. Leaving these open to `0.0.0.0/0` exposes the management interface to the internet.
+   :::
+
+### Associate the Elastic IP
+
+If the CloudFormation template did not allocate a static Elastic IP, manually associate one now:
+
+1. In the EC2 console, navigate to **Elastic IPs** and allocate a new address.
+2. Select the address and click **Actions → Associate Elastic IP Address**.
+3. Select the conductor EC2 instance and click **Associate**.
+
+Record the Elastic IP. This is the conductor address that all managed routers use to connect (`203.0.113.10` in this guide).
+
+### AWS CLI (Optional)
+
+To launch the conductor template from the command line, follow the [AWS CLI deployment steps](intro_installation_byol_aws_conductor.md#using-the-aws-cli).
+
+### Cloud-Init Onboarding (Optional)
+
+If you are launching the instance outside of the CloudFormation template — for example, from a custom automation pipeline — you can supply the following user-data to automate conductor initialization:
+
+```yaml
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+        {
+            "name": "Conductor",
+            "ssr-version": "7.1.4",
+            "mode": "conductor",
+            "artifactory-user": "<your-username>",
+            "artifactory-password": "<your-token>",
+            "node-name": "node0",
+            "cloud-provider": "aws"
+        }
+```
+
+| Option | Meaning |
+|--------|---------|
+| `name` | Name of the conductor instance. |
+| `ssr-version` | SSR software version to install. |
+| `mode` | Set to `conductor` for conductor deployments. |
+| `artifactory-user` | User portion of your Artifactory credentials. |
+| `artifactory-password` | Token portion of your Artifactory credentials. |
+| `node-name` | Node name. Use `node0` for a standalone conductor. |
+| `cloud-provider` | Set to `aws`. |
+
+## What Was Deployed
+
+After the CloudFormation stack completes, the following resources exist in your AWS account:
+
+| Resource | Description |
+|----------|-------------|
+| EC2 instance | `Conductor` — `c5.xlarge`, running the BYOL SSR image |
+| Security group | Allows inbound SSH (22), HTTPS (443), and router management ports (930, 4505, 4506) |
+| Elastic IP | Assigned to the conductor's control ENI (`203.0.113.10`) |
+
+The BYOL software installation begins immediately after the EC2 instance starts. The SSR 7.1.4 installation takes approximately **10–15 minutes** to complete.
+
+## Next Step
+
+Proceed to [Step 2 — Install SSR 7.1.4 and Initialize the Conductor](deploy_aws_conductor_install.mdx).
