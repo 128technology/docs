@@ -1,0 +1,117 @@
+---
+title: "Step 1: Create the Azure Conductor VM"
+sidebar_label: "Create the Conductor VM"
+---
+import NetworkDesign from './_deploy_azure_conductor_network_design.md';
+
+This step deploys the BYOL Session Smart Conductor VM from the Azure Marketplace, using either the Azure Marketplace Web Interface, or the Command Line Interface. You do not need to do both. The deployment template creates the VM, assigns a static public IP to the management interface, and configures a network security group. A cloud-init script installs SSR 7.1.4 and initializes the node as a conductor automatically.
+
+## Requirements
+
+The following infrastructure must exist in your Azure subscription before deploying the conductor:
+
+- A VNet where the Conductor will be deployed (`SSR-VNet` in this guide).
+- A subnet within that VNet reachable via SSH and HTTPS for administration (`ssr-conductor-subnet`).
+- The subnet must be reachable from the WAN interface of every SSR router this conductor will manage.
+- A **Managed Identity** assigned the following minimum read permissions:
+
+  ```
+  Microsoft.Compute/virtualMachines/read
+  Microsoft.Network/virtualNetworks/read
+  Microsoft.Network/networkInterfaces/read
+  ```
+
+## Recommended VM Sizes
+
+Select the instance size that best meets the scale of your deployment.
+
+| Recommended Azure VM Size | Max vNICs | vCPU Cores | Memory |
+|---------------------------|-----------|-----------|--------|
+| Standard_F8s_v2 | 4 | 8 | 16 GB |
+| Standard_F16s_v2 | 4 | 16 | 32 GB |
+| Standard_F32s_v2 | 8 | 32 | 64 GB |
+| Standard_D8s_v5 | 4 | 8 | 32 GB |
+
+For guidance on scaling the conductor for larger deployments, see [System Requirements](intro_system_reqs.md#conductor-scaling-recommendations).
+
+## What the Template Creates
+
+When you deploy the conductor using the BYOL template, Azure automatically creates:
+
+- A VM using the BYOL Session Smart image from the Marketplace.
+- A single network interface (`control`) connected to the management subnet.
+- A network security group (NSG) associated with the control interface.
+- A unique static public IP address assigned to the control interface.
+
+The following image shows the resulting infrastructure:
+
+![Conductor deployment](/img/platforms_azure_conductor_deployment.png)
+
+## Select the BYOL Plan
+
+1. Go to the [**Session Smart Networking Platform**](https://marketplace.microsoft.com/en-us/product/juniper-networks.session-smart-networking-payg) in the Azure Marketplace.
+
+2. Select the **Plans + Pricing** tab.
+
+    ![Select a Plan](/img/dep-azure-plan-pricing.png)
+
+3. Scroll down to the bottom of the **BYOL** section.
+
+4. Next to **Juniper Session Smart Conductor**, click **Launch**.
+
+    ![Launch the Conductor Template](/img/dep-azure-conductor-launch.png)
+
+## Deploy via Azure Portal
+
+1. Fill in the template parameters using the following table. 
+
+   | Parameter | Example Value | Notes |
+   |-----------|--------------|-------|
+   | Subscription | _(your subscription)_ | Subscription for the deployment. |
+   | Resource Group | `SSR-RG` | Select an existing Resource Group |
+   | Location | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
+   | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
+   | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the conductor. |
+   | Instance Name | `Conductor` | Display name for the conductor VM. |
+   | SSR Version | `7.1.4` | The BYOL version to install |
+   | Artifactory Username | _(your username)_ | User portion of the Juniper access credentials. |
+   | Artifactory Token | _(your token)_ | Token portion of the Juniper access credentials. |
+   | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
+   | Virtual Network Name | `SSR-VNet` | Select an existing VNet name. |
+   | Control Subnet Name | `ssr-conductor-subnet` | The conductor management subnet. Name of the management subnet within the VNet. |
+   | Control Allowed CIDR | `0.0.0.0/0` | Restrict to known source IPs after deployment. Source IP CIDR range allowed to reach the conductor control interface. |
+   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTPS | Source IP CIDR range `x.x.x.x/32` to reach the conductor for administration. |
+   | Admin Public Key Data | _(contents of your SSH public key)_ | RSA public key (at least 2048-bit) used to authenticate SSH access to the VM. |
+   | SSH public key source | Select Generate new key pair. | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times. |
+   | SSH Key Type | Default is RSA SSH Format |  |
+   | Key Pair Name | _(identifiable key pair name)_ | Easily identifiable name for the key pair | 
+
+   :::caution
+   `Admin Allowed CIDR` access must be restricted to known source addresses prior to deployment. 
+   After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Control Allowed CIDR` to known source addresses.
+   :::
+
+3. Click Next. Azure will validate the input.
+
+    ![Next button](/img/dep-azure-portal-step3.png)
+
+4. After reviewing the Terms, click **Create**.
+
+5. When the deployment completes, open the **Outputs** tab. 
+
+   ![Deployment complete](/img/platforms_azure_deployment_complete.png)
+
+    Make a note of the following values — you will need them in later steps:
+
+   - **Public IP address** assigned to the conductor management interface.
+   - **SSH login command** for the Linux VM.
+
+   :::important
+   Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
+   :::
+
+   When the deployment completes, the SSR 7.1.4 installation begins.
+
+## Next Step
+
+Proceed to [Step 2 — Initialize and Access the Conductor](deploy_azure_conductor_install.mdx).
