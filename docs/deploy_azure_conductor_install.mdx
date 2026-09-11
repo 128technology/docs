@@ -50,6 +50,18 @@ The installation is complete when the SSR PCLI launches.
 
 3. A successful login confirms the conductor is running and reachable on the public IP.
 
+## Troubleshooting the Installation
+
+### Device Does Not Initialize Properly
+
+Once the instance is launched with the correct parameters, the device will begin to install the SSR software. After installing the software, the device will initialize as a Conductor. This process can take up to 15 minutes to complete.
+
+If the instance does not install SSR as expected, SSH into the instance using the credentials provided during VM creation.
+
+- Try to log into the pcli, run `su admin` and then `show system`.
+
+- If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
+
 ## Next Step
 
 Proceed to [Step 3 — Configure the Conductor](deploy_azure_conductor_config.mdx).
