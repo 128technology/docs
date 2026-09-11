@@ -1,0 +1,67 @@
+---
+title: "Step 2: Initialize and Access the Conductor"
+sidebar_label: "Initialize and Access"
+---
+
+This step verifies that the BYOL installation has completed successfully, confirms the conductor is running, and walks you through logging in to the conductor GUI for the first time.
+
+## Wait for Installation to Complete
+
+The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. The SSR Install screens do not open - this process takes place behind the scenes. You must open an SSH window to confirm the installation. 
+
+Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
+
+The installation is complete when the SSR PCLI launches.
+
+## Verify the Conductor Is Running
+
+1. From an SSH session on the conductor VM, enter the SSR PCLI:
+
+   ```
+   su admin
+   ```
+
+2. Run `show system` and wait until the status returns as `running`:
+
+   ```
+   admin@node0.Conductor# show system
+   ```
+
+   The system may take a few minutes to fully start after installation. Run the command again if the status is not yet `running`.
+
+## Log In to the Conductor GUI
+
+1. Open a browser and navigate to `https://<conductor-public-ip>`.
+
+   :::note
+   The conductor uses a self-signed certificate. If your browser presents an "unsafe connection" warning, click through to continue. You can replace the certificate later.
+   :::
+
+2. Log in with the following default credentials:
+
+   | Field | Value |
+   |-------|-------|
+   | Username | `admin` |
+   | Password | `128Tadmin` |
+
+   :::important
+   Change the default password immediately after first login. The new password requires a minimum of 9 characters containing at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+   :::
+
+3. A successful login confirms the conductor is running and reachable on the public IP.
+
+## Troubleshooting the Installation
+
+### Device Does Not Initialize Properly
+
+Once the instance is launched with the correct parameters, the device will begin to install the SSR software. After installing the software, the device will initialize as a Conductor. This process can take up to 15 minutes to complete.
+
+If the instance does not install SSR as expected, SSH into the instance using the credentials provided during VM creation.
+
+- Try to log into the pcli, run `su admin` and then `show system`.
+
+- If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
+
+## Next Step
+
+Proceed to [Step 3 — Configure the Conductor](deploy_azure_conductor_config.mdx).
