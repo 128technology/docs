@@ -75,12 +75,12 @@ The following image shows the resulting infrastructure:
    | Instance Name | `Conductor` | Display name for the conductor VM. |
    | SSR Version | `7.1.4` | The BYOL version to install |
    | Artifactory Username | _(your username)_ | User portion of the Juniper access credentials. |
-   | Artifiactory Token | _(your token)_ | Token portion of the Juniper access credentials. |
+   | Artifactory Token | _(your token)_ | Token portion of the Juniper access credentials. |
    | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
    | Virtual Network Name | `SSR-VNet` | Select an existing VNet name. |
    | Control Subnet Name | `ssr-conductor-subnet` | The conductor management subnet. Name of the management subnet within the VNet. |
    | Control Allowed CIDR | `0.0.0.0/0` | Restrict to known source IPs after deployment. Source IP CIDR range allowed to reach the conductor control interface. |
-   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTP | Source IP CIDR range `x.x.x.x/32` to reach the conductor for administration. |
+   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTPS | Source IP CIDR range `x.x.x.x/32` to reach the conductor for administration. |
    | Admin Public Key Data | _(contents of your SSH public key)_ | RSA public key (at least 2048-bit) used to authenticate SSH access to the VM. |
    | SSH public key source | Select Generate new key pair. | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times. |
    | SSH Key Type | Default is RSA SSH Format |  |

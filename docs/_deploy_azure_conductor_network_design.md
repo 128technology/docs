@@ -15,7 +15,7 @@ The following IP addressing and naming scheme is used consistently throughout th
 | Conductor Name | `Conductor` | Conductor system name |
 | Conductor Node Name | `node0` | Conductor node name |
 | Conductor Subnet | `ssr-wan-subnet` | Conductor public (WAN) subnet (`10.0.1.0/24`). This is shared with the router. |
-| Router WAN Subnet | `ssr-wan-subnet` | Router public (WAN) subnet (`10.0.1.0/24`) |
+| Router WAN Subnet | `ssr-wan-subnet` | Router public (WAN) subnet (`10.0.1.0/24`). This is shared with the conductor. |
 | Router LAN Subnet | `ssr-lan-subnet` | Router private (LAN) subnet (`10.0.2.0/24`) |
 | Router Name | `azure-router-1` | Router system name |
 | Router Node Name | `node0` | Router node name |

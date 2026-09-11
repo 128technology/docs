@@ -13,7 +13,7 @@ This guide walks you through deploying a **Juniper Session Smart Conductor on Az
 | 1 | [Create the Azure Conductor VM](deploy_azure_conductor_vm.mdx) | Deploy the BYOL Conductor VM from the Azure Marketplace |
 | 2 | [Initialize and Access the Conductor](deploy_azure_conductor_install.mdx) | Verify the BYOL installation and log in to the Conductor GUI |
 | 3 | [Configure the Conductor](deploy_azure_conductor_config.mdx) | Set the authority name, conductor address, tenant, and internet service |
-| — | [Appendix — Conductor Configuration](deploy_appendix_azure_conductor.mdx) | Complete Azure conductor and router PCLI configuration reference |
+| — | [Appendix — Conductor Configuration](deploy_appendix_azure_conductor.mdx) | Complete Azure conductor PCLI configuration reference |
 
 ## Network Topology
 
@@ -55,9 +55,8 @@ Before beginning, ensure the following are available:
 
 - **Azure subscription** — with permission to create VMs, VNets, network security groups, and managed identities.
 - **Azure VNet** — with at least the following subnets already created:
-  - `ssr-conductor-subnet` — reachable via SSH and HTTPS for administration.
-  - `ssr-router-wan` — the router's public (WAN) subnet; must have internet egress.
-  - `ssr-router-lan` — the router's private (LAN) subnet.
+  - `ssr-wan-subnet` — the router's public (WAN) subnet; must have internet egress and reachable via SSH and HTTPS for administration. This is shared with the conductor.
+  - `ssr-lan-subnet` — the router's private (LAN) subnet.
 - **Azure Managed Identity** — with the minimum read permissions listed in [Step 1](deploy_azure_conductor_vm.mdx#requirements).
 - **Juniper software access credentials** — Artifactory username and password for SSR software downloads.
 - **SSH key pair** — RSA 2048-bit or stronger; the public key is supplied to the Azure deployment templates.
