@@ -24,6 +24,16 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.14-3-lts
+
+**Release Date:** August 14, 2026
+
+### Resolved Issues
+
+- **I95-65826 Assets enter a `Disconnected` state after upgrading the Conductor:** After a Conductor upgrade, assets entered a `Disconnected` state while the SSH connections were restored. In some cases this took an hour or more. The Minion connector has been upgraded to version 1.7.6 to resolve this issue. 
+------
+- **I95-66070 Highway Crash in High-Scale Peer Scenarios:** Resolved an issue where the Highway process would crash (segmentation fault) with a large number of SSR peers, due to a race condition. The fix adds thread-safe locking mechanisms to protect all read and write operations, ensuring stable operation at scale.
+
 ## Release 6.2.13-1-lts
 
 **Release Date:** July 20, 2026
@@ -200,7 +210,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
 ------
-- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when an mroute has no outgoing interfaces. A Detour Path is now used instead of NoServicePaths to prevent resource contention.
 ------
 - **I95-62258 Packet steered to egress non-existent interface causes highway crash:** Added logic to capture the errant packet and prevent the crash. An exception is logged so that the issue can be more easily rectified.
 ------

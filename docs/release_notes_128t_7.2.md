@@ -30,6 +30,10 @@ After installing / upgrading to SSR 7.1.3 or later, downgrading *to an earlier v
 Rollback to the previously installed version of software *is* supported.  
 :::
 
+:::warning
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.0, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
+::: 
+
 **7.0.1 Conductor Upgrades**
 
 If you are upgrading a conductor that is currently installed with version 6.3.4 or lower, and you wish to upgrade to version 7.0.1 or higher, you must first upgrade the conductor to any version of the 6.3.x software, including and higher than 6.3.5. 

@@ -28,6 +28,14 @@ To provide a secure and mutually authenticated onboarding mechanism, the followi
 
 The public certificate and CA certificate are configured on the conductor at the Authority level.
 
+Secure Conductor Onboarding requires the use of an IP SAN (subject alternative name) for routers to securely identify the conductor's identity. This requires that the certificate issued by the CA includes the IP SAN for the conductor, allowing the router to validate the connection to the conductor and securely onboard. 
+
+The IP SAN should be incuded under the `authority -> conductor-address` list, which specifies addresses routers should use to reach the conductor.
+
+For an HA conductor, each node must have an separate IP SAN entry.
+
+For additional information about certificates, see [Certificate Requirements and Validation](cert_validation_requirements.md). For details on the IP SAN naming and configuration, see [Issue a `certificate-signing-request`](config_custom_certs.md#issue-a-certificate-signing-request).
+
 ## Basic Configuration 
 
 The following information are the steps to configure and use Secure Conductor Onboarding. For details about any of the commands and steps, see [How It Works](#how-it-works)
@@ -103,11 +111,91 @@ Once the Secure Conductor Onboarding workflow is initiated, the router performs 
 
 Once the secure SSH tunnels are established, the SCO workflow concludes. All future communication between the router and conductor will occur over port 930.
 
+### Re-Onboarding Workflow
+
+Secure Cloud Onboarding (SCO) re-onboarding may be necessary when a router is factory reset and fails to re-onboard because the conductor identifies it as **already onboarded**. This may also occur in scenarios involving transitions from non-SCO to SCO environments.
+
+1. Rename the asset ID.
+
+`config authority router <router> node <node> asset-id <asset-id>-temp`
+
+The conductor processes the removal of the original asset ID and cleans up the associated content. The asset is then removed from the `show assets` list. 
+
+2. Check the show assets command ouptut to verify the original ID is no longer present.
+
+```
+admin@node0.Conductor# show assets Spoke1Node0
+Mon 2026-08-10 18:29:01 UTC
+✔ Retrieving assets...
+====================================================
+ Spoke1Node0
+====================================================
+  Router:                       Spoke1
+  Node:                         node0
+  Current Version:              7.1.6-7.sts.el9
+  Platform:                     OpenStack Nova
+  Install Type:                 Image
+  Status:                       Synchronized
+  Conductor Connectivity:       Connected
+  Peer Conductor Connectivity:  Connected
+  Service Status:               Running
+  First Connection Date:        2026-08-03 19:03:19
+  Time in Status:               2h 34m 41s
+Completed in 0.14 seconds
+admin@node0.Conductor# show assets Spoke1Node0
+Mon 2026-08-10 18:29:06 UTC
+✖ Retrieving assets...
+% Error: Failed to retrieve assets: Asset id 'Spoke1Node0' does not exist
+
+```
+
+3. Ensure all authorized keys are removed for the original asset ID.
+
+`delete system connectivity authorized-keys entry comment <asset-id> node all`
+
+This operation may indicate keys were removed.
+
+```
+admin@node0.Conductor# delete system connectivity authorized-keys entry comment Spoke1Node0 node all
+✔ Updating SSH Configuration...
+Deleted 2 entries on node0.Conductor
+```
+
+Alternatively, the keys may have been missing or removed by the temporary asset rename. It is **not an issue** if no entries are removed.
+
+```
+admin@node0.Conductor# delete system connectivity authorized-keys entry comment Spoke1Node0 node all
+✔ Updating SSH Configuration...
+Deleted 0 entries on node0.Conductor
+```
+
+4. Restore the original asset ID.
+
+    `config authority router <router> node <node> asset-id <asset-id>`
+
+    The conductor is ready for the device to re-onboard. Verify this using `show secure-conductor-onboarding <asset-id>`
+
+```
+admin@node0.Conductor# show secure-conductor-onboarding <asset-id>
+Mon 2026-08-10 18:43:30 UTC
+✔ Retrieving Secure Conductor Onboarding state...
+======================================
+ Secure Conductor Onboarding Detail
+======================================
+ Asset Id:                <asset-id>
+ Auth State:              waiting
+ Last Problem:
+ Last Attempt Time:       —
+ Number of Attempts:      0
+ Mode:                    weak/strong
+Completed in 0.01 seconds
+```
+
 ### Verifying Onboarding Status In The Conductor UI
 
 After SCO is enabled, the conductor GUI **Routers** page displays a **Secure Conductor Onboarding** panel for each node, replacing the legacy asset-id onboarding view. Use this panel to monitor the SCO handshake as it progresses.
 
-![Conductor Routers page showing a Secure Conductor Onboarding panel for each node, with Asset ID, Auth State, Last Updated, Attempts, Last Problem, and Mode fields](/img/sec-conductor-onboarding-router-view.png)
+<!-- ![Conductor Routers page showing a Secure Conductor Onboarding panel for each node, with Asset ID, Auth State, Last Updated, Attempts, Last Problem, and Mode fields](/img/sec-conductor-onboarding-router-view.png) -->
 
 Each panel reports the following fields:
 

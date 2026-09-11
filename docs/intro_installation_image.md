@@ -28,6 +28,10 @@ The image-based ISOs are available to download at the following location:
 
 https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
+:::note
+Access to the URL above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+:::
+
 Files available for download are:
 
 - `*.iso` - This file is used for installing/staging bare metal platforms. **Use this file to perform an image-based install.** 

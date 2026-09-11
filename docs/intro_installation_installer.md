@@ -19,9 +19,11 @@ Do not uninstall old versions of the SSR Installer. Later versions of the SSR In
 1. Launch a Linux command prompt.
 2. Enter the command to install the Yum repository that corresponds to the SSR software installer.
 
-```
-https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
-```
+- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
+
+:::note
+Access to the URL above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+:::
 
 3. Enter the command to download the installer.
 

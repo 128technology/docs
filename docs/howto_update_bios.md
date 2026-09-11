@@ -139,7 +139,11 @@ Proceed with the next step, [Upgrading the BIOS and Firmware](#upgrading-the-bio
 For systems that do not have internet access (air-gap systems), you can download the BIOS update package `afulnx-5.16.02.0111-3.el7.x86_64.rpm` from the SSR repository. This method requires saving the RPM to a USB device and then copying it into the `/tmp` directory of the SSR. Use the following steps to perform the download and installation:
 
 1. From an internet connected computer, download the BIOS update package from the following repository to a USB drive:
-  `https://software.128technology.com/artifactory/list/rpm-128t-deps-release-local/CentOS/7.5/packaging/afulnx-5.16.02.0111-3.el7.x86_64.rpm` 
+  `https://software.128technology.com/artifactory/list/rpm-128t-deps-release-local/CentOS/7.5/packaging/afulnx-5.16.02.0111-3.el7.x86_64.rpm`
+
+  :::note
+  Access to the URL above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+  ::: 
 2. Login to your SSR device using SSH or through the console.
 3. Insert the USB into the SSR device.
 4. Download the BIOS update RPM into the `/tmp` directory on the target SSR device.

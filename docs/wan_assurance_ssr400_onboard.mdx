@@ -1,0 +1,46 @@
+---
+title: SSR400 Device Onboarding
+sidebar_label: SSR400 Device Onboarding
+---
+import ClaimMethods from './_wan_qs_claim_methods.md';
+import OnboardingComplete from './_wan_qs_onboarding_complete.md';
+
+Congratulations on your new Session Smart Routing (SSR) WAN Edge device!
+
+Let's get it set up in the Mist cloud with WAN Assurance. This guide walks you through the simple steps to get a new cloud-ready Juniper Networks® SSR400 router up and running in the Juniper Mist™ cloud portal. You can onboard a single device using your mobile phone, or one or more devices using your computer. Once onboarded, we'll walk you through the steps to create a basic configuration.
+You'll need your Juniper Mist WAN Assurance subscription and your login credentials for the Juniper Mist portal. If you have not already activated your subscriptions and set up your organization and sites, please follow the steps in [Create a Mist Account and Organization](https://www.juniper.net/documentation/us/en/quick-start/software/mist/quick-start/mist-quick-start/product-quick-start/topics/topic-map/step-1-begin.html). 
+
+## Connect Your Device to the Cloud
+
+SSR400 Series routers do not have a dedicated out-of-band management network port. Ports 0 (`ge-0-0`), 1 (`ge-0-1`), and 2 (`ge-0-2`) can be used to contact Mist for zero-touch provisioning (ZTP), and for Conductor remote management. 
+
+Ports 3 through 9 (`ge-0-3` through `ge-0-9`) can be used for LAN network connections.
+
+![Device Connections](/img/ssr-400-frontpanel.png)
+
+1. Connect an Ethernet link that can assign a DHCP address to the SSR device and provides connectivity to the Internet and Mist to any of the following ports: Port 0 (`ge-0-0`), Port 1 (`ge-0-1`), or Port 2 (`ge-0-2`). 
+
+    For device management, connect to Mist using port 2 (`ge-0-2`). You can also connect to Mist from one of the WAN ports 0 (`ge-0-0`) and 1 (`ge-0-1`) **only** when port 2 (`ge-0-2`) is disconnected, or does not have a valid DHCP leased address and default route.
+
+    Do not change the Mist management port once your device is powered on and connected to the Mist Cloud instance.
+
+2. Connect your LAN devices (Mist-managed Juniper EX switches, Mist APs, and other User devices) to any of the ports 3 through 9 (`ge-0-3` through `ge-0-9`).
+
+3. **Power on the device**.
+
+Great job! Your SSR device is now connected to the Mist cloud and awaiting further instructions.
+
+## Claim Your Device
+
+To add the device to your organization's WAN Edge inventory, locate the claim label found on the device.
+
+![Claim Code](/img/ssr-400-claimcode.png)
+
+<ClaimMethods/>
+
+<OnboardingComplete/>
+
+
+
+
+

@@ -1,7 +1,8 @@
 ---
-description: "Generate release notes for a WAN Assurance plugin version from the RPM spec changelog and JIRA. Use when producing release notes for a new mist-wan-assurance plugin release."
-agent: "agent"
-argument-hint: "Target plugin version (e.g. 3.102.0)"
+name: generate-wan-assurance-release-notes
+description: 'Generate WAN Assurance plugin release notes for a specific version by parsing the RPM spec changelog and enriching entries with JIRA and GitHub PR context.'
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # WAN Assurance Plugin Release Notes Generator

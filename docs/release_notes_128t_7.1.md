@@ -233,7 +233,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65719 Secure Conductor Onboarding (SCO) failing:** Resolved an issue where Secure Conductor Onboarding (SCO) failed when using RSA certificates in full chain format, incorrectly reporting that only RSA certificates are supported.
 ------
-- **I95-65769 Minion connector update:** Updated the minion connector to version 1.7.6, incorporating connectivity reliability improvements.
+- **I95-65769 Minion connector update:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
 ------
 - **WAN-4774 Configuration model list key derivation:** Improved internal configuration model handling by deriving list keys from the consolidated configuration model instead of using a hardcoded path map, improving accuracy for Mist-managed deployments.
 
@@ -480,7 +480,7 @@ If you have an SSR400 or SSR440, it is strongly recommended that you upgrade to 
 ------
 - **I95-62011 Stats from adjacency traffic engineering throw an exception when a hostname is used:** Resolved an issue where dynamic reconfiguration when adding neighbors/adjacencies that use an FQDN and have adjacency Traffic Engineering enabled, caused the device interface to reach a failure state.
 ------
-- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when we have an mroute with no outgoing interfaces. We now use a Detour Path instead of NoServicePaths to prevent resource contention.
+- **I95-62071 Multicast Traffic contributing to service area resource contention:** Resolved an issue when an mroute has no outgoing interfaces. A Detour Path is now used instead of NoServicePaths to prevent resource contention.
 ------
 - **I95-62179 Software Lifecycle History not up to date:** Resolved an issue where the software lifecycle page was not showing any history, or in some cases, the history was outdated. Internal functionality has been updated, and both the GUI and CLI outputs now show the correct information.
 ------

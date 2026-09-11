@@ -27,13 +27,17 @@ Prepare your system for installation - appliance installation and power up - per
 
 ### Download 
 
-The image-based ISO's are available to download at the following location:
+The image-based ISOs are available to download at the following location:
 
 - https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 The package-based ISOs for Conductor-managed deployments are available to download at the following location:
 
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
+
+:::note
+Access to the URLs above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+:::
 
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page. For the detailed download process, see [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso). 
 

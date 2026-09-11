@@ -72,7 +72,7 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
 
    ![Device Interface window](/img/dep-vmrouter-wandev2.png)
 
-4. Select **SAVE**.
+4. Select **COMMIT**.
 
 ### 1b. Create the WAN Network Interface
 
@@ -95,9 +95,10 @@ The WAN interface (NIC 1) connects to the ISP, obtains a DHCP address, and carri
    
    ![WAN Basic Info](/img/dep-vmrouter-wandev4.png)
 
-4. Scroll down to **Management Vector** and select **ADD**.
-   - Enter name `mgmt-vec-wan` and priority `100`.
-   - Select **SAVE**.
+4. Scroll down to **Management Traffic Settings**.
+   - In the Management Vector Name, select `mgmt-vec-wan` from the dropdown.
+   - In the Management Vector Priority, enter `100`.
+   - Select **COMMIT**.
 
    ![Management Vector](/img/dep-vmrouter-wandev5.png)
 
