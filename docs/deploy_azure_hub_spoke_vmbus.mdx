@@ -1,0 +1,129 @@
+---
+title: "Step 3: Verify Installation and Discover VMBus UUIDs"
+sidebar_label: "Verify and Discover VMBus UUIDs"
+---
+import NetworkDesign from './_deploy_azure_hub_spoke_network_design.md';
+
+This step waits for SSR 7.1.4 to finish installing on both VMs, confirms both routers appear on the conductor, and discovers the VMBus UUIDs for the WAN and LAN interfaces on each router. You must record these UUIDs before configuring the routers on the conductor.
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Wait for Installation to Complete
+
+The BYOL bootstrapper installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** per VM after it first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
+
+Monitor installation progress by connecting to each VM via SSH:
+
+```bash
+# Hub router
+ssh t128@<hub-router-public-ip>
+
+# Spoke router (separate terminal)
+ssh t128@<spoke-router-public-ip>
+```
+
+Once logged in, check the bootstrapper journal for progress:
+
+```bash
+journalctl -u 128T-hardware-bootstrapper -f
+```
+
+Installation is complete on each VM when you see output similar to:
+
+```
+Device successfully initialized
+```
+
+## Verify the Routers Are Running
+
+On each router, enter the SSR PCLI and confirm the system is running:
+
+```bash
+su admin
+```
+
+```text
+admin@node0.azure-hub-router# show system
+```
+
+The status should return `running`. Repeat for the spoke router:
+
+```text
+admin@node0.azure-spoke-router# show system
+```
+
+## Verify the Routers Appear on the Conductor
+
+After installation, each router contacts the conductor and appears as a pending asset.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority** and look under **Routers**.
+3. Both `azure-hub-router` and `azure-spoke-router` should appear with pending associations.
+
+If a router does not appear within 15 minutes of installation completing, verify that:
+- The conductor's public IP is reachable from the router WAN subnet over ports 930, 4505, and 4506.
+- The correct conductor IP was supplied in the deployment template or cloud-init block.
+
+## Discover VMBus UUIDs
+
+In Azure, device interfaces are identified by **VMBus UUID** rather than PCI address. You must discover the VMBus UUID for each WAN and LAN interface before configuring the routers on the conductor.
+
+Perform the following steps on **each router** separately. Record the UUIDs — you will need them in [Step 4](deploy_azure_hub_spoke_config.mdx).
+
+### Step 1: Run dpdk-devbind on the Router VM
+
+SSH into the router VM and run:
+
+```bash
+sudo dpdk-devbind.py --status
+```
+
+In the **VMBus devices** section, the first column contains the VMBus UUID. The `if` parameter shows the associated Linux interface name.
+
+Example output:
+
+```
+VMBus devices using DPDK-compatible driver
+==========================================
+...
+
+Other VMBus devices
+===================
+<vmbus-uuid-A> 'Hyper-V NIC VF [140...] if=eth1 drv=hv_netvsc ...
+<vmbus-uuid-B> 'Hyper-V NIC VF [140...] if=eth2 drv=hv_netvsc ...
+```
+
+### Step 2: Map Azure NICs to VMBus UUIDs
+
+1. Log in to the [Azure Portal](https://portal.azure.com).
+2. Navigate to the router VM and select **Networking** under **Settings**.
+
+   ![Azure Networking Settings](/img/VMBusAzureUI1.png)
+
+3. The attached network interfaces are listed from left to right: **Router-mgmt**, **Router-public**, **Router-private**.
+
+   ![Azure Port UI](/img/VMBusAzureUI2.png)
+
+4. Cross-reference the Linux interface names from `dpdk-devbind.py` with the Azure portal to build the following mapping for each router:
+
+   | Azure NIC Name | Linux Interface | Subnet | VMBus UUID |
+   |----------------|----------------|--------|-----------|
+   | Router-public | `eth1` | WAN subnet | _(from dpdk-devbind.py)_ |
+   | Router-private | `eth2` | LAN subnet | _(from dpdk-devbind.py)_ |
+
+### VMBus UUID Reference Table
+
+Record your discovered UUIDs using the following table. You will substitute these values throughout [Step 4](deploy_azure_hub_spoke_config.mdx).
+
+| Router | Interface | Role | VMBus UUID |
+|--------|-----------|------|-----------|
+| `azure-hub-router` | `eth1` | WAN (`ssr-hub-wan`) | `<hub-wan-vmbus-uuid>` |
+| `azure-hub-router` | `eth2` | LAN (`ssr-hub-lan`) | `<hub-lan-vmbus-uuid>` |
+| `azure-spoke-router` | `eth1` | WAN (`ssr-spoke-wan`) | `<spoke-wan-vmbus-uuid>` |
+| `azure-spoke-router` | `eth2` | LAN (`ssr-spoke-lan`) | `<spoke-lan-vmbus-uuid>` |
+
+## Next Step
+
+Proceed to [Step 4 — Configure Hub and Spoke Routers](deploy_azure_hub_spoke_config.mdx).
