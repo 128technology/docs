@@ -15,7 +15,17 @@ A quick recap:
 
 `External` interfaces are not used for any control traffic to the node's HA peer and the user has no limit to how many `external` interfaces they configure. A user may configure either one `fabric` or one `shared` interface per node, and that interface will be used for all HA control traffic.
 
+## HA Sync Redundancy
 
+Within an HA router, the communication that occurs on the HA sync connection is vital to proper operation of the router. In many ways this communication channel is similar to the backplane of a chassis-based router, despite the fact that it is provided through an Ethernet connection. Due to the importance of this connection to proper functionality, customers often wish to provide redundant connections for this traffic in case of cable or interface failure.
+
+Beginning with version 7.2.0, HA Sync Redundancy has expanded the ability to bond interfaces to include Non Forwarding interfaces. This allows you to bond a non-forwarding device interface with `ha-sync` as the parent-bond, providing redundancy for the ha-sync port.
+
+For configuration information see [Configuring LAC and LACP](config_lacp.md#configuring-lag-and-lacp). For command information, see [parent-bond](config_command_guide.md#configure-authority-router-node-device-interface-parent-bond).
+
+Use `show device-interface` to view the `parent-bond` interface.
+
+## Configuring Non-Forwarding HA Interfaces
 
 This example will configure an interface to be used to establish connectivity between HA peers. To configure a non-forwarding interface, set the `forwarding` flag to `false`. This example uses a `device-interface` set to type `ethernet`.
 
@@ -234,3 +244,4 @@ TYPE=Ethernet
 USERCTL=no
 ZONE=trusted
 ```
+
