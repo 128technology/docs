@@ -71,7 +71,7 @@ An issue has been identified that may be observed in conductor deployments runni
 
 An issue has been identified when onboarding SSR routers installed with older versions of software (such as 5.4.4) to Conductors running 6.3.x, when running in offline-mode. In some cases, certain software packages are not available to be installed during onboarding. To work around this issue, import the **package-based** (the "128T" prefixed) ISO for the current conductor version onto the conductor. This provides the necessary software packages to complete the onboarding process. This issue will be resolved in a future release. 
 
-## Release 7.1.7-14-sts
+## Release 7.1.7-15-sts
 
 **Release Date:** September 17, 2026
 
@@ -111,13 +111,13 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65365 PCLI Command to Trigger GARP:** Added the PCLI command  to manually trigger Gratuitous ARP (GARP) on VRRP interfaces, accepting device and network-interface as arguments.
 ------
-- **I95-65392 Hierarchical services ping traffic failure between sites:** Resolved an issue where ICMP ping traffic between specific sites failed when using hierarchical service configurations with application identification groups (AIG).
+- **I95-65392 Hierarchical services ping traffic failure between sites:** Resolved an issue where ICMP ping traffic between specific sites failed when using hierarchical service configurations with application identification groups.
 ------
 - **I95-65394 Improved Detail in Peer Certificate Validation Alarms:** Resolved an issue where the peer certificate invalid alarm provided no specific reason for the validation failure. The alarm now includes the underlying certificate validation error, such as expiration, revocation, or a name mismatch, to help identify the root cause.
 ------
 - **I95-65527 Added Missing sysServices SNMP OID on Conductor:** Resolved an issue where the conductor did not return the standard `sysServices` SNMP OID (`.1.3.6.1.2.1.1.7.0`), which some third-party management systems require for device discovery. The conductor's generated SNMP configuration now includes this OID.
 ------
-- **I95-65532 Application Identification Not Available Immediately After a Container Rebuild:** Resolved an issue where rebuilding the security/IDP container removed the installed application-identification package, causing traffic to be classified as an unknown application until the next scheduled download. The application-identification package is now installed automatically during IDP startup.
+- **II95-65532 Application Identification Not Available Immediately After IDP Engine Restart:** Resolved an issue where restarting the IDP Engine removed the installed application-identification package, causing traffic to be classified as an unknown application until the next scheduled download. The application-identification package is now installed automatically during IDP startup.
 ------
 - **I95-65535 Assets Stuck in Synchronizing State:** Resolved an issue where assets could become stuck in a synchronizing state for extended periods (up to 24 hours) due to overly aggressive watchdog timer defaults. The default timer settings have been relaxed.
 ------
@@ -137,7 +137,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-65680 RoutingManager Not Running on HA Headend Router:** Resolved an issue where the routingManager could remain in STANDBY after a session interruption, leaving the router without an active routing process (loss of BGP/routing connectivity) until restarted.
 ------
-- **I95-65754 Highway Crash on Shutdown Due to Static Sessions:** Resolved an issue where the highway process crashed during shutdown on HA nodes performing a downgrade. Static sessions were not being cleared during the shutdown sequence, causing a use-after-free condition when session destructors ran after the worker thread pool had already been destroyed. Static sessions are now properly cleared alongside the session table during shutdown, preventing the crash.
+- **I95-65754 Highway Crash on Shutdown Due to Static Sessions:** Resolved an issue where the highway process crashed during shutdown on HA nodes performing a downgrade. Static sessions were not being cleared during the shutdown sequence. Static sessions are now properly cleared alongside the session table during shutdown, preventing the crash.
 ------
 - **I95-65771 Resolved a Highway Crash Related to Unclassified Application Statistics:** Resolved an issue where the highway process could crash while collecting application identification statistics for sessions that had no classified application type. Application statistics handling now safely accounts for this case.
 ------
@@ -173,17 +173,21 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-66067 Offline upgrade failure:** Resolved an issue during upgrade that was being reported as an `Unpacker Failure`. The service startup order has been adjusted to prevent the issue in future upgrades/installations.
 ------
-- **I95-66070 Highway Crash in High-Scale Peer Scenarios:** Resolved an issue where the Highway process would crash (segmentation fault) with a large number of SSR peers, due to a race condition. The fix adds thread-safe locking mechanisms to protect all read and write operations, ensuring stable operation at scale.
+- **I95-66070 Highway Crash in High-Scale Peer Scenarios:** Resolved an issue where the Highway process would crash with a large number of SSR peers, due to a race condition. The fix adds thread-safe locking mechanisms to protect all read and write operations, ensuring stable operation at scale.
 ------
 - **I95-66071 Resolved a Highway Crash During GRE Tunnel Configuration Updates:** Resolved an issue where a failed lookup during a GRE tunnel interface modification could leave stale internal state, causing the highway process to crash on a subsequent configuration change to the same tunnel. GRE tunnel state is now cleaned up correctly when a lookup fails.
 ------
 - **I95-66082 Resolved a Highway Crash on Reverse-Flow Session Collision:** Resolved an issue where the highway process could crash when a returning packet collided with an internal session during reverse-flow processing, causing peer instability. The colliding packet is now safely dropped instead of causing a crash.
+------
+- **I95-66127 401 Authorization Required error when refreshing Logs page:** Resolved a `401 Authorization Required` error that prevented non-default administrator users from viewing router displays, the Logs page, and FIB tables in the Conductor GUI. 
 ------
 - **I95-66131 Resolved a Highway Crash When Setting PoE Port Provisional Status:** Resolved an issue where setting the provisional status of a PoE port could cause the highway process to abort due to a cross-thread access violation. The operation now safely executes on the correct thread.
 ------
 - **I95-66196 Commit Failures After Upgrade Due to Auto-Generated IPv6 DNS Service Routes:** Resolved an issue where upgrading could automatically generate an IPv6 DNS management service and associated service-route even when IPv6 DNS was not in use, causing configuration commits to fail on routers where the management interface did not have source NAT enabled. The DNS service route is now generated only for address families that have a corresponding management interface.
 ------
 - **I95-66222 Encrypted Directories Occasionally Not Unlocked at Boot:** Resolved an issue where a timing condition between TPM initialization and the integrity handler could cause the system to incorrectly determine that TPM support was unavailable, resulting in encrypted directories not being unlocked at boot. The integrity handler now retries TPM detection before proceeding.
+------
+- **I05-66238 NTP fails to sync after upgrade:** Resolved an issue where NTP failed to sync after a linux upgrade due to an outdated NetworkManager script not removed by the upgrade process.
 ------
 - **I95-66278 Resolved Peer-Path Instability with SVR2 ML-KEM Sessions:** Resolved an issue where an incorrect retransmit timer for SVR2 sessions using ML-KEM could cause peer-paths to intermittently flap and drop traffic. The retransmit timer has been corrected.
 
