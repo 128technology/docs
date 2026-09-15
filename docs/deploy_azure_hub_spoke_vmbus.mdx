@@ -2,13 +2,8 @@
 title: "Step 3: Verify Installation and Discover VMBus UUIDs"
 sidebar_label: "Verify and Discover VMBus UUIDs"
 ---
-import NetworkDesign from './_deploy_azure_hub_spoke_network_design.md';
 
 This step waits for SSR 7.1.4 to finish installing on both VMs, confirms both routers appear on the conductor, and discovers the VMBus UUIDs for the WAN and LAN interfaces on each router. You must record these UUIDs before configuring the routers on the conductor.
-
-## Network Design Reference
-
-<NetworkDesign/>
 
 ## Wait for Installation to Complete
 
@@ -16,7 +11,7 @@ The BYOL bootstrapper installs SSR 7.1.4 automatically after each VM is deployed
 
 Monitor installation progress by connecting to each VM via SSH:
 
-```bash
+```
 # Hub router
 ssh t128@<hub-router-public-ip>
 
@@ -26,7 +21,7 @@ ssh t128@<spoke-router-public-ip>
 
 Once logged in, check the bootstrapper journal for progress:
 
-```bash
+```
 journalctl -u 128T-hardware-bootstrapper -f
 ```
 
@@ -40,17 +35,17 @@ Device successfully initialized
 
 On each router, enter the SSR PCLI and confirm the system is running:
 
-```bash
+```
 su admin
 ```
 
-```text
+```
 admin@node0.azure-hub-router# show system
 ```
 
 The status should return `running`. Repeat for the spoke router:
 
-```text
+```
 admin@node0.azure-spoke-router# show system
 ```
 
@@ -66,52 +61,53 @@ If a router does not appear within 15 minutes of installation completing, verify
 - The conductor's public IP is reachable from the router WAN subnet over ports 930, 4505, and 4506.
 - The correct conductor IP was supplied in the deployment template or cloud-init block.
 
+## Network Interface Layout
+
+The BYOL conductor-managed router template deploys a VM with three network interfaces attached in the following order:
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| `ge-0-0` | Router-mgmt | If the management interface exists, it is ge-0-0. If the management interface does not exist, then WAN is ge-0-0 and LAN is ge-0-1. |
+| `ge-0-1` | Router-public | `ssr-router-wan` |
+| `ge-0-2` | Router-private | `ssr-router-lan` |
+
+In Azure, device interfaces are identified by **VMBus UUID** rather than PCI address. You must discover the VMBus UUID for each interface before configuring the router on the conductor.
+
 ## Discover VMBus UUIDs
 
 In Azure, device interfaces are identified by **VMBus UUID** rather than PCI address. You must discover the VMBus UUID for each WAN and LAN interface before configuring the routers on the conductor.
 
 Perform the following steps on **each router** separately. Record the UUIDs — you will need them in [Step 4](deploy_azure_hub_spoke_config.mdx).
 
-### Step 1: Run dpdk-devbind on the Router VM
+### Step 1: Identify VMBus UUIDs From the Router VM
 
-SSH into the router VM and run:
+Open the devicemap to see the VMBus UUID:
 
-```bash
-sudo dpdk-devbind.py --status
-```
+`/var/lib/128technology/devicemap.json`
 
 In the **VMBus devices** section, the first column contains the VMBus UUID. The `if` parameter shows the associated Linux interface name.
-
-Example output:
-
-```
-VMBus devices using DPDK-compatible driver
-==========================================
-...
-
-Other VMBus devices
-===================
-<vmbus-uuid-A> 'Hyper-V NIC VF [140...] if=eth1 drv=hv_netvsc ...
-<vmbus-uuid-B> 'Hyper-V NIC VF [140...] if=eth2 drv=hv_netvsc ...
-```
 
 ### Step 2: Map Azure NICs to VMBus UUIDs
 
 1. Log in to the [Azure Portal](https://portal.azure.com).
-2. Navigate to the router VM and select **Networking** under **Settings**.
+2. Navigate to the router VM and select **Network Settings**.
 
    ![Azure Networking Settings](/img/VMBusAzureUI1.png)
 
-3. The attached network interfaces are listed from left to right: **Router-mgmt**, **Router-public**, **Router-private**.
+3. The attached network interfaces are available in a dropdown: **Router-mgmt**, **Router-public**, **Router-private**.
+
+**Need new screenshot and updated workflow
 
    ![Azure Port UI](/img/VMBusAzureUI2.png)
 
-4. Cross-reference the Linux interface names from `dpdk-devbind.py` with the Azure portal to build the following mapping for each router:
+4. Cross-reference the Linux interface names with the Azure portal to build the following mapping:
 
    | Azure NIC Name | Linux Interface | Subnet | VMBus UUID |
    |----------------|----------------|--------|-----------|
-   | Router-public | `eth1` | WAN subnet | _(from dpdk-devbind.py)_ |
-   | Router-private | `eth2` | LAN subnet | _(from dpdk-devbind.py)_ |
+   | Router-public | `ge-0-1` | `ssr-router-wan` | _(identified in the devicemap.json)_ |
+   | Router-private | `ge-0-2` | `ssr-router-lan` | _(identified in the devicemap.json)_ |
+
+   Record the WAN VMBus UUID as `<wan-vmbus-uuid>` and the LAN VMBus UUID as `<lan-vmbus-uuid>` for use in the following configuration steps.
 
 ### VMBus UUID Reference Table
 

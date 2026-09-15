@@ -2,7 +2,6 @@
 title: "Step 4: Configure Hub and Spoke Routers"
 sidebar_label: "Configure Hub and Spoke Routers"
 ---
-import NetworkDesign from './_deploy_azure_hub_spoke_network_design.md';
 
 This step configures both routers on the conductor. You will first update the authority-level objects to support hub and spoke tenants, then configure each router's WAN interface, LAN interface, and service routes. The hub router provides direct internet breakout; the spoke router routes internet traffic to the hub over an SVR peer path.
 
@@ -11,10 +10,6 @@ All steps are performed from the **Conductor GUI** at `https://<conductor-public
 :::note
 If you prefer to apply configuration using the PCLI, the complete example configuration is available in the [Appendix](deploy_appendix_azure_hub_spoke.mdx).
 :::
-
-## Network Design Reference
-
-<NetworkDesign/>
 
 ## Part 1: Update Authority-Level Configuration
 
@@ -65,7 +60,7 @@ The `spoke-corp` access policy on the `Internet-Traffic` service allows traffic 
 
 ### Assign the Hub Router's Asset ID
 
-1. In the Conductor GUI, select **Configuration**.
+1. In the Conductor GUI, select **Configuration** .
 2. Under **Routers**, select `azure-hub-router`.
 3. Select the **Configure** icon.
 4. Select node `node0`.
@@ -74,7 +69,9 @@ The `spoke-corp` access policy on the `Internet-Traffic` service allows traffic 
 
 ### 1. Configure the Hub WAN Interface
 
-The WAN interface (`eth1` / `ssr-hub-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic. The neighborhood topology is set to `hub`, which makes this router the internet gateway for spoke routers in the same neighborhood.
+The WAN interface `ge-0-1` / `ssr-hub-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic. The neighborhood topology is set to `hub`, which makes this router the internet gateway for spoke routers in the same neighborhood.
+
+**Can you please clarify which interface should be used here; `eth1`, `ge-0-0`, or `ge-01`?
 
 #### 1a. Create the Hub WAN Device Interface
 
@@ -88,8 +85,6 @@ The WAN interface (`eth1` / `ssr-hub-wan`) connects to the internet, obtains a D
    | Type | `ethernet` | |
    | VMBus UUID | `<hub-wan-vmbus-uuid>` | Discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx) |
    | Forwarding | `true` | |
-
-5. Select **SAVE**.
 
 #### 1b. Create the Hub WAN Network Interface
 
@@ -113,11 +108,13 @@ The WAN interface (`eth1` / `ssr-hub-wan`) connects to the internet, obtains a D
    - Select **SAVE**.
 
 5. Scroll to **Neighborhoods** and select **ADD**.
-   - Name: `internet`
-   - Topology: `hub`
+   - Enter neighborhood name `internet`.
    - Select **SAVE**.
+   - Verify **Topology** is set to `spoke`.
+   - Select the Security Policy **internal**.
 
-6. Select **SAVE**.
+:::important
+`Conductor` must be set to `true` or management traffic will not reach the conductor.
 
 :::important
 Setting **Topology** to `hub` on the hub router's neighborhood is what distinguishes it from a spoke. The conductor uses this topology to auto-generate adjacencies between the hub and any spoke routers that share the same neighborhood name with topology `spoke`.
@@ -128,6 +125,9 @@ Setting **Topology** to `hub` on the hub router's neighborhood is what distingui
 ### 2. Configure the Hub LAN Interface
 
 The LAN interface (`eth2` / `ssr-hub-lan`) connects to the hub private subnet and assigns the `hub-corp` tenant to inbound traffic.
+
+**Can you please clarify which interface should be used here; `eth1`, `ge-0-0`, or `ge-01`?
+
 
 #### 2a. Create the Hub LAN Device Interface
 
@@ -156,12 +156,11 @@ The LAN interface (`eth2` / `ssr-hub-lan`) connects to the hub private subnet an
    | Global-ID | `2` | |
    | DHCP | `disabled` | |
    | Tenant | `hub-corp` | Assigns all inbound LAN traffic to the hub-corp tenant |
-   | Source NAT | `true` | |
+   | Source NAT | `true` | **question from Andy  - is sournce nat here necessary?|
 
 4. Scroll to **Interface Addresses** and select **ADD**.
    - IP Address: `10.0.2.1`
    - Prefix Length: `24`
-5. Select **SAVE**.
 
 ### 3. Configure Hub DNS
 
@@ -169,8 +168,7 @@ Configure DNS so the hub router can resolve FQDNs for conductor connectivity and
 
 1. Return to the **Router** level for `azure-hub-router`.
 2. Scroll to **DNS Config** and select **ADD**.
-3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
-4. Select **SAVE**.
+3. Set **Mode** to `static` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
 
 ### 4. Create the Hub Internet Breakout Service Route
 
@@ -331,7 +329,7 @@ From the Conductor GUI, select **Routers**. Both `azure-hub-router` and `azure-s
 
 From the conductor PCLI:
 
-```text
+```
 admin@node0.Conductor# show peers
 ```
 
@@ -341,7 +339,7 @@ Both routers should appear with status `Up`. After SVR adjacencies form, a third
 
 From the hub router PCLI:
 
-```text
+```
 admin@node0.azure-hub-router# show peers
 ```
 
@@ -349,7 +347,7 @@ The spoke router should appear as an SVR peer with status `Up`.
 
 From the spoke router PCLI:
 
-```text
+```
 admin@node0.azure-spoke-router# show peers
 ```
 
@@ -359,7 +357,7 @@ The hub router should appear with status `Up`.
 
 Azure gateways do not respond to ICMP ping. Use the ARP table to verify WAN connectivity on each router:
 
-```text
+```
 admin@node0.azure-hub-router# show arp
 admin@node0.azure-spoke-router# show arp
 ```
@@ -370,13 +368,13 @@ Look for **valid** ARP entries on the `wan1` interface of each router.
 
 From the hub router:
 
-```text
+```
 admin@node0.azure-hub-router# ping 8.8.8.8
 ```
 
 From the spoke router:
 
-```text
+```
 admin@node0.azure-spoke-router# ping 8.8.8.8
 ```
 
@@ -386,7 +384,7 @@ Both routers should reach the internet. Spoke internet traffic traverses the SVR
 
 From the spoke router, confirm that internet traffic resolves through the hub:
 
-```text
+```
 admin@node0.azure-spoke-router# show service-path
 ```
 
