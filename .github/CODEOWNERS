@@ -12,3 +12,7 @@
 # `docs/getting-started.md` but not further nested files like
 # `docs/build-app/troubleshooting.md`.
 docs/**  @MichaelBaj @Chr1st0ph3rTurn3r
+
+# Changes to knowledge-base articles require review from
+# @reidstidolph-JNPR.
+kb/**  @reidstidolph-JNPR @MichaelBaj @Chr1st0ph3rTurn3r
