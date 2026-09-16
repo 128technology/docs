@@ -16,6 +16,10 @@ The SSR Software packages are available from the Juniper Networks public servers
 
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/
 
+:::note
+Access to the URL above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+:::
+
 Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. 
 
 :::important

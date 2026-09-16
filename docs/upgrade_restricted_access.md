@@ -52,6 +52,10 @@ The following are use cases for upgrades within an air-gap network.
 Use these procedures for upgrades only. When performing an initial installation of version 6.3.x software or greater, the image-based SSR ISO is required. 
 :::
 
+:::note
+All download links to https://software.128technology.com require authentication. Log in using the username and token supplied with your SSR license.
+:::
+
 ### Upgrade Considerations
 
 **7.0.1 Conductor Upgrades**

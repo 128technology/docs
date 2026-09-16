@@ -8,7 +8,6 @@ module.exports = {
       "about_support_policy",
       "config_firewall_ports",
     ],
-
     "Release Notes": [
       {
         "type": "category",
@@ -207,6 +206,17 @@ module.exports = {
                 "deploy_appendix_vmware_conductor",
               ],
             },
+            {   
+              "type": "category",
+              "label": "Azure Conductor",
+              "items": [
+                "deploy_azure_conductor",
+                "deploy_azure_conductor_vm",
+                "deploy_azure_conductor_install",
+                "deploy_azure_conductor_config",
+                "deploy_appendix_azure_conductor",
+              ],
+            },
             {
               "type": "category",
               "label": "GCP Conductor",
@@ -226,7 +236,19 @@ module.exports = {
           "items": [
               {
                 "type": "category",
-                "label": "VMware Router",
+                "label": "VMware Hub Router",
+                "items": [
+                  "deploy_vmware_hub_router_overview",
+                  "deploy_vmware_hub_router_vm",
+                  "deploy_vmware_hub_router_install",
+                  "deploy_vmware_hub_router_pci",
+                  "deploy_vmware_hub_router_config",
+                  "deploy_appendix_vmware_hub_router",
+              ],
+            },
+            {
+                "type": "category",
+                "label": "VMware Spoke Router",
                 "items": [
                   "deploy_vmware_router_overview",
                   "deploy_vmware_router_vm",

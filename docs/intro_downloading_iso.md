@@ -41,6 +41,9 @@ The image-based SSR ISOs are available to download at the following location:
 
 - https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
+:::note
+Access to the URLs above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+:::
 
 The package-based 128T ISOs are available to download at the following location:
 

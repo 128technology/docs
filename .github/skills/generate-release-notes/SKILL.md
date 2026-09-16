@@ -1,7 +1,8 @@
 ---
-description: "Generate or update release notes for a specific SSR software version from a JIRA JQL query. Use when producing release notes based on resolved bugs and features delivered in one or more SSR releases, or when updating an existing release notes file with newly resolved issues."
-agent: "agent"
-argument-hint: "Target SSR version(s) and JQL query"
+name: generate-release-notes
+description: 'Generate or update SSR software release notes for a specific version from a JIRA JQL query, covering resolved bugs, features, CVEs, and caveats.'
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # SSR Release Notes Generator
