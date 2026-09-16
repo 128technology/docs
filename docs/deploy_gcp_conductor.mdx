@@ -1,8 +1,7 @@
 ---
-title: GCP Conductor Deployment Guide
+title: GCP Conductor Deployment Overview
 sidebar_label: Overview
 ---
-import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
 This guide walks a network engineer through deploying a **standalone SSR Conductor in Google Cloud Platform (GCP)** using the GCP Marketplace. You can choose between two deployment methods: a graphical user interface or a command-line (Terraform) workflow. When you complete the steps in this guide, the conductor will be running SSR 7.0.1, configured with an authority name and conductor address, and ready for SSR routers to onboard.
 
@@ -10,9 +9,9 @@ This guide walks a network engineer through deploying a **standalone SSR Conduct
 
 | Step | Topic | Description |
 |------|-------|-------------|
-| 1 | [Before You Deploy](deploy_gcp_conductor_prereqs.mdx) | Create the required VPC, subnet, and SSH key pair in GCP |
-| 2 | [Deploy via GCP Marketplace](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the Marketplace GUI or CLI (Terraform) |
-| 3 | [Configure the SSR Conductor](deploy_gcp_conductor_config.mdx) | Set the authority name, conductor address, and assign the asset ID |
+| 1 | [Configure the VPC](deploy_gcp_conductor_prereqs.mdx) | Create the required VPC, subnet, and SSH key pair in GCP |
+| 2 | [Create the GCP VM](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the Marketplace GUI or CLI (Terraform) |
+| 3 | [Configure the Conductor](deploy_gcp_conductor_config.mdx) | Set the authority name, conductor address, and assign the asset ID |
 | — | [Appendix — Deployment Parameters](deploy_appendix_gcp_conductor.mdx) | Complete Terraform variable reference for the GCP conductor deployment |
 
 ## Network Topology
@@ -53,7 +52,7 @@ Before beginning, ensure the following are available:
 
 - **GCP access** — access to a GCP project with permissions to create VPC networks, subnets, VM instances, and service accounts.
 - **Juniper software access credentials** — Artifactory username and token for software downloads and provisioning.
-- **SSH key pair** — an RSA key pair for authenticating to the conductor VM. Steps to create one are in [Step 1 — Before You Deploy](deploy_gcp_conductor_prereqs.mdx).
+- **SSH key pair** — an RSA key pair for authenticating to the conductor VM. Steps to create one are in [Step 1 — Configure the VPC](deploy_gcp_conductor_prereqs.mdx).
 
 ## Instance Size
 
@@ -70,7 +69,7 @@ For additional guidance, see [System Requirements](intro_system_reqs.md) and the
 
 ## Software Version Requirements
 
-This guide uses **SSR 7.0.1** on the conductor.
+This guide installs **SSR 7.1.4** on the conductor. 
 
 :::note
 The router software version must be lower than or equal to the conductor software version.
