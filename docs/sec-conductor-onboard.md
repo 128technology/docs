@@ -195,7 +195,7 @@ Completed in 0.01 seconds
 
 After SCO is enabled, the conductor GUI **Routers** page displays a **Secure Conductor Onboarding** panel for each node, replacing the legacy asset-id onboarding view. Use this panel to monitor the SCO handshake as it progresses.
 
-![Conductor Routers page showing a Secure Conductor Onboarding panel for each node, with Asset ID, Auth State, Last Updated, Attempts, Last Problem, and Mode fields](/img/sec-conductor-onboarding-router-view.png)
+<!-- ![Conductor Routers page showing a Secure Conductor Onboarding panel for each node, with Asset ID, Auth State, Last Updated, Attempts, Last Problem, and Mode fields](/img/sec-conductor-onboarding-router-view.png) -->
 
 Each panel reports the following fields:
 

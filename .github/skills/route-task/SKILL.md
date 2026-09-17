@@ -1,8 +1,8 @@
 ---
-description: "Classify an incoming request and route it to a subagent running the model best suited to the task tier (reasoning, balanced, or fast). Use when you want task-appropriate model selection without manually changing the chat model picker."
-agent: "agent"
-model: claude-sonnet-4.6
-argument-hint: "Describe the task you want done; the router classifies it and delegates to the right model."
+name: route-task
+description: 'Classify an incoming request and route it to a subagent running the model best suited to the task tier (reasoning, balanced, or fast) for cost-optimal model selection.'
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # Task Router
