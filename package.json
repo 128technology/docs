@@ -26,7 +26,7 @@
     "lunr": "^2.3.9",
     "mermaid": "^11.17.2",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.8",
+    "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-simple-flowchart": "^1.2.4",
     "react-table": "^7.0.0"
