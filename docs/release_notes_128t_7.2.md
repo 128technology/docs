@@ -99,7 +99,7 @@ An issue has been identified when onboarding SSR routers installed with older ve
 ------
 - **I95-63012 AppID Scale Optimization:** Improved application identification scalability including automatic scaling of the app-id cache by platform, enhanced sessions-per-second rate with app-id enabled, and automatic tuning of service area for app-id functionality.
 ------
-- **I95-63030 HA Sync Redundancy:** Beginning with version 7.2.0, [HA Sync Redundancy](config_non_forwarding_ha_interfaces.md#ha-sync-redundancy) has expanded the ability to bond interfaces to include Non Forwarding interfaces. This allows you to bond a non-forwarding device interface with `ha-sync` as the parent-bond, providing redundancy for the ha-sync port.
+- **I95-63030 HA Sync Redundancy:** Beginning with SSR 7.2.0, [HA Sync Redundancy](config_non_forwarding_ha_interfaces.md#ha-sync-redundancy) allows you to configure a non-forwarding `bond` device interface for the HA control traffic interface. Grouping this bond interface with multiple ethernet device interfaces provides redundancy in the event of a port or cable failure.
 ------
 - **I95-64149 Enhanced Security Key Management Events:** Added system audit events for all success-path PKI operations in Certificate Management — including private key generation/deletion, certificate update/deletion, and CSR deletion — complementing the existing audit coverage for CSR generation and certificate ingest. See the [Troubleshooting section of Enhanced Security Key Managament](sec_enhanced_key_mgmt.md#troubleshooting) for additional information. 
 ------

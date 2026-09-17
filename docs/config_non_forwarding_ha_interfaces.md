@@ -15,16 +15,6 @@ A quick recap:
 
 `External` interfaces are not used for any control traffic to the node's HA peer and the user has no limit to how many `external` interfaces they configure. A user may configure either one `fabric` or one `shared` interface per node, and that interface will be used for all HA control traffic.
 
-## HA Sync Redundancy
-
-Within an HA router, the communication that occurs on the HA sync connection is vital to proper operation of the router. In many ways this communication channel is similar to the backplane of a chassis-based router, despite the fact that it is provided through an Ethernet connection. Due to the importance of this connection to proper functionality, customers often wish to provide redundant connections for this traffic in case of cable or interface failure.
-
-Beginning with version 7.2.0, HA Sync Redundancy has expanded the ability to bond interfaces to include Non Forwarding interfaces. This allows you to bond a non-forwarding device interface with `ha-sync` as the parent-bond, providing redundancy for the ha-sync port.
-
-For configuration information see [Configuring LAC and LACP](config_lacp.md#configuring-lag-and-lacp). For command information, see [parent-bond](config_command_guide.md#configure-authority-router-node-device-interface-parent-bond).
-
-Use `show device-interface` to view the `parent-bond` interface.
-
 ## Configuring Non-Forwarding HA Interfaces
 
 This example will configure an interface to be used to establish connectivity between HA peers. To configure a non-forwarding interface, set the `forwarding` flag to `false`. This example uses a `device-interface` set to type `ethernet`.
@@ -245,3 +235,66 @@ USERCTL=no
 ZONE=trusted
 ```
 
+## HA Sync Redundancy
+
+Within an HA router, the communication that occurs on the HA sync connection is vital to proper operation of the router. In many ways this communication channel is similar to the backplane of a chassis-based router, despite the fact that it is provided through an Ethernet connection. Due to the importance of this connection to proper functionality, customers often wish to provide redundant connections for this traffic in case of cable or interface failure.
+
+Beginning with version 7.2.0, HA Sync Redundancy allows you to configure a non-forwarding `bond` device interface for the HA control traffic interface. Grouping this bond interface with multiple ethernet device interfaces provides redundancy in the event of a port or cable failure.
+
+### Configure HA Sync Redundancy
+
+Use the following steps to configure HA sync redundancy.
+
+1. On the Configuration page, under Routers, select the router.
+
+    ![Routers](/img/nfi-ha-sync-config1.png)
+
+2. Under Device Interfaces, select your non-forwarding HA control interface. 
+
+    ![Device Interface](/img/nfi-ha-sync-config2.png)
+
+3. Make note of the PCI Address used.
+
+    ![Device Interface Type Settings](/img/nfi-ha-sync-config3.png)
+
+4. Change the HA control Device Interface Type from type ethernet to type `bond`.
+
+    ![Change to Bond](/img/nfi-ha-sync-config4.png)
+
+#### Add New Non-Forwarding Device Interfaces
+
+1. Next to the Device Interface heading, select ADD.
+
+    ![New Device Interface](/img/nfi-ha-sync-config5.png)
+
+2. Provide a name for the device interface and click **SAVE**.
+
+    ![Device name](/img/nfi-ha-sync-config5a.png)
+
+3. Configure the following:
+
+    - Device type `ethernet` 
+    - Use the PCI address noted from step 1
+    - Select the bond interface from step 2 as the Parent Bond for this interface
+
+    ![Control-1 device interface](/img/nfi-ha-sync-config6.png)
+
+
+4. Return to the Device Interface level and add another new Non-Fowarding Device Interface to be the redundant interface.
+
+5. Next to the Device Interface heading, select ADD.
+
+    ![New Device Interface](/img/nfi-ha-sync-config5.png)
+
+6. Provide a name for the device interface and click **SAVE**.
+
+7. Configure the device Type ethernet, using an available PCI address, and
+select the bond interface from step 2 as the Parent Bond for this interface.
+
+    ![Control-2 device interface](/img/nfi-ha-sync-config7.png)
+
+8. Click **Validate** and **Commit**.
+
+It is highly recommended to perform these steps for each node of the HA pair.
+
+For additional information about bond interfaces, see [Configuring LAC and LACP](config_lacp.md#configuring-lag-and-lacp). For command information, see [parent-bond](config_command_guide.md#configure-authority-router-node-device-interface-parent-bond).
