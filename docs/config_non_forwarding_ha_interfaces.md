@@ -239,7 +239,7 @@ ZONE=trusted
 
 Within an HA router, the communication that occurs on the HA sync connection is vital to proper operation of the router. In many ways this communication channel is similar to the backplane of a chassis-based router, despite the fact that it is provided through an Ethernet connection. Due to the importance of this connection to proper functionality, customers often wish to provide redundant connections for this traffic in case of cable or interface failure.
 
-Beginning with version 7.2.0, HA Sync Redundancy allows you to configure a non-forwarding `bond` device interface for the HA control traffic interface. Grouping this bond interface with multiple ethernet device interfaces provides redundancy in the event of a port or cable failure.
+Beginning with version 7.2.0, HA Sync Redundancy allows you to configure a non-forwarding `bond` device interface for the HA control traffic interface. Grouping this bond interface with multiple ethernet device interfaces provides the solution for this desired connection redundancy.
 
 ### Configure HA Sync Redundancy
 
