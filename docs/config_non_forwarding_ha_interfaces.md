@@ -297,4 +297,4 @@ select the bond interface from step 2 as the Parent Bond for this interface.
 
 It is highly recommended to perform these steps for each node of the HA pair.
 
-For additional information about bond interfaces, see [Configuring LAC and LACP](config_lacp.md#configuring-lag-and-lacp). For command information, see [parent-bond](config_command_guide.md#configure-authority-router-node-device-interface-parent-bond).
+For additional information about bond interfaces, see [Configuring LAG and LACP](config_lacp.md#configuring-lag-and-lacp). For command information, see [parent-bond](config_command_guide.md#configure-authority-router-node-device-interface-parent-bond).
