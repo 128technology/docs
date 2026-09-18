@@ -16,7 +16,6 @@ When installing SSR V6.3.0 or newer on a new system, use the image-based ISO - i
 
 Offline mode conductor and router upgrades to image-based installations are detailed in the [Single-Version 6.3.0 Upgrade](upgrade_restricted_access.md#single-version-630-upgrade) instructions.
 
-
 ### Upgrade Considerations
 
 **7.x Conductor Upgrades**
@@ -62,7 +61,7 @@ Rollback to the previously installed version of software *is* supported.
 :::
 
 :::warning
-An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment and are upgrading to SSR 7.X, it is recommended to upgrade to SSR 7.2.x and replace the plugin with a `bond` control interface.
 ::: 
 
 :::important
