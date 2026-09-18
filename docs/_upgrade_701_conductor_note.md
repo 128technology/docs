@@ -3,7 +3,7 @@
 :::important
 **7.x Conductor Upgrades**
 
-If you are upgrading a **conductor** that currently running version 6.3.4 or lower, and you wish to upgrade to any version of 7.x, you must first perform a transitional upgrade of the conductor to version 6.3.5 - 6.3.7.
+If you are upgrading a **conductor** that is currently running version 6.3.4 or lower, and you wish to upgrade to any version of 7.x, you must first perform a transitional upgrade of the conductor to version 6.3.5 - 6.3.7.
 
 Once the conductor has completed the 6.3.5-6.3.7 transitional upgrade, you may then upgrade the conductor to any 7.x version of the SSR software.
 
