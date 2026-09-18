@@ -1,0 +1,301 @@
+---
+title: "Appendix: Azure Hub and Spoke Configuration"
+sidebar_label: "Appendix: Hub and Spoke Config"
+---
+import NetworkDesign from './_deploy_azure_hub_spoke_network_design.md';
+
+This appendix contains the complete SSR PCLI configuration for the `azure-hub-router` and `azure-spoke-router` deployments described in this guide. This configuration reflects the final state after completing all steps through [Step 4 — Configure Hub and Spoke Routers](deploy_azure_hub_spoke_config.mdx).
+
+:::important
+Replace all placeholder values (shown in angle brackets) with values from your environment before applying:
+
+- `<conductor-public-ip>` — public IP of the conductor VM.
+- `<conductor-vmbus-uuid>` — VMBus UUID of the conductor management interface (found using `sudo dpdk-devbind.py --status` on the conductor VM).
+- `<hub-wan-vmbus-uuid>` — VMBus UUID of the hub router WAN NIC (`eth1`).
+- `<hub-lan-vmbus-uuid>` — VMBus UUID of the hub router LAN NIC (`eth2`).
+- `<spoke-wan-vmbus-uuid>` — VMBus UUID of the spoke router WAN NIC (`eth1`).
+- `<spoke-lan-vmbus-uuid>` — VMBus UUID of the spoke router LAN NIC (`eth2`).
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Applying This Configuration
+
+This configuration can be applied to the conductor using the PCLI import function.
+
+1. Save the configuration below to a file — for example, `azure-hub-spoke.cfg`.
+
+2. Copy the file to the conductor:
+
+   ```bash
+   scp azure-hub-spoke.cfg t128@<conductor-public-ip>:/tmp/
+   ```
+
+3. Log in to the conductor PCLI:
+
+   ```bash
+   ssh t128@<conductor-public-ip>
+   su admin
+   ```
+
+4. Enter configuration mode and import:
+
+   ```text
+   admin@node0.Conductor# import config /tmp/azure-hub-spoke.cfg
+   ```
+
+5. Review any validation warnings, then commit:
+
+   ```text
+   admin@node0.Conductor (config)# commit
+   Are you sure you want to commit the candidate config? [y/N]: y
+   ```
+
+Alternatively, you may copy and paste each block into the PCLI while in `configure` → `edit` mode.
+
+:::note
+The authority-level objects the routers depend on (`hub-corp` tenant, `spoke-corp` tenant, `Internet-Traffic` service, authority name, and conductor address) are included in the configuration block below. If your conductor already has an `Internet-Traffic` service or other conflicting objects, reconcile those before importing.
+:::
+
+## Complete Configuration
+
+```text
+config
+    authority
+        name              Authority128
+
+        conductor-address  <conductor-public-ip>
+
+        tenant  hub-corp
+            name  hub-corp
+        exit
+
+        tenant  spoke-corp
+            name  spoke-corp
+        exit
+
+        service  Internet-Traffic
+            name             Internet-Traffic
+            scope            public
+            security         internal
+
+            access-policy    hub-corp
+                source  hub-corp
+            exit
+
+            access-policy    spoke-corp
+                source  spoke-corp
+            exit
+
+            address  0.0.0.0/0
+        exit
+
+        router  Conductor
+            name                 Conductor
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  conductor
+
+                device-interface  mgmt-dev
+                    name         mgmt-dev
+                    type         ethernet
+                    forwarding   false
+                    vmbus-uuid   <conductor-vmbus-uuid>
+
+                    network-interface  mgmt-intf
+                        name  mgmt-intf
+                        type  management
+
+                        address  10.0.0.10
+                            ip-address     10.0.0.10
+                            prefix-length  24
+                            gateway        10.0.0.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+
+        router  azure-hub-router
+            name                 azure-hub-router
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    type               ethernet
+                    forwarding         true
+                    vmbus-uuid         <hub-wan-vmbus-uuid>
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              1
+                        conductor              true
+                        default-route          true
+                        source-nat             true
+                        management             true
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood           internet
+                            name      internet
+                            topology  hub
+                        exit
+
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    type               ethernet
+                    forwarding         true
+                    vmbus-uuid         <hub-lan-vmbus-uuid>
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+                        tenant      hub-corp
+                        source-nat  true
+                        dhcp        disabled
+
+                        address     10.0.2.1
+                            ip-address     10.0.2.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            dns-config
+                mode     manual
+                servers  [ 1.1.1.1 8.8.8.8 ]
+            exit
+
+            service-route  internet-breakout
+                name          internet-breakout
+                service-name  Internet-Traffic
+
+                next-hop      node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+        exit
+
+        router  azure-spoke-router
+            name                 azure-spoke-router
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    type               ethernet
+                    forwarding         true
+                    vmbus-uuid         <spoke-wan-vmbus-uuid>
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              1
+                        conductor              true
+                        default-route          true
+                        source-nat             true
+                        management             true
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood           internet
+                            name      internet
+                            topology  spoke
+                        exit
+
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    type               ethernet
+                    forwarding         true
+                    vmbus-uuid         <spoke-lan-vmbus-uuid>
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+                        tenant      spoke-corp
+                        source-nat  true
+                        dhcp        disabled
+
+                        address     10.0.4.1
+                            ip-address     10.0.4.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            dns-config
+                mode     manual
+                servers  [ 1.1.1.1 8.8.8.8 ]
+            exit
+
+            service-route  internet-via-hub
+                name          internet-via-hub
+                service-name  Internet-Traffic
+                peer          azure-hub-router
+            exit
+        exit
+    exit
+exit
+```
+
+## Interface Summary
+
+### Hub Router (`azure-hub-router`)
+
+| Interface | Device Interface | VMBus UUID | Type | Configuration |
+|-----------|-----------------|-----------|------|---------------|
+| `wan1` | `wan-dev` | `<hub-wan-vmbus-uuid>` | External | DHCP v4, conductor, default-route, source-nat, management, neighborhood `internet` topology `hub` |
+| `lan1` | `lan-dev` | `<hub-lan-vmbus-uuid>` | External | Tenant `hub-corp`, static `10.0.2.1/24`, source-nat |
+
+### Spoke Router (`azure-spoke-router`)
+
+| Interface | Device Interface | VMBus UUID | Type | Configuration |
+|-----------|-----------------|-----------|------|---------------|
+| `wan1` | `wan-dev` | `<spoke-wan-vmbus-uuid>` | External | DHCP v4, conductor, default-route, source-nat, management, neighborhood `internet` topology `spoke` |
+| `lan1` | `lan-dev` | `<spoke-lan-vmbus-uuid>` | External | Tenant `spoke-corp`, static `10.0.4.1/24`, source-nat |
+
+## Service Route Summary
+
+| Router | Service Route | Service | Type | Next Hop | Effect |
+|--------|--------------|---------|------|---------|--------|
+| `azure-hub-router` | `internet-breakout` | `Internet-Traffic` | `service-agent` | `node0/wan1` | Hub LAN and spoke SVR traffic breaks out directly to the internet. |
+| `azure-spoke-router` | `internet-via-hub` | `Internet-Traffic` | `peer` | `azure-hub-router` | Spoke internet traffic is forwarded over the SVR peer path to the hub for breakout. |
+
+## Traffic Flow Reference
+
+The following table describes how internet traffic flows in the completed hub-and-spoke network.
+
+| Source | Destination | Path |
+|--------|------------|------|
+| Hub LAN device (10.0.2.x) | Internet | Hub LAN → `hub-corp` tenant → `Internet-Traffic` service → `internet-breakout` route → hub `wan1` → internet. |
+| Spoke LAN device (10.0.4.x) | Internet | Spoke LAN → `spoke-corp` tenant → `Internet-Traffic` service → `internet-via-hub` peer route → SVR path → hub `wan1` → internet. |
+| Hub or spoke router | Conductor | Management over forwarding on `wan1` using port 930/4505/4506; management-vector priority 100 on each router's WAN interface. |
