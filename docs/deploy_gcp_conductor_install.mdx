@@ -4,12 +4,12 @@ sidebar_label: "Create the GCP VM"
 ---
 import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
-This step deploys the conductor VM in GCP. You can use either the GCP Web Interface to deploy; or the command line (Terraform). You do not need to do both. once the deployment is complete, proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
+This step deploys the conductor VM in GCP. You can use either the GCP Graphical User Interface (GUI) to deploy, or the command line (Terraform). You do not need to do both. once the deployment is complete, proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
 
 
-## Deploy a GCP Conductor VM using the Graphical User Interface
+## Deploy a GCP Conductor VM using the GUI
 
-The following procedure deploys a GCP Conductor VM using the Graphical User Interface.
+The following procedure deploys a GCP Conductor VM using the GUI.
 
 ### 1. Select the BYOL Plan
 
@@ -64,14 +64,14 @@ Under the **New Session Smart Networking Platform – BYOL deployment**, provide
 
 Once all sections are complete, scroll to the bottom and click **Deploy**.
 
-   ![GCP Marketplace common template fields](/img/gcp-common-template.png)
-   ![GCP Marketplace conductor-specific fields](/img/gcp-conductor-template.png)
+   ![GCP Marketplace common template fields](/img/deploy-gcp-conductor-web9a.png)
+   ![GCP Marketplace conductor-specific fields](/img/deploy-gcp-conductor-web9b.png)
 
 GCP creates the conductor VM in under five minutes. A green check mark appears next to **Status** for each created resource when complete.
 
    ![Conductor Complete](/img/deploy-gcp-conductor-web10.png)
 
-After the VM is created, it automatically runs its initialization process to install the SSR software. **Allow an additional 15 minutes for initialization to complete** before proceeding to [Step 3 — Configure the SSR Conductor](deploy_gcp_conductor_config.mdx).
+After the VM is created, it automatically runs its initialization process to install the SSR software. **Allow an additional 15 minutes for initialization to complete** before proceeding to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
 
 ---
 
@@ -127,7 +127,7 @@ The following procedure deploys a GCP Conductor VM using the Command Line Interf
    zone                    = "us-west2-a"
    boot_disk_size          = "60"
    ssr_mode                = "conductor"
-   ssr_version             = "7.0.1"
+   ssr_version             = "7.1.4"
    artifactory_user        = "<your-artifactory-username>"
    artifactory_token       = "<your-artifactory-token>"
    ssh_public_key          = "<your-ssh-public-key>"
@@ -195,4 +195,4 @@ After the conductor VM is created, it automatically runs its initialization proc
 
 ## Next Step
 
-Proceed to [Step 3 — Configure the SSR Conductor](deploy_gcp_conductor_config.mdx).
+Proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).

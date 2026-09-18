@@ -1,10 +1,10 @@
 ---
-title: "Step 1: Configure the VPC"
-sidebar_label: "Configure the VPC"
+title: "Step 1: Configure the GCP Prerequisites"
+sidebar_label: "Configure the GCP Prerequisites"
 ---
 import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
-Before deploying the SSR conductor through the GCP Marketplace, you must create a VPC with a subnet for the conductor VM and an SSH key pair for VM authentication.
+Before deploying the SSR conductor on GCP you must create the required VPCs, SSH public/private key pair, and the GCP service account used for deployment.
 
 ## Network Design Reference
 
@@ -68,7 +68,7 @@ The following example uses a macOS terminal.
 An existing SSH key pair can be used instead of creating a new one. In that case, skip this section and use your existing public key during deployment.
 :::
 
-## GCP Service Account
+## 3. Create the GCP Service Account
 
 The deployment requires a GCP service account with the following IAM roles:
 
@@ -79,8 +79,8 @@ The deployment requires a GCP service account with the following IAM roles:
 | `roles/iam.serviceAccountUser` | Required to act as the service account |
 | `roles/storage.objectViewer` | Required to read deployment objects from storage |
 
-You can create the service account directly within the Marketplace deployment form during [Step 2 — Deploy via GCP Marketplace](deploy_gcp_conductor_install.mdx). A separate pre-creation step in the GCP console is not required.
+You can create the service account directly within the Marketplace deployment form during [Step 2 — Create the GCP VM](deploy_gcp_conductor_install.mdx). A separate pre-creation step in the GCP console is not required.
 
 ## Next Step
 
-Proceed to [Step 2 — Deploy via GCP Marketplace](deploy_gcp_conductor_install.mdx).
+Proceed to [Step 2 — Create the GCP VM](deploy_gcp_conductor_install.mdx).

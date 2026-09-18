@@ -17,7 +17,7 @@ The following table describes all supported Terraform variables for the BYOL con
 | Zone | `zone` | Yes | GCP zone within the selected region. |
 | Boot Disk Size | `boot_disk_size` | Yes | Boot disk size in GB. Minimum `60` is recommended. |
 | SSR Mode | `ssr_mode` | Yes | Set to `conductor` for a conductor deployment. |
-| SSR Version | `ssr_version` | Yes | SSR software version to install on the conductor (for example, `7.0.1`). |
+| SSR Version | `ssr_version` | Yes | SSR software version to install on the conductor (for example, `7.1.4`). |
 | Artifactory Username | `artifactory_user` | Yes | Username for Juniper BYOL repository access. |
 | Artifactory Token | `artifactory_token` | Yes | Token or password for Juniper BYOL repository access. |
 | SSH Public Key | `ssh_public_key` | Yes | Public SSH key added for administrator access to the conductor VM. |
@@ -37,7 +37,7 @@ region                   = "us-west2"
 zone                     = "us-west2-a"
 boot_disk_size           = "60"
 ssr_mode                 = "conductor"
-ssr_version              = "7.0.1"
+ssr_version              = "7.1.4"
 artifactory_user         = "<your-artifactory-username>"
 artifactory_token        = "<your-artifactory-token>"
 ssh_public_key           = "<your-ssh-public-key>"
