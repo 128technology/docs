@@ -3,7 +3,16 @@ title: Installing from the AWS Marketplace
 sidebar_label: Installing from the AWS Marketplace
 ---
 
+:::info Recommended: BYOL Deployment Model
+Juniper recommends **BYOL (Bring Your Own License)** for both new installations and existing environments. BYOL simplifies ongoing maintenance, streamlines version upgrades, and enables cleaner lifecycle management across your infrastructure.
+
+Existing PAYG deployments remain fully supported — no immediate action required.
+
+To review the BYOL deployment procedure, see [Installing a BYOL Conductor-managed Router in AWS](intro_installation_byol_aws_conductor.md).
+:::
+
 Partnering with Amazon, you can install an SSR Conductor and a Session Smart Router (SSR) using Amazon Web Services (AWS). AWS is a secure cloud platform that offers computing power, data storage, content delivery, flexibility, scalability, and reliability for software products. 
+
 :::note
 For more information on Amazon Web Services, refer to the [AWS website](https://aws.amazon.com/what-is-aws/).
 :::
