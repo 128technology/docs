@@ -2,7 +2,6 @@
 title: Upgrade Considerations
 sidebar_label: Upgrade Considerations
 ---
-import UpgradeNote701 from './_upgrade_701_conductor_note.md'; 
 
 Before upgrading, please review the following information.
 
@@ -16,7 +15,17 @@ Rollback to the previously installed version of software *is* supported.
 An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is not advised to upgrade at this time. The issue is being investigated and will be resolved in a future release.
 :::
 
-<UpgradeNote701/>
+:::important
+**7.x Conductor Upgrades**
+
+If you are upgrading a **conductor** that currently running version 6.3.4 or lower, and you wish to upgrade any version of 7.x, you must first upgrade the conductor to version 6.3.5 - 6.3.7.
+
+Once the conductor has completed the 6.3.5 installation, you may upgrade the conductor to any 7.x version of the SSR software.
+
+If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.x normally.
+
+**Routers that are being upgraded to 7.x DO NOT have to make a transitional installation step to communicate with a conductor running 7.x. Router upgrades can go directly from pre-7.x to 7.x.**
+:::
 
 ### Upgrade Installer
 For software versions prior to 6.3.0, before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
