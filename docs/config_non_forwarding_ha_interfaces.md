@@ -249,7 +249,11 @@ Use the following steps to configure HA sync redundancy.
 
     ![Routers](/img/nfi-ha-sync-config1.png)
 
-2. Under Device Interfaces, select your non-forwarding HA control interface. 
+2. Scroll down and select the Node.
+
+    ![Select the Node](/img/nfi-ha-sync-config1a.png)
+
+Under Device Interfaces, select your non-forwarding HA control interface. 
 
     ![Device Interface](/img/nfi-ha-sync-config2.png)
 
@@ -295,6 +299,8 @@ select the bond interface from step 2 as the Parent Bond for this interface.
 
 8. Click **Validate** and **Commit**.
 
+:::important
 It is highly recommended to perform these steps for each node of the HA pair.
+:::
 
 For additional information about bond interfaces, see [Configuring LAG and LACP](config_lacp.md#configuring-lag-and-lacp). For command information, see [parent-bond](config_command_guide.md#configure-authority-router-node-device-interface-parent-bond).

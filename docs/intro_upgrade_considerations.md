@@ -11,7 +11,7 @@ Rollback to the previously installed version of software *is* supported.
 :::
 
 :::warning
-An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment, it is recommended to upgrade to SSR 7.2.x. 
+An issue has been identified involving the use of the HA Sync Redundancy Plugin with SSR 7.0.1, which prevents proper functioning of the plugin. If you use the HA Plugin in your SSR deployment and are upgrading to SSR 7.X, it is recommended to upgrade to SSR 7.2.x and replace the plugin with a `bond` control interface.
 
 Beginning with version 7.2.0, HA Sync Redundancy allows you to configure a non-forwarding `bond` device interface for the HA control traffic interface. Grouping this bond interface with multiple ethernet device interfaces provides redundancy in the event of a port or cable failure.
 
