@@ -3,7 +3,7 @@ title: "Step 4: Configure Hub and Spoke Routers"
 sidebar_label: "Configure Hub and Spoke Routers"
 ---
 
-This step configures both routers on the conductor. You will first update the authority-level objects to support hub and spoke tenants, then configure each router's WAN interface, LAN interface, and service routes. The hub router provides direct internet breakout; the spoke router routes internet traffic to the hub over an SVR peer path.
+This step configures both hub and spoke routers on the conductor. You will first update the authority-level objects to support hub and spoke tenants, then configure each router's WAN interface, LAN interface, and service routes. The hub router provides direct internet breakout; the spoke router routes internet traffic to the hub over an SVR peer path.
 
 All steps are performed from the **Conductor GUI** at `https://<conductor-public-ip>` unless otherwise noted.
 
@@ -69,9 +69,7 @@ The `spoke-corp` access policy on the `Internet-Traffic` service allows traffic 
 
 ### 1. Configure the Hub WAN Interface
 
-The WAN interface `ge-0-1` / `ssr-hub-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic. The neighborhood topology is set to `hub`, which makes this router the internet gateway for spoke routers in the same neighborhood.
-
-**Can you please clarify which interface should be used here; `eth1`, `ge-0-0`, or `ge-01`?
+The WAN interface `ge-0-0` / `ssr-hub-wan`) connects to the internet, obtains a DHCP address, and carries both internet forwarding and conductor management traffic. The neighborhood topology is set to `hub`, which makes this router the internet gateway for spoke routers in the same neighborhood.
 
 #### 1a. Create the Hub WAN Device Interface
 
@@ -124,10 +122,7 @@ Setting **Topology** to `hub` on the hub router's neighborhood is what distingui
 
 ### 2. Configure the Hub LAN Interface
 
-The LAN interface (`eth2` / `ssr-hub-lan`) connects to the hub private subnet and assigns the `hub-corp` tenant to inbound traffic.
-
-**Can you please clarify which interface should be used here; `eth1`, `ge-0-0`, or `ge-01`?
-
+The LAN interface (`ge-0-1` / `ssr-hub-lan`) connects to the hub private subnet and assigns the `hub-corp` tenant to inbound traffic.
 
 #### 2a. Create the Hub LAN Device Interface
 
@@ -203,7 +198,7 @@ The hub routes internet-bound traffic (from both its own LAN users and spoke use
 
 ### 1. Configure the Spoke WAN Interface
 
-The spoke WAN interface (`eth1` / `ssr-spoke-wan`) connects to the internet and carries both conductor management traffic and the SVR underlay path to the hub router. The neighborhood topology is set to `spoke`.
+The spoke WAN interface (`ge-0-0` / `ssr-spoke-wan`) connects to the internet and carries both conductor management traffic and the SVR underlay path to the hub router. The neighborhood topology is set to `spoke`.
 
 #### 1a. Create the Spoke WAN Device Interface
 
@@ -254,7 +249,7 @@ Setting **Topology** to `spoke` pairs this router with the hub router in the `in
 
 ### 2. Configure the Spoke LAN Interface
 
-The LAN interface (`eth2` / `ssr-spoke-lan`) connects to the spoke private subnet and assigns the `spoke-corp` tenant to inbound traffic.
+The LAN interface (`ge-0-1` / `ssr-spoke-lan`) connects to the spoke private subnet and assigns the `spoke-corp` tenant to inbound traffic.
 
 #### 2a. Create the Spoke LAN Device Interface
 
@@ -321,37 +316,19 @@ The `peer` service route type directs matched traffic over the SVR path to the n
 
 ## Verify Connectivity
 
-After committing all configuration, verify both routers are online and forwarding traffic correctly.
+After committing all configuration, all nodes must reach the `synchronized` state. Once reached, verify both routers are online and forwarding traffic correctly.
 
 ### Verify Both Routers Are Connected to the Conductor
 
 From the Conductor GUI, select **Routers**. Both `azure-hub-router` and `azure-spoke-router` should show a **Connected** status within 2–5 minutes of the commit.
 
-From the conductor PCLI:
-
-```
-admin@node0.Conductor# show peers
-```
-
 Both routers should appear with status `Up`. After SVR adjacencies form, a third entry for the hub-to-spoke peer should also appear.
 
 ### Verify SVR Peering Between Hub and Spoke
 
-From the hub router PCLI:
+From the hub router, the spoke router should appear as an SVR peer with status `Up`.
 
-```
-admin@node0.azure-hub-router# show peers
-```
-
-The spoke router should appear as an SVR peer with status `Up`.
-
-From the spoke router PCLI:
-
-```
-admin@node0.azure-spoke-router# show peers
-```
-
-The hub router should appear with status `Up`.
+From the spoke router, the hub router should appear with status `Up`.
 
 ### Verify ARP on the WAN Interfaces
 

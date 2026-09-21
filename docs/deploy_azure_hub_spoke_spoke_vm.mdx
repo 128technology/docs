@@ -12,12 +12,8 @@ The following infrastructure must exist in your Azure subscription before deploy
 - The `SSR-VNet` VNet with the `ssr-spoke-wan` and `ssr-spoke-lan` subnets already created.
 - An Availability Set named `SSR-SpokeSet` in the same resource group and region.
 - The same **Managed Identity** used for the hub router, or a separate identity with the same minimum read permissions.
-
-:::note
-You can deploy the spoke VM while the hub VM bootstrapper is still running. Both installations proceed in parallel; you verify both in [Step 3](deploy_azure_hub_spoke_vmbus.mdx).
-:::
-
-**^ We don't need this ^ do we?**
+- A conductor where the Spoke Router will onboard. 
+- A Hub Router. Note the Spoke Router can be deployed while the hub installation completes.
 
 ## Select the BYOL Plan
 
@@ -31,7 +27,7 @@ You can deploy the spoke VM while the hub VM bootstrapper is still running. Both
 
 4. Next to **Juniper Session Smart Conductor-managed Router**, click **Launch**.
 
-    ![Launch the Router Template](/img/dep-azure-conductor-launch.png)
+   ![Launch the Router Template](/img/dep-azure-router-launch.png))
 
    ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
 
@@ -43,26 +39,26 @@ You can deploy the spoke VM while the hub VM bootstrapper is still running. Both
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | Subscription for the deployment. |
    | Resource Group | `SSR-RG` | Select an existing Resource Group |
-   | Location | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
+   | Region | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
    | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
    | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the conductor. |
    | Instance Name | `azure-spoke-router` | |
-| SSR Version | `7.1.4` | The BYOL version to install |
+   | SSR Version | `7.1.4` | The BYOL version to install |
+   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor |
+   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
    | Artifactory Username | _(your username)_ | User portion of the Juniper access credentials. |
    | Artifactory Token | _(your token)_ | Token portion of the Juniper access credentials. |
    | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
    | Virtual Network Name | `SSR-VNet` | Select an existing VNet name. |
-   | Public Subnet Name | `ssr-spoke-wan` | Spoke WAN subnet |
-   | Private Subnet Name | `ssr-spoke-lan` | Spoke LAN subnet |
-   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
+   | Public Subnet Name | `ssr-spoke-wan` | Hub WAN subnet |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` | This should be restricted at deployment time to the IP address for SSH/HTTPS |
+   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTPS | Source IP CIDR range `x.x.x.x/32` to reach the conductor for administration. |
+   | Private Subnet Name | `ssr-spoke-lan` | Hub LAN subnet |
    | Private Subnet Allowed CIDR | `0.0.0.0/0` | |
-   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
-   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor |
-   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
    | Admin Public Key Data | _(contents of your SSH public key)_ | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times. |
 
    :::caution
-   `Public Subnet Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Control Allowed CIDR` to known source addresses.
+   `Public Subnet Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Public Subnet Allowed CIDR` to known source addresses.
    :::
 
 3. Click Next. Azure will validate the input.
@@ -79,14 +75,6 @@ You can deploy the spoke VM while the hub VM bootstrapper is still running. Both
 
    - **Public IP address** assigned to the conductor management interface.
 
-## Network Interface Layout
-
-| Linux Interface | Azure NIC Name | Subnet |
-|-----------------|---------------|--------|
-| `ge-0-0` | Router-mgmt | _(not used in this guide)_ |
-| `ge-0-1` | Router-public | `ssr-spoke-wan` |
-| `ge-0-2` | Router-private | `ssr-spoke-lan` |
-
 ## Next Step
 
-After both VMs are deployed, proceed to [Step 3 — Verify Installation and Discover VMBus UUIDs](deploy_azure_hub_spoke_vmbus.mdx).
+After both the Hub and Spoke VMs are deployed, proceed to [Step 3 — Verify Installation and Discover VMBus UUIDs](deploy_azure_hub_spoke_vmbus.mdx).

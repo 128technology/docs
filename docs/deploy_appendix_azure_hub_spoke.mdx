@@ -10,11 +10,11 @@ This appendix contains the complete SSR PCLI configuration for the `azure-hub-ro
 Replace all placeholder values (shown in angle brackets) with values from your environment before applying:
 
 - `<conductor-public-ip>` — public IP of the conductor VM.
-- `<conductor-vmbus-uuid>` — VMBus UUID of the conductor management interface (found using `sudo dpdk-devbind.py --status` on the conductor VM).
-- `<hub-wan-vmbus-uuid>` — VMBus UUID of the hub router WAN NIC (`eth1`).
-- `<hub-lan-vmbus-uuid>` — VMBus UUID of the hub router LAN NIC (`eth2`).
-- `<spoke-wan-vmbus-uuid>` — VMBus UUID of the spoke router WAN NIC (`eth1`).
-- `<spoke-lan-vmbus-uuid>` — VMBus UUID of the spoke router LAN NIC (`eth2`).
+- `<conductor-vmbus-uuid>` — VMBus UUID of the conductor management interface (found in `devicemap.json` on the conductor VM).
+- `<hub-wan-vmbus-uuid>` — VMBus UUID of the hub router WAN NIC (`ge-0-0`).
+- `<hub-lan-vmbus-uuid>` — VMBus UUID of the hub router LAN NIC (`ge-0-1`).
+- `<spoke-wan-vmbus-uuid>` — VMBus UUID of the spoke router WAN NIC (`ge-0-0`).
+- `<spoke-lan-vmbus-uuid>` — VMBus UUID of the spoke router LAN NIC (`ge-0-1`).
 :::
 
 ## Network Design Reference
@@ -29,26 +29,26 @@ This configuration can be applied to the conductor using the PCLI import functio
 
 2. Copy the file to the conductor:
 
-   ```bash
-   scp azure-hub-spoke.cfg t128@<conductor-public-ip>:/tmp/
+   ```
+   scp -i azure-hub-spoke.cfg t128@<conductor-public-ip>:/tmp/
    ```
 
 3. Log in to the conductor PCLI:
 
-   ```bash
-   ssh t128@<conductor-public-ip>
+   ```
+   ssh -i t128@<conductor-public-ip>
    su admin
    ```
 
 4. Enter configuration mode and import:
 
-   ```text
+   ```
    admin@node0.Conductor# import config /tmp/azure-hub-spoke.cfg
    ```
 
 5. Review any validation warnings, then commit:
 
-   ```text
+   ```
    admin@node0.Conductor (config)# commit
    Are you sure you want to commit the candidate config? [y/N]: y
    ```
@@ -61,7 +61,7 @@ The authority-level objects the routers depend on (`hub-corp` tenant, `spoke-cor
 
 ## Complete Configuration
 
-```text
+```
 config
     authority
         name              Authority128

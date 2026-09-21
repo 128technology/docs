@@ -7,16 +7,16 @@ This step waits for SSR 7.1.4 to finish installing on both VMs, confirms both ro
 
 ## Wait for Installation to Complete
 
-The BYOL bootstrapper installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** per VM after it first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
+The BYOL bootstrapper installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
 
 Monitor installation progress by connecting to each VM via SSH:
 
 ```
 # Hub router
-ssh t128@<hub-router-public-ip>
+ssh -i t128@<hub-router-public-ip>
 
 # Spoke router (separate terminal)
-ssh t128@<spoke-router-public-ip>
+ssh -i t128@<spoke-router-public-ip>
 ```
 
 Once logged in, check the bootstrapper journal for progress:
@@ -25,11 +25,7 @@ Once logged in, check the bootstrapper journal for progress:
 journalctl -u 128T-hardware-bootstrapper -f
 ```
 
-Installation is complete on each VM when you see output similar to:
-
-```
-Device successfully initialized
-```
+The installation is complete when the SSR PCLI launches.
 
 ## Verify the Routers Are Running
 
@@ -63,15 +59,12 @@ If a router does not appear within 15 minutes of installation completing, verify
 
 ## Network Interface Layout
 
-The BYOL conductor-managed router template deploys a VM with three network interfaces attached in the following order:
+The BYOL conductor-managed router template deploys a VM with network interfaces attached in the following order:
 
 | Linux Interface | Azure NIC Name | Subnet |
 |-----------------|---------------|--------|
-| `ge-0-0` | Router-mgmt | If the management interface exists, it is ge-0-0. If the management interface does not exist, then WAN is ge-0-0 and LAN is ge-0-1. |
-| `ge-0-1` | Router-public | `ssr-router-wan` |
-| `ge-0-2` | Router-private | `ssr-router-lan` |
-
-In Azure, device interfaces are identified by **VMBus UUID** rather than PCI address. You must discover the VMBus UUID for each interface before configuring the router on the conductor.
+| ge-0-0 | azure-spoke-router-public | ssr-spoke-wan |
+| ge-0-1 | azure-spoke-router-private | ssr-spoke-lan |
 
 ## Discover VMBus UUIDs
 
@@ -81,44 +74,22 @@ Perform the following steps on **each router** separately. Record the UUIDs — 
 
 ### Step 1: Identify VMBus UUIDs From the Router VM
 
-Open the devicemap to see the VMBus UUID:
+Open the devicemap to see the VMBus UUID mapping for the attached interfaces.
 
-`/var/lib/128technology/devicemap.json`
+`cat /var/lib/128technology/devicemap.json | jq`
 
-In the **VMBus devices** section, the first column contains the VMBus UUID. The `if` parameter shows the associated Linux interface name.
-
-### Step 2: Map Azure NICs to VMBus UUIDs
-
-1. Log in to the [Azure Portal](https://portal.azure.com).
-2. Navigate to the router VM and select **Network Settings**.
-
-   ![Azure Networking Settings](/img/VMBusAzureUI1.png)
-
-3. The attached network interfaces are available in a dropdown: **Router-mgmt**, **Router-public**, **Router-private**.
-
-**Need new screenshot and updated workflow
-
-   ![Azure Port UI](/img/VMBusAzureUI2.png)
-
-4. Cross-reference the Linux interface names with the Azure portal to build the following mapping:
-
-   | Azure NIC Name | Linux Interface | Subnet | VMBus UUID |
-   |----------------|----------------|--------|-----------|
-   | Router-public | `ge-0-1` | `ssr-router-wan` | _(identified in the devicemap.json)_ |
-   | Router-private | `ge-0-2` | `ssr-router-lan` | _(identified in the devicemap.json)_ |
-
-   Record the WAN VMBus UUID as `<wan-vmbus-uuid>` and the LAN VMBus UUID as `<lan-vmbus-uuid>` for use in the following configuration steps.
+Take note of the device names and associated VMBus ID.
 
 ### VMBus UUID Reference Table
 
 Record your discovered UUIDs using the following table. You will substitute these values throughout [Step 4](deploy_azure_hub_spoke_config.mdx).
 
-| Router | Interface | Role | VMBus UUID |
+| Router | Interface | Role | Subnet | VMBus UUID |
 |--------|-----------|------|-----------|
-| `azure-hub-router` | `eth1` | WAN (`ssr-hub-wan`) | `<hub-wan-vmbus-uuid>` |
-| `azure-hub-router` | `eth2` | LAN (`ssr-hub-lan`) | `<hub-lan-vmbus-uuid>` |
-| `azure-spoke-router` | `eth1` | WAN (`ssr-spoke-wan`) | `<spoke-wan-vmbus-uuid>` |
-| `azure-spoke-router` | `eth2` | LAN (`ssr-spoke-lan`) | `<spoke-lan-vmbus-uuid>` |
+| `azure-hub-router` | `ge-0-0` | WAN | `ssr-hub-wan` | `<hub-wan-vmbus-uuid>` |
+| `azure-hub-router` | `ge-0-1` | LAN | `ssr-hub-lan` | `<hub-lan-vmbus-uuid>` |
+| `azure-spoke-router` | `ge-0-0` | WAN | `ssr-spoke-wan` | `<spoke-wan-vmbus-uuid>` |
+| `azure-spoke-router` | `ge-0-1` | LAN | `ssr-spoke-lan` | `<spoke-lan-vmbus-uuid>` |
 
 ## Next Step
 

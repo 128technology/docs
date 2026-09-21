@@ -80,7 +80,6 @@ Before beginning, ensure the following are available:
   - `ssr-hub-lan` — hub router LAN subnet.
   - `ssr-spoke-wan` — spoke router WAN subnet; must have internet egress.
   - `ssr-spoke-lan` — spoke router LAN subnet.
-- **Two Azure Availability Sets** — one for the hub VM (`SSR-HubSet`) and one for the spoke VM (`SSR-SpokeSet`), in the same resource group.
 - **Azure Managed Identity** — with the minimum read permissions listed in [Step 1](deploy_azure_hub_spoke_hub_vm.mdx#requirements).
 - **Juniper software access credentials** — Artifactory username and token for SSR software downloads.
 - **SSH key pair** — RSA 2048-bit or stronger; the public key is supplied to both deployment templates.

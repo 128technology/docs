@@ -3,7 +3,7 @@ title: "Step 1: Create the Hub Router VM"
 sidebar_label: "Create the Hub Router VM"
 ---
 
-This step deploys the BYOL Hub Router VM from the Azure Marketplace. The deployment template creates the VM, attaches it to the hub WAN and LAN subnets, and runs a cloud-init bootstrapper that installs SSR 7.1.4 and configures the node as a conductor-managed router automatically.
+This step deploys the BYOL SSR VM from the Azure Marketplace as a Hub Router. The deployment template creates the VM, attaches it to the hub WAN and LAN subnets, and runs a cloud-init bootstrapper that installs SSR 7.1.4 and configures the node as a conductor-managed router automatically.
 
 ## Requirements
 
@@ -18,7 +18,6 @@ The following infrastructure must exist in your Azure subscription before deploy
   Microsoft.Network/virtualNetworks/read
   Microsoft.Network/networkInterfaces/read
   ```
-**^ We don't need this ^ do we?**
 
 - The conductor's public IP address from the [Azure Conductor Deployment Guide](deploy_azure_conductor.mdx).
 
@@ -42,11 +41,11 @@ For guidance on sizing for larger deployments, see [System Requirements](intro_s
 When you deploy the hub router using the BYOL conductor-managed router template, Azure automatically creates:
 
 - A VM using the BYOL Session Smart image from the Marketplace.
-- Three network interfaces: management (`ge-0-0`), WAN/public (`ge-0-1`), and LAN/private (`ge-0-2`).
+- Two network interfaces: WAN/public (ge-0-0) and LAN/private (ge-0-1).
 - A network security group associated with each interface.
 - A unique public IP address assigned to the WAN interface.
 
-The management interface (`eth0`) is not used in this guide. Management traffic travels over the WAN forwarding interface instead.
+The router template supports an additional management interface. This is not used for this guide. Management traffic travels over the WAN forwarding interface intstead.
 
 ## Select the BYOL Plan
 
@@ -60,9 +59,9 @@ The management interface (`eth0`) is not used in this guide. Management traffic 
 
 4. Next to **Juniper Session Smart Conductor-managed Router**, click **Launch**.
 
-    ![Launch the Router Template](/img/dep-azure-conductor-launch.png)
+    ![Launch the Router Template](/img/dep-azure-router-launch.png)
 
-   ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
+    ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
 
 ## Deploy via Azure Portal
 
@@ -71,27 +70,27 @@ The management interface (`eth0`) is not used in this guide. Management traffic 
    | Parameter | Example Value | Notes |
    |-----------|--------------|-------|
    | Subscription | _(your subscription)_ | Subscription for the deployment. |
-   | Resource Group | `SSR-RG` | Select an existing Resource Group |
-   | Location | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
+   | Resource Group | `SSR-RG` | Select an existing Resource Group. |
+   | Region | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
    | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
    | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the conductor. |
    | Instance Name | `azure-hub-router` | |
-   | SSR Version | `7.1.4` | The BYOL version to install |
+   | SSR Version | `7.1.4` | The BYOL version to install. |
+   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor. |
+   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments. |
    | Artifactory Username | _(your username)_ | User portion of the Juniper access credentials. |
    | Artifactory Token | _(your token)_ | Token portion of the Juniper access credentials. |
    | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
    | Virtual Network Name | `SSR-VNet` | Select an existing VNet name. |
-   | Public Subnet Name | `ssr-hub-wan` | Hub WAN subnet |
-   | Private Subnet Name | `ssr-hub-lan` | Hub LAN subnet |
-   | Public Subnet Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
-   | Private Subnet Allowed CIDR | `0.0.0.0/0` | |
-   | Admin Allowed CIDR | `0.0.0.0/0` | Restrict after deployment |
-   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor |
-   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
+   | Public Subnet Name | `ssr-hub-wan` | Hub WAN subnet. |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` If the value is known at deployment time, it should be restricted. | Source IP address range of the routers to be allowed for SVR traffic. |
+   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTPS. This should be restricted at deployment time. | Ingress rule allows SSH and HTTPs access from this IP address range. |
+   | Private Subnet Name | `ssr-hub-lan` | Hub LAN subnet. |
+   | Private Subnet Allowed CIDR | `0.0.0.0/0` If the value is known at deployment time, it should be restricted.| Source IP address range of the internal workloads to allow access. |
    | Admin Public Key Data | _(contents of your SSH public key)_ | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times. |
 
    :::caution
-   `Public Subnet Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Control Allowed CIDR` to known source addresses.
+   `Public Subnet Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Public Subnet Allowed CIDR` to known source addresses.
    :::
 
 3. Click Next. Azure will validate the input.
@@ -107,6 +106,13 @@ The management interface (`eth0`) is not used in this guide. Management traffic 
     Make a note of the following value — you will need them in later steps:
 
    - **Public IP address** assigned to the conductor management interface.
+
+## Network Interface Layout
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| ge-0-0 | azure-hub-router-public | ssr-hub-wan |
+| ge-0-1 | azure-hub-router-private | ssr-hub-lan |
 
 ## Next Step
 
