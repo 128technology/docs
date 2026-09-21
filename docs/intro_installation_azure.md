@@ -5,6 +5,15 @@ sidebar_label: Installing a PAYG Conductor-managed Router in Azure
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+:::info Recommended: BYOL Deployment Model
+Juniper recommends **BYOL (Bring Your Own License)** for both new installations and existing environments. BYOL simplifies ongoing maintenance, streamlines version upgrades, and enables cleaner lifecycle management across your infrastructure.
+
+Existing PAYG deployments remain fully supported — no immediate action required.
+
+To review the BYOL deployment procedure, see [Installing a BYOL Conductor-managed Router in Azure](intro_installation_byol_azure_conductor.md).
+:::
+
+
 ## Introduction
 
 This guide describes the process for deploying a PAYG (Pay As You Go) Session Smart Conductor and a Session Smart Router (SSR) in Azure.
