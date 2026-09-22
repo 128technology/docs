@@ -322,7 +322,7 @@ ML-DSA is the signature counterpart to ML-KEM - where ML-KEM protects key agreem
 
 #### Prerequisites
 
-In order to use an ML-DSA certificate on a router, post-quantum cryptography must be enabled on each peer. After setting post-quantum cryptography to `true`, the 128T service must be restarted to implement the change. Once the service has  restarted, you will be able to provision ML-DSA certificates.
+In order to use an ML-DSA certificate on a router, post-quantum cryptography must be enabled on each peer. After setting post-quantum cryptography to `true`, the 128T service must be restarted to implement the change. Once the service has  restarted, you will be able to provision ML-DSA certificates. Without enablilng post-quantum crypotography (`enable-pqc true`), validation will fail. 
 
 ```
 configure
@@ -342,14 +342,14 @@ ML-DSA Trusted CA certificates are configured and provisioned using the SSR’s 
 
 ##### Ingest the Certificate
 
-When the signed certificate is returned, instruct the SSR to ingest the certificate. The certificate must be associated with the name used in the two earlier API calls. Create the following json file:
+Use the following information to instruct the SSR to ingest the certificate. Create the following json file:
 
 **certificate.json**
 
 ```
 POST /api/v1/router/{router_name}/node/{node_name}/trusted-ca-certificate
 {
-    "name": "my_peering_cert",
+    "name": "my_ca_cert",
     "certificate": "-----BEGIN CERTIFICATE-----
 MIIF3DCCBESgAwIBAgIKAf9HQjJKSQd1lTANBgkqhkiG9w0BAQsFADBaMQswCQYD
 VQQGEwJERTERMA8GA1UECgwIT3BlblhQS0kxDDAKBgNVBAsMA1BLSTEqMCgGA1UE

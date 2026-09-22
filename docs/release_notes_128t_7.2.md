@@ -73,9 +73,9 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
-## Release 7.2.3-3r2 
+## Release 7.2.3-7r2 
 
-**Beta Release Date:** September 1, 2026
+**Beta Release Date:** September 22, 2026
 
 ### New Features
 
