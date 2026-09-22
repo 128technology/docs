@@ -5,6 +5,14 @@ sidebar_label: Installing PAYG Mist-managed Router in Azure
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+:::info Recommended: BYOL Deployment Model
+Juniper recommends **BYOL (Bring Your Own License)** for both new installations and existing environments. BYOL simplifies ongoing maintenance, streamlines version upgrades, and enables cleaner lifecycle management across your infrastructure.
+
+Existing PAYG deployments remain fully supported — no immediate action required.
+
+To review the BYOL deployment procedure, see [Installing a BYOL Mist-managed Router in Azure](intro_installation_byol_azure_mist.md).
+:::
+
 This guide describes the process for deploying a PAYG (Pay As You Go) Mist-managed Session Smart Router (SSR) in Azure. When installed as an Azure image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
 * [Selecting the Azure Plan](#selecting-the-azure-plan).

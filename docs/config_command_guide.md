@@ -21131,13 +21131,12 @@ configure authority router node device-interface parent-bond [<leafref>]
 
 | name | description |
 | ---- | ----------- |
-| leafref | The value to set for this field |
+| leafref | The device name of the bond interface |
 
 #### Description
 
-##### leafref
+`parent-bond` is configured using the name of the bond interface. 
 
-A reference to an existing value in the instance data.
 
 ## `configure authority router node device-interface pci-address`
 

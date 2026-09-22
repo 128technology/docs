@@ -8,7 +8,6 @@ module.exports = {
       "about_support_policy",
       "config_firewall_ports",
     ],
-
     "Release Notes": [
       {
         "type": "category",
@@ -205,6 +204,17 @@ module.exports = {
                 "deploy_vmware_conductor_install",
                 "deploy_vmware_conductor_config",
                 "deploy_appendix_vmware_conductor",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "Azure Conductor",
+              "items": [
+                "deploy_azure_conductor",
+                "deploy_azure_conductor_vm",
+                "deploy_azure_conductor_install",
+                "deploy_azure_conductor_config",
+                "deploy_appendix_azure_conductor",
               ],
             },
           ],

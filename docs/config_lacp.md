@@ -26,7 +26,8 @@ LAG/LACP has the following requirements:
 
 ### Supported Platforms
 
-All SSR hardware platforms (SSR100 Series and SSR1000 Series) are supported.
+- LAG/LACP is supported on the SSR100 Series and SSR1000 Series platforms.
+- The SSR4x0 Series platforms **do not support LAG/LACP**. 
 
 ## Configuring LAG and LACP
 
