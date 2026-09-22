@@ -24,6 +24,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
+## Release 6.2.15-3-lts
+
+**Release Date:** September 24, 2026
+
+### Resolved Issues
+
+- **I95-66234 Creating a snapshot log for large configurations appears to hang the system:** 
+Modified the TSI collection process to prevent issues on systems with very large configurations.
+------
+- **I95-66348 Secure Communication Manager crashes:** Increase mutex duration times, allowing the Secure Communication Manager to complete processes without hitting the deadlock detection limit. This resolves crashing of the Secure Communication Manager process on Conductors managing large configurations.
+------
+- **I95-66428 / I95-66125: Minion connector update:** The minion connector has been updated to version 1.7.7 tor resolve salt state issues.  
+
 ## Release 6.2.14-3-lts
 
 **Release Date:** August 14, 2026
