@@ -3,7 +3,7 @@ title: "Step 2: Create the Spoke Router VM"
 sidebar_label: "Create the Spoke Router VM"
 ---
 
-This step deploys the BYOL Spoke Router VM from the Azure Marketplace using the same conductor-managed router template used for the hub router. The bootstrapper installs SSR 7.1.4 and connects the spoke to the conductor automatically.
+This step deploys the BYOL SSR VM from the Azure Marketplace as a Spoke Router. The deployment template creates the VM, attaches it to the spoke WAN and LAN subnets, and runs a cloud-init bootstrapper that installs SSR 7.1.4 and configures the node as a conductor-managed router automatically.
 
 ## Requirements
 
