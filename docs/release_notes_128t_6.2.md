@@ -35,7 +35,7 @@ Modified the TSI collection process to prevent issues on systems with very large
 ------
 - **I95-66348 Secure Communication Manager crashes:** Increase mutex duration times, allowing the Secure Communication Manager to complete processes without hitting the deadlock detection limit. This resolves crashing of the Secure Communication Manager process on Conductors managing large configurations.
 ------
-- **I95-66428 / I95-66125: Minion connector update:** The minion connector has been updated to version 1.7.7 tor resolve salt state issues.  
+- **I95-66125 Conductor upgrade leaves assets in Connected/Disconnected state (not Running):** Adjusted the minion-connector health detection logic to prevent unnecessary service restarts.  
 
 ## Release 6.2.14-3-lts
 
