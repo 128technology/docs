@@ -30,7 +30,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **I95-66234 Creating a snapshot log for large configurations appears to hang the system:** 
+- **I95-66234 Creating a snapshot log for large configurations appears to stall the system:** 
 Modified the TSI collection process to prevent issues on systems with very large configurations.
 ------
 - **I95-66348 Secure Communication Manager crashes:** Increase mutex duration times, allowing the Secure Communication Manager to complete processes without hitting the deadlock detection limit. This resolves crashing of the Secure Communication Manager process on Conductors managing large configurations.
