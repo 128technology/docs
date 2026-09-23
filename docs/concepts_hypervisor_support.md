@@ -29,7 +29,9 @@ Virtualized instances of the SSR are supported on VMWare ESXi versions 6.7, 7.0,
 
 ### KVM 
 
-Virtualized instances of the SSR are supported in KVM on a Linux host running a minimum 6.1 kernel, and a minimum QEMU version of 6.2. The use of virtio type adapters is required.
+The product is designed to operate on KVM-based virtualization platforms. Validation and regression testing are performed using OpenStack as the reference virtualization environment. Operation on other KVM-based virtualization management platforms, including but not limited to Nutanix, ZPE, Proxmox, and OpenShift Virtualization, is expected; however, these platforms are not routinely tested or certified as part of the standard QA process.
+
+Virtual SSR instances are supported on KVM running on a Linux host with a minimum kernel version of 6.1 and a minimum QEMU version of 6.2. Virtio-based network and storage adapters are required.
 
 ### Live Migrations
 
