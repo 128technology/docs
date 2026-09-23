@@ -107,16 +107,13 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 ### Resolved Issues
 
-- **The following CVEs have been identified and resolved in this release:** CVE-2024-12086, CVE-2024-34459, CVE-2025-10911, CVE-2025-12748, CVE-2025-13151, CVE-2025-14087, CVE-2025-14512, CVE-2025-5278, CVE-2025-61662, CVE-2025-6170, CVE-2025-9714, CVE-2026-0865, CVE-2026-14380, CVE-2026-14474, CVE-2026-14476, CVE-2026-14739, CVE-2026-1519, CVE-2026-15308, CVE-2026-1933, CVE-2026-2291, CVE-2026-2340, CVE-2026-23479, CVE-2026-23631, CVE-2026-25243, CVE-2026-25646, CVE-2026-25749, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-28390, CVE-2026-28417, CVE-2026-28421, CVE-2026-28780, CVE-2026-28847, CVE-2026-28883, CVE-2026-28901, CVE-2026-28902, CVE-2026-28903, CVE-2026-28904, CVE-2026-28905, CVE-2026-28907, CVE-2026-28942, CVE-2026-28946, CVE-2026-28947, CVE-2026-28953, CVE-2026-28955, CVE-2026-28958, CVE-2026-29111, CVE-2026-29518, CVE-2026-3012, CVE-2026-3039, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33007, CVE-2026-33278, CVE-2026-33412, CVE-2026-33526, CVE-2026-33845, CVE-2026-33846, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2026-34180, CVE-2026-34181, CVE-2026-34182, CVE-2026-34183, CVE-2026-34980, CVE-2026-35177, CVE-2026-35385, CVE-2026-37555, CVE-2026-3832, CVE-2026-3833, CVE-2026-39979, CVE-2026-40164, CVE-2026-40170, CVE-2026-40355, CVE-2026-40356, CVE-2026-4046, CVE-2026-40460, CVE-2026-40622, CVE-2026-40701, CVE-2026-41035, CVE-2026-41292, CVE-2026-41411, CVE-2026-42009, CVE-2026-42010, CVE-2026-42011, CVE-2026-42012, CVE-2026-42013, CVE-2026-42014, CVE-2026-42015, CVE-2026-42055, CVE-2026-42533, CVE-2026-42534, CVE-2026-42764, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-42926, CVE-2026-42934, CVE-2026-42944, CVE-2026-42945, CVE-2026-42946, CVE-2026-42959, CVE-2026-43284, CVE-2026-43500, CVE-2026-43618, CVE-2026-43658, CVE-2026-43660, CVE-2026-4408, CVE-2026-4437, CVE-2026-4438, CVE-2026-44390, CVE-2026-44431, CVE-2026-44432, CVE-2026-44673, CVE-2026-4480, CVE-2026-45186, CVE-2026-4519, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-46300, CVE-2026-46333, CVE-2026-46483, CVE-2026-47162, CVE-2026-47167, CVE-2026-4786, CVE-2026-4800, CVE-2026-48142, CVE-2026-4878, CVE-2026-48864, CVE-2026-4890, CVE-2026-4891, CVE-2026-48914, CVE-2026-4892, CVE-2026-4893, CVE-2026-5119, CVE-2026-5260, CVE-2026-52858, CVE-2026-5419, CVE-2026-5435, CVE-2026-54369, CVE-2026-54370, CVE-2026-5450, CVE-2026-55693, CVE-2026-56434, CVE-2026-57455, CVE-2026-57456, CVE-2026-58016, CVE-2026-5928, CVE-2026-5946, CVE-2026-59856, CVE-2026-59858, CVE-2026-60005, CVE-2026-6238, CVE-2026-6893, CVE-2026-7383, CVE-2026-9076, CVE-2026-9256, CVE-2026-9698
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-12086, CVE-2024-34459, CVE-2025-10911, CVE-2025-12748, CVE-2025-13151, CVE-2025-14087, CVE-2025-14512, CVE-2025-5278, CVE-2025-61662, CVE-2025-6170, CVE-2025-9714, CVE-2026-0865, CVE-2026-14380, CVE-2026-14474, CVE-2026-14476, CVE-2026-14739, CVE-2026-1519, CVE-2026-15308, CVE-2026-1933, CVE-2026-2291, CVE-2026-2340, CVE-2026-23479, CVE-2026-23631, CVE-2026-25243, CVE-2026-25646, CVE-2026-25749, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-28390, CVE-2026-28417, CVE-2026-28421, CVE-2026-28780, CVE-2026-28847, CVE-2026-28883, CVE-2026-28901, CVE-2026-28902, CVE-2026-28903, CVE-2026-28904, CVE-2026-28905, CVE-2026-28907, CVE-2026-28942, CVE-2026-28946, CVE-2026-28947, CVE-2026-28953, CVE-2026-28955, CVE-2026-28958, CVE-2026-29111, CVE-2026-29518, CVE-2026-3012, CVE-2026-3039, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33007, CVE-2026-33278, CVE-2026-33412, CVE-2026-33526, CVE-2026-33845, CVE-2026-33846, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2026-34180, CVE-2026-34181, CVE-2026-34182, CVE-2026-34183, CVE-2026-34980, CVE-2026-35177, CVE-2026-35385, CVE-2026-37555, CVE-2026-3832, CVE-2026-3833, CVE-2026-39979, CVE-2026-40164, CVE-2026-40170, CVE-2026-40355, CVE-2026-40356, CVE-2026-4046, CVE-2026-40460, CVE-2026-40622, CVE-2026-40701, CVE-2026-41035, CVE-2026-41292, CVE-2026-41411, CVE-2026-42009, CVE-2026-42010, CVE-2026-42011, CVE-2026-42012, CVE-2026-42013, CVE-2026-42014, CVE-2026-42015, CVE-2026-42055, CVE-2026-42533, CVE-2026-42534, CVE-2026-42764, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-42926, CVE-2026-42934, CVE-2026-42944, CVE-2026-42945, CVE-2026-42946, CVE-2026-42959, CVE-2026-43284, CVE-2026-43500, CVE-2026-43618, CVE-2026-43658, CVE-2026-43660, CVE-2026-4408, CVE-2026-4437, CVE-2026-4438, CVE-2026-44390, CVE-2026-44431, CVE-2026-44432, CVE-2026-44673, CVE-2026-4480, CVE-2026-45186, CVE-2026-4519, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-46300, CVE-2026-46333, CVE-2026-46483, CVE-2026-47162, CVE-2026-47167, CVE-2026-4786, CVE-2026-4800, CVE-2026-48142, CVE-2026-4878, CVE-2026-48864, CVE-2026-4890, CVE-2026-4891, CVE-2026-48914, CVE-2026-4892, CVE-2026-4893, CVE-2026-5119, CVE-2026-5260, CVE-2026-52858, CVE-2026-5419, CVE-2026-5435, CVE-2026-54369, CVE-2026-54370, CVE-2026-5450, CVE-2026-55693, CVE-2026-56434, CVE-2026-57455, CVE-2026-57456, CVE-2026-58016, CVE-2026-5928, CVE-2026-5946, CVE-2026-59856, CVE-2026-59858, CVE-2026-60005, CVE-2026-6238, CVE-2026-6893, CVE-2026-7383, CVE-2026-9076, CVE-2026-9256, CVE-2026-9698.
 ------
-- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:**
-------
+- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65018, I95-65021, I95-65025, I95-65026, I95-65027, I95-65028, I95-65030, I95-65033, I95-65034, I95-65038, I95-65039, I95-65044, I95-65054, I95-65055, I95-65205, I95-65206, I95-65208, I95-65210, I95-65211, I95-65217, I95-65219, I95-65221, I95-65224, I95-65226, I95-65228, I95-65235, I95-65238, I95-65239, I95-65247, I95-65249, I95-65250, I95-65252, I95-65254, I95-65297.
 ------
 - **I95-58472 Leopard Platform Provisioning Reboot Loop:** Resolved an issue where CN102 Leopard-based platforms could enter an infinite reboot loop during initial provisioning.
 ------
 - **I95-60912 PIM and PIMv6 cannot be enabled on the same interface:** Resolved an issue where enabling both PIM (IPv4) and PIMv6 on the same interface was not possible, preventing dual-stack multicast configurations.
-------
-- **I95-62091 Kernel Address Space Layout Randomization Not Seeded on ARM Platforms:** Resolved an issue where the kernel could not obtain a random seed for kernel address space layout randomization (KASLR) on certain ARM-based platforms, causing the kernel's base address to remain constant across reboots. KASLR is now properly seeded, restoring this security mitigation.
 ------
 - **I95-62331 OSPF Default Route Not Re-Advertised After Restart:** Resolved an issue where a timing condition could prevent OSPF from generating the external (Type 5) LSA for a configured default route after a restart, so peers did not receive the default route until the OSPF process was manually cleared. OSPF now reliably advertises the default route after a restart.
 ------
@@ -164,79 +161,13 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-64978 Highway crash on head-end router causing interface flaps:** Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash with a core dump, resulting in interface flaps. Access to these fields is now properly synchronized.
 ------
-- **I95-65017 Hardened Bootstrap Endpoint Against Symlink Attacks:** Resolved a security issue where an unauthenticated local endpoint wrote to a predictable temporary file path, which could be used in a symlink attack to overwrite an arbitrary file. The system now uses a unique, per-request temporary location.
-------
-- **I95-65018 Cryptographically Secure Random Number Generation:** Replaced a non-cryptographic random number generator used for password hash salts and certain internal identifiers with a cryptographically secure random number generator.
-------
-- **I95-65025 Trusted Source for Logged Usernames:** Hardened the system logging middleware to derive the authenticated username from a trusted, already-verified request header instead of an unverified token field.
-------
-- **I95-65026 PCLI Datamodel Cache Integrity Verification:** Added integrity verification for the PCLI datamodel cache file to prevent it from being used to execute unintended code if the cache file were tampered with.
-------
-- **I95-65027 Hardened Certificate Generation Utility:** Hardened the certificate generation utility against shell-injection and path-traversal issues by validating file paths and safely invoking external commands.
-------
-- **I95-65028 Hardened XML Parsing:** Hardened XML parsing, used for NETCONF, plugin configuration, and CRL/OCSP processing, against entity-expansion and external-entity vulnerabilities.
-------
-- **I95-65030 Hardened Audit Rule Cleanup:** Resolved an issue where an internal audit-rule cleanup routine constructed a shell command from user input, which could allow unintended file operations. The system now removes these files directly instead of through a shell command.
-------
-- **I95-65033 SNMP Community String Validation:** Added validation for the configured SNMP community string to prevent it from being used to inject unintended entries into the generated SNMP daemon configuration.
-------
-- **I95-65034 Temporary Configuration File Permissions:** Resolved an issue where certain internal routing and configuration files were briefly written with overly permissive file permissions before being restricted. These files are now created with restrictive permissions from the start.
-------
-- **I95-65038 Hardened LDAP Account Status Lookup:** Hardened an internal LDAP account-status lookup to avoid shell interpretation of account names, preventing a potential command-injection issue in LDAP/SSSD-integrated deployments.
-------
-- **I95-65039 Sanitized Log Download Filenames:** Added sanitization for filenames returned in HTTP response headers when downloading logs, preventing a potential HTTP header injection issue.
-------
-- **I95-65044 Hardened Restricted SSH Shell SCP Handling:** Hardened the restricted SSH shell's SCP command handling to prevent a sandbox-escape issue via crafted command-line input.
-------
-- **I95-65054 Pillar Configuration Temporary File Permissions:** Resolved an issue where a temporary configuration file used internally by the plugin subsystem was briefly written to a world-readable location before its permissions were restricted. The file is now written directly to a restricted, root-owned location.
-------
-- **I95-65055 Routing Configuration Temporary File Permissions:** Resolved an issue where a temporary configuration file used internally by the routing manager was briefly written to a world-readable location before its permissions were restricted. The file is now written directly to a restricted, root-owned location.
-------
 - **I95-65129 Peer Path Up Using Mixed Certificates:** Resolved an issue where peer paths could come up using certificates from different issuers (default Juniper certificate on one side and a custom CA-signed certificate on the other), even with a custom trusted CA configured.
 ------
 - **I95-65171 TSI Download Missing File Extension:** Resolved an issue where Tech Support Info (TSI) bundles downloaded from the SSR Web UI had no file extension, preventing extraction with standard archive tools. Tech support files downloaded from the web UI now have the correct `.zip` extension.
 ------
 - **I95-65190 Node Deletion Cleanup in High Availability Configurations:** Resolved an issue where transitioning a router from a dual-node High Availability (HA) configuration to a single-node configuration failed to remove the deleted node from `global.init`, leaving residual fabric interfaces and causing synchronization failures on the remaining node.
 ------
-- **I95-65206 Hardened PCLI Shell Tab-Completion:** Hardened the PCLI `shell` command's tab-completion to prevent a command-injection issue via crafted input entered before pressing Tab.
-------
-- **I95-65208 Hardened Internal Management Command Handling:** Hardened internal conductor-to-router management commands to properly escape identifiers, preventing a potential shell-injection issue.
-------
-- **I95-65211 Hardened DHCP Option Length Validation:** Resolved an issue where a malformed DHCP option value could trigger a stack buffer overflow in the DHCP client. The system now validates option lengths before use.
-------
-- **I95-65217 Isolated Internal Authentication Endpoint:** Hardened an internal-only authentication endpoint used for administrative token issuance by isolating it behind a dedicated, non-network-reachable path.
-------
-- **I95-65219 Resolved IP Fragment Reassembly Crash:** Resolved an issue where a specially crafted IP fragment could cause a null-pointer dereference in the data-plane fragment-reassembly logic, resulting in a process restart.
-------
-- **I95-65221 Hardened HA Session Redundancy Channel:** Resolved an issue where an oversized session identifier value on the internal HA session-redundancy channel could cause a stack buffer overflow. The session identifier length is now validated before use.
-------
-- **I95-65224 Consistent Authorization State for Federated Tokens:** Improved authorization handling for remotely issued (federated) authentication tokens so that user-disabled and role-change state is consistently enforced, in addition to token signature validation.
-------
-- **I95-65225 Hardened DHCP Option Parsing:** Added bounds checking to DHCP option parsing to prevent an out-of-bounds read triggered by a malformed DHCP message.
-------
-- **I95-65228 Restricted Custom Branding Image Source:** Restricted the custom web-branding logo and favicon feature to accept only valid image data, preventing it from being used to fetch arbitrary local files or internal network resources.
-------
-- **I95-65235 Validated Tech Support Info Archive Path:** Added validation for the optional prefix argument on the `save tech-support-info` command to prevent the resulting archive from being written outside the intended directory.
-------
-- **I95-65236 Hardened HTTP Request Parsing:** Resolved an issue where a specially crafted HTTP request line could cause an out-of-bounds read in application identification's HTTP parsing logic, potentially destabilizing the data plane.
-------
-- **I95-65237 Hardened TCP Option Handling:** Resolved an issue where a specially crafted TCP option could cause data to be written past the end of the TCP header during packet optimization. The system now validates the option length before use.
-------
-- **I95-65238 Hardened TCP Selective Acknowledgment Handling:** Resolved an issue where a malformed TCP selective-acknowledgment (SACK) option could cause reads and writes past the TCP header during TCP session stitching. The SACK option length is now validated against the actual options area.
-------
-- **I95-65239 Hardened VRRP Advertisement Parsing:** Resolved an issue where a malformed VRRP advertisement could cause the system to read data beyond the VRRP header. The advertised address count is now validated against the actual packet length.
-------
-- **I95-65247 Security Policy Key Assignment:** Resolved an issue where updating a security policy through certain internal code paths could leave the associated encryption key in a stale or default state instead of using the newly configured key.
-------
-- **I95-65249 Restricted Plugin Service Control Socket:** Restricted local access permissions on the plugin service's internal control socket and removed exposure of an internal diagnostic endpoint.
-------
-- **I95-65252 Validated DHCP Lease Handler Interface Identifier:** Added validation for the network-interface identifier used by the internal DHCP lease-viewing handler to prevent it from being used to reach an unintended internal socket path.
-------
-- **I95-65259 Leopard Serial Console Baud Rate Persistence:** Extended the configurable serial console baud rate feature so that the configured value is persisted in IDPROM on Leopard-based platforms, ensuring the setting survives a reboot.
-------
 - **I95-65296 ESKM Peering Failures with Fragmentation:** Resolved an issue where ESKM peer paths failed to establish in environments where fragmentation occurs on the underlay, such as GCP with Cloud Routers.
-------
-- **I95-65297 Sensitive Information in PCLI History:** Resolved an issue where sensitive configuration values (such as encryption keys, initialization vectors, and passwords) were stored in clear text in the PCLI command history (`~/.pcli_history`). Sensitive values are now recorded as `(removed)`, and existing history files are sanitized automatically.
 ------
 - **I95-65299 SSR440 upgrade from 7.1.0 to 7.1.5 failure:** Resolved an issue where upgrading an SSR440 from 7.1.0 to 7.1.5 could fail, with the highway process not running after reboot, causing the system to roll back automatically.
 ------
@@ -432,11 +363,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66371 Antivirus Engine Startup Failure on Repeated CA Load:** Resolved an issue where the antivirus engine could fail to start if its certificate authority had already been extracted from a previous startup attempt.
 ------
-- **I95-66427 Minion-Connector Package Update:** Updated the minion-connector package to version 1.7.7.
-------
-- **I95-66429 Minion-Connector Package Update:** Updated the minion-connector package to version 1.7.7.
-
-<!-- REVIEW: The following issues appear in these notes but were not present in the JQL query. Verify whether they should remain: I95-62536 -->
+- **I95-66427 / I95-66429 Minion-Connector Package Update:** Updated the minion-connector package to version 1.7.7.
 
 ## Release 7.2.1-1r1 
 
