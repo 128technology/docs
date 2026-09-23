@@ -1,0 +1,119 @@
+---
+title: "Step 1: Create the Hub Router VM"
+sidebar_label: "Create the Hub Router VM"
+---
+
+This step deploys the BYOL SSR VM from the Azure Marketplace as a Hub Router. The deployment template creates the VM, attaches it to the hub WAN and LAN subnets, and runs a cloud-init bootstrapper that installs SSR 7.1.4 and configures the node as a conductor-managed router automatically.
+
+## Requirements
+
+The following infrastructure must exist in your Azure subscription before deploying the hub router:
+
+- The `SSR-VNet` VNet with the `ssr-hub-wan` and `ssr-hub-lan` subnets already created.
+- An Availability Set named `SSR-HubSet` in the same resource group and region.
+- A **Managed Identity** assigned the following minimum read permissions:
+
+  ```
+  Microsoft.Compute/virtualMachines/read
+  Microsoft.Network/virtualNetworks/read
+  Microsoft.Network/networkInterfaces/read
+  ```
+
+- The conductor's public IP address from the [Azure Conductor Deployment Guide](deploy_azure_conductor.mdx).
+
+:::note
+A dedicated management subnet is not required. Management traffic travels over the WAN forwarding interface using [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md).
+:::
+
+## Recommended VM Sizes
+
+| Azure VM Size | Max vNICs | vCPU Cores | Memory |
+|---------------|-----------|-----------|--------|
+| Standard_F8s_v2 | 4 | 8 | 16 GB |
+| Standard_F16s_v2 | 4 | 16 | 32 GB |
+| Standard_F32s_v2 | 8 | 32 | 64 GB |
+| Standard_D8s_v5 | 4 | 8 | 32 GB |
+
+For guidance on sizing for larger deployments, see [System Requirements](intro_system_reqs.md).
+
+## What the Template Creates
+
+When you deploy the hub router using the BYOL conductor-managed router template, Azure automatically creates:
+
+- A VM using the BYOL Session Smart image from the Marketplace.
+- Two network interfaces: WAN/public (ge-0-0) and LAN/private (ge-0-1).
+- A network security group associated with each interface.
+- A unique public IP address assigned to the WAN interface.
+
+The router template supports an additional management interface. This is not used for this guide. Management traffic travels over the WAN forwarding interface intstead.
+
+## Select the BYOL Plan
+
+1. Go to the [**Session Smart Networking Platform**](https://marketplace.microsoft.com/en-us/product/juniper-networks.session-smart-networking-payg) in the Azure Marketplace.
+
+2. Select the **Plans + Pricing** tab.
+
+    ![Select a Plan](/img/dep-azure-plan-pricing.png)
+
+3. Scroll down to the bottom of the **BYOL** section.
+
+4. Next to **Juniper Session Smart Conductor-managed Router**, click **Launch**.
+
+    ![Launch the Router Template](/img/dep-azure-router-launch.png)
+
+    ![Router ARM Template](/img/azure-byol-conductor-managed-template.png)
+
+## Deploy via Azure Portal
+
+1. Fill in the template parameters using the following table. 
+
+   | Parameter | Example Value | Notes |
+   |-----------|--------------|-------|
+   | Subscription | _(your subscription)_ | Subscription for the deployment. |
+   | Resource Group | `SSR-RG` | Select an existing Resource Group. |
+   | Region | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
+   | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
+   | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the conductor. |
+   | Instance Name | `azure-hub-router` | |
+   | SSR Version | `7.1.4` | The BYOL version to install. |
+   | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor. |
+   | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments. |
+   | Artifactory Username | _(your username)_ | User portion of the Juniper access credentials. |
+   | Artifactory Token | _(your token)_ | Token portion of the Juniper access credentials. |
+   | Managed Identity | _(your managed identity)_ | Must have the permissions listed in [Requirements](#requirements) |
+   | Virtual Network Name | `SSR-VNet` | Select an existing VNet name. |
+   | Public Subnet Name | `ssr-hub-wan` | Hub WAN subnet. |
+   | Public Subnet Allowed CIDR | `0.0.0.0/0` If the value is known at deployment time, it should be restricted. | Source IP address range of the routers to be allowed for SVR traffic. |
+   | Admin Allowed CIDR | CIDR range allowed for SSH/HTTPS. This should be restricted at deployment time. | Ingress rule allows SSH and HTTPs access from this IP address range. |
+   | Private Subnet Name | `ssr-hub-lan` | Hub LAN subnet. |
+   | Private Subnet Allowed CIDR | `0.0.0.0/0` If the value is known at deployment time, it should be restricted.| Source IP address range of the internal workloads to allow access. |
+   | Admin Public Key Data | _(contents of your SSH public key)_ | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times. |
+
+   :::caution
+   `Public Subnet Allowed CIDR` and `Admin Allowed CIDR` default to `0.0.0.0/0` for initial deployment. After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Public Subnet Allowed CIDR` to known source addresses.
+   :::
+
+3. Click Next. Azure will validate the input.
+
+    ![Next button](/img/dep-azure-portal-step3.png)
+
+4. After reviewing the Terms, click **Create**.
+
+5. When the deployment completes, open the **Outputs** tab. 
+
+   ![Deployment complete](/img/platforms_azure_deployment_complete.png)
+
+    Make a note of the following value — you will need them in later steps:
+
+   - **Public IP address** assigned to the conductor management interface.
+
+## Network Interface Layout
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| ge-0-0 | azure-hub-router-public | ssr-hub-wan |
+| ge-0-1 | azure-hub-router-private | ssr-hub-lan |
+
+## Next Step
+
+Proceed to [Step 2 — Create the Spoke Router VM](deploy_azure_hub_spoke_spoke_vm.mdx).
