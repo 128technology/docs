@@ -206,7 +206,7 @@ module.exports = {
                 "deploy_appendix_vmware_conductor",
               ],
             },
-            {
+            {   
               "type": "category",
               "label": "Azure Conductor",
               "items": [
@@ -215,6 +215,17 @@ module.exports = {
                 "deploy_azure_conductor_install",
                 "deploy_azure_conductor_config",
                 "deploy_appendix_azure_conductor",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "GCP Conductor",
+              "items": [
+                "deploy_gcp_conductor",
+                "deploy_gcp_conductor_prereqs",
+                "deploy_gcp_conductor_install",
+                "deploy_gcp_conductor_config",
+                "deploy_appendix_gcp_conductor",
               ],
             },
           ],
