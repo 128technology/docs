@@ -2,12 +2,73 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docs.128technology.com/kb</id>
     <title>SSR Knowledge Base Articles</title>
-    <updated>2026-09-18T00:00:00.000Z</updated>
+    <updated>2026-09-25T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docs.128technology.com/kb"/>
     <subtitle>Session Smart Router Knowledge Base Articles</subtitle>
     <icon>https://docs.128technology.com/img/favicon.ico</icon>
     <rights>Copyright © 2026 Juniper Networks, Inc.</rights>
+    <entry>
+        <title type="html"><![CDATA[Juniper 10G LR SFP+ Transceivers May Fail To Enter Service On SSR-1300 And SSR-1400 X722 Ports]]></title>
+        <id>https://docs.128technology.com/kb/2026/09/25/I95-65908</id>
+        <link href="https://docs.128technology.com/kb/2026/09/25/I95-65908"/>
+        <updated>2026-09-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Juniper 10G LR SFP+ transceivers, Juniper part number 740-021309, may fail to enter active service when installed in Intel X722 network interface card ports on SSR-1300 and SSR-1400 routers.]]></summary>
+        <content type="html"><![CDATA[<p>Juniper 10G LR SFP+ transceivers, Juniper part number <code>740-021309</code>, may fail to enter active service when installed in Intel X722 network interface card ports on SSR-1300 and SSR-1400 routers.</p>
+<p><strong>Issue ID:</strong> I95-65908</p>
+<p><strong>Last Updated:</strong> 2026-09-25</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h3>
+<p>The Intel X722 network interface card (NIC) is used for ports <code>xe0/0</code> through <code>xe0/3</code> on SSR-1300 and SSR-1400 routers. The X722 NIC firmware scans the EEPROM for each installed optical device and checks the device against an approved optics list built into the firmware. Optical devices that are not present in the approved optics list are not allowed into service on this NIC.</p>
+<p>Juniper partners with several optical transceiver vendors to deliver Juniper-branded optics. For the Juniper 10G LR SFP+ transceiver portfolio, Juniper part number <code>740-021309</code>, the EEPROM encoding for one specific vendor is not recognized by the X722 firmware. As a result, the transceiver may not enter active service when installed in an affected X722 port.<sup><a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#user-content-fn-x722-firmware-fc905c" id="user-content-fnref-x722-firmware-fc905c" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="affected-products">Affected Products<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#affected-products" class="hash-link" aria-label="Direct link to Affected Products" title="Direct link to Affected Products" translate="no">​</a></h3>
+<table><thead><tr><th style="text-align:left">Product</th><th style="text-align:left">Affected Ports</th></tr></thead><tbody><tr><td style="text-align:left">SSR-1300</td><td style="text-align:left"><code>xe0/0</code> through <code>xe0/3</code></td></tr><tr><td style="text-align:left">SSR-1400</td><td style="text-align:left"><code>xe0/0</code> through <code>xe0/3</code></td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="affected-transceiver">Affected Transceiver<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#affected-transceiver" class="hash-link" aria-label="Direct link to Affected Transceiver" title="Direct link to Affected Transceiver" translate="no">​</a></h3>
+<table><thead><tr><th style="text-align:left">Field</th><th style="text-align:left">Value</th></tr></thead><tbody><tr><td style="text-align:left">Optic type</td><td style="text-align:left">10G LR SFP+</td></tr><tr><td style="text-align:left">Juniper part number</td><td style="text-align:left"><code>740-021309</code></td></tr><tr><td style="text-align:left">Affected vendor encoding</td><td style="text-align:left"><code>JUNIPER-1W1</code></td></tr><tr><td style="text-align:left">Vendor OUI</td><td style="text-align:left"><code>20:1b:c9</code></td></tr><tr><td style="text-align:left">Vendor PN</td><td style="text-align:left"><code>1W1T8A</code></td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="symptom">Symptom<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#symptom" class="hash-link" aria-label="Direct link to Symptom" title="Direct link to Symptom" translate="no">​</a></h3>
+<p>When this issue occurs, the affected interface remains unavailable for forwarding. The port shows an <strong>Admin Status</strong> of <code>down</code> and an <strong>Operational Status</strong> of <code>unknown</code>.</p>
+<p>Example output:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">========================================</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> node1:xe-0-1</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">========================================</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Type:                ethernet</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Internal ID:         3</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Forwarding:          true</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> PCI Address:         0000:6a:00.1</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> MAC Address:</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Admin Status:        down</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Operational Status:  unknown</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Provisional Status:  up</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Redundancy Status:   non-redundant</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Speed:               0 Mb/s</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Duplex:              half</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> in-octets:                           0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> in-unicast-pkts:                     0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> in-errors:                           0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> out-octets:                          0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> out-unicast-pkts:                    0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> out-errors:                          0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Plugin Info:         unavailable</span><br></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cause">Cause<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#cause" class="hash-link" aria-label="Direct link to Cause" title="Direct link to Cause" translate="no">​</a></h3>
+<p>The X722 NIC firmware does not recognize the EEPROM encoding used by one vendor variant of the Juniper 10G LR SFP+ transceiver, part number <code>740-021309</code>. Because the optical device is not recognized as approved by the X722 firmware, the NIC does not allow the transceiver to enter service.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="identify-the-affected-transceiver">Identify The Affected Transceiver<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#identify-the-affected-transceiver" class="hash-link" aria-label="Direct link to Identify The Affected Transceiver" title="Direct link to Identify The Affected Transceiver" translate="no">​</a></h3>
+<p>SFP EEPROM data is accessible via PCLI in select SSR software versions using the <code>show device-interface node &lt;node&gt; name &lt;port&gt; optics-statistics</code> command. If this is not available in your version of SSR software, use the Linux <code>ethtool</code> command.</p>
+<p>In order to use the Linux <code>ethtool</code> command on X722 ports, you must complete the firmware upgrade referenced earlier.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="affected-transceiver-in-x722-port-after-nic-firmware-upgrade">Affected Transceiver In X722 Port After NIC Firmware Upgrade<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#affected-transceiver-in-x722-port-after-nic-firmware-upgrade" class="hash-link" aria-label="Direct link to Affected Transceiver In X722 Port After NIC Firmware Upgrade" title="Direct link to Affected Transceiver In X722 Port After NIC Firmware Upgrade" translate="no">​</a></h4>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">ethtool -m xe-0-1</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Cannot get module EEPROM information: Input/output error</span><br></div></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="affected-transceiver-in-a-non-x722-port">Affected Transceiver In A Non-X722 Port<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#affected-transceiver-in-a-non-x722-port" class="hash-link" aria-label="Direct link to Affected Transceiver In A Non-X722 Port" title="Direct link to Affected Transceiver In A Non-X722 Port" translate="no">​</a></h4>
+<p>When the same affected transceiver is installed in a non-X722 port where EEPROM data can be read, the EEPROM output includes the following vendor information:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">ethtool -m xe-2-1</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    Vendor name                : JUNIPER-1W1</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    Vendor OUI                 : 20:1b:c9</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    Vendor PN                  : 1W1T8A</span><br></div></code></pre></div></div>
+<p>If the <code>ethtool</code> output aligns with either of the examples above, the transceiver is not compatible with the X722 NIC, and should be replaced with a compatible, approved Juniper transceiver.</p>
+<p>The output below is seen when the X722 upgrade is needed.<sup><a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#user-content-fn-x722-firmware-fc905c" id="user-content-fnref-x722-firmware-fc905c-2" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup> Please upgrade the NIC firmware in order to capture the correct output, or move the transceiver to a non-X722 port to display the SFP information.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">ethtool -m xe-0-1</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">i40e 0000:6a:00.1 xe-0-1: Module EEPROM memory read not supported. Please update the NVM image.</span><br></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
+<p>No software workaround is available.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolution">Resolution<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#resolution" class="hash-link" aria-label="Direct link to Resolution" title="Direct link to Resolution" translate="no">​</a></h3>
+<p>Contact HPE technical support and initiate a return material authorization (RMA) request. HPE will replace the affected device.</p>
+<p>When opening the support case, include the following information:</p>
+<ul>
+<li class="">SSR platform: SSR-1300 or SSR-1400</li>
+<li class="">Affected port: for example, <code>xe0/0</code>, <code>xe0/1</code>, <code>xe0/2</code>, or <code>xe0/3</code></li>
+<li class="">SSR software version</li>
+<li class="">Transceiver part number: <code>740-021309</code></li>
+<li class="">Interface status output showing:<!-- -->
+<ul>
+<li class=""><code>Admin Status: down</code></li>
+<li class=""><code>Operational Status: unknown</code></li>
+</ul>
+</li>
+<li class=""><code>ethtool -m</code> output, if available</li>
+</ul>
+<!-- -->
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#footnote-label" class="hash-link" aria-label="Direct link to Footnotes" title="Direct link to Footnotes" translate="no">​</a></h2>
+<ol>
+<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-x722-firmware-fc905c">
+<p>Juniper recommends that you verify the X722 NIC is running the recommended firmware and upgrade it if necessary. For more information, see <a href="https://docs.128technology.com/docs/howto_update_bios/" target="_blank" rel="noopener noreferrer" class="">SSR1300 and SSR1400 BIOS Upgrade for the Intel X722</a>. <a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#user-content-fnref-x722-firmware-fc905c" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a> <a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#user-content-fnref-x722-firmware-fc905c-2" data-footnote-backref="" aria-label="Back to reference 1-2" class="data-footnote-backref">↩<sup>2</sup></a></p>
+</li>
+</ol>
+</section>]]></content>
+        <category label="all" term="all"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[401 Authorization Required Error for Non-Default Admin Users on Conductor GUI]]></title>
         <id>https://docs.128technology.com/kb/2026/09/18/I95-66127</id>
@@ -445,42 +506,5 @@ During device configuration, user specified MTU exceeding 2K will cause init fai
 <p>Disable the accelerated networking to allow the device to be bound via PCLI address instead of vmbus-id.</p>]]></content>
         <category label="6.1" term="6.1"/>
         <category label="6.1.5" term="6.1.5"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Application Identification incompatible with DSCP Steering]]></title>
-        <id>https://docs.128technology.com/kb/2024/04/25/I95-56437</id>
-        <link href="https://docs.128technology.com/kb/2024/04/25/I95-56437"/>
-        <updated>2024-04-25T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Issue ID: I95-56437]]></summary>
-        <content type="html"><![CDATA[<p><strong>Issue ID:</strong> I95-56437<br>
-<strong>Last Updated:</strong> 2024-04-25<br>
-<strong>Introduced in SSR Version:</strong> 5.6.13</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h3>
-<p>The app-id and dscp-steering features are incompatible.</p>
-<p>If app-id is configured on a child service (application-name, domain-name, domain-name-category, url, subcategory) and also on the same service a dscp-range list is defined, this triggers a failure state when the configuration is committed, causing the service to be added/modified/removed twice during config processing (ServiceManager + AppIdManager).  The commit action fails, and any subsequent service config updates <em>within that failed config</em> are ignored.</p>
-<p>The administrator will not be aware of a configuration issue. The only indication of the failure are log messages, as shown below.
-<code>highway.log</code></p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 17 13:59:54.622 [HWMC|SVC ] WARN  (routingAgPoller) ServiceAddException: Failed to Add Service Audio.MicrosoftTeams</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 17 13:59:54.622 [HWMC|SVC ] ERROR (routingAgPoller) ServiceManager failed to process config trackers</span><br></div></code></pre></div></div>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes" translate="no">​</a></h3>
-<p>The app-id and dscp-steering features are incompatible and should not be configured simultaneously; doing so will cause future commits to fail. Strict configuration validation has been added to prevent configuring both features simultaneously.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
-<li class="">Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
-<li class="">Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
-<li class="">Minor: Would not significantly impair the functioning or affect service.</li>
-</ul></div></div></details>
-<p>Major</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="status">Status<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status" translate="no">​</a></h3>
-<p>Open</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In" translate="no">​</a></h3>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="product">Product<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product" translate="no">​</a></h3>
-<p>SSR</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area" translate="no">​</a></h3>
-<p>Configuration</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/04/25/I95-56437#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div></details>
-<p>Disable the service, or delete the offending configuration.</p>]]></content>
-        <category label="5.6" term="5.6"/>
-        <category label="5.6.13" term="5.6.13"/>
     </entry>
 </feed>
