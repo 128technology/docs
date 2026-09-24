@@ -37,7 +37,7 @@
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/types": "3.10.2",
     "@eslint/eslintrc": "^3.3.7",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "gray-matter": "^4.0.3",
-    "prettier": "^3.9.6"
+    "prettier": "^3.9.8"
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
