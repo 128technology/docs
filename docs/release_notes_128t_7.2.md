@@ -86,14 +86,14 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 - **I95-63281 Configurable serial console baud rate:** Added the ability to configure the serial baud rate on the SSR devices to either 9600, 38400, or 115200 (default). This can be done from the command line `config authority router <router> node <node> serial-console-baud-rate`, or the web interface at `Router -> Node -> Serial Console Baud Rate` using the dropdown.
 
   :::note
-  Since the baud rate change happens at the kernel level, output such as bios or grub remains at 115200bps. If the serial console client is set to a value other than 115200, the output will be displayed as garbage. If one of those garbage characters happens to be `xon`, the client will stop the display. To prevent the display issue, it is recommended to turn off software flow control (`xon/xoff`).
+  Since the baud rate change happens at the kernel level, output such as bios or grub remains at 115200bps. If the serial console client is set to a value other than 115200, the output will be displayed as garbled text. If one of those garbled characters happens to be `xon`, the client will stop the display. To prevent the display issue, it is recommended to turn off software flow control (`xon/xoff`).
   :::
 ------
 - **I95-63985 VRRP Non-revertive Active/Active Recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
 ------
 - **I95-64184 Static Route State Tracking:** Added the monitoring of service path reachability state to prevent traffic from being forwarded to an unreachable destination if an intermediate network fails even when the next hop or destination remains operational. ICMP probes monitor network connectivity; when a failure is detected and exceeds the configured threshold, the system now automatically removes the kernel route from the RIB. When the ICMP probes recover and the destination is reachable again, the kernel routes are automatically added back to the RIB. For more information about reachability profiles, see [Configuring a Reachability Detection Profile](config_service_health.md#creating-a-reachability-detection-profile).  
 ------
-- **I95-64692 Improved L7-Security Packet Interface:** The internal packet interface used for L7-Security function chaining, such as IDP, has moved from the deprecated KNI (Kernel NIC Interface) technology to virtio-user. This improves throughput headroom for IDP-enabled deployments and removes a dependency that upstream DPDK is phasing out.
+- **I95-64692 Improved L7-Security Packet Interface:** The internal packet interface used for L7-Security function chaining, such as IDP, has changed affording more throughput headroom for IDP-enabled deployments.
 ------
 - **I95-64862 Waypoint Pool Exhaustion Monitoring:** Added visibility into waypoint pool utilization including the historical maximum number of ports used, and added a peer name column to help identify the peer-related usage in the waypoint table. See [`show waypoints`](cli_reference.md#show-waypoints) for more information.
 ------
@@ -102,6 +102,12 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
   :::important
   The use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140 because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests. 
   :::
+------
+- **I95-65348 Added Support for Bouncing PoE Ports:** Added the ability to force a link down/up cycle ("bounce") on SSR4x0 PoE ports, allowing a connected access point to be power-cycled without physically disconnecting the cable.
+------
+- **I95-65365 PCLI Command to Trigger GARP:** Added the PCLI command to manually trigger Gratuitous ARP (GARP) on VRRP interfaces, accepting device and network-interface as arguments.
+------
+- **I95-65366 Maximum GARP interval for VRRP:** Added a configurable `maximum-garp-interval` parameter for VRRP, allowing control over how frequently gratuitous ARP messages are sent during VRRP state transitions. This prevents excessive ARP traffic in environments with many VRRP instances.
 
 ### Resolved Issues
 
@@ -109,7 +115,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65018, I95-65021, I95-65025, I95-65026, I95-65027, I95-65028, I95-65030, I95-65033, I95-65034, I95-65038, I95-65039, I95-65044, I95-65054, I95-65055, I95-65205, I95-65206, I95-65208, I95-65210, I95-65211, I95-65217, I95-65219, I95-65221, I95-65224, I95-65226, I95-65228, I95-65235, I95-65238, I95-65239, I95-65247, I95-65249, I95-65250, I95-65252, I95-65254, I95-65297.
 ------
-- **I95-58472 SSR4x0 Platform Provisioning Reboot Loop:** Resolved an issue where CN102 SSR4x0 platforms could enter an infinite reboot loop during initial provisioning.
+- **I95-58472 SSR4x0 Platform Provisioning Reboot Loop:** Resolved an issue where SSR4x0 platforms could enter an infinite reboot loop during initial provisioning.
 ------
 - **I95-60912 PIM and PIMv6 cannot be enabled on the same interface:** Resolved an issue where enabling both PIM (IPv4) and PIMv6 on the same interface was not possible, preventing dual-stack multicast configurations.
 ------
@@ -121,13 +127,13 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-63811 IPv6 Service with ICMP Transport Not Routed:** Resolved an issue where PINGv6 sessions were not routed when an IPv6 service was configured with ICMP as the transport protocol. The system now correctly remaps ICMP to ICMPv6 for IPv6 service prefixes.
 ------
-- **I95-63876 Route Flapping and Inaccessibility:** Resolved an issue where routes would flap or become inaccessible in hub-and-spoke topologies with inter-hub steering preferences configured, causing intermittent connectivity failures.
+- **I95-63876 Route Flapping and Inaccessibility:** Resolved an issue where BGP routes would flap or become inaccessible in hub-and-spoke topologies with inter-hub steering preferences configured, causing intermittent connectivity failures.
 ------
 - **I95-63895 SSR sending packets larger than configured MTU:** Resolved an issue where the SSR was sending packets larger than the configured MTU (e.g., 1518 bytes instead of 1500), causing packet drops on downstream network elements.
 ------
 - **I95-63913 Session-source incorrect in BFD pinhole:** Resolved an issue where session-source was incorrectly set to public when a BFD pinhole also happened to be a flow-move scenario.
 ------
-- **I95-64054 Highway Crash with ESKM Jumbo Packets:** Resolved an issue where the highway process could crash with a null pointer dereference when processing jumbo packets with ESKM due to an uninitialized encryption context.
+- **I95-64054 Highway Crash with ESKM Jumbo Packets:** Resolved an issue where the highway process could crash when processing jumbo packets with ESKM due to an uninitialized encryption context.
 ------
 - **I95-64407 Alternate SHA Ciphers with ESKM:** Resolved an issue where configuring alternate SHA ciphers (`sha384` and `sha512`) on security policies in ESKM did not properly allocate metadata keys or verify HMAC digests on metadata headers.
 ------
@@ -157,7 +163,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-64908 Runtime Error Collapsing Logs Panel in Web Interface:** Resolved an issue where interacting with the collapse control on the Conductor Logs page before the page had fully rendered could trigger a runtime script error. The Logs page now safely handles this interaction.
 ------
-- **I95-64978 Highway crash on head-end router causing interface flaps:** Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash with a core dump, resulting in interface flaps. Access to these fields is now properly synchronized.
+- **I95-64978 Highway crash on head-end router causing interface flaps:** Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash, resulting in interface flaps.
 ------
 - **I95-65129 Peer Path Up Using Mixed Certificates:** Resolved an issue where peer paths could come up using certificates from different issuers (default Juniper certificate on one side and a custom CA-signed certificate on the other), even with a custom trusted CA configured.
 ------
@@ -175,15 +181,9 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65337 Missing FIB Entries After Router Migration:** Resolved an issue where FIB entries were missing after migrating WAN interfaces from one router to another using the same IP addresses. The system now correctly detects new peers and triggers path addition for peers that are already up.
 ------
-- **I95-65348 Added Support for Bouncing PoE Ports:** Added the ability to force a link down/up cycle ("bounce") on SSR4x0 PoE ports, allowing a connected access point to be power-cycled without physically disconnecting the cable.
-------
 - **I95-65351 IMA and Security Stack Incompatibility:** Resolved an issue where enabling IDP with IMA caused the security engine to fail to start due to an incompatibility between IMA enforcement and the security stack binaries.
 ------
 - **I95-65354 Missing Dependencies in Offline ISO:** Resolved an issue where required software dependencies were missing from the offline ISO, preventing plugin upgrades in air-gapped environments.
-------
-- **I95-65365 PCLI Command to Trigger GARP:** Added the PCLI command to manually trigger Gratuitous ARP (GARP) on VRRP interfaces, accepting device and network-interface as arguments.
-------
-- **I95-65366 Maximum GARP interval for VRRP:** Added a configurable `maximum-garp-interval` parameter for VRRP, allowing control over how frequently gratuitous ARP messages are sent during VRRP state transitions. This prevents excessive ARP traffic in environments with many VRRP instances.
 ------
 - **I95-65374 Child tenants not applied to security policies:** Resolved an issue where child tenants were not correctly applied to security policies, preventing IDP rules from being enforced on traffic matching child tenant definitions.
 ------
@@ -241,7 +241,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65548 DSCP steering support with deferred classification in hierarchical services:** Added support for DSCP steering services when classification is deferred in hierarchical service configurations, enabling correct traffic handling in Mist-managed deployments.
 ------
-- **I95-65557 Highway Crash During Show Commands on HA Router:** Resolved an issue where issuing show commands on an HA router could cause a highway crash on both nodes due to FIB table contention. FIB table operations are now batched to prevent mutex lock errors.
+- **I95-65557 Highway Crash when running `show fib` commands on HA Router:** Resolved an issue where issuing `show fib` commands on an HA router could cause a highway crash on both nodes due to FIB table contention. FIB table operations are now batched to prevent mutex lock errors.
 ------
 - **I95-65559 PCLI Content Mode Discarding Certificate Input:** Resolved a regression where entering a certificate in PCLI `content` interactive mode as a single SSH write containing embedded new lines caused the certificate to be silently discarded from the candidate configuration instead of being stored.
 ------
@@ -313,7 +313,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66071 Resolved a Highway Crash During GRE Tunnel Configuration Updates:** Resolved an issue where a failed lookup during a GRE tunnel interface modification could leave stale internal state, causing the highway process to crash on a subsequent configuration change to the same tunnel. GRE tunnel state is now cleaned up correctly when a lookup fails.
 ------
-- **I95-66077 BGP Peers Down After Enabling a Second Internet Provider:** Resolved a double-free defect in BGP conditional advertisement processing that could cause all BGP peers to go down when a second BGP-connected internet provider was enabled.
+- **I95-66077 BGP Peers Down After Enabling a Second Internet Provider:** Resolved a defect in BGP conditional advertisement processing that could cause all BGP peers to go down when a second BGP-connected internet provider was enabled.
 ------
 - **I95-66082 Resolved a Highway Crash on Reverse-Flow Session Collision:** Resolved an issue where the highway process could crash when a returning packet collided with an internal session during reverse-flow processing, causing peer instability. The colliding packet is now safely dropped instead of causing a crash.
 ------
