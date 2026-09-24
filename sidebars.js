@@ -258,6 +258,7 @@ module.exports = {
                   "deploy_appendix_vmware_router",
               ],
             },
+            "deploy_gcp_hub_spoke_routers",
           ],
         },
       ],
