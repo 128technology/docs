@@ -39,7 +39,7 @@ For Air-Gap networks, setting Offline Mode to `true` prevents devices from attem
 
 1. From the GUI, navigate `Configuration > Authority > Router: Conductor`.
 
-2. Scroll down to the **Router System Settings tile** and click it. 
+2. Scroll down to **Router Settings tile** and click on the **System Settings** tile. 
 
 3. Scroll down to **Software Update Settings**.
 
@@ -71,12 +71,13 @@ The *service* configuration element defines the IP destinations that the SSR rou
 4. Scroll down to **Services** and select **ADD**.
 5. Enter the name `Internet-Traffic` and select **SAVE**.
 6. On the Service screen, verify **Enabled** is set to `true`.
-7. Scroll down to **Service Addresses** and select **ADD**.
-8. Enter `0.0.0.0/0` and select **SAVE**.
-9. Scroll down to **Access Policy** and select **ADD**.
+7. Under **Scope**, select Public.
+8. Scroll down to **Service Addresses** and select **ADD**.
+9. Enter `0.0.0.0/0` and select **SAVE**.
+10. Scroll down to **Access Policy** and select **ADD**.
    - Set **Source** to `corp`.
    - Select **SAVE**.
-10. Select **VALIDATE** then **COMMIT**.
+11. Select **VALIDATE** then **COMMIT**.
 
 ## What Was Configured
 
