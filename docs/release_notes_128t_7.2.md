@@ -73,7 +73,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
-## Release 7.2.3-7r2 
+## Release 7.2.3-8r2 
 
 **Release Date:** September 29, 2026
 
@@ -344,6 +344,14 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 - **I95-66351 Peer Paths Not Recovering After Interface Changes:** Resolved an issue where peer paths could remain down and next-hop routes unreachable after a network-interface configuration change, such as a shutdown or rename, requiring a full system restart to recover. Device-interface configuration changes are now retried automatically after a transient failure.
 ------
 - **I95-66371 Antivirus Engine Startup Failure on Repeated CA Load:** Resolved an issue where the antivirus engine could fail to start if the certificate authority had already been extracted from a previous startup attempt.
+
+### Caveats
+
+- **I9566331 Peer path failure between SSR routers running version 7.2.1 and a hub running version 7.2.3 when using ESKM:** There is an issue where the ESKM metadata-key exchange between different software versions may fail to reach the  MetadataKeyExchCompleted state causing a peer path failure.
+
+  Any sender on 7.1.0-7.1.6 or 7.2.0-7.2.1 will remain in MetadataKeyExchInitiated when its peer is running 7.0.5, 7.1.7 or 7.2.3. This issue will be addressed in later releases.
+
+  If you are required to pair a 7.1.0-7.1.6 or 7.2.0-7.2.1 router with a 7.0.5, 7.1.7 or 7.2.3 peer on an ESKM path (during an upgrade, for example), upgrade both ends of each ESKM path in the same upgrade window.  Avoid rolling back to the earlier release while the peer remains on 7.0.5, 7.1.7 or 7.2.3.
 
 ## Release 7.2.1-1r1 
 
