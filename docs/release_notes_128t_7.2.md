@@ -73,6 +73,286 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
+## Release 7.2.3-8r2 
+
+**Release Date:** September 29, 2026
+
+### New Features
+
+- **I95-62044 Peer Certificate Expiration Alarms:** The router now raises an alarm when a received SVR peer certificate is approaching expiration (within a month or a week), in addition to the existing alarms for the router's own certificates. This gives you advance warning of an expiring peer certificate before the peer path goes down.
+------
+- **I95-62790 ML-DSA for SVR Certificates:** ML-DSA has been added as a new algorithm option to the existing certificate lifecycle. ML-DSA support applies exclusively to SVR peering certificates managed by the customer through the REST API. For more information, see [ML-DSA](sec_enhanced_key_mgmt.md#ml-dsa).
+------
+- **I95-63281 Configurable serial console baud rate:** Added the ability to configure the serial baud rate on the SSR devices to either 9600, 38400, or 115200 (default). This can be done from the command line `config authority router <router> node <node> serial-console-baud-rate`, or the web interface at `Router -> Node -> Serial Console Baud Rate` using the dropdown.
+
+  :::note
+  Since the baud rate change happens at the kernel level, output such as bios or grub remains at 115200bps. If the serial console client is set to a value other than 115200, the output will be displayed as garbled text. If one of those garbled characters happens to be `xon`, the client will stop the display. To prevent the display issue, it is recommended to turn off software flow control (`xon/xoff`).
+  :::
+------
+- **I95-63985 VRRP Non-revertive Active/Active Recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
+------
+- **I95-64184 Static Route State Tracking:** Added the monitoring of service path reachability state to prevent traffic from being forwarded to an unreachable destination if an intermediate network fails even when the next hop or destination remains operational. ICMP probes monitor network connectivity; when a failure is detected and exceeds the configured threshold, the system now automatically removes the kernel route from the RIB. When the ICMP probes recover and the destination is reachable again, the kernel routes are automatically added back to the RIB. For more information about reachability profiles, see [Configuring a Reachability Detection Profile](config_service_health.md#creating-a-reachability-detection-profile).  
+------
+- **I95-64692 Improved L7-Security Packet Interface:** The internal packet interface used for L7-Security function chaining, such as IDP, has changed affording more throughput headroom for IDP-enabled deployments.
+------
+- **I95-64862 Waypoint Pool Exhaustion Monitoring:** Added visibility into waypoint pool utilization including the historical maximum number of ports used, and added a peer name column to help identify the peer-related usage in the waypoint table. See [`show waypoints`](cli_reference.md#show-waypoints) for more information.
+------
+- **I95-65332 Allow BGP/MSDP to use TCP MD5 even when kernel is in FIPS mode:** The use of BGP and MSDP protocols with TCP MD5 authentication has been enabled when kernel is in FIPS mode. 
+
+  :::important
+  The use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140 because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests. 
+  :::
+------
+- **I95-65348 Added Support for Bouncing PoE Ports:** Added the ability to force a link down/up cycle ("bounce") on SSR4x0 PoE ports, allowing a connected access point to be power-cycled without physically disconnecting the cable.
+------
+- **I95-65365 PCLI Command to Trigger GARP:** Added the PCLI command to manually trigger Gratuitous ARP (GARP) on VRRP interfaces, accepting device and network-interface as arguments.
+------
+- **I95-65366 Maximum GARP interval for VRRP:** Added a configurable `maximum-garp-interval` parameter for VRRP, allowing control over how frequently gratuitous ARP messages are sent during VRRP state transitions. This prevents excessive ARP traffic in environments with many VRRP instances.
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2024-12086, CVE-2024-34459, CVE-2025-10911, CVE-2025-12748, CVE-2025-13151, CVE-2025-14087, CVE-2025-14512, CVE-2025-5278, CVE-2025-61662, CVE-2025-6170, CVE-2025-9714, CVE-2026-0865, CVE-2026-14380, CVE-2026-14474, CVE-2026-14476, CVE-2026-14739, CVE-2026-1519, CVE-2026-15308, CVE-2026-1933, CVE-2026-2291, CVE-2026-2340, CVE-2026-23479, CVE-2026-23631, CVE-2026-25243, CVE-2026-25646, CVE-2026-25749, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-28390, CVE-2026-28417, CVE-2026-28421, CVE-2026-28780, CVE-2026-28847, CVE-2026-28883, CVE-2026-28901, CVE-2026-28902, CVE-2026-28903, CVE-2026-28904, CVE-2026-28905, CVE-2026-28907, CVE-2026-28942, CVE-2026-28946, CVE-2026-28947, CVE-2026-28953, CVE-2026-28955, CVE-2026-28958, CVE-2026-29111, CVE-2026-29518, CVE-2026-3012, CVE-2026-3039, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33007, CVE-2026-33278, CVE-2026-33412, CVE-2026-33526, CVE-2026-33845, CVE-2026-33846, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2026-34180, CVE-2026-34181, CVE-2026-34182, CVE-2026-34183, CVE-2026-34980, CVE-2026-35177, CVE-2026-35385, CVE-2026-37555, CVE-2026-3832, CVE-2026-3833, CVE-2026-39979, CVE-2026-40164, CVE-2026-40170, CVE-2026-40355, CVE-2026-40356, CVE-2026-4046, CVE-2026-40460, CVE-2026-40622, CVE-2026-40701, CVE-2026-41035, CVE-2026-41292, CVE-2026-41411, CVE-2026-42009, CVE-2026-42010, CVE-2026-42011, CVE-2026-42012, CVE-2026-42013, CVE-2026-42014, CVE-2026-42015, CVE-2026-42055, CVE-2026-42533, CVE-2026-42534, CVE-2026-42764, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-42926, CVE-2026-42934, CVE-2026-42944, CVE-2026-42945, CVE-2026-42946, CVE-2026-42959, CVE-2026-43284, CVE-2026-43500, CVE-2026-43618, CVE-2026-43658, CVE-2026-43660, CVE-2026-4408, CVE-2026-4437, CVE-2026-4438, CVE-2026-44390, CVE-2026-44431, CVE-2026-44432, CVE-2026-44673, CVE-2026-4480, CVE-2026-45186, CVE-2026-4519, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-46300, CVE-2026-46333, CVE-2026-46483, CVE-2026-47162, CVE-2026-47167, CVE-2026-4786, CVE-2026-4800, CVE-2026-48142, CVE-2026-4878, CVE-2026-48864, CVE-2026-4890, CVE-2026-4891, CVE-2026-48914, CVE-2026-4892, CVE-2026-4893, CVE-2026-5119, CVE-2026-5260, CVE-2026-52858, CVE-2026-5419, CVE-2026-5435, CVE-2026-54369, CVE-2026-54370, CVE-2026-5450, CVE-2026-55693, CVE-2026-56434, CVE-2026-57455, CVE-2026-57456, CVE-2026-58016, CVE-2026-5928, CVE-2026-5946, CVE-2026-59856, CVE-2026-59858, CVE-2026-60005, CVE-2026-6238, CVE-2026-6893, CVE-2026-7383, CVE-2026-9076, CVE-2026-9256, CVE-2026-9698.
+------
+- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-62091, I95-65017, I95-65018, I95-65021, I95-65025, I95-65026, I95-65027, I95-65028, I95-65030, I95-65033, I95-65034, I95-65038, I95-65039, I95-65044, I95-65054, I95-65055, I95-65205, I95-65206, I95-65208, I95-65210, I95-65211, I95-65217, I95-65219, I95-65221, I95-65224, I95-65226, I95-65228, I95-65235, I95-65238, I95-65239, I95-65247, I95-65249, I95-65250, I95-65252, I95-65254, I95-65297.
+------
+- **I95-58472 SSR4x0 Platform Provisioning Reboot Loop:** Resolved an issue where SSR4x0 platforms could enter an infinite reboot loop during initial provisioning.
+------
+- **I95-60912 PIM and PIMv6 cannot be enabled on the same interface:** Resolved an issue where enabling both PIM (IPv4) and PIMv6 on the same interface was not possible, preventing dual-stack multicast configurations.
+------
+- **I95-62331 OSPF Default Route Not Re-Advertised After Restart:** Resolved an issue where a timing condition could prevent OSPF from generating the external (Type 5) LSA for a configured default route after a restart, so peers did not receive the default route until the OSPF process was manually cleared. OSPF now reliably advertises the default route after a restart.
+------
+- **I95-62758 BGP Establishment Taking Incorrect Path Over GRE:** Resolved an issue where BGP SYN packets were sent over the wrong GRE tunnel instead of using the direct path, causing BGP to establish over an unintended interface.
+------
+- **I95-63195 Highway Crash During ESKM Session Scaling:** Resolved an issue where the highway process could crash during high session scaling due to incorrect metadata propagation in ESKM encrypt/decrypt contexts.
+------
+- **I95-63811 IPv6 Service with ICMP Transport Not Routed:** Resolved an issue where PINGv6 sessions were not routed when an IPv6 service was configured with ICMP as the transport protocol. The system now correctly remaps ICMP to ICMPv6 for IPv6 service prefixes.
+------
+- **I95-63876 Route Flapping and Inaccessibility:** Resolved an issue where BGP routes would flap or become inaccessible in hub-and-spoke topologies with inter-hub steering preferences configured, causing intermittent connectivity failures.
+------
+- **I95-63895 SSR sending packets larger than configured MTU:** Resolved an issue where the SSR was sending packets larger than the configured MTU (e.g., 1518 bytes instead of 1500), causing packet drops on downstream network elements.
+------
+- **I95-63913 Session-source incorrect in BFD pinhole:** Resolved an issue where session-source was incorrectly set to public when a BFD pinhole also happened to be a flow-move scenario.
+------
+- **I95-64054 Highway Crash with ESKM Jumbo Packets:** Resolved an issue where the highway process could crash when processing jumbo packets with ESKM due to an uninitialized encryption context.
+------
+- **I95-64407 Alternate SHA Ciphers with ESKM:** Resolved an issue where configuring alternate SHA ciphers (`sha384` and `sha512`) on security policies in ESKM did not properly allocate metadata keys or verify HMAC digests on metadata headers.
+------
+- **I95-64411 IPv6 BGP route-map `set ipv6 next-hop peer-address` support:** Added support for the `set ipv6 next-hop peer-address` directive in route-maps, which is required for IPv6 WAN assurance deployments.
+------
+- **I95-64464 Slow Initial Router Onboarding to Conductor:** Resolved an issue where router onboarding to the conductor was slow, causing assets to remain in a `synchronizing` state for extended periods.
+------
+- **I95-64550 Persisted Waypoint Pool Historical Maximum:** The historical maximum number of waypoint ports used is now persisted to long-term analytics storage, so this value survives a router restart. This complements the waypoint pool utilization visibility described above.
+------
+- **I95-64603 `Chronyd` Requires Manual Restart After Reboot:** Resolved an issue where all NTP servers appeared as rejected after a reboot, requiring a manual restart of the `chronyd` service to restore time synchronization.
+------
+- **I95-64610 Peer Name in `show waypoints`:** The `show waypoints` command output now includes a peer name column, making it easier to identify which peer is associated with a given waypoint entry.
+------
+- **I95-64627 Certificate Unavailable for Peering After Upgrade:** Resolved an issue where the local certificate became unavailable for peering after an upgrade, resulting in peer paths remaining down with a "No local certificate available" error.
+------
+- **I95-64684 HMAC Cipher Mode Information in Logs and Session Output:** Added HMAC mode and HMAC cipher details to session logs and `show sessions` output, improving visibility into the active encryption and authentication state of sessions.
+------
+- **I95-64688 Highway coredumps causing peer path flaps:** Resolved an issue where highway process coredumps were occurring, resulting in peer path flaps.
+------
+- **I95-64811 Highway crash causing session drops:** Resolved a highway process crash that occurred under specific traffic conditions, resulting in session drops and temporary traffic disruption.
+------
+- **I95-64857 REST API for Trusted CA Certificate Ingestion:** Added a REST API endpoint to ingest a trusted CA certificate bundle directly, so that certificates referenced by a `trusted-ca-certificate` file pointer no longer need to be placed on disk manually.
+------
+- **I95-64903 High CPU and Disk Usage on SSR440:** Resolved an issue where SSR440 devices experienced high CPU and disk usage without corresponding syslog messages being generated, making the condition difficult to diagnose.
+------
+- **I95-64905 401 Authorization Required error when refreshing Logs page:** Resolved an issue where refreshing the Logs page on the conductor GUI returned a 401 Authorization Required error, requiring a full page reload or re-login.
+------
+- **I95-64908 Runtime Error Collapsing Logs Panel in Web Interface:** Resolved an issue where interacting with the collapse control on the Conductor Logs page before the page had fully rendered could trigger a runtime script error. The Logs page now safely handles this interaction.
+------
+- **I95-64978 Highway crash on head-end router causing interface flaps:** Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash, resulting in interface flaps.
+------
+- **I95-65129 Peer Path Up Using Mixed Certificates:** Resolved an issue where peer paths could come up using certificates from different issuers (default Juniper certificate on one side and a custom CA-signed certificate on the other), even with a custom trusted CA configured.
+------
+- **I95-65171 TSI Download Missing File Extension:** Resolved an issue where Tech Support Info (TSI) bundles downloaded from the SSR Web UI had no file extension, preventing extraction with standard archive tools. Tech support files downloaded from the web UI now have the correct `.zip` extension.
+------
+- **I95-65190 Node Deletion Cleanup in High Availability Configurations:** Resolved an issue where transitioning a router from a dual-node High Availability (HA) configuration to a single-node configuration failed to remove the deleted node from `global.init`, leaving residual fabric interfaces and causing synchronization failures on the remaining node.
+------
+- **I95-65296 ESKM Peering Failures with Fragmentation:** Resolved an issue where ESKM peer paths failed to establish in environments where fragmentation occurs on the underlay, such as GCP with Cloud Routers.
+------
+- **I95-65299 SSR440 upgrade failure:** Resolved an issue where upgrading an SSR440 could fail, with the highway process not running after reboot, causing the system to roll back automatically.
+------
+- **I95-65314 Sessions Not Switching to Available Source NAT IPs:** Resolved an issue where a source NAT database corruption and race condition prevented sessions from switching to additional available IP addresses on a WAN interface, causing packet drops.
+------
+- **I95-65336 Factory reset resilience to interruption:** Improved the factory reset procedure to be more resilient to interruption (e.g., unexpected reboot). The system now tracks reset progress and can resume or indicate completion status after recovery.
+------
+- **I95-65337 Missing FIB Entries After Router Migration:** Resolved an issue where FIB entries were missing after migrating WAN interfaces from one router to another using the same IP addresses. The system now correctly detects new peers and triggers path addition for peers that are already up.
+------
+- **I95-65351 IMA and Security Stack Incompatibility:** Resolved an issue where enabling IDP with IMA caused the security engine to fail to start due to an incompatibility between IMA enforcement and the security stack binaries.
+------
+- **I95-65354 Missing Dependencies in Offline ISO:** Resolved an issue where required software dependencies were missing from the offline ISO, preventing plugin upgrades in air-gapped environments.
+------
+- **I95-65374 Child tenants not applied to security policies:** Resolved an issue where child tenants were not correctly applied to security policies, preventing IDP rules from being enforced on traffic matching child tenant definitions.
+------
+- **I95-65390 Conductor Migration Deadlock in SSH-Only Mode:** Resolved an issue where conductor migration could deadlock when using `asset-connection-resiliency` in `SSH-only` mode because the router switched to the unauthenticated tunnel before the new conductor completed SSH key exchange.
+------
+- **I95-65392 Hierarchical services ping traffic failure between sites:** Resolved an issue where ICMP ping traffic between specific sites failed when using hierarchical service configurations with application identification groups.
+------
+- **I95-65393 ESKM Certificate Invalid Alarm After Upgrade:** Resolved an issue where a certificate invalid alarm was incorrectly raised after upgrading to a newer SSR version, causing peering to go down even though the certificate was not expired.
+------
+- **I95-65394 Improved Detail in Peer Certificate Validation Alarms:** Resolved an issue where the peer certificate invalid alarm provided no specific reason for the validation failure. The alarm now includes the underlying certificate validation error, such as expiration, revocation, or a name mismatch, to help identify the root cause.
+------
+- **I95-65403 Disallow CA Certificates for Peering:** Added validation to prevent certificates with the CA:True basic constraint from being used as peering certificates, as these are intended for signing other certificates rather than direct peering authentication.
+------
+- **I95-65410 Incorrect RBAC for Certificate Ingestion API:** Resolved an issue where the POST `/api/v1/certificate` endpoint incorrectly required READ permission for the entire configuration instead of WRITE permission.
+------
+- **I95-65411 CLI Command Appending Unrelated Output:** Resolved an issue where executing certain PCLI commands (such as `show peer router all force`) would append unrelated command output at the end of the expected results.
+------
+- **I95-65414 Overlapping child tenant IP validation:** Added configuration validation to disallow overlapping IP addresses across child tenants, preventing ambiguous traffic classification.
+------
+- **I95-65432 Conflux process crash during upgrade:** Resolved an issue where the Conflux process exited unexpectedly during or after an upgrade, causing temporary loss of analytics data collection.
+------
+- **I95-65439 CRL in Certificate Not Taken into Account:** Resolved an issue where the Certificate Revocation List (CRL) distribution point specified within a certificate was not being honored, requiring manual CRL configuration on the conductor.
+------
+- **I95-65455 Network Manager Interface Preventing HA Sync:** Resolved an issue where a spurious "Wired Connection 1" Network Manager interface prevented the HA sync interface from obtaining an IP address after an upgrade.
+------
+- **I95-65459 IDP bypass not engaged during restart/rebuild:** Resolved an issue where IDP bypass rules were not properly engaged during engine restart or rebuild operations, causing traffic that should be bypassed to be dropped temporarily.
+------
+- **I95-65469 GUI Network Interface Display:** Resolved an issue where the SSR Web UI displayed "No Data" in the Network Interfaces table on the Router page due to overly strict GraphQL filter and pagination validation.
+------
+- **I95-65470 Multicast session display count discrepancy:** Resolved an issue where `show sessions` displayed fewer multicast sessions than expected (e.g., 334 of 400), even though all multicast routes were correctly installed.
+------
+- **I95-65478 Mist-Agent Upgrade Blocked by Version Mismatch:** Resolved an issue where a router running a newer `mist-agent` package version than the one bundled with the target software release could fail to upgrade, because `mist-agent` downgrades were not permitted by default.
+------
+- **I95-65486 Highway Crash During Upgrade from Legacy Version:** Resolved a highway crash that occurred during router upgrades from legacy versions (e.g., 5.5.x to 7.2.x), causing the upgrade to fail after timing out.
+------
+- **I95-65488 Improved Logging for File-Based Trusted CA Certificates:** Added logging to the configuration director to make it easier to determine when a file-pointer-based trusted CA certificate is referenced in configuration but the file is not yet present on disk.
+------
+- **I95-65512 Web Server and Nginx Crash Looping:** Resolved an issue where the web server and nginx processes entered a crash loop, preventing access to the SSR Web UI.
+------
+- **I95-65526 Stale Onboarding State During Node Redeployment:** Resolved an issue where redeploying a node or reusing a node name after deletion caused Secure Conductor Onboarding (SCO) to fail due to stale onboarding state and residual keys persisting on the conductor, resulting in onboarding rejections and expired tokens.
+------
+- **I95-65527 Added Missing sysServices SNMP OID on Conductor:** Resolved an issue where the conductor did not return the standard `sysServices` SNMP OID (`.1.3.6.1.2.1.1.7.0`), which some third-party management systems require for device discovery. The conductor's generated SNMP configuration now includes this OID.
+------
+- **I95-65529 Auto-generated syslog service incorrectly uses UDP for TLS:** Resolved an issue where the auto-generated service for TLS-based syslog was incorrectly configured with UDP as the transport protocol instead of TCP.
+------
+- **I95-65532 Unclassified Application Sessions After Security Engine Rebuild:** Resolved an issue where, after the security engine container was rebuilt, application identification stopped classifying traffic and reported sessions as an unclassified application until the next scheduled package update. The required application-identification packages are now installed during IDP startup.
+------
+- **I95-65534 Waypoint Usage Alarm Not Triggering at 100% Usage:** Resolved an issue where the waypoint pool utilization alarm did not trigger when port usage reached 100%.
+------
+- **I95-65535 Assets Stuck in Synchronizing State:** Resolved an issue where assets could become stuck in a synchronizing state for extended periods (up to 24 hours) due to overly aggressive watchdog timer defaults. The default timer settings have been relaxed.
+------
+- **I95-65544 Host Service Exposure on WAN Interface During Startup:** Resolved an issue where host services (such as SSH) were exposed on external WAN interfaces during system boot because `firewalld` flushed interface-to-zone associations during startup reloads before security rules were fully established.
+------
+- **I95-65545 Incorrect Fragmentation Stats Table Name:** Resolved an issue where the PCLI displayed an incorrect table name ("Non-Fabric IPv6 Fragmented Packets" instead of "Non-Fabric IPv4 Fragmented Packets") for IPv4 fragmentation statistics.
+------
+- **I95-65548 DSCP steering support with deferred classification in hierarchical services:** Added support for DSCP steering services when classification is deferred in hierarchical service configurations, enabling correct traffic handling in Mist-managed deployments.
+------
+- **I95-65557 Highway Crash when running `show fib` commands on HA Router:** Resolved an issue where issuing `show fib` commands on an HA router could cause a highway crash on both nodes due to FIB table contention. FIB table operations are now batched to prevent mutex lock errors.
+------
+- **I95-65559 PCLI Content Mode Discarding Certificate Input:** Resolved a regression where entering a certificate in PCLI `content` interactive mode as a single SSH write containing embedded new lines caused the certificate to be silently discarded from the candidate configuration instead of being stored.
+------
+- **I95-65583 InfluxDB HTTP Log Growth and Disk Space Exhaustion:** Resolved an issue on Enterprise Linux 9 systems where `logrotate` executed only once daily instead of hourly, allowing `influxdb_http.log` files to grow rapidly and exhaust available disk space on `/var/log`.
+------
+- **I95-65603 Peer Path UP with Mixed Certificates in Fail-Hard Mode:** Resolved an issue where peer paths remained UP between nodes using mismatched certificate trust anchors (default factory-signed and custom CA-signed certificates) even when `invalid-certificate-behavior` was configured to `fail-hard`.
+------
+- **I95-65609 Routers Reverting to Waiting State After Conductor Upgrade:** Resolved an issue where previously onboarded routers incorrectly reverted to a "waiting" state in `show secure-conductor-onboarding` following a conductor upgrade due to improper handling of startup HTTP responses during authorized key retrieval.
+------
+- **I95-65617 Loss of syslog forwarding over TLS after upgrade:** Resolved an issue where syslog forwarding over TLS stopped working after upgrading, preventing log delivery to remote collectors.
+------
+- **I95-65635 Source NAT Port Exhaustion on Loopback Interface:** Resolved an issue where a large number of `SourceNatPortException` errors for the local KNI interface caused SSH connection failures to the SSR loopback IP. Host-type service routes no longer use the KNI IPv6 control interface for source NAT.
+------
+- **I95-65656 Conductor upgrade fails on health check:** Resolved an issue where conductor upgrades could fail due to a health check timeout, preventing the upgrade from completing successfully.
+------
+- **I95-65669 Configuration Synchronization Following Conductor Migration:** Resolved an issue where a router appeared synchronized after conductor migration but retained stale configuration because a temporary `NONE_AVAILABLE` response from the conductor was treated as terminal, halting configuration retrieval until a manual commit was executed.
+------
+- **I95-65680 RoutingManager Not Running on HA Headend Router:** Resolved an issue where the routingManager could remain in STANDBY after a session interruption, leaving the router without an active routing process (loss of BGP/routing connectivity) until restarted.
+------
+- **I95-65691 Node disconnected after headend partial rollback:** Resolved an issue where a node could remain disconnected from the conductor after a partial rollback scenario on a headend router.
+------
+- **I95-65719 Secure Conductor Onboarding (SCO) failing:** Resolved an issue where Secure Conductor Onboarding (SCO) failed when using RSA certificates in full chain format, incorrectly reporting that only RSA certificates are supported.
+------
+- **I95-65754 Highway Crash on Shutdown Due to Static Sessions:** Resolved an issue where the highway process crashed during shutdown on HA nodes performing a downgrade. Static sessions were not being cleared during the shutdown sequence. Static sessions are now properly cleared alongside the session table during shutdown, preventing the crash.
+------
+- **I95-65757 Highway Crash Adding a Second WAN Circuit on an HA Node:** Resolved an issue where the highway process could crash on both nodes of an HA pair when bringing up an additional WAN interface, triggered by a BGP flapping condition that occurred while the new circuit's physical link had not yet come up.
+------
+- **I95-65769 SSR400-series platforms failed to start due to missing IMA file signatures:** Resolved an issue where runtime RPM upgrades of the minion-connector on SSR400-series platforms failed to start due to missing IMA file signatures, resulting in loss of conductor connectivity.
+------
+- **I95-65771 Resolved a Highway Crash Related to Unclassified Application Statistics:** Resolved an issue where the highway process could crash while collecting application identification statistics for sessions that had no classified application type. Application statistics handling now safely accounts for this case.
+------
+- **I95-65797 ESKM Peering Stays Down After Late Metadata Key:** Resolved an issue where ESKM peering remained down when BFD received the local metadata key late because retransmit timers were not being restarted after their initial firing.
+------
+- **I95-65803 Connected Routes on a Bonded Interface Missing from the RIB After Upgrade:** Resolved an issue where, after an upgrade, directly connected routes on a bonded (LAG) interface could be missing from the routing table even though the interface and its members were up, requiring users to manually reset the interface to restore the routes. The system now correctly handles the race condition.
+------
+- **I95-65804 RADIUS Certificate Validation Rule Coverage:** Extended the configuration validation rule that requires a client certificate when a RADIUS server is configured for TLS to also cover router-level RADIUS server lists, which had previously been missed.
+------
+- **I95-65819 Fixed Syslog TLS Certificate Validation Failure:** Resolved an issue where syslog messages configured to use TLS could fail to be forwarded because the certificate authority bundle was not concatenated correctly. CA certificate bundles are now assembled correctly.
+------
+- **I95-65826 Assets enter a `Disconnected` state after upgrading the Conductor:** After a Conductor upgrade, assets entered a `Disconnected` state while the SSH connections were restored. In some cases this took an hour or more. The minion connector has been upgraded to version 1.7.7 to resolve this issue. 
+------
+- **I95-65855 IPv6 Link-Local Resolver Nginx Failures:** Resolved an issue where Nginx failed to start, or entered a crash loop when no external DNS was configured because IPv6 link-local addresses were selected as resolvers. The resolver logic now filters link-local addresses, properly formats IPv6 addresses, and prioritizes `/etc/hosts` and `dnsmasq` overrides.
+------
+- **I95-65886 Static DNS Host Entries Not Honored for Syslog Destinations:** Resolved an issue where syslog destinations configured by hostname did not resolve using locally configured static host-to-IP mappings when public DNS was unavailable. Syslog now resolves configured hostnames using static entries directly, rather than through the nginx resolver.
+------
+- **I95-65893 Display ESKM Payload Key Indices in Session Details:** Resolved an issue where operators could not verify active ESKM encryption key indices on live sessions. The `show session detail` and `show sessions by-id` command outputs now include ESKM payload key indices (`currentEncryptionIndex` and `currentDecryptionIndex`) for active encrypted flows.
+------
+- **I95-65899 Router not synchronized After Conductor Migration:** Resolved an issue where an HA router pair could remain un-synchronized with the production conductor after migrating from a staging conductor, because the new conductor address was not persisted following migration.
+------
+- **I95-65912 Resolved Source NAT Port Exhaustion Caused by Duplicate Internal Interfaces:** Resolved an issue where enabling both source NAT and IDP could result in duplicate internal interface identifiers being created, contributing to premature exhaustion of available source NAT ports and dropped packets. Internal IDP interface identifiers are now allocated uniquely.
+------
+- **I95-65914 Trusted CA Certificate File Resolution:** Resolved an issue where the `file` attribute of a trusted CA certificate was ignored in favor of the `name` attribute when resolving the certificate file on disk, which could prevent Secure Conductor Onboarding from locating the expected certificate file.
+------
+- **I95-65941 DHCP Subnet-Level Custom Options Rejected:** Resolved an issue where non-standard DHCP options and vendor-specific information (VIVSO) configured at the subnet level could be rejected due to a missing option definition, preventing the DHCP service from starting.
+------
+- **I95-65959 Improved Subtenant Support in IDP Access Policy Configuration:** Improved handling of subtenant relationships in IDP access policy configuration to ensure access policies are applied correctly across tenant hierarchies.
+------
+- **I95-65962 False-Positive NAT Duplicate Validation Error on HA Routers with IDP Enabled:** Resolved an issue where committing a dynamic or bidirectional source NAT configuration on an HA router with IDP enabled could fail with a false "duplicate" validation error, because the configuration validator did not account for the shared interface existing identically on both HA nodes. The validator now correctly recognizes this as a single logical interface.
+------
+- **I95-65963 Secure Conductor Onboarding Panels Displayed in Inconsistent Order:** Resolved an issue where Secure Conductor Onboarding (SCO) panels were displayed in a random order in the web interface. Panels are now displayed in a consistent, deterministic order.
+------
+- **I95-65971 Improved Subtenant Support in Access Policy Validation:** Improved access policy validation to correctly accept bidirectional tenant relationships when subtenants are configured.
+------
+- **I95-65972 Improved Subtenant Prefix Inheritance in Access Policy:** Resolved an issue where child tenants did not correctly inherit prefix bindings from an ancestor tenant in access policy configurations. Subtenant configurations now correctly inherit ancestor prefix bindings.
+------
+- **I95-66066 CA Bundle Not Refreshed After REST API Certificate Ingestion:** Resolved an issue where ingesting a trusted CA certificate through the REST API did not refresh the in-memory CA bundle used for certificate validation, causing subsequent client certificate ingestion to fail with a certificate validation error until an unrelated configuration commit was performed.
+------
+- **I95-66067 Offline upgrade failure:** Resolved an issue during upgrade that was being reported as an `Unpacker Failure`. The service startup order has been adjusted to prevent the issue in future upgrades/installations.
+------
+- **I95-66071 Resolved a Highway Crash During GRE Tunnel Configuration Updates:** Resolved an issue where a failed lookup during a GRE tunnel interface modification could leave stale internal state, causing the highway process to crash on a subsequent configuration change to the same tunnel. GRE tunnel state is now cleaned up correctly when a lookup fails.
+------
+- **I95-66077 BGP Peers Down After Enabling a Second Internet Provider:** Resolved a defect in BGP conditional advertisement processing that could cause all BGP peers to go down when a second BGP-connected internet provider was enabled.
+------
+- **I95-66082 Resolved a Highway Crash on Reverse-Flow Session Collision:** Resolved an issue where the highway process could crash when a returning packet collided with an internal session during reverse-flow processing, causing peer instability. The colliding packet is now safely dropped instead of causing a crash.
+------
+- **I95-66125 Assets Remain Disconnected After Conductor Upgrade:** Resolved an issue where assets could remain in a Disconnected or flapping state after a conductor upgrade instead of reaching a stable Running state.
+------
+- **I95-66127 401 Authorization Required error when refreshing Logs page:** Resolved a `401 Authorization Required` error that prevented non-default administrator users from viewing router displays, the Logs page, and FIB tables in the Conductor GUI. 
+------
+- **I95-66131 Highway Crash when setting PoE Port Provisional Status:** Resolved an issue where setting the provisional status of a PoE port could cause the highway process to abort due to a cross-thread access violation. The operation now safely executes on the correct thread.
+------
+- **I95-66133 Improved Conflux Shutdown Diagnostics:** Added logging to more clearly capture a shutdown deadlock condition in the Conflux analytics process, improving the ability to diagnose the issue if it recurs.
+------
+- **I95-66165 AES-GCM-256 Commit Failure:** Resolved an issue where committing a security policy using the `aes-gcm-256` cipher failed because the encryption vector was not automatically generated.
+------
+- **I95-66196 Commit Failures After Upgrade Due to Auto-Generated IPv6 DNS Service Routes:** Resolved an issue where upgrading could automatically generate an IPv6 DNS management service and associated service-route even when IPv6 DNS was not in use, causing configuration commits to fail on routers where the management interface did not have source NAT enabled. The DNS service route is now generated only for address families that have a corresponding management interface.
+------
+- **I95-66234 Creating a snapshot log for large configurations appears to stall the system:** Resolved an issue where generating a diagnostic snapshot log, including as part of a tech support info bundle, could take an excessive amount of time on a system with a large configuration and cause the configuration director's poller thread to appear unresponsive.
+------
+- **I95-66238 NTP Rejected State After Upgrade:** Resolved an issue where NTP synchronization could enter a rejected state after an upgrade, caused by a boot-sequence race condition where the NTP time-sync dispatcher ran before the internal management interface was ready. This could also result in missing analytics graphs and authentication errors on the Conductor GUI due to clock skew.
+------
+- **I95-66246 Antivirus Connectivity Failing on Vhost Platforms:** Resolved an issue where the antivirus (IDP AV) engine failed to establish connectivity on platforms using vhost-based networking, and improved parsing of security event information.
+------
+- **I95-66278 Resolved Peer-Path Instability with ML-KEM Sessions:** Resolved an issue where an incorrect retransmit timer for  sessions using ML-KEM could cause peer-paths to intermittently flap and drop traffic. The retransmit timer has been corrected.
+------
+- **I95-66291 RoutingManager Crash With Unresolved FQDN Service Route:** Resolved an issue where the routing manager process could crash when a service route's NAT target was an unresolved fully qualified domain name (FQDN), such as one still pending DNS resolution.
+------
+- **I95-66333 Highway Crash on Hub After Spoke WAN Interface Disruption:** Resolved an issue where the highway process on a hub could crash while decrypting payload traffic over a fabric or inter-router interface that did not have inter-router security configured, following a peer-path failure on a spoke.
+------
+- **I95-66351 Peer Paths Not Recovering After Interface Changes:** Resolved an issue where peer paths could remain down and next-hop routes unreachable after a network-interface configuration change, such as a shutdown or rename, requiring a full system restart to recover. Device-interface configuration changes are now retried automatically after a transient failure.
+------
+- **I95-66371 Antivirus Engine Startup Failure on Repeated CA Load:** Resolved an issue where the antivirus engine could fail to start if the certificate authority had already been extracted from a previous startup attempt.
+
+### Caveats
+
+- **I9566331 Peer path failure between SSR routers running version 7.2.1 and a hub running version 7.2.3 when using ESKM:** There is an issue where the ESKM metadata-key exchange between different software versions may fail to reach the  MetadataKeyExchCompleted state causing a peer path failure.
+
+  Any sender on 7.1.0-7.1.6 or 7.2.0-7.2.1 will remain in MetadataKeyExchInitiated when its peer is running 7.0.5, 7.1.7 or 7.2.3. This issue will be addressed in later releases.
+
+  If you are required to pair a 7.1.0-7.1.6 or 7.2.0-7.2.1 router with a 7.0.5, 7.1.7 or 7.2.3 peer on an ESKM path (during an upgrade, for example), upgrade both ends of each ESKM path in the same upgrade window.  Avoid rolling back to the earlier release while the peer remains on 7.0.5, 7.1.7 or 7.2.3.
+
 ## Release 7.2.1-1r1 
 
 **Release Date:** July 14, 2026
