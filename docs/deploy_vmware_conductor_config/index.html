@@ -6,7 +6,7 @@
 <title data-rh="true">Step 3: Configure the Conductor | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/deploy_vmware_conductor_config"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Step 3: Configure the Conductor | SSN Docs"><meta data-rh="true" name="description" content="This step configures the authority-level settings on the conductor: the authority name, conductor address, internet service, and corporate tenant. These objects are shared across all routers managed by this conductor."><meta data-rh="true" property="og:description" content="This step configures the authority-level settings on the conductor: the authority name, conductor address, internet service, and corporate tenant. These objects are shared across all routers managed by this conductor."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/deploy_vmware_conductor_config"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/deploy_vmware_conductor_config" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/deploy_vmware_conductor_config" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Configure the Conductor","item":"https://docs.128technology.com/docs/deploy_vmware_conductor_config"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.bcc1883f.css">
-<script src="/assets/js/runtime~main.d39f1229.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.be9cfd6b.js" defer="defer"></script>
 <script src="/assets/js/main.79a0ea34.js" defer="defer"></script>
 </head>
 <body>
@@ -24,7 +24,7 @@
 <ol>
 <li class="">Select the <strong>Conductor</strong> from the Authority menu on the left side of the GUI.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Configuration menu" src="/assets/images/config_menu_gui-d6cb9a08866058fa3b354486eb332ab0.png" width="234" height="412" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Configuration menu" src="/assets/images/config_menu_gui-2def20dce067614627a56d2c647b7bb9.png" width="234" height="412" class="img_ev3q"></p>
 <ol start="2">
 <li class="">Select the <strong>Configure</strong> icon.</li>
 </ol>
@@ -70,7 +70,7 @@
 <p>From the GUI, navigate <code>Configuration &gt; Authority &gt; Router: Conductor</code>.</p>
 </li>
 <li class="">
-<p>Scroll down to the <strong>Router System Settings tile</strong> and click it.</p>
+<p>Scroll down to <strong>Router Settings tile</strong> and click on the <strong>System Settings</strong> tile.</p>
 </li>
 <li class="">
 <p>Scroll down to <strong>Software Update Settings</strong>.</p>
@@ -99,14 +99,16 @@
 <li class="">Scroll down to <strong>Services</strong> and select <strong>ADD</strong>.</li>
 <li class="">Enter the name <code>Internet-Traffic</code> and select <strong>SAVE</strong>.</li>
 <li class="">On the Service screen, verify <strong>Enabled</strong> is set to <code>true</code>.</li>
+<li class="">Under <strong>Scope</strong>, select Public.</li>
 <li class="">Scroll down to <strong>Service Addresses</strong> and select <strong>ADD</strong>.</li>
 <li class="">Enter <code>0.0.0.0/0</code> and select <strong>SAVE</strong>.</li>
-<li class="">Scroll down to <strong>Access Policy</strong> and select <strong>ADD</strong>.<!-- -->
+<li class="">Scroll down to <strong>Access Policy</strong> and select <strong>ADD</strong>.</li>
+</ol>
 <ul>
 <li class="">Set <strong>Source</strong> to <code>corp</code>.</li>
 <li class="">Select <strong>SAVE</strong>.</li>
 </ul>
-</li>
+<ol start="11">
 <li class="">Select <strong>VALIDATE</strong> then <strong>COMMIT</strong>.</li>
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-was-configured">What Was Configured<a href="#what-was-configured" class="hash-link" aria-label="Direct link to What Was Configured" title="Direct link to What Was Configured" translate="no">​</a></h2>
