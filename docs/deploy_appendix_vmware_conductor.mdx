@@ -18,13 +18,13 @@ This configuration can be applied to a freshly initialized conductor using the P
 
 2. Copy the file to the conductor:
 
-   ```bash
+   ```
    scp vmware-conductor.cfg admin@192.168.100.10:/tmp/
    ```
 
 3. Log in to the conductor PCLI:
 
-   ```bash
+   ```
    ssh admin@192.168.100.10
    ```
 
@@ -59,7 +59,6 @@ config
         service  Internet-Traffic
             name             Internet-Traffic
             scope            public
-            security         internal
 
             access-policy
                 source  corp
@@ -76,23 +75,6 @@ config
                 name  node0
                 role  conductor
 
-                device-interface  mgmt-dev
-                    name         mgmt-dev
-                    type         ethernet
-                    pci-address  0000:0b:00.0
-                    forwarding   false
-
-                    network-interface  mgmt-intf
-                        name  mgmt-intf
-                        type  management
-
-                        address  192.168.100.10
-                            ip-address     192.168.100.10
-                            prefix-length  24
-                            gateway        192.168.100.1
-                        exit
-                    exit
-                exit
             exit
         exit
     exit
