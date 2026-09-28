@@ -41,8 +41,8 @@ The following infrastructure must exist in your Azure subscription before deploy
    | Resource Group | `SSR-RG` | Select an existing Resource Group |
    | Region | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
    | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
-   | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the conductor. |
-   | Instance Name | `azure-spoke-router` | |
+   | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the router. |
+   | Instance Name | `azure-spoke-router` | Display name for the VM. |
    | SSR Version | `7.1.4` | The BYOL version to install |
    | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor |
    | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments |
@@ -54,7 +54,7 @@ The following infrastructure must exist in your Azure subscription before deploy
    | Public Subnet Allowed CIDR | `0.0.0.0/0` | This should be restricted at deployment time to the IP address for SSH/HTTPS |
    | Admin Allowed CIDR | CIDR range allowed for SSH/HTTPS | Source IP CIDR range `x.x.x.x/32` to reach the conductor for administration. |
    | Private Subnet Name | `ssr-spoke-lan` | Hub LAN subnet |
-   | Private Subnet Allowed CIDR | `0.0.0.0/0` | |
+   | Private Subnet Allowed CIDR | `0.0.0.0/0` If the value is known at deployment time, it should be restricted. | Source IP address range of the internal workloads to allow access. |
    | Admin Public Key Data | _(contents of your SSH public key)_ | If you have an existing public key, select the appropriate response and provide the key. If not, generate a new one the first time, and reuse the same key subsequent times. |
 
    :::caution
@@ -73,7 +73,7 @@ The following infrastructure must exist in your Azure subscription before deploy
 
     Make a note of the following value — you will need them in later steps:
 
-   - **Public IP address** assigned to the conductor management interface.
+   - **Public IP address:** The router's Azure assigned Public IP.
 
 ## Next Step
 

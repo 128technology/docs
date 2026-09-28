@@ -73,8 +73,8 @@ The router template supports an additional management interface. This is not use
    | Resource Group | `SSR-RG` | Select an existing Resource Group. |
    | Region | `eastus` | The Azure location where the VNet exists. One word, all lowercase (for example, `eastus`, `westus`, `westeurope`). See [Azure locations](https://azure.microsoft.com/en-us/global-infrastructure/locations). |
    | Availability Set Name | Optional | This is an optional parameter and should be left blank. |
-   | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the conductor. |
-   | Instance Name | `azure-hub-router` | |
+   | Instance Size | `Standard_F8s_v2` | The Azure VM size to use for the router. |
+   | Instance Name | `azure-hub-router` | Display name for the VM. |
    | SSR Version | `7.1.4` | The BYOL version to install. |
    | Primary Control IP | `<conductor-public-ip>` | Public IP of the conductor. |
    | Secondary Control IP | _(leave blank)_ | Only required for HA conductor deployments. |
@@ -105,9 +105,11 @@ The router template supports an additional management interface. This is not use
 
     Make a note of the following value — you will need them in later steps:
 
-   - **Public IP address** assigned to the conductor management interface.
+   - **Public IP address:** The router's Azure assigned public IP.
 
 ## Network Interface Layout
+
+Use the following interface information to assign the LAN and WAN interfaces later in this process. 
 
 | Linux Interface | Azure NIC Name | Subnet |
 |-----------------|---------------|--------|

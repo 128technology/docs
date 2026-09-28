@@ -295,7 +295,7 @@ exit
 The following table describes how internet traffic flows in the completed hub-and-spoke network.
 
 | Source | Destination | Path |
-|--------|------------|------|
-| Hub LAN device (10.0.2.x) | Internet | Hub LAN → `hub-corp` tenant → `Internet-Traffic` service → `internet-breakout` route → hub `wan1` → internet. |
-| Spoke LAN device (10.0.4.x) | Internet | Spoke LAN → `spoke-corp` tenant → `Internet-Traffic` service → `internet-via-hub` peer route → SVR path → hub `wan1` → internet. |
-| Hub or spoke router | Conductor | Management over forwarding on `wan1` using port 930/4505/4506; management-vector priority 100 on each router's WAN interface. |
+| --- | --- | --- |
+| Hub LAN device (10.0.2.x) | Internet | Hub LAN → `hub-corp` tenant → `Internet-Traffic` service → `internet-breakout` route → hub `wan1` → internet |
+| Spoke LAN device (10.0.4.x) | Internet | Spoke LAN → `spoke-corp` tenant → `Internet-Traffic` service → `internet-via-hub` peer route → SVR path → hub `wan1` → internet |
+| Hub or spoke router | Conductor | Management over forwarding on `wan1` using port 930/4505/4506; management-vector priority 100 on each router's WAN interface |
