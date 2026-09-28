@@ -1,0 +1,35 @@
+---
+title: "Step 4: Onboard the Routers to the Conductor"
+sidebar_label: "Onboard the Routers to the Conductor"
+---
+
+This step creates the router objects on the conductor and binds each to its GCP deployment name (asset ID). Perform this step for `Hub1`, then repeat for `Spoke1`.
+
+1. Open a browser tab and navigate to your conductor: `https://<conductor-external-IP>` and log in to the conductor GUI.
+2. On the left menu, click **Authority** under **Configuration**, and click **Add** next to the **Routers** section.
+
+   ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
+
+3. In the **New Router** pop-up window, enter the router name (`hub1` or `spoke1`) and click **Save**.
+
+   ![New Router](/img/dep-vmrouter-newrouter.png)
+
+4. In the **Basic Information** section, select `internal` for the **Inter-node Security Policy** field.
+
+   ![Basic Info](/img/dep-vmrouter-basicinfo.png)
+
+5. Below **Basic Info**, click **Add** next to **Nodes**. In the **New Node** pop-up window, enter `node0` and click **Save**.
+
+   ![New Node](/img/dep-vmrouter-newnode.png)
+
+6. On the **Node** screen, set the **Associated Asset ID** to the router's GCP deployment name (`hub1` or `spoke1`) and set **Role** to `combo`.
+
+   ![Node Asset ID](/img/dep-vmrouter-node-asset-id.png)
+
+7. Click **Validate and Commit**. If a review-commit warning appears, click **Proceed** and **Commit**.
+
+The router VM begins to synchronize with the conductor. Navigate to **Routers** under **Authority** and wait for the **Provisioner** status to show `Synchronized` before continuing. This may take 8–10 minutes per router.
+
+## Next Step
+
+With both routers synchronized, proceed to [Step 5 — Configure Hub and Spoke Routers](deploy_gcp_hub_spoke_config.mdx).

@@ -1,0 +1,327 @@
+---
+title: "Appendix: GCP Hub and Spoke Configuration"
+sidebar_label: "Appendix: Hub and Spoke Config"
+---
+import NetworkDesign from './_deploy_gcp_hub_spoke_router_network_design.md';
+
+This appendix contains the complete SSR PCLI configuration for the `hub1` and `spoke1` GCP router deployments described in this guide. This configuration reflects the final state after completing all steps through [Step 5 — Configure Hub and Spoke Routers](deploy_gcp_hub_spoke_config.mdx).
+
+:::important
+This appendix uses **example** PCI addresses (`0000:00:04.0` for WAN, `0000:00:05.0` for LAN). These are the standard first two NIC slots for a two-interface GCP VM, but always confirm the actual addresses reported by each router if you use more than two NICs.
+:::
+
+## Network Design Reference
+
+<NetworkDesign/>
+
+## Applying This Configuration
+
+This configuration can be applied to the conductor using the PCLI import function.
+
+1. Save the configuration below to a file — for example, `gcp-hub-spoke.cfg`.
+
+2. Copy the file to the conductor:
+
+   ```
+   scp gcp-hub-spoke.cfg admin@<conductor-external-ip>:/tmp/
+   ```
+
+3. Log in to the conductor PCLI:
+
+   ```
+   ssh admin@<conductor-external-ip>
+   ```
+
+4. Enter configuration mode and import:
+
+   ```
+   admin@node0.conductor1# import config /tmp/gcp-hub-spoke.cfg
+   ```
+
+5. Review any validation warnings, then commit:
+
+   ```
+   admin@node0.conductor1 (config)# commit
+   Are you sure you want to commit the candidate config? [y/N]: y
+   ```
+
+Alternatively, you may copy and paste each block into the PCLI while in `configure` → `edit` mode.
+
+:::note
+The authority-level objects this configuration depends on (an authority name, conductor address, and the default `Internet-Traffic` service) must already exist in the running configuration. This block only adds the `hub-workloads`/`spoke-workloads` tenants, the `Hub-Workloads`/`Spoke-Workloads` services, and the two router objects. If your conductor's `Internet-Traffic` service does not yet permit the `hub-workloads` tenant, add that access policy separately.
+:::
+
+## Complete Configuration
+
+```
+config
+    authority
+        tenant  hub-workloads
+            name    hub-workloads
+
+            member  hub-workloads-subnets
+                neighborhood  hub-workloads-nbhd
+                address       192.168.12.0/24
+            exit
+        exit
+
+        tenant  spoke-workloads
+            name    spoke-workloads
+
+            member  spoke-workloads-subnets
+                neighborhood  spoke-workloads-nbhd
+                address       192.168.22.0/24
+            exit
+        exit
+
+        service  Hub-Workloads
+            name             Hub-Workloads
+            security         internal
+
+            access-policy    spoke-workloads
+                source  spoke-workloads
+            exit
+
+            address          192.168.12.0/24
+        exit
+
+        service  Spoke-Workloads
+            name             Spoke-Workloads
+            security         internal
+
+            access-policy    hub-workloads
+                source  hub-workloads
+            exit
+
+            address          192.168.22.0/24
+        exit
+
+        service  Internet-Traffic
+            name             Internet-Traffic
+            address          0.0.0.0/0
+
+            access-policy    hub-workloads
+                source  hub-workloads
+            exit
+
+            access-policy    spoke-workloads
+                source  spoke-workloads
+            exit
+        exit
+
+        router  hub1
+            name                 hub1
+            inter-node-security  internal
+
+            node  node0
+                name        node0
+                asset-id    hub1
+                role        combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    pci-address        0000:00:04.0
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              1
+                        conductor              true
+                        default-route          true
+                        source-nat             true
+                        management             true
+                        dhcp                   v4
+                        inter-router-security  internal
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood           svr-hub-spoke
+                            name      svr-hub-spoke
+                            topology  hub
+                        exit
+
+                        host-service           ssh
+                            service-type  ssh
+                        exit
+
+                        access-policy          admin-access
+                            source  <admin-allowed-cidr>
+                        exit
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    pci-address        0000:00:05.0
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+
+                        neighborhood           hub-workloads-nbhd
+                            name  hub-workloads-nbhd
+                        exit
+
+                        address     192.168.11.2
+                            ip-address     192.168.11.2
+                            prefix-length  24
+                            gateway        192.168.11.1
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route  internet-route
+                name          internet-route
+                service-name  Internet-Traffic
+
+                next-hop      node0 wan1
+                    node-name  node0
+                    interface  wan1
+                exit
+            exit
+
+            service-route  hub-to-spoke-route
+                name          hub-to-spoke-route
+                service-name  Spoke-Workloads
+                peer          spoke1
+            exit
+
+            service-route  spoke-inbound-route
+                name          spoke-inbound-route
+                service-name  Hub-Workloads
+
+                next-hop      node0 lan1
+                    node-name  node0
+                    interface  lan1
+                exit
+            exit
+        exit
+
+        router  spoke1
+            name                 spoke1
+            inter-node-security  internal
+
+            node  node0
+                name        node0
+                asset-id    spoke1
+                role        combo
+
+                device-interface  wan-dev
+                    name               wan-dev
+                    pci-address        0000:00:04.0
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              1
+                        conductor              true
+                        default-route          true
+                        source-nat             true
+                        management             true
+                        dhcp                   v4
+                        inter-router-security  internal
+
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+
+                        neighborhood           svr-hub-spoke
+                            name      svr-hub-spoke
+                            topology  spoke
+                        exit
+
+                        host-service           ssh
+                            service-type  ssh
+                        exit
+
+                        access-policy          admin-access
+                            source  <admin-allowed-cidr>
+                        exit
+                    exit
+                exit
+
+                device-interface  lan-dev
+                    name               lan-dev
+                    pci-address        0000:00:05.0
+
+                    network-interface  lan1
+                        name        lan1
+                        global-id   2
+
+                        neighborhood           spoke-workloads-nbhd
+                            name  spoke-workloads-nbhd
+                        exit
+
+                        address     192.168.21.2
+                            ip-address     192.168.21.2
+                            prefix-length  24
+                            gateway        192.168.21.1
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route  spoke-to-hub-route
+                name          spoke-to-hub-route
+                service-name  Hub-Workloads
+                peer          hub1
+            exit
+
+            service-route  hub-inbound-route
+                name          hub-inbound-route
+                service-name  Spoke-Workloads
+
+                next-hop      node0 lan1
+                    node-name  node0
+                    interface  lan1
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+## Interface Summary
+
+### Hub Router (`hub1`)
+
+| Interface | Device Interface | PCI Address | Type | Configuration |
+|-----------|-----------------|-------------|------|---------------|
+| `wan1` | `wan-dev` | `0000:00:04.0` | External | DHCP v4, conductor, default-route, source-nat, management, neighborhood `svr-hub-spoke` topology `hub` |
+| `lan1` | `lan-dev` | `0000:00:05.0` | External | Static `192.168.11.2/24`, neighborhood `hub-workloads-nbhd` |
+
+### Spoke Router (`spoke1`)
+
+| Interface | Device Interface | PCI Address | Type | Configuration |
+|-----------|-----------------|-------------|------|---------------|
+| `wan1` | `wan-dev` | `0000:00:04.0` | External | DHCP v4, conductor, default-route, source-nat, management, neighborhood `svr-hub-spoke` topology `spoke` |
+| `lan1` | `lan-dev` | `0000:00:05.0` | External | Static `192.168.21.2/24`, neighborhood `spoke-workloads-nbhd` |
+
+## Service Route Summary
+
+| Router | Service Route | Service | Type | Next Hop / Peer | Effect |
+|--------|--------------|---------|------|-----------------|--------|
+| `hub1` | `internet-route` | `Internet-Traffic` | `service-agent` | `node0 / wan1` | Hub workload and spoke SVR-forwarded internet traffic breaks out through the hub's WAN interface. |
+| `hub1` | `hub-to-spoke-route` | `Spoke-Workloads` | `peer` | `spoke1` | Hub-initiated traffic to spoke workloads is forwarded over the SVR peer path. |
+| `hub1` | `spoke-inbound-route` | `Hub-Workloads` | `service-agent` | `node0 / lan1` | Spoke-initiated traffic to hub workloads is forwarded out the hub's LAN interface. |
+| `spoke1` | `spoke-to-hub-route` | `Hub-Workloads` | `peer` | `hub1` | Spoke-initiated traffic to hub workloads is forwarded over the SVR peer path. |
+| `spoke1` | `hub-inbound-route` | `Spoke-Workloads` | `service-agent` | `node0 / lan1` | Hub-initiated traffic to spoke workloads is forwarded out the spoke's LAN interface. |
+
+## Traffic Flow Reference
+
+The following table describes how traffic flows in the completed hub-and-spoke network.
+
+| Source | Destination | Path |
+| --- | --- | --- |
+| Hub workload (192.168.12.x) | Internet | Hub workload → `hub-workloads` tenant → `Internet-Traffic` service → `internet-route` → hub `wan1` → internet |
+| Spoke workload (192.168.22.x) | Hub workload (192.168.12.x) | Spoke workload → `spoke-workloads` tenant → `Hub-Workloads` service → `spoke-to-hub-route` peer route → SVR path → hub `lan1` → hub workload |
+| Hub workload (192.168.12.x) | Spoke workload (192.168.22.x) | Hub workload → `hub-workloads` tenant → `Spoke-Workloads` service → `hub-to-spoke-route` peer route → SVR path → spoke `lan1` → spoke workload |
+
+## Related Documentation
+
+- [Overview — Deploying GCP Hub and Spoke Routers](deploy_gcp_hub_spoke_overview.mdx)
+- [Step 5 — Configure Hub and Spoke Routers](deploy_gcp_hub_spoke_config.mdx)
+- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.md)

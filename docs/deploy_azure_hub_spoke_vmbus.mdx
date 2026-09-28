@@ -1,0 +1,96 @@
+---
+title: "Step 3: Verify Installation and Discover VMBus UUIDs"
+sidebar_label: "Verify and Discover VMBus UUIDs"
+---
+
+This step waits for SSR 7.1.4 to finish installing on both VMs, confirms both routers appear on the conductor, and discovers the VMBus UUIDs for the WAN and LAN interfaces on each router. You must record these UUIDs before configuring the routers on the conductor.
+
+## Wait for Installation to Complete
+
+The BYOL bootstrapper installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
+
+Monitor installation progress by connecting to each VM via SSH:
+
+```
+# Hub router
+ssh -i t128@<hub-router-public-ip>
+
+# Spoke router (separate terminal)
+ssh -i t128@<spoke-router-public-ip>
+```
+
+Once logged in, check the bootstrapper journal for progress:
+
+```
+journalctl -u 128T-hardware-bootstrapper -f
+```
+
+The installation is complete when the SSR PCLI launches.
+
+## Verify the Routers Are Running
+
+On each router, enter the SSR PCLI and confirm the system is running:
+
+```
+su admin
+```
+
+```
+admin@node0.azure-hub-router# show system
+```
+
+The status should return `running`. Repeat for the spoke router:
+
+```
+admin@node0.azure-spoke-router# show system
+```
+
+## Verify the Routers Appear on the Conductor
+
+After installation, each router contacts the conductor and appears as a pending asset.
+
+1. In the Conductor GUI, select **Configuration**.
+2. Select **Authority** and look under **Routers**.
+3. Both `azure-hub-router` and `azure-spoke-router` should appear with pending associations.
+
+If a router does not appear within 15 minutes of installation completing, verify that:
+- The conductor's public IP is reachable from the router WAN subnet over ports 930, 4505, and 4506.
+- The correct conductor IP was supplied in the deployment template or cloud-init block.
+
+## Network Interface Layout
+
+The BYOL conductor-managed router template deploys a VM with network interfaces attached in the following order:
+
+| Linux Interface | Azure NIC Name | Subnet |
+|-----------------|---------------|--------|
+| ge-0-0 | azure-spoke-router-public | ssr-spoke-wan |
+| ge-0-1 | azure-spoke-router-private | ssr-spoke-lan |
+
+## Discover VMBus UUIDs
+
+In Azure, device interfaces are identified by **VMBus UUID** rather than PCI address. You must discover the VMBus UUID for each WAN and LAN interface before configuring the routers on the conductor.
+
+Perform the following steps on **each router** separately. Record the UUIDs — you will need them in [Step 4](deploy_azure_hub_spoke_config.mdx).
+
+### Step 1: Identify VMBus UUIDs From the Router VM
+
+Open the devicemap to see the VMBus UUID mapping for the attached interfaces.
+
+`cat /var/lib/128technology/devicemap.json | jq`
+
+Take note of the device names and associated VMBus ID.
+
+### VMBus UUID Reference Table
+
+Record your discovered UUIDs using the following table. You will substitute these values throughout [Step 4](deploy_azure_hub_spoke_config.mdx).
+
+| Router | Interface | Role | Subnet | VMBus UUID |
+|--------|-----------|------|-----------|
+| `azure-hub-router` | `ge-0-0` | WAN | `ssr-hub-wan` | `<hub-wan-vmbus-uuid>` |
+| `azure-hub-router` | `ge-0-1` | LAN | `ssr-hub-lan` | `<hub-lan-vmbus-uuid>` |
+| `azure-spoke-router` | `ge-0-0` | WAN | `ssr-spoke-wan` | `<spoke-wan-vmbus-uuid>` |
+| `azure-spoke-router` | `ge-0-1` | LAN | `ssr-spoke-lan` | `<spoke-lan-vmbus-uuid>` |
+
+## Next Step
+
+Proceed to [Step 4 — Configure Hub and Spoke Routers](deploy_azure_hub_spoke_config.mdx).
