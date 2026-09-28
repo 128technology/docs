@@ -153,7 +153,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-64688 Highway coredumps causing peer path flaps:** Resolved an issue where highway process coredumps were occurring, resulting in peer path flaps.
 ------
-- **I95-64811 Highway crash causing session drops:** Resolved a highway process crash that occurred under specific traffic conditions, resulting in session drops and temporary traffic disruption.
+- **I95-64811 Highway crash causing session drops:** Resolved a highway process crash caused by asserts that allowed null pointers to propagate into the flow table, resulting in session drops and temporary traffic disruption.
 ------
 - **I95-64857 REST API for Trusted CA Certificate Ingestion:** Added a REST API endpoint to ingest a trusted CA certificate bundle directly, so that certificates referenced by a `trusted-ca-certificate` file pointer no longer need to be placed on disk manually.
 ------
@@ -221,7 +221,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65488 Improved Logging for File-Based Trusted CA Certificates:** Added logging to the configuration director to make it easier to determine when a file-pointer-based trusted CA certificate is referenced in configuration but the file is not yet present on disk.
 ------
-- **I95-65512 Web Server and Nginx Crash Looping:** Resolved an issue where the web server and nginx processes entered a crash loop, preventing access to the SSR Web UI.
+- **I95-65512 Web Server and Nginx Crash Looping:** Resolved an issue where the web server and nginx could enter a restart loop when an IPv6 nameserver was present in resolv.conf (common on OL9). The syslog proxy configuration now correctly brackets IPv6 addresses in the nginx resolver and upstream directives.
 ------
 - **I95-65526 Stale Onboarding State During Node Redeployment:** Resolved an issue where redeploying a node or reusing a node name after deletion caused Secure Conductor Onboarding (SCO) to fail due to stale onboarding state and residual keys persisting on the conductor, resulting in onboarding rejections and expired tokens.
 ------
@@ -253,7 +253,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65617 Loss of syslog forwarding over TLS after upgrade:** Resolved an issue where syslog forwarding over TLS stopped working after upgrading, preventing log delivery to remote collectors.
 ------
-- **I95-65635 Source NAT Port Exhaustion on Loopback Interface:** Resolved an issue where a large number of `SourceNatPortException` errors for the local KNI interface caused SSH connection failures to the SSR loopback IP. Host-type service routes no longer use the KNI IPv6 control interface for source NAT.
+- **I95-65635 Source NAT Port Exhaustion on Loopback Interface:** Resolved an issue where a large number of `SourceNatPortException` errors for the local KNI interface caused SSH connection failures. `service-routes` with the `host` type now only generate service-route config with next-hop set to match the target-address list option for `host`.
 ------
 - **I95-65656 Conductor upgrade fails on health check:** Resolved an issue where conductor upgrades could fail due to a health check timeout, preventing the upgrade from completing successfully.
 ------
@@ -261,7 +261,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65680 RoutingManager Not Running on HA Headend Router:** Resolved an issue where the routingManager could remain in STANDBY after a session interruption, leaving the router without an active routing process (loss of BGP/routing connectivity) until restarted.
 ------
-- **I95-65691 Node disconnected after headend partial rollback:** Resolved an issue where a node could remain disconnected from the conductor after a partial rollback scenario on a headend router.
+- **I95-65691 Node disconnected after headend rollback:** Resolved an issue where a node could remain disconnected from the conductor after one node of a redundant dual node headend router does not successfully complete a rollback. 
 ------
 - **I95-65719 Secure Conductor Onboarding (SCO) failing:** Resolved an issue where Secure Conductor Onboarding (SCO) failed when using RSA certificates in full chain format, incorrectly reporting that only RSA certificates are supported.
 ------
