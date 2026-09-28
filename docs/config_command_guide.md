@@ -50,6 +50,9 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | [`resource-group`](#configure-authority-resource-group) | Collect objects into a management group. |
 | [`router`](#configure-authority-router) | The router configuration element serves as a container for holding the nodes of a single deployed router, along with their policies. |
 | [`routing`](#configure-authority-routing) | authority level routing configuration |
+| [`salt-minimum-auth-version`](#configure-authority-salt-minimum-auth-version) | Enforce a minimum authentication protocol version from minions connecting to the master. This setting protects against authentication downgrade attacks (CVE-2025-62349) where a malicious minion attempts to use an older, less secure authentication protocol version to bypass security features introduced in newer protocol versions.</br>Authentication protocol versions and their security features:</br>- Version 0/1: No message signing, no nonce, no security features (legacy, insecure)
+</br>- Version 2: Message signing and nonce, but missing TTL validation, token validation, and minion ID matching (partially secure)
+</br>- Version 3+: Full security with message signing, nonce, TTL checks, token validation, minion ID matching, and session keys (recommended)</br>Version 3 requires all managed routers to be running SSR version 7.0+ |
 | [`secure-conductor-onboarding`](#configure-authority-secure-conductor-onboarding) | Configure Secure Conductor Onboarding |
 | [`security`](#configure-authority-security) | The security elements represent security policies for governing how and when the SSR encrypts and/or authenticates packets. |
 | [`security-key-management`](#configure-authority-security-key-management) | Configure Security Key Management |
@@ -5280,6 +5283,7 @@ configure authority router <name>
 | command | description |
 | ------- | ----------- |
 | [`administrative-group`](#configure-authority-router-administrative-group) | An identifier that associates this router with an administrative group. |
+| [`allow-summary-services`](#configure-authority-router-allow-summary-services) | Allow an SVR packet matching a summary service on the ingress router to match a specific service on the egress router or vice versa. When enabled, the locally matched service is used without hierarchical service relation checks |
 | [`application-identification`](#configure-authority-router-application-identification) | Configure Application Identification |
 | [`bfd`](#configure-authority-router-bfd) | BFD parameters for sessions between nodes within the router. |
 | [`certificate-revocations`](#configure-authority-router-certificate-revocations) | Configure Certificate Revocations |
@@ -5355,6 +5359,32 @@ A string identifier which only uses alphanumerics, underscores, or dashes, and c
 
 Must contain only alphanumeric characters or any of the following: _ -
 Length: 0-63
+
+## `configure authority router allow-summary-services`
+
+Allow an SVR packet matching a summary service on the ingress router to match a specific service on the egress router or vice versa. When enabled, the locally matched service is used without hierarchical service relation checks
+
+#### Usage
+
+```
+configure authority router allow-summary-services [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router application-identification`
 
@@ -8075,6 +8105,7 @@ configure authority router node <name>
 | [`reset-button-enabled`](#configure-authority-router-node-reset-button-enabled) | Enable the reset button for restarting or factory resetting. |
 | [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the SSR system. |
 | [`secure-conductor-onboarding`](#configure-authority-router-node-secure-conductor-onboarding) | Configure Secure Conductor Onboarding |
+| [`serial-console-baud-rate`](#configure-authority-router-node-serial-console-baud-rate) | Serial console baud rate. |
 | [`serial-console-enabled`](#configure-authority-router-node-serial-console-enabled) | Enable serial console. |
 | [`session-processor-count`](#configure-authority-router-node-session-processor-count) | The number of threads to use for session processing when using &#x27;manual&#x27; session-processor mode. |
 | [`session-processor-mode`](#configure-authority-router-node-session-processor-mode) | The method by which the number of threads used for session processing should be determined. |
@@ -8280,6 +8311,7 @@ configure authority router node device-interface <name>
 | [`target-interface`](#configure-authority-router-node-device-interface-target-interface) | Specifies the name of an external interface to be automatically bridged to a logical interface. |
 | [`traffic-engineering`](#configure-authority-router-node-device-interface-traffic-engineering) | Configure Traffic Engineering |
 | [`type`](#configure-authority-router-node-device-interface-type) | Type of interface. |
+| [`vhost`](#configure-authority-router-node-device-interface-vhost) | Configure Vhost |
 | [`vmbus-uuid`](#configure-authority-router-node-device-interface-vmbus-uuid) | The VMBus UUID of the network device. Hyper-V Environment only. Only relevant if type is ethernet. |
 | [`vrrp`](#configure-authority-router-node-device-interface-vrrp) | Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP). |
 
@@ -20956,10 +20988,12 @@ Configure Vrrp
 | [`advertisement-interval`](#configure-authority-router-node-device-interface-network-interface-vrrp-advertisement-interval) | How frequently (in milliseconds) advertisements should be sent. |
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-node-device-interface-network-interface-vrrp-enabled) | Whether or not this interface should participate in VRRP. |
+| [`max-garp-interval`](#configure-authority-router-node-device-interface-network-interface-vrrp-max-garp-interval) | Maximum time (in seconds) between gratuitous ARP transmissions during VRRP backoff. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`priority`](#configure-authority-router-node-device-interface-network-interface-vrrp-priority) | The priority of this interface within the virtual router pair. |
 | `show` | Show configuration data for &#x27;vrrp&#x27; |
 | [`use-physical-address`](#configure-authority-router-node-device-interface-network-interface-vrrp-use-physical-address) | Use the physical mac address of the device instead of the VRRP virtual mac. |
+| [`use-uptime-tiebreaker`](#configure-authority-router-node-device-interface-network-interface-vrrp-use-uptime-tiebreaker) | When two Active devices have equal Priority, use uptime as tie breaker. Only supported between SSR nodes on same router. |
 | [`vrid`](#configure-authority-router-node-device-interface-network-interface-vrrp-vrid) | The Virtual Router ID. This value must be mirrored by the redundant interface. |
 
 ## `configure authority router node device-interface network-interface vrrp advertisement-interval`
@@ -21016,6 +21050,34 @@ A true or false value.
 
 Options: true or false
 
+## `configure authority router node device-interface network-interface vrrp max-garp-interval`
+
+Maximum time (in seconds) between gratuitous ARP transmissions during VRRP backoff.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface vrrp max-garp-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 300
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface network-interface vrrp priority`
 
 The priority of this interface within the virtual router pair.
@@ -21050,6 +21112,32 @@ Use the physical mac address of the device instead of the VRRP virtual mac.
 
 ```
 configure authority router node device-interface network-interface vrrp use-physical-address [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router node device-interface network-interface vrrp use-uptime-tiebreaker`
+
+When two Active devices have equal Priority, use uptime as tie breaker. Only supported between SSR nodes on same router.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface vrrp use-uptime-tiebreaker [<boolean>]
 ```
 
 ##### Positional Arguments
@@ -21641,7 +21729,49 @@ Options:
 - lte:         An interface using LTE.
 - t1:          An interface using a T1 card.
 - bond:        An aggregated group of ethernet interfaces.
+- vhost:       A vhost-user interface for direct DPDK communication.
 - conduit:     An interface which is used as a connection to a switch device.
+
+## `configure authority router node device-interface vhost`
+
+Configure Vhost
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`mode`](#configure-authority-router-node-device-interface-vhost-mode) | Configure Mode |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;vhost&#x27; |
+
+## `configure authority router node device-interface vhost mode`
+
+Configure Mode
+
+#### Usage
+
+```
+configure authority router node device-interface vhost mode [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: client
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- client:    Run vhost-user in client mode.
 
 ## `configure authority router node device-interface vmbus-uuid`
 
@@ -21679,10 +21809,12 @@ Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VR
 | [`advertisement-interval`](#configure-authority-router-node-device-interface-vrrp-advertisement-interval) | How frequently (in milliseconds) advertisements should be sent. |
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-node-device-interface-vrrp-enabled) | Whether or not this interface should participate in VRRP. |
+| [`max-garp-interval`](#configure-authority-router-node-device-interface-vrrp-max-garp-interval) | Maximum time (in seconds) between gratuitous ARP transmissions during VRRP backoff. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`priority`](#configure-authority-router-node-device-interface-vrrp-priority) | The priority of this interface within the virtual router pair. |
 | `show` | Show configuration data for &#x27;vrrp&#x27; |
 | [`use-physical-address`](#configure-authority-router-node-device-interface-vrrp-use-physical-address) | Use the physical mac address of the device instead of the VRRP virtual mac. |
+| [`use-uptime-tiebreaker`](#configure-authority-router-node-device-interface-vrrp-use-uptime-tiebreaker) | When two Active devices have equal Priority, use uptime as tie breaker. Only supported between SSR nodes on same router. |
 | [`vlan`](#configure-authority-router-node-device-interface-vrrp-vlan) | Vlan of the network-interface that will represent this device |
 | [`vrid`](#configure-authority-router-node-device-interface-vrrp-vrid) | The Virtual Router ID. This value must be mirrored by the redundant interface. |
 
@@ -21740,6 +21872,34 @@ A true or false value.
 
 Options: true or false
 
+## `configure authority router node device-interface vrrp max-garp-interval`
+
+Maximum time (in seconds) between gratuitous ARP transmissions during VRRP backoff.
+
+#### Usage
+
+```
+configure authority router node device-interface vrrp max-garp-interval [<uint32>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint32 | The value to set for this field |
+
+#### Description
+
+Units: seconds
+
+Default: 300
+
+##### uint32
+
+An unsigned 32-bit integer.
+
+Range: 1-86400
+
 ## `configure authority router node device-interface vrrp priority`
 
 The priority of this interface within the virtual router pair.
@@ -21774,6 +21934,32 @@ Use the physical mac address of the device instead of the VRRP virtual mac.
 
 ```
 configure authority router node device-interface vrrp use-physical-address [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
+
+## `configure authority router node device-interface vrrp use-uptime-tiebreaker`
+
+When two Active devices have equal Priority, use uptime as tie breaker. Only supported between SSR nodes on same router.
+
+#### Usage
+
+```
+configure authority router node device-interface vrrp use-uptime-tiebreaker [<boolean>]
 ```
 
 ##### Positional Arguments
@@ -23030,6 +23216,40 @@ configure authority router node secure-conductor-onboarding endorsement-key [<st
 A text value.
 
 Must be a base64 encoded string.
+
+## `configure authority router node serial-console-baud-rate`
+
+Serial console baud rate.
+
+#### Usage
+
+```
+configure authority router node serial-console-baud-rate [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+#### Description
+
+Default: 115200
+
+:::warning
+a restart is required if serial-console-baud-rate is created, modified, or deleted
+:::
+
+##### enumeration
+
+A value from a set of predefined names.
+
+Options:
+
+- 9600:      9600 baud rate.
+- 38400:     38400 baud rate.
+- 115200:    115200 baud rate.
 
 ## `configure authority router node serial-console-enabled`
 
@@ -40630,6 +40850,7 @@ System group configuration. Lets administrators configure system-wide properties
 | `clone` | Clone a list item |
 | [`contact`](#configure-authority-router-system-contact) | The administrator contact information for the system. |
 | `delete` | Delete configuration data |
+| [`enable-pqc`](#configure-authority-router-system-enable-pqc) | Enable post-quantum cryptography mode when supported by system policy and runtime conditions. |
 | [`inactivity-timer`](#configure-authority-router-system-inactivity-timer) | The amount of time a user is allowed to be idle before being automatically disconnected from the system. |
 | [`local-login`](#configure-authority-router-system-local-login) | Configure Local Login |
 | [`log-category`](#configure-authority-router-system-log-category) | Log category configuration lets administrators configure the SSR&#x27;s log level for specific log categories, overriding the default log-level setting. |
@@ -41323,6 +41544,36 @@ configure authority router system contact [<string>]
 ##### string
 
 A text value.
+
+## `configure authority router system enable-pqc`
+
+Enable post-quantum cryptography mode when supported by system policy and runtime conditions.
+
+#### Usage
+
+```
+configure authority router system enable-pqc [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: false
+
+:::warning
+a restart is required if enable-pqc is created, modified, or deleted
+:::
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority router system inactivity-timer`
 
@@ -46107,6 +46358,7 @@ configure authority routing policy statement action <type>
 | [`distance`](#configure-authority-routing-policy-statement-action-distance) | The administrative distance value |
 | [`exclude`](#configure-authority-routing-policy-statement-action-exclude) | The AS(s) to exclude from the as-path |
 | [`ip-address`](#configure-authority-routing-policy-statement-action-ip-address) | The new next hop IP address to set |
+| [`ipv6-peer-address`](#configure-authority-routing-policy-statement-action-ipv6-peer-address) | Set the next hop to the IPv6 address of the peer |
 | [`local-preference`](#configure-authority-routing-policy-statement-action-local-preference) | The local preference value |
 | [`no-extended-communities`](#configure-authority-routing-policy-statement-action-no-extended-communities) | Remove all extended communities |
 | [`none`](#configure-authority-routing-policy-statement-action-none) | Remove all communities |
@@ -46383,6 +46635,22 @@ configure authority routing policy statement action ip-address [<unicast-non-def
 A unicast non-default IPv4 address
 
 Must be a valid IPv4 address.
+
+## `configure authority routing policy statement action ipv6-peer-address`
+
+Set the next hop to the IPv6 address of the peer
+
+#### Usage
+
+```
+configure authority routing policy statement action ipv6-peer-address
+```
+
+#### Description
+
+##### empty
+
+Has no value.
 
 ## `configure authority routing policy statement action local-preference`
 
@@ -47255,6 +47523,47 @@ configure authority routing resource-group [<resource-group-ref>]
 
 This type is used by other entities that need to reference configured resource groups.
 
+## `configure authority salt-minimum-auth-version`
+
+Enforce a minimum authentication protocol version from minions connecting to the master.
+This setting protects against authentication downgrade attacks (CVE-2025-62349) where a
+malicious minion attempts to use an older, less secure authentication protocol version to
+bypass security features introduced in newer protocol versions.
+
+Authentication protocol versions and their security features:
+
+Version 0/1: No message signing, no nonce, no security features (legacy, insecure)
+Version 2: Message signing and nonce, but missing TTL validation, token validation, and minion ID matching (partially secure)
+Version 3+: Full security with message signing, nonce, TTL checks, token validation, minion ID matching, and session keys (recommended)
+
+Version 3 requires all managed routers to be running SSR version 7.0+
+
+#### Usage
+
+```
+configure authority salt-minimum-auth-version [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | The value to set for this field |
+
+#### Description
+
+Default: 0
+
+:::warning
+a restart is required if salt-minimum-auth-version is created, modified, or deleted
+:::
+
+##### uint8
+
+An unsigned 8-bit integer.
+
+Range: 0-3
+
 ## `configure authority secure-conductor-onboarding`
 
 Configure Secure Conductor Onboarding
@@ -47779,6 +48088,7 @@ Configure Security Key Management
 
 | command | description |
 | ------- | ----------- |
+| [`allow-self-signed-peering-certificates`](#configure-authority-security-key-management-allow-self-signed-peering-certificates) | Allow peering using self-signed certificates. |
 | [`ca-profile`](#configure-authority-security-key-management-ca-profile) | Configure Ca Profile |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
@@ -47790,6 +48100,32 @@ Configure Security Key Management
 | [`peer-key-retransmit-interval`](#configure-authority-security-key-management-peer-key-retransmit-interval) | Seconds between security key retransmission for peer routers, when peer key establishment has not been acknowledged. |
 | [`peer-key-timeout`](#configure-authority-security-key-management-peer-key-timeout) | Seconds before security key retransmission timeout for peer routers, when peer key establishment has not been acknowledged. |
 | `show` | Show configuration data for &#x27;security-key-management&#x27; |
+
+## `configure authority security-key-management allow-self-signed-peering-certificates`
+
+Allow peering using self-signed certificates.
+
+#### Usage
+
+```
+configure authority security-key-management allow-self-signed-peering-certificates [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+#### Description
+
+Default: true
+
+##### boolean
+
+A true or false value.
+
+Options: true or false
 
 ## `configure authority security-key-management ca-profile`
 

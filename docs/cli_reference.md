@@ -4246,6 +4246,29 @@ request system software ...
 set system software ...
 delete system software ...
 
+## `send garp`
+
+Send a Gratuitous ARP (GARP) for the specified interface.
+
+#### Usage
+
+```
+send garp {device-interface <device-interface> | network-interface <network-interface>} router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | Device interface to send GARP for |
+| network-interface | Network interface to send GARP for |
+| node | The node to send GARP from |
+| router | The router to send GARP from |
+
+#### Description
+
+This command triggers the immediate transmission of Gratuitous ARP packets for a device-interface (all network-interfaces on that port) or a specific network-interface.
+
 ## `service-ping`
 
 Ping that uses a tenant or service to make an ICMP request.
@@ -5026,6 +5049,12 @@ show app-id web-filtering router <router> node <node>
 | ---- | ----------- |
 | node | The node from which to retrieve |
 | router | The router from which to retrieve |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show app-id cache-sizes`](#show-app-id-cache-sizes) | Show app-id cache configured and current sizes |
 
 ## `show application modules registration`
 
@@ -11040,7 +11069,7 @@ show platform [{router <router> | resource-group <resource-group>}] [force] [nod
 
 | name | description |
 | ---- | ----------- |
-| category | all \| cpu \| device-interfaces \| disk \| memory \| operating-system \| vendor (default: all) |
+| category | all \| cpu \| device-interfaces \| disk \| memory \| operating-system \| security \| vendor (default: all) |
 
 ##### See Also
 
