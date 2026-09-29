@@ -23,13 +23,13 @@ Each router requires its own WAN VPC/subnet and LAN VPC/subnet. Repeat this step
    - Subnet Region
    - An IPv4 range for the subnet — for example, `192.168.10.0/24`
 
-   ![Define the VPC Network](/img/deploy-gcp-create-vpc3.png)
+   ![Define the VPC Network](/img/deploy-gcp-hub-router-create-vpc3.png)
 
 4. Scroll to the bottom and click **Create**.
 
    After the VPC is created it appears on the VPC networks page.
 
-   ![VPC Networks Page](/img/deploy-gcp-create-vpc4.png)
+   ![VPC Networks Page](/img/deploy-gcp-hub-router-create-vpc4.png)
 
 5. Repeat for the remaining three VPCs and subnets (`hub-private-vpc`, `spoke-public-vpc`, `spoke-private-vpc`).
 
@@ -43,7 +43,7 @@ An SSH key pair authenticates you to each router VM after deployment. You can re
 
 1. On your local machine, open a terminal and run:
 
-   ```bash
+   ```
    ssh-keygen -t rsa -b 4096
    ```
 
@@ -51,7 +51,7 @@ An SSH key pair authenticates you to each router VM after deployment. You can re
 
 3. Display the public key, replacing `<your-key-pair-name>` with the filename you chose:
 
-   ```bash
+   ```
    cat <your-key-pair-name>.pub
    ```
 

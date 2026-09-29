@@ -13,7 +13,9 @@ This guide walks you through deploying **two conductor-managed SSR routers in Go
 :::note
 This guide assumes a conductor is already installed and running SSR 7.1.4. If you have not yet deployed a conductor, complete one of the conductor deployment guides first:
 
+- [Azure Conductor Deployment Guide](deploy_azure_conductor.mdx)
 - [GCP Conductor Deployment Guide](deploy_gcp_conductor.mdx)
+- [VMware ESXi Conductor Deployment Guide](deploy_vmware_conductor.mdx)
 
 This guide also builds on the router deployment inputs described in [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.md). Refer to that page for the full BYOL Marketplace and Terraform deployment parameter reference.
 :::
@@ -67,6 +69,8 @@ graph TD
     SpokeLAN --- SpokeWorkloads
 ```
 
+![Network Design](/img/deploy-gcp-hub-router-diagram.png)
+
 ## Roles
 
 | Device | Type | Role |
@@ -85,7 +89,7 @@ Before beginning, ensure the following are available:
 
 - **GCP access** — access to a GCP project with permissions to create VPC networks, subnets, VM instances, and service accounts.
 - **Juniper software access credentials** — Artifactory username and token for software downloads and provisioning.
-- **Pre-existing conductor** — running SSR 7.1.4 at a public or otherwise reachable control IP. This guide uses `35.Y.Y.Y`.
+- **Pre-existing conductor** — running SSR 7.1.4 at a public or otherwise reachable control IP. This guide uses `35.X.X.X`.
 - **SSH key pair** — an RSA key pair for authenticating to each router VM. Steps to create one are in [Step 1](deploy_gcp_hub_spoke_prereqs.mdx#2-create-an-ssh-key-pair).
 - **New or existing VPCs and subnets** for each router's WAN and LAN interfaces. Steps to create new VPCs are in [Step 1](deploy_gcp_hub_spoke_prereqs.mdx#1-create-the-hub-and-spoke-vpcs-and-subnets).
 

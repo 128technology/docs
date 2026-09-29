@@ -11,9 +11,9 @@ The following IP addressing and naming scheme is used consistently throughout th
 | LAN Subnet | `hub-private-subnet` (`192.168.11.0/24`) | `spoke-private-subnet` (`192.168.21.0/24`) | Regional segment for the router's LAN interface. |
 | Workload Subnet | `hub-workload-subnet` (`192.168.12.0/24`) | `spoke-workload-subnet` (`192.168.22.0/24`) | Regional segment, in the same LAN VPC, hosting the workloads reachable through the router's LAN interface. |
 | WAN Internal IP | `192.168.10.2` | `192.168.20.2` | Router WAN interface private IP address assigned by GCP. |
-| WAN External IP | `35.X.X.X` | `34.X.X.X` | Router WAN interface public IP address assigned by GCP, used for SVR adjacency between the hub and spoke. |
+| WAN External IP | `35.X.X.X` | `35.X.X.X` | Router WAN interface public IP address assigned by GCP, used for SVR adjacency between the hub and spoke. |
 | LAN Internal IP | `192.168.11.2` | `192.168.21.2` | Router LAN interface private IP address assigned by GCP. |
-| Conductor Control IP | `35.Y.Y.Y` | `35.Y.Y.Y` | Public IP of the pre-existing conductor used for router onboarding. |
+| Conductor Control IP | `35.X.X.X` | `35.X.X.X` | Public IP of the pre-existing conductor used for router onboarding. |
 | Router Node Name | `node0` | `node0` | Router node name. |
 | Router Asset ID | `hub1` | `spoke1` | Asset ID assigned during onboarding. |
 | WAN Device / Network Interface | `wan-dev` / `wan1` | `wan-dev` / `wan1` | WAN device and network interface names. |
