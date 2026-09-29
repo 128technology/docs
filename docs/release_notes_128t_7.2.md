@@ -339,15 +339,18 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66291 RoutingManager Crash With Unresolved FQDN Service Route:** Resolved an issue where the routing manager process could crash when a service route's NAT target was an unresolved fully qualified domain name (FQDN), such as one still pending DNS resolution.
 ------
+
 - **I95-66333 Highway Crash on Hub After Spoke WAN Interface Disruption:** Resolved an issue where the highway process on a hub could crash while decrypting payload traffic over a fabric or inter-router interface that did not have inter-router security configured, following a peer-path failure on a spoke.
 ------
 - **I95-66351 Peer Paths Not Recovering After Interface Changes:** Resolved an issue where peer paths could remain down and next-hop routes unreachable after a network-interface configuration change, such as a shutdown or rename, requiring a full system restart to recover. Device-interface configuration changes are now retried automatically after a transient failure.
 ------
 - **I95-66371 Antivirus Engine Startup Failure on Repeated CA Load:** Resolved an issue where the antivirus engine could fail to start if the certificate authority had already been extracted from a previous startup attempt.
+------
+- **I95-66499 Failed to parse combined trusted CA certificate:** Resolved an issue where a valid, trusted CA certificate that did not end with a new line caused the error message, "Failed to parse combined trusted CA certificate: bad end line". Trusted CA certificates that do not end with a newline are now handled correctly during validation.
 
 ### Caveats
 
-- **I9566331 Peer path failure between SSR routers running version 7.2.1 and a hub running version 7.2.3 when using ESKM:** There is an issue where the ESKM metadata-key exchange between different software versions may fail to reach the  MetadataKeyExchCompleted state causing a peer path failure.
+- **I95-66331 Peer path failure between SSR routers running version 7.2.1 and a hub running version 7.2.3 when using ESKM:** There is an issue where the ESKM metadata-key exchange between different software versions may fail to reach the  MetadataKeyExchCompleted state causing a peer path failure.
 
   Any sender on 7.1.0-7.1.6 or 7.2.0-7.2.1 will remain in MetadataKeyExchInitiated when its peer is running 7.0.5, 7.1.7 or 7.2.3. This issue will be addressed in later releases.
 
