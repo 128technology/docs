@@ -59226,6 +59226,7 @@ show stats packet-processing action failure dpi [core <core>] [since <since>] [f
 | command | description |
 | ------- | ----------- |
 | [`ftp`](#show-stats-packet-processing-action-failure-dpi-ftp) | Statistics for &#x27;ftp&#x27; |
+| [`stuck-in-init-payload-empty`](#show-stats-packet-processing-action-failure-dpi-stuck-in-init-payload-empty) | The number of times payload for a packet is zero during TLS DPI initialization |
 
 ## `show stats packet-processing action failure dpi ftp`
 
@@ -59332,6 +59333,33 @@ show stats packet-processing action failure dpi ftp pinhole-timeout [core <core>
 | core | The core number for which this metric was generated (comma-separated list) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure dpi stuck-in-init-payload-empty`
+
+The number of times payload for a packet is zero during TLS DPI initialization
+
+#### Usage
+
+```
+show stats packet-processing action failure dpi stuck-in-init-payload-empty [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
 | router | The router for which to display stats (default: &lt;current router&gt;) |
 | since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
 
@@ -61660,6 +61688,7 @@ show stats packet-processing action failure tcp-proxy [core <core>] [port <port>
 | ------- | ----------- |
 | [`buffer-allocation`](#show-stats-packet-processing-action-failure-tcp-proxy-buffer-allocation) | The number of times a packet was not proxied due to a lack of buffers |
 | [`inbound-discards`](#show-stats-packet-processing-action-failure-tcp-proxy-inbound-discards) | The number of packets discarded on receipt for being outside of the receive window |
+| [`malformed-discards`](#show-stats-packet-processing-action-failure-tcp-proxy-malformed-discards) | The number of packets dropped because a TCP option had a malformed or inconsistent length field |
 | [`sessions-timed-out`](#show-stats-packet-processing-action-failure-tcp-proxy-sessions-timed-out) | The number of sessions closed due to the data timing out |
 
 ## `show stats packet-processing action failure tcp-proxy buffer-allocation`
@@ -61697,6 +61726,33 @@ The number of packets discarded on receipt for being outside of the receive wind
 
 ```
 show stats packet-processing action failure tcp-proxy inbound-discards [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure tcp-proxy malformed-discards`
+
+The number of packets dropped because a TCP option had a malformed or inconsistent length field
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-proxy malformed-discards [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -94241,6 +94297,7 @@ show stats waypoint [since <since>] [force] [router <router>] [node <node>] [<ve
 | [`giid-transition-to-active`](#show-stats-waypoint-giid-transition-to-active) | The number of notifications for interface transitioning to active |
 | [`giid-transition-to-inactive`](#show-stats-waypoint-giid-transition-to-inactive) | The number of notifications for interface transitioning to inactive |
 | [`inactive-inter-router-tables`](#show-stats-waypoint-inactive-inter-router-tables) | The number of inactive inter-router waypoint tables |
+| [`max-ports-used`](#show-stats-waypoint-max-ports-used) | The historical maximum number of ports used from the waypoint port allocation pool |
 | [`reinitialize-ports-in-db`](#show-stats-waypoint-reinitialize-ports-in-db) | The number of times ports were renitialized after recovery |
 | [`release-ports-to-db-failure`](#show-stats-waypoint-release-ports-to-db-failure) | The number of times ports were released back to database unsuccessfully |
 | [`release-ports-to-db-success`](#show-stats-waypoint-release-ports-to-db-success) | The number of times ports were released back to database successfully |
@@ -94404,6 +94461,31 @@ The number of inactive inter-router waypoint tables
 
 ```
 show stats waypoint inactive-inter-router-tables [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats waypoint max-ports-used`
+
+The historical maximum number of ports used from the waypoint port allocation pool
+
+#### Usage
+
+```
+show stats waypoint max-ports-used [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
