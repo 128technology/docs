@@ -1,0 +1,198 @@
+---
+title: "Step 2: Create the GCP VM"
+sidebar_label: "Create the GCP VM"
+---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
+
+This step deploys the conductor VM in GCP. You can use either the GCP Graphical User Interface (GUI) to deploy, or the command line (Terraform). You do not need to do both. once the deployment is complete, proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
+
+
+## Deploy a GCP Conductor VM using the GUI
+
+The following procedure deploys a GCP Conductor VM using the GUI.
+
+### 1. Select the BYOL Plan
+
+1. In the GCP console, search for **Marketplace** in the search bar. Click the Marketplace listing in the results.
+
+![GCP Marketplace](/img/deploy-gcp-conductor-web1.png)
+
+2. Enter **Session Smart Networking Platform – BYOL** in the Marketplace search tool, and select the **Session Smart Networking Platform – BYOL** result.
+
+![marketplace Search](/img/deploy-gcp-conductor-web2.png)
+
+3. On the product details page, click **Launch**.
+
+![Product Details Panel](/img/deploy-gcp-conductor-web3.png)
+
+### 2. Configure the Deployment
+
+Under the **New Session Smart Networking Platform – BYOL deployment**, provide the following:
+
+1. **Deployment Name** — enter a name for the conductor VM instance. This name appears in GCP and in the conductor UI (for example, `conductor`).
+
+ ![Deployment Name](/img/deploy-gcp-conductor-web4.png)
+
+2. **Deployment Service Account** — in the **Deployment Service Account** section, select **New account** and provide a name for the new service account. This creates a service account with the required IAM roles automatically.
+
+ ![Service Account](/img/deploy-gcp-conductor-web5.png)
+
+3. **Machine Type** — select the instance size that best meets your network requirements and select the desired **Region** and **Zone**. See the [Instance Size](deploy_gcp_conductor.mdx#instance-size) table in the Overview for guidance.
+
+ ![Machine Type](/img/deploy-gcp-conductor-web6.png)
+
+4. **SSR Configuration** — in the **Session Smart Router BYOL Configuration** section:
+   - Set **SSR Mode** to `conductor`.
+   - Enter the desired **SSR Version** - `7.1.4`.
+
+   ![Mode and Version](/img/deploy-gcp-conductor-web7.png)
+
+5. **SSH Access Control** — in the **SSH Access Control** section:
+   - Enter the **Admin Allowed CIDR** — the source IP range permitted for SSH and HTTPS access.
+   - Paste the SSH public key you created in [Step 1](deploy_gcp_conductor_prereqs.mdx) into the **SSH Public Key** field.
+
+   ![SSH Access Control](/img/deploy-gcp-conductor-web8.png)
+
+6. **Conductor Configuration and Networking** — in the **SSR Mode: Conductor Configuration Options** section:
+   - Enter your **Artifactory Username** and **Artifactory Token**.
+   - Enter the **Conductor Control Allowed CIDR** — the source IP range permitted to connect to the conductor on ports 930, 4505, and 4506.
+   - Click **Add a network interface**, select the VPC you created in [Step 1](deploy_gcp_conductor_prereqs.mdx) for **Network**, and the subnet for **Subnetwork**. Click **Done**.
+
+   ![SSR Mode](/img/deploy-gcp-conductor-web9.png)
+
+### 3. Deploy
+
+Once all sections are complete, scroll to the bottom and click **Deploy**.
+
+   ![GCP Marketplace common template fields](/img/deploy-gcp-conductor-web9a.png)
+   ![GCP Marketplace conductor-specific fields](/img/deploy-gcp-conductor-web9b.png)
+
+GCP creates the conductor VM in under five minutes. A green check mark appears next to **Status** for each created resource when complete.
+
+   ![Conductor Complete](/img/deploy-gcp-conductor-web10.png)
+
+After the VM is created, it automatically runs its initialization process to install the SSR software. **Allow an additional 15 minutes for initialization to complete** before proceeding to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
+
+---
+
+## Deploy a GCP Conductor VM using the Command Line Interface
+
+The following procedure deploys a GCP Conductor VM using the Command Line Interface.
+
+### 1. Select the BYOL Plan
+
+1. In the GCP console, search for **Marketplace** in the search bar. Click the Marketplace listing in the results.
+
+![GCP Marketplace](/img/deploy-gcp-conductor-web1.png)
+
+2. Enter **Session Smart Networking Platform – BYOL** in the Marketplace search tool, and select the **Session Smart Networking Platform – BYOL** result.
+
+![marketplace Search](/img/deploy-gcp-conductor-web2.png)
+
+3. On the product details page, click **Launch**.
+
+![Product Details Panel](/img/deploy-gcp-conductor-web3.png)
+
+4. In **New Session Smart Networking Platform – BYOL deployment**, click **Command-Line Deployment**.
+
+   ![GCP CLI Deployment tab](/img/deploy-gcp-conductor-cli4.png)
+
+5. In the **Configure a service account (optional)** section, click **Configure**. 
+
+   ![Service Account](/img/deploy-gcp-conductor-cli5.png)
+
+   In the **Configure service account** panel that appears on the right:
+   - Select **New account**.
+   - Enter a service account name.
+   - Click **Create**, then **Save**.
+
+   ![New Account](/img/deploy-gcp-conductor-cli6.png)
+
+6. Scroll to the bottom of the page and click **Download**. This downloads the Terraform module as a ZIP file to your local machine.
+
+   ![Download](/img/deploy-gcp-conductor-cli7.png)
+
+### 2. Create the Terraform Variables File
+
+1. Unzip the downloaded Terraform module. The result is a folder containing several interrelated resource files.
+
+2. Inside the Terraform module folder, create a file named `ssr-variables.tfvars`.
+
+3. Add the following parameters to the file, substituting your own values. For a complete list of supported variables, see the [Appendix — Deployment Parameters](deploy_appendix_gcp_conductor.mdx).
+
+   ```
+   goog_cm_deployment_name = "conductor"
+   machine_type            = "c2-standard-4"
+   region                  = "us-west2"
+   zone                    = "us-west2-a"
+   boot_disk_size          = "60"
+   ssr_mode                = "conductor"
+   ssr_version             = "7.1.4"
+   artifactory_user        = "<your-artifactory-username>"
+   artifactory_token       = "<your-artifactory-token>"
+   ssh_public_key          = "<your-ssh-public-key>"
+   admin_allowed_cidr      = "0.0.0.0/0"
+   control_nic_network     = ["conductor-vpc"]
+   control_nic_subnet      = ["conductor-subnet"]
+   control_nic_allowed_cidr = "0.0.0.0/0"
+   ```
+
+   :::caution
+   Replace `admin_allowed_cidr` and `control_nic_allowed_cidr` with appropriately restricted CIDR ranges for your environment. Using `0.0.0.0/0` permits access from any source address.
+   :::
+
+   After the file is created and saved in the Terraform module folder, you can leverage the GCP Cloud Shell to run the Terraform deployment via command-line.
+
+### 3. Upload the Module to GCP Cloud Shell
+
+1. In the GCP console, click the **Activate Cloud Shell** icon in the top-right corner. 
+
+   ![Activate](/img/deploy-gcp-conductor-cli8.png)
+
+   Authorize the activation when prompted. The Cloud Shell terminal appears at the bottom of the GCP screen.
+
+2. In the Cloud Shell terminal, click the **three-dot menu** icon and click **Upload**.
+
+   ![Upload](/img/deploy-gcp-conductor-cli9.png)
+
+3. In the **Upload** window, select **Folder**, click **Choose Folder**, navigate to your Terraform module folder, and click **Upload**.
+
+   ![Choose Folder](/img/deploy-gcp-conductor-cli10.png)
+
+4. After the upload completes, navigate to the module folder in Cloud Shell:
+
+   ```
+   cd <your-terraform-module-folder-name>
+   ```
+
+### 4. Run the Terraform Deployment
+
+1. Run the Terraform initialization command:
+
+   ```
+   terraform init
+   ```
+
+   Cloud Shell provides a set of commands to install Terraform. Copy and paste those commands into the terminal.
+
+   ![Commands](/img/deploy-gcp-conductor-cli11.png)
+
+2. After Terraform installation completes, run initialization again:
+
+   ```
+   terraform init
+   ```
+
+3. Execute the deployment:
+
+   ```
+   terraform apply --var-file=ssr-variables.tfvars
+   ```
+
+   Follow the prompts to confirm your project name and approve the deployment actions. When complete, the output includes `Apply complete`, `ssh_username`, `ssr_instance_id`, and `ssr_public_ip_addresses`.
+
+After the conductor VM is created, it automatically runs its initialization process to install the SSR software. **Allow an additional 15 minutes for initialization to complete** before proceeding to [Step 3 — Configure the SSR Conductor](deploy_gcp_conductor_config.mdx).
+
+## Next Step
+
+Proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
