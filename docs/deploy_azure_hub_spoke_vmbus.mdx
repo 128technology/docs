@@ -7,25 +7,9 @@ This step waits for SSR 7.1.4 to finish installing on both VMs, confirms both ro
 
 ## Wait for Installation to Complete
 
-The BYOL bootstrapper installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
+The BYOL software installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
 
-Monitor installation progress by connecting to each VM via SSH:
-
-```
-# Hub router
-ssh -i t128@<hub-router-public-ip>
-
-# Spoke router (separate terminal)
-ssh -i t128@<spoke-router-public-ip>
-```
-
-Once logged in, check the bootstrapper journal for progress:
-
-```
-journalctl -u 128T-hardware-bootstrapper -f
-```
-
-The installation is complete when the SSR PCLI launches.
+The installation is complete when both routers appear in show assets on the conductor.
 
 ## Verify the Routers Are Running
 
@@ -34,6 +18,8 @@ On each router, enter the SSR PCLI and confirm the system is running:
 ```
 su admin
 ```
+
+Enter your password at the prompt.
 
 ```
 admin@node0.azure-hub-router# show system
@@ -78,6 +64,46 @@ Open the devicemap to see the VMBus UUID mapping for the attached interfaces.
 
 `cat /var/lib/128technology/devicemap.json | jq`
 
+Exit the CLI and run `sudo` from the linux shell before opening the devicemap.
+
+```
+admin@node.router# quit 
+[t128@ssr-hub-router-1 ~]$ sudo cat /var/lib/128technology/devicemap.json | jq 
+
+{ 
+  "source": "bootstrapper", 
+  "ethernet": [ 
+    { 
+      "type": "WAN", 
+      "name": "ge-0-0", 
+      "description": "", 
+      "bcpNetwork": { 
+        "standaloneBranch": { 
+          "name": "wan1" 
+        } 
+      }, 
+
+      "pciAddress": null, 
+      "vmbusId": "002248be-be61-0022-48be-be61002248be" 
+    }, 
+    { 
+      "type": "LAN", 
+      "name": "ge-0-1", 
+      "description": "", 
+      "bcpNetwork": { 
+        "standaloneBranch": { 
+          "name": "lan2" 
+        } 
+      }, 
+
+      "pciAddress": null, 
+      "vmbusId": "002248be-bb15-0022-48be-bb15002248be" 
+    } 
+  ], 
+  "lte": [] 
+} 
+```
+
 Take note of the device names and associated VMBus ID.
 
 ### VMBus UUID Reference Table
@@ -85,7 +111,7 @@ Take note of the device names and associated VMBus ID.
 Record your discovered UUIDs using the following table. You will substitute these values throughout [Step 4](deploy_azure_hub_spoke_config.mdx).
 
 | Router | Interface | Role | Subnet | VMBus UUID |
-|--------|-----------|------|-----------|
+| --- | --- | --- | --- | --- |
 | `azure-hub-router` | `ge-0-0` | WAN | `ssr-hub-wan` | `<hub-wan-vmbus-uuid>` |
 | `azure-hub-router` | `ge-0-1` | LAN | `ssr-hub-lan` | `<hub-lan-vmbus-uuid>` |
 | `azure-spoke-router` | `ge-0-0` | WAN | `ssr-spoke-wan` | `<spoke-wan-vmbus-uuid>` |
