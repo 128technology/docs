@@ -2,6 +2,10 @@
 title: Installing a BYOL Mist-managed Router in AWS
 sidebar_label: Installing a BYOL Mist-managed Router in AWS
 ---
+
+import InstanceSizing from './_byol_aws_instance_types.md'
+
+
 This guide describes the process for deploying a Mist-managed instance through AWS. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The installation and deployment process consists of the following steps:
 
 * [Selecting the AMI](#selecting-the-ami).
@@ -18,19 +22,8 @@ For the latest information about SSR BYOL offerings, please refer to the [Cloud 
 Once you have selected the AMI that suits the needs of your deployment, proceed to the [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
 ## Selecting the Instance Size
-The following instance sizes are supported for virtual SSR in AWS. Choose the size that best meets your requirements. More information can be found in the [AWS Documentation](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html)
 
-| Recommended AWS VM Size | Max vNICs Supported | vCPU Cores | Memory |
-| ----------------------- | ------------------- | ---------- | ------ |
-| c5.xlarge     |  4  |  4    |   8  |
-| c5.2xlarge    |  4  |  8    |   16  |
-| c5.4xlarge    |  8  |  16   |   32  |
-| c5.9xlarge    |  8  |  36   |   72  |
-| c5n.xlarge    |  4  |  4    |   10.5  |
-| c5n.2xlarge   |  4  |  8    |   21  |
-| c5n.4xlarge   |  8  |  16   |   42  |
-| c5n.9xlarge   |  8  |  36   |   96  |
-
+<InstanceSizing/>
 
 ## Session Smart Router Deployment
 

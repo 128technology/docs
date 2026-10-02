@@ -2,6 +2,9 @@
 title: Installing a BYOL Conductor-managed Router in AWS
 sidebar_label: Installing a BYOL Conductor-managed Router in AWS
 ---
+
+import InstanceSizing from './_byol_aws_instance_types.md'
+
 This guide describes the process for deploying a BYOL Session Smart Conductor and a BYOL Session Smart Router (SSR) in AWS.
 
 The installation and deployment process consists of the following steps:
@@ -23,19 +26,8 @@ The **Bring Your Own License (BYOL)** AMI allows you to install your own license
 Once you have selected the AMI for your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Conductor Managed Router.
 
 ## Selecting the Instance Size
-The following instance sizes are supported for virtual SSR in AWS. Choose the size that best meets your requirements. More information can be found in the [AWS Documentation](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html)
 
-| Recommended AWS VM Size | Max vNICs Supported | vCPU Cores | Memory |
-| ----------------------- | ------------------- | ---------- | ------ |
-| c5.xlarge     |  4  |  4    |   8  |
-| c5.2xlarge    |  4  |  8    |   16  |
-| c5.4xlarge    |  8  |  16   |   32  |
-| c5.9xlarge    |  8  |  36   |   72  |
-| c5n.xlarge    |  4  |  4    |   10.5  |
-| c5n.2xlarge   |  4  |  8    |   21  |
-| c5n.4xlarge   |  8  |  16   |   42  |
-| c5n.9xlarge   |  8  |  36   |   96  |
-
+<InstanceSizing/>
 
 ## Session Smart Conductor Deployment
 

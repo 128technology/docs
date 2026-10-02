@@ -8,7 +8,7 @@ Juniper recommends **BYOL (Bring Your Own License)** for both new installations 
 
 Existing PAYG deployments remain fully supported — no immediate action required.
 
-To review the BYOL deployment procedure, see [Installing a BYOL Conductor-managed Router in AWS](intro_installation_byol_aws_conductor.md).
+To review the BYOL deployment procedure, see [Installing a BYOL Conductor-managed Router in AWS](intro_installation_byol_aws_conductor.mdx).
 :::
 
 ## Introduction

@@ -8,7 +8,7 @@ Juniper recommends **BYOL (Bring Your Own License)** for both new installations 
 
 Existing PAYG deployments remain fully supported — no immediate action required.
 
-To review the BYOL deployment procedure, see [Installing a BYOL Conductor-managed Router in AWS](intro_installation_byol_aws_conductor.md).
+To review the BYOL deployment procedure, see [Installing a BYOL Conductor-managed Router in AWS](intro_installation_byol_aws_conductor.mdx).
 :::
 
 Partnering with Amazon, you can install an SSR Conductor and a Session Smart Router (SSR) using Amazon Web Services (AWS). AWS is a secure cloud platform that offers computing power, data storage, content delivery, flexibility, scalability, and reliability for software products. 

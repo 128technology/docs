@@ -2,6 +2,7 @@
 title: Installing a BYOL Conductor-managed Router in GCP
 sidebar_label: Installing a BYOL Conductor-managed Router in GCP
 ---
+import InstanceSizing from './_byol_gcp_instance_types.md'
 
 This guide describes the process for deploying a BYOL Session Smart Conductor and a BYOL Session Smart Router (SSR) in Google Cloud Platform (GCP).
 
@@ -25,16 +26,7 @@ After selecting the BYOL plan, continue to [Session Smart Conductor Deployment](
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in GCP. Choose the size that best meets your requirements. More information on GCP instance types can be found in the [GCP machine type documentation](https://docs.cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
-
-| Recommended VM Size | Max vNICs Supported | vCPU Cores | Memory |
-| --- | --- | --- | --- |
-| c2-standard-4  | 4  | 4  | 16 GB  |
-| c2-standard-8  | 8  | 8  | 32 GB  |
-| c2-standard-16 | 10 | 16 | 64 GB  |
-| c2-standard-30 | 10 | 30 | 120 GB |
-
-Session Smart Router Size recommendatations can be found in [System Requirements](intro_system_reqs.md).
+<InstanceSizing/>
 
 ## Session Smart Conductor Deployment
 
