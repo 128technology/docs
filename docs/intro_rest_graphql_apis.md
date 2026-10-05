@@ -18,10 +18,15 @@ The examples shown in this document use the `curl` command-line application; any
 The REST and GraphQL APIs are authorized and authenticated securely using authorization tokens. Tokens are granted using the username and password of a suitably privileged user, and passed to each API call. The SSR uses the token to determine authorization for each API call. The RBAC privileges of the user determine access to the resources being accessed by the API.
 
 The `/api/v1/login` REST API is used to generate these tokens. For example:
-`curl --request POST -k --url 'https://192.168.0.1/api/v1/login' -H "Content-Type: application/json" -d '{ "username": "admin", "password":"128Tadmin"}'`
+```bash
+curl --request POST -k --url 'https://192.168.0.1/api/v1/login' -H "Content-Type: application/json" -d '{ "username": "admin", "password":"<configured-admin-password>"}'
+```
 
-In this example, the address of the SSR is `192.168.0.1` and the username is `admin` with password `128Tadmin`. Additionally the `-H "Content-Type: application/json"` specifies a `Content-Type` header that the client is passing and accepting JSON data.
-a `Content-Type` header that the client is passing and accepting JSON data.
+In this example, the address of the SSR is `192.168.0.1` and the username is `admin`. Replace `<configured-admin-password>` with the password you configured for that account. The `-H "Content-Type: application/json"` header specifies that the request body contains JSON data.
+
+:::important
+Beginning with SSR 7.2.4-R2, the default `admin` password is temporary after a fresh installation or full factory reset. Replace it before requesting an authentication token. If a local password is expired, `/api/v1/login` returns HTTP `401 Unauthorized` with `"expired-token": true` and does not issue a token. Complete the password change through the SSR web interface or PCLI, then request a token using the new password. Repeating the login request with the expired password does not resolve the failure. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::
 
 If the login attempt is successful a token is returned. For example:
 ```

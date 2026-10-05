@@ -53,6 +53,10 @@ These steps configure the interface you will use to initialize the conductor via
    - Username: `root`
    - Password: `128tRoutes`
 
+   :::important
+   Beginning with SSR 7.2.4-R2, the default root password is expired after installation. Complete the password-change prompts before running the commands below. Use your new root password for later console logins. If the default `admin` password is still temporary when you enter the PCLI, complete its password-change prompts as well. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+   :::
+
 3. Run the following two commands to disable the service and stop the messages. 
 
    ```
@@ -94,7 +98,7 @@ These steps configure the interface you will use to initialize the conductor via
 
 1. After the system boots, the SSR login screen appears. Login using the root credentials.
    - Username: `root`
-   - Password: `128tRoutes`
+   - Password: Your current root password (`128tRoutes` only if the factory password has not yet been replaced).
 
    ![Conductor Login](/img/dep-vmware-conductor-login.png)
 

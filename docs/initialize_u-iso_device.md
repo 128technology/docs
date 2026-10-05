@@ -49,6 +49,10 @@ Use the following process to initialize your device as a Conductor.
 Setting the password for the system accounts (`admin`, `root`, and `t128`) is performed during initialization from either the web interface or the conductor command line. All system account passwords are set to the same value.
 :::
 
+:::important
+Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or full factory reset. The password you supply during initialization replaces the factory credentials for the system accounts. Use this password for subsequent access. If you access an account while its password is still expired or temporary, complete the password-change prompts before continuing. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::
+
 3. Click **ASSOCIATE**
 
 4. The device reboots and comes online as a Conductor.
@@ -79,6 +83,10 @@ Use the following process to initialize your device as a Conductor-managed route
 2. Enter the router name, the associated Conductor IP address, and the Admin and system account passwords.
 
   ![Conductor Managed Association](/img/u-iso11_cond-mngd-assoc-new.png)
+
+:::note
+Use the system-account password supplied here for subsequent access, rather than the factory credentials. For the default-password requirements introduced in SSR 7.2.4-R2, see [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::
 
 3. Click **ASSOCIATE** when you have completed the required information.
 

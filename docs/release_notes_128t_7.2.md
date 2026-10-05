@@ -73,6 +73,12 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
+## Release 7.2.4-R2
+
+### New Features
+
+- **I95-63062 Default Password Expiration:** Default passwords for the `root` and `t128` accounts are expired on fresh installation and after a full factory reset. The default application `admin` password is also marked temporary on fresh installation and expired after a full factory reset. You must replace these passwords at first login before continuing normal access with the affected account, or configure replacement passwords during initialization. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+
 ## Release 7.2.3-8r2 
 
 **Release Date:** September 29, 2026

@@ -51,4 +51,8 @@ For users with SSR devices shipped with 6.3.0 installed, simply power up your de
 
   ![Final Install Screen](/img/u-iso7_serial_install.png)
 
+:::important
+Beginning with SSR 7.2.4-R2, a fresh installation marks the default `root` and `t128` passwords expired and the default `admin` password temporary. If you log in with a default password, complete the password change before continuing normal access with that account. The initialization workflow also lets you configure replacement system-account passwords. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::
+
 **Great job! Your software has installed, now let's go [initialize your device!](initialize_u-iso_device.md)**

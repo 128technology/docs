@@ -5,6 +5,38 @@ sidebar_label: Password Security
 
 Password security is one of the first lines of defense for every organization, and Juniper recommends strong password security. For information on password requirements, see [Password Policies](config_password_policies.md).
 
+## Default Passwords and First Login
+
+Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or a [full factory reset](config_factory_reset.md). The `root` and `t128` passwords are expired, and the default `admin` password is temporary. You must replace an expired or temporary password before continuing normal access with that account.
+
+| Account | Access | First-Login Action |
+| ------- | ------ | ------------------ |
+| `admin` | SSR web interface or PCLI | Follow the password-change prompt before continuing. |
+| `t128` | Linux shell through SSH or the console | Follow the password-change prompts before continuing. |
+| `root` | Local console | Follow the password-change prompts before continuing. |
+
+:::important
+This requirement does not enable SSH login for `root`. Use the local console for direct root login. For remote administration, use an account with sudo privileges as described in [Access Management](config_access_mgmt.md#root-access).
+:::
+
+### Change the Default Admin Password
+
+1. Log in to the SSR web interface or PCLI with the default `admin` credentials.
+2. When prompted, enter a new password that meets the [password requirements](config_password_policies.md#password-requirements) and confirm it. In the web interface, submit the password-change dialog before continuing.
+3. If the session closes after the password change, log in again with the new password.
+
+The password-change prompt is part of authentication. You do not need to reach your user profile or run `set password` first. For subsequent password changes or a lost password, see [Password Change and Account Recovery](howto_reset_user_password.md).
+
+### Change the Default Linux Passwords
+
+Log in as `t128` through SSH or the console, or as `root` through the local console. Follow the prompts to enter the current password, enter a new password, and confirm it. If the session closes, log in again with the new password. Store the replacement passwords securely.
+
+Changing an account's password at first login does not replace the passwords for the other accounts. The initialization workflows below set passwords for all three system accounts together. When you have already configured a replacement password during initialization, use that password rather than the factory credential.
+
+### Automated Access
+
+Do not rely on unchanged factory passwords for unattended SSH sessions or API login. An expired local password cannot obtain an authentication token from `/api/v1/login`. Configure replacement passwords through your initialization workflow or complete the interactive password change before using password-based automation. See [Advanced Initialization Workflows](initialize_u-iso_adv_workflow.md#automated-onboarding) and [API Authentication](intro_rest_graphql_apis.md#authentication-tokens).
+
 ## Set a Password for the System Accounts
 
 Setting the password for the system accounts (`admin`, `root`, and `t128`) is performed during initialization from either the web interface, the conductor command line, or the interactive initializer. All system account passwords are set to the same value, preventing any of the account passwords from being overlooked. 
@@ -37,3 +69,10 @@ You can also specify the `password-hash` argument to generate a pre-salted sha51
 :::note
 The root account will not be used for day-to-day access, but the root account password should be stored securely off-box so that it can be used for admin account recovery if required. 
 :::
+
+## Related Topics
+
+- [Username and Password Policies](config_password_policies.md)
+- [Password Change and Account Recovery](howto_reset_user_password.md)
+- [Access Management](config_access_mgmt.md)
+- [Factory Reset](config_factory_reset.md)

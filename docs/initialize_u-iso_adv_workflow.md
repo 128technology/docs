@@ -28,6 +28,10 @@ For non console access you can connect your laptop or other device to any of the
 The laptop or other client device must be assigned a static IP address within the range of `192.168.128.2` to `192.168.128.254` along with a subnet mask of `/24` or `255.255.255.0`
 :::
 
+:::important
+Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or full factory reset. When logging in to the PCLI or Linux shell with a default password, complete the password-change prompts before running initialization commands. If the session closes, reconnect using the new password. Changing one account's password does not change the passwords for the other accounts. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::
+
 ## PCLI Workflow
 
 Use the following workflows to initialize and onboard your device. For a conductor-managed deployment use
@@ -100,6 +104,24 @@ Automated onboarding can be used whenever the user wants to automatically set up
 ### Onboarding Configuration File
 
 The brains behind the automated onboarding process is a json file named `onboarding-config.json`. This file contains all the configuration parameters and drives the entire onboarding process. The `onboarding-config.json` can be [provided from a USB](#usb-initialization), as a [file placed in `/etc/128T-hardware-bootstrapper/onboarding-config.json` on the SSR disk](#file-on-disk), or applied via [API initialization](#api-initialization). For virtual and cloud based deployments, the same mechanism is supported via cloud-init as well.
+
+### Passwords for Automated Access
+
+Beginning with SSR 7.2.4-R2, do not assume unchanged factory passwords are usable for unattended SSH sessions or SSR API login after a fresh installation or full factory reset. Configure replacement passwords during onboarding, or complete the interactive password change before using password-based automation.
+
+The onboarding configuration supports the following password fields for conductor and conductor-managed router initialization. Each value must be a salted SHA-512 password hash, not a cleartext password.
+
+| Field | Account |
+| ----- | ------- |
+| `admin-password` | SSR `admin` account |
+| `root-password` | Linux `root` account |
+| `t128-password` | Linux `t128` account |
+
+Protect onboarding files containing password hashes. Use the configured passwords for subsequent access; do not continue using factory credentials. For account-specific password-change guidance, see [Password Security](config_password_security.md#default-passwords-and-first-login).
+
+The bootstrap API used for [API Initialization](#api-initialization) is separate from `/api/v1/login`, which issues authentication tokens for the SSR application. An expired local password cannot obtain an SSR application token. See [API Authentication](intro_rest_graphql_apis.md#authentication-tokens).
+
+### Onboarding Configuration Examples
 
 The following are examples of the `onboarding-config.json` files.
 
