@@ -27,6 +27,30 @@ This requirement does not enable SSH login for `root`. Use the local console for
 
 The password-change prompt is part of authentication. You do not need to reach your user profile or run `set password` first. For subsequent password changes or a lost password, see [Password Change and Account Recovery](howto_reset_user_password.md).
 
+#### Enter the PCLI From a Linux Shell
+
+When you run `su admin` and the admin password is expired, the PCLI automatically starts the password-change procedure. The `Starting the PCLI...` message does not mean you can begin running PCLI commands. Enter your current admin password again at the `Enter your current password:` prompt, then enter and confirm a new password.
+
+Changing the password logs the admin account out of all active sessions. After `Password updated successfully` appears, you return to your original Linux shell. Run `su admin` again and authenticate with the new password to begin a normal PCLI session, as shown in this example. Passwords are not displayed as you type them.
+
+```text
+[operator@router ~]$ su admin
+Password:
+WARNING: Your password has expired.
+You must change your password now and login again!
+Starting the PCLI...
+Modifying password...
+Changing the current password will log this user out of all active sessions. Subsequent logins will require the new password to authenticate.
+Enter your current password:
+Enter a new password:
+Confirm:
+Password updated successfully
+[operator@router ~]$ su admin
+Password:
+Starting the PCLI...
+admin@node0.router#
+```
+
 ### Change the Default Linux Passwords
 
 Log in as `t128` through SSH or the console, or as `root` through the local console. Follow the prompts to enter the current password, enter a new password, and confirm it. Once the password has been changed, use the new password for subsequent logins. Store the replacement passwords securely.

@@ -14,7 +14,7 @@ Login to the system using the default `admin` user, [locally created users](conf
 :::
 
 :::note
-Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or full factory reset. If the `admin` password is temporary, complete the password-change prompts before running PCLI commands, including when entering the PCLI from a Linux shell. Once the password has been changed, use the new password for subsequent logins. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or full factory reset. If the `admin` password is temporary, complete the password-change prompts before running PCLI commands, including when entering the PCLI from a Linux shell. When using `su admin`, a successful password change returns you to the original Linux shell. Run `su admin` again using the new password to begin a normal PCLI session. See [Enter the PCLI From a Linux Shell](config_password_security.md#enter-the-pcli-from-a-linux-shell).
 :::
 
 Optional arguments are written in brackets (`[` `]`), and users may include or omit them as needed. Variable arguments (where users need to supply a value, rather than entering in the literal string shown in the syntax) are written in angle brackets (`<` `>`).
