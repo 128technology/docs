@@ -25,7 +25,7 @@ curl --request POST -k --url 'https://192.168.0.1/api/v1/login' -H "Content-Type
 In this example, the address of the SSR is `192.168.0.1` and the username is `admin`. Replace `<configured-admin-password>` with the password you configured for that account. The `-H "Content-Type: application/json"` header specifies that the request body contains JSON data.
 
 :::important
-Beginning with SSR 7.2.4-R2, the default `admin` password is temporary after a fresh installation or full factory reset. Replace it before requesting an authentication token. If a local password is expired, `/api/v1/login` returns HTTP `401 Unauthorized` with `"expired-token": true` and does not issue a token. Complete the password change through the SSR web interface or PCLI, then request a token using the new password. Repeating the login request with the expired password does not resolve the failure. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+Beginning with SSR 7.2.4-R2, the default `admin` password must be replaced after a fresh installation or full factory reset. Replace it before requesting an authentication token. If a local password is expired, `/api/v1/login` returns HTTP `401 Unauthorized` with `"expired-token": true` and does not issue a token. Complete the password change through the SSR web interface or PCLI, then request a token using the new password. Repeating the login request with the expired password does not resolve the failure. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
 :::
 
 If the login attempt is successful a token is returned. For example:

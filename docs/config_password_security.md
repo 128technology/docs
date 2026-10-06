@@ -23,13 +23,13 @@ This requirement does not enable SSH login for `root`. Use the local console for
 
 1. Log in to the SSR web interface or PCLI with the default `admin` credentials.
 2. When prompted, enter a new password that meets the [password requirements](config_password_policies.md#password-requirements) and confirm it. In the web interface, submit the password-change dialog before continuing.
-3. If the session closes after the password change, log in again with the new password.
+3. Once the password has been changed, use the new password for subsequent logins.
 
 The password-change prompt is part of authentication. You do not need to reach your user profile or run `set password` first. For subsequent password changes or a lost password, see [Password Change and Account Recovery](howto_reset_user_password.md).
 
 ### Change the Default Linux Passwords
 
-Log in as `t128` through SSH or the console, or as `root` through the local console. Follow the prompts to enter the current password, enter a new password, and confirm it. If the session closes, log in again with the new password. Store the replacement passwords securely.
+Log in as `t128` through SSH or the console, or as `root` through the local console. Follow the prompts to enter the current password, enter a new password, and confirm it. Once the password has been changed, use the new password for subsequent logins. Store the replacement passwords securely.
 
 Changing an account's password at first login does not replace the passwords for the other accounts. The initialization workflows below set passwords for all three system accounts together. When you have already configured a replacement password during initialization, use that password rather than the factory credential.
 

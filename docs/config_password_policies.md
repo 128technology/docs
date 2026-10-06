@@ -26,8 +26,8 @@ The SSR password policies have been updated to provide a more secure experience.
 10. The maximum failed login attempts are configurable, with a default of 6.
 11. User lock time (time the user must wait before attempting login after reaching the max failed attempts) is configurable. The default is 1800 seconds.
 
-:::note
-Beginning with SSR 7.2.4-R2, a fresh installation expires the default `root` and `t128` passwords and marks the default `admin` password temporary. A full factory reset restores and expires the default passwords for all three accounts. Replace the password before continuing normal access with the affected account. This first-login requirement is separate from password-lifetime settings. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::note 
+Beginning with SSR 7.2.4-R2, a fresh installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. A full factory reset removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. Replace the password before continuing normal access with the affected account. This first-login requirement is separate from password-lifetime settings. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
 :::
 
 ### Username Requirements

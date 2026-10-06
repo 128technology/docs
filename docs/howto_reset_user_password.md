@@ -46,7 +46,7 @@ This process should only be used to recover access to an account where the passw
 
 1. Make sure the 128T process is running. If it is not running or is restarted before logging into the PCLI and making the update, the password change will be lost. 
 2. Log in to the Linux shell. 
-	If the `t128` password is expired, complete its password-change prompts before proceeding. Use the replacement password for the sudo password prompt below.
+	If the `t128` password is expired, complete its password-change prompts before proceeding. Use the replacement password for the `sudo` password prompt below.
 3. Change the password for the corresponding Linux user. In this example the `admin` user password has been lost. The same procedure is used for a lost user password. 
 
 ```
