@@ -33,7 +33,7 @@ Attempting to open the Conductor GUI before the installation has completed - i.e
    | Password | `128Tadmin` |
 
    :::important
-   Change the default password immediately after first login. The new password requires a minimum of 9 characters containing at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+   You must change the default password immediately after first login. The new password requires a minimum of 9 characters containing at least 1 uppercase letter, 1 lowercase letter, and 1 number.
    :::
 
 3. A successful login confirms the conductor is running and reachable on the public IP.
@@ -46,7 +46,9 @@ Once the instance is launched with the correct parameters, the device will begin
 
 If the instance does not install SSR as expected, SSH into the instance using the credentials provided during VM creation.
 
-- Try to log into the pcli, run `su admin` and then `show system`.
+`ssh -i <private-ssh-key> t128@<conductor-public-ip>`
+
+- Try to log into the pcli, run `su admin`, enter your password, and then `show system`.
 
 - If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
 
