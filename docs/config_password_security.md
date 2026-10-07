@@ -7,7 +7,7 @@ Password security is one of the first lines of defense for every organization, a
 
 ## Default Passwords and First Login
 
-Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or a [full factory reset](config_factory_reset.md). The `root` and `t128` passwords are expired, and the default `admin` password is temporary. You must replace an expired or temporary password before continuing normal access with that account.
+Beginning with SSR 7.2.4-R2, default passwords are required to be reset after a fresh installation or a [factory reset](config_factory_reset.md) operation. The `root`, `t128`, and `admin` passwords must be reset before continuing normal access with each account.
 
 | Account | Access | First-Login Action |
 | ------- | ------ | ------------------ |
@@ -25,11 +25,11 @@ This requirement does not enable SSH login for `root`. Use the local console for
 2. When prompted, enter a new password that meets the [password requirements](config_password_policies.md#password-requirements) and confirm it. In the web interface, submit the password-change dialog before continuing.
 3. Once the password has been changed, use the new password for subsequent logins.
 
-The password-change prompt is part of authentication. You do not need to reach your user profile or run `set password` first. For subsequent password changes or a lost password, see [Password Change and Account Recovery](howto_reset_user_password.md).
+The password-change prompt is part of authentication. For subsequent password changes or a lost password, see [Password Change and Account Recovery](howto_reset_user_password.md).
 
 #### Enter the PCLI From a Linux Shell
 
-When you run `su admin` and the admin password is expired, the PCLI automatically starts the password-change procedure. The `Starting the PCLI...` message does not mean you can begin running PCLI commands. Enter your current admin password again at the `Enter your current password:` prompt, then enter and confirm a new password.
+When you run `su admin` and the admin password has expired, the PCLI automatically starts the password-change procedure. The `Starting the PCLI...` message does not mean you can begin running PCLI commands. Enter your current admin password again at the `Enter your current password:` prompt, then enter and confirm a new password.
 
 Changing the password logs the admin account out of all active sessions. After `Password updated successfully` appears, you return to your original Linux shell. Run `su admin` again and authenticate with the new password to begin a normal PCLI session, as shown in this example. Passwords are not displayed as you type them.
 
@@ -55,11 +55,11 @@ admin@node0.router#
 
 Log in as `t128` through SSH or the console, or as `root` through the local console. Follow the prompts to enter the current password, enter a new password, and confirm it. Once the password has been changed, use the new password for subsequent logins. Store the replacement passwords securely.
 
-Changing an account's password at first login does not replace the passwords for the other accounts. The initialization workflows below set passwords for all three system accounts together. When you have already configured a replacement password during initialization, use that password rather than the factory credential.
+Changing an account's password at first login does not replace the passwords for the other built-in system accounts. The initialization workflows below set passwords for all three system accounts together. When you have already reset the default password during initialization, use that password rather than the factory credential.
 
 ### Automated Access
 
-Do not rely on unchanged factory passwords for unattended SSH sessions or API login. An expired local password cannot obtain an authentication token from `/api/v1/login`. Configure replacement passwords through your initialization workflow or complete the interactive password change before using password-based automation. See [Advanced Initialization Workflows](initialize_u-iso_adv_workflow.md#automated-onboarding) and [API Authentication](intro_rest_graphql_apis.md#authentication-tokens).
+Do not rely on unchanged factory-default passwords for unattended SSH sessions or API login. An expired local password cannot obtain an authentication token from `/api/v1/login`. Reset passwords through your initialization workflow or complete the interactive password change before using password-based automation. See [Advanced Initialization Workflows](initialize_u-iso_adv_workflow.md#automated-onboarding) and [API Authentication](intro_rest_graphql_apis.md#authentication-tokens).
 
 ## Set a Password for the System Accounts
 

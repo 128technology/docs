@@ -77,7 +77,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 ### New Features
 
-- **I95-63062 Default Password Expiration:** Beginning with SSR 7.2.4-R2, a fresh installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. A full factory reset removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. Replace these passwords at first login before continuing normal access with the affected account, or configure replacement passwords during initialization. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+- **I95-63062 Default Password Expiration:** Beginning with SSR 7.2.4-R2, a new installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. A factory reset removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. Reset these passwords at first login before continuing normal access with the affected account, or reset passwords during initialization. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
 
 ## Release 7.2.3-8r2 
 

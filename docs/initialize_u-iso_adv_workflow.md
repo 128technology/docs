@@ -29,7 +29,9 @@ The laptop or other client device must be assigned a static IP address within th
 :::
 
 :::important
-Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or full factory reset. When logging in to the PCLI or Linux shell with a default password, complete the password-change prompts before running initialization commands. If the session closes, reconnect using the new password. Changing one account's password does not change the passwords for the other accounts. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+Beginning with SSR 7.2.4-R2, a new installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. The **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. 
+
+When logging in to the PCLI or Linux shell with a default password, complete the password-change prompts before running initialization commands. If the session closes, reconnect using the new password. Changing one account's password does not change the passwords for the other accounts. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
 :::
 
 ## PCLI Workflow
@@ -107,7 +109,7 @@ The brains behind the automated onboarding process is a json file named `onboard
 
 ### Passwords for Automated Access
 
-Beginning with SSR 7.2.4-R2, do not assume unchanged factory passwords are usable for unattended SSH sessions or SSR API login after a fresh installation or full factory reset. Configure replacement passwords during onboarding, or complete the interactive password change before using password-based automation.
+Beginning with SSR 7.2.4-R2, do not assume unchanged factory passwords are usable for unattended SSH sessions or SSR API login after a new installation or factory reset. Reset passwords during onboarding, or complete the interactive password change before using password-based automation.
 
 The onboarding configuration supports the following password fields for conductor and conductor-managed router initialization. Each value must be a salted SHA-512 password hash, not a cleartext password.
 

@@ -8,7 +8,7 @@ sidebars_label: Factory Reset
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.1.0   | SSR 4x0 Factory Reset support added. |
-| 7.2.4-R2 | Default account passwords require replacement after a full factory reset. |
+| 7.2.4-R2 | Default account passwords require replacement after a factory reset. |
 
 The SSR software, SSR1x0, SSR1x00, and SSR4x0 series provide the ability to reset to factory defaults. The SSR software and SSR1x0/1x00 devices use a software reset to return to the original factory defaults, and remove customer configurations.
 
@@ -18,9 +18,9 @@ Use the information below to determine the best option for your deployment.
 
 ## Passwords After a Full Factory Reset
 
-Beginning with SSR 7.2.4-R2, a full factory reset restores the factory passwords for `admin`, `root`, and `t128` and marks them expired. Your pre-reset passwords no longer provide access to these accounts. You must replace each expired password before continuing normal access with that account, or configure replacement passwords during initialization.
+Beginning with SSR 7.2.4-R2, the **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. You will be presented with the password reset prompts at the first login for each account. Alternatively, you can configure new passwords during initialization.
 
-This applies to the software `restore system factory-default` procedure and the SSR400/SSR440 factory-reset button action described below. An ordinary reboot does not restore factory credentials. Resetting to a rescue configuration is a separate operation, not a full factory reset.
+This applies to the software `restore system factory-default` procedure and the SSR400/SSR440 factory-reset button action described below. An ordinary reboot does not restore factory credentials. Resetting to a rescue configuration is a separate operation, not a factory reset.
 
 See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login) for the password-change procedures. SSH login as `root` remains prohibited; use the local console for direct root login.
 

@@ -50,7 +50,9 @@ Setting the password for the system accounts (`admin`, `root`, and `t128`) is pe
 :::
 
 :::important
-Beginning with SSR 7.2.4-R2, default passwords require replacement after a fresh installation or full factory reset. The password you supply during initialization replaces the factory credentials for the system accounts. Use this password for subsequent access. If you access an account while its password is still expired or temporary, complete the password-change prompts before continuing. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+Beginning with SSR 7.2.4-R2, a new installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. The **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login.
+
+The password you supply during initialization replaces the factory credentials for the system accounts. Use this password for subsequent access. If you access an account while its password is still expired or temporary, complete the password-change prompts before continuing. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
 :::
 
 3. Click **ASSOCIATE**
