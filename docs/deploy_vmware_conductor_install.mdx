@@ -53,6 +53,10 @@ These steps configure the interface you will use to initialize the conductor via
    - Username: `root`
    - Password: `128tRoutes`
 
+   :::important
+   Beginning with SSR 7.2.4-R2, a new installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. Complete the password-change prompts before running the commands below. Once the password has been reset, use the new password for subsequent logins. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login) for additional information.
+   :::
+
 3. Run the following two commands to disable the service and stop the messages. 
 
    ```
@@ -76,7 +80,7 @@ These steps configure the interface you will use to initialize the conductor via
 
       ![show network interface](/img/dep-vmware-cli-show-ge-0-0.png)
 
-      - Locate the ge-0-0 interface, and make a note of the IP address.
+      - Locate the `ge-0-0` interface, and make a note of the IP address.
 
 5. From the Conductor VM in the ESXi Navigator, select **Actions** and then **Edit**.
 
@@ -94,7 +98,7 @@ These steps configure the interface you will use to initialize the conductor via
 
 1. After the system boots, the SSR login screen appears. Login using the root credentials.
    - Username: `root`
-   - Password: `128tRoutes`
+   - Password: Your current root password or `128tRoutes` if the factory password has not yet been reset.
 
    ![Conductor Login](/img/dep-vmware-conductor-login.png)
 
