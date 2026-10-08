@@ -14,16 +14,6 @@ The following IP addressing and naming scheme is used consistently throughout th
 | Authority Name | `Authority128` | SSR organizational authority name |
 | Conductor Name | `Conductor` | Conductor system name |
 | Conductor Node Name | `node0` | Conductor node name |
-| Conductor Subnet | `ssr-wan-subnet` | Conductor public (WAN) subnet (`10.0.1.0/24`). This is shared with the router. |
-| Router WAN Subnet | `ssr-wan-subnet` | Router public (WAN) subnet (`10.0.1.0/24`). This is shared with the conductor. |
-| Router LAN Subnet | `ssr-lan-subnet` | Router private (LAN) subnet (`10.0.2.0/24`) |
-| Router Name | `azure-router-1` | Router system name |
-| Router Node Name | `node0` | Router node name |
-| WAN Device Interface | `wan-dev` | WAN device interface name |
-| WAN Network Interface | `wan1` | WAN network interface name |
-| LAN Device Interface | `lan-dev` | LAN device interface name |
-| LAN Network Interface | `lan1` | LAN network interface name |
-| Router LAN IP | `10.0.2.1/24` | LAN gateway address assigned to the router LAN interface |
 | Tenant Name | `corp` | LAN-side user tenant |
 | Service Name | `Internet-Traffic` | Internet breakout service |
 | Service Address | `0.0.0.0/0` | All internet-bound traffic |
