@@ -6,8 +6,8 @@
 <title data-rh="true">Step 3: Configure the Conductor | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/deploy_azure_conductor_config"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Step 3: Configure the Conductor | SSN Docs"><meta data-rh="true" name="description" content="This step configures the authority-level settings on the conductor: the authority name, conductor address, corporate tenant, and internet service. These objects are shared across all routers managed by this conductor."><meta data-rh="true" property="og:description" content="This step configures the authority-level settings on the conductor: the authority name, conductor address, corporate tenant, and internet service. These objects are shared across all routers managed by this conductor."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/deploy_azure_conductor_config"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/deploy_azure_conductor_config" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/deploy_azure_conductor_config" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Configure the Conductor","item":"https://docs.128technology.com/docs/deploy_azure_conductor_config"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.bcc1883f.css">
-<script src="/assets/js/runtime~main.5fce327e.js" defer="defer"></script>
-<script src="/assets/js/main.79a0ea34.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.63768a5c.js" defer="defer"></script>
+<script src="/assets/js/main.2781b639.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -27,21 +27,22 @@
 </ol>
 <p><img decoding="async" loading="lazy" alt="Conductor Configuration Icon" src="/assets/images/conductor_config_icon-f779deae6093e3a0ea6d658509d52a8c.png" width="621" height="75" class="img_ev3q"></p>
 <ol start="3">
-<li class="">Select the node for the conductor - in this example it is <code>node0</code>.</li>
-</ol>
-<p><img decoding="async" loading="lazy" alt="Conductor Node" src="/assets/images/conductor_node-daae7d19277a5892ed9a447f638f7a40.png" width="1738" height="280" class="img_ev3q"></p>
-<ol start="4">
-<li class="">Under <strong>Associated Asset ID</strong> select the hostname for the conductor.</li>
+<li class="">In the Node panel, under <strong>Associated Asset ID</strong>, select the hostname for the conductor.</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Asset ID" src="/assets/images/dep-conductor_asset-id-d70db545e8291a6784430abeba74ac73.png" width="463" height="62" class="img_ev3q"></p>
-<ol start="5">
+<ol start="4">
 <li class="">Validate and Commit the changes to the configuration.</li>
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-set-the-authority-name">2. Set the Authority Name<a href="#2-set-the-authority-name" class="hash-link" aria-label="Direct link to 2. Set the Authority Name" title="Direct link to 2. Set the Authority Name" translate="no">​</a></h2>
 <p>The authority represents the complete set of all SSRs managed under a single organizational entity.</p>
 <ol>
-<li class="">Return to the Authority level.</li>
-<li class="">Select the Authority Settings.</li>
+<li class="">
+<p>Return to the Authority level - either select <strong>Authority</strong> from the configuration menu on the left side of the GUI, or select the up arrow next to <strong>Node</strong> at the top of the screen.</p>
+<p><img decoding="async" loading="lazy" alt="Up arrow" src="/assets/images/deploy-up-arrow-189481c1797dba4c94f5d8c7f903df3e.png" width="170" height="168" class="img_ev3q"></p>
+</li>
+<li class="">
+<p>Select the Authority Settings.</p>
+</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Authority Settings" src="/assets/images/conductor_authority_name-5574c5da0a7e4753dd7014e74bac6731.png" width="294" height="325" class="img_ev3q"></p>
 <ol start="3">
@@ -61,7 +62,6 @@
 <li class="">Click Validate and Commit. Warnings will appear, advising you of the change.</li>
 </ol>
 <p>The steps during initialization setup the management IP. The conductor IP address is the public IP address to which the managed routers connect. It is not necessary to manually associate this IP address with a network interface; the interactions between the SSR software and Linux will identify and assign the IP address to the network interface.</p>
-<p>When prompted for the conductor address, enter the public IP address displayed in the Azure Portal Outputs tab (for example, <code>203.0.113.10</code>). Validate and commit the change.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-create-the-corporate-tenant">4. Create the Corporate Tenant<a href="#4-create-the-corporate-tenant" class="hash-link" aria-label="Direct link to 4. Create the Corporate Tenant" title="Direct link to 4. Create the Corporate Tenant" translate="no">​</a></h2>
 <p>Tenants logically partition the network. The <code>corp</code> tenant represents corporate LAN users and is referenced by the LAN interface configuration on each managed router.</p>
 <ol>
@@ -82,7 +82,7 @@
 <li class="">On the Service screen, verify <strong>Enabled</strong> is set to <code>true</code>.</li>
 <li class="">Scroll down to <strong>Service Addresses</strong> and select <strong>ADD</strong>.</li>
 <li class="">Enter <code>0.0.0.0/0</code> and select <strong>SAVE</strong>.</li>
-<li class="">Scroll down to <strong>Access Policy</strong> and select <strong>ADD</strong>.<!-- -->
+<li class="">Scroll down to <strong>Access Policies</strong> and select <strong>ADD</strong>.<!-- -->
 <ul>
 <li class="">Set <strong>Source</strong> to <code>corp</code>.</li>
 <li class="">Select <strong>SAVE</strong>.</li>
@@ -92,7 +92,7 @@
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-was-configured">What Was Configured<a href="#what-was-configured" class="hash-link" aria-label="Direct link to What Was Configured" title="Direct link to What Was Configured" translate="no">​</a></h2>
 <p>At the end of this step your authority contains:</p>
-<table><thead><tr><th>Name</th><th>Value</th><th>Description</th></tr></thead><tbody><tr><td>Authority</td><td><code>Authority128</code></td><td></td></tr><tr><td>Conductor Address</td><td></td><td>Public IP of the conductor VM</td></tr><tr><td>Tenant</td><td><code>corp</code></td><td>LAN-side user population</td></tr><tr><td>Service</td><td><code>Internet-Traffic</code></td><td><code>0.0.0.0/0</code>, access from <code>corp</code></td></tr></tbody></table>
+<table><thead><tr><th>Name</th><th>Value</th><th>Description</th></tr></thead><tbody><tr><td>Authority</td><td><code>Authority128</code></td><td>SSR organizational authority name</td></tr><tr><td>Conductor Address</td><td><code>&lt;auto-assigned&gt;</code></td><td>Azure-assigned public IP — used for SSH, GUI, and as the conductor address</td></tr><tr><td>Tenant</td><td><code>corp</code></td><td>LAN-side user population</td></tr><tr><td>Service</td><td><code>Internet-Traffic</code></td><td><code>0.0.0.0/0</code>, access from <code>corp</code></td></tr></tbody></table>
 <p>The conductor is now ready to accept router onboarding.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="next-step">Next Step<a href="#next-step" class="hash-link" aria-label="Direct link to Next Step" title="Direct link to Next Step" translate="no">​</a></h2>
 <p>Congratulations, your Azure Conductor is deployed. The next step is to deploy your router(s) and onboard them to the conductor. See the appropriate router deployment guide for your needs.</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/deploy_azure_conductor_install"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Initialize and Access</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/deploy_appendix_azure_conductor"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Appendix - Azure Conductor Configuration</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-assign-the-conductors-asset-id" class="table-of-contents__link toc-highlight">1. Assign the Conductor&#39;s Asset ID</a></li><li><a href="#2-set-the-authority-name" class="table-of-contents__link toc-highlight">2. Set the Authority Name</a></li><li><a href="#3-set-the-conductor-address" class="table-of-contents__link toc-highlight">3. Set the Conductor Address</a></li><li><a href="#4-create-the-corporate-tenant" class="table-of-contents__link toc-highlight">4. Create the Corporate Tenant</a></li><li><a href="#5-create-the-internet-traffic-service" class="table-of-contents__link toc-highlight">5. Create the <code>Internet-Traffic</code> Service</a></li><li><a href="#what-was-configured" class="table-of-contents__link toc-highlight">What Was Configured</a></li><li><a href="#next-step" class="table-of-contents__link toc-highlight">Next Step</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
