@@ -13,6 +13,12 @@ Note that all of the examples in this document are run as the _admin_ role (as d
 Login to the system using the default `admin` user, [locally created users](config_radius.md#local-users), or [remotely authenticated users](config_radius.md#overview) will result in PCLI as the user environment. Other users such as `root` or `t128` use a system Linux shell as the user environment. If operating as one of these users in a Linux shell, you can change users to those having PCLI as their environment to access PCLI. Example: `su admin`.
 :::
 
+:::note
+Beginning with SSR 7.2.4-R2, a fresh installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. The **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. You will be presented with the password reset prompts at the first login for each account.  Alternatively, you can configure new passwords during initialization. 
+
+Complete the password-change prompts before running PCLI commands, including when entering the PCLI from a Linux shell. When using `su admin`, a successful password change returns you to the original Linux shell. Run `su admin` again using the new password to begin a normal PCLI session. See [Enter the PCLI From a Linux Shell](config_password_security.md#enter-the-pcli-from-a-linux-shell).
+:::
+
 Optional arguments are written in brackets (`[` `]`), and users may include or omit them as needed. Variable arguments (where users need to supply a value, rather than entering in the literal string shown in the syntax) are written in angle brackets (`<` `>`).
 
 ```

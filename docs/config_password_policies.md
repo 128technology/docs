@@ -8,6 +8,7 @@ sidebar_label: Username and Password Policies
 | 5.6.0   | Feature introduced |
 | 6.0.1   | Added Max failed login attempts and User lock time. |
 | 6.0.4   | Added Username requirements. |
+| 7.2.4-R2 | Enforced default-password replacement after fresh installation and factory reset. |
 
 ### Password Requirements
 
@@ -24,6 +25,10 @@ The SSR password policies have been updated to provide a more secure experience.
 9. The default admin password **must** be changed to strong password on first use.
 10. The maximum failed login attempts are configurable, with a default of 6.
 11. User lock time (time the user must wait before attempting login after reaching the max failed attempts) is configurable. The default is 1800 seconds.
+
+:::note 
+Beginning with SSR 7.2.4-R2, a fresh installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. The **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. You will be presented with the password reset prompts at the first login for each account. Alternatively, you can configure new passwords during initialization. This first-login requirement is separate from password-lifetime settings. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login).
+:::
 
 ### Username Requirements
 

@@ -8,12 +8,21 @@ sidebars_label: Factory Reset
 | Release | Modification                |
 | ------- | --------------------------- |
 | 7.1.0   | SSR 4x0 Factory Reset support added. |
+| 7.2.4-R2 | Default account passwords require replacement after a factory reset. |
 
 The SSR software, SSR1x0, SSR1x00, and SSR4x0 series provide the ability to reset to factory defaults. The SSR software and SSR1x0/1x00 devices use a software reset to return to the original factory defaults, and remove customer configurations.
 
 The SSR400 and SSR440 provides software-activated reset as well as a reset button on the device. With the reset button, you have the option of resetting to a previously defined rescue configuration, or reset to the factory configuration and perform a secure zeroization.
 
 Use the information below to determine the best option for your deployment.    
+
+## Passwords After a Full Factory Reset
+
+Beginning with SSR 7.2.4-R2, the **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. You will be presented with the password reset prompts at the first login for each account. Alternatively, you can configure new passwords during initialization.
+
+This applies to the software `restore system factory-default` procedure and the SSR400/SSR440 factory-reset button action described below. An ordinary reboot does not restore factory credentials. Resetting to a rescue configuration is a separate operation, not a factory reset.
+
+See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login) for the password-change procedures. SSH login as `root` remains prohibited; use the local console for direct root login.
 
 ## SSR400 and SSR440 Factory Reset
 
