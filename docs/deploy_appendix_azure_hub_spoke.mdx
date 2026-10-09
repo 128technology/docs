@@ -64,203 +64,190 @@ The authority-level objects the routers depend on (`hub-corp` tenant, `spoke-cor
 ```
 config
     authority
-        name              Authority128
-
         conductor-address  <conductor-public-ip>
-
-        tenant  hub-corp
-            name  hub-corp
-        exit
-
-        tenant  spoke-corp
-            name  spoke-corp
-        exit
-
-        service  Internet-Traffic
-            name             Internet-Traffic
-            scope            public
-            security         internal
-
-            access-policy    hub-corp
-                source  hub-corp
-            exit
-
-            access-policy    spoke-corp
-                source  spoke-corp
-            exit
-
-            address  0.0.0.0/0
-        exit
-
-        router  Conductor
-            name                 Conductor
-            inter-node-security  internal
-
+ 
+        router             conductor-1
+            name  conductor-1
+ 
             node  node0
-                name  node0
-                role  conductor
-
-                device-interface  mgmt-dev
-                    name         mgmt-dev
-                    type         ethernet
-                    forwarding   false
-                    vmbus-uuid   <conductor-vmbus-uuid>
-
-                    network-interface  mgmt-intf
-                        name  mgmt-intf
-                        type  management
-
-                        address  10.0.0.10
-                            ip-address     10.0.0.10
-                            prefix-length  24
-                            gateway        10.0.0.1
-                        exit
-                    exit
-                exit
+                name           node0
+                asset-id       conductor-1
+                platform-type  "Virtual Machine"
             exit
         exit
-
-        router  azure-hub-router
-            name                 azure-hub-router
+ 
+        router             ssr-router-2
+            name                 ssr-router-2
             inter-node-security  internal
-
-            node  node0
-                name  node0
-                role  combo
-
+ 
+            dns-config           static
+                mode     static
+                address  1.1.1.1
+                address  8.8.8.8
+            exit
+ 
+            node                 node0
+                name              node0
+                asset-id          ssr-router-2
+                role              combo
+                platform-type     "Virtual Machine"
+ 
                 device-interface  wan-dev
                     name               wan-dev
-                    type               ethernet
-                    forwarding         true
-                    vmbus-uuid         <hub-wan-vmbus-uuid>
-
+                    vmbus-uuid         00224879-yourvmbusuuidhere
+ 
                     network-interface  wan1
                         name                   wan1
                         global-id              1
                         conductor              true
                         default-route          true
+ 
+                        neighborhood           internet
+                            name  internet
+                        exit
+                        inter-router-security  internal
                         source-nat             true
+ 
+                        host-service           ssh
+                            service-type   ssh
+ 
+                            access-policy  0.0.0.0/0
+                                source  0.0.0.0/0
+                            exit
+                        exit
                         management             true
-
+ 
                         management-vector
                             name      mgmt-vec-wan
                             priority  100
                         exit
-
-                        neighborhood           internet
-                            name      internet
-                            topology  hub
-                        exit
-
-                        inter-router-security  internal
                         dhcp                   v4
                     exit
                 exit
-
+ 
                 device-interface  lan-dev
                     name               lan-dev
-                    type               ethernet
-                    forwarding         true
-                    vmbus-uuid         <hub-lan-vmbus-uuid>
-
+                    vmbus-uuid         00224879-yourvmbusuuidhere
+ 
                     network-interface  lan1
                         name        lan1
                         global-id   2
-                        tenant      hub-corp
+                        tenant      spoke-corp
                         source-nat  true
-                        dhcp        disabled
-
-                        address     10.0.2.1
-                            ip-address     10.0.2.1
+ 
+                        address     10.8.2.5
+                            ip-address     10.8.2.5
                             prefix-length  24
                         exit
                     exit
                 exit
             exit
-
-            dns-config
-                mode     manual
-                servers  [ 1.1.1.1 8.8.8.8 ]
+ 
+            service-route        internet-via-hub
+                name          internet-via-hub
+                service-name  Internet-Traffic
+                peer          ssr-hub-router-1
             exit
-
-            service-route  internet-breakout
+        exit
+ 
+        router             ssr-hub-router-1
+            name                 ssr-hub-router-1
+            inter-node-security  internal
+ 
+            dns-config           static
+                mode     static
+                address  1.1.1.1
+                address  8.8.8.8
+            exit
+ 
+            node                 node0
+                name              node0
+                asset-id          ssr-hub-router-1
+                role              combo
+                platform-type     "Virtual Machine"
+ 
+                device-interface  wan-dev
+                    name               wan-dev
+                    vmbus-uuid         002248be-yourvmbusuuidhere
+ 
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              3
+                        conductor              true
+                        default-route          true
+ 
+                        neighborhood           internet
+                            name      internet
+                            topology  hub
+                        exit
+                        inter-router-security  internal
+                        source-nat             true
+ 
+                        host-service           ssh
+                            service-type   ssh
+ 
+                            access-policy  0.0.0.0/0
+                                source  0.0.0.0/0
+                            exit
+                        exit
+                        management             true
+ 
+                        management-vector
+                            name      mgmt-vec-wan
+                            priority  100
+                        exit
+                        dhcp                   v4
+                    exit
+                exit
+ 
+                device-interface  lan-dev
+                    name               lan-dev
+                    vmbus-uuid         002248be-yourvmbusuuidhere
+ 
+                    network-interface  lan1
+                        name        lan1
+                        global-id   4
+                        tenant      hub-corp
+                        source-nat  true
+ 
+                        address     10.8.6.4
+                            ip-address     10.8.6.4
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+ 
+            service-route        internet-breakout
                 name          internet-breakout
                 service-name  Internet-Traffic
-
+ 
                 next-hop      node0 wan1
                     node-name  node0
                     interface  wan1
                 exit
             exit
         exit
-
-        router  azure-spoke-router
-            name                 azure-spoke-router
-            inter-node-security  internal
-
-            node  node0
-                name  node0
-                role  combo
-
-                device-interface  wan-dev
-                    name               wan-dev
-                    type               ethernet
-                    forwarding         true
-                    vmbus-uuid         <spoke-wan-vmbus-uuid>
-
-                    network-interface  wan1
-                        name                   wan1
-                        global-id              1
-                        conductor              true
-                        default-route          true
-                        source-nat             true
-                        management             true
-
-                        management-vector
-                            name      mgmt-vec-wan
-                            priority  100
-                        exit
-
-                        neighborhood           internet
-                            name      internet
-                            topology  spoke
-                        exit
-
-                        inter-router-security  internal
-                        dhcp                   v4
-                    exit
-                exit
-
-                device-interface  lan-dev
-                    name               lan-dev
-                    type               ethernet
-                    forwarding         true
-                    vmbus-uuid         <spoke-lan-vmbus-uuid>
-
-                    network-interface  lan1
-                        name        lan1
-                        global-id   2
-                        tenant      spoke-corp
-                        source-nat  true
-                        dhcp        disabled
-
-                        address     10.0.4.1
-                            ip-address     10.0.4.1
-                            prefix-length  24
-                        exit
-                    exit
-                exit
+ 
+        tenant             hub-corp
+            name  hub-corp
+        exit
+ 
+        tenant             spoke-corp
+            name  spoke-corp
+        exit
+ 
+        service            Internet-Traffic
+            name           Internet-Traffic
+            security       internal
+            address        0.0.0.0/0
+ 
+            access-policy  hub-corp
+                source  hub-corp
             exit
-
-            dns-config
-                mode     manual
-                servers  [ 1.1.1.1 8.8.8.8 ]
-            exit
-
-            service-route  internet-via-hub
-                name          internet-via-hub
-                service-name  Internet-Traffic
-                peer          azure-hub-router
+ 
+            access-policy  spoke-corp
+                source  spoke-corp
             exit
         exit
     exit

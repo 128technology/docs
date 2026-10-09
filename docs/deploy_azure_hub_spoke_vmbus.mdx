@@ -7,7 +7,7 @@ This step waits for SSR 7.1.4 to finish installing on both VMs, confirms both ro
 
 ## Wait for Installation to Complete
 
-The BYOL software installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
+The BYOL software installs SSR 7.1.4 automatically after each VM is deployed. This process takes approximately **20 minutes** after the VM first starts. Both VMs install in parallel, so you do not need to wait for one to finish before checking the other.
 
 The installation is complete when both routers appear in show assets on the conductor.
 
@@ -58,7 +58,7 @@ In Azure, device interfaces are identified by **VMBus UUID** rather than PCI add
 
 Perform the following steps on **each router** separately. Record the UUIDs — you will need them in [Step 4](deploy_azure_hub_spoke_config.mdx).
 
-### Step 1: Identify VMBus UUIDs From the Router VM
+### Identify VMBus UUIDs From the Router VM
 
 Open the devicemap to see the VMBus UUID mapping for the attached interfaces.
 
