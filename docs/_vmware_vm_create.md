@@ -29,7 +29,8 @@ Use the steps below to configure the following:
 
 3. Name the Virtual Machine **Conductor**.  
 
-4. Select **Linux** from the Guest OS family dropdown selection, and select the Guest OS version as the highest available Oracle Linux (64-bit) version. In this example it is Oracle Linux 8, but your deplpoyment may be different. Click **Next**.
+4. Select **Linux** from the Guest OS family dropdown selection, and select the Guest OS version as the highest available Oracle Linux (64-bit) version. In this example it is Oracle Linux 8, but your deployment may be different. 
+   Click **Next**.
 
    ![Name VM](/img/dep3-vm-name-os.png)
 
