@@ -37,11 +37,10 @@ If all managed routers reside in the same Azure VNet and communicate over privat
 
 Tenants logically partition the network. The `corp` tenant represents corporate LAN users and is referenced by the LAN interface configuration on each managed router.
 
-1. In the Conductor GUI, select **Configuration**.
-2. Select **Authority**.
-3. Scroll to **Tenants** and select **ADD**.
-4. Enter the name `corp` and select **SAVE**.
-5. Select **VALIDATE** then **COMMIT**.
+1. Select **Authority** from the left panel.
+2. Scroll to **Tenants** and select **ADD**.
+3. Enter the name `corp` and select **SAVE**.
+4. Select **VALIDATE** then **COMMIT**.
 
 :::info
 Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
@@ -51,17 +50,16 @@ Tenants are authority-wide. A single `corp` tenant definition applies to all rou
 
 The *service* configuration element defines the IP destinations that the SSR routes. This step creates a single service representing all internet-bound traffic from corporate LAN users.
 
-1. In the Conductor GUI, select **Configuration**.
-2. Select **Authority** from the left panel.
-3. Scroll down to **Services** and select **ADD**.
-4. Enter the name `Internet-Traffic` and select **SAVE**.
-5. On the Service screen, verify **Enabled** is set to `true`.
-6. Scroll down to **Service Addresses** and select **ADD**.
-7. Enter `0.0.0.0/0` and select **SAVE**.
-8. Scroll down to **Access Policies** and select **ADD**.
+1. Select **Authority** from the left panel.
+2. Scroll down to **Services** and select **ADD**.
+3. Enter the name `Internet-Traffic` and select **SAVE**.
+4. On the Service screen, verify **Enabled** is set to `true`.
+5. Scroll down to **Service Addresses** and select **ADD**.
+6. Enter `0.0.0.0/0` and select **SAVE**.
+7. Scroll down to **Access Policies** and select **ADD**.
    - Set **Source** to `corp`.
    - Select **SAVE**.
-9. Select **VALIDATE** then **COMMIT**.
+8. Select **VALIDATE** then **COMMIT**.
 
 ## What Was Configured
 
