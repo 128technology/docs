@@ -72,6 +72,92 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
+## Release 7.0.6-7-lts
+
+**Release Date:** October 15, 2026
+
+### Resolved Issues
+
+- **The following CVEs have been identified and resolved in this release:** CVE-2022-50073, CVE-2024-12086, CVE-2024-34459, CVE-2025-5278, CVE-2025-6170, CVE-2025-10911, CVE-2025-12748, CVE-2025-13151, CVE-2025-14087, CVE-2025-14512, CVE-2025-21502, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2025-30749, CVE-2025-30754, CVE-2025-50059, CVE-2025-50106, CVE-2025-53057, CVE-2025-53066, CVE-2025-64720, CVE-2025-65018, CVE-2026-0865, CVE-2026-1933, CVE-2026-2291, CVE-2026-2340, CVE-2026-3012, CVE-2026-3039, CVE-2026-3832, CVE-2026-3833, CVE-2026-4046, CVE-2026-4408, CVE-2026-4437, CVE-2026-4438, CVE-2026-4480, CVE-2026-4786, CVE-2026-4800, CVE-2026-4878, CVE-2026-4890, CVE-2026-4891, CVE-2026-4892, CVE-2026-4893, CVE-2026-5119, CVE-2026-5260, CVE-2026-5419, CVE-2026-5435, CVE-2026-5450, CVE-2026-5704, CVE-2026-5928, CVE-2026-5946, CVE-2026-6238, CVE-2026-6653, CVE-2026-6733, CVE-2026-6893, CVE-2026-7383, CVE-2026-9076, CVE-2026-9678, CVE-2026-9698, CVE-2026-11525, CVE-2026-11822, CVE-2026-11824, CVE-2026-11979, CVE-2026-12151, CVE-2026-13149, CVE-2026-14257, CVE-2026-14380, CVE-2026-14474, CVE-2026-14476, CVE-2026-14739, CVE-2026-15308, CVE-2026-15709, CVE-2026-15711, CVE-2026-16118, CVE-2026-16730, CVE-2026-18477, CVE-2026-18508, CVE-2026-19546, CVE-2026-21925, CVE-2026-21933, CVE-2026-21945, CVE-2026-22007, CVE-2026-22013, CVE-2026-22016, CVE-2026-22018, CVE-2026-22021, CVE-2026-23479, CVE-2026-23631, CVE-2026-23865, CVE-2026-25243, CVE-2026-28390, CVE-2026-28420, CVE-2026-28780, CVE-2026-28847, CVE-2026-28883, CVE-2026-28901, CVE-2026-28902, CVE-2026-28903, CVE-2026-28904, CVE-2026-28905, CVE-2026-28907, CVE-2026-28942, CVE-2026-28946, CVE-2026-28947, CVE-2026-28953, CVE-2026-28955, CVE-2026-28958, CVE-2026-29518, CVE-2026-31504, CVE-2026-31533, CVE-2026-31657, CVE-2026-31669, CVE-2026-31790, CVE-2026-33007, CVE-2026-33278, CVE-2026-33845, CVE-2026-33846, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2026-34180, CVE-2026-34181, CVE-2026-34182, CVE-2026-34183, CVE-2026-34268, CVE-2026-34282, CVE-2026-34980, CVE-2026-35177, CVE-2026-37555, CVE-2026-39979, CVE-2026-40164, CVE-2026-40170, CVE-2026-40355, CVE-2026-40356, CVE-2026-41035, CVE-2026-41254, CVE-2026-41411, CVE-2026-41991, CVE-2026-41992, CVE-2026-42009, CVE-2026-42010, CVE-2026-42011, CVE-2026-42012, CVE-2026-42013, CVE-2026-42014, CVE-2026-42015, CVE-2026-42055, CVE-2026-42338, CVE-2026-42764, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-42944, CVE-2026-42959, CVE-2026-43618, CVE-2026-43658, CVE-2026-43660, CVE-2026-44431, CVE-2026-44432, CVE-2026-45186, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-46483, CVE-2026-46917, CVE-2026-46968, CVE-2026-47010, CVE-2026-47021, CVE-2026-47027, CVE-2026-47059, CVE-2026-47063, CVE-2026-47162, CVE-2026-47167, CVE-2026-48142, CVE-2026-48615, CVE-2026-48618, CVE-2026-48619, CVE-2026-48864, CVE-2026-48914, CVE-2026-48928, CVE-2026-48930, CVE-2026-48933, CVE-2026-48934, CVE-2026-48935, CVE-2026-48962, CVE-2026-49825, CVE-2026-50219, CVE-2026-52858, CVE-2026-52859, CVE-2026-54369, CVE-2026-54370, CVE-2026-54371, CVE-2026-54411, CVE-2026-55693, CVE-2026-55892, CVE-2026-56132, CVE-2026-56392, CVE-2026-56846, CVE-2026-56848, CVE-2026-57455, CVE-2026-57456, CVE-2026-58016, CVE-2026-58043, CVE-2026-58471, CVE-2026-58472, CVE-2026-59843, CVE-2026-59844, CVE-2026-59845, CVE-2026-59846, CVE-2026-59847, CVE-2026-59848, CVE-2026-59850, CVE-2026-59856, CVE-2026-59857, CVE-2026-59858, CVE-2026-59873, CVE-2026-59874, CVE-2026-60147, CVE-2026-60589, CVE-2026-61308, CVE-2026-66373, CVE-2026-69152, CVE-2026-69192, CVE-2026-70907, CVE-2026-73072, CVE-2026-73076, CVE-2026-73077, CVE-2026-73078, CVE-2026-81934
+------
+- **The following issues have been addressed and delivered to increase the overall security posture of the SSR:** I95-65018, I95-65027, I95-65028, I95-65030, I95-65038, I95-65044, I95-65157, I95-65206, I95-65208, I95-65235, I95-65244, I95-65250, I95-65252, I95-65254.
+------
+- **I95-62331 OSPF Default Route Not Re-Advertised After Restart:** Resolved an issue where a timing condition could prevent OSPF from generating the external (Type 5) LSA for a configured default route after a restart, so peers did not receive the default route until the OSPF process was manually cleared. OSPF now reliably advertises the default route after a restart.
+------
+- **I95-65392 Hierarchical services ping traffic failure between sites:** Resolved an issue where ICMP ping traffic between specific sites failed when using hierarchical service configurations with application identification groups.
+------
+- **I95-65411 CLI Command Appending Unrelated Output:** Resolved an issue where executing certain PCLI commands (such as `show peer router all force`) would append unrelated command output at the end of the expected results.
+------
+- **I95-65532 Unclassified Application Sessions After Security Engine Rebuild:** Resolved an issue where, after the security engine container was rebuilt, application identification stopped classifying traffic and reported sessions as an unclassified application until the next scheduled package update. The required application-identification packages are now installed during IDP startup.
+------
+- **I95-65535 Assets Stuck in Synchronizing State:** Resolved an issue where assets could become stuck in a synchronizing state for extended periods (up to 24 hours) due to overly aggressive watchdog timer defaults. The default timer settings have been relaxed.
+------
+- **I95-65672 Excessive LDAP Service Lookups Against External Directory Servers:** Resolved an issue where SSR nodes generated an excessive volume of LDAP lookups against an external directory server (such as JumpCloud) when resolving well-known service names (for example, `ntp`, `sctp`, `udplite`, and `dccp`). These service names are now resolved from the local `/etc/services` file instead of querying the external directory server.
+------
+- **I95-65680 RoutingManager Not Running on HA Headend Router:** Resolved an issue where the routingManager could remain in STANDBY after a session interruption, leaving the router without an active routing process (loss of BGP/routing connectivity) until restarted.
+------
+- **I95-65736 Improved Source NAT Visibility in Tech-Support-Info:** Added a form of the source NAT rules `show` command that reports pool usage across all network-interfaces in a single invocation, and included this output in tech-support-info collection to improve visibility into source NAT operation during troubleshooting.
+------
+- **I95-65754 Highway Crash on Shutdown Due to Static Sessions:** Resolved an issue where the highway process crashed during shutdown on HA nodes performing a downgrade. Static sessions were not being cleared during the shutdown sequence. Static sessions are now properly cleared alongside the session table during shutdown, preventing the crash.
+------
+- **I95-65771 Resolved a Highway Crash Related to Unclassified Application Statistics:** Resolved an issue where the highway process could crash while collecting application identification statistics for sessions that had no classified application type. Application statistics handling now safely accounts for this case.
+------
+- **I95-65803 Connected Routes on a Bonded Interface Missing from the RIB After Upgrade:** Resolved an issue where, after an upgrade, directly connected routes on a bonded (LAG) interface could be missing from the routing table even though the interface and its members were up, requiring users to manually reset the interface to restore the routes. The system now correctly handles the race condition.
+------
+- **I95-65826 Assets enter a `Disconnected` state after upgrading the Conductor:** After a Conductor upgrade, assets entered a `Disconnected` state while the SSH connections were restored. In some cases this took an hour or more. The minion connector has been upgraded to version 1.7.7 to resolve this issue. 
+------
+- **I95-65899 Router not synchronized After Conductor Migration:** Resolved an issue where an HA router pair could remain un-synchronized with the production conductor after migrating from a staging conductor, because the new conductor address was not persisted following migration.
+------
+- **I95-65912 Resolved Source NAT Port Exhaustion Caused by Duplicate Internal Interfaces:** Resolved an issue where enabling both source NAT and IDP could result in duplicate internal interface identifiers being created, contributing to premature exhaustion of available source NAT ports and dropped packets. Internal IDP interface identifiers are now allocated uniquely.
+------
+- **I95-65957 VRRP Split-Brain After Adding GRE Tunnels To A Redundant WAN Interface:** Resolved an issue where adding GRE tunnel network-interfaces to a redundant WAN device-interface could cause both nodes of an HA pair to simultaneously claim the VRRP master role, resulting in an active-active split-brain condition. VRRP state machines are no longer created for tunnel interfaces.
+------
+- **I95-65962 False-Positive NAT Duplicate Validation Error on HA Routers with IDP Enabled:** Resolved an issue where committing a dynamic or bidirectional source NAT configuration on an HA router with IDP enabled could fail with a false "duplicate" validation error, because the configuration validator did not account for the shared interface existing identically on both HA nodes. The validator now correctly recognizes this as a single logical interface.
+------
+- **I95-66067 Offline upgrade failure:** Resolved an issue during upgrade that was being reported as an `Unpacker Failure`. The service startup order has been adjusted to prevent the issue in future upgrades/installations.
+------
+- **I95-66070 Highway Crash in High-Scale Peer Scenarios:** Resolved an issue where the Highway process would crash with a large number of SSR peers, due to a race condition. The fix adds thread-safe locking mechanisms to protect all read and write operations, ensuring stable operation at scale.
+------
+- **I95-66071 Resolved a Highway Crash During GRE Tunnel Configuration Updates:** Resolved an issue where a failed lookup during a GRE tunnel interface modification could leave a stale internal state, causing the highway process to crash on a subsequent configuration change to the same tunnel. GRE tunnel state is now cleaned up correctly when a lookup fails.
+------
+- **I95-66077 BGP Peers Down After Enabling a Second Internet Provider:** Resolved a defect in BGP conditional advertisement processing that could cause all BGP peers to go down when a second BGP-connected internet provider was enabled.
+------
+- **I95-66082 Resolved a Highway Crash on Reverse-Flow Session Collision:** Resolved an issue where the highway process could crash when a returning packet collided with an internal session during reverse-flow processing, causing peer instability. The colliding packet is now safely dropped instead of causing a crash.
+------
+- **I95-66088 DHCP `ha-heartbeat` State Showing `partner-down` on both HA Nodes:** Resolved an issue where the DHCP `ha-heartbeat` state could show `partner-down` on both nodes of an HA pair because HA control interface addresses were not recovered correctly.
+------
+- **I95-66149 AIDE Logs Added to Tech-Support-Info:** Tech-support-info collection now includes the AIDE (Advanced Intrusion Detection Environment) log directory, improving visibility into file-integrity monitoring during troubleshooting.
+------
+- **I95-66157 Stale BGP Routes Shown as `inaccessible, import-check enabled`:** Resolved an issue in the underlying routing stack where stale BGP routes could remain in a per-VRF routing table and be displayed as `inaccessible, import-check enabled` when VRF route leaking was configured. Stale routes are now correctly withdrawn.
+------
+- **I95-66196 Commit Failures After Upgrade Due to Auto-Generated IPv6 DNS Service Routes:** Resolved an issue where upgrading could automatically generate an IPv6 DNS management service and associated service-route even when IPv6 DNS was not in use, causing configuration commits to fail on routers where the management interface did not have source NAT enabled. The DNS service route is now generated only for address families that have a corresponding management interface.
+------
+- **I95-66234 Creating a snapshot log for large configurations appears to stall the system:** Resolved an issue where generating a diagnostic snapshot log, including as part of a tech support info bundle, could take an excessive amount of time on a system with a large configuration and cause the configuration director's poller thread to appear unresponsive.
+------
+- **I95-66238 NTP Rejected State After Upgrade:** Resolved an issue where NTP synchronization could enter a rejected state after an upgrade, caused by a boot-sequence race condition where the NTP time-sync dispatcher ran before the internal management interface was ready. This could also result in missing analytics graphs and authentication errors on the Conductor GUI due to clock skew.
+------
+- **I95-66282 Removed Trusted CA Certificates Remained Trusted:** Resolved an issue where removing a certificate from the `trusted-ca-certificate` configuration did not remove it from the highway process's in-memory trust map, so the certificate continued to be trusted for ESKM peering.
+------
+- **I95-66284 API Swagger Documentation Updated:** Updated the OpenAPI (Swagger) documentation to reflect the preferred `/api/config` endpoint and the deprecation of the legacy `/api/v1/config` endpoint.
+------
+- **I95-66319 Self-Signed Certificates Rejected by Strict TLS Clients on Dates Before 2050:** Resolved an issue where self-signed certificates generated by the initializer and by the PCLI certificate-regeneration command encoded validity dates before the year 2050 using a format that violates RFC 5280. Strict TLS stacks, including macOS and LibreSSL-based `curl`, rejected these certificates with a `format error in certificate's notBefore field` error. Certificate validity dates are now encoded using the RFC-compliant format for the applicable year range.
+------
+- **I95-66332 Peer Data Channel SSH Keys Could Become Corrupted After A Forced Restart:** Resolved an issue where a forced restart could corrupt or empty the Peer Data Channel (PDC) SSH host key files, preventing the Secure Communication Manager from establishing the SSH tunnel used for HA state replication. The Secure Communication Manager now validates the PDC SSH keys at startup and regenerates them automatically if they are missing or invalid.
+------
+- **I95-66333 Highway Crash on Hub After Spoke WAN Interface Disruption:** Resolved an issue where the highway process on a hub could crash while decrypting payload traffic over a fabric or inter-router interface that did not have inter-router security configured, following a peer-path failure on a spoke.
+------
+- **I95-66348 Secure Communication Manager crashes:** Increase mutex duration times, allowing the Secure Communication Manager to complete processes without hitting the deadlock detection limit. This resolves crashing of the Secure Communication Manager process on Conductors managing large configurations.
+------
+- **I95-66371 Antivirus Engine Startup Failure on Repeated CA Load:** Resolved an issue where the antivirus engine could fail to start if the certificate authority had already been extracted from a previous startup attempt.
+------
+- **I95-66452 Highway Crash When The Application Statistics Cache Reached Capacity:** Resolved an issue where the highway process could crash with a null-pointer when the application identification statistics cache reached its configured capacity and a subsequent memory allocation failed.
+------
+- **I95-66474 Conductor Event History Export Produced Corrupted Files:** Resolved an issue where exporting event history from the Conductor produced a ZIP archive containing corrupted or zero-byte files, due to an incompatible compression dependency. Event history exports are now generated correctly.
+------
+- **I95-66495 `optics-statistics` Reported Unavailable For Some SFPs:** Resolved a parsing error that caused the `show device-interface optics-statistics` command to report optics statistics as unavailable for certain SFP transceivers.
+------
+- **I95-66605 Multicast `show` REST Endpoints Now Accept `ipAddress` Query Parameter:** Resolved an issue where the PIM, IGMP, MSDP, and MLD `show` REST endpoints only recognized the `ip-address` query parameter, causing Mist-originated requests that use `ipAddress` (camelCase) to silently ignore address filters. These endpoints now accept both parameter forms.
+
 ## Release 7.0.5-14-lts
 
 **Release Date:** August 20, 2026
