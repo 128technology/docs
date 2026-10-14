@@ -24,8 +24,17 @@ Your conductor must already have an authority name and conductor address set. If
 The `hub-corp` tenant represents users on the hub router's LAN.
 
 1. Under **Configuration** in the left panel, select **Authority**.
+   
+![Select Authority](/img/deploy-azure-select-authority.png)
+
 2. Scroll to **Tenants** and select **ADD**.
+
+![Add Tenant](/img/deploy-azure-select-tenant-add.png)
+
 3. Enter the name `hub-corp` and select **SAVE**.
+
+![Hub tenant](/img/deploy-azure-hs-hub-tenant.png)
+
 4. Select **VALIDATE** then **COMMIT**.
 
 ### 2. Create the Spoke Tenant
@@ -34,6 +43,9 @@ The `spoke-corp` tenant represents users on the spoke router's LAN.
 
 1. Return to **Tenants** (click the up arrow next to **Tenant**) and select **ADD**.
 2. Enter the name `spoke-corp` and select **SAVE**.
+
+![Spoke tenant](/img/deploy-azure-hs-spoke-tenant.png)
+
 3. Select **VALIDATE** then **COMMIT**.
 
 ### 3. Create or Update the `Internet-Traffic` Service
@@ -41,15 +53,45 @@ The `spoke-corp` tenant represents users on the spoke router's LAN.
 The `Internet-Traffic` service matches all internet-bound traffic. Both tenants must be granted access so the hub can forward internet traffic for both hub LAN users and spoke LAN users arriving over SVR.
 
 1. Under **Configuration** in the left panel, select **Authority**.
+
+![Select Authority](/img/deploy-azure-select-authority.png)
+
 3. Scroll to **Services** and select **ADD** (or select the existing `Internet-Traffic` service if it already exists).
+
+![Add Service](/img/deploy-azure-hs-services.png)
+
 4. Enter the name `Internet-Traffic` and select **SAVE**.
+
+![Add Internet Traffic Service](/img/deploy-azure-service-int-traf.png)
+
 5. Verify **Enabled** is set to `true`.
-6. Scroll to **Service Addresses** and select **ADD**. Enter `0.0.0.0/0` and select **SAVE**.
-7. Scroll to **Access Policy** and add two entries:
-   - **Source:** `hub-corp` — select **SAVE**.
+
+![Internet Traffic Service True](/img/deploy-azure-service-int-traf2.png)
+
+6. Scroll to **Service Addresses** and select **ADD**. 
+
+![Select Service Addresses](/img/deploy-azure-service-int-traf3.png)
+
+7. Enter `0.0.0.0/0` and select **SAVE**.
+
+![Address IP](/img/deploy-azure-service-address.png)
+
+8. In the **Access Policy** field, add two entries:
+
+   Scroll to **Access Policy** and select **ADD**.
+
+      ![Add Access policy](/img/deploy-azure-hs-access-policies-select.png)
+
+   - In the New Access Policy window, add **Source:** `hub-corp` and select **SAVE**.
+
+      ![New Policy](/img/deploy-azure-hs-hubcorp-acc-policy.png)
+
    - Click the up arrow next to **Access Policy**.
-   - Scroll to back down to **Access Policy** and select **ADD**.
-   - **Source:** `spoke-corp` — select **SAVE**.
+   - Select **ADD**.
+   - In the New Access Policy window, add **Source:** `spoke-corp` and select **SAVE**.
+
+      ![New Policy](/img/deploy-azure-hs-spokecorp-acc-policy.png)
+
 8. Select **VALIDATE** then **COMMIT**.
 
 :::info
@@ -58,7 +100,7 @@ The `spoke-corp` access policy on the `Internet-Traffic` service allows traffic 
 
 ## Part 2: Configure the Hub Router
 
-### Add the azure-hub-router to the Authority
+### Add the Hub Router to the Authority
 
 1. In the Conductor GUI, click on Authority. 
 
@@ -68,11 +110,11 @@ The `spoke-corp` access policy on the `Internet-Traffic` service allows traffic 
 
    ![Add Router](/img/dep-vmrouter-addrouter.png)
 
-3. Enter the router `azure-hub-router`. and click **Save**.
+3. Enter the router `azure-hub-router` and click **Save**.
 
-   ![New Router](/img/dep-vmrouter-hub-newrouter.png)
+   ![New Router](/img/deploy-azure-newhub-rtr.png)
 
-4. Under **Inter-node Security Policy**, select `Internal`.
+4. In the Basic Information screen, under **Inter-node Security Policy**, select `Internal`.
 
 5. Below the **Basic Info** screen, click **ADD** next to **Nodes**. 
 
@@ -90,7 +132,7 @@ On the Node screen:
 - Under **Associated Asset ID**, select the asset ID reported by the hub router VM.
 - Set the Role to `Combo`. 
 
-   ![Node Asset ID](/img/dep-vmrouter-hub-node-asset-id.png)
+   ![Node Asset ID](/img/deploy-azure-node-basicinfo.png)
 
 Select **VALIDATE** then **COMMIT**.
 
@@ -108,50 +150,51 @@ The WAN interface `ge-0-0` / `ssr-hub-wan`) connects to the internet, obtains a 
    To ensure successful onboarding, the `ge-0-0` interface MUST be configured as the WAN device interface. 
    :::
 
-   ![Name the WAN Interface](/img/dep-vmrouter-wandev1.png)
+   ![Name the WAN Interface](/img/deploy-azure-wan-dev-intf.png)
 
 4. In the Device Interface window, set the type to `ethernet`. When the **Identifier** field becomes visible, select VMBus UUID from the dropdown, and then enter the ID discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx)
 
-   ![Device Interface window](/img/dep-vmrouter-wandev2.png)
+   ![Device Interface window](/img/deploy-azure-wan-dev-intf2.png)
 
 #### 1b. Create the Hub WAN Network Interface
 
 1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
 2. Enter the name `wan1` and select **SAVE**.
 
-   ![New Network Interface](/img/dep-vmrouter-wandev3.png)
+   ![New Network Interface](/img/deploy-azure-wan-dev-intf3.png)
 
-3. Set the following fields:
+3. On the Basic Information screen, set the following fields:
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `external` | |
-   | DHCP | `v4` | Azure assigns an IP via DHCP |
-   | Global-ID | `1` | |
-   | Conductor | `true` | Marks this interface for conductor connectivity |
-   | Management | `true` | Enables management over forwarding |
-   | Default Route | `true` | Linux uses this interface as its default route |
-   | Source NAT | `true` | Required for management over forwarding |
+   - Global-ID: `1` 
+   - Type: `external`
+   - DHCP: `v4` - Azure assigns an IP via DHCP
+   - Security Policy: **internal**
 
-   ![WAN Basic Info](/img/dep-vmrouter-wandev4.png)
+   ![WAN Basic Info](/img/deploy-azure-wan-dev-intf4.png)
 
-4. Scroll to **Management Vector** and select **ADD**.
-   - In the Management Vector Name, select `mgmt-vec-wan` from the dropdown.
-   - In the Management Vector Priority, enter `100`.
-   - Select **COMMIT**.
+4. Scroll to Management Traffic Settings and set:
 
-   ![Management Vector](/img/dep-vmrouter-wandev5.png)
+   - Conductor: `true`  - Marks the interface for conductor connectivity
+   - Management Enabled: `true` - Enables management over forwarding
+   - Management Vector Name: `mgmt-vec-wan`
+   - Management Vector Priority: `100`
+   - Default Route: `true` - Linux uses this interface as its default route
 
-5. Scroll to **Neighborhoods** and select **ADD**.
+   ![Management Vector](/img/deploy-azure-wan-dev-intf5.png)
+
+5. Scroll down to Network Interface settings, and set **Source NAT** to `true`. This is required for management over forwarding.
+
+   ![Set Source NAT](/img/deploy-azure-wan-dev-intf6.png)
+
+6. Scroll to **Neighborhoods** and select **ADD**.
    - Enter neighborhood name `internet`.
+
+   ![New Neighborhood](/img/deploy-azure-wan-dev-intf7.png)
+
    - Select **SAVE**.
    - Verify **Topology** is set to `hub`.
-   - Select the Security Policy **internal**.
 
-   ![Topology](/img/dep-vmrouter-wandev7.png)
-
-:::important
-`Conductor` must be set to `true` or management traffic will not reach the conductor.
+   ![Topology](/img/deploy-azure-wan-dev-intf8.png)
 
 :::important
 Setting **Topology** to `hub` on the hub router's neighborhood is what distinguishes it from a spoke. The conductor uses this topology to auto-generate adjacencies between the hub and any spoke routers that share the same neighborhood name with topology `spoke`.
@@ -165,83 +208,98 @@ The LAN interface (`ge-0-1` / `ssr-hub-lan`) connects to the hub private subnet 
 
 #### 2a. Create the Hub LAN Device Interface
 
-1. Navigate to node `node0` of `azure-hub-router`.
-2. Scroll to **Device Interfaces** and select **ADD**.
+1. In the Conductor GUI, navigate to the `azure-hub-router` router, then to node `node0`.
+2. Scroll down to **Device Interfaces** and select **ADD**.
 3. Enter the name `lan-dev` and select **SAVE**.
 4. In the New Device Interface window, add the LAN device name `lan`, and click **SAVE**. This adds a physical device name for you to assign your LAN interface.
 
-   ![New LAN](/img/dep-vmrouter-wandev8.png)
+   ![New LAN](/img/deploy-azure-lan-dev-intf1.png)
 
-Set the following fields:
+5. In the Device Interface Type Settings window, set the type to `ethernet`. When the **Identifier** field becomes visible, select VMBus UUID from the dropdown, and then enter the ID discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx)
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `ethernet` | |
-   | VMBus UUID | `<hub-lan-vmbus-uuid>` | Discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx) |
-   | Forwarding | `true` | |
-
-   ![PCI Fields](/img/dep-vmrouter-wandev8a.png)
-
-5. Select **SAVE**.
+![Device Interface Type](/img/deploy-azure-lan-dev-intf2.png)
 
 #### 2b. Create the Hub LAN Network Interface
 
-1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+1. Under the LAN Device Interface, scroll down to **Network Interfaces** and select **ADD**.
 
-   ![Add LAN1](/img/dep-vmrouter-wandev9.png)
+   ![Add LAN1](/img/deploy-azure-lan-dev-intf3.png)
+
 2. Enter the name `lan1` and select **SAVE**.
-3. Set the following fields:
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `external` | |
-   | Global-ID | `2` | |
-   | DHCP | `disabled` | |
-   | Tenant | `hub-corp` | Assigns all inbound LAN traffic to the hub-corp tenant |
-   | Source NAT | `true` | **question from Andy  - is sournce nat here necessary?|
+   ![New Dev Interface](/img/deploy-azure-lan-dev-intf4.png)
 
-   ![External Corp](/img/dep-vmrouter-wandev10.png)
+3. On the Basic Information screen, set the following fields:
+
+   - Type: `external` 
+   - Global-ID: `2` 
+   - DHCP: `disabled` 
+   - Tenant: `hub-corp` - Assigns all inbound LAN traffic to the hub-corp tenant
+   - Security Policy: `internal`
+
+   ![Network Interface](/img/deploy-azure-lan-dev-intf5.png)
 
 4. Scroll to **Interface Addresses** and select **ADD**.
+
+![Add Intf Address](/img/deploy-azure-lan-dev-intf6.png)
+
+5. Enter the following IP address and prefix.
+
    - IP Address: `10.0.2.1`
    - Prefix Length: `24`
+
+![New Intf](/img/deploy-azure-lan-dev-intf7.png)
 
 ### 3. Configure Hub DNS
 
 Configure DNS so the hub router can resolve FQDNs for conductor connectivity and software downloads.
 
-1. Return to the **Router** level for `azure-hub-router`.
+1. Return to the **Router** level for `azure-hub-router`. You can either click the up arrow at the top of the screen until you reach the `azure-hub-router` level, or select the down arrow to the right of the Network Interface heading and select the `azure-hub-router`.
+
+![Navigation](/img/deploy-azure-lan-dev-intf8.png)
+
 2. Scroll to **DNS Config** and select **ADD**.
 
 ![Interface and DNS addresses](/img/dep-vmrouter-wandev11.png)
 
-3. Set **Mode** to `static` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
+1. In the New DNS Config window, use the Mode dropdown to set the mode to **Static**, and click **SAVE**.
+
+![DNS Mode](/img/deploy-azure-lan-dev-intf9.png)
+
+2. In the DNS Server Address section, click ADD.
+3. Enter 1.1.1.1 and click SAVE.
+
+![DNS Server Addresss](/img/deploy-azure-lan-dev-intf10.png)
+
+4. Click **ADD** again.
+5. Enter 8.8.8.8 and click SAVE.
+
+![DNS Server Addresss List](/img/deploy-azure-lan-dev-intf11.png)
 
 ### 4. Create the Hub Internet Service Route
 
 The hub routes internet-bound traffic (from both its own LAN users and spoke users arriving over SVR) directly out through its WAN interface.
 
 1. Return to the **Router** level for `azure-hub-router`.
-2. Scroll to **Service Routes** and select **ADD**.
+2. Scroll down to **Service Routes** and select **ADD**.
 3. Enter the name `internet-breakout` and select **SAVE**.
 
-![Service Route Name](/img/dep-vmrouter-wandev12.png)
+![Service Route Name](/img/deploy-azure-lan-dev-intf12.png)
 
-4. Set the following fields:
+4. Under Service Route Information, set the **Service Name** to `Internet-Traffic` 
 
-   | Field | Value |
-   |-------|-------|
-   | Service Name | `Internet-Traffic` |
-   | Service Route Type | `service-agent` |
+![Service Route Info](/img/deploy-azure-lan-dev-intf13.png)
 
-   ![Service Route Details](/img/dep-vmrouter-wandev13.png)
+5. Under Service Route Type, select **Service Agent** from the **Type** dropdown.
+
+![Service Route Details](/img/deploy-azure-lan-dev-intf14.png)
 
 5. Scroll to **Next Hops** and select **ADD**.
    - Node Name: `node0`
    - Interface: `wan1`
 6. Select **SAVE**.
 
-   ![New Next Hop](/img/dep-vmrouter-wandev14.png)
+![New Next Hop](/img/deploy-azure-lan-dev-intf15.png)
 
 7. Select **VALIDATE** then **COMMIT**.
 
