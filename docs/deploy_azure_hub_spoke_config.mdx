@@ -210,12 +210,11 @@ The LAN interface (`ge-0-1` / `ssr-hub-lan`) connects to the hub private subnet 
 
 1. In the Conductor GUI, navigate to the `azure-hub-router` router, then to node `node0`.
 2. Scroll down to **Device Interfaces** and select **ADD**.
-3. Enter the name `lan-dev` and select **SAVE**.
-4. In the New Device Interface window, add the LAN device name `lan`, and click **SAVE**. This adds a physical device name for you to assign your LAN interface.
+3. Enter the name `lan-dev` and select **SAVE**. This adds a physical device name for you to assign your LAN interface.
 
    ![New LAN](/img/deploy-azure-lan-dev-intf1.png)
 
-5. In the Device Interface Type Settings window, set the type to `ethernet`. When the **Identifier** field becomes visible, select VMBus UUID from the dropdown, and then enter the ID discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx)
+5. In the Device Interface Type Settings window, set the type to `ethernet`. When the **Identifier** field becomes visible, select VMBus UUID from the dropdown, and then enter the ID discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx). Set Forwarding to `true`.
 
 ![Device Interface Type](/img/deploy-azure-lan-dev-intf2.png)
 
@@ -239,11 +238,13 @@ The LAN interface (`ge-0-1` / `ssr-hub-lan`) connects to the hub private subnet 
 
    ![Network Interface](/img/deploy-azure-lan-dev-intf5.png)
 
-4. Scroll to **Interface Addresses** and select **ADD**.
+4. Scroll down to Network Interface settings, and set **Source NAT** to `true`. 
+
+5. Scroll to **Interface Addresses** and select **ADD**.
 
 ![Add Intf Address](/img/deploy-azure-lan-dev-intf6.png)
 
-5. Enter the following IP address and prefix.
+6. Enter the following IP address and prefix.
 
    - IP Address: `10.0.2.1`
    - Prefix Length: `24`
@@ -262,17 +263,17 @@ Configure DNS so the hub router can resolve FQDNs for conductor connectivity and
 
 ![Interface and DNS addresses](/img/dep-vmrouter-wandev11.png)
 
-1. In the New DNS Config window, use the Mode dropdown to set the mode to **Static**, and click **SAVE**.
+3. In the New DNS Config window, use the Mode dropdown to set the mode to **Static**, and click **SAVE**.
 
 ![DNS Mode](/img/deploy-azure-lan-dev-intf9.png)
 
-2. In the DNS Server Address section, click ADD.
-3. Enter 1.1.1.1 and click SAVE.
+4. In the DNS Server Address section, click ADD.
+5. Enter 1.1.1.1 and click SAVE.
 
 ![DNS Server Addresss](/img/deploy-azure-lan-dev-intf10.png)
 
-4. Click **ADD** again.
-5. Enter 8.8.8.8 and click SAVE.
+6. Click **ADD** again.
+7. Enter 8.8.8.8 and click SAVE.
 
 ![DNS Server Addresss List](/img/deploy-azure-lan-dev-intf11.png)
 
@@ -305,15 +306,43 @@ The hub routes internet-bound traffic (from both its own LAN users and spoke use
 
 ## Part 3: Configure the Spoke Router
 
+### Add the Spoke Router to the Authority
+
+1. In the Conductor GUI, click on Authority. 
+
+   ![Conductor Authority](/img/dep-vmrouter-config-authority.png)
+
+2. At the top of the list of Routers, select **ADD**. 
+
+   ![Add Router](/img/dep-vmrouter-addrouter.png)
+
+3. Enter the router `azure-spoke-router` and click **Save**.
+
+   ![New Router](/img/deploy-azure-newspoke-rtr.png)
+
+4. In the Basic Information screen, under **Inter-node Security Policy**, select `Internal`.
+
+![Internode Security](/img/deploy-azure-spoke-basic.png)
+
+5. Below the **Basic Info** screen, click **ADD** next to **Nodes**. 
+
+6. The **New Node** dialog is displayed - enter `node0`.
+
+   ![New Node](/img/dep-vmrouter-newnode.png)
+
+7. Click **Save**. The **Node** screen appears.
+
 ### Assign the Spoke Router's Asset ID
 
-1. In the Conductor GUI, select **Configuration**.
-2. Under **Routers**, select `azure-spoke-router`.
-3. Select the **Configure** icon.
-4. Select node `node0`.
-5. Under **Associated Asset ID**, select the asset ID reported by the spoke router VM.
-   ![Node Asset ID](/img/dep-vmrouter-node-asset-id.png)
-6. Select **VALIDATE** then **COMMIT**.
+The Asset ID allows the hub and conductor to fully connect, and allows the conductor to configure and control the hub router. 
+
+On the Node screen: 
+- Under **Associated Asset ID**, select the asset ID reported by the spoke router VM.
+- Set the Role to `Combo`. 
+
+   ![Node Asset ID](/img/deploy-azure-spk-node-basicinfo.png)
+
+Select **VALIDATE** then **COMMIT**.
 
 ### 1. Configure the Spoke WAN Interface
 
@@ -325,54 +354,51 @@ The spoke WAN interface (`ge-0-0` / `ssr-spoke-wan`) connects to the internet an
 2. Scroll to **Device Interfaces** and select **ADD**.
 3. Enter the name `wan-dev` and select **SAVE**.
 
-   ![Name the WAN Interface](/img/dep-vmrouter-wandev1.png)
+   ![Name the WAN Interface](/img/deploy-azure-wan-dev-intf.png)
 
-4. Set the following fields:
+4. In the Device Interface window, set the type to `ethernet`. When the **Identifier** field becomes visible, select VMBus UUID from the dropdown, and then enter the ID discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx)
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `ethernet` | |
-   | VMBus UUID | `<spoke-wan-vmbus-uuid>` | Discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx) |
-   | Forwarding | `true` | |
-
-5. Select **SAVE**.
+   ![Device Interface window](/img/deploy-azure-wan-dev-intf2.png)
 
 #### 1b. Create the Spoke WAN Network Interface
 
 1. Under the WAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
 2. Enter the name `wan1` and select **SAVE**.
 
-   ![New Network Interface](/img/dep-vmrouter-wandev3.png)
+   ![New Network Interface](/img/deploy-azure-wan-dev-intf3.png)
 
-3. Set the following fields:
+3. On the Basic Information screen, set the following fields:
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `external` | |
-   | DHCP | `v4` | Azure assigns an IP via DHCP |
-   | Global-ID | `1` | |
-   | Conductor | `true` | Marks this interface for conductor connectivity |
-   | Management | `true` | Enables management over forwarding |
-   | Default Route | `true` | Linux uses this interface as its default route |
-   | Source NAT | `true` | Required for management over forwarding |
+   - Global-ID: `2` 
+   - Type: `external`
+   - DHCP: `v4` - Azure assigns an IP via DHCP
+   - Security Policy: **internal**
 
-   ![WAN Basic Info](/img/dep-vmrouter-wandev4.png)
+   ![WAN Basic Info](/img/deploy-azure-spoke-wan-dev-intf4.png)
 
-4. Scroll to **Management Vector** and select **ADD**.
-   - Name: `mgmt-vec-wan`
-   - Priority: `100`
+4. Scroll to Management Traffic Settings and set:
+
+   - Conductor: `true`  - Marks the interface for conductor connectivity
+   - Management Enabled: `true` - Enables management over forwarding
+   - Management Vector Name: `mgmt-vec-wan`
+   - Management Vector Priority: `100`
+   - Default Route: `true` - Linux uses this interface as its default route
+
+   ![Management Vector](/img/deploy-azure-wan-dev-intf5.png)
+
+5. Scroll down to Network Interface settings, and set **Source NAT** to `true`. This is required for management over forwarding.
+
+   ![Set Source NAT](/img/deploy-azure-wan-dev-intf6.png)
+
+6. Scroll to **Neighborhoods** and select **ADD**.
+   - Enter neighborhood name `internet`.
+
+   ![New Neighborhood](/img/deploy-azure-wan-dev-intf7.png)
+
    - Select **SAVE**.
-
-   ![Management Vector](/img/dep-vmrouter-wandev5.png)
-
-5. Scroll down to **Neighborhoods** and select **ADD**.
-
-   ![Neighborhood Name](/img/dep-vmrouter-wandev6.png)
-
-   - Select `internet` as the neighborhood name.
    - Verify **Topology** is set to `spoke`.
 
-   ![Topology](/img/dep-vmrouter-wandev7.png)
+   ![Topology](/img/deploy-azure-spoke-wan-dev-intf8.png)
 
 6. Select **SAVE**.
 
@@ -386,54 +412,73 @@ The LAN interface (`ge-0-1` / `ssr-spoke-lan`) connects to the spoke private sub
 
 #### 2a. Create the Spoke LAN Device Interface
 
-1. Navigate to node `node0` of `azure-spoke-router`.
-2. Scroll to **Device Interfaces** and select **ADD**.
-3. Enter the name `lan-dev` and select **SAVE**.
+1. In the Conductor GUI, navigate to the `azure-spoke-router` router, then to node `node0`.
+2. Scroll down to **Device Interfaces** and select **ADD**.
+3. Enter the name `lan-dev` and select **SAVE**. This adds a physical device name for you to assign your LAN interface.
 
-   ![New LAN](/img/dep-vmrouter-wandev8.png)
+   ![New LAN](/img/deploy-azure-lan-dev-intf1.png)
 
-4. Set the following fields:
+5. In the Device Interface Type Settings window, set the type to `ethernet`. When the **Identifier** field becomes visible, select VMBus UUID from the dropdown, and then enter the ID discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx). Set Forwarding to `true`.
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `ethernet` | |
-   | VMBus UUID | `<spoke-lan-vmbus-uuid>` | Discovered in [Step 3](deploy_azure_hub_spoke_vmbus.mdx) |
-   | Forwarding | `true` | |
-
-5. Select **SAVE**.
+![Device Interface Type](/img/deploy-azure-lan-dev-intf2.png)
 
 #### 2b. Create the Spoke LAN Network Interface
 
-1. Under the LAN Device Interface, scroll to **Network Interfaces** and select **ADD**.
+1. Under the LAN Device Interface, scroll down to **Network Interfaces** and select **ADD**.
 
-![Add LAN1](/img/dep-vmrouter-wandev9.png)
+   ![Add LAN1](/img/deploy-azure-lan-dev-intf3.png)
 
 2. Enter the name `lan1` and select **SAVE**.
-3. Set the following fields:
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Type | `external` | |
-   | Global-ID | `2` | |
-   | DHCP | `disabled` | |
-   | Tenant | `spoke-corp` | Assigns all inbound LAN traffic to the spoke-corp tenant |
-   | Source NAT | `true` | |
+   ![New Dev Interface](/img/deploy-azure-lan-dev-intf4.png)
 
-   ![External Corp](/img/dep-vmrouter-wandev10.png)   
+3. On the Basic Information screen, set the following fields:
 
-4. Scroll to **Interface Addresses** and select **ADD**.
+   - Global-ID: `3` 
+   - Type: `external` 
+   - DHCP: `disabled` 
+   - Tenant: `spoke-corp` - Assigns all inbound LAN traffic to the spoke-corp tenant 
+
+   ![Network Interface](/img/deploy-azure-spoke-lan-dev-intf5.png)
+
+5. Scroll down to Network Interface settings, and set **Source NAT** to `true`. This is required for management over forwarding.
+
+   ![External Corp](/img/deploy-azure-spoke-lan-dev-intf5a.png)   
+
+6. Scroll to **Interface Addresses** and select **ADD**.
+
+![Add Intf Address](/img/deploy-azure-lan-dev-intf6.png)
+
+7. Enter the following IP address and prefix.
+
    - IP Address: `10.0.4.1`
    - Prefix Length: `24`
-5. Select **SAVE**.
+
+![New Intf](/img/deploy-azure-spoke-lan-dev-intf7.png)
 
 ### 3. Configure Spoke DNS
 
-1. Return to the **Router** level for `azure-spoke-router`.
-2. Scroll to **DNS Config** and select **ADD**.
-3. Set **Mode** to `manual` and enter DNS server addresses — for example, `1.1.1.1` and `8.8.8.8`.
-4. Select **SAVE**.
+Configure DNS so the spoke router can resolve FQDNs for conductor connectivity and software downloads.
 
-   ![Interface and DNS addresses](/img/dep-vmrouter-wandev11.png)
+1. Return to the **Router** level for `azure-spoke-router`. You can either click the up arrow at the top of the screen until you reach the `azure-spoke-router` level, or select the down arrow to the right of the Network Interface heading and select the `azure-spoke-router`.
+
+![Navigation](/img/deploy-azure-lan-dev-intf8.png)
+
+2. Scroll to **DNS Config** and select **ADD**.
+
+![Interface and DNS addresses](/img/dep-vmrouter-wandev11.png)
+
+3. In the New DNS Config window, use the Mode dropdown to set the mode to **Static**, and click **SAVE**.
+
+![DNS Mode](/img/deploy-azure-lan-dev-intf9.png)
+
+4. In the DNS Server Address section, click ADD.
+5. Enter 1.1.1.1 and click **SAVE**.
+
+![DNS Server Addresss](/img/deploy-azure-lan-dev-intf10.png)
+
+6. Click **ADD** again.
+7. Enter 8.8.8.8 and click **SAVE**.
 
 ### 4. Create the Spoke Internet Service Route
 
@@ -443,32 +488,35 @@ The spoke router does not break out internet traffic directly. Instead, it forwa
 2. Scroll to **Service Routes** and select **ADD**.
 3. Enter the name `internet-via-hub` and select **SAVE**.
 
-   ![Service Route Name](/img/dep-vmrouter-wandev12.png)
+![Service Route Name](/img/deploy-azure-spoke-lan-dev-intf12.png)
 
-4. Set the following fields:
+4. Under Service Route Information, set the **Service Name** to `Internet-Traffic` 
 
-   | Field | Value | Notes |
-   |-------|-------|-------|
-   | Service Name | `Internet-Traffic` | |
-   | Service Route Type | `peer` | Routes internet traffic to a peer router via SVR |
-   | Peer | `azure-hub-router` | The hub router provides internet breakout for the spoke |
+![Service Route Info](/img/deploy-azure-spoke-lan-dev-intf13.png)
 
-5. Select **SAVE**.
-6. Select **VALIDATE** then **COMMIT**.
+5. Under Service Route Type, select **Peer Service Route** from the **Type** dropdown. This routes internet traffic to a peer router via SVR.
+
+6. Under **Peer**, add `azure-hub-router`. The hub router provides internet breakout for the spoke.
+
+![Service Route Details](/img/deploy-azure-spoke-lan-dev-intf14.png)
+
+7. Select **VALIDATE** then **COMMIT**.
 
 :::info
-The `peer` service route type directs matched traffic over the SVR path to the named peer router. The hub's `internet-breakout` service route then forwards that traffic to the internet. This is the SSR hub-and-spoke internet breakout pattern.
+The `peer service route` type directs matched traffic over the SVR path to the named peer router. The hub's `internet-breakout` service route then forwards that traffic to the internet. This is the SSR hub-and-spoke internet breakout pattern.
 :::
 
 ## Verify Connectivity
 
-After committing all configuration, all nodes must reach the `synchronized` state. Once reached, verify both routers are online and forwarding traffic correctly.
+After committing all configuration, all nodes must reach the `synchronized` state. From the Conductor GUI, select **Routers** to view their status. Once reached, verify both routers are online and forwarding traffic correctly.
 
 ### Verify Both Routers Are Connected to the Conductor
 
-From the Conductor GUI, select **Routers**. Both `azure-hub-router` and `azure-spoke-router` should show a **Connected** status within 2–5 minutes of the commit.
+From the Conductor GUI, select **Routers**. Select the individual routers to see their status. 
 
-Both routers should appear with status `Up`. After SVR adjacencies form, a third entry for the hub-to-spoke peer should also appear.
+Both `azure-hub-router` and `azure-spoke-router` should show a **Connected** status within 2–5 minutes of the commit.
+
+Both routers should appear with status `Up`. After SVR adjacencies form, a third entry for the hub-to-spoke peer should also appear. To view this, click on a router and scroll down to the Peer Paths section.
 
 ### Verify SVR Peering Between Hub and Spoke
 
