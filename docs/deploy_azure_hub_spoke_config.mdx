@@ -516,13 +516,17 @@ From the Conductor GUI, select **Routers**. Select the individual routers to see
 
 Both `azure-hub-router` and `azure-spoke-router` should show a **Connected** status within 2–5 minutes of the commit.
 
-Both routers should appear with status `Up`. After SVR adjacencies form, a third entry for the hub-to-spoke peer should also appear. To view this, click on a router and scroll down to the Peer Paths section.
+Both routers should appear with status `Up`. 
 
 ### Verify SVR Peering Between Hub and Spoke
+
+To view peering information, select **Routers** from the Conductor GUI (as above) and select an individual router. Scroll down to the **Peer Paths** section to view peering details.
 
 From the hub router, the spoke router should appear as an SVR peer with status `Up`.
 
 From the spoke router, the hub router should appear with status `Up`.
+
+After SVR adjacencies form, a third entry for the hub-to-spoke peer should also appear.
 
 ### Verify ARP on the WAN Interfaces
 
@@ -553,7 +557,7 @@ Both routers should reach the internet. Spoke internet traffic traverses the SVR
 
 ### Verify Service Paths
 
-From the spoke router, confirm that internet traffic resolves through the hub:
+From the spoke router, confirm that internet traffic resolves through the hub. 
 
 ```
 admin@node0.azure-spoke-router# show service-path
