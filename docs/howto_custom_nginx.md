@@ -40,6 +40,22 @@ Do not modify `/etc/nginx/nginx.conf` directly. SSR manages this file and may re
 	sudo nginx -T 2>&1 | grep -n "zz-custom.conf"
 	```
 
+### Preserving Custom Files
+
+To preserve custom NGINX files across image-based upgrades, use the following config to transfer your file.
+
+```
+# /etc/ssr-upgrade/data-transfer.d/90-custom-nginx.yml
+version: "2.1"
+data:
+  - dataset: Custom NGINX configuration
+    operations:
+      - upgrade
+      - reinstall
+    files:
+      - /etc/nginx/default.d/zz-custom.conf
+``` 
+
 ## Remove the Configuration
 
 1. Remove the custom file:
