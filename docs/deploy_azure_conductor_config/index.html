@@ -6,8 +6,8 @@
 <title data-rh="true">Step 3: Configure the Conductor | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/deploy_azure_conductor_config"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Step 3: Configure the Conductor | SSN Docs"><meta data-rh="true" name="description" content="This step configures the authority-level settings on the conductor: the authority name, conductor address, corporate tenant, and internet service. These objects are shared across all routers managed by this conductor."><meta data-rh="true" property="og:description" content="This step configures the authority-level settings on the conductor: the authority name, conductor address, corporate tenant, and internet service. These objects are shared across all routers managed by this conductor."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/deploy_azure_conductor_config"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/deploy_azure_conductor_config" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/deploy_azure_conductor_config" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Configure the Conductor","item":"https://docs.128technology.com/docs/deploy_azure_conductor_config"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.bcc1883f.css">
-<script src="/assets/js/runtime~main.516a21e3.js" defer="defer"></script>
-<script src="/assets/js/main.f0afdf28.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4135be4e.js" defer="defer"></script>
+<script src="/assets/js/main.e7f9a1e0.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -19,15 +19,16 @@
 <p>Take this opportunity to log into the Conductor GUI to complete the following operations. This provides validation that the installation was successful, and familiarizes you with GUI operations.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="assign-the-conductors-asset">Assign the Conductor&#x27;s Asset<a href="#assign-the-conductors-asset" class="hash-link" aria-label="Direct link to Assign the Conductor&#x27;s Asset" title="Direct link to Assign the Conductor&#x27;s Asset" translate="no">​</a></h4>
 <ol>
-<li class="">Select the <strong>Conductor</strong> from the Authority menu on the left side of the GUI.</li>
+<li class="">
+<p>Select the <strong>Conductor</strong> from the Authority menu on the left side of the GUI.</p>
+</li>
+<li class="">
+<p>In the <strong>Node</strong> panel, select the <strong>Configure</strong> icon.</p>
+</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Configuration menu" src="/assets/images/config_menu_gui-2def20dce067614627a56d2c647b7bb9.png" width="234" height="412" class="img_ev3q"></p>
-<ol start="2">
-<li class="">Select the <strong>Configure</strong> icon.</li>
-</ol>
-<p><img decoding="async" loading="lazy" alt="Conductor Configuration Icon" src="/assets/images/conductor_config_icon-f779deae6093e3a0ea6d658509d52a8c.png" width="621" height="75" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Conductor Configuration Icon" src="/assets/images/conductor_config_icon-def8f7ad72c12702dde41176871c143e.png" width="864" height="451" class="img_ev3q"></p>
 <ol start="3">
-<li class="">In the Node panel, under <strong>Associated Asset ID</strong>, select the hostname for the conductor.</li>
+<li class="">In the Node Basic Information panel, under <strong>Associated Asset ID</strong>, enter the hostname for the conductor.</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Asset ID" src="/assets/images/dep-conductor_asset-id-d70db545e8291a6784430abeba74ac73.png" width="463" height="62" class="img_ev3q"></p>
 <ol start="4">
@@ -41,7 +42,7 @@
 <p><img decoding="async" loading="lazy" alt="Up arrow" src="/assets/images/deploy-up-arrow-189481c1797dba4c94f5d8c7f903df3e.png" width="170" height="168" class="img_ev3q"></p>
 </li>
 <li class="">
-<p>Select the Authority Settings.</p>
+<p>Select the Authority tile.</p>
 </li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Authority Settings" src="/assets/images/conductor_authority_name-5574c5da0a7e4753dd7014e74bac6731.png" width="294" height="325" class="img_ev3q"></p>
@@ -54,40 +55,70 @@
 <p>The conductor address is the IP that managed routers use to reach this conductor. For Azure deployments, use the <strong>public IP address</strong> assigned to the conductor VM so that routers outside the Azure VNet can also reach it.</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>If all managed routers reside in the same Azure VNet and communicate over private addressing, you may use the conductor&#x27;s <strong>private IP</strong> (<code>10.0.0.10</code> in this guide) instead.</p></div></div>
 <ol>
-<li class="">Under Conductor Addresses, select ADD.</li>
+<li class="">Under Authority Settings, scroll down to <strong>Conductor Addresses</strong> and select <strong>ADD</strong>.</li>
 <li class="">In the <strong>New Conductor Address</strong> window, enter the conductor public IP address, <code>192.168.100.10</code>.</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Conductor Address" src="/assets/images/conductor_address-44788b4c3914f968fa08e52ff0646bbf.png" width="609" height="203" class="img_ev3q"></p>
 <ol start="3">
-<li class="">Click Validate and Commit. Warnings will appear, advising you of the change.</li>
+<li class="">Select <strong>VALIDATE</strong> then <strong>COMMIT</strong>. Warnings will appear, advising you of the change.</li>
 </ol>
 <p>The steps during initialization setup the management IP. The conductor IP address is the public IP address to which the managed routers connect. It is not necessary to manually associate this IP address with a network interface; the interactions between the SSR software and Linux will identify and assign the IP address to the network interface.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-create-the-corporate-tenant">4. Create the Corporate Tenant<a href="#4-create-the-corporate-tenant" class="hash-link" aria-label="Direct link to 4. Create the Corporate Tenant" title="Direct link to 4. Create the Corporate Tenant" translate="no">​</a></h2>
 <p>Tenants logically partition the network. The <code>corp</code> tenant represents corporate LAN users and is referenced by the LAN interface configuration on each managed router.</p>
 <ol>
-<li class="">In the Conductor GUI, select <strong>Configuration</strong>.</li>
-<li class="">Select <strong>Authority</strong>.</li>
+<li class="">Under <strong>Configuration</strong> in the left panel, select <strong>Authority</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Select Authority" src="/assets/images/deploy-azure-select-authority-0bb8e7a864db702bbbb23bd592423222.png" width="288" height="580" class="img_ev3q"></p>
+<ol start="2">
 <li class="">Scroll to <strong>Tenants</strong> and select <strong>ADD</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Add Tenant" src="/assets/images/deploy-azure-select-tenant-add-aac363145999c203fedf038347312f60.png" width="576" height="300" class="img_ev3q"></p>
+<ol start="3">
 <li class="">Enter the name <code>corp</code> and select <strong>SAVE</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Name Tenant" src="/assets/images/deploy-azure-newtenant-4b66657a739058adc8428d7a192fbdc1.png" width="432" height="145" class="img_ev3q"></p>
+<ol start="4">
 <li class="">Select <strong>VALIDATE</strong> then <strong>COMMIT</strong>.</li>
 </ol>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Tenants are authority-wide. A single <code>corp</code> tenant definition applies to all routers that assign it to a LAN interface.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-create-the-internet-traffic-service">5. Create the <code>Internet-Traffic</code> Service<a href="#5-create-the-internet-traffic-service" class="hash-link" aria-label="Direct link to 5-create-the-internet-traffic-service" title="Direct link to 5-create-the-internet-traffic-service" translate="no">​</a></h2>
 <p>The <em>service</em> configuration element defines the IP destinations that the SSR routes. This step creates a single service representing all internet-bound traffic from corporate LAN users.</p>
 <ol>
-<li class="">In the Conductor GUI, select <strong>Configuration</strong>.</li>
-<li class="">Select <strong>Authority</strong> from the left panel.</li>
-<li class="">Scroll down to <strong>Services</strong> and select <strong>ADD</strong>.</li>
+<li class="">Under <strong>Configuration</strong> in the left panel, select <strong>Authority</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Select Authority" src="/assets/images/deploy-azure-select-authority-0bb8e7a864db702bbbb23bd592423222.png" width="288" height="580" class="img_ev3q"></p>
+<ol start="3">
+<li class="">Scroll to <strong>Services</strong> and select <strong>ADD</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Add Service" src="/assets/images/deploy-azure-hs-services-5768a9f2f17f0df7041c77f00744d3cb.png" width="576" height="305" class="img_ev3q"></p>
+<ol start="4">
 <li class="">Enter the name <code>Internet-Traffic</code> and select <strong>SAVE</strong>.</li>
-<li class="">On the Service screen, verify <strong>Enabled</strong> is set to <code>true</code>.</li>
-<li class="">Scroll down to <strong>Service Addresses</strong> and select <strong>ADD</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Add Internet Traffic Service" src="/assets/images/deploy-azure-service-int-traf-321fe5409cc6cd0fb04c2fedd9c052fb.png" width="288" height="97" class="img_ev3q"></p>
+<ol start="5">
+<li class="">Verify <strong>Enabled</strong> is set to <code>true</code>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Internet Traffic Service True" src="/assets/images/deploy-azure-service-int-traf2-e09c6d06fa9dc9ff05591ee8bddc2d2d.png" width="288" height="232" class="img_ev3q"></p>
+<ol start="6">
+<li class="">Scroll to <strong>Service Addresses</strong> and select <strong>ADD</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Select Service Addresses" src="/assets/images/deploy-azure-service-int-traf3-397932b2a7aaaf6f5dcfb762e1884cb8.png" width="576" height="304" class="img_ev3q"></p>
+<ol start="7">
 <li class="">Enter <code>0.0.0.0/0</code> and select <strong>SAVE</strong>.</li>
-<li class="">Scroll down to <strong>Access Policies</strong> and select <strong>ADD</strong>.<!-- -->
+</ol>
+<p><img decoding="async" loading="lazy" alt="Address IP" src="/assets/images/deploy-azure-service-address-f5f4499a00875b5a023e7cb92bd88bd3.png" width="432" height="145" class="img_ev3q"></p>
+<ol start="8">
+<li class="">Scroll to <strong>Access Policies</strong> and select <strong>ADD</strong>.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Add Access policy" src="/assets/images/deploy-azure-hs-access-policies-select-2602ceca23fef4a385215715d8fd84f9.png" width="576" height="83" class="img_ev3q"></p>
 <ul>
 <li class="">Set <strong>Source</strong> to <code>corp</code>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Corp Access Policy" src="/assets/images/deploy-azure-access-policy-corp-2ebb6274e58050cbc20d85267e996691.png" width="432" height="147" class="img_ev3q"></p>
+<ul>
 <li class="">Select <strong>SAVE</strong>.</li>
 </ul>
-</li>
+<ol start="9">
 <li class="">Select <strong>VALIDATE</strong> then <strong>COMMIT</strong>.</li>
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-was-configured">What Was Configured<a href="#what-was-configured" class="hash-link" aria-label="Direct link to What Was Configured" title="Direct link to What Was Configured" translate="no">​</a></h2>
