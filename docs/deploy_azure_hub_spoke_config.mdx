@@ -530,7 +530,7 @@ After SVR adjacencies form, a third entry for the hub-to-spoke peer should also 
 
 ### Verify ARP on the WAN Interfaces
 
-Azure gateways do not respond to ICMP ping. Use the ARP table to verify WAN connectivity on each router:
+Azure gateways do not respond to ICMP ping. You can use the ARP table from the PCLI to verify WAN connectivity on each router:
 
 ```
 admin@node0.azure-hub-router# show arp
@@ -540,6 +540,8 @@ admin@node0.azure-spoke-router# show arp
 Look for **valid** ARP entries on the `wan1` interface of each router.
 
 ### Verify Internet Reachability
+
+Optionally, generate test traffic to confirm internet connectivity:
 
 From the hub router:
 
@@ -555,15 +557,8 @@ admin@node0.azure-spoke-router# ping 8.8.8.8
 
 Both routers should reach the internet. Spoke internet traffic traverses the SVR peer path to the hub before being forwarded to the internet.
 
-### Verify Service Paths
+If the ping fails, begin troubleshooting by reviewing your configuration for incorrect addresses, typos, or other issues. 
 
-From the spoke router, confirm that internet traffic resolves through the hub. 
-
-```
-admin@node0.azure-spoke-router# show service-path
-```
-
-The `Internet-Traffic` service should show a path type of `peer` with `azure-hub-router` as the next-hop peer.
 
 ## Configuration Summary
 
