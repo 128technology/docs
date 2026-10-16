@@ -1,7 +1,7 @@
 <!---FIPS default behavior in 7.0 / 7.1 and the impact on non-FIPS algorithms--->
 
 :::important
-Beginning with SSR software **version 7.0** (including **7.1**), the SSR installs with **FIPS mode enabled by default**. In these releases, FIPS enforcement prevents the use of non-FIPS-compliant cryptographic algorithms such as **MD5** and **SHA-1**. This affects features that rely on these algorithms, including:
+The SSR4x0 series devices have **FIPS mode enabled by default**. On these devices, FIPS enforcement prevents the use of non-FIPS-compliant cryptographic algorithms such as **MD5** and **SHA-1**. This affects features that rely on these algorithms, including:
 
 - BGP MD5 neighbor authentication (`auth-password`).
 - MSDP peer/mesh-group authentication (`auth-password`).
@@ -10,9 +10,9 @@ Beginning with SSR software **version 7.0** (including **7.1**), the SSR install
 - RADIUS, which uses MD5 internally to protect attributes and the shared secret.
 - Any other feature that negotiates or stores a hash using MD5 or SHA-1.
 
-If you need to use one of these features on a 7.0 or 7.1 system, FIPS mode must be disabled on the affected node **before** the feature is configured. See [Disable FIPS Mode](#disable-fips-mode-to-use-non-fips-algorithms) below.
+If you need to use one of these features on an SSR4x0 series device, FIPS mode must be disabled on the affected node **before** the feature is configured. See [Disable FIPS Mode](#disable-fips-mode-to-use-non-fips-algorithms) below.
 
-In future SSR releases, FIPS will continue to be enabled by default, but it will no longer prevent the configuration of non-FIPS algorithms. FIPS compliance will become *compliance by configuration* — operators who require strict FIPS compliance must avoid configuring non-FIPS algorithms, but the software will not block them.
+<!---In future SSR releases, FIPS will continue to be enabled by default, but it will no longer prevent the configuration of non-FIPS algorithms. FIPS compliance will become *compliance by configuration* — operators who require strict FIPS compliance must avoid configuring non-FIPS algorithms, but the software will not block them.--->
 :::
 
 ### Disable FIPS Mode To Use Non-FIPS Algorithms
@@ -47,7 +47,7 @@ Disabling FIPS mode is a node-local operation and requires a reboot. Perform the
 
   The expected result is `0`.
 
-To re-enable FIPS later, repeat the procedure substituting `--set-fips 1` and reboot.
+**To re-enable FIPS later, repeat the procedure substituting `--set-fips 1` and reboot.**
 
 :::caution
 Disabling FIPS mode takes the node out of any FIPS- or Common Criteria-compliant posture. Do not disable FIPS on nodes that must remain compliant for regulatory reasons.
