@@ -5,10 +5,14 @@ sidebar_label: Installing in VMWare
 
 This guide describes the process for deploying a Session Smart Conductor or a Session Smart Router (SSR) in VMWare ESXi. The process consists of the following steps:
 
-- Download the SSR package-based ISO. Refer to [Downloading ISOs](intro_downloading_iso.md)
-- Log into VMware ESXi with Administrative rights
-- Create a new Virtual Machine and configure
-- Boot Virtual Machine to run the Juniper SSR ISO and install software
+- Download the latest SSR ISO. Refer to [Downloading ISOs](intro_downloading_iso.md).
+- Log into VMware ESXi with Administrative rights.
+- Create a new Virtual Machine and configure.
+- Boot Virtual Machine to run the Juniper SSR ISO and install software.
+
+:::note
+It is highly recommended that VMWare installations use an image-based ISO (identified by the SSR prefix on the image file) when performing a new installation. However, if you are installing on a VMWare ESXi environment and choose to use a QCOW2 file (identified by the `.qcow2` extension), it must be converted to a `vmdk` before installing. Refer to your VMWare documentation for more information.
+:::
 
 ## VMWare Configuration
 
