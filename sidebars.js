@@ -354,6 +354,7 @@ module.exports = {
           "config_in-memory_metrics",
           "howto_ms365",
           "howto_extend_gui_nav",
+          "howto_custom_nginx",
           ],
         },
         {
