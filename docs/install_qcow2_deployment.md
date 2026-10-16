@@ -7,6 +7,10 @@ The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage form
 
 For successful SSR qcow2 deployment, a cloud-init (or nocloud) configuration **must** provide persistent network interface bindings on first boot of the VM; otherwise the SSR will not correlate virtual machine NICs to router interfaces, and the NIC assignments may change across VM reboots. Operation of SSR qcow2 without persistent NIC bindings is not supported at this time.
 
+:::note
+If you are installing on a VMWare ESXi environment, the QCOW2 file must be converted to a `vmdk`. Refer to your VMWare documentation for more information.
+:::
+
 Download the 128T package-based qcow2 image using the link below:
 
 https://software.128technology.com/artifactory/list/generic-128t-images-release-local/
