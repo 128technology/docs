@@ -13,48 +13,45 @@ Do not modify `/etc/nginx/nginx.conf` directly. SSR manages this file and may re
 
 1. Create a `.conf` file in `/etc/nginx/default.d/` containing only the required NGINX directives. Do not add a `server` block. For example:
 
-	```
+```
 	sudo tee /etc/nginx/default.d/zz-custom.conf >/dev/null <<'EOF'
 	# Custom NGINX directives
 	auth_request /oauth2/auth;
 	error_page 401 = /oauth2/sign_in;
 	auth_request_set $auth_user $upstream_http_x_auth_request_user;
 	EOF
-	```
+```
+2. To preserve your custom NGINX file across image-based upgrades, create a data-transfer configuration file in `/etc/ssr-upgrade/data-transfer.d/`. For example:
 
-2. Validate the configuration:
+```
+	sudo tee /etc/ssr-upgrade/data-transfer.d/90-custom-nginx.yml >/dev/null <<'EOF'
+	version: "2.1"
+	data:
+	  - dataset: Custom NGINX configuration
+	    operations:
+	      - upgrade
+	      - reinstall
+	    files:
+	      - /etc/nginx/default.d/zz-custom.conf
+	EOF
+```
+3. Validate the configuration:
 
 	```
 	sudo nginx -t
 	```
 
-3. If validation succeeds, reload NGINX:
+4. If validation succeeds, reload NGINX:
 
 	```
 	sudo systemctl reload nginx
 	```
 
-4. Confirm that the custom file is included:
+5. Confirm that the custom file is included:
 
 	```
 	sudo nginx -T 2>&1 | grep -n "zz-custom.conf"
 	```
-
-### Preserving Custom Files
-
-To preserve custom NGINX files across image-based upgrades, use the following config to transfer your file.
-
-```
-# /etc/ssr-upgrade/data-transfer.d/90-custom-nginx.yml
-version: "2.1"
-data:
-  - dataset: Custom NGINX configuration
-    operations:
-      - upgrade
-      - reinstall
-    files:
-      - /etc/nginx/default.d/zz-custom.conf
-``` 
 
 ## Remove the Configuration
 
