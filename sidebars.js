@@ -217,6 +217,16 @@ module.exports = {
                 "deploy_appendix_azure_conductor",
               ],
             },
+            {
+              "type": "category",
+              "label": "SSR1200 Conductor",
+              "items": [
+                "deploy_hrdwr_conductor_overview",
+                "deploy_hrdwr_conductor_install",
+                "deploy_hrdwr_conductor_config",
+                "deploy_appendix_hrdwr_conductor",
+              ],
+            },
           ],
         },
         {

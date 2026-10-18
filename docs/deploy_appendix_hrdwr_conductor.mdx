@@ -1,0 +1,91 @@
+---
+title: "Appendix - Conductor Configuration"
+sidebar_label: "Appendix - Conductor Configuration"
+---
+import NetworkDesign from './_deploy_network_design.md';
+
+This appendix contains the complete conductor configuration in SSR PCLI format for the `conductor1` system described in this guide. This configuration reflects the state after completing [Step 2 — Configure the Conductor](deploy_hrdwr_conductor_config.mdx).
+
+## Applying This Configuration
+
+This configuration can be applied to a fresh conductor using the **import** function:
+
+1. Save the configuration below to a file, for example `acmecorp-conductor.cfg`.
+2. Copy the file to the conductor at `/etc/128technology/config-exports/`.
+3. From the conductor PCLI, run:
+
+    ```
+    import config acmecorp-conductor.cfg
+    ```
+
+4. Review any validation warnings, then commit:
+
+    ```
+    commit
+    ```
+
+Alternatively, copy and paste each configuration block into the PCLI in configuration mode (`configure` → `edit`).
+
+## Complete Conductor Configuration
+
+```
+config
+    authority
+        name              Authority128
+
+        conductor-address  192.168.100.10
+
+        tenant  corp
+            name  corp
+        exit
+
+        service  Internet-Traffic
+            name             Internet-Traffic
+            scope            public
+            security         internal
+
+            access-policy
+                source  corp
+            exit
+
+            address  0.0.0.0/0
+        exit
+
+        router  conductor1
+            name                 conductor1
+            inter-node-security  internal
+
+            node  node0
+                name  node0
+                role  conductor
+
+                device-interface  mgmt-dev
+                    name        mgmt-dev
+                    type        ethernet
+                    pci-address  0000:03:00.0
+
+                    network-interface  mgmt-intf
+                        name  mgmt-intf
+                        type  management
+
+                        address  192.168.100.10
+                            ip-address     192.168.100.10
+                            prefix-length  24
+                            gateway        192.168.100.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+## Configuration Notes
+
+| Item | Note |
+|------|------|
+| `conductor-address` | Replace `192.168.100.10` with the actual static IP assigned to the conductor's MGMT port |
+| `gateway` | Replace `192.168.100.1` with your management network gateway |
+| LAN address | Replace `192.168.1.1/24` with the LAN subnet for each branch site |
+| Coordinates | The `location` field is not shown here; add ISO 6709 coordinates for your conductor and each branch site |
