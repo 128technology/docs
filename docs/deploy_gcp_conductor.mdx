@@ -3,14 +3,14 @@ title: GCP Conductor Deployment Overview
 sidebar_label: Overview
 ---
 
-This guide walks a network engineer through deploying a **standalone SSR Conductor in Google Cloud Platform (GCP)** using the GCP Marketplace. You can choose between two deployment methods: a graphical user interface or a command-line (Terraform) workflow. When you complete the steps in this guide, the conductor will be running SSR 7.1.4, configured with an authority name and conductor address, and ready for SSR routers to onboard.
+This guide walks you through deploying a **Session Smart Conductor on the Google Cloud Platform (GCP)** using the Bring Your Own License (BYOL) plan. When you complete the steps in this guide, the conductor will be running SSR software version 7.1.4, configured with an authority name and conductor address, and ready for SSR routers to onboard.
 
 ## Guide Topics
 
 | Step | Topic | Description |
 |------|-------|-------------|
 | 1 | [Configure the GCP Prerequisites](deploy_gcp_conductor_prereqs.mdx) | Create the required VPCs, SSH public/private key pair, and the GCP service account used for deployment. |
-| 2 | [Create the GCP VM](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the GCP GUI or CLI (Terraform). |
+| 2 | [Create the GCP VM](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the GCP GUI. |
 | 3 | [Configure the Conductor](deploy_gcp_conductor_config.mdx) | Set the authority name, conductor address, and assign the asset ID. |
 | — | [Appendix — GCP Conductor Configuration](deploy_appendix_gcp_conductor.mdx) | Complete Terraform variable reference for the GCP conductor deployment. |
 
@@ -25,7 +25,7 @@ graph TD
     subgraph GCP["GCP Project"]
         subgraph VPC["conductor-vpc"]
             subgraph Subnet["conductor-subnet\n192.168.1.0/24"]
-                ConductorVM["SSR Conductor VM\nconductor\nnic0: 192.168.1.2 internal\nnic0: 35.X.X.X external"]
+                ConductorVM["SSR Conductor VM\nconductor\ge-0-0: 192.168.1.2 internal\ge-0-0: 35.X.X.X external"]
             end
         end
     end
@@ -65,11 +65,12 @@ For additional guidance, see [System Requirements](intro_system_reqs.md) and the
 
 ## Software Version Requirements
 
-This guide installs **SSR 7.1.4** on the conductor. 
+- This guide installs **SSR 7.1.4** on the conductor. 
 
-:::note
-The router software version must be lower than or equal to the conductor software version.
-:::
+- The router software version must be lower than or equal to the conductor software version.
+
+- BYOL instances require the conductor to run SSR 6.3.0-R1 or newer. SSR 7.1.4 satisfies this requirement.
+
 
 ## Related Documentation
 

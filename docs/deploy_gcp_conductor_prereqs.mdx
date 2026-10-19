@@ -12,7 +12,7 @@ Before deploying the SSR conductor on GCP you must create the required VPCs, SSH
 
 ## 1. Create a VPC and Subnet
 
-The conductor VM requires a single network interface (`nic0`) that will be automatically created during deployment. This interface receives an internal IP address within the subnet you specify and an external (public) IP address for management access — including SSH, HTTPS (web console), and SSR router onboarding.
+The conductor VM requires a single network interface (`ge-0-0`) that will be automatically created during deployment. This interface receives an internal IP address within the subnet you specify, and an external (public) IP address for management access — including SSH, HTTPS (web console), and communication with the routers.
 
 Create the VPC and subnet in your GCP project before beginning the Marketplace deployment.
 
@@ -28,7 +28,7 @@ Create the VPC and subnet in your GCP project before beginning the Marketplace d
    - VPC Name: `conductor-vpc`
    - Subnet Name: `conductor-subnet`
    - Subnet Region
-   - An IPv4 range for the subnet (for example, `192.168.1.0/24`)
+   - An IPv4 range for the subnet (for example, `10.0.1.0/24`)
 
 ![Define the VPC Network](/img/deploy-gcp-create-vpc3.png)
 

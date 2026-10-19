@@ -12,21 +12,15 @@ This step accesses the conductor web GUI and configures the authority name, cond
 
 ## 1. Access the Conductor GUI
 
-1. In the GCP console, search for **Compute Engine** in the search bar and click the top result.
+1. In the GCP Console, navigate to the VM Instance created in [Step 2 — Create the GCP VM](deploy_gcp_conductor_install.mdx). Copy the external IP of the the conductor VM.
 
-   ![Compute Engine](/img/deploy-gcp-conductor-config1.png)
-
-2. Navigate to **VM instances** and copy the **External IP** of the conductor VM.
-
-   ![VM Instances](/img/deploy-gcp-conductor-config2.png)
-
-3. In a browser, navigate to:
+2. In a browser, navigate to:
 
    ```
    https://<conductor-external-ip>
    ```
 
-4. On the conductor login page, enter the default credentials:
+3. On the conductor login page, enter the default credentials:
 
    | Field | Value |
    |-------|-------|
