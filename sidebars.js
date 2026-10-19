@@ -233,9 +233,9 @@ module.exports = {
                   "deploy_vmware_hub_router_pci",
                   "deploy_vmware_hub_router_config",
                   "deploy_appendix_vmware_hub_router",
-              ],
-            },
-            {
+                ],
+              },
+              {
                 "type": "category",
                 "label": "VMware Spoke Router",
                 "items": [
@@ -245,8 +245,20 @@ module.exports = {
                   "deploy_vmware_router_pci",
                   "deploy_vmware_router_config",
                   "deploy_appendix_vmware_router",
-              ],
-            },
+                ],
+              },
+              {
+                "type": "category",
+                "label": "Azure Hub and Spoke Routers",
+                "items": [
+                  "deploy_azure_hub_spoke_overview",
+                  "deploy_azure_hub_spoke_hub_vm",
+                  "deploy_azure_hub_spoke_spoke_vm",
+                  "deploy_azure_hub_spoke_vmbus",
+                  "deploy_azure_hub_spoke_config",
+                  "deploy_appendix_azure_hub_spoke",
+                ],
+              },
           ],
         },
       ],
