@@ -3,29 +3,45 @@ title: Deployment Using QCOW2
 sidebar_label: Deployment Using QCOW2
 ---
 
-The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages which can be used to automate instance deployment. Cloud-init can be used for Linux network provisioning and for disk volume dynamic expansion on first boot.
+The SSR software can now be downloaded as a `qcow2` image. `qcow2` is a storage format for virtual disks. The SSR `qcow2` is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages which can be used to automate instance deployment. Cloud-init can be used for Linux network provisioning and for disk volume dynamic expansion on first boot.
 
-For successful SSR qcow2 deployment, a cloud-init (or nocloud) configuration **must** provide persistent network interface bindings on first boot of the VM; otherwise the SSR will not correlate virtual machine NICs to router interfaces, and the NIC assignments may change across VM reboots. Operation of SSR qcow2 without persistent NIC bindings is not supported at this time.
+For successful SSR `qcow2` deployment, a cloud-init (or nocloud) configuration **must** provide persistent network interface bindings on first boot of the VM; otherwise the SSR will not correlate virtual machine NICs to router interfaces, and the NIC assignments may change across VM reboots. Operation of SSR qcow2 without persistent NIC bindings is not supported at this time.
 
-:::note
-If you are installing on a VMWare ESXi environment, the QCOW2 file must be converted to a `vmdk`. Refer to your VMWare documentation for more information.
+It is highly recommended that VMWare installations use an image-based ISO (identified by the SSR prefix on the image file) when performing a new installation. However, if you are installing on a VMWare ESXi environment and choose to use a QCOW2 file (identified by the `.qcow2` file extension), **it must be converted to a `vmdk` before installing**. 
+
+### Converting a `qcow2` Image
+
+:::important
+If you are installing a `qcow2` image on a VMWare ESXi environment, the `qcow2` image must first be converted to a `vmdk`. 
 :::
 
-Download the 128T package-based qcow2 image using the link below:
+1. Download the SSR image-based install `qcow2` using the link below:
 
-https://software.128technology.com/artifactory/list/generic-128t-images-release-local/
+    https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
-Beginning with version 6.0, an image-based ISO installation process has been implemented. This installation and upgrade process is only available for SSR version 6.0 and higher. Conductors with version 6.3.0 installed are able to manage routers installed with image-based and package-based software versions. For more information, see [Image-Based Installation](intro_installation_image.md).
+  :::note
+  Access to the URL above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
+  :::
 
-Download the SSR image-based install qcow2 using the link below:
+2. Install the qemu tools on a Linux staging host. Qemu is available natively for Linux distributions, and via third parties for other architectures such as [Windows](https://qemu.weilnetz.de/w64/) and [MacOS](https://formulae.brew.sh/formula/qemu). 
 
-https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
+3. Download the `qcow2` file. 
 
-:::note
-Access to the URLs above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
-:::
+4. Use the `qemu-img` example code below to run the conversion on the Linux host:
+```
+$ file SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.qcow2
+SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.qcow2: QEMU QCOW2 Image (v3), 10173284352 bytes
 
-## Using cloud-init to bootstrap SSR connection to Conductor
+$ qemu-img convert -f qcow2 -O vmdk SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.qcow2 SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.vmdk
+
+$ file SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.vmdk
+SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.vmdk: VMware4 disk image
+
+$ ls -lh SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.vmdk
+-rw-r--r-- 1 user group 6.5G Oct 16 12:36 SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.vmdk
+```
+
+## Using `cloud-init` to Connect to the Conductor
 
 The simplest method for onboarding a new SSR to an existing conductor is to initialize the system as a router node and provide the addresses for any conductor nodes. The manual initialization process can be automated by providing an [initializer preferences](initializer_preferences.md) file. This can be automated through `cloud-init cloud-config` by providing a user-data to a cloud-init capable hypervisor similar to what is shown below.
 
@@ -46,7 +62,7 @@ This causes the device's salt-minion to attempt to connect to the Conductor at I
 The example above assumes that the system will be able obtain an IP address via DHCP on the first network interface, which provides connectivity to the Conductor. If this is not the case, additional configuration can be provided to cloud-init to assist in provisioning network interfaces. However, these details are beyond the scope of this document. Please consult the official cloud-init documentation and the documentation for your particular hypervisor for further guidance.
 :::
 
-## Using NoCloud to provide cloud-init meta-data, user-data, and network-config
+## Using NoCloud to Provide Data to `cloud-init`
 
 Even when using a hypervisor that does not directly provide a cloud-init metadata service, it is possible to use NoCloud to seed the required data to cloud-init. On first boot, if the cloud-init process finds an attached disk with the volume label `cidata`, it looks on this disk for configuration data that is typically provided by a hypervisor's metadata service. 
 
