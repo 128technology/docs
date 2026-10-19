@@ -25,9 +25,8 @@ If you are installing a `qcow2` image on a VMWare ESXi environment, the `qcow2` 
 
 2. Install the qemu tools on a Linux staging host. Qemu is available natively for Linux distributions, and via third parties for other architectures such as [Windows](https://qemu.weilnetz.de/w64/) and [MacOS](https://formulae.brew.sh/formula/qemu). 
 
-3. Download the `qcow2` file. 
+3. Use the `qemu-img` example code below to run the conversion on the Linux host:
 
-4. Use the `qemu-img` example code below to run the conversion on the Linux host:
 ```
 $ file SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.qcow2
 SSR-7.2.4-4.r2.el9.x86_64.ibu-v1.qcow2: QEMU QCOW2 Image (v3), 10173284352 bytes
