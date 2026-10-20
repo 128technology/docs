@@ -11,17 +11,17 @@ The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the m
 | --- | --- | --- | --- | --- | --- |
 | bidirectional | 1280/UDP   | 2945 | 90  | 600s | Interval is configurable within `path-mtu-discovery/interval`, or disabled `path-mtu-discovery/enabled`. |
 
-In deployments where ICMP Destination Unreachable: Fragmentation Needed and DF Set response messages are not generated or are suppressed, the SSR uses probe non-responses to infer the MTU. The SSR treats three consecutive non-responses as equivalent to an ICMP response, which keeps the discovery algorithm moving forward. See [RFC 1191](https://www.rfc-editor.org/rfc/rfc1191) for ICMP-based Path MTU Discovery.
+In deployments where `ICMP Destination Unreachable: Fragmentation Needed and DF Set` response messages are not generated or are suppressed, the SSR uses probe non-responses to infer the MTU. The SSR treats three consecutive non-responses as equivalent to an ICMP response, which keeps the discovery algorithm moving forward. See [RFC 1191](https://www.rfc-editor.org/rfc/rfc1191) for ICMP-based Path MTU Discovery.
 
 Use `show peers` to view the discovered MTU.
 
 Prior to SSR 7.2.0, a reduced underlay MTU was not discovered until the next PMTUD cycle. Existing sessions continued to use the previous MTU until they were rebuilt, even after periodic PMTUD discovered the change.
 
-Devices in the underlay report an ICMP Destination Unreachable: Fragmentation Needed and DF Set message (Type 3, Code 4) when a packet with DF set exceeds the next-hop MTU. Prior to SSR 7.2.0, the SSR forwarded these messages to the endpoint without acting on the reported MTU. The affected session retained its previous path MTU.
+Devices in the underlay report an `ICMP Destination Unreachable: Fragmentation Needed and DF Set` message (Type 3, Code 4) when a packet with DF set exceeds the next-hop MTU. Prior to SSR 7.2.0, the SSR forwarded these messages to the endpoint without acting on the reported MTU. The affected session retained its previous path MTU.
 
 SSR 7.2.0 adds two complementary enhancements under Adaptive Path MTU (I95-60371):
 
-1. **Underlay ICMP Reaction** — The ingress SSR intercepts the ICMP Fragmentation Needed message, updates the affected flow, and generates a corrected ICMP Fragmentation Needed message toward the original sender. The corrected MTU accounts for SVR overhead.
+1. **Underlay ICMP Reaction** — The ingress SSR intercepts the ICMP Fragmentation Needed message, updates the affected flow, and generates a corrected `ICMP Fragmentation Needed` message toward the original sender. The corrected MTU accounts for SVR overhead.
 2. **Session Refresh** — The SSR updates the flow that carried the dropped packet in place, using the MTU the underlay reported. The session does not need to be rebuilt.
 
 See [Adaptive Path MTU for Long-Lived Sessions](#adaptive-path-mtu-for-long-lived-sessions) for a hub-and-spoke example.
@@ -73,12 +73,12 @@ When the spoke SSR receives an ICMP Fragmentation Needed message from R2, it:
 The flow update and client notification provide two ways to handle the reduced MTU: the sender can reduce its packet size, or the SSRs can fragment and reassemble traffic within the fabric.
 
 :::info Introduced In SSR 7.2.0
-Adaptive Path MTU applies to overlay (SVR/fabric) sessions between peering SSR routers and requires no configuration. It depends on receiving an ICMP Fragmentation Needed message from the underlay.
+Adaptive Path MTU applies to overlay (SVR/fabric) sessions between peering SSR routers and requires no configuration. It depends on receiving an `ICMP Fragmentation Needed` message from the underlay.
 :::
 
 | Session State | Behavior |
 | --- | --- |
-| Existing session | The SSR updates the affected flow in place when it processes an ICMP Fragmentation Needed message. |
+| Existing session | The SSR updates the affected flow in place when it processes an `ICMP Fragmentation Needed` message. |
 | New session | The SSR uses the peer path MTU available at session setup. After periodic PMTUD discovers the reduced MTU, new sessions use that value. A session established before discovery can still require adaptive correction. |
 
 ### Detailed Walkthrough
@@ -108,7 +108,7 @@ sequenceDiagram
 
 The client continues sending 1428-byte IP packets. The spoke SSR encapsulates the next packet into a 1468-byte fabric packet with DF set. R2 cannot forward it over the 1000-byte link, so it drops the packet.
 
-R2 returns an ICMP Destination Unreachable: Fragmentation Needed and DF Set message (Type 3, Code 4) to the spoke SSR's WAN interface. The message reports a next-hop MTU of 1000 and quotes the dropped packet's IP header.
+R2 returns an `ICMP Destination Unreachable: Fragmentation Needed and DF Set` message (Type 3, Code 4) to the spoke SSR's WAN interface. The message reports a next-hop MTU of 1000 and quotes the dropped packet's IP header.
 
 #### Step 2: The Spoke SSR Updates the Flow
 
@@ -120,7 +120,7 @@ The `flow-mtu-updates` counter in `show stats icmp` increments when the flow MTU
 
 The reported MTU applies to encapsulated traffic. The spoke SSR must account for SVR overhead before notifying the client; otherwise, a client packet sized to 1000 bytes would exceed the underlay MTU after encapsulation.
 
-In this example, the SSR subtracts a 48-byte SVR overhead allowance and sends a corrected ICMP Fragmentation Needed message to the client with a next-hop MTU of **952 bytes** (1000 − 48). The wire length of the ICMP packet itself (576 bytes in this example) is separate from the MTU value it reports inside its payload — do not confuse the two.
+In this example, the SSR subtracts a 48-byte SVR overhead allowance and sends a corrected `ICMP Fragmentation Needed` message to the client with a next-hop MTU of **952 bytes** (1000 − 48). The wire length of the ICMP packet itself (576 bytes in this example) is separate from the MTU value it reports inside its payload — do not confuse the two.
 
 :::info
 The SVR overhead allowance used for MTU calculation is not necessarily a fixed difference between an individual client packet and its resulting fabric packet. Encryption, HMAC, forward error correction (FEC), and BFD tunneling can affect the usable MTU. Rely on the corrected MTU calculated and reported by the SSR rather than estimating from a single observed packet.
@@ -184,7 +184,7 @@ sequenceDiagram
 
 The 998- and 550-byte fabric fragments both fit within R2's 1000-byte MTU. Their payloads are 970 and 522 bytes, respectively. The hub SSR reassembles them and delivers the original 1428-byte IP packet to the server. The fragmentation remains within the fabric, but adds processing at both SSRs for each oversized packet.
 
-The following table traces the same sequence at the packet level. Steps 1 through 3 establish the baseline flow MTU update and the ICMP notification sent to the client; steps 4 and 5 show the resulting fabric fragmentation once the client keeps sending oversized packets:
+The following table traces the same sequence at the packet level. Steps 1 through 3 establish the baseline flow MTU update and the ICMP notification sent to the client; steps 4 and 5 show the resulting fabric fragmentation when the client continues to send oversized packets:
 
 | Step | Packet | Size | Notes |
 | --- | --- | --- | --- |
@@ -196,7 +196,7 @@ The following table traces the same sequence at the packet level. Steps 1 throug
 
 #### Scenario 3: Asymmetric Paths and Directional Behavior
 
-Adaptive Path MTU updates each direction independently. An ICMP Fragmentation Needed message updates the flow that carried the dropped packet; it does not also change the reverse flow.
+Adaptive Path MTU updates each direction independently. An `ICMP Fragmentation Needed` message updates the flow that carried the dropped packet; it does not also change the reverse flow.
 
 After the spoke SSR processes R2's message:
 
@@ -211,7 +211,7 @@ If the reverse path still supports 1500 bytes, its flow MTU remains unchanged. C
 
 ## Fabric Fragmentation and Oversize Packet Behavior
 
-When an encapsulated packet exceeds the overlay path MTU, the SSR fragments it within the fabric, even if the original packet has the Don't Fragment (DF) bit set. The egress peer reassembles the fabric fragments before delivering the original packet.
+When an encapsulated packet exceeds the overlay path MTU, the SSR fragments it within the fabric, even if the original packet has the `Don't Fragment` (DF) bit set. The egress peer reassembles the fabric fragments before delivering the original packet.
 
 Fabric fragmentation is separate from fragmentation of the client's IP packet by an underlay router. It allows traffic to use a smaller underlay MTU without exposing fabric fragments to the endpoint. It also adds fragmentation and reassembly work at the SSRs.
 
@@ -329,7 +329,7 @@ Capture on the hub LAN if you need to confirm reassembly and delivery of the ori
 
 - If the path MTU shown by `show peers` does not reflect the expected value, verify that `path-mtu-discovery > enabled` is `true` on both sides of the adjacency.
 - If TCP sessions continue to fragment after you configure `enforced-mss automatic`, confirm the setting is on the correct egress interface and that periodic PMTUD has discovered the expected MTU. Check the advertised MSS when a new connection is established; the setting does not renegotiate an existing connection.
-- If `flow-mtu-updates` does not increment after an underlay MTU change, verify that an oversized fabric packet triggers an ICMP Destination Unreachable: Fragmentation Needed and DF Set response. Confirm that the response reaches the ingress SSR. Adaptive Path MTU cannot react to a message that is suppressed or filtered; periodic PMTUD can still infer a lower MTU from probe non-responses.
+- If `flow-mtu-updates` does not increment after an underlay MTU change, verify that an oversized fabric packet triggers an `ICMP Destination Unreachable: Fragmentation Needed and DF Set` response. Confirm that the response reaches the ingress SSR. Adaptive Path MTU cannot react to a message that is suppressed or filtered; periodic PMTUD can still infer a lower MTU from probe non-responses.
 - If only one direction of a session appears corrected, check the counter on the peer SSR as well. Each direction is corrected independently; see [Scenario 3](#scenario-3-asymmetric-paths-and-directional-behavior).
 - If fabric fragmentation continues, check whether the sender is receiving and acting on the corrected ICMP message. A sender that keeps sending oversized packets continues to require fabric fragmentation. For TCP, check for ICMP filtering between the SSR and the sender.
 
