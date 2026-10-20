@@ -28,7 +28,7 @@ Attempting to open the Conductor GUI before the installation has completed - i.e
 2. Log in with the following default credentials:
 
    | Field | Value |
-   |-------|-------|
+   | :-----| :------|
    | Username | `admin` |
    | Password | `128Tadmin` |
 
