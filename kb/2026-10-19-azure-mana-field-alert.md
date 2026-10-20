@@ -25,7 +25,7 @@ Customer action is required. Review your Azure vSSR deployments and evaluate app
 
 ## Problem Description
 
-Microsoft is actively rolling out Azure host hardware based on the Microsoft Azure Network Adapter (MANA) across Azure infrastructure. HPE Networking is targeting support for MANA-enabled hardware in SSR version 7.3.3-r2 or above. Once SSR version 7.3.3-r2 or above is released, upgrade your vSSR instances to obtain MANA support.
+Microsoft is actively rolling out Azure host hardware based on the Microsoft Azure Network Adapter (MANA) across Azure infrastructure. HPE Networking is targeting support for MANA-enabled hardware in SSR version 7.3.3-r2 (and higher), **which is expected to release in Q1 of 2027**. Once SSR version 7.3.3-r2 is released, it is recommended to upgrade your vSSR instances to obtain MANA support.
 
 As Azure expands the deployment of MANA-enabled hosts, both new and existing vSSR instances may be placed on MANA-enabled hardware. This placement can occur during any of the following events:
 
@@ -43,13 +43,13 @@ As Azure expands the deployment of MANA-enabled hosts, both new and existing vSS
 | Deployment Types | vSSR deployments acting as a Network Virtual Appliance (NVA). |
 | Trigger Events | Creation of a new vSSR instance, VM stop/deallocation and restart, VM redeployment, Azure host maintenance, and placement on MANA-enabled hardware. |
 
-If you run vSSRs within an Azure VNet, upgrade to SSR version 7.3.3-r2 or above before the May 31, 2027 deadline to ensure that your NVA continues to operate. Once the opt-out mechanism expires, placement on MANA-enabled hardware causes the vSSR instance to fail completely and not function in any capacity.
+If you run vSSRs within an Azure VNet, upgrade to SSR version 7.3.3-r2 or above when it is available, before the May 31, 2027 deadline to ensure that your NVA continues to operate. Once the opt-out mechanism expires, placement on MANA-enabled hardware causes the vSSR instance to fail completely and not function in any capacity.
 
 ## Symptom And Cause
 
 A vSSR instance placed on MANA-enabled hardware will not function in any capacity because the current vSSR software does not contain native MANA support.
 
-Existing vSSR instances currently running on non-MANA Azure infrastructure continue to operate normally unless Azure relocates the VM to MANA-enabled hardware. Azure may perform such relocation during stop, deallocate, and restart operations.
+Existing vSSR instances currently running on non-MANA Azure infrastructure continue to operate normally unless Azure relocates the VM to MANA-enabled hardware. **Azure may perform such relocation during stop, deallocate, and restart operations**.
 
 ## Required Customer Action
 
@@ -68,7 +68,7 @@ Consult Microsoft Azure documentation for updates or changes to the opt-out poli
 
 :::
 
-### Additional Considerations
+### Important Considerations
 
 1. Your existing vSSR deployments can continue operating today on the current Azure infrastructure.
 2. If you are concerned about MANA placement, avoid unnecessary stop/deallocate operations until you have applied the `LegacyVMNVA` tag.
@@ -88,7 +88,7 @@ Support for MANA is planned for the upcoming SSR version 7.3.3-r2 release or abo
 
 :::caution
 
-After May 31, 2027, the Microsoft opt-out mechanism may no longer be available. Upgrade to SSR version 7.3.3-r2 or above before this deadline to avoid complete loss of service and function.
+After May 31, 2027, the Microsoft opt-out mechanism may no longer be available. Upgrade to SSR version 7.3.3-r2 or above when it becomes available (expected to release in Q1 of 2027) before May 31, 2027 to avoid complete loss of service and function.
 
 :::
 
