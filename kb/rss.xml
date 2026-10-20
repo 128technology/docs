@@ -4,11 +4,82 @@
         <title>SSR Knowledge Base Articles</title>
         <link>https://docs.128technology.com/kb</link>
         <description>Session Smart Router Knowledge Base Articles</description>
-        <lastBuildDate>Fri, 25 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 19 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
         <copyright>Copyright © 2026 Juniper Networks, Inc.</copyright>
+        <item>
+            <title><![CDATA[Virtual SSR Incompatible With Azure MANA Hardware]]></title>
+            <link>https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert</link>
+            <guid>https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert</guid>
+            <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Microsoft is rolling out Azure host hardware based on the Microsoft Azure Network Adapter (MANA), and virtual Session Smart Router (vSSR) instances placed on MANA-enabled hardware will not function until you upgrade to SSR version 7.3.3-r2 or above, which is targeted to add MANA support.]]></description>
+            <content:encoded><![CDATA[<p>Microsoft is rolling out Azure host hardware based on the Microsoft Azure Network Adapter (MANA), and virtual Session Smart Router (vSSR) instances placed on MANA-enabled hardware will not function until you upgrade to SSR version 7.3.3-r2 or above, which is targeted to add MANA support.</p>
+<p><strong>Advisory Type:</strong> Field Alert</p>
+<p><strong>Date:</strong> 2026-10-19</p>
+<p><strong>Impacted Deployments:</strong> Virtual Session Smart Router (vSSR) instances deployed in Microsoft Azure</p>
+<p><strong>Last Updated:</strong> 2026-10-19</p>
+<div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Customer action is required. Review your Azure vSSR deployments and evaluate application of the Microsoft LegacyVMNVA opt-out tag before May 31, 2027.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem-description">Problem Description<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#problem-description" class="hash-link" aria-label="Direct link to Problem Description" title="Direct link to Problem Description" translate="no">​</a></h2>
+<p>Microsoft is actively rolling out Azure host hardware based on the Microsoft Azure Network Adapter (MANA) across Azure infrastructure. HPE Networking is targeting support for MANA-enabled hardware in SSR version 7.3.3-r2 (and higher), <strong>which is expected to release in Q1 of 2027</strong>. Once SSR version 7.3.3-r2 is released, it is recommended to upgrade your vSSR instances to obtain MANA support.</p>
+<p>As Azure expands the deployment of MANA-enabled hosts, both new and existing vSSR instances may be placed on MANA-enabled hardware. This placement can occur during any of the following events:</p>
+<ol>
+<li class="">New VM deployments.</li>
+<li class="">VM stop, deallocate, and restart operations.</li>
+<li class="">VM redeployments.</li>
+<li class="">Azure infrastructure maintenance and host relocation events.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="affected-deployments">Affected Deployments<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#affected-deployments" class="hash-link" aria-label="Direct link to Affected Deployments" title="Direct link to Affected Deployments" translate="no">​</a></h2>
+<table><thead><tr><th style="text-align:left">Deployment Attribute</th><th style="text-align:left">Detail</th></tr></thead><tbody><tr><td style="text-align:left">Product</td><td style="text-align:left">HPE Networking virtual Session Smart Router (vSSR) instances.</td></tr><tr><td style="text-align:left">Cloud Platform</td><td style="text-align:left">Microsoft Azure.</td></tr><tr><td style="text-align:left">Deployment Types</td><td style="text-align:left">vSSR deployments acting as a Network Virtual Appliance (NVA).</td></tr><tr><td style="text-align:left">Trigger Events</td><td style="text-align:left">Creation of a new vSSR instance, VM stop/deallocation and restart, VM redeployment, Azure host maintenance, and placement on MANA-enabled hardware.</td></tr></tbody></table>
+<p>If you run vSSRs within an Azure VNet, upgrade to SSR version 7.3.3-r2 or above when it is available, before the May 31, 2027 deadline to ensure that your NVA continues to operate. Once the opt-out mechanism expires, placement on MANA-enabled hardware causes the vSSR instance to fail completely and not function in any capacity.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="symptom-and-cause">Symptom And Cause<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#symptom-and-cause" class="hash-link" aria-label="Direct link to Symptom And Cause" title="Direct link to Symptom And Cause" translate="no">​</a></h2>
+<p>A vSSR instance placed on MANA-enabled hardware will not function in any capacity because the current vSSR software does not contain native MANA support.</p>
+<p>Existing vSSR instances currently running on non-MANA Azure infrastructure continue to operate normally unless Azure relocates the VM to MANA-enabled hardware. <strong>Azure may perform such relocation during stop, deallocate, and restart operations</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="required-customer-action">Required Customer Action<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#required-customer-action" class="hash-link" aria-label="Direct link to Required Customer Action" title="Direct link to Required Customer Action" translate="no">​</a></h2>
+<p>Customers who are concerned about MANA compatibility should apply the Microsoft <code>LegacyVMNVA</code> opt-out tag. Refer to the Microsoft instructions on how to <a href="https://learn.microsoft.com/en-us/azure/virtual-network/accelerated-networking-mana-network-virtual-appliance-opt-out#temporary-mana-exception-with-legacyvmnva" target="_blank" rel="noopener noreferrer" class="">apply the LegacyVMNVA tag</a>.</p>
+<p>According to information provided by Microsoft and communicated through HPE internal guidance:</p>
+<ol>
+<li class="">You can apply the <code>LegacyVMNVA</code> tag to existing vSSR deployments.</li>
+<li class="">You can specify the <code>LegacyVMNVA</code> tag during new vSSR deployments.</li>
+<li class="">Microsoft has indicated that the opt-out mechanism remains available through May 31, 2027.</li>
+<li class="">vSSR instances using the <code>LegacyVMNVA</code> tag are expected to remain on the current hardware platform during the opt-out period.</li>
+</ol>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Consult Microsoft Azure documentation for updates or changes to the opt-out policy.</p></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="important-considerations">Important Considerations<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#important-considerations" class="hash-link" aria-label="Direct link to Important Considerations" title="Direct link to Important Considerations" translate="no">​</a></h3>
+<ol>
+<li class="">Your existing vSSR deployments can continue operating today on the current Azure infrastructure.</li>
+<li class="">If you are concerned about MANA placement, avoid unnecessary stop/deallocate operations until you have applied the <code>LegacyVMNVA</code> tag.</li>
+<li class="">Monitor Azure Service Health notifications and Microsoft Azure communications regarding MANA rollout activities.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="recommended-workaround">Recommended Workaround<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#recommended-workaround" class="hash-link" aria-label="Direct link to Recommended Workaround" title="Direct link to Recommended Workaround" translate="no">​</a></h2>
+<p>Apply the <code>LegacyVMNVA</code> opt-out tag to keep your vSSR instance on its current hardware platform until you complete your upgrade to SSR version 7.3.3-r2 or above.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="future-upgrade-planning">Future Upgrade Planning<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#future-upgrade-planning" class="hash-link" aria-label="Direct link to Future Upgrade Planning" title="Direct link to Future Upgrade Planning" translate="no">​</a></h2>
+<p>Support for MANA is planned for the upcoming SSR version 7.3.3-r2 release or above. Plan your upgrade to SSR version 7.3.3-r2 or above well before the May 31, 2027 opt-out expiration:</p>
+<ol>
+<li class="">Review the release notes for SSR version 7.3.3-r2 for MANA support details.</li>
+<li class="">Develop and schedule an upgrade plan targeting SSR version 7.3.3-r2 or above.</li>
+<li class="">Validate your Azure deployment and operational procedures before the Microsoft opt-out period expires on May 31, 2027.</li>
+</ol>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>caution</div><div class="admonitionContent_BuS1"><p>After May 31, 2027, the Microsoft opt-out mechanism may no longer be available. Upgrade to SSR version 7.3.3-r2 or above when it becomes available (expected to release in Q1 of 2027) before May 31, 2027 to avoid complete loss of service and function.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="frequently-asked-questions">Frequently Asked Questions<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#frequently-asked-questions" class="hash-link" aria-label="Direct link to Frequently Asked Questions" title="Direct link to Frequently Asked Questions" translate="no">​</a></h2>
+<p><strong>Does SSR software currently support MANA?</strong></p>
+<p>No currently released SSR version supports MANA-enabled hardware. Once SSR version 7.3.3-r2 or above is released, upgrade to that version to obtain MANA support.</p>
+<p><strong>What is the recommended workaround?</strong></p>
+<p>Microsoft provides the <code>LegacyVMNVA</code> opt-out tag, which you can use to keep vSSR instances on the current hardware platform during the opt-out period.</p>
+<p><strong>Can I apply the LegacyVMNVA tag to an existing VM?</strong></p>
+<p>Yes. Microsoft has indicated that you can apply the <code>LegacyVMNVA</code> tag to already deployed VMs, and it remains effective through May 31, 2027.</p>
+<p><strong>Are existing vSSR deployments already affected?</strong></p>
+<p>Existing vSSR deployments running on current hardware can continue operating normally. However, Azure may place a VM on MANA-capable hardware following stop, deallocate, and restart operations. You should be aware of this scenario and implement proactive planning and operational measures to prevent it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="advisory-status">Advisory Status<a href="https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert#advisory-status" class="hash-link" aria-label="Direct link to Advisory Status" title="Direct link to Advisory Status" translate="no">​</a></h2>
+<p>Customer action is required.</p>
+<p>If you operate a virtual Session Smart Router (vSSR) within Microsoft Azure, review your deployments, evaluate application of the <code>LegacyVMNVA</code> opt-out tag, and plan your upgrade to SSR version 7.3.3-r2 or above well before the May 31, 2027 opt-out expiration to avoid complete loss of service if Azure places your instance on MANA-enabled hardware.</p>]]></content:encoded>
+            <category>azure</category>
+            <category>vssr</category>
+            <category>mana</category>
+            <category>field-alert</category>
+            <category>7.3.3-r2</category>
+        </item>
         <item>
             <title><![CDATA[Juniper 10G LR SFP+ Transceivers May Fail To Enter Service On SSR-1300 And SSR-1400 X722 Ports]]></title>
             <link>https://docs.128technology.com/kb/2026/09/25/I95-65908</link>
@@ -469,44 +540,6 @@ There will be an excessive amount of rx errors indicated by the system.</p>
 <code>systemctl restart 128T</code></p>]]></content:encoded>
             <category>6.1</category>
             <category>6.1.7</category>
-        </item>
-        <item>
-            <title><![CDATA[Unable to bind accelerated networking interfaces in Azure when using vmbus-id]]></title>
-            <link>https://docs.128technology.com/kb/2024/04/25/I95-54541</link>
-            <guid>https://docs.128technology.com/kb/2024/04/25/I95-54541</guid>
-            <pubDate>Thu, 25 Apr 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Recent changes to fix MTU to use the max device supported value causes the SSR to set MTU to 9K. However since NetVSC does not support Scatter RX, it fails to bind because the SSR uses packet buffers of size 2K, and cannot span multiple mbufs.]]></description>
-            <content:encoded><![CDATA[<p>Recent changes to fix MTU to use the max device supported value causes the SSR to set MTU to 9K. However since NetVSC does not support Scatter RX, it fails to bind because the SSR uses packet buffers of size 2K, and cannot span multiple mbufs.</p>
-<p><strong>Issue ID:</strong> I95-54541<br>
-<strong>Last Updated:</strong> 2024-04-25<br>
-<strong>Introduced in SSR Version:</strong> 6.1.5</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h3>
-<p>NetVSC does not support Scatter RX, so with new changes to use 9K max RX, it is unable to span multipe 2K packet buffers. When matched with MLX in accelerated networking, the MLX device fails to initialize.
-During device configuration, user specified MTU exceeding 2K will cause init failure for that device interface.</p>
-<p>Limit the MTU (also max RX size in DPDK) of NetVSC devices to SSR packet buffer size.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes" translate="no">​</a></h3>
-<p>Fixes an issue where device-interfaces configured in Azure VM would fail during initialization and port remains operationally down.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
-<li class="">Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
-<li class="">Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
-<li class="">Minor: Would not significantly impair the functioning or affect service.</li>
-</ul></div></div></details>
-<p>Major</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="status">Status<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status" translate="no">​</a></h3>
-<p>Closed</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In" translate="no">​</a></h3>
-<p><a class="" href="https://docs.128technology.com/docs/release_notes_128t_6.1#release-618-15-lts">6.1.8</a>,
-<a class="" href="https://docs.128technology.com/docs/release_notes_128t_6.2#release-624-14r2">6.2.4</a></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="product">Product<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product" translate="no">​</a></h3>
-<p>Azure SSR AMI</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area" translate="no">​</a></h3>
-<p>Interface Binding</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/04/25/I95-54541#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div></details>
-<p>Disable the accelerated networking to allow the device to be bound via PCLI address instead of vmbus-id.</p>]]></content:encoded>
-            <category>6.1</category>
-            <category>6.1.5</category>
         </item>
     </channel>
 </rss>
