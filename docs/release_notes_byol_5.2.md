@@ -4,9 +4,23 @@ sidebar_label: '5.2'
 ---
 ## Release 5.2.0
 
-**Release Date:** Oct 7, 2026
+**Release Date:** Oct 23, 2026
 
 ### New Features and Improvements
+- **I95-66382 Replace artifactory keyword in AWS, Azure, GCP**
+Updated the cloud templates use `SSR Software Access Username` and `SSR Software Access Token` instead of `Artifactory Username` and `Artifactory Token`. Added a similar `software-access-username` and `software-access-token` to the onboarding configuration.
+Example:
+```
+   {
+      "name": "<conductor-name>",
+      "ssr-version": "<version>",
+      "mode": "conductor",
+      "software-access-username": "<username>",
+      "software-access-token": "<token>",
+      "node-name": "node0",
+      "cloud-provider": "aws"
+   }
+```
 
 - **I95-66517 Updated sizing guidelines for AWS, GCP**
 Updated sizing guidelines to be in-line with SSR Hardware Platforms. Legacy sizes are still available, but new reccomended sizes are added.

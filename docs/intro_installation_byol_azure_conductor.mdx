@@ -17,7 +17,7 @@ BYOL instances only support image-based installations, and require the conductor
 
 ## Selecting the Azure Plan
 
-The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of the SSR software on an Azure VM. Artifactory credentials are required to authenticate access to the installation repositories. Select the BYOL plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of the SSR software on an Azure VM. SSR software access credentials are required to authenticate access to the installation repositories. Select the BYOL plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
 
 Once you have selected the BYOL plan for your deployment, proceed to [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor-managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Router.
@@ -83,7 +83,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
   - Provide the name of the VNet in the **Virtual Network Name** field (for example: `128T-VNet`).
   - Provide the name of the availability set in the **Availability Set Name** field (for example: `128TSet`).
   - Provide the name of the **Management Subnet**
-- What are the artifactory credentials used to install the software?
+- What are the SSR software access credentials used to install the software?
 - Who is going to be the administrator?
   - Provide the content of your public SSH key in the `Admin Public Key Data` field.
 
@@ -133,8 +133,8 @@ write_files:
             "name": "<conductor-name>",
             "ssr-version": "<version>",
             "mode": "conductor",
-            "artifactory-user": "<username>",
-            "artifactory-password": "<password>",
+            "software-access-username": "<username>",
+            "software-access-token": "<token>",
             "node-name": "node0",
             "cloud-provider": "azure"
         }
@@ -144,8 +144,8 @@ write_files:
 | ------ | ------- |
 | name | The name of the router. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
-| artifactory-user | User portion of the artifactory credentials. |
-| artifactory-password | Password portion of the artifactory credentials. |
+| software-access-username | User portion of the SSR software access credentials. |
+| software-access-token | Password portion of the SSR software access credentials. |
 | node-name | The name of the node being provisioned. For a standalone conductor, this is `node0`. |
 | download-timeout | The timeout duration for installing BYOL (default: 6h) |
 | download-retries | The number of times to retry SSR installation (default: unlimited) |
@@ -178,8 +178,8 @@ A description of the parameters of the template are listed in the following tabl
 | Instance Size           | Select the size of the VM in the field Instance Size. |
 | Instance Name           | Provide a name to the VM for the Session Smart Conductor. |
 | SSR Version             | SSR software version installed on the instance. |
-| Artifactory Username    | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token       | Token for the artifactory credentials used to install the SSR software. |
+| SSR Software Access Username    | Username portion of the SSR software access credentials used to install the SSR software. |
+| SSR Software Access Token       | Token for the SSR software access credentials used to install the SSR software. |
 | Managed Identity        | The Azure Managed identity used to manage permissions for the router instance. |
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
 | Control Subnet Name     | The name of the management subnet within the VNet. |
@@ -246,11 +246,11 @@ Paste the following JSON content. Please adjust the values to your specific envi
     "SSR Version": {
       "value": "<SSR Version to be Installed>"
     },
-    "artifactoryUsername": {
-      "value": "The username portion of the artifactory credentials"
+    "SSR Software Access Username": {
+      "value": "The username portion of the SSR software access credentials"
     },
-    "artifactoryToken": {
-      "value": "The password portion of the artifactory credentials"
+    "SSR Software Access Token": {
+      "value": "The token portion of the SSR software access credentials"
     },
     "managedIdentity": {
       "value": "<Name of the Managed Identity>"
@@ -362,7 +362,7 @@ To deploy the Session Smart Networking software via the Azure Portal:
 - What name do you want to give it?
   - Provide it in the **Instance Name** field (for example: Router).
 - What version of SSR software do you want to install?
-- What are the artifactory credentials used to install the software?
+- What are the SSR software access credentials used to install the software?
 - Provide the name of the VNet in the **Virtual Network Name** field (for example: `128T-VNet`).
   - Provide the name of the **Public Subnet Name**
   - Provide the name of the **Private Subnet Name**
@@ -422,8 +422,8 @@ write_files:
             "ssr-version": "<version>",
             “mode”: "conductor-managed",
             “conductor-hosts”: ["<conductor-host>"],
-            "artifactory-user": "<username>",
-            "artifactory-password": "<password>",
+            "software-access-username": "<username>",
+            "software-access-token": "<token>",
             "cloud-provider": "azure"
         }
 ```
@@ -431,8 +431,8 @@ write_files:
 | ------ | ------- |
 | name                 | The name of the Router. |
 | ssr-version          | The SSR software version to be installed on the instance. (BYOL only) |
-| artifactory-user     | User portion of the artifactory credentials. |
-| artifactory-password | Password portion of the artifactory credentials. |
+| software-access-username     | Username portion of the SSR software access credentials. |
+| software-access-token | Token portion of the SSR software access credentials. |
 | conductor-hosts      | The list of Conductor control IPs used to manage the router. |
 | download-timeout | The timeout duration for installing BYOL (default: 6h) |
 | download-retries | The number of times to retry SSR installation (default: unlimited) |
@@ -465,8 +465,8 @@ A description of the parameters of the template are listed in the following tabl
 | SSR Version             | SSR software version installed on the instance. |
 | Primary Control IP      | The primary IP address of the Conductor |
 | Secondary Control IP    | The secondary IP address of the Conductor |
-| Artifactory Username    | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token       | Token for the artifactory credentials used to install the SSR software. |
+| SSR Software Access Username    | User portion of the SSR software access credentials used to install the SSR software. |
+| SSR Software Access Token       | Token for the SSR software access credentials used to install the SSR software. |
 | Virtual Network Name    | Name of the existing VNet where the Session Smart Router is going to be deployed. |
 | Public Subnet Name      | The name of the public subnet within the VNet. |
 | Public Subnet Allowed CIDR     | Corresponds to the source IP CIDR range of the SSR/s at the data center/branch (outside the cloud) allowed to originate traffic to the public interface of the router. This field allows for defining a well defined and trusted IP address range. It is common to set this field to 0.0.0.0/0 for now, as the source IP addresses of the routers at the data center or branch (outside the cloud) are not known at this time. However, after the deployment and once these external IP addresses are known it is recommended to provision them in the corresponding security groups to increase the degree of security. |
@@ -540,11 +540,11 @@ Paste the following JSON content. Please adjust the values to your specific envi
     "conductorSecondaryControlIP": {
         "value" "The Secondary Control IP of the Conductor",
     },
-    "artifactoryUsername": {
-      "value": "The username portion of the artifactory credentials"
+    "SSR Software Access Username": {
+      "value": "The username portion of the SSR software access credentials"
     },
-    "artifactoryToken": {
-      "value": "The password portion of the artifactory credentials"
+    "SSR Software Access Token": {
+      "value": "The password portion of the SSR software access credentials"
     },
     "managedIdentity": {
       "value": "Name of the user managed identity resource to be assigned to the Router."
