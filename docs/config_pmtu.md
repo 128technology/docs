@@ -11,7 +11,7 @@ The SSR performs Path MTU Discovery (PMTUD) along the overlay to determine the m
 | --- | --- | --- | --- | --- | --- |
 | bidirectional | 1280/UDP   | 2945 | 90  | 600s | Interval is configurable within `path-mtu-discovery/interval`, or disabled `path-mtu-discovery/enabled`. |
 
-In deployments where ICMP Destination Unreachable: Fragmentation Needed and DF Set response messages are not generated or are suppressed, the SSR uses probe non-responses to infer the MTU. Three consecutive non-responses are considered equivalent to ICMP responses for the purposes of driving the discovery algorithm. See [RFC 1191](https://www.rfc-editor.org/rfc/rfc1191) for ICMP-based Path MTU Discovery.
+In deployments where ICMP Destination Unreachable: Fragmentation Needed and DF Set response messages are not generated or are suppressed, the SSR uses probe non-responses to infer the MTU. The SSR treats three consecutive non-responses as equivalent to an ICMP response, which keeps the discovery algorithm moving forward. See [RFC 1191](https://www.rfc-editor.org/rfc/rfc1191) for ICMP-based Path MTU Discovery.
 
 Use `show peers` to view the discovered MTU.
 
@@ -19,10 +19,10 @@ Prior to SSR 7.2.0, a reduced underlay MTU was not discovered until the next PMT
 
 Devices in the underlay report an ICMP Destination Unreachable: Fragmentation Needed and DF Set message (Type 3, Code 4) when a packet with DF set exceeds the next-hop MTU. Prior to SSR 7.2.0, the SSR forwarded these messages to the endpoint without acting on the reported MTU. The affected session retained its previous path MTU.
 
-SSR 7.2.0 introduces two complementary enhancements under Adaptive Path MTU (I95-60371):
+SSR 7.2.0 adds two complementary enhancements under Adaptive Path MTU (I95-60371):
 
 1. **Underlay ICMP Reaction** — The ingress SSR intercepts the ICMP Fragmentation Needed message, updates the affected flow, and generates a corrected ICMP Fragmentation Needed message toward the original sender. The corrected MTU accounts for SVR overhead.
-2. **Session Refresh** — The flow that carried the dropped packet is updated in place to use the MTU reported by the underlay. The session does not need to be rebuilt.
+2. **Session Refresh** — The SSR updates the flow that carried the dropped packet in place, using the MTU the underlay reported. The session does not need to be rebuilt.
 
 See [Adaptive Path MTU for Long-Lived Sessions](#adaptive-path-mtu-for-long-lived-sessions) for a hub-and-spoke example.
 
@@ -120,7 +120,7 @@ The `flow-mtu-updates` counter in `show stats icmp` increments when the flow MTU
 
 The reported MTU applies to encapsulated traffic. The spoke SSR must account for SVR overhead before notifying the client; otherwise, a client packet sized to 1000 bytes would exceed the underlay MTU after encapsulation.
 
-In this example, the SSR subtracts a 48-byte SVR overhead allowance and sends a corrected ICMP Fragmentation Needed message to the client with a next-hop MTU of **952 bytes** (1000 − 48). Note that the wire length of the ICMP packet itself (576 bytes in this example) is separate from the MTU value it reports inside its payload.
+In this example, the SSR subtracts a 48-byte SVR overhead allowance and sends a corrected ICMP Fragmentation Needed message to the client with a next-hop MTU of **952 bytes** (1000 − 48). The wire length of the ICMP packet itself (576 bytes in this example) is separate from the MTU value it reports inside its payload — do not confuse the two.
 
 :::info
 The SVR overhead allowance used for MTU calculation is not necessarily a fixed difference between an individual client packet and its resulting fabric packet. Encryption, HMAC, forward error correction (FEC), and BFD tunneling can affect the usable MTU. Rely on the corrected MTU calculated and reported by the SSR rather than estimating from a single observed packet.
