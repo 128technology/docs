@@ -7,11 +7,9 @@ import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 This step deploys the BYOL Session Smart Conductor VM from the GCP Marketplace. The deployment template creates the VM, assigns a static public IP to the management interface, and configures a network security group. SSR version 7.1.4 is automatically installed and the node is initialized as a conductor.
 
 
-## Deploy a GCP Conductor VM using the GUI
-
 The following procedure deploys a GCP Conductor VM using the GUI.
 
-### 1. Select the BYOL Plan
+### Select the BYOL Plan
 
 1. In the GCP console, search for **Marketplace** in the search bar. Click the Marketplace listing in the results.
 
@@ -25,11 +23,11 @@ The following procedure deploys a GCP Conductor VM using the GUI.
 
 ![Product Details Panel](/img/deploy-gcp-conductor-web3.png)
 
-### 2. Configure the Deployment
+### Configure the Deployment
 
 Under the **New Session Smart Networking Platform – BYOL deployment**, provide the following:
 
-**Add a table here, using the same format as the Azure tables 
+**Add a table here, using the same format as the Azure tables  
 
 1. **Deployment Name** — enter a name for the conductor VM instance. This name appears in GCP and in the conductor UI (for example, `conductor`).
 
@@ -62,7 +60,7 @@ Under the **New Session Smart Networking Platform – BYOL deployment**, provide
 
    ![SSR Mode](/img/deploy-gcp-conductor-web9.png)
 
-### 3. Deploy
+### Deploy
 
 Once all sections are complete, scroll to the bottom and click **Deploy**.
 

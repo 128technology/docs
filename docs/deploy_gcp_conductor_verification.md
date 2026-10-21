@@ -13,7 +13,7 @@ The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed.
 
 You can verify the successful conductor installation by logging in to the Conductor GUI using the Conductor Primary NIC public IP address.
 
-   ![Conductor IP address]()
+**Add Conductor IP address graphic here
 
 :::important
 Attempting to open the Conductor GUI before the installation has completed - i.e., not waiting 20 minutes - will result in an error message. This DOES NOT mean the installation failed, it means it has not completed yet. If you get an error message, wait longer, then try again. 
