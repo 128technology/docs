@@ -1,0 +1,25 @@
+---
+title: "Step 3: Deploy the Spoke Router VM"
+sidebar_label: "Deploy the Spoke Router VM"
+---
+
+Repeat [Step 2 — Deploy the Hub Router VM](deploy_gcp_hub_spoke_hub_vm.mdx) — using either the GUI or Terraform method — to deploy `Spoke1`, substituting the Spoke1 values from the [Network Design Reference](deploy_gcp_hub_spoke_overview.mdx#network-design-reference):
+
+| Field | Hub1 Value | Spoke1 Value |
+|-------|-----------|--------------|
+| Deployment Name | `hub1` | `spoke1` |
+| WAN Network / Subnetwork | `hub-public-vpc` / `hub-public-subnet` | `spoke-public-vpc` / `spoke-public-subnet` |
+| LAN Network / Subnetwork | `hub-private-vpc` / `hub-private-subnet` | `spoke-private-vpc` / `spoke-private-subnet` |
+| `goog_cm_deployment_name` | `hub1` | `spoke1` |
+| `wan_nic_networks` / `wan_nic_subnets` | `["hub-public-vpc"]` / `["hub-public-subnet"]` | `["spoke-public-vpc"]` / `["spoke-public-subnet"]` |
+| `lan_nic_networks` / `lan_nic_subnets` | `["hub-private-vpc"]` / `["hub-private-subnet"]` | `["spoke-private-vpc"]` / `["spoke-private-subnet"]` |
+
+All other fields — conductor control IP, Artifactory credentials, SSH public key, machine type, and SSR mode/version — are the same for both routers.
+
+:::note
+Both VMs can be deployed in parallel. You do not need to wait for `Hub1` to finish installing before starting the `Spoke1` deployment.
+:::
+
+## Next Step
+
+After both the `Hub1` and `Spoke1` VMs are deployed, proceed to [Step 4 — Onboard the Routers to the Conductor](deploy_gcp_hub_spoke_onboard.mdx).

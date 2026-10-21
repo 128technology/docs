@@ -206,7 +206,7 @@ module.exports = {
                 "deploy_appendix_vmware_conductor",
               ],
             },
-            {
+            {   
               "type": "category",
               "label": "Azure Conductor",
               "items": [
@@ -215,6 +215,17 @@ module.exports = {
                 "deploy_azure_conductor_install",
                 "deploy_azure_conductor_config",
                 "deploy_appendix_azure_conductor",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "GCP Conductor",
+              "items": [
+                "deploy_gcp_conductor",
+                "deploy_gcp_conductor_prereqs",
+                "deploy_gcp_conductor_install",
+                "deploy_gcp_conductor_config",
+                "deploy_appendix_gcp_conductor",
               ],
             },
           ],
@@ -245,6 +256,19 @@ module.exports = {
                   "deploy_vmware_router_pci",
                   "deploy_vmware_router_config",
                   "deploy_appendix_vmware_router",
+                ],
+              },
+              {
+                "type": "category",
+                "label": "GCP Hub and Spoke Routers",
+                "items": [
+                  "deploy_gcp_hub_spoke_overview",
+                  "deploy_gcp_hub_spoke_prereqs",
+                  "deploy_gcp_hub_spoke_hub_vm",
+                  "deploy_gcp_hub_spoke_spoke_vm",
+                  "deploy_gcp_hub_spoke_onboard",
+                  "deploy_gcp_hub_spoke_config",
+                  "deploy_appendix_gcp_hub_spoke",
                 ],
               },
               {

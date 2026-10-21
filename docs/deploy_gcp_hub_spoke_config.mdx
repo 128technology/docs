@@ -1,0 +1,207 @@
+---
+title: "Step 5: Configure Hub and Spoke Routers"
+sidebar_label: "Configure Hub and Spoke Routers"
+---
+
+This step configures both `Hub1` and `Spoke1` on the conductor. You will configure each router's WAN and LAN interfaces, define tenants and services for the workload subnets behind each router, connect the two routers over a shared hub-spoke neighborhood, and configure service routes so traffic flows in the desired directions.
+
+All steps are performed from the **Conductor GUI** unless otherwise noted.
+
+:::note
+If you prefer to apply configuration using the PCLI, the complete example configuration is available in the [Appendix](deploy_appendix_gcp_hub_spoke.mdx).
+:::
+
+## Part 1: Configure the Hub Router Interfaces
+
+With `Hub1` synchronized, configure its WAN and LAN interfaces from the conductor GUI. From **Authority**, click on `hub1`, then click `node0`.
+
+### Configure the Hub WAN Interface
+
+1. In the **Device Interfaces** section, click **Add**. Enter the name `wan-dev` and click **Save**.
+2. In the **Device Interface Type Settings** section, select `PCI Address` for **Identifier** and select `0000:00:04.0` for **PCI Address**.
+3. In the **Network Interfaces** section, click **Add**. Enter the name `wan1` and click **Save**.
+4. In the **Basic Information** section, select `internal` for **Security Policy** and `v4` for **DHCP**.
+5. In the **Management Traffic Settings** section, toggle `true` under **Conductor**, toggle `true` under **Management Enabled**, enter a **Management Vector Name**, enter `100` for **Management Vector Priority**, and toggle `true` under **Default Route**.
+6. In the **Host Services** section, click **Add**, select `ssh` for **Service Type**, and click **Save**. This allows SSH over the WAN interface.
+7. In the **Access Policies** section, click **Add**, enter an IP prefix permitted for SSH access in the **Source** field, and click **Save**.
+8. Navigate back to the network interface configuration page and, in the **Network Interface Settings** section, toggle `true` under **Source NAT**.
+9. Click **Validate and Commit**, then **Proceed Commit**.
+
+Wait until the **Provisioner** status returns to `Synchronized` under **Routers**.
+
+### Configure the Hub LAN Interface
+
+1. Return to `hub1` → `node0`. In the **Device Interfaces** section, click **Add**. Enter the name `lan-dev` and click **Save**.
+2. In the **Device Interface Type Settings** section, select `PCI Address` for **Identifier** and select `0000:00:05.0` for **PCI Address**.
+3. In the **Network Interfaces** section, click **Add**. Enter the name `lan1` and click **Save**.
+4. In the **Basic Information** section, select `internal` for **Security Policy**.
+5. In the **Interface Addresses** section, click **Add**. Enter the LAN interface IP address GCP assigned to `nic1` (`192.168.11.2`) in the **Address** field, and click **Save**.
+
+   :::tip
+   To find the assigned IP address, open the GCP console, search **VM instances**, locate the `hub1` VM, and copy the internal IP for `nic1`.
+   :::
+
+6. Still in **Basic Information**, enter the LAN interface's prefix length (`24`) in the **Prefix** field, and the GCP subnet gateway (typically the `.1` address of the subnet, `192.168.11.1`) in the **Gateway** field.
+7. Click **Validate and Commit**, then **Proceed Commit**.
+
+The `Hub1` LAN interface is now configured.
+
+## Part 2: Configure the Spoke Router Interfaces
+
+Repeat [Part 1](#part-1-configure-the-hub-router-interfaces) for `spoke1`, substituting the Spoke1 values from the [Network Design Reference](deploy_gcp_hub_spoke_overview.mdx#network-design-reference):
+
+| Setting | Hub1 Value | Spoke1 Value |
+|---------|-----------|--------------|
+| Router | `hub1` | `spoke1` |
+| LAN interface IP | `192.168.11.2` | `192.168.21.2` |
+| LAN gateway | `192.168.11.1` | `192.168.21.1` |
+
+WAN and LAN device interface PCI addresses (`0000:00:04.0` and `0000:00:05.0`) and interface names (`wan-dev`/`wan1`, `lan-dev`/`lan1`) are the same on both routers, since each is a separate two-NIC GCP VM.
+
+## Part 3: Configure Tenants, Services, and the Hub-Spoke Neighborhood
+
+To allow traffic between hub workloads, spoke workloads, and the internet, configure tenants, services, and a shared neighborhood, then reference them in service routes in [Part 4](#part-4-configure-service-routes).
+
+### Create Tenants
+
+Create one tenant per router, using **tenancy by subnets** so that tenant members are defined as subnets within a neighborhood assigned to that router's LAN interface.
+
+1. Navigate to **Authority** under **Configuration**. In the **Tenants** section, click **Add**.
+2. Enter the tenant name — `hub-workloads` for Hub1, `spoke-workloads` for Spoke1 — and click **Save**.
+3. In the **Tenant Members** section, click **Add**. Enter a name for the tenant members neighborhood and click **Save**.
+4. In the **Tenant Subnets** section, click **Add** for each workload subnet behind that router (for example, `hub-workload-subnet` / `192.168.12.0/24`). Repeat if you have multiple workload subnets.
+5. Click **Validate and Commit**, then **Proceed Commit**.
+6. Assign the tenant member neighborhood to that router's LAN interface: navigate to the router → `node0` → the LAN device interface → LAN network interface → **Neighborhoods** → **Add**, select the neighborhood, and click **Save**. Commit the change.
+
+Repeat this procedure for the other router. `hub-workloads` members are assigned to `hub1`'s `lan1`; `spoke-workloads` members are assigned to `spoke1`'s `lan1`.
+
+### Create Services
+
+Create one service per router's workloads, plus modify the default internet service.
+
+1. Navigate to **Authority** under **Configuration**. In the **Services** section, click **Add**.
+2. Enter the service name — `Hub-Workloads` for Hub1's workloads, `Spoke-Workloads` for Spoke1's workloads — and click **Save**.
+3. In the **Service Addresses** section, click **Add** for each workload subnet the service represents (for example, `192.168.12.0/24`).
+4. In the **Policies** section, select `internal` for **Security Policy**.
+5. In the **Access Policies** section, click **Add**, and select the *other* router's tenant as the permitted **Source** — for example, the `Hub-Workloads` service permits the `spoke-workloads` tenant, and the `Spoke-Workloads` service permits the `hub-workloads` tenant.
+6. Click **Validate and Commit**, then **Proceed Commit**.
+
+For internet access, modify the default internet service instead of creating a new one:
+
+1. Navigate to **Authority** under **Configuration**. In the **Services** section, click the default `Internet-Traffic` service.
+2. In the **Access Policies** section, click **Add**, select the `hub-workloads` tenant as the permitted **Source**, and click **Save**. Add the `spoke-workloads` tenant as well if spoke workloads also need direct internet breakout through the hub.
+3. Click **Validate and Commit**, then **Proceed Commit**.
+
+### Create the Hub-Spoke Neighborhood
+
+For `Hub1` and `Spoke1` to establish SVR adjacency with each other, assign a shared neighborhood to both routers' WAN interfaces, with `Hub1` set as the hub and `Spoke1` set as the spoke.
+
+1. Navigate to **Authority** under **Configuration**. In the **Routers** section, click on `hub1`.
+2. In the **Nodes** section, select `node0`. In the **Device Interfaces** section, select the WAN device interface. In the **Network Interfaces** section, select the WAN network interface (`wan1`).
+3. In the **Neighborhoods** section, click **Add**. Enter the neighborhood name `svr-hub-spoke` and click **Save**.
+4. In the **Basic Information** section, select `hub` for the **Topology** field.
+5. Click **Validate and Commit**, then **Proceed Commit**.
+6. Repeat these steps on `spoke1`'s WAN network interface (`wan1`), using the same neighborhood name `svr-hub-spoke`, but select `spoke` for the **Topology** field.
+
+Once committed on both routers, `Hub1` and `Spoke1` establish SVR adjacency over their WAN interfaces' external (public) IP addresses.
+
+## Part 4: Configure Service Routes
+
+With tenants, services, and the neighborhood in place, configure service routes so traffic flows in the desired directions. Each route below only shows the configuration on one router — apply the paired route on the other router as noted.
+
+### Internet-destined Traffic (from Hub Workloads)
+
+To allow `hub-workloads` to reach the internet through `Hub1`:
+
+1. Navigate to **Authority** under **Configuration**. In the **Routers** section, click `hub1`.
+2. In the **Service Routes** section, click **Add**. Enter a name (for example, `internet-route`) and click **Save**.
+3. In the **Service Route Information** section, select `Internet-Traffic` for **Service Name**.
+4. In the **Service Route Type** section, select `Service Agent` for **Type**.
+5. In the **Next Hops** section, click **Add**, select `node0` for **Node** and `wan1` for **Network Interface**, and click **Save**.
+6. Click **Validate and Commit**, then **Proceed Commit**.
+
+:::note
+You must also create a default or specific route in the `hub-private-vpc` (or the workload's own VPC, if peered) in GCP, with `Hub1`'s LAN interface IP (`192.168.11.2`) as the next hop, to force internet-destined workload traffic through the router.
+:::
+
+### Hub-to-Spoke Traffic
+
+To allow `hub-workloads` to initiate traffic to `spoke-workloads`:
+
+1. On `hub1`, in the **Service Routes** section, click **Add**. Enter a name (for example, `hub-to-spoke-route`) and click **Save**.
+2. In the **Service Route Information** section, select `Spoke-Workloads` for **Service Name**.
+3. In the **Service Route Type** section, select `Peer Service Route` for **Type**, and select `spoke1` for **Peer**.
+4. Click **Validate and Commit**, then **Proceed Commit**.
+5. On `spoke1`, create the paired inbound route: **Service Routes** → **Add** → name (for example, `hub-inbound-route`) → **Service Name** `Hub-Workloads` → **Type** `Service Agent` → **Next Hops** → `node0` / `lan1` → **Save** → **Validate and Commit** → **Proceed Commit**.
+
+### Spoke-to-Hub Traffic
+
+To allow `spoke-workloads` to initiate traffic to `hub-workloads`:
+
+1. On `spoke1`, in the **Service Routes** section, click **Add**. Enter a name (for example, `spoke-to-hub-route`) and click **Save**.
+2. In the **Service Route Information** section, select `Hub-Workloads` for **Service Name**.
+3. In the **Service Route Type** section, select `Peer Service Route` for **Type**, and select `hub1` for **Peer**.
+4. Click **Validate and Commit**, then **Proceed Commit**.
+5. On `hub1`, create the paired inbound route: **Service Routes** → **Add** → name (for example, `spoke-inbound-route`) → **Service Name** `Spoke-Workloads` → **Type** `Service Agent` → **Next Hops** → `node0` / `lan1` → **Save** → **Validate and Commit** → **Proceed Commit**.
+
+## Verify Connectivity
+
+After committing all configuration, both routers must reach the `synchronized` state. Once reached, verify both routers are online and forwarding traffic correctly.
+
+### Verify Both Routers Are Connected to the Conductor
+
+From the Conductor GUI, select **Routers**. Both `hub1` and `spoke1` should show a **Connected** status within 2–5 minutes of the final commit.
+
+### Verify SVR Peering Between Hub and Spoke
+
+From `hub1`'s PCLI, `spoke1` should appear as an SVR peer with status `Up`:
+
+```
+admin@node0.hub1# show peer spoke1
+```
+
+From `spoke1`'s PCLI, `hub1` should appear with status `Up`:
+
+```
+admin@node0.spoke1# show peer hub1
+```
+
+### Verify Internet Reachability
+
+From `Hub1`:
+
+```
+admin@node0.hub1# ping 8.8.8.8
+```
+
+From a workload behind `Spoke1`, confirm internet traffic (if configured) reaches the internet by way of the hub.
+
+### Verify Service Paths
+
+From `spoke1`, confirm that traffic to hub workloads resolves over the peer path:
+
+```
+admin@node0.spoke1# show service-path
+```
+
+The `Hub-Workloads` service should show a path type of `peer` with `hub1` as the next-hop peer.
+
+## Configuration Summary
+
+After committing all steps, the conductor pushes the following configuration to `Hub1` and `Spoke1`.
+
+| Object | Hub1 | Spoke1 |
+|--------|------|--------|
+| Router | `hub1`, combo node, asset-id `hub1` | `spoke1`, combo node, asset-id `spoke1` |
+| WAN Interface | `wan1` — DHCP, conductor, default-route, source-nat, management | `wan1` — DHCP, conductor, default-route, source-nat, management |
+| LAN Interface | `lan1` — `192.168.11.2/24` | `lan1` — `192.168.21.2/24` |
+| Tenant | `hub-workloads` | `spoke-workloads` |
+| Service | `Hub-Workloads` | `Spoke-Workloads` |
+| Neighborhood | `svr-hub-spoke` — Topology `hub` | `svr-hub-spoke` — Topology `spoke` |
+| Service Routes | `internet-route`, `hub-to-spoke-route`, `spoke-inbound-route` | `spoke-to-hub-route`, `hub-inbound-route` |
+
+## Related Documentation
+
+- [Appendix — Hub and Spoke Configuration](deploy_appendix_gcp_hub_spoke.mdx)
+- [Management Traffic over Forwarding Interfaces](config_management_over_forwarding.md)
+- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.md)
