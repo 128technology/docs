@@ -1,6 +1,6 @@
 ---
 name: generate-deployment-guides
-description: 'Generate a consistently structured SSR Conductor Deployment Guide set (overview, VM creation, install/initialize, configuration, appendix, and partials) for a target platform, modeled on the Azure Conductor Deployment Guide.'
+description: 'Generate a consistently structured SSR Conductor Deployment Guide set or SSR Hub and Spoke Router Deployment Guide set (overview, VM creation, install/initialize, configuration, appendix, and partials) for a target platform, modeled on the Azure deployment guides.'
 user-invocable: true
 disable-model-invocation: true
 ---
@@ -20,6 +20,15 @@ Generate a complete SSR Conductor Deployment Guide set for a target platform (fo
 | [_deploy_azure_conductor_to_authority.md](../../../docs/_deploy_azure_conductor_to_authority.md) | Partial — assign asset ID |
 
 The VMware ESXi Conductor guide (`deploy_vmware_conductor*.mdx`) follows the same structure and is the reference for on-premises variations (ISO install, management VLAN, air-gap offline mode).
+
+## Guide Types
+
+| Guide Type | Template |
+|------------|----------|
+| Conductor Deployment Guide | This file |
+| Hub and Spoke Router Deployment Guide | [hub-spoke-guide-template.md](hub-spoke-guide-template.md) |
+
+When the request is for a hub and spoke guide, follow [hub-spoke-guide-template.md](hub-spoke-guide-template.md) instead of the conductor outline below.
 
 ## Inputs
 
