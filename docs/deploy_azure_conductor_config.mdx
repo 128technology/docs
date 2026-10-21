@@ -37,11 +37,19 @@ If all managed routers reside in the same Azure VNet and communicate over privat
 
 Tenants logically partition the network. The `corp` tenant represents corporate LAN users and is referenced by the LAN interface configuration on each managed router.
 
-1. In the Conductor GUI, select **Configuration**.
-2. Select **Authority**.
-3. Scroll to **Tenants** and select **ADD**.
-4. Enter the name `corp` and select **SAVE**.
-5. Select **VALIDATE** then **COMMIT**.
+1. Under **Configuration** in the left panel, select **Authority**.
+   
+![Select Authority](/img/deploy-azure-select-authority.png)
+
+2. Scroll to **Tenants** and select **ADD**.
+
+![Add Tenant](/img/deploy-azure-select-tenant-add.png)
+
+3. Enter the name `corp` and select **SAVE**.
+
+![Name Tenant](/img/deploy-azure-newtenant.png)
+
+4. Select **VALIDATE** then **COMMIT**.
 
 :::info
 Tenants are authority-wide. A single `corp` tenant definition applies to all routers that assign it to a LAN interface.
@@ -51,16 +59,40 @@ Tenants are authority-wide. A single `corp` tenant definition applies to all rou
 
 The *service* configuration element defines the IP destinations that the SSR routes. This step creates a single service representing all internet-bound traffic from corporate LAN users.
 
-1. In the Conductor GUI, select **Configuration**.
-2. Select **Authority** from the left panel.
-3. Scroll down to **Services** and select **ADD**.
+1. Under **Configuration** in the left panel, select **Authority**.
+
+![Select Authority](/img/deploy-azure-select-authority.png)
+
+3. Scroll to **Services** and select **ADD**.
+
+![Add Service](/img/deploy-azure-hs-services.png)
+
 4. Enter the name `Internet-Traffic` and select **SAVE**.
-5. On the Service screen, verify **Enabled** is set to `true`.
-6. Scroll down to **Service Addresses** and select **ADD**.
+
+![Add Internet Traffic Service](/img/deploy-azure-service-int-traf.png)
+
+5. Verify **Enabled** is set to `true`.
+
+![Internet Traffic Service True](/img/deploy-azure-service-int-traf2.png)
+
+6. Scroll to **Service Addresses** and select **ADD**. 
+
+![Select Service Addresses](/img/deploy-azure-service-int-traf3.png)
+
 7. Enter `0.0.0.0/0` and select **SAVE**.
-8. Scroll down to **Access Policies** and select **ADD**.
+
+![Address IP](/img/deploy-azure-service-address.png)
+
+8. Scroll to **Access Policies** and select **ADD**.
+
+![Add Access policy](/img/deploy-azure-hs-access-policies-select.png)
+
    - Set **Source** to `corp`.
+
+![Corp Access Policy](/img/deploy-azure-access-policy-corp.png)
+
    - Select **SAVE**.
+
 9. Select **VALIDATE** then **COMMIT**.
 
 ## What Was Configured
