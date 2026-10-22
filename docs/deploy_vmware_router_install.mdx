@@ -41,6 +41,10 @@ These steps configure VLANs on the router.
 
 2. Select **Console** and login using the root credentials.
 
+   :::important
+   Beginning with SSR 7.2.4-R2, a new installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. Complete the password-change prompts before running the commands below. Once the password has been reset, use the new password for subsequent logins. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login) for additional information.
+   :::
+
 3. From the linux prompt run the command `ip a | more` . Make a note of the `ge-0-x` interfaces and MAC address associations.
 
    ![Start Spoke console](/img/dep-start-spoke-console.png)
@@ -90,7 +94,7 @@ ge-0-3 =00:0c:29:6c:32:c1 = Adapter4 (VLAN1)
 
 2. Click **Console** and login using the root credentials.
    - Username: `root`
-   - Password: `128tRoutes`
+   - Password: Your current root password or `128tRoutes` if the factory password has not yet been reset.
 
    The system takes a few minutes to start up.
 
