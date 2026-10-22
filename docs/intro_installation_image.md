@@ -36,8 +36,9 @@ Files available for download are:
 
 - `*.iso` - This file is used for installing/staging bare metal platforms. **Use this file to perform an image-based install.** 
 - `*.tar` - This file is used by Mist or the SSR conductor for image-based upgrades, and is accessed directly by the system during the upgrade. User download is not necessary or advised.
-- `*.qcow` - This file is used for virtual environments such as KVM or ESXi. **Do not** use this file to perform an image-based install on a Mist-managed device or system. For more information see [Deployment Using QCOW2](install_qcow2_deployment.md).  
-- `*.ztp.raw.gz` - This file is used by manufacturing, and is not applicable for customer use. 
+- `*.qcow2` - This file can be used for virtual environments such as KVM or ESXi, and must be converted to `vmdk` for use on ESXi.
+
+	**Do not** use this file to perform an image-based install on a Mist-managed device or system. For more information on installation and conversion, see [Deployment Using QCOW2](install_qcow2_deployment.md).  
 
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page.
 
