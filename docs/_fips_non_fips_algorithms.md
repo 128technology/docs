@@ -12,7 +12,7 @@ The SSR4x0 series devices have **FIPS mode enabled by default**. On these device
 
 If you need to use one of these features on an SSR4x0 series device, FIPS mode must be disabled on the affected node **before** the feature is configured. See [Disable FIPS Mode](#disable-fips-mode-to-use-non-fips-algorithms) below.
 
-<!---In future SSR releases, FIPS will continue to be enabled by default, but it will no longer prevent the configuration of non-FIPS algorithms. FIPS compliance will become *compliance by configuration* — operators who require strict FIPS compliance must avoid configuring non-FIPS algorithms, but the software will not block them.--->
+With the release of software version 7.2.x, FIPS is **compliance-by-configuration** and no longer blocks these algorithms. **However, the use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140** because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests. Operators who require strict FIPS compliance must avoid configuring non-FIPS algorithms.
 :::
 
 ### Disable FIPS Mode To Use Non-FIPS Algorithms
