@@ -27,7 +27,7 @@
     "mermaid": "^12.1.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.3.1",
-    "react-dom": "^19.3.0",
+    "react-dom": "^19.3.1",
     "react-simple-flowchart": "^1.2.4",
     "react-table": "^7.0.0"
   },
