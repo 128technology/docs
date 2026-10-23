@@ -36,7 +36,7 @@ Access to the URL above requires authentication. Log in to https://software.128t
 Files available for download are:
 
 - `*.iso` - This file is used for installing/staging bare metal platforms. **Use this file to perform an initial image-based install.** 
-- `*.tar` - This file is used by Mist or the SSR conductor for image-based upgrades, and is accessed directly by the system during the upgrade. User download is not necessary or advised.
+- `*.tar` - This file is used by Mist for image-based upgrades, and is accessed directly by the system during the upgrade. **Do not download or use this to install SSR Software.** 
 
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page.
 
