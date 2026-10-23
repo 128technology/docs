@@ -59,7 +59,7 @@ Files available for download are:
 Operation of SSR qcow2 without cloud-init is not supported at this time. Please see 
 [Deployment Using QCOW2](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/install_qcow2_deployment/) for further details.
 :::
-- `*.tar` - This file is used by Mist for image-based upgrades, and is accessed directly by the system during the upgrade. **Do not download or use this to install SSR Software.** 
+- `*.tar` - This file is used for image-based upgrades, and is accessed directly by the system during the upgrade. **Do not download or use this to install SSR Software.** 
 - `*.ztp.raw.gz` - This file is used by manufacturing, and is not applicable for customer use. 
 - `sha256sum` - checksum file used to verify integrity of asset.
 - `sha256sum.asc` - GPG verification file used to verify asset signature.

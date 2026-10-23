@@ -35,7 +35,7 @@ Access to the URL above requires authentication. Log in to https://software.128t
 Files available for download are:
 
 - `*.iso` - This file is used for installing/staging bare metal platforms. **Use this file to perform an image-based install.** 
-- `*.tar` - This file is used by Mist for image-based upgrades, and is accessed directly by the system during the upgrade. **Do not download or use this to install SSR Software.** 
+- `*.tar` - This file is used for image-based upgrades, and is accessed directly by the system during the upgrade. **Do not download or use this to install SSR Software.** 
 - `*.qcow2` - This file can be used for virtual environments such as KVM or ESXi, and must be converted to `vmdk` for use on ESXi.
 
 	**Do not** use this file to perform an image-based install on a Mist-managed device or system. For more information on installation and conversion, see [Deployment Using QCOW2](install_qcow2_deployment.md).  
