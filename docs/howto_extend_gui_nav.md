@@ -3,7 +3,7 @@ title: Extending the GUI Navigation Bar
 sidebar_label: Extending the GUI Navigation Bar
 ---
 
-The SSR Networking Platform has been designed to be extended beyond its base set of capabilities. One way in which this can be realized is in extending the navigation pane within the GUI to links external to the SSR platform. This is useful when integrating third party packages into the SSR ecosystem, such as using [Squid Proxy](http://www.squid-cache.org) to perform URL filtering. Extending the navigation bar provides a seamless integration between the application so the user does not need to leave the SSR experience.
+The SSR Networking Platform has been designed to be extended beyond its base set of capabilities. One way in which this can be realized is in extending the navigation pane within the GUI to links external to the SSR platform. This is useful when integrating third party packages into the SSR ecosystem to perform URL filtering. Extending the navigation bar provides a seamless integration between the application so the user does not need to leave the SSR experience.
 
 The example below shows the "Apple" and "Hello" added as external resources.
 
