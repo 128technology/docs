@@ -75,6 +75,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_5.2",
           "release_notes_byol_5.1",
           "release_notes_byol_5.0",
           "release_notes_byol_4.0",
@@ -102,20 +103,20 @@ module.exports = {
        "type": "category",
           "label": "Installing In AWS",
           "items": [
-            "intro_installation_quickstart_aws",
-            "intro_installation_quickstart_mist_aws",
             "intro_installation_byol_aws_conductor",
             "intro_installation_byol_aws_mist",
+            "intro_installation_quickstart_aws",
+            "intro_installation_quickstart_mist_aws",
             ],
       },
       {
        "type": "category",
           "label": "Installing In Azure",
           "items": [
-            "intro_installation_azure",
-            "intro_installation_azure_mist",
             "intro_installation_byol_azure_conductor",
             "intro_installation_byol_azure_mist",
+            "intro_installation_azure",
+            "intro_installation_azure_mist",
           ],
       },
       {

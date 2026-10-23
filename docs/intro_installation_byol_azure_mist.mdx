@@ -3,6 +3,7 @@ title: Installing a BYOL Mist-managed Router in Azure
 sidebar_label: Installing a BYOL Mist-managed Router in Azure
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import InstanceSizing from './_byol_azure_instance_types.md'
 
 This guide describes the process for deploying a Mist-managed Session Smart Router (SSR) in Azure using your own license. When installed as an Azure image, SSR Version 6.x supports Mist-managed routers. The process consists of the following steps:
 
@@ -19,14 +20,7 @@ Once you have selected the plan that best suits the needs of your deployment, pr
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in Azure. Choose the size that best meets your requirements. More information can be found in the [Azure Documentation](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes).
-
-| Recommended Azure VM Size | Max vNICs Supported | vCPU Cores | Memory |
-| --- | --- | --- | --- |
-| Standard_F8s_v2     |  4   |  8   | 16 GB |
-| Standard_F16s_v2    |  4   |  16  | 32 GB |
-| Standard_F32s_v2    |  8   |  32  | 64 GB |
-| Standard_D8s_v5     |  4   |  8   | 32 GB |
+<InstanceSizing/>
 
 ## Session Smart Router
 

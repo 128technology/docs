@@ -2,6 +2,9 @@
 title: Installing a BYOL Conductor-managed Router in AWS
 sidebar_label: Installing a BYOL Conductor-managed Router in AWS
 ---
+
+import InstanceSizing from './_byol_aws_instance_types.md'
+
 This guide describes the process for deploying a BYOL Session Smart Conductor and a BYOL Session Smart Router (SSR) in AWS.
 
 The installation and deployment process consists of the following steps:
@@ -18,24 +21,13 @@ BYOL instances only support image-based installations, and require the conductor
 
 ### Selecting the AMI
 
-The **Bring Your Own License (BYOL)** AMI allows you to install your own licensed copy of the SSR software on an AWS VM. Artifactory credentials are required to authenticate access to the installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
+The **Bring Your Own License (BYOL)** AMI allows you to install your own licensed copy of the SSR software on an AWS VM. SSR software access credentials are required to authenticate access to the installation repositories. Refer to the [Session Smart Networking Platform (BYOL)](https://aws.amazon.com/marketplace/pp/prodview-lz6cjd43qgw3c?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) offering.
 
 Once you have selected the AMI for your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Conductor Managed Router Deployment](#session-smart-conductor-managed-router-deployment) to deploy a Session Smart Conductor Managed Router.
 
 ## Selecting the Instance Size
-The following instance sizes are supported for virtual SSR in AWS. Choose the size that best meets your requirements. More information can be found in the [AWS Documentation](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html)
 
-| Recommended AWS VM Size | Max vNICs Supported | vCPU Cores | Memory |
-| ----------------------- | ------------------- | ---------- | ------ |
-| c5.xlarge     |  4  |  4    |   8  |
-| c5.2xlarge    |  4  |  8    |   16  |
-| c5.4xlarge    |  8  |  16   |   32  |
-| c5.9xlarge    |  8  |  36   |   72  |
-| c5n.xlarge    |  4  |  4    |   10.5  |
-| c5n.2xlarge   |  4  |  8    |   21  |
-| c5n.4xlarge   |  8  |  16   |   42  |
-| c5n.9xlarge   |  8  |  36   |   96  |
-
+<InstanceSizing/>
 
 ## Session Smart Conductor Deployment
 
@@ -81,7 +73,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 - What name do you want to give the instance?
   - Provide it in the **Conductor Name** field (for example: conductor).
 - What version of SSR software do you want to install?
-- What are the artifactory credentials used to install the software?
+- What are the SSR software access credentials used to install the software?
 - Where do you want to deploy it?
   - Select the VPC in the region.
   - Select the subnet within the VPC.
@@ -123,8 +115,8 @@ write_files:
             "name": "<conductor-name>",
             "ssr-version": "<version>",
             "mode": "conductor",
-            "artifactory-user": "<username>",
-            "artifactory-password": "<password>",
+            "software-access-username": "<username>",
+            "software-access-token": "<token>",
             "node-name": "node0",
             "cloud-provider": "aws"
         }
@@ -134,8 +126,8 @@ write_files:
 | ------ | ------- |
 | name | The name of the router. By default, the instance name is used. |
 | ssr-version | The SSR software version to be installed on the instance. (BYOL only) |
-| artifactory-user | User portion of the artifactory credentials. |
-| artifactory-password | Password portion of the artifactory credentials. |
+| software-access-username | User portion of the SSR software access credentials. |
+| software-access-token | Password portion of the SSR software access credentials. |
 | node-name | The name of the node being provisioned. For a standalone conductor, this is `node0`. |
 | download-timeout | The timeout duration for installing BYOL (default: 6h) |
 | download-retries | The number of times to retry SSR installation (default: unlimited) |
@@ -164,8 +156,8 @@ A description of the parameters of the template are listed in the following tabl
 | Name                 | The Instance Name field provides a name to the VM for the device.|
 | Instance Type        | Size of the EC2 instance.|
 | SSR Version          | SSR software version installed on the instance. |
-| Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
+| SSR Software Access Username | User portion of the SSR software access credentials used to install the SSR software. |
+| SSR Software Access Username  | Token for the SSR software access credentials used to install the SSR software. |
 | VPC ID               | ID of the existing VPC where the device is going to be deployed. |
 | Control Subnet ID    | ID of the control subnet within the VPC. |
 | Control Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Conductor's management interface in the management subnet. |
@@ -210,8 +202,8 @@ Paste the following JSON content. Please adjust the values to your specific envi
   "Name": "<instance name>",
   "Version": "<ssr-version>",
   "InstanceType": "c5n.xlarge",
-  "ArtifactoryUsername": "<username>",
-  "ArtifactoryUsername": "<password>",
+  "SSRSoftwareAccessUsername": "<username>",
+  "SSRSoftwareAccessToken": "<token>",
   "VpcId": "<ID of the VPC>",
   "ControlSubnet": "<ID of the management subnet within the VPC>",
   "ControlAllowedCidr": "0.0.0.0/0",
@@ -333,7 +325,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 - Where do you want to deploy it?
   - Select the VPC in the region.
   - Select the public, private, and optional management subnets within the VPC.
-- What are the artifactory credentials used to install the software?
+- What are the SSR software access credentials used to install the software?
 - What is the control IP address of the Conductor used to manage it?
 - **Optional** What is the secondary control IP address of the Conductor used to manage it?
 - Who is going to be the administrator?
@@ -382,8 +374,8 @@ write_files:
 | ------ | ------- |
 | name                 | The name of the Router. |
 | ssr-version          | The SSR software version to be installed on the instance. |
-| artifactory-user     | User portion of the artifactory credentials. |
-| artifactory-password | Password portion of the artifactory credentials. |
+| software-access-username  | Username portion of the SSR software access credentials. |
+| software-access-token | Token portion of the SSR software access credentials. |
 | conductor-hosts      | The list of Conductor control IPs used to manage the router. |
 | download-timeout | The timeout duration for installing BYOL (default: 6h) |
 | download-retries | The number of times to retry SSR installation (default: unlimited) |
@@ -428,8 +420,8 @@ A description of the parameters of the template are listed in the following tabl
 | -------------------- | ----------- |
 | Name                 | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
 | Version              | SSR software version installed on the instance. |
-| Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
+| SSR Software Access Username | Username portion of the SSR software access credentials used to install the SSR software. |
+| SSR Software Access  Token    | Token for the SSR software access credentials used to install the SSR software. |
 | Primary Control IP   | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
@@ -479,8 +471,8 @@ Paste the following JSON content. Please adjust the values to your specific envi
 {
   "Name": "<instance name>",
   "Version": "<ssr-version>",
-  "ArtifactoryUsername": "<username>",
-  "ArtifactoryToken": "<password>",
+  "SSRSoftwareAccessUsername": "<username>",
+  "SSRSoftwareAccessToken": "<token>",
   "conductorPrimaryControlIP": "<control-ip>",
   "conductorSecondaryControlIP": "<control-ip>",
   "InstanceType": "c5n.xlarge",
@@ -573,8 +565,8 @@ A description of the parameters of the template are listed in the following tabl
 | -------------------- | ----------- |
 | Name                 | Fill out the Instance Name field to provide a name to the VM for the conductor-managed router.|
 | Version              | SSR software version installed on the instance. |
-| Artifactory Username | User portion of the artifactory credentials used to install the SSR software. |
-| Artifactory Token    | Token for the artifactory credentials used to install the SSR software. |
+| SSR Software Access Username | Username portion of the SSR software access credentials used to install the SSR software. |
+| SSR Software Access Token    | Token for the SSR software access credentials used to install the SSR software. |
 | Primary Control IP   | The primary IP address of the Conductor |
 | Secondary Control IP | The secondary IP address of the Conductor |
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
