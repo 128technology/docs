@@ -49,7 +49,7 @@ const config = {
           position: 'right',
         },
         {
-          href: '[HPE Networking Community SD-WAN and Session Smart Router](https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c)',
+          href: 'https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c',
           label: 'Community',
           position: 'right',
         },
