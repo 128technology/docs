@@ -176,7 +176,12 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-63985 VRRP Non-revertive Active/Active Recovery:** Added support for VRRP to automatically revert from an active/active state back to active/standby when the underlying Layer 2 connectivity is restored, without requiring manual intervention such as priority changes or interface flaps.
 ------
-- **I95-65332 BGP Authentication with MD5 in FIPS Mode:** BGP and MSDP now support TCP MD5 authentication when the system is operating in FIPS mode. Previously, enabling FIPS mode prevented BGP authentication from functioning.
+- **I95-65332 Allow BGP/MSDP to use TCP MD5 even when kernel is in FIPS mode:** The use of BGP and MSDP protocols with TCP MD5 authentication has been enabled when kernel is in FIPS mode. 
+
+  :::important
+  The use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140 because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests. 
+  :::
+------
 
 ### Resolved Issues
 
