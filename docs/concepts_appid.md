@@ -274,9 +274,9 @@ The `application-name` is configured as it is with the `tls` variant of `applica
 ```
 
 :::note
-In the case of this module, the script that generates the JSON is `/etc/128technology/application-modules/zoom.py`, the output is stored as `/var/run/128technology/application-modules/zoom.json`. A copy of the `zoom.py` script is available on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c).
+In the case of this module, the script that generates the JSON is `/etc/128technology/application-modules/zoom.py`, the output is stored as `/var/run/128technology/application-modules/zoom.json`. A copy of the `zoom.py` script is available on our user community, [HPE Networking Community SD-WAN and Session Smart Router](https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c).
 :::
 
 The `services` tag of `ZOOM` is what associates these IP prefixes to the service we've shown above. Each of these IP prefixes (which could have also included port ranges, but don't in this example) will create a FIB entry for the `ZOOM` service, and be given access and policy determinations based on the configuration we've set in our SSR.
 
-The SSR ships with an Office365 module, and other modules can be found on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c), our user community, as well as on Github. For more information on writing your own application identification module, refer to our developer documentation or our sample code.
+The SSR ships with an Office365 module, and other modules can be found on [HPE Networking Community SD-WAN and Session Smart Router](https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c), our user community, as well as on Github. For more information on writing your own application identification module, refer to our developer documentation or our sample code.
