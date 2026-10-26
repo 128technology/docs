@@ -154,7 +154,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66513 IDP Alarms Not Generated For A Parent Tenant With A Neighborhood Member:** Resolved an issue where IDP alarms were not generated for traffic associated with a parent tenant that had a neighborhood member configured, even though traffic was being inspected correctly.
 ------
-- **I95-66588 IDP Policy Compilation Failed On SSR440 Platforms:** Resolved an issue where enabling IDP on SSR440 platforms may leave the IDP engine stuck in a `rebuilding` state due to duplicate critical-profile policy entries, preventing policy compilation from completing.
+- **I95-66588 IDP loading failed on SSR440 Platforms:** Resolved an issue where enabling IDP on SSR440 platforms may leave the IDP engine stuck in a `rebuilding` state due to duplicate critical-profile policy entries.
 ------
 - **I95-66598 Highway Crash Guard For Unprimed ESKM Payload Security Contexts:** Backported a defensive fix that guards ESKM CBC payload encryption and decryption against unprimed security contexts, preventing a potential highway crash.
 ------
@@ -172,13 +172,13 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66679 `show certificate ca detail` Did Not Decode The Subject Directory Attributes Extension:** Resolved an issue where the `show certificate ca detail` command displayed the X.509v3 Subject Directory Attributes extension as raw, unreadable characters instead of the decoded OID and value.
 ------
-- **I95-66682 L7 Security Validation Did Not Check The Last Access-Policy Member:** Resolved a programming error where the validation logic that checks access-policies for Layer 7 security mismatches skipped the last item in the service list, allowing a mismatched configuration to go undetected.
+- **I95-66682 L7 Security Validation did not check the last access-Policy member:** Corrected the validation logic that checks access-policies for Layer 7 security mismatches. The last item in the service list allowed a mismatched configuration to go undetected.
 ------
 - **I95-66684 PIM-Over-SVR Neighbors Failed To Form On Mist-Managed Routers:** Resolved an issue where locally originated PIM control traffic on a Mist-managed router was dropped because firmware looked up the PIM speaker tenant using the legacy name `pim_speaker` instead of `_pim_speaker_`, preventing PIM-over-SVR neighbor relationships from forming.
 ------
 - **I95-66685 Additional ESKM Security State Machine Hardening:** Resolved additional cases where the ESKM security state machine may stall or take a peer path down without recovering, including a lost ML-KEM acknowledgment and unvalidated peer rekey handling, following further hardening of the key-exchange timer and flag-cleanup logic.
 ------
-- **I95-66699 Highway Crash When An HA Peer Certificate-Expiration Notice Was Received:** Resolved an issue where an HA node receiving a peer certificate-expiration notice from its HA partner attempted to remove the same tracked peer metadata key twice, causing highway to crash in debug builds or read invalid memory in release builds. Duplicate removal is now tolerated safely.
+- **I95-66699 Highway crash when an HA peer certificate-expiration notice was received:** Resolved an issue where an HA node receiving a peer certificate-expiration notice from its HA partner attempted to remove the same tracked peer metadata key twice, causing highway to crash. Duplicate removal is now tolerated safely.
 ------
 - **I95-66708 Downgrade Failures In HA Setups:** Resolved an issue where downgrading an HA pair to certain earlier SSR versions could fail because backwards-incompatible application-identification auto-detection fields were not removed from the configuration before the downgrade.
 ------
