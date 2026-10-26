@@ -116,21 +116,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
 <p>No software workaround is available.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolution">Resolution<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#resolution" class="hash-link" aria-label="Direct link to Resolution" title="Direct link to Resolution" translate="no">​</a></h3>
-<p>Contact HPE technical support and initiate a return material authorization (RMA) request for the affected SFP only. HPE will replace the affected SFP.</p>
-<p>When opening the support case, include the following information:</p>
-<ul>
-<li class="">SSR platform: SSR-1300 or SSR-1400</li>
-<li class="">Affected port: for example, <code>xe0/0</code>, <code>xe0/1</code>, <code>xe0/2</code>, or <code>xe0/3</code></li>
-<li class="">SSR software version</li>
-<li class="">Transceiver part number: <code>740-021309</code></li>
-<li class="">Interface status output showing:<!-- -->
-<ul>
-<li class=""><code>Admin Status: down</code></li>
-<li class=""><code>Operational Status: unknown</code></li>
-</ul>
-</li>
-<li class=""><code>ethtool -m</code> output, if available</li>
-</ul>
+<p>If you encounter this issue, please contact your account team for further guidance.</p>
 <!-- -->
 <section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://docs.128technology.com/kb/2026/09/25/I95-65908#footnote-label" class="hash-link" aria-label="Direct link to Footnotes" title="Direct link to Footnotes" translate="no">​</a></h2>
 <ol>
