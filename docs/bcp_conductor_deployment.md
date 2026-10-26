@@ -53,7 +53,7 @@ The SSR conductor will run effectively on a virtual machine in both private and 
 
 Running a small lab network or pilot deployment on a modestly sized conductor is acceptable, but be advised that migrating routers from a "temporary" or "POC" conductor to a production conductor may incur downtime during the transition. It is best to procure and deploy suitable hardware up front.
 
-Juniper provides a sizing tool on [our community site](https://community.juniper.net/viewdocument/128t-conductor-sizing-spreadsheet?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c&tab=librarydocuments) to give guidance on CPU, memory, and disk requirements for bare metal and cloud conductor deployments.
+Juniper provides a sizing tool on [our community site]https://community.networking.hpe.com/community-home/librarydocuments?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c&tab=librarydocuments&folder=46ad37ee-f3cb-4043-b246-5c986facfd4d&e86c94c7-ef7f-49c3-a3b5-9e9520e953f3=eyJwYWdlaW5kZXgiOjAsImxpYnJhcnllbnRyeSI6ImRjN2NlNGNmLTQ1MzAtNDU0MS05ZDk3LWUwMDk2NDRiYTI4YiJ9 to give guidance on CPU, memory, and disk requirements for bare metal and cloud conductor deployments.
 
 :::tip Key Decision
 Size your conductor for the size you anticipate your network to grow to, or the number of nodes your administrative policy caps for a single configuration platform. For deployments in excess of 2,000 managed nodes (remembering that a highly available router counts twice), see the section on POD design below.

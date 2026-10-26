@@ -19,7 +19,7 @@ OSPF [`message-digest-key`](config_command_guide.md#configure-authority-router-r
 
 With the release of software version 7.2.x, FIPS is **compliance-by-configuration** and no longer blocks these algorithms. **However, the use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140** because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests.
 
-It is not a FIPS-approved operating mode to use features which include MD5 or SHA1 authentication. If your 7.0.x or 7.1.x deployment **does not require FIPS compliance** and you wish to disable FIPS mode, refer to the disable procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp).
+It is not a FIPS-approved operating mode to use features which include MD5 authentication. If your 7.0.x or 7.1.x deployment **does not require FIPS compliance** and you wish to disable FIPS mode, refer to the disable procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp).
 :::
 
 ## Prerequisites
