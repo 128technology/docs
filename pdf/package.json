@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^23.10.4",
+    "puppeteer": "^25.16.0",
     "serve-handler": "^6.1.6"
   }
 }
