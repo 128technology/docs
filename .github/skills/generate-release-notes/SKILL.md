@@ -18,16 +18,16 @@ Ask for the following if not provided:
 3. **Output filename** — where to save the generated notes (default: `docs/release_notes_128t_<major.minor>.md`).
 4. **Mode** — `generate` (create a new release notes file or section) or `update` (add new issues to an existing release notes section). If the output file already exists and contains the target version heading, infer `update` mode unless the user explicitly requests `generate`.
 5. **Target release section** *(update mode only)* — the specific `## Release <version>` heading to update (e.g., `## Release 7.1.6-r2`). Required when mode is `update`.
-6. **Build number** — the build number for the release (e.g., `7`). If provided, render it in the release heading as `## Release <version> (Build# <number>)`.
+6. **Build number** — optional. If provided, use that build; otherwise discover the latest matching numbered build in Artifactory. Render it in the release heading as `## Release <version> (Build# <number>)`.
 7. **Release classification** — the release audience or stage (e.g., `Beta Release`, `Limited Availability`, `General Availability`). Omit this heading only when the user confirms that no classification applies.
 8. **Customer** *(customer-specific releases only)* — the customer name displayed in the release metadata. Do not infer it solely from JIRA issue content; use the customer explicitly supplied by the user or an authoritative release manifest.
-9. **Image details** — one record per release artifact containing architecture, type, URL, and SHA256. Accept these values only from an authoritative build manifest, checksum file, artifact service, or explicit user input. Each record must include:
+9. **Image details** — discover these from Artifactory when not supplied. Use an authoritative build manifest or artifact listing and checksum sidecars. Each record must include:
    - Architecture (e.g., `x86_64`, `aarch64`)
    - Type (e.g., `ISO`, `TAR`)
    - Artifact URL
    - SHA256 checksum
 
-If build metadata or image details are absent, ask for them before producing the final draft. The user may explicitly confirm that a field does not apply; do not fabricate or silently omit applicable metadata.
+Attempt Artifactory discovery before asking for a build number or image details. Ask only when no matching artifacts exist, the release lane cannot be resolved, or an authoritative listing/checksum is inaccessible. The user may explicitly confirm that a metadata field does not apply; do not fabricate or silently omit applicable metadata.
 
 ## Helper Scripts
 
@@ -74,14 +74,13 @@ This produces a categorized breakdown. Use the output to identify which issues a
 
 Before drafting the release section:
 
-1. Record the build number, release classification, customer (when customer-specific), and image details supplied in the inputs.
-2. Verify each artifact URL and SHA256 against an authoritative source:
-    - Prefer a signed or published build manifest/checksum file from the artifact service.
-    - Otherwise, download the artifact to `/tmp/rn-artifacts/` and calculate its SHA256 locally.
-    - If authentication or artifact size prevents local verification, mark the artifact as **unverified** in the review summary and require explicit user approval before saving. Do not claim that an unverified checksum is valid.
-3. Confirm that each artifact filename matches the target version and build number.
-4. Confirm that every artifact row has a unique architecture/type pair and a 64-character lowercase hexadecimal SHA256 value.
-5. Save normalized metadata to `/tmp/rn-release-metadata.json` using this shape:
+1. Record the release classification and customer (when customer-specific) from explicit user input or an authoritative release manifest. Do not infer either from issue contents or artifact filenames.
+2. Unless the user supplied a build number, inspect the Artifactory directory index at `https://artifactory.ssn.juniper.net/artifactory/generic-128t-install-images-alpha-local/<major.minor>/`. Filter filenames to the exact target version and release lane. When the target version omits a lane, use the explicit target lane or the `Delivered To[Labels]` value from the supplied JQL results. Ignore timestamped development builds, `.develop` builds, and unrelated versions. Select the highest numeric build in the matching lane; if multiple lanes remain plausible, ask the user to choose.
+3. Use the selected build's standard ISO and TAR artifacts for each available architecture. Do not include QCOW2, raw, or ODM artifacts unless the user requests them or the established release format requires them.
+4. Fetch each artifact's `.sha256sum` sidecar from the same Artifactory directory. Treat the sidecar as the authoritative checksum source. If a sidecar is missing or inaccessible, download the artifact to `/tmp/rn-artifacts/` and calculate its SHA256 locally. If neither method verifies the checksum, mark the artifact **unverified** in the review summary and require explicit user approval before saving. Never label an unverified checksum valid.
+5. Confirm that each artifact URL is listed in Artifactory and each filename matches the target version, selected build, release lane, architecture, and type.
+6. Confirm that every artifact row has a unique architecture/type pair and a 64-character lowercase hexadecimal SHA256 value.
+7. Save normalized metadata to `/tmp/rn-release-metadata.json` using this shape:
 
 ```json
 {
