@@ -67,8 +67,8 @@ Allowed Options:
 | `router-name` | (Required) Assign a name to the router/conductor. |
 | `clustered` | (Required for HA) Whether or not this conductor is to be configured as an HA pair; set to `true` .|
 | `ha-interface-name` | Interface name (matching a port in the device-map) to bind the ha-ip. |
-| `ha-ip` | The IPv4 address to assign to the HA interface on this node. |
-| `ha-peer-ip` | The IPv4 address of the node to be used as an HA peer. |
+| `ha-ip` | The IPv4 address and prefix length to assign to the HA interface on this node (x.x.x.x/y). For example, `169.254.253.2/30`. |
+| `ha-peer-ip` | The IPv4 address of the HA interface on the peer node, without a prefix length (x.x.x.x). For example, `169.254.253.1`. |
 | `ha-peer-name` | The name of the Node to be used as an HA peer. |
 | `ha-peer-username` | The user on the peer node to authenticate as. This user must have sudo privileges. Required if `learn-from-ha-peer` is true. |
 | `unsafe-ha-peer-password` | The password for the user on the peer node to authenticate as. WARNING: If this field is used, the preferences file should not be world-readable to avoid leaking the peer node password. Required if `learn-from-ha-peer` is true. |
@@ -82,6 +82,24 @@ When configuring High Availability, if any one of the following options is confi
 - learn-from-ha-peer
 - ha-peer-username
 - unsafe-ha-peer-password
+
+:::important
+`node-ip` and `ha-ip` must include a prefix length (x.x.x.x/y), while `ha-peer-ip` is an address only (x.x.x.x). The `ha-ip` prefix length must match the HA subnet used on the peer node. If `ha-ip` is entered without a prefix length, initialization fails with a `Validation failed` error.
+:::
+
+#### Example: Initialize an HA Conductor Pair
+
+The following example initializes the first conductor node (`node0`):
+
+```
+initialize conductor node-ip 10.73.1.10/24 node-gateway 10.73.1.1 interface-name ge-0-0 clustered ha-ip 169.254.253.1/30 ha-interface-name ge-0-3 ha-peer-ip 169.254.253.2 ha-peer-name node1 router-name MyConductor node-name node0
+```
+
+The following example initializes the second conductor node (`node1`), learning the remaining configuration from `node0`:
+
+```
+initialize conductor node-ip 10.73.1.11/24 node-gateway 10.73.1.1 interface-name ge-0-0 clustered ha-ip 169.254.253.2/30 ha-interface-name ge-0-3 ha-peer-ip 169.254.253.1 ha-peer-name node0 learn-from-ha-peer ha-peer-username t128 unsafe-ha-peer-password <password> router-name MyConductor node-name node1
+```
 
 For more information on the available options and parameters, refer to the [`initialize conductor`](cli_reference.md#initialize-conductor) command.
 
