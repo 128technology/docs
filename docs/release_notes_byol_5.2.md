@@ -4,7 +4,7 @@ sidebar_label: '5.2'
 ---
 ## Release 5.2.0
 
-**Release Date:** Oct 23, 2026
+**Release Date:** Oct 27, 2026
 
 ### New Features and Improvements
 - **I95-66382 Replace artifactory keyword in AWS, Azure, GCP**
