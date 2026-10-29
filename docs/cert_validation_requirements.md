@@ -119,6 +119,8 @@ Client certificates used for peering are validated as leaf (end-entity) certific
 
 Intermediate certificates in a chain are validated as CA certificates and must meet the same Basic Constraints requirements as [Trusted CA Certificates](#trusted-ca-certificates-trusted-ca-certificate).
 
+Certificates supplied with an identity chain are not independently trusted anchors. They support building a path from the leaf to an explicitly provisioned trust anchor. Place the leaf first, followed by its issuing intermediate and each successive issuer, excluding the anchor itself. See [Identity Chains and Trust Anchors](concepts_certificate_management.md#identity-chains-and-trust-anchors).
+
 ## Understanding `validation-mode`
 
 The `validation-mode` setting is available on `trusted-ca-certificate`, `client-certificate`, and router-level `client-certificate` objects. It controls the behavior of **config-time validation** (the checks that run when you commit configuration).
@@ -132,6 +134,10 @@ trusted-ca-certificate my-ca
 | --- | --- |
 | `strict` (default) | Any certificate issue found during config-time validation causes the commit to **fail with an error**. The configuration is not accepted. |
 | `warn` | Certificate issues found during config-time validation produce **warnings** but the commit is **allowed to proceed**. |
+
+:::note SCO-specific validation
+SCO additionally requires a file-backed RSA identity certificate and invokes certificate-property validation on that file. A failure in this SCO-specific check blocks the configuration regardless of the certificate object's `validation-mode`. Setting `warn` does not bypass this additional check.
+:::
 
 ### What `validation-mode` Does Not Control
 
@@ -158,9 +164,13 @@ Config-time validation runs during `validate` and `commit` operations. It checks
 - Self-signed certificate detection.
 - Extended Key Usage presence.
 
+For an identity PEM bundle, the property checker treats the first certificate as the leaf and all subsequent certificates as CAs. It does not reorder certificates, combine separately configured identity and trust-anchor inputs, or verify the signature path between them. Consequently, a leaf-first bundle with incorrectly ordered CA certificates can pass property checks without establishing a valid, trusted chain.
+
 The results of these checks are controlled by `validation-mode`:
 - In `strict` mode, issues block the commit.
 - In `warn` mode, issues produce warnings but the commit proceeds.
+
+The additional SCO-specific check described above is not controlled by `validation-mode`.
 
 ### Runtime Validation
 
@@ -174,6 +184,8 @@ Runtime validation occurs when certificates are actively used — for example, d
 - Basic Constraints criticality (via strict X.509 conformance checking).
 - Certificate Revocation List (CRL) checking, when CRLs are configured.
 
+The runtime requirements above describe peer authentication such as BFD and key exchange. SCO uses a separate TLS verification path: the router validates the conductor's presented identity chain and IP identity using the CA certificate provisioned through the onboarding token. Do not infer that BFD-specific runtime checks or settings apply to SCO. See [SCO Certificate Ordering and Validation](sec-conductor-onboard.md#certificate-ordering-and-validation).
+
 ### Behavioral Differences
 
 Because config-time and runtime validation are separate processes, certain edge cases may produce different outcomes:
@@ -183,7 +195,7 @@ Because config-time and runtime validation are separate processes, certain edge 
 | CA cert with `CA:TRUE` but Basic Constraints **not critical**. | May pass with `validation-mode warn` | **Rejected** — strict X.509 conformance is always enforced. |
 | Certificate with weak signature algorithm. | Warning (`warn`) or error (`strict`) | **Rejected** |
 | Expired certificate. | Warning (`warn`) or error (`strict`) | **Rejected** |
-| Valid, conforming certificate. | Passes | Passes |
+| Valid, conforming certificate properties. | Passes property checks | Must also have a valid chain to a provisioned trust anchor and satisfy the feature's identity and runtime requirements. |
 
 :::tip
 To avoid runtime failures, ensure all certificates meet the full set of requirements documented on this page **before** importing them, even when using `validation-mode warn`. The `warn` setting is intended as a diagnostic aid, not as a way to bypass certificate requirements.
