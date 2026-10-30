@@ -1,6 +1,6 @@
 ---
 name: generate-release-notes
-description: 'Generate or update SSR software release notes for a specific version from a JIRA JQL query, covering resolved bugs, features, CVEs, and caveats.'
+description: 'Generate or update SSR software release notes for a specific version from a JIRA JQL query, including build metadata, release classification, customer scope, image artifacts, resolved bugs, features, CVEs, and caveats.'
 user-invocable: true
 disable-model-invocation: true
 ---
@@ -18,6 +18,16 @@ Ask for the following if not provided:
 3. **Output filename** — where to save the generated notes (default: `docs/release_notes_128t_<major.minor>.md`).
 4. **Mode** — `generate` (create a new release notes file or section) or `update` (add new issues to an existing release notes section). If the output file already exists and contains the target version heading, infer `update` mode unless the user explicitly requests `generate`.
 5. **Target release section** *(update mode only)* — the specific `## Release <version>` heading to update (e.g., `## Release 7.1.6-r2`). Required when mode is `update`.
+6. **Build number** — optional. If provided, use that build; otherwise discover the latest matching numbered build in Artifactory. Render it in the release heading as `## Release <version> (Build# <number>)`.
+7. **Release classification** — the release audience or stage (e.g., `Beta Release`, `Limited Availability`, `General Availability`). Omit this heading only when the user confirms that no classification applies.
+8. **Customer** *(customer-specific releases only)* — the customer name displayed in the release metadata. Do not infer it solely from JIRA issue content; use the customer explicitly supplied by the user or an authoritative release manifest.
+9. **Image details** — discover these from Artifactory when not supplied. Use an authoritative build manifest or artifact listing and checksum sidecars. Each record must include:
+   - Architecture (e.g., `x86_64`, `aarch64`)
+   - Type (e.g., `ISO`, `TAR`)
+   - Artifact URL
+   - SHA256 checksum
+
+Attempt Artifactory discovery before asking for a build number or image details. Ask only when no matching artifacts exist, the release lane cannot be resolved, or an authoritative listing/checksum is inaccessible. The user may explicitly confirm that a metadata field does not apply; do not fabricate or silently omit applicable metadata.
 
 ## Helper Scripts
 
@@ -39,7 +49,7 @@ All scripts use file-based I/O. Save intermediate data to `/tmp/rn-*` files.
 
 Before starting any work, confirm that both required MCP servers are available:
 
-1. **JIRA MCP** — Call `mcp_ssr-jira-mcp_get_issue` with a known issue key (e.g., `I95-1`) or any lightweight JIRA MCP tool. If the call fails or times out, stop.
+1. **JIRA MCP** — Call `mcp_ssr-jira-mcp_jql_query` with the lightweight query `project = I95 ORDER BY created DESC` and `max_results: 1`. If the call fails or times out, stop.
 2. **GitHub MCP** — Call `mcp_github_mcp_se_get_me` to verify the GitHub MCP server is reachable. If the call fails or times out, stop.
 
 If **either** server is not running, halt immediately and inform the user:
@@ -60,12 +70,45 @@ node scripts/release-notes/categorize.js --input /tmp/rn-jql-results.json --outp
 
 This produces a categorized breakdown. Use the output to identify which issues are CVEs (grouped automatically), features, caveats, and resolved issues.
 
+### Step 1.2 — Verify Build And Image Metadata
+
+Before drafting the release section:
+
+1. Record the release classification and customer (when customer-specific) from explicit user input or an authoritative release manifest. Do not infer either from issue contents or artifact filenames.
+2. Unless the user supplied a build number, inspect the Artifactory directory index at `https://artifactory.ssn.juniper.net/artifactory/generic-128t-install-images-alpha-local/<major.minor>/`. Filter filenames to the exact target version and release lane. When the target version omits a lane, use the explicit target lane or the `Delivered To[Labels]` value from the supplied JQL results. Ignore timestamped development builds, `.develop` builds, and unrelated versions. Select the highest numeric build in the matching lane; if multiple lanes remain plausible, ask the user to choose.
+3. Use the selected build's standard ISO and TAR artifacts for each available architecture. Do not include QCOW2, raw, or ODM artifacts unless the user requests them or the established release format requires them.
+4. Fetch each artifact's `.sha256sum` sidecar from the same Artifactory directory. Treat the sidecar as the authoritative checksum source. If a sidecar is missing or inaccessible, download the artifact to `/tmp/rn-artifacts/` and calculate its SHA256 locally. If neither method verifies the checksum, mark the artifact **unverified** in the review summary and require explicit user approval before saving. Never label an unverified checksum valid.
+5. Confirm that each artifact URL is listed in Artifactory and each filename matches the target version, selected build, release lane, architecture, and type.
+6. Confirm that every artifact row has a unique architecture/type pair and a 64-character lowercase hexadecimal SHA256 value.
+7. Save normalized metadata to `/tmp/rn-release-metadata.json` using this shape:
+
+```json
+{
+   "version": "7.2.3-r2",
+   "build": "7",
+   "classification": "Beta Release",
+   "customer": "Example Customer",
+   "images": [
+      {
+         "architecture": "x86_64",
+         "type": "ISO",
+         "url": "https://artifacts.example/SSR-7.2.3-7.r2.el9.x86_64.ibu-v1.iso",
+         "sha256": "<64-character-sha256>",
+         "verified": true
+      }
+   ]
+}
+```
+
+Do not place authentication tokens, cookies, or signed URL query parameters in the release notes. Use stable artifact URLs without embedded credentials.
+
 ### Step 1.5 — Diff Against Existing Notes (Update Mode Only)
 
 Skip this step entirely if mode is `generate`.
 
 1. Read the existing release notes file specified in the output filename.
 2. Locate the target `## Release <version>` section (up to the next `## Release` heading or end of file).
+   - A heading with build metadata, such as `## Release <version> (Build# <number>)`, identifies the same target version.
 3. Extract all issue keys from that section by scanning for bold entry patterns (e.g., `**I95-12345`, `**IN-460`, `**WAN-1234`). Also extract any CVE identifiers from the grouped CVE entry.
 4. Compare the issue keys found in the existing section against the issue keys returned by the JQL query in Step 1:
    - **New issues** — present in JQL results but NOT in the existing section → these proceed through Steps 2–4.
@@ -128,7 +171,7 @@ Do not copy any single source verbatim. Synthesize all inputs into one clear, co
 
 ### Step 5 — Generate or Update Release Notes Document
 
-Use the format from [docs/release_notes_128t_7.1.md](../../docs/release_notes_128t_7.1.md) as the template.
+Use the format from `docs/release_notes_128t_7.2.md` as the template.
 
 #### Using helper scripts for assembly
 
@@ -151,11 +194,42 @@ node scripts/release-notes/assemble-section.js \
 
 Review the output in `/tmp/rn-section.md` before inserting.
 
+The assembly helper generates issue sections only. After assembly, add the verified release metadata from `/tmp/rn-release-metadata.json` immediately after the release heading and before the issue subsections. The final prefix must use this structure:
+
+```markdown
+## Release <version> (Build# <build-number>)
+
+**Release Date:** <date>
+
+### <Release Classification>:
+
+Customer: <customer>
+
+### Image Details
+
+| Architecture | Type | Link | SHA256 |
+|--------------|------|------|--------|
+| <architecture> | <type> | [<artifact-filename>](<stable-artifact-url>) | <verified-sha256> |
+```
+
+Formatting requirements for release metadata:
+
+- Omit `(Build# <build-number>)` only when the user confirms that no build number applies.
+- Omit `Customer: <customer>` for non-customer-specific releases.
+- Omit the release-classification heading only when the user confirms that no classification applies.
+- Omit `### Image Details` only when the user confirms that no downloadable images apply.
+- Sort image rows by architecture, then type.
+- Derive link text from the artifact filename; do not display a bare URL.
+- Keep the verified SHA256 lowercase and unbroken.
+- Place `### New Features`, `### Resolved Issues`, and `### Caveats` after `### Image Details`.
+
 #### Update mode — merge new entries into the existing section
 
 When mode is `update`, do NOT regenerate the document from scratch. Instead:
 
 1. Read the existing file and preserve all content outside the target `## Release <version>` section unchanged.
+   - Preserve existing build, classification, customer, and image metadata unless the user supplies authoritative replacement values.
+   - When metadata changes, update only the affected metadata fields or image rows; do not regenerate unrelated issue text.
 2. Within the target section, retain all **existing entries** verbatim (do not rewrite or re-order them).
 3. Insert each **new entry** (produced in Step 4) into the correct subsection (`### New Features`, `### Resolved Issues`, or `### Caveats`) based on the categorization rules below.
 4. After inserting new entries, re-sort all entries within each subsection by issue key (alphabetically by project prefix, then numerically by issue number).
@@ -182,9 +256,19 @@ title: "SSR <major.minor> Release Notes"
 sidebar_label: "<major.minor>"
 ---
 
-## Release <version>
+## Release <version> (Build# <build-number>)
 
 **Release Date:** <date>
+
+### <Release Classification>:
+
+Customer: <customer>
+
+### Image Details
+
+| Architecture | Type | Link | SHA256 |
+|--------------|------|------|--------|
+| <architecture> | <type> | [<artifact-filename>](<artifact-url>) | <verified-sha256> |
 
 ### New Features
 
@@ -235,6 +319,7 @@ node scripts/release-notes/insert-section.js --file <output-file> --section /tmp
 **Generate mode:** Present the complete draft for review. After approval, save to the specified output file.
 
 **Update mode:** Present a summary that includes:
+- Build metadata changes, including verification status for every image.
 - Number of new entries added (list their issue keys).
 - Number of existing entries retained unchanged.
 - Number of stale entries flagged for review (list their issue keys).
@@ -252,7 +337,9 @@ JQL: type in (Bug) AND status in (Resolved, Closed) AND resolution in (Done) AND
 ## Important
 
 - Do NOT fabricate issue details. Every entry must be grounded in the JIRA issue and/or the linked PR description.
-- Customer names MUST be excluded from Issue titles and description.
+- Customer names MUST be excluded from issue titles and descriptions. For a customer-specific release, the explicitly supplied customer name MAY appear only in the release metadata line `Customer: <customer>`.
+- Do NOT fabricate build numbers, release classifications, artifact URLs, filenames, or checksums.
+- Do NOT report a checksum as verified unless it was matched to an authoritative manifest/checksum file or calculated from the downloaded artifact.
 - Do NOT run the Docusaurus build after generating release notes.
 - Write in second person, active voice, present tense.
 - Use Title Case for headings.
