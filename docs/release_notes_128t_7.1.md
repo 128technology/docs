@@ -40,6 +40,14 @@ Due to changes in the base SSR/Linux OS in 7.X, interface naming behavior has ch
 
 This issue is currently being addressed by engineering. However, if your deployment requires an upgrade to 7.X on a VM configured with interfaces using the `ethX` naming convention, please ensure that console access is available, as manual updates to the Linux interface configuration may be required.
 
+To avoid manual Linux interface configuration, define these management interfaces in the SSR configuration as non-forwarding interfaces. Configure a `device-interface` with `forwarding` set to `false`, identify the NIC by its `pci-address`, and add a single `network-interface` of type `external` with the management address settings. The SSR then generates and maintains the Linux interface configuration (`ifcfg`) using the interface name that the operating system assigns, so the configuration remains valid regardless of the naming convention. This applies to conductors as well as routers. Note the following:
+
+- Configure exactly one `network-interface` on each non-forwarding `device-interface`. The SSR does not configure the Linux interface if none is present.
+- If you configure multiple management interfaces, set `default-route` to `true` and configure a `gateway` only on the interface that provides the default route.
+- Committing this configuration can briefly interrupt connectivity on the management interface while the SSR takes control of it. Use console access when changing the interface you are connected through.
+
+For configuration examples and details, see [Non-Forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md), which includes an example of an `external` non-forwarding management interface.
+
 **System Disk Considerations**
 
 As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
