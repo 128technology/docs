@@ -280,6 +280,11 @@ config
     authority
         enhanced-security-key-management  true
 ```
+
+:::important
+Changing the `enhanced-security-key-management` mode from enabled to disabled or disabled to enabled (toggling the `true/false` setting) has a system wide impact on the security model. Any change should be accompanied by a manual session clearing operation, such as [`delete sessions force`](cli_reference.md#delete-sessions). Sessions initiated after the mode change are installed using the new security model, while preexisting sessions are not expected to continue to pass traffic.
+:::
+
 2. Configure a unique `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is a **unique alias per router** that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the `peering-common-name` from the certificate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
 
 :::note
