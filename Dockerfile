@@ -1,4 +1,4 @@
-FROM node:lts as base
+FROM node:22 as base
 ENV FORCE_COLOR=0
 RUN corepack enable
 WORKDIR /app/
