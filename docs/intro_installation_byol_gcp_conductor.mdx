@@ -2,6 +2,7 @@
 title: Installing a BYOL Conductor-managed Router in GCP
 sidebar_label: Installing a BYOL Conductor-managed Router in GCP
 ---
+import InstanceSizing from './_byol_gcp_instance_types.md'
 
 This guide describes the process for deploying a BYOL Session Smart Conductor and a BYOL Session Smart Router (SSR) in Google Cloud Platform (GCP).
 
@@ -17,7 +18,7 @@ BYOL instances only support image-based installations, and require the conductor
 
 ## Selecting the GCP Plan
 
-The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of SSR software on a GCP virtual machine. Artifactory credentials are required to authenticate access to the BYOL installation repositories.
+The **Bring Your Own License (BYOL)** plan allows you to install your own licensed copy of SSR software on a GCP virtual machine. SSR software access credentials are required to authenticate access to the BYOL installation repositories.
 
 For the latest information about SSR BYOL offerings, refer to the [Cloud Images BYOL Release Notes](release_notes_byol.md).
 
@@ -25,16 +26,7 @@ After selecting the BYOL plan, continue to [Session Smart Conductor Deployment](
 
 ## Selecting the Instance Size
 
-The following instance types are supported for virtual SSR in GCP. Choose the size that best meets your requirements. More information on GCP instance types can be found in the [GCP machine type documentation](https://docs.cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
-
-| Recommended VM Size | Max vNICs Supported | vCPU Cores | Memory |
-| --- | --- | --- | --- |
-| c2-standard-4  | 4  | 4  | 16 GB  |
-| c2-standard-8  | 8  | 8  | 32 GB  |
-| c2-standard-16 | 10 | 16 | 64 GB  |
-| c2-standard-30 | 10 | 30 | 120 GB |
-
-Session Smart Router Size recommendatations can be found in [System Requirements](intro_system_reqs.md).
+<InstanceSizing/>
 
 ## Session Smart Conductor Deployment
 
@@ -72,8 +64,8 @@ To deploy the Session Smart Networking software through Google Cloud Marketplace
 4. In SSR mode, select **Conductor**.
 5. Provide the BYOL software inputs:
 	 * SSR software version
-	 * Artifactory username
-	 * Artifactory token/password
+	 * SSR software access username
+	 * SSR software access token/password
 6. Provide administrative access settings:
 	 * Allowed CIDR(s) for SSH/HTTPS access
 	 * SSH public key
@@ -108,8 +100,8 @@ In the downloaded package, create a Terraform variables file named `ssr-variable
 ssr_mode = "conductor"
 ssr_version = "7.0.1"
 
-artifactory_username = "username"
-artifactory_token = "password"
+ssr_software_access_username = "username"
+ssr_software_access_token = "password"
 ssh_public_key = "ssh key"
 admin_allowed_cidr = "cidr"
 
@@ -140,8 +132,8 @@ write_files:
 				"name": "<conductor-name>",
 				"ssr-version": "<version>",
 				"mode": "conductor",
-				"artifactory-user": "<username>",
-				"artifactory-password": "<password>",
+				"software-access-username": "<username>",
+				"software-access-token": "<password>",
 				"node-name": "node0",
 				"cloud-provider": "gcp"
 			}
@@ -151,8 +143,8 @@ write_files:
 | --- | --- |
 | name | The name of the conductor/router. |
 | ssr-version | The SSR software version to be installed on the instance (BYOL only). |
-| artifactory-user | Username portion of the artifactory credentials. |
-| artifactory-password | Password/token portion of the artifactory credentials. |
+| software-access-username | Username portion of the SSR software access credentials. |
+| software-access-token | Password/token portion of the SSR software access credentials. |
 | node-name | The node name being provisioned. For a standalone conductor, use `node0`. |
 | download-timeout | The timeout duration for installing BYOL (default: 6h) |
 | download-retries | The number of times to retry SSR installation (default: unlimited) |
@@ -181,8 +173,8 @@ The following are the common deployment parameters for a BYOL Conductor in GCP.
 | Boot Disk Size | boot_disk_size | Boot disk size in GB. Minimum 60 GB is recommended. |
 | SSR Mode | ssr_mode | Set to `conductor` for a Conductor deployment. |
 | SSR Version | ssr_version | SSR software version installed. |
-| Artifactory Username | artifactory_username | Username for BYOL repository access. |
-| Artifactory Token | artifactory_token | Token/password for BYOL repository access. |
+| SSR Software Access Username | ssr_software_access_username | Username for BYOL repository access. |
+| SSR Software Access Token | ssr_software_access_token | Token/password for BYOL repository access. |
 | Admin Allowed CIDR | admin_allowed_cidr | Source CIDR allowed for SSH and HTTPS administration. |
 | SSH Public Key | ssh_public_key | Public SSH key added for administrator access. |
 | Control Allowed CIDR | control_nic_allowed_cidr | Source CIDR allowed to reach the Conductor control interface. |
@@ -228,8 +220,8 @@ At deployment time:
 4. In SSR mode, select **Conductor-managed**.
 5. Provide the BYOL software inputs:
 	 * SSR software version
-	 * Artifactory username
-	 * Artifactory token/password
+	 * SSR software access username
+	 * SSR software access token/password
 6. Specify whether the router is High Availability (HA).
 7. Provide administrative access settings:
 	 * Allowed CIDR(s) for SSH/HTTPS access
@@ -271,8 +263,8 @@ In the downloaded package, create a Terraform variables file named `ssr-variable
 ssr_mode = "conductor-managed"
 ssr_version = "7.0.1"
 
-artifactory_username = "username"
-artifactory_token = "password"
+ssr_software_access_username = "username"
+ssr_software_access_token = "password"
 conductor_hosts = ["<conductor-ip-or-fqdn>"]
 ssh_public_key = "ssh key"
 admin_allowed_cidr = "cidr"
@@ -315,8 +307,8 @@ write_files:
 				"name": "<router-name>",
 				"ssr-version": "<version>",
 				"mode": "conductor-managed",
-				"artifactory-user": "<username>",
-				"artifactory-password": "<password>",
+				"software-access-username": "<username>",
+				"software-access-token": "<password>",
 				"conductor-hosts": ["<conductor-ip>"],
 				"cloud-provider": "gcp"
 			}
@@ -327,8 +319,8 @@ write_files:
 | name | The name of the router instance. |
 | ssr-version | The SSR software version to be installed on the instance (BYOL only). |
 | mode | Set to `conductor-managed` for a Conductor-managed router. |
-| artifactory-user | Username portion of the artifactory credentials. |
-| artifactory-password | Password/token portion of the artifactory credentials. |
+| software-access-username | Username portion of the SSR software access credentials. |
+| software-access-token | Password/token portion of the SSR software access credentials. |
 | conductor-hosts | One or more IP addresses (or FQDNs) of reachable Conductor control interfaces. |
 | download-timeout | The timeout duration for installing BYOL (default: 6h) |
 | download-retries | The number of times to retry SSR installation (default: unlimited) |
@@ -356,8 +348,8 @@ The following are the common deployment parameters for a BYOL Conductor-managed 
 | SSR Mode | ssr_mode | Set to conductor-managed for this workflow. |
 | SSR Version | ssr_version | SSR software version installed. |
 | HA Router | ha_router | Enables HA-specific interfaces and HA onboarding behavior. |
-| Artifactory Username | artifactory_username | Username for SSR repository access. |
-| Artifactory Token | artifactory_token | Token/password for SSR repository access. |
+| SSR Software Access Username | ssr_software_access_username | Username for SSR repository access. |
+| SSR Software Access Token | ssr_software_access_token | Token/password for SSR repository access. |
 | Admin Allowed CIDR | admin_allowed_cidr | Source CIDR allowed for SSH and HTTPS administration. |
 | SSH Public Key | ssh_public_key | Public SSH key added for administrator access. |
 | Conductor Hosts | conductor_hosts | One or more reachable Conductor control IP addresses for onboarding. |
