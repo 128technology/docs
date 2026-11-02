@@ -80,7 +80,7 @@ It may be necessary to change the target system’s BIOS settings to allow booti
 ![BIOS Screen](/img/intro_installation_bootable_media_bios.png)
 
 ### Enable Automatic Restart
-In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for commonly deployed SSR hardware platforms. Below are representative steps for common BIOS parameters:
+In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [HPE Networking Community SD-WAN and Session Smart Router](https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c) for commonly deployed SSR hardware platforms. Below are representative steps for common BIOS parameters:
 
 #### To enable Automatic Restart:
 1. From the BIOS settings screen, select ACPI \> Power Settings.
@@ -100,7 +100,7 @@ When deploying SSR on VMware ESXi release 6.7 (or newer), Secure Boot must be di
 3. Save the configuration.
 4. Reboot your system.
 
-BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of SSR hardware platforms may be found on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208).
+BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of SSR hardware platforms may be found on [HPE Networking Community SD-WAN and Session Smart Router](https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c).
 
 ## Interface Requirements
 Logically, SSR routers have at least two interfaces; in many deployments they represent LAN and WAN interfaces. These may be separate physical interfaces, or they may be separate VLANs on a single physical interface. There is also typically a third interface used for management traffic.
@@ -161,7 +161,7 @@ If a PCI address for an interfaces change, the system will be disqualified. Exam
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
 :::
 :::note
-PCI-to-port maps are available for commonly deployed hardware systems on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208)
+PCI-to-port maps are available for commonly deployed hardware systems on our user community, [HPE Networking Community SD-WAN and Session Smart Router](https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c).
 :::
 
 ## Next Steps
