@@ -86,7 +86,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 ### Resolved Issues
 
-- **I95-670336 Increase maximum limit of an XML document to support very large configs:** Removed the 64MB size limit on XML configuration documents, which was causing perpetual crashes on customers with large configuration files. 
+- **I95-670336 Increase maximum limit of an XML document to support very large configs:** Removed the 64MB size limit on XML configuration documents, which causes perpetual crashes on systems with large configuration files. 
 
 ## Release 7.0.6-9-lts
 
