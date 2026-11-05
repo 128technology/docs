@@ -8,7 +8,7 @@ The steps in this section describe the process of onboarding SSR100 or SSR1000 s
 For details about WAN Assurance offerings; 
 
 - See [Cloud Telemetry](config_wan_assurance.md) for information about conductor-managed deployments with access to Mist Telemetry data.
-- See [Mist WAN Assurance](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/) for information about Mist-managed deployments.
+- See [Mist WAN Assurance](https://networkingdocs.hpe.com/documentation/product/us/en/mist-wan-assurance/) for information about Mist-managed deployments.
 
 :::note
 The Mist-redirect ZTP process for Conductor-managed deployments is only supported on Juniper SSR100 or SSR1000 series devices.
@@ -47,7 +47,7 @@ Configuring WAN Assurance requires Administrator level privileges on all platfor
 
     ![Organization Panel](/img/wan_create_org.png)
 
-    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.juniper.net/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-1-begin.html#task_e15_krd_qjb).
+    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://networkingdocs.hpe.com/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-1-begin.html#task_e15_krd_qjb).
 
 #### 3. Create one Site for each physical location for onboarding the SSRs.
 
@@ -69,7 +69,7 @@ Create a unique site for each physical (or logical) location in the network. **F
 
     ![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
-    For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.juniper.net/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-2-up-and-running.html#task_l3w_tz2_lxb).
+    For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://networkingdocs.hpe.com/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-2-up-and-running.html#task_l3w_tz2_lxb).
 
 :::note
 For new deployments enter the Conductor IP address as shown above.

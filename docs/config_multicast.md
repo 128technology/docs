@@ -7,7 +7,7 @@ Multicast is a “one source, many destinations” method of traffic distributio
 
 Network applications that can function with unicast but are better suited for multicast include collaborative groupware, teleconferencing, periodic or “push” data delivery (stock quotes, sports scores, magazines, newspapers, and advertisements), server or website replication, and distributed interactive simulation (DIS) such as war simulations or virtual reality. Any IP network concerned with reducing network resource overhead for one-to-many or many-to-many data or multimedia applications with multiple receivers benefits from multicast.
 
-Please refer to the [Juniper Multicast Overview](https://www.juniper.net/documentation/us/en/software/junos/multicast/topics/concept/multicast-ip-overview.html) for more in-depth information about Multicast. 
+Please refer to the [Juniper Multicast Overview](https://networkingdocs.hpe.com/documentation/us/en/software/junos/multicast/topics/concept/multicast-ip-overview.html) for more in-depth information about Multicast. 
 
 #### Version History
 

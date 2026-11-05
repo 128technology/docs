@@ -55,7 +55,7 @@ const config = {
           position: 'right',
         },
         {
-          href: 'https://www.juniper.net/',
+          href: 'https://www.hpe.com/us/en/home.html',
           label: 'Company',
           position: 'right',
         },

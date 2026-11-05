@@ -8,7 +8,7 @@ This section provides information about the secure upgrade process and the unins
 
 To determine the current version of software running on your Conductor or Router, run the following command from the Conductor CLI:
 
-[`show system version`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#show-system-version)
+[`show system version`](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/cli_reference#show-system-version)
 
 Use this information if you are upgrading to a newer software version **after having installed** SSR Version 6.2.5-5r2. This is the initial Common Criteria compliant SSR software release. 
 
@@ -20,13 +20,13 @@ The SSR Software packages are available from the Juniper Networks public servers
 Access to the URL above requires authentication. Log in to https://software.128technology.com using the username and token supplied with your SSR license.
 :::
 
-Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. 
+Please refer to [Upgrade Considerations](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. 
 
 :::important
 **The SSH Root login is not permitted and is not compliant with Common Criteria guidelines.**
 ::: 
 
-To perform an upgrade on either a conductor or router, refer to the detailed instructions at [Upgrading the SSR Networking Platform.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrading) 
+To perform an upgrade on either a conductor or router, refer to the detailed instructions at [Upgrading the SSR Networking Platform.](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/intro_upgrading) 
 
 Two upgrade methods are available depending on your network internet access: The `install128t` process which downloads and installs using an internet connection, or the `import iso` method where the ISO is downloaded onto a USB device, then loaded onto the Conductor, and installed from there. 
 
