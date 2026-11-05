@@ -3,19 +3,15 @@ title: Cloud Upgrades
 sidebar_label: Cloud Upgrades
 ---
 
+Some legacy Azure, AWS, or GCP installations, including installations originating from the historical 5.4.4 private offer, have a disk layout that cannot be automatically converted to the layout required for image-based software delivery. Specifically, these installations did not use LVM for partitioning. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. Installing a newer package on an old VM does not change its disk layout.
 
-In certain scenarios, existing cloud routers have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. These instances must be rebuilt using the SSR BYOL image in AWS or Azure.
+It is recommended that these instances use the Migration / Upgrade process and rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.md) or [Azure](intro_installation_byol_azure_conductor.md).
 
+This guide provides that upgrade path for users moving from an SSR package-based cloud deployment to an image-based cloud deployment. For customers running the legacy package-based Conductor deployment, this procedure replaces that deployment with an image-based installation/upgrade. 
 
-This guide provides an upgrade path for users moving from an SSR package-based cloud deployment to an image-based cloud deployment. 
-
-Some legacy Azure installations, including installations originating from the historical 5.4.4 private offer, have a disk layout that cannot be automatically converted to the layout required for image-based software delivery. The SSR release notes specifically identify cloud images without LVM as a conversion failure case and recommend rebuilding from the official BYOL image. Installing a newer package on an old VM does not necessarily change its disk layout.
-
-For customers running the legacy package-based Conductor deployment, this procedure replaces that deployment with an image-based installation/upgrade. 
-
-Do not attempt manual repartitioning of the old VMs. 
-
+:::important
 Mist-managed routers are not affected and do not require this procedure.
+:::
 
 The replacement VMs use the official Azure BYOL offering. The source release is SSR 6.2.10 and the destination release is SSR 7.0.5. Use the sequence below rather than the generic upgrade-path selection process.  
 
