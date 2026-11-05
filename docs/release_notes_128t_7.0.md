@@ -80,6 +80,16 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
+## Release 7.0.7-2-lts
+
+**Release Date:** November 5, 2026
+
+### Resolved Issues
+
+- **I95-65656 Conductor upgrade fails on health check:** Resolved an issue where a conductor with a large configuration caused the web service to exhaust all its startup retries before the configuration fully loaded. This resulted in the local API becoming unavailable and caused the post-upgrade health check to fail.
+------
+- **I95-670336 Increase maximum limit of an XML document to support very large configs:** Removed the 64MB size limit on XML configuration documents, which causes perpetual crashes on systems with large configuration files. 
+
 ## Release 7.0.6-9-lts
 
 **Release Date:** October 20, 2026
