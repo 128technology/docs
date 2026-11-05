@@ -54,7 +54,7 @@ const config = {
           position: 'right',
         },
         {
-          href: 'https://www.hpe.com/',
+          href: 'https://www.hpe.com/us/en/home.html',
           label: 'Company',
           position: 'right',
         },
