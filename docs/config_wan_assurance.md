@@ -38,7 +38,7 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Organization Panel](/img/wan_create_org.png)
 
-    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.juniper.net/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-1-begin.html#task_e15_krd_qjb).
+    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://networkingdocs.hpe.com/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-1-begin.html#task_e15_krd_qjb).
 
 #### 3. Create one Site for each physical location for onboarding the SSRs.
 
@@ -60,7 +60,7 @@ Create a unique site for each physical (or logical) location in the network. For
 
     ![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
-    For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.juniper.net/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-2-up-and-running.html#task_l3w_tz2_lxb).
+    For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://networkingdocs.hpe.com/documentation/us/en/quick-start/software/mist/mist-qsg/topics/topic-map/step-2-up-and-running.html#task_l3w_tz2_lxb).
 
 :::note
 For existing deployments of Conductor-managed Session Smart Networking, the Conductor IP address is pre-populated.

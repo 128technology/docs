@@ -158,7 +158,7 @@ Resolution: The high value was due to an internal corruption when the metrics fo
 ------
 - **I95-52104 URI escape characters handled incorrectly:** The `lookup application by-domain` and `clear app-id cache-entry url` were handling url parameters incorrectly, in lookup, creating and clearing cache entries. This has been resolved and each command now performs the correct operation. 
 ------
-- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_domain-based_web_filter/#service-matching-order)
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_domain-based_web_filter/#service-matching-order)
 ------
 - **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
