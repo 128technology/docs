@@ -209,7 +209,7 @@ To terminate an active session:
 
 - If using an account other than admin, type `exit` to end the login session. 
 
-Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
+Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
 
 ## Additional Software Self-Tests
 

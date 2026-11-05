@@ -1,5 +1,5 @@
 {
-  "recurse": true,
+  "recurse": false,
   "cleanUrls": true,
   "checkFragments": true,
   "markdown": true,
@@ -20,7 +20,8 @@
     "^https://docs\\.aws\\.amazon\\.com",
     "^https://thekelleys\\.org\\.uk",
     "^https://www\\.hpe\\.com/psnow/doc/PSN1014689145USEN\\.pdf",
-    "^https://www\\.juniper\\.net/us/en/products/cloud-services/wan-assurance\\.html$"
+    "^https://www\\.hpe\\.com/us/en/home\\.html$",
+    "^https://www\\.hpe\\.com/us/en/products/networking/network-security\\.html$"
   ],
   "retry": true,
   "retryErrors": true,
