@@ -2,12 +2,66 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docs.128technology.com/kb</id>
     <title>SSR Knowledge Base Articles</title>
-    <updated>2026-10-19T00:00:00.000Z</updated>
+    <updated>2026-10-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docs.128technology.com/kb"/>
     <subtitle>Session Smart Router Knowledge Base Articles</subtitle>
     <icon>https://docs.128technology.com/img/favicon.ico</icon>
     <rights>Copyright © 2026 Juniper Networks, Inc.</rights>
+    <entry>
+        <title type="html"><![CDATA[BGP Next-Hop Resolution Through Another BGP Route Can Mark Routes Inaccessible]]></title>
+        <id>https://docs.128technology.com/kb/2026/10/28/I95-66848</id>
+        <link href="https://docs.128technology.com/kb/2026/10/28/I95-66848"/>
+        <updated>2026-10-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Session Smart Router (SSR) may mark a Border Gateway Protocol (BGP) path inaccessible when its next hop resolves through another BGP-learned route, and select a different path.]]></summary>
+        <content type="html"><![CDATA[<p>Session Smart Router (SSR) may mark a Border Gateway Protocol (BGP) path inaccessible when its next hop resolves through another BGP-learned route, and select a different path.</p>
+<p><strong>Advisory Type:</strong> Field Notice</p>
+<p><strong>Issue ID:</strong> I95-66848</p>
+<p><strong>Last Updated:</strong> 2026-10-28</p>
+<p><strong>Introduced in SSR Version:</strong> 6.2.11, 7.0.5, 7.1.6, 7.2.0, 7.2.2, 7.2.3</p>
+<p><strong>Resolution Planned for SSR Version:</strong> Tracked by I95-66848</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="https://docs.128technology.com/kb/2026/10/28/I95-66848#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h2>
+<p>SSR's BGP next-hop tracking now rejects paths whose next hop resolves through another BGP-learned route. This prevents recursive routing feedback loops, but can also invalidate legitimate paths in designs that rely on BGP-learned next-hop reachability.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="symptom">Symptom<a href="https://docs.128technology.com/kb/2026/10/28/I95-66848#symptom" class="hash-link" aria-label="Direct link to Symptom" title="Direct link to Symptom" translate="no">​</a></h2>
+<p>An affected path may appear in BGP output as <code>inaccessible</code>.</p>
+<p>When another valid path exists, SSR may select that alternate path, potentially changing traffic direction, path preference, or failover behavior. If no eligible alternate exists, the destination may have no usable route. The impact depends on the network topology and available paths; not every BGP route or deployment is affected.</p>
+<p>Representative output:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">show bgp &lt;prefix&gt;</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">&lt;prefix&gt; &lt;next-hop&gt; (inaccessible, import-check enabled) from &lt;BGP-peer&gt;</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">  Origin &lt;origin&gt;, localpref &lt;value&gt;, invalid, internal</span><br></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cause">Cause<a href="https://docs.128technology.com/kb/2026/10/28/I95-66848#cause" class="hash-link" aria-label="Direct link to Cause" title="Direct link to Cause" translate="no">​</a></h2>
+<p>The next-hop tracking check was introduced to prevent recursive route-resolution feedback between BGP and zebra, SSR's routing-table manager. In a feedback loop, a BGP route becomes unreachable, an alternate route changes the routing table, and the original next hop then appears reachable through a BGP route whose installation depends on that same routing state. BGP and zebra can repeatedly update one another, delaying convergence and route withdrawal during failures.</p>
+<p>To prevent this condition, SSR rejects BGP routes whose next hops resolve through BGP-learned routes. That guard also rejects some valid designs where a distinct BGP-learned route provides reachability to a route's next hop.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2026/10/28/I95-66848#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h2>
+<p>On the SSR where the affected destination route is received, run <code>show bgp &lt;destination-prefix&gt;</code> to inspect its paths. Identify the affected path's NEXT_HOP, then check how SSR reaches the next-hop address.</p>
+<p>This can happen when a route's NEXT_HOP is a third-party BGP peer, and another SSR advertises the BGP route used to reach that peer.</p>
+<p>If traffic can safely use the advertising SSR as an alternate transit path: Configure <code>next-hop-self</code> on that SSR's BGP session toward the SSR receiving the affected destination route. This replaces the original next hop with the advertising SSR's peer address, causing affected traffic to transit that SSR. Use this workaround only if the receiving SSR can reach the advertising SSR's peer address directly and the advertising SSR has a route to the destination. Do not use it if traffic must bypass the advertising SSR.</p>
+<p>Generic SSR configuration pattern:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">config authority router &lt;ADVERTISING_ROUTER&gt; routing default-instance routing-protocol bgp neighbor &lt;RECEIVING_ROUTER_PEER_ADDRESS&gt; address-family ipv4-unicast next-hop-self true</span><br></div></code></pre></div></div>
+<p>Apply the setting on the advertising router, not on the receiving router's outbound session. Verify actual peer addresses, address family, and outbound policy before changing configuration.</p>
+<p>If traffic must continue to use the original next hop: Provide a valid route to that next-hop address through a non-BGP source, such as a connected or static route, where supported and appropriate for your design. Ensure this route is independently reachable, does not depend on the affected BGP path, and has correct failover behavior. Avoid creating a static or IGP recursion loop or unintentionally overriding a preferred route.</p>
+<p>After applying the workaround, verify that:</p>
+<ol>
+<li class="">The receiving router sees a valid next hop resolved through the intended route source.</li>
+<li class="">The path is valid and selected as expected.</li>
+<li class="">The destination route is installed in the routing information base (RIB) and forwarding information base (FIB) through the intended peer.</li>
+<li class="">Bidirectional application traffic follows the intended path, including existing sessions and relevant failover scenarios.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolution">Resolution<a href="https://docs.128technology.com/kb/2026/10/28/I95-66848#resolution" class="hash-link" aria-label="Direct link to Resolution" title="Direct link to Resolution" translate="no">​</a></h2>
+<p>This behavior change is being addressed under issue I95-66848. Contact Juniper Support for release availability.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="related-topics">Related Topics<a href="https://docs.128technology.com/kb/2026/10/28/I95-66848#related-topics" class="hash-link" aria-label="Direct link to Related Topics" title="Direct link to Related Topics" translate="no">​</a></h2>
+<ul>
+<li class=""><a class="" href="https://docs.128technology.com/docs/config_bgp">BGP Configuration</a></li>
+<li class=""><a class="" href="https://docs.128technology.com/docs/config_reference_guide">Configuration Reference Guide</a></li>
+</ul>]]></content>
+        <category label="BGP" term="BGP"/>
+        <category label="Routing" term="Routing"/>
+        <category label="field-notice" term="field-notice"/>
+        <category label="6.2.11" term="6.2.11"/>
+        <category label="7.0.5" term="7.0.5"/>
+        <category label="7.1.6" term="7.1.6"/>
+        <category label="7.2.0" term="7.2.0"/>
+        <category label="7.2.2" term="7.2.2"/>
+        <category label="7.2.3" term="7.2.3"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Virtual SSR Incompatible With Azure MANA Hardware]]></title>
         <id>https://docs.128technology.com/kb/2026/10/19/azure-mana-field-alert</id>
@@ -469,61 +523,5 @@
 <p>If you have confirmed the <code>application-director</code> has significant memory increases over time, the service can be restarted on the offending device using <code>systemctl restart application-director</code> as a privileged User.</p>]]></content>
         <category label="6.2.3" term="6.2.3"/>
         <category label="6.2.4" term="6.2.4"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Packet forwarding stops in AWS after several hours]]></title>
-        <id>https://docs.128technology.com/kb/2024/04/25/I95-56233</id>
-        <link href="https://docs.128technology.com/kb/2024/04/25/I95-56233"/>
-        <updated>2024-04-26T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Packet forwarding on the SSR stops after several hours of runtime in AWS when using Elastic Network Adapter (ENA) driver.]]></summary>
-        <content type="html"><![CDATA[<p>Packet forwarding on the SSR stops after several hours of runtime in AWS when using Elastic Network Adapter (ENA) driver.</p>
-<p><strong>Issue ID:</strong> I95-56233<br>
-<strong>Last Updated:</strong> 2024-04-26<br>
-<strong>Introduced in SSR Version:</strong> 6.1.7</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h3>
-<p>The ENA command-queue becomes unresponsive (device not responding) and the interface no longer passes traffic.</p>
-<p>Indications of the symptoms can be observed by viewing the output of <code>show device-interface extended-statistics</code>.
-There will be an excessive amount of rx errors indicated by the system.</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Extended Statistics:</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   bw_in_allowance_exceeded:                0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   bw_out_allowance_exceeded:               0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   conntrack_allowance_exceeded:            0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   dev_start:                               0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   dev_stop:                                0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   device_port:                             4</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   dpdk_port:                               0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   linklocal_allowance_exceeded:            0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   pps_allowance_exceeded:                  0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_errors:                 139836994071144</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_good_bytes:                           0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_good_packets:                         0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_mbuf_allocation_errors: 139838439323150</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_missed_errors:          139837561586960</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_bytes:                       1876012</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_cnt:                               0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_errors:                      2734322</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_l3_csum_bad:                       0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_l4_csum_bad:                       0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_l4_csum_good:                      0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_packets:                   875075952</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q0_refill_partial:                    0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q1_bytes:                       1862808</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q1_cnt:                               0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">   rx_q1_errors:                      2100224</span><br></div></code></pre></div></div>
-<p>Additionally, the following log messages provide evidence of the failure event:
-<code>DPDK.log</code></p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:22.351 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_com_wait_and_process_admin_cq_interrupts]Timeout waiting for comp_ctx-&gt;wait_event</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:22.351 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_com_wait_and_process_admin_cq_interrupts]The ena device didn't send a completion for the admin cmd 11 status 0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:22.351 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_get_dev_stats]Failed to get stats. error: -62</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:22.351 [DPDK| -- ] ERROR (deviceManagerTP) ena_stats_get(): Could not retrieve statistics from ENA</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:25.352 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_com_wait_and_process_admin_cq_interrupts]Timeout waiting for comp_ctx-&gt;wait_event</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:25.352 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_com_wait_and_process_admin_cq_interrupts]The ena device didn't send a completion for the admin cmd 11 status 0</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:25.352 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_get_dev_stats]Failed to get stats. error: -62</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:25.352 [DPDK| -- ] ERROR (deviceManagerTP) ena_stats_get(): Could not retrieve statistics from ENA</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:26.353 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_get_dev_stats]Failed to get stats. error: -19</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:26.353 [DPDK| -- ] ERROR (deviceManagerTP) ena_stats_get(): Could not retrieve statistics from ENA</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 02 23:47:26.354 [DPDK| -- ] ERROR (deviceManagerTP) [ENA_COM: ena_get_dev_stats]Failed to get stats. error: -19</span><br></div></code></pre></div></div>
-<p><code>journal.log</code></p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 03 08:26:02.642583 relayroutereast001 highway[9604]: Failed to queue packet; No ARP for x.x.x.1, interface 1.0, ex: ArpEntryPendException: Pend list max size of 5 exceeded</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 03 08:26:02.642595 relayroutereast001 highway[9604]: Send packet failed for session remote-host:  ip-address: x.x.x.1; local-ip x.x.x.242; local-intf: 1.0; peer-name Router11-W</span><br></div></code></pre></div></div>
-<p><code>highway.log</code></p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 03 09:25:35.173 [LINK|BFDS] ERROR (bfdAgentTP     ) Failed to queue packet; No ARP for x.x.x.195, interface 1.0, ex: ArpEntryPendException: Pend list max size of 5 exceeded</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Apr 03 09:25:35.173 [LINK|BFDS] ERROR (bfdAgentTP     ) Send packet failed for session remote-host:  ip-address: x.x.x.195; local-ip x.x.x.242; local-intf: 1.0; peer-name RelayRouter001</span><br></div></code></pre></div></div>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes" translate="no">​</a></h3>
-<p>The ENA command-queue becomes unresponsive (device not responding) and the interface no longer passes traffic.</p>
-<p>Updated ENA device driver from DPDK/Amazon (upgrading driver from 2.6.0 to 2.9.0).
-<a href="https://github.com/amzn/amzn-drivers/blob/master/kernel/linux/ena/RELEASENOTES.md" target="_blank" rel="noopener noreferrer" class="">ENA release notes</a></p>
-<p>ENA supports health checks which can be used to detect faulty behavior of the hardware and the driver. As such, an ENA driver watchdog has been developed to check for the following reset reasons:</p>
-<ul>
-<li class="">HW unresponsiveness – Driver detected that the periodic keep alive signals stopped arriving from the HW through the Asynchronous Event Notification Queue (AENQ).</li>
-<li class="">Faulty admin queue behavior – The admin queue entered a faulty state.</li>
-<li class="">Faulty behavior on the IO path – The device returned invalid descriptors or caused the driver to enter the invalid state.</li>
-<li class="">Missing Tx completions exceeds a dynamically calculated threshold - Prevent Tx ring stalls in case Tx descriptors were not returned by the HW.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
-<li class="">Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
-<li class="">Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
-<li class="">Minor: Would not significantly impair the functioning or affect service.</li>
-</ul></div></div></details>
-<p>Critical</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="status">Status<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status" translate="no">​</a></h3>
-<p>Open</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In" translate="no">​</a></h3>
-<p><a class="" href="https://docs.128technology.com/docs/release_notes_128t_6.2#release-626-15-sts">6.2.6</a></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="product">Product<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product" translate="no">​</a></h3>
-<p>SSR</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area" translate="no">​</a></h3>
-<p>Datapath</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/04/25/I95-56233#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div>
-<p>Disable enhanced networking in AWS instance.</p>
-<p>A restart of the SSR is necessary to remediate this condition:
-<code>systemctl restart 128T</code></p>]]></content>
-        <category label="6.1" term="6.1"/>
-        <category label="6.1.7" term="6.1.7"/>
     </entry>
 </feed>
