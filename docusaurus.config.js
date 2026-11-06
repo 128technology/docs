@@ -49,12 +49,12 @@ const config = {
           position: 'right',
         },
         {
-          href: 'https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c',
+          href: 'https://community.networking.hpe.com/community-home?communitykey=310d1a41-12fa-4627-9a99-880145a7c87c',
           label: 'Community',
           position: 'right',
         },
         {
-          href: 'https://www.juniper.net/',
+          href: 'https://www.hpe.com/us/en/home.html',
           label: 'Company',
           position: 'right',
         },

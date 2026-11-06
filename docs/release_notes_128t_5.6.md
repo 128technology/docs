@@ -719,7 +719,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 - **I95-49724 Quickstart URL Upload not working:** In Release 5.6.6, the QuickStart file upload using the `https://<ssr-ip>/quick-start` URL is not working. This is currently being worked on and will be fixed in 5.6.7. No other patches/releases are affected. 
 
-**Workaround:** Upload the Quickstart file using a USB as outlined in [Configure the SSR and Network Interfaces](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_otp_iso_install#2-configure-the-ssr-and-network-interfaces) section of the [Router Installation Using OTP](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_otp_iso_install) guide. 
+**Workaround:** Upload the Quickstart file using a USB as outlined in [Configure the SSR and Network Interfaces](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/intro_otp_iso_install#2-configure-the-ssr-and-network-interfaces) section of the [Router Installation Using OTP](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/intro_otp_iso_install) guide. 
 
 ## Release 5.6.5-5
 

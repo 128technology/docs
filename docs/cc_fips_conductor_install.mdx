@@ -7,7 +7,7 @@ import ConnectConsole from './_install_connect_console.md';
 import BootUSBSSR100 from './_install_boot_usb_ssr100.md';
 import BootUSBSSR1000 from './_install_boot_usb_ssr1000.md';
 
-After downloading the ISO, use the procedure in [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb) to create a bootable USB. 
+After downloading the ISO, use the procedure in [Creating a Bootable USB](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb) to create a bootable USB. 
 
 The steps in this section describe the interactive conductor installation from the packaged-based ISO, using the serial console. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing using the interactive installation.
 
@@ -42,7 +42,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
   Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
-  For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing).
+  For serial console issues please refer to [Serial Console Troubleshooting](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing).
 
 2. Press the TAB key to edit the configuration.
 
@@ -117,7 +117,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 There are two different types of conductor installations supported: 
 - Standalone Conductor 
-- [Conductor High Availability](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ha_conductor_install)
+- [Conductor High Availability](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/ha_conductor_install)
 
 :::note
 All High Availability configurations must be run and managed over private connections.
@@ -297,7 +297,7 @@ After the system has been set up for the first time, the next step is to provisi
 
 From the root user in the workflow above, run the `pcli` command to access the CLI and configure the token.
 
-Use the CLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
+Use the CLI command `set software access-token`. For information on this command, see [`set software access-token`](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
 
 ```
 [root@test-conductor ~]# pcli
@@ -332,7 +332,7 @@ To terminate an active session:
 
 - If using an account other than admin, type `exit` to end the login session. 
 
-Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
+Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
 
 ## Next Steps - Router Configuration
 
@@ -340,7 +340,7 @@ Congratulations, you have successfully installed and configured a conductor! The
 
 Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
 
-A sample branch router configuration is available as a [**template**](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top-level resources. For more information, see [Configuration Templates](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates). 
+A sample branch router configuration is available as a [**template**](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_templates#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top-level resources. For more information, see [Configuration Templates](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_templates). 
 
 To see an example router configuration, refer to the [Appendix](cc_fips_appendix.md).
 

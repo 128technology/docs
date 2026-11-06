@@ -11,7 +11,7 @@ For Common Criteria compliance, a dedicated, out-of-band network must be used to
 
 ### SSR Configuration
 
-The SSR router will need to be provisioned on the conductor. This procedure assumes you are familiar with the [concepts](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_glossary) and [configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_basics) of the SSR platform.
+The SSR router will need to be provisioned on the conductor. This procedure assumes you are familiar with the [concepts](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/concepts_glossary) and [configuration](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_basics) of the SSR platform.
 
 When a router configuration has been added to the conductor, but the device has not yet connected, in place of device-specific information, QuickStart instructions will be displayed.
 
