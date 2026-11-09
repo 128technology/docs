@@ -2,36 +2,10 @@
 title: "Step 3: Configure the Conductor"
 sidebar_label: "Configure the Conductor"
 ---
-import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
-This step accesses the conductor web GUI and configures the authority name, conductor address, and asset ID. All steps are performed from a browser unless otherwise noted.
+This step accesses the conductor web GUI and configures the authority name, conductor address, and asset ID. All steps are performed from a browser.
 
-## Network Design Reference
-
-<NetworkDesign/>
-
-## 1. Access the Conductor GUI
-
-1. In the GCP Console, navigate to the VM Instance created in [Step 2 — Create the GCP VM](deploy_gcp_conductor_install.mdx). Copy the external IP of the the conductor VM.
-
-2. In a browser, navigate to:
-
-   ```
-   https://<conductor-external-ip>
-   ```
-
-3. On the conductor login page, enter the default credentials:
-
-   | Field | Value |
-   |-------|-------|
-   | Username | `admin` |
-   | Password | `128Tadmin` |
-
-   :::important
-   Change the default password immediately after your first login. This **must** be changed. The new password has the following minimum requirements: A minimum of 9 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
-   :::
-
-## 2. Set the Authority Name
+## 1. Set the Authority Name
 
 The authority name identifies your organization within the SSR configuration model. It applies globally to all routers managed by this conductor and cannot be changed after routers have been provisioned without re-onboarding them.
 
@@ -45,7 +19,7 @@ The authority name identifies your organization within the SSR configuration mod
 
    ![Authority128](/img/deploy-gcp-conductor-config4.png)
 
-## 3. Add the Conductor Address
+## 2. Add the Conductor Address
 
 The conductor address is the IP address that managed routers use to reach this conductor. Use the conductor VM's external IP address.
 
@@ -61,7 +35,7 @@ The conductor address is the IP address that managed routers use to reach this c
 
    ![Commit the Config](/img/deploy-gcp-conductor-config7.png)
 
-## 4. Assign the Asset ID and Confirm the Role
+## 3. Assign the Asset ID and Confirm the Role
 
 1. In the left menu, click **Authority** under **Configuration**, then click **conductor** under **Routers**.
 

@@ -1,5 +1,5 @@
 ---
-title: "Step 3: Verify the Installation"
+title: "Step 2: Verify the Installation"
 sidebar_label: "Verify the Installation"
 ---
 
@@ -13,19 +13,20 @@ The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed.
 
 You can verify the successful conductor installation by logging in to the Conductor GUI using the Conductor Primary NIC public IP address.
 
-**Add Conductor IP address graphic here
+1.  In the GCP Console, navigate to the VM Instance created in [Step 1 — Create the GCP VM](deploy_gcp_conductor_install.mdx). Copy the external IP of the the conductor VM.
 
-:::important
-Attempting to open the Conductor GUI before the installation has completed - i.e., not waiting 20 minutes - will result in an error message. This DOES NOT mean the installation failed, it means it has not completed yet. If you get an error message, wait longer, then try again. 
-:::
 
-1. Open a browser and navigate to `https://<conductor-public-ip>`.
+2. Open a browser and navigate to `https://<conductor-public-ip>`.
+
+   :::important
+   Attempting to open the Conductor GUI before the installation has completed - i.e., not waiting 20 minutes - will result in an error message. This DOES NOT mean the installation failed, it means it has not completed yet. If you get an error message, wait longer, then try again. 
+   :::
 
    :::note
    The conductor uses a self-signed certificate. If your browser presents an "unsafe connection" warning, click through to continue. You can replace the certificate later.
    :::
 
-2. Log in with the following default credentials:
+3. Log in with the following default credentials:
 
    | Field | Value |
    | :-----| :------|
@@ -33,10 +34,10 @@ Attempting to open the Conductor GUI before the installation has completed - i.e
    | Password | `128Tadmin` |
 
    :::important
-   You must change the default password immediately after first login. The new password requires a minimum of 9 characters containing at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+   Change the default password immediately after your first login. This **must** be changed. The new password has the following minimum requirements: A minimum of 9 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
    :::
 
-3. A successful login confirms the conductor is running and reachable on the public IP.
+4. A successful login confirms the conductor is running and reachable on the public IP.
 
 ## Troubleshooting the Installation
 
@@ -54,4 +55,4 @@ If the instance does not install SSR as expected, SSH into the instance using th
 
 ## Next Step
 
-Proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.mdx).
+Proceed to [Step 3 — Configure the Conductor](deploy_gcp_conductor_config.md).

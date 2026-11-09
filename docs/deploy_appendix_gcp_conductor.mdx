@@ -2,12 +2,15 @@
 title: Appendix - GCP Conductor Configuration
 sidebar_label: Appendix - GCP Conductor Configuration
 ---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
-This appendix contains the complete Terraform variable reference for the GCP conductor deployment described in this guide. Use it when creating the `ssr-variables.tfvars` file in [Step 2 — Create the GCP VM](deploy_gcp_conductor_install.mdx#deploy-a-gcp-conductor-vm-using-the-command-line-interface).
+This appendix contains the complete Terraform variable reference for the GCP conductor deployment described in this guide. Use it when creating the `ssr-variables.tfvars` file.
 
 ## Deployment Parameters
 
 The following table describes all supported Terraform variables for the BYOL conductor deployment in GCP. Variables marked **Required** must be present in `ssr-variables.tfvars`. All others are optional and fall back to defaults when omitted.
+
+<NetworkDesign/>
 
 | GCP Marketplace Name | Terraform Variable | Required | Description |
 |----------------------|--------------------|----------|-------------|

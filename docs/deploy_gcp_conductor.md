@@ -9,9 +9,9 @@ This guide walks you through deploying a **Session Smart Conductor on the Google
 
 | Step | Topic | Description |
 |------|-------|-------------|
-| 1 | [Configure the GCP Prerequisites](deploy_gcp_conductor_prereqs.mdx) | Create the required VPCs, SSH public/private key pair, and the GCP service account used for deployment. |
-| 2 | [Create the GCP VM](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the GCP GUI. |
-| 3 | [Configure the Conductor](deploy_gcp_conductor_config.mdx) | Set the authority name, conductor address, and assign the asset ID. |
+| 1 | [Create the GCP VM](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the GCP GUI. |
+| 2 | [Verify the Installation](deploy_gcp_conductor_verification.md) | Verify the installation is successful, and logs in to the conductor for the first time. |
+| 3 | [Configure the Conductor](deploy_gcp_conductor_config.md) | Set the authority name, conductor address, and assign the asset ID. |
 | — | [Appendix — GCP Conductor Configuration](deploy_appendix_gcp_conductor.mdx) | Complete Terraform variable reference for the GCP conductor deployment. |
 
 ## Network Topology
@@ -48,7 +48,7 @@ Before beginning, ensure the following are available:
 
 - **GCP access** — access to a GCP project with permissions to create VPC networks, subnets, VM instances, and service accounts.
 - **Juniper software access credentials** — Artifactory username and token for software downloads and provisioning.
-- **SSH key pair** — an RSA key pair for authenticating to the conductor VM. Steps to create one are in [Step 1 — Configure the GCP Prerequisites](deploy_gcp_conductor_prereqs.mdx).
+- **SSH key pair** — an RSA key pair for authenticating to the conductor VM.
 
 ## Instance Size
 

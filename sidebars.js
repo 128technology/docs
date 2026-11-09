@@ -224,7 +224,6 @@ module.exports = {
                 "deploy_gcp_conductor",
                 "deploy_gcp_conductor_prereqs",
                 "deploy_gcp_conductor_install",
-                "deploy_gcp_conductor_verification",
                 "deploy_gcp_conductor_config",
                 "deploy_appendix_gcp_conductor",
               ],
