@@ -129,7 +129,7 @@ Add the doc id to the appropriate section of [sidebars.js](../sidebars.js). Do *
 
 ## 7. Style guide
 
-- **Headings:** Title Case. *Good:* `## Configure The Conductor Address`. *Bad:* `## Configure the conductor address`.
+- **Headings:** Title Case. *Good:* `## Configure the Conductor Address`. *Bad:* `## Configure the conductor address`.
 - **Voice:** second person ("you"), active voice, present tense.
 - **Terminology (canonical):**
   - *Session Smart Router* (SSR) — the routing software.
