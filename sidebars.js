@@ -189,6 +189,12 @@ module.exports = {
       "upgrade_legacy",
       "intro_rollback",
     ],
+    "Cloud Upgrades": [
+      "upgrade-cloud-images",
+      "upgrade-cloud-image-backup",
+      "upgrade-cloud-cond-single-process",
+      "upgrade-cloud-cond-ha-process",
+    ],
     "Deployment Guides": [
       "deploy_guides_overview",
       {

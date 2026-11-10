@@ -61,10 +61,11 @@ On both conductor nodes, please execute the following commands and save their ou
 
 #### Rogers Version
 
-This section provides the steps to backup all relevant backup files for your conductor and save the files onto a separate machine.
-Run the command below to save all relevant backup files as a tarball in the `/var/log/128technology/` directory. The tarball file name must be unique for each conductor node, and uses the convention: `conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz`. 
+This section provides the steps to create a backup of all relevant conductor files. You will use these files to recreate your conductor on a new, LVM enabled cloud instance. 
 
-As an example if the primary node is named primary-node and the below command was executed on 10/10/2026, the tarball file name will be conductor-backup-primary-node-2026-10-10.tar.gz.
+Run the command below to save the necessary files as a tarball in the `/var/log/128technology/` directory. The tarball file name is unique for each conductor node, and uses the convention: `conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz`. 
+
+For example, on a primary node named `primary-node` where the command was executed on 10/10/2026, the tarball file name is `conductor-backup-primary-node-2026-10-10.tar.gz`.
 
 ```
 sudo tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz /var/lib/128technology/t128-running.json 
