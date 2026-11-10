@@ -1,0 +1,74 @@
+---
+title: "Step 1: Create the GCP VM"
+sidebar_label: "Create the GCP VM"
+---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
+
+This step deploys the BYOL Session Smart Conductor VM from the GCP Marketplace. The deployment template creates the VM, assigns a static public IP to the management interface, and configures a network security group. SSR version 7.1.4 is automatically installed and the node is initialized as a conductor.
+
+## Requirements
+
+The following infrastructure must exist in your GCP Deployment before deploying the conductor:
+
+- A VPC network where the Conductor will be deployed (`conductor-vpc` in this guide). This includes:
+   - A subnet (`conductor-subnet`) reachable via SSH and HTTPS for administration.
+   - The appropriate subnet region.
+   - An IPv4 range for the subnet (for example, `10.0.1.0/24`)
+
+- An SSH key pair to authenticate to the conductor VM after deployment.
+- A GCP service account with the following IAM roles:
+   
+   | Role | Purpose |
+   |------|---------|
+   | `roles/config.agent` | Required for GCP deployment manager operations |
+   | `roles/compute.admin` | Required to create and manage compute resources |
+   | `roles/iam.serviceAccountUser` | Required to act as the service account |
+   | `roles/storage.objectViewer` | Required to read deployment objects from storage |
+
+
+## Select the BYOL Plan
+
+1. In the GCP console, search for **Marketplace** in the search bar. Click the Marketplace listing in the results.
+
+![GCP Marketplace](/img/deploy-gcp-conductor-web1.png)
+
+2. Enter **Session Smart Networking Platform – BYOL** in the Marketplace search tool, and select the **Session Smart Networking Platform – BYOL** result.
+
+![marketplace Search](/img/deploy-gcp-conductor-web2.png)
+
+3. On the product details page, click **Launch**.
+
+![Product Details Panel](/img/deploy-gcp-conductor-web3.png)
+
+## Deploy via Google Cloud Marketplace
+
+Fill in the template parameters using the following table. 
+
+<NetworkDesign/>
+
+   :::caution
+   `Admin Allowed CIDR` access must be restricted to known source addresses prior to deployment. 
+   After the deployment completes and your environment is stable, update the associated NSG rules to restrict access for `Control Allowed CIDR` to known source addresses.
+   :::
+
+   :::important
+   Leave the Mist-managed and Conductor-managed router sections empty. Providing inputs for a conductor deployment will cause the deployment to fail.
+   :::
+
+### Deploy
+
+Once all sections are complete, scroll to the bottom and click **Deploy**.
+
+
+![GCP Marketplace common template fields](/img/deploy-gcp-conductor-web9a.png)
+![GCP Marketplace conductor-specific fields](/img/deploy-gcp-conductor-web9b.png)
+
+A green checkmark appears under **Status** for each successfully created resource. 
+
+   ![Conductor Complete](/img/deploy-gcp-conductor-web10.png)
+
+After the VM is created, the the SSR software installation and initialization process automatically runs. **Allow an additional 20 minutes for initialization to complete** before proceeding to [Step 2 — Verify the Installation](deploy_gcp_conductor_verification.md).
+
+## Next Step
+
+Proceed to [Step 2 — Verify the Installation](deploy_gcp_conductor_verification.md).
