@@ -74,7 +74,7 @@ For additional guidance, see [System Requirements](intro_system_reqs.md) and the
 
 ## Related Documentation
 
-- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.md)
+- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.mdx)
 - [System Requirements](intro_system_reqs.md)
 - [Conductor Deployment Best Practices](bcp_conductor_deployment.md)
 - [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md)
