@@ -12,7 +12,7 @@ sidebars-label: Enhanced Security Key Management
 | 7.2.0   | Subject Alternative Name (SAN) URI support for peering identity. |
 | 7.2.3   | Support for ML-DSA added. | 
 
-Security is a critical component of [SD-WAN (software-defined wide area network)](https://www.juniper.net/us/en/products/routers/session-smart-router.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
+Security is a critical component of [Network Security SD-WAN](https://www.hpe.com/us/en/products/networking/network-security.html) products in today’s market. [The SSR (Session Smart Router)](about_128t.md) offers several means of ensuring the integrity of data transmitted through the router, such as encrypting application payload content, encrypting SVR (Secure Vector Routing) metadata, and authentication for metadata.
 
 As an example, let's look at the needs of a financial institution. They have to keep transaction traffic secure. If not, the results are catastrophic for both the institution and the individual/companies whose transaction gets hijacked. SSR technology uses SVR along with Enhanced Security Key Management, allowing you to configure unparalelled security without the increased packet size, fragmentation, and increased transaction time [common with IPSec](about_svr_savings.md). This design creates maximum scale, avoids mid-network re-encryption, and provides the ability to rotate keys as required.
 
@@ -280,6 +280,11 @@ config
     authority
         enhanced-security-key-management  true
 ```
+
+:::important
+Changing the `enhanced-security-key-management` mode from enabled to disabled or disabled to enabled (toggling the `true/false` setting) has a system wide impact on the security model. After any change, the 128T service must be restarted to implement the change. Sessions initiated after the mode change are installed using the new security model, while preexisting sessions are not guaranteed to continue to pass traffic.
+:::
+
 2. Configure a unique `peering-common-name` on each router. In a secure environment, the router name should never be sent between routers as plaintext in BFD messages. The `peering-common-name` is a **unique alias per router** that identifies the router and is configured at the router level. When `enhanced-security-key-management` is configured, it is validated against the `peering-common-name` from the certificate, and integrated into the auto-generated adjacencies list for the peers of the router from the neighborhood configuration.
 
 :::note
