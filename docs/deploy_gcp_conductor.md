@@ -2,6 +2,8 @@
 title: GCP Conductor Deployment Overview
 sidebar_label: Overview
 ---
+import InstanceSizing from './_byol_gcp_instance_types.md'
+
 
 This guide walks you through deploying a **Session Smart Conductor on the Google Cloud Platform (GCP)** using the Bring Your Own License (BYOL) plan. When you complete the steps in this guide, the conductor will be running SSR software version 7.1.4, configured with an authority name and conductor address, and ready for SSR routers to onboard.
 
@@ -52,16 +54,7 @@ Before beginning, ensure the following are available:
 
 ## Instance Size
 
-Select a GCP machine type that meets your network scale requirements. The following instance types are supported for virtual SSR in GCP.
-
-| GCP Machine Type | Max vNICs | vCPU Cores | Memory |
-|------------------|-----------|-----------|--------|
-| `c2-standard-4` | 4 | 4 | 16 GB |
-| `c2-standard-8` | 8 | 8 | 32 GB |
-| `c2-standard-16` | 10 | 16 | 64 GB |
-| `c2-standard-30` | 10 | 30 | 120 GB |
-
-For additional guidance, see [System Requirements](intro_system_reqs.md) and the [GCP machine type documentation](https://cloud.google.com/compute/docs/compute-optimized-machines#c2_machine_types).
+<InstanceSizing/>
 
 ## Software Version Requirements
 
