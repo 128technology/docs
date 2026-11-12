@@ -31,6 +31,12 @@ If your conductor is currently running SSR version 6.3.5+, you may upgrade to 7.
 **Routers that are being upgraded to 7.x DO NOT have to make a transitional upgrade step. The transitional upgrade through 6.3.5-6.3.7 applies ONLY to Conductor. Routers can be upgraded directly from pre-7.x to 7.x.**
 :::
 
+:::important
+Some legacy Azure, AWS, or GCP installations, including installations originating from the historical 5.4.4 private offer, have a disk layout that cannot be automatically converted to the layout required for image-based software delivery. Specifically, these installations did not use LVM for partitioning. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. Installing a newer package on an old VM does not change its disk layout. These older, non-LVM partioned deployments can only be upgraded using the [Upgrade via Migration process](upgrade-cloud-images.md).
+
+To determine if your cloud conductor is a non-LVM deployment, see [Cloud Upgrades](upgrade-cloud-images.md) for details.
+:::
+
 ### Upgrade Installer
 For software versions prior to 6.3.0, before **upgrading or installing**, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 
