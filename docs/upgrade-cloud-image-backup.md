@@ -3,21 +3,23 @@ title: Cloud Upgrade Backup Process
 sidebar_label: Cloud Upgrade Backup Process
 ---
 
-#### USSS Version
+#### USSS Version (Mix of CLI and GUI)
 
-Use the following process to backup important information for the Conductor. Commands are issued from both the Web interface and the command line.
+Use the following process to backup the information necessary to reconstruct the conductor on the new cloud instance. Commands are issued from **either/both** the Web interface and the command line. You will use these files to recreate your conductor on a new, LVM-enabled cloud instance.
 
-From the UI, navigate to the **Import / Export** option under **Configuration**. 
-Click the button with the circular arrow in the upper right of the screen. 
-Select the option to **Export Running Configuration**.
+1. From the UI, navigate to the **Import / Export** option under **Configuration**. 
+2. Click the button with the circular arrow in the upper right of the screen. 
+3. Select the option to **Export Running Configuration**.
+4. Enter a name for the exported file, and click the **Export** button. 
+5. The configuration export file displays as shown below. Click the icon to download the export onto your local machine. 
 
-A menu will pop up asking you to provide a name for the export. Provide a name and then click the “Export” button. Now, you should see your configuration export as shown below. Click the icon to download the export off the Conductor and onto your local machine. This can be used in cases where the entire conductor may need to be restored.
+6. There are three additional files that must be copied off of the conductor to your local machine:
 
-Also, there are two files in the “/etc/128technology/salt/pki/master” directory. One is named “master.pem” and the other is named “master.pub”. Please copy these files off the conductor. These files will be necessary for restoring service should the conductor need to be rebuilt from scratch. These are keys that the routers use to authenticate the conductor and should the conductor be rebuilt without these exact keys, the routers will reject any attempt to be managed by the new conductor and require hands on each router instance to accept the new conductor’s keys. These keys are synced between HA nodes of an active conductor so therefore they should be the same on both nodes of your existing conductor.
+	- Two files in the `/etc/128technology/salt/pki/master` directory that need to be exported from the conductor with the exported configuration files; `master.pem` and `master.pub`. These are keys that the routers use to authenticate the conductor - without these keys the routers will reject any attempt to be managed by the new conductor.
 
-Lastly, copy of the file “/var/lib/128technology/user-running.json” which contains all current users and their credentials. This file will be synchronized between both nodes on the conductor so you only need to copy it off of one node.
+	- The file `/var/lib/128technology/user-running.json` contains all current users and their credentials. 
 
-On both conductor nodes, please execute the following commands and save their output. This information will be helpful when building the new instance:
+7. Execute the following commands and save the output. This information is important when building the new instance:
 
 ```
 ip a
@@ -30,30 +32,42 @@ cat /etc/128technology/local.init
 cat /etc/128technology/global.init
 ```
 
-#### Rogers Version
+### Command Line
 
-This section provides the steps to create a backup of all relevant conductor files. You will use these files to recreate your conductor on a new, LVM enabled cloud instance. 
+This section provides the steps to backup and download the files necessary to reconstruct the conductor on a new, LVM-enabled cloud instance. Commands are run from an SSR command line instance.
 
-Run the command below to save the necessary files as a tarball in the `/var/log/128technology/` directory. The tarball file name is unique for each conductor node, and uses the convention: `conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz`. 
+1. Run the command below to create a tarball in the `/var/log/128technology/` directory. The tarball file name is unique for each conductor node, and uses the convention: `conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz`. 
 
-For example, on a primary node named `primary-node` where the command was executed on 10/10/2026, the tarball file name is `conductor-backup-primary-node-2026-10-10.tar.gz`.
+	For example, on a primary node named `primary-node` where the command was executed on 10/10/2026, the tarball file name is `conductor-backup-primary-node-2026-10-10.tar.gz`.
 
-```
-sudo tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz /var/lib/128technology/t128-running.json 
-/var/lib/128technology/user-running.json 
-/etc/128technology/salt/pki/master/master.pem 
-/etc/128technology/salt/pki/master/master.pub 
-/etc/128technology/salt/pki/master/minions/ /etc/128technology/global.init 
-/etc/128technology/local.init /etc/salt/pki/minion/minion.pem 
-/etc/salt/pki/minion/minion.pub /etc/salt/pki/minion/minion_master.pub /srv/salt 
-/etc/salt/minion_id
-```
+	```
+	sudo tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%m-%d').tar.gz /var/lib/128technology/t128-running.json 
+	/var/lib/128technology/user-running.json 
+	/etc/128technology/salt/pki/master/master.pem 
+	/etc/128technology/salt/pki/master/master.pub 
+	/etc/128technology/salt/pki/master/minions/ /etc/128technology/global.init 
+	/etc/128technology/local.init /etc/salt/pki/minion/minion.pem 
+	/etc/salt/pki/minion/minion.pub /etc/salt/pki/minion/minion_master.pub /srv/salt 
+	/etc/salt/minion_id
+	```
 
-To verify that the backup tarball file was successfully created, run the below command on each conductor node.
-ls -lh /var/log/128technology/conductor-backup*
+2. Run the following command to verify the tarball file was created successfully.
 
-To verify all files that were copied into the backup tarball file, run the below command on each conductor node.
-tar -ztvf /var/log/128technology/<insert-your-tarball-filename>
+	`ls -lh /var/log/128technology/conductor-backup*`
 
-On a separate machine, securely copy the tarball file from each conductor node into this separate machine. Note that this machine needs to be able to connect to the conductor nodes. Below is a sample command using scp on a Ubuntu machine to copy the tarball file from a conductor node (with the IP address 10.9.0.6) and saving the file in the Ubuntu machine’s local user’s Downloads folder.
-scp -i <insert-your-private-key-filename> t128@10.9.0.6:'/var/log/128technology/<insert-your-tarball-filename>' ~/Downloads
+	As an option, use the command below to verify the files copied into the tarball:
+
+	`tar -ztvf /var/log/128technology/<insert-your-tarball-filename>`
+
+3. Copy the tarball file from the conductor to your local machine. Note that this device must be able to connect to the new instance of the cloud conductor. 
+
+	The following is an example, using scp on a Ubuntu machine to copy the tarball file from a conductor node (with the IP address 10.9.0.6), and saving the file in the local user’s `Downloads` folder.
+	
+	```
+	scp -i <insert-your-private-key-filename> t128@10.9.0.6:'/var/log/128technology/<insert-your-tarball-filename>' ~/Downloads
+	```
+
+
+
+
+

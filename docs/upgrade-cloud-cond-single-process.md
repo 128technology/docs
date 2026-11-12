@@ -1,6 +1,9 @@
-# MOP: Standalone SSR conductor in Azure
+---
+title: Standalone Cloud Conductor Upgrade Process
+sidebar_label: Standalone Cloud Conductor Upgrade
+---
 
-This procedure deploys a single-node (standalone) Session Smart conductor in Azure from the BYOL marketplace image, using an ARM template, a parameters file and a cloud-init file. Allow about 30 minutes, most of it waiting for the SSR software to install. A standalone conductor has no redundancy: while it is down, the routers it manages cannot be configured or monitored from it.
+This procedure deploys a single-node (standalone) Session Smart conductor in Azure from the BYOL marketplace image, using an ARM template, a parameters file, and a `cloud-init `file. Allow about 30 minutes to complete the process.
 
 ## Environment
 
@@ -15,7 +18,7 @@ This procedure deploys a single-node (standalone) Session Smart conductor in Azu
 | Conductor name | `Conductor` |
 | SSR version | `7.2.3` |
 
-## Network topology
+## Network Topology
 
 The standalone SSR conductor is one Azure VM with a **single NIC** in an existing subnet. Inside the VM, SSR sees that NIC as `ge-0-0`, and it carries the conductor (control) traffic from managed routers. There is no second node, so there is no HA sync or fabric interface.
 
@@ -73,9 +76,9 @@ Resource group ssr-conductor-rg (eastus) - created: VM, NIC, NSG
 
 > The cloud-init file contains the repository token. Keep it private and delete it from Cloud Shell when the procedure is complete.
 
-## Procedure
+## Process Overview - How It Works
 
-### Where each command runs
+### Where Each Command Runs
 
 Azure Cloud Shell is only used for Azure operations: deploying the VM and, if needed, rolling it back. Everything that happens on the conductor runs in an SSH session on it, as root, or in the SSR command line (PCLI) opened from that session. Each step says where it runs:
 
@@ -86,7 +89,7 @@ Azure Cloud Shell is only used for Azure operations: deploying the VM and, if ne
 | conductor root shell | The root session on the conductor. Multi-line blocks are pasted as a whole. Keep it open until the end. |
 | conductor PCLI (admin) | The SSR command line on the conductor, used to accept the conductor's own asset. Each PCLI step starts with `su admin` in the conductor root shell, which opens the PCLI (the prompt becomes `admin@node0.Conductor#`), and ends with `quit`, which returns to the root shell. Enter PCLI commands one at a time, pressing Enter after each one. |
 
-### Timing and what to expect
+### Timing and What to Expect
 
 Allow about 30 minutes in total. The deployment command takes up to about 2 minutes. The conductor then downloads, installs and initializes SSR by itself and **reboots twice**: once into the newly installed SSR software, and once after the conductor is initialized. This typically takes 5-15 minutes, and longer if the software download is slow. Each reboot closes your SSH session with a message such as `Connection to ... closed by remote host`. That is normal and not a failure. To watch the reboot cycle, attach to the VM's serial console (Azure portal: the VM > Help > Serial console); the template enables the boot diagnostics it needs.
 
@@ -107,7 +110,9 @@ While the conductor is `INSTALLING`, `STARTING` or `INITIALIZING`:
 - **Do not** use `az vm run-command`. Azure runs only one run-command per VM at a time, and a command sent while the VM is rebooting can stay pending for a long time and block every command after it.
 - Only act when the status shows `FAILED`, or when the conductor has not reached `READY` after 60 minutes.
 
-### Step 1: Confirm the Azure subscription
+## Rebuilding the Azure Cloud Conductor 
+
+### Step 1: Confirm the Azure Subscription
 
 **Run in:** Azure Cloud Shell (PowerShell)
 
@@ -119,7 +124,7 @@ az account show --query '[name, id]' --output 'tsv'
 
 Expected: The target subscription name and ID.
 
-### Step 2: Accept the marketplace image terms
+### Step 2: Accept the Marketplace Image Terms
 
 **Run in:** Azure Cloud Shell (PowerShell)
 
@@ -131,7 +136,7 @@ az vm image terms accept --publisher 'juniper-networks' --offer 'session-smart-n
 
 Expected: `true`
 
-### Step 3: Deploy the conductor
+### Step 3: Deploy the Conductor
 
 **Run in:** Azure Cloud Shell (PowerShell)
 
@@ -143,7 +148,7 @@ az deployment group create --resource-group 'ssr-conductor-rg' --name 'ssr-condu
 
 Expected: `Succeeded` and the SSH command for the conductor, after up to about 2 minutes.
 
-### Step 4: Connect to the conductor
+### Step 4: Connect to the Conductor
 
 **Run in:** Your terminal (SSH client)
 
@@ -156,11 +161,11 @@ sudo -i
 
 Expected: A root prompt on conductor-node0. The hostname is still `conductor-node0` until the conductor is initialized.
 
-### Step 5: Wait until the conductor is initialized
+### Step 5: Wait Until the Conductor is Initialized
 
-**Run in:** conductor root shell
+**Run in:** Conductor `root` shell
 
-Paste once and leave it running: it prints the phase every minute (see "Timing and what to expect"). The VM reboots by itself at least twice, which closes your SSH session. That is expected: wait 2-3 minutes, reconnect with step 4, and paste this command again. Do not restart or redeploy the VM, and do not use `az vm run-command`, while it is INSTALLING, STARTING or INITIALIZING.
+Paste once and leave it running: It prints the phase every minute (see [Timing and What to Expect](#timing-and-what-to-expect)). The VM reboots by itself at least twice, which closes your SSH session. That is expected: Wait 2-3 minutes, reconnect with step 4, and paste this command again. **Do not restart or redeploy the VM, and do not use `az vm run-command`, while it is INSTALLING, STARTING or INITIALIZING.**
 
 ```bash
 while :; do
@@ -180,11 +185,11 @@ echo "pending assets (not yet accepted): ${pending:-none}"
 
 Expected: `READY`, then `conductors in global.init: node0=10.0.1.10` and the pending assets: `Conductor-node0` (the conductor's own asset, accepted in the next step; it can take a few minutes after `READY` to appear). `FAILED` means the bootstrapper stopped with an error (see Troubleshooting).
 
-### Step 6: Accept the conductor's asset
+### Step 6: Accept the Conductor's Asset
 
-**Run in:** conductor PCLI (admin)
+**Run in:** Conductor PCLI (as `admin`)
 
-In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting the conductor's asset ID in the configuration accepts the conductor's pending asset: its salt minion key is accepted automatically as soon as the asset ID is configured. The status command in step 5 listed the pending asset; if its ID differs from `Conductor-node0`, use that ID. `commit force` skips the confirmation prompt; validation still runs.
+In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting the conductor's asset ID in the configuration accepts the conductor's pending asset; its salt-minion key is accepted automatically as soon as the asset ID is configured. The status command in step 5 listed the pending asset; if its ID differs from `Conductor-node0`, use that ID. `commit force` skips the confirmation prompt; validation still runs.
 
 ```pcli
 su admin
@@ -196,9 +201,9 @@ quit
 
 Expected: `Configuration committed`. In `show assets`, the conductor with asset ID `Conductor-node0` moves through `Synchronizing` to `Running` within a few minutes; run `show assets` again before `quit` to follow it.
 
-### Step 7: Verify the conductor
+### Step 7: Verify the Conductor
 
-**Run in:** conductor PCLI (admin)
+**Run in:** Conductor PCLI (as `admin`)
 
 In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Wait until the conductor's asset is `Running` (repeat `show assets`), then check the conductor's system state.
 
@@ -211,13 +216,13 @@ quit
 
 Expected: `show assets` shows `Conductor-node0` as `Running`, and `show system` lists node `node0` as running, with role conductor and software version 7.2.3.
 
-### Optional: conductor address for managed routers
+### Optional: Conductor Address for Managed Routers
 
-The standalone conductor is complete after step 7. The following step tells managed routers how to reach the conductor. It is optional at this point because the address routers use (for example a public IP) may only be known after deployment.
+**The standalone conductor is complete after step 7.** The following step tells managed routers how to reach the conductor. It is optional at this point because the address routers use (for example, a public IP) may only be known after deployment.
 
-### Step 8 (optional): Set the conductor address for managed routers
+### Step 8 (optional): Set the Conductor address for managed routers
 
-**Run in:** conductor PCLI (admin)
+**Run in:** Conductor PCLI (as `admin`)
 
 In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Sets `authority conductor-address`, the address managed routers receive in their configuration and use to reach the conductor. The command uses the private IP, which routers reach through VNet peering, VPN or ExpressRoute; use another address (for example a NAT or DNS name) if that is how routers reach the conductor. Do this before onboarding routers; it can also be done later. It changes the configuration of every managed router, and a conductor address can be an IP address or a DNS name.
 
@@ -255,8 +260,12 @@ journalctl -u ember --no-pager | tail -n 40
 tail -n 30 /var/log/cloud-init-output.log
 ```
 
-- **`INSTALLING` for more than 60 minutes:** check the SSR download progress. Usual causes are a wrong repository user or token, or no outbound HTTPS from the subnet.
-- **`FAILED`:** the task table shows which task failed. When the initializer fails, the bootstrapper log reports it as `Error enabling release repo`; the real cause is in the `stderr` part of that line and in the initializer log. On failure, a tech-support bundle is saved at `/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`.
-- **An asset stays `Pending`, or `show assets` shows a configured asset that never connects:** the asset ID in the configuration must equal the node's salt minion ID, which is its hostname (`Conductor-node0`). In the conductor root shell, `t128-salt-key -L` lists the IDs that are waiting (`Unaccepted Keys`) and accepted. Set the asset ID in the PCLI to the listed ID and commit again. A pending key that is not accepted within 10 minutes is dropped and sent again by the node, so it can briefly disappear from the list.
-- **SSH refused or timing out:** the conductor is booting or rebooting; wait 2-3 minutes. If it persists, check that your terminal's address is inside the admin allowed range and that nothing else (a subnet NSG, a firewall) blocks TCP 22.
-- **No SSH access at all:** as a last resort, read a log from Cloud Shell with `az vm run-command invoke --resource-group '<resource group>' --name '<vm>' --command-id RunShellScript --scripts 'tail -n 50 <log file>' --query 'value[0].message' --output tsv`. Send one command at a time, wait for it to return, and never send one while the conductor is rebooting.
+- **`INSTALLING` for more than 60 minutes:** Check the SSR download progress. Usual causes are a wrong repository user or token, or no outbound HTTPS from the subnet.
+
+- **`FAILED`:** The task table shows which task failed. When the initializer fails, the bootstrapper log reports it as `Error enabling release repo`; the real cause is in the `stderr` part of that line and in the initializer log. On failure, a tech-support bundle is saved at `/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`.
+
+- **An asset stays `Pending`, or `show assets` shows a configured asset that never connects:** The asset ID in the configuration must equal the node's salt minion ID, which is its hostname (`Conductor-node0`). In the conductor root shell, `t128-salt-key -L` lists the IDs that are waiting (`Unaccepted Keys`) and accepted. Set the asset ID in the PCLI to the listed ID and commit again. A pending key that is not accepted within 10 minutes is dropped and sent again by the node, so it can briefly disappear from the list.
+
+- **SSH refused or timing out:** The conductor is booting or rebooting; wait 2-3 minutes. If it persists, check that your terminal's address is inside the admin allowed range and that nothing else (a subnet NSG, a firewall) blocks TCP 22.
+
+- **No SSH access at all:** As a last resort, read a log from Cloud Shell with `az vm run-command invoke --resource-group '<resource group>' --name '<vm>' --command-id RunShellScript --scripts 'tail -n 50 <log file>' --query 'value[0].message' --output tsv`. Send one command at a time, wait for it to return, and never send one while the conductor is rebooting.
