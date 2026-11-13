@@ -3,7 +3,7 @@ title: High Availability Cloud Conductor Upgrade Process
 sidebar_label: High Availability Cloud Conductor Upgrade
 ---
 
-This procedure deploys a two-node highly available Session Smart conductor (node0 and node1) in Azure from the BYOL marketplace image, using an ARM template, a parameters file per node and a cloud-init file per node. Allow 60-90 minutesto complete the process.
+This procedure deploys a two-node highly available Session Smart conductor (`node0` and `node1`) in Azure from the BYOL marketplace image, using an ARM template, a parameters file per node and a cloud-init file per node. Allow 60-90 minutesto complete the process.
 
 ## Environment
 
@@ -19,7 +19,7 @@ This procedure deploys a two-node highly available Session Smart conductor (node
 | Conductor name | `Conductor` |
 | SSR version | `7.2.3` |
 
-## Network topology
+## Network Topology
 
 Each SSR conductor node is one Azure VM with a **single NIC** in the same existing subnet. Inside the VM, SSR sees that NIC as `ge-0-0`, and it carries both the conductor (control) traffic from managed routers and the HA sync between the two nodes. No separate HA sync or fabric NIC is deployed.
 
@@ -53,7 +53,7 @@ Resource group ssr-conductor-rg (eastus) - created per node: VM, NIC, NSG
 
 | SSR term (inside the VM) | Azure resource (outside the VM) | Details |
 |---|---|---|
-| Conductor router `Conductor`, nodes `node0` / `node1` | VMs `conductor-node0` / `conductor-node1` (zone 1 / zone 2) | One VM per node from the BYOL marketplace image, deployed from the same ARM template. Hostnames (also the asset IDs) `Conductor-node0` / `Conductor-node1`. The MOP calls the nodes node0 and node1 whatever their SSR node names are. |
+| Conductor router `Conductor`, nodes `node0` / `node1` | VMs `conductor-node0` / `conductor-node1` (zone 1 / zone 2) | One VM per node from the BYOL marketplace image, deployed from the same ARM template. Hostnames (also the asset IDs) `Conductor-node0` / `Conductor-node1`. |
 | Interface `ge-0-0` | NICs `conductor-node0-control` / `conductor-node1-control` | The only NIC on each VM, so SSR names it `ge-0-0` (NICs become `ge-0-0`, `ge-0-1`, ... in attach order). Tagged `SSR-ROLE=MGMT`; accelerated networking and IP forwarding enabled. |
 | Node IP (`node-ip`), the conductor address | Static private IPs `10.0.1.10` / `10.0.1.11` | The NIC IP (template `controlPrivateIp`) and the cloud-init `node-ip` are the same value. Managed routers connect to both addresses. |
 | HA sync interface (node1 `ha-peer-ip` = `10.0.1.10`) | Same NIC and IP; no HA sync NIC | Conductor-to-conductor sync runs over `ge-0-0` through the subnet. Hardware conductors use a dedicated HA sync NIC on `169.254.253.x` (`clustered`), which an Azure VNet cannot carry. |
@@ -78,7 +78,9 @@ Resource group ssr-conductor-rg (eastus) - created per node: VM, NIC, NSG
 | `conductor-node0-params.json` / `conductor-node1-params.json` | Template parameters for node0 / node1 |
 | `conductor-node0-cloud-init.txt` / `conductor-node1-cloud-init.txt` | cloud-init with the SSR onboarding configuration for node0 / node1 |
 
-> The cloud-init files contain the repository token and a temporary password. Keep them private and delete them from Cloud Shell when the procedure is complete.
+:::important
+The cloud-init files contain the repository token and a temporary password. Keep them private and delete them from Cloud Shell when the procedure is complete.
+:::
 
 ## Process Overview - How It Works
 
@@ -90,12 +92,12 @@ Azure Cloud Shell is only used for Azure operations: deploying the two VMs and, 
 |---|---|
 | Azure Cloud Shell (PowerShell) | `az` commands, one per line. Copy the whole block. |
 | Your terminal (SSH client) | Opens the SSH session to a node and becomes root with `sudo -i`. |
-| node0 root shell / node1 root shell | The root session on that node. Multi-line blocks are pasted as a whole. Keep both sessions open until the end. |
-| node0 PCLI (admin) | The SSR command line on node0, used to accept the conductor assets and add node1 to the configuration. Each PCLI step starts with `su admin` in the node0 root shell, which opens the PCLI (the prompt becomes `admin@node0.Conductor#`), and ends with `quit`, which returns to the root shell. Enter PCLI commands one at a time, pressing Enter after each one. |
+| `node0` root shell / `node1` root shell | The root session on that node. Multi-line blocks are pasted as a whole. Keep both sessions open until the end. |
+| `node0` PCLI (admin) | The SSR command line on `node0`, used to accept the conductor assets and add `node1` to the configuration. Each PCLI step starts with `su admin` in the `node0` root shell, which opens the PCLI (the prompt becomes `admin@node0.Conductor#`), and ends with `quit`, which returns to the root shell. Enter PCLI commands one at a time, pressing Enter after each one. |
 
 ### Timing and What to Expect
 
-Allow about 60 minutes in total. Each deployment command takes up to about 2 minutes. The node then downloads, installs and initializes SSR by itself and **reboots twice**: once into the newly installed SSR software, and once after the conductor is initialized. This typically takes 5-15 minutes per node, and longer if the software download is slow. Each reboot closes your SSH session with a message such as `Connection to ... closed by remote host`. That is normal and not a failure. To watch the reboot cycle, attach to the VM's serial console (Azure portal: the VM > Help > Serial console); the template enables the boot diagnostics it needs.
+Allow approximately 60 minutes in total. Each deployment command takes up to 2 minutes. The node then downloads, installs and initializes SSR by itself and **reboots twice**: once into the newly installed SSR software, and once after the conductor is initialized. This typically takes 5-15 minutes per node, and longer if the software download is slow. Each reboot closes your SSH session with a message such as `Connection to ... closed by remote host`. That is normal and not a failure. To watch the reboot cycle, attach to the VM's serial console (Azure portal: the VM > Help > Serial console); the template enables the boot diagnostics it needs.
 
 The status command prints one line per minute with the time, the uptime (it drops back to a few minutes after each reboot) and the phase:
 
@@ -144,7 +146,7 @@ Expected: `true`
 
 **Run in:** Azure Cloud Shell (PowerShell)
 
-Creates conductor-node0 from the template. The cloud-init file is passed as the template's `customData` parameter. The deployment takes up to about 2 minutes. The node then installs and initializes SSR on its own and reboots twice, which typically takes 5-15 minutes (longer if the software download is slow). To watch the reboot cycle, attach to the VM's serial console: in the Azure portal open conductor-node0 and select Help > Serial console, or run `az serial-console connect --resource-group 'ssr-conductor-rg' --name 'conductor-node0'` in Cloud Shell (boot diagnostics, which the serial console needs, is enabled by the template).
+Creates `conductor-node0` from the template. The cloud-init file is passed as the template's `customData` parameter. The deployment takes up to 2 minutes. The node then installs and initializes SSR on its own and reboots twice, which typically takes 5-15 minutes (longer if the software download is slow). To watch the reboot cycle, attach to the VM's serial console: in the Azure portal open conductor-node0 and select Help > Serial console, or run `az serial-console connect --resource-group 'ssr-conductor-rg' --name 'conductor-node0'` in Cloud Shell (boot diagnostics, which the serial console needs, is enabled by the template).
 
 ```powershell
 az deployment group create --resource-group 'ssr-conductor-rg' --name 'ssr-conductor-node0' --template-file 'conductor_template.json' --parameters '@conductor-node0-params.json' 'customData=@conductor-node0-cloud-init.txt' --query '[properties.provisioningState, properties.outputs.SSHLogin.value]' --output 'tsv'
@@ -169,7 +171,7 @@ Expected: A root prompt on conductor-node0. The hostname is still `conductor-nod
 
 **Run in:** node0 root shell
 
-Paste once and leave it running: it prints the phase every minute (see "Timing and what to expect"). The VM reboots by itself at least twice, which closes your SSH session. That is expected: wait 2-3 minutes, reconnect with step 4, and paste this command again. Do not restart or redeploy the VM, and do not use `az vm run-command`, while it is INSTALLING, STARTING or INITIALIZING.
+Paste once and leave it running: it prints the phase every minute (see [Timing and What to Expect](#timing-and-what-to-expect)). The VM reboots by itself at least twice, which closes your SSH session. That is expected: wait 2-3 minutes, reconnect with step 4, and paste this command again. **Do not restart or redeploy the VM, and do not use `az vm run-command`, while it is INSTALLING, STARTING or INITIALIZING.**
 
 ```bash
 while :; do
@@ -187,13 +189,13 @@ pending=$(t128-salt-key --no-color -l unaccepted 2>/dev/null | sed 1d | paste -s
 echo "pending assets (not yet accepted): ${pending:-none}"
 ```
 
-Expected: `READY`, then `conductors in global.init: node0=10.0.1.10` and the pending assets: `Conductor-node0` (node0's own asset, accepted in the next step; it can take a few minutes after `READY` to appear). `FAILED` means the bootstrapper stopped with an error (see Troubleshooting).
+Expected: `READY`, then `conductors in global.init: node0=10.0.1.10` and the pending assets: `Conductor-node0` (node0's own asset, accepted in the next step; it can take a few minutes after `READY` to appear). `FAILED` means the bootstrapper stopped with an error (see [Troubleshooting](#troubleshooting)).
 
 ### Step 6: Accept `node0`'s Asset
 
 **Run in:** node0 PCLI (as `admin`)
 
-In the node0 root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting node0's asset ID in the configuration accepts node0's pending asset: its salt minion key is accepted automatically as soon as the asset ID is configured. The status command in step 5 listed the pending asset; if its ID differs from `Conductor-node0`, use that ID. `commit force` skips the confirmation prompt; validation still runs.
+In the node0 root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting node0's asset ID in the configuration accepts node0's pending asset: its salt minion key is accepted automatically as soon as the asset ID is configured. The status command in step 5 listed the pending asset; if its ID differs from `Conductor-node0`, use that ID. `commit force` skips the confirmation prompt; validation still runs.
 
 ```pcli
 su admin
@@ -209,7 +211,7 @@ Expected: `Configuration committed`. In `show assets`, node0 with asset ID `Cond
 
 **Run in:** node0 PCLI (as `admin`)
 
-In the node0 root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Adds node1 (SSR node `node1`) as the second conductor node of the conductor router, so that node1 finds its own node in the configuration it receives from node0 when it joins. node1 is reported as not connected until then, which is expected.
+In the node0 root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Adds node1 (SSR node `node1`) as the second conductor node of the conductor router, so that node1 finds its own node in the configuration it receives from node0 when it joins. node1 is reported as not connected until then, which is expected.
 
 ```pcli
 su admin
@@ -242,7 +244,7 @@ echo HA_PEER_ACCESS_OPEN
 HA_PEER_OPEN
 ```
 
-Expected: `HA_PEER_ACCESS_OPEN`. If it prints `ERROR: ...` instead, fix that first (see Troubleshooting); do not deploy node1 yet.
+Expected: `HA_PEER_ACCESS_OPEN`. If it prints `ERROR: ...` instead, fix that first (see [Troubleshooting](#troubleshooting)); do not deploy node1 yet.
 
 ### Step 9: Deploy `node1`
 
@@ -354,7 +356,7 @@ Expected: `READY`, `conductors in global.init: node0=10.0.1.10, node1=10.0.1.11`
 
 **Run in:** node0 PCLI (admin)
 
-In the `node0` root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting node1's asset ID accepts node1's pending asset. If the pending asset listed in step 14 has a different ID than `Conductor-node1`, use that ID.
+In the `node0` root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting node1's asset ID accepts node1's pending asset. If the pending asset listed in step 14 has a different ID than `Conductor-node1`, use that ID.
 
 ```pcli
 su admin
@@ -370,7 +372,7 @@ Expected: `Configuration committed`. In `show assets`, node1 with asset ID `Cond
 
 **Run in:** node0 PCLI (admin)
 
-In the `node0` root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Wait until both assets are `Running` (repeat `show assets`), then check that the conductor nodes see each other.
+In the `node0` root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Wait until both assets are `Running` (repeat `show assets`), then check that the conductor nodes see each other.
 
 ```pcli
 su admin
@@ -389,7 +391,7 @@ The HA conductor is complete after step 16. The following steps tell managed rou
 
 **Run in:** node0 PCLI (admin)
 
-In the `node0` root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Adds both conductor nodes to `authority conductor-address`. Managed routers receive this list in their configuration and connect to both conductor nodes, so a router keeps its conductor connection when one node is down. The commands use the private IPs, which routers reach through VNet peering, VPN or ExpressRoute; use other addresses (for example a NAT or DNS name) if that is how routers reach the nodes. Do this before onboarding routers; it can also be done later. It changes the configuration of every managed router, and a conductor address can be an IP address or a DNS name.
+In the `node0` root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Adds both conductor nodes to `authority conductor-address`. Managed routers receive this list in their configuration and connect to both conductor nodes, so a router keeps its conductor connection when one node is down. The commands use the private IPs, which routers reach through VNet peering, VPN or ExpressRoute; use other addresses (for example a NAT or DNS name) if that is how routers reach the nodes. Do this before onboarding routers; it can also be done later. It changes the configuration of every managed router, and a conductor address can be an IP address or a DNS name.
 
 ```pcli
 su admin

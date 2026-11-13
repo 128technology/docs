@@ -74,7 +74,9 @@ Resource group ssr-conductor-rg (eastus) - created: VM, NIC, NSG
 | `conductor-node0-params.json` | Template parameters for the conductor |
 | `conductor-node0-cloud-init.txt` | cloud-init with the SSR onboarding configuration |
 
-> The cloud-init file contains the repository token. Keep it private and delete it from Cloud Shell when the procedure is complete.
+:::important
+The cloud-init file contains the repository token. Keep it private and delete it from Cloud Shell when the procedure is complete.
+:::
 
 ## Process Overview - How It Works
 
@@ -183,13 +185,13 @@ pending=$(t128-salt-key --no-color -l unaccepted 2>/dev/null | sed 1d | paste -s
 echo "pending assets (not yet accepted): ${pending:-none}"
 ```
 
-Expected: `READY`, then `conductors in global.init: node0=10.0.1.10` and the pending assets: `Conductor-node0` (the conductor's own asset, accepted in the next step; it can take a few minutes after `READY` to appear). `FAILED` means the bootstrapper stopped with an error (see Troubleshooting).
+Expected: `READY`, then `conductors in global.init: node0=10.0.1.10` and the pending assets: `Conductor-node0` (the conductor's own asset, accepted in the next step; it can take a few minutes after `READY` to appear). `FAILED` means the bootstrapper stopped with an error (see [Troubleshooting](#troubleshooting)).
 
 ### Step 6: Accept the Conductor's Asset
 
 **Run in:** Conductor PCLI (as `admin`)
 
-In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting the conductor's asset ID in the configuration accepts the conductor's pending asset; its salt-minion key is accepted automatically as soon as the asset ID is configured. The status command in step 5 listed the pending asset; if its ID differs from `Conductor-node0`, use that ID. `commit force` skips the confirmation prompt; validation still runs.
+In the conductor root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Setting the conductor's asset ID in the configuration accepts the conductor's pending asset; its salt-minion key is accepted automatically as soon as the asset ID is configured. The status command in step 5 listed the pending asset; if its ID differs from `Conductor-node0`, use that ID. `commit force` skips the confirmation prompt; validation still runs.
 
 ```pcli
 su admin
@@ -205,7 +207,7 @@ Expected: `Configuration committed`. In `show assets`, the conductor with asset 
 
 **Run in:** Conductor PCLI (as `admin`)
 
-In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Wait until the conductor's asset is `Running` (repeat `show assets`), then check the conductor's system state.
+In the conductor root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Wait until the conductor's asset is `Running` (repeat `show assets`), then check the conductor's system state.
 
 ```pcli
 su admin
@@ -220,11 +222,11 @@ Expected: `show assets` shows `Conductor-node0` as `Running`, and `show system` 
 
 **The standalone conductor is complete after step 7.** The following step tells managed routers how to reach the conductor. It is optional at this point because the address routers use (for example, a public IP) may only be known after deployment.
 
-### Step 8 (optional): Set the Conductor address for managed routers
+### Step 8 (Optional): Set the Conductor address for managed routers
 
 **Run in:** Conductor PCLI (as `admin`)
 
-In the conductor root shell, enter these commands one at a time, pressing Enter after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Sets `authority conductor-address`, the address managed routers receive in their configuration and use to reach the conductor. The command uses the private IP, which routers reach through VNet peering, VPN or ExpressRoute; use another address (for example a NAT or DNS name) if that is how routers reach the conductor. Do this before onboarding routers; it can also be done later. It changes the configuration of every managed router, and a conductor address can be an IP address or a DNS name.
+In the conductor root shell, enter these commands one at a time, pressing `Enter` after each one. `su admin` opens the PCLI (the prompt becomes `admin@node0.Conductor#`; if it shows a different router name, use that name in the commands), and `quit` returns to the root shell. Sets `authority conductor-address`, the address managed routers receive in their configuration and use to reach the conductor. The command uses the private IP, which routers reach through VNet peering, VPN or ExpressRoute; use another address (for example a NAT or DNS name) if that is how routers reach the conductor. Do this before onboarding routers; it can also be done later. It changes the configuration of every managed router, and a conductor address can be an IP address or a DNS name.
 
 ```pcli
 su admin
