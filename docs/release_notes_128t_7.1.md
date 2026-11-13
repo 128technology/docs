@@ -82,9 +82,9 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
 
-## Release 7.1.8-3-sts
+## Release 7.1.8-9-sts
 
-**Release Date:** November 12, 2026
+**Release Date:** November 16, 2026
 
 ### Resolved Issues
 
@@ -221,6 +221,8 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 - **I95-66908 IDP Configuration Commits Fail After a PKI Service Timeout:** Resolved an issue where, if the PKI service briefly stopped responding, the generated IDP configuration included an SSL proxy profile without its required root CA certificate. The SSL proxy profile is now omitted when the root certificate is unavailable, allowing the remaining security configuration to commit.
 ------
 - **I95-66938 Traffic Dropped for Sessions Crossing the HA Fabric After a Metadata Key Rotation:** Resolved an issue where, after a security metadata key rotation, existing sessions that entered one node of an HA router and egressed the other node across the fabric stopped passing traffic toward the peer router. The egress node signed packets with the new key but did not announce the new key index, so the peer failed HMAC validation and dropped the packets. The new key index is now announced on this path, and the payload key is re-primed correctly.
+------
+- **I95-66956 ESKM Sessions Stop Passing Traffic After a Security-Key Configuration Change:** Resolved an issue where, with rekey disabled, a security-key configuration change replaced the key material without changing the security identifier, causing already-established ESKM sessions to keep using the previous key and fail authentication indefinitely. Affected sessions now pick up the new key material automatically.
 ------
 - **I95-67006 Peer Path Remains Down After an HA Certificate-Expiration Notification:** Resolved an issue where, with `invalid-certificate-behavior` set to `fail-hard`, a stale certificate-expiration notification sent by one HA node during a CRL update caused its HA partner to expire a valid peer metadata key and take an established peer path down. The path remained down because the security state machine was not restarted. The security state machine now restarts after processing this notification, allowing the peer path to recover automatically.
 ------
