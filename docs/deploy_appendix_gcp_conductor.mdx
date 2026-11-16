@@ -12,23 +12,6 @@ The following table describes all supported Terraform variables for the BYOL con
 
 <NetworkDesign/>
 
-| GCP Marketplace Name | Terraform Variable | Required | Description |
-|----------------------|--------------------|----------|-------------|
-| Deployment Name | `goog_cm_deployment_name` | Yes | Name of the conductor VM instance displayed in GCP and the conductor UI. |
-| Machine Type | `machine_type` | Yes | GCP machine type for the conductor VM (for example, `c2-standard-4`). |
-| Region | `region` | Yes | GCP region where the conductor VM is deployed. |
-| Zone | `zone` | Yes | GCP zone within the selected region. |
-| Boot Disk Size | `boot_disk_size` | Yes | Boot disk size in GB. Minimum `60` is recommended. |
-| SSR Mode | `ssr_mode` | Yes | Set to `conductor` for a conductor deployment. |
-| SSR Version | `ssr_version` | Yes | SSR software version to install on the conductor (for example, `7.1.4`). |
-| Artifactory Username | `artifactory_user` | Yes | Username for Juniper BYOL repository access. |
-| Artifactory Token | `artifactory_token` | Yes | Token or password for Juniper BYOL repository access. |
-| SSH Public Key | `ssh_public_key` | Yes | Public SSH key added for administrator access to the conductor VM. |
-| Admin Allowed CIDR | `admin_allowed_cidr` | Yes | Source CIDR range allowed for SSH and HTTPS administration access. |
-| Control Interface Network | `control_nic_network` | Yes | List containing the VPC network name for the conductor control interface. |
-| Control Interface Subnet | `control_nic_subnet` | Yes | List containing the subnet name for the conductor control interface. |
-| Control Allowed CIDR | `control_nic_allowed_cidr` | Yes | Source CIDR range allowed to reach the conductor on ports 930, 4505, and 4506. |
-
 ## Sample `ssr-variables.tfvars`
 
 The following sample file reflects the network design used in this guide. Replace each value with your own before running `terraform apply`.

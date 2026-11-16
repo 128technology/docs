@@ -22,11 +22,11 @@ The diagram below shows the logical network of the GCP conductor deployed in thi
 
 ```mermaid
 graph TD
-    Internet((Internet))
+    Internet((Internet access to SW Repo))
     Admin["Administrator\n(SSH / HTTPS)"]
     subgraph GCP["GCP Project"]
         subgraph VPC["conductor-vpc"]
-            subgraph Subnet["conductor-subnet\n192.168.1.0/24"]
+            subgraph Subnet["conductor-subnet\n10.0.1.0/24"]
                 ConductorVM["SSR Conductor VM\nconductor\ge-0-0: 192.168.1.2 internal\ge-0-0: 35.X.X.X external"]
             end
         end
@@ -49,8 +49,35 @@ graph TD
 Before beginning, ensure the following are available:
 
 - **GCP access** — access to a GCP project with permissions to create VPC networks, subnets, VM instances, and service accounts.
+- **SSR license** - Your SSR License may be required to deploy the GCP VM.
 - **SSR software access credentials** — Username and token for software downloads and provisioning.
 - **SSH key pair** — an RSA key pair for authenticating to the conductor VM.
+
+#### How to Create an SSH Key Pair
+
+An SSH key pair is required to authenticate to the conductor VM after deployment. The public key is provided to the Marketplace deployment form; the private key stays on your local machine.
+
+The following example uses a macOS terminal.
+
+1. Open a terminal on your local machine and run:
+
+   ```
+   ssh-keygen -t rsa -b 4096
+   ```
+
+2. When prompted, enter a name for the key pair and a passphrase. The key files are saved to your home directory.
+
+3. Display the public key by running the following command, replacing `<your-key-pair-name>` with the filename you chose:
+
+   ```
+   cat <your-key-pair-name>.pub
+   ```
+
+4. Copy the key output for use later. You will paste this value into the **SSH Public Key** field during the Marketplace deployment.
+
+:::note
+An existing SSH key pair can be used instead of creating a new one. In that case, skip this section and use your existing public key during deployment.
+:::
 
 ## Instance Size
 

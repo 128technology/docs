@@ -4,7 +4,7 @@ sidebar_label: "Create the GCP VM"
 ---
 import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
-This step deploys the BYOL Session Smart Conductor VM from the GCP Marketplace. The deployment template creates the VM, assigns a static public IP to the management interface, and configures a network security group. SSR version 7.1.4 is automatically installed and the node is initialized as a conductor.
+This step deploys the BYOL Session Smart Conductor VM from the GCP Marketplace. The deployment template creates the VM, reserves an external IP address on the control interface, and configures a network security group that includes VPC Firewall rules. SSR version 7.1.4 is automatically installed and the node is initialized as a conductor.
 
 ## Requirements
 
@@ -16,15 +16,6 @@ The following infrastructure must exist in your GCP Deployment before deploying 
    - An IPv4 range for the subnet (for example, `10.0.1.0/24`)
 
 - An SSH key pair to authenticate to the conductor VM after deployment.
-- A GCP service account with the following IAM roles:
-   
-   | Role | Purpose |
-   |------|---------|
-   | `roles/config.agent` | Required for GCP deployment manager operations |
-   | `roles/compute.admin` | Required to create and manage compute resources |
-   | `roles/iam.serviceAccountUser` | Required to act as the service account |
-   | `roles/storage.objectViewer` | Required to read deployment objects from storage |
-
 
 ## Select the BYOL Plan
 
@@ -32,7 +23,7 @@ The following infrastructure must exist in your GCP Deployment before deploying 
 
 ![GCP Marketplace](/img/deploy-gcp-conductor-web1.png)
 
-2. Enter **Session Smart Networking Platform – BYOL** in the Marketplace search tool, and select the **Session Smart Networking Platform – BYOL** result.
+2. Enter **Session Smart Networking Platform - BYOL** in the Marketplace search tool, and select the **Session Smart Networking Platform - BYOL** result.
 
 ![marketplace Search](/img/deploy-gcp-conductor-web2.png)
 
@@ -57,7 +48,7 @@ Fill in the template parameters using the following table.
 
 ### Deploy
 
-Once all sections are complete, scroll to the bottom and click **Deploy**.
+After you have filled out the template with the required information, scroll to the bottom and click **Deploy**.
 
 
 ![GCP Marketplace common template fields](/img/deploy-gcp-conductor-web9a.png)
@@ -67,7 +58,7 @@ A green checkmark appears under **Status** for each successfully created resourc
 
    ![Conductor Complete](/img/deploy-gcp-conductor-web10.png)
 
-After the VM is created, the the SSR software installation and initialization process automatically runs. **Allow an additional 20 minutes for initialization to complete** before proceeding to [Step 2 — Verify the Installation](deploy_gcp_conductor_verification.md).
+After the VM is created, the the SSR software installation and initialization process automatically runs. **Allow approximately 20 minutes for initialization to complete** before proceeding to [Step 2 — Verify the Installation](deploy_gcp_conductor_verification.md).
 
 ## Next Step
 

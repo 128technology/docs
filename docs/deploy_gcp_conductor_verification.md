@@ -23,7 +23,7 @@ You can verify the successful conductor installation by logging in to the Conduc
    :::
 
    :::note
-   The conductor uses a self-signed certificate. If your browser presents an "unsafe connection" warning, click through to continue. You can replace the certificate later.
+   The conductor uses a self-signed certificate. If your browser presents an "unsafe connection" warning, click on **Advanced Information** and then click **Proceed to X.X.X.X** to continue.
    :::
 
 3. Log in with the following default credentials:
@@ -37,7 +37,7 @@ You can verify the successful conductor installation by logging in to the Conduc
    Change the default password immediately after your first login. This **must** be changed. The new password has the following minimum requirements: A minimum of 9 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
    :::
 
-4. A successful login confirms the conductor is running and reachable on the public IP.
+A successful login confirms the conductor is running and reachable on the public IP.
 
 ## Troubleshooting the Installation
 
@@ -49,9 +49,9 @@ If the instance does not install SSR as expected, SSH into the instance using th
 
 `ssh -i <private-ssh-key> t128@<conductor-public-ip>`
 
-- Try to log into the pcli, run `su admin`, enter your password, and then `show system`.
+- Try to log into the PCLI, run `su admin`, enter the admin password, and then `show system`.
 
-- If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
+- If the PCLI is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support zip file for review (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`), and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
 
 ## Next Step
 
