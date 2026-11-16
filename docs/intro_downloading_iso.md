@@ -57,7 +57,7 @@ Files available for download are:
 - `*.qcow` - This file is used for virtual environments such as KVM.
 :::note
 Operation of SSR qcow2 without cloud-init is not supported at this time. Please see 
-[Deployment Using QCOW2](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/install_qcow2_deployment/) for further details.
+[Deployment Using QCOW2](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/install_qcow2_deployment/) for further details.
 :::
 - `*.tar` - This file is used for image-based upgrades, and is accessed directly by the system during the upgrade. **Do not download or use this to install SSR Software.** 
 - `*.ztp.raw.gz` - This file is used by manufacturing, and is not applicable for customer use. 
