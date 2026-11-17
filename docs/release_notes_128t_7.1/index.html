@@ -6,7 +6,7 @@
 <title data-rh="true">SSR 7.1 Release Notes | SSN Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://docs.128technology.com/docs/release_notes_128t_7.1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSR 7.1 Release Notes | SSN Docs"><meta data-rh="true" name="description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><meta data-rh="true" property="og:description" content="The SSR has moved away from the historical package-based delivery to an image-based delivery. As such, it is strongly suggested that you revisit your &quot;standard&quot; procedures for installation and upgrade of SSR Software."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.128technology.com/docs/release_notes_128t_7.1"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.128technology.com/docs/release_notes_128t_7.1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"7.1","item":"https://docs.128technology.com/docs/release_notes_128t_7.1"}]}</script><link rel="alternate" type="application/rss+xml" href="/kb/rss.xml" title="SSR Knowledge Base Articles RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/kb/atom.xml" title="SSR Knowledge Base Articles Atom Feed">
 <link rel="alternate" type="application/json" href="/kb/feed.json" title="SSR Knowledge Base Articles JSON Feed"><link rel="stylesheet" href="/assets/css/styles.bcc1883f.css">
-<script src="/assets/js/runtime~main.994792b6.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.d25ebcd1.js" defer="defer"></script>
 <script src="/assets/js/main.dadd6076.js" defer="defer"></script>
 </head>
 <body>
@@ -50,6 +50,296 @@
 <div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Before upgrading please review the <a class="" href="/docs/intro_upgrade_considerations"><strong>Upgrade Considerations</strong></a> and the <a class="" href="/docs/intro_rollback"><strong>Rolling Back Software</strong></a> pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.</p></div></div>
 <p>After the installation of SSR 7.x, it is not possible to downgrade to a 6.x version of the SSR software. Because of the format of the image based installation (dividing the disk into two partitions), downgrading from SSR 7.x to any package based installation (6.x) is not possible. A downgrade is defined as uninstalling the 7.x software, and attempting to install a 6.x version.</p>
 <p><strong><a class="" href="/docs/intro_rollback">Rollback</a> (to the previously installed version) is supported.</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-718-9-sts">Release 7.1.8-9-sts<a href="#release-718-9-sts" class="hash-link" aria-label="Direct link to Release 7.1.8-9-sts" title="Direct link to Release 7.1.8-9-sts" translate="no">​</a></h2>
+<p><strong>Release Date:</strong> November 16, 2026</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2022-50073, CVE-2024-12086, CVE-2024-27012, CVE-2024-34459, CVE-2024-58240, CVE-2025-5278, CVE-2025-10911, CVE-2025-12748, CVE-2025-13151, CVE-2025-14087, CVE-2025-14512, CVE-2025-38560, CVE-2026-0799, CVE-2026-0865, CVE-2026-1933, CVE-2026-2291, CVE-2026-2340, CVE-2026-3012, CVE-2026-3039, CVE-2026-3832, CVE-2026-3833, CVE-2026-4046, CVE-2026-4408, CVE-2026-4437, CVE-2026-4438, CVE-2026-4480, CVE-2026-4878, CVE-2026-4890, CVE-2026-4891, CVE-2026-4892, CVE-2026-4893, CVE-2026-5119, CVE-2026-5260, CVE-2026-5419, CVE-2026-5450, CVE-2026-5704, CVE-2026-5946, CVE-2026-6653, CVE-2026-6733, CVE-2026-6893, CVE-2026-7383, CVE-2026-9076, CVE-2026-9496, CVE-2026-9678, CVE-2026-11525, CVE-2026-11822, CVE-2026-11824, CVE-2026-11979, CVE-2026-12151, CVE-2026-13149, CVE-2026-14257, CVE-2026-14456, CVE-2026-14457, CVE-2026-15709, CVE-2026-15711, CVE-2026-16118, CVE-2026-16730, CVE-2026-18477, CVE-2026-18508, CVE-2026-18798, CVE-2026-18917, CVE-2026-19534, CVE-2026-19546, CVE-2026-23479, CVE-2026-23631, CVE-2026-25243, CVE-2026-27145, CVE-2026-28390, CVE-2026-28420, CVE-2026-28780, CVE-2026-28847, CVE-2026-28883, CVE-2026-28901, CVE-2026-28902, CVE-2026-28903, CVE-2026-28904, CVE-2026-28905, CVE-2026-28907, CVE-2026-28942, CVE-2026-28946, CVE-2026-28947, CVE-2026-28953, CVE-2026-28955, CVE-2026-28958, CVE-2026-29518, CVE-2026-31504, CVE-2026-31533, CVE-2026-31657, CVE-2026-31669, CVE-2026-31790, CVE-2026-33007, CVE-2026-33278, CVE-2026-33811, CVE-2026-33814, CVE-2026-33818, CVE-2026-33845, CVE-2026-33846, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2026-34180, CVE-2026-34181, CVE-2026-34182, CVE-2026-34183, CVE-2026-35177, CVE-2026-37555, CVE-2026-39817, CVE-2026-39819, CVE-2026-39820, CVE-2026-39821, CVE-2026-39822, CVE-2026-39823, CVE-2026-39825, CVE-2026-39826, CVE-2026-39836, CVE-2026-39979, CVE-2026-40164, CVE-2026-40170, CVE-2026-40355, CVE-2026-40356, CVE-2026-40467, CVE-2026-40468, CVE-2026-40553, CVE-2026-41035, CVE-2026-41411, CVE-2026-41991, CVE-2026-41992, CVE-2026-42009, CVE-2026-42010, CVE-2026-42011, CVE-2026-42012, CVE-2026-42013, CVE-2026-42014, CVE-2026-42015, CVE-2026-42338, CVE-2026-42499, CVE-2026-42501, CVE-2026-42504, CVE-2026-42507, CVE-2026-42764, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-42944, CVE-2026-42959, CVE-2026-43216, CVE-2026-43491, CVE-2026-43618, CVE-2026-43658, CVE-2026-43660, CVE-2026-44172, CVE-2026-44431, CVE-2026-44432, CVE-2026-45186, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-46135, CVE-2026-48615, CVE-2026-48618, CVE-2026-48619, CVE-2026-48928, CVE-2026-48930, CVE-2026-48933, CVE-2026-48934, CVE-2026-48935, CVE-2026-49825, CVE-2026-50219, CVE-2026-52859, CVE-2026-52995, CVE-2026-53090, CVE-2026-53392, CVE-2026-53393, CVE-2026-53399, CVE-2026-53400, CVE-2026-53402, CVE-2026-54411, CVE-2026-54874, CVE-2026-55892, CVE-2026-56132, CVE-2026-56392, CVE-2026-56846, CVE-2026-56848, CVE-2026-56853, CVE-2026-56858, CVE-2026-56859, CVE-2026-56860, CVE-2026-56862, CVE-2026-58043, CVE-2026-58471, CVE-2026-58472, CVE-2026-59843, CVE-2026-59844, CVE-2026-59845, CVE-2026-59846, CVE-2026-59847, CVE-2026-59848, CVE-2026-59850, CVE-2026-59857, CVE-2026-59873, CVE-2026-59874, CVE-2026-60001, CVE-2026-63072, CVE-2026-63073, CVE-2026-63074, CVE-2026-63075, CVE-2026-63076, CVE-2026-63622, CVE-2026-63806, CVE-2026-63810, CVE-2026-63829, CVE-2026-63830, CVE-2026-64098, CVE-2026-64187, CVE-2026-64189, CVE-2026-64192, CVE-2026-64206, CVE-2026-64266, CVE-2026-64270, CVE-2026-64271, CVE-2026-64272, CVE-2026-64275, CVE-2026-64276, CVE-2026-64279, CVE-2026-64294, CVE-2026-64296, CVE-2026-64298, CVE-2026-64299, CVE-2026-64304, CVE-2026-64306, CVE-2026-64312, CVE-2026-64313, CVE-2026-64317, CVE-2026-64322, CVE-2026-64323, CVE-2026-64324, CVE-2026-64330, CVE-2026-64331, CVE-2026-64332, CVE-2026-64333, CVE-2026-64334, CVE-2026-64335, CVE-2026-64336, CVE-2026-64338, CVE-2026-64340, CVE-2026-64342, CVE-2026-64343, CVE-2026-64344, CVE-2026-64346, CVE-2026-64347, CVE-2026-64351, CVE-2026-64352, CVE-2026-64355, CVE-2026-64362, CVE-2026-64363, CVE-2026-64364, CVE-2026-64370, CVE-2026-64371, CVE-2026-64372, CVE-2026-64373, CVE-2026-64374, CVE-2026-64375, CVE-2026-64379, CVE-2026-64380, CVE-2026-64381, CVE-2026-64401, CVE-2026-64403, CVE-2026-64406, CVE-2026-64408, CVE-2026-64411, CVE-2026-64412, CVE-2026-64413, CVE-2026-64420, CVE-2026-64422, CVE-2026-64423, CVE-2026-64425, CVE-2026-64427, CVE-2026-64434, CVE-2026-64435, CVE-2026-64436, CVE-2026-64440, CVE-2026-64441, CVE-2026-64442, CVE-2026-64443, CVE-2026-64444, CVE-2026-64445, CVE-2026-64446, CVE-2026-64448, CVE-2026-64450, CVE-2026-64452, CVE-2026-64454, CVE-2026-64455, CVE-2026-64456, CVE-2026-64461, CVE-2026-64465, CVE-2026-64470, CVE-2026-64471, CVE-2026-64475, CVE-2026-64478, CVE-2026-64479, CVE-2026-64483, CVE-2026-64484, CVE-2026-64487, CVE-2026-64496, CVE-2026-64503, CVE-2026-64504, CVE-2026-64510, CVE-2026-64512, CVE-2026-64514, CVE-2026-64530, CVE-2026-64531, CVE-2026-64534, CVE-2026-64535, CVE-2026-64536, CVE-2026-64538, CVE-2026-64540, CVE-2026-64543, CVE-2026-64544, CVE-2026-64545, CVE-2026-64546, CVE-2026-64547, CVE-2026-64548, CVE-2026-64549, CVE-2026-64551, CVE-2026-64553, CVE-2026-64554, CVE-2026-64560, CVE-2026-64561, CVE-2026-64562, CVE-2026-64563, CVE-2026-64567, CVE-2026-64569, CVE-2026-64571, CVE-2026-64572, CVE-2026-64576, CVE-2026-64579, CVE-2026-64586, CVE-2026-64593, CVE-2026-64599, CVE-2026-64600, CVE-2026-64604, CVE-2026-66046, CVE-2026-66373, CVE-2026-68082, CVE-2026-68091, CVE-2026-68096, CVE-2026-68104, CVE-2026-68106, CVE-2026-68111, CVE-2026-68115, CVE-2026-68117, CVE-2026-68121, CVE-2026-68123, CVE-2026-68125, CVE-2026-68129, CVE-2026-68131, CVE-2026-68132, CVE-2026-68138, CVE-2026-68142, CVE-2026-68143, CVE-2026-68144, CVE-2026-68146, CVE-2026-68153, CVE-2026-68154, CVE-2026-68155, CVE-2026-68156, CVE-2026-68157, CVE-2026-68158, CVE-2026-68159, CVE-2026-68160, CVE-2026-68162, CVE-2026-68180, CVE-2026-68184, CVE-2026-68186, CVE-2026-68187, CVE-2026-68188, CVE-2026-68190, CVE-2026-68192, CVE-2026-68197, CVE-2026-68198, CVE-2026-68199, CVE-2026-68202, CVE-2026-68205, CVE-2026-68212, CVE-2026-68213, CVE-2026-68214, CVE-2026-68216, CVE-2026-68217, CVE-2026-68218, CVE-2026-68226, CVE-2026-68227, CVE-2026-68234, CVE-2026-68243, CVE-2026-68244, CVE-2026-68248, CVE-2026-68249, CVE-2026-68250, CVE-2026-68253, CVE-2026-68254, CVE-2026-68255, CVE-2026-68284, CVE-2026-68294, CVE-2026-68297, CVE-2026-68299, CVE-2026-68300, CVE-2026-68301, CVE-2026-68304, CVE-2026-68309, CVE-2026-68313, CVE-2026-68315, CVE-2026-68320, CVE-2026-68325, CVE-2026-68326, CVE-2026-68328, CVE-2026-68338, CVE-2026-68344, CVE-2026-68349, CVE-2026-68350, CVE-2026-68351, CVE-2026-68352, CVE-2026-68353, CVE-2026-68354, CVE-2026-68355, CVE-2026-68363, CVE-2026-68365, CVE-2026-68367, CVE-2026-68368, CVE-2026-68373, CVE-2026-68376, CVE-2026-68377, CVE-2026-68398, CVE-2026-68402, CVE-2026-68403, CVE-2026-68405, CVE-2026-68406, CVE-2026-68410, CVE-2026-68413, CVE-2026-68414, CVE-2026-68422, CVE-2026-68425, CVE-2026-68428, CVE-2026-68430, CVE-2026-68432, CVE-2026-68433, CVE-2026-68434, CVE-2026-68444, CVE-2026-68446, CVE-2026-68450, CVE-2026-68456, CVE-2026-68461, CVE-2026-68469, CVE-2026-68475, CVE-2026-68477, CVE-2026-68479, CVE-2026-68480, CVE-2026-69152, CVE-2026-69192, CVE-2026-72004, CVE-2026-72005, CVE-2026-72010, CVE-2026-72014, CVE-2026-72015, CVE-2026-72019, CVE-2026-72020, CVE-2026-72021, CVE-2026-72024, CVE-2026-72035, CVE-2026-72036, CVE-2026-72039, CVE-2026-72045, CVE-2026-72049, CVE-2026-72051, CVE-2026-72052, CVE-2026-72053, CVE-2026-72054, CVE-2026-72055, CVE-2026-72056, CVE-2026-72057, CVE-2026-72061, CVE-2026-72063, CVE-2026-72065, CVE-2026-72066, CVE-2026-72067, CVE-2026-72068, CVE-2026-72070, CVE-2026-72073, CVE-2026-72083, CVE-2026-72084, CVE-2026-72085, CVE-2026-72086, CVE-2026-72087, CVE-2026-72088, CVE-2026-72096, CVE-2026-72099, CVE-2026-72102, CVE-2026-72105, CVE-2026-72107, CVE-2026-72108, CVE-2026-72110, CVE-2026-72113, CVE-2026-72114, CVE-2026-72115, CVE-2026-72116, CVE-2026-72117, CVE-2026-72118, CVE-2026-72119, CVE-2026-72120, CVE-2026-72121, CVE-2026-72122, CVE-2026-72123, CVE-2026-72124, CVE-2026-72125, CVE-2026-72126, CVE-2026-72129, CVE-2026-72135, CVE-2026-72136, CVE-2026-72138, CVE-2026-72142, CVE-2026-72152, CVE-2026-72155, CVE-2026-72159, CVE-2026-72160, CVE-2026-72163, CVE-2026-72164, CVE-2026-72165, CVE-2026-72166, CVE-2026-72170, CVE-2026-72182, CVE-2026-72218, CVE-2026-72219, CVE-2026-72223, CVE-2026-72224, CVE-2026-72225, CVE-2026-72226, CVE-2026-72228, CVE-2026-72229, CVE-2026-72230, CVE-2026-72231, CVE-2026-72232, CVE-2026-72233, CVE-2026-72234, CVE-2026-72235, CVE-2026-72240, CVE-2026-72241, CVE-2026-72242, CVE-2026-72245, CVE-2026-72247, CVE-2026-72250, CVE-2026-72251, CVE-2026-72252, CVE-2026-72253, CVE-2026-72255, CVE-2026-72256, CVE-2026-72265, CVE-2026-72272, CVE-2026-72282, CVE-2026-72289, CVE-2026-72297, CVE-2026-72298, CVE-2026-72299, CVE-2026-72305, CVE-2026-72306, CVE-2026-72310, CVE-2026-72314, CVE-2026-72316, CVE-2026-72319, CVE-2026-72322, CVE-2026-72326, CVE-2026-72339, CVE-2026-72347, CVE-2026-72348, CVE-2026-72349, CVE-2026-72350, CVE-2026-72351, CVE-2026-72389, CVE-2026-72392, CVE-2026-72396, CVE-2026-72400, CVE-2026-72406, CVE-2026-72409, CVE-2026-72418, CVE-2026-72421, CVE-2026-72428, CVE-2026-72433, CVE-2026-72435, CVE-2026-72441, CVE-2026-72447, CVE-2026-72450, CVE-2026-72466, CVE-2026-72476, CVE-2026-72481, CVE-2026-72491, CVE-2026-72502, CVE-2026-73072, CVE-2026-73073, CVE-2026-73076, CVE-2026-73077, CVE-2026-73078, CVE-2026-74255, CVE-2026-74256, CVE-2026-74265, CVE-2026-74267, CVE-2026-74279, CVE-2026-74281, CVE-2026-74282, CVE-2026-74283, CVE-2026-74284, CVE-2026-74287, CVE-2026-74288, CVE-2026-74295, CVE-2026-74297, CVE-2026-74305, CVE-2026-74312, CVE-2026-74313, CVE-2026-74320, CVE-2026-74321, CVE-2026-74327, CVE-2026-74329, CVE-2026-74330, CVE-2026-74331, CVE-2026-74339, CVE-2026-74340, CVE-2026-74346, CVE-2026-74348, CVE-2026-74349, CVE-2026-74351, CVE-2026-74359, CVE-2026-74363, CVE-2026-74376, CVE-2026-74379, CVE-2026-74382, CVE-2026-74384, CVE-2026-74390, CVE-2026-74394, CVE-2026-74395, CVE-2026-74398, CVE-2026-74399, CVE-2026-74408, CVE-2026-74410, CVE-2026-74416, CVE-2026-74424, CVE-2026-74443, CVE-2026-74444, CVE-2026-74453, CVE-2026-74455, CVE-2026-74456, CVE-2026-74457, CVE-2026-74458, CVE-2026-74460, CVE-2026-74461, CVE-2026-74464, CVE-2026-74465, CVE-2026-74469, CVE-2026-74470, CVE-2026-74471, CVE-2026-74473, CVE-2026-74475, CVE-2026-74479, CVE-2026-74480, CVE-2026-74481, CVE-2026-74482, CVE-2026-74485, CVE-2026-74486, CVE-2026-74487, CVE-2026-74488, CVE-2026-74490, CVE-2026-74492, CVE-2026-74495, CVE-2026-74497, CVE-2026-74498, CVE-2026-74499, CVE-2026-74505, CVE-2026-74507, CVE-2026-74508, CVE-2026-74512, CVE-2026-74517, CVE-2026-74518, CVE-2026-74519, CVE-2026-74523, CVE-2026-74540, CVE-2026-74546, CVE-2026-74547, CVE-2026-74548, CVE-2026-74556, CVE-2026-74557, CVE-2026-74564, CVE-2026-74566, CVE-2026-74567, CVE-2026-74569, CVE-2026-74575, CVE-2026-74577, CVE-2026-74579, CVE-2026-74580, CVE-2026-74581, CVE-2026-74583, CVE-2026-74585, CVE-2026-74586, CVE-2026-74587, CVE-2026-74588, CVE-2026-74589, CVE-2026-74594, CVE-2026-74595, CVE-2026-74597, CVE-2026-74598, CVE-2026-74599, CVE-2026-74601, CVE-2026-74604, CVE-2026-74609, CVE-2026-74613, CVE-2026-74614, CVE-2026-74615, CVE-2026-74616, CVE-2026-74620, CVE-2026-74621, CVE-2026-74622, CVE-2026-74623, CVE-2026-74625, CVE-2026-74630, CVE-2026-74635, CVE-2026-74636, CVE-2026-74641, CVE-2026-74648, CVE-2026-74649, CVE-2026-74650, CVE-2026-74651, CVE-2026-74654, CVE-2026-74656, CVE-2026-74657, CVE-2026-74658, CVE-2026-74660, CVE-2026-74664, CVE-2026-74667, CVE-2026-74669, CVE-2026-74671, CVE-2026-74673, CVE-2026-74675, CVE-2026-74676, CVE-2026-74679, CVE-2026-74680, CVE-2026-74682, CVE-2026-74683, CVE-2026-74684, CVE-2026-74688, CVE-2026-74696, CVE-2026-74697, CVE-2026-74701, CVE-2026-74704, CVE-2026-74705, CVE-2026-74717, CVE-2026-74720, CVE-2026-74726, CVE-2026-74730, CVE-2026-74746, CVE-2026-74748, CVE-2026-80527, CVE-2026-80528, CVE-2026-80534, CVE-2026-80540, CVE-2026-80541, CVE-2026-80558, CVE-2026-80561, CVE-2026-80574, CVE-2026-80586, CVE-2026-80590, CVE-2026-80593, CVE-2026-80599, CVE-2026-80601, CVE-2026-80603, CVE-2026-80604, CVE-2026-80605, CVE-2026-80609, CVE-2026-80613, CVE-2026-80622, CVE-2026-80630, CVE-2026-80644, CVE-2026-80646, CVE-2026-80652, CVE-2026-80659, CVE-2026-80664, CVE-2026-80677, CVE-2026-80678, CVE-2026-80681, CVE-2026-80706, CVE-2026-80707, CVE-2026-80714, CVE-2026-80715, CVE-2026-80716, CVE-2026-80717, CVE-2026-80722, CVE-2026-80731, CVE-2026-80733, CVE-2026-80742, CVE-2026-80744, CVE-2026-80754, CVE-2026-80756, CVE-2026-80757, CVE-2026-81934, CVE-2026-88815, CVE-2026-93990, CVE-2026-96512.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>The following issues have been addressed and delivered to increase the overall security posture of the SSR:</strong> I95-65157, I95-65217, I95-65244, I95-65250, I95-65254, I95-66535, I95-66539, I95-66540, I95-66541, I95-66545, I95-66546, I95-66547, I95-66835.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-63282 <code>local-salt-states</code> Service Logged Repeated Failures On Unmanaged Routers:</strong> Resolved an issue where the <code>local-salt-states</code> service attempted to run on unmanaged routers in addition to conductor nodes, repeatedly logging <code>Failed to start Run Necessary Salt States Locally on Unmanaged Conductor</code> messages. This script is now restricted to conductor nodes only.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65544 Host Service Exposure on WAN Interface During Startup:</strong> Resolved an issue where host services (such as SSH) were exposed on external WAN interfaces during system boot because <code>firewalld</code> flushed interface-to-zone associations during startup reloads before security rules were fully established.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65583 Corrected Log Rotation Frequency for InfluxDB Logs:</strong> Resolved an issue where InfluxDB log rotation ran only once per day instead of hourly on some platforms, allowing log files to grow much larger than expected and, in some cases, consume all available disk space. Log rotation now runs hourly as intended.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65672 Excessive LDAP Service Lookups Against External Directory Servers:</strong> Resolved an issue where SSR nodes generated an excessive volume of LDAP lookups against an external directory server (such as JumpCloud) when resolving well-known service names (for example, <code>ntp</code>, <code>sctp</code>, <code>udplite</code>, and <code>dccp</code>). These service names are now resolved from the local <code>/etc/services</code> file instead of querying the external directory server.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65736 Improved Source NAT Visibility in Tech-Support-Info:</strong> Added a form of the source NAT rules <code>show</code> command that reports pool usage across all network-interfaces in a single invocation, and included this output in tech-support-info collection to improve visibility into source NAT operation during troubleshooting.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65899 Router not synchronized After Conductor Migration:</strong> Resolved an issue where an HA router pair remains un-synchronized with the production conductor after migrating from a staging conductor, because the new conductor address was not persisted following migration.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65901 Configuration Commit Failure When <code>host-service</code> Is The Only Defined Service:</strong> Resolved an issue where committing a configuration with a <code>host-service</code> defined on a network-interface, but no other services defined under the authority, caused configDirector to throw an exception and flood the log and connected PCLI sessions with JSON output. <code>host-service</code> entries are now placed correctly when no other services are configured.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65912 Source NAT Port Exhaustion Caused by Duplicate Internal Interfaces:</strong> Resolved an issue where enabling both source NAT and IDP results in duplicate internal interface identifiers being created, contributing to premature exhaustion of available source NAT ports and dropped packets. Internal IDP interface identifiers are now allocated uniquely.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-65957 VRRP Split-Brain After Adding GRE Tunnels To A Redundant WAN Interface:</strong> Resolved an issue where adding GRE tunnel network-interfaces to a redundant WAN device-interface causes both nodes of an HA pair to simultaneously claim the VRRP master role, resulting in an active-active split-brain condition. VRRP state machines are no longer created for tunnel interfaces.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66077 BGP Peers Down After Enabling a Second Internet Provider:</strong> Resolved a defect in BGP conditional advertisement processing that causes all BGP peers to go down when a second BGP-connected internet provider was enabled.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66082 Highway Crash on Reverse-Flow Session Collision:</strong> Resolved an issue where the highway process crashes when a returning packet collides with an internal session during reverse-flow processing, causing peer instability. The colliding packet is now safely dropped instead of causing a crash.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66087 Mist Insights Reported DHCP Success For A WAN Port With No Link:</strong> Resolved an issue where Mist Insights reports a successful WAN edge DHCP transaction for an interface that had no physical link, because the DHCP event did not identify the specific node and interface involved. DHCP events now include the affected node so link state can be correlated correctly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66088 DHCP <code>ha-heartbeat</code> State Showing <code>partner-down</code> on both HA Nodes:</strong> Resolved an issue where the DHCP <code>ha-heartbeat</code> state shows <code>partner-down</code> on both nodes of an HA pair because HA control interface addresses were not recovered correctly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66123 PCLI <code>paste-config</code> Reordered Delete Operations To The End Of A Transaction:</strong> Resolved an issue where pasting a multi-operation configuration transaction into the PCLI always moved delete operations to the end, regardless of their original order, changing the intended effect of the transaction. The PCLI now preserves the original operation order.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66127 401 Authorization Required error when refreshing Logs page:</strong> Resolved a <code>401 Authorization Required</code> error that prevented non-default administrator users from viewing router displays, the Logs page, and FIB tables in the Conductor GUI.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66149 AIDE Logs Added to Tech-Support-Info:</strong> Tech-support-info collection now includes the AIDE (Advanced Intrusion Detection Environment) log directory, improving visibility into file-integrity monitoring during troubleshooting.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66157 Stale BGP Routes Shown as <code>inaccessible, import-check enabled</code>:</strong> Resolved an issue in the underlying routing stack where stale BGP routes remain in a per-VRF routing table and are displayed as <code>inaccessible, import-check enabled</code> when VRF route leaking is configured. Stale routes are now correctly withdrawn.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66197 Clarified <code>show system software available</code> Output On The Conductor:</strong> Improved the <code>show system software available</code> output on the conductor so upgrade-eligible router versions are easier to identify immediately after a conductor upgrade, reducing confusion about which versions are available to install.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66234 Creating a snapshot log for large configurations appears to stall the system:</strong> Resolved an issue where generating a diagnostic snapshot log takes an excessive amount of time on a system with a large configuration and causes the configuration director&#x27;s poller thread to appear unresponsive.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66238 NTP Rejected State After Upgrade:</strong> Resolved an issue where NTP synchronization enters a rejected state after an upgrade, caused by a boot-sequence race condition where the NTP time-sync dispatcher ran before the internal management interface was ready. This could also result in missing analytics graphs and authentication errors on the Conductor GUI due to clock skew.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66256 Secure Conductor Onboarding Status Inconsistent Between HA Conductor Nodes:</strong> Resolved an issue where, after a router was successfully onboarded using Secure Conductor Onboarding (SCO), the standby conductor node continued to display stale onboarding status while the active node reported the asset as onboarded. The onboarding service loaded the list of onboarded assets only at startup. Onboarded assets are now reloaded and reconciled on each reload, and the authorizing node notifies its HA peer to refresh its state. Access to SCO endpoints is also now restricted to users with the appropriate permissions.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66259 configDirector Crash Due To Thread-Name Reuse In Metrics Collection:</strong> Resolved an issue where configDirector crashed with a failed assertion in the metrics subsystem when a reused thread name in the worker pool created a mismatch between recorded and incoming thread statistics. Thread statistics are now aggregated correctly for threads that share a name.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66278 Resolved Peer-Path Instability with ESKM ML-KEM Sessions:</strong> Resolved an issue where an incorrect retransmit timer for ESKM sessions using ML-KEM could cause peer-paths to intermittently flap and drop traffic. The retransmit timer has been corrected.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66282 Removed Trusted CA Certificates Remained Trusted:</strong> Resolved an issue where removing a certificate from the <code>trusted-ca-certificate</code> configuration did not remove it from the highway process&#x27;s in-memory trust map, so the certificate continued to be trusted for ESKM peering.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66284 API Swagger Documentation Updated:</strong> Updated the OpenAPI (Swagger) documentation to reflect the preferred <code>/api/config</code> endpoint and the deprecation of the legacy <code>/api/v1/config</code> endpoint.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66319 Self-Signed Certificates Rejected by Strict TLS Clients on Dates Before 2050:</strong> Resolved an issue where self-signed certificates generated by the initializer and by the PCLI certificate-regeneration command encoded validity dates before the year 2050 using a format that violates RFC 5280. Strict TLS stacks, including macOS and LibreSSL-based <code>curl</code>, rejected these certificates with a <code>format error in certificate&#x27;s notBefore field</code> error. Certificate validity dates are now encoded using the RFC-compliant format for the applicable year range.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66331 ESKM Peer Paths Fail to Establish Between Routers on Different Software Versions:</strong> Resolved an issue where the ESKM metadata-key exchange between different software versions may fail to reach the  MetadataKeyExchCompleted state causing a peer path failure. The router running the newer version of software now correctly recognizes the metadata key of the older version of software on the router.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66332 Peer Data Channel SSH Keys Become Corrupted After A Forced Restart:</strong> Resolved an issue where a forced restart may corrupt or empty the Peer Data Channel (PDC) SSH host key files, preventing the Secure Communication Manager from establishing the SSH tunnel used for HA state replication. The Secure Communication Manager now validates the PDC SSH keys at startup and regenerates them automatically if they are missing or invalid.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66333 Highway Crash on Hub After Spoke WAN Interface Disruption:</strong> Resolved an issue where the highway process on a hub crashed while decrypting payload traffic over a fabric or inter-router interface that did not have inter-router security configured, following a peer-path failure on a spoke.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66348 Secure Communication Manager crashes:</strong> Increase mutex duration times, allowing the Secure Communication Manager to complete processes without hitting the deadlock detection limit. This resolves crashing of the Secure Communication Manager process on Conductors managing large configurations.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66351 Peer Paths Not Recovering After Interface Changes:</strong> Resolved an issue where peer paths remain down and next-hop routes unreachable after a network-interface configuration change, such as a shutdown or rename, requiring a full system restart to recover. Device-interface configuration changes are now retried automatically after a transient failure.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66352 Indexed Pagination Added To PIM And IGMP Operational <code>show</code> Commands:</strong> Added indexed pagination (<code>first-index</code> and count limit) to PIM and IGMP operational <code>show</code> commands across the FRR data plane, PCLI, and RoutingManager REST endpoints, preventing buffer exhaustion, memory spikes, and query timeouts in large-scale multicast deployments.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66371 Antivirus Engine Startup Failure on Repeated CA Load:</strong> Resolved an issue where the antivirus engine fails to start if the certificate authority has already been extracted during a previous startup attempt.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66452 Highway Crash When The Application Statistics Cache Reached Capacity:</strong> Resolved an issue where the highway process crashes with a null-pointer when the application identification statistics cache reaches its configured capacity and a subsequent memory allocation failed.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66474 Conductor Event History Export Produced Corrupted Files:</strong> Resolved an issue where exporting event history from the Conductor produced a ZIP archive containing corrupted or zero-byte files, due to an incompatible compression dependency. Event history exports are now generated correctly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66491 Conductor Not Displaying Router Metrics After Upgrade:</strong> Resolved a regression where, after upgrading the conductor, logging in with certain administrator accounts no longer displayed CPU, RAM, disk, and session metrics for managed routers.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66495 <code>optics-statistics</code> Reported Unavailable For Some SFPs:</strong> Resolved a parsing error that caused the <code>show device-interface optics-statistics</code> command to report optics statistics as unavailable for certain SFP transceivers.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66513 IDP Alarms Not Generated For A Parent Tenant With A Neighborhood Member:</strong> Resolved an issue where IDP alarms were not generated for traffic associated with a parent tenant that had a neighborhood member configured, even though traffic was being inspected correctly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66588 IDP loading failed on SSR440 Platforms:</strong> Resolved an issue where enabling IDP on SSR440 platforms may leave the IDP engine stuck in a <code>rebuilding</code> state due to duplicate critical-profile policy entries.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66598 Highway Crash Guard For Unprimed ESKM Payload Security Contexts:</strong> Backported a defensive fix that guards ESKM CBC payload encryption and decryption against unprimed security contexts, preventing a potential highway crash.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66605 Multicast <code>show</code> REST Endpoints Now Accept <code>ipAddress</code> Query Parameter:</strong> Resolved an issue where the PIM, IGMP, MSDP, and MLD <code>show</code> REST endpoints only recognized the <code>ip-address</code> query parameter, causing Mist-originated requests that use <code>ipAddress</code> (camelCase) to silently ignore address filters. These endpoints now accept both parameter forms.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66608 Configuration Validation Added For Missing Fabric Security Policy With ESKM:</strong> Added configuration validation that flags a fabric interface missing <code>inter-router-security</code> when ESKM is enabled, preventing a configuration that was previously known to trigger a highway crash.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66615 CSR Subject DN Attributes not generated in Conventional Order:</strong> Resolved an issue where certificate signing requests (CSRs) generated through the SSR API ordered the subject distinguished name (DN) attributes in a non-conventional sequence, regardless of the order supplied in the request, causing certificate authorities that enforce strict DN ordering to reject the request. Subject relative distinguished names (RDNs) are now ordered according to convention: C, ST, L, O, OU, CN.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66618 Highway becomes unresponsive due to a peer metadata-key HA response loop:</strong> Resolved an issue where an HA response loop in the peer metadata-key exchange causes highway to rapidly resend requests to its peer, overflowing internal buffers and leading to service failure. A guard now prevents this non-progress response loop.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66646 Peer Path State Mismatch Between Local And Remote Routers:</strong> Resolved a race condition in the ESKM security state machine that caused a peer path to be reported as down on one side of a connection while the other side reported it as up.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66648 Highway Crash After ESKM Flow Migration:</strong> Resolved an issue where the highway process was crashing on a hub router with ESKM enabled when flow migration occurred at the same time as a payload-key restart, because the recipient lacked the information needed to decrypt the migrated payload. The ESKM payload key is now correctly re-primed after a metadata restart.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66661 Reserved <code>_pim_speaker_</code> Tenant Name To Prevent Namespace Collisions:</strong> The auto-generated tenant used for PIM-over-SVR access-policy authorization is now named <code>_pim_speaker_</code> instead of <code>pim_speaker</code>, preventing collisions with a user-configured tenant or network of the same name.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66679 <code>show certificate ca detail</code> Did Not Decode The Subject Directory Attributes Extension:</strong> Resolved an issue where the <code>show certificate ca detail</code> command displayed the X.509v3 Subject Directory Attributes extension as raw, unreadable characters instead of the decoded OID and value.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66682 L7 Security Validation did not check the last access-Policy member:</strong> Corrected the validation logic that checks access-policies for Layer 7 security mismatches. The last item in the service list allowed a mismatched configuration to go undetected.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66684 PIM-Over-SVR Neighbors Failed To Form On Mist-Managed Routers:</strong> Resolved an issue where locally originated PIM control traffic on a Mist-managed router was dropped because firmware looked up the PIM speaker tenant using the legacy name <code>pim_speaker</code> instead of <code>_pim_speaker_</code>, preventing PIM-over-SVR neighbor relationships from forming.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66685 Additional ESKM Security State Machine Hardening:</strong> Resolved additional cases where the ESKM security state machine may stall or take a peer path down without recovering, including a lost ML-KEM acknowledgment and unvalidated peer rekey handling, following further hardening of the key-exchange timer and flag-cleanup logic.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66699 Highway crash when an HA peer certificate-expiration notice was received:</strong> Resolved an issue where an HA node receiving a peer certificate-expiration notice from its HA partner attempted to remove the same tracked peer metadata key twice, causing highway to crash. Duplicate removal is now tolerated safely.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66708 Downgrade Failures In HA Setups:</strong> Resolved an issue where downgrading an HA pair to certain earlier SSR versions could fail because backwards-incompatible application-identification auto-detection fields were not removed from the configuration before the downgrade.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66730 <code>show certificate ca router &lt;router&gt; node &lt;node&gt;</code> Command Failed:</strong> Resolved an issue where the <code>show certificate ca router &lt;router&gt; node &lt;node&gt;</code> command failed when displaying empty or malformed CA certificate entries, even though querying a specific certificate name succeeded.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66750 Runtime Validation of AES-CBC Key and IV Sizes:</strong> Replaced debug-only key and initialization vector (IV) size assertions in the AES-CBC encryption context with runtime validation. Only 16-byte or 32-byte keys and a 16-byte IV are accepted, and invalid input is rejected before it is copied into fixed-size buffers.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66751 Metadata-Key Ciphertext Removed From BFD Debug Logs:</strong> BFD transmit and receive debug logs no longer include the encrypted metadata-key payload. The logs retain non-sensitive context, such as the rekey index, session identity, peer and node identity, and payload size.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66752 Improved Security-Key Service Shutdown Handling:</strong> Resolved an issue where queued callbacks in the security-key service could continue to run after the service was stopped, sending key requests or accessing stopped or destroyed state during shutdown. Queued work is now invalidated during shutdown, active callbacks complete before retry timers are canceled, and the service handler is stopped before the security manager.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66753 Stale Rekey Timer Callbacks Now Discarded:</strong> Resolved an issue where previously queued rekey timer work in the security key manager could act on key or timer state that had since changed. Rekey timer callbacks are now invalidated when the timer is reconfigured, disabled, restarted, or shut down, and timeout work is revalidated before any key is modified.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66790 Auto-Generated BGP-Over-SVR Services Distributed to Unrelated Routers:</strong> Resolved an issue in hub-and-spoke BGP-over-SVR deployments where auto-generated BGP services were distributed to every router sharing a resource group, rather than only to the routers involved in the peering. Generated BGP loopback services are now scoped to the owning router and its direct BGP peers.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66816 Web Interface Unavailable Due to an Internal Request Loop:</strong> Resolved an issue where a request containing an encoded or non-normalized URI (for example, <code>/%2Fapi/config</code>) caused the web server to repeatedly forward the request back to itself, exhausting available connections and making the web interface unavailable until the conductor was restarted. These requests now return a <code>404</code> response.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66844 BGP Sessions Flap After an SVR Payload Key Rekey:</strong> Resolved an issue where BGP sessions between routers could flap following an SVR payload key rekey. A delayed packet carrying the previous key could cause a router to advertise a payload key that did not match the key used to encrypt traffic, so the peer failed HMAC validation and dropped the packets. The advertised and active payload keys now remain consistent, and the payload key is re-primed correctly after a restart.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66881 Prevent Web Crawlers from indexing paths:</strong> The SSR web interface now serves a <code>robots.txt</code> file that instructs web crawlers not to index any paths. The file is also included in tech-support-info collection.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66901 IDP Security Events Not Forwarded to External Syslog Servers:</strong> Resolved an issue where IDP and antivirus security events were not forwarded to configured external syslog servers, even though the IDP engine generated the events and other session syslog messages were forwarded normally. The per-service syslog policy is now applied to these events, and they are forwarded as expected.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66908 IDP Configuration Commits Fail After a PKI Service Timeout:</strong> Resolved an issue where, if the PKI service briefly stopped responding, the generated IDP configuration included an SSL proxy profile without its required root CA certificate. The SSL proxy profile is now omitted when the root certificate is unavailable, allowing the remaining security configuration to commit.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66938 Traffic Dropped for Sessions Crossing the HA Fabric After a Metadata Key Rotation:</strong> Resolved an issue where, after a security metadata key rotation, existing sessions that entered one node of an HA router and egressed the other node across the fabric stopped passing traffic toward the peer router. The egress node signed packets with the new key but did not announce the new key index, so the peer failed HMAC validation and dropped the packets. The new key index is now announced on this path, and the payload key is re-primed correctly.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-66956 ESKM Sessions Stop Passing Traffic After a Security-Key Configuration Change:</strong> Resolved an issue where, with rekey disabled, a security-key configuration change replaced the key material without changing the security identifier, causing already-established ESKM sessions to keep using the previous key and fail authentication indefinitely. Affected sessions now pick up the new key material automatically.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-67006 Peer Path Remains Down After an HA Certificate-Expiration Notification:</strong> Resolved an issue where, with <code>invalid-certificate-behavior</code> set to <code>fail-hard</code>, a stale certificate-expiration notification sent by one HA node during a CRL update caused its HA partner to expire a valid peer metadata key and take an established peer path down. The path remained down because the security state machine was not restarted. The security state machine now restarts after processing this notification, allowing the peer path to recover automatically.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-67007 Reverse Traffic Dropped After a Same-Index Failover:</strong> Resolved an issue where, following a failover in which the payload key index did not change, reverse-direction packets were dropped because a new encryption context was not installed when no existing context was present. The new encryption context is now installed in this case, and delayed packets carrying an older key no longer overwrite the current decryption key.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-67036 Very Large Configurations Fail to Load:</strong> Resolved an issue where a 64 MB limit on XML parsing prevented very large configurations from loading. Large configurations are now parsed successfully, and the web service continues retrying startup while a large configuration is being prepared, preventing the API from becoming unavailable during upgrade health checks.</li>
+</ul>
+<hr>
+<ul>
+<li class=""><strong>I95-67045 Configuration Commit Blocked by IDP Tenant Prefix Validation:</strong> Resolved an issue where IDP tenant validation rejected a configuration commit when child tenants of an IDP-enabled parent tenant used the same prefix on different routers. Duplicate child-tenant prefix validation is now scoped to each router, allowing independent sites to reuse the same prefixes.</li>
+</ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-717-15-sts">Release 7.1.7-15-sts<a href="#release-717-15-sts" class="hash-link" aria-label="Direct link to Release 7.1.7-15-sts" title="Direct link to Release 7.1.7-15-sts" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> September 17, 2026</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-features">New Features<a href="#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features" translate="no">​</a></h3>
@@ -64,7 +354,7 @@
 </li>
 </ul>
 <hr>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues">Resolved Issues<a href="#resolved-issues" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2024-12086, CVE-2024-34459, CVE-2025-5278, CVE-2025-6170, CVE-2025-9714, CVE-2025-10911, CVE-2025-12748, CVE-2025-13151, CVE-2025-14087, CVE-2025-14512, CVE-2025-21502, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2025-30749, CVE-2025-30754, CVE-2025-50059, CVE-2025-50106, CVE-2025-53057, CVE-2025-53066, CVE-2025-64720, CVE-2025-65018, CVE-2026-0865, CVE-2026-1933, CVE-2026-2291, CVE-2026-2340, CVE-2026-3012, CVE-2026-3039, CVE-2026-3832, CVE-2026-3833, CVE-2026-4046, CVE-2026-4408, CVE-2026-4437, CVE-2026-4438, CVE-2026-4480, CVE-2026-4786, CVE-2026-4800, CVE-2026-4878, CVE-2026-4890, CVE-2026-4891, CVE-2026-4892, CVE-2026-4893, CVE-2026-5119, CVE-2026-5260, CVE-2026-5419, CVE-2026-5435, CVE-2026-5450, CVE-2026-5928, CVE-2026-5946, CVE-2026-6238, CVE-2026-6893, CVE-2026-7383, CVE-2026-9076, CVE-2026-9698, CVE-2026-14380, CVE-2026-14474, CVE-2026-14476, CVE-2026-14739, CVE-2026-15308, CVE-2026-21925, CVE-2026-21933, CVE-2026-21945, CVE-2026-22007, CVE-2026-22013, CVE-2026-22016, CVE-2026-22018, CVE-2026-22021, CVE-2026-23479, CVE-2026-23631, CVE-2026-23865, CVE-2026-25243, CVE-2026-28390, CVE-2026-28780, CVE-2026-28847, CVE-2026-28883, CVE-2026-28901, CVE-2026-28902, CVE-2026-28903, CVE-2026-28904, CVE-2026-28905, CVE-2026-28907, CVE-2026-28942, CVE-2026-28946, CVE-2026-28947, CVE-2026-28953, CVE-2026-28955, CVE-2026-28958, CVE-2026-29111, CVE-2026-29518, CVE-2026-33007, CVE-2026-33278, CVE-2026-33845, CVE-2026-33846, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2026-34180, CVE-2026-34181, CVE-2026-34182, CVE-2026-34183, CVE-2026-34268, CVE-2026-34282, CVE-2026-34980, CVE-2026-35177, CVE-2026-35385, CVE-2026-37555, CVE-2026-39979, CVE-2026-40164, CVE-2026-40170, CVE-2026-40355, CVE-2026-40356, CVE-2026-40622, CVE-2026-41035, CVE-2026-41254, CVE-2026-41292, CVE-2026-41411, CVE-2026-42009, CVE-2026-42010, CVE-2026-42011, CVE-2026-42012, CVE-2026-42013, CVE-2026-42014, CVE-2026-42015, CVE-2026-42055, CVE-2026-42534, CVE-2026-42764, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-42944, CVE-2026-42959, CVE-2026-43618, CVE-2026-43658, CVE-2026-43660, CVE-2026-44390, CVE-2026-44431, CVE-2026-44432, CVE-2026-44673, CVE-2026-45186, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-46483, CVE-2026-46917, CVE-2026-46968, CVE-2026-47010, CVE-2026-47021, CVE-2026-47027, CVE-2026-47059, CVE-2026-47063, CVE-2026-47162, CVE-2026-47167, CVE-2026-48142, CVE-2026-48864, CVE-2026-48914, CVE-2026-48962, CVE-2026-52858, CVE-2026-54369, CVE-2026-54370, CVE-2026-54371, CVE-2026-55693, CVE-2026-57455, CVE-2026-57456, CVE-2026-58016, CVE-2026-59856, CVE-2026-59858, CVE-2026-60147, CVE-2026-60589, CVE-2026-61308, CVE-2026-70907, CVE-2026-103390, CVE-2026-103391, CVE-2026-103392, CVE-2026-103393, CVE-2026-103394, CVE-2026-103400, CVE-2026-103401, CVE-2026-103402, CVE-2026-103403, CVE-2026-103404, CVE-2026-103405, CVE-2026-103406, CVE-2026-103407, CVE-2026-103408, CVE-2026-103409, CVE-2026-103410, CVE-2026-103411, CVE-2026-106079.</li>
 </ul>
@@ -74,11 +364,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-62331 OSPF Default Route Not Re-Advertised After Restart:</strong> Resolved an issue where a timing condition could prevent OSPF from generating the external (Type 5) LSA for a configured default route after a restart, so peers did not receive the default route until the OSPF process was manually cleared. OSPF now reliably advertises the default route after a restart.</li>
+<li class=""><strong>I95-62331 OSPF Default Route Not Re-Advertised After Restart:</strong> Resolved an issue where a timing condition prevented OSPF from generating the external (Type 5) LSA for a configured default route after a restart, so peers did not receive the default route until the OSPF process was manually cleared. OSPF now reliably advertises the default route after a restart.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-63195 Highway Crash During ESKM Session Scaling:</strong> Resolved an issue where the highway process could crash during high session scaling due to incorrect metadata propagation in ESKM encrypt/decrypt contexts.</li>
+<li class=""><strong>I95-63195 Highway Crash During ESKM Session Scaling:</strong> Resolved a highway process crash during high session scaling due to incorrect metadata propagation in ESKM encrypt/decrypt contexts.</li>
 </ul>
 <hr>
 <ul>
@@ -94,11 +384,11 @@
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-64908 Runtime Error Collapsing Logs Panel in Web Interface:</strong> Resolved an issue where interacting with the collapse control on the Conductor Logs page before the page had fully rendered could trigger a runtime script error. The Logs page now safely handles this interaction.</li>
+<li class=""><strong>I95-64908 Runtime Error Collapsing Logs Panel in Web Interface:</strong> Resolved an issue where interacting with the collapse control on the Conductor Logs page before the page had fully rendered was triggering a runtime script error. The Logs page now safely handles this interaction.</li>
 </ul>
 <hr>
 <ul>
-<li class=""><strong>I95-64978 Highway crash on head-end router causing interface flaps:</strong> Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) could cause the highway process to crash with a core dump, resulting in interface flaps. Access to these fields is now properly synchronized.</li>
+<li class=""><strong>I95-64978 Highway crash on head-end router causing interface flaps:</strong> Resolved an issue where a race condition on session classification fields (such as domain name, URI, and application classification) caused the highway process to crash with a core dump, resulting in interface flaps. Access to these fields is now properly synchronized.</li>
 </ul>
 <hr>
 <ul>
@@ -290,7 +580,7 @@
 <ul>
 <li class=""><strong>I95-63012 AppID Scale Optimization:</strong> Improved application identification performance and scale for WAN deployments. Optimizations reduce resource consumption on spoke routers where application identification is enabled by default, improving capacity under high traffic loads.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-1">Resolved Issues<a href="#resolved-issues-1" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2023-40403, CVE-2025-9230, CVE-2025-12084, CVE-2025-13601, CVE-2025-14087, CVE-2025-14512, CVE-2025-61662, CVE-2025-67873, CVE-2025-68114, CVE-2025-68973, CVE-2026-1519, CVE-2026-3497, CVE-2026-4111, CVE-2026-4424, CVE-2026-4519, CVE-2026-4786, CVE-2026-4878, CVE-2026-5119, CVE-2026-5121, CVE-2026-6100, CVE-2026-9256, CVE-2026-21710, CVE-2026-25646, CVE-2026-25749, CVE-2026-26996, CVE-2026-27135, CVE-2026-27651, CVE-2026-27654, CVE-2026-27784, CVE-2026-27904, CVE-2026-28417, CVE-2026-28421, CVE-2026-29111, CVE-2026-31431, CVE-2026-32647, CVE-2026-32748, CVE-2026-33412, CVE-2026-33416, CVE-2026-33526, CVE-2026-33636, CVE-2026-34982, CVE-2026-35385, CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414, CVE-2026-35535, CVE-2026-39979, CVE-2026-40164, CVE-2026-40460, CVE-2026-40701, CVE-2026-41242, CVE-2026-42926, CVE-2026-42934, CVE-2026-42945, CVE-2026-42946, CVE-2026-43284, CVE-2026-43500, CVE-2026-46300, CVE-2026-46333.</li>
 </ul>
@@ -612,7 +902,7 @@
 <ul>
 <li class=""><strong>I95-64623 Plugin packaging improvements:</strong> Updated plugin packaging to include <code>128T-plugin-support-files</code>. This ensures that plugin dependencies are available on systems that rely on the extra packages bundle.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-2">Resolved Issues<a href="#resolved-issues-2" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2021-47670, CVE-2022-25883, CVE-2022-49985, CVE-2022-50087, CVE-2022-50228, CVE-2022-50367, CVE-2022-50386, CVE-2022-50543, CVE-2023-53125, CVE-2023-53178, CVE-2023-53226, CVE-2023-53257, CVE-2023-53297, CVE-2023-53305, CVE-2023-53386, CVE-2023-53401, CVE-2023-53513, CVE-2023-53539, CVE-2024-56644, CVE-2025-4945, CVE-2025-6176, CVE-2025-9086, CVE-2025-9230, CVE-2025-11021, CVE-2025-12084, CVE-2025-13601, CVE-2025-14104, CVE-2025-21727, CVE-2025-21759, CVE-2025-22026, CVE-2025-22058, CVE-2025-22097, CVE-2025-37797, CVE-2025-37914, CVE-2025-38085, CVE-2025-38159, CVE-2025-38200, CVE-2025-38211, CVE-2025-38250, CVE-2025-38332, CVE-2025-38350, CVE-2025-38352, CVE-2025-38380, CVE-2025-38392, CVE-2025-38449, CVE-2025-38461, CVE-2025-38464, CVE-2025-38477, CVE-2025-38498, CVE-2025-38527, CVE-2025-38556, CVE-2025-38718, CVE-2025-38724, CVE-2025-39697, CVE-2025-39718, CVE-2025-39730, CVE-2025-39817, CVE-2025-39825, CVE-2025-39841, CVE-2025-39849, CVE-2025-39864, CVE-2025-39883, CVE-2025-39898, CVE-2025-39955, CVE-2025-39971, CVE-2025-40300, CVE-2025-66418, CVE-2025-66471, CVE-2026-0719, CVE-2026-1761, CVE-2026-21441.</li>
 </ul>
@@ -678,7 +968,7 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-714-3r2">Release 7.1.4-3r2<a href="#release-714-3r2" class="hash-link" aria-label="Direct link to Release 7.1.4-3r2" title="Direct link to Release 7.1.4-3r2" translate="no">​</a></h2>
 <p><strong>Release Date:</strong> March 17, 2026</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-3">Resolved Issues<a href="#resolved-issues-3" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-64521 Upgrade from 7.1.0-r1 to 7.1.3-r2 failed on SSR440:</strong> Resolved an issue where an upgrade to 7.1.3-r2 on an SSR440 HA router would fail because the system health check failed. The <code>ha-0-0</code> interface did not come up during boot (<code>eth1</code> comes up instead), causing the system health check to fail. The <code>ha-0-0</code> interface is now correctly initialized during upgrades on all SSR4x0 HA configurations.</li>
 </ul>
@@ -733,7 +1023,7 @@
 <ul>
 <li class=""><strong>I95-63476 Router/Peer path override for <code>key-exchange-algorithm</code>:</strong> A router/peer-path override has been added to enable the transition to a new algorithm within authority. For more information, see <a class="" href="/docs/sec_enhanced_key_mgmt#key-exchange-algorithm-router-override">Key Exchange Algorithm Router Override</a>.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-4">Resolved Issues<a href="#resolved-issues-4" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2024-56326, CVE-2025-47273, CVE-2025-32415, CVE-2025-58060, CVE-2025-54389, CVE-2021-28651, CVE-2025-54574, CVE-2025-8194, CVE-2025-32462, CVE-2018-10906, CVE-2018-14468, CVE-2021-42574, CVE-2022-24407, CVE-2019-12749, CVE-2021-20277, CVE-2021-4034, CVE-2021-3621, CVE-2024-28956, CVE-2025-53057, CVE-2025-53066, CVE-2025-62168, CVE-2025-11561, CVE-2024-43876, CVE-2024-43877, CVE-2025-22058, CVE-2025-23143, CVE-2025-38678, CVE-2025-39880, CVE-2025-39883, CVE-2025-39885, CVE-2025-39911, CVE-2025-39913, CVE-2025-39923, CVE-2025-39945, CVE-2025-39949, CVE-2025-39953, CVE-2025-39955, CVE-2025-39964, CVE-2025-39967, CVE-2025-39968, CVE-2025-39969, CVE-2025-39970, CVE-2025-39971, CVE-2025-39972, CVE-2025-39973, CVE-2025-39980, CVE-2025-39993, CVE-2025-39994, CVE-2025-39996, CVE-2025-39998, CVE-2025-40001, CVE-2025-40006, CVE-2025-40011, CVE-2025-40018, CVE-2025-40019, CVE-2025-40020, CVE-2025-40021, CVE-2025-40022, CVE-2025-40026, CVE-2025-40027, CVE-2025-40030, CVE-2025-40035, CVE-2025-40042, CVE-2025-40044, CVE-2025-40048, CVE-2025-40049, CVE-2025-40053, CVE-2025-40055, CVE-2025-40070, CVE-2025-40078, CVE-2025-40081, CVE-2025-40085, CVE-2025-40087, CVE-2025-40092, CVE-2025-40094, CVE-2025-40105, CVE-2025-40109, CVE-2025-40111, CVE-2025-40115, CVE-2025-40118, CVE-2025-40120, CVE-2025-40121, CVE-2025-40125, CVE-2025-40134, CVE-2025-40140, CVE-2025-40153, CVE-2025-40154, CVE-2025-40167, CVE-2025-40171, CVE-2025-40173, CVE-2025-40178, CVE-2025-40179, CVE-2025-40183, CVE-2025-40186, CVE-2025-40187, CVE-2025-40190, CVE-2025-40194, CVE-2025-40197, CVE-2025-40200, CVE-2025-40204, CVE-2025-40205, CVE-2025-5987, CVE-2025-11083, CVE-2025-61984, CVE-2025-61985, CVE-2024-5642, CVE-2025-6069, CVE-2025-6075, CVE-2025-8291, CVE-2025-58098, CVE-2025-65082, CVE-2025-66200, CVE-2025-45582, CVE-2024-12087, CVE-2025-64720, CVE-2025-65018, CVE-2025-66293, CVE-2025-40778, CVE-2025-58436, CVE-2025-61915, CVE-2025-14523, CVE-2025-68615, CVE-2025-68973, CVE-2025-61729, CVE-2025-11187, CVE-2025-15467, CVE-2025-15468, CVE-2025-15469, CVE-2025-66199, CVE-2025-68160, CVE-2025-69418, CVE-2025-69419, CVE-2025-69420, CVE-2025-69421, CVE-2026-22795, CVE-2026-22796.</li>
 </ul>
@@ -954,7 +1244,7 @@
 <ul>
 <li class=""><strong>I95-59235 HTTP/S proxy server for all public URLs:</strong> Support has been added to allow a connection to a public URL or to MIST using an explicit proxy and a private web proxy. See <a class="" href="/docs/config_proxy_server">Proxy Server Configuration</a> for information to configure the SSR to identify and use the non-transparent proxy. This process can also be used to support the <a class="" href="/docs/sec-ztp-web-proxy">Mist secure ZTP onboarding</a> process.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-5">Resolved Issues<a href="#resolved-issues-5" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-issues-6">Resolved Issues<a href="#resolved-issues-6" class="hash-link" aria-label="Direct link to Resolved Issues" title="Direct link to Resolved Issues" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>The following CVEs have been identified and resolved in this release:</strong> CVE-2024-3651, CVE-2024-56171, CVE-2025-24928, CVE-2024-11187, CVE-2024-1737, CVE-2024-1975, CVE-2024-3596, CVE-2024-37370, CVE-2024-37371, CVE-2025-24528, CVE-2023-46846, CVE-2024-45802, CVE-2024-12085, CVE-2023-26604, CVE-2024-7347, CVE-2025-23419, CVE-2024-43842, CVE-2024-40906, CVE-2024-44970, CVE-2025-21756, CVE-2022-49011, CVE-2024-53141, CVE-2025-21587, CVE-2025-30691, CVE-2025-30698, CVE-2024-0727, CVE-2023-5678, CVE-2024-5535, CVE-2024-9143, CVE-2024-13176, CVE-2016-9840, CVE-2024-12718, CVE-2025-4138, CVE-2025-4330, CVE-2025-4435, CVE-2025-4517, CVE-2025-32462, CVE-2025-5702, CVE-2025-5702, CVE-2025-4802, CVE-2025-6020, CVE-2025-47268, CVE-2025-25724, CVE-2025-3576, CVE-2025-47273, CVE-2024-23337, CVE-2025-48060, CVE-2023-52572, CVE-2023-52621, CVE-2023-52757, CVE-2024-26686, CVE-2024-26739, CVE-2024-26952, CVE-2024-27402, CVE-2024-35790, CVE-2024-35866, CVE-2024-35867, CVE-2024-35943, CVE-2024-36350, CVE-2024-36357, CVE-2024-36908, CVE-2024-38540, CVE-2024-38541, CVE-2024-42160, CVE-2024-42322, CVE-2024-44938, CVE-2024-46742, CVE-2024-46751, CVE-2024-46774, CVE-2024-46784, CVE-2024-46816, CVE-2024-49960, CVE-2024-49989, CVE-2024-50047, CVE-2024-50125, CVE-2024-50258, CVE-2024-50272, CVE-2024-50280, CVE-2024-53128, CVE-2024-53185, CVE-2024-53203, CVE-2024-54458, CVE-2024-56551, CVE-2024-56599, CVE-2024-56655, CVE-2024-56658, CVE-2024-56751, CVE-2025-21681, CVE-2025-21839, CVE-2025-21853, CVE-2025-22027, CVE-2025-22062, CVE-2025-23140, CVE-2025-23142, CVE-2025-23144, CVE-2025-23145, CVE-2025-23146, CVE-2025-23147, CVE-2025-23148, CVE-2025-23150, CVE-2025-23151, CVE-2025-23156, CVE-2025-23157, CVE-2025-23158, CVE-2025-23159, CVE-2025-23161, CVE-2025-23163, CVE-2025-37738, CVE-2025-37739, CVE-2025-37740, CVE-2025-37741, CVE-2025-37742, CVE-2025-37749, CVE-2025-37752, CVE-2025-37756, CVE-2025-37757, CVE-2025-37758, CVE-2025-37765, CVE-2025-37766, CVE-2025-37767, CVE-2025-37768, CVE-2025-37770, CVE-2025-37771, CVE-2025-37773, CVE-2025-37780, CVE-2025-37781, CVE-2025-37787, CVE-2025-37788, CVE-2025-37789, CVE-2025-37790, CVE-2025-37792, CVE-2025-37794, CVE-2025-37796, CVE-2025-37797, CVE-2025-37803, CVE-2025-37805, CVE-2025-37808, CVE-2025-37810, CVE-2025-37812, CVE-2025-37817, CVE-2025-37819, CVE-2025-37823, CVE-2025-37824, CVE-2025-37829, CVE-2025-37830, CVE-2025-37836, CVE-2025-37838, CVE-2025-37839, CVE-2025-37840, CVE-2025-37841, CVE-2025-37844, CVE-2025-37850, CVE-2025-37857, CVE-2025-37858, CVE-2025-37859, CVE-2025-37862, CVE-2025-37867, CVE-2025-37875, CVE-2025-37881, CVE-2025-37883, CVE-2025-37885, CVE-2025-37890, CVE-2025-37892, CVE-2025-37905, CVE-2025-37909, CVE-2025-37911, CVE-2025-37913, CVE-2025-37914, CVE-2025-37915, CVE-2025-37923, CVE-2025-37927, CVE-2025-37929, CVE-2025-37930, CVE-2025-37940, CVE-2025-37949, CVE-2025-37967, CVE-2025-37969, CVE-2025-37970, CVE-2025-37982, CVE-2025-37983, CVE-2025-37985, CVE-2025-37989, CVE-2025-37990, CVE-2025-37991, CVE-2025-37992, CVE-2025-37994, CVE-2025-37995, CVE-2025-37997, CVE-2025-37998, CVE-2025-38005, CVE-2025-38009, CVE-2025-38023, CVE-2025-38024, CVE-2025-38031, CVE-2025-38089, CVE-2025-7425, CVE-2025-32414, CVE-2025-32415, CVE-2025-27151, CVE-2025-32023, CVE-2025-48367, CVE-2025-49133, CVE-2025-6965, CVE-2025-5222, CVE-2025-4373, CVE-2024-52533, CVE-2024-6174, CVE-2025-5994, CVE-2024-52615, CVE-2025-40909, CVE-2022-29458, CVE-2024-47081, CVE-2025-6965, CVE-2025-8058, CVE-2025-30749, CVE-2025-30754, CVE-2025-30761, CVE-2025-50106, CVE-2025-5914, CVE-2025-54389, CVE-2025-7425, CVE-2025-8194, CVE-2025-48964, CVE-2025-53905, CVE-2025-53906, CVE-2025-58060, CVE-2025-58364, CVE-2025-32988, CVE-2025-32989, CVE-2025-32990, CVE-2025-6395, CVE-2023-49083, CVE-2024-47252, CVE-2025-23048, CVE-2025-49812, CVE-2020-11023, CVE-2025-5318, CVE-2025-6021, CVE-2025-32414 ,CVE-2025-49794, CVE-2025-49796, CVE-2025-49844, CVE-2023-4752, CVE-2023-6693, CVE-2024-12797, CVE-2024-25742, CVE-2024-25743, CVE-2024-25744, CVE-2024-28956, CVE-2024-3567, CVE-2024-52616, CVE-2024-55549, CVE-2024-56583, CVE-2024-8176, CVE-2024-8508, CVE-2025-21605, CVE-2025-2784, CVE-2025-31498, CVE-2025-32049, CVE-2025-32050, CVE-2025-32052, CVE-2025-32053, CVE-2025-32906, CVE-2025-32907, CVE-2025-32911, CVE-2025-32913, CVE-2025-32914, CVE-2025-4598, CVE-2025-46420, CVE-2025-46421, CVE-2025-4948.</li>
 </ul>
@@ -1057,6 +1347,6 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats-1">Caveats<a href="#caveats-1" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>I95-63422 Factory reset routers not re-onboarding when ESKM enabled:</strong> Resolved an issue where if ESKM was initially started using invalid certificate on one node, it would be unable to onboard until the remote peering relationship is restarted.</li>
-</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_7.2"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">7.2</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_7.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">7.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation-from-iso" class="table-of-contents__link toc-highlight">Installation from ISO</a></li><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-717-15-sts" class="table-of-contents__link toc-highlight">Release 7.1.7-15-sts</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-716-7-sts" class="table-of-contents__link toc-highlight">Release 7.1.6-7-sts</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-715-7r2" class="table-of-contents__link toc-highlight">Release 7.1.5-7r2</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-714-3r2" class="table-of-contents__link toc-highlight">Release 7.1.4-3r2</a><ul><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-713-29r2" class="table-of-contents__link toc-highlight">Release 7.1.3-29r2</a><ul><li><a href="#new-features-3" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-710-50r1" class="table-of-contents__link toc-highlight">Release 7.1.0-50r1</a><ul><li><a href="#new-features-4" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/release_notes_128t_7.2"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">7.2</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/release_notes_128t_7.0"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">7.0</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation-from-iso" class="table-of-contents__link toc-highlight">Installation from ISO</a></li><li><a href="#upgrade-considerations" class="table-of-contents__link toc-highlight">Upgrade Considerations</a></li><li><a href="#release-718-9-sts" class="table-of-contents__link toc-highlight">Release 7.1.8-9-sts</a><ul><li><a href="#resolved-issues" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-717-15-sts" class="table-of-contents__link toc-highlight">Release 7.1.7-15-sts</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-1" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-716-7-sts" class="table-of-contents__link toc-highlight">Release 7.1.6-7-sts</a><ul><li><a href="#new-features-1" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-2" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-715-7r2" class="table-of-contents__link toc-highlight">Release 7.1.5-7r2</a><ul><li><a href="#new-features-2" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-3" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-714-3r2" class="table-of-contents__link toc-highlight">Release 7.1.4-3r2</a><ul><li><a href="#resolved-issues-4" class="table-of-contents__link toc-highlight">Resolved Issues</a></li></ul></li><li><a href="#release-713-29r2" class="table-of-contents__link toc-highlight">Release 7.1.3-29r2</a><ul><li><a href="#new-features-3" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-5" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li><li><a href="#release-710-50r1" class="table-of-contents__link toc-highlight">Release 7.1.0-50r1</a><ul><li><a href="#new-features-4" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#resolved-issues-6" class="table-of-contents__link toc-highlight">Resolved Issues</a></li><li><a href="#caveats-1" class="table-of-contents__link toc-highlight">Caveats</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Juniper Networks, Inc.</div></div></div></footer></div>
 </body>
 </html>
