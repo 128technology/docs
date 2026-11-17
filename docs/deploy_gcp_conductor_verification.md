@@ -7,7 +7,7 @@ This step verifies that the BYOL installation has completed successfully, confir
 
 ## Wait for Installation to Complete
 
-The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **20 minutes** after the VM first starts. The SSR Install screens do not open - this process takes place behind the scenes. 
+The SSR software is automatically installed after the VM is deployed. This process takes approximately **20 minutes** after the VM first starts. The SSR Install screens do not open - this process does not require user interaction. 
 
 ## Verify the Successful Conductor Installation
 
@@ -49,9 +49,12 @@ If the instance does not install SSR as expected, SSH into the instance using th
 
 `ssh -i <private-ssh-key> t128@<conductor-public-ip>`
 
-- Try to log into the PCLI, run `su admin`, enter the admin password, and then `show system`.
+- Log into the PCLI 
+- Run `su admin` 
+- Enter the admin password
+- Run `show system`
 
-- If the PCLI is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support zip file for review (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`), and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
+If the PCLI is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support zip file for review (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`), and examine the journal for entries containing `128T-hardware-bootstrapper` and `ember`.
 
 ## Next Step
 
