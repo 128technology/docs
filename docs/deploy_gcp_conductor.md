@@ -48,10 +48,39 @@ graph TD
 
 Before beginning, ensure the following are available:
 
-- **GCP access** — access to a GCP project with permissions to create VPC networks, subnets, VM instances, and service accounts.
+- **GCP subscription** — Access to a GCP project with permission to create VPC networks, subnets, VM instances, and service accounts.
+- **A VPC network** - Network where the Conductor is deployed (`conductor-vpc` in this guide). This includes:
+   - A subnet (`conductor-subnet`) reachable via SSH and HTTPS for administration.
+   - The appropriate subnet region.
+   - An IPv4 range for the subnet (for example, `10.0.1.0/24`)
+- **Outbound HTTPS access** - Used to connect to the software repository
 - **SSR license** - Your SSR License may be required to deploy the GCP VM.
 - **SSR software access credentials** — Username and token for software downloads and provisioning.
-- **SSH key pair** — an RSA key pair for authenticating to the conductor VM.
+- **SSH key pair** — An SSH key pair to authenticate to the conductor VM after deployment.
+
+#### How to Create a VPC and Subnet
+
+Use the following steps to create a VPC and subnet where the conductor VM will be deployed. 
+
+During the GPC VM deployment, a single network interface (`nic0`) is automatically created for the conductor VM. `nic0` is assigned an internal IP address within the created subnet and an external IP address for management (SSH, access to web console, and SSR router onboarding).
+
+
+1. In the GCP console, use the searchbar to search for **VPC networks**. 
+2. Select the top result.
+3. On the VPC networks panel, click **Create VPC Network**.
+
+![Name VPC](/img/deploy-gcp-cond-prereq1.png)
+
+4. Enter the following values, or substitute the appropriate values for your deployment:
+
+- VPC name:  `conductor-vpc`
+- Subnet: `conductor-subnet` 
+- Region: The appropriate subnet region - in this guide it is `east-us`
+- IPV4 range: `10.0.1.0/24` or a value appropriate for your deployment.
+
+![Create VPC](/img/deploy-gcp-cond-prereq2.png)
+
+5. Once these fields are entered, scroll to the bottom and click **Create**. The VPC will appear on the VPC networks page. 
 
 #### How to Create an SSH Key Pair
 

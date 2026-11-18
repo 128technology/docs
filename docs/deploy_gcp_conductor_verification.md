@@ -34,7 +34,7 @@ You can verify the successful conductor installation by logging in to the Conduc
    | Password | `128Tadmin` |
 
    :::important
-   Change the default password immediately after your first login. This **must** be changed. The new password has the following minimum requirements: A minimum of 9 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
+   You will be prompted to change the default password immediately after your first login. This **must** be changed. The new password has the following minimum requirements: A minimum of 9 characters; Contain 1 upper case letter, 1 lower case letter, and 1 number.
    :::
 
 A successful login confirms the conductor is running and reachable on the public IP.
