@@ -95,9 +95,9 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-65672 Excessive LDAP Service Lookups Against External Directory Servers:** Resolved an issue where SSR nodes generated an excessive volume of LDAP lookups against an external directory server (such as JumpCloud) when resolving well-known service names (for example, `ntp`, `sctp`, `udplite`, and `dccp`). These service names are now resolved from the local `/etc/services` file instead of querying the external directory server.
 ------
-- **I95-65736 Improved Source NAT Visibility in Tech-Support-Info:** Added a form of the source NAT rules `show` command that reports pool usage across all network-interfaces in a single invocation, and included this output in tech-support-info collection to improve visibility into source NAT operation during troubleshooting.
+- **I95-65736 Improved Source NAT Visibility in Tech-Support-Info:** Added a source NAT `show` command that reports pool usage across all network-interfaces in a single invocation. This output is included in `tech-support-info` collection to improve visibility into source NAT operation during troubleshooting.
 ------
-- **I95-65901 Configuration Commit Failure When a Host Service Is the Only Service:** Resolved an issue where committing a configuration in which a `host-service` on a network-interface was the only service defined in the authority caused an exception in the configuration process, writing verbose error output to the log and broadcasting it to logged-in users. These configurations now commit successfully.
+- **I95-65901 Configuration Commit Failure When a Host Service is the Only Service:** Resolved an issue where committing a configuration in which a `host-service` on a network-interface was the only service defined in the authority caused an exception in the configuration process, writing verbose error output to the log and broadcasting it to logged-in users. These configurations now commit successfully.
 ------
 - **I95-65957 VRRP Split-Brain After Adding GRE Tunnels To A Redundant WAN Interface:** Resolved an issue where adding GRE tunnel network-interfaces to a redundant WAN device-interface could cause both nodes of an HA pair to simultaneously claim the VRRP master role, resulting in an active-active split-brain condition. VRRP state machines are no longer created for tunnel interfaces.
 ------
@@ -123,9 +123,9 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66352 Pagination Support for PIM and IGMP Operational Data:** Resolved an issue where querying large PIM and IGMP operational tables in large-scale multicast deployments could cause high memory usage and PCLI or REST API timeouts. The IPv4 PIM (`mroute`, `state`, `rp`, `interface`, and `neighbor`) and IGMP (`groups`, `interfaces`, and `sources`) REST API endpoints now support pagination and VRF query parameters, consistent with other paginated SSR REST APIs.
 ------
-- **I95-66452 Highway Crash When The Application Statistics Cache Reached Capacity:** Resolved an issue where the highway process could crash with a null-pointer when the application identification statistics cache reached its configured capacity and a subsequent memory allocation failed.
+- **I95-66452 Highway Crash when the Application Statistics cache reaches capacity:** Resolved an issue where the highway process could crash when the application identification statistics cache reached its configured capacity and a subsequent memory allocation failed.
 ------
-- **I95-66474 Conductor Event History Export Produced Corrupted Files:** Resolved an issue where exporting event history from the Conductor produced a ZIP archive containing corrupted or zero-byte files, due to an incompatible compression dependency. Event history exports are now generated correctly.
+- **I95-66474 Conductor Event History Export Produced Zero-Byte Files:** Resolved an issue where exporting event history from the Conductor produced a ZIP archive containing zero-byte files, due to an incompatible compression dependency. Event history exports are now generated correctly.
 ------
 - **I95-66495 `optics-statistics` Reported Unavailable For Some SFPs:** Resolved a parsing error that caused the `show device-interface optics-statistics` command to report optics statistics as unavailable for certain SFP transceivers.
 ------
@@ -139,7 +139,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66588 IDP Policy Compilation Failure on SSR440 Devices:** Resolved an issue where enabling IDP on SSR440 devices failed with the IDP engine remaining in the `rebuilding` state and reporting `failed to set policy config`, due to duplicate entries in the critical profile policy for ARM-based platforms. The duplicate entries have been removed, and the IDP policy now installs successfully.
 ------
-- **I95-66598 Highway Crash in ESKM Payload Processing When a Security Key Is Not Yet Available:** Resolved an issue where the highway process could crash when processing ESKM AES-CBC payload traffic for a flow whose security state did not yet have a key. This condition is now detected and handled without a crash.
+- **I95-66598 Highway Crash in ESKM payload processing when a security key is not yet available:** Resolved an issue where the highway process could crash when processing ESKM AES-CBC payload traffic for a flow whose security state did not yet have a key. This condition is now detected and handled correctly.
 ------
 - **I95-66605 Multicast `show` REST Endpoints Now Accept `ipAddress` Query Parameter:** Resolved an issue where the PIM, IGMP, MSDP, and MLD `show` REST endpoints only recognized the `ip-address` query parameter, causing Mist-originated requests that use `ipAddress` (camelCase) to silently ignore address filters. These endpoints now accept both parameter forms.
 ------
@@ -157,7 +157,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66661 Reserved PIM Speaker Tenant Name for Mist-Managed Routers:** Resolved an issue where the tenant name used for auto-generated PIM over SVR services on Mist-managed routers could collide with a user-configured network or tenant of the same name. The data model now permits the internal `_pim_speaker_` tenant name, which is outside the user-configurable tenant namespace.
 ------
-- **I95-66666 `show certificate ca detail` Unable to Display ML-DSA Public Keys:** Resolved an issue where the PCLI `show certificate ca detail` command reported `Unable to load Public Key` for ML-DSA certificates. The command now retrieves certificate details from the SSR REST API, which correctly decodes ML-DSA public keys.
+- **I95-66666 `show certificate ca detail` unable to display ML-DSA public keys:** Resolved an issue where the `show certificate ca detail` command reported `Unable to load Public Key` for ML-DSA certificates. The command now retrieves certificate details from the REST API, which correctly decodes ML-DSA public keys.
 ------
 - **I95-66679 `show certificate ca detail` Did Not Decode Subject Directory Attributes:** Resolved an issue where the `show certificate ca detail` command displayed the X509v3 Subject Directory Attributes extension as raw characters. The extension is now decoded and displayed correctly.
 ------
@@ -195,7 +195,7 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66844 BGP Flap Caused by an ESKM Payload Key Mismatch:** Resolved an issue where BGP sessions over ESKM could flap because, after receiving a delayed packet that carried a previous key, the payload key advertised to the peer no longer matched the key used to encrypt the payload. The advertised and encryption keys now remain consistent, and the payload key is restored when metadata is restarted.
 ------
-- **I95-66848 BGP Routes Marked Inaccessible With Third-Party Next Hops:** Resolved an issue where BGP routes whose next hop resolved recursively through another iBGP route were marked inaccessible, a regression introduced by a previous fix for BGP over SVR. Recursive next-hop resolution over BGP routes is now rejected only for configured BGP neighbors.
+- **I95-66848 BGP Routes Marked Inaccessible With Third-Party Next Hops:** Resolved an issue where BGP routes whose next hop resolved recursively through another iBGP route were marked inaccessible. Recursive next-hop resolution over BGP routes is now rejected only for configured BGP neighbors.
 ------
 - **I95-66857 Reboot Required After Changing Enhanced Security Key Management:** Resolved an issue where creating, changing, or deleting `enhanced-security-key-management` was not identified as a change that requires a restart. Committing such a change now generates a warning that a reboot is required for the setting to take effect.
 ------
