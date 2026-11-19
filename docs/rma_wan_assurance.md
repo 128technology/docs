@@ -114,6 +114,6 @@ Verify new node is online and running in the WAN Edges view for All Nodes.
 
  ![Verify Online](/img/rma_wan_assurance_verify_online.png)
 
-If the new device is not the same version as the existing one, [upgrade the device at this time](https://www.juniper.net/documentation/us/en/software/mist/mist-wan/topics/task/ssr-configuration-wan-edge-upgrade.html)
+If the new device is not the same version as the existing one, [upgrade the device at this time](https://networkingdocs.hpe.com/documentation/us/en/software/mist/mist-wan/topics/task/ssr-configuration-wan-edge-upgrade.html)
 
 Once you have verified the state of the device, and upgraded the firmware as necessary, place the replaced unit in the box and return to Juniper.

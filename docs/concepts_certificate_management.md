@@ -34,6 +34,21 @@ The SSR does not accept DER-encoded (binary) certificates. If your Certificate A
 openssl x509 -inform DER -outform PEM -in certificate.der -out certificate.pem
 ```
 
+## Identity Chains and Trust Anchors
+
+An identity certificate bundle contains a leaf (end-entity) certificate followed by any supporting intermediate CA certificates in issuer order. Each following certificate issues the preceding certificate. Supply the certificates needed to reach the intended trust anchor, excluding the anchor itself.
+
+A trust anchor is a CA certificate selected and provisioned independently as trusted. It can be a root CA or an explicitly trusted intermediate CA. Including a CA certificate in an identity bundle does not establish trust in it. Intermediates supplied with an identity are not independently trusted anchors; their signatures and constraints must be validated as part of a path to a configured anchor.
+
+For example, when a root CA is the trust anchor, an identity issued by an intermediate uses two separate inputs:
+
+```text
+Trust anchor:    Root CA
+Identity chain: Leaf -> intermediate CA
+```
+
+How trust anchors are provisioned depends on the feature. SCO embeds its configured CA certificate in the onboarding token delivered to the router, independently of the conductor's TLS connection. See [SCO Trust Anchor and Identity Certificate Chain](sec-conductor-onboard.md#trust-anchor-and-identity-certificate-chain) for file requirements, ordering, and the single-anchor limitation.
+
 ## Certificate Configuration Models
 
 The SSR supports two models for associating certificate material with the configuration. Choosing the right model depends on whether a private key must reside on the node.
@@ -57,12 +72,17 @@ In the content-based model, the PEM content is embedded directly in the SSR conf
 
 Use the content-based model for trust anchors — such as `trusted-ca-certificate` objects — where no private key is required on the node and easy distribution through configuration is convenient.
 
+:::note
+SCO is an exception: both its identity certificate and its trusted CA certificate must use file references, even though no CA private key is required. The trust-anchor certificate is distributed to the onboarding router through the SCO token.
+:::
+
 ### Choosing a Model
 
 | Scenario | Recommended Model |
 | --- | --- |
 | Identity certificate whose private key was generated on the node (ESKM, SCO). | File reference |
-| Trusted CA certificate used to establish a chain of trust. | Content-based |
+| Trusted CA certificate used to establish a chain of trust, except SCO. | Content-based |
+| Trusted CA certificate used by SCO. | File reference |
 
 Mixing the two models is allowed, however it is recommended to use each model only for it's intended purpose.
 

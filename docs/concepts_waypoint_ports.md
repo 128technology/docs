@@ -3,7 +3,7 @@ title: Waypoints and Waypoint Ports
 sidebar_label: Waypoints
 ---
 
-*Secure Vector Routing*, the patented technique used by an SSR to send directional, encrypted, tunnel-free traffic to its peers, creates engineered pathways between *waypoints* – IP addresses assigned to SSR interfaces.
+*Secure Vector Routing*, the patented technique used by an SSR to send directional, encrypted, tunnel-free traffic to its peers, creates engineered pathways between *waypoints* – IP addresses assigned to SSR interfaces.
 
 Much like an airplane pilot creates a flight plan between the source airport and destination airport, charting a series of air traffic control towers with which they will check in en route, an SSR also creates a sort of "flight plan" for each session it forwards using SVR. Rather than using tunnels between software instances, the SSR uses a novel NATting technique to create distinct "[tuples](https://en.wikipedia.org/wiki/Tuple)" between one another, where the tuple includes a unique combination of source IP, destination IP, source port, destination port, and transport protocol.
 

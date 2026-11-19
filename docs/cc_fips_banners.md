@@ -3,7 +3,7 @@ title: Configuring Banners
 sidebar_label: Configuring Banners
 ---
 
-Administrators can configure a login banner message to identify a Common Criteria compliant instance using the configure authority web-messages command shown here. For additional information, please see [configure authority web-messages](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-web-messages) command.
+Administrators can configure a login banner message to identify a Common Criteria compliant instance using the configure authority web-messages command shown here. For additional information, please see [configure authority web-messages](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-web-messages) command.
 
 ### `configure authority web-messages`
 

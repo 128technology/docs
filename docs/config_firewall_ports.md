@@ -39,7 +39,7 @@ In deployments where the routers managed by a conductor do not have internet acc
 
 ### SSR to the Mist Cloud
 
-For the most up to date SSR to Mist Cloud connectivity information, see [Juniper Mist Firewall Ports and IP Addresses for Firewall Configuration](https://www.juniper.net/documentation/us/en/software/mist/mist-management/topics/ref/firewall-ports-to-open.html).
+For the most up to date SSR to Mist Cloud connectivity information, see [Juniper Mist Firewall Ports and IP Addresses for Firewall Configuration](https://networkingdocs.hpe.com/documentation/us/en/software/mist/mist-management/topics/ref/firewall-ports-to-open.html).
 
 | Service Type | Global 01 | Global 02 | Global 03 | Global 04 | Global 05 | EMEA 01 | EMEA 02 | EMEA 03 | EMEA 04 | APAC 01 | APAC 03 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

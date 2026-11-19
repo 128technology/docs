@@ -4246,6 +4246,29 @@ request system software ...
 set system software ...
 delete system software ...
 
+## `send garp`
+
+Send a Gratuitous ARP (GARP) for the specified interface.
+
+#### Usage
+
+```
+send garp {device-interface <device-interface> | network-interface <network-interface>} router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | Device interface to send GARP for |
+| network-interface | Network interface to send GARP for |
+| node | The node to send GARP from |
+| router | The router to send GARP from |
+
+#### Description
+
+This command triggers the immediate transmission of Gratuitous ARP packets for a device-interface (all network-interfaces on that port) or a specific network-interface.
+
 ## `service-ping`
 
 Ping that uses a tenant or service to make an ICMP request.
@@ -5026,6 +5049,12 @@ show app-id web-filtering router <router> node <node>
 | ---- | ----------- |
 | node | The node from which to retrieve |
 | router | The router from which to retrieve |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show app-id cache-sizes`](#show-app-id-cache-sizes) | Show app-id cache configured and current sizes |
 
 ## `show application modules registration`
 
@@ -11040,7 +11069,7 @@ show platform [{router <router> | resource-group <resource-group>}] [force] [nod
 
 | name | description |
 | ---- | ----------- |
-| category | all \| cpu \| device-interfaces \| disk \| memory \| operating-system \| vendor (default: all) |
+| category | all \| cpu \| device-interfaces \| disk \| memory \| operating-system \| security \| vendor (default: all) |
 
 ##### See Also
 
@@ -13431,10 +13460,10 @@ show waypoints router <router> node <node> [<detail>]
 admin@branch.spoke# show waypoints
 Thu 2026-06-18 10:31:02 UTC
 :heavy_check_mark: Retrieving waypoint information...
-============== ============== =========== ======== ========= ============
-Source         Dest           Interface   In Use   Usage     Peak Usage
-============== ============== =========== ======== ========= ============
-172.16.3.136   172.16.3.188   wan         50000    100.00%   100.00%
+============== ============== =========== =========== ============ ======== ============ ========= ============
+Source         Dest           Interface   Peer Name   Total Ports  In Use   Range        Usage     Peak Usage
+============== ============== =========== =========== ============ ======== ============ ========= ============
+172.16.3.136   172.16.3.188   wan         combo2      50000        50000     1025-12345  100.00%   100.00%
 ```
 
 ##### `show waypoints detail`
@@ -13444,10 +13473,10 @@ admin@branch.spoke# show waypoints detail
 Tue 2026-06-16 16:32:25 UTC
 ✔ Retrieving waypoint table information...
 
-============== ============== =========== ============= ======== ============= ========= ============ ======= ======== ============ ========== ========= ===========
- Source         Dest           Interface   Total Ports   In Use   Range         Usage     Peak Usage   In Db   In Mem   In Release   Max Used   State     Ring Size
-============== ============== =========== ============= ======== ============= ========= ============ ======= ======== ============ ========== ========= ===========
- 172.16.3.136   172.16.3.188   wan               50000    50000   16385-65533   100.00%   100.00%          0        0            0      50000   Standby        1000
+============== ============== =========== =========== ============= ======== ============= ========= ============ ======= ======== ============ ========== ========= ===========
+ Source         Dest          Interface   Peer Name   Total Ports   In Use   Range         Usage     Peak Usage   In Db   In Mem   In Release   Max Used   State     Ring Size
+============== ============== =========== =========== ============= ======== ============= ========= ============ ======= ======== ============ ========== ========= ===========
+ 172.16.3.136   172.16.3.188   wan        ombo2       50000         50000    16385-65533   100.00%   100.00%         0        0         0       50000      Standby      1000
 ``` 
 
 ## `sync peer addresses`
