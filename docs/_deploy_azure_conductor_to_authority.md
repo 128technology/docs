@@ -6,13 +6,11 @@ Take this opportunity to log into the Conductor GUI to complete the following op
 
 1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
 
- ![Configuration menu](/img/config_menu_gui.png)
-
-2. Select the **Configure** icon.
+2. In the **Node** panel, select the **Configure** icon.
 
  ![Conductor Configuration Icon](/img/conductor_config_icon.png)
 
-3. In the Node panel, under **Associated Asset ID**, select the hostname for the conductor.
+3. In the Node Basic Information panel, under **Associated Asset ID**, enter the hostname for the conductor.
 
  ![Asset ID](/img/dep-conductor_asset-id.png)
 

@@ -75,6 +75,7 @@ module.exports = {
         "type": "category",
         "label": "BYOL Cloud Images",
         "items": [
+          "release_notes_byol_5.2",
           "release_notes_byol_5.1",
           "release_notes_byol_5.0",
           "release_notes_byol_4.0",
@@ -102,20 +103,20 @@ module.exports = {
        "type": "category",
           "label": "Installing In AWS",
           "items": [
-            "intro_installation_quickstart_aws",
-            "intro_installation_quickstart_mist_aws",
             "intro_installation_byol_aws_conductor",
             "intro_installation_byol_aws_mist",
+            "intro_installation_quickstart_aws",
+            "intro_installation_quickstart_mist_aws",
             ],
       },
       {
        "type": "category",
           "label": "Installing In Azure",
           "items": [
-            "intro_installation_azure",
-            "intro_installation_azure_mist",
             "intro_installation_byol_azure_conductor",
             "intro_installation_byol_azure_mist",
+            "intro_installation_azure",
+            "intro_installation_azure_mist",
           ],
       },
       {
@@ -239,9 +240,9 @@ module.exports = {
                   "deploy_vmware_hub_router_pci",
                   "deploy_vmware_hub_router_config",
                   "deploy_appendix_vmware_hub_router",
-              ],
-            },
-            {
+                ],
+              },
+              {
                 "type": "category",
                 "label": "VMware Spoke Router",
                 "items": [
@@ -251,8 +252,20 @@ module.exports = {
                   "deploy_vmware_router_pci",
                   "deploy_vmware_router_config",
                   "deploy_appendix_vmware_router",
-              ],
-            },
+                ],
+              },
+              {
+                "type": "category",
+                "label": "Azure Hub and Spoke Routers",
+                "items": [
+                  "deploy_azure_hub_spoke_overview",
+                  "deploy_azure_hub_spoke_hub_vm",
+                  "deploy_azure_hub_spoke_spoke_vm",
+                  "deploy_azure_hub_spoke_vmbus",
+                  "deploy_azure_hub_spoke_config",
+                  "deploy_appendix_azure_hub_spoke",
+                ],
+              },
           ],
         },
       ],
@@ -348,6 +361,7 @@ module.exports = {
           "config_in-memory_metrics",
           "howto_ms365",
           "howto_extend_gui_nav",
+          "howto_custom_nginx",
           ],
         },
         {

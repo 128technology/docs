@@ -74,6 +74,10 @@ A configured, functioning Certificate Authority (CA) is required.
 
 ### Install the Trusted CA Certificate
 
+:::note
+This procedure describes ESKM certificate provisioning. SCO requires file-backed references for both its identity and CA certificates and provisions a single trust-anchor certificate through its onboarding token. Do not apply this content-based CA-bundle example to SCO. For SCO certificate placement and ordering, see [Trust Anchor and Identity Certificate Chain](sec-conductor-onboard.md#trust-anchor-and-identity-certificate-chain).
+:::
+
 In order to provision a certificate on the system, install the public certificate of the Certificate Authority, as well as all certificates up the chain to the root of trust. To accomplish this, the user must obtain these certificates and append them into a single file. For example:
 
 ```

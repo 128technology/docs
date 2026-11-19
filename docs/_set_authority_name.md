@@ -6,7 +6,7 @@ The authority represents the complete set of all SSRs managed under a single org
 
 	![Up arrow](/img/deploy-up-arrow.png)
 
-2. Select the Authority Settings.
+2. Select the Authority tile.
 
  ![Authority Settings](/img/conductor_authority_name.png)
 

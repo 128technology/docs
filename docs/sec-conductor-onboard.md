@@ -16,15 +16,15 @@ When a router has SCO enabled, asset-id based onboarding is disabled. Ports 4505
 ### Prerequisites
 
 - The `secure-conductor-onboarding` must be enabled
-- The `secure-conductor-onboarding public-key` field must be configured
+- The `secure-conductor-onboarding public-certificate` field must be configured
 - The `secure-conductor-onboarding ca-certificate` field must be configured
 - The conductor nodes must have asset-id's configured
 
 To provide a secure and mutually authenticated onboarding mechanism, the following information must be configured.
 
 - Pre-shared key: The onboarding pre-shared key is a 48-character alphanumeric string, configured at the router level. This key is mandatory for the SCO process.
-- Conductor Public certificate: A public-private key certificate.
-- Conductor CA certificate: A public certificate signed by a preferred CA signing authority. 
+- Conductor identity certificate: A CA-signed leaf certificate, its supporting intermediate certificates, and the matching private key.
+- Conductor CA certificate: The CA certificate selected as the trust anchor for validating the conductor's identity chain.
 
 The public certificate and CA certificate are configured on the conductor at the Authority level.
 
@@ -36,27 +36,80 @@ For an HA conductor, each node must have an separate IP SAN entry.
 
 For additional information about certificates, see [Certificate Requirements and Validation](cert_validation_requirements.md). For details on the IP SAN naming and configuration, see [Issue a `certificate-signing-request`](config_custom_certs.md#issue-a-certificate-signing-request).
 
+## Trust Anchor and Identity Certificate Chain
+
+SCO uses two separate certificate inputs configured at the authority level:
+
+| Input | Configuration | Purpose |
+| --- | --- | --- |
+| Trust anchor | `trusted-ca-certificate`, referenced by `secure-conductor-onboarding ca-certificate` | Supplies the CA certificate embedded in the SCO onboarding token. |
+| Conductor identity chain | `client-certificate`, referenced by `secure-conductor-onboarding public-certificate` | Supplies the conductor's leaf certificate and any intermediate CA certificates needed to build a path to the trust anchor. |
+
+The conductor generates the onboarding token using the configured trust anchor. In the Mist Conductor Redirect workflow, Mist delivers the token and conductor address information to the router before the router connects to the conductor. Mist transports the trust anchor; it does not select or generate it. Alternatively, the token can be supplied through the router's onboarding configuration.
+
+The router uses the CA certificate from the token to validate the conductor's TLS identity chain. Trust is therefore provisioned independently of the conductor's TLS connection. Including a root CA certificate in the conductor's identity file does not make that root trusted.
+
+### Certificate Placement and Ordering
+
+Place the conductor's leaf certificate first in the identity PEM file, followed by its issuing intermediate CA, then each successive issuing intermediate:
+
+```text
+Leaf -> issuing intermediate -> next issuing intermediate -> ...
+```
+
+Stop before the configured trust anchor and omit the anchor itself from the identity file. The anchor need not be a root CA; it can be an explicitly trusted intermediate CA. An intermediate supplied with the identity chain is not independently trusted as an anchor: its signature and constraints must be validated as part of a path to the provisioned anchor.
+
+For a root CA -> intermediate CA -> conductor leaf hierarchy, use:
+
+| Configuration object | File | Contents |
+| --- | --- | --- |
+| `trusted-ca-certificate sco-root` | `sco-root.pem` | Root CA only |
+| `client-certificate sco-conductor` | `sco-conductor.pem` | Conductor leaf -> intermediate CA |
+
+If the root issued the conductor's leaf directly, the identity file contains only the leaf. If an intermediate is the configured trust anchor, omit that intermediate and any certificates above it from the identity file.
+
+:::note
+SCO requires file references for both certificate objects. Currently, SCO embeds only the first certificate from the referenced CA file in the onboarding token. Use a single intended trust-anchor certificate in that file; do not assume that a multi-certificate CA bundle provisions multiple trust anchors.
+:::
+
+### Certificate Ordering and Validation
+
+Configuration-time certificate-property validation treats the first identity-file certificate as the leaf and the remaining certificates as CAs. It does not reorder the certificates, combine the identity file with the trust-anchor file, or verify a signature path between them.
+
+| Identity-file contents | Property-check result | Guidance when the root is the separately provisioned anchor |
+| --- | --- | --- |
+| Leaf -> intermediate | Can pass | Recommended identity-chain layout. |
+| Leaf -> root -> intermediate | Can pass | Not the recommended layout; passing does not prove a valid or trusted chain. |
+| Leaf -> intermediate -> root | Can pass | Omit the root from the identity file. |
+| Root -> intermediate -> leaf | Fails leaf checks | The first certificate must be the conductor leaf. |
+
+Passing these checks does not prove successful SCO authentication. During TLS establishment, the router validates the conductor's presented chain against the trust anchor provisioned through the onboarding token and verifies the conductor's IP identity. See [Certificate Requirements and Validation](cert_validation_requirements.md#config-time-vs-runtime-validation).
+
 ## Basic Configuration 
 
 The following information are the steps to configure and use Secure Conductor Onboarding. For details about any of the commands and steps, see [How It Works](#how-it-works)
 
 - Configure the Conductor where the router will onboard.
     - Configure the conductor to accept the router.
-- Generate signed certs for the conductor and place the certificates in the appropriate location on the conductor. 
-    ```
-    mv myCA.key /etc/128technology/pki/myCA.key 
-    mv myCA.pem /etc/128technology/pki/myCA.pem 
-    mv server.key /etc/128technology/pki/server.key 
-    mv server.pem /etc/128technology/pki/server.pem 
-    ```
+- Provision the conductor's signed identity chain, matching private key, and trust-anchor certificate using the [certificate management APIs](config_custom_certs.md#authenticate-to-use-rest). For the root-anchor example above, the files under `/etc/128technology/pki/` are:
+
+    | File | Contents |
+    | --- | --- |
+    | `sco-conductor.pem` | Conductor leaf followed by intermediate CA certificates in issuer order, excluding the trust anchor. |
+    | `sco-conductor.key` | Private key matching the conductor leaf certificate. |
+    | `sco-root.pem` | Root trust-anchor certificate only. |
+
+    The CA's private key is not required on the conductor and must not be copied there for SCO.
 :::note
 Only RSA keys are supported at this time. 
 ::: 
 
-- Load the certificate for SCO configuration. 
+- Configure the file references and associate them with SCO. A file reference does not upload, create, or concatenate certificate files; the files must be provisioned separately.
     ```
-    configure authority client-certificate server file server 
-    configure authority trusted-ca-certificate myCA file myCA 
+    configure authority client-certificate sco-conductor file sco-conductor
+    configure authority trusted-ca-certificate sco-root file sco-root
+    configure authority secure-conductor-onboarding public-certificate sco-conductor
+    configure authority secure-conductor-onboarding ca-certificate sco-root
     ```
 
 - Enable ssh-only for asset resiliency. 
@@ -97,7 +150,7 @@ Enabling SCO does not immediately close ports 4505 and 4506. The ports close aut
     - Using the Command line: `create secure-conductor-onboarding token` command and `onboarding-config.json`.
     - Mist Conductor Redirect: In the Mist interface, token information is entered with the conductor IP address. This information is sent to the router once SZTP has been completed and then passed to the router client to perform secure conductor onboarding.
 
-Once the process is initiated, the conductor CA certificate is loaded on the system as a trusted CA, allowing the device to trust the conductor in subsequent workflows.
+Before establishing the TLS connection to the conductor, the router loads the CA certificate from the onboarding token into its SCO TLS trust pool. The conductor's presented identity chain is validated against that anchor.
 
 ### Onboarding Workflow
 
@@ -241,7 +294,7 @@ The following parameters are required, and are configured at the Router level.
 
 To enable this feature on the conductor, verify the following:
 
-- The `secure-conductor-onboarding public-key` field must be configured.
+- The `secure-conductor-onboarding public-certificate` field must reference the file-backed `client-certificate` containing the conductor's identity chain.
 - The `secure-conductor-onboarding ca-certificate` field must be configured.
 
 When all routers have SCO enabled, the legacy asset-id based onboarding is disabled. Ports 4505 and 4506 are disabled on the conductor to prevent any devices not using this feature from onboarding. In addition, if a SCO enabled device attempts to onboard using the legacy method, the attempt will be rejected.
@@ -253,7 +306,7 @@ To provide secure and mutually authenticated onboarding, the following additiona
 - Conductor CA certificate
 
 The onboarding pre-shared key will be 48-character alphanumeric string configured at the router level. This key is mandatory for SCO process to work successfully.
-The conductor is expected to contain a public-private key certificate with the additional option to sign the public certificate by the organization’s preferred CA signing authority. The public certificate and CA certificate will be configured in the conductor data model.
+The conductor must have a CA-signed leaf certificate, any supporting intermediate certificates, and the matching private key. Configure the identity chain and trust anchor separately as described in [Trust Anchor and Identity Certificate Chain](#trust-anchor-and-identity-certificate-chain).
 
 ## Token Creation
 
@@ -265,7 +318,7 @@ Create a router level token:
 
 Token creation requires the following:
 
-- The fields `secure-conductor-onboarding ca-certificate` and `secure-conductor-onboarding public-certificate` must be configured, valid, and signed by the root CA of the conductor. 
+- The fields `secure-conductor-onboarding ca-certificate` and `secure-conductor-onboarding public-certificate` must reference the provisioned trust anchor and conductor identity chain, respectively. The conductor's identity chain must validate to that anchor, which may itself be a self-signed root CA. Successful token creation does not establish that the identity chain validates to the anchor; this is checked during the router's TLS connection.
 
 - SCO must be enabled on the conductor at the Authority or per router level (can be both).
 
@@ -285,7 +338,7 @@ exit
 
 If any checks fail, the `create secure-conductor-onboarding token` command returns an error with an explanation. This command can be run as many times as needed for each router. All information to form the token is present in the configuration.
 
-The CA certificate is read from disk at the location given in `secure-conductor-onboarding ca-certificate`.  
+The `secure-conductor-onboarding ca-certificate` field references a `trusted-ca-certificate` object. SCO reads the CA certificate from that object's file reference and embeds the first certificate in the onboarding token.
 
 ### Token Contents
 
@@ -320,4 +373,3 @@ The conductor’s current date/time is used to validate the expiration. If the c
 - Change pre-shared key: To invalidate unexpired tokens, the user can change the pre-shared key in the conductor configuration. This is done at the authority or router level, based on the mode of operation.
 
 - Update conductor certificate: When the conductor certificate expires and a new certificate is installed, all existing tokens signed by the old certificate are no longer valid. The details of how to update the conductor certificate follow existing supported procedures.
-

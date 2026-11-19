@@ -427,7 +427,7 @@ IDP is not available on the following SSR devices: SSR120, SSR400 and SSR440.
 ------
 - **I95-47154 Conductor-management of image-based SSR devices:** Upgrading to or installing SSR 6.3.0 now supports conductor managed deployments. See [SSR Universal ISO Installation](intro_installation_univ-iso.md) for installation information, and refer to [Upgrading the Conductor](upgrade_ibu_conductor.mdx) for upgrade information. 
 ------
-- **I95-48255 BYOL SSR images for AWS and Azure marketplaces:** New streamlined instances for AWS and Azure have been introduced. For installation and deployment information, refer to [Installing a BYOL Mist-managed Router in AWS](intro_installation_byol_aws_mist.md) and [Installing a BYOL Mist-managed Router in Azure](intro_installation_byol_azure_mist.md).
+- **I95-48255 BYOL SSR images for AWS and Azure marketplaces:** New streamlined instances for AWS and Azure have been introduced. For installation and deployment information, refer to [Installing a BYOL Mist-managed Router in AWS](intro_installation_byol_aws_mist.mdx) and [Installing a BYOL Mist-managed Router in Azure](intro_installation_byol_azure_mist.mdx).
 ------
 - **I95-50572 Unified ISO for Mist and Conductor Onboarding:** A single, image-based ISO is the preferred method of installation for all SSR deployments. This new ISO greatly simplifies the software installation process and onboarding of routers to both the Mist-managed and Conductor-managed environments. For information about the install and onboarding process, refer to [SSR Universal ISO Installation](intro_installation_univ-iso.md).
 ------
