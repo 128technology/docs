@@ -15,8 +15,10 @@ sidebar_label: Authentication Methods
 Either RADIUS or LDAP remote authentication can be configured on a system. If RADIUS authentication is rejected or if the RADIUS Server is not available, then LDAP authorization is requested.
 
 :::important
-Beginning with SSR software **version 7.0** (including **7.1**), FIPS mode is enabled by default and blocks the use of non-FIPS-compliant algorithms such as **MD5**. Because the RADIUS protocol uses MD5 internally to protect the shared secret and per-attribute payloads, RADIUS authentication will not function on a 7.0 or 7.1 node while FIPS is enabled. If you need RADIUS on those releases, disable FIPS on the affected node first — see the procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). [RADIUS over TLS (RADSEC)](config_radsec.md) is unaffected and is the recommended option when FIPS must remain enabled. In a future SSR release, FIPS will be compliance-by-configuration and will no longer block these algorithms.
-:::
+SSR4x0 series devices have **FIPS mode enabled by default**. With SSR versions 7.0.x and 7.1.x, FIPS enforcement prevents the use of non-FIPS-compliant cryptographic algorithms such as **MD5** and **SHA-1**. This affects features that rely on these algorithms. Because the RADIUS protocol uses MD5 internally to protect the shared secret and per-attribute payloads, RADIUS authentication will not function on an SSR4x0 series device while FIPS is enabled. If you need RADIUS on those releases, disable FIPS on the affected node first — see the procedure on the [conductor install page](single_conductor_install.mdx#fips-enforcement-mode) or in [Troubleshooting IDP](ts_idp.md#fips-mode-and-idp). [RADIUS over TLS (RADSEC)](config_radsec.md) is unaffected and is the recommended option when FIPS must remain enabled.
+
+With the release of software version 7.2.x, FIPS is **compliance-by-configuration** and no longer blocks these algorithms. **However, the use of MD5 is strictly prohibited for secure hashing and cryptographic authentication by FIPS 140** because MD5 is vulnerable to collision attacks and considered legacy from a compliance standpoint. The use of these legacy BGP and MSDP protocols with TCP MD5 authentication enabled is outside of the SSR cryptographic module boundary, and is not covered by the FIPS power-on self-tests.
+::: 
 
 ## Configuring RADIUS 
 

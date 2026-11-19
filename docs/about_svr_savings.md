@@ -4,9 +4,7 @@ sidebar_label: Secure Vector Routing Savings
 description: 'Session Smart tunnel-free SD-WAN affords cost savings of 30-40% over traditional tunnel-based SD-WAN solutions.  The proof is in the pudding, as can be realized with the built-in proof points tool.'
 ---
 
-Traditional SD-WAN solves the issues of WAN connectivity by creating virtual networks, or overlays, on top of the current transport network. Overlay-based SD-WAN however comes with a dependency on tunnels. While the use of tunnels can make the creation of overlays easier, tunnels bring with them a number of costs. In some applications, such as VoIP, tunnel overhead consumes as much as 40% to 100% additional packet bandwidth[^1], resulting in poor bandwidth efficiency, increased latency, packet drops and worst of all, poor customer experience.
-
-[^1]: https://www.juniper.net/content/dam/www/assets/analyst-reports/us/en/2021/acg-research-tunnel-based-versus-tunnel-free-sd-wan.pdf
+Traditional SD-WAN solves the issues of WAN connectivity by creating virtual networks, or overlays, on top of the current transport network. Overlay-based SD-WAN however comes with a dependency on tunnels. While the use of tunnels can make the creation of overlays easier, tunnels bring with them a number of costs. In some applications, such as VoIP, tunnel overhead consumes as much as 40% to 100% additional packet bandwidth, resulting in poor bandwidth efficiency, increased latency, packet drops and worst of all, poor customer experience.
 
 Overlay-based SD-WAN creates a heavyweight, less-optimized network transport that introduces fragmentation and degrades scalability and security. Session Smart Routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
 

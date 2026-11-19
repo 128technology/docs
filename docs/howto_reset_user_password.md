@@ -3,6 +3,12 @@ title: Password Change and Account Recovery
 sidebar_label: Password Change and Account Recovery
 ---
 
+## First Login With a Default Password
+
+Beginning with SSR 7.2.4-R2, a new installation requires that the default `root`, `t128`, and `admin` passwords be reset upon first login. The **factory reset** operation removes any user configured passwords including those on the default accounts, and requires that the default passwords be reset upon first login. You will be presented with the password reset prompts at the first login for each account.  Alternatively, you can configure new passwords during initialization. See [Default Passwords and First Login](config_password_security.md#default-passwords-and-first-login) for the `admin`, `root`, and `t128` procedures.
+
+An expired default password is not a lost password. Use the first-login password-change workflow when you know the current credential; use account recovery below only when the password has been lost.
+
 ## Changing your Password
 
 Changing a user password requires entering the old password. For this reason it is highly recommended to keep password records accessible and secure. User password reset is typically performed from the GUI. 
@@ -40,6 +46,7 @@ This process should only be used to recover access to an account where the passw
 
 1. Make sure the 128T process is running. If it is not running or is restarted before logging into the PCLI and making the update, the password change will be lost. 
 2. Log in to the Linux shell. 
+	If the `t128` password has expired, complete the password-change prompts before proceeding. Use the replacement password for the `sudo` password prompt below.
 3. Change the password for the corresponding Linux user. In this example the `admin` user password has been lost. The same procedure is used for a lost user password. 
 
 ```

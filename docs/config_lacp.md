@@ -9,7 +9,7 @@ LACP is the protocol that defines how the group of interfaces operates. LACP ena
 
 A Link Aggregation Group (LAG) that does not have LACP enabled operates as a static LAG, where the interfaces do not communicate state information.
 
-For a deeper look at LAG and LACP, see [Aggregated Ethernet Interfaces](https://www.juniper.net/documentation/us/en/software/junos/interfaces-ethernet-switches/topics/topic-map/switches-interface-aggregated.html).
+For a deeper look at LAG and LACP, see [Aggregated Ethernet Interfaces](https://networkingdocs.hpe.com/documentation/us/en/software/junos/interfaces-ethernet-switches/topics/topic-map/switches-interface-aggregated.html).
 
 ## How It Works
 

@@ -40,10 +40,7 @@ graph TD
 
 ## Roles
 
-| Device | Type | Role |
-|--------|------|------|
-| `Conductor` | Azure VM (BYOL) | Standalone SSR Conductor — centralized management and provisioning |
-| `azure-router-1` | Azure VM (BYOL) | Conductor-managed SSR — internet breakout, LAN forwarding |
+The role for this deployment is a `Conductor`  on an Azure VM (BYOL) functioning as a standalone SSR Conductor providing centralized management and provisioning for the router deployment of your choice.
 
 ## Network Design Reference
 
@@ -55,8 +52,7 @@ Before beginning, ensure the following are available:
 
 - **Azure subscription** — with permission to create VMs, VNets, network security groups, and managed identities.
 - **Azure VNet** — with at least the following subnets already created:
-  - `ssr-wan-subnet` — the router's public (WAN) subnet; must have internet egress and reachable via SSH and HTTPS for administration. This is shared with the conductor.
-  - `ssr-lan-subnet` — the router's private (LAN) subnet.
+  - `ssr-conductor-subnet` - The Conductor's primary control subnet. Used for communication with the routers as well as SSH and HTTPS administration access.
 - **Azure Managed Identity** — with the minimum read permissions listed in [Step 1](deploy_azure_conductor_vm.mdx#requirements).
 - **Juniper software access credentials** — Artifactory username and password for SSR software downloads.
 - **SSH key pair** — RSA 2048-bit or stronger; the public key is supplied to the Azure deployment templates.

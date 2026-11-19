@@ -7,29 +7,17 @@ This step verifies that the BYOL installation has completed successfully, confir
 
 ## Wait for Installation to Complete
 
-The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **10–15 minutes** after the VM first starts. The SSR Install screens do not open - this process takes place behind the scenes. You must open an SSH window to confirm the installation. 
+The BYOL bootstrapper installs SSR 7.1.4 automatically after the VM is deployed. This process takes approximately **20 minutes** after the VM first starts. The SSR Install screens do not open - this process takes place behind the scenes. 
 
-Log in to the Linux instance via SSH using the default username `t128` and the private key that corresponds to the public key supplied in **Admin Public Key Data**.
+## Verify the Successful Conductor Installation
 
-The installation is complete when the SSR PCLI launches.
+You can verify the successful conductor installation by logging in to the Conductor GUI using the Conductor Primary NIC public IP address.
 
-## Verify the Conductor Is Running
+   ![Conductor IP address](/img/deploy-azure-conductor-ip-address.png)
 
-1. From an SSH session on the conductor VM, enter the SSR PCLI:
-
-   ```
-   su admin
-   ```
-
-2. Run `show system` and wait until the status returns as `running`:
-
-   ```
-   admin@node0.Conductor# show system
-   ```
-
-   The system may take a few minutes to fully start after installation. Run the command again if the status is not yet `running`.
-
-## Log In to the Conductor GUI
+:::important
+Attempting to open the Conductor GUI before the installation has completed - i.e., not waiting 20 minutes - will result in an error message. This DOES NOT mean the installation failed, it means it has not completed yet. If you get an error message, wait longer, then try again. 
+:::
 
 1. Open a browser and navigate to `https://<conductor-public-ip>`.
 
@@ -45,7 +33,7 @@ The installation is complete when the SSR PCLI launches.
    | Password | `128Tadmin` |
 
    :::important
-   Change the default password immediately after first login. The new password requires a minimum of 9 characters containing at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+   You must change the default password immediately after first login. The new password requires a minimum of 9 characters containing at least 1 uppercase letter, 1 lowercase letter, and 1 number.
    :::
 
 3. A successful login confirms the conductor is running and reachable on the public IP.
@@ -58,7 +46,9 @@ Once the instance is launched with the correct parameters, the device will begin
 
 If the instance does not install SSR as expected, SSH into the instance using the credentials provided during VM creation.
 
-- Try to log into the pcli, run `su admin` and then `show system`.
+`ssh -i <private-ssh-key> t128@<conductor-public-ip>`
+
+- Try to log into the pcli, run `su admin`, enter your password, and then `show system`.
 
 - If the pcli is not accessible or the status and necessary action is not obvious, capture the Hardware Bootstrapper tech support (`/var/log/128T-hardware-bootstrapper/hardware-bootstrapper-tech-support.zip`) and examine the journal for `128T-hardware-bootstrapper`, and `ember`.
 

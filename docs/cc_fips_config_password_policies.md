@@ -3,7 +3,7 @@ title: Username and Password Policies
 sidebar_label: Username and Password Policies
 ---
 
-Username and password requirements are listed below. For a list of the commands and how they are used to configure and enforce requirements, please refer to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy).
+Username and password requirements are listed below. For a list of the commands and how they are used to configure and enforce requirements, please refer to [`configure authority password-policy`](https://networkingdocs.hpe.com/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy).
 
 ### Password Requirements
 
