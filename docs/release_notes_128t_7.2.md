@@ -181,8 +181,6 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 ------
 - **I95-66752 Improved Security-Key Service Callback Handling During Shutdown:** Resolved an issue where security-key service callbacks could be invoked after the associated resources had been released during shutdown. Callback lifetimes are now protected during shutdown.
 ------
-- **I95-66753 Stale ESKM Rekey Timer Callbacks Invalidated:** Resolved an issue where a stale rekey timer callback could act on an outdated security key exchange. Stale callbacks are now invalidated, and rekey events are dispatched on the security key management polling thread.
-------
 - **I95-66772 SHA-1 Based `ssh-rsa` Host-Key Algorithm Offered by SSH Services:** Resolved an issue where the system SSH daemon and the internal SSH services used for conductor-to-router communication, including port 930, offered the `ssh-rsa` host-key algorithm, which uses SHA-1 and is flagged by security audits. The `ssh-rsa` algorithm has been removed in both FIPS and non-FIPS modes; RSA algorithms using SHA-2 remain enabled.
 ------
 - **I95-66782 Configurable TLS Supported Groups and Signature Algorithms for the Web Server:** The `supported-groups` and `signature-algorithms` settings have been added under `authority > router > system > services > webserver > ssl`, and to the GUI, allowing you to configure the TLS key exchange groups and signature algorithms used by the web server, for example to meet CNSA 1.0 requirements. These settings apply to the HTTPS listener, the Secure Conductor Onboarding listener, and upstream TLS connections. When `supported-groups` is not configured, the existing default group list (`prime256v1:secp384r1:secp521r1`) is retained.
@@ -222,8 +220,6 @@ After the installation of SSR 7.x, it is not possible to downgrade to a 6.x vers
 - **I95-67036 Large Configurations Failed to Load Due to an XML Size Limit:** Resolved an issue where very large configurations could not be loaded because of a 64 MB limit on XML parsing. The limit has been removed to support very large configurations. Additionally, web service startup rate limiting has been removed, while the 15-second restart delay is retained.
 ------
 - **I95-67045 IDP Tenant Validation Rejected Prefixes Reused Across Routers:** Resolved an issue where configuration commits failed IDP tenant validation when child tenants on different routers used the same prefixes. Duplicate-prefix validation is now scoped to each router, allowing independent sites to reuse the same prefixes.
-------
-- **I95-67211 `libffi` Package Dependency on ARM-Based Platforms:** Resolved a packaging issue on ARM-based platforms where an update to the application identification downloader removed a dependency on the `libffi` library that other installed packages still relied on. The dependency is now declared correctly.
 
 ## Release 7.2.4-4r2
 
