@@ -189,7 +189,7 @@ module.exports = {
       "upgrade_legacy",
       "intro_rollback",
     ],
-    "Cloud Upgrades": [
+    "Cloud Conductor Upgrades": [
       "upgrade-cloud-images",
       "upgrade-cloud-image-backup",
       "upgrade-cloud-cond-single-process",

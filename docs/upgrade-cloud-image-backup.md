@@ -1,6 +1,6 @@
 ---
-title: Cloud Upgrade Backup Process
-sidebar_label: Cloud Upgrade Backup Process
+title: Cloud Conductor Upgrade Backup Process
+sidebar_label: Cloud Conductor Upgrade Backup Process
 ---
 
 ### Command Line

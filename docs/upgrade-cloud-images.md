@@ -1,11 +1,11 @@
 ---
-title: Cloud Upgrades
-sidebar_label: Cloud Upgrades
+title: Cloud Conductor Upgrade
+sidebar_label: Cloud Conductor Upgrade
 ---
 
-Some legacy Azure, AWS, or GCP installations, including installations originating from the historical 5.4.4 private offer, have a disk layout that cannot be automatically converted to the layout required for image-based software delivery. Specifically, these installations did not use LVM for partitioning. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. Installing a newer package on an old VM does not change its disk layout.
+Some legacy Azure and AWS installations including installations originating from the historical 5.4.4 private offer, have a disk layout that cannot be automatically converted to the layout required for image-based software delivery. Specifically, these installations did not use LVM for partitioning. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. Installing a newer package on an old VM does not change its disk layout.
 
-This guide documents the upgrade path for users moving from a non-LVM, SSR package-based cloud deployment to an image-based cloud deployment. For these users, this procedure requires a new deployment with an image-based installation using the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.md) or [Azure](intro_installation_byol_azure_conductor.md).
+This guide documents the upgrade path for Conductor deployments moving from a non-LVM, SSR package-based cloud deployment to an image-based cloud deployment. For these systems, the upgrade requires a new deployment with an image-based installation using the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.md) or [Azure](intro_installation_byol_azure_conductor.md).
 
 :::important
 Mist-managed routers are not affected and do not require this procedure.
