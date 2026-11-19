@@ -2,29 +2,23 @@
 title: Appendix - GCP Conductor Configuration
 sidebar_label: Appendix - GCP Conductor Configuration
 ---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
 
-This appendix contains the complete Terraform variable reference for the GCP conductor deployment described in this guide. Use it when creating the `ssr-variables.tfvars` file in [Step 2 — Create the GCP VM](deploy_gcp_conductor_install.mdx#deploy-a-gcp-conductor-vm-using-the-command-line-interface).
+This appendix **does not yet** provide an example conductor configuration for the parameters described in this guide.  
+
+Additionally, a Terraform variable reference is provided for the GCP conductor deployment described in this guide. Use it when creating the `ssr-variables.tfvars` file.
 
 ## Deployment Parameters
 
-The following table describes all supported Terraform variables for the BYOL conductor deployment in GCP. Variables marked **Required** must be present in `ssr-variables.tfvars`. All others are optional and fall back to defaults when omitted.
+The following table describes all the values for the BYOL conductor deployment in GCP. 
 
-| GCP Marketplace Name | Terraform Variable | Required | Description |
-|----------------------|--------------------|----------|-------------|
-| Deployment Name | `goog_cm_deployment_name` | Yes | Name of the conductor VM instance displayed in GCP and the conductor UI. |
-| Machine Type | `machine_type` | Yes | GCP machine type for the conductor VM (for example, `c2-standard-4`). |
-| Region | `region` | Yes | GCP region where the conductor VM is deployed. |
-| Zone | `zone` | Yes | GCP zone within the selected region. |
-| Boot Disk Size | `boot_disk_size` | Yes | Boot disk size in GB. Minimum `60` is recommended. |
-| SSR Mode | `ssr_mode` | Yes | Set to `conductor` for a conductor deployment. |
-| SSR Version | `ssr_version` | Yes | SSR software version to install on the conductor (for example, `7.1.4`). |
-| Artifactory Username | `artifactory_user` | Yes | Username for Juniper BYOL repository access. |
-| Artifactory Token | `artifactory_token` | Yes | Token or password for Juniper BYOL repository access. |
-| SSH Public Key | `ssh_public_key` | Yes | Public SSH key added for administrator access to the conductor VM. |
-| Admin Allowed CIDR | `admin_allowed_cidr` | Yes | Source CIDR range allowed for SSH and HTTPS administration access. |
-| Control Interface Network | `control_nic_network` | Yes | List containing the VPC network name for the conductor control interface. |
-| Control Interface Subnet | `control_nic_subnet` | Yes | List containing the subnet name for the conductor control interface. |
-| Control Allowed CIDR | `control_nic_allowed_cidr` | Yes | Source CIDR range allowed to reach the conductor on ports 930, 4505, and 4506. |
+Variables marked **Required** must be present in `ssr-variables.tfvars`. All others are optional and fall back to defaults when omitted.
+
+<NetworkDesign/>
+
+## Example Conductor Configuration 
+
+To Be Provided 
 
 ## Sample `ssr-variables.tfvars`
 
@@ -54,5 +48,5 @@ Replace `admin_allowed_cidr` and `control_nic_allowed_cidr` with appropriately r
 ## Related Documentation
 
 - [Step 2 — Deploy via GCP Marketplace](deploy_gcp_conductor_install.mdx)
-- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.md)
+- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.mdx)
 - [System Requirements](intro_system_reqs.md)
