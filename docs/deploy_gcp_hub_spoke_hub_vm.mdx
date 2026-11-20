@@ -1,0 +1,104 @@
+---
+title: "Step 2: Deploy the Hub Router VM"
+sidebar_label: "Deploy the Hub Router VM"
+---
+
+This step deploys `Hub1` using either the GCP Marketplace graphical user interface or the command line (Terraform). You do not need to do both.
+
+## Requirements
+
+Before deploying `Hub1`, complete [Step 1 — Configure the GCP Prerequisites](deploy_gcp_hub_spoke_prereqs.mdx):
+
+- `hub-public-vpc` / `hub-public-subnet` and `hub-private-vpc` / `hub-private-subnet` created (or existing equivalents).
+- An SSH key pair.
+- A GCP service account, or the permissions to create one during deployment.
+- The pre-existing conductor's control IP and Artifactory credentials.
+
+## Instance Size
+
+Select a GCP machine type that meets your network scale requirements. The following instance types are supported for virtual SSR in GCP.
+
+| GCP Machine Type | Max vNICs | vCPU Cores | Memory |
+|------------------|-----------|-----------|--------|
+| `c2-standard-4`  | 4  | 4  | 16 GB  |
+| `c2-standard-8`  | 8  | 8  | 32 GB  |
+| `c2-standard-16` | 10 | 16 | 64 GB  |
+| `c2-standard-30` | 10 | 30 | 120 GB |
+
+Session Smart Router size recommendations can be found in [System Requirements](intro_system_reqs.md).
+
+## Deploy via GCP Marketplace Graphical User Interface
+
+1. In the GCP console, search for **Marketplace** in the search bar and click the top result.
+2. Search for **Session Smart Networking Platform – BYOL** and click the matching listing.
+3. On the product details page, click **Launch**.
+4. Provide a **Deployment Name** — for example, `hub1`. This name is displayed in GCP and in the conductor UI.
+5. In the **Deployment Service Account** section, select an existing account or create a new one as described in [Step 1](deploy_gcp_hub_spoke_prereqs.mdx#3-create-the-gcp-service-account).
+6. In the **Machine Type** section, select the instance size from [Instance Size](#instance-size) and the desired **Region** and **Zone**.
+7. In the **Session Smart Router BYOL Configuration** section, select **conductor-managed** for **SSR Mode** and enter the desired **SSR Version** (`7.1.4`).
+8. In the **SSH Access Control** section, enter the **Admin Allowed CIDR** for SSH/HTTPS access and paste the SSH public key created in [Step 1](deploy_gcp_hub_spoke_prereqs.mdx#2-create-an-ssh-key-pair).
+9. In the **SSR Mode: Conductor-Managed Router Configuration Options** section, click **Add item** to enter the conductor's control IP (`35.Y.Y.Y`), and enter your Artifactory username and token.
+10. In the **SSR WAN Interfaces** section, enter the **WAN Allowed CIDR** (source IP range permitted for SVR traffic). Click **Add a new interface**, select `hub-public-vpc` under **Network** and `hub-public-subnet` under **Subnetwork**, then click **Done**.
+11. In the **SSR LAN Interfaces** section, enter the **LAN Allowed CIDR** (source IP range of workloads permitted connectivity through the router). Click **Add a new interface**, select `hub-private-vpc` under **Network** and `hub-private-subnet` under **Subnetwork**, then click **Done**.
+12. Scroll to the bottom and click **Deploy**.
+
+   ![gcp common template deployment](/img/gcp-common-template.png)
+   ![gcp conductor-managed router template deployment](/img/gcp-conductor-managed-rtr-template.png)
+   ![gcp networking template deployment](/img/gcp-networking-template.png)
+
+GCP creates the `Hub1` VM in under 5 minutes — a green check mark appears next to **Status** for each created resource. After the VM is created, it automatically installs the SSR software and checks in to the conductor. Allow an additional 10 to 15 minutes for this process to complete before continuing to [Step 4 — Onboard the Routers to the Conductor](deploy_gcp_hub_spoke_onboard.mdx).
+
+## Deploy via GCP Marketplace Command Line (Terraform)
+
+1. In the GCP console, search for **Marketplace** and open the **Session Smart Networking Platform – BYOL** listing.
+2. Click **Launch**, then select the **Command-Line Deployment** tab.
+3. Click **Download** to download the Terraform deployment package.
+
+   ![gcp cli deployment](/img/gcp-cli-deployment.png)
+
+4. Unzip the downloaded package on your local machine. Within the resulting Terraform module folder, create a file named `ssr-variables.tfvars` with values similar to the following, substituting your own values:
+
+   ```
+   goog_cm_deployment_name = "hub1"
+   machine_type            = "c2-standard-4"
+   region                  = "us-west2"
+   zone                    = "us-west2-a"
+   boot_disk_size          = "60"
+   ssr_mode                = "conductor-managed"
+   ssr_version             = "7.1.4"
+   artifactory_user        = "<input-your-artifactory-user>"
+   artifactory_token       = "<input-your-artifactory-token>"
+   conductor_control_ips   = ["35.Y.Y.Y"]
+   ssh_public_key          = "<input-your-ssh-public-key>"
+   admin_allowed_cidr      = "0.0.0.0/0"
+   wan_nic_allowed_cidr    = "0.0.0.0/0"
+   wan_nic_networks        = ["hub-public-vpc"]
+   wan_nic_subnets         = ["hub-public-subnet"]
+   lan_nic_allowed_cidr    = "0.0.0.0/0"
+   lan_nic_networks        = ["hub-private-vpc"]
+   lan_nic_subnets         = ["hub-private-subnet"]
+   ```
+
+5. Use the GCP Cloud Shell to run the deployment. Click the **Activate Cloud Shell** icon at the top right of the GCP console, then upload your Terraform module folder using the Cloud Shell Terminal's **Upload** option.
+6. Navigate to the uploaded folder and initialize Terraform:
+
+   ```bash
+   cd <your-terraform-module-folder-name>
+   terraform init
+   ```
+
+7. Apply the deployment:
+
+   ```bash
+   terraform apply --var-file=ssr-variables.tfvars
+   ```
+
+8. Follow the prompts to confirm your project name and the deployment actions. When complete, Terraform prints `Apply complete` along with `ssh_username`, `ssr_instance_id`, and `ssr_public_ip_addresses`.
+
+After the VM is created, it automatically installs the SSR software. Allow an additional 10 to 15 minutes for this process to complete before continuing to [Step 4 — Onboard the Routers to the Conductor](deploy_gcp_hub_spoke_onboard.mdx).
+
+For the full BYOL Terraform variable reference, see [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.md#deployment-parameters-conductor-managed-router).
+
+## Next Step
+
+Proceed to [Step 3 — Deploy the Spoke Router VM](deploy_gcp_hub_spoke_spoke_vm.mdx).

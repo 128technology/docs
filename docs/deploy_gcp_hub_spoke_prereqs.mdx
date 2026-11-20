@@ -1,0 +1,75 @@
+---
+title: "Step 1: Configure the GCP Prerequisites"
+sidebar_label: "Configure the GCP Prerequisites"
+---
+
+This step creates the GCP infrastructure that both the hub and spoke router deployments depend on: the WAN and LAN VPCs/subnets for each router, an SSH key pair for authenticating to each router VM, and the GCP service account used by the Marketplace deployment.
+
+## 1. Create the Hub and Spoke VPCs and Subnets
+
+Each router requires its own WAN VPC/subnet and LAN VPC/subnet. Repeat this step four times — once each for `hub-public-vpc`, `hub-private-vpc`, `spoke-public-vpc`, and `spoke-private-vpc` — substituting the names and IPv4 ranges from the [Network Design Reference](deploy_gcp_hub_spoke_overview.mdx#network-design-reference).
+
+1. In the GCP console, search for **VPC networks** in the search bar and click on **VPC Networks**.
+
+   ![VPC Networks](/img/deploy-gcp-create-vpc1.png)
+
+2. On the Google Cloud dashboard under VPC networks, click **Create VPC Network**.
+
+   ![Create VPC Network](/img/deploy-gcp-create-vpc2.png)
+
+3. Under **Create a VPC network**, enter the following information:
+   - VPC Name — for example, `hub-public-vpc`
+   - Subnet Name — for example, `hub-public-subnet`
+   - Subnet Region
+   - An IPv4 range for the subnet — for example, `192.168.10.0/24`
+
+   ![Define the VPC Network](/img/deploy-gcp-create-vpc3.png)
+
+4. Scroll to the bottom and click **Create**.
+
+   After the VPC is created it appears on the VPC networks page.
+
+   ![VPC Networks Page](/img/deploy-gcp-create-vpc4.png)
+
+5. Repeat for the remaining three VPCs and subnets (`hub-private-vpc`, `spoke-public-vpc`, `spoke-private-vpc`).
+
+:::note
+Existing VPCs and subnets can be used instead of creating new ones. In that case, skip this step and use your existing VPC and subnet names during the Marketplace deployment.
+:::
+
+## 2. Create an SSH Key Pair
+
+An SSH key pair authenticates you to each router VM after deployment. You can reuse the same key pair for both `Hub1` and `Spoke1`, or create a separate pair for each.
+
+1. On your local machine, open a terminal and run:
+
+   ```bash
+   ssh-keygen -t rsa -b 4096
+   ```
+
+2. When prompted, enter a name for the key pair and a passphrase. The key files are saved to your home directory.
+
+3. Display the public key, replacing `<your-key-pair-name>` with the filename you chose:
+
+   ```bash
+   cat <your-key-pair-name>.pub
+   ```
+
+4. Copy the output. You will paste this value into the **SSH Public Key** field during each router's Marketplace deployment.
+
+## 3. Create the GCP Service Account
+
+Each router deployment requires a GCP service account with the following IAM roles:
+
+| Role | Purpose |
+|------|---------|
+| `roles/config.agent` | Required for GCP deployment manager operations. |
+| `roles/compute.admin` | Required to create and manage compute resources. |
+| `roles/iam.serviceAccountUser` | Required to act as the service account. |
+| `roles/storage.objectViewer` | Required to read deployment objects from storage. |
+
+You can create the service account directly within the Marketplace deployment form for each router — a separate pre-creation step in the GCP console is not required. You may use the same service account for both `Hub1` and `Spoke1`, or create one per router.
+
+## Next Step
+
+Proceed to [Step 2 — Deploy the Hub Router VM](deploy_gcp_hub_spoke_hub_vm.mdx).
