@@ -51,6 +51,8 @@ Resource group ssr-conductor-rg (eastus) - created per node: VM, NIC, NSG
  Outbound: HTTPS to the SSR software repository (install and upgrades)
 ```
 
+![Cloud Migration overview](/img/cloud-cond-migration1.png)
+
 | SSR term (inside the VM) | Azure resource (outside the VM) | Details |
 |---|---|---|
 | Conductor router `Conductor`, nodes `node0` / `node1` | VMs `conductor-node0` / `conductor-node1` (zone 1 / zone 2) | One VM per node from the BYOL marketplace image, deployed from the same ARM template. Hostnames (also the asset IDs) `Conductor-node0` / `Conductor-node1`. |
