@@ -3,14 +3,16 @@ title: High Availability Cloud Conductor Upgrade Process
 sidebar_label: High Availability Cloud Conductor Upgrade
 ---
 
-This procedure deploys a two-node highly available Session Smart conductor (`node0` and `node1`) in Azure from the BYOL marketplace image, using an ARM template, a parameters file per node and a cloud-init file per node. Allow 60-90 minutesto complete the process.
+This procedure deploys a two-node highly available Session Smart conductor (`node0` and `node1`) in Azure from the BYOL marketplace image, using an ARM template, a parameters file per node and a cloud-init file per node. Allow 60-90 minutes to complete the process.
+
+![Cloud Migration overview](/img/cloud-cond-migration1.png)
 
 ## Environment
 
 | Item | Value |
 |---|---|
 | Resource group | `ssr-conductor-rg` |
-| Region | `eastus` |
+| Region | `eastus` (Set the region appropriate for your deployment) |
 | VNet / subnet | `ssr-vnet` / `conductor-subnet` |
 | Managed identity | `ssr-conductor-identity` |
 | node0 | SSR node `node0` (hostname and asset ID `Conductor-node0`), VM `conductor-node0`, IP `10.0.1.10`, zone 1 |
@@ -34,14 +36,14 @@ Resource group ssr-conductor-rg (eastus) - created per node: VM, NIC, NSG
 │ ge-0-0  10.0.1.10                 │<────────────>│ ge-0-0  10.0.1.11                 │
 │   conductor address + HA sync     │              │   conductor address + HA sync     │
 └───┬───────────────────────────────┘              └───┬───────────────────────────────┘
+    │                                                  │ 
     │ NIC appears in the VM as ge-0-0                  │ NIC appears in the VM as ge-0-0
-┌───┴───────────────────────────────┐              ┌───┴───────────────────────────────┐
-│ NIC conductor-node0-control       │              │ NIC conductor-node1-control       │
-│   static IP 10.0.1.10             │              │   static IP 10.0.1.11             │
-│   tag SSR-ROLE=MGMT               │              │   tag SSR-ROLE=MGMT               │
-│ NSG conductor-node0-control       │              │ NSG conductor-node1-control       │
-│ no public IP                      │              │ no public IP                      │
-└───┬───────────────────────────────┘              └───┬───────────────────────────────┘
+    │ NIC conductor-node0-control                      │ NIC conductor-node1-control 
+    │   static IP 10.0.1.10                            │   static IP 10.0.1.11  
+    │   tag SSR-ROLE=MGMT                              │   tag SSR-ROLE=MGMT 
+    │ NSG conductor-node0-control                      │ NSG conductor-node1-control 
+    │ no public IP                                     │ no public IP 
+    │                                                  │ 
 ════╧══════════════════════════════════════════════════╧════════════════════════════════
  Subnet conductor-subnet in VNet ssr-vnet (existing)
  Inbound, allowed by each node's NSG:
@@ -51,8 +53,6 @@ Resource group ssr-conductor-rg (eastus) - created per node: VM, NIC, NSG
  Outbound: HTTPS to the SSR software repository (install and upgrades)
 ```
 
-![Cloud Migration overview](/img/cloud-cond-migration1.png)
-
 | SSR term (inside the VM) | Azure resource (outside the VM) | Details |
 |---|---|---|
 | Conductor router `Conductor`, nodes `node0` / `node1` | VMs `conductor-node0` / `conductor-node1` (zone 1 / zone 2) | One VM per node from the BYOL marketplace image, deployed from the same ARM template. Hostnames (also the asset IDs) `Conductor-node0` / `Conductor-node1`. |
@@ -60,7 +60,7 @@ Resource group ssr-conductor-rg (eastus) - created per node: VM, NIC, NSG
 | Node IP (`node-ip`), the conductor address | Static private IPs `10.0.1.10` / `10.0.1.11` | The NIC IP (template `controlPrivateIp`) and the cloud-init `node-ip` are the same value. Managed routers connect to both addresses. |
 | HA sync interface (node1 `ha-peer-ip` = `10.0.1.10`) | Same NIC and IP; no HA sync NIC | Conductor-to-conductor sync runs over `ge-0-0` through the subnet. Hardware conductors use a dedicated HA sync NIC on `169.254.253.x` (`clustered`), which an Azure VNet cannot carry. |
 | HA fabric interface | None | Conductors do not forward session traffic, so there is no fabric link. |
-| - | NSGs `conductor-node0-control` / `conductor-node1-control`, one per NIC | Inbound allow: TCP 22, 443 from `0.0.0.0/0`; TCP 930 (router control), 933 (secure onboarding), 4505-4506 (salt) from `0.0.0.0/0`; all traffic from the HA peer's IP. |
+| - | Network Security Groups (NSG) `conductor-node0-control` / `conductor-node1-control`, one per NIC | Inbound allow: TCP 22, 443 from `0.0.0.0/0`; TCP 930 (router control), 933 (secure onboarding), 4505-4506 (salt) from `0.0.0.0/0`; all traffic from the HA peer's IP. |
 | - | No public IP | Routers and administrators reach the nodes on their private IPs (VNet peering, VPN or ExpressRoute). |
 | - | VNet `ssr-vnet`, subnet `conductor-subnet` | Existing, not created by the template. Needs outbound HTTPS for the SSR download and must allow traffic between the two nodes. |
 

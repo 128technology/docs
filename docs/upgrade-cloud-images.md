@@ -36,7 +36,18 @@ If you have already initiated an upgrade and received any of the following log m
 
 ## Conductor Upgrade via Migration 
 
+Migrating a non-lvm, package-based cloud conductor to an LVM, image-based cloud deployment requires the backup procedure covered in Step 1 of this guide. 
+
+The creation of a new VM and redeployment of the conductor depends on your current deployment, as well as your security needs. There are two types of deployments to consider when upgrading your cloud conductor. 
+
+ - Option A: A private IP attached to the conductor VM, with a correlating public IP that is is managed by the external NAT/Firewall. This is the recommended deployment model, whether you have a standalone or HA network. It is more secure, with access to the conductor limited by the rules configured on the firewall. If this is not your default network configuration, you can use this guide to migrate to this configuration.
+ - Option B: Public and private IPs attached to the conductor VM. This deployment type provides a public IP address on the conductor, giving it direct access to the internet.  
+
 The procedure that follows deploys either a standalone Session Smart Conductor (node0), or a Highly Available Session Smart Conductor (node0, node1) in Azure from the BYOL marketplace image, using an ARM template, a parameters file and a cloud-init file. Allow approximately 60 minutes to complete the upgrade process.
+
+If your deployment model is Option A, continue with the Backup Procedure in Step 1, and then select the migration path for Option A offered at the end of the backup procedure.
+
+If your deployment model is Option B, continue with the Backup Procedure in Step 1, and then select the migration path for Option B offered at the end of the backup procedure.
 
 Backup procedures are the same for Standalone or High Availability Conductors. The  Migration procedures are different for each type of deployment. 
 

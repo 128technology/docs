@@ -66,7 +66,3 @@ cat /etc/resolv.conf
 cat /etc/128technology/local.init
 cat /etc/128technology/global.init
 ```
-
-
-
-

@@ -10,7 +10,7 @@ This procedure deploys a single-node (standalone) Session Smart conductor in Azu
 | Item | Value |
 |---|---|
 | Resource group | `ssr-conductor-rg` |
-| Region | `eastus` |
+| Region | `eastus` (Set the region appropriate for your deployment) |
 | VNet / subnet | `ssr-vnet` / `conductor-subnet` |
 | Managed identity | `ssr-conductor-identity` |
 | Conductor | SSR node `node0` (hostname and asset ID `Conductor-node0`), VM `conductor-node0`, IP `10.0.1.10`, zone 1 |
@@ -33,14 +33,14 @@ Resource group ssr-conductor-rg (eastus) - created: VM, NIC, NSG
 │ ge-0-0  10.0.1.10                 │
 │   conductor address               │
 └───┬───────────────────────────────┘
+    │
     │ NIC appears in the VM as ge-0-0
-┌───┴───────────────────────────────┐
-│ NIC conductor-node0-control       │
-│   static IP 10.0.1.10             │
-│   tag SSR-ROLE=MGMT               │
-│ NSG conductor-node0-control       │
-│ no public IP                      │
-└───┬───────────────────────────────┘
+    │ NIC conductor-node0-control       
+    │   static IP 10.0.1.10             
+    │   tag SSR-ROLE=MGMT               
+    │ NSG conductor-node0-control       
+    │ no public IP                      
+    │
 ════╧════════════════════════════════
  Subnet conductor-subnet in VNet ssr-vnet (existing)
  Inbound, allowed by the NSG:
@@ -54,7 +54,7 @@ Resource group ssr-conductor-rg (eastus) - created: VM, NIC, NSG
 | Conductor router `Conductor`, node `node0` | VM `conductor-node0` (zone 1) | One VM from the BYOL marketplace image, deployed from the ARM template. Hostname (also the asset ID) `Conductor-node0`. |
 | Interface `ge-0-0` | NIC `conductor-node0-control` | The only NIC on the VM, so SSR names it `ge-0-0`. Tagged `SSR-ROLE=MGMT`; accelerated networking and IP forwarding enabled. |
 | Node IP (`node-ip`), the conductor address | Static private IP `10.0.1.10` | The NIC IP (template `controlPrivateIp`) and the cloud-init `node-ip` are the same value. Managed routers connect to this address (or to the public IP). |
-| - | NSG `conductor-node0-control` | Inbound allow: TCP 22, 443 from `0.0.0.0/0`; TCP 930 (router control), 933 (secure onboarding), 4505-4506 (salt) from `0.0.0.0/0`. |
+| - | Network Security Group (NSG) `conductor-node0-control` | Inbound allow: TCP 22, 443 from `0.0.0.0/0`; TCP 930 (router control), 933 (secure onboarding), 4505-4506 (salt) from `0.0.0.0/0`. |
 | - | No public IP | Routers and administrators reach the conductor on its private IP (VNet peering, VPN or ExpressRoute). |
 | - | VNet `ssr-vnet`, subnet `conductor-subnet` | Existing, not created by the template. Needs outbound HTTPS for the SSR download. |
 
