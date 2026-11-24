@@ -3,7 +3,7 @@ title: WAN Assurance Overview
 sidebar_label: Overview
 ---
 
-SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. Beginning with version 6.0, WAN Assurance for the SSR is available for users who [manage their network using the Mist Cloud](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/). 
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. Beginning with version 6.0, WAN Assurance for the SSR is available for users who [manage their network using the Mist Cloud](https://networkingdocs.hpe.com/documentation/product/us/en/mist-wan-assurance/). 
 
 For conductor-managed SSR devices running software versions 5.4.x and greater, [WAN Assurance Cloud Telemetry](config_wan_assurance.md) is available through Mist.
 

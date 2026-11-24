@@ -8,7 +8,7 @@ Juniper recommends **BYOL (Bring Your Own License)** for both new installations 
 
 Existing PAYG deployments remain fully supported — no immediate action required.
 
-To review the BYOL deployment procedure, see [Installing a BYOL Mist-managed Router in AWS](intro_installation_byol_aws_mist.md).
+To review the BYOL deployment procedure, see [Installing a BYOL Mist-managed Router in AWS](intro_installation_byol_aws_mist.mdx).
 :::
 
 This guide describes the process for deploying a PAYG (Pay As You Go) Mist-managed instance through AWS. When installed as an AWS image, SSR Version 6.x supports Mist-managed routers. The installation and deployment process consists of the following steps:

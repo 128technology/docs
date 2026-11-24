@@ -38,11 +38,19 @@ Due to changes in the base SSR/Linux OS in 7.X, interface naming behavior has ch
 
 This issue is currently being addressed by engineering. However, if your deployment requires an upgrade to 7.X on a VM configured with interfaces using the `ethX` naming convention, please ensure that console access is available, as manual updates to the Linux interface configuration may be required.
 
+To avoid manual Linux interface configuration, define these management interfaces in the SSR configuration as non-forwarding interfaces. Configure a `device-interface` with `forwarding` set to `false`, identify the NIC by its `pci-address`, and add a single `network-interface` of type `external` with the management address settings. The SSR then generates and maintains the Linux interface configuration (`ifcfg`) using the interface name that the operating system assigns, so the configuration remains valid regardless of the naming convention. This applies to conductors as well as routers. Note the following:
+
+- Configure exactly one `network-interface` on each non-forwarding `device-interface`. The SSR does not configure the Linux interface if none is present.
+- If you configure multiple management interfaces, set `default-route` to `true` and configure a `gateway` only on the interface that provides the default route.
+- Committing this configuration can briefly interrupt connectivity on the management interface while the SSR takes control of it. Use console access when changing the interface you are connected through.
+
+For configuration examples and details, see [Non-Forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md), which includes an example of an `external` non-forwarding management interface.
+
 **System Disk Considerations**
 
 As mentioned above, during the upgrade to an image-based installation, existing systems will go through a conversion process to support image-based delivery. This process involves resizing the existing disk partition to support writing a new disk image to the remaining disk space. As such, the usable disk space seen after this conversion will be approximately halved. The system will automatically detect if there is not enough usable disk space on the existing drive to support this partition resizing and, if so, will trigger an upgrade failure. Even if the conversion is successful and the upgrade succeeds, users may note that the system is experiencing disk space alarms after the upgrade due to the reduction in overall capacity. It is suggested to remove unnecessary large files from systems before upgrading. Old saved tech-support-info archives (check for tar.gz or zip files in `/var/log/128technology`) and uploaded ISO images are frequent contributors to used disk space and should be manually deleted.
 
-In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.md) or [Azure](intro_installation_byol_azure_conductor.md).
+In certain scenarios, existing cloud routers may have been installed from images that did not use LVM for partitions. For these systems, the automatic resizing of disk partitions will fail and they cannot be upgraded. It is suggested to rebuild these instances from the official SSR BYOL image for either [AWS](intro_installation_byol_aws_conductor.mdx) or [Azure](intro_installation_byol_azure_conductor.mdx).
 
 When the conductor is initially upgraded to an image-based installation, it will be upgraded as a package-based system. This is because the system does not understand how to handle image-based delivery until it is running 6.3 software. Once the conductor is running 6.3 all router upgrades will be treated as image-based upgrades and any subsequent conductor upgrade will be treated as image-based. Therefore, it is possible that issues related to disk usage on conductor may not arise until a subsequent upgrade of the conductor beyond the initial step to 6.3.
 
@@ -71,6 +79,16 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 After the installation of SSR 7.x, it is not possible to downgrade to a 6.x version of the SSR software. Because of the format of the image based installation (dividing the disk into two partitions), downgrading from SSR 7.x to any package based installation (6.x) is not possible. A downgrade is defined as uninstalling the 7.x software, and attempting to install a 6.x version.
 
 **[Rollback](intro_rollback.md) (to the previously installed version) is supported.** 
+
+## Release 7.0.7-2-lts
+
+**Release Date:** November 5, 2026
+
+### Resolved Issues
+
+- **I95-65656 Conductor upgrade fails on health check:** Resolved an issue where a conductor with a large configuration caused the web service to exhaust all its startup retries before the configuration fully loaded. This resulted in the local API becoming unavailable and caused the post-upgrade health check to fail.
+------
+- **I95-670336 Increase maximum limit of an XML document to support very large configs:** Removed the 64MB size limit on XML configuration documents, which causes perpetual crashes on systems with large configuration files. 
 
 ## Release 7.0.6-9-lts
 
