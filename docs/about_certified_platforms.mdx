@@ -1,247 +1,11 @@
 ---
-title: Certified Portfolio
-sidebar_label: Certified Portfolio
+title: Certified Platform Status
+sidebar_label: Certified Platform Status
 ---
 
-export const certifiedPlatforms = {
-  lenovosr650r2 : {
-    application : "Large Datacenter, 100G hub",
-    cpu : "40C (Xeon Platinum 8380)",
-    mem : "512GB",
-    hdrive : "960GB (1+1 redundant) SSD",
-    interfaces : [
-      "12 ports total", 
-      "4 x 100GbE", 
-      "4 x 10/25GbE", 
-      "4 x 10GBase-T"
-    ]
-  },
-  silicommadridg15901 : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 6 ports",
-    ]
-  },
-  silicommadridg02 : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 6 ports",
-    ]
-  },
-  silicommadridg03 : {
-    application : "Medium/Large Branch",
-    cpu : "8C (Atom C3758)",
-    mem : "16GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 8 ports",
-    ]
-  },
-  silicommadridg15911 : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 6 ports",
-      "LTE (AT&T, Verizon)"
-    ]
-  },
-  silicommadridg12 : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 6 ports",
-      "LTE (AT&T, Verizon)"
-    ]
-  },
-  silicommadridg13 : {
-    application : "Medium/Large Branch",
-    cpu : "8C (Atom C3758)",
-    mem : "16GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 8 ports",
-      "LTE (AT&T, Verizon)"
-    ]
-  },
-  silicommadridg71 : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB",
-    hdrive : "120GB SSD",
-    interfaces : [
-      "Ethernet, 6 ports",
-      "Dual LTE (AT&T, Verizon)"
-    ]
-  },
-  lannernca1515b : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB ECC",
-    hdrive : "128GB SSD",
-    interfaces : [
-      "Ethernet, 6 RJ45 ports, 2 SFP",
-    ]
-  },
-  lannernca1515a : {
-    application : "Medium/Large Branch",
-    cpu : "8C (Atom C3758)",
-    mem : "16GB ECC",
-    hdrive : "128GB SSD",
-    interfaces : [
-      "Ethernet, 6 RJ45 ports, 2 SFP",
-    ]
-  },
-  lannernca1515blte : {
-    application : "Small/Medium Branch",
-    cpu : "4C (Atom C3558)",
-    mem : "8GB ECC",
-    hdrive : "128GB SSD",
-    interfaces : [
-      "Ethernet, 6 RJ45 ports, 2 SFP",
-      "LTE (AT&T, Verizon)"
-    ]
-  },
-  lannernca1515alte : {
-    application : "Medium/Large Branch",
-    cpu : "8C (Atom C3758)",
-    mem : "16GB ECC",
-    hdrive : "128GB SSD",
-    interfaces : [
-      "Ethernet, 6 RJ45 ports, 2 SFP",
-      "LTE (AT&T, Verizon)"
-    ]
-  },
-  hpedl345gen11 : {
-    application : "Large Datacenter, 100G hub",
-    cpu : "64C (AMD EPYC 9575F)",
-    mem : "768GB DDR5 ECC",
-    hdrive : "2x 1.92T U.3 SSDs in RAID1",
-    interfaces : [
-      "12 ports total", 
-      "4 x 100GbE", 
-      "4 x 10/25GbE", 
-      "4 x 1GBase-T"
-    ]
-  }
-}
+HPE currently certifies only the HPE DL345 Gen11 configuration below for new customer deployments. HPE continues to support existing installations of the legacy platforms listed below on all currently supported SSR releases. Legacy platforms are not available to new customers for purchase or deployment.
 
-export const Platform = ({id}) => (
-  <table>
-    <tbody>
-      <tr>
-        <td><b>Application</b></td>
-        <td>{certifiedPlatforms[id].application}</td>
-      </tr>
-      <tr>
-        <td><b>CPU</b></td>
-          <td>{certifiedPlatforms[id].cpu}</td>
-      </tr>
-      <tr>
-        <td><b>Memory</b></td>
-        <td>{certifiedPlatforms[id].mem}</td>
-      </tr>  
-      <tr>
-        <td><b>Hard Drive</b></td>
-        <td>{certifiedPlatforms[id].hdrive}</td>
-      </tr> 
-      <tr>
-        <td><b>Interface Options</b></td>
-        <td>{ certifiedPlatforms[id].interfaces.map((iface, index) => <li key={index}>{ iface }</li>) }</td>
-      </tr>
-    </tbody>
-  </table>
-)
-
-Juniper maintains platforms which have been certified to run the Session Smart Router (SSR) software.
-
-## Certified Platforms - Small and Medium Branch
-
-The following devices are Certified Platforms for small to medium deployments. Only the SKUs listed are Certified. The platform model alone does not guarantee conformance to software requirements.
-
-### Silicom Madrid
-
-![Silicom Madrid 90500-0151-G71](/img/about_certified_platforms_silicommadrid-gseries.png)
-
-Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for information and quotes.
-
-#### Silicom Madrid 90500-0151-G71
-<Platform id="silicommadridg71"></Platform>
-
-#### Silicom Madrid 90500-0151-G12
-<Platform id="silicommadridg12"></Platform>
-
-#### Silicom Madrid 90500-0151-G02
-<Platform id="silicommadridg02"></Platform>
-
-### Silicom Madrid Ruggedized
-
-The ruggedized Silicom Madrid provides a sealed, fanless chassis to protect against humidity and dust.
-
-![Silicom Madrid Ruggedized 90500-0159-G01](/img/about_certified_platforms_silicommadrid-ruggedize-g01.png)
-
-Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for information and quotes.
-
-#### Silicom Madrid Ruggedized 90500-0159-G01
-<Platform id="silicommadridg15901"></Platform>
-
-#### Silicom Madrid Ruggedized 90500-0159-G11
-<Platform id="silicommadridg15911"></Platform>
-
-### Lanner NCA-1515B
-
-![Lanner NCA-1515B](/img/about_certified_platforms_lanner-nca-1515.jpg)
-
-Please reach out to the Lanner sales domain at partner_sales@Lannerinc.com with any purchase requests, hardware questions, and order fulfillment.
-
-#### L-1515B-4C-8E-128M-SSR1
-<Platform id="lannernca1515b"></Platform>
-
-#### L-1515B-4C-8E-128M-C1-SSR
-<Platform id="lannernca1515blte"></Platform>
-
-## Certified Platforms – Medium and Large Branch
-
-The following devices are Certified Platforms for medium to large deployments. Only the SKUs listed are Certified. The platform model alone does not guarantee conformance to software requirements.
-
-### Lanner NCA-1515A
-
-![Lanner NCA-1515B](/img/about_certified_platforms_lanner-nca-1515.jpg)
-
-Please reach out to the Lanner sales domain at partner_sales@Lannerinc.com with any purchase requests, hardware questions, and order fulfillment.
-
-#### L-1515A-8C-16E-128M-SSR
-<Platform id="lannernca1515a"></Platform>
-
-#### L-1515A-8C-16E-128M-C1-SSR1
-<Platform id="lannernca1515alte"></Platform>
-
-### Silicom Madrid
-
-Please contact Silicom Ltd. Connectivity Solutions at yotaml@silicom.co.il for information and quotes.
-
-![Silicom Madrid 8 Port G-Series](/img/about_certified_platforms_silicommadrid-gseries.png)
-
-#### 90500-0151-G03 (NO LTE)
-<Platform id="silicommadridg03"></Platform>
-
-
-#### 90500-0151-G13 (LTE)
-<Platform id="silicommadridg13"></Platform>
-
-
-## Certified Platform – Hub
-
-The following devices are Certified Platforms for Hub deployments. Only the SKUs listed are Certified. The platform model alone does not guarantee conformance to software requirements.
+## Current Certified Platform
 
 ### HPE DL345 Gen11
 
@@ -249,10 +13,16 @@ The following devices are Certified Platforms for Hub deployments. Only the SKUs
 
 See the HPE DL345 Gen11 [data sheet](https://www.hpe.com/psnow/doc/PSN1014689145USEN.pdf?jumpid=in_pdp-psnow-dds).
 
-<Platform id="hpedl345gen11"></Platform>
+| Property | Certified Configuration |
+|---|---|
+| Application | Large datacenter, 100G hub. |
+| CPU | 64-core AMD EPYC 9575F |
+| Memory | 768 GB DDR5 ECC |
+| Storage | 2 x 1.92 TB U.3 SSDs in RAID 1. |
+| Interfaces | 12 ports total: 4 x 100GbE, 4 x 10/25GbE, and 4 x 1GBase-T. |
 
 #### Bill of Materials
-A detailed Bill of Materials (BOM) for the HPE DL345 Gen11 device certified for SSR:
+A detailed Bill of Materials (BOM) for the HPE DL345 Gen11 configuration certified for SSR:
 
 | Qty | Product | Description |
 |-----|---------|-------------|
@@ -277,17 +47,15 @@ A detailed Bill of Materials (BOM) for the HPE DL345 Gen11 device certified for 
 | 1 | P58459-B21 | HPE DL3X5 Gen11 Perf 2U Heat Sink Kit |
 | 1 | H40TDE | HPE 5Y TC Bas OEM DL345 Gen11 HW SVC |
 
-### Lenovo SR650v2
+## Legacy Platforms for Existing Installations
 
-![Lenovo SR650v2](/img/lenovo-SR650ports.png)
+HPE continues to support existing installations of the following previously certified platforms on all currently supported SSR releases. These platforms are not available to new customers for purchase or deployment.
 
-Please reach out to one of the following organizations for sales and quote information:
-
-- Ingram Micro
-- TD Synnex
-- Arrow ECS (EMEA)
-- Arrow Integrated Solutions (USA)
-
-#### Lenovo SR650v2 7Z73VWQ100
-<Platform id="lenovosr650r2"></Platform>
+| Platform | Model Numbers |
+|---|---|
+| Silicom Madrid | 90500-0151-G02, 90500-0151-G12, 90500-0151-G71, 90500-0151-G03, 90500-0151-G13 |
+| Silicom Madrid Ruggedized | 90500-0159-G01, 90500-0159-G11 |
+| Lanner NCA-1515A | L-1515A-8C-16E-128M-SSR, L-1515A-8C-16E-128M-C1-SSR1 |
+| Lanner NCA-1515B | L-1515B-4C-8E-128M-SSR1, L-1515B-4C-8E-128M-C1-SSR |
+| Lenovo SR650v2 | 7Z73VWQ100 |
 
