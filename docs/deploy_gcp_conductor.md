@@ -14,7 +14,7 @@ This guide walks you through deploying a **Session Smart Conductor on the Google
 | 1 | [Create the GCP VM](deploy_gcp_conductor_install.mdx) | Launch the conductor VM using the GCP GUI. |
 | 2 | [Verify the Installation](deploy_gcp_conductor_verification.md) | Verify the installation is successful, and log in to the conductor for the first time. |
 | 3 | [Configure the Conductor](deploy_gcp_conductor_config.md) | Set the authority name, conductor address, and assign the asset ID. |
-| — | [Appendix — GCP Conductor Configuration](deploy_appendix_gcp_conductor.mdx) | Complete Terraform variable reference for the GCP conductor deployment. |
+| — | [Appendix — GCP Conductor Configuration](deploy_appendix_gcp_conductor.mdx) | Sample command line configuration for the GCP conductor deployment. |
 
 ## Network Topology
 
@@ -27,7 +27,7 @@ graph TD
     subgraph GCP["GCP Project"]
         subgraph VPC["conductor-vpc"]
             subgraph Subnet["conductor-subnet\n10.0.1.0/24"]
-                ConductorVM["SSR Conductor VM\nconductor\ge-0-0: 192.168.1.2 internal\ge-0-0: 35.X.X.X external"]
+                ConductorVM["SSR Conductor VM\nconductor\ge-0-0: 10.0.1.2 internal\ge-0-0: 35.X.X.X external"]
             end
         end
     end
@@ -54,7 +54,7 @@ Before beginning, ensure the following are available:
    - The appropriate subnet region.
    - An IPv4 range for the subnet (for example, `10.0.1.0/24`)
 - **Outbound HTTPS access** - Used to connect to the software repository
-- **SSR license** - Your SSR License may be required to deploy the GCP VM.
+- **SSR license** - Your SSR license; this is assumed if you have valid software access credentials.
 - **SSR software access credentials** — Username and token for software downloads and provisioning.
 - **SSH key pair** — An SSH key pair to authenticate to the conductor VM after deployment.
 
@@ -62,10 +62,10 @@ Before beginning, ensure the following are available:
 
 Use the following steps to create a VPC and subnet where the conductor VM will be deployed. 
 
-During the GPC VM deployment, a single network interface (`nic0`) is automatically created for the conductor VM. `nic0` is assigned an internal IP address within the created subnet and an external IP address for management (SSH, access to web console, and SSR router onboarding).
+During the GCP VM deployment, a single network interface (`nic0`) is automatically created for the conductor VM. `nic0` is assigned an internal IP address within the created subnet and an external IP address for management (SSH, access to web console, and SSR router onboarding).
 
 
-1. In the GCP console, use the searchbar to search for **VPC networks**. 
+1. In the GCP console, use the search bar to search for **VPC networks**. 
 2. Select the top result.
 3. On the VPC networks panel, click **Create VPC Network**.
 

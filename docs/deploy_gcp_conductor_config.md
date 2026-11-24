@@ -58,12 +58,12 @@ The conductor address is the IP address that managed routers use to reach this c
 
 At the end of this step your authority contains:
 
-| Object | Name | Value |
-|--------|------|-------|
-| Authority | `Authority128` | |
-| Conductor Address | | `35.X.X.X` (external IP) |
-| Asset ID | `conductor` | Linked to conductor VM |
-| Role | | `conductor` |
+| Object | Value |
+|--------|-------|
+| Authority | `Authority128` |
+| Conductor Address | `35.X.X.X` (external IP) |
+| Asset ID | `conductor` |
+| Role | `conductor` |
 
 The conductor is now fully deployed and ready to onboard SSR routers.
 
