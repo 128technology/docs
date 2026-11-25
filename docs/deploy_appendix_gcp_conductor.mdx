@@ -1,0 +1,43 @@
+---
+title: Appendix - GCP Conductor Configuration
+sidebar_label: Appendix - GCP Conductor Configuration
+---
+import NetworkDesign from './_deploy_gcp_conductor_network_design.md';
+
+This appendix provides an example conductor configuration for the parameters described in this guide.  
+
+## Deployment Parameters
+
+The table below describes all the values for the BYOL conductor deployment in GCP. 
+
+<NetworkDesign/>
+
+## Example Conductor Configuration 
+
+```
+config
+
+    authority
+        conductor-address  35.X.X.X
+
+
+
+        router             conductor
+            name  conductor
+
+            node  node0
+                name           node0
+                asset-id       conductor
+                platform-type  "Google Compute Engine"
+            exit
+        exit
+
+
+    exit
+exit
+```
+
+## Related Documentation
+
+- [Installing a BYOL Conductor-managed Router in GCP](intro_installation_byol_gcp_conductor.mdx)
+- [System Requirements](intro_system_reqs.md)
