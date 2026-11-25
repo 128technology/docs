@@ -4,11 +4,53 @@
         <title>SSR Knowledge Base Articles</title>
         <link>https://docs.128technology.com/kb</link>
         <description>Session Smart Router Knowledge Base Articles</description>
-        <lastBuildDate>Wed, 28 Oct 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 23 Nov 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en-US</language>
         <copyright>Copyright © 2026 Juniper Networks, Inc.</copyright>
+        <item>
+            <title><![CDATA[Intermittent SNAT Traffic Issues After HA Upgrade to SSR 7.0.x]]></title>
+            <link>https://docs.128technology.com/kb/2026/11/23/I95-66933</link>
+            <guid>https://docs.128technology.com/kb/2026/11/23/I95-66933</guid>
+            <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Following software upgrade of an SSR High-Availability (HA) router, traffic using Source NAT (SNAT) or Waypoint resources may fail intermittently on the first upgraded node.]]></description>
+            <content:encoded><![CDATA[<p>Following software upgrade of an SSR High-Availability (HA) router, traffic using Source NAT (SNAT) or Waypoint resources may fail intermittently on the first upgraded node.</p>
+<p><strong>Issue ID:</strong> I95-66933</p>
+<p><strong>Last Updated:</strong> 2026-11-23</p>
+<p><strong>Affected SSR Versions:</strong> 7.0.5, 7.0.6, 7.0.7</p>
+<p><strong>Fix Planned for SSR Version:</strong> 7.0.8</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="symptom">Symptom<a href="https://docs.128technology.com/kb/2026/11/23/I95-66933#symptom" class="hash-link" aria-label="Direct link to Symptom" title="Direct link to Symptom" translate="no">​</a></h3>
+<p>The issue is exposed following an upgrade on an HA router between the versions listed below. After the second HA node completes its upgrade, traffic flowing through the first upgraded node may fail intermittently as a result of SNAT and/or Waypoint resource allocation failures. Logs may show indication of resource allocation errors, as shown below:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">WayPointException: Failed to allocate WayPoint ports (possibly exhausted)</span><br></div></code></pre></div></div>
+<p>This issue is exposed during HA router upgrade between the following SSR releases:</p>
+<table><thead><tr><th style="text-align:left">Upgrade From Versions</th><th style="text-align:left">Upgrade To Versions</th></tr></thead><tbody><tr><td style="text-align:left"><strong>7.0 release:</strong> 7.0.3 or earlier<br><strong>6.3 release:</strong> 6.3.6 or earlier<br><strong>6.2 release:</strong> 6.2.9 or earlier</td><td style="text-align:left">7.0.5, 7.0.6, and 7.0.7<br> <br></td></tr></tbody></table>
+<p>This issue is not exposed in SSR release 7.1 and later when you use the default leadership election mode.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cause">Cause<a href="https://docs.128technology.com/kb/2026/11/23/I95-66933#cause" class="hash-link" aria-label="Direct link to Cause" title="Direct link to Cause" translate="no">​</a></h3>
+<p>SNAT and Waypoint resources are maintained in a Redis database which is synchronized between HA nodes.  During an upgrade between the affected versions, the first upgraded node's Redis database is unable to synchronize with the pre-upgrade master.</p>
+<p>The problem is hidden until the second node (original Redis master) goes down for its upgrade. The first-upgraded node then becomes master with an unsynchronized Redis database. The second-upgraded node initializes its own NAT-port and waypoint records, but the database is missing the records that should have been initialized by the first upgraded node. This can cause intermittent traffic issues associated with that node.</p>
+<p>Note that the issue may be masked if the second node goes down for upgrade before the first node’s one-hour recovery timer expires.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2026/11/23/I95-66933#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
+<p>After upgrading both nodes, restart the first upgraded node to re-establish Redis replication as follows:</p>
+<ol>
+<li class="">Upgrade the first node.</li>
+<li class="">Upgrade the second node.</li>
+<li class="">Restart the first node.</li>
+</ol>
+<p>After restarting the first upgraded node, confirm that both nodes complete post-upgrade health check and upgrade MOP validation steps.  Additionally, To verify that the first node correctly re-establishes Redis synchronization, execute the following and confirm that the output aligns with the "healthy" example shown in the table.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">redis-cli info replication | egrep 'master_port|master_link_status'</span><br></div></code></pre></div></div>
+<table><thead><tr><th style="text-align:left">Field</th><th style="text-align:left">Healthy</th><th style="text-align:left">Unhealthy</th></tr></thead><tbody><tr><td style="text-align:left"><code>master_port</code></td><td style="text-align:left"><code>6379</code></td><td style="text-align:left"><code>57005</code></td></tr><tr><td style="text-align:left"><code>master_link_status</code></td><td style="text-align:left"><code>up</code></td><td style="text-align:left"><code>down</code></td></tr></tbody></table>
+<p>Contact HPE support if any of the following are observed following the upgrade of an HA router between the affected routers:</p>
+<ul>
+<li class="">the verification step above produces output that aligns with the "unhealthy" example.</li>
+<li class="">traffic is failing on the first upgraded node</li>
+<li class="">logs indicate resource allocation errors involving SNAT and/or Waypoint resources</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolution">Resolution<a href="https://docs.128technology.com/kb/2026/11/23/I95-66933#resolution" class="hash-link" aria-label="Direct link to Resolution" title="Direct link to Resolution" translate="no">​</a></h3>
+<p>A fix is planned for SSR 7.0.8. Until the fix is available, use the workaround when upgrading an HA pair across the affected versions.</p>]]></content:encoded>
+            <category>7.0.5</category>
+            <category>HA</category>
+        </item>
         <item>
             <title><![CDATA[BGP Next-Hop Resolution Through Another BGP Route Can Mark Routes Inaccessible]]></title>
             <link>https://docs.128technology.com/kb/2026/10/28/I95-66848</link>
@@ -481,49 +523,6 @@
 </ul>]]></content:encoded>
             <category>6.2</category>
             <category>6.2.3-r2</category>
-        </item>
-        <item>
-            <title><![CDATA[High Memory usage for application-director]]></title>
-            <link>https://docs.128technology.com/kb/2024/05/29/I95-56484</link>
-            <guid>https://docs.128technology.com/kb/2024/05/29/I95-56484</guid>
-            <pubDate>Wed, 29 May 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Changes to use a new database in the app-id engine have introduced high memory utilization for the application-director.]]></description>
-            <content:encoded><![CDATA[<p>Changes to use a new database in the app-id engine have introduced high memory utilization for the application-director.</p>
-<p><strong>Issue ID:</strong> I95-56484</p>
-<p><strong>Last Updated:</strong> 2024-05-29</p>
-<p><strong>Introduced in SSR Version:</strong> 6.2.3</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem">Problem<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#problem" class="hash-link" aria-label="Direct link to Problem" title="Direct link to Problem" translate="no">​</a></h3>
-<p>The application-director has a race condition that can occur during app-id module updates, app-id database reloads, and configuration changes.</p>
-<p>It is possible that stale connections to a database will utilize excessive memory over a long duration (application-director uptime).</p>
-<p>The administrator might notice alarms for high system memory and an Application Director alarm with the message <code>IP Database reload failed.</code></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="release-notes">Release Notes<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#release-notes" class="hash-link" aria-label="Direct link to Release Notes" title="Direct link to Release Notes" translate="no">​</a></h3>
-<p>Resolve application-director stale database connection memory leak.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="severity">Severity<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#severity" class="hash-link" aria-label="Direct link to Severity" title="Direct link to Severity" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>The potential impact of a software defect if encountered. Severity levels are:</p><ul>
-<li class="">Critical: Could severely affect service, capacity/traffic, and maintenance capabilities. May have a prolonged impact to the entire system.</li>
-<li class="">Major: Could seriously affect system operation, maintenance, administration and related tasks.</li>
-<li class="">Minor: Would not significantly impair the functioning or affect service.</li>
-</ul></div></div></details>
-<p>Major</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="status">Status<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#status" class="hash-link" aria-label="Direct link to Status" title="Direct link to Status" translate="no">​</a></h3>
-<p>Resolved</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolved-in">Resolved In<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#resolved-in" class="hash-link" aria-label="Direct link to Resolved In" title="Direct link to Resolved In" translate="no">​</a></h3>
-<p><a class="" href="https://docs.128technology.com/docs/release_notes_128t_6.2#release-625-5r2">6.2.5</a></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="product">Product<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#product" class="hash-link" aria-label="Direct link to Product" title="Direct link to Product" translate="no">​</a></h3>
-<p>SSR</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="functional-area">Functional Area<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#functional-area" class="hash-link" aria-label="Direct link to Functional Area" title="Direct link to Functional Area" translate="no">​</a></h3>
-<p>System Health</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="workaround">Workaround<a href="https://docs.128technology.com/kb/2024/05/29/I95-56484#workaround" class="hash-link" aria-label="Direct link to Workaround" title="Direct link to Workaround" translate="no">​</a></h3>
-<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Details</summary><div><div class="collapsibleContent_i85q"><p>Juniper may provide a method to temporarily circumvent a problem; workarounds do not exist for all issues.</p></div></div></details>
-<p>Utilizing SSR metrics data, custom charts can be used to view memory usage over time to identify processes that are increasing. Also, the PCLI provides a way to view current process memory utilization and a way to compare the current value a previous point in time.</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">admin@node.router# show stats process memory process-name application-director</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Thu 2024-05-30 20:38:03 UTC</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">✔ Retrieving statistics...</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Process Memory Metrics</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">----------------------</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">======== ====== ====================== ============</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Metric   Node   Process-name                Value</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">======== ====== ====================== ============</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> rss      node   application-director     61681664</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> vsz      node   application-director   1589444608</span><br></div></code></pre></div></div>
-<p>The above values will appear as bytes. Shown below is comparing the current value to 10 days prior.</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#bfc7d5"><span class="token plain">admin@node.router# show stats process memory process-name application-director since 10d</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Thu 2024-05-30 20:52:39 UTC</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">✔ Retrieving statistics...</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Since: 2024-05-20 20:52:39</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Process Memory Metrics</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">----------------------</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">======== ====== ====================== =========</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Metric   Node   Process-name             Value</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">======== ====== ====================== =========</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> rss      node   application-director   1171456</span><br></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> vsz      node   application-director         0</span><br></div></code></pre></div></div>
-<p>In this case, the delta is 10Mb which is normal operating behavior.</p>
-<p>However, if the deltas over time are increasing significantly such that the current utilization has doubled or tripled, this is a good indicator that this issue is occurring.</p>
-<p>If you have confirmed the <code>application-director</code> has significant memory increases over time, the service can be restarted on the offending device using <code>systemctl restart application-director</code> as a privileged User.</p>]]></content:encoded>
-            <category>6.2.3</category>
-            <category>6.2.4</category>
         </item>
     </channel>
 </rss>
